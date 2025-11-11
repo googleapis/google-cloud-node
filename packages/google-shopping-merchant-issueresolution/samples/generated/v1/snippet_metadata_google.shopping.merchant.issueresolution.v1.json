@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 70,
+          "end": 82,
           "type": "FULL"
         }
       ],
@@ -150,6 +150,10 @@
           {
             "name": "payload",
             "type": ".google.shopping.merchant.issueresolution.v1.RenderIssuesRequestPayload"
+          },
+          {
+            "name": "product_id_base64_url_encoded",
+            "type": "TYPE_BOOL"
           }
         ],
         "resultType": ".google.shopping.merchant.issueresolution.v1.RenderProductIssuesResponse",

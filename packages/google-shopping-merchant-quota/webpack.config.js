@@ -17,8 +17,8 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   output: {
-    library: 'QuotaService',
-    filename: './quota-service.js',
+    library: 'AccountLimitsService',
+    filename: './account-limits-service.js',
   },
   node: {
     child_process: 'empty',

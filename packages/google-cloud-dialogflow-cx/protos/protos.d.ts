@@ -52733,6 +52733,103 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Properties of a CodeBlock. */
+                    interface ICodeBlock {
+
+                        /** CodeBlock code */
+                        code?: (string|null);
+                    }
+
+                    /** Represents a CodeBlock. */
+                    class CodeBlock implements ICodeBlock {
+
+                        /**
+                         * Constructs a new CodeBlock.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.ICodeBlock);
+
+                        /** CodeBlock code. */
+                        public code: string;
+
+                        /**
+                         * Creates a new CodeBlock instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CodeBlock instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.ICodeBlock): google.cloud.dialogflow.cx.v3beta1.CodeBlock;
+
+                        /**
+                         * Encodes the specified CodeBlock message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.CodeBlock.verify|verify} messages.
+                         * @param message CodeBlock message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.ICodeBlock, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CodeBlock message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.CodeBlock.verify|verify} messages.
+                         * @param message CodeBlock message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.ICodeBlock, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CodeBlock message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CodeBlock
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.CodeBlock;
+
+                        /**
+                         * Decodes a CodeBlock message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CodeBlock
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.CodeBlock;
+
+                        /**
+                         * Verifies a CodeBlock message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CodeBlock message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CodeBlock
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.CodeBlock;
+
+                        /**
+                         * Creates a plain object from a CodeBlock message. Also converts values to other types if specified.
+                         * @param message CodeBlock
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.CodeBlock, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CodeBlock to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CodeBlock
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Represents a ConversationHistory */
                     class ConversationHistory extends $protobuf.rpc.Service {
 
@@ -75347,6 +75444,9 @@ export namespace google {
                             /** GenericWebService serviceAgentAuth */
                             serviceAgentAuth?: (google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAgentAuth|keyof typeof google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAgentAuth|null);
 
+                            /** GenericWebService serviceAccountAuthConfig */
+                            serviceAccountAuthConfig?: (google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.IServiceAccountAuthConfig|null);
+
                             /** GenericWebService webhookType */
                             webhookType?: (google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.WebhookType|keyof typeof google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.WebhookType|null);
 
@@ -75395,6 +75495,9 @@ export namespace google {
 
                             /** GenericWebService serviceAgentAuth. */
                             public serviceAgentAuth: (google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAgentAuth|keyof typeof google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAgentAuth);
+
+                            /** GenericWebService serviceAccountAuthConfig. */
+                            public serviceAccountAuthConfig?: (google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.IServiceAccountAuthConfig|null);
 
                             /** GenericWebService webhookType. */
                             public webhookType: (google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.WebhookType|keyof typeof google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.WebhookType);
@@ -75712,6 +75815,103 @@ export namespace google {
                                 NONE = 1,
                                 ID_TOKEN = 2,
                                 ACCESS_TOKEN = 3
+                            }
+
+                            /** Properties of a ServiceAccountAuthConfig. */
+                            interface IServiceAccountAuthConfig {
+
+                                /** ServiceAccountAuthConfig serviceAccount */
+                                serviceAccount?: (string|null);
+                            }
+
+                            /** Represents a ServiceAccountAuthConfig. */
+                            class ServiceAccountAuthConfig implements IServiceAccountAuthConfig {
+
+                                /**
+                                 * Constructs a new ServiceAccountAuthConfig.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.IServiceAccountAuthConfig);
+
+                                /** ServiceAccountAuthConfig serviceAccount. */
+                                public serviceAccount: string;
+
+                                /**
+                                 * Creates a new ServiceAccountAuthConfig instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns ServiceAccountAuthConfig instance
+                                 */
+                                public static create(properties?: google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.IServiceAccountAuthConfig): google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAccountAuthConfig;
+
+                                /**
+                                 * Encodes the specified ServiceAccountAuthConfig message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAccountAuthConfig.verify|verify} messages.
+                                 * @param message ServiceAccountAuthConfig message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.IServiceAccountAuthConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified ServiceAccountAuthConfig message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAccountAuthConfig.verify|verify} messages.
+                                 * @param message ServiceAccountAuthConfig message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.IServiceAccountAuthConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a ServiceAccountAuthConfig message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns ServiceAccountAuthConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAccountAuthConfig;
+
+                                /**
+                                 * Decodes a ServiceAccountAuthConfig message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns ServiceAccountAuthConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAccountAuthConfig;
+
+                                /**
+                                 * Verifies a ServiceAccountAuthConfig message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a ServiceAccountAuthConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns ServiceAccountAuthConfig
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAccountAuthConfig;
+
+                                /**
+                                 * Creates a plain object from a ServiceAccountAuthConfig message. Also converts values to other types if specified.
+                                 * @param message ServiceAccountAuthConfig
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAccountAuthConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this ServiceAccountAuthConfig to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for ServiceAccountAuthConfig
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
                             }
 
                             /** WebhookType enum. */
@@ -83018,6 +83218,12 @@ export namespace google {
                         /** Playbook referencedTools */
                         referencedTools?: (string[]|null);
 
+                        /** Playbook inlineActions */
+                        inlineActions?: (string[]|null);
+
+                        /** Playbook codeBlock */
+                        codeBlock?: (google.cloud.dialogflow.cx.v3beta1.ICodeBlock|null);
+
                         /** Playbook llmModelSettings */
                         llmModelSettings?: (google.cloud.dialogflow.cx.v3beta1.ILlmModelSettings|null);
 
@@ -83075,6 +83281,12 @@ export namespace google {
 
                         /** Playbook referencedTools. */
                         public referencedTools: string[];
+
+                        /** Playbook inlineActions. */
+                        public inlineActions: string[];
+
+                        /** Playbook codeBlock. */
+                        public codeBlock?: (google.cloud.dialogflow.cx.v3beta1.ICodeBlock|null);
 
                         /** Playbook llmModelSettings. */
                         public llmModelSettings?: (google.cloud.dialogflow.cx.v3beta1.ILlmModelSettings|null);
@@ -88500,6 +88712,9 @@ export namespace google {
 
                             /** Authentication bearerTokenConfig */
                             bearerTokenConfig?: (google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.IBearerTokenConfig|null);
+
+                            /** Authentication serviceAccountAuthConfig */
+                            serviceAccountAuthConfig?: (google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.IServiceAccountAuthConfig|null);
                         }
 
                         /** Represents an Authentication. */
@@ -88523,8 +88738,11 @@ export namespace google {
                             /** Authentication bearerTokenConfig. */
                             public bearerTokenConfig?: (google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.IBearerTokenConfig|null);
 
+                            /** Authentication serviceAccountAuthConfig. */
+                            public serviceAccountAuthConfig?: (google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.IServiceAccountAuthConfig|null);
+
                             /** Authentication authConfig. */
-                            public authConfig?: ("apiKeyConfig"|"oauthConfig"|"serviceAgentAuthConfig"|"bearerTokenConfig");
+                            public authConfig?: ("apiKeyConfig"|"oauthConfig"|"serviceAgentAuthConfig"|"bearerTokenConfig"|"serviceAccountAuthConfig");
 
                             /**
                              * Creates a new Authentication instance using the specified properties.
@@ -89068,6 +89286,103 @@ export namespace google {
 
                                 /**
                                  * Gets the default type url for BearerTokenConfig
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            /** Properties of a ServiceAccountAuthConfig. */
+                            interface IServiceAccountAuthConfig {
+
+                                /** ServiceAccountAuthConfig serviceAccount */
+                                serviceAccount?: (string|null);
+                            }
+
+                            /** Represents a ServiceAccountAuthConfig. */
+                            class ServiceAccountAuthConfig implements IServiceAccountAuthConfig {
+
+                                /**
+                                 * Constructs a new ServiceAccountAuthConfig.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.IServiceAccountAuthConfig);
+
+                                /** ServiceAccountAuthConfig serviceAccount. */
+                                public serviceAccount: string;
+
+                                /**
+                                 * Creates a new ServiceAccountAuthConfig instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns ServiceAccountAuthConfig instance
+                                 */
+                                public static create(properties?: google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.IServiceAccountAuthConfig): google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.ServiceAccountAuthConfig;
+
+                                /**
+                                 * Encodes the specified ServiceAccountAuthConfig message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.ServiceAccountAuthConfig.verify|verify} messages.
+                                 * @param message ServiceAccountAuthConfig message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.IServiceAccountAuthConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified ServiceAccountAuthConfig message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.ServiceAccountAuthConfig.verify|verify} messages.
+                                 * @param message ServiceAccountAuthConfig message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.IServiceAccountAuthConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a ServiceAccountAuthConfig message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns ServiceAccountAuthConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.ServiceAccountAuthConfig;
+
+                                /**
+                                 * Decodes a ServiceAccountAuthConfig message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns ServiceAccountAuthConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.ServiceAccountAuthConfig;
+
+                                /**
+                                 * Verifies a ServiceAccountAuthConfig message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a ServiceAccountAuthConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns ServiceAccountAuthConfig
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.ServiceAccountAuthConfig;
+
+                                /**
+                                 * Creates a plain object from a ServiceAccountAuthConfig message. Also converts values to other types if specified.
+                                 * @param message ServiceAccountAuthConfig
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.ServiceAccountAuthConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this ServiceAccountAuthConfig to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for ServiceAccountAuthConfig
                                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                                  * @returns The default type url
                                  */

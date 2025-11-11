@@ -233,6 +233,8 @@ export class BackupDRClient {
           new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'dataSources'),
       listBackups:
           new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'backups'),
+      fetchBackupsForResourceType:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'backups'),
       listBackupPlans:
           new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'backupPlans'),
       listBackupPlanRevisions:
@@ -241,6 +243,8 @@ export class BackupDRClient {
           new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'backupPlanAssociations'),
       fetchBackupPlanAssociationsForResourceType:
           new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'backupPlanAssociations'),
+      listDataSourceReferences:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'dataSourceReferences'),
       fetchDataSourceReferencesForResourceType:
           new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'dataSourceReferences')
     };
@@ -441,7 +445,7 @@ export class BackupDRClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const backupDRStubMethods =
-        ['listManagementServers', 'getManagementServer', 'createManagementServer', 'deleteManagementServer', 'createBackupVault', 'listBackupVaults', 'fetchUsableBackupVaults', 'getBackupVault', 'updateBackupVault', 'deleteBackupVault', 'listDataSources', 'getDataSource', 'updateDataSource', 'listBackups', 'getBackup', 'updateBackup', 'deleteBackup', 'restoreBackup', 'createBackupPlan', 'updateBackupPlan', 'getBackupPlan', 'listBackupPlans', 'deleteBackupPlan', 'getBackupPlanRevision', 'listBackupPlanRevisions', 'createBackupPlanAssociation', 'updateBackupPlanAssociation', 'getBackupPlanAssociation', 'listBackupPlanAssociations', 'fetchBackupPlanAssociationsForResourceType', 'deleteBackupPlanAssociation', 'triggerBackup', 'getDataSourceReference', 'fetchDataSourceReferencesForResourceType', 'initializeService'];
+        ['listManagementServers', 'getManagementServer', 'createManagementServer', 'deleteManagementServer', 'createBackupVault', 'listBackupVaults', 'fetchUsableBackupVaults', 'getBackupVault', 'updateBackupVault', 'deleteBackupVault', 'listDataSources', 'getDataSource', 'updateDataSource', 'listBackups', 'fetchBackupsForResourceType', 'getBackup', 'updateBackup', 'deleteBackup', 'restoreBackup', 'createBackupPlan', 'updateBackupPlan', 'getBackupPlan', 'listBackupPlans', 'deleteBackupPlan', 'getBackupPlanRevision', 'listBackupPlanRevisions', 'createBackupPlanAssociation', 'updateBackupPlanAssociation', 'getBackupPlanAssociation', 'listBackupPlanAssociations', 'fetchBackupPlanAssociationsForResourceType', 'deleteBackupPlanAssociation', 'triggerBackup', 'getDataSourceReference', 'listDataSourceReferences', 'fetchDataSourceReferencesForResourceType', 'initializeService'];
     for (const methodName of backupDRStubMethods) {
       const callPromise = this.backupDRStub.then(
         stub => (...args: Array<{}>) => {
@@ -4619,6 +4623,272 @@ export class BackupDRClient {
     ) as AsyncIterable<protos.google.cloud.backupdr.v1.IBackup>;
   }
  /**
+ * Fetch Backups for a given resource type.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Datasources are the parent resource for the backups.
+ *   Format:
+ *   projects/{project}/locations/{location}/backupVaults/{backupVaultId}/dataSources/{datasourceId}
+ * @param {string} request.resourceType
+ *   Required. The type of the GCP resource.
+ *   Ex: sqladmin.googleapis.com/Instance
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of Backups to return. The service may
+ *   return fewer than this value. If unspecified, at most 50
+ *   Backups will be returned. The maximum value is 100; values
+ *   above 100 will be coerced to 100.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous call of
+ *   `FetchBackupsForResourceType`.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `FetchBackupsForResourceType` must match
+ *   the call that provided the page token.
+ * @param {string} [request.filter]
+ *   Optional. A filter expression that filters the results fetched in the
+ *   response. The expression must specify the field name, a comparison
+ *   operator, and the value that you want to use for filtering. Supported
+ *   fields:
+ * @param {string} [request.orderBy]
+ *   Optional. A comma-separated list of fields to order by, sorted in ascending
+ *   order. Use "desc" after a field name for descending.
+ * @param {google.cloud.backupdr.v1.BackupView} [request.view]
+ *   Optional. This parameter is used to specify the view of the backup.
+ *   If not specified, the default view is BASIC.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.backupdr.v1.Backup|Backup}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `fetchBackupsForResourceTypeAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  fetchBackupsForResourceType(
+      request?: protos.google.cloud.backupdr.v1.IFetchBackupsForResourceTypeRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.backupdr.v1.IBackup[],
+        protos.google.cloud.backupdr.v1.IFetchBackupsForResourceTypeRequest|null,
+        protos.google.cloud.backupdr.v1.IFetchBackupsForResourceTypeResponse
+      ]>;
+  fetchBackupsForResourceType(
+      request: protos.google.cloud.backupdr.v1.IFetchBackupsForResourceTypeRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
+          protos.google.cloud.backupdr.v1.IFetchBackupsForResourceTypeRequest,
+          protos.google.cloud.backupdr.v1.IFetchBackupsForResourceTypeResponse|null|undefined,
+          protos.google.cloud.backupdr.v1.IBackup>): void;
+  fetchBackupsForResourceType(
+      request: protos.google.cloud.backupdr.v1.IFetchBackupsForResourceTypeRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.backupdr.v1.IFetchBackupsForResourceTypeRequest,
+          protos.google.cloud.backupdr.v1.IFetchBackupsForResourceTypeResponse|null|undefined,
+          protos.google.cloud.backupdr.v1.IBackup>): void;
+  fetchBackupsForResourceType(
+      request?: protos.google.cloud.backupdr.v1.IFetchBackupsForResourceTypeRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.backupdr.v1.IFetchBackupsForResourceTypeRequest,
+          protos.google.cloud.backupdr.v1.IFetchBackupsForResourceTypeResponse|null|undefined,
+          protos.google.cloud.backupdr.v1.IBackup>,
+      callback?: PaginationCallback<
+          protos.google.cloud.backupdr.v1.IFetchBackupsForResourceTypeRequest,
+          protos.google.cloud.backupdr.v1.IFetchBackupsForResourceTypeResponse|null|undefined,
+          protos.google.cloud.backupdr.v1.IBackup>):
+      Promise<[
+        protos.google.cloud.backupdr.v1.IBackup[],
+        protos.google.cloud.backupdr.v1.IFetchBackupsForResourceTypeRequest|null,
+        protos.google.cloud.backupdr.v1.IFetchBackupsForResourceTypeResponse
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.backupdr.v1.IFetchBackupsForResourceTypeRequest,
+      protos.google.cloud.backupdr.v1.IFetchBackupsForResourceTypeResponse|null|undefined,
+      protos.google.cloud.backupdr.v1.IBackup>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('fetchBackupsForResourceType values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('fetchBackupsForResourceType request %j', request);
+    return this.innerApiCalls
+      .fetchBackupsForResourceType(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.cloud.backupdr.v1.IBackup[],
+        protos.google.cloud.backupdr.v1.IFetchBackupsForResourceTypeRequest|null,
+        protos.google.cloud.backupdr.v1.IFetchBackupsForResourceTypeResponse
+      ]) => {
+        this._log.info('fetchBackupsForResourceType values %j', response);
+        return [response, input, output];
+      });
+  }
+
+/**
+ * Equivalent to `fetchBackupsForResourceType`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Datasources are the parent resource for the backups.
+ *   Format:
+ *   projects/{project}/locations/{location}/backupVaults/{backupVaultId}/dataSources/{datasourceId}
+ * @param {string} request.resourceType
+ *   Required. The type of the GCP resource.
+ *   Ex: sqladmin.googleapis.com/Instance
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of Backups to return. The service may
+ *   return fewer than this value. If unspecified, at most 50
+ *   Backups will be returned. The maximum value is 100; values
+ *   above 100 will be coerced to 100.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous call of
+ *   `FetchBackupsForResourceType`.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `FetchBackupsForResourceType` must match
+ *   the call that provided the page token.
+ * @param {string} [request.filter]
+ *   Optional. A filter expression that filters the results fetched in the
+ *   response. The expression must specify the field name, a comparison
+ *   operator, and the value that you want to use for filtering. Supported
+ *   fields:
+ * @param {string} [request.orderBy]
+ *   Optional. A comma-separated list of fields to order by, sorted in ascending
+ *   order. Use "desc" after a field name for descending.
+ * @param {google.cloud.backupdr.v1.BackupView} [request.view]
+ *   Optional. This parameter is used to specify the view of the backup.
+ *   If not specified, the default view is BASIC.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.backupdr.v1.Backup|Backup} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `fetchBackupsForResourceTypeAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  fetchBackupsForResourceTypeStream(
+      request?: protos.google.cloud.backupdr.v1.IFetchBackupsForResourceTypeRequest,
+      options?: CallOptions):
+    Transform{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['fetchBackupsForResourceType'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('fetchBackupsForResourceType stream %j', request);
+    return this.descriptors.page.fetchBackupsForResourceType.createStream(
+      this.innerApiCalls.fetchBackupsForResourceType as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+/**
+ * Equivalent to `fetchBackupsForResourceType`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Datasources are the parent resource for the backups.
+ *   Format:
+ *   projects/{project}/locations/{location}/backupVaults/{backupVaultId}/dataSources/{datasourceId}
+ * @param {string} request.resourceType
+ *   Required. The type of the GCP resource.
+ *   Ex: sqladmin.googleapis.com/Instance
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of Backups to return. The service may
+ *   return fewer than this value. If unspecified, at most 50
+ *   Backups will be returned. The maximum value is 100; values
+ *   above 100 will be coerced to 100.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous call of
+ *   `FetchBackupsForResourceType`.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `FetchBackupsForResourceType` must match
+ *   the call that provided the page token.
+ * @param {string} [request.filter]
+ *   Optional. A filter expression that filters the results fetched in the
+ *   response. The expression must specify the field name, a comparison
+ *   operator, and the value that you want to use for filtering. Supported
+ *   fields:
+ * @param {string} [request.orderBy]
+ *   Optional. A comma-separated list of fields to order by, sorted in ascending
+ *   order. Use "desc" after a field name for descending.
+ * @param {google.cloud.backupdr.v1.BackupView} [request.view]
+ *   Optional. This parameter is used to specify the view of the backup.
+ *   If not specified, the default view is BASIC.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.backupdr.v1.Backup|Backup}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/backup_d_r.fetch_backups_for_resource_type.js</caption>
+ * region_tag:backupdr_v1_generated_BackupDR_FetchBackupsForResourceType_async
+ */
+  fetchBackupsForResourceTypeAsync(
+      request?: protos.google.cloud.backupdr.v1.IFetchBackupsForResourceTypeRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.backupdr.v1.IBackup>{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['fetchBackupsForResourceType'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('fetchBackupsForResourceType iterate %j', request);
+    return this.descriptors.page.fetchBackupsForResourceType.asyncIterate(
+      this.innerApiCalls['fetchBackupsForResourceType'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.backupdr.v1.IBackup>;
+  }
+ /**
  * Lists BackupPlans in a given project and location.
  *
  * @param {Object} request
@@ -5585,6 +5855,275 @@ export class BackupDRClient {
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.backupdr.v1.IBackupPlanAssociation>;
+  }
+ /**
+ * Lists DataSourceReferences for a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource name.
+ *   Format: projects/{project}/locations/{location}
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of DataSourceReferences to return. The service
+ *   may return fewer than this value. If unspecified, at most 50
+ *   DataSourceReferences will be returned. The maximum value is 100; values
+ *   above 100 will be coerced to 100.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListDataSourceReferences`
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `ListDataSourceReferences` must match the call that provided the page
+ *   token.
+ * @param {string} [request.filter]
+ *   Optional. A filter expression that filters the results listed in the
+ *   response. The expression must specify the field name, a comparison
+ *   operator, and the value that you want to use for filtering.
+ *
+ *   The following field and operator combinations are supported:
+ *
+ *   * data_source_gcp_resource_info.gcp_resourcename with `=`, `!=`
+ *   * data_source_gcp_resource_info.type with `=`, `!=`
+ * @param {string} [request.orderBy]
+ *   Optional. A comma-separated list of fields to order by, sorted in ascending
+ *   order. Use "desc" after a field name for descending.
+ *
+ *   Supported fields:
+ *
+ *   * data_source
+ *   * data_source_gcp_resource_info.gcp_resourcename
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.backupdr.v1.DataSourceReference|DataSourceReference}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listDataSourceReferencesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listDataSourceReferences(
+      request?: protos.google.cloud.backupdr.v1.IListDataSourceReferencesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.backupdr.v1.IDataSourceReference[],
+        protos.google.cloud.backupdr.v1.IListDataSourceReferencesRequest|null,
+        protos.google.cloud.backupdr.v1.IListDataSourceReferencesResponse
+      ]>;
+  listDataSourceReferences(
+      request: protos.google.cloud.backupdr.v1.IListDataSourceReferencesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
+          protos.google.cloud.backupdr.v1.IListDataSourceReferencesRequest,
+          protos.google.cloud.backupdr.v1.IListDataSourceReferencesResponse|null|undefined,
+          protos.google.cloud.backupdr.v1.IDataSourceReference>): void;
+  listDataSourceReferences(
+      request: protos.google.cloud.backupdr.v1.IListDataSourceReferencesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.backupdr.v1.IListDataSourceReferencesRequest,
+          protos.google.cloud.backupdr.v1.IListDataSourceReferencesResponse|null|undefined,
+          protos.google.cloud.backupdr.v1.IDataSourceReference>): void;
+  listDataSourceReferences(
+      request?: protos.google.cloud.backupdr.v1.IListDataSourceReferencesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.backupdr.v1.IListDataSourceReferencesRequest,
+          protos.google.cloud.backupdr.v1.IListDataSourceReferencesResponse|null|undefined,
+          protos.google.cloud.backupdr.v1.IDataSourceReference>,
+      callback?: PaginationCallback<
+          protos.google.cloud.backupdr.v1.IListDataSourceReferencesRequest,
+          protos.google.cloud.backupdr.v1.IListDataSourceReferencesResponse|null|undefined,
+          protos.google.cloud.backupdr.v1.IDataSourceReference>):
+      Promise<[
+        protos.google.cloud.backupdr.v1.IDataSourceReference[],
+        protos.google.cloud.backupdr.v1.IListDataSourceReferencesRequest|null,
+        protos.google.cloud.backupdr.v1.IListDataSourceReferencesResponse
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.backupdr.v1.IListDataSourceReferencesRequest,
+      protos.google.cloud.backupdr.v1.IListDataSourceReferencesResponse|null|undefined,
+      protos.google.cloud.backupdr.v1.IDataSourceReference>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listDataSourceReferences values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listDataSourceReferences request %j', request);
+    return this.innerApiCalls
+      .listDataSourceReferences(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.cloud.backupdr.v1.IDataSourceReference[],
+        protos.google.cloud.backupdr.v1.IListDataSourceReferencesRequest|null,
+        protos.google.cloud.backupdr.v1.IListDataSourceReferencesResponse
+      ]) => {
+        this._log.info('listDataSourceReferences values %j', response);
+        return [response, input, output];
+      });
+  }
+
+/**
+ * Equivalent to `listDataSourceReferences`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource name.
+ *   Format: projects/{project}/locations/{location}
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of DataSourceReferences to return. The service
+ *   may return fewer than this value. If unspecified, at most 50
+ *   DataSourceReferences will be returned. The maximum value is 100; values
+ *   above 100 will be coerced to 100.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListDataSourceReferences`
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `ListDataSourceReferences` must match the call that provided the page
+ *   token.
+ * @param {string} [request.filter]
+ *   Optional. A filter expression that filters the results listed in the
+ *   response. The expression must specify the field name, a comparison
+ *   operator, and the value that you want to use for filtering.
+ *
+ *   The following field and operator combinations are supported:
+ *
+ *   * data_source_gcp_resource_info.gcp_resourcename with `=`, `!=`
+ *   * data_source_gcp_resource_info.type with `=`, `!=`
+ * @param {string} [request.orderBy]
+ *   Optional. A comma-separated list of fields to order by, sorted in ascending
+ *   order. Use "desc" after a field name for descending.
+ *
+ *   Supported fields:
+ *
+ *   * data_source
+ *   * data_source_gcp_resource_info.gcp_resourcename
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.backupdr.v1.DataSourceReference|DataSourceReference} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listDataSourceReferencesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listDataSourceReferencesStream(
+      request?: protos.google.cloud.backupdr.v1.IListDataSourceReferencesRequest,
+      options?: CallOptions):
+    Transform{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listDataSourceReferences'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listDataSourceReferences stream %j', request);
+    return this.descriptors.page.listDataSourceReferences.createStream(
+      this.innerApiCalls.listDataSourceReferences as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+/**
+ * Equivalent to `listDataSourceReferences`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource name.
+ *   Format: projects/{project}/locations/{location}
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of DataSourceReferences to return. The service
+ *   may return fewer than this value. If unspecified, at most 50
+ *   DataSourceReferences will be returned. The maximum value is 100; values
+ *   above 100 will be coerced to 100.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListDataSourceReferences`
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `ListDataSourceReferences` must match the call that provided the page
+ *   token.
+ * @param {string} [request.filter]
+ *   Optional. A filter expression that filters the results listed in the
+ *   response. The expression must specify the field name, a comparison
+ *   operator, and the value that you want to use for filtering.
+ *
+ *   The following field and operator combinations are supported:
+ *
+ *   * data_source_gcp_resource_info.gcp_resourcename with `=`, `!=`
+ *   * data_source_gcp_resource_info.type with `=`, `!=`
+ * @param {string} [request.orderBy]
+ *   Optional. A comma-separated list of fields to order by, sorted in ascending
+ *   order. Use "desc" after a field name for descending.
+ *
+ *   Supported fields:
+ *
+ *   * data_source
+ *   * data_source_gcp_resource_info.gcp_resourcename
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.backupdr.v1.DataSourceReference|DataSourceReference}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/backup_d_r.list_data_source_references.js</caption>
+ * region_tag:backupdr_v1_generated_BackupDR_ListDataSourceReferences_async
+ */
+  listDataSourceReferencesAsync(
+      request?: protos.google.cloud.backupdr.v1.IListDataSourceReferencesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.backupdr.v1.IDataSourceReference>{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listDataSourceReferences'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listDataSourceReferences iterate %j', request);
+    return this.descriptors.page.listDataSourceReferences.asyncIterate(
+      this.innerApiCalls['listDataSourceReferences'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.backupdr.v1.IDataSourceReference>;
   }
  /**
  * Fetch DataSourceReferences for a given project, location and resource type.

@@ -128263,6 +128263,211 @@
                             return Changelog;
                         })();
     
+                        v3beta1.CodeBlock = (function() {
+    
+                            /**
+                             * Properties of a CodeBlock.
+                             * @memberof google.cloud.dialogflow.cx.v3beta1
+                             * @interface ICodeBlock
+                             * @property {string|null} [code] CodeBlock code
+                             */
+    
+                            /**
+                             * Constructs a new CodeBlock.
+                             * @memberof google.cloud.dialogflow.cx.v3beta1
+                             * @classdesc Represents a CodeBlock.
+                             * @implements ICodeBlock
+                             * @constructor
+                             * @param {google.cloud.dialogflow.cx.v3beta1.ICodeBlock=} [properties] Properties to set
+                             */
+                            function CodeBlock(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CodeBlock code.
+                             * @member {string} code
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.CodeBlock
+                             * @instance
+                             */
+                            CodeBlock.prototype.code = "";
+    
+                            /**
+                             * Creates a new CodeBlock instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.CodeBlock
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3beta1.ICodeBlock=} [properties] Properties to set
+                             * @returns {google.cloud.dialogflow.cx.v3beta1.CodeBlock} CodeBlock instance
+                             */
+                            CodeBlock.create = function create(properties) {
+                                return new CodeBlock(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CodeBlock message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.CodeBlock.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.CodeBlock
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3beta1.ICodeBlock} message CodeBlock message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CodeBlock.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.code != null && Object.hasOwnProperty.call(message, "code"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.code);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CodeBlock message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.CodeBlock.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.CodeBlock
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3beta1.ICodeBlock} message CodeBlock message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CodeBlock.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CodeBlock message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.CodeBlock
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dialogflow.cx.v3beta1.CodeBlock} CodeBlock
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CodeBlock.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.cx.v3beta1.CodeBlock();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.code = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CodeBlock message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.CodeBlock
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dialogflow.cx.v3beta1.CodeBlock} CodeBlock
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CodeBlock.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CodeBlock message.
+                             * @function verify
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.CodeBlock
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CodeBlock.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.code != null && message.hasOwnProperty("code"))
+                                    if (!$util.isString(message.code))
+                                        return "code: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CodeBlock message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.CodeBlock
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dialogflow.cx.v3beta1.CodeBlock} CodeBlock
+                             */
+                            CodeBlock.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dialogflow.cx.v3beta1.CodeBlock)
+                                    return object;
+                                var message = new $root.google.cloud.dialogflow.cx.v3beta1.CodeBlock();
+                                if (object.code != null)
+                                    message.code = String(object.code);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CodeBlock message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.CodeBlock
+                             * @static
+                             * @param {google.cloud.dialogflow.cx.v3beta1.CodeBlock} message CodeBlock
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CodeBlock.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.code = "";
+                                if (message.code != null && message.hasOwnProperty("code"))
+                                    object.code = message.code;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CodeBlock to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.CodeBlock
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CodeBlock.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for CodeBlock
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.CodeBlock
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CodeBlock.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dialogflow.cx.v3beta1.CodeBlock";
+                            };
+    
+                            return CodeBlock;
+                        })();
+    
                         v3beta1.ConversationHistory = (function() {
     
                             /**
@@ -183464,6 +183669,7 @@
                                  * @property {Array.<Uint8Array>|null} [allowedCaCerts] GenericWebService allowedCaCerts
                                  * @property {google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.IOAuthConfig|null} [oauthConfig] GenericWebService oauthConfig
                                  * @property {google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAgentAuth|null} [serviceAgentAuth] GenericWebService serviceAgentAuth
+                                 * @property {google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.IServiceAccountAuthConfig|null} [serviceAccountAuthConfig] GenericWebService serviceAccountAuthConfig
                                  * @property {google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.WebhookType|null} [webhookType] GenericWebService webhookType
                                  * @property {google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.HttpMethod|null} [httpMethod] GenericWebService httpMethod
                                  * @property {string|null} [requestBody] GenericWebService requestBody
@@ -183562,6 +183768,14 @@
                                 GenericWebService.prototype.serviceAgentAuth = 0;
     
                                 /**
+                                 * GenericWebService serviceAccountAuthConfig.
+                                 * @member {google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.IServiceAccountAuthConfig|null|undefined} serviceAccountAuthConfig
+                                 * @memberof google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService
+                                 * @instance
+                                 */
+                                GenericWebService.prototype.serviceAccountAuthConfig = null;
+    
+                                /**
                                  * GenericWebService webhookType.
                                  * @member {google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.WebhookType} webhookType
                                  * @memberof google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService
@@ -183642,6 +183856,8 @@
                                         $root.google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.OAuthConfig.encode(message.oauthConfig, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                                     if (message.serviceAgentAuth != null && Object.hasOwnProperty.call(message, "serviceAgentAuth"))
                                         writer.uint32(/* id 12, wireType 0 =*/96).int32(message.serviceAgentAuth);
+                                    if (message.serviceAccountAuthConfig != null && Object.hasOwnProperty.call(message, "serviceAccountAuthConfig"))
+                                        $root.google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAccountAuthConfig.encode(message.serviceAccountAuthConfig, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
                                     if (message.secretVersionForUsernamePassword != null && Object.hasOwnProperty.call(message, "secretVersionForUsernamePassword"))
                                         writer.uint32(/* id 19, wireType 2 =*/154).string(message.secretVersionForUsernamePassword);
                                     if (message.secretVersionsForRequestHeaders != null && Object.hasOwnProperty.call(message, "secretVersionsForRequestHeaders"))
@@ -183759,6 +183975,10 @@
                                             }
                                         case 12: {
                                                 message.serviceAgentAuth = reader.int32();
+                                                break;
+                                            }
+                                        case 18: {
+                                                message.serviceAccountAuthConfig = $root.google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAccountAuthConfig.decode(reader, reader.uint32());
                                                 break;
                                             }
                                         case 6: {
@@ -183883,6 +184103,11 @@
                                         case 3:
                                             break;
                                         }
+                                    if (message.serviceAccountAuthConfig != null && message.hasOwnProperty("serviceAccountAuthConfig")) {
+                                        var error = $root.google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAccountAuthConfig.verify(message.serviceAccountAuthConfig);
+                                        if (error)
+                                            return "serviceAccountAuthConfig." + error;
+                                    }
                                     if (message.webhookType != null && message.hasOwnProperty("webhookType"))
                                         switch (message.webhookType) {
                                         default:
@@ -183996,6 +184221,11 @@
                                         message.serviceAgentAuth = 3;
                                         break;
                                     }
+                                    if (object.serviceAccountAuthConfig != null) {
+                                        if (typeof object.serviceAccountAuthConfig !== "object")
+                                            throw TypeError(".google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.serviceAccountAuthConfig: object expected");
+                                        message.serviceAccountAuthConfig = $root.google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAccountAuthConfig.fromObject(object.serviceAccountAuthConfig);
+                                    }
                                     switch (object.webhookType) {
                                     default:
                                         if (typeof object.webhookType === "number") {
@@ -184097,6 +184327,7 @@
                                         object.requestBody = "";
                                         object.oauthConfig = null;
                                         object.serviceAgentAuth = options.enums === String ? "SERVICE_AGENT_AUTH_UNSPECIFIED" : 0;
+                                        object.serviceAccountAuthConfig = null;
                                         object.secretVersionForUsernamePassword = "";
                                     }
                                     if (message.uri != null && message.hasOwnProperty("uri"))
@@ -184131,6 +184362,8 @@
                                         object.oauthConfig = $root.google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.OAuthConfig.toObject(message.oauthConfig, options);
                                     if (message.serviceAgentAuth != null && message.hasOwnProperty("serviceAgentAuth"))
                                         object.serviceAgentAuth = options.enums === String ? $root.google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAgentAuth[message.serviceAgentAuth] === undefined ? message.serviceAgentAuth : $root.google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAgentAuth[message.serviceAgentAuth] : message.serviceAgentAuth;
+                                    if (message.serviceAccountAuthConfig != null && message.hasOwnProperty("serviceAccountAuthConfig"))
+                                        object.serviceAccountAuthConfig = $root.google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAccountAuthConfig.toObject(message.serviceAccountAuthConfig, options);
                                     if (message.secretVersionForUsernamePassword != null && message.hasOwnProperty("secretVersionForUsernamePassword"))
                                         object.secretVersionForUsernamePassword = message.secretVersionForUsernamePassword;
                                     if (message.secretVersionsForRequestHeaders && (keys2 = Object.keys(message.secretVersionsForRequestHeaders)).length) {
@@ -184703,6 +184936,211 @@
                                     values[valuesById[2] = "ID_TOKEN"] = 2;
                                     values[valuesById[3] = "ACCESS_TOKEN"] = 3;
                                     return values;
+                                })();
+    
+                                GenericWebService.ServiceAccountAuthConfig = (function() {
+    
+                                    /**
+                                     * Properties of a ServiceAccountAuthConfig.
+                                     * @memberof google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService
+                                     * @interface IServiceAccountAuthConfig
+                                     * @property {string|null} [serviceAccount] ServiceAccountAuthConfig serviceAccount
+                                     */
+    
+                                    /**
+                                     * Constructs a new ServiceAccountAuthConfig.
+                                     * @memberof google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService
+                                     * @classdesc Represents a ServiceAccountAuthConfig.
+                                     * @implements IServiceAccountAuthConfig
+                                     * @constructor
+                                     * @param {google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.IServiceAccountAuthConfig=} [properties] Properties to set
+                                     */
+                                    function ServiceAccountAuthConfig(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * ServiceAccountAuthConfig serviceAccount.
+                                     * @member {string} serviceAccount
+                                     * @memberof google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAccountAuthConfig
+                                     * @instance
+                                     */
+                                    ServiceAccountAuthConfig.prototype.serviceAccount = "";
+    
+                                    /**
+                                     * Creates a new ServiceAccountAuthConfig instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAccountAuthConfig
+                                     * @static
+                                     * @param {google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.IServiceAccountAuthConfig=} [properties] Properties to set
+                                     * @returns {google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAccountAuthConfig} ServiceAccountAuthConfig instance
+                                     */
+                                    ServiceAccountAuthConfig.create = function create(properties) {
+                                        return new ServiceAccountAuthConfig(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified ServiceAccountAuthConfig message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAccountAuthConfig.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAccountAuthConfig
+                                     * @static
+                                     * @param {google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.IServiceAccountAuthConfig} message ServiceAccountAuthConfig message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    ServiceAccountAuthConfig.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.serviceAccount != null && Object.hasOwnProperty.call(message, "serviceAccount"))
+                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.serviceAccount);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified ServiceAccountAuthConfig message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAccountAuthConfig.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAccountAuthConfig
+                                     * @static
+                                     * @param {google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.IServiceAccountAuthConfig} message ServiceAccountAuthConfig message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    ServiceAccountAuthConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a ServiceAccountAuthConfig message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAccountAuthConfig
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAccountAuthConfig} ServiceAccountAuthConfig
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    ServiceAccountAuthConfig.decode = function decode(reader, length, error) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAccountAuthConfig();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            if (tag === error)
+                                                break;
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    message.serviceAccount = reader.string();
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a ServiceAccountAuthConfig message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAccountAuthConfig
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAccountAuthConfig} ServiceAccountAuthConfig
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    ServiceAccountAuthConfig.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a ServiceAccountAuthConfig message.
+                                     * @function verify
+                                     * @memberof google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAccountAuthConfig
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    ServiceAccountAuthConfig.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                                            if (!$util.isString(message.serviceAccount))
+                                                return "serviceAccount: string expected";
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a ServiceAccountAuthConfig message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAccountAuthConfig
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAccountAuthConfig} ServiceAccountAuthConfig
+                                     */
+                                    ServiceAccountAuthConfig.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAccountAuthConfig)
+                                            return object;
+                                        var message = new $root.google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAccountAuthConfig();
+                                        if (object.serviceAccount != null)
+                                            message.serviceAccount = String(object.serviceAccount);
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a ServiceAccountAuthConfig message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAccountAuthConfig
+                                     * @static
+                                     * @param {google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAccountAuthConfig} message ServiceAccountAuthConfig
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    ServiceAccountAuthConfig.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults)
+                                            object.serviceAccount = "";
+                                        if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                                            object.serviceAccount = message.serviceAccount;
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this ServiceAccountAuthConfig to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAccountAuthConfig
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    ServiceAccountAuthConfig.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for ServiceAccountAuthConfig
+                                     * @function getTypeUrl
+                                     * @memberof google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAccountAuthConfig
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    ServiceAccountAuthConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAccountAuthConfig";
+                                    };
+    
+                                    return ServiceAccountAuthConfig;
                                 })();
     
                                 /**
@@ -201830,6 +202268,8 @@
                              * @property {Array.<string>|null} [referencedPlaybooks] Playbook referencedPlaybooks
                              * @property {Array.<string>|null} [referencedFlows] Playbook referencedFlows
                              * @property {Array.<string>|null} [referencedTools] Playbook referencedTools
+                             * @property {Array.<string>|null} [inlineActions] Playbook inlineActions
+                             * @property {google.cloud.dialogflow.cx.v3beta1.ICodeBlock|null} [codeBlock] Playbook codeBlock
                              * @property {google.cloud.dialogflow.cx.v3beta1.ILlmModelSettings|null} [llmModelSettings] Playbook llmModelSettings
                              * @property {google.cloud.dialogflow.cx.v3beta1.AdvancedSettings.ISpeechSettings|null} [speechSettings] Playbook speechSettings
                              * @property {Array.<google.cloud.dialogflow.cx.v3beta1.IHandler>|null} [handlers] Playbook handlers
@@ -201850,6 +202290,7 @@
                                 this.referencedPlaybooks = [];
                                 this.referencedFlows = [];
                                 this.referencedTools = [];
+                                this.inlineActions = [];
                                 this.handlers = [];
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
@@ -201954,6 +202395,22 @@
                             Playbook.prototype.referencedTools = $util.emptyArray;
     
                             /**
+                             * Playbook inlineActions.
+                             * @member {Array.<string>} inlineActions
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.Playbook
+                             * @instance
+                             */
+                            Playbook.prototype.inlineActions = $util.emptyArray;
+    
+                            /**
+                             * Playbook codeBlock.
+                             * @member {google.cloud.dialogflow.cx.v3beta1.ICodeBlock|null|undefined} codeBlock
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.Playbook
+                             * @instance
+                             */
+                            Playbook.prototype.codeBlock = null;
+    
+                            /**
                              * Playbook llmModelSettings.
                              * @member {google.cloud.dialogflow.cx.v3beta1.ILlmModelSettings|null|undefined} llmModelSettings
                              * @memberof google.cloud.dialogflow.cx.v3beta1.Playbook
@@ -202047,6 +202504,11 @@
                                     writer.uint32(/* id 19, wireType 0 =*/152).int32(message.playbookType);
                                 if (message.speechSettings != null && Object.hasOwnProperty.call(message, "speechSettings"))
                                     $root.google.cloud.dialogflow.cx.v3beta1.AdvancedSettings.SpeechSettings.encode(message.speechSettings, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
+                                if (message.codeBlock != null && Object.hasOwnProperty.call(message, "codeBlock"))
+                                    $root.google.cloud.dialogflow.cx.v3beta1.CodeBlock.encode(message.codeBlock, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                                if (message.inlineActions != null && message.inlineActions.length)
+                                    for (var i = 0; i < message.inlineActions.length; ++i)
+                                        writer.uint32(/* id 22, wireType 2 =*/178).string(message.inlineActions[i]);
                                 return writer;
                             };
     
@@ -202139,6 +202601,16 @@
                                             if (!(message.referencedTools && message.referencedTools.length))
                                                 message.referencedTools = [];
                                             message.referencedTools.push(reader.string());
+                                            break;
+                                        }
+                                    case 22: {
+                                            if (!(message.inlineActions && message.inlineActions.length))
+                                                message.inlineActions = [];
+                                            message.inlineActions.push(reader.string());
+                                            break;
+                                        }
+                                    case 21: {
+                                            message.codeBlock = $root.google.cloud.dialogflow.cx.v3beta1.CodeBlock.decode(reader, reader.uint32());
                                             break;
                                         }
                                     case 14: {
@@ -202260,6 +202732,18 @@
                                         if (!$util.isString(message.referencedTools[i]))
                                             return "referencedTools: string[] expected";
                                 }
+                                if (message.inlineActions != null && message.hasOwnProperty("inlineActions")) {
+                                    if (!Array.isArray(message.inlineActions))
+                                        return "inlineActions: array expected";
+                                    for (var i = 0; i < message.inlineActions.length; ++i)
+                                        if (!$util.isString(message.inlineActions[i]))
+                                            return "inlineActions: string[] expected";
+                                }
+                                if (message.codeBlock != null && message.hasOwnProperty("codeBlock")) {
+                                    var error = $root.google.cloud.dialogflow.cx.v3beta1.CodeBlock.verify(message.codeBlock);
+                                    if (error)
+                                        return "codeBlock." + error;
+                                }
                                 if (message.llmModelSettings != null && message.hasOwnProperty("llmModelSettings")) {
                                     var error = $root.google.cloud.dialogflow.cx.v3beta1.LlmModelSettings.verify(message.llmModelSettings);
                                     if (error)
@@ -202374,6 +202858,18 @@
                                     for (var i = 0; i < object.referencedTools.length; ++i)
                                         message.referencedTools[i] = String(object.referencedTools[i]);
                                 }
+                                if (object.inlineActions) {
+                                    if (!Array.isArray(object.inlineActions))
+                                        throw TypeError(".google.cloud.dialogflow.cx.v3beta1.Playbook.inlineActions: array expected");
+                                    message.inlineActions = [];
+                                    for (var i = 0; i < object.inlineActions.length; ++i)
+                                        message.inlineActions[i] = String(object.inlineActions[i]);
+                                }
+                                if (object.codeBlock != null) {
+                                    if (typeof object.codeBlock !== "object")
+                                        throw TypeError(".google.cloud.dialogflow.cx.v3beta1.Playbook.codeBlock: object expected");
+                                    message.codeBlock = $root.google.cloud.dialogflow.cx.v3beta1.CodeBlock.fromObject(object.codeBlock);
+                                }
                                 if (object.llmModelSettings != null) {
                                     if (typeof object.llmModelSettings !== "object")
                                         throw TypeError(".google.cloud.dialogflow.cx.v3beta1.Playbook.llmModelSettings: object expected");
@@ -202437,6 +202933,7 @@
                                     object.referencedFlows = [];
                                     object.referencedTools = [];
                                     object.handlers = [];
+                                    object.inlineActions = [];
                                 }
                                 if (options.defaults) {
                                     object.name = "";
@@ -202453,6 +202950,7 @@
                                     object.instruction = null;
                                     object.playbookType = options.enums === String ? "PLAYBOOK_TYPE_UNSPECIFIED" : 0;
                                     object.speechSettings = null;
+                                    object.codeBlock = null;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -202507,6 +203005,13 @@
                                     object.playbookType = options.enums === String ? $root.google.cloud.dialogflow.cx.v3beta1.Playbook.PlaybookType[message.playbookType] === undefined ? message.playbookType : $root.google.cloud.dialogflow.cx.v3beta1.Playbook.PlaybookType[message.playbookType] : message.playbookType;
                                 if (message.speechSettings != null && message.hasOwnProperty("speechSettings"))
                                     object.speechSettings = $root.google.cloud.dialogflow.cx.v3beta1.AdvancedSettings.SpeechSettings.toObject(message.speechSettings, options);
+                                if (message.codeBlock != null && message.hasOwnProperty("codeBlock"))
+                                    object.codeBlock = $root.google.cloud.dialogflow.cx.v3beta1.CodeBlock.toObject(message.codeBlock, options);
+                                if (message.inlineActions && message.inlineActions.length) {
+                                    object.inlineActions = [];
+                                    for (var j = 0; j < message.inlineActions.length; ++j)
+                                        object.inlineActions[j] = message.inlineActions[j];
+                                }
                                 return object;
                             };
     
@@ -215272,6 +215777,7 @@
                                  * @property {google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.IOAuthConfig|null} [oauthConfig] Authentication oauthConfig
                                  * @property {google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.IServiceAgentAuthConfig|null} [serviceAgentAuthConfig] Authentication serviceAgentAuthConfig
                                  * @property {google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.IBearerTokenConfig|null} [bearerTokenConfig] Authentication bearerTokenConfig
+                                 * @property {google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.IServiceAccountAuthConfig|null} [serviceAccountAuthConfig] Authentication serviceAccountAuthConfig
                                  */
     
                                 /**
@@ -215321,17 +215827,25 @@
                                  */
                                 Authentication.prototype.bearerTokenConfig = null;
     
+                                /**
+                                 * Authentication serviceAccountAuthConfig.
+                                 * @member {google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.IServiceAccountAuthConfig|null|undefined} serviceAccountAuthConfig
+                                 * @memberof google.cloud.dialogflow.cx.v3beta1.Tool.Authentication
+                                 * @instance
+                                 */
+                                Authentication.prototype.serviceAccountAuthConfig = null;
+    
                                 // OneOf field names bound to virtual getters and setters
                                 var $oneOfFields;
     
                                 /**
                                  * Authentication authConfig.
-                                 * @member {"apiKeyConfig"|"oauthConfig"|"serviceAgentAuthConfig"|"bearerTokenConfig"|undefined} authConfig
+                                 * @member {"apiKeyConfig"|"oauthConfig"|"serviceAgentAuthConfig"|"bearerTokenConfig"|"serviceAccountAuthConfig"|undefined} authConfig
                                  * @memberof google.cloud.dialogflow.cx.v3beta1.Tool.Authentication
                                  * @instance
                                  */
                                 Object.defineProperty(Authentication.prototype, "authConfig", {
-                                    get: $util.oneOfGetter($oneOfFields = ["apiKeyConfig", "oauthConfig", "serviceAgentAuthConfig", "bearerTokenConfig"]),
+                                    get: $util.oneOfGetter($oneOfFields = ["apiKeyConfig", "oauthConfig", "serviceAgentAuthConfig", "bearerTokenConfig", "serviceAccountAuthConfig"]),
                                     set: $util.oneOfSetter($oneOfFields)
                                 });
     
@@ -215367,6 +215881,8 @@
                                         $root.google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.ServiceAgentAuthConfig.encode(message.serviceAgentAuthConfig, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                                     if (message.bearerTokenConfig != null && Object.hasOwnProperty.call(message, "bearerTokenConfig"))
                                         $root.google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.BearerTokenConfig.encode(message.bearerTokenConfig, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                    if (message.serviceAccountAuthConfig != null && Object.hasOwnProperty.call(message, "serviceAccountAuthConfig"))
+                                        $root.google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.ServiceAccountAuthConfig.encode(message.serviceAccountAuthConfig, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                                     return writer;
                                 };
     
@@ -215417,6 +215933,10 @@
                                             }
                                         case 4: {
                                                 message.bearerTokenConfig = $root.google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.BearerTokenConfig.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 5: {
+                                                message.serviceAccountAuthConfig = $root.google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.ServiceAccountAuthConfig.decode(reader, reader.uint32());
                                                 break;
                                             }
                                         default:
@@ -215493,6 +216013,16 @@
                                                 return "bearerTokenConfig." + error;
                                         }
                                     }
+                                    if (message.serviceAccountAuthConfig != null && message.hasOwnProperty("serviceAccountAuthConfig")) {
+                                        if (properties.authConfig === 1)
+                                            return "authConfig: multiple values";
+                                        properties.authConfig = 1;
+                                        {
+                                            var error = $root.google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.ServiceAccountAuthConfig.verify(message.serviceAccountAuthConfig);
+                                            if (error)
+                                                return "serviceAccountAuthConfig." + error;
+                                        }
+                                    }
                                     return null;
                                 };
     
@@ -215527,6 +216057,11 @@
                                         if (typeof object.bearerTokenConfig !== "object")
                                             throw TypeError(".google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.bearerTokenConfig: object expected");
                                         message.bearerTokenConfig = $root.google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.BearerTokenConfig.fromObject(object.bearerTokenConfig);
+                                    }
+                                    if (object.serviceAccountAuthConfig != null) {
+                                        if (typeof object.serviceAccountAuthConfig !== "object")
+                                            throw TypeError(".google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.serviceAccountAuthConfig: object expected");
+                                        message.serviceAccountAuthConfig = $root.google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.ServiceAccountAuthConfig.fromObject(object.serviceAccountAuthConfig);
                                     }
                                     return message;
                                 };
@@ -215563,6 +216098,11 @@
                                         object.bearerTokenConfig = $root.google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.BearerTokenConfig.toObject(message.bearerTokenConfig, options);
                                         if (options.oneofs)
                                             object.authConfig = "bearerTokenConfig";
+                                    }
+                                    if (message.serviceAccountAuthConfig != null && message.hasOwnProperty("serviceAccountAuthConfig")) {
+                                        object.serviceAccountAuthConfig = $root.google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.ServiceAccountAuthConfig.toObject(message.serviceAccountAuthConfig, options);
+                                        if (options.oneofs)
+                                            object.authConfig = "serviceAccountAuthConfig";
                                     }
                                     return object;
                                 };
@@ -216751,6 +217291,211 @@
                                     };
     
                                     return BearerTokenConfig;
+                                })();
+    
+                                Authentication.ServiceAccountAuthConfig = (function() {
+    
+                                    /**
+                                     * Properties of a ServiceAccountAuthConfig.
+                                     * @memberof google.cloud.dialogflow.cx.v3beta1.Tool.Authentication
+                                     * @interface IServiceAccountAuthConfig
+                                     * @property {string|null} [serviceAccount] ServiceAccountAuthConfig serviceAccount
+                                     */
+    
+                                    /**
+                                     * Constructs a new ServiceAccountAuthConfig.
+                                     * @memberof google.cloud.dialogflow.cx.v3beta1.Tool.Authentication
+                                     * @classdesc Represents a ServiceAccountAuthConfig.
+                                     * @implements IServiceAccountAuthConfig
+                                     * @constructor
+                                     * @param {google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.IServiceAccountAuthConfig=} [properties] Properties to set
+                                     */
+                                    function ServiceAccountAuthConfig(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * ServiceAccountAuthConfig serviceAccount.
+                                     * @member {string} serviceAccount
+                                     * @memberof google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.ServiceAccountAuthConfig
+                                     * @instance
+                                     */
+                                    ServiceAccountAuthConfig.prototype.serviceAccount = "";
+    
+                                    /**
+                                     * Creates a new ServiceAccountAuthConfig instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.ServiceAccountAuthConfig
+                                     * @static
+                                     * @param {google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.IServiceAccountAuthConfig=} [properties] Properties to set
+                                     * @returns {google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.ServiceAccountAuthConfig} ServiceAccountAuthConfig instance
+                                     */
+                                    ServiceAccountAuthConfig.create = function create(properties) {
+                                        return new ServiceAccountAuthConfig(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified ServiceAccountAuthConfig message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.ServiceAccountAuthConfig.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.ServiceAccountAuthConfig
+                                     * @static
+                                     * @param {google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.IServiceAccountAuthConfig} message ServiceAccountAuthConfig message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    ServiceAccountAuthConfig.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.serviceAccount != null && Object.hasOwnProperty.call(message, "serviceAccount"))
+                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.serviceAccount);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified ServiceAccountAuthConfig message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.ServiceAccountAuthConfig.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.ServiceAccountAuthConfig
+                                     * @static
+                                     * @param {google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.IServiceAccountAuthConfig} message ServiceAccountAuthConfig message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    ServiceAccountAuthConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a ServiceAccountAuthConfig message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.ServiceAccountAuthConfig
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.ServiceAccountAuthConfig} ServiceAccountAuthConfig
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    ServiceAccountAuthConfig.decode = function decode(reader, length, error) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.ServiceAccountAuthConfig();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            if (tag === error)
+                                                break;
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    message.serviceAccount = reader.string();
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a ServiceAccountAuthConfig message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.ServiceAccountAuthConfig
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.ServiceAccountAuthConfig} ServiceAccountAuthConfig
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    ServiceAccountAuthConfig.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a ServiceAccountAuthConfig message.
+                                     * @function verify
+                                     * @memberof google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.ServiceAccountAuthConfig
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    ServiceAccountAuthConfig.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                                            if (!$util.isString(message.serviceAccount))
+                                                return "serviceAccount: string expected";
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a ServiceAccountAuthConfig message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.ServiceAccountAuthConfig
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.ServiceAccountAuthConfig} ServiceAccountAuthConfig
+                                     */
+                                    ServiceAccountAuthConfig.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.ServiceAccountAuthConfig)
+                                            return object;
+                                        var message = new $root.google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.ServiceAccountAuthConfig();
+                                        if (object.serviceAccount != null)
+                                            message.serviceAccount = String(object.serviceAccount);
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a ServiceAccountAuthConfig message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.ServiceAccountAuthConfig
+                                     * @static
+                                     * @param {google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.ServiceAccountAuthConfig} message ServiceAccountAuthConfig
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    ServiceAccountAuthConfig.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults)
+                                            object.serviceAccount = "";
+                                        if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                                            object.serviceAccount = message.serviceAccount;
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this ServiceAccountAuthConfig to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.ServiceAccountAuthConfig
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    ServiceAccountAuthConfig.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for ServiceAccountAuthConfig
+                                     * @function getTypeUrl
+                                     * @memberof google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.ServiceAccountAuthConfig
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    ServiceAccountAuthConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.ServiceAccountAuthConfig";
+                                    };
+    
+                                    return ServiceAccountAuthConfig;
                                 })();
     
                                 return Authentication;

@@ -1222,6 +1222,9 @@ export namespace google {
 
                         /** RenderProductIssuesRequest payload */
                         payload?: (google.shopping.merchant.issueresolution.v1.IRenderIssuesRequestPayload|null);
+
+                        /** RenderProductIssuesRequest productIdBase64UrlEncoded */
+                        productIdBase64UrlEncoded?: (boolean|null);
                     }
 
                     /** Represents a RenderProductIssuesRequest. */
@@ -1244,6 +1247,9 @@ export namespace google {
 
                         /** RenderProductIssuesRequest payload. */
                         public payload?: (google.shopping.merchant.issueresolution.v1.IRenderIssuesRequestPayload|null);
+
+                        /** RenderProductIssuesRequest productIdBase64UrlEncoded. */
+                        public productIdBase64UrlEncoded: boolean;
 
                         /**
                          * Creates a new RenderProductIssuesRequest instance using the specified properties.
@@ -3383,7 +3389,8 @@ export namespace google {
                             REVIEW_PRODUCT_ISSUE_IN_MERCHANT_CENTER = 1,
                             REVIEW_ACCOUNT_ISSUE_IN_MERCHANT_CENTER = 2,
                             LEGAL_APPEAL_IN_HELP_CENTER = 3,
-                            VERIFY_IDENTITY_IN_MERCHANT_CENTER = 4
+                            VERIFY_IDENTITY_IN_MERCHANT_CENTER = 4,
+                            VERIFY_BUSINESS_VIDEO_IN_MERCHANT_CENTER = 5
                         }
                     }
 
@@ -5408,6 +5415,9 @@ export namespace google {
 
                         /** RenderProductIssuesRequest payload */
                         payload?: (google.shopping.merchant.issueresolution.v1beta.IRenderIssuesRequestPayload|null);
+
+                        /** RenderProductIssuesRequest productIdBase64UrlEncoded */
+                        productIdBase64UrlEncoded?: (boolean|null);
                     }
 
                     /** Represents a RenderProductIssuesRequest. */
@@ -5430,6 +5440,9 @@ export namespace google {
 
                         /** RenderProductIssuesRequest payload. */
                         public payload?: (google.shopping.merchant.issueresolution.v1beta.IRenderIssuesRequestPayload|null);
+
+                        /** RenderProductIssuesRequest productIdBase64UrlEncoded. */
+                        public productIdBase64UrlEncoded: boolean;
 
                         /**
                          * Creates a new RenderProductIssuesRequest instance using the specified properties.
@@ -7569,7 +7582,8 @@ export namespace google {
                             REVIEW_PRODUCT_ISSUE_IN_MERCHANT_CENTER = 1,
                             REVIEW_ACCOUNT_ISSUE_IN_MERCHANT_CENTER = 2,
                             LEGAL_APPEAL_IN_HELP_CENTER = 3,
-                            VERIFY_IDENTITY_IN_MERCHANT_CENTER = 4
+                            VERIFY_IDENTITY_IN_MERCHANT_CENTER = 4,
+                            VERIFY_BUSINESS_VIDEO_IN_MERCHANT_CENTER = 5
                         }
                     }
 

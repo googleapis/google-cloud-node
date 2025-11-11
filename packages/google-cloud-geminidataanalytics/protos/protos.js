@@ -1588,6 +1588,7 @@
                          * @interface IConversationOptions
                          * @property {google.cloud.geminidataanalytics.v1alpha.IChartOptions|null} [chart] ConversationOptions chart
                          * @property {google.cloud.geminidataanalytics.v1alpha.IAnalysisOptions|null} [analysis] ConversationOptions analysis
+                         * @property {google.cloud.geminidataanalytics.v1alpha.IDatasourceOptions|null} [datasource] ConversationOptions datasource
                          */
     
                         /**
@@ -1622,6 +1623,14 @@
                         ConversationOptions.prototype.analysis = null;
     
                         /**
+                         * ConversationOptions datasource.
+                         * @member {google.cloud.geminidataanalytics.v1alpha.IDatasourceOptions|null|undefined} datasource
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ConversationOptions
+                         * @instance
+                         */
+                        ConversationOptions.prototype.datasource = null;
+    
+                        /**
                          * Creates a new ConversationOptions instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.geminidataanalytics.v1alpha.ConversationOptions
@@ -1649,6 +1658,8 @@
                                 $root.google.cloud.geminidataanalytics.v1alpha.ChartOptions.encode(message.chart, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.analysis != null && Object.hasOwnProperty.call(message, "analysis"))
                                 $root.google.cloud.geminidataanalytics.v1alpha.AnalysisOptions.encode(message.analysis, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.datasource != null && Object.hasOwnProperty.call(message, "datasource"))
+                                $root.google.cloud.geminidataanalytics.v1alpha.DatasourceOptions.encode(message.datasource, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             return writer;
                         };
     
@@ -1691,6 +1702,10 @@
                                     }
                                 case 2: {
                                         message.analysis = $root.google.cloud.geminidataanalytics.v1alpha.AnalysisOptions.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.datasource = $root.google.cloud.geminidataanalytics.v1alpha.DatasourceOptions.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -1738,6 +1753,11 @@
                                 if (error)
                                     return "analysis." + error;
                             }
+                            if (message.datasource != null && message.hasOwnProperty("datasource")) {
+                                var error = $root.google.cloud.geminidataanalytics.v1alpha.DatasourceOptions.verify(message.datasource);
+                                if (error)
+                                    return "datasource." + error;
+                            }
                             return null;
                         };
     
@@ -1763,6 +1783,11 @@
                                     throw TypeError(".google.cloud.geminidataanalytics.v1alpha.ConversationOptions.analysis: object expected");
                                 message.analysis = $root.google.cloud.geminidataanalytics.v1alpha.AnalysisOptions.fromObject(object.analysis);
                             }
+                            if (object.datasource != null) {
+                                if (typeof object.datasource !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1alpha.ConversationOptions.datasource: object expected");
+                                message.datasource = $root.google.cloud.geminidataanalytics.v1alpha.DatasourceOptions.fromObject(object.datasource);
+                            }
                             return message;
                         };
     
@@ -1782,11 +1807,14 @@
                             if (options.defaults) {
                                 object.chart = null;
                                 object.analysis = null;
+                                object.datasource = null;
                             }
                             if (message.chart != null && message.hasOwnProperty("chart"))
                                 object.chart = $root.google.cloud.geminidataanalytics.v1alpha.ChartOptions.toObject(message.chart, options);
                             if (message.analysis != null && message.hasOwnProperty("analysis"))
                                 object.analysis = $root.google.cloud.geminidataanalytics.v1alpha.AnalysisOptions.toObject(message.analysis, options);
+                            if (message.datasource != null && message.hasOwnProperty("datasource"))
+                                object.datasource = $root.google.cloud.geminidataanalytics.v1alpha.DatasourceOptions.toObject(message.datasource, options);
                             return object;
                         };
     
@@ -1817,6 +1845,216 @@
                         };
     
                         return ConversationOptions;
+                    })();
+    
+                    v1alpha.DatasourceOptions = (function() {
+    
+                        /**
+                         * Properties of a DatasourceOptions.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha
+                         * @interface IDatasourceOptions
+                         * @property {google.protobuf.IInt64Value|null} [bigQueryMaxBilledBytes] DatasourceOptions bigQueryMaxBilledBytes
+                         */
+    
+                        /**
+                         * Constructs a new DatasourceOptions.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha
+                         * @classdesc Represents a DatasourceOptions.
+                         * @implements IDatasourceOptions
+                         * @constructor
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IDatasourceOptions=} [properties] Properties to set
+                         */
+                        function DatasourceOptions(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DatasourceOptions bigQueryMaxBilledBytes.
+                         * @member {google.protobuf.IInt64Value|null|undefined} bigQueryMaxBilledBytes
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.DatasourceOptions
+                         * @instance
+                         */
+                        DatasourceOptions.prototype.bigQueryMaxBilledBytes = null;
+    
+                        /**
+                         * Creates a new DatasourceOptions instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.DatasourceOptions
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IDatasourceOptions=} [properties] Properties to set
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.DatasourceOptions} DatasourceOptions instance
+                         */
+                        DatasourceOptions.create = function create(properties) {
+                            return new DatasourceOptions(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DatasourceOptions message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.DatasourceOptions.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.DatasourceOptions
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IDatasourceOptions} message DatasourceOptions message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DatasourceOptions.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.bigQueryMaxBilledBytes != null && Object.hasOwnProperty.call(message, "bigQueryMaxBilledBytes"))
+                                $root.google.protobuf.Int64Value.encode(message.bigQueryMaxBilledBytes, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DatasourceOptions message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.DatasourceOptions.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.DatasourceOptions
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IDatasourceOptions} message DatasourceOptions message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DatasourceOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DatasourceOptions message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.DatasourceOptions
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.DatasourceOptions} DatasourceOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DatasourceOptions.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1alpha.DatasourceOptions();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.bigQueryMaxBilledBytes = $root.google.protobuf.Int64Value.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DatasourceOptions message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.DatasourceOptions
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.DatasourceOptions} DatasourceOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DatasourceOptions.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DatasourceOptions message.
+                         * @function verify
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.DatasourceOptions
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DatasourceOptions.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.bigQueryMaxBilledBytes != null && message.hasOwnProperty("bigQueryMaxBilledBytes")) {
+                                var error = $root.google.protobuf.Int64Value.verify(message.bigQueryMaxBilledBytes);
+                                if (error)
+                                    return "bigQueryMaxBilledBytes." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DatasourceOptions message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.DatasourceOptions
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.DatasourceOptions} DatasourceOptions
+                         */
+                        DatasourceOptions.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.geminidataanalytics.v1alpha.DatasourceOptions)
+                                return object;
+                            var message = new $root.google.cloud.geminidataanalytics.v1alpha.DatasourceOptions();
+                            if (object.bigQueryMaxBilledBytes != null) {
+                                if (typeof object.bigQueryMaxBilledBytes !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1alpha.DatasourceOptions.bigQueryMaxBilledBytes: object expected");
+                                message.bigQueryMaxBilledBytes = $root.google.protobuf.Int64Value.fromObject(object.bigQueryMaxBilledBytes);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DatasourceOptions message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.DatasourceOptions
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.DatasourceOptions} message DatasourceOptions
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DatasourceOptions.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.bigQueryMaxBilledBytes = null;
+                            if (message.bigQueryMaxBilledBytes != null && message.hasOwnProperty("bigQueryMaxBilledBytes"))
+                                object.bigQueryMaxBilledBytes = $root.google.protobuf.Int64Value.toObject(message.bigQueryMaxBilledBytes, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DatasourceOptions to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.DatasourceOptions
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DatasourceOptions.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DatasourceOptions
+                         * @function getTypeUrl
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.DatasourceOptions
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DatasourceOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1alpha.DatasourceOptions";
+                        };
+    
+                        return DatasourceOptions;
                     })();
     
                     v1alpha.ChartOptions = (function() {
@@ -5140,6 +5378,7 @@
                          * @property {string|null} [studioDatasourceId] Datasource studioDatasourceId
                          * @property {google.cloud.geminidataanalytics.v1alpha.ILookerExploreReference|null} [lookerExploreReference] Datasource lookerExploreReference
                          * @property {google.cloud.geminidataanalytics.v1alpha.ISchema|null} [schema] Datasource schema
+                         * @property {google.protobuf.IStruct|null} [structSchema] Datasource structSchema
                          */
     
                         /**
@@ -5189,6 +5428,14 @@
                          */
                         Datasource.prototype.schema = null;
     
+                        /**
+                         * Datasource structSchema.
+                         * @member {google.protobuf.IStruct|null|undefined} structSchema
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.Datasource
+                         * @instance
+                         */
+                        Datasource.prototype.structSchema = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -5235,6 +5482,8 @@
                                 $root.google.cloud.geminidataanalytics.v1alpha.LookerExploreReference.encode(message.lookerExploreReference, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             if (message.schema != null && Object.hasOwnProperty.call(message, "schema"))
                                 $root.google.cloud.geminidataanalytics.v1alpha.Schema.encode(message.schema, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.structSchema != null && Object.hasOwnProperty.call(message, "structSchema"))
+                                $root.google.protobuf.Struct.encode(message.structSchema, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                             return writer;
                         };
     
@@ -5285,6 +5534,10 @@
                                     }
                                 case 7: {
                                         message.schema = $root.google.cloud.geminidataanalytics.v1alpha.Schema.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 10: {
+                                        message.structSchema = $root.google.protobuf.Struct.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -5353,6 +5606,11 @@
                                 if (error)
                                     return "schema." + error;
                             }
+                            if (message.structSchema != null && message.hasOwnProperty("structSchema")) {
+                                var error = $root.google.protobuf.Struct.verify(message.structSchema);
+                                if (error)
+                                    return "structSchema." + error;
+                            }
                             return null;
                         };
     
@@ -5385,6 +5643,11 @@
                                     throw TypeError(".google.cloud.geminidataanalytics.v1alpha.Datasource.schema: object expected");
                                 message.schema = $root.google.cloud.geminidataanalytics.v1alpha.Schema.fromObject(object.schema);
                             }
+                            if (object.structSchema != null) {
+                                if (typeof object.structSchema !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1alpha.Datasource.structSchema: object expected");
+                                message.structSchema = $root.google.protobuf.Struct.fromObject(object.structSchema);
+                            }
                             return message;
                         };
     
@@ -5401,8 +5664,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.schema = null;
+                                object.structSchema = null;
+                            }
                             if (message.bigqueryTableReference != null && message.hasOwnProperty("bigqueryTableReference")) {
                                 object.bigqueryTableReference = $root.google.cloud.geminidataanalytics.v1alpha.BigQueryTableReference.toObject(message.bigqueryTableReference, options);
                                 if (options.oneofs)
@@ -5420,6 +5685,8 @@
                             }
                             if (message.schema != null && message.hasOwnProperty("schema"))
                                 object.schema = $root.google.cloud.geminidataanalytics.v1alpha.Schema.toObject(message.schema, options);
+                            if (message.structSchema != null && message.hasOwnProperty("structSchema"))
+                                object.structSchema = $root.google.protobuf.Struct.toObject(message.structSchema, options);
                             return object;
                         };
     
@@ -13751,6 +14018,7 @@
                          * @property {google.cloud.geminidataanalytics.v1alpha.IContext|null} [inlineContext] ChatRequest inlineContext
                          * @property {google.cloud.geminidataanalytics.v1alpha.IConversationReference|null} [conversationReference] ChatRequest conversationReference
                          * @property {google.cloud.geminidataanalytics.v1alpha.IDataAgentContext|null} [dataAgentContext] ChatRequest dataAgentContext
+                         * @property {google.cloud.geminidataanalytics.v1alpha.IClientManagedResourceContext|null} [clientManagedResourceContext] ChatRequest clientManagedResourceContext
                          * @property {string|null} [project] ChatRequest project
                          * @property {string|null} [parent] ChatRequest parent
                          * @property {Array.<google.cloud.geminidataanalytics.v1alpha.IMessage>|null} [messages] ChatRequest messages
@@ -13797,6 +14065,14 @@
                         ChatRequest.prototype.dataAgentContext = null;
     
                         /**
+                         * ChatRequest clientManagedResourceContext.
+                         * @member {google.cloud.geminidataanalytics.v1alpha.IClientManagedResourceContext|null|undefined} clientManagedResourceContext
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ChatRequest
+                         * @instance
+                         */
+                        ChatRequest.prototype.clientManagedResourceContext = null;
+    
+                        /**
                          * ChatRequest project.
                          * @member {string} project
                          * @memberof google.cloud.geminidataanalytics.v1alpha.ChatRequest
@@ -13825,12 +14101,12 @@
     
                         /**
                          * ChatRequest contextProvider.
-                         * @member {"inlineContext"|"conversationReference"|"dataAgentContext"|undefined} contextProvider
+                         * @member {"inlineContext"|"conversationReference"|"dataAgentContext"|"clientManagedResourceContext"|undefined} contextProvider
                          * @memberof google.cloud.geminidataanalytics.v1alpha.ChatRequest
                          * @instance
                          */
                         Object.defineProperty(ChatRequest.prototype, "contextProvider", {
-                            get: $util.oneOfGetter($oneOfFields = ["inlineContext", "conversationReference", "dataAgentContext"]),
+                            get: $util.oneOfGetter($oneOfFields = ["inlineContext", "conversationReference", "dataAgentContext", "clientManagedResourceContext"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -13871,6 +14147,8 @@
                                 $root.google.cloud.geminidataanalytics.v1alpha.ConversationReference.encode(message.conversationReference, writer.uint32(/* id 103, wireType 2 =*/826).fork()).ldelim();
                             if (message.dataAgentContext != null && Object.hasOwnProperty.call(message, "dataAgentContext"))
                                 $root.google.cloud.geminidataanalytics.v1alpha.DataAgentContext.encode(message.dataAgentContext, writer.uint32(/* id 104, wireType 2 =*/834).fork()).ldelim();
+                            if (message.clientManagedResourceContext != null && Object.hasOwnProperty.call(message, "clientManagedResourceContext"))
+                                $root.google.cloud.geminidataanalytics.v1alpha.ClientManagedResourceContext.encode(message.clientManagedResourceContext, writer.uint32(/* id 105, wireType 2 =*/842).fork()).ldelim();
                             return writer;
                         };
     
@@ -13917,6 +14195,10 @@
                                     }
                                 case 104: {
                                         message.dataAgentContext = $root.google.cloud.geminidataanalytics.v1alpha.DataAgentContext.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 105: {
+                                        message.clientManagedResourceContext = $root.google.cloud.geminidataanalytics.v1alpha.ClientManagedResourceContext.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 1: {
@@ -13997,6 +14279,16 @@
                                         return "dataAgentContext." + error;
                                 }
                             }
+                            if (message.clientManagedResourceContext != null && message.hasOwnProperty("clientManagedResourceContext")) {
+                                if (properties.contextProvider === 1)
+                                    return "contextProvider: multiple values";
+                                properties.contextProvider = 1;
+                                {
+                                    var error = $root.google.cloud.geminidataanalytics.v1alpha.ClientManagedResourceContext.verify(message.clientManagedResourceContext);
+                                    if (error)
+                                        return "clientManagedResourceContext." + error;
+                                }
+                            }
                             if (message.project != null && message.hasOwnProperty("project"))
                                 if (!$util.isString(message.project))
                                     return "project: string expected";
@@ -14041,6 +14333,11 @@
                                 if (typeof object.dataAgentContext !== "object")
                                     throw TypeError(".google.cloud.geminidataanalytics.v1alpha.ChatRequest.dataAgentContext: object expected");
                                 message.dataAgentContext = $root.google.cloud.geminidataanalytics.v1alpha.DataAgentContext.fromObject(object.dataAgentContext);
+                            }
+                            if (object.clientManagedResourceContext != null) {
+                                if (typeof object.clientManagedResourceContext !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1alpha.ChatRequest.clientManagedResourceContext: object expected");
+                                message.clientManagedResourceContext = $root.google.cloud.geminidataanalytics.v1alpha.ClientManagedResourceContext.fromObject(object.clientManagedResourceContext);
                             }
                             if (object.project != null)
                                 message.project = String(object.project);
@@ -14101,6 +14398,11 @@
                                 object.dataAgentContext = $root.google.cloud.geminidataanalytics.v1alpha.DataAgentContext.toObject(message.dataAgentContext, options);
                                 if (options.oneofs)
                                     object.contextProvider = "dataAgentContext";
+                            }
+                            if (message.clientManagedResourceContext != null && message.hasOwnProperty("clientManagedResourceContext")) {
+                                object.clientManagedResourceContext = $root.google.cloud.geminidataanalytics.v1alpha.ClientManagedResourceContext.toObject(message.clientManagedResourceContext, options);
+                                if (options.oneofs)
+                                    object.contextProvider = "clientManagedResourceContext";
                             }
                             return object;
                         };
@@ -14663,6 +14965,263 @@
                         };
     
                         return ConversationReference;
+                    })();
+    
+                    v1alpha.ClientManagedResourceContext = (function() {
+    
+                        /**
+                         * Properties of a ClientManagedResourceContext.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha
+                         * @interface IClientManagedResourceContext
+                         * @property {google.cloud.geminidataanalytics.v1alpha.IContext|null} [inlineContext] ClientManagedResourceContext inlineContext
+                         * @property {string|null} [conversationId] ClientManagedResourceContext conversationId
+                         * @property {string|null} [agentId] ClientManagedResourceContext agentId
+                         */
+    
+                        /**
+                         * Constructs a new ClientManagedResourceContext.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha
+                         * @classdesc Represents a ClientManagedResourceContext.
+                         * @implements IClientManagedResourceContext
+                         * @constructor
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IClientManagedResourceContext=} [properties] Properties to set
+                         */
+                        function ClientManagedResourceContext(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ClientManagedResourceContext inlineContext.
+                         * @member {google.cloud.geminidataanalytics.v1alpha.IContext|null|undefined} inlineContext
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClientManagedResourceContext
+                         * @instance
+                         */
+                        ClientManagedResourceContext.prototype.inlineContext = null;
+    
+                        /**
+                         * ClientManagedResourceContext conversationId.
+                         * @member {string} conversationId
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClientManagedResourceContext
+                         * @instance
+                         */
+                        ClientManagedResourceContext.prototype.conversationId = "";
+    
+                        /**
+                         * ClientManagedResourceContext agentId.
+                         * @member {string} agentId
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClientManagedResourceContext
+                         * @instance
+                         */
+                        ClientManagedResourceContext.prototype.agentId = "";
+    
+                        /**
+                         * Creates a new ClientManagedResourceContext instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClientManagedResourceContext
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IClientManagedResourceContext=} [properties] Properties to set
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.ClientManagedResourceContext} ClientManagedResourceContext instance
+                         */
+                        ClientManagedResourceContext.create = function create(properties) {
+                            return new ClientManagedResourceContext(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ClientManagedResourceContext message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.ClientManagedResourceContext.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClientManagedResourceContext
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IClientManagedResourceContext} message ClientManagedResourceContext message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ClientManagedResourceContext.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.inlineContext != null && Object.hasOwnProperty.call(message, "inlineContext"))
+                                $root.google.cloud.geminidataanalytics.v1alpha.Context.encode(message.inlineContext, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.conversationId != null && Object.hasOwnProperty.call(message, "conversationId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.conversationId);
+                            if (message.agentId != null && Object.hasOwnProperty.call(message, "agentId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.agentId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ClientManagedResourceContext message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.ClientManagedResourceContext.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClientManagedResourceContext
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IClientManagedResourceContext} message ClientManagedResourceContext message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ClientManagedResourceContext.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ClientManagedResourceContext message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClientManagedResourceContext
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.ClientManagedResourceContext} ClientManagedResourceContext
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ClientManagedResourceContext.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1alpha.ClientManagedResourceContext();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.inlineContext = $root.google.cloud.geminidataanalytics.v1alpha.Context.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.conversationId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.agentId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ClientManagedResourceContext message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClientManagedResourceContext
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.ClientManagedResourceContext} ClientManagedResourceContext
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ClientManagedResourceContext.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ClientManagedResourceContext message.
+                         * @function verify
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClientManagedResourceContext
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ClientManagedResourceContext.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.inlineContext != null && message.hasOwnProperty("inlineContext")) {
+                                var error = $root.google.cloud.geminidataanalytics.v1alpha.Context.verify(message.inlineContext);
+                                if (error)
+                                    return "inlineContext." + error;
+                            }
+                            if (message.conversationId != null && message.hasOwnProperty("conversationId"))
+                                if (!$util.isString(message.conversationId))
+                                    return "conversationId: string expected";
+                            if (message.agentId != null && message.hasOwnProperty("agentId"))
+                                if (!$util.isString(message.agentId))
+                                    return "agentId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ClientManagedResourceContext message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClientManagedResourceContext
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.ClientManagedResourceContext} ClientManagedResourceContext
+                         */
+                        ClientManagedResourceContext.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.geminidataanalytics.v1alpha.ClientManagedResourceContext)
+                                return object;
+                            var message = new $root.google.cloud.geminidataanalytics.v1alpha.ClientManagedResourceContext();
+                            if (object.inlineContext != null) {
+                                if (typeof object.inlineContext !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1alpha.ClientManagedResourceContext.inlineContext: object expected");
+                                message.inlineContext = $root.google.cloud.geminidataanalytics.v1alpha.Context.fromObject(object.inlineContext);
+                            }
+                            if (object.conversationId != null)
+                                message.conversationId = String(object.conversationId);
+                            if (object.agentId != null)
+                                message.agentId = String(object.agentId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ClientManagedResourceContext message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClientManagedResourceContext
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.ClientManagedResourceContext} message ClientManagedResourceContext
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ClientManagedResourceContext.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.inlineContext = null;
+                                object.conversationId = "";
+                                object.agentId = "";
+                            }
+                            if (message.inlineContext != null && message.hasOwnProperty("inlineContext"))
+                                object.inlineContext = $root.google.cloud.geminidataanalytics.v1alpha.Context.toObject(message.inlineContext, options);
+                            if (message.conversationId != null && message.hasOwnProperty("conversationId"))
+                                object.conversationId = message.conversationId;
+                            if (message.agentId != null && message.hasOwnProperty("agentId"))
+                                object.agentId = message.agentId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ClientManagedResourceContext to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClientManagedResourceContext
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ClientManagedResourceContext.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ClientManagedResourceContext
+                         * @function getTypeUrl
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClientManagedResourceContext
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ClientManagedResourceContext.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1alpha.ClientManagedResourceContext";
+                        };
+    
+                        return ClientManagedResourceContext;
                     })();
     
                     v1alpha.Message = (function() {
@@ -15843,6 +16402,7 @@
                                 case 0:
                                 case 1:
                                 case 2:
+                                case 3:
                                     break;
                                 }
                             return null;
@@ -15885,6 +16445,10 @@
                             case "THOUGHT":
                             case 2:
                                 message.textType = 2;
+                                break;
+                            case "PROGRESS":
+                            case 3:
+                                message.textType = 3;
                                 break;
                             }
                             return message;
@@ -15950,12 +16514,14 @@
                          * @property {number} TEXT_TYPE_UNSPECIFIED=0 TEXT_TYPE_UNSPECIFIED value
                          * @property {number} FINAL_RESPONSE=1 FINAL_RESPONSE value
                          * @property {number} THOUGHT=2 THOUGHT value
+                         * @property {number} PROGRESS=3 PROGRESS value
                          */
                         TextMessage.TextType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "TEXT_TYPE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "FINAL_RESPONSE"] = 1;
                             values[valuesById[2] = "THOUGHT"] = 2;
+                            values[valuesById[3] = "PROGRESS"] = 3;
                             return values;
                         })();
     
@@ -20964,6 +21530,8 @@
                          * @property {google.cloud.geminidataanalytics.v1beta.IDatasourceReferences|null} [datasourceReferences] Context datasourceReferences
                          * @property {google.cloud.geminidataanalytics.v1beta.IConversationOptions|null} [options] Context options
                          * @property {Array.<google.cloud.geminidataanalytics.v1beta.IExampleQuery>|null} [exampleQueries] Context exampleQueries
+                         * @property {Array.<google.cloud.geminidataanalytics.v1beta.IGlossaryTerm>|null} [glossaryTerms] Context glossaryTerms
+                         * @property {Array.<google.cloud.geminidataanalytics.v1beta.Context.ISchemaRelationship>|null} [schemaRelationships] Context schemaRelationships
                          */
     
                         /**
@@ -20976,6 +21544,8 @@
                          */
                         function Context(properties) {
                             this.exampleQueries = [];
+                            this.glossaryTerms = [];
+                            this.schemaRelationships = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -21015,6 +21585,22 @@
                         Context.prototype.exampleQueries = $util.emptyArray;
     
                         /**
+                         * Context glossaryTerms.
+                         * @member {Array.<google.cloud.geminidataanalytics.v1beta.IGlossaryTerm>} glossaryTerms
+                         * @memberof google.cloud.geminidataanalytics.v1beta.Context
+                         * @instance
+                         */
+                        Context.prototype.glossaryTerms = $util.emptyArray;
+    
+                        /**
+                         * Context schemaRelationships.
+                         * @member {Array.<google.cloud.geminidataanalytics.v1beta.Context.ISchemaRelationship>} schemaRelationships
+                         * @memberof google.cloud.geminidataanalytics.v1beta.Context
+                         * @instance
+                         */
+                        Context.prototype.schemaRelationships = $util.emptyArray;
+    
+                        /**
                          * Creates a new Context instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.geminidataanalytics.v1beta.Context
@@ -21047,6 +21633,12 @@
                                     $root.google.cloud.geminidataanalytics.v1beta.ExampleQuery.encode(message.exampleQueries[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             if (message.datasourceReferences != null && Object.hasOwnProperty.call(message, "datasourceReferences"))
                                 $root.google.cloud.geminidataanalytics.v1beta.DatasourceReferences.encode(message.datasourceReferences, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.glossaryTerms != null && message.glossaryTerms.length)
+                                for (var i = 0; i < message.glossaryTerms.length; ++i)
+                                    $root.google.cloud.geminidataanalytics.v1beta.GlossaryTerm.encode(message.glossaryTerms[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.schemaRelationships != null && message.schemaRelationships.length)
+                                for (var i = 0; i < message.schemaRelationships.length; ++i)
+                                    $root.google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.encode(message.schemaRelationships[i], writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                             return writer;
                         };
     
@@ -21099,6 +21691,18 @@
                                         if (!(message.exampleQueries && message.exampleQueries.length))
                                             message.exampleQueries = [];
                                         message.exampleQueries.push($root.google.cloud.geminidataanalytics.v1beta.ExampleQuery.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 8: {
+                                        if (!(message.glossaryTerms && message.glossaryTerms.length))
+                                            message.glossaryTerms = [];
+                                        message.glossaryTerms.push($root.google.cloud.geminidataanalytics.v1beta.GlossaryTerm.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 9: {
+                                        if (!(message.schemaRelationships && message.schemaRelationships.length))
+                                            message.schemaRelationships = [];
+                                        message.schemaRelationships.push($root.google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -21158,6 +21762,24 @@
                                         return "exampleQueries." + error;
                                 }
                             }
+                            if (message.glossaryTerms != null && message.hasOwnProperty("glossaryTerms")) {
+                                if (!Array.isArray(message.glossaryTerms))
+                                    return "glossaryTerms: array expected";
+                                for (var i = 0; i < message.glossaryTerms.length; ++i) {
+                                    var error = $root.google.cloud.geminidataanalytics.v1beta.GlossaryTerm.verify(message.glossaryTerms[i]);
+                                    if (error)
+                                        return "glossaryTerms." + error;
+                                }
+                            }
+                            if (message.schemaRelationships != null && message.hasOwnProperty("schemaRelationships")) {
+                                if (!Array.isArray(message.schemaRelationships))
+                                    return "schemaRelationships: array expected";
+                                for (var i = 0; i < message.schemaRelationships.length; ++i) {
+                                    var error = $root.google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.verify(message.schemaRelationships[i]);
+                                    if (error)
+                                        return "schemaRelationships." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -21195,6 +21817,26 @@
                                     message.exampleQueries[i] = $root.google.cloud.geminidataanalytics.v1beta.ExampleQuery.fromObject(object.exampleQueries[i]);
                                 }
                             }
+                            if (object.glossaryTerms) {
+                                if (!Array.isArray(object.glossaryTerms))
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.Context.glossaryTerms: array expected");
+                                message.glossaryTerms = [];
+                                for (var i = 0; i < object.glossaryTerms.length; ++i) {
+                                    if (typeof object.glossaryTerms[i] !== "object")
+                                        throw TypeError(".google.cloud.geminidataanalytics.v1beta.Context.glossaryTerms: object expected");
+                                    message.glossaryTerms[i] = $root.google.cloud.geminidataanalytics.v1beta.GlossaryTerm.fromObject(object.glossaryTerms[i]);
+                                }
+                            }
+                            if (object.schemaRelationships) {
+                                if (!Array.isArray(object.schemaRelationships))
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.Context.schemaRelationships: array expected");
+                                message.schemaRelationships = [];
+                                for (var i = 0; i < object.schemaRelationships.length; ++i) {
+                                    if (typeof object.schemaRelationships[i] !== "object")
+                                        throw TypeError(".google.cloud.geminidataanalytics.v1beta.Context.schemaRelationships: object expected");
+                                    message.schemaRelationships[i] = $root.google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.fromObject(object.schemaRelationships[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -21211,8 +21853,11 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.exampleQueries = [];
+                                object.glossaryTerms = [];
+                                object.schemaRelationships = [];
+                            }
                             if (options.defaults) {
                                 object.systemInstruction = "";
                                 object.options = null;
@@ -21229,6 +21874,16 @@
                             }
                             if (message.datasourceReferences != null && message.hasOwnProperty("datasourceReferences"))
                                 object.datasourceReferences = $root.google.cloud.geminidataanalytics.v1beta.DatasourceReferences.toObject(message.datasourceReferences, options);
+                            if (message.glossaryTerms && message.glossaryTerms.length) {
+                                object.glossaryTerms = [];
+                                for (var j = 0; j < message.glossaryTerms.length; ++j)
+                                    object.glossaryTerms[j] = $root.google.cloud.geminidataanalytics.v1beta.GlossaryTerm.toObject(message.glossaryTerms[j], options);
+                            }
+                            if (message.schemaRelationships && message.schemaRelationships.length) {
+                                object.schemaRelationships = [];
+                                for (var j = 0; j < message.schemaRelationships.length; ++j)
+                                    object.schemaRelationships[j] = $root.google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.toObject(message.schemaRelationships[j], options);
+                            }
                             return object;
                         };
     
@@ -21257,6 +21912,608 @@
                             }
                             return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1beta.Context";
                         };
+    
+                        Context.SchemaRelationship = (function() {
+    
+                            /**
+                             * Properties of a SchemaRelationship.
+                             * @memberof google.cloud.geminidataanalytics.v1beta.Context
+                             * @interface ISchemaRelationship
+                             * @property {google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.ISchemaPaths|null} [leftSchemaPaths] SchemaRelationship leftSchemaPaths
+                             * @property {google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.ISchemaPaths|null} [rightSchemaPaths] SchemaRelationship rightSchemaPaths
+                             * @property {Array.<google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.Source>|null} [sources] SchemaRelationship sources
+                             * @property {number|null} [confidenceScore] SchemaRelationship confidenceScore
+                             */
+    
+                            /**
+                             * Constructs a new SchemaRelationship.
+                             * @memberof google.cloud.geminidataanalytics.v1beta.Context
+                             * @classdesc Represents a SchemaRelationship.
+                             * @implements ISchemaRelationship
+                             * @constructor
+                             * @param {google.cloud.geminidataanalytics.v1beta.Context.ISchemaRelationship=} [properties] Properties to set
+                             */
+                            function SchemaRelationship(properties) {
+                                this.sources = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SchemaRelationship leftSchemaPaths.
+                             * @member {google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.ISchemaPaths|null|undefined} leftSchemaPaths
+                             * @memberof google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship
+                             * @instance
+                             */
+                            SchemaRelationship.prototype.leftSchemaPaths = null;
+    
+                            /**
+                             * SchemaRelationship rightSchemaPaths.
+                             * @member {google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.ISchemaPaths|null|undefined} rightSchemaPaths
+                             * @memberof google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship
+                             * @instance
+                             */
+                            SchemaRelationship.prototype.rightSchemaPaths = null;
+    
+                            /**
+                             * SchemaRelationship sources.
+                             * @member {Array.<google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.Source>} sources
+                             * @memberof google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship
+                             * @instance
+                             */
+                            SchemaRelationship.prototype.sources = $util.emptyArray;
+    
+                            /**
+                             * SchemaRelationship confidenceScore.
+                             * @member {number} confidenceScore
+                             * @memberof google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship
+                             * @instance
+                             */
+                            SchemaRelationship.prototype.confidenceScore = 0;
+    
+                            /**
+                             * Creates a new SchemaRelationship instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship
+                             * @static
+                             * @param {google.cloud.geminidataanalytics.v1beta.Context.ISchemaRelationship=} [properties] Properties to set
+                             * @returns {google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship} SchemaRelationship instance
+                             */
+                            SchemaRelationship.create = function create(properties) {
+                                return new SchemaRelationship(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SchemaRelationship message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship
+                             * @static
+                             * @param {google.cloud.geminidataanalytics.v1beta.Context.ISchemaRelationship} message SchemaRelationship message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SchemaRelationship.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.leftSchemaPaths != null && Object.hasOwnProperty.call(message, "leftSchemaPaths"))
+                                    $root.google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.SchemaPaths.encode(message.leftSchemaPaths, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.rightSchemaPaths != null && Object.hasOwnProperty.call(message, "rightSchemaPaths"))
+                                    $root.google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.SchemaPaths.encode(message.rightSchemaPaths, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.sources != null && message.sources.length) {
+                                    writer.uint32(/* id 3, wireType 2 =*/26).fork();
+                                    for (var i = 0; i < message.sources.length; ++i)
+                                        writer.int32(message.sources[i]);
+                                    writer.ldelim();
+                                }
+                                if (message.confidenceScore != null && Object.hasOwnProperty.call(message, "confidenceScore"))
+                                    writer.uint32(/* id 4, wireType 5 =*/37).float(message.confidenceScore);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SchemaRelationship message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship
+                             * @static
+                             * @param {google.cloud.geminidataanalytics.v1beta.Context.ISchemaRelationship} message SchemaRelationship message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SchemaRelationship.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SchemaRelationship message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship} SchemaRelationship
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SchemaRelationship.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.leftSchemaPaths = $root.google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.SchemaPaths.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.rightSchemaPaths = $root.google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.SchemaPaths.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            if (!(message.sources && message.sources.length))
+                                                message.sources = [];
+                                            if ((tag & 7) === 2) {
+                                                var end2 = reader.uint32() + reader.pos;
+                                                while (reader.pos < end2)
+                                                    message.sources.push(reader.int32());
+                                            } else
+                                                message.sources.push(reader.int32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.confidenceScore = reader.float();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SchemaRelationship message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship} SchemaRelationship
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SchemaRelationship.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SchemaRelationship message.
+                             * @function verify
+                             * @memberof google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SchemaRelationship.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.leftSchemaPaths != null && message.hasOwnProperty("leftSchemaPaths")) {
+                                    var error = $root.google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.SchemaPaths.verify(message.leftSchemaPaths);
+                                    if (error)
+                                        return "leftSchemaPaths." + error;
+                                }
+                                if (message.rightSchemaPaths != null && message.hasOwnProperty("rightSchemaPaths")) {
+                                    var error = $root.google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.SchemaPaths.verify(message.rightSchemaPaths);
+                                    if (error)
+                                        return "rightSchemaPaths." + error;
+                                }
+                                if (message.sources != null && message.hasOwnProperty("sources")) {
+                                    if (!Array.isArray(message.sources))
+                                        return "sources: array expected";
+                                    for (var i = 0; i < message.sources.length; ++i)
+                                        switch (message.sources[i]) {
+                                        default:
+                                            return "sources: enum value[] expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                        case 3:
+                                            break;
+                                        }
+                                }
+                                if (message.confidenceScore != null && message.hasOwnProperty("confidenceScore"))
+                                    if (typeof message.confidenceScore !== "number")
+                                        return "confidenceScore: number expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SchemaRelationship message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship} SchemaRelationship
+                             */
+                            SchemaRelationship.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship)
+                                    return object;
+                                var message = new $root.google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship();
+                                if (object.leftSchemaPaths != null) {
+                                    if (typeof object.leftSchemaPaths !== "object")
+                                        throw TypeError(".google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.leftSchemaPaths: object expected");
+                                    message.leftSchemaPaths = $root.google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.SchemaPaths.fromObject(object.leftSchemaPaths);
+                                }
+                                if (object.rightSchemaPaths != null) {
+                                    if (typeof object.rightSchemaPaths !== "object")
+                                        throw TypeError(".google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.rightSchemaPaths: object expected");
+                                    message.rightSchemaPaths = $root.google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.SchemaPaths.fromObject(object.rightSchemaPaths);
+                                }
+                                if (object.sources) {
+                                    if (!Array.isArray(object.sources))
+                                        throw TypeError(".google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.sources: array expected");
+                                    message.sources = [];
+                                    for (var i = 0; i < object.sources.length; ++i)
+                                        switch (object.sources[i]) {
+                                        default:
+                                            if (typeof object.sources[i] === "number") {
+                                                message.sources[i] = object.sources[i];
+                                                break;
+                                            }
+                                        case "SOURCE_UNSPECIFIED":
+                                        case 0:
+                                            message.sources[i] = 0;
+                                            break;
+                                        case "BIGQUERY_JOB_HISTORY":
+                                        case 1:
+                                            message.sources[i] = 1;
+                                            break;
+                                        case "LLM_SUGGESTED":
+                                        case 2:
+                                            message.sources[i] = 2;
+                                            break;
+                                        case "BIGQUERY_TABLE_CONSTRAINTS":
+                                        case 3:
+                                            message.sources[i] = 3;
+                                            break;
+                                        }
+                                }
+                                if (object.confidenceScore != null)
+                                    message.confidenceScore = Number(object.confidenceScore);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SchemaRelationship message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship
+                             * @static
+                             * @param {google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship} message SchemaRelationship
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SchemaRelationship.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.sources = [];
+                                if (options.defaults) {
+                                    object.leftSchemaPaths = null;
+                                    object.rightSchemaPaths = null;
+                                    object.confidenceScore = 0;
+                                }
+                                if (message.leftSchemaPaths != null && message.hasOwnProperty("leftSchemaPaths"))
+                                    object.leftSchemaPaths = $root.google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.SchemaPaths.toObject(message.leftSchemaPaths, options);
+                                if (message.rightSchemaPaths != null && message.hasOwnProperty("rightSchemaPaths"))
+                                    object.rightSchemaPaths = $root.google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.SchemaPaths.toObject(message.rightSchemaPaths, options);
+                                if (message.sources && message.sources.length) {
+                                    object.sources = [];
+                                    for (var j = 0; j < message.sources.length; ++j)
+                                        object.sources[j] = options.enums === String ? $root.google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.Source[message.sources[j]] === undefined ? message.sources[j] : $root.google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.Source[message.sources[j]] : message.sources[j];
+                                }
+                                if (message.confidenceScore != null && message.hasOwnProperty("confidenceScore"))
+                                    object.confidenceScore = options.json && !isFinite(message.confidenceScore) ? String(message.confidenceScore) : message.confidenceScore;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SchemaRelationship to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SchemaRelationship.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SchemaRelationship
+                             * @function getTypeUrl
+                             * @memberof google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SchemaRelationship.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship";
+                            };
+    
+                            SchemaRelationship.SchemaPaths = (function() {
+    
+                                /**
+                                 * Properties of a SchemaPaths.
+                                 * @memberof google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship
+                                 * @interface ISchemaPaths
+                                 * @property {string|null} [tableFqn] SchemaPaths tableFqn
+                                 * @property {Array.<string>|null} [paths] SchemaPaths paths
+                                 */
+    
+                                /**
+                                 * Constructs a new SchemaPaths.
+                                 * @memberof google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship
+                                 * @classdesc Represents a SchemaPaths.
+                                 * @implements ISchemaPaths
+                                 * @constructor
+                                 * @param {google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.ISchemaPaths=} [properties] Properties to set
+                                 */
+                                function SchemaPaths(properties) {
+                                    this.paths = [];
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * SchemaPaths tableFqn.
+                                 * @member {string} tableFqn
+                                 * @memberof google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.SchemaPaths
+                                 * @instance
+                                 */
+                                SchemaPaths.prototype.tableFqn = "";
+    
+                                /**
+                                 * SchemaPaths paths.
+                                 * @member {Array.<string>} paths
+                                 * @memberof google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.SchemaPaths
+                                 * @instance
+                                 */
+                                SchemaPaths.prototype.paths = $util.emptyArray;
+    
+                                /**
+                                 * Creates a new SchemaPaths instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.SchemaPaths
+                                 * @static
+                                 * @param {google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.ISchemaPaths=} [properties] Properties to set
+                                 * @returns {google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.SchemaPaths} SchemaPaths instance
+                                 */
+                                SchemaPaths.create = function create(properties) {
+                                    return new SchemaPaths(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified SchemaPaths message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.SchemaPaths.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.SchemaPaths
+                                 * @static
+                                 * @param {google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.ISchemaPaths} message SchemaPaths message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                SchemaPaths.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.tableFqn != null && Object.hasOwnProperty.call(message, "tableFqn"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.tableFqn);
+                                    if (message.paths != null && message.paths.length)
+                                        for (var i = 0; i < message.paths.length; ++i)
+                                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.paths[i]);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified SchemaPaths message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.SchemaPaths.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.SchemaPaths
+                                 * @static
+                                 * @param {google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.ISchemaPaths} message SchemaPaths message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                SchemaPaths.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a SchemaPaths message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.SchemaPaths
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.SchemaPaths} SchemaPaths
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                SchemaPaths.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.SchemaPaths();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.tableFqn = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                if (!(message.paths && message.paths.length))
+                                                    message.paths = [];
+                                                message.paths.push(reader.string());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a SchemaPaths message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.SchemaPaths
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.SchemaPaths} SchemaPaths
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                SchemaPaths.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a SchemaPaths message.
+                                 * @function verify
+                                 * @memberof google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.SchemaPaths
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                SchemaPaths.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.tableFqn != null && message.hasOwnProperty("tableFqn"))
+                                        if (!$util.isString(message.tableFqn))
+                                            return "tableFqn: string expected";
+                                    if (message.paths != null && message.hasOwnProperty("paths")) {
+                                        if (!Array.isArray(message.paths))
+                                            return "paths: array expected";
+                                        for (var i = 0; i < message.paths.length; ++i)
+                                            if (!$util.isString(message.paths[i]))
+                                                return "paths: string[] expected";
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a SchemaPaths message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.SchemaPaths
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.SchemaPaths} SchemaPaths
+                                 */
+                                SchemaPaths.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.SchemaPaths)
+                                        return object;
+                                    var message = new $root.google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.SchemaPaths();
+                                    if (object.tableFqn != null)
+                                        message.tableFqn = String(object.tableFqn);
+                                    if (object.paths) {
+                                        if (!Array.isArray(object.paths))
+                                            throw TypeError(".google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.SchemaPaths.paths: array expected");
+                                        message.paths = [];
+                                        for (var i = 0; i < object.paths.length; ++i)
+                                            message.paths[i] = String(object.paths[i]);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a SchemaPaths message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.SchemaPaths
+                                 * @static
+                                 * @param {google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.SchemaPaths} message SchemaPaths
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                SchemaPaths.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.arrays || options.defaults)
+                                        object.paths = [];
+                                    if (options.defaults)
+                                        object.tableFqn = "";
+                                    if (message.tableFqn != null && message.hasOwnProperty("tableFqn"))
+                                        object.tableFqn = message.tableFqn;
+                                    if (message.paths && message.paths.length) {
+                                        object.paths = [];
+                                        for (var j = 0; j < message.paths.length; ++j)
+                                            object.paths[j] = message.paths[j];
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this SchemaPaths to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.SchemaPaths
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                SchemaPaths.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for SchemaPaths
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.SchemaPaths
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                SchemaPaths.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.SchemaPaths";
+                                };
+    
+                                return SchemaPaths;
+                            })();
+    
+                            /**
+                             * Source enum.
+                             * @name google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.Source
+                             * @enum {number}
+                             * @property {number} SOURCE_UNSPECIFIED=0 SOURCE_UNSPECIFIED value
+                             * @property {number} BIGQUERY_JOB_HISTORY=1 BIGQUERY_JOB_HISTORY value
+                             * @property {number} LLM_SUGGESTED=2 LLM_SUGGESTED value
+                             * @property {number} BIGQUERY_TABLE_CONSTRAINTS=3 BIGQUERY_TABLE_CONSTRAINTS value
+                             */
+                            SchemaRelationship.Source = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "SOURCE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "BIGQUERY_JOB_HISTORY"] = 1;
+                                values[valuesById[2] = "LLM_SUGGESTED"] = 2;
+                                values[valuesById[3] = "BIGQUERY_TABLE_CONSTRAINTS"] = 3;
+                                return values;
+                            })();
+    
+                            return SchemaRelationship;
+                        })();
     
                         return Context;
                     })();
@@ -21508,6 +22765,275 @@
                         return ExampleQuery;
                     })();
     
+                    v1beta.GlossaryTerm = (function() {
+    
+                        /**
+                         * Properties of a GlossaryTerm.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @interface IGlossaryTerm
+                         * @property {string|null} [displayName] GlossaryTerm displayName
+                         * @property {string|null} [description] GlossaryTerm description
+                         * @property {Array.<string>|null} [labels] GlossaryTerm labels
+                         */
+    
+                        /**
+                         * Constructs a new GlossaryTerm.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @classdesc Represents a GlossaryTerm.
+                         * @implements IGlossaryTerm
+                         * @constructor
+                         * @param {google.cloud.geminidataanalytics.v1beta.IGlossaryTerm=} [properties] Properties to set
+                         */
+                        function GlossaryTerm(properties) {
+                            this.labels = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GlossaryTerm displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.geminidataanalytics.v1beta.GlossaryTerm
+                         * @instance
+                         */
+                        GlossaryTerm.prototype.displayName = "";
+    
+                        /**
+                         * GlossaryTerm description.
+                         * @member {string} description
+                         * @memberof google.cloud.geminidataanalytics.v1beta.GlossaryTerm
+                         * @instance
+                         */
+                        GlossaryTerm.prototype.description = "";
+    
+                        /**
+                         * GlossaryTerm labels.
+                         * @member {Array.<string>} labels
+                         * @memberof google.cloud.geminidataanalytics.v1beta.GlossaryTerm
+                         * @instance
+                         */
+                        GlossaryTerm.prototype.labels = $util.emptyArray;
+    
+                        /**
+                         * Creates a new GlossaryTerm instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.geminidataanalytics.v1beta.GlossaryTerm
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IGlossaryTerm=} [properties] Properties to set
+                         * @returns {google.cloud.geminidataanalytics.v1beta.GlossaryTerm} GlossaryTerm instance
+                         */
+                        GlossaryTerm.create = function create(properties) {
+                            return new GlossaryTerm(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GlossaryTerm message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.GlossaryTerm.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.GlossaryTerm
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IGlossaryTerm} message GlossaryTerm message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GlossaryTerm.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.displayName);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.description);
+                            if (message.labels != null && message.labels.length)
+                                for (var i = 0; i < message.labels.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.labels[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GlossaryTerm message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.GlossaryTerm.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.GlossaryTerm
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IGlossaryTerm} message GlossaryTerm message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GlossaryTerm.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GlossaryTerm message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.GlossaryTerm
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.geminidataanalytics.v1beta.GlossaryTerm} GlossaryTerm
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GlossaryTerm.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1beta.GlossaryTerm();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.labels && message.labels.length))
+                                            message.labels = [];
+                                        message.labels.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GlossaryTerm message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.GlossaryTerm
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.geminidataanalytics.v1beta.GlossaryTerm} GlossaryTerm
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GlossaryTerm.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GlossaryTerm message.
+                         * @function verify
+                         * @memberof google.cloud.geminidataanalytics.v1beta.GlossaryTerm
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GlossaryTerm.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!Array.isArray(message.labels))
+                                    return "labels: array expected";
+                                for (var i = 0; i < message.labels.length; ++i)
+                                    if (!$util.isString(message.labels[i]))
+                                        return "labels: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GlossaryTerm message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.GlossaryTerm
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.geminidataanalytics.v1beta.GlossaryTerm} GlossaryTerm
+                         */
+                        GlossaryTerm.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.geminidataanalytics.v1beta.GlossaryTerm)
+                                return object;
+                            var message = new $root.google.cloud.geminidataanalytics.v1beta.GlossaryTerm();
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.labels) {
+                                if (!Array.isArray(object.labels))
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.GlossaryTerm.labels: array expected");
+                                message.labels = [];
+                                for (var i = 0; i < object.labels.length; ++i)
+                                    message.labels[i] = String(object.labels[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GlossaryTerm message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.GlossaryTerm
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.GlossaryTerm} message GlossaryTerm
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GlossaryTerm.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.labels = [];
+                            if (options.defaults) {
+                                object.displayName = "";
+                                object.description = "";
+                            }
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.labels && message.labels.length) {
+                                object.labels = [];
+                                for (var j = 0; j < message.labels.length; ++j)
+                                    object.labels[j] = message.labels[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GlossaryTerm to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.geminidataanalytics.v1beta.GlossaryTerm
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GlossaryTerm.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GlossaryTerm
+                         * @function getTypeUrl
+                         * @memberof google.cloud.geminidataanalytics.v1beta.GlossaryTerm
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GlossaryTerm.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1beta.GlossaryTerm";
+                        };
+    
+                        return GlossaryTerm;
+                    })();
+    
                     v1beta.ConversationOptions = (function() {
     
                         /**
@@ -21516,6 +23042,7 @@
                          * @interface IConversationOptions
                          * @property {google.cloud.geminidataanalytics.v1beta.IChartOptions|null} [chart] ConversationOptions chart
                          * @property {google.cloud.geminidataanalytics.v1beta.IAnalysisOptions|null} [analysis] ConversationOptions analysis
+                         * @property {google.cloud.geminidataanalytics.v1beta.IDatasourceOptions|null} [datasource] ConversationOptions datasource
                          */
     
                         /**
@@ -21550,6 +23077,14 @@
                         ConversationOptions.prototype.analysis = null;
     
                         /**
+                         * ConversationOptions datasource.
+                         * @member {google.cloud.geminidataanalytics.v1beta.IDatasourceOptions|null|undefined} datasource
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ConversationOptions
+                         * @instance
+                         */
+                        ConversationOptions.prototype.datasource = null;
+    
+                        /**
                          * Creates a new ConversationOptions instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.geminidataanalytics.v1beta.ConversationOptions
@@ -21577,6 +23112,8 @@
                                 $root.google.cloud.geminidataanalytics.v1beta.ChartOptions.encode(message.chart, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.analysis != null && Object.hasOwnProperty.call(message, "analysis"))
                                 $root.google.cloud.geminidataanalytics.v1beta.AnalysisOptions.encode(message.analysis, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.datasource != null && Object.hasOwnProperty.call(message, "datasource"))
+                                $root.google.cloud.geminidataanalytics.v1beta.DatasourceOptions.encode(message.datasource, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             return writer;
                         };
     
@@ -21619,6 +23156,10 @@
                                     }
                                 case 2: {
                                         message.analysis = $root.google.cloud.geminidataanalytics.v1beta.AnalysisOptions.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.datasource = $root.google.cloud.geminidataanalytics.v1beta.DatasourceOptions.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -21666,6 +23207,11 @@
                                 if (error)
                                     return "analysis." + error;
                             }
+                            if (message.datasource != null && message.hasOwnProperty("datasource")) {
+                                var error = $root.google.cloud.geminidataanalytics.v1beta.DatasourceOptions.verify(message.datasource);
+                                if (error)
+                                    return "datasource." + error;
+                            }
                             return null;
                         };
     
@@ -21691,6 +23237,11 @@
                                     throw TypeError(".google.cloud.geminidataanalytics.v1beta.ConversationOptions.analysis: object expected");
                                 message.analysis = $root.google.cloud.geminidataanalytics.v1beta.AnalysisOptions.fromObject(object.analysis);
                             }
+                            if (object.datasource != null) {
+                                if (typeof object.datasource !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.ConversationOptions.datasource: object expected");
+                                message.datasource = $root.google.cloud.geminidataanalytics.v1beta.DatasourceOptions.fromObject(object.datasource);
+                            }
                             return message;
                         };
     
@@ -21710,11 +23261,14 @@
                             if (options.defaults) {
                                 object.chart = null;
                                 object.analysis = null;
+                                object.datasource = null;
                             }
                             if (message.chart != null && message.hasOwnProperty("chart"))
                                 object.chart = $root.google.cloud.geminidataanalytics.v1beta.ChartOptions.toObject(message.chart, options);
                             if (message.analysis != null && message.hasOwnProperty("analysis"))
                                 object.analysis = $root.google.cloud.geminidataanalytics.v1beta.AnalysisOptions.toObject(message.analysis, options);
+                            if (message.datasource != null && message.hasOwnProperty("datasource"))
+                                object.datasource = $root.google.cloud.geminidataanalytics.v1beta.DatasourceOptions.toObject(message.datasource, options);
                             return object;
                         };
     
@@ -21745,6 +23299,216 @@
                         };
     
                         return ConversationOptions;
+                    })();
+    
+                    v1beta.DatasourceOptions = (function() {
+    
+                        /**
+                         * Properties of a DatasourceOptions.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @interface IDatasourceOptions
+                         * @property {google.protobuf.IInt64Value|null} [bigQueryMaxBilledBytes] DatasourceOptions bigQueryMaxBilledBytes
+                         */
+    
+                        /**
+                         * Constructs a new DatasourceOptions.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @classdesc Represents a DatasourceOptions.
+                         * @implements IDatasourceOptions
+                         * @constructor
+                         * @param {google.cloud.geminidataanalytics.v1beta.IDatasourceOptions=} [properties] Properties to set
+                         */
+                        function DatasourceOptions(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DatasourceOptions bigQueryMaxBilledBytes.
+                         * @member {google.protobuf.IInt64Value|null|undefined} bigQueryMaxBilledBytes
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DatasourceOptions
+                         * @instance
+                         */
+                        DatasourceOptions.prototype.bigQueryMaxBilledBytes = null;
+    
+                        /**
+                         * Creates a new DatasourceOptions instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DatasourceOptions
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IDatasourceOptions=} [properties] Properties to set
+                         * @returns {google.cloud.geminidataanalytics.v1beta.DatasourceOptions} DatasourceOptions instance
+                         */
+                        DatasourceOptions.create = function create(properties) {
+                            return new DatasourceOptions(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DatasourceOptions message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.DatasourceOptions.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DatasourceOptions
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IDatasourceOptions} message DatasourceOptions message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DatasourceOptions.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.bigQueryMaxBilledBytes != null && Object.hasOwnProperty.call(message, "bigQueryMaxBilledBytes"))
+                                $root.google.protobuf.Int64Value.encode(message.bigQueryMaxBilledBytes, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DatasourceOptions message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.DatasourceOptions.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DatasourceOptions
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IDatasourceOptions} message DatasourceOptions message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DatasourceOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DatasourceOptions message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DatasourceOptions
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.geminidataanalytics.v1beta.DatasourceOptions} DatasourceOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DatasourceOptions.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1beta.DatasourceOptions();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.bigQueryMaxBilledBytes = $root.google.protobuf.Int64Value.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DatasourceOptions message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DatasourceOptions
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.geminidataanalytics.v1beta.DatasourceOptions} DatasourceOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DatasourceOptions.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DatasourceOptions message.
+                         * @function verify
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DatasourceOptions
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DatasourceOptions.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.bigQueryMaxBilledBytes != null && message.hasOwnProperty("bigQueryMaxBilledBytes")) {
+                                var error = $root.google.protobuf.Int64Value.verify(message.bigQueryMaxBilledBytes);
+                                if (error)
+                                    return "bigQueryMaxBilledBytes." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DatasourceOptions message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DatasourceOptions
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.geminidataanalytics.v1beta.DatasourceOptions} DatasourceOptions
+                         */
+                        DatasourceOptions.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.geminidataanalytics.v1beta.DatasourceOptions)
+                                return object;
+                            var message = new $root.google.cloud.geminidataanalytics.v1beta.DatasourceOptions();
+                            if (object.bigQueryMaxBilledBytes != null) {
+                                if (typeof object.bigQueryMaxBilledBytes !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.DatasourceOptions.bigQueryMaxBilledBytes: object expected");
+                                message.bigQueryMaxBilledBytes = $root.google.protobuf.Int64Value.fromObject(object.bigQueryMaxBilledBytes);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DatasourceOptions message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DatasourceOptions
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.DatasourceOptions} message DatasourceOptions
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DatasourceOptions.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.bigQueryMaxBilledBytes = null;
+                            if (message.bigQueryMaxBilledBytes != null && message.hasOwnProperty("bigQueryMaxBilledBytes"))
+                                object.bigQueryMaxBilledBytes = $root.google.protobuf.Int64Value.toObject(message.bigQueryMaxBilledBytes, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DatasourceOptions to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DatasourceOptions
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DatasourceOptions.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DatasourceOptions
+                         * @function getTypeUrl
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DatasourceOptions
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DatasourceOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1beta.DatasourceOptions";
+                        };
+    
+                        return DatasourceOptions;
                     })();
     
                     v1beta.ChartOptions = (function() {
@@ -25068,6 +26832,7 @@
                          * @property {string|null} [studioDatasourceId] Datasource studioDatasourceId
                          * @property {google.cloud.geminidataanalytics.v1beta.ILookerExploreReference|null} [lookerExploreReference] Datasource lookerExploreReference
                          * @property {google.cloud.geminidataanalytics.v1beta.ISchema|null} [schema] Datasource schema
+                         * @property {google.protobuf.IStruct|null} [structSchema] Datasource structSchema
                          */
     
                         /**
@@ -25117,6 +26882,14 @@
                          */
                         Datasource.prototype.schema = null;
     
+                        /**
+                         * Datasource structSchema.
+                         * @member {google.protobuf.IStruct|null|undefined} structSchema
+                         * @memberof google.cloud.geminidataanalytics.v1beta.Datasource
+                         * @instance
+                         */
+                        Datasource.prototype.structSchema = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -25163,6 +26936,8 @@
                                 $root.google.cloud.geminidataanalytics.v1beta.LookerExploreReference.encode(message.lookerExploreReference, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             if (message.schema != null && Object.hasOwnProperty.call(message, "schema"))
                                 $root.google.cloud.geminidataanalytics.v1beta.Schema.encode(message.schema, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.structSchema != null && Object.hasOwnProperty.call(message, "structSchema"))
+                                $root.google.protobuf.Struct.encode(message.structSchema, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                             return writer;
                         };
     
@@ -25213,6 +26988,10 @@
                                     }
                                 case 7: {
                                         message.schema = $root.google.cloud.geminidataanalytics.v1beta.Schema.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 10: {
+                                        message.structSchema = $root.google.protobuf.Struct.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -25281,6 +27060,11 @@
                                 if (error)
                                     return "schema." + error;
                             }
+                            if (message.structSchema != null && message.hasOwnProperty("structSchema")) {
+                                var error = $root.google.protobuf.Struct.verify(message.structSchema);
+                                if (error)
+                                    return "structSchema." + error;
+                            }
                             return null;
                         };
     
@@ -25313,6 +27097,11 @@
                                     throw TypeError(".google.cloud.geminidataanalytics.v1beta.Datasource.schema: object expected");
                                 message.schema = $root.google.cloud.geminidataanalytics.v1beta.Schema.fromObject(object.schema);
                             }
+                            if (object.structSchema != null) {
+                                if (typeof object.structSchema !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.Datasource.structSchema: object expected");
+                                message.structSchema = $root.google.protobuf.Struct.fromObject(object.structSchema);
+                            }
                             return message;
                         };
     
@@ -25329,8 +27118,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.schema = null;
+                                object.structSchema = null;
+                            }
                             if (message.bigqueryTableReference != null && message.hasOwnProperty("bigqueryTableReference")) {
                                 object.bigqueryTableReference = $root.google.cloud.geminidataanalytics.v1beta.BigQueryTableReference.toObject(message.bigqueryTableReference, options);
                                 if (options.oneofs)
@@ -25348,6 +27139,8 @@
                             }
                             if (message.schema != null && message.hasOwnProperty("schema"))
                                 object.schema = $root.google.cloud.geminidataanalytics.v1beta.Schema.toObject(message.schema, options);
+                            if (message.structSchema != null && message.hasOwnProperty("structSchema"))
+                                object.structSchema = $root.google.protobuf.Struct.toObject(message.structSchema, options);
                             return object;
                         };
     
@@ -28812,6 +30605,211 @@
                         };
     
                         return ListConversationsResponse;
+                    })();
+    
+                    v1beta.DeleteConversationRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteConversationRequest.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @interface IDeleteConversationRequest
+                         * @property {string|null} [name] DeleteConversationRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteConversationRequest.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @classdesc Represents a DeleteConversationRequest.
+                         * @implements IDeleteConversationRequest
+                         * @constructor
+                         * @param {google.cloud.geminidataanalytics.v1beta.IDeleteConversationRequest=} [properties] Properties to set
+                         */
+                        function DeleteConversationRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteConversationRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DeleteConversationRequest
+                         * @instance
+                         */
+                        DeleteConversationRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteConversationRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DeleteConversationRequest
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IDeleteConversationRequest=} [properties] Properties to set
+                         * @returns {google.cloud.geminidataanalytics.v1beta.DeleteConversationRequest} DeleteConversationRequest instance
+                         */
+                        DeleteConversationRequest.create = function create(properties) {
+                            return new DeleteConversationRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteConversationRequest message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.DeleteConversationRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DeleteConversationRequest
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IDeleteConversationRequest} message DeleteConversationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteConversationRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteConversationRequest message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.DeleteConversationRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DeleteConversationRequest
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IDeleteConversationRequest} message DeleteConversationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteConversationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteConversationRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DeleteConversationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.geminidataanalytics.v1beta.DeleteConversationRequest} DeleteConversationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteConversationRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1beta.DeleteConversationRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteConversationRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DeleteConversationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.geminidataanalytics.v1beta.DeleteConversationRequest} DeleteConversationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteConversationRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteConversationRequest message.
+                         * @function verify
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DeleteConversationRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteConversationRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteConversationRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DeleteConversationRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.geminidataanalytics.v1beta.DeleteConversationRequest} DeleteConversationRequest
+                         */
+                        DeleteConversationRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.geminidataanalytics.v1beta.DeleteConversationRequest)
+                                return object;
+                            var message = new $root.google.cloud.geminidataanalytics.v1beta.DeleteConversationRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteConversationRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DeleteConversationRequest
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.DeleteConversationRequest} message DeleteConversationRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteConversationRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteConversationRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DeleteConversationRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteConversationRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteConversationRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DeleteConversationRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteConversationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1beta.DeleteConversationRequest";
+                        };
+    
+                        return DeleteConversationRequest;
                     })();
     
                     v1beta.DataAgent = (function() {
@@ -32572,6 +34570,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.geminidataanalytics.v1beta.DataChatService|deleteConversation}.
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DataChatService
+                         * @typedef DeleteConversationCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls DeleteConversation.
+                         * @function deleteConversation
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DataChatService
+                         * @instance
+                         * @param {google.cloud.geminidataanalytics.v1beta.IDeleteConversationRequest} request DeleteConversationRequest message or plain object
+                         * @param {google.cloud.geminidataanalytics.v1beta.DataChatService.DeleteConversationCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataChatService.prototype.deleteConversation = function deleteConversation(request, callback) {
+                            return this.rpcCall(deleteConversation, $root.google.cloud.geminidataanalytics.v1beta.DeleteConversationRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "DeleteConversation" });
+    
+                        /**
+                         * Calls DeleteConversation.
+                         * @function deleteConversation
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DataChatService
+                         * @instance
+                         * @param {google.cloud.geminidataanalytics.v1beta.IDeleteConversationRequest} request DeleteConversationRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.geminidataanalytics.v1beta.DataChatService|getConversation}.
                          * @memberof google.cloud.geminidataanalytics.v1beta.DataChatService
                          * @typedef GetConversationCallback
@@ -33441,6 +35472,7 @@
                          * @property {google.cloud.geminidataanalytics.v1beta.IContext|null} [inlineContext] ChatRequest inlineContext
                          * @property {google.cloud.geminidataanalytics.v1beta.IConversationReference|null} [conversationReference] ChatRequest conversationReference
                          * @property {google.cloud.geminidataanalytics.v1beta.IDataAgentContext|null} [dataAgentContext] ChatRequest dataAgentContext
+                         * @property {google.cloud.geminidataanalytics.v1beta.IClientManagedResourceContext|null} [clientManagedResourceContext] ChatRequest clientManagedResourceContext
                          * @property {string|null} [project] ChatRequest project
                          * @property {string|null} [parent] ChatRequest parent
                          * @property {Array.<google.cloud.geminidataanalytics.v1beta.IMessage>|null} [messages] ChatRequest messages
@@ -33487,6 +35519,14 @@
                         ChatRequest.prototype.dataAgentContext = null;
     
                         /**
+                         * ChatRequest clientManagedResourceContext.
+                         * @member {google.cloud.geminidataanalytics.v1beta.IClientManagedResourceContext|null|undefined} clientManagedResourceContext
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ChatRequest
+                         * @instance
+                         */
+                        ChatRequest.prototype.clientManagedResourceContext = null;
+    
+                        /**
                          * ChatRequest project.
                          * @member {string} project
                          * @memberof google.cloud.geminidataanalytics.v1beta.ChatRequest
@@ -33515,12 +35555,12 @@
     
                         /**
                          * ChatRequest contextProvider.
-                         * @member {"inlineContext"|"conversationReference"|"dataAgentContext"|undefined} contextProvider
+                         * @member {"inlineContext"|"conversationReference"|"dataAgentContext"|"clientManagedResourceContext"|undefined} contextProvider
                          * @memberof google.cloud.geminidataanalytics.v1beta.ChatRequest
                          * @instance
                          */
                         Object.defineProperty(ChatRequest.prototype, "contextProvider", {
-                            get: $util.oneOfGetter($oneOfFields = ["inlineContext", "conversationReference", "dataAgentContext"]),
+                            get: $util.oneOfGetter($oneOfFields = ["inlineContext", "conversationReference", "dataAgentContext", "clientManagedResourceContext"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -33561,6 +35601,8 @@
                                 $root.google.cloud.geminidataanalytics.v1beta.ConversationReference.encode(message.conversationReference, writer.uint32(/* id 103, wireType 2 =*/826).fork()).ldelim();
                             if (message.dataAgentContext != null && Object.hasOwnProperty.call(message, "dataAgentContext"))
                                 $root.google.cloud.geminidataanalytics.v1beta.DataAgentContext.encode(message.dataAgentContext, writer.uint32(/* id 104, wireType 2 =*/834).fork()).ldelim();
+                            if (message.clientManagedResourceContext != null && Object.hasOwnProperty.call(message, "clientManagedResourceContext"))
+                                $root.google.cloud.geminidataanalytics.v1beta.ClientManagedResourceContext.encode(message.clientManagedResourceContext, writer.uint32(/* id 105, wireType 2 =*/842).fork()).ldelim();
                             return writer;
                         };
     
@@ -33607,6 +35649,10 @@
                                     }
                                 case 104: {
                                         message.dataAgentContext = $root.google.cloud.geminidataanalytics.v1beta.DataAgentContext.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 105: {
+                                        message.clientManagedResourceContext = $root.google.cloud.geminidataanalytics.v1beta.ClientManagedResourceContext.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 1: {
@@ -33687,6 +35733,16 @@
                                         return "dataAgentContext." + error;
                                 }
                             }
+                            if (message.clientManagedResourceContext != null && message.hasOwnProperty("clientManagedResourceContext")) {
+                                if (properties.contextProvider === 1)
+                                    return "contextProvider: multiple values";
+                                properties.contextProvider = 1;
+                                {
+                                    var error = $root.google.cloud.geminidataanalytics.v1beta.ClientManagedResourceContext.verify(message.clientManagedResourceContext);
+                                    if (error)
+                                        return "clientManagedResourceContext." + error;
+                                }
+                            }
                             if (message.project != null && message.hasOwnProperty("project"))
                                 if (!$util.isString(message.project))
                                     return "project: string expected";
@@ -33731,6 +35787,11 @@
                                 if (typeof object.dataAgentContext !== "object")
                                     throw TypeError(".google.cloud.geminidataanalytics.v1beta.ChatRequest.dataAgentContext: object expected");
                                 message.dataAgentContext = $root.google.cloud.geminidataanalytics.v1beta.DataAgentContext.fromObject(object.dataAgentContext);
+                            }
+                            if (object.clientManagedResourceContext != null) {
+                                if (typeof object.clientManagedResourceContext !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.ChatRequest.clientManagedResourceContext: object expected");
+                                message.clientManagedResourceContext = $root.google.cloud.geminidataanalytics.v1beta.ClientManagedResourceContext.fromObject(object.clientManagedResourceContext);
                             }
                             if (object.project != null)
                                 message.project = String(object.project);
@@ -33791,6 +35852,11 @@
                                 object.dataAgentContext = $root.google.cloud.geminidataanalytics.v1beta.DataAgentContext.toObject(message.dataAgentContext, options);
                                 if (options.oneofs)
                                     object.contextProvider = "dataAgentContext";
+                            }
+                            if (message.clientManagedResourceContext != null && message.hasOwnProperty("clientManagedResourceContext")) {
+                                object.clientManagedResourceContext = $root.google.cloud.geminidataanalytics.v1beta.ClientManagedResourceContext.toObject(message.clientManagedResourceContext, options);
+                                if (options.oneofs)
+                                    object.contextProvider = "clientManagedResourceContext";
                             }
                             return object;
                         };
@@ -34355,6 +36421,263 @@
                         return ConversationReference;
                     })();
     
+                    v1beta.ClientManagedResourceContext = (function() {
+    
+                        /**
+                         * Properties of a ClientManagedResourceContext.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @interface IClientManagedResourceContext
+                         * @property {google.cloud.geminidataanalytics.v1beta.IContext|null} [inlineContext] ClientManagedResourceContext inlineContext
+                         * @property {string|null} [conversationId] ClientManagedResourceContext conversationId
+                         * @property {string|null} [agentId] ClientManagedResourceContext agentId
+                         */
+    
+                        /**
+                         * Constructs a new ClientManagedResourceContext.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @classdesc Represents a ClientManagedResourceContext.
+                         * @implements IClientManagedResourceContext
+                         * @constructor
+                         * @param {google.cloud.geminidataanalytics.v1beta.IClientManagedResourceContext=} [properties] Properties to set
+                         */
+                        function ClientManagedResourceContext(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ClientManagedResourceContext inlineContext.
+                         * @member {google.cloud.geminidataanalytics.v1beta.IContext|null|undefined} inlineContext
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClientManagedResourceContext
+                         * @instance
+                         */
+                        ClientManagedResourceContext.prototype.inlineContext = null;
+    
+                        /**
+                         * ClientManagedResourceContext conversationId.
+                         * @member {string} conversationId
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClientManagedResourceContext
+                         * @instance
+                         */
+                        ClientManagedResourceContext.prototype.conversationId = "";
+    
+                        /**
+                         * ClientManagedResourceContext agentId.
+                         * @member {string} agentId
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClientManagedResourceContext
+                         * @instance
+                         */
+                        ClientManagedResourceContext.prototype.agentId = "";
+    
+                        /**
+                         * Creates a new ClientManagedResourceContext instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClientManagedResourceContext
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IClientManagedResourceContext=} [properties] Properties to set
+                         * @returns {google.cloud.geminidataanalytics.v1beta.ClientManagedResourceContext} ClientManagedResourceContext instance
+                         */
+                        ClientManagedResourceContext.create = function create(properties) {
+                            return new ClientManagedResourceContext(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ClientManagedResourceContext message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.ClientManagedResourceContext.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClientManagedResourceContext
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IClientManagedResourceContext} message ClientManagedResourceContext message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ClientManagedResourceContext.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.inlineContext != null && Object.hasOwnProperty.call(message, "inlineContext"))
+                                $root.google.cloud.geminidataanalytics.v1beta.Context.encode(message.inlineContext, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.conversationId != null && Object.hasOwnProperty.call(message, "conversationId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.conversationId);
+                            if (message.agentId != null && Object.hasOwnProperty.call(message, "agentId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.agentId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ClientManagedResourceContext message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.ClientManagedResourceContext.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClientManagedResourceContext
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IClientManagedResourceContext} message ClientManagedResourceContext message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ClientManagedResourceContext.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ClientManagedResourceContext message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClientManagedResourceContext
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.geminidataanalytics.v1beta.ClientManagedResourceContext} ClientManagedResourceContext
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ClientManagedResourceContext.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1beta.ClientManagedResourceContext();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.inlineContext = $root.google.cloud.geminidataanalytics.v1beta.Context.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.conversationId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.agentId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ClientManagedResourceContext message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClientManagedResourceContext
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.geminidataanalytics.v1beta.ClientManagedResourceContext} ClientManagedResourceContext
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ClientManagedResourceContext.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ClientManagedResourceContext message.
+                         * @function verify
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClientManagedResourceContext
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ClientManagedResourceContext.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.inlineContext != null && message.hasOwnProperty("inlineContext")) {
+                                var error = $root.google.cloud.geminidataanalytics.v1beta.Context.verify(message.inlineContext);
+                                if (error)
+                                    return "inlineContext." + error;
+                            }
+                            if (message.conversationId != null && message.hasOwnProperty("conversationId"))
+                                if (!$util.isString(message.conversationId))
+                                    return "conversationId: string expected";
+                            if (message.agentId != null && message.hasOwnProperty("agentId"))
+                                if (!$util.isString(message.agentId))
+                                    return "agentId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ClientManagedResourceContext message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClientManagedResourceContext
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.geminidataanalytics.v1beta.ClientManagedResourceContext} ClientManagedResourceContext
+                         */
+                        ClientManagedResourceContext.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.geminidataanalytics.v1beta.ClientManagedResourceContext)
+                                return object;
+                            var message = new $root.google.cloud.geminidataanalytics.v1beta.ClientManagedResourceContext();
+                            if (object.inlineContext != null) {
+                                if (typeof object.inlineContext !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.ClientManagedResourceContext.inlineContext: object expected");
+                                message.inlineContext = $root.google.cloud.geminidataanalytics.v1beta.Context.fromObject(object.inlineContext);
+                            }
+                            if (object.conversationId != null)
+                                message.conversationId = String(object.conversationId);
+                            if (object.agentId != null)
+                                message.agentId = String(object.agentId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ClientManagedResourceContext message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClientManagedResourceContext
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.ClientManagedResourceContext} message ClientManagedResourceContext
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ClientManagedResourceContext.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.inlineContext = null;
+                                object.conversationId = "";
+                                object.agentId = "";
+                            }
+                            if (message.inlineContext != null && message.hasOwnProperty("inlineContext"))
+                                object.inlineContext = $root.google.cloud.geminidataanalytics.v1beta.Context.toObject(message.inlineContext, options);
+                            if (message.conversationId != null && message.hasOwnProperty("conversationId"))
+                                object.conversationId = message.conversationId;
+                            if (message.agentId != null && message.hasOwnProperty("agentId"))
+                                object.agentId = message.agentId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ClientManagedResourceContext to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClientManagedResourceContext
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ClientManagedResourceContext.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ClientManagedResourceContext
+                         * @function getTypeUrl
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClientManagedResourceContext
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ClientManagedResourceContext.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1beta.ClientManagedResourceContext";
+                        };
+    
+                        return ClientManagedResourceContext;
+                    })();
+    
                     v1beta.Message = (function() {
     
                         /**
@@ -34907,6 +37230,7 @@
                          * @property {google.cloud.geminidataanalytics.v1beta.IAnalysisMessage|null} [analysis] SystemMessage analysis
                          * @property {google.cloud.geminidataanalytics.v1beta.IChartMessage|null} [chart] SystemMessage chart
                          * @property {google.cloud.geminidataanalytics.v1beta.IErrorMessage|null} [error] SystemMessage error
+                         * @property {google.cloud.geminidataanalytics.v1beta.IExampleQueries|null} [exampleQueries] SystemMessage exampleQueries
                          * @property {number|null} [groupId] SystemMessage groupId
                          */
     
@@ -34974,6 +37298,14 @@
                         SystemMessage.prototype.error = null;
     
                         /**
+                         * SystemMessage exampleQueries.
+                         * @member {google.cloud.geminidataanalytics.v1beta.IExampleQueries|null|undefined} exampleQueries
+                         * @memberof google.cloud.geminidataanalytics.v1beta.SystemMessage
+                         * @instance
+                         */
+                        SystemMessage.prototype.exampleQueries = null;
+    
+                        /**
                          * SystemMessage groupId.
                          * @member {number|null|undefined} groupId
                          * @memberof google.cloud.geminidataanalytics.v1beta.SystemMessage
@@ -34986,12 +37318,12 @@
     
                         /**
                          * SystemMessage kind.
-                         * @member {"text"|"schema"|"data"|"analysis"|"chart"|"error"|undefined} kind
+                         * @member {"text"|"schema"|"data"|"analysis"|"chart"|"error"|"exampleQueries"|undefined} kind
                          * @memberof google.cloud.geminidataanalytics.v1beta.SystemMessage
                          * @instance
                          */
                         Object.defineProperty(SystemMessage.prototype, "kind", {
-                            get: $util.oneOfGetter($oneOfFields = ["text", "schema", "data", "analysis", "chart", "error"]),
+                            get: $util.oneOfGetter($oneOfFields = ["text", "schema", "data", "analysis", "chart", "error", "exampleQueries"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -35039,6 +37371,8 @@
                                 $root.google.cloud.geminidataanalytics.v1beta.ErrorMessage.encode(message.error, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.groupId != null && Object.hasOwnProperty.call(message, "groupId"))
                                 writer.uint32(/* id 12, wireType 0 =*/96).int32(message.groupId);
+                            if (message.exampleQueries != null && Object.hasOwnProperty.call(message, "exampleQueries"))
+                                $root.google.cloud.geminidataanalytics.v1beta.ExampleQueries.encode(message.exampleQueries, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                             return writer;
                         };
     
@@ -35097,6 +37431,10 @@
                                     }
                                 case 6: {
                                         message.error = $root.google.cloud.geminidataanalytics.v1beta.ErrorMessage.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 13: {
+                                        message.exampleQueries = $root.google.cloud.geminidataanalytics.v1beta.ExampleQueries.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 12: {
@@ -35197,6 +37535,16 @@
                                         return "error." + error;
                                 }
                             }
+                            if (message.exampleQueries != null && message.hasOwnProperty("exampleQueries")) {
+                                if (properties.kind === 1)
+                                    return "kind: multiple values";
+                                properties.kind = 1;
+                                {
+                                    var error = $root.google.cloud.geminidataanalytics.v1beta.ExampleQueries.verify(message.exampleQueries);
+                                    if (error)
+                                        return "exampleQueries." + error;
+                                }
+                            }
                             if (message.groupId != null && message.hasOwnProperty("groupId")) {
                                 properties._groupId = 1;
                                 if (!$util.isInteger(message.groupId))
@@ -35246,6 +37594,11 @@
                                 if (typeof object.error !== "object")
                                     throw TypeError(".google.cloud.geminidataanalytics.v1beta.SystemMessage.error: object expected");
                                 message.error = $root.google.cloud.geminidataanalytics.v1beta.ErrorMessage.fromObject(object.error);
+                            }
+                            if (object.exampleQueries != null) {
+                                if (typeof object.exampleQueries !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.SystemMessage.exampleQueries: object expected");
+                                message.exampleQueries = $root.google.cloud.geminidataanalytics.v1beta.ExampleQueries.fromObject(object.exampleQueries);
                             }
                             if (object.groupId != null)
                                 message.groupId = object.groupId | 0;
@@ -35300,6 +37653,11 @@
                                 if (options.oneofs)
                                     object._groupId = "groupId";
                             }
+                            if (message.exampleQueries != null && message.hasOwnProperty("exampleQueries")) {
+                                object.exampleQueries = $root.google.cloud.geminidataanalytics.v1beta.ExampleQueries.toObject(message.exampleQueries, options);
+                                if (options.oneofs)
+                                    object.kind = "exampleQueries";
+                            }
                             return object;
                         };
     
@@ -35339,6 +37697,7 @@
                          * @memberof google.cloud.geminidataanalytics.v1beta
                          * @interface ITextMessage
                          * @property {Array.<string>|null} [parts] TextMessage parts
+                         * @property {google.cloud.geminidataanalytics.v1beta.TextMessage.TextType|null} [textType] TextMessage textType
                          */
     
                         /**
@@ -35364,6 +37723,14 @@
                          * @instance
                          */
                         TextMessage.prototype.parts = $util.emptyArray;
+    
+                        /**
+                         * TextMessage textType.
+                         * @member {google.cloud.geminidataanalytics.v1beta.TextMessage.TextType} textType
+                         * @memberof google.cloud.geminidataanalytics.v1beta.TextMessage
+                         * @instance
+                         */
+                        TextMessage.prototype.textType = 0;
     
                         /**
                          * Creates a new TextMessage instance using the specified properties.
@@ -35392,6 +37759,8 @@
                             if (message.parts != null && message.parts.length)
                                 for (var i = 0; i < message.parts.length; ++i)
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.parts[i]);
+                            if (message.textType != null && Object.hasOwnProperty.call(message, "textType"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.textType);
                             return writer;
                         };
     
@@ -35432,6 +37801,10 @@
                                         if (!(message.parts && message.parts.length))
                                             message.parts = [];
                                         message.parts.push(reader.string());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.textType = reader.int32();
                                         break;
                                     }
                                 default:
@@ -35476,6 +37849,16 @@
                                     if (!$util.isString(message.parts[i]))
                                         return "parts: string[] expected";
                             }
+                            if (message.textType != null && message.hasOwnProperty("textType"))
+                                switch (message.textType) {
+                                default:
+                                    return "textType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -35498,6 +37881,30 @@
                                 for (var i = 0; i < object.parts.length; ++i)
                                     message.parts[i] = String(object.parts[i]);
                             }
+                            switch (object.textType) {
+                            default:
+                                if (typeof object.textType === "number") {
+                                    message.textType = object.textType;
+                                    break;
+                                }
+                                break;
+                            case "TEXT_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.textType = 0;
+                                break;
+                            case "FINAL_RESPONSE":
+                            case 1:
+                                message.textType = 1;
+                                break;
+                            case "THOUGHT":
+                            case 2:
+                                message.textType = 2;
+                                break;
+                            case "PROGRESS":
+                            case 3:
+                                message.textType = 3;
+                                break;
+                            }
                             return message;
                         };
     
@@ -35516,11 +37923,15 @@
                             var object = {};
                             if (options.arrays || options.defaults)
                                 object.parts = [];
+                            if (options.defaults)
+                                object.textType = options.enums === String ? "TEXT_TYPE_UNSPECIFIED" : 0;
                             if (message.parts && message.parts.length) {
                                 object.parts = [];
                                 for (var j = 0; j < message.parts.length; ++j)
                                     object.parts[j] = message.parts[j];
                             }
+                            if (message.textType != null && message.hasOwnProperty("textType"))
+                                object.textType = options.enums === String ? $root.google.cloud.geminidataanalytics.v1beta.TextMessage.TextType[message.textType] === undefined ? message.textType : $root.google.cloud.geminidataanalytics.v1beta.TextMessage.TextType[message.textType] : message.textType;
                             return object;
                         };
     
@@ -35549,6 +37960,24 @@
                             }
                             return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1beta.TextMessage";
                         };
+    
+                        /**
+                         * TextType enum.
+                         * @name google.cloud.geminidataanalytics.v1beta.TextMessage.TextType
+                         * @enum {number}
+                         * @property {number} TEXT_TYPE_UNSPECIFIED=0 TEXT_TYPE_UNSPECIFIED value
+                         * @property {number} FINAL_RESPONSE=1 FINAL_RESPONSE value
+                         * @property {number} THOUGHT=2 THOUGHT value
+                         * @property {number} PROGRESS=3 PROGRESS value
+                         */
+                        TextMessage.TextType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "TEXT_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "FINAL_RESPONSE"] = 1;
+                            values[valuesById[2] = "THOUGHT"] = 2;
+                            values[valuesById[3] = "PROGRESS"] = 3;
+                            return values;
+                        })();
     
                         return TextMessage;
                     })();
@@ -37236,6 +39665,7 @@
                          * Properties of a DataQuery.
                          * @memberof google.cloud.geminidataanalytics.v1beta
                          * @interface IDataQuery
+                         * @property {google.cloud.geminidataanalytics.v1beta.ILookerQuery|null} [looker] DataQuery looker
                          * @property {string|null} [question] DataQuery question
                          * @property {string|null} [name] DataQuery name
                          * @property {Array.<google.cloud.geminidataanalytics.v1beta.IDatasource>|null} [datasources] DataQuery datasources
@@ -37256,6 +39686,14 @@
                                     if (properties[keys[i]] != null)
                                         this[keys[i]] = properties[keys[i]];
                         }
+    
+                        /**
+                         * DataQuery looker.
+                         * @member {google.cloud.geminidataanalytics.v1beta.ILookerQuery|null|undefined} looker
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DataQuery
+                         * @instance
+                         */
+                        DataQuery.prototype.looker = null;
     
                         /**
                          * DataQuery question.
@@ -37280,6 +39718,20 @@
                          * @instance
                          */
                         DataQuery.prototype.datasources = $util.emptyArray;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * DataQuery queryType.
+                         * @member {"looker"|undefined} queryType
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DataQuery
+                         * @instance
+                         */
+                        Object.defineProperty(DataQuery.prototype, "queryType", {
+                            get: $util.oneOfGetter($oneOfFields = ["looker"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new DataQuery instance using the specified properties.
@@ -37312,6 +39764,8 @@
                                     $root.google.cloud.geminidataanalytics.v1beta.Datasource.encode(message.datasources[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.name);
+                            if (message.looker != null && Object.hasOwnProperty.call(message, "looker"))
+                                $root.google.cloud.geminidataanalytics.v1beta.LookerQuery.encode(message.looker, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             return writer;
                         };
     
@@ -37348,6 +39802,10 @@
                                 if (tag === error)
                                     break;
                                 switch (tag >>> 3) {
+                                case 4: {
+                                        message.looker = $root.google.cloud.geminidataanalytics.v1beta.LookerQuery.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 1: {
                                         message.question = reader.string();
                                         break;
@@ -37397,6 +39855,15 @@
                         DataQuery.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
+                            if (message.looker != null && message.hasOwnProperty("looker")) {
+                                properties.queryType = 1;
+                                {
+                                    var error = $root.google.cloud.geminidataanalytics.v1beta.LookerQuery.verify(message.looker);
+                                    if (error)
+                                        return "looker." + error;
+                                }
+                            }
                             if (message.question != null && message.hasOwnProperty("question"))
                                 if (!$util.isString(message.question))
                                     return "question: string expected";
@@ -37427,6 +39894,11 @@
                             if (object instanceof $root.google.cloud.geminidataanalytics.v1beta.DataQuery)
                                 return object;
                             var message = new $root.google.cloud.geminidataanalytics.v1beta.DataQuery();
+                            if (object.looker != null) {
+                                if (typeof object.looker !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.DataQuery.looker: object expected");
+                                message.looker = $root.google.cloud.geminidataanalytics.v1beta.LookerQuery.fromObject(object.looker);
+                            }
                             if (object.question != null)
                                 message.question = String(object.question);
                             if (object.name != null)
@@ -37472,6 +39944,11 @@
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
+                            if (message.looker != null && message.hasOwnProperty("looker")) {
+                                object.looker = $root.google.cloud.geminidataanalytics.v1beta.LookerQuery.toObject(message.looker, options);
+                                if (options.oneofs)
+                                    object.queryType = "looker";
+                            }
                             return object;
                         };
     
@@ -40019,6 +42496,232 @@
                         };
     
                         return ErrorMessage;
+                    })();
+    
+                    v1beta.ExampleQueries = (function() {
+    
+                        /**
+                         * Properties of an ExampleQueries.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @interface IExampleQueries
+                         * @property {Array.<google.cloud.geminidataanalytics.v1beta.IExampleQuery>|null} [exampleQueries] ExampleQueries exampleQueries
+                         */
+    
+                        /**
+                         * Constructs a new ExampleQueries.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @classdesc Represents an ExampleQueries.
+                         * @implements IExampleQueries
+                         * @constructor
+                         * @param {google.cloud.geminidataanalytics.v1beta.IExampleQueries=} [properties] Properties to set
+                         */
+                        function ExampleQueries(properties) {
+                            this.exampleQueries = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ExampleQueries exampleQueries.
+                         * @member {Array.<google.cloud.geminidataanalytics.v1beta.IExampleQuery>} exampleQueries
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ExampleQueries
+                         * @instance
+                         */
+                        ExampleQueries.prototype.exampleQueries = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ExampleQueries instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ExampleQueries
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IExampleQueries=} [properties] Properties to set
+                         * @returns {google.cloud.geminidataanalytics.v1beta.ExampleQueries} ExampleQueries instance
+                         */
+                        ExampleQueries.create = function create(properties) {
+                            return new ExampleQueries(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExampleQueries message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.ExampleQueries.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ExampleQueries
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IExampleQueries} message ExampleQueries message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExampleQueries.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.exampleQueries != null && message.exampleQueries.length)
+                                for (var i = 0; i < message.exampleQueries.length; ++i)
+                                    $root.google.cloud.geminidataanalytics.v1beta.ExampleQuery.encode(message.exampleQueries[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExampleQueries message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.ExampleQueries.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ExampleQueries
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IExampleQueries} message ExampleQueries message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExampleQueries.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExampleQueries message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ExampleQueries
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.geminidataanalytics.v1beta.ExampleQueries} ExampleQueries
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExampleQueries.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1beta.ExampleQueries();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.exampleQueries && message.exampleQueries.length))
+                                            message.exampleQueries = [];
+                                        message.exampleQueries.push($root.google.cloud.geminidataanalytics.v1beta.ExampleQuery.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExampleQueries message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ExampleQueries
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.geminidataanalytics.v1beta.ExampleQueries} ExampleQueries
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExampleQueries.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExampleQueries message.
+                         * @function verify
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ExampleQueries
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExampleQueries.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.exampleQueries != null && message.hasOwnProperty("exampleQueries")) {
+                                if (!Array.isArray(message.exampleQueries))
+                                    return "exampleQueries: array expected";
+                                for (var i = 0; i < message.exampleQueries.length; ++i) {
+                                    var error = $root.google.cloud.geminidataanalytics.v1beta.ExampleQuery.verify(message.exampleQueries[i]);
+                                    if (error)
+                                        return "exampleQueries." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExampleQueries message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ExampleQueries
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.geminidataanalytics.v1beta.ExampleQueries} ExampleQueries
+                         */
+                        ExampleQueries.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.geminidataanalytics.v1beta.ExampleQueries)
+                                return object;
+                            var message = new $root.google.cloud.geminidataanalytics.v1beta.ExampleQueries();
+                            if (object.exampleQueries) {
+                                if (!Array.isArray(object.exampleQueries))
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.ExampleQueries.exampleQueries: array expected");
+                                message.exampleQueries = [];
+                                for (var i = 0; i < object.exampleQueries.length; ++i) {
+                                    if (typeof object.exampleQueries[i] !== "object")
+                                        throw TypeError(".google.cloud.geminidataanalytics.v1beta.ExampleQueries.exampleQueries: object expected");
+                                    message.exampleQueries[i] = $root.google.cloud.geminidataanalytics.v1beta.ExampleQuery.fromObject(object.exampleQueries[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExampleQueries message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ExampleQueries
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.ExampleQueries} message ExampleQueries
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExampleQueries.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.exampleQueries = [];
+                            if (message.exampleQueries && message.exampleQueries.length) {
+                                object.exampleQueries = [];
+                                for (var j = 0; j < message.exampleQueries.length; ++j)
+                                    object.exampleQueries[j] = $root.google.cloud.geminidataanalytics.v1beta.ExampleQuery.toObject(message.exampleQueries[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ExampleQueries to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ExampleQueries
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExampleQueries.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ExampleQueries
+                         * @function getTypeUrl
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ExampleQueries
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ExampleQueries.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1beta.ExampleQueries";
+                        };
+    
+                        return ExampleQueries;
                     })();
     
                     v1beta.Blob = (function() {
@@ -58339,6 +61042,2767 @@
                 return GeneratedCodeInfo;
             })();
     
+            protobuf.Struct = (function() {
+    
+                /**
+                 * Properties of a Struct.
+                 * @memberof google.protobuf
+                 * @interface IStruct
+                 * @property {Object.<string,google.protobuf.IValue>|null} [fields] Struct fields
+                 */
+    
+                /**
+                 * Constructs a new Struct.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a Struct.
+                 * @implements IStruct
+                 * @constructor
+                 * @param {google.protobuf.IStruct=} [properties] Properties to set
+                 */
+                function Struct(properties) {
+                    this.fields = {};
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Struct fields.
+                 * @member {Object.<string,google.protobuf.IValue>} fields
+                 * @memberof google.protobuf.Struct
+                 * @instance
+                 */
+                Struct.prototype.fields = $util.emptyObject;
+    
+                /**
+                 * Creates a new Struct instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Struct
+                 * @static
+                 * @param {google.protobuf.IStruct=} [properties] Properties to set
+                 * @returns {google.protobuf.Struct} Struct instance
+                 */
+                Struct.create = function create(properties) {
+                    return new Struct(properties);
+                };
+    
+                /**
+                 * Encodes the specified Struct message. Does not implicitly {@link google.protobuf.Struct.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Struct
+                 * @static
+                 * @param {google.protobuf.IStruct} message Struct message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Struct.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.fields != null && Object.hasOwnProperty.call(message, "fields"))
+                        for (var keys = Object.keys(message.fields), i = 0; i < keys.length; ++i) {
+                            writer.uint32(/* id 1, wireType 2 =*/10).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                            $root.google.protobuf.Value.encode(message.fields[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                        }
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Struct message, length delimited. Does not implicitly {@link google.protobuf.Struct.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Struct
+                 * @static
+                 * @param {google.protobuf.IStruct} message Struct message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Struct.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Struct message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Struct
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Struct} Struct
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Struct.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Struct(), key, value;
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                if (message.fields === $util.emptyObject)
+                                    message.fields = {};
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = null;
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
+                                }
+                                message.fields[key] = value;
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Struct message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Struct
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Struct} Struct
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Struct.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Struct message.
+                 * @function verify
+                 * @memberof google.protobuf.Struct
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Struct.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.fields != null && message.hasOwnProperty("fields")) {
+                        if (!$util.isObject(message.fields))
+                            return "fields: object expected";
+                        var key = Object.keys(message.fields);
+                        for (var i = 0; i < key.length; ++i) {
+                            var error = $root.google.protobuf.Value.verify(message.fields[key[i]]);
+                            if (error)
+                                return "fields." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a Struct message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Struct
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Struct} Struct
+                 */
+                Struct.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Struct)
+                        return object;
+                    var message = new $root.google.protobuf.Struct();
+                    if (object.fields) {
+                        if (typeof object.fields !== "object")
+                            throw TypeError(".google.protobuf.Struct.fields: object expected");
+                        message.fields = {};
+                        for (var keys = Object.keys(object.fields), i = 0; i < keys.length; ++i) {
+                            if (typeof object.fields[keys[i]] !== "object")
+                                throw TypeError(".google.protobuf.Struct.fields: object expected");
+                            message.fields[keys[i]] = $root.google.protobuf.Value.fromObject(object.fields[keys[i]]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Struct message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Struct
+                 * @static
+                 * @param {google.protobuf.Struct} message Struct
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Struct.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.objects || options.defaults)
+                        object.fields = {};
+                    var keys2;
+                    if (message.fields && (keys2 = Object.keys(message.fields)).length) {
+                        object.fields = {};
+                        for (var j = 0; j < keys2.length; ++j)
+                            object.fields[keys2[j]] = $root.google.protobuf.Value.toObject(message.fields[keys2[j]], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this Struct to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Struct
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Struct.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Struct
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Struct
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Struct.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Struct";
+                };
+    
+                return Struct;
+            })();
+    
+            protobuf.Value = (function() {
+    
+                /**
+                 * Properties of a Value.
+                 * @memberof google.protobuf
+                 * @interface IValue
+                 * @property {google.protobuf.NullValue|null} [nullValue] Value nullValue
+                 * @property {number|null} [numberValue] Value numberValue
+                 * @property {string|null} [stringValue] Value stringValue
+                 * @property {boolean|null} [boolValue] Value boolValue
+                 * @property {google.protobuf.IStruct|null} [structValue] Value structValue
+                 * @property {google.protobuf.IListValue|null} [listValue] Value listValue
+                 */
+    
+                /**
+                 * Constructs a new Value.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a Value.
+                 * @implements IValue
+                 * @constructor
+                 * @param {google.protobuf.IValue=} [properties] Properties to set
+                 */
+                function Value(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Value nullValue.
+                 * @member {google.protobuf.NullValue|null|undefined} nullValue
+                 * @memberof google.protobuf.Value
+                 * @instance
+                 */
+                Value.prototype.nullValue = null;
+    
+                /**
+                 * Value numberValue.
+                 * @member {number|null|undefined} numberValue
+                 * @memberof google.protobuf.Value
+                 * @instance
+                 */
+                Value.prototype.numberValue = null;
+    
+                /**
+                 * Value stringValue.
+                 * @member {string|null|undefined} stringValue
+                 * @memberof google.protobuf.Value
+                 * @instance
+                 */
+                Value.prototype.stringValue = null;
+    
+                /**
+                 * Value boolValue.
+                 * @member {boolean|null|undefined} boolValue
+                 * @memberof google.protobuf.Value
+                 * @instance
+                 */
+                Value.prototype.boolValue = null;
+    
+                /**
+                 * Value structValue.
+                 * @member {google.protobuf.IStruct|null|undefined} structValue
+                 * @memberof google.protobuf.Value
+                 * @instance
+                 */
+                Value.prototype.structValue = null;
+    
+                /**
+                 * Value listValue.
+                 * @member {google.protobuf.IListValue|null|undefined} listValue
+                 * @memberof google.protobuf.Value
+                 * @instance
+                 */
+                Value.prototype.listValue = null;
+    
+                // OneOf field names bound to virtual getters and setters
+                var $oneOfFields;
+    
+                /**
+                 * Value kind.
+                 * @member {"nullValue"|"numberValue"|"stringValue"|"boolValue"|"structValue"|"listValue"|undefined} kind
+                 * @memberof google.protobuf.Value
+                 * @instance
+                 */
+                Object.defineProperty(Value.prototype, "kind", {
+                    get: $util.oneOfGetter($oneOfFields = ["nullValue", "numberValue", "stringValue", "boolValue", "structValue", "listValue"]),
+                    set: $util.oneOfSetter($oneOfFields)
+                });
+    
+                /**
+                 * Creates a new Value instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Value
+                 * @static
+                 * @param {google.protobuf.IValue=} [properties] Properties to set
+                 * @returns {google.protobuf.Value} Value instance
+                 */
+                Value.create = function create(properties) {
+                    return new Value(properties);
+                };
+    
+                /**
+                 * Encodes the specified Value message. Does not implicitly {@link google.protobuf.Value.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Value
+                 * @static
+                 * @param {google.protobuf.IValue} message Value message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Value.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.nullValue != null && Object.hasOwnProperty.call(message, "nullValue"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.nullValue);
+                    if (message.numberValue != null && Object.hasOwnProperty.call(message, "numberValue"))
+                        writer.uint32(/* id 2, wireType 1 =*/17).double(message.numberValue);
+                    if (message.stringValue != null && Object.hasOwnProperty.call(message, "stringValue"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.stringValue);
+                    if (message.boolValue != null && Object.hasOwnProperty.call(message, "boolValue"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).bool(message.boolValue);
+                    if (message.structValue != null && Object.hasOwnProperty.call(message, "structValue"))
+                        $root.google.protobuf.Struct.encode(message.structValue, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                    if (message.listValue != null && Object.hasOwnProperty.call(message, "listValue"))
+                        $root.google.protobuf.ListValue.encode(message.listValue, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Value message, length delimited. Does not implicitly {@link google.protobuf.Value.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Value
+                 * @static
+                 * @param {google.protobuf.IValue} message Value message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Value.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Value message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Value
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Value} Value
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Value.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Value();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.nullValue = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                message.numberValue = reader.double();
+                                break;
+                            }
+                        case 3: {
+                                message.stringValue = reader.string();
+                                break;
+                            }
+                        case 4: {
+                                message.boolValue = reader.bool();
+                                break;
+                            }
+                        case 5: {
+                                message.structValue = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 6: {
+                                message.listValue = $root.google.protobuf.ListValue.decode(reader, reader.uint32());
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Value message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Value
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Value} Value
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Value.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Value message.
+                 * @function verify
+                 * @memberof google.protobuf.Value
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Value.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    var properties = {};
+                    if (message.nullValue != null && message.hasOwnProperty("nullValue")) {
+                        properties.kind = 1;
+                        switch (message.nullValue) {
+                        default:
+                            return "nullValue: enum value expected";
+                        case 0:
+                            break;
+                        }
+                    }
+                    if (message.numberValue != null && message.hasOwnProperty("numberValue")) {
+                        if (properties.kind === 1)
+                            return "kind: multiple values";
+                        properties.kind = 1;
+                        if (typeof message.numberValue !== "number")
+                            return "numberValue: number expected";
+                    }
+                    if (message.stringValue != null && message.hasOwnProperty("stringValue")) {
+                        if (properties.kind === 1)
+                            return "kind: multiple values";
+                        properties.kind = 1;
+                        if (!$util.isString(message.stringValue))
+                            return "stringValue: string expected";
+                    }
+                    if (message.boolValue != null && message.hasOwnProperty("boolValue")) {
+                        if (properties.kind === 1)
+                            return "kind: multiple values";
+                        properties.kind = 1;
+                        if (typeof message.boolValue !== "boolean")
+                            return "boolValue: boolean expected";
+                    }
+                    if (message.structValue != null && message.hasOwnProperty("structValue")) {
+                        if (properties.kind === 1)
+                            return "kind: multiple values";
+                        properties.kind = 1;
+                        {
+                            var error = $root.google.protobuf.Struct.verify(message.structValue);
+                            if (error)
+                                return "structValue." + error;
+                        }
+                    }
+                    if (message.listValue != null && message.hasOwnProperty("listValue")) {
+                        if (properties.kind === 1)
+                            return "kind: multiple values";
+                        properties.kind = 1;
+                        {
+                            var error = $root.google.protobuf.ListValue.verify(message.listValue);
+                            if (error)
+                                return "listValue." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a Value message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Value
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Value} Value
+                 */
+                Value.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Value)
+                        return object;
+                    var message = new $root.google.protobuf.Value();
+                    switch (object.nullValue) {
+                    default:
+                        if (typeof object.nullValue === "number") {
+                            message.nullValue = object.nullValue;
+                            break;
+                        }
+                        break;
+                    case "NULL_VALUE":
+                    case 0:
+                        message.nullValue = 0;
+                        break;
+                    }
+                    if (object.numberValue != null)
+                        message.numberValue = Number(object.numberValue);
+                    if (object.stringValue != null)
+                        message.stringValue = String(object.stringValue);
+                    if (object.boolValue != null)
+                        message.boolValue = Boolean(object.boolValue);
+                    if (object.structValue != null) {
+                        if (typeof object.structValue !== "object")
+                            throw TypeError(".google.protobuf.Value.structValue: object expected");
+                        message.structValue = $root.google.protobuf.Struct.fromObject(object.structValue);
+                    }
+                    if (object.listValue != null) {
+                        if (typeof object.listValue !== "object")
+                            throw TypeError(".google.protobuf.Value.listValue: object expected");
+                        message.listValue = $root.google.protobuf.ListValue.fromObject(object.listValue);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Value message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Value
+                 * @static
+                 * @param {google.protobuf.Value} message Value
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Value.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (message.nullValue != null && message.hasOwnProperty("nullValue")) {
+                        object.nullValue = options.enums === String ? $root.google.protobuf.NullValue[message.nullValue] === undefined ? message.nullValue : $root.google.protobuf.NullValue[message.nullValue] : message.nullValue;
+                        if (options.oneofs)
+                            object.kind = "nullValue";
+                    }
+                    if (message.numberValue != null && message.hasOwnProperty("numberValue")) {
+                        object.numberValue = options.json && !isFinite(message.numberValue) ? String(message.numberValue) : message.numberValue;
+                        if (options.oneofs)
+                            object.kind = "numberValue";
+                    }
+                    if (message.stringValue != null && message.hasOwnProperty("stringValue")) {
+                        object.stringValue = message.stringValue;
+                        if (options.oneofs)
+                            object.kind = "stringValue";
+                    }
+                    if (message.boolValue != null && message.hasOwnProperty("boolValue")) {
+                        object.boolValue = message.boolValue;
+                        if (options.oneofs)
+                            object.kind = "boolValue";
+                    }
+                    if (message.structValue != null && message.hasOwnProperty("structValue")) {
+                        object.structValue = $root.google.protobuf.Struct.toObject(message.structValue, options);
+                        if (options.oneofs)
+                            object.kind = "structValue";
+                    }
+                    if (message.listValue != null && message.hasOwnProperty("listValue")) {
+                        object.listValue = $root.google.protobuf.ListValue.toObject(message.listValue, options);
+                        if (options.oneofs)
+                            object.kind = "listValue";
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this Value to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Value
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Value.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Value
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Value
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Value.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Value";
+                };
+    
+                return Value;
+            })();
+    
+            /**
+             * NullValue enum.
+             * @name google.protobuf.NullValue
+             * @enum {number}
+             * @property {number} NULL_VALUE=0 NULL_VALUE value
+             */
+            protobuf.NullValue = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "NULL_VALUE"] = 0;
+                return values;
+            })();
+    
+            protobuf.ListValue = (function() {
+    
+                /**
+                 * Properties of a ListValue.
+                 * @memberof google.protobuf
+                 * @interface IListValue
+                 * @property {Array.<google.protobuf.IValue>|null} [values] ListValue values
+                 */
+    
+                /**
+                 * Constructs a new ListValue.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a ListValue.
+                 * @implements IListValue
+                 * @constructor
+                 * @param {google.protobuf.IListValue=} [properties] Properties to set
+                 */
+                function ListValue(properties) {
+                    this.values = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ListValue values.
+                 * @member {Array.<google.protobuf.IValue>} values
+                 * @memberof google.protobuf.ListValue
+                 * @instance
+                 */
+                ListValue.prototype.values = $util.emptyArray;
+    
+                /**
+                 * Creates a new ListValue instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.ListValue
+                 * @static
+                 * @param {google.protobuf.IListValue=} [properties] Properties to set
+                 * @returns {google.protobuf.ListValue} ListValue instance
+                 */
+                ListValue.create = function create(properties) {
+                    return new ListValue(properties);
+                };
+    
+                /**
+                 * Encodes the specified ListValue message. Does not implicitly {@link google.protobuf.ListValue.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.ListValue
+                 * @static
+                 * @param {google.protobuf.IListValue} message ListValue message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ListValue.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.values != null && message.values.length)
+                        for (var i = 0; i < message.values.length; ++i)
+                            $root.google.protobuf.Value.encode(message.values[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ListValue message, length delimited. Does not implicitly {@link google.protobuf.ListValue.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.ListValue
+                 * @static
+                 * @param {google.protobuf.IListValue} message ListValue message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ListValue.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ListValue message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.ListValue
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.ListValue} ListValue
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ListValue.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ListValue();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                if (!(message.values && message.values.length))
+                                    message.values = [];
+                                message.values.push($root.google.protobuf.Value.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ListValue message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.ListValue
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.ListValue} ListValue
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ListValue.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ListValue message.
+                 * @function verify
+                 * @memberof google.protobuf.ListValue
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ListValue.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.values != null && message.hasOwnProperty("values")) {
+                        if (!Array.isArray(message.values))
+                            return "values: array expected";
+                        for (var i = 0; i < message.values.length; ++i) {
+                            var error = $root.google.protobuf.Value.verify(message.values[i]);
+                            if (error)
+                                return "values." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a ListValue message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.ListValue
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.ListValue} ListValue
+                 */
+                ListValue.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.ListValue)
+                        return object;
+                    var message = new $root.google.protobuf.ListValue();
+                    if (object.values) {
+                        if (!Array.isArray(object.values))
+                            throw TypeError(".google.protobuf.ListValue.values: array expected");
+                        message.values = [];
+                        for (var i = 0; i < object.values.length; ++i) {
+                            if (typeof object.values[i] !== "object")
+                                throw TypeError(".google.protobuf.ListValue.values: object expected");
+                            message.values[i] = $root.google.protobuf.Value.fromObject(object.values[i]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ListValue message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.ListValue
+                 * @static
+                 * @param {google.protobuf.ListValue} message ListValue
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ListValue.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.values = [];
+                    if (message.values && message.values.length) {
+                        object.values = [];
+                        for (var j = 0; j < message.values.length; ++j)
+                            object.values[j] = $root.google.protobuf.Value.toObject(message.values[j], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this ListValue to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.ListValue
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ListValue.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ListValue
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.ListValue
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ListValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.ListValue";
+                };
+    
+                return ListValue;
+            })();
+    
+            protobuf.DoubleValue = (function() {
+    
+                /**
+                 * Properties of a DoubleValue.
+                 * @memberof google.protobuf
+                 * @interface IDoubleValue
+                 * @property {number|null} [value] DoubleValue value
+                 */
+    
+                /**
+                 * Constructs a new DoubleValue.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a DoubleValue.
+                 * @implements IDoubleValue
+                 * @constructor
+                 * @param {google.protobuf.IDoubleValue=} [properties] Properties to set
+                 */
+                function DoubleValue(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * DoubleValue value.
+                 * @member {number} value
+                 * @memberof google.protobuf.DoubleValue
+                 * @instance
+                 */
+                DoubleValue.prototype.value = 0;
+    
+                /**
+                 * Creates a new DoubleValue instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.DoubleValue
+                 * @static
+                 * @param {google.protobuf.IDoubleValue=} [properties] Properties to set
+                 * @returns {google.protobuf.DoubleValue} DoubleValue instance
+                 */
+                DoubleValue.create = function create(properties) {
+                    return new DoubleValue(properties);
+                };
+    
+                /**
+                 * Encodes the specified DoubleValue message. Does not implicitly {@link google.protobuf.DoubleValue.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.DoubleValue
+                 * @static
+                 * @param {google.protobuf.IDoubleValue} message DoubleValue message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                DoubleValue.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                        writer.uint32(/* id 1, wireType 1 =*/9).double(message.value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified DoubleValue message, length delimited. Does not implicitly {@link google.protobuf.DoubleValue.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.DoubleValue
+                 * @static
+                 * @param {google.protobuf.IDoubleValue} message DoubleValue message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                DoubleValue.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a DoubleValue message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.DoubleValue
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.DoubleValue} DoubleValue
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                DoubleValue.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DoubleValue();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.value = reader.double();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a DoubleValue message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.DoubleValue
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.DoubleValue} DoubleValue
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                DoubleValue.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a DoubleValue message.
+                 * @function verify
+                 * @memberof google.protobuf.DoubleValue
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                DoubleValue.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (typeof message.value !== "number")
+                            return "value: number expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a DoubleValue message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.DoubleValue
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.DoubleValue} DoubleValue
+                 */
+                DoubleValue.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.DoubleValue)
+                        return object;
+                    var message = new $root.google.protobuf.DoubleValue();
+                    if (object.value != null)
+                        message.value = Number(object.value);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a DoubleValue message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.DoubleValue
+                 * @static
+                 * @param {google.protobuf.DoubleValue} message DoubleValue
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                DoubleValue.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.value = 0;
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        object.value = options.json && !isFinite(message.value) ? String(message.value) : message.value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this DoubleValue to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.DoubleValue
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                DoubleValue.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for DoubleValue
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.DoubleValue
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                DoubleValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.DoubleValue";
+                };
+    
+                return DoubleValue;
+            })();
+    
+            protobuf.FloatValue = (function() {
+    
+                /**
+                 * Properties of a FloatValue.
+                 * @memberof google.protobuf
+                 * @interface IFloatValue
+                 * @property {number|null} [value] FloatValue value
+                 */
+    
+                /**
+                 * Constructs a new FloatValue.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a FloatValue.
+                 * @implements IFloatValue
+                 * @constructor
+                 * @param {google.protobuf.IFloatValue=} [properties] Properties to set
+                 */
+                function FloatValue(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * FloatValue value.
+                 * @member {number} value
+                 * @memberof google.protobuf.FloatValue
+                 * @instance
+                 */
+                FloatValue.prototype.value = 0;
+    
+                /**
+                 * Creates a new FloatValue instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.FloatValue
+                 * @static
+                 * @param {google.protobuf.IFloatValue=} [properties] Properties to set
+                 * @returns {google.protobuf.FloatValue} FloatValue instance
+                 */
+                FloatValue.create = function create(properties) {
+                    return new FloatValue(properties);
+                };
+    
+                /**
+                 * Encodes the specified FloatValue message. Does not implicitly {@link google.protobuf.FloatValue.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.FloatValue
+                 * @static
+                 * @param {google.protobuf.IFloatValue} message FloatValue message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FloatValue.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                        writer.uint32(/* id 1, wireType 5 =*/13).float(message.value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified FloatValue message, length delimited. Does not implicitly {@link google.protobuf.FloatValue.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.FloatValue
+                 * @static
+                 * @param {google.protobuf.IFloatValue} message FloatValue message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FloatValue.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a FloatValue message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.FloatValue
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.FloatValue} FloatValue
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FloatValue.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FloatValue();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.value = reader.float();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a FloatValue message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.FloatValue
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.FloatValue} FloatValue
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FloatValue.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a FloatValue message.
+                 * @function verify
+                 * @memberof google.protobuf.FloatValue
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                FloatValue.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (typeof message.value !== "number")
+                            return "value: number expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a FloatValue message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.FloatValue
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.FloatValue} FloatValue
+                 */
+                FloatValue.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.FloatValue)
+                        return object;
+                    var message = new $root.google.protobuf.FloatValue();
+                    if (object.value != null)
+                        message.value = Number(object.value);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a FloatValue message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.FloatValue
+                 * @static
+                 * @param {google.protobuf.FloatValue} message FloatValue
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                FloatValue.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.value = 0;
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        object.value = options.json && !isFinite(message.value) ? String(message.value) : message.value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this FloatValue to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.FloatValue
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                FloatValue.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FloatValue
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FloatValue
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FloatValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FloatValue";
+                };
+    
+                return FloatValue;
+            })();
+    
+            protobuf.Int64Value = (function() {
+    
+                /**
+                 * Properties of an Int64Value.
+                 * @memberof google.protobuf
+                 * @interface IInt64Value
+                 * @property {number|Long|null} [value] Int64Value value
+                 */
+    
+                /**
+                 * Constructs a new Int64Value.
+                 * @memberof google.protobuf
+                 * @classdesc Represents an Int64Value.
+                 * @implements IInt64Value
+                 * @constructor
+                 * @param {google.protobuf.IInt64Value=} [properties] Properties to set
+                 */
+                function Int64Value(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Int64Value value.
+                 * @member {number|Long} value
+                 * @memberof google.protobuf.Int64Value
+                 * @instance
+                 */
+                Int64Value.prototype.value = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                /**
+                 * Creates a new Int64Value instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Int64Value
+                 * @static
+                 * @param {google.protobuf.IInt64Value=} [properties] Properties to set
+                 * @returns {google.protobuf.Int64Value} Int64Value instance
+                 */
+                Int64Value.create = function create(properties) {
+                    return new Int64Value(properties);
+                };
+    
+                /**
+                 * Encodes the specified Int64Value message. Does not implicitly {@link google.protobuf.Int64Value.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Int64Value
+                 * @static
+                 * @param {google.protobuf.IInt64Value} message Int64Value message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Int64Value.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int64(message.value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Int64Value message, length delimited. Does not implicitly {@link google.protobuf.Int64Value.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Int64Value
+                 * @static
+                 * @param {google.protobuf.IInt64Value} message Int64Value message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Int64Value.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an Int64Value message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Int64Value
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Int64Value} Int64Value
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Int64Value.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Int64Value();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.value = reader.int64();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an Int64Value message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Int64Value
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Int64Value} Int64Value
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Int64Value.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an Int64Value message.
+                 * @function verify
+                 * @memberof google.protobuf.Int64Value
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Int64Value.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (!$util.isInteger(message.value) && !(message.value && $util.isInteger(message.value.low) && $util.isInteger(message.value.high)))
+                            return "value: integer|Long expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an Int64Value message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Int64Value
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Int64Value} Int64Value
+                 */
+                Int64Value.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Int64Value)
+                        return object;
+                    var message = new $root.google.protobuf.Int64Value();
+                    if (object.value != null)
+                        if ($util.Long)
+                            (message.value = $util.Long.fromValue(object.value)).unsigned = false;
+                        else if (typeof object.value === "string")
+                            message.value = parseInt(object.value, 10);
+                        else if (typeof object.value === "number")
+                            message.value = object.value;
+                        else if (typeof object.value === "object")
+                            message.value = new $util.LongBits(object.value.low >>> 0, object.value.high >>> 0).toNumber();
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an Int64Value message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Int64Value
+                 * @static
+                 * @param {google.protobuf.Int64Value} message Int64Value
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Int64Value.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        if ($util.Long) {
+                            var long = new $util.Long(0, 0, false);
+                            object.value = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                        } else
+                            object.value = options.longs === String ? "0" : 0;
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (typeof message.value === "number")
+                            object.value = options.longs === String ? String(message.value) : message.value;
+                        else
+                            object.value = options.longs === String ? $util.Long.prototype.toString.call(message.value) : options.longs === Number ? new $util.LongBits(message.value.low >>> 0, message.value.high >>> 0).toNumber() : message.value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Int64Value to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Int64Value
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Int64Value.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Int64Value
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Int64Value
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Int64Value.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Int64Value";
+                };
+    
+                return Int64Value;
+            })();
+    
+            protobuf.UInt64Value = (function() {
+    
+                /**
+                 * Properties of a UInt64Value.
+                 * @memberof google.protobuf
+                 * @interface IUInt64Value
+                 * @property {number|Long|null} [value] UInt64Value value
+                 */
+    
+                /**
+                 * Constructs a new UInt64Value.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a UInt64Value.
+                 * @implements IUInt64Value
+                 * @constructor
+                 * @param {google.protobuf.IUInt64Value=} [properties] Properties to set
+                 */
+                function UInt64Value(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * UInt64Value value.
+                 * @member {number|Long} value
+                 * @memberof google.protobuf.UInt64Value
+                 * @instance
+                 */
+                UInt64Value.prototype.value = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+                /**
+                 * Creates a new UInt64Value instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.UInt64Value
+                 * @static
+                 * @param {google.protobuf.IUInt64Value=} [properties] Properties to set
+                 * @returns {google.protobuf.UInt64Value} UInt64Value instance
+                 */
+                UInt64Value.create = function create(properties) {
+                    return new UInt64Value(properties);
+                };
+    
+                /**
+                 * Encodes the specified UInt64Value message. Does not implicitly {@link google.protobuf.UInt64Value.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.UInt64Value
+                 * @static
+                 * @param {google.protobuf.IUInt64Value} message UInt64Value message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                UInt64Value.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified UInt64Value message, length delimited. Does not implicitly {@link google.protobuf.UInt64Value.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.UInt64Value
+                 * @static
+                 * @param {google.protobuf.IUInt64Value} message UInt64Value message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                UInt64Value.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a UInt64Value message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.UInt64Value
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.UInt64Value} UInt64Value
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                UInt64Value.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UInt64Value();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.value = reader.uint64();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a UInt64Value message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.UInt64Value
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.UInt64Value} UInt64Value
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                UInt64Value.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a UInt64Value message.
+                 * @function verify
+                 * @memberof google.protobuf.UInt64Value
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                UInt64Value.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (!$util.isInteger(message.value) && !(message.value && $util.isInteger(message.value.low) && $util.isInteger(message.value.high)))
+                            return "value: integer|Long expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a UInt64Value message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.UInt64Value
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.UInt64Value} UInt64Value
+                 */
+                UInt64Value.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.UInt64Value)
+                        return object;
+                    var message = new $root.google.protobuf.UInt64Value();
+                    if (object.value != null)
+                        if ($util.Long)
+                            (message.value = $util.Long.fromValue(object.value)).unsigned = true;
+                        else if (typeof object.value === "string")
+                            message.value = parseInt(object.value, 10);
+                        else if (typeof object.value === "number")
+                            message.value = object.value;
+                        else if (typeof object.value === "object")
+                            message.value = new $util.LongBits(object.value.low >>> 0, object.value.high >>> 0).toNumber(true);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a UInt64Value message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.UInt64Value
+                 * @static
+                 * @param {google.protobuf.UInt64Value} message UInt64Value
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                UInt64Value.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        if ($util.Long) {
+                            var long = new $util.Long(0, 0, true);
+                            object.value = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                        } else
+                            object.value = options.longs === String ? "0" : 0;
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (typeof message.value === "number")
+                            object.value = options.longs === String ? String(message.value) : message.value;
+                        else
+                            object.value = options.longs === String ? $util.Long.prototype.toString.call(message.value) : options.longs === Number ? new $util.LongBits(message.value.low >>> 0, message.value.high >>> 0).toNumber(true) : message.value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this UInt64Value to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.UInt64Value
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                UInt64Value.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for UInt64Value
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.UInt64Value
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                UInt64Value.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.UInt64Value";
+                };
+    
+                return UInt64Value;
+            })();
+    
+            protobuf.Int32Value = (function() {
+    
+                /**
+                 * Properties of an Int32Value.
+                 * @memberof google.protobuf
+                 * @interface IInt32Value
+                 * @property {number|null} [value] Int32Value value
+                 */
+    
+                /**
+                 * Constructs a new Int32Value.
+                 * @memberof google.protobuf
+                 * @classdesc Represents an Int32Value.
+                 * @implements IInt32Value
+                 * @constructor
+                 * @param {google.protobuf.IInt32Value=} [properties] Properties to set
+                 */
+                function Int32Value(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Int32Value value.
+                 * @member {number} value
+                 * @memberof google.protobuf.Int32Value
+                 * @instance
+                 */
+                Int32Value.prototype.value = 0;
+    
+                /**
+                 * Creates a new Int32Value instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Int32Value
+                 * @static
+                 * @param {google.protobuf.IInt32Value=} [properties] Properties to set
+                 * @returns {google.protobuf.Int32Value} Int32Value instance
+                 */
+                Int32Value.create = function create(properties) {
+                    return new Int32Value(properties);
+                };
+    
+                /**
+                 * Encodes the specified Int32Value message. Does not implicitly {@link google.protobuf.Int32Value.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Int32Value
+                 * @static
+                 * @param {google.protobuf.IInt32Value} message Int32Value message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Int32Value.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Int32Value message, length delimited. Does not implicitly {@link google.protobuf.Int32Value.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Int32Value
+                 * @static
+                 * @param {google.protobuf.IInt32Value} message Int32Value message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Int32Value.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an Int32Value message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Int32Value
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Int32Value} Int32Value
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Int32Value.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Int32Value();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.value = reader.int32();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an Int32Value message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Int32Value
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Int32Value} Int32Value
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Int32Value.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an Int32Value message.
+                 * @function verify
+                 * @memberof google.protobuf.Int32Value
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Int32Value.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (!$util.isInteger(message.value))
+                            return "value: integer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an Int32Value message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Int32Value
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Int32Value} Int32Value
+                 */
+                Int32Value.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Int32Value)
+                        return object;
+                    var message = new $root.google.protobuf.Int32Value();
+                    if (object.value != null)
+                        message.value = object.value | 0;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an Int32Value message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Int32Value
+                 * @static
+                 * @param {google.protobuf.Int32Value} message Int32Value
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Int32Value.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.value = 0;
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        object.value = message.value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Int32Value to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Int32Value
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Int32Value.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Int32Value
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Int32Value
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Int32Value.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Int32Value";
+                };
+    
+                return Int32Value;
+            })();
+    
+            protobuf.UInt32Value = (function() {
+    
+                /**
+                 * Properties of a UInt32Value.
+                 * @memberof google.protobuf
+                 * @interface IUInt32Value
+                 * @property {number|null} [value] UInt32Value value
+                 */
+    
+                /**
+                 * Constructs a new UInt32Value.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a UInt32Value.
+                 * @implements IUInt32Value
+                 * @constructor
+                 * @param {google.protobuf.IUInt32Value=} [properties] Properties to set
+                 */
+                function UInt32Value(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * UInt32Value value.
+                 * @member {number} value
+                 * @memberof google.protobuf.UInt32Value
+                 * @instance
+                 */
+                UInt32Value.prototype.value = 0;
+    
+                /**
+                 * Creates a new UInt32Value instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.UInt32Value
+                 * @static
+                 * @param {google.protobuf.IUInt32Value=} [properties] Properties to set
+                 * @returns {google.protobuf.UInt32Value} UInt32Value instance
+                 */
+                UInt32Value.create = function create(properties) {
+                    return new UInt32Value(properties);
+                };
+    
+                /**
+                 * Encodes the specified UInt32Value message. Does not implicitly {@link google.protobuf.UInt32Value.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.UInt32Value
+                 * @static
+                 * @param {google.protobuf.IUInt32Value} message UInt32Value message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                UInt32Value.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified UInt32Value message, length delimited. Does not implicitly {@link google.protobuf.UInt32Value.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.UInt32Value
+                 * @static
+                 * @param {google.protobuf.IUInt32Value} message UInt32Value message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                UInt32Value.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a UInt32Value message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.UInt32Value
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.UInt32Value} UInt32Value
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                UInt32Value.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UInt32Value();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.value = reader.uint32();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a UInt32Value message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.UInt32Value
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.UInt32Value} UInt32Value
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                UInt32Value.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a UInt32Value message.
+                 * @function verify
+                 * @memberof google.protobuf.UInt32Value
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                UInt32Value.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (!$util.isInteger(message.value))
+                            return "value: integer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a UInt32Value message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.UInt32Value
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.UInt32Value} UInt32Value
+                 */
+                UInt32Value.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.UInt32Value)
+                        return object;
+                    var message = new $root.google.protobuf.UInt32Value();
+                    if (object.value != null)
+                        message.value = object.value >>> 0;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a UInt32Value message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.UInt32Value
+                 * @static
+                 * @param {google.protobuf.UInt32Value} message UInt32Value
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                UInt32Value.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.value = 0;
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        object.value = message.value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this UInt32Value to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.UInt32Value
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                UInt32Value.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for UInt32Value
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.UInt32Value
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                UInt32Value.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.UInt32Value";
+                };
+    
+                return UInt32Value;
+            })();
+    
+            protobuf.BoolValue = (function() {
+    
+                /**
+                 * Properties of a BoolValue.
+                 * @memberof google.protobuf
+                 * @interface IBoolValue
+                 * @property {boolean|null} [value] BoolValue value
+                 */
+    
+                /**
+                 * Constructs a new BoolValue.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a BoolValue.
+                 * @implements IBoolValue
+                 * @constructor
+                 * @param {google.protobuf.IBoolValue=} [properties] Properties to set
+                 */
+                function BoolValue(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * BoolValue value.
+                 * @member {boolean} value
+                 * @memberof google.protobuf.BoolValue
+                 * @instance
+                 */
+                BoolValue.prototype.value = false;
+    
+                /**
+                 * Creates a new BoolValue instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.BoolValue
+                 * @static
+                 * @param {google.protobuf.IBoolValue=} [properties] Properties to set
+                 * @returns {google.protobuf.BoolValue} BoolValue instance
+                 */
+                BoolValue.create = function create(properties) {
+                    return new BoolValue(properties);
+                };
+    
+                /**
+                 * Encodes the specified BoolValue message. Does not implicitly {@link google.protobuf.BoolValue.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.BoolValue
+                 * @static
+                 * @param {google.protobuf.IBoolValue} message BoolValue message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                BoolValue.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).bool(message.value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified BoolValue message, length delimited. Does not implicitly {@link google.protobuf.BoolValue.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.BoolValue
+                 * @static
+                 * @param {google.protobuf.IBoolValue} message BoolValue message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                BoolValue.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a BoolValue message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.BoolValue
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.BoolValue} BoolValue
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                BoolValue.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.BoolValue();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.value = reader.bool();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a BoolValue message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.BoolValue
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.BoolValue} BoolValue
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                BoolValue.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a BoolValue message.
+                 * @function verify
+                 * @memberof google.protobuf.BoolValue
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                BoolValue.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (typeof message.value !== "boolean")
+                            return "value: boolean expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a BoolValue message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.BoolValue
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.BoolValue} BoolValue
+                 */
+                BoolValue.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.BoolValue)
+                        return object;
+                    var message = new $root.google.protobuf.BoolValue();
+                    if (object.value != null)
+                        message.value = Boolean(object.value);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a BoolValue message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.BoolValue
+                 * @static
+                 * @param {google.protobuf.BoolValue} message BoolValue
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                BoolValue.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.value = false;
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        object.value = message.value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this BoolValue to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.BoolValue
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                BoolValue.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for BoolValue
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.BoolValue
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                BoolValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.BoolValue";
+                };
+    
+                return BoolValue;
+            })();
+    
+            protobuf.StringValue = (function() {
+    
+                /**
+                 * Properties of a StringValue.
+                 * @memberof google.protobuf
+                 * @interface IStringValue
+                 * @property {string|null} [value] StringValue value
+                 */
+    
+                /**
+                 * Constructs a new StringValue.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a StringValue.
+                 * @implements IStringValue
+                 * @constructor
+                 * @param {google.protobuf.IStringValue=} [properties] Properties to set
+                 */
+                function StringValue(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * StringValue value.
+                 * @member {string} value
+                 * @memberof google.protobuf.StringValue
+                 * @instance
+                 */
+                StringValue.prototype.value = "";
+    
+                /**
+                 * Creates a new StringValue instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.StringValue
+                 * @static
+                 * @param {google.protobuf.IStringValue=} [properties] Properties to set
+                 * @returns {google.protobuf.StringValue} StringValue instance
+                 */
+                StringValue.create = function create(properties) {
+                    return new StringValue(properties);
+                };
+    
+                /**
+                 * Encodes the specified StringValue message. Does not implicitly {@link google.protobuf.StringValue.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.StringValue
+                 * @static
+                 * @param {google.protobuf.IStringValue} message StringValue message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                StringValue.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified StringValue message, length delimited. Does not implicitly {@link google.protobuf.StringValue.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.StringValue
+                 * @static
+                 * @param {google.protobuf.IStringValue} message StringValue message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                StringValue.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a StringValue message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.StringValue
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.StringValue} StringValue
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                StringValue.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.StringValue();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.value = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a StringValue message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.StringValue
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.StringValue} StringValue
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                StringValue.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a StringValue message.
+                 * @function verify
+                 * @memberof google.protobuf.StringValue
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                StringValue.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (!$util.isString(message.value))
+                            return "value: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a StringValue message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.StringValue
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.StringValue} StringValue
+                 */
+                StringValue.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.StringValue)
+                        return object;
+                    var message = new $root.google.protobuf.StringValue();
+                    if (object.value != null)
+                        message.value = String(object.value);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a StringValue message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.StringValue
+                 * @static
+                 * @param {google.protobuf.StringValue} message StringValue
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                StringValue.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.value = "";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        object.value = message.value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this StringValue to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.StringValue
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                StringValue.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for StringValue
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.StringValue
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                StringValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.StringValue";
+                };
+    
+                return StringValue;
+            })();
+    
+            protobuf.BytesValue = (function() {
+    
+                /**
+                 * Properties of a BytesValue.
+                 * @memberof google.protobuf
+                 * @interface IBytesValue
+                 * @property {Uint8Array|null} [value] BytesValue value
+                 */
+    
+                /**
+                 * Constructs a new BytesValue.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a BytesValue.
+                 * @implements IBytesValue
+                 * @constructor
+                 * @param {google.protobuf.IBytesValue=} [properties] Properties to set
+                 */
+                function BytesValue(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * BytesValue value.
+                 * @member {Uint8Array} value
+                 * @memberof google.protobuf.BytesValue
+                 * @instance
+                 */
+                BytesValue.prototype.value = $util.newBuffer([]);
+    
+                /**
+                 * Creates a new BytesValue instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.BytesValue
+                 * @static
+                 * @param {google.protobuf.IBytesValue=} [properties] Properties to set
+                 * @returns {google.protobuf.BytesValue} BytesValue instance
+                 */
+                BytesValue.create = function create(properties) {
+                    return new BytesValue(properties);
+                };
+    
+                /**
+                 * Encodes the specified BytesValue message. Does not implicitly {@link google.protobuf.BytesValue.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.BytesValue
+                 * @static
+                 * @param {google.protobuf.IBytesValue} message BytesValue message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                BytesValue.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified BytesValue message, length delimited. Does not implicitly {@link google.protobuf.BytesValue.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.BytesValue
+                 * @static
+                 * @param {google.protobuf.IBytesValue} message BytesValue message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                BytesValue.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a BytesValue message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.BytesValue
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.BytesValue} BytesValue
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                BytesValue.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.BytesValue();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.value = reader.bytes();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a BytesValue message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.BytesValue
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.BytesValue} BytesValue
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                BytesValue.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a BytesValue message.
+                 * @function verify
+                 * @memberof google.protobuf.BytesValue
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                BytesValue.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (!(message.value && typeof message.value.length === "number" || $util.isString(message.value)))
+                            return "value: buffer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a BytesValue message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.BytesValue
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.BytesValue} BytesValue
+                 */
+                BytesValue.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.BytesValue)
+                        return object;
+                    var message = new $root.google.protobuf.BytesValue();
+                    if (object.value != null)
+                        if (typeof object.value === "string")
+                            $util.base64.decode(object.value, message.value = $util.newBuffer($util.base64.length(object.value)), 0);
+                        else if (object.value.length >= 0)
+                            message.value = object.value;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a BytesValue message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.BytesValue
+                 * @static
+                 * @param {google.protobuf.BytesValue} message BytesValue
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                BytesValue.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        if (options.bytes === String)
+                            object.value = "";
+                        else {
+                            object.value = [];
+                            if (options.bytes !== Array)
+                                object.value = $util.newBuffer(object.value);
+                        }
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        object.value = options.bytes === String ? $util.base64.encode(message.value, 0, message.value.length) : options.bytes === Array ? Array.prototype.slice.call(message.value) : message.value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this BytesValue to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.BytesValue
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                BytesValue.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for BytesValue
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.BytesValue
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                BytesValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.BytesValue";
+                };
+    
+                return BytesValue;
+            })();
+    
             protobuf.Timestamp = (function() {
     
                 /**
@@ -59459,885 +64923,6 @@
                 };
     
                 return Empty;
-            })();
-    
-            protobuf.Struct = (function() {
-    
-                /**
-                 * Properties of a Struct.
-                 * @memberof google.protobuf
-                 * @interface IStruct
-                 * @property {Object.<string,google.protobuf.IValue>|null} [fields] Struct fields
-                 */
-    
-                /**
-                 * Constructs a new Struct.
-                 * @memberof google.protobuf
-                 * @classdesc Represents a Struct.
-                 * @implements IStruct
-                 * @constructor
-                 * @param {google.protobuf.IStruct=} [properties] Properties to set
-                 */
-                function Struct(properties) {
-                    this.fields = {};
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Struct fields.
-                 * @member {Object.<string,google.protobuf.IValue>} fields
-                 * @memberof google.protobuf.Struct
-                 * @instance
-                 */
-                Struct.prototype.fields = $util.emptyObject;
-    
-                /**
-                 * Creates a new Struct instance using the specified properties.
-                 * @function create
-                 * @memberof google.protobuf.Struct
-                 * @static
-                 * @param {google.protobuf.IStruct=} [properties] Properties to set
-                 * @returns {google.protobuf.Struct} Struct instance
-                 */
-                Struct.create = function create(properties) {
-                    return new Struct(properties);
-                };
-    
-                /**
-                 * Encodes the specified Struct message. Does not implicitly {@link google.protobuf.Struct.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.protobuf.Struct
-                 * @static
-                 * @param {google.protobuf.IStruct} message Struct message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Struct.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.fields != null && Object.hasOwnProperty.call(message, "fields"))
-                        for (var keys = Object.keys(message.fields), i = 0; i < keys.length; ++i) {
-                            writer.uint32(/* id 1, wireType 2 =*/10).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
-                            $root.google.protobuf.Value.encode(message.fields[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
-                        }
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Struct message, length delimited. Does not implicitly {@link google.protobuf.Struct.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.protobuf.Struct
-                 * @static
-                 * @param {google.protobuf.IStruct} message Struct message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Struct.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a Struct message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.protobuf.Struct
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.protobuf.Struct} Struct
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Struct.decode = function decode(reader, length, error) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Struct(), key, value;
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        if (tag === error)
-                            break;
-                        switch (tag >>> 3) {
-                        case 1: {
-                                if (message.fields === $util.emptyObject)
-                                    message.fields = {};
-                                var end2 = reader.uint32() + reader.pos;
-                                key = "";
-                                value = null;
-                                while (reader.pos < end2) {
-                                    var tag2 = reader.uint32();
-                                    switch (tag2 >>> 3) {
-                                    case 1:
-                                        key = reader.string();
-                                        break;
-                                    case 2:
-                                        value = $root.google.protobuf.Value.decode(reader, reader.uint32());
-                                        break;
-                                    default:
-                                        reader.skipType(tag2 & 7);
-                                        break;
-                                    }
-                                }
-                                message.fields[key] = value;
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a Struct message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.protobuf.Struct
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.protobuf.Struct} Struct
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Struct.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a Struct message.
-                 * @function verify
-                 * @memberof google.protobuf.Struct
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Struct.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.fields != null && message.hasOwnProperty("fields")) {
-                        if (!$util.isObject(message.fields))
-                            return "fields: object expected";
-                        var key = Object.keys(message.fields);
-                        for (var i = 0; i < key.length; ++i) {
-                            var error = $root.google.protobuf.Value.verify(message.fields[key[i]]);
-                            if (error)
-                                return "fields." + error;
-                        }
-                    }
-                    return null;
-                };
-    
-                /**
-                 * Creates a Struct message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.protobuf.Struct
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.protobuf.Struct} Struct
-                 */
-                Struct.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.protobuf.Struct)
-                        return object;
-                    var message = new $root.google.protobuf.Struct();
-                    if (object.fields) {
-                        if (typeof object.fields !== "object")
-                            throw TypeError(".google.protobuf.Struct.fields: object expected");
-                        message.fields = {};
-                        for (var keys = Object.keys(object.fields), i = 0; i < keys.length; ++i) {
-                            if (typeof object.fields[keys[i]] !== "object")
-                                throw TypeError(".google.protobuf.Struct.fields: object expected");
-                            message.fields[keys[i]] = $root.google.protobuf.Value.fromObject(object.fields[keys[i]]);
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a Struct message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.protobuf.Struct
-                 * @static
-                 * @param {google.protobuf.Struct} message Struct
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Struct.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.objects || options.defaults)
-                        object.fields = {};
-                    var keys2;
-                    if (message.fields && (keys2 = Object.keys(message.fields)).length) {
-                        object.fields = {};
-                        for (var j = 0; j < keys2.length; ++j)
-                            object.fields[keys2[j]] = $root.google.protobuf.Value.toObject(message.fields[keys2[j]], options);
-                    }
-                    return object;
-                };
-    
-                /**
-                 * Converts this Struct to JSON.
-                 * @function toJSON
-                 * @memberof google.protobuf.Struct
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Struct.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for Struct
-                 * @function getTypeUrl
-                 * @memberof google.protobuf.Struct
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                Struct.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.protobuf.Struct";
-                };
-    
-                return Struct;
-            })();
-    
-            protobuf.Value = (function() {
-    
-                /**
-                 * Properties of a Value.
-                 * @memberof google.protobuf
-                 * @interface IValue
-                 * @property {google.protobuf.NullValue|null} [nullValue] Value nullValue
-                 * @property {number|null} [numberValue] Value numberValue
-                 * @property {string|null} [stringValue] Value stringValue
-                 * @property {boolean|null} [boolValue] Value boolValue
-                 * @property {google.protobuf.IStruct|null} [structValue] Value structValue
-                 * @property {google.protobuf.IListValue|null} [listValue] Value listValue
-                 */
-    
-                /**
-                 * Constructs a new Value.
-                 * @memberof google.protobuf
-                 * @classdesc Represents a Value.
-                 * @implements IValue
-                 * @constructor
-                 * @param {google.protobuf.IValue=} [properties] Properties to set
-                 */
-                function Value(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Value nullValue.
-                 * @member {google.protobuf.NullValue|null|undefined} nullValue
-                 * @memberof google.protobuf.Value
-                 * @instance
-                 */
-                Value.prototype.nullValue = null;
-    
-                /**
-                 * Value numberValue.
-                 * @member {number|null|undefined} numberValue
-                 * @memberof google.protobuf.Value
-                 * @instance
-                 */
-                Value.prototype.numberValue = null;
-    
-                /**
-                 * Value stringValue.
-                 * @member {string|null|undefined} stringValue
-                 * @memberof google.protobuf.Value
-                 * @instance
-                 */
-                Value.prototype.stringValue = null;
-    
-                /**
-                 * Value boolValue.
-                 * @member {boolean|null|undefined} boolValue
-                 * @memberof google.protobuf.Value
-                 * @instance
-                 */
-                Value.prototype.boolValue = null;
-    
-                /**
-                 * Value structValue.
-                 * @member {google.protobuf.IStruct|null|undefined} structValue
-                 * @memberof google.protobuf.Value
-                 * @instance
-                 */
-                Value.prototype.structValue = null;
-    
-                /**
-                 * Value listValue.
-                 * @member {google.protobuf.IListValue|null|undefined} listValue
-                 * @memberof google.protobuf.Value
-                 * @instance
-                 */
-                Value.prototype.listValue = null;
-    
-                // OneOf field names bound to virtual getters and setters
-                var $oneOfFields;
-    
-                /**
-                 * Value kind.
-                 * @member {"nullValue"|"numberValue"|"stringValue"|"boolValue"|"structValue"|"listValue"|undefined} kind
-                 * @memberof google.protobuf.Value
-                 * @instance
-                 */
-                Object.defineProperty(Value.prototype, "kind", {
-                    get: $util.oneOfGetter($oneOfFields = ["nullValue", "numberValue", "stringValue", "boolValue", "structValue", "listValue"]),
-                    set: $util.oneOfSetter($oneOfFields)
-                });
-    
-                /**
-                 * Creates a new Value instance using the specified properties.
-                 * @function create
-                 * @memberof google.protobuf.Value
-                 * @static
-                 * @param {google.protobuf.IValue=} [properties] Properties to set
-                 * @returns {google.protobuf.Value} Value instance
-                 */
-                Value.create = function create(properties) {
-                    return new Value(properties);
-                };
-    
-                /**
-                 * Encodes the specified Value message. Does not implicitly {@link google.protobuf.Value.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.protobuf.Value
-                 * @static
-                 * @param {google.protobuf.IValue} message Value message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Value.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.nullValue != null && Object.hasOwnProperty.call(message, "nullValue"))
-                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.nullValue);
-                    if (message.numberValue != null && Object.hasOwnProperty.call(message, "numberValue"))
-                        writer.uint32(/* id 2, wireType 1 =*/17).double(message.numberValue);
-                    if (message.stringValue != null && Object.hasOwnProperty.call(message, "stringValue"))
-                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.stringValue);
-                    if (message.boolValue != null && Object.hasOwnProperty.call(message, "boolValue"))
-                        writer.uint32(/* id 4, wireType 0 =*/32).bool(message.boolValue);
-                    if (message.structValue != null && Object.hasOwnProperty.call(message, "structValue"))
-                        $root.google.protobuf.Struct.encode(message.structValue, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
-                    if (message.listValue != null && Object.hasOwnProperty.call(message, "listValue"))
-                        $root.google.protobuf.ListValue.encode(message.listValue, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Value message, length delimited. Does not implicitly {@link google.protobuf.Value.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.protobuf.Value
-                 * @static
-                 * @param {google.protobuf.IValue} message Value message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Value.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a Value message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.protobuf.Value
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.protobuf.Value} Value
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Value.decode = function decode(reader, length, error) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Value();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        if (tag === error)
-                            break;
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.nullValue = reader.int32();
-                                break;
-                            }
-                        case 2: {
-                                message.numberValue = reader.double();
-                                break;
-                            }
-                        case 3: {
-                                message.stringValue = reader.string();
-                                break;
-                            }
-                        case 4: {
-                                message.boolValue = reader.bool();
-                                break;
-                            }
-                        case 5: {
-                                message.structValue = $root.google.protobuf.Struct.decode(reader, reader.uint32());
-                                break;
-                            }
-                        case 6: {
-                                message.listValue = $root.google.protobuf.ListValue.decode(reader, reader.uint32());
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a Value message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.protobuf.Value
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.protobuf.Value} Value
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Value.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a Value message.
-                 * @function verify
-                 * @memberof google.protobuf.Value
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Value.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    var properties = {};
-                    if (message.nullValue != null && message.hasOwnProperty("nullValue")) {
-                        properties.kind = 1;
-                        switch (message.nullValue) {
-                        default:
-                            return "nullValue: enum value expected";
-                        case 0:
-                            break;
-                        }
-                    }
-                    if (message.numberValue != null && message.hasOwnProperty("numberValue")) {
-                        if (properties.kind === 1)
-                            return "kind: multiple values";
-                        properties.kind = 1;
-                        if (typeof message.numberValue !== "number")
-                            return "numberValue: number expected";
-                    }
-                    if (message.stringValue != null && message.hasOwnProperty("stringValue")) {
-                        if (properties.kind === 1)
-                            return "kind: multiple values";
-                        properties.kind = 1;
-                        if (!$util.isString(message.stringValue))
-                            return "stringValue: string expected";
-                    }
-                    if (message.boolValue != null && message.hasOwnProperty("boolValue")) {
-                        if (properties.kind === 1)
-                            return "kind: multiple values";
-                        properties.kind = 1;
-                        if (typeof message.boolValue !== "boolean")
-                            return "boolValue: boolean expected";
-                    }
-                    if (message.structValue != null && message.hasOwnProperty("structValue")) {
-                        if (properties.kind === 1)
-                            return "kind: multiple values";
-                        properties.kind = 1;
-                        {
-                            var error = $root.google.protobuf.Struct.verify(message.structValue);
-                            if (error)
-                                return "structValue." + error;
-                        }
-                    }
-                    if (message.listValue != null && message.hasOwnProperty("listValue")) {
-                        if (properties.kind === 1)
-                            return "kind: multiple values";
-                        properties.kind = 1;
-                        {
-                            var error = $root.google.protobuf.ListValue.verify(message.listValue);
-                            if (error)
-                                return "listValue." + error;
-                        }
-                    }
-                    return null;
-                };
-    
-                /**
-                 * Creates a Value message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.protobuf.Value
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.protobuf.Value} Value
-                 */
-                Value.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.protobuf.Value)
-                        return object;
-                    var message = new $root.google.protobuf.Value();
-                    switch (object.nullValue) {
-                    default:
-                        if (typeof object.nullValue === "number") {
-                            message.nullValue = object.nullValue;
-                            break;
-                        }
-                        break;
-                    case "NULL_VALUE":
-                    case 0:
-                        message.nullValue = 0;
-                        break;
-                    }
-                    if (object.numberValue != null)
-                        message.numberValue = Number(object.numberValue);
-                    if (object.stringValue != null)
-                        message.stringValue = String(object.stringValue);
-                    if (object.boolValue != null)
-                        message.boolValue = Boolean(object.boolValue);
-                    if (object.structValue != null) {
-                        if (typeof object.structValue !== "object")
-                            throw TypeError(".google.protobuf.Value.structValue: object expected");
-                        message.structValue = $root.google.protobuf.Struct.fromObject(object.structValue);
-                    }
-                    if (object.listValue != null) {
-                        if (typeof object.listValue !== "object")
-                            throw TypeError(".google.protobuf.Value.listValue: object expected");
-                        message.listValue = $root.google.protobuf.ListValue.fromObject(object.listValue);
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a Value message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.protobuf.Value
-                 * @static
-                 * @param {google.protobuf.Value} message Value
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Value.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (message.nullValue != null && message.hasOwnProperty("nullValue")) {
-                        object.nullValue = options.enums === String ? $root.google.protobuf.NullValue[message.nullValue] === undefined ? message.nullValue : $root.google.protobuf.NullValue[message.nullValue] : message.nullValue;
-                        if (options.oneofs)
-                            object.kind = "nullValue";
-                    }
-                    if (message.numberValue != null && message.hasOwnProperty("numberValue")) {
-                        object.numberValue = options.json && !isFinite(message.numberValue) ? String(message.numberValue) : message.numberValue;
-                        if (options.oneofs)
-                            object.kind = "numberValue";
-                    }
-                    if (message.stringValue != null && message.hasOwnProperty("stringValue")) {
-                        object.stringValue = message.stringValue;
-                        if (options.oneofs)
-                            object.kind = "stringValue";
-                    }
-                    if (message.boolValue != null && message.hasOwnProperty("boolValue")) {
-                        object.boolValue = message.boolValue;
-                        if (options.oneofs)
-                            object.kind = "boolValue";
-                    }
-                    if (message.structValue != null && message.hasOwnProperty("structValue")) {
-                        object.structValue = $root.google.protobuf.Struct.toObject(message.structValue, options);
-                        if (options.oneofs)
-                            object.kind = "structValue";
-                    }
-                    if (message.listValue != null && message.hasOwnProperty("listValue")) {
-                        object.listValue = $root.google.protobuf.ListValue.toObject(message.listValue, options);
-                        if (options.oneofs)
-                            object.kind = "listValue";
-                    }
-                    return object;
-                };
-    
-                /**
-                 * Converts this Value to JSON.
-                 * @function toJSON
-                 * @memberof google.protobuf.Value
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Value.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for Value
-                 * @function getTypeUrl
-                 * @memberof google.protobuf.Value
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                Value.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.protobuf.Value";
-                };
-    
-                return Value;
-            })();
-    
-            /**
-             * NullValue enum.
-             * @name google.protobuf.NullValue
-             * @enum {number}
-             * @property {number} NULL_VALUE=0 NULL_VALUE value
-             */
-            protobuf.NullValue = (function() {
-                var valuesById = {}, values = Object.create(valuesById);
-                values[valuesById[0] = "NULL_VALUE"] = 0;
-                return values;
-            })();
-    
-            protobuf.ListValue = (function() {
-    
-                /**
-                 * Properties of a ListValue.
-                 * @memberof google.protobuf
-                 * @interface IListValue
-                 * @property {Array.<google.protobuf.IValue>|null} [values] ListValue values
-                 */
-    
-                /**
-                 * Constructs a new ListValue.
-                 * @memberof google.protobuf
-                 * @classdesc Represents a ListValue.
-                 * @implements IListValue
-                 * @constructor
-                 * @param {google.protobuf.IListValue=} [properties] Properties to set
-                 */
-                function ListValue(properties) {
-                    this.values = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * ListValue values.
-                 * @member {Array.<google.protobuf.IValue>} values
-                 * @memberof google.protobuf.ListValue
-                 * @instance
-                 */
-                ListValue.prototype.values = $util.emptyArray;
-    
-                /**
-                 * Creates a new ListValue instance using the specified properties.
-                 * @function create
-                 * @memberof google.protobuf.ListValue
-                 * @static
-                 * @param {google.protobuf.IListValue=} [properties] Properties to set
-                 * @returns {google.protobuf.ListValue} ListValue instance
-                 */
-                ListValue.create = function create(properties) {
-                    return new ListValue(properties);
-                };
-    
-                /**
-                 * Encodes the specified ListValue message. Does not implicitly {@link google.protobuf.ListValue.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.protobuf.ListValue
-                 * @static
-                 * @param {google.protobuf.IListValue} message ListValue message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ListValue.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.values != null && message.values.length)
-                        for (var i = 0; i < message.values.length; ++i)
-                            $root.google.protobuf.Value.encode(message.values[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified ListValue message, length delimited. Does not implicitly {@link google.protobuf.ListValue.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.protobuf.ListValue
-                 * @static
-                 * @param {google.protobuf.IListValue} message ListValue message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ListValue.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a ListValue message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.protobuf.ListValue
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.protobuf.ListValue} ListValue
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ListValue.decode = function decode(reader, length, error) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ListValue();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        if (tag === error)
-                            break;
-                        switch (tag >>> 3) {
-                        case 1: {
-                                if (!(message.values && message.values.length))
-                                    message.values = [];
-                                message.values.push($root.google.protobuf.Value.decode(reader, reader.uint32()));
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a ListValue message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.protobuf.ListValue
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.protobuf.ListValue} ListValue
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ListValue.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a ListValue message.
-                 * @function verify
-                 * @memberof google.protobuf.ListValue
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                ListValue.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.values != null && message.hasOwnProperty("values")) {
-                        if (!Array.isArray(message.values))
-                            return "values: array expected";
-                        for (var i = 0; i < message.values.length; ++i) {
-                            var error = $root.google.protobuf.Value.verify(message.values[i]);
-                            if (error)
-                                return "values." + error;
-                        }
-                    }
-                    return null;
-                };
-    
-                /**
-                 * Creates a ListValue message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.protobuf.ListValue
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.protobuf.ListValue} ListValue
-                 */
-                ListValue.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.protobuf.ListValue)
-                        return object;
-                    var message = new $root.google.protobuf.ListValue();
-                    if (object.values) {
-                        if (!Array.isArray(object.values))
-                            throw TypeError(".google.protobuf.ListValue.values: array expected");
-                        message.values = [];
-                        for (var i = 0; i < object.values.length; ++i) {
-                            if (typeof object.values[i] !== "object")
-                                throw TypeError(".google.protobuf.ListValue.values: object expected");
-                            message.values[i] = $root.google.protobuf.Value.fromObject(object.values[i]);
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a ListValue message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.protobuf.ListValue
-                 * @static
-                 * @param {google.protobuf.ListValue} message ListValue
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                ListValue.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults)
-                        object.values = [];
-                    if (message.values && message.values.length) {
-                        object.values = [];
-                        for (var j = 0; j < message.values.length; ++j)
-                            object.values[j] = $root.google.protobuf.Value.toObject(message.values[j], options);
-                    }
-                    return object;
-                };
-    
-                /**
-                 * Converts this ListValue to JSON.
-                 * @function toJSON
-                 * @memberof google.protobuf.ListValue
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                ListValue.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for ListValue
-                 * @function getTypeUrl
-                 * @memberof google.protobuf.ListValue
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                ListValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.protobuf.ListValue";
-                };
-    
-                return ListValue;
             })();
     
             return protobuf;

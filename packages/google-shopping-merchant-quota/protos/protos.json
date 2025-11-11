@@ -21,6 +21,163 @@
                         "(google.api.resource_definition).pattern": "accounts/{account}"
                       },
                       "nested": {
+                        "AccountLimitsService": {
+                          "options": {
+                            "(google.api.default_host)": "merchantapi.googleapis.com",
+                            "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/content"
+                          },
+                          "methods": {
+                            "GetAccountLimit": {
+                              "requestType": "GetAccountLimitRequest",
+                              "responseType": "AccountLimit",
+                              "options": {
+                                "(google.api.http).get": "/accounts/v1/{name=accounts/*/limits/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/accounts/v1/{name=accounts/*/limits/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "ListAccountLimits": {
+                              "requestType": "ListAccountLimitsRequest",
+                              "responseType": "ListAccountLimitsResponse",
+                              "options": {
+                                "(google.api.http).get": "/accounts/v1/{parent=accounts/*}/limits",
+                                "(google.api.method_signature)": "parent"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/accounts/v1/{parent=accounts/*}/limits"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        "ProductLimit": {
+                          "fields": {
+                            "scope": {
+                              "type": "Scope",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "limit": {
+                              "type": "int64",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "Scope": {
+                              "values": {
+                                "SCOPE_UNSPECIFIED": 0,
+                                "ADS_NON_EEA": 1,
+                                "ADS_EEA": 2
+                              }
+                            }
+                          }
+                        },
+                        "AccountLimit": {
+                          "options": {
+                            "(google.api.resource).type": "merchantapi.googleapis.com/AccountLimit",
+                            "(google.api.resource).pattern": "accounts/{account}/limits/{limit}",
+                            "(google.api.resource).plural": "accountLimits",
+                            "(google.api.resource).singular": "accountLimit"
+                          },
+                          "oneofs": {
+                            "type": {
+                              "oneof": [
+                                "products"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "products": {
+                              "type": "ProductLimit",
+                              "id": 100
+                            },
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "IDENTIFIER"
+                              }
+                            }
+                          }
+                        },
+                        "GetAccountLimitRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "merchantapi.googleapis.com/AccountLimit"
+                              }
+                            }
+                          }
+                        },
+                        "ListAccountLimitsRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "merchantapi.googleapis.com/Account"
+                              }
+                            },
+                            "pageSize": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "pageToken": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "filter": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "ListAccountLimitsResponse": {
+                          "fields": {
+                            "accountLimits": {
+                              "rule": "repeated",
+                              "type": "AccountLimit",
+                              "id": 1
+                            },
+                            "nextPageToken": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
                         "QuotaService": {
                           "options": {
                             "(google.api.default_host)": "merchantapi.googleapis.com",

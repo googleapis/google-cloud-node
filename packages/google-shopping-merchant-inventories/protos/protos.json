@@ -308,6 +308,13 @@
                             "pageToken": {
                               "type": "string",
                               "id": 3
+                            },
+                            "productIdBase64UrlEncoded": {
+                              "type": "bool",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -340,6 +347,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED"
                               }
+                            },
+                            "productIdBase64UrlEncoded": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -351,6 +365,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED",
                                 "(google.api.resource_reference).type": "merchantapi.googleapis.com/LocalInventory"
+                              }
+                            },
+                            "productIdBase64UrlEncoded": {
+                              "type": "bool",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           }
@@ -468,6 +489,13 @@
                             "pageToken": {
                               "type": "string",
                               "id": 3
+                            },
+                            "productIdBase64UrlEncoded": {
+                              "type": "bool",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -500,6 +528,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED"
                               }
+                            },
+                            "productIdBase64UrlEncoded": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -512,6 +547,13 @@
                                 "(google.api.field_behavior)": "REQUIRED",
                                 "(google.api.resource_reference).type": "merchantapi.googleapis.com/RegionalInventory"
                               }
+                            },
+                            "productIdBase64UrlEncoded": {
+                              "type": "bool",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         }
@@ -519,10 +561,13 @@
                     },
                     "v1beta": {
                       "options": {
+                        "csharp_namespace": "Google.Shopping.Merchant.Inventories.V1Beta",
                         "go_package": "cloud.google.com/go/shopping/merchant/inventories/apiv1beta/inventoriespb;inventoriespb",
                         "java_multiple_files": true,
                         "java_outer_classname": "RegionalInventoryProto",
                         "java_package": "com.google.shopping.merchant.inventories.v1beta",
+                        "php_namespace": "Google\\Shopping\\Merchant\\Inventories\\V1beta",
+                        "ruby_package": "Google::Shopping::Merchant::Inventories::V1beta",
                         "(google.api.resource_definition).type": "merchantapi.googleapis.com/Product",
                         "(google.api.resource_definition).pattern": "accounts/{account}/products/{product}"
                       },
@@ -643,15 +688,24 @@
                             },
                             "price": {
                               "type": "google.shopping.type.Price",
-                              "id": 4
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             },
                             "salePrice": {
                               "type": "google.shopping.type.Price",
-                              "id": 5
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             },
                             "salePriceEffectiveDate": {
                               "type": "google.type.Interval",
-                              "id": 6
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             },
                             "availability": {
                               "type": "string",
@@ -691,7 +745,10 @@
                             "customAttributes": {
                               "rule": "repeated",
                               "type": "google.shopping.type.CustomAttribute",
-                              "id": 12
+                              "id": 12,
+                              "options": {
+                                "deprecated": true
+                              }
                             }
                           }
                         },
@@ -712,6 +769,13 @@
                             "pageToken": {
                               "type": "string",
                               "id": 3
+                            },
+                            "productIdBase64UrlEncoded": {
+                              "type": "bool",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -744,6 +808,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED"
                               }
+                            },
+                            "productIdBase64UrlEncoded": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -755,6 +826,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED",
                                 "(google.api.resource_reference).type": "merchantapi.googleapis.com/LocalInventory"
+                              }
+                            },
+                            "productIdBase64UrlEncoded": {
+                              "type": "bool",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           }
@@ -855,15 +933,24 @@
                             },
                             "price": {
                               "type": "google.shopping.type.Price",
-                              "id": 4
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             },
                             "salePrice": {
                               "type": "google.shopping.type.Price",
-                              "id": 5
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             },
                             "salePriceEffectiveDate": {
                               "type": "google.type.Interval",
-                              "id": 6
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             },
                             "availability": {
                               "type": "string",
@@ -875,7 +962,10 @@
                             "customAttributes": {
                               "rule": "repeated",
                               "type": "google.shopping.type.CustomAttribute",
-                              "id": 8
+                              "id": 8,
+                              "options": {
+                                "deprecated": true
+                              }
                             }
                           }
                         },
@@ -896,6 +986,13 @@
                             "pageToken": {
                               "type": "string",
                               "id": 3
+                            },
+                            "productIdBase64UrlEncoded": {
+                              "type": "bool",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -928,6 +1025,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED"
                               }
+                            },
+                            "productIdBase64UrlEncoded": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -939,6 +1043,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED",
                                 "(google.api.resource_reference).type": "merchantapi.googleapis.com/RegionalInventory"
+                              }
+                            },
+                            "productIdBase64UrlEncoded": {
+                              "type": "bool",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           }

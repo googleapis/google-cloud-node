@@ -109,6 +109,10 @@ function main(parent, sourceLanguageCode, targetLanguageCodes, inputConfigs, out
    *  Optional. If true, enable auto rotation correction in DVS.
    */
   // const enableRotationCorrection = true
+  /**
+   *  Optional. If true, only native pdf pages will be translated.
+   */
+  // const pdfNativeOnly = true
 
   // Imports the Translation library
   const {TranslationServiceClient} = require('@google-cloud/translate').v3beta1;
