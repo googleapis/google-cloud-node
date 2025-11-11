@@ -16479,6 +16479,7 @@
                              * @property {google.shopping.merchant.products.v1beta.IProductInput|null} [productInput] UpdateProductInputRequest productInput
                              * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateProductInputRequest updateMask
                              * @property {string|null} [dataSource] UpdateProductInputRequest dataSource
+                             * @property {boolean|null} [productIdBase64UrlEncoded] UpdateProductInputRequest productIdBase64UrlEncoded
                              */
     
                             /**
@@ -16521,6 +16522,14 @@
                             UpdateProductInputRequest.prototype.dataSource = "";
     
                             /**
+                             * UpdateProductInputRequest productIdBase64UrlEncoded.
+                             * @member {boolean} productIdBase64UrlEncoded
+                             * @memberof google.shopping.merchant.products.v1beta.UpdateProductInputRequest
+                             * @instance
+                             */
+                            UpdateProductInputRequest.prototype.productIdBase64UrlEncoded = false;
+    
+                            /**
                              * Creates a new UpdateProductInputRequest instance using the specified properties.
                              * @function create
                              * @memberof google.shopping.merchant.products.v1beta.UpdateProductInputRequest
@@ -16550,6 +16559,8 @@
                                     $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                                 if (message.dataSource != null && Object.hasOwnProperty.call(message, "dataSource"))
                                     writer.uint32(/* id 3, wireType 2 =*/26).string(message.dataSource);
+                                if (message.productIdBase64UrlEncoded != null && Object.hasOwnProperty.call(message, "productIdBase64UrlEncoded"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).bool(message.productIdBase64UrlEncoded);
                                 return writer;
                             };
     
@@ -16596,6 +16607,10 @@
                                         }
                                     case 3: {
                                             message.dataSource = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.productIdBase64UrlEncoded = reader.bool();
                                             break;
                                         }
                                     default:
@@ -16646,6 +16661,9 @@
                                 if (message.dataSource != null && message.hasOwnProperty("dataSource"))
                                     if (!$util.isString(message.dataSource))
                                         return "dataSource: string expected";
+                                if (message.productIdBase64UrlEncoded != null && message.hasOwnProperty("productIdBase64UrlEncoded"))
+                                    if (typeof message.productIdBase64UrlEncoded !== "boolean")
+                                        return "productIdBase64UrlEncoded: boolean expected";
                                 return null;
                             };
     
@@ -16673,6 +16691,8 @@
                                 }
                                 if (object.dataSource != null)
                                     message.dataSource = String(object.dataSource);
+                                if (object.productIdBase64UrlEncoded != null)
+                                    message.productIdBase64UrlEncoded = Boolean(object.productIdBase64UrlEncoded);
                                 return message;
                             };
     
@@ -16693,6 +16713,7 @@
                                     object.productInput = null;
                                     object.updateMask = null;
                                     object.dataSource = "";
+                                    object.productIdBase64UrlEncoded = false;
                                 }
                                 if (message.productInput != null && message.hasOwnProperty("productInput"))
                                     object.productInput = $root.google.shopping.merchant.products.v1beta.ProductInput.toObject(message.productInput, options);
@@ -16700,6 +16721,8 @@
                                     object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
                                 if (message.dataSource != null && message.hasOwnProperty("dataSource"))
                                     object.dataSource = message.dataSource;
+                                if (message.productIdBase64UrlEncoded != null && message.hasOwnProperty("productIdBase64UrlEncoded"))
+                                    object.productIdBase64UrlEncoded = message.productIdBase64UrlEncoded;
                                 return object;
                             };
     
@@ -16740,6 +16763,7 @@
                              * @interface IDeleteProductInputRequest
                              * @property {string|null} [name] DeleteProductInputRequest name
                              * @property {string|null} [dataSource] DeleteProductInputRequest dataSource
+                             * @property {boolean|null} [productIdBase64UrlEncoded] DeleteProductInputRequest productIdBase64UrlEncoded
                              */
     
                             /**
@@ -16774,6 +16798,14 @@
                             DeleteProductInputRequest.prototype.dataSource = "";
     
                             /**
+                             * DeleteProductInputRequest productIdBase64UrlEncoded.
+                             * @member {boolean} productIdBase64UrlEncoded
+                             * @memberof google.shopping.merchant.products.v1beta.DeleteProductInputRequest
+                             * @instance
+                             */
+                            DeleteProductInputRequest.prototype.productIdBase64UrlEncoded = false;
+    
+                            /**
                              * Creates a new DeleteProductInputRequest instance using the specified properties.
                              * @function create
                              * @memberof google.shopping.merchant.products.v1beta.DeleteProductInputRequest
@@ -16801,6 +16833,8 @@
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                                 if (message.dataSource != null && Object.hasOwnProperty.call(message, "dataSource"))
                                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.dataSource);
+                                if (message.productIdBase64UrlEncoded != null && Object.hasOwnProperty.call(message, "productIdBase64UrlEncoded"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.productIdBase64UrlEncoded);
                                 return writer;
                             };
     
@@ -16845,6 +16879,10 @@
                                             message.dataSource = reader.string();
                                             break;
                                         }
+                                    case 3: {
+                                            message.productIdBase64UrlEncoded = reader.bool();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -16886,6 +16924,9 @@
                                 if (message.dataSource != null && message.hasOwnProperty("dataSource"))
                                     if (!$util.isString(message.dataSource))
                                         return "dataSource: string expected";
+                                if (message.productIdBase64UrlEncoded != null && message.hasOwnProperty("productIdBase64UrlEncoded"))
+                                    if (typeof message.productIdBase64UrlEncoded !== "boolean")
+                                        return "productIdBase64UrlEncoded: boolean expected";
                                 return null;
                             };
     
@@ -16905,6 +16946,8 @@
                                     message.name = String(object.name);
                                 if (object.dataSource != null)
                                     message.dataSource = String(object.dataSource);
+                                if (object.productIdBase64UrlEncoded != null)
+                                    message.productIdBase64UrlEncoded = Boolean(object.productIdBase64UrlEncoded);
                                 return message;
                             };
     
@@ -16924,11 +16967,14 @@
                                 if (options.defaults) {
                                     object.name = "";
                                     object.dataSource = "";
+                                    object.productIdBase64UrlEncoded = false;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
                                 if (message.dataSource != null && message.hasOwnProperty("dataSource"))
                                     object.dataSource = message.dataSource;
+                                if (message.productIdBase64UrlEncoded != null && message.hasOwnProperty("productIdBase64UrlEncoded"))
+                                    object.productIdBase64UrlEncoded = message.productIdBase64UrlEncoded;
                                 return object;
                             };
     
@@ -23020,6 +23066,8 @@
                              * @property {number|Long|null} [maxHandlingTime] Shipping maxHandlingTime
                              * @property {number|Long|null} [minTransitTime] Shipping minTransitTime
                              * @property {number|Long|null} [maxTransitTime] Shipping maxTransitTime
+                             * @property {string|null} [handlingCutoffTime] Shipping handlingCutoffTime
+                             * @property {string|null} [handlingCutoffTimezone] Shipping handlingCutoffTimezone
                              */
     
                             /**
@@ -23125,6 +23173,22 @@
                              */
                             Shipping.prototype.maxTransitTime = null;
     
+                            /**
+                             * Shipping handlingCutoffTime.
+                             * @member {string|null|undefined} handlingCutoffTime
+                             * @memberof google.shopping.merchant.products.v1beta.Shipping
+                             * @instance
+                             */
+                            Shipping.prototype.handlingCutoffTime = null;
+    
+                            /**
+                             * Shipping handlingCutoffTimezone.
+                             * @member {string|null|undefined} handlingCutoffTimezone
+                             * @memberof google.shopping.merchant.products.v1beta.Shipping
+                             * @instance
+                             */
+                            Shipping.prototype.handlingCutoffTimezone = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
@@ -23149,6 +23213,18 @@
                             // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Shipping.prototype, "_maxTransitTime", {
                                 get: $util.oneOfGetter($oneOfFields = ["maxTransitTime"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(Shipping.prototype, "_handlingCutoffTime", {
+                                get: $util.oneOfGetter($oneOfFields = ["handlingCutoffTime"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(Shipping.prototype, "_handlingCutoffTimezone", {
+                                get: $util.oneOfGetter($oneOfFields = ["handlingCutoffTimezone"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -23198,6 +23274,10 @@
                                     writer.uint32(/* id 10, wireType 0 =*/80).int64(message.minTransitTime);
                                 if (message.maxTransitTime != null && Object.hasOwnProperty.call(message, "maxTransitTime"))
                                     writer.uint32(/* id 11, wireType 0 =*/88).int64(message.maxTransitTime);
+                                if (message.handlingCutoffTime != null && Object.hasOwnProperty.call(message, "handlingCutoffTime"))
+                                    writer.uint32(/* id 12, wireType 2 =*/98).string(message.handlingCutoffTime);
+                                if (message.handlingCutoffTimezone != null && Object.hasOwnProperty.call(message, "handlingCutoffTimezone"))
+                                    writer.uint32(/* id 13, wireType 2 =*/106).string(message.handlingCutoffTimezone);
                                 return writer;
                             };
     
@@ -23276,6 +23356,14 @@
                                         }
                                     case 11: {
                                             message.maxTransitTime = reader.int64();
+                                            break;
+                                        }
+                                    case 12: {
+                                            message.handlingCutoffTime = reader.string();
+                                            break;
+                                        }
+                                    case 13: {
+                                            message.handlingCutoffTimezone = reader.string();
                                             break;
                                         }
                                     default:
@@ -23357,6 +23445,16 @@
                                     if (!$util.isInteger(message.maxTransitTime) && !(message.maxTransitTime && $util.isInteger(message.maxTransitTime.low) && $util.isInteger(message.maxTransitTime.high)))
                                         return "maxTransitTime: integer|Long expected";
                                 }
+                                if (message.handlingCutoffTime != null && message.hasOwnProperty("handlingCutoffTime")) {
+                                    properties._handlingCutoffTime = 1;
+                                    if (!$util.isString(message.handlingCutoffTime))
+                                        return "handlingCutoffTime: string expected";
+                                }
+                                if (message.handlingCutoffTimezone != null && message.hasOwnProperty("handlingCutoffTimezone")) {
+                                    properties._handlingCutoffTimezone = 1;
+                                    if (!$util.isString(message.handlingCutoffTimezone))
+                                        return "handlingCutoffTimezone: string expected";
+                                }
                                 return null;
                             };
     
@@ -23432,6 +23530,10 @@
                                         message.maxTransitTime = object.maxTransitTime;
                                     else if (typeof object.maxTransitTime === "object")
                                         message.maxTransitTime = new $util.LongBits(object.maxTransitTime.low >>> 0, object.maxTransitTime.high >>> 0).toNumber();
+                                if (object.handlingCutoffTime != null)
+                                    message.handlingCutoffTime = String(object.handlingCutoffTime);
+                                if (object.handlingCutoffTimezone != null)
+                                    message.handlingCutoffTimezone = String(object.handlingCutoffTimezone);
                                 return message;
                             };
     
@@ -23509,6 +23611,16 @@
                                         object.maxTransitTime = options.longs === String ? $util.Long.prototype.toString.call(message.maxTransitTime) : options.longs === Number ? new $util.LongBits(message.maxTransitTime.low >>> 0, message.maxTransitTime.high >>> 0).toNumber() : message.maxTransitTime;
                                     if (options.oneofs)
                                         object._maxTransitTime = "maxTransitTime";
+                                }
+                                if (message.handlingCutoffTime != null && message.hasOwnProperty("handlingCutoffTime")) {
+                                    object.handlingCutoffTime = message.handlingCutoffTime;
+                                    if (options.oneofs)
+                                        object._handlingCutoffTime = "handlingCutoffTime";
+                                }
+                                if (message.handlingCutoffTimezone != null && message.hasOwnProperty("handlingCutoffTimezone")) {
+                                    object.handlingCutoffTimezone = message.handlingCutoffTimezone;
+                                    if (options.oneofs)
+                                        object._handlingCutoffTimezone = "handlingCutoffTimezone";
                                 }
                                 return object;
                             };
@@ -28353,6 +28465,7 @@
                              * @memberof google.shopping.merchant.products.v1beta
                              * @interface IGetProductRequest
                              * @property {string|null} [name] GetProductRequest name
+                             * @property {boolean|null} [productIdBase64UrlEncoded] GetProductRequest productIdBase64UrlEncoded
                              */
     
                             /**
@@ -28377,6 +28490,14 @@
                              * @instance
                              */
                             GetProductRequest.prototype.name = "";
+    
+                            /**
+                             * GetProductRequest productIdBase64UrlEncoded.
+                             * @member {boolean} productIdBase64UrlEncoded
+                             * @memberof google.shopping.merchant.products.v1beta.GetProductRequest
+                             * @instance
+                             */
+                            GetProductRequest.prototype.productIdBase64UrlEncoded = false;
     
                             /**
                              * Creates a new GetProductRequest instance using the specified properties.
@@ -28404,6 +28525,8 @@
                                     writer = $Writer.create();
                                 if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.productIdBase64UrlEncoded != null && Object.hasOwnProperty.call(message, "productIdBase64UrlEncoded"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).bool(message.productIdBase64UrlEncoded);
                                 return writer;
                             };
     
@@ -28444,6 +28567,10 @@
                                             message.name = reader.string();
                                             break;
                                         }
+                                    case 2: {
+                                            message.productIdBase64UrlEncoded = reader.bool();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -28482,6 +28609,9 @@
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     if (!$util.isString(message.name))
                                         return "name: string expected";
+                                if (message.productIdBase64UrlEncoded != null && message.hasOwnProperty("productIdBase64UrlEncoded"))
+                                    if (typeof message.productIdBase64UrlEncoded !== "boolean")
+                                        return "productIdBase64UrlEncoded: boolean expected";
                                 return null;
                             };
     
@@ -28499,6 +28629,8 @@
                                 var message = new $root.google.shopping.merchant.products.v1beta.GetProductRequest();
                                 if (object.name != null)
                                     message.name = String(object.name);
+                                if (object.productIdBase64UrlEncoded != null)
+                                    message.productIdBase64UrlEncoded = Boolean(object.productIdBase64UrlEncoded);
                                 return message;
                             };
     
@@ -28515,10 +28647,14 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
-                                if (options.defaults)
+                                if (options.defaults) {
                                     object.name = "";
+                                    object.productIdBase64UrlEncoded = false;
+                                }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
+                                if (message.productIdBase64UrlEncoded != null && message.hasOwnProperty("productIdBase64UrlEncoded"))
+                                    object.productIdBase64UrlEncoded = message.productIdBase64UrlEncoded;
                                 return object;
                             };
     

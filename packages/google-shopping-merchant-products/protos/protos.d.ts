@@ -5088,6 +5088,9 @@ export namespace google {
 
                         /** UpdateProductInputRequest dataSource */
                         dataSource?: (string|null);
+
+                        /** UpdateProductInputRequest productIdBase64UrlEncoded */
+                        productIdBase64UrlEncoded?: (boolean|null);
                     }
 
                     /** Represents an UpdateProductInputRequest. */
@@ -5107,6 +5110,9 @@ export namespace google {
 
                         /** UpdateProductInputRequest dataSource. */
                         public dataSource: string;
+
+                        /** UpdateProductInputRequest productIdBase64UrlEncoded. */
+                        public productIdBase64UrlEncoded: boolean;
 
                         /**
                          * Creates a new UpdateProductInputRequest instance using the specified properties.
@@ -5194,6 +5200,9 @@ export namespace google {
 
                         /** DeleteProductInputRequest dataSource */
                         dataSource?: (string|null);
+
+                        /** DeleteProductInputRequest productIdBase64UrlEncoded */
+                        productIdBase64UrlEncoded?: (boolean|null);
                     }
 
                     /** Represents a DeleteProductInputRequest. */
@@ -5210,6 +5219,9 @@ export namespace google {
 
                         /** DeleteProductInputRequest dataSource. */
                         public dataSource: string;
+
+                        /** DeleteProductInputRequest productIdBase64UrlEncoded. */
+                        public productIdBase64UrlEncoded: boolean;
 
                         /**
                          * Creates a new DeleteProductInputRequest instance using the specified properties.
@@ -6997,6 +7009,12 @@ export namespace google {
 
                         /** Shipping maxTransitTime */
                         maxTransitTime?: (number|Long|string|null);
+
+                        /** Shipping handlingCutoffTime */
+                        handlingCutoffTime?: (string|null);
+
+                        /** Shipping handlingCutoffTimezone */
+                        handlingCutoffTimezone?: (string|null);
                     }
 
                     /** Represents a Shipping. */
@@ -7040,6 +7058,12 @@ export namespace google {
 
                         /** Shipping maxTransitTime. */
                         public maxTransitTime?: (number|Long|string|null);
+
+                        /** Shipping handlingCutoffTime. */
+                        public handlingCutoffTime?: (string|null);
+
+                        /** Shipping handlingCutoffTimezone. */
+                        public handlingCutoffTimezone?: (string|null);
 
                         /**
                          * Creates a new Shipping instance using the specified properties.
@@ -8851,6 +8875,9 @@ export namespace google {
 
                         /** GetProductRequest name */
                         name?: (string|null);
+
+                        /** GetProductRequest productIdBase64UrlEncoded */
+                        productIdBase64UrlEncoded?: (boolean|null);
                     }
 
                     /** Represents a GetProductRequest. */
@@ -8864,6 +8891,9 @@ export namespace google {
 
                         /** GetProductRequest name. */
                         public name: string;
+
+                        /** GetProductRequest productIdBase64UrlEncoded. */
+                        public productIdBase64UrlEncoded: boolean;
 
                         /**
                          * Creates a new GetProductRequest instance using the specified properties.
