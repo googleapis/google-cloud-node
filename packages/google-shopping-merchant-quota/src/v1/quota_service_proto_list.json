@@ -1,3 +1,4 @@
 [
+  "../../protos/google/shopping/merchant/quota/v1/accountlimits.proto",
   "../../protos/google/shopping/merchant/quota/v1/quota.proto"
 ]
