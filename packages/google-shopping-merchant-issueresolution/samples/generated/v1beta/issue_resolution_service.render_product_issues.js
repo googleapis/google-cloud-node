@@ -49,6 +49,18 @@ function main(name) {
    *  Optional. The payload for configuring how the content should be rendered.
    */
   // const payload = {}
+  /**
+   *  Optional. If true, the `{product}` in the `name` field of the request will
+   *  be interpreted as unpadded base64url-encoded and decoded during request
+   *  processing to match the decoded value. Default value is `false`. Use this
+   *  if your `{product}` contains special characters, such as forward slash `/`
+   *  or other characters that are unpadded base64url-encoded (as per RFC 7515:
+   *  https://datatracker.ietf.org/doc/html/rfc7515#section-2).
+   *  Note that future versions of the API will only accept unpadded
+   *  base64url-encoded product ids, so we strongly recommend proactively setting
+   *  this to `true` and encoding the product ids.
+   */
+  // const productIdBase64UrlEncoded = true
 
   // Imports the Issueresolution library
   const {IssueResolutionServiceClient} = require('@google-shopping/issueresolution').v1beta;
