@@ -1654,6 +1654,8 @@
                          * @property {string|null} [mediaType] DockerImage mediaType
                          * @property {google.protobuf.ITimestamp|null} [buildTime] DockerImage buildTime
                          * @property {google.protobuf.ITimestamp|null} [updateTime] DockerImage updateTime
+                         * @property {string|null} [artifactType] DockerImage artifactType
+                         * @property {Array.<google.devtools.artifactregistry.v1.IImageManifest>|null} [imageManifests] DockerImage imageManifests
                          */
     
                         /**
@@ -1666,6 +1668,7 @@
                          */
                         function DockerImage(properties) {
                             this.tags = [];
+                            this.imageManifests = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -1737,6 +1740,22 @@
                         DockerImage.prototype.updateTime = null;
     
                         /**
+                         * DockerImage artifactType.
+                         * @member {string} artifactType
+                         * @memberof google.devtools.artifactregistry.v1.DockerImage
+                         * @instance
+                         */
+                        DockerImage.prototype.artifactType = "";
+    
+                        /**
+                         * DockerImage imageManifests.
+                         * @member {Array.<google.devtools.artifactregistry.v1.IImageManifest>} imageManifests
+                         * @memberof google.devtools.artifactregistry.v1.DockerImage
+                         * @instance
+                         */
+                        DockerImage.prototype.imageManifests = $util.emptyArray;
+    
+                        /**
                          * Creates a new DockerImage instance using the specified properties.
                          * @function create
                          * @memberof google.devtools.artifactregistry.v1.DockerImage
@@ -1777,6 +1796,11 @@
                                 $root.google.protobuf.Timestamp.encode(message.buildTime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
                                 $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.artifactType != null && Object.hasOwnProperty.call(message, "artifactType"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.artifactType);
+                            if (message.imageManifests != null && message.imageManifests.length)
+                                for (var i = 0; i < message.imageManifests.length; ++i)
+                                    $root.google.devtools.artifactregistry.v1.ImageManifest.encode(message.imageManifests[i], writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                             return writer;
                         };
     
@@ -1845,6 +1869,16 @@
                                     }
                                 case 8: {
                                         message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.artifactType = reader.string();
+                                        break;
+                                    }
+                                case 11: {
+                                        if (!(message.imageManifests && message.imageManifests.length))
+                                            message.imageManifests = [];
+                                        message.imageManifests.push($root.google.devtools.artifactregistry.v1.ImageManifest.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -1916,6 +1950,18 @@
                                 if (error)
                                     return "updateTime." + error;
                             }
+                            if (message.artifactType != null && message.hasOwnProperty("artifactType"))
+                                if (!$util.isString(message.artifactType))
+                                    return "artifactType: string expected";
+                            if (message.imageManifests != null && message.hasOwnProperty("imageManifests")) {
+                                if (!Array.isArray(message.imageManifests))
+                                    return "imageManifests: array expected";
+                                for (var i = 0; i < message.imageManifests.length; ++i) {
+                                    var error = $root.google.devtools.artifactregistry.v1.ImageManifest.verify(message.imageManifests[i]);
+                                    if (error)
+                                        return "imageManifests." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -1968,6 +2014,18 @@
                                     throw TypeError(".google.devtools.artifactregistry.v1.DockerImage.updateTime: object expected");
                                 message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
                             }
+                            if (object.artifactType != null)
+                                message.artifactType = String(object.artifactType);
+                            if (object.imageManifests) {
+                                if (!Array.isArray(object.imageManifests))
+                                    throw TypeError(".google.devtools.artifactregistry.v1.DockerImage.imageManifests: array expected");
+                                message.imageManifests = [];
+                                for (var i = 0; i < object.imageManifests.length; ++i) {
+                                    if (typeof object.imageManifests[i] !== "object")
+                                        throw TypeError(".google.devtools.artifactregistry.v1.DockerImage.imageManifests: object expected");
+                                    message.imageManifests[i] = $root.google.devtools.artifactregistry.v1.ImageManifest.fromObject(object.imageManifests[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -1984,8 +2042,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.tags = [];
+                                object.imageManifests = [];
+                            }
                             if (options.defaults) {
                                 object.name = "";
                                 object.uri = "";
@@ -1998,6 +2058,7 @@
                                 object.mediaType = "";
                                 object.buildTime = null;
                                 object.updateTime = null;
+                                object.artifactType = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -2021,6 +2082,13 @@
                                 object.buildTime = $root.google.protobuf.Timestamp.toObject(message.buildTime, options);
                             if (message.updateTime != null && message.hasOwnProperty("updateTime"))
                                 object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.artifactType != null && message.hasOwnProperty("artifactType"))
+                                object.artifactType = message.artifactType;
+                            if (message.imageManifests && message.imageManifests.length) {
+                                object.imageManifests = [];
+                                for (var j = 0; j < message.imageManifests.length; ++j)
+                                    object.imageManifests[j] = $root.google.devtools.artifactregistry.v1.ImageManifest.toObject(message.imageManifests[j], options);
+                            }
                             return object;
                         };
     
@@ -2051,6 +2119,367 @@
                         };
     
                         return DockerImage;
+                    })();
+    
+                    v1.ImageManifest = (function() {
+    
+                        /**
+                         * Properties of an ImageManifest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface IImageManifest
+                         * @property {string|null} [architecture] ImageManifest architecture
+                         * @property {string|null} [os] ImageManifest os
+                         * @property {string|null} [digest] ImageManifest digest
+                         * @property {string|null} [mediaType] ImageManifest mediaType
+                         * @property {string|null} [osVersion] ImageManifest osVersion
+                         * @property {Array.<string>|null} [osFeatures] ImageManifest osFeatures
+                         * @property {string|null} [variant] ImageManifest variant
+                         */
+    
+                        /**
+                         * Constructs a new ImageManifest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents an ImageManifest.
+                         * @implements IImageManifest
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.IImageManifest=} [properties] Properties to set
+                         */
+                        function ImageManifest(properties) {
+                            this.osFeatures = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ImageManifest architecture.
+                         * @member {string} architecture
+                         * @memberof google.devtools.artifactregistry.v1.ImageManifest
+                         * @instance
+                         */
+                        ImageManifest.prototype.architecture = "";
+    
+                        /**
+                         * ImageManifest os.
+                         * @member {string} os
+                         * @memberof google.devtools.artifactregistry.v1.ImageManifest
+                         * @instance
+                         */
+                        ImageManifest.prototype.os = "";
+    
+                        /**
+                         * ImageManifest digest.
+                         * @member {string} digest
+                         * @memberof google.devtools.artifactregistry.v1.ImageManifest
+                         * @instance
+                         */
+                        ImageManifest.prototype.digest = "";
+    
+                        /**
+                         * ImageManifest mediaType.
+                         * @member {string} mediaType
+                         * @memberof google.devtools.artifactregistry.v1.ImageManifest
+                         * @instance
+                         */
+                        ImageManifest.prototype.mediaType = "";
+    
+                        /**
+                         * ImageManifest osVersion.
+                         * @member {string} osVersion
+                         * @memberof google.devtools.artifactregistry.v1.ImageManifest
+                         * @instance
+                         */
+                        ImageManifest.prototype.osVersion = "";
+    
+                        /**
+                         * ImageManifest osFeatures.
+                         * @member {Array.<string>} osFeatures
+                         * @memberof google.devtools.artifactregistry.v1.ImageManifest
+                         * @instance
+                         */
+                        ImageManifest.prototype.osFeatures = $util.emptyArray;
+    
+                        /**
+                         * ImageManifest variant.
+                         * @member {string} variant
+                         * @memberof google.devtools.artifactregistry.v1.ImageManifest
+                         * @instance
+                         */
+                        ImageManifest.prototype.variant = "";
+    
+                        /**
+                         * Creates a new ImageManifest instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.ImageManifest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IImageManifest=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.ImageManifest} ImageManifest instance
+                         */
+                        ImageManifest.create = function create(properties) {
+                            return new ImageManifest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ImageManifest message. Does not implicitly {@link google.devtools.artifactregistry.v1.ImageManifest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.ImageManifest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IImageManifest} message ImageManifest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImageManifest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.architecture != null && Object.hasOwnProperty.call(message, "architecture"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.architecture);
+                            if (message.os != null && Object.hasOwnProperty.call(message, "os"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.os);
+                            if (message.digest != null && Object.hasOwnProperty.call(message, "digest"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.digest);
+                            if (message.mediaType != null && Object.hasOwnProperty.call(message, "mediaType"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.mediaType);
+                            if (message.osVersion != null && Object.hasOwnProperty.call(message, "osVersion"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.osVersion);
+                            if (message.osFeatures != null && message.osFeatures.length)
+                                for (var i = 0; i < message.osFeatures.length; ++i)
+                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.osFeatures[i]);
+                            if (message.variant != null && Object.hasOwnProperty.call(message, "variant"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.variant);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ImageManifest message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.ImageManifest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.ImageManifest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IImageManifest} message ImageManifest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImageManifest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ImageManifest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.ImageManifest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.ImageManifest} ImageManifest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImageManifest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.ImageManifest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.architecture = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.os = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.digest = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.mediaType = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.osVersion = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        if (!(message.osFeatures && message.osFeatures.length))
+                                            message.osFeatures = [];
+                                        message.osFeatures.push(reader.string());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.variant = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ImageManifest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.ImageManifest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.ImageManifest} ImageManifest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImageManifest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ImageManifest message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.ImageManifest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ImageManifest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.architecture != null && message.hasOwnProperty("architecture"))
+                                if (!$util.isString(message.architecture))
+                                    return "architecture: string expected";
+                            if (message.os != null && message.hasOwnProperty("os"))
+                                if (!$util.isString(message.os))
+                                    return "os: string expected";
+                            if (message.digest != null && message.hasOwnProperty("digest"))
+                                if (!$util.isString(message.digest))
+                                    return "digest: string expected";
+                            if (message.mediaType != null && message.hasOwnProperty("mediaType"))
+                                if (!$util.isString(message.mediaType))
+                                    return "mediaType: string expected";
+                            if (message.osVersion != null && message.hasOwnProperty("osVersion"))
+                                if (!$util.isString(message.osVersion))
+                                    return "osVersion: string expected";
+                            if (message.osFeatures != null && message.hasOwnProperty("osFeatures")) {
+                                if (!Array.isArray(message.osFeatures))
+                                    return "osFeatures: array expected";
+                                for (var i = 0; i < message.osFeatures.length; ++i)
+                                    if (!$util.isString(message.osFeatures[i]))
+                                        return "osFeatures: string[] expected";
+                            }
+                            if (message.variant != null && message.hasOwnProperty("variant"))
+                                if (!$util.isString(message.variant))
+                                    return "variant: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ImageManifest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.ImageManifest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.ImageManifest} ImageManifest
+                         */
+                        ImageManifest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.ImageManifest)
+                                return object;
+                            var message = new $root.google.devtools.artifactregistry.v1.ImageManifest();
+                            if (object.architecture != null)
+                                message.architecture = String(object.architecture);
+                            if (object.os != null)
+                                message.os = String(object.os);
+                            if (object.digest != null)
+                                message.digest = String(object.digest);
+                            if (object.mediaType != null)
+                                message.mediaType = String(object.mediaType);
+                            if (object.osVersion != null)
+                                message.osVersion = String(object.osVersion);
+                            if (object.osFeatures) {
+                                if (!Array.isArray(object.osFeatures))
+                                    throw TypeError(".google.devtools.artifactregistry.v1.ImageManifest.osFeatures: array expected");
+                                message.osFeatures = [];
+                                for (var i = 0; i < object.osFeatures.length; ++i)
+                                    message.osFeatures[i] = String(object.osFeatures[i]);
+                            }
+                            if (object.variant != null)
+                                message.variant = String(object.variant);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ImageManifest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.ImageManifest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.ImageManifest} message ImageManifest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ImageManifest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.osFeatures = [];
+                            if (options.defaults) {
+                                object.architecture = "";
+                                object.os = "";
+                                object.digest = "";
+                                object.mediaType = "";
+                                object.osVersion = "";
+                                object.variant = "";
+                            }
+                            if (message.architecture != null && message.hasOwnProperty("architecture"))
+                                object.architecture = message.architecture;
+                            if (message.os != null && message.hasOwnProperty("os"))
+                                object.os = message.os;
+                            if (message.digest != null && message.hasOwnProperty("digest"))
+                                object.digest = message.digest;
+                            if (message.mediaType != null && message.hasOwnProperty("mediaType"))
+                                object.mediaType = message.mediaType;
+                            if (message.osVersion != null && message.hasOwnProperty("osVersion"))
+                                object.osVersion = message.osVersion;
+                            if (message.osFeatures && message.osFeatures.length) {
+                                object.osFeatures = [];
+                                for (var j = 0; j < message.osFeatures.length; ++j)
+                                    object.osFeatures[j] = message.osFeatures[j];
+                            }
+                            if (message.variant != null && message.hasOwnProperty("variant"))
+                                object.variant = message.variant;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ImageManifest to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.ImageManifest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ImageManifest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ImageManifest
+                         * @function getTypeUrl
+                         * @memberof google.devtools.artifactregistry.v1.ImageManifest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ImageManifest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devtools.artifactregistry.v1.ImageManifest";
+                        };
+    
+                        return ImageManifest;
                     })();
     
                     v1.ListDockerImagesRequest = (function() {
@@ -18615,6 +19044,7 @@
                                 case 9:
                                 case 10:
                                 case 11:
+                                case 12:
                                     break;
                                 }
                             if (message.description != null && message.hasOwnProperty("description"))
@@ -18767,6 +19197,10 @@
                             case "GENERIC":
                             case 11:
                                 message.format = 11;
+                                break;
+                            case "RUBY":
+                            case 12:
+                                message.format = 12;
                                 break;
                             }
                             if (object.description != null)
@@ -19834,6 +20268,7 @@
                          * @property {number} KFP=9 KFP value
                          * @property {number} GO=10 GO value
                          * @property {number} GENERIC=11 GENERIC value
+                         * @property {number} RUBY=12 RUBY value
                          */
                         Repository.Format = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -19847,6 +20282,7 @@
                             values[valuesById[9] = "KFP"] = 9;
                             values[valuesById[10] = "GO"] = 10;
                             values[valuesById[11] = "GENERIC"] = 11;
+                            values[valuesById[12] = "RUBY"] = 12;
                             return values;
                         })();
     
