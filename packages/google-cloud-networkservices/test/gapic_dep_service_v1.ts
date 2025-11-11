@@ -491,6 +491,114 @@ describe('v1.DepServiceClient', () => {
         });
     });
 
+    describe('getLbEdgeExtension', () => {
+        it('invokes getLbEdgeExtension without error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.GetLbEdgeExtensionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.GetLbEdgeExtensionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.LbEdgeExtension()
+            );
+            client.innerApiCalls.getLbEdgeExtension = stubSimpleCall(expectedResponse);
+            const [response] = await client.getLbEdgeExtension(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getLbEdgeExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getLbEdgeExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getLbEdgeExtension without error using callback', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.GetLbEdgeExtensionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.GetLbEdgeExtensionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.LbEdgeExtension()
+            );
+            client.innerApiCalls.getLbEdgeExtension = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getLbEdgeExtension(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.networkservices.v1.ILbEdgeExtension|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getLbEdgeExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getLbEdgeExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getLbEdgeExtension with error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.GetLbEdgeExtensionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.GetLbEdgeExtensionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getLbEdgeExtension = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getLbEdgeExtension(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getLbEdgeExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getLbEdgeExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getLbEdgeExtension with closed client', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.GetLbEdgeExtensionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.GetLbEdgeExtensionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getLbEdgeExtension(request), expectedError);
+        });
+    });
+
     describe('getAuthzExtension', () => {
         it('invokes getAuthzExtension without error', async () => {
             const client = new depserviceModule.v1.DepServiceClient({
@@ -1531,6 +1639,472 @@ describe('v1.DepServiceClient', () => {
         });
     });
 
+    describe('createLbEdgeExtension', () => {
+        it('invokes createLbEdgeExtension without error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.CreateLbEdgeExtensionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.CreateLbEdgeExtensionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createLbEdgeExtension = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createLbEdgeExtension(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createLbEdgeExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createLbEdgeExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createLbEdgeExtension without error using callback', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.CreateLbEdgeExtensionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.CreateLbEdgeExtensionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createLbEdgeExtension = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createLbEdgeExtension(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.networkservices.v1.ILbEdgeExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.networkservices.v1.ILbEdgeExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createLbEdgeExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createLbEdgeExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createLbEdgeExtension with call error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.CreateLbEdgeExtensionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.CreateLbEdgeExtensionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createLbEdgeExtension = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createLbEdgeExtension(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createLbEdgeExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createLbEdgeExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createLbEdgeExtension with LRO error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.CreateLbEdgeExtensionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.CreateLbEdgeExtensionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createLbEdgeExtension = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createLbEdgeExtension(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createLbEdgeExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createLbEdgeExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateLbEdgeExtensionProgress without error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateLbEdgeExtensionProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateLbEdgeExtensionProgress with error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateLbEdgeExtensionProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateLbEdgeExtension', () => {
+        it('invokes updateLbEdgeExtension without error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.UpdateLbEdgeExtensionRequest()
+            );
+            request.lbEdgeExtension ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.UpdateLbEdgeExtensionRequest', ['lbEdgeExtension', 'name']);
+            request.lbEdgeExtension.name = defaultValue1;
+            const expectedHeaderRequestParams = `lb_edge_extension.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateLbEdgeExtension = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateLbEdgeExtension(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateLbEdgeExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateLbEdgeExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateLbEdgeExtension without error using callback', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.UpdateLbEdgeExtensionRequest()
+            );
+            request.lbEdgeExtension ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.UpdateLbEdgeExtensionRequest', ['lbEdgeExtension', 'name']);
+            request.lbEdgeExtension.name = defaultValue1;
+            const expectedHeaderRequestParams = `lb_edge_extension.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateLbEdgeExtension = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateLbEdgeExtension(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.networkservices.v1.ILbEdgeExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.networkservices.v1.ILbEdgeExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateLbEdgeExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateLbEdgeExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateLbEdgeExtension with call error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.UpdateLbEdgeExtensionRequest()
+            );
+            request.lbEdgeExtension ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.UpdateLbEdgeExtensionRequest', ['lbEdgeExtension', 'name']);
+            request.lbEdgeExtension.name = defaultValue1;
+            const expectedHeaderRequestParams = `lb_edge_extension.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateLbEdgeExtension = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateLbEdgeExtension(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateLbEdgeExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateLbEdgeExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateLbEdgeExtension with LRO error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.UpdateLbEdgeExtensionRequest()
+            );
+            request.lbEdgeExtension ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.UpdateLbEdgeExtensionRequest', ['lbEdgeExtension', 'name']);
+            request.lbEdgeExtension.name = defaultValue1;
+            const expectedHeaderRequestParams = `lb_edge_extension.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateLbEdgeExtension = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateLbEdgeExtension(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateLbEdgeExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateLbEdgeExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateLbEdgeExtensionProgress without error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateLbEdgeExtensionProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateLbEdgeExtensionProgress with error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateLbEdgeExtensionProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteLbEdgeExtension', () => {
+        it('invokes deleteLbEdgeExtension without error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.DeleteLbEdgeExtensionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.DeleteLbEdgeExtensionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteLbEdgeExtension = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteLbEdgeExtension(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteLbEdgeExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteLbEdgeExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteLbEdgeExtension without error using callback', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.DeleteLbEdgeExtensionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.DeleteLbEdgeExtensionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteLbEdgeExtension = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteLbEdgeExtension(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteLbEdgeExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteLbEdgeExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteLbEdgeExtension with call error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.DeleteLbEdgeExtensionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.DeleteLbEdgeExtensionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteLbEdgeExtension = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteLbEdgeExtension(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteLbEdgeExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteLbEdgeExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteLbEdgeExtension with LRO error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.DeleteLbEdgeExtensionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.DeleteLbEdgeExtensionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteLbEdgeExtension = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteLbEdgeExtension(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteLbEdgeExtension as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteLbEdgeExtension as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteLbEdgeExtensionProgress without error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteLbEdgeExtensionProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteLbEdgeExtensionProgress with error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteLbEdgeExtensionProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
     describe('createAuthzExtension', () => {
         it('invokes createAuthzExtension without error', async () => {
             const client = new depserviceModule.v1.DepServiceClient({
@@ -2480,6 +3054,251 @@ describe('v1.DepServiceClient', () => {
                     .getCall(0).args[1], request);
             assert(
                 (client.descriptors.page.listLbRouteExtensions.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('listLbEdgeExtensions', () => {
+        it('invokes listLbEdgeExtensions without error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.ListLbEdgeExtensionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.ListLbEdgeExtensionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.LbEdgeExtension()),
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.LbEdgeExtension()),
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.LbEdgeExtension()),
+            ];
+            client.innerApiCalls.listLbEdgeExtensions = stubSimpleCall(expectedResponse);
+            const [response] = await client.listLbEdgeExtensions(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listLbEdgeExtensions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listLbEdgeExtensions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listLbEdgeExtensions without error using callback', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.ListLbEdgeExtensionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.ListLbEdgeExtensionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.LbEdgeExtension()),
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.LbEdgeExtension()),
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.LbEdgeExtension()),
+            ];
+            client.innerApiCalls.listLbEdgeExtensions = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listLbEdgeExtensions(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.networkservices.v1.ILbEdgeExtension[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listLbEdgeExtensions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listLbEdgeExtensions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listLbEdgeExtensions with error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.ListLbEdgeExtensionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.ListLbEdgeExtensionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listLbEdgeExtensions = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listLbEdgeExtensions(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listLbEdgeExtensions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listLbEdgeExtensions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listLbEdgeExtensionsStream without error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.ListLbEdgeExtensionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.ListLbEdgeExtensionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.LbEdgeExtension()),
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.LbEdgeExtension()),
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.LbEdgeExtension()),
+            ];
+            client.descriptors.page.listLbEdgeExtensions.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listLbEdgeExtensionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.networkservices.v1.LbEdgeExtension[] = [];
+                stream.on('data', (response: protos.google.cloud.networkservices.v1.LbEdgeExtension) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listLbEdgeExtensions.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listLbEdgeExtensions, request));
+            assert(
+                (client.descriptors.page.listLbEdgeExtensions.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listLbEdgeExtensionsStream with error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.ListLbEdgeExtensionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.ListLbEdgeExtensionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listLbEdgeExtensions.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listLbEdgeExtensionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.networkservices.v1.LbEdgeExtension[] = [];
+                stream.on('data', (response: protos.google.cloud.networkservices.v1.LbEdgeExtension) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listLbEdgeExtensions.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listLbEdgeExtensions, request));
+            assert(
+                (client.descriptors.page.listLbEdgeExtensions.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listLbEdgeExtensions without error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.ListLbEdgeExtensionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.ListLbEdgeExtensionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.LbEdgeExtension()),
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.LbEdgeExtension()),
+              generateSampleMessage(new protos.google.cloud.networkservices.v1.LbEdgeExtension()),
+            ];
+            client.descriptors.page.listLbEdgeExtensions.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.networkservices.v1.ILbEdgeExtension[] = [];
+            const iterable = client.listLbEdgeExtensionsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listLbEdgeExtensions.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listLbEdgeExtensions.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listLbEdgeExtensions with error', async () => {
+            const client = new depserviceModule.v1.DepServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkservices.v1.ListLbEdgeExtensionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkservices.v1.ListLbEdgeExtensionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listLbEdgeExtensions.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listLbEdgeExtensionsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.networkservices.v1.ILbEdgeExtension[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listLbEdgeExtensions.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listLbEdgeExtensions.asyncIterate as SinonStub)
                     .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
                         expectedHeaderRequestParams
                     )
@@ -3711,6 +4530,52 @@ describe('v1.DepServiceClient', () => {
                 const result = client.matchHttpRouteFromHttpRouteName(fakePath);
                 assert.strictEqual(result, "httpRouteValue");
                 assert((client.pathTemplates.httpRoutePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('lbEdgeExtension', async () => {
+            const fakePath = "/rendered/path/lbEdgeExtension";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                lb_edge_extension: "lbEdgeExtensionValue",
+            };
+            const client = new depserviceModule.v1.DepServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.lbEdgeExtensionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.lbEdgeExtensionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('lbEdgeExtensionPath', () => {
+                const result = client.lbEdgeExtensionPath("projectValue", "locationValue", "lbEdgeExtensionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.lbEdgeExtensionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromLbEdgeExtensionName', () => {
+                const result = client.matchProjectFromLbEdgeExtensionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.lbEdgeExtensionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromLbEdgeExtensionName', () => {
+                const result = client.matchLocationFromLbEdgeExtensionName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.lbEdgeExtensionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLbEdgeExtensionFromLbEdgeExtensionName', () => {
+                const result = client.matchLbEdgeExtensionFromLbEdgeExtensionName(fakePath);
+                assert.strictEqual(result, "lbEdgeExtensionValue");
+                assert((client.pathTemplates.lbEdgeExtensionPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

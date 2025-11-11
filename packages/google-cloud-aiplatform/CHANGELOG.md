@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.13.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.12.0...aiplatform-v5.13.0) (2025-11-11)
+
+
+### Features
+
+* Add order_by to list_events ([#6864](https://github.com/googleapis/google-cloud-node/issues/6864)) ([8d71bbf](https://github.com/googleapis/google-cloud-node/commit/8d71bbf30bc7ae1a54a3e37b8740d46dfbe418dd))
+
 ## [5.12.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.11.0...aiplatform-v5.12.0) (2025-10-25)
 
 

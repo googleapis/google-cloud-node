@@ -422,7 +422,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 81,
+          "end": 88,
           "type": "FULL"
         }
       ],
@@ -442,6 +442,10 @@
           {
             "name": "data_agent_context",
             "type": ".google.cloud.geminidataanalytics.v1beta.DataAgentContext"
+          },
+          {
+            "name": "client_managed_resource_context",
+            "type": ".google.cloud.geminidataanalytics.v1beta.ClientManagedResourceContext"
           },
           {
             "name": "project",
@@ -516,6 +520,46 @@
         "method": {
           "shortName": "CreateConversation",
           "fullName": "google.cloud.geminidataanalytics.v1beta.DataChatService.CreateConversation",
+          "service": {
+            "shortName": "DataChatService",
+            "fullName": "google.cloud.geminidataanalytics.v1beta.DataChatService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "geminidataanalytics_v1beta_generated_DataChatService_DeleteConversation_async",
+      "title": "DataAgentService deleteConversation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a conversation.",
+      "canonical": true,
+      "file": "data_chat_service.delete_conversation.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteConversation",
+        "fullName": "google.cloud.geminidataanalytics.v1beta.DataChatService.DeleteConversation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "DataChatServiceClient",
+          "fullName": "google.cloud.geminidataanalytics.v1beta.DataChatServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteConversation",
+          "fullName": "google.cloud.geminidataanalytics.v1beta.DataChatService.DeleteConversation",
           "service": {
             "shortName": "DataChatService",
             "fullName": "google.cloud.geminidataanalytics.v1beta.DataChatService"

@@ -180,6 +180,9 @@ export class QuotaServiceClient {
       accountPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}'
       ),
+      accountLimitPathTemplate: new this._gaxModule.PathTemplate(
+        'accounts/{account}/limits/{limit}'
+      ),
       quotaGroupPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/groups/{group}'
       ),
@@ -566,6 +569,42 @@ export class QuotaServiceClient {
    */
   matchAccountFromAccountName(accountName: string) {
     return this.pathTemplates.accountPathTemplate.match(accountName).account;
+  }
+
+  /**
+   * Return a fully-qualified accountLimit resource name string.
+   *
+   * @param {string} account
+   * @param {string} limit
+   * @returns {string} Resource name string.
+   */
+  accountLimitPath(account:string,limit:string) {
+    return this.pathTemplates.accountLimitPathTemplate.render({
+      account: account,
+      limit: limit,
+    });
+  }
+
+  /**
+   * Parse the account from AccountLimit resource.
+   *
+   * @param {string} accountLimitName
+   *   A fully-qualified path representing AccountLimit resource.
+   * @returns {string} A string representing the account.
+   */
+  matchAccountFromAccountLimitName(accountLimitName: string) {
+    return this.pathTemplates.accountLimitPathTemplate.match(accountLimitName).account;
+  }
+
+  /**
+   * Parse the limit from AccountLimit resource.
+   *
+   * @param {string} accountLimitName
+   *   A fully-qualified path representing AccountLimit resource.
+   * @returns {string} A string representing the limit.
+   */
+  matchLimitFromAccountLimitName(accountLimitName: string) {
+    return this.pathTemplates.accountLimitPathTemplate.match(accountLimitName).limit;
   }
 
   /**

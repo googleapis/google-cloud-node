@@ -352,11 +352,26 @@ export class ProductsServiceClient {
  *   The request object that will be sent.
  * @param {string} request.name
  *   Required. The name of the product to retrieve.
- *   Format: `accounts/{account}/products/{product}`
- *   where the last section `product` consists of 4 parts:
- *   `channel~content_language~feed_label~offer_id`
- *   example for product name is
- *   `accounts/123/products/online~en~US~sku123`
+ *   Format:
+ *   `accounts/{account}/products/{product}` where the last
+ *   section `product` consists of:
+ *   `content_language~feed_label~offer_id`
+ *   example for product name is `accounts/123/products/en~US~sku123`. A legacy
+ *   local product name would be `accounts/123/products/local~en~US~sku123`.
+ *   Note: For calls to the v1beta version, the `product` section consists
+ *   of: `channel~content_language~feed_label~offer_id`, for example:
+ *   `accounts/123/products/online~en~US~sku123`.
+ * @param {boolean} [request.productIdBase64UrlEncoded]
+ *   Optional. If true, the `{product}` in the `name` field of the request will
+ *   be interpreted as unpadded base64url-encoded and decoded during request
+ *   processing to match the decoded value. Default value is `false`. Use this
+ *   if your `{product}` contains special characters, such as forward slash `/`
+ *   or other characters that are unpadded base64url-encoded (as per RFC 7515:
+ *   https://datatracker.ietf.org/doc/html/rfc7515#section-2).
+ *
+ *   Note that future versions of the API will only accept unpadded
+ *   base64url-encoded product ids, so we strongly recommend proactively setting
+ *   this to `true` and encoding the product ids.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -462,7 +477,7 @@ export class ProductsServiceClient {
  *   The maximum number of products to return. The service may return fewer than
  *   this value.
  *   The maximum value is 1000; values above 1000 will be coerced to 1000.
- *   If unspecified, the maximum number of products will be returned.
+ *   If unspecified, the default page size of 25 products will be returned.
  * @param {string} request.pageToken
  *   A page token, received from a previous `ListProducts` call.
  *   Provide this to retrieve the subsequent page.
@@ -568,7 +583,7 @@ export class ProductsServiceClient {
  *   The maximum number of products to return. The service may return fewer than
  *   this value.
  *   The maximum value is 1000; values above 1000 will be coerced to 1000.
- *   If unspecified, the maximum number of products will be returned.
+ *   If unspecified, the default page size of 25 products will be returned.
  * @param {string} request.pageToken
  *   A page token, received from a previous `ListProducts` call.
  *   Provide this to retrieve the subsequent page.
@@ -623,7 +638,7 @@ export class ProductsServiceClient {
  *   The maximum number of products to return. The service may return fewer than
  *   this value.
  *   The maximum value is 1000; values above 1000 will be coerced to 1000.
- *   If unspecified, the maximum number of products will be returned.
+ *   If unspecified, the default page size of 25 products will be returned.
  * @param {string} request.pageToken
  *   A page token, received from a previous `ListProducts` call.
  *   Provide this to retrieve the subsequent page.

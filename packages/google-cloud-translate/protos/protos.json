@@ -3659,6 +3659,22 @@
                               }
                             }
                           ]
+                        },
+                        "RefineText": {
+                          "requestType": "RefineTextRequest",
+                          "responseType": "RefineTextResponse",
+                          "options": {
+                            "(google.api.http).post": "/v3beta1/{parent=projects/*/locations/*}:refineText",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v3beta1/{parent=projects/*/locations/*}:refineText",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -3674,6 +3690,13 @@
                         "ignoreCase": {
                           "type": "bool",
                           "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "contextualTranslationEnabled": {
+                          "type": "bool",
+                          "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -4012,7 +4035,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
                           }
                         },
                         "sourceLanguageCode": {
@@ -4597,6 +4621,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "pdfNativeOnly": {
+                          "type": "bool",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -4727,6 +4758,67 @@
                             "CANCELLING": 4,
                             "CANCELLED": 5
                           }
+                        }
+                      }
+                    },
+                    "RefinementEntry": {
+                      "fields": {
+                        "sourceText": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "originalTranslation": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "RefineTextRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "refinementEntries": {
+                          "rule": "repeated",
+                          "type": "RefinementEntry",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "sourceLanguageCode": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "targetLanguageCode": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "RefineTextResponse": {
+                      "fields": {
+                        "refinedTranslations": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
                         }
                       }
                     }

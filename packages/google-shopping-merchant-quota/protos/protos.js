@@ -75,6 +75,1373 @@
                          */
                         var v1 = {};
     
+                        v1.AccountLimitsService = (function() {
+    
+                            /**
+                             * Constructs a new AccountLimitsService service.
+                             * @memberof google.shopping.merchant.quota.v1
+                             * @classdesc Represents an AccountLimitsService
+                             * @extends $protobuf.rpc.Service
+                             * @constructor
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             */
+                            function AccountLimitsService(rpcImpl, requestDelimited, responseDelimited) {
+                                $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                            }
+    
+                            (AccountLimitsService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = AccountLimitsService;
+    
+                            /**
+                             * Creates new AccountLimitsService service using the specified rpc implementation.
+                             * @function create
+                             * @memberof google.shopping.merchant.quota.v1.AccountLimitsService
+                             * @static
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             * @returns {AccountLimitsService} RPC service. Useful where requests and/or responses are streamed.
+                             */
+                            AccountLimitsService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                                return new this(rpcImpl, requestDelimited, responseDelimited);
+                            };
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.quota.v1.AccountLimitsService|getAccountLimit}.
+                             * @memberof google.shopping.merchant.quota.v1.AccountLimitsService
+                             * @typedef GetAccountLimitCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.quota.v1.AccountLimit} [response] AccountLimit
+                             */
+    
+                            /**
+                             * Calls GetAccountLimit.
+                             * @function getAccountLimit
+                             * @memberof google.shopping.merchant.quota.v1.AccountLimitsService
+                             * @instance
+                             * @param {google.shopping.merchant.quota.v1.IGetAccountLimitRequest} request GetAccountLimitRequest message or plain object
+                             * @param {google.shopping.merchant.quota.v1.AccountLimitsService.GetAccountLimitCallback} callback Node-style callback called with the error, if any, and AccountLimit
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(AccountLimitsService.prototype.getAccountLimit = function getAccountLimit(request, callback) {
+                                return this.rpcCall(getAccountLimit, $root.google.shopping.merchant.quota.v1.GetAccountLimitRequest, $root.google.shopping.merchant.quota.v1.AccountLimit, request, callback);
+                            }, "name", { value: "GetAccountLimit" });
+    
+                            /**
+                             * Calls GetAccountLimit.
+                             * @function getAccountLimit
+                             * @memberof google.shopping.merchant.quota.v1.AccountLimitsService
+                             * @instance
+                             * @param {google.shopping.merchant.quota.v1.IGetAccountLimitRequest} request GetAccountLimitRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.quota.v1.AccountLimit>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.quota.v1.AccountLimitsService|listAccountLimits}.
+                             * @memberof google.shopping.merchant.quota.v1.AccountLimitsService
+                             * @typedef ListAccountLimitsCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.quota.v1.ListAccountLimitsResponse} [response] ListAccountLimitsResponse
+                             */
+    
+                            /**
+                             * Calls ListAccountLimits.
+                             * @function listAccountLimits
+                             * @memberof google.shopping.merchant.quota.v1.AccountLimitsService
+                             * @instance
+                             * @param {google.shopping.merchant.quota.v1.IListAccountLimitsRequest} request ListAccountLimitsRequest message or plain object
+                             * @param {google.shopping.merchant.quota.v1.AccountLimitsService.ListAccountLimitsCallback} callback Node-style callback called with the error, if any, and ListAccountLimitsResponse
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(AccountLimitsService.prototype.listAccountLimits = function listAccountLimits(request, callback) {
+                                return this.rpcCall(listAccountLimits, $root.google.shopping.merchant.quota.v1.ListAccountLimitsRequest, $root.google.shopping.merchant.quota.v1.ListAccountLimitsResponse, request, callback);
+                            }, "name", { value: "ListAccountLimits" });
+    
+                            /**
+                             * Calls ListAccountLimits.
+                             * @function listAccountLimits
+                             * @memberof google.shopping.merchant.quota.v1.AccountLimitsService
+                             * @instance
+                             * @param {google.shopping.merchant.quota.v1.IListAccountLimitsRequest} request ListAccountLimitsRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.quota.v1.ListAccountLimitsResponse>} Promise
+                             * @variation 2
+                             */
+    
+                            return AccountLimitsService;
+                        })();
+    
+                        v1.ProductLimit = (function() {
+    
+                            /**
+                             * Properties of a ProductLimit.
+                             * @memberof google.shopping.merchant.quota.v1
+                             * @interface IProductLimit
+                             * @property {google.shopping.merchant.quota.v1.ProductLimit.Scope|null} [scope] ProductLimit scope
+                             * @property {number|Long|null} [limit] ProductLimit limit
+                             */
+    
+                            /**
+                             * Constructs a new ProductLimit.
+                             * @memberof google.shopping.merchant.quota.v1
+                             * @classdesc Represents a ProductLimit.
+                             * @implements IProductLimit
+                             * @constructor
+                             * @param {google.shopping.merchant.quota.v1.IProductLimit=} [properties] Properties to set
+                             */
+                            function ProductLimit(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ProductLimit scope.
+                             * @member {google.shopping.merchant.quota.v1.ProductLimit.Scope} scope
+                             * @memberof google.shopping.merchant.quota.v1.ProductLimit
+                             * @instance
+                             */
+                            ProductLimit.prototype.scope = 0;
+    
+                            /**
+                             * ProductLimit limit.
+                             * @member {number|Long} limit
+                             * @memberof google.shopping.merchant.quota.v1.ProductLimit
+                             * @instance
+                             */
+                            ProductLimit.prototype.limit = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * Creates a new ProductLimit instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.quota.v1.ProductLimit
+                             * @static
+                             * @param {google.shopping.merchant.quota.v1.IProductLimit=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.quota.v1.ProductLimit} ProductLimit instance
+                             */
+                            ProductLimit.create = function create(properties) {
+                                return new ProductLimit(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ProductLimit message. Does not implicitly {@link google.shopping.merchant.quota.v1.ProductLimit.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.quota.v1.ProductLimit
+                             * @static
+                             * @param {google.shopping.merchant.quota.v1.IProductLimit} message ProductLimit message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ProductLimit.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.scope != null && Object.hasOwnProperty.call(message, "scope"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.scope);
+                                if (message.limit != null && Object.hasOwnProperty.call(message, "limit"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int64(message.limit);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ProductLimit message, length delimited. Does not implicitly {@link google.shopping.merchant.quota.v1.ProductLimit.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.quota.v1.ProductLimit
+                             * @static
+                             * @param {google.shopping.merchant.quota.v1.IProductLimit} message ProductLimit message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ProductLimit.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ProductLimit message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.quota.v1.ProductLimit
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.quota.v1.ProductLimit} ProductLimit
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ProductLimit.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.quota.v1.ProductLimit();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.scope = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.limit = reader.int64();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ProductLimit message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.quota.v1.ProductLimit
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.quota.v1.ProductLimit} ProductLimit
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ProductLimit.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ProductLimit message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.quota.v1.ProductLimit
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ProductLimit.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.scope != null && message.hasOwnProperty("scope"))
+                                    switch (message.scope) {
+                                    default:
+                                        return "scope: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                if (message.limit != null && message.hasOwnProperty("limit"))
+                                    if (!$util.isInteger(message.limit) && !(message.limit && $util.isInteger(message.limit.low) && $util.isInteger(message.limit.high)))
+                                        return "limit: integer|Long expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ProductLimit message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.quota.v1.ProductLimit
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.quota.v1.ProductLimit} ProductLimit
+                             */
+                            ProductLimit.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.quota.v1.ProductLimit)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.quota.v1.ProductLimit();
+                                switch (object.scope) {
+                                default:
+                                    if (typeof object.scope === "number") {
+                                        message.scope = object.scope;
+                                        break;
+                                    }
+                                    break;
+                                case "SCOPE_UNSPECIFIED":
+                                case 0:
+                                    message.scope = 0;
+                                    break;
+                                case "ADS_NON_EEA":
+                                case 1:
+                                    message.scope = 1;
+                                    break;
+                                case "ADS_EEA":
+                                case 2:
+                                    message.scope = 2;
+                                    break;
+                                }
+                                if (object.limit != null)
+                                    if ($util.Long)
+                                        (message.limit = $util.Long.fromValue(object.limit)).unsigned = false;
+                                    else if (typeof object.limit === "string")
+                                        message.limit = parseInt(object.limit, 10);
+                                    else if (typeof object.limit === "number")
+                                        message.limit = object.limit;
+                                    else if (typeof object.limit === "object")
+                                        message.limit = new $util.LongBits(object.limit.low >>> 0, object.limit.high >>> 0).toNumber();
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ProductLimit message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.quota.v1.ProductLimit
+                             * @static
+                             * @param {google.shopping.merchant.quota.v1.ProductLimit} message ProductLimit
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ProductLimit.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.scope = options.enums === String ? "SCOPE_UNSPECIFIED" : 0;
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.limit = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.limit = options.longs === String ? "0" : 0;
+                                }
+                                if (message.scope != null && message.hasOwnProperty("scope"))
+                                    object.scope = options.enums === String ? $root.google.shopping.merchant.quota.v1.ProductLimit.Scope[message.scope] === undefined ? message.scope : $root.google.shopping.merchant.quota.v1.ProductLimit.Scope[message.scope] : message.scope;
+                                if (message.limit != null && message.hasOwnProperty("limit"))
+                                    if (typeof message.limit === "number")
+                                        object.limit = options.longs === String ? String(message.limit) : message.limit;
+                                    else
+                                        object.limit = options.longs === String ? $util.Long.prototype.toString.call(message.limit) : options.longs === Number ? new $util.LongBits(message.limit.low >>> 0, message.limit.high >>> 0).toNumber() : message.limit;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ProductLimit to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.quota.v1.ProductLimit
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ProductLimit.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ProductLimit
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.quota.v1.ProductLimit
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ProductLimit.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.quota.v1.ProductLimit";
+                            };
+    
+                            /**
+                             * Scope enum.
+                             * @name google.shopping.merchant.quota.v1.ProductLimit.Scope
+                             * @enum {number}
+                             * @property {number} SCOPE_UNSPECIFIED=0 SCOPE_UNSPECIFIED value
+                             * @property {number} ADS_NON_EEA=1 ADS_NON_EEA value
+                             * @property {number} ADS_EEA=2 ADS_EEA value
+                             */
+                            ProductLimit.Scope = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "SCOPE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "ADS_NON_EEA"] = 1;
+                                values[valuesById[2] = "ADS_EEA"] = 2;
+                                return values;
+                            })();
+    
+                            return ProductLimit;
+                        })();
+    
+                        v1.AccountLimit = (function() {
+    
+                            /**
+                             * Properties of an AccountLimit.
+                             * @memberof google.shopping.merchant.quota.v1
+                             * @interface IAccountLimit
+                             * @property {google.shopping.merchant.quota.v1.IProductLimit|null} [products] AccountLimit products
+                             * @property {string|null} [name] AccountLimit name
+                             */
+    
+                            /**
+                             * Constructs a new AccountLimit.
+                             * @memberof google.shopping.merchant.quota.v1
+                             * @classdesc Represents an AccountLimit.
+                             * @implements IAccountLimit
+                             * @constructor
+                             * @param {google.shopping.merchant.quota.v1.IAccountLimit=} [properties] Properties to set
+                             */
+                            function AccountLimit(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * AccountLimit products.
+                             * @member {google.shopping.merchant.quota.v1.IProductLimit|null|undefined} products
+                             * @memberof google.shopping.merchant.quota.v1.AccountLimit
+                             * @instance
+                             */
+                            AccountLimit.prototype.products = null;
+    
+                            /**
+                             * AccountLimit name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.quota.v1.AccountLimit
+                             * @instance
+                             */
+                            AccountLimit.prototype.name = "";
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * AccountLimit type.
+                             * @member {"products"|undefined} type
+                             * @memberof google.shopping.merchant.quota.v1.AccountLimit
+                             * @instance
+                             */
+                            Object.defineProperty(AccountLimit.prototype, "type", {
+                                get: $util.oneOfGetter($oneOfFields = ["products"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new AccountLimit instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.quota.v1.AccountLimit
+                             * @static
+                             * @param {google.shopping.merchant.quota.v1.IAccountLimit=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.quota.v1.AccountLimit} AccountLimit instance
+                             */
+                            AccountLimit.create = function create(properties) {
+                                return new AccountLimit(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AccountLimit message. Does not implicitly {@link google.shopping.merchant.quota.v1.AccountLimit.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.quota.v1.AccountLimit
+                             * @static
+                             * @param {google.shopping.merchant.quota.v1.IAccountLimit} message AccountLimit message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AccountLimit.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.products != null && Object.hasOwnProperty.call(message, "products"))
+                                    $root.google.shopping.merchant.quota.v1.ProductLimit.encode(message.products, writer.uint32(/* id 100, wireType 2 =*/802).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AccountLimit message, length delimited. Does not implicitly {@link google.shopping.merchant.quota.v1.AccountLimit.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.quota.v1.AccountLimit
+                             * @static
+                             * @param {google.shopping.merchant.quota.v1.IAccountLimit} message AccountLimit message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AccountLimit.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AccountLimit message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.quota.v1.AccountLimit
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.quota.v1.AccountLimit} AccountLimit
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AccountLimit.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.quota.v1.AccountLimit();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 100: {
+                                            message.products = $root.google.shopping.merchant.quota.v1.ProductLimit.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AccountLimit message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.quota.v1.AccountLimit
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.quota.v1.AccountLimit} AccountLimit
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AccountLimit.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AccountLimit message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.quota.v1.AccountLimit
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AccountLimit.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.products != null && message.hasOwnProperty("products")) {
+                                    properties.type = 1;
+                                    {
+                                        var error = $root.google.shopping.merchant.quota.v1.ProductLimit.verify(message.products);
+                                        if (error)
+                                            return "products." + error;
+                                    }
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AccountLimit message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.quota.v1.AccountLimit
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.quota.v1.AccountLimit} AccountLimit
+                             */
+                            AccountLimit.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.quota.v1.AccountLimit)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.quota.v1.AccountLimit();
+                                if (object.products != null) {
+                                    if (typeof object.products !== "object")
+                                        throw TypeError(".google.shopping.merchant.quota.v1.AccountLimit.products: object expected");
+                                    message.products = $root.google.shopping.merchant.quota.v1.ProductLimit.fromObject(object.products);
+                                }
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an AccountLimit message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.quota.v1.AccountLimit
+                             * @static
+                             * @param {google.shopping.merchant.quota.v1.AccountLimit} message AccountLimit
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AccountLimit.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.products != null && message.hasOwnProperty("products")) {
+                                    object.products = $root.google.shopping.merchant.quota.v1.ProductLimit.toObject(message.products, options);
+                                    if (options.oneofs)
+                                        object.type = "products";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this AccountLimit to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.quota.v1.AccountLimit
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AccountLimit.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for AccountLimit
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.quota.v1.AccountLimit
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AccountLimit.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.quota.v1.AccountLimit";
+                            };
+    
+                            return AccountLimit;
+                        })();
+    
+                        v1.GetAccountLimitRequest = (function() {
+    
+                            /**
+                             * Properties of a GetAccountLimitRequest.
+                             * @memberof google.shopping.merchant.quota.v1
+                             * @interface IGetAccountLimitRequest
+                             * @property {string|null} [name] GetAccountLimitRequest name
+                             */
+    
+                            /**
+                             * Constructs a new GetAccountLimitRequest.
+                             * @memberof google.shopping.merchant.quota.v1
+                             * @classdesc Represents a GetAccountLimitRequest.
+                             * @implements IGetAccountLimitRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.quota.v1.IGetAccountLimitRequest=} [properties] Properties to set
+                             */
+                            function GetAccountLimitRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GetAccountLimitRequest name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.quota.v1.GetAccountLimitRequest
+                             * @instance
+                             */
+                            GetAccountLimitRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new GetAccountLimitRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.quota.v1.GetAccountLimitRequest
+                             * @static
+                             * @param {google.shopping.merchant.quota.v1.IGetAccountLimitRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.quota.v1.GetAccountLimitRequest} GetAccountLimitRequest instance
+                             */
+                            GetAccountLimitRequest.create = function create(properties) {
+                                return new GetAccountLimitRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GetAccountLimitRequest message. Does not implicitly {@link google.shopping.merchant.quota.v1.GetAccountLimitRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.quota.v1.GetAccountLimitRequest
+                             * @static
+                             * @param {google.shopping.merchant.quota.v1.IGetAccountLimitRequest} message GetAccountLimitRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetAccountLimitRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GetAccountLimitRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.quota.v1.GetAccountLimitRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.quota.v1.GetAccountLimitRequest
+                             * @static
+                             * @param {google.shopping.merchant.quota.v1.IGetAccountLimitRequest} message GetAccountLimitRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetAccountLimitRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GetAccountLimitRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.quota.v1.GetAccountLimitRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.quota.v1.GetAccountLimitRequest} GetAccountLimitRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetAccountLimitRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.quota.v1.GetAccountLimitRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GetAccountLimitRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.quota.v1.GetAccountLimitRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.quota.v1.GetAccountLimitRequest} GetAccountLimitRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetAccountLimitRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GetAccountLimitRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.quota.v1.GetAccountLimitRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GetAccountLimitRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GetAccountLimitRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.quota.v1.GetAccountLimitRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.quota.v1.GetAccountLimitRequest} GetAccountLimitRequest
+                             */
+                            GetAccountLimitRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.quota.v1.GetAccountLimitRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.quota.v1.GetAccountLimitRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GetAccountLimitRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.quota.v1.GetAccountLimitRequest
+                             * @static
+                             * @param {google.shopping.merchant.quota.v1.GetAccountLimitRequest} message GetAccountLimitRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GetAccountLimitRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GetAccountLimitRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.quota.v1.GetAccountLimitRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GetAccountLimitRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GetAccountLimitRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.quota.v1.GetAccountLimitRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GetAccountLimitRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.quota.v1.GetAccountLimitRequest";
+                            };
+    
+                            return GetAccountLimitRequest;
+                        })();
+    
+                        v1.ListAccountLimitsRequest = (function() {
+    
+                            /**
+                             * Properties of a ListAccountLimitsRequest.
+                             * @memberof google.shopping.merchant.quota.v1
+                             * @interface IListAccountLimitsRequest
+                             * @property {string|null} [parent] ListAccountLimitsRequest parent
+                             * @property {number|null} [pageSize] ListAccountLimitsRequest pageSize
+                             * @property {string|null} [pageToken] ListAccountLimitsRequest pageToken
+                             * @property {string|null} [filter] ListAccountLimitsRequest filter
+                             */
+    
+                            /**
+                             * Constructs a new ListAccountLimitsRequest.
+                             * @memberof google.shopping.merchant.quota.v1
+                             * @classdesc Represents a ListAccountLimitsRequest.
+                             * @implements IListAccountLimitsRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.quota.v1.IListAccountLimitsRequest=} [properties] Properties to set
+                             */
+                            function ListAccountLimitsRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ListAccountLimitsRequest parent.
+                             * @member {string} parent
+                             * @memberof google.shopping.merchant.quota.v1.ListAccountLimitsRequest
+                             * @instance
+                             */
+                            ListAccountLimitsRequest.prototype.parent = "";
+    
+                            /**
+                             * ListAccountLimitsRequest pageSize.
+                             * @member {number} pageSize
+                             * @memberof google.shopping.merchant.quota.v1.ListAccountLimitsRequest
+                             * @instance
+                             */
+                            ListAccountLimitsRequest.prototype.pageSize = 0;
+    
+                            /**
+                             * ListAccountLimitsRequest pageToken.
+                             * @member {string} pageToken
+                             * @memberof google.shopping.merchant.quota.v1.ListAccountLimitsRequest
+                             * @instance
+                             */
+                            ListAccountLimitsRequest.prototype.pageToken = "";
+    
+                            /**
+                             * ListAccountLimitsRequest filter.
+                             * @member {string} filter
+                             * @memberof google.shopping.merchant.quota.v1.ListAccountLimitsRequest
+                             * @instance
+                             */
+                            ListAccountLimitsRequest.prototype.filter = "";
+    
+                            /**
+                             * Creates a new ListAccountLimitsRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.quota.v1.ListAccountLimitsRequest
+                             * @static
+                             * @param {google.shopping.merchant.quota.v1.IListAccountLimitsRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.quota.v1.ListAccountLimitsRequest} ListAccountLimitsRequest instance
+                             */
+                            ListAccountLimitsRequest.create = function create(properties) {
+                                return new ListAccountLimitsRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ListAccountLimitsRequest message. Does not implicitly {@link google.shopping.merchant.quota.v1.ListAccountLimitsRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.quota.v1.ListAccountLimitsRequest
+                             * @static
+                             * @param {google.shopping.merchant.quota.v1.IListAccountLimitsRequest} message ListAccountLimitsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListAccountLimitsRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                                if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                                if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ListAccountLimitsRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.quota.v1.ListAccountLimitsRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.quota.v1.ListAccountLimitsRequest
+                             * @static
+                             * @param {google.shopping.merchant.quota.v1.IListAccountLimitsRequest} message ListAccountLimitsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListAccountLimitsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ListAccountLimitsRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.quota.v1.ListAccountLimitsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.quota.v1.ListAccountLimitsRequest} ListAccountLimitsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListAccountLimitsRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.quota.v1.ListAccountLimitsRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.pageSize = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.pageToken = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.filter = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ListAccountLimitsRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.quota.v1.ListAccountLimitsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.quota.v1.ListAccountLimitsRequest} ListAccountLimitsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListAccountLimitsRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ListAccountLimitsRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.quota.v1.ListAccountLimitsRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ListAccountLimitsRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    if (!$util.isInteger(message.pageSize))
+                                        return "pageSize: integer expected";
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    if (!$util.isString(message.pageToken))
+                                        return "pageToken: string expected";
+                                if (message.filter != null && message.hasOwnProperty("filter"))
+                                    if (!$util.isString(message.filter))
+                                        return "filter: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ListAccountLimitsRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.quota.v1.ListAccountLimitsRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.quota.v1.ListAccountLimitsRequest} ListAccountLimitsRequest
+                             */
+                            ListAccountLimitsRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.quota.v1.ListAccountLimitsRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.quota.v1.ListAccountLimitsRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.pageSize != null)
+                                    message.pageSize = object.pageSize | 0;
+                                if (object.pageToken != null)
+                                    message.pageToken = String(object.pageToken);
+                                if (object.filter != null)
+                                    message.filter = String(object.filter);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ListAccountLimitsRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.quota.v1.ListAccountLimitsRequest
+                             * @static
+                             * @param {google.shopping.merchant.quota.v1.ListAccountLimitsRequest} message ListAccountLimitsRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ListAccountLimitsRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.pageSize = 0;
+                                    object.pageToken = "";
+                                    object.filter = "";
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    object.pageSize = message.pageSize;
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    object.pageToken = message.pageToken;
+                                if (message.filter != null && message.hasOwnProperty("filter"))
+                                    object.filter = message.filter;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ListAccountLimitsRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.quota.v1.ListAccountLimitsRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ListAccountLimitsRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ListAccountLimitsRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.quota.v1.ListAccountLimitsRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ListAccountLimitsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.quota.v1.ListAccountLimitsRequest";
+                            };
+    
+                            return ListAccountLimitsRequest;
+                        })();
+    
+                        v1.ListAccountLimitsResponse = (function() {
+    
+                            /**
+                             * Properties of a ListAccountLimitsResponse.
+                             * @memberof google.shopping.merchant.quota.v1
+                             * @interface IListAccountLimitsResponse
+                             * @property {Array.<google.shopping.merchant.quota.v1.IAccountLimit>|null} [accountLimits] ListAccountLimitsResponse accountLimits
+                             * @property {string|null} [nextPageToken] ListAccountLimitsResponse nextPageToken
+                             */
+    
+                            /**
+                             * Constructs a new ListAccountLimitsResponse.
+                             * @memberof google.shopping.merchant.quota.v1
+                             * @classdesc Represents a ListAccountLimitsResponse.
+                             * @implements IListAccountLimitsResponse
+                             * @constructor
+                             * @param {google.shopping.merchant.quota.v1.IListAccountLimitsResponse=} [properties] Properties to set
+                             */
+                            function ListAccountLimitsResponse(properties) {
+                                this.accountLimits = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ListAccountLimitsResponse accountLimits.
+                             * @member {Array.<google.shopping.merchant.quota.v1.IAccountLimit>} accountLimits
+                             * @memberof google.shopping.merchant.quota.v1.ListAccountLimitsResponse
+                             * @instance
+                             */
+                            ListAccountLimitsResponse.prototype.accountLimits = $util.emptyArray;
+    
+                            /**
+                             * ListAccountLimitsResponse nextPageToken.
+                             * @member {string} nextPageToken
+                             * @memberof google.shopping.merchant.quota.v1.ListAccountLimitsResponse
+                             * @instance
+                             */
+                            ListAccountLimitsResponse.prototype.nextPageToken = "";
+    
+                            /**
+                             * Creates a new ListAccountLimitsResponse instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.quota.v1.ListAccountLimitsResponse
+                             * @static
+                             * @param {google.shopping.merchant.quota.v1.IListAccountLimitsResponse=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.quota.v1.ListAccountLimitsResponse} ListAccountLimitsResponse instance
+                             */
+                            ListAccountLimitsResponse.create = function create(properties) {
+                                return new ListAccountLimitsResponse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ListAccountLimitsResponse message. Does not implicitly {@link google.shopping.merchant.quota.v1.ListAccountLimitsResponse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.quota.v1.ListAccountLimitsResponse
+                             * @static
+                             * @param {google.shopping.merchant.quota.v1.IListAccountLimitsResponse} message ListAccountLimitsResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListAccountLimitsResponse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.accountLimits != null && message.accountLimits.length)
+                                    for (var i = 0; i < message.accountLimits.length; ++i)
+                                        $root.google.shopping.merchant.quota.v1.AccountLimit.encode(message.accountLimits[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ListAccountLimitsResponse message, length delimited. Does not implicitly {@link google.shopping.merchant.quota.v1.ListAccountLimitsResponse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.quota.v1.ListAccountLimitsResponse
+                             * @static
+                             * @param {google.shopping.merchant.quota.v1.IListAccountLimitsResponse} message ListAccountLimitsResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListAccountLimitsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ListAccountLimitsResponse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.quota.v1.ListAccountLimitsResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.quota.v1.ListAccountLimitsResponse} ListAccountLimitsResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListAccountLimitsResponse.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.quota.v1.ListAccountLimitsResponse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.accountLimits && message.accountLimits.length))
+                                                message.accountLimits = [];
+                                            message.accountLimits.push($root.google.shopping.merchant.quota.v1.AccountLimit.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.nextPageToken = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ListAccountLimitsResponse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.quota.v1.ListAccountLimitsResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.quota.v1.ListAccountLimitsResponse} ListAccountLimitsResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListAccountLimitsResponse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ListAccountLimitsResponse message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.quota.v1.ListAccountLimitsResponse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ListAccountLimitsResponse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.accountLimits != null && message.hasOwnProperty("accountLimits")) {
+                                    if (!Array.isArray(message.accountLimits))
+                                        return "accountLimits: array expected";
+                                    for (var i = 0; i < message.accountLimits.length; ++i) {
+                                        var error = $root.google.shopping.merchant.quota.v1.AccountLimit.verify(message.accountLimits[i]);
+                                        if (error)
+                                            return "accountLimits." + error;
+                                    }
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    if (!$util.isString(message.nextPageToken))
+                                        return "nextPageToken: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ListAccountLimitsResponse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.quota.v1.ListAccountLimitsResponse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.quota.v1.ListAccountLimitsResponse} ListAccountLimitsResponse
+                             */
+                            ListAccountLimitsResponse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.quota.v1.ListAccountLimitsResponse)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.quota.v1.ListAccountLimitsResponse();
+                                if (object.accountLimits) {
+                                    if (!Array.isArray(object.accountLimits))
+                                        throw TypeError(".google.shopping.merchant.quota.v1.ListAccountLimitsResponse.accountLimits: array expected");
+                                    message.accountLimits = [];
+                                    for (var i = 0; i < object.accountLimits.length; ++i) {
+                                        if (typeof object.accountLimits[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.quota.v1.ListAccountLimitsResponse.accountLimits: object expected");
+                                        message.accountLimits[i] = $root.google.shopping.merchant.quota.v1.AccountLimit.fromObject(object.accountLimits[i]);
+                                    }
+                                }
+                                if (object.nextPageToken != null)
+                                    message.nextPageToken = String(object.nextPageToken);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ListAccountLimitsResponse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.quota.v1.ListAccountLimitsResponse
+                             * @static
+                             * @param {google.shopping.merchant.quota.v1.ListAccountLimitsResponse} message ListAccountLimitsResponse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ListAccountLimitsResponse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.accountLimits = [];
+                                if (options.defaults)
+                                    object.nextPageToken = "";
+                                if (message.accountLimits && message.accountLimits.length) {
+                                    object.accountLimits = [];
+                                    for (var j = 0; j < message.accountLimits.length; ++j)
+                                        object.accountLimits[j] = $root.google.shopping.merchant.quota.v1.AccountLimit.toObject(message.accountLimits[j], options);
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    object.nextPageToken = message.nextPageToken;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ListAccountLimitsResponse to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.quota.v1.ListAccountLimitsResponse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ListAccountLimitsResponse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ListAccountLimitsResponse
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.quota.v1.ListAccountLimitsResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ListAccountLimitsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.quota.v1.ListAccountLimitsResponse";
+                            };
+    
+                            return ListAccountLimitsResponse;
+                        })();
+    
                         v1.QuotaService = (function() {
     
                             /**

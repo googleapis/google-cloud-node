@@ -1,0 +1,235 @@
+{
+  "clientLibrary": {
+    "name": "nodejs-datamanager",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.ads.datamanager.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "regionTag": "datamanager_v1_generated_IngestionService_IngestAudienceMembers_async",
+      "title": "IngestionService ingestAudienceMembers Sample",
+      "origin": "API_DEFINITION",
+      "description": " Uploads a list of [AudienceMember][google.ads.datamanager.v1.AudienceMember] resources to the provided [Destination][google.ads.datamanager.v1.Destination].",
+      "canonical": true,
+      "file": "ingestion_service.ingest_audience_members.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 92,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "IngestAudienceMembers",
+        "fullName": "google.ads.datamanager.v1.IngestionService.IngestAudienceMembers",
+        "async": true,
+        "parameters": [
+          {
+            "name": "destinations",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "audience_members",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "consent",
+            "type": ".google.ads.datamanager.v1.Consent"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "encoding",
+            "type": ".google.ads.datamanager.v1.Encoding"
+          },
+          {
+            "name": "encryption_info",
+            "type": ".google.ads.datamanager.v1.EncryptionInfo"
+          },
+          {
+            "name": "terms_of_service",
+            "type": ".google.ads.datamanager.v1.TermsOfService"
+          }
+        ],
+        "resultType": ".google.ads.datamanager.v1.IngestAudienceMembersResponse",
+        "client": {
+          "shortName": "IngestionServiceClient",
+          "fullName": "google.ads.datamanager.v1.IngestionServiceClient"
+        },
+        "method": {
+          "shortName": "IngestAudienceMembers",
+          "fullName": "google.ads.datamanager.v1.IngestionService.IngestAudienceMembers",
+          "service": {
+            "shortName": "IngestionService",
+            "fullName": "google.ads.datamanager.v1.IngestionService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datamanager_v1_generated_IngestionService_RemoveAudienceMembers_async",
+      "title": "IngestionService removeAudienceMembers Sample",
+      "origin": "API_DEFINITION",
+      "description": " Removes a list of [AudienceMember][google.ads.datamanager.v1.AudienceMember] resources from the provided [Destination][google.ads.datamanager.v1.Destination].",
+      "canonical": true,
+      "file": "ingestion_service.remove_audience_members.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RemoveAudienceMembers",
+        "fullName": "google.ads.datamanager.v1.IngestionService.RemoveAudienceMembers",
+        "async": true,
+        "parameters": [
+          {
+            "name": "destinations",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "audience_members",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "encoding",
+            "type": ".google.ads.datamanager.v1.Encoding"
+          },
+          {
+            "name": "encryption_info",
+            "type": ".google.ads.datamanager.v1.EncryptionInfo"
+          }
+        ],
+        "resultType": ".google.ads.datamanager.v1.RemoveAudienceMembersResponse",
+        "client": {
+          "shortName": "IngestionServiceClient",
+          "fullName": "google.ads.datamanager.v1.IngestionServiceClient"
+        },
+        "method": {
+          "shortName": "RemoveAudienceMembers",
+          "fullName": "google.ads.datamanager.v1.IngestionService.RemoveAudienceMembers",
+          "service": {
+            "shortName": "IngestionService",
+            "fullName": "google.ads.datamanager.v1.IngestionService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datamanager_v1_generated_IngestionService_IngestEvents_async",
+      "title": "IngestionService ingestEvents Sample",
+      "origin": "API_DEFINITION",
+      "description": " Uploads a list of [Event][google.ads.datamanager.v1.Event] resources from the provided [Destination][google.ads.datamanager.v1.Destination].",
+      "canonical": true,
+      "file": "ingestion_service.ingest_events.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 88,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "IngestEvents",
+        "fullName": "google.ads.datamanager.v1.IngestionService.IngestEvents",
+        "async": true,
+        "parameters": [
+          {
+            "name": "destinations",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "events",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "consent",
+            "type": ".google.ads.datamanager.v1.Consent"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "encoding",
+            "type": ".google.ads.datamanager.v1.Encoding"
+          },
+          {
+            "name": "encryption_info",
+            "type": ".google.ads.datamanager.v1.EncryptionInfo"
+          }
+        ],
+        "resultType": ".google.ads.datamanager.v1.IngestEventsResponse",
+        "client": {
+          "shortName": "IngestionServiceClient",
+          "fullName": "google.ads.datamanager.v1.IngestionServiceClient"
+        },
+        "method": {
+          "shortName": "IngestEvents",
+          "fullName": "google.ads.datamanager.v1.IngestionService.IngestEvents",
+          "service": {
+            "shortName": "IngestionService",
+            "fullName": "google.ads.datamanager.v1.IngestionService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datamanager_v1_generated_IngestionService_RetrieveRequestStatus_async",
+      "title": "IngestionService retrieveRequestStatus Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the status of a request given request id.",
+      "canonical": true,
+      "file": "ingestion_service.retrieve_request_status.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RetrieveRequestStatus",
+        "fullName": "google.ads.datamanager.v1.IngestionService.RetrieveRequestStatus",
+        "async": true,
+        "parameters": [
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.ads.datamanager.v1.RetrieveRequestStatusResponse",
+        "client": {
+          "shortName": "IngestionServiceClient",
+          "fullName": "google.ads.datamanager.v1.IngestionServiceClient"
+        },
+        "method": {
+          "shortName": "RetrieveRequestStatus",
+          "fullName": "google.ads.datamanager.v1.IngestionService.RetrieveRequestStatus",
+          "service": {
+            "shortName": "IngestionService",
+            "fullName": "google.ads.datamanager.v1.IngestionService"
+          }
+        }
+      }
+    }
+  ]
+}

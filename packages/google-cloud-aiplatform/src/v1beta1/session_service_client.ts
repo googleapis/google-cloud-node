@@ -1121,8 +1121,9 @@ export class SessionServiceClient {
  *   Optional. The standard list filter.
  *   Supported fields:
  *      * `display_name`
+ *      * `user_id`
  *
- *   Example: `display_name=abc`.
+ *   Example: `display_name="abc"`, `user_id="123"`.
  * @param {string} [request.orderBy]
  *   Optional. A comma-separated list of fields to order by, sorted in ascending
  *   order. Use "desc" after a field name for descending. Supported fields:
@@ -1240,8 +1241,9 @@ export class SessionServiceClient {
  *   Optional. The standard list filter.
  *   Supported fields:
  *      * `display_name`
+ *      * `user_id`
  *
- *   Example: `display_name=abc`.
+ *   Example: `display_name="abc"`, `user_id="123"`.
  * @param {string} [request.orderBy]
  *   Optional. A comma-separated list of fields to order by, sorted in ascending
  *   order. Use "desc" after a field name for descending. Supported fields:
@@ -1308,8 +1310,9 @@ export class SessionServiceClient {
  *   Optional. The standard list filter.
  *   Supported fields:
  *      * `display_name`
+ *      * `user_id`
  *
- *   Example: `display_name=abc`.
+ *   Example: `display_name="abc"`, `user_id="123"`.
  * @param {string} [request.orderBy]
  *   Optional. A comma-separated list of fields to order by, sorted in ascending
  *   order. Use "desc" after a field name for descending. Supported fields:
@@ -1378,6 +1381,12 @@ export class SessionServiceClient {
  *      the timestamp is in RFC 3339 format)
  *
  *   More detail in [AIP-160](https://google.aip.dev/160).
+ * @param {string} [request.orderBy]
+ *   Optional. A comma-separated list of fields to order by, sorted in ascending
+ *   order. Use "desc" after a field name for descending. Supported fields:
+ *     * `timestamp`
+ *
+ *   Example: `timestamp desc`.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -1491,6 +1500,12 @@ export class SessionServiceClient {
  *      the timestamp is in RFC 3339 format)
  *
  *   More detail in [AIP-160](https://google.aip.dev/160).
+ * @param {string} [request.orderBy]
+ *   Optional. A comma-separated list of fields to order by, sorted in ascending
+ *   order. Use "desc" after a field name for descending. Supported fields:
+ *     * `timestamp`
+ *
+ *   Example: `timestamp desc`.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
@@ -1553,6 +1568,12 @@ export class SessionServiceClient {
  *      the timestamp is in RFC 3339 format)
  *
  *   More detail in [AIP-160](https://google.aip.dev/160).
+ * @param {string} [request.orderBy]
+ *   Optional. A comma-separated list of fields to order by, sorted in ascending
+ *   order. Use "desc" after a field name for descending. Supported fields:
+ *     * `timestamp`
+ *
+ *   Example: `timestamp desc`.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}

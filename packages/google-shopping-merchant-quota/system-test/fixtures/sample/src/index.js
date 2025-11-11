@@ -21,6 +21,7 @@
 const quota = require('@google-shopping/quota');
 
 function main() {
+  const accountLimitsServiceClient = new quota.AccountLimitsServiceClient();
   const quotaServiceClient = new quota.QuotaServiceClient();
 }
 

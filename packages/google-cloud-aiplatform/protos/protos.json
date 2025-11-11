@@ -9052,7 +9052,9 @@
                         "GETTING_CONTAINER_IMAGE": 9,
                         "STARTING_MODEL_SERVER": 3,
                         "FINISHING_UP": 4,
-                        "DEPLOYMENT_TERMINATED": 10
+                        "DEPLOYMENT_TERMINATED": 10,
+                        "SUCCESSFULLY_DEPLOYED": 11,
+                        "FAILED_TO_DEPLOY": 12
                       }
                     },
                     "EndpointService": {
@@ -49025,7 +49027,9 @@
                         "GETTING_CONTAINER_IMAGE": 9,
                         "STARTING_MODEL_SERVER": 3,
                         "FINISHING_UP": 4,
-                        "DEPLOYMENT_TERMINATED": 10
+                        "DEPLOYMENT_TERMINATED": 10,
+                        "SUCCESSFULLY_DEPLOYED": 11,
+                        "FAILED_TO_DEPLOY": 12
                       }
                     },
                     "EndpointService": {
@@ -82977,6 +82981,13 @@
                         "filter": {
                           "type": "string",
                           "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
