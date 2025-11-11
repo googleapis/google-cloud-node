@@ -4,6 +4,190 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "a637d5caaa14186adaae5e8a708f5faee3a17084",
+          "message": "[geminidataanalytics] Adding a new SchemaRelationship message to define relationships between table schema",
+          "issues": [
+            "6871"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/geminidataanalytics",
+      "id": "2dfbc409-ea8e-4078-af9c-cd183563fd6e",
+      "createTime": "2025-11-11T01:02:09.511Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "947fcf5468e0923866bbe7c28c262830d748f5ca",
+          "message": "Add initial files for google.ads.datamanager.v1",
+          "issues": [
+            "6841"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ads/datamanager",
+      "id": "0b41663d-a553-454b-a7b8-9a85e02081be",
+      "createTime": "2025-11-11T01:02:09.476Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e1c953ae47d7f6697bd9f048d82d5584239ba0d1",
+          "message": "Doc linter issues",
+          "issues": []
+        }
+      ],
+      "version": "0.1.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/capacityplanner",
+      "id": "e04b2af3-2a2b-4a8a-9aa0-5934b2b135d0",
+      "createTime": "2025-11-11T01:02:09.433Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "44f08c6d3e7d9377e7e070c8ba3dcb949e2642c1",
+          "message": "[backupdr] Adding `unreachable` field to `ListDataSourceReferences` API",
+          "issues": [
+            "6865"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/backupdr",
+      "id": "e25c6aee-80cd-429a-b90c-7dd6d81f7c69",
+      "createTime": "2025-11-11T01:02:09.384Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c9d8b6ad53d584999a6a76073ae1f3e47fae3d37",
+          "message": "[translate] Adds support for RefineText",
+          "issues": [
+            "6867"
+          ]
+        }
+      ],
+      "version": "9.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/translate",
+      "id": "1f7f6610-7132-4522-9d79-ba50be4992ae",
+      "createTime": "2025-11-11T01:02:09.356Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "4bc9aa903b6385f9eec79c71320959da9c65764a",
+          "message": "[networkservices] Add support for LbEdgeExtension resource in NetworkServices API",
+          "issues": [
+            "6863"
+          ]
+        }
+      ],
+      "version": "0.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/networkservices",
+      "id": "5e913f31-ef5e-4b21-aa73-4162f971225d",
+      "createTime": "2025-11-11T01:02:09.276Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e6cfcdea780819b0c84daf0325127be322803fac",
+          "message": "[dialogflow] add agentDesktopSource field to the Participant object",
+          "issues": [
+            "6878"
+          ]
+        }
+      ],
+      "version": "7.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow",
+      "id": "3769165e-658d-4ec5-8032-e3c8f820452b",
+      "createTime": "2025-11-11T01:02:09.233Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "524ca3cabe52d2e58e83467f94968cdf28c79fe9",
+          "message": "Add GetIamPolicy method for DataProduct resources",
+          "issues": [],
+          "scope": "dataplex"
+        },
+        {
+          "type": "feat",
+          "sha": "524ca3cabe52d2e58e83467f94968cdf28c79fe9",
+          "message": "[dataplex] Allow publishing Data Profile scan results to the Dataplex Catalog",
+          "issues": [
+            "6868"
+          ],
+          "scope": "dataplex"
+        }
+      ],
+      "version": "5.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataplex",
+      "id": "8d0b52de-7190-4af2-9f4c-bdab414c2d39",
+      "createTime": "2025-11-11T01:02:09.189Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e4faaba9f6d3c28cf81d816fbd3758af80b6a45d",
+          "message": "[bigquery-analyticshub] add Stored Procedure Sharing support for analyticshub listings",
+          "issues": [
+            "6866"
+          ]
+        }
+      ],
+      "version": "2.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-analyticshub",
+      "id": "430fa686-b6b5-442a-b3ae-8ad3ff60b6c6",
+      "createTime": "2025-11-11T01:02:09.157Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "8d71bbf30bc7ae1a54a3e37b8740d46dfbe418dd",
+          "message": "Add order_by to list_events",
+          "issues": [
+            "6864"
+          ]
+        }
+      ],
+      "version": "5.13.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "6d4d35b4-76a7-40e5-b14f-c0a431c721ee",
+      "createTime": "2025-11-11T01:02:09.120Z"
+    },
+    {
+      "changes": [
+        {
           "type": "fix",
           "sha": "91207939dad2b0c1e258bd8f24ec70d6a0bbe35b",
           "message": "[merchantapi] An existing field `contains_custom_rules` is removed from message `.google.shopping.merchant.datasources.v1.PrimaryProductDataSource`",
@@ -66743,5 +66927,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-10-31T23:33:45.328Z"
+  "updateTime": "2025-11-11T01:02:09.511Z"
 }
