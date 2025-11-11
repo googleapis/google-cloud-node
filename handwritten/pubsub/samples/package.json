@@ -33,6 +33,7 @@
     "@opentelemetry/sdk-trace-node": "^1.17.0",
     "@opentelemetry/semantic-conventions": "^1.17.0",
     "avro-js": "^1.11.3",
+    "google-auth-library": "^10.5.0",
     "p-defer": "^3.0.0",
     "protobufjs": "~7.5.0"
   },
