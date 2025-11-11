@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/backupdr-v0.5.1...backupdr-v0.6.0) (2025-11-11)
+
+
+### Features
+
+* [backupdr] Adding `unreachable` field to `ListDataSourceReferences` API ([#6865](https://github.com/googleapis/google-cloud-node/issues/6865)) ([44f08c6](https://github.com/googleapis/google-cloud-node/commit/44f08c6d3e7d9377e7e070c8ba3dcb949e2642c1))
+
 ## [0.5.1](https://github.com/googleapis/google-cloud-node/compare/backupdr-v0.5.0...backupdr-v0.5.1) (2025-10-13)
 
 

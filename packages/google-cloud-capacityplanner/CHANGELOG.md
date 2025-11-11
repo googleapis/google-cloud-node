@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/googleapis/google-cloud-node/compare/capacityplanner-v0.1.1...capacityplanner-v0.1.2) (2025-11-11)
+
+
+### Bug Fixes
+
+* Doc linter issues ([e1c953a](https://github.com/googleapis/google-cloud-node/commit/e1c953ae47d7f6697bd9f048d82d5584239ba0d1))
+
 ## [0.1.1](https://github.com/googleapis/google-cloud-node/compare/capacityplanner-v0.1.0...capacityplanner-v0.1.1) (2025-10-13)
 
 
