@@ -355,6 +355,7 @@ service Storage {
   //   `true` and the relevant
   //     bucket has uniform bucket-level access disabled)
   rpc RestoreObject(RestoreObjectRequest) returns (StorageObject) {
+    option (google.api.routing) = {
       routing_parameters { field: "bucket" path_template: "{bucket=**}" }
 
   // Cancels an in-progress resumable upload.
@@ -1220,6 +1221,10 @@ message BidiReadObjectResponse {
   // Only populated in the first response in the stream and not populated when
   // the stream is opened with a read handle.
   StorageObject metadata = 4;
+
+  // This field is periodically refreshed, however it might not be set in
+  // every response. It allows the client to more efficiently open subsequent
+  // bidirectional streams to the same object.
   BidiReadHandle read_handle = 7;
 }
 
@@ -1736,6 +1741,10 @@ message RewriteObjectRequest {
   // object's metadata; otherwise the destination object's metadata is
   // copied from the source object.
   StorageObject destination = 1 [(google.api.field_behavior) = OPTIONAL];
+
+  // Required. Name of the bucket in which to find the source object.
+  string source_bucket = 2 [
+    (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = { type: "storage.googleapis.com/Bucket" }
   ];
 
@@ -1973,6 +1982,10 @@ message UpdateObjectRequest {
   // revision of this object whose metadata should be updated. Otherwise,
   // assumes the live version of the object.
   StorageObject object = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Makes the operation conditional on whether the object's current generation
+  // matches the given value. Setting to 0 makes the operation succeed only if
+  // there are no live versions of the object.
   optional int64 if_generation_match = 2;
 
   // Makes the operation conditional on whether the object's live generation
@@ -2813,7 +2826,7 @@ message StorageObject {
   // cannot be deleted or overwritten until their retention expires.
   message Retention {
     enum Mode {
-      // No specified mode. Object is not under retention.
+      // No specified mode. StorageObject is not under retention.
       MODE_UNSPECIFIED = 0;
       // The mode might be changed to locked.
       UNLOCKED = 1;

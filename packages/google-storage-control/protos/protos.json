@@ -2187,10 +2187,14 @@
                     "ComposeObject": {
                       "requestType": "ComposeObjectRequest",
 <<<<<<< HEAD
+<<<<<<< HEAD
                       "responseType": "StorageObject",
 =======
                       "responseType": "Object",
 >>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
+=======
+                      "responseType": "StorageObject",
+>>>>>>> f012718bb9 (add utility for cleaning up storage proto and creating merged client)
                       "options": {
                         "(google.api.routing).routing_parameters.field": "destination.bucket",
                         "(google.api.routing).routing_parameters.path_template": "{bucket=**}"
@@ -2234,10 +2238,14 @@
                     "RestoreObject": {
                       "requestType": "RestoreObjectRequest",
 <<<<<<< HEAD
+<<<<<<< HEAD
                       "responseType": "StorageObject",
 =======
                       "responseType": "Object",
 >>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
+=======
+                      "responseType": "StorageObject",
+>>>>>>> f012718bb9 (add utility for cleaning up storage proto and creating merged client)
                       "options": {
                         "(google.api.routing).routing_parameters.field": "bucket",
                         "(google.api.routing).routing_parameters.path_template": "{bucket=**}",
@@ -2282,10 +2290,14 @@
                     "GetObject": {
                       "requestType": "GetObjectRequest",
 <<<<<<< HEAD
+<<<<<<< HEAD
                       "responseType": "StorageObject",
 =======
                       "responseType": "Object",
 >>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
+=======
+                      "responseType": "StorageObject",
+>>>>>>> f012718bb9 (add utility for cleaning up storage proto and creating merged client)
                       "options": {
                         "(google.api.routing).routing_parameters.field": "bucket",
                         "(google.api.routing).routing_parameters.path_template": "{bucket=**}",
@@ -2357,10 +2369,14 @@
                     "UpdateObject": {
                       "requestType": "UpdateObjectRequest",
 <<<<<<< HEAD
+<<<<<<< HEAD
                       "responseType": "StorageObject",
 =======
                       "responseType": "Object",
 >>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
+=======
+                      "responseType": "StorageObject",
+>>>>>>> f012718bb9 (add utility for cleaning up storage proto and creating merged client)
                       "options": {
                         "(google.api.routing).routing_parameters.field": "object.bucket",
                         "(google.api.routing).routing_parameters.path_template": "{bucket=**}",
@@ -2479,10 +2495,14 @@
                     "MoveObject": {
                       "requestType": "MoveObjectRequest",
 <<<<<<< HEAD
+<<<<<<< HEAD
                       "responseType": "StorageObject",
 =======
                       "responseType": "Object",
 >>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
+=======
+                      "responseType": "StorageObject",
+>>>>>>> f012718bb9 (add utility for cleaning up storage proto and creating merged client)
                       "options": {
                         "(google.api.routing).routing_parameters.field": "bucket",
                         "(google.api.routing).routing_parameters.path_template": "{bucket=**}",
@@ -2804,10 +2824,14 @@
                   "fields": {
                     "destination": {
 <<<<<<< HEAD
+<<<<<<< HEAD
                       "type": "StorageObject",
 =======
                       "type": "Object",
 >>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
+=======
+                      "type": "StorageObject",
+>>>>>>> f012718bb9 (add utility for cleaning up storage proto and creating merged client)
                       "id": 1,
                       "options": {
                         "(google.api.field_behavior)": "REQUIRED"
@@ -3351,10 +3375,14 @@
                     },
                     "metadata": {
 <<<<<<< HEAD
+<<<<<<< HEAD
                       "type": "StorageObject",
 =======
                       "type": "Object",
 >>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
+=======
+                      "type": "StorageObject",
+>>>>>>> f012718bb9 (add utility for cleaning up storage proto and creating merged client)
                       "id": 4
                     }
                   }
@@ -3507,10 +3535,14 @@
                     },
                     "metadata": {
 <<<<<<< HEAD
+<<<<<<< HEAD
                       "type": "StorageObject",
 =======
                       "type": "Object",
 >>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
+=======
+                      "type": "StorageObject",
+>>>>>>> f012718bb9 (add utility for cleaning up storage proto and creating merged client)
                       "id": 4
                     },
                     "readHandle": {
@@ -3703,10 +3735,14 @@
                   "fields": {
                     "resource": {
 <<<<<<< HEAD
+<<<<<<< HEAD
                       "type": "StorageObject",
 =======
                       "type": "Object",
 >>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
+=======
+                      "type": "StorageObject",
+>>>>>>> f012718bb9 (add utility for cleaning up storage proto and creating merged client)
                       "id": 1,
                       "options": {
                         "(google.api.field_behavior)": "REQUIRED"
@@ -3836,10 +3872,14 @@
                     },
                     "resource": {
 <<<<<<< HEAD
+<<<<<<< HEAD
                       "type": "StorageObject",
 =======
                       "type": "Object",
 >>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
+=======
+                      "type": "StorageObject",
+>>>>>>> f012718bb9 (add utility for cleaning up storage proto and creating merged client)
                       "id": 2
                     }
                   }
@@ -4017,10 +4057,14 @@
                     },
                     "resource": {
 <<<<<<< HEAD
+<<<<<<< HEAD
                       "type": "StorageObject",
 =======
                       "type": "Object",
 >>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
+=======
+                      "type": "StorageObject",
+>>>>>>> f012718bb9 (add utility for cleaning up storage proto and creating merged client)
                       "id": 2
                     },
                     "writeHandle": {
@@ -4176,10 +4220,14 @@
                     },
                     "resource": {
 <<<<<<< HEAD
+<<<<<<< HEAD
                       "type": "StorageObject",
 =======
                       "type": "Object",
 >>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
+=======
+                      "type": "StorageObject",
+>>>>>>> f012718bb9 (add utility for cleaning up storage proto and creating merged client)
                       "id": 2
                     }
                   }
@@ -4253,10 +4301,14 @@
                     },
                     "destination": {
 <<<<<<< HEAD
+<<<<<<< HEAD
                       "type": "StorageObject",
 =======
                       "type": "Object",
 >>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
+=======
+                      "type": "StorageObject",
+>>>>>>> f012718bb9 (add utility for cleaning up storage proto and creating merged client)
                       "id": 1,
                       "options": {
                         "(google.api.field_behavior)": "OPTIONAL"
@@ -4418,10 +4470,14 @@
                     },
                     "resource": {
 <<<<<<< HEAD
+<<<<<<< HEAD
                       "type": "StorageObject",
 =======
                       "type": "Object",
 >>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
+=======
+                      "type": "StorageObject",
+>>>>>>> f012718bb9 (add utility for cleaning up storage proto and creating merged client)
                       "id": 5
                     }
                   }
@@ -4617,10 +4673,14 @@
                   "fields": {
                     "object": {
 <<<<<<< HEAD
+<<<<<<< HEAD
                       "type": "StorageObject",
 =======
                       "type": "Object",
 >>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
+=======
+                      "type": "StorageObject",
+>>>>>>> f012718bb9 (add utility for cleaning up storage proto and creating merged client)
                       "id": 1,
                       "options": {
                         "(google.api.field_behavior)": "REQUIRED"
@@ -5829,10 +5889,14 @@
                   }
                 },
 <<<<<<< HEAD
+<<<<<<< HEAD
                 "StorageObject": {
 =======
                 "Object": {
 >>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
+=======
+                "StorageObject": {
+>>>>>>> f012718bb9 (add utility for cleaning up storage proto and creating merged client)
                   "oneofs": {
                     "_restoreToken": {
                       "oneof": [
@@ -6197,10 +6261,14 @@
                     "objects": {
                       "rule": "repeated",
 <<<<<<< HEAD
+<<<<<<< HEAD
                       "type": "StorageObject",
 =======
                       "type": "Object",
 >>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
+=======
+                      "type": "StorageObject",
+>>>>>>> f012718bb9 (add utility for cleaning up storage proto and creating merged client)
                       "id": 1
                     },
                     "prefixes": {
