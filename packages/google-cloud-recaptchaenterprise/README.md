@@ -18,7 +18,7 @@ reCAPTCHA Enterprise API client for Node.js
 A comprehensive list of changes in each version may be found in
 [the CHANGELOG][homepage_changelog].
 
-* [reCAPTCHA Enterprise API Nodejs Client API Reference](https://cloud.google.com/nodejs/docs/reference/recaptchaenterprise/latest)
+* [reCAPTCHA Enterprise API Nodejs Client API Reference](https://cloud.google.com/nodejs/docs/reference/recaptcha-enterprise/latest)
 
 
 Read more about the client libraries for Cloud APIs, including the older
