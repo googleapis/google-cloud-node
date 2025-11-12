@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/gapic-generator",
-  "version": "4.9.12",
+  "version": "4.11.10",
   "type": "module",
   "description": "Google API Client Library Generator for TypeScript, written in TypeScript.",
   "homepage": "https://github.com/googleapis/google-cloud-node-core/tree/main/packages/gapic-generator-typescript",

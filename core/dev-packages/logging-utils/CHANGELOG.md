@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.3](https://github.com/googleapis/google-cloud-node-core/compare/google-logging-utils-v1.1.2...google-logging-utils-v1.1.3) (2025-11-11)
+
+
+### Bug Fixes
+
+* Package.json links in gax, tools and logging utils ([#498](https://github.com/googleapis/google-cloud-node-core/issues/498)) ([2340de4](https://github.com/googleapis/google-cloud-node-core/commit/2340de472f3936fa80d12535eeaaf540d1f63c8c))
+
 ## [1.1.2](https://github.com/googleapis/google-cloud-node-core/compare/google-logging-utils-v1.1.1...google-logging-utils-v1.1.2) (2025-10-29)
 
 

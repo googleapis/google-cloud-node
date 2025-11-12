@@ -14,7 +14,7 @@
     "*.js"
   ],
   "dependencies": {
-    "google-gax": "^5.0.5"
+    "google-gax": "^5.0.6"
   },
   "devDependencies": {
     "c8": "^9.0.0",

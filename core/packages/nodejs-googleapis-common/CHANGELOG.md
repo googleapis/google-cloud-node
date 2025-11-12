@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/nodejs-googleapis-common?activeTab=versions
 
+## [8.0.1](https://github.com/googleapis/google-cloud-node-core/compare/googleapis-common-v8.0.0...googleapis-common-v8.0.1) (2025-11-11)
+
+
+### Bug Fixes
+
+* Further increase system test timeout ([2253a3d](https://github.com/googleapis/google-cloud-node-core/commit/2253a3d119aa4697d94b006e7f3510b980f46645))
+* Increase system test timeout ([4036df6](https://github.com/googleapis/google-cloud-node-core/commit/4036df62541adb8a2c0ca5b97aee969094b768d3))
+
 ## [8.0.0](https://github.com/googleapis/nodejs-googleapis-common/compare/v7.2.0...v8.0.0) (2025-06-16)
 
 
