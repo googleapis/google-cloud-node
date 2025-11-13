@@ -94,6 +94,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | get vpc flow logs config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkmanagement/samples/generated/v1beta1/vpc_flow_logs_service.get_vpc_flow_logs_config.js) |
 | list vpc flow logs configs | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkmanagement/samples/generated/v1beta1/vpc_flow_logs_service.list_vpc_flow_logs_configs.js) |
 | query org vpc flow logs configs | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkmanagement/samples/generated/v1beta1/vpc_flow_logs_service.query_org_vpc_flow_logs_configs.js) |
+| show effective flow logs configs | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkmanagement/samples/generated/v1beta1/vpc_flow_logs_service.show_effective_flow_logs_configs.js) |
 | update vpc flow logs config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkmanagement/samples/generated/v1beta1/vpc_flow_logs_service.update_vpc_flow_logs_config.js) |
 
 

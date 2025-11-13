@@ -698,6 +698,12 @@ export namespace google {
 
                     /** DockerImage updateTime */
                     updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DockerImage artifactType */
+                    artifactType?: (string|null);
+
+                    /** DockerImage imageManifests */
+                    imageManifests?: (google.devtools.artifactregistry.v1.IImageManifest[]|null);
                 }
 
                 /** Represents a DockerImage. */
@@ -732,6 +738,12 @@ export namespace google {
 
                     /** DockerImage updateTime. */
                     public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DockerImage artifactType. */
+                    public artifactType: string;
+
+                    /** DockerImage imageManifests. */
+                    public imageManifests: google.devtools.artifactregistry.v1.IImageManifest[];
 
                     /**
                      * Creates a new DockerImage instance using the specified properties.
@@ -805,6 +817,139 @@ export namespace google {
 
                     /**
                      * Gets the default type url for DockerImage
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ImageManifest. */
+                interface IImageManifest {
+
+                    /** ImageManifest architecture */
+                    architecture?: (string|null);
+
+                    /** ImageManifest os */
+                    os?: (string|null);
+
+                    /** ImageManifest digest */
+                    digest?: (string|null);
+
+                    /** ImageManifest mediaType */
+                    mediaType?: (string|null);
+
+                    /** ImageManifest osVersion */
+                    osVersion?: (string|null);
+
+                    /** ImageManifest osFeatures */
+                    osFeatures?: (string[]|null);
+
+                    /** ImageManifest variant */
+                    variant?: (string|null);
+                }
+
+                /** Represents an ImageManifest. */
+                class ImageManifest implements IImageManifest {
+
+                    /**
+                     * Constructs a new ImageManifest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.artifactregistry.v1.IImageManifest);
+
+                    /** ImageManifest architecture. */
+                    public architecture: string;
+
+                    /** ImageManifest os. */
+                    public os: string;
+
+                    /** ImageManifest digest. */
+                    public digest: string;
+
+                    /** ImageManifest mediaType. */
+                    public mediaType: string;
+
+                    /** ImageManifest osVersion. */
+                    public osVersion: string;
+
+                    /** ImageManifest osFeatures. */
+                    public osFeatures: string[];
+
+                    /** ImageManifest variant. */
+                    public variant: string;
+
+                    /**
+                     * Creates a new ImageManifest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImageManifest instance
+                     */
+                    public static create(properties?: google.devtools.artifactregistry.v1.IImageManifest): google.devtools.artifactregistry.v1.ImageManifest;
+
+                    /**
+                     * Encodes the specified ImageManifest message. Does not implicitly {@link google.devtools.artifactregistry.v1.ImageManifest.verify|verify} messages.
+                     * @param message ImageManifest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.artifactregistry.v1.IImageManifest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImageManifest message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.ImageManifest.verify|verify} messages.
+                     * @param message ImageManifest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.artifactregistry.v1.IImageManifest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImageManifest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImageManifest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.artifactregistry.v1.ImageManifest;
+
+                    /**
+                     * Decodes an ImageManifest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImageManifest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.artifactregistry.v1.ImageManifest;
+
+                    /**
+                     * Verifies an ImageManifest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImageManifest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImageManifest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.artifactregistry.v1.ImageManifest;
+
+                    /**
+                     * Creates a plain object from an ImageManifest message. Also converts values to other types if specified.
+                     * @param message ImageManifest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.artifactregistry.v1.ImageManifest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImageManifest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ImageManifest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -7953,7 +8098,8 @@ export namespace google {
                         PYTHON = 8,
                         KFP = 9,
                         GO = 10,
-                        GENERIC = 11
+                        GENERIC = 11,
+                        RUBY = 12
                     }
 
                     /** Mode enum. */

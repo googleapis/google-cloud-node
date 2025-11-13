@@ -29,7 +29,8 @@ function main(operation, project, region) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Name of the Operations resource to return, or its unique numeric identifier.
+   *  Name of the Operations resource to return, or its unique numeric
+   *  identifier.
    */
   // const operation = 'abc123'
   /**

@@ -33,11 +33,13 @@ function main(project, reservation, reservationBlock, zone) {
    */
   // const project = 'my-project'
   /**
-   *  The name of the reservation. Name should conform to RFC1035 or be a resource ID.
+   *  The name of the reservation.
+   *  Name should conform to RFC1035 or be a resource ID.
    */
   // const reservation = 'abc123'
   /**
-   *  The name of the reservation block. Name should conform to RFC1035 or be a resource ID.
+   *  The name of the reservation block.
+   *  Name should conform to RFC1035 or be a resource ID.
    */
   // const reservationBlock = 'abc123'
   /**

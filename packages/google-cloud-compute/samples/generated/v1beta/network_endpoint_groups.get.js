@@ -37,7 +37,8 @@ function main(networkEndpointGroup, project, zone) {
    */
   // const project = 'my-project'
   /**
-   *  The name of the zone where the network endpoint group is located. It should comply with RFC1035.
+   *  The name of the zone where
+   *  the network endpoint group is located. It should comply with RFC1035.
    */
   // const zone = 'abc123'
 

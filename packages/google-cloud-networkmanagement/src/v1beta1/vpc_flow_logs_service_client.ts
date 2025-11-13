@@ -213,7 +213,9 @@ export class VpcFlowLogsServiceClient {
       listVpcFlowLogsConfigs:
           new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'vpcFlowLogsConfigs'),
       queryOrgVpcFlowLogsConfigs:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'vpcFlowLogsConfigs')
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'vpcFlowLogsConfigs'),
+      showEffectiveFlowLogsConfigs:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'effectiveFlowLogsConfigs')
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -306,7 +308,7 @@ export class VpcFlowLogsServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const vpcFlowLogsServiceStubMethods =
-        ['listVpcFlowLogsConfigs', 'getVpcFlowLogsConfig', 'createVpcFlowLogsConfig', 'updateVpcFlowLogsConfig', 'deleteVpcFlowLogsConfig', 'queryOrgVpcFlowLogsConfigs'];
+        ['listVpcFlowLogsConfigs', 'getVpcFlowLogsConfig', 'createVpcFlowLogsConfig', 'updateVpcFlowLogsConfig', 'deleteVpcFlowLogsConfig', 'queryOrgVpcFlowLogsConfigs', 'showEffectiveFlowLogsConfigs'];
     for (const methodName of vpcFlowLogsServiceStubMethods) {
       const callPromise = this.vpcFlowLogsServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -1326,6 +1328,234 @@ export class VpcFlowLogsServiceClient {
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.networkmanagement.v1beta1.IVpcFlowLogsConfig>;
+  }
+ /**
+ * ShowEffectiveFlowLogsConfigs returns a list of all VPC Flow Logs
+ * configurations applicable to a specified resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource of the VpcFlowLogsConfig, specified in
+ *   the following format: `projects/{project_id}/locations/global`
+ * @param {string} request.resource
+ *   Required. The resource to get the effective VPC Flow Logs configuration
+ *   for. The resource must belong to the same project as the parent. The
+ *   resource must be a network, subnetwork, interconnect attachment, VPN
+ *   tunnel, or a project.
+ * @param {number} [request.pageSize]
+ *   Optional. Number of `EffectiveVpcFlowLogsConfigs` to return. Default is 30.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token from an earlier query, as returned in
+ *   `next_page_token`.
+ * @param {string} [request.filter]
+ *   Optional. Lists the `EffectiveVpcFlowLogsConfigs` that match the filter
+ *   expression. A filter expression must use the supported [CEL logic
+ *   operators]
+ *   (https://cloud.google.com/vpc/docs/about-flow-logs-records#supported_cel_logic_operators).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig|EffectiveVpcFlowLogsConfig}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `showEffectiveFlowLogsConfigsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  showEffectiveFlowLogsConfigs(
+      request?: protos.google.cloud.networkmanagement.v1beta1.IShowEffectiveFlowLogsConfigsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.networkmanagement.v1beta1.IEffectiveVpcFlowLogsConfig[],
+        protos.google.cloud.networkmanagement.v1beta1.IShowEffectiveFlowLogsConfigsRequest|null,
+        protos.google.cloud.networkmanagement.v1beta1.IShowEffectiveFlowLogsConfigsResponse
+      ]>;
+  showEffectiveFlowLogsConfigs(
+      request: protos.google.cloud.networkmanagement.v1beta1.IShowEffectiveFlowLogsConfigsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
+          protos.google.cloud.networkmanagement.v1beta1.IShowEffectiveFlowLogsConfigsRequest,
+          protos.google.cloud.networkmanagement.v1beta1.IShowEffectiveFlowLogsConfigsResponse|null|undefined,
+          protos.google.cloud.networkmanagement.v1beta1.IEffectiveVpcFlowLogsConfig>): void;
+  showEffectiveFlowLogsConfigs(
+      request: protos.google.cloud.networkmanagement.v1beta1.IShowEffectiveFlowLogsConfigsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.networkmanagement.v1beta1.IShowEffectiveFlowLogsConfigsRequest,
+          protos.google.cloud.networkmanagement.v1beta1.IShowEffectiveFlowLogsConfigsResponse|null|undefined,
+          protos.google.cloud.networkmanagement.v1beta1.IEffectiveVpcFlowLogsConfig>): void;
+  showEffectiveFlowLogsConfigs(
+      request?: protos.google.cloud.networkmanagement.v1beta1.IShowEffectiveFlowLogsConfigsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.networkmanagement.v1beta1.IShowEffectiveFlowLogsConfigsRequest,
+          protos.google.cloud.networkmanagement.v1beta1.IShowEffectiveFlowLogsConfigsResponse|null|undefined,
+          protos.google.cloud.networkmanagement.v1beta1.IEffectiveVpcFlowLogsConfig>,
+      callback?: PaginationCallback<
+          protos.google.cloud.networkmanagement.v1beta1.IShowEffectiveFlowLogsConfigsRequest,
+          protos.google.cloud.networkmanagement.v1beta1.IShowEffectiveFlowLogsConfigsResponse|null|undefined,
+          protos.google.cloud.networkmanagement.v1beta1.IEffectiveVpcFlowLogsConfig>):
+      Promise<[
+        protos.google.cloud.networkmanagement.v1beta1.IEffectiveVpcFlowLogsConfig[],
+        protos.google.cloud.networkmanagement.v1beta1.IShowEffectiveFlowLogsConfigsRequest|null,
+        protos.google.cloud.networkmanagement.v1beta1.IShowEffectiveFlowLogsConfigsResponse
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.networkmanagement.v1beta1.IShowEffectiveFlowLogsConfigsRequest,
+      protos.google.cloud.networkmanagement.v1beta1.IShowEffectiveFlowLogsConfigsResponse|null|undefined,
+      protos.google.cloud.networkmanagement.v1beta1.IEffectiveVpcFlowLogsConfig>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('showEffectiveFlowLogsConfigs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('showEffectiveFlowLogsConfigs request %j', request);
+    return this.innerApiCalls
+      .showEffectiveFlowLogsConfigs(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.cloud.networkmanagement.v1beta1.IEffectiveVpcFlowLogsConfig[],
+        protos.google.cloud.networkmanagement.v1beta1.IShowEffectiveFlowLogsConfigsRequest|null,
+        protos.google.cloud.networkmanagement.v1beta1.IShowEffectiveFlowLogsConfigsResponse
+      ]) => {
+        this._log.info('showEffectiveFlowLogsConfigs values %j', response);
+        return [response, input, output];
+      });
+  }
+
+/**
+ * Equivalent to `showEffectiveFlowLogsConfigs`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource of the VpcFlowLogsConfig, specified in
+ *   the following format: `projects/{project_id}/locations/global`
+ * @param {string} request.resource
+ *   Required. The resource to get the effective VPC Flow Logs configuration
+ *   for. The resource must belong to the same project as the parent. The
+ *   resource must be a network, subnetwork, interconnect attachment, VPN
+ *   tunnel, or a project.
+ * @param {number} [request.pageSize]
+ *   Optional. Number of `EffectiveVpcFlowLogsConfigs` to return. Default is 30.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token from an earlier query, as returned in
+ *   `next_page_token`.
+ * @param {string} [request.filter]
+ *   Optional. Lists the `EffectiveVpcFlowLogsConfigs` that match the filter
+ *   expression. A filter expression must use the supported [CEL logic
+ *   operators]
+ *   (https://cloud.google.com/vpc/docs/about-flow-logs-records#supported_cel_logic_operators).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig|EffectiveVpcFlowLogsConfig} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `showEffectiveFlowLogsConfigsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  showEffectiveFlowLogsConfigsStream(
+      request?: protos.google.cloud.networkmanagement.v1beta1.IShowEffectiveFlowLogsConfigsRequest,
+      options?: CallOptions):
+    Transform{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['showEffectiveFlowLogsConfigs'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('showEffectiveFlowLogsConfigs stream %j', request);
+    return this.descriptors.page.showEffectiveFlowLogsConfigs.createStream(
+      this.innerApiCalls.showEffectiveFlowLogsConfigs as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+/**
+ * Equivalent to `showEffectiveFlowLogsConfigs`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource of the VpcFlowLogsConfig, specified in
+ *   the following format: `projects/{project_id}/locations/global`
+ * @param {string} request.resource
+ *   Required. The resource to get the effective VPC Flow Logs configuration
+ *   for. The resource must belong to the same project as the parent. The
+ *   resource must be a network, subnetwork, interconnect attachment, VPN
+ *   tunnel, or a project.
+ * @param {number} [request.pageSize]
+ *   Optional. Number of `EffectiveVpcFlowLogsConfigs` to return. Default is 30.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token from an earlier query, as returned in
+ *   `next_page_token`.
+ * @param {string} [request.filter]
+ *   Optional. Lists the `EffectiveVpcFlowLogsConfigs` that match the filter
+ *   expression. A filter expression must use the supported [CEL logic
+ *   operators]
+ *   (https://cloud.google.com/vpc/docs/about-flow-logs-records#supported_cel_logic_operators).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig|EffectiveVpcFlowLogsConfig}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/vpc_flow_logs_service.show_effective_flow_logs_configs.js</caption>
+ * region_tag:networkmanagement_v1beta1_generated_VpcFlowLogsService_ShowEffectiveFlowLogsConfigs_async
+ */
+  showEffectiveFlowLogsConfigsAsync(
+      request?: protos.google.cloud.networkmanagement.v1beta1.IShowEffectiveFlowLogsConfigsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.networkmanagement.v1beta1.IEffectiveVpcFlowLogsConfig>{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['showEffectiveFlowLogsConfigs'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('showEffectiveFlowLogsConfigs iterate %j', request);
+    return this.descriptors.page.showEffectiveFlowLogsConfigs.asyncIterate(
+      this.innerApiCalls['showEffectiveFlowLogsConfigs'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.networkmanagement.v1beta1.IEffectiveVpcFlowLogsConfig>;
   }
 /**
  * Gets the access control policy for a resource. Returns an empty policy

@@ -37,7 +37,8 @@ function main(project, region, sslPolicy) {
    */
   // const region = 'us-central1'
   /**
-   *  Name of the SSL policy to update. The name must be 1-63 characters long, and comply with RFC1035.
+   *  Name of the SSL policy to update. The name must be 1-63 characters long,
+   *  and comply with RFC1035.
    */
   // const sslPolicy = 'abc123'
 

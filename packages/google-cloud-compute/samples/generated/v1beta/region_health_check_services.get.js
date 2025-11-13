@@ -29,7 +29,8 @@ function main(healthCheckService, project, region) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Name of the HealthCheckService to update. The name must be 1-63 characters long, and comply with RFC1035.
+   *  Name of the HealthCheckService to update. The name
+   *  must be 1-63 characters long, and comply with RFC1035.
    */
   // const healthCheckService = 'abc123'
   /**
