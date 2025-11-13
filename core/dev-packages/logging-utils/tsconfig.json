@@ -1,0 +1,15 @@
+{
+  "extends": "./node_modules/gts/tsconfig-google.json",
+  "compilerOptions": {
+    "lib": ["es2018", "dom"],
+    "rootDir": ".",
+    "outDir": "build",
+    "noImplicitAny": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true                             /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables `allowSyntheticDefaultImports` for type compatibility. */
+  },
+  "include": [
+    "src/*.ts",
+    "test/*.ts"
+  ]
+}

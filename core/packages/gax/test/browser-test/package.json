@@ -1,0 +1,59 @@
+{
+  "name": "google-gax-browser-test",
+  "version": "0.1.0",
+  "description": "",
+  "main": "build/src/index.js",
+  "types": "build/src/index.d.ts",
+  "files": [
+    "build/test"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "Apache-2.0",
+  "keywords": [],
+  "scripts": {
+    "compile": "tsc",
+    "prefetch-cleanup": "rm -rf node_modules package-lock.json google-gax*.tgz showcase-echo-client*.tgz showcase-server*.tgz",
+    "prefetch-google-gax": "cd ../.. && npm pack && mv google-gax*.tgz test/browser-test/google-gax.tgz",
+    "prefetch-showcase-echo-client": "cd ../showcase-echo-client && npm run prefetch && npm install && npm pack && mv showcase-echo-client*.tgz ../browser-test/showcase-echo-client.tgz",
+    "prefetch-showcase-server": "cd ../showcase-server && npm install && npm pack && mv showcase-server*.tgz ../browser-test/showcase-server.tgz",
+    "prefetch": "npm run prefetch-cleanup && npm run prefetch-google-gax && npm run prefetch-showcase-echo-client && npm run prefetch-showcase-server",
+    "prepare": "npm run compile",
+    "pretest": "npm run compile",
+    "test": "karma start"
+  },
+  "devDependencies": {
+    "@types/mocha": "^9.1.1",
+    "@types/node": "^20.5.0",
+    "@types/sinon": "^10.0.13",
+    "assert": "^2.1.0",
+    "browserify-zlib": "^0.2.0",
+    "core-js": "^3.40.0",
+    "crypto-browserify": "^3.12.1",
+    "google-gax": "./google-gax.tgz",
+    "https-browserify": "^1.0.0",
+    "is-docker": "^2.2.1",
+    "karma": "^6.4.4",
+    "karma-child-process": "^1.0.14",
+    "karma-chrome-launcher": "^3.2.0",
+    "karma-mocha": "^2.0.1",
+    "karma-sourcemap-loader": "^0.4.0",
+    "karma-webpack": "^5.0.1",
+    "mocha": "^10.0.0",
+    "os-browserify": "^0.3.0",
+    "path-browserify": "^1.0.1",
+    "process": "^0.11.10",
+    "puppeteer": "^16.0.0",
+    "querystring-es3": "^0.2.1",
+    "showcase-echo-client": "./showcase-echo-client.tgz",
+    "showcase-server": "./showcase-server.tgz",
+    "sinon": "^14.0.0",
+    "stream-browserify": "^3.0.0",
+    "stream-http": "^3.2.0",
+    "typescript": "^5.7.3",
+    "url": "^0.11.4",
+    "webpack": "^5.97.1",
+    "webpack-cli": "^4.0.0"
+  }
+}
