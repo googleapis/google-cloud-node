@@ -1454,13 +1454,6 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
-                            },
-                            "productIdBase64UrlEncoded": {
-                              "type": "bool",
-                              "id": 5,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
                             }
                           }
                         },
@@ -1962,8 +1955,7 @@
                                 "REVIEW_PRODUCT_ISSUE_IN_MERCHANT_CENTER": 1,
                                 "REVIEW_ACCOUNT_ISSUE_IN_MERCHANT_CENTER": 2,
                                 "LEGAL_APPEAL_IN_HELP_CENTER": 3,
-                                "VERIFY_IDENTITY_IN_MERCHANT_CENTER": 4,
-                                "VERIFY_BUSINESS_VIDEO_IN_MERCHANT_CENTER": 5
+                                "VERIFY_IDENTITY_IN_MERCHANT_CENTER": 4
                               }
                             }
                           }
