@@ -15,7 +15,7 @@
       "regionTag": "merchantapi_v1_generated_ProductInputsService_InsertProductInput_async",
       "title": "ProductInputsService insertProductInput Sample",
       "origin": "API_DEFINITION",
-      "description": " [Uploads a product input to your Merchant Center account](/merchant/api/guides/products/add-manage#add_a_product). You must have a products [data source](/merchant/api/guides/data-sources/api-sources#create-primary-data-source) to be able to insert a product. The unique identifier of the data source is passed as a query parameter in the request URL. If a product input with the same contentLanguage, offerId, and dataSource already exists, then the product input inserted by this method replaces that entry. After inserting, updating, or deleting a product input, it may take several minutes before the processed product can be retrieved.",
+      "description": " [Uploads a product input to your Merchant Center account](/merchant/api/guides/products/overview#upload-product-input). You must have a products [data source](/merchant/api/guides/data-sources/overview) to be able to insert a product. The unique identifier of the data source is passed as a query parameter in the request URL. If a product input with the same contentLanguage, offerId, and dataSource already exists, then the product input inserted by this method replaces that entry. After inserting, updating, or deleting a product input, it may take several minutes before the processed product can be retrieved.",
       "canonical": true,
       "file": "product_inputs_service.insert_product_input.js",
       "language": "JAVASCRIPT",
@@ -70,7 +70,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 89,
+          "end": 76,
           "type": "FULL"
         }
       ],
@@ -90,10 +90,6 @@
           {
             "name": "data_source",
             "type": "TYPE_STRING"
-          },
-          {
-            "name": "product_id_base64_url_encoded",
-            "type": "TYPE_BOOL"
           }
         ],
         "resultType": ".google.shopping.merchant.products.v1.ProductInput",
@@ -122,7 +118,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 79,
+          "end": 66,
           "type": "FULL"
         }
       ],
@@ -138,10 +134,6 @@
           {
             "name": "data_source",
             "type": "TYPE_STRING"
-          },
-          {
-            "name": "product_id_base64_url_encoded",
-            "type": "TYPE_BOOL"
           }
         ],
         "resultType": ".google.protobuf.Empty",
@@ -170,7 +162,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 74,
+          "end": 62,
           "type": "FULL"
         }
       ],
@@ -182,10 +174,6 @@
           {
             "name": "name",
             "type": "TYPE_STRING"
-          },
-          {
-            "name": "product_id_base64_url_encoded",
-            "type": "TYPE_BOOL"
           }
         ],
         "resultType": ".google.shopping.merchant.products.v1.Product",

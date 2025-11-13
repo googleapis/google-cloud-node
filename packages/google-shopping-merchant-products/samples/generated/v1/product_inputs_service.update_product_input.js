@@ -54,19 +54,6 @@ function main(productInput, dataSource) {
    *  `accounts/123456/dataSources/104628`.
    */
   // const dataSource = 'abc123'
-  /**
-   *  Optional. If true, the `{productInput}` in the `name` field of the request
-   *  will be interpreted as unpadded base64url-encoded and decoded during
-   *  request processing to match the decoded value. Default value is `false`.
-   *  Use this if your `{productInput}` contains special characters, such as
-   *  forward slash
-   *  `/` or other characters that are unpadded base64url-encoded (as per RFC
-   *  7515: https://datatracker.ietf.org/doc/html/rfc7515#section-2).
-   *  Note that future versions of the API will only accept unpadded
-   *  base64url-encoded product ids, so we strongly recommend proactively setting
-   *  this to `true` and encoding the product ids.
-   */
-  // const productIdBase64UrlEncoded = true
 
   // Imports the Products library
   const {ProductInputsServiceClient} = require('@google-shopping/products').v1;
