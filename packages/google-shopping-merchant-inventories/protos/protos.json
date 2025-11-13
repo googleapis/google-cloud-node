@@ -308,13 +308,6 @@
                             "pageToken": {
                               "type": "string",
                               "id": 3
-                            },
-                            "productIdBase64UrlEncoded": {
-                              "type": "bool",
-                              "id": 4,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
                             }
                           }
                         },
@@ -347,13 +340,6 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED"
                               }
-                            },
-                            "productIdBase64UrlEncoded": {
-                              "type": "bool",
-                              "id": 3,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
                             }
                           }
                         },
@@ -365,13 +351,6 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED",
                                 "(google.api.resource_reference).type": "merchantapi.googleapis.com/LocalInventory"
-                              }
-                            },
-                            "productIdBase64UrlEncoded": {
-                              "type": "bool",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           }
@@ -489,13 +468,6 @@
                             "pageToken": {
                               "type": "string",
                               "id": 3
-                            },
-                            "productIdBase64UrlEncoded": {
-                              "type": "bool",
-                              "id": 4,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
                             }
                           }
                         },
@@ -528,13 +500,6 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED"
                               }
-                            },
-                            "productIdBase64UrlEncoded": {
-                              "type": "bool",
-                              "id": 3,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
                             }
                           }
                         },
@@ -546,13 +511,6 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED",
                                 "(google.api.resource_reference).type": "merchantapi.googleapis.com/RegionalInventory"
-                              }
-                            },
-                            "productIdBase64UrlEncoded": {
-                              "type": "bool",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           }
