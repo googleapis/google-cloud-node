@@ -2517,13 +2517,10 @@
                     },
                     "v1beta": {
                       "options": {
-                        "csharp_namespace": "Google.Shopping.Merchant.Products.V1Beta",
                         "go_package": "cloud.google.com/go/shopping/merchant/products/apiv1beta/productspb;productspb",
                         "java_multiple_files": true,
                         "java_outer_classname": "ProductsProto",
                         "java_package": "com.google.shopping.merchant.products.v1beta",
-                        "php_namespace": "Google\\Shopping\\Merchant\\Products\\V1beta",
-                        "ruby_package": "Google::Shopping::Merchant::Products::V1beta",
                         "(google.api.resource_definition).type": "merchantapi.googleapis.com/Account",
                         "(google.api.resource_definition).pattern": "accounts/{account}"
                       },
@@ -2720,13 +2717,6 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED"
                               }
-                            },
-                            "productIdBase64UrlEncoded": {
-                              "type": "bool",
-                              "id": 4,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
                             }
                           }
                         },
@@ -2745,13 +2735,6 @@
                               "id": 2,
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            },
-                            "productIdBase64UrlEncoded": {
-                              "type": "bool",
-                              "id": 3,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           }
@@ -3850,16 +3833,6 @@
                               "oneof": [
                                 "maxTransitTime"
                               ]
-                            },
-                            "_handlingCutoffTime": {
-                              "oneof": [
-                                "handlingCutoffTime"
-                              ]
-                            },
-                            "_handlingCutoffTimezone": {
-                              "oneof": [
-                                "handlingCutoffTimezone"
-                              ]
                             }
                           },
                           "fields": {
@@ -3915,20 +3888,6 @@
                             "maxTransitTime": {
                               "type": "int64",
                               "id": 11,
-                              "options": {
-                                "proto3_optional": true
-                              }
-                            },
-                            "handlingCutoffTime": {
-                              "type": "string",
-                              "id": 12,
-                              "options": {
-                                "proto3_optional": true
-                              }
-                            },
-                            "handlingCutoffTimezone": {
-                              "type": "string",
-                              "id": 13,
                               "options": {
                                 "proto3_optional": true
                               }
@@ -4514,13 +4473,6 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED",
                                 "(google.api.resource_reference).type": "merchantapi.googleapis.com/Product"
-                              }
-                            },
-                            "productIdBase64UrlEncoded": {
-                              "type": "bool",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           }
