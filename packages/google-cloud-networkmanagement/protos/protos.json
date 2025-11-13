@@ -3771,8 +3771,10 @@
                             "endpoint",
                             "googleService",
                             "forwardingRule",
+                            "hybridSubnet",
                             "vpnGateway",
                             "vpnTunnel",
+                            "interconnectAttachment",
                             "vpcConnector",
                             "directVpcEgressConnection",
                             "serverlessExternalConnection",
@@ -3838,6 +3840,10 @@
                           "type": "ForwardingRuleInfo",
                           "id": 9
                         },
+                        "hybridSubnet": {
+                          "type": "HybridSubnetInfo",
+                          "id": 36
+                        },
                         "vpnGateway": {
                           "type": "VpnGatewayInfo",
                           "id": 10
@@ -3845,6 +3851,10 @@
                         "vpnTunnel": {
                           "type": "VpnTunnelInfo",
                           "id": 11
+                        },
+                        "interconnectAttachment": {
+                          "type": "InterconnectAttachmentInfo",
+                          "id": 35
                         },
                         "vpcConnector": {
                           "type": "VpcConnectorInfo",
@@ -3969,8 +3979,10 @@
                             "ARRIVE_AT_INSTANCE": 9,
                             "ARRIVE_AT_INTERNAL_LOAD_BALANCER": 10,
                             "ARRIVE_AT_EXTERNAL_LOAD_BALANCER": 11,
+                            "ARRIVE_AT_HYBRID_SUBNET": 38,
                             "ARRIVE_AT_VPN_GATEWAY": 12,
                             "ARRIVE_AT_VPN_TUNNEL": 13,
+                            "ARRIVE_AT_INTERCONNECT_ATTACHMENT": 37,
                             "ARRIVE_AT_VPC_CONNECTOR": 24,
                             "DIRECT_VPC_EGRESS_CONNECTION": 35,
                             "SERVERLESS_EXTERNAL_CONNECTION": 36,
@@ -4124,6 +4136,10 @@
                         "policyPriority": {
                           "type": "int32",
                           "id": 12
+                        },
+                        "targetType": {
+                          "type": "TargetType",
+                          "id": 13
                         }
                       },
                       "nested": {
@@ -4139,6 +4155,13 @@
                             "UNSUPPORTED_FIREWALL_POLICY_RULE": 100,
                             "TRACKING_STATE": 101,
                             "ANALYSIS_SKIPPED": 102
+                          }
+                        },
+                        "TargetType": {
+                          "values": {
+                            "TARGET_TYPE_UNSPECIFIED": 0,
+                            "INSTANCES": 1,
+                            "INTERNAL_MANAGED_LB": 2
                           }
                         }
                       }
@@ -4485,6 +4508,22 @@
                         }
                       }
                     },
+                    "HybridSubnetInfo": {
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
                     "VpnGatewayInfo": {
                       "fields": {
                         "displayName": {
@@ -4559,6 +4598,52 @@
                             "ROUTE_BASED": 1,
                             "POLICY_BASED": 2,
                             "DYNAMIC": 3
+                          }
+                        }
+                      }
+                    },
+                    "InterconnectAttachmentInfo": {
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "interconnectUri": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "cloudRouterUri": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "type": {
+                          "type": "Type",
+                          "id": 6
+                        },
+                        "l2AttachmentMatchedIpAddress": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_info).format": "IPV4_OR_IPV6"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Type": {
+                          "values": {
+                            "TYPE_UNSPECIFIED": 0,
+                            "DEDICATED": 1,
+                            "PARTNER": 2,
+                            "PARTNER_PROVIDER": 3,
+                            "L2_DEDICATED": 4
                           }
                         }
                       }
@@ -4797,7 +4882,8 @@
                             "NON_ROUTABLE_IP_ADDRESS": 22,
                             "UNKNOWN_ISSUE_IN_GOOGLE_MANAGED_PROJECT": 30,
                             "UNSUPPORTED_GOOGLE_MANAGED_PROJECT_CONFIG": 31,
-                            "NO_SERVERLESS_IP_RANGES": 37
+                            "NO_SERVERLESS_IP_RANGES": 37,
+                            "IP_VERSION_PROTOCOL_MISMATCH": 40
                           }
                         }
                       }
@@ -4823,6 +4909,14 @@
                         "region": {
                           "type": "string",
                           "id": 5
+                        },
+                        "sourceGeolocationCode": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "destinationGeolocationCode": {
+                          "type": "string",
+                          "id": 7
                         }
                       },
                       "nested": {
@@ -4920,7 +5014,13 @@
                             "TRAFFIC_FROM_HYBRID_ENDPOINT_TO_INTERNET_DISALLOWED": 89,
                             "NO_MATCHING_NAT64_GATEWAY": 90,
                             "LOAD_BALANCER_BACKEND_IP_VERSION_MISMATCH": 96,
-                            "NO_KNOWN_ROUTE_FROM_NCC_NETWORK_TO_DESTINATION": 97
+                            "NO_KNOWN_ROUTE_FROM_NCC_NETWORK_TO_DESTINATION": 97,
+                            "CLOUD_NAT_PROTOCOL_UNSUPPORTED": 99,
+                            "L2_INTERCONNECT_UNSUPPORTED_PROTOCOL": 100,
+                            "L2_INTERCONNECT_UNSUPPORTED_PORT": 101,
+                            "L2_INTERCONNECT_DESTINATION_IP_MISMATCH": 102,
+                            "NCC_ROUTE_WITHIN_HYBRID_SUBNET_UNSUPPORTED": 104,
+                            "HYBRID_SUBNET_REGION_MISMATCH": 105
                           }
                         }
                       }
@@ -5218,7 +5318,8 @@
                             "INTERNAL_TO_EXTERNAL": 1,
                             "EXTERNAL_TO_INTERNAL": 2,
                             "CLOUD_NAT": 3,
-                            "PRIVATE_SERVICE_CONNECT": 4
+                            "PRIVATE_SERVICE_CONNECT": 4,
+                            "GKE_POD_IP_MASQUERADING": 5
                           }
                         }
                       }
@@ -5785,6 +5886,20 @@
                               }
                             }
                           ]
+                        },
+                        "ShowEffectiveFlowLogsConfigs": {
+                          "requestType": "ShowEffectiveFlowLogsConfigsRequest",
+                          "responseType": "ShowEffectiveFlowLogsConfigsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*}/vpcFlowLogsConfigs:showEffectiveFlowLogsConfigs"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=projects/*/locations/*}/vpcFlowLogsConfigs:showEffectiveFlowLogsConfigs"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -6092,6 +6207,64 @@
                         }
                       }
                     },
+                    "ShowEffectiveFlowLogsConfigsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "networkmanagement.googleapis.com/VpcFlowLogsConfig"
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ShowEffectiveFlowLogsConfigsResponse": {
+                      "fields": {
+                        "effectiveFlowLogsConfigs": {
+                          "rule": "repeated",
+                          "type": "EffectiveVpcFlowLogsConfig",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
                     "VpcFlowLogsConfig": {
                       "options": {
                         "(google.api.resource).type": "networkmanagement.googleapis.com/VpcFlowLogsConfig",
@@ -6307,6 +6480,142 @@
                             "TARGET_RESOURCE_STATE_UNSPECIFIED": 0,
                             "TARGET_RESOURCE_EXISTS": 1,
                             "TARGET_RESOURCE_DOES_NOT_EXIST": 2
+                          }
+                        }
+                      }
+                    },
+                    "EffectiveVpcFlowLogsConfig": {
+                      "oneofs": {
+                        "_state": {
+                          "oneof": [
+                            "state"
+                          ]
+                        },
+                        "_aggregationInterval": {
+                          "oneof": [
+                            "aggregationInterval"
+                          ]
+                        },
+                        "_flowSampling": {
+                          "oneof": [
+                            "flowSampling"
+                          ]
+                        },
+                        "_metadata": {
+                          "oneof": [
+                            "metadata"
+                          ]
+                        },
+                        "_filterExpr": {
+                          "oneof": [
+                            "filterExpr"
+                          ]
+                        },
+                        "_crossProjectMetadata": {
+                          "oneof": [
+                            "crossProjectMetadata"
+                          ]
+                        },
+                        "targetResource": {
+                          "oneof": [
+                            "network",
+                            "subnet",
+                            "interconnectAttachment",
+                            "vpnTunnel"
+                          ]
+                        },
+                        "_scope": {
+                          "oneof": [
+                            "scope"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "state": {
+                          "type": "VpcFlowLogsConfig.State",
+                          "id": 3,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "aggregationInterval": {
+                          "type": "VpcFlowLogsConfig.AggregationInterval",
+                          "id": 4,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "flowSampling": {
+                          "type": "float",
+                          "id": 5,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "metadata": {
+                          "type": "VpcFlowLogsConfig.Metadata",
+                          "id": 6,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "metadataFields": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 7
+                        },
+                        "filterExpr": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "crossProjectMetadata": {
+                          "type": "VpcFlowLogsConfig.CrossProjectMetadata",
+                          "id": 13,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "network": {
+                          "type": "string",
+                          "id": 100
+                        },
+                        "subnet": {
+                          "type": "string",
+                          "id": 101
+                        },
+                        "interconnectAttachment": {
+                          "type": "string",
+                          "id": 102
+                        },
+                        "vpnTunnel": {
+                          "type": "string",
+                          "id": 103
+                        },
+                        "scope": {
+                          "type": "Scope",
+                          "id": 12,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Scope": {
+                          "values": {
+                            "SCOPE_UNSPECIFIED": 0,
+                            "SUBNET": 1,
+                            "COMPUTE_API_SUBNET": 2,
+                            "NETWORK": 3,
+                            "VPN_TUNNEL": 4,
+                            "INTERCONNECT_ATTACHMENT": 5,
+                            "ORGANIZATION": 6
                           }
                         }
                       }

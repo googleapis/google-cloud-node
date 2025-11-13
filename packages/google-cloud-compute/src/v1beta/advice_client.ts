@@ -319,7 +319,10 @@ export class AdviceClient {
   // -- Service calls --
   // -------------------
 /**
- * Advise how, where and when to create the requested amount of instances with specified accelerators, within the specified time and location limits. The method recommends creating future reservations for the requested resources.
+ * Advise how, where and when to create the requested amount of instances
+ * with specified accelerators, within the specified time and location limits.
+ * The method recommends creating future reservations for the requested
+ * resources.
  *
  * @param {Object} request
  *   The request object that will be sent.

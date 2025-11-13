@@ -29,7 +29,8 @@ function main(parentName, project, reservationSubBlock, zone) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The name of the parent reservation and parent block. In the format of reservations/{reservation_name}/reservationBlocks/{reservation_block_name}
+   *  The name of the parent reservation and parent block. In the format of
+   *  reservations/{reservation_name}/reservationBlocks/{reservation_block_name}
    */
   // const parentName = 'abc123'
   /**
@@ -37,9 +38,15 @@ function main(parentName, project, reservationSubBlock, zone) {
    */
   // const project = 'my-project'
   /**
-   *  The name of the reservation subBlock. Name should conform to RFC1035 or be a resource ID.
+   *  The name of the reservation subBlock.
+   *  Name should conform to RFC1035 or be a resource ID.
    */
   // const reservationSubBlock = 'abc123'
+  /**
+   *  View of the subBlock.
+   *  Check the View enum for the list of possible values.
+   */
+  // const view = 'abc123'
   /**
    *  Name of the zone for this request. Zone name should conform to RFC1035.
    */

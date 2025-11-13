@@ -41,7 +41,8 @@ function main(project, region, router) {
    */
   // const region = 'us-central1'
   /**
-   *  Name of the Router resource to query for the route policy. The name should conform to RFC1035.
+   *  Name of the Router resource to query for the route policy. The name should
+   *  conform to RFC1035.
    */
   // const router = 'abc123'
 
