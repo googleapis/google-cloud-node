@@ -4669,7 +4669,6 @@
                              * @property {string|null} [parent] ListLocalInventoriesRequest parent
                              * @property {number|null} [pageSize] ListLocalInventoriesRequest pageSize
                              * @property {string|null} [pageToken] ListLocalInventoriesRequest pageToken
-                             * @property {boolean|null} [productIdBase64UrlEncoded] ListLocalInventoriesRequest productIdBase64UrlEncoded
                              */
     
                             /**
@@ -4712,14 +4711,6 @@
                             ListLocalInventoriesRequest.prototype.pageToken = "";
     
                             /**
-                             * ListLocalInventoriesRequest productIdBase64UrlEncoded.
-                             * @member {boolean} productIdBase64UrlEncoded
-                             * @memberof google.shopping.merchant.inventories.v1beta.ListLocalInventoriesRequest
-                             * @instance
-                             */
-                            ListLocalInventoriesRequest.prototype.productIdBase64UrlEncoded = false;
-    
-                            /**
                              * Creates a new ListLocalInventoriesRequest instance using the specified properties.
                              * @function create
                              * @memberof google.shopping.merchant.inventories.v1beta.ListLocalInventoriesRequest
@@ -4749,8 +4740,6 @@
                                     writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
                                 if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                                     writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
-                                if (message.productIdBase64UrlEncoded != null && Object.hasOwnProperty.call(message, "productIdBase64UrlEncoded"))
-                                    writer.uint32(/* id 4, wireType 0 =*/32).bool(message.productIdBase64UrlEncoded);
                                 return writer;
                             };
     
@@ -4799,10 +4788,6 @@
                                             message.pageToken = reader.string();
                                             break;
                                         }
-                                    case 4: {
-                                            message.productIdBase64UrlEncoded = reader.bool();
-                                            break;
-                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -4847,9 +4832,6 @@
                                 if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                     if (!$util.isString(message.pageToken))
                                         return "pageToken: string expected";
-                                if (message.productIdBase64UrlEncoded != null && message.hasOwnProperty("productIdBase64UrlEncoded"))
-                                    if (typeof message.productIdBase64UrlEncoded !== "boolean")
-                                        return "productIdBase64UrlEncoded: boolean expected";
                                 return null;
                             };
     
@@ -4871,8 +4853,6 @@
                                     message.pageSize = object.pageSize | 0;
                                 if (object.pageToken != null)
                                     message.pageToken = String(object.pageToken);
-                                if (object.productIdBase64UrlEncoded != null)
-                                    message.productIdBase64UrlEncoded = Boolean(object.productIdBase64UrlEncoded);
                                 return message;
                             };
     
@@ -4893,7 +4873,6 @@
                                     object.parent = "";
                                     object.pageSize = 0;
                                     object.pageToken = "";
-                                    object.productIdBase64UrlEncoded = false;
                                 }
                                 if (message.parent != null && message.hasOwnProperty("parent"))
                                     object.parent = message.parent;
@@ -4901,8 +4880,6 @@
                                     object.pageSize = message.pageSize;
                                 if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                     object.pageToken = message.pageToken;
-                                if (message.productIdBase64UrlEncoded != null && message.hasOwnProperty("productIdBase64UrlEncoded"))
-                                    object.productIdBase64UrlEncoded = message.productIdBase64UrlEncoded;
                                 return object;
                             };
     
@@ -5193,7 +5170,6 @@
                              * @interface IInsertLocalInventoryRequest
                              * @property {string|null} [parent] InsertLocalInventoryRequest parent
                              * @property {google.shopping.merchant.inventories.v1beta.ILocalInventory|null} [localInventory] InsertLocalInventoryRequest localInventory
-                             * @property {boolean|null} [productIdBase64UrlEncoded] InsertLocalInventoryRequest productIdBase64UrlEncoded
                              */
     
                             /**
@@ -5228,14 +5204,6 @@
                             InsertLocalInventoryRequest.prototype.localInventory = null;
     
                             /**
-                             * InsertLocalInventoryRequest productIdBase64UrlEncoded.
-                             * @member {boolean} productIdBase64UrlEncoded
-                             * @memberof google.shopping.merchant.inventories.v1beta.InsertLocalInventoryRequest
-                             * @instance
-                             */
-                            InsertLocalInventoryRequest.prototype.productIdBase64UrlEncoded = false;
-    
-                            /**
                              * Creates a new InsertLocalInventoryRequest instance using the specified properties.
                              * @function create
                              * @memberof google.shopping.merchant.inventories.v1beta.InsertLocalInventoryRequest
@@ -5263,8 +5231,6 @@
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
                                 if (message.localInventory != null && Object.hasOwnProperty.call(message, "localInventory"))
                                     $root.google.shopping.merchant.inventories.v1beta.LocalInventory.encode(message.localInventory, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                                if (message.productIdBase64UrlEncoded != null && Object.hasOwnProperty.call(message, "productIdBase64UrlEncoded"))
-                                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.productIdBase64UrlEncoded);
                                 return writer;
                             };
     
@@ -5307,10 +5273,6 @@
                                         }
                                     case 2: {
                                             message.localInventory = $root.google.shopping.merchant.inventories.v1beta.LocalInventory.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    case 3: {
-                                            message.productIdBase64UrlEncoded = reader.bool();
                                             break;
                                         }
                                     default:
@@ -5356,9 +5318,6 @@
                                     if (error)
                                         return "localInventory." + error;
                                 }
-                                if (message.productIdBase64UrlEncoded != null && message.hasOwnProperty("productIdBase64UrlEncoded"))
-                                    if (typeof message.productIdBase64UrlEncoded !== "boolean")
-                                        return "productIdBase64UrlEncoded: boolean expected";
                                 return null;
                             };
     
@@ -5381,8 +5340,6 @@
                                         throw TypeError(".google.shopping.merchant.inventories.v1beta.InsertLocalInventoryRequest.localInventory: object expected");
                                     message.localInventory = $root.google.shopping.merchant.inventories.v1beta.LocalInventory.fromObject(object.localInventory);
                                 }
-                                if (object.productIdBase64UrlEncoded != null)
-                                    message.productIdBase64UrlEncoded = Boolean(object.productIdBase64UrlEncoded);
                                 return message;
                             };
     
@@ -5402,14 +5359,11 @@
                                 if (options.defaults) {
                                     object.parent = "";
                                     object.localInventory = null;
-                                    object.productIdBase64UrlEncoded = false;
                                 }
                                 if (message.parent != null && message.hasOwnProperty("parent"))
                                     object.parent = message.parent;
                                 if (message.localInventory != null && message.hasOwnProperty("localInventory"))
                                     object.localInventory = $root.google.shopping.merchant.inventories.v1beta.LocalInventory.toObject(message.localInventory, options);
-                                if (message.productIdBase64UrlEncoded != null && message.hasOwnProperty("productIdBase64UrlEncoded"))
-                                    object.productIdBase64UrlEncoded = message.productIdBase64UrlEncoded;
                                 return object;
                             };
     
@@ -5449,7 +5403,6 @@
                              * @memberof google.shopping.merchant.inventories.v1beta
                              * @interface IDeleteLocalInventoryRequest
                              * @property {string|null} [name] DeleteLocalInventoryRequest name
-                             * @property {boolean|null} [productIdBase64UrlEncoded] DeleteLocalInventoryRequest productIdBase64UrlEncoded
                              */
     
                             /**
@@ -5474,14 +5427,6 @@
                              * @instance
                              */
                             DeleteLocalInventoryRequest.prototype.name = "";
-    
-                            /**
-                             * DeleteLocalInventoryRequest productIdBase64UrlEncoded.
-                             * @member {boolean} productIdBase64UrlEncoded
-                             * @memberof google.shopping.merchant.inventories.v1beta.DeleteLocalInventoryRequest
-                             * @instance
-                             */
-                            DeleteLocalInventoryRequest.prototype.productIdBase64UrlEncoded = false;
     
                             /**
                              * Creates a new DeleteLocalInventoryRequest instance using the specified properties.
@@ -5509,8 +5454,6 @@
                                     writer = $Writer.create();
                                 if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                                if (message.productIdBase64UrlEncoded != null && Object.hasOwnProperty.call(message, "productIdBase64UrlEncoded"))
-                                    writer.uint32(/* id 2, wireType 0 =*/16).bool(message.productIdBase64UrlEncoded);
                                 return writer;
                             };
     
@@ -5551,10 +5494,6 @@
                                             message.name = reader.string();
                                             break;
                                         }
-                                    case 2: {
-                                            message.productIdBase64UrlEncoded = reader.bool();
-                                            break;
-                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -5593,9 +5532,6 @@
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     if (!$util.isString(message.name))
                                         return "name: string expected";
-                                if (message.productIdBase64UrlEncoded != null && message.hasOwnProperty("productIdBase64UrlEncoded"))
-                                    if (typeof message.productIdBase64UrlEncoded !== "boolean")
-                                        return "productIdBase64UrlEncoded: boolean expected";
                                 return null;
                             };
     
@@ -5613,8 +5549,6 @@
                                 var message = new $root.google.shopping.merchant.inventories.v1beta.DeleteLocalInventoryRequest();
                                 if (object.name != null)
                                     message.name = String(object.name);
-                                if (object.productIdBase64UrlEncoded != null)
-                                    message.productIdBase64UrlEncoded = Boolean(object.productIdBase64UrlEncoded);
                                 return message;
                             };
     
@@ -5631,14 +5565,10 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
-                                if (options.defaults) {
+                                if (options.defaults)
                                     object.name = "";
-                                    object.productIdBase64UrlEncoded = false;
-                                }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
-                                if (message.productIdBase64UrlEncoded != null && message.hasOwnProperty("productIdBase64UrlEncoded"))
-                                    object.productIdBase64UrlEncoded = message.productIdBase64UrlEncoded;
                                 return object;
                             };
     
@@ -6246,7 +6176,6 @@
                              * @property {string|null} [parent] ListRegionalInventoriesRequest parent
                              * @property {number|null} [pageSize] ListRegionalInventoriesRequest pageSize
                              * @property {string|null} [pageToken] ListRegionalInventoriesRequest pageToken
-                             * @property {boolean|null} [productIdBase64UrlEncoded] ListRegionalInventoriesRequest productIdBase64UrlEncoded
                              */
     
                             /**
@@ -6289,14 +6218,6 @@
                             ListRegionalInventoriesRequest.prototype.pageToken = "";
     
                             /**
-                             * ListRegionalInventoriesRequest productIdBase64UrlEncoded.
-                             * @member {boolean} productIdBase64UrlEncoded
-                             * @memberof google.shopping.merchant.inventories.v1beta.ListRegionalInventoriesRequest
-                             * @instance
-                             */
-                            ListRegionalInventoriesRequest.prototype.productIdBase64UrlEncoded = false;
-    
-                            /**
                              * Creates a new ListRegionalInventoriesRequest instance using the specified properties.
                              * @function create
                              * @memberof google.shopping.merchant.inventories.v1beta.ListRegionalInventoriesRequest
@@ -6326,8 +6247,6 @@
                                     writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
                                 if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                                     writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
-                                if (message.productIdBase64UrlEncoded != null && Object.hasOwnProperty.call(message, "productIdBase64UrlEncoded"))
-                                    writer.uint32(/* id 4, wireType 0 =*/32).bool(message.productIdBase64UrlEncoded);
                                 return writer;
                             };
     
@@ -6376,10 +6295,6 @@
                                             message.pageToken = reader.string();
                                             break;
                                         }
-                                    case 4: {
-                                            message.productIdBase64UrlEncoded = reader.bool();
-                                            break;
-                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -6424,9 +6339,6 @@
                                 if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                     if (!$util.isString(message.pageToken))
                                         return "pageToken: string expected";
-                                if (message.productIdBase64UrlEncoded != null && message.hasOwnProperty("productIdBase64UrlEncoded"))
-                                    if (typeof message.productIdBase64UrlEncoded !== "boolean")
-                                        return "productIdBase64UrlEncoded: boolean expected";
                                 return null;
                             };
     
@@ -6448,8 +6360,6 @@
                                     message.pageSize = object.pageSize | 0;
                                 if (object.pageToken != null)
                                     message.pageToken = String(object.pageToken);
-                                if (object.productIdBase64UrlEncoded != null)
-                                    message.productIdBase64UrlEncoded = Boolean(object.productIdBase64UrlEncoded);
                                 return message;
                             };
     
@@ -6470,7 +6380,6 @@
                                     object.parent = "";
                                     object.pageSize = 0;
                                     object.pageToken = "";
-                                    object.productIdBase64UrlEncoded = false;
                                 }
                                 if (message.parent != null && message.hasOwnProperty("parent"))
                                     object.parent = message.parent;
@@ -6478,8 +6387,6 @@
                                     object.pageSize = message.pageSize;
                                 if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                     object.pageToken = message.pageToken;
-                                if (message.productIdBase64UrlEncoded != null && message.hasOwnProperty("productIdBase64UrlEncoded"))
-                                    object.productIdBase64UrlEncoded = message.productIdBase64UrlEncoded;
                                 return object;
                             };
     
@@ -6770,7 +6677,6 @@
                              * @interface IInsertRegionalInventoryRequest
                              * @property {string|null} [parent] InsertRegionalInventoryRequest parent
                              * @property {google.shopping.merchant.inventories.v1beta.IRegionalInventory|null} [regionalInventory] InsertRegionalInventoryRequest regionalInventory
-                             * @property {boolean|null} [productIdBase64UrlEncoded] InsertRegionalInventoryRequest productIdBase64UrlEncoded
                              */
     
                             /**
@@ -6805,14 +6711,6 @@
                             InsertRegionalInventoryRequest.prototype.regionalInventory = null;
     
                             /**
-                             * InsertRegionalInventoryRequest productIdBase64UrlEncoded.
-                             * @member {boolean} productIdBase64UrlEncoded
-                             * @memberof google.shopping.merchant.inventories.v1beta.InsertRegionalInventoryRequest
-                             * @instance
-                             */
-                            InsertRegionalInventoryRequest.prototype.productIdBase64UrlEncoded = false;
-    
-                            /**
                              * Creates a new InsertRegionalInventoryRequest instance using the specified properties.
                              * @function create
                              * @memberof google.shopping.merchant.inventories.v1beta.InsertRegionalInventoryRequest
@@ -6840,8 +6738,6 @@
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
                                 if (message.regionalInventory != null && Object.hasOwnProperty.call(message, "regionalInventory"))
                                     $root.google.shopping.merchant.inventories.v1beta.RegionalInventory.encode(message.regionalInventory, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                                if (message.productIdBase64UrlEncoded != null && Object.hasOwnProperty.call(message, "productIdBase64UrlEncoded"))
-                                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.productIdBase64UrlEncoded);
                                 return writer;
                             };
     
@@ -6884,10 +6780,6 @@
                                         }
                                     case 2: {
                                             message.regionalInventory = $root.google.shopping.merchant.inventories.v1beta.RegionalInventory.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    case 3: {
-                                            message.productIdBase64UrlEncoded = reader.bool();
                                             break;
                                         }
                                     default:
@@ -6933,9 +6825,6 @@
                                     if (error)
                                         return "regionalInventory." + error;
                                 }
-                                if (message.productIdBase64UrlEncoded != null && message.hasOwnProperty("productIdBase64UrlEncoded"))
-                                    if (typeof message.productIdBase64UrlEncoded !== "boolean")
-                                        return "productIdBase64UrlEncoded: boolean expected";
                                 return null;
                             };
     
@@ -6958,8 +6847,6 @@
                                         throw TypeError(".google.shopping.merchant.inventories.v1beta.InsertRegionalInventoryRequest.regionalInventory: object expected");
                                     message.regionalInventory = $root.google.shopping.merchant.inventories.v1beta.RegionalInventory.fromObject(object.regionalInventory);
                                 }
-                                if (object.productIdBase64UrlEncoded != null)
-                                    message.productIdBase64UrlEncoded = Boolean(object.productIdBase64UrlEncoded);
                                 return message;
                             };
     
@@ -6979,14 +6866,11 @@
                                 if (options.defaults) {
                                     object.parent = "";
                                     object.regionalInventory = null;
-                                    object.productIdBase64UrlEncoded = false;
                                 }
                                 if (message.parent != null && message.hasOwnProperty("parent"))
                                     object.parent = message.parent;
                                 if (message.regionalInventory != null && message.hasOwnProperty("regionalInventory"))
                                     object.regionalInventory = $root.google.shopping.merchant.inventories.v1beta.RegionalInventory.toObject(message.regionalInventory, options);
-                                if (message.productIdBase64UrlEncoded != null && message.hasOwnProperty("productIdBase64UrlEncoded"))
-                                    object.productIdBase64UrlEncoded = message.productIdBase64UrlEncoded;
                                 return object;
                             };
     
@@ -7026,7 +6910,6 @@
                              * @memberof google.shopping.merchant.inventories.v1beta
                              * @interface IDeleteRegionalInventoryRequest
                              * @property {string|null} [name] DeleteRegionalInventoryRequest name
-                             * @property {boolean|null} [productIdBase64UrlEncoded] DeleteRegionalInventoryRequest productIdBase64UrlEncoded
                              */
     
                             /**
@@ -7051,14 +6934,6 @@
                              * @instance
                              */
                             DeleteRegionalInventoryRequest.prototype.name = "";
-    
-                            /**
-                             * DeleteRegionalInventoryRequest productIdBase64UrlEncoded.
-                             * @member {boolean} productIdBase64UrlEncoded
-                             * @memberof google.shopping.merchant.inventories.v1beta.DeleteRegionalInventoryRequest
-                             * @instance
-                             */
-                            DeleteRegionalInventoryRequest.prototype.productIdBase64UrlEncoded = false;
     
                             /**
                              * Creates a new DeleteRegionalInventoryRequest instance using the specified properties.
@@ -7086,8 +6961,6 @@
                                     writer = $Writer.create();
                                 if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                                if (message.productIdBase64UrlEncoded != null && Object.hasOwnProperty.call(message, "productIdBase64UrlEncoded"))
-                                    writer.uint32(/* id 2, wireType 0 =*/16).bool(message.productIdBase64UrlEncoded);
                                 return writer;
                             };
     
@@ -7128,10 +7001,6 @@
                                             message.name = reader.string();
                                             break;
                                         }
-                                    case 2: {
-                                            message.productIdBase64UrlEncoded = reader.bool();
-                                            break;
-                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -7170,9 +7039,6 @@
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     if (!$util.isString(message.name))
                                         return "name: string expected";
-                                if (message.productIdBase64UrlEncoded != null && message.hasOwnProperty("productIdBase64UrlEncoded"))
-                                    if (typeof message.productIdBase64UrlEncoded !== "boolean")
-                                        return "productIdBase64UrlEncoded: boolean expected";
                                 return null;
                             };
     
@@ -7190,8 +7056,6 @@
                                 var message = new $root.google.shopping.merchant.inventories.v1beta.DeleteRegionalInventoryRequest();
                                 if (object.name != null)
                                     message.name = String(object.name);
-                                if (object.productIdBase64UrlEncoded != null)
-                                    message.productIdBase64UrlEncoded = Boolean(object.productIdBase64UrlEncoded);
                                 return message;
                             };
     
@@ -7208,14 +7072,10 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
-                                if (options.defaults) {
+                                if (options.defaults)
                                     object.name = "";
-                                    object.productIdBase64UrlEncoded = false;
-                                }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
-                                if (message.productIdBase64UrlEncoded != null && message.hasOwnProperty("productIdBase64UrlEncoded"))
-                                    object.productIdBase64UrlEncoded = message.productIdBase64UrlEncoded;
                                 return object;
                             };
     

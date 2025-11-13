@@ -1857,9 +1857,6 @@ export namespace google {
 
                         /** ListLocalInventoriesRequest pageToken */
                         pageToken?: (string|null);
-
-                        /** ListLocalInventoriesRequest productIdBase64UrlEncoded */
-                        productIdBase64UrlEncoded?: (boolean|null);
                     }
 
                     /** Represents a ListLocalInventoriesRequest. */
@@ -1879,9 +1876,6 @@ export namespace google {
 
                         /** ListLocalInventoriesRequest pageToken. */
                         public pageToken: string;
-
-                        /** ListLocalInventoriesRequest productIdBase64UrlEncoded. */
-                        public productIdBase64UrlEncoded: boolean;
 
                         /**
                          * Creates a new ListLocalInventoriesRequest instance using the specified properties.
@@ -2072,9 +2066,6 @@ export namespace google {
 
                         /** InsertLocalInventoryRequest localInventory */
                         localInventory?: (google.shopping.merchant.inventories.v1beta.ILocalInventory|null);
-
-                        /** InsertLocalInventoryRequest productIdBase64UrlEncoded */
-                        productIdBase64UrlEncoded?: (boolean|null);
                     }
 
                     /** Represents an InsertLocalInventoryRequest. */
@@ -2091,9 +2082,6 @@ export namespace google {
 
                         /** InsertLocalInventoryRequest localInventory. */
                         public localInventory?: (google.shopping.merchant.inventories.v1beta.ILocalInventory|null);
-
-                        /** InsertLocalInventoryRequest productIdBase64UrlEncoded. */
-                        public productIdBase64UrlEncoded: boolean;
 
                         /**
                          * Creates a new InsertLocalInventoryRequest instance using the specified properties.
@@ -2178,9 +2166,6 @@ export namespace google {
 
                         /** DeleteLocalInventoryRequest name */
                         name?: (string|null);
-
-                        /** DeleteLocalInventoryRequest productIdBase64UrlEncoded */
-                        productIdBase64UrlEncoded?: (boolean|null);
                     }
 
                     /** Represents a DeleteLocalInventoryRequest. */
@@ -2194,9 +2179,6 @@ export namespace google {
 
                         /** DeleteLocalInventoryRequest name. */
                         public name: string;
-
-                        /** DeleteLocalInventoryRequest productIdBase64UrlEncoded. */
-                        public productIdBase64UrlEncoded: boolean;
 
                         /**
                          * Creates a new DeleteLocalInventoryRequest instance using the specified properties.
@@ -2513,9 +2495,6 @@ export namespace google {
 
                         /** ListRegionalInventoriesRequest pageToken */
                         pageToken?: (string|null);
-
-                        /** ListRegionalInventoriesRequest productIdBase64UrlEncoded */
-                        productIdBase64UrlEncoded?: (boolean|null);
                     }
 
                     /** Represents a ListRegionalInventoriesRequest. */
@@ -2535,9 +2514,6 @@ export namespace google {
 
                         /** ListRegionalInventoriesRequest pageToken. */
                         public pageToken: string;
-
-                        /** ListRegionalInventoriesRequest productIdBase64UrlEncoded. */
-                        public productIdBase64UrlEncoded: boolean;
 
                         /**
                          * Creates a new ListRegionalInventoriesRequest instance using the specified properties.
@@ -2728,9 +2704,6 @@ export namespace google {
 
                         /** InsertRegionalInventoryRequest regionalInventory */
                         regionalInventory?: (google.shopping.merchant.inventories.v1beta.IRegionalInventory|null);
-
-                        /** InsertRegionalInventoryRequest productIdBase64UrlEncoded */
-                        productIdBase64UrlEncoded?: (boolean|null);
                     }
 
                     /** Represents an InsertRegionalInventoryRequest. */
@@ -2747,9 +2720,6 @@ export namespace google {
 
                         /** InsertRegionalInventoryRequest regionalInventory. */
                         public regionalInventory?: (google.shopping.merchant.inventories.v1beta.IRegionalInventory|null);
-
-                        /** InsertRegionalInventoryRequest productIdBase64UrlEncoded. */
-                        public productIdBase64UrlEncoded: boolean;
 
                         /**
                          * Creates a new InsertRegionalInventoryRequest instance using the specified properties.
@@ -2834,9 +2804,6 @@ export namespace google {
 
                         /** DeleteRegionalInventoryRequest name */
                         name?: (string|null);
-
-                        /** DeleteRegionalInventoryRequest productIdBase64UrlEncoded */
-                        productIdBase64UrlEncoded?: (boolean|null);
                     }
 
                     /** Represents a DeleteRegionalInventoryRequest. */
@@ -2850,9 +2817,6 @@ export namespace google {
 
                         /** DeleteRegionalInventoryRequest name. */
                         public name: string;
-
-                        /** DeleteRegionalInventoryRequest productIdBase64UrlEncoded. */
-                        public productIdBase64UrlEncoded: boolean;
 
                         /**
                          * Creates a new DeleteRegionalInventoryRequest instance using the specified properties.
