@@ -440,6 +440,11 @@
               "methods": [
                 "unregisterGcp"
               ]
+            },
+            "GetAccountForGcpRegistration": {
+              "methods": [
+                "getAccountForGcpRegistration"
+              ]
             }
           }
         },
@@ -459,6 +464,11 @@
             "UnregisterGcp": {
               "methods": [
                 "unregisterGcp"
+              ]
+            },
+            "GetAccountForGcpRegistration": {
+              "methods": [
+                "getAccountForGcpRegistration"
               ]
             }
           }
@@ -1048,6 +1058,11 @@
                 "updateUser"
               ]
             },
+            "VerifySelf": {
+              "methods": [
+                "verifySelf"
+              ]
+            },
             "ListUsers": {
               "methods": [
                 "listUsers",
@@ -1078,6 +1093,11 @@
             "UpdateUser": {
               "methods": [
                 "updateUser"
+              ]
+            },
+            "VerifySelf": {
+              "methods": [
+                "verifySelf"
               ]
             },
             "ListUsers": {

@@ -296,7 +296,7 @@ export class UserServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const userServiceStubMethods =
-        ['getUser', 'createUser', 'deleteUser', 'updateUser', 'listUsers'];
+        ['getUser', 'createUser', 'deleteUser', 'updateUser', 'listUsers', 'verifySelf'];
     for (const methodName of userServiceStubMethods) {
       const callPromise = this.userServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -796,6 +796,102 @@ export class UserServiceClient {
         {}|undefined
       ]) => {
         this._log.info('updateUser response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Updates the user that is represented by the caller from pending to
+ * verified.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.account
+ *   Required. The name of the account under which the caller is a user.
+ *   Format: `accounts/{account}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.shopping.merchant.accounts.v1.User|User}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/user_service.verify_self.js</caption>
+ * region_tag:merchantapi_v1_generated_UserService_VerifySelf_async
+ */
+  verifySelf(
+      request?: protos.google.shopping.merchant.accounts.v1.IVerifySelfRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.shopping.merchant.accounts.v1.IUser,
+        protos.google.shopping.merchant.accounts.v1.IVerifySelfRequest|undefined, {}|undefined
+      ]>;
+  verifySelf(
+      request: protos.google.shopping.merchant.accounts.v1.IVerifySelfRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.shopping.merchant.accounts.v1.IUser,
+          protos.google.shopping.merchant.accounts.v1.IVerifySelfRequest|null|undefined,
+          {}|null|undefined>): void;
+  verifySelf(
+      request: protos.google.shopping.merchant.accounts.v1.IVerifySelfRequest,
+      callback: Callback<
+          protos.google.shopping.merchant.accounts.v1.IUser,
+          protos.google.shopping.merchant.accounts.v1.IVerifySelfRequest|null|undefined,
+          {}|null|undefined>): void;
+  verifySelf(
+      request?: protos.google.shopping.merchant.accounts.v1.IVerifySelfRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.shopping.merchant.accounts.v1.IUser,
+          protos.google.shopping.merchant.accounts.v1.IVerifySelfRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.shopping.merchant.accounts.v1.IUser,
+          protos.google.shopping.merchant.accounts.v1.IVerifySelfRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.shopping.merchant.accounts.v1.IUser,
+        protos.google.shopping.merchant.accounts.v1.IVerifySelfRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'account': request.account ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('verifySelf request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.shopping.merchant.accounts.v1.IUser,
+        protos.google.shopping.merchant.accounts.v1.IVerifySelfRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('verifySelf response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.verifySelf(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.shopping.merchant.accounts.v1.IUser,
+        protos.google.shopping.merchant.accounts.v1.IVerifySelfRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('verifySelf response %j', response);
         return [response, options, rawResponse];
       }).catch((error: any) => {
         if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
