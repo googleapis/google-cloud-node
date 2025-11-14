@@ -46,6 +46,12 @@ function main(account, service) {
    *  `product_management` services may be provided.
    */
   // const service = [1,2,3,4]
+  /**
+   *  Optional. If a relationship is created with a provider, you can set an
+   *  alias for it with this field. The calling user must be an admin on the
+   *  provider to be able to set an alias.
+   */
+  // const setAlias = [1,2,3,4]
 
   // Imports the Accounts library
   const {AccountsServiceClient} = require('@google-shopping/accounts').v1;

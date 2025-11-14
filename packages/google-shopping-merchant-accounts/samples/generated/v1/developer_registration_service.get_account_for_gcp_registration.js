@@ -20,32 +20,14 @@
 
 'use strict';
 
-function main(name, developerEmail) {
-  // [START merchantapi_v1_generated_DeveloperRegistrationService_RegisterGcp_async]
+function main() {
+  // [START merchantapi_v1_generated_DeveloperRegistrationService_GetAccountForGcpRegistration_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
    * It may require correct/in-range values for request initialization.
    * TODO(developer): Uncomment these variables before running the sample.
    */
-  /**
-   *  Required. The name of the developer registration to be created for the
-   *  merchant account that the GCP will be registered with. Format:
-   *  `accounts/{account}/developerRegistration`
-   */
-  // const name = 'abc123'
-  /**
-   *  Immutable. If the developer email provided is associated with a user in the
-   *  merchant account provided, the user will be updated to have "API developer"
-   *  access type and the email preference corresponding to that user will be
-   *  updated to have the new "API notifications" preference. If the developer
-   *  email provided is not associated with any user we will just add it as a
-   *  contact. The email preference corresponding to that contact will have the
-   *  new "API notifications" preference. Make sure the email used is associated
-   *  with a Google Account (Google Workspace account or Gmail account)
-   *  and is not a service account as service accounts can't receive emails.
-   */
-  // const developerEmail = 'abc123'
 
   // Imports the Accounts library
   const {DeveloperRegistrationServiceClient} = require('@google-shopping/accounts').v1;
@@ -53,20 +35,18 @@ function main(name, developerEmail) {
   // Instantiates a client
   const accountsClient = new DeveloperRegistrationServiceClient();
 
-  async function callRegisterGcp() {
+  async function callGetAccountForGcpRegistration() {
     // Construct request
     const request = {
-      name,
-      developerEmail,
     };
 
     // Run request
-    const response = await accountsClient.registerGcp(request);
+    const response = await accountsClient.getAccountForGcpRegistration(request);
     console.log(response);
   }
 
-  callRegisterGcp();
-  // [END merchantapi_v1_generated_DeveloperRegistrationService_RegisterGcp_async]
+  callGetAccountForGcpRegistration();
+  // [END merchantapi_v1_generated_DeveloperRegistrationService_GetAccountForGcpRegistration_async]
 }
 
 process.on('unhandledRejection', err => {

@@ -516,6 +516,10 @@ export class AccountsServiceClient {
  *   used to create a sub-account under an existing advanced account through
  *   this method. Additional `account_management` or
  *   `product_management` services may be provided.
+ * @param {number[]} [request.setAlias]
+ *   Optional. If a relationship is created with a provider, you can set an
+ *   alias for it with this field. The calling user must be an admin on the
+ *   provider to be able to set an alias.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -601,10 +605,13 @@ export class AccountsServiceClient {
 /**
  * Deletes the specified account regardless of its type: standalone, advanced
  * account or sub-account. Deleting an advanced account leads to the deletion
- * of all of its sub-accounts. Executing this method requires admin access.
- * The deletion succeeds only if the account does not provide services
- * to any other account and has no processed offers. You can use the `force`
- * parameter to override this.
+ * of all of its sub-accounts. This also deletes the account's [developer
+ * registration
+ * entity](/merchant/api/reference/rest/accounts_v1/accounts.developerRegistration)
+ * and any associated GCP project to the account. Executing this method
+ * requires admin access. The deletion succeeds only if the account does not
+ * provide services to any other account and has no processed offers. You can
+ * use the `force` parameter to override this.
  *
  * @param {Object} request
  *   The request object that will be sent.

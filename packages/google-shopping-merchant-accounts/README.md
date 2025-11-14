@@ -85,6 +85,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | delete checkout settings | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/checkout_settings_service.delete_checkout_settings.js) |
 | get checkout settings | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/checkout_settings_service.get_checkout_settings.js) |
 | update checkout settings | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/checkout_settings_service.update_checkout_settings.js) |
+| get account for gcp registration | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/developer_registration_service.get_account_for_gcp_registration.js) |
 | get developer registration | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/developer_registration_service.get_developer_registration.js) |
 | register gcp | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/developer_registration_service.register_gcp.js) |
 | unregister gcp | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/developer_registration_service.unregister_gcp.js) |
@@ -132,6 +133,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | get user | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/user_service.get_user.js) |
 | list users | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/user_service.list_users.js) |
 | update user | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/user_service.update_user.js) |
+| verify self | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1/user_service.verify_self.js) |
 | list account issues | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1beta/account_issue_service.list_account_issues.js) |
 | get account tax | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1beta/account_tax_service.get_account_tax.js) |
 | list account tax | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1beta/account_tax_service.list_account_tax.js) |

@@ -1660,6 +1660,9 @@ export namespace google {
 
                         /** CreateAndConfigureAccountRequest service */
                         service?: (google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.IAddAccountService[]|null);
+
+                        /** CreateAndConfigureAccountRequest setAlias */
+                        setAlias?: (google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.ISetAliasForRelationship[]|null);
                     }
 
                     /** Represents a CreateAndConfigureAccountRequest. */
@@ -1679,6 +1682,9 @@ export namespace google {
 
                         /** CreateAndConfigureAccountRequest service. */
                         public service: google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.IAddAccountService[];
+
+                        /** CreateAndConfigureAccountRequest setAlias. */
+                        public setAlias: google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.ISetAliasForRelationship[];
 
                         /**
                          * Creates a new CreateAndConfigureAccountRequest instance using the specified properties.
@@ -1768,6 +1774,9 @@ export namespace google {
 
                             /** AddUser user */
                             user?: (google.shopping.merchant.accounts.v1.IUser|null);
+
+                            /** AddUser verificationMailSettings */
+                            verificationMailSettings?: (google.shopping.merchant.accounts.v1.IVerificationMailSettings|null);
                         }
 
                         /** Represents an AddUser. */
@@ -1784,6 +1793,9 @@ export namespace google {
 
                             /** AddUser user. */
                             public user?: (google.shopping.merchant.accounts.v1.IUser|null);
+
+                            /** AddUser verificationMailSettings. */
+                            public verificationMailSettings?: (google.shopping.merchant.accounts.v1.IVerificationMailSettings|null);
 
                             /**
                              * Creates a new AddUser instance using the specified properties.
@@ -1869,8 +1881,23 @@ export namespace google {
                             /** AddAccountService accountAggregation */
                             accountAggregation?: (google.shopping.merchant.accounts.v1.IAccountAggregation|null);
 
+                            /** AddAccountService accountManagement */
+                            accountManagement?: (google.shopping.merchant.accounts.v1.IAccountManagement|null);
+
+                            /** AddAccountService comparisonShopping */
+                            comparisonShopping?: (google.shopping.merchant.accounts.v1.IComparisonShopping|null);
+
+                            /** AddAccountService productsManagement */
+                            productsManagement?: (google.shopping.merchant.accounts.v1.IProductsManagement|null);
+
+                            /** AddAccountService campaignsManagement */
+                            campaignsManagement?: (google.shopping.merchant.accounts.v1.ICampaignsManagement|null);
+
                             /** AddAccountService provider */
                             provider?: (string|null);
+
+                            /** AddAccountService externalAccountId */
+                            externalAccountId?: (string|null);
                         }
 
                         /** Represents an AddAccountService. */
@@ -1885,11 +1912,26 @@ export namespace google {
                             /** AddAccountService accountAggregation. */
                             public accountAggregation?: (google.shopping.merchant.accounts.v1.IAccountAggregation|null);
 
+                            /** AddAccountService accountManagement. */
+                            public accountManagement?: (google.shopping.merchant.accounts.v1.IAccountManagement|null);
+
+                            /** AddAccountService comparisonShopping. */
+                            public comparisonShopping?: (google.shopping.merchant.accounts.v1.IComparisonShopping|null);
+
+                            /** AddAccountService productsManagement. */
+                            public productsManagement?: (google.shopping.merchant.accounts.v1.IProductsManagement|null);
+
+                            /** AddAccountService campaignsManagement. */
+                            public campaignsManagement?: (google.shopping.merchant.accounts.v1.ICampaignsManagement|null);
+
                             /** AddAccountService provider. */
                             public provider?: (string|null);
 
+                            /** AddAccountService externalAccountId. */
+                            public externalAccountId: string;
+
                             /** AddAccountService serviceType. */
-                            public serviceType?: "accountAggregation";
+                            public serviceType?: ("accountAggregation"|"accountManagement"|"comparisonShopping"|"productsManagement"|"campaignsManagement");
 
                             /**
                              * Creates a new AddAccountService instance using the specified properties.
@@ -1963,6 +2005,109 @@ export namespace google {
 
                             /**
                              * Gets the default type url for AddAccountService
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a SetAliasForRelationship. */
+                        interface ISetAliasForRelationship {
+
+                            /** SetAliasForRelationship provider */
+                            provider?: (string|null);
+
+                            /** SetAliasForRelationship accountIdAlias */
+                            accountIdAlias?: (string|null);
+                        }
+
+                        /** Represents a SetAliasForRelationship. */
+                        class SetAliasForRelationship implements ISetAliasForRelationship {
+
+                            /**
+                             * Constructs a new SetAliasForRelationship.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.ISetAliasForRelationship);
+
+                            /** SetAliasForRelationship provider. */
+                            public provider: string;
+
+                            /** SetAliasForRelationship accountIdAlias. */
+                            public accountIdAlias: string;
+
+                            /**
+                             * Creates a new SetAliasForRelationship instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns SetAliasForRelationship instance
+                             */
+                            public static create(properties?: google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.ISetAliasForRelationship): google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.SetAliasForRelationship;
+
+                            /**
+                             * Encodes the specified SetAliasForRelationship message. Does not implicitly {@link google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.SetAliasForRelationship.verify|verify} messages.
+                             * @param message SetAliasForRelationship message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.ISetAliasForRelationship, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified SetAliasForRelationship message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.SetAliasForRelationship.verify|verify} messages.
+                             * @param message SetAliasForRelationship message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.ISetAliasForRelationship, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a SetAliasForRelationship message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns SetAliasForRelationship
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.SetAliasForRelationship;
+
+                            /**
+                             * Decodes a SetAliasForRelationship message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns SetAliasForRelationship
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.SetAliasForRelationship;
+
+                            /**
+                             * Verifies a SetAliasForRelationship message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a SetAliasForRelationship message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns SetAliasForRelationship
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.SetAliasForRelationship;
+
+                            /**
+                             * Creates a plain object from a SetAliasForRelationship message. Also converts values to other types if specified.
+                             * @param message SetAliasForRelationship
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.SetAliasForRelationship, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this SetAliasForRelationship to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for SetAliasForRelationship
                              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                              * @returns The default type url
                              */
@@ -2747,6 +2892,9 @@ export namespace google {
                         /** AccountService localListingManagement */
                         localListingManagement?: (google.shopping.merchant.accounts.v1.ILocalListingManagement|null);
 
+                        /** AccountService comparisonShopping */
+                        comparisonShopping?: (google.shopping.merchant.accounts.v1.IComparisonShopping|null);
+
                         /** AccountService name */
                         name?: (string|null);
 
@@ -2790,6 +2938,9 @@ export namespace google {
                         /** AccountService localListingManagement. */
                         public localListingManagement?: (google.shopping.merchant.accounts.v1.ILocalListingManagement|null);
 
+                        /** AccountService comparisonShopping. */
+                        public comparisonShopping?: (google.shopping.merchant.accounts.v1.IComparisonShopping|null);
+
                         /** AccountService name. */
                         public name: string;
 
@@ -2809,7 +2960,7 @@ export namespace google {
                         public externalAccountId: string;
 
                         /** AccountService serviceType. */
-                        public serviceType?: ("productsManagement"|"campaignsManagement"|"accountManagement"|"accountAggregation"|"localListingManagement");
+                        public serviceType?: ("productsManagement"|"campaignsManagement"|"accountManagement"|"accountAggregation"|"localListingManagement"|"comparisonShopping");
 
                         /**
                          * Creates a new AccountService instance using the specified properties.
@@ -3966,6 +4117,97 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Properties of a ComparisonShopping. */
+                    interface IComparisonShopping {
+                    }
+
+                    /** Represents a ComparisonShopping. */
+                    class ComparisonShopping implements IComparisonShopping {
+
+                        /**
+                         * Constructs a new ComparisonShopping.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1.IComparisonShopping);
+
+                        /**
+                         * Creates a new ComparisonShopping instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ComparisonShopping instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1.IComparisonShopping): google.shopping.merchant.accounts.v1.ComparisonShopping;
+
+                        /**
+                         * Encodes the specified ComparisonShopping message. Does not implicitly {@link google.shopping.merchant.accounts.v1.ComparisonShopping.verify|verify} messages.
+                         * @param message ComparisonShopping message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1.IComparisonShopping, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ComparisonShopping message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1.ComparisonShopping.verify|verify} messages.
+                         * @param message ComparisonShopping message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1.IComparisonShopping, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ComparisonShopping message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ComparisonShopping
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1.ComparisonShopping;
+
+                        /**
+                         * Decodes a ComparisonShopping message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ComparisonShopping
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1.ComparisonShopping;
+
+                        /**
+                         * Verifies a ComparisonShopping message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ComparisonShopping message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ComparisonShopping
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1.ComparisonShopping;
+
+                        /**
+                         * Creates a plain object from a ComparisonShopping message. Also converts values to other types if specified.
+                         * @param message ComparisonShopping
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1.ComparisonShopping, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ComparisonShopping to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ComparisonShopping
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Properties of a Handshake. */
                     interface IHandshake {
 
@@ -4176,6 +4418,20 @@ export namespace google {
                          * @returns Promise
                          */
                         public listUsers(request: google.shopping.merchant.accounts.v1.IListUsersRequest): Promise<google.shopping.merchant.accounts.v1.ListUsersResponse>;
+
+                        /**
+                         * Calls VerifySelf.
+                         * @param request VerifySelfRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and User
+                         */
+                        public verifySelf(request: google.shopping.merchant.accounts.v1.IVerifySelfRequest, callback: google.shopping.merchant.accounts.v1.UserService.VerifySelfCallback): void;
+
+                        /**
+                         * Calls VerifySelf.
+                         * @param request VerifySelfRequest message or plain object
+                         * @returns Promise
+                         */
+                        public verifySelf(request: google.shopping.merchant.accounts.v1.IVerifySelfRequest): Promise<google.shopping.merchant.accounts.v1.User>;
                     }
 
                     namespace UserService {
@@ -4214,6 +4470,13 @@ export namespace google {
                          * @param [response] ListUsersResponse
                          */
                         type ListUsersCallback = (error: (Error|null), response?: google.shopping.merchant.accounts.v1.ListUsersResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.accounts.v1.UserService|verifySelf}.
+                         * @param error Error, if any
+                         * @param [response] User
+                         */
+                        type VerifySelfCallback = (error: (Error|null), response?: google.shopping.merchant.accounts.v1.User) => void;
                     }
 
                     /** Properties of a User. */
@@ -4951,6 +5214,210 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a VerifySelfRequest. */
+                    interface IVerifySelfRequest {
+
+                        /** VerifySelfRequest account */
+                        account?: (string|null);
+                    }
+
+                    /** Represents a VerifySelfRequest. */
+                    class VerifySelfRequest implements IVerifySelfRequest {
+
+                        /**
+                         * Constructs a new VerifySelfRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1.IVerifySelfRequest);
+
+                        /** VerifySelfRequest account. */
+                        public account: string;
+
+                        /**
+                         * Creates a new VerifySelfRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns VerifySelfRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1.IVerifySelfRequest): google.shopping.merchant.accounts.v1.VerifySelfRequest;
+
+                        /**
+                         * Encodes the specified VerifySelfRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1.VerifySelfRequest.verify|verify} messages.
+                         * @param message VerifySelfRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1.IVerifySelfRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified VerifySelfRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1.VerifySelfRequest.verify|verify} messages.
+                         * @param message VerifySelfRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1.IVerifySelfRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a VerifySelfRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns VerifySelfRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1.VerifySelfRequest;
+
+                        /**
+                         * Decodes a VerifySelfRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns VerifySelfRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1.VerifySelfRequest;
+
+                        /**
+                         * Verifies a VerifySelfRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a VerifySelfRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns VerifySelfRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1.VerifySelfRequest;
+
+                        /**
+                         * Creates a plain object from a VerifySelfRequest message. Also converts values to other types if specified.
+                         * @param message VerifySelfRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1.VerifySelfRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this VerifySelfRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for VerifySelfRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a VerificationMailSettings. */
+                    interface IVerificationMailSettings {
+
+                        /** VerificationMailSettings verificationMailMode */
+                        verificationMailMode?: (google.shopping.merchant.accounts.v1.VerificationMailSettings.VerificationMailMode|keyof typeof google.shopping.merchant.accounts.v1.VerificationMailSettings.VerificationMailMode|null);
+                    }
+
+                    /** Represents a VerificationMailSettings. */
+                    class VerificationMailSettings implements IVerificationMailSettings {
+
+                        /**
+                         * Constructs a new VerificationMailSettings.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1.IVerificationMailSettings);
+
+                        /** VerificationMailSettings verificationMailMode. */
+                        public verificationMailMode: (google.shopping.merchant.accounts.v1.VerificationMailSettings.VerificationMailMode|keyof typeof google.shopping.merchant.accounts.v1.VerificationMailSettings.VerificationMailMode);
+
+                        /**
+                         * Creates a new VerificationMailSettings instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns VerificationMailSettings instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1.IVerificationMailSettings): google.shopping.merchant.accounts.v1.VerificationMailSettings;
+
+                        /**
+                         * Encodes the specified VerificationMailSettings message. Does not implicitly {@link google.shopping.merchant.accounts.v1.VerificationMailSettings.verify|verify} messages.
+                         * @param message VerificationMailSettings message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1.IVerificationMailSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified VerificationMailSettings message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1.VerificationMailSettings.verify|verify} messages.
+                         * @param message VerificationMailSettings message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1.IVerificationMailSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a VerificationMailSettings message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns VerificationMailSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1.VerificationMailSettings;
+
+                        /**
+                         * Decodes a VerificationMailSettings message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns VerificationMailSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1.VerificationMailSettings;
+
+                        /**
+                         * Verifies a VerificationMailSettings message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a VerificationMailSettings message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns VerificationMailSettings
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1.VerificationMailSettings;
+
+                        /**
+                         * Creates a plain object from a VerificationMailSettings message. Also converts values to other types if specified.
+                         * @param message VerificationMailSettings
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1.VerificationMailSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this VerificationMailSettings to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for VerificationMailSettings
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace VerificationMailSettings {
+
+                        /** VerificationMailMode enum. */
+                        enum VerificationMailMode {
+                            VERIFICATION_MAIL_MODE_UNSPECIFIED = 0,
+                            SEND_VERIFICATION_MAIL = 1,
+                            SUPPRESS_VERIFICATION_MAIL = 2
+                        }
                     }
 
                     /** Represents an AutofeedSettingsService */
@@ -8106,6 +8573,20 @@ export namespace google {
                          * @returns Promise
                          */
                         public unregisterGcp(request: google.shopping.merchant.accounts.v1.IUnregisterGcpRequest): Promise<google.protobuf.Empty>;
+
+                        /**
+                         * Calls GetAccountForGcpRegistration.
+                         * @param request Empty message or plain object
+                         * @param callback Node-style callback called with the error, if any, and GetAccountForGcpRegistrationResponse
+                         */
+                        public getAccountForGcpRegistration(request: google.protobuf.IEmpty, callback: google.shopping.merchant.accounts.v1.DeveloperRegistrationService.GetAccountForGcpRegistrationCallback): void;
+
+                        /**
+                         * Calls GetAccountForGcpRegistration.
+                         * @param request Empty message or plain object
+                         * @returns Promise
+                         */
+                        public getAccountForGcpRegistration(request: google.protobuf.IEmpty): Promise<google.shopping.merchant.accounts.v1.GetAccountForGcpRegistrationResponse>;
                     }
 
                     namespace DeveloperRegistrationService {
@@ -8130,6 +8611,13 @@ export namespace google {
                          * @param [response] Empty
                          */
                         type UnregisterGcpCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.accounts.v1.DeveloperRegistrationService|getAccountForGcpRegistration}.
+                         * @param error Error, if any
+                         * @param [response] GetAccountForGcpRegistrationResponse
+                         */
+                        type GetAccountForGcpRegistrationCallback = (error: (Error|null), response?: google.shopping.merchant.accounts.v1.GetAccountForGcpRegistrationResponse) => void;
                     }
 
                     /** Properties of a DeveloperRegistration. */
@@ -8526,6 +9014,103 @@ export namespace google {
 
                         /**
                          * Gets the default type url for GetDeveloperRegistrationRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GetAccountForGcpRegistrationResponse. */
+                    interface IGetAccountForGcpRegistrationResponse {
+
+                        /** GetAccountForGcpRegistrationResponse name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetAccountForGcpRegistrationResponse. */
+                    class GetAccountForGcpRegistrationResponse implements IGetAccountForGcpRegistrationResponse {
+
+                        /**
+                         * Constructs a new GetAccountForGcpRegistrationResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1.IGetAccountForGcpRegistrationResponse);
+
+                        /** GetAccountForGcpRegistrationResponse name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetAccountForGcpRegistrationResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetAccountForGcpRegistrationResponse instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1.IGetAccountForGcpRegistrationResponse): google.shopping.merchant.accounts.v1.GetAccountForGcpRegistrationResponse;
+
+                        /**
+                         * Encodes the specified GetAccountForGcpRegistrationResponse message. Does not implicitly {@link google.shopping.merchant.accounts.v1.GetAccountForGcpRegistrationResponse.verify|verify} messages.
+                         * @param message GetAccountForGcpRegistrationResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1.IGetAccountForGcpRegistrationResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetAccountForGcpRegistrationResponse message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1.GetAccountForGcpRegistrationResponse.verify|verify} messages.
+                         * @param message GetAccountForGcpRegistrationResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1.IGetAccountForGcpRegistrationResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetAccountForGcpRegistrationResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetAccountForGcpRegistrationResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1.GetAccountForGcpRegistrationResponse;
+
+                        /**
+                         * Decodes a GetAccountForGcpRegistrationResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetAccountForGcpRegistrationResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1.GetAccountForGcpRegistrationResponse;
+
+                        /**
+                         * Verifies a GetAccountForGcpRegistrationResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetAccountForGcpRegistrationResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetAccountForGcpRegistrationResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1.GetAccountForGcpRegistrationResponse;
+
+                        /**
+                         * Creates a plain object from a GetAccountForGcpRegistrationResponse message. Also converts values to other types if specified.
+                         * @param message GetAccountForGcpRegistrationResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1.GetAccountForGcpRegistrationResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetAccountForGcpRegistrationResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetAccountForGcpRegistrationResponse
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -39616,6 +40201,113 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a VerificationMailSettings. */
+                    interface IVerificationMailSettings {
+
+                        /** VerificationMailSettings verificationMailMode */
+                        verificationMailMode?: (google.shopping.merchant.accounts.v1beta.VerificationMailSettings.VerificationMailMode|keyof typeof google.shopping.merchant.accounts.v1beta.VerificationMailSettings.VerificationMailMode|null);
+                    }
+
+                    /** Represents a VerificationMailSettings. */
+                    class VerificationMailSettings implements IVerificationMailSettings {
+
+                        /**
+                         * Constructs a new VerificationMailSettings.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1beta.IVerificationMailSettings);
+
+                        /** VerificationMailSettings verificationMailMode. */
+                        public verificationMailMode: (google.shopping.merchant.accounts.v1beta.VerificationMailSettings.VerificationMailMode|keyof typeof google.shopping.merchant.accounts.v1beta.VerificationMailSettings.VerificationMailMode);
+
+                        /**
+                         * Creates a new VerificationMailSettings instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns VerificationMailSettings instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1beta.IVerificationMailSettings): google.shopping.merchant.accounts.v1beta.VerificationMailSettings;
+
+                        /**
+                         * Encodes the specified VerificationMailSettings message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.VerificationMailSettings.verify|verify} messages.
+                         * @param message VerificationMailSettings message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1beta.IVerificationMailSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified VerificationMailSettings message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.VerificationMailSettings.verify|verify} messages.
+                         * @param message VerificationMailSettings message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.IVerificationMailSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a VerificationMailSettings message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns VerificationMailSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.VerificationMailSettings;
+
+                        /**
+                         * Decodes a VerificationMailSettings message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns VerificationMailSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.VerificationMailSettings;
+
+                        /**
+                         * Verifies a VerificationMailSettings message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a VerificationMailSettings message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns VerificationMailSettings
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.VerificationMailSettings;
+
+                        /**
+                         * Creates a plain object from a VerificationMailSettings message. Also converts values to other types if specified.
+                         * @param message VerificationMailSettings
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1beta.VerificationMailSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this VerificationMailSettings to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for VerificationMailSettings
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace VerificationMailSettings {
+
+                        /** VerificationMailMode enum. */
+                        enum VerificationMailMode {
+                            VERIFICATION_MAIL_MODE_UNSPECIFIED = 0,
+                            SEND_VERIFICATION_MAIL = 1,
+                            SUPPRESS_VERIFICATION_MAIL = 2
+                        }
                     }
                 }
             }
