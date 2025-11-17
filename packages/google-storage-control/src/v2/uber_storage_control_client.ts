@@ -179,6 +179,19 @@ export class StorageControlClient {
   }
 
   getProjectId(
+    request?: Callback<string, undefined, undefined>,
+    options?: CallOptions,
+  ): Promise<string>;
+  getProjectId(
+    request: Callback<string, undefined, undefined>,
+    options: CallOptions,
+    callback: Callback<string, undefined, undefined>,
+  ): void;
+  getProjectId(
+    request: Callback<string, undefined, undefined>,
+    callback: Callback<string, undefined, undefined>,
+  ): void;
+  getProjectId(
     callback?: Callback<string, undefined, undefined>,
   ): Promise<string> | void {
     if (callback) {
@@ -226,6 +239,34 @@ export class StorageControlClient {
    * @example <caption>include:samples/generated/v2/storage_control.create_folder.js</caption>
    * region_tag:storage_v2_generated_StorageControl_CreateFolder_async
    */
+
+  createFolder(
+    request?: protos.google.storage.control.v2.ICreateFolderRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IFolder,
+      protos.google.storage.control.v2.ICreateFolderRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  createFolder(
+    request: protos.google.storage.control.v2.ICreateFolderRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.storage.control.v2.IFolder,
+      protos.google.storage.control.v2.ICreateFolderRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createFolder(
+    request: protos.google.storage.control.v2.ICreateFolderRequest,
+    callback: Callback<
+      protos.google.storage.control.v2.IFolder,
+      protos.google.storage.control.v2.ICreateFolderRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createFolder(
     request?: protos.google.storage.control.v2.ICreateFolderRequest,
     optionsOrCallback?:
@@ -290,6 +331,34 @@ export class StorageControlClient {
    * @example <caption>include:samples/generated/v2/storage_control.delete_folder.js</caption>
    * region_tag:storage_v2_generated_StorageControl_DeleteFolder_async
    */
+
+  deleteFolder(
+    request?: protos.google.storage.control.v2.IDeleteFolderRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.storage.control.v2.IDeleteFolderRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteFolder(
+    request: protos.google.storage.control.v2.IDeleteFolderRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.storage.control.v2.IDeleteFolderRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteFolder(
+    request: protos.google.storage.control.v2.IDeleteFolderRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.storage.control.v2.IDeleteFolderRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteFolder(
     request?: protos.google.storage.control.v2.IDeleteFolderRequest,
     optionsOrCallback?:
@@ -354,6 +423,34 @@ export class StorageControlClient {
    * @example <caption>include:samples/generated/v2/storage_control.get_folder.js</caption>
    * region_tag:storage_v2_generated_StorageControl_GetFolder_async
    */
+
+  getFolder(
+    request?: protos.google.storage.control.v2.IGetFolderRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IFolder,
+      protos.google.storage.control.v2.IGetFolderRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getFolder(
+    request: protos.google.storage.control.v2.IGetFolderRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.storage.control.v2.IFolder,
+      protos.google.storage.control.v2.IGetFolderRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getFolder(
+    request: protos.google.storage.control.v2.IGetFolderRequest,
+    callback: Callback<
+      protos.google.storage.control.v2.IFolder,
+      protos.google.storage.control.v2.IGetFolderRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getFolder(
     request?: protos.google.storage.control.v2.IGetFolderRequest,
     optionsOrCallback?:
@@ -412,6 +509,38 @@ export class StorageControlClient {
    * @example <caption>include:samples/generated/v2/storage_control.get_storage_layout.js</caption>
    * region_tag:storage_v2_generated_StorageControl_GetStorageLayout_async
    */
+
+  getStorageLayout(
+    request?: protos.google.storage.control.v2.IGetStorageLayoutRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IStorageLayout,
+      protos.google.storage.control.v2.IGetStorageLayoutRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getStorageLayout(
+    request: protos.google.storage.control.v2.IGetStorageLayoutRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.storage.control.v2.IStorageLayout,
+      | protos.google.storage.control.v2.IGetStorageLayoutRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getStorageLayout(
+    request: protos.google.storage.control.v2.IGetStorageLayoutRequest,
+    callback: Callback<
+      protos.google.storage.control.v2.IStorageLayout,
+      | protos.google.storage.control.v2.IGetStorageLayoutRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getStorageLayout(
     request?: protos.google.storage.control.v2.IGetStorageLayoutRequest,
     optionsOrCallback?:
@@ -482,6 +611,38 @@ export class StorageControlClient {
    * @example <caption>include:samples/generated/v2/storage_control.create_managed_folder.js</caption>
    * region_tag:storage_v2_generated_StorageControl_CreateManagedFolder_async
    */
+
+  createManagedFolder(
+    request?: protos.google.storage.control.v2.ICreateManagedFolderRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IManagedFolder,
+      protos.google.storage.control.v2.ICreateManagedFolderRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  createManagedFolder(
+    request: protos.google.storage.control.v2.ICreateManagedFolderRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.storage.control.v2.IManagedFolder,
+      | protos.google.storage.control.v2.ICreateManagedFolderRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createManagedFolder(
+    request: protos.google.storage.control.v2.ICreateManagedFolderRequest,
+    callback: Callback<
+      protos.google.storage.control.v2.IManagedFolder,
+      | protos.google.storage.control.v2.ICreateManagedFolderRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createManagedFolder(
     request?: protos.google.storage.control.v2.ICreateManagedFolderRequest,
     optionsOrCallback?:
@@ -557,6 +718,38 @@ export class StorageControlClient {
    * @example <caption>include:samples/generated/v2/storage_control.delete_managed_folder.js</caption>
    * region_tag:storage_v2_generated_StorageControl_DeleteManagedFolder_async
    */
+
+  deleteManagedFolder(
+    request?: protos.google.storage.control.v2.IDeleteManagedFolderRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.storage.control.v2.IDeleteManagedFolderRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteManagedFolder(
+    request: protos.google.storage.control.v2.IDeleteManagedFolderRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.storage.control.v2.IDeleteManagedFolderRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteManagedFolder(
+    request: protos.google.storage.control.v2.IDeleteManagedFolderRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.storage.control.v2.IDeleteManagedFolderRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteManagedFolder(
     request?: protos.google.storage.control.v2.IDeleteManagedFolderRequest,
     optionsOrCallback?:
@@ -627,6 +820,38 @@ export class StorageControlClient {
    * @example <caption>include:samples/generated/v2/storage_control.get_managed_folder.js</caption>
    * region_tag:storage_v2_generated_StorageControl_GetManagedFolder_async
    */
+
+  getManagedFolder(
+    request?: protos.google.storage.control.v2.IGetManagedFolderRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IManagedFolder,
+      protos.google.storage.control.v2.IGetManagedFolderRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getManagedFolder(
+    request: protos.google.storage.control.v2.IGetManagedFolderRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.storage.control.v2.IManagedFolder,
+      | protos.google.storage.control.v2.IGetManagedFolderRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getManagedFolder(
+    request: protos.google.storage.control.v2.IGetManagedFolderRequest,
+    callback: Callback<
+      protos.google.storage.control.v2.IManagedFolder,
+      | protos.google.storage.control.v2.IGetManagedFolderRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getManagedFolder(
     request?: protos.google.storage.control.v2.IGetManagedFolderRequest,
     optionsOrCallback?:
@@ -694,6 +919,38 @@ export class StorageControlClient {
    * @example <caption>include:samples/generated/v2/storage_control.disable_anywhere_cache.js</caption>
    * region_tag:storage_v2_generated_StorageControl_DisableAnywhereCache_async
    */
+
+  disableAnywhereCache(
+    request?: protos.google.storage.control.v2.IDisableAnywhereCacheRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IAnywhereCache,
+      protos.google.storage.control.v2.IDisableAnywhereCacheRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  disableAnywhereCache(
+    request: protos.google.storage.control.v2.IDisableAnywhereCacheRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.storage.control.v2.IAnywhereCache,
+      | protos.google.storage.control.v2.IDisableAnywhereCacheRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  disableAnywhereCache(
+    request: protos.google.storage.control.v2.IDisableAnywhereCacheRequest,
+    callback: Callback<
+      protos.google.storage.control.v2.IAnywhereCache,
+      | protos.google.storage.control.v2.IDisableAnywhereCacheRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   disableAnywhereCache(
     request?: protos.google.storage.control.v2.IDisableAnywhereCacheRequest,
     optionsOrCallback?:
@@ -758,6 +1015,38 @@ export class StorageControlClient {
    * @example <caption>include:samples/generated/v2/storage_control.pause_anywhere_cache.js</caption>
    * region_tag:storage_v2_generated_StorageControl_PauseAnywhereCache_async
    */
+
+  pauseAnywhereCache(
+    request?: protos.google.storage.control.v2.IPauseAnywhereCacheRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IAnywhereCache,
+      protos.google.storage.control.v2.IPauseAnywhereCacheRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  pauseAnywhereCache(
+    request: protos.google.storage.control.v2.IPauseAnywhereCacheRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.storage.control.v2.IAnywhereCache,
+      | protos.google.storage.control.v2.IPauseAnywhereCacheRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  pauseAnywhereCache(
+    request: protos.google.storage.control.v2.IPauseAnywhereCacheRequest,
+    callback: Callback<
+      protos.google.storage.control.v2.IAnywhereCache,
+      | protos.google.storage.control.v2.IPauseAnywhereCacheRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   pauseAnywhereCache(
     request?: protos.google.storage.control.v2.IPauseAnywhereCacheRequest,
     optionsOrCallback?:
@@ -822,6 +1111,38 @@ export class StorageControlClient {
    * @example <caption>include:samples/generated/v2/storage_control.resume_anywhere_cache.js</caption>
    * region_tag:storage_v2_generated_StorageControl_ResumeAnywhereCache_async
    */
+
+  resumeAnywhereCache(
+    request?: protos.google.storage.control.v2.IResumeAnywhereCacheRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IAnywhereCache,
+      protos.google.storage.control.v2.IResumeAnywhereCacheRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  resumeAnywhereCache(
+    request: protos.google.storage.control.v2.IResumeAnywhereCacheRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.storage.control.v2.IAnywhereCache,
+      | protos.google.storage.control.v2.IResumeAnywhereCacheRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  resumeAnywhereCache(
+    request: protos.google.storage.control.v2.IResumeAnywhereCacheRequest,
+    callback: Callback<
+      protos.google.storage.control.v2.IAnywhereCache,
+      | protos.google.storage.control.v2.IResumeAnywhereCacheRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   resumeAnywhereCache(
     request?: protos.google.storage.control.v2.IResumeAnywhereCacheRequest,
     optionsOrCallback?:
@@ -885,6 +1206,38 @@ export class StorageControlClient {
    * @example <caption>include:samples/generated/v2/storage_control.get_anywhere_cache.js</caption>
    * region_tag:storage_v2_generated_StorageControl_GetAnywhereCache_async
    */
+
+  getAnywhereCache(
+    request?: protos.google.storage.control.v2.IGetAnywhereCacheRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IAnywhereCache,
+      protos.google.storage.control.v2.IGetAnywhereCacheRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getAnywhereCache(
+    request: protos.google.storage.control.v2.IGetAnywhereCacheRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.storage.control.v2.IAnywhereCache,
+      | protos.google.storage.control.v2.IGetAnywhereCacheRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getAnywhereCache(
+    request: protos.google.storage.control.v2.IGetAnywhereCacheRequest,
+    callback: Callback<
+      protos.google.storage.control.v2.IAnywhereCache,
+      | protos.google.storage.control.v2.IGetAnywhereCacheRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getAnywhereCache(
     request?: protos.google.storage.control.v2.IGetAnywhereCacheRequest,
     optionsOrCallback?:
@@ -947,6 +1300,41 @@ export class StorageControlClient {
    * @example <caption>include:samples/generated/v2/storage_control.get_project_intelligence_config.js</caption>
    * region_tag:storage_v2_generated_StorageControl_GetProjectIntelligenceConfig_async
    */
+
+  getProjectIntelligenceConfig(
+    request?: protos.google.storage.control.v2.IGetProjectIntelligenceConfigRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IIntelligenceConfig,
+      (
+        | protos.google.storage.control.v2.IGetProjectIntelligenceConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getProjectIntelligenceConfig(
+    request: protos.google.storage.control.v2.IGetProjectIntelligenceConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.storage.control.v2.IIntelligenceConfig,
+      | protos.google.storage.control.v2.IGetProjectIntelligenceConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getProjectIntelligenceConfig(
+    request: protos.google.storage.control.v2.IGetProjectIntelligenceConfigRequest,
+    callback: Callback<
+      protos.google.storage.control.v2.IIntelligenceConfig,
+      | protos.google.storage.control.v2.IGetProjectIntelligenceConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getProjectIntelligenceConfig(
     request?: protos.google.storage.control.v2.IGetProjectIntelligenceConfigRequest,
     optionsOrCallback?:
@@ -1019,6 +1407,41 @@ export class StorageControlClient {
    * @example <caption>include:samples/generated/v2/storage_control.update_project_intelligence_config.js</caption>
    * region_tag:storage_v2_generated_StorageControl_UpdateProjectIntelligenceConfig_async
    */
+
+  updateProjectIntelligenceConfig(
+    request?: protos.google.storage.control.v2.IUpdateProjectIntelligenceConfigRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IIntelligenceConfig,
+      (
+        | protos.google.storage.control.v2.IUpdateProjectIntelligenceConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updateProjectIntelligenceConfig(
+    request: protos.google.storage.control.v2.IUpdateProjectIntelligenceConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.storage.control.v2.IIntelligenceConfig,
+      | protos.google.storage.control.v2.IUpdateProjectIntelligenceConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateProjectIntelligenceConfig(
+    request: protos.google.storage.control.v2.IUpdateProjectIntelligenceConfigRequest,
+    callback: Callback<
+      protos.google.storage.control.v2.IIntelligenceConfig,
+      | protos.google.storage.control.v2.IUpdateProjectIntelligenceConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateProjectIntelligenceConfig(
     request?: protos.google.storage.control.v2.IUpdateProjectIntelligenceConfigRequest,
     optionsOrCallback?:
@@ -1087,6 +1510,41 @@ export class StorageControlClient {
    * @example <caption>include:samples/generated/v2/storage_control.get_folder_intelligence_config.js</caption>
    * region_tag:storage_v2_generated_StorageControl_GetFolderIntelligenceConfig_async
    */
+
+  getFolderIntelligenceConfig(
+    request?: protos.google.storage.control.v2.IGetFolderIntelligenceConfigRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IIntelligenceConfig,
+      (
+        | protos.google.storage.control.v2.IGetFolderIntelligenceConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getFolderIntelligenceConfig(
+    request: protos.google.storage.control.v2.IGetFolderIntelligenceConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.storage.control.v2.IIntelligenceConfig,
+      | protos.google.storage.control.v2.IGetFolderIntelligenceConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getFolderIntelligenceConfig(
+    request: protos.google.storage.control.v2.IGetFolderIntelligenceConfigRequest,
+    callback: Callback<
+      protos.google.storage.control.v2.IIntelligenceConfig,
+      | protos.google.storage.control.v2.IGetFolderIntelligenceConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getFolderIntelligenceConfig(
     request?: protos.google.storage.control.v2.IGetFolderIntelligenceConfigRequest,
     optionsOrCallback?:
@@ -1159,6 +1617,41 @@ export class StorageControlClient {
    * @example <caption>include:samples/generated/v2/storage_control.update_folder_intelligence_config.js</caption>
    * region_tag:storage_v2_generated_StorageControl_UpdateFolderIntelligenceConfig_async
    */
+
+  updateFolderIntelligenceConfig(
+    request?: protos.google.storage.control.v2.IUpdateFolderIntelligenceConfigRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IIntelligenceConfig,
+      (
+        | protos.google.storage.control.v2.IUpdateFolderIntelligenceConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updateFolderIntelligenceConfig(
+    request: protos.google.storage.control.v2.IUpdateFolderIntelligenceConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.storage.control.v2.IIntelligenceConfig,
+      | protos.google.storage.control.v2.IUpdateFolderIntelligenceConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateFolderIntelligenceConfig(
+    request: protos.google.storage.control.v2.IUpdateFolderIntelligenceConfigRequest,
+    callback: Callback<
+      protos.google.storage.control.v2.IIntelligenceConfig,
+      | protos.google.storage.control.v2.IUpdateFolderIntelligenceConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateFolderIntelligenceConfig(
     request?: protos.google.storage.control.v2.IUpdateFolderIntelligenceConfigRequest,
     optionsOrCallback?:
@@ -1227,6 +1720,41 @@ export class StorageControlClient {
    * @example <caption>include:samples/generated/v2/storage_control.get_organization_intelligence_config.js</caption>
    * region_tag:storage_v2_generated_StorageControl_GetOrganizationIntelligenceConfig_async
    */
+
+  getOrganizationIntelligenceConfig(
+    request?: protos.google.storage.control.v2.IGetOrganizationIntelligenceConfigRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IIntelligenceConfig,
+      (
+        | protos.google.storage.control.v2.IGetOrganizationIntelligenceConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getOrganizationIntelligenceConfig(
+    request: protos.google.storage.control.v2.IGetOrganizationIntelligenceConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.storage.control.v2.IIntelligenceConfig,
+      | protos.google.storage.control.v2.IGetOrganizationIntelligenceConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getOrganizationIntelligenceConfig(
+    request: protos.google.storage.control.v2.IGetOrganizationIntelligenceConfigRequest,
+    callback: Callback<
+      protos.google.storage.control.v2.IIntelligenceConfig,
+      | protos.google.storage.control.v2.IGetOrganizationIntelligenceConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getOrganizationIntelligenceConfig(
     request?: protos.google.storage.control.v2.IGetOrganizationIntelligenceConfigRequest,
     optionsOrCallback?:
@@ -1299,6 +1827,41 @@ export class StorageControlClient {
    * @example <caption>include:samples/generated/v2/storage_control.update_organization_intelligence_config.js</caption>
    * region_tag:storage_v2_generated_StorageControl_UpdateOrganizationIntelligenceConfig_async
    */
+
+  updateOrganizationIntelligenceConfig(
+    request?: protos.google.storage.control.v2.IUpdateOrganizationIntelligenceConfigRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IIntelligenceConfig,
+      (
+        | protos.google.storage.control.v2.IUpdateOrganizationIntelligenceConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updateOrganizationIntelligenceConfig(
+    request: protos.google.storage.control.v2.IUpdateOrganizationIntelligenceConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.storage.control.v2.IIntelligenceConfig,
+      | protos.google.storage.control.v2.IUpdateOrganizationIntelligenceConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateOrganizationIntelligenceConfig(
+    request: protos.google.storage.control.v2.IUpdateOrganizationIntelligenceConfigRequest,
+    callback: Callback<
+      protos.google.storage.control.v2.IIntelligenceConfig,
+      | protos.google.storage.control.v2.IUpdateOrganizationIntelligenceConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateOrganizationIntelligenceConfig(
     request?: protos.google.storage.control.v2.IUpdateOrganizationIntelligenceConfigRequest,
     optionsOrCallback?:
@@ -1372,6 +1935,34 @@ export class StorageControlClient {
    * @example <caption>include:samples/generated/v2/storage_control.get_iam_policy.js</caption>
    * region_tag:storage_v2_generated_StorageControl_GetIamPolicy_async
    */
+
+  getIamPolicy(
+    request?: protos.google.iam.v1.IGetIamPolicyRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getIamPolicy(
+    request: protos.google.iam.v1.IGetIamPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getIamPolicy(
+    request: protos.google.iam.v1.IGetIamPolicyRequest,
+    callback: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getIamPolicy(
     request?: protos.google.iam.v1.IGetIamPolicyRequest,
     optionsOrCallback?:
@@ -1439,6 +2030,34 @@ export class StorageControlClient {
    * @example <caption>include:samples/generated/v2/storage_control.set_iam_policy.js</caption>
    * region_tag:storage_v2_generated_StorageControl_SetIamPolicy_async
    */
+
+  setIamPolicy(
+    request?: protos.google.iam.v1.ISetIamPolicyRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  setIamPolicy(
+    request: protos.google.iam.v1.ISetIamPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  setIamPolicy(
+    request: protos.google.iam.v1.ISetIamPolicyRequest,
+    callback: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   setIamPolicy(
     request?: protos.google.iam.v1.ISetIamPolicyRequest,
     optionsOrCallback?:
@@ -1502,6 +2121,34 @@ export class StorageControlClient {
    * @example <caption>include:samples/generated/v2/storage_control.test_iam_permissions.js</caption>
    * region_tag:storage_v2_generated_StorageControl_TestIamPermissions_async
    */
+
+  testIamPermissions(
+    request?: protos.google.iam.v1.ITestIamPermissionsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  testIamPermissions(
+    request: protos.google.iam.v1.ITestIamPermissionsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  testIamPermissions(
+    request: protos.google.iam.v1.ITestIamPermissionsRequest,
+    callback: Callback<
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   testIamPermissions(
     request?: protos.google.iam.v1.ITestIamPermissionsRequest,
     optionsOrCallback?:
@@ -1575,6 +2222,43 @@ export class StorageControlClient {
    * @example <caption>include:samples/generated/v2/storage_control.rename_folder.js</caption>
    * region_tag:storage_v2_generated_StorageControl_RenameFolder_async
    */
+
+  renameFolder(
+    request?: protos.google.storage.control.v2.IRenameFolderRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.storage.control.v2.IFolder,
+        protos.google.storage.control.v2.IRenameFolderMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  renameFolder(
+    request: protos.google.storage.control.v2.IRenameFolderRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.storage.control.v2.IFolder,
+        protos.google.storage.control.v2.IRenameFolderMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  renameFolder(
+    request: protos.google.storage.control.v2.IRenameFolderRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.storage.control.v2.IFolder,
+        protos.google.storage.control.v2.IRenameFolderMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   renameFolder(
     request?: protos.google.storage.control.v2.IRenameFolderRequest,
     optionsOrCallback?:
@@ -1669,6 +2353,43 @@ export class StorageControlClient {
    * @example <caption>include:samples/generated/v2/storage_control.create_anywhere_cache.js</caption>
    * region_tag:storage_v2_generated_StorageControl_CreateAnywhereCache_async
    */
+
+  createAnywhereCache(
+    request?: protos.google.storage.control.v2.ICreateAnywhereCacheRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.storage.control.v2.IAnywhereCache,
+        protos.google.storage.control.v2.ICreateAnywhereCacheMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  createAnywhereCache(
+    request: protos.google.storage.control.v2.ICreateAnywhereCacheRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.storage.control.v2.IAnywhereCache,
+        protos.google.storage.control.v2.ICreateAnywhereCacheMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createAnywhereCache(
+    request: protos.google.storage.control.v2.ICreateAnywhereCacheRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.storage.control.v2.IAnywhereCache,
+        protos.google.storage.control.v2.ICreateAnywhereCacheMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createAnywhereCache(
     request?: protos.google.storage.control.v2.ICreateAnywhereCacheRequest,
     optionsOrCallback?:
@@ -1772,6 +2493,43 @@ export class StorageControlClient {
    * @example <caption>include:samples/generated/v2/storage_control.update_anywhere_cache.js</caption>
    * region_tag:storage_v2_generated_StorageControl_UpdateAnywhereCache_async
    */
+
+  updateAnywhereCache(
+    request?: protos.google.storage.control.v2.IUpdateAnywhereCacheRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.storage.control.v2.IAnywhereCache,
+        protos.google.storage.control.v2.IUpdateAnywhereCacheMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateAnywhereCache(
+    request: protos.google.storage.control.v2.IUpdateAnywhereCacheRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.storage.control.v2.IAnywhereCache,
+        protos.google.storage.control.v2.IUpdateAnywhereCacheMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateAnywhereCache(
+    request: protos.google.storage.control.v2.IUpdateAnywhereCacheRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.storage.control.v2.IAnywhereCache,
+        protos.google.storage.control.v2.IUpdateAnywhereCacheMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateAnywhereCache(
     request?: protos.google.storage.control.v2.IUpdateAnywhereCacheRequest,
     optionsOrCallback?:
@@ -1889,6 +2647,34 @@ export class StorageControlClient {
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
+
+  listFolders(
+    request?: protos.google.storage.control.v2.IListFoldersRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IFolder[],
+      protos.google.storage.control.v2.IListFoldersRequest | null,
+      protos.google.storage.control.v2.IListFoldersResponse,
+    ]
+  >;
+  listFolders(
+    request: protos.google.storage.control.v2.IListFoldersRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.storage.control.v2.IListFoldersRequest,
+      protos.google.storage.control.v2.IListFoldersResponse | null | undefined,
+      protos.google.storage.control.v2.IFolder
+    >,
+  ): void;
+  listFolders(
+    request: protos.google.storage.control.v2.IListFoldersRequest,
+    callback: PaginationCallback<
+      protos.google.storage.control.v2.IListFoldersRequest,
+      protos.google.storage.control.v2.IListFoldersResponse | null | undefined,
+      protos.google.storage.control.v2.IFolder
+    >,
+  ): void;
   listFolders(
     request?: protos.google.storage.control.v2.IListFoldersRequest,
     optionsOrCallback?:
@@ -2062,6 +2848,38 @@ export class StorageControlClient {
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
+
+  listManagedFolders(
+    request?: protos.google.storage.control.v2.IListManagedFoldersRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IManagedFolder[],
+      protos.google.storage.control.v2.IListManagedFoldersRequest | null,
+      protos.google.storage.control.v2.IListManagedFoldersResponse,
+    ]
+  >;
+  listManagedFolders(
+    request: protos.google.storage.control.v2.IListManagedFoldersRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.storage.control.v2.IListManagedFoldersRequest,
+      | protos.google.storage.control.v2.IListManagedFoldersResponse
+      | null
+      | undefined,
+      protos.google.storage.control.v2.IManagedFolder
+    >,
+  ): void;
+  listManagedFolders(
+    request: protos.google.storage.control.v2.IListManagedFoldersRequest,
+    callback: PaginationCallback<
+      protos.google.storage.control.v2.IListManagedFoldersRequest,
+      | protos.google.storage.control.v2.IListManagedFoldersResponse
+      | null
+      | undefined,
+      protos.google.storage.control.v2.IManagedFolder
+    >,
+  ): void;
   listManagedFolders(
     request?: protos.google.storage.control.v2.IListManagedFoldersRequest,
     optionsOrCallback?:
@@ -2214,6 +3032,38 @@ export class StorageControlClient {
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
+
+  listAnywhereCaches(
+    request?: protos.google.storage.control.v2.IListAnywhereCachesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IAnywhereCache[],
+      protos.google.storage.control.v2.IListAnywhereCachesRequest | null,
+      protos.google.storage.control.v2.IListAnywhereCachesResponse,
+    ]
+  >;
+  listAnywhereCaches(
+    request: protos.google.storage.control.v2.IListAnywhereCachesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.storage.control.v2.IListAnywhereCachesRequest,
+      | protos.google.storage.control.v2.IListAnywhereCachesResponse
+      | null
+      | undefined,
+      protos.google.storage.control.v2.IAnywhereCache
+    >,
+  ): void;
+  listAnywhereCaches(
+    request: protos.google.storage.control.v2.IListAnywhereCachesRequest,
+    callback: PaginationCallback<
+      protos.google.storage.control.v2.IListAnywhereCachesRequest,
+      | protos.google.storage.control.v2.IListAnywhereCachesResponse
+      | null
+      | undefined,
+      protos.google.storage.control.v2.IAnywhereCache
+    >,
+  ): void;
   listAnywhereCaches(
     request?: protos.google.storage.control.v2.IListAnywhereCachesRequest,
     optionsOrCallback?:
@@ -2362,6 +3212,28 @@ export class StorageControlClient {
    * // doThingsWith(response)
    * ```
    */
+
+  getOperation(
+    request?: protos.google.longrunning.GetOperationRequest,
+    options?: CallOptions,
+  ): Promise<[protos.google.longrunning.Operation]>;
+  getOperation(
+    request: protos.google.longrunning.GetOperationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.longrunning.Operation,
+      protos.google.longrunning.GetOperationRequest,
+      {} | null | undefined
+    >,
+  ): void;
+  getOperation(
+    request: protos.google.longrunning.GetOperationRequest,
+    callback: Callback<
+      protos.google.longrunning.Operation,
+      protos.google.longrunning.GetOperationRequest,
+      {} | null | undefined
+    >,
+  ): void;
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
     optionsOrCallback?:
@@ -2459,6 +3331,28 @@ export class StorageControlClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
+
+  cancelOperation(
+    request?: protos.google.longrunning.CancelOperationRequest,
+    options?: CallOptions,
+  ): Promise<protos.google.protobuf.Empty>;
+  cancelOperation(
+    request: protos.google.longrunning.CancelOperationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.longrunning.CancelOperationRequest,
+      protos.google.protobuf.Empty,
+      {} | undefined | null
+    >,
+  ): void;
+  cancelOperation(
+    request: protos.google.longrunning.CancelOperationRequest,
+    callback: Callback<
+      protos.google.longrunning.CancelOperationRequest,
+      protos.google.protobuf.Empty,
+      {} | undefined | null
+    >,
+  ): void;
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
@@ -2517,6 +3411,28 @@ export class StorageControlClient {
    * await client.deleteOperation({name: ''});
    * ```
    */
+
+  deleteOperation(
+    request?: protos.google.longrunning.DeleteOperationRequest,
+    options?: CallOptions,
+  ): Promise<protos.google.protobuf.Empty>;
+  deleteOperation(
+    request: protos.google.longrunning.DeleteOperationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.Empty,
+      protos.google.longrunning.DeleteOperationRequest,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteOperation(
+    request: protos.google.longrunning.DeleteOperationRequest,
+    callback: Callback<
+      protos.google.protobuf.Empty,
+      protos.google.longrunning.DeleteOperationRequest,
+      {} | null | undefined
+    >,
+  ): void;
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
     optionsOrCallback?:
@@ -2991,6 +3907,34 @@ export class StorageControlClient {
    * @example <caption>include:samples/generated/v2/storage.delete_bucket.js</caption>
    * region_tag:storage_v2_generated_Storage_DeleteBucket_async
    */
+
+  deleteBucket(
+    request?: protos.google.storage.v2.IDeleteBucketRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.storage.v2.IDeleteBucketRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteBucket(
+    request: protos.google.storage.v2.IDeleteBucketRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.storage.v2.IDeleteBucketRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteBucket(
+    request: protos.google.storage.v2.IDeleteBucketRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.storage.v2.IDeleteBucketRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteBucket(
     request?: protos.google.storage.v2.IDeleteBucketRequest,
     optionsOrCallback?:
@@ -3062,6 +4006,34 @@ export class StorageControlClient {
    * @example <caption>include:samples/generated/v2/storage.get_bucket.js</caption>
    * region_tag:storage_v2_generated_Storage_GetBucket_async
    */
+
+  getBucket(
+    request?: protos.google.storage.v2.IGetBucketRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.storage.v2.IBucket,
+      protos.google.storage.v2.IGetBucketRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getBucket(
+    request: protos.google.storage.v2.IGetBucketRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.storage.v2.IBucket,
+      protos.google.storage.v2.IGetBucketRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getBucket(
+    request: protos.google.storage.v2.IGetBucketRequest,
+    callback: Callback<
+      protos.google.storage.v2.IBucket,
+      protos.google.storage.v2.IGetBucketRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getBucket(
     request?: protos.google.storage.v2.IGetBucketRequest,
     optionsOrCallback?:
@@ -3147,6 +4119,34 @@ export class StorageControlClient {
    * @example <caption>include:samples/generated/v2/storage.create_bucket.js</caption>
    * region_tag:storage_v2_generated_Storage_CreateBucket_async
    */
+
+  createBucket(
+    request?: protos.google.storage.v2.ICreateBucketRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.storage.v2.IBucket,
+      protos.google.storage.v2.ICreateBucketRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  createBucket(
+    request: protos.google.storage.v2.ICreateBucketRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.storage.v2.IBucket,
+      protos.google.storage.v2.ICreateBucketRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createBucket(
+    request: protos.google.storage.v2.ICreateBucketRequest,
+    callback: Callback<
+      protos.google.storage.v2.IBucket,
+      protos.google.storage.v2.ICreateBucketRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createBucket(
     request?: protos.google.storage.v2.ICreateBucketRequest,
     optionsOrCallback?:
@@ -3219,6 +4219,38 @@ export class StorageControlClient {
    * @example <caption>include:samples/generated/v2/storage.lock_bucket_retention_policy.js</caption>
    * region_tag:storage_v2_generated_Storage_LockBucketRetentionPolicy_async
    */
+
+  lockBucketRetentionPolicy(
+    request?: protos.google.storage.v2.ILockBucketRetentionPolicyRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.storage.v2.IBucket,
+      protos.google.storage.v2.ILockBucketRetentionPolicyRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  lockBucketRetentionPolicy(
+    request: protos.google.storage.v2.ILockBucketRetentionPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.storage.v2.IBucket,
+      | protos.google.storage.v2.ILockBucketRetentionPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  lockBucketRetentionPolicy(
+    request: protos.google.storage.v2.ILockBucketRetentionPolicyRequest,
+    callback: Callback<
+      protos.google.storage.v2.IBucket,
+      | protos.google.storage.v2.ILockBucketRetentionPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   lockBucketRetentionPolicy(
     request?: protos.google.storage.v2.ILockBucketRetentionPolicyRequest,
     optionsOrCallback?:
@@ -3314,6 +4346,34 @@ export class StorageControlClient {
    * @example <caption>include:samples/generated/v2/storage.update_bucket.js</caption>
    * region_tag:storage_v2_generated_Storage_UpdateBucket_async
    */
+
+  updateBucket(
+    request?: protos.google.storage.v2.IUpdateBucketRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.storage.v2.IBucket,
+      protos.google.storage.v2.IUpdateBucketRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateBucket(
+    request: protos.google.storage.v2.IUpdateBucketRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.storage.v2.IBucket,
+      protos.google.storage.v2.IUpdateBucketRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateBucket(
+    request: protos.google.storage.v2.IUpdateBucketRequest,
+    callback: Callback<
+      protos.google.storage.v2.IBucket,
+      protos.google.storage.v2.IUpdateBucketRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateBucket(
     request?: protos.google.storage.v2.IUpdateBucketRequest,
     optionsOrCallback?:
@@ -3396,6 +4456,34 @@ export class StorageControlClient {
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
+
+  listBuckets(
+    request?: protos.google.storage.v2.IListBucketsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.storage.v2.IBucket[],
+      protos.google.storage.v2.IListBucketsRequest | null,
+      protos.google.storage.v2.IListBucketsResponse,
+    ]
+  >;
+  listBuckets(
+    request: protos.google.storage.v2.IListBucketsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.storage.v2.IListBucketsRequest,
+      protos.google.storage.v2.IListBucketsResponse | null | undefined,
+      protos.google.storage.v2.IBucket
+    >,
+  ): void;
+  listBuckets(
+    request: protos.google.storage.v2.IListBucketsRequest,
+    callback: PaginationCallback<
+      protos.google.storage.v2.IListBucketsRequest,
+      protos.google.storage.v2.IListBucketsResponse | null | undefined,
+      protos.google.storage.v2.IBucket
+    >,
+  ): void;
   listBuckets(
     request?: protos.google.storage.v2.IListBucketsRequest,
     optionsOrCallback?:

@@ -39,6 +39,91 @@ function getEscapedText(name: ts.PropertyName | ts.BindingName): string {
 }
 
 /**
+ * This is a helper function to generate the overloaded method signatures for a given method.
+ *
+ * @param {ts.MethodDeclaration | ts.GetAccessorDeclaration} node - The AST node for the method.
+ * @returns {string} The overloaded method signatures.
+ */
+function getOverloadedMethod(
+  node: ts.MethodDeclaration | ts.GetAccessorDeclaration
+): string {
+  if (ts.isGetAccessorDeclaration(node) || !node.body) {
+    return '';
+  }
+
+  const functionName = getEscapedText(node.name);
+  const parameters = node.parameters;
+
+  // We are looking for standard GAPIC methods which have this signature pattern
+  if (parameters.length < 2 || parameters.length > 3) {
+    return '';
+  }
+
+  const requestParam = parameters[0];
+  const optionsOrCallbackParam = parameters[1];
+
+  // Not a standard GAPIC method if the params don't have types
+  if (!requestParam.type || !optionsOrCallbackParam.type || !node.type) {
+    return '';
+  }
+
+  const requestParamName = getEscapedText(requestParam.name);
+  const requestType = requestParam.type.getText(sourceFile);
+
+  // Extract Promise and Callback types from return type
+  let promiseReturnType = '';
+  if (ts.isUnionTypeNode(node.type)) {
+    const promiseTypeNode = node.type.types.find(
+      t =>
+        t.kind === ts.SyntaxKind.TypeReference &&
+        t.getText(sourceFile).startsWith('Promise')
+    );
+    if (promiseTypeNode) {
+      promiseReturnType = promiseTypeNode.getText(sourceFile);
+    }
+  } else if (node.type.getText(sourceFile).startsWith('Promise')) {
+    promiseReturnType = node.type.getText(sourceFile);
+  }
+
+  // If there's no promise return type, it's not a method we need to overload.
+  if (!promiseReturnType) {
+    return '';
+  }
+
+  // Extract Callback type from the `optionsOrCallback` parameter
+  let callbackType = '';
+  if (ts.isUnionTypeNode(optionsOrCallbackParam.type)) {
+    const callbackTypeNode = optionsOrCallbackParam.type.types.find(
+      t =>
+        t.kind === ts.SyntaxKind.TypeReference &&
+        (t.getText(sourceFile).startsWith('Callback') ||
+          t.getText(sourceFile).startsWith('PaginationCallback'))
+    );
+    if (callbackTypeNode) {
+      callbackType = callbackTypeNode.getText(sourceFile);
+    }
+  }
+
+  // If there's no callback type, it's not a method we need to overload.
+  if (!callbackType) {
+    return '';
+  }
+
+  // Make request param non-optional for callback signatures
+  const requiredRequestType = requestType.replace('?', '');
+
+  const promiseSignature = `\n${functionName}(${requestParamName}?: ${requestType}, options?: CallOptions): ${promiseReturnType};`;
+  const callbackWithOptionsSignature = `\n${functionName}(${requestParamName}: ${requiredRequestType}, options: CallOptions, callback: ${callbackType}): void;`;
+  const callbackWithoutOptionsSignature = `\n${functionName}(${requestParamName}: ${requiredRequestType}, callback: ${callbackType}): void;`;
+
+  return (
+    promiseSignature +
+    callbackWithOptionsSignature +
+    callbackWithoutOptionsSignature
+  );
+}
+
+/**
  * This is a helper function to get the kind of a AST node.
  *
  * @param {ts.Node} node - The node to get the kind from.
@@ -133,6 +218,7 @@ function ast(file: string, client: string): [string, string][] {
     if (!isExcludedFunction) {
       const docString = methodDocstrings.get(functionName);
       output = output.concat(`\n\n${docString}`);
+      output = output.concat(getOverloadedMethod(node));
       if (isStatic) {
         output = output.concat('\tstatic ');
       }
