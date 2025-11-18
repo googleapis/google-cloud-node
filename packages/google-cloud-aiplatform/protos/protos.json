@@ -2962,6 +2962,114 @@
                         }
                       }
                     },
+                    "PrebuiltVoiceConfig": {
+                      "oneofs": {
+                        "_voiceName": {
+                          "oneof": [
+                            "voiceName"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "voiceName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "ReplicatedVoiceConfig": {
+                      "fields": {
+                        "mimeType": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "voiceSampleAudio": {
+                          "type": "bytes",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "VoiceConfig": {
+                      "oneofs": {
+                        "voiceConfig": {
+                          "oneof": [
+                            "prebuiltVoiceConfig",
+                            "replicatedVoiceConfig"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "prebuiltVoiceConfig": {
+                          "type": "PrebuiltVoiceConfig",
+                          "id": 1
+                        },
+                        "replicatedVoiceConfig": {
+                          "type": "ReplicatedVoiceConfig",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "SpeakerVoiceConfig": {
+                      "fields": {
+                        "speaker": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "voiceConfig": {
+                          "type": "VoiceConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "MultiSpeakerVoiceConfig": {
+                      "fields": {
+                        "speakerVoiceConfigs": {
+                          "rule": "repeated",
+                          "type": "SpeakerVoiceConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "SpeechConfig": {
+                      "fields": {
+                        "voiceConfig": {
+                          "type": "VoiceConfig",
+                          "id": 1
+                        },
+                        "languageCode": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "multiSpeakerVoiceConfig": {
+                          "type": "MultiSpeakerVoiceConfig",
+                          "id": 3
+                        }
+                      }
+                    },
                     "ImageConfig": {
                       "oneofs": {
                         "_aspectRatio": {
@@ -3046,6 +3154,11 @@
                         "_routingConfig": {
                           "oneof": [
                             "routingConfig"
+                          ]
+                        },
+                        "_speechConfig": {
+                          "oneof": [
+                            "speechConfig"
                           ]
                         },
                         "_imageConfig": {
@@ -3169,6 +3282,14 @@
                         "routingConfig": {
                           "type": "RoutingConfig",
                           "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "speechConfig": {
+                          "type": "SpeechConfig",
+                          "id": 23,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
