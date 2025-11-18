@@ -2434,6 +2434,11 @@
                             "backupMinimumEnforcedRetentionDuration"
                           ]
                         },
+                        "_backupRetentionInheritance": {
+                          "oneof": [
+                            "backupRetentionInheritance"
+                          ]
+                        },
                         "_deletable": {
                           "oneof": [
                             "deletable"
@@ -2447,6 +2452,11 @@
                         "_effectiveTime": {
                           "oneof": [
                             "effectiveTime"
+                          ]
+                        },
+                        "_encryptionConfig": {
+                          "oneof": [
+                            "encryptionConfig"
                           ]
                         }
                       },
@@ -2495,6 +2505,14 @@
                           "id": 20,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
+                          }
+                        },
+                        "backupRetentionInheritance": {
+                          "type": "BackupRetentionInheritance",
+                          "id": 27,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
                           }
                         },
@@ -2572,9 +2590,24 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "encryptionConfig": {
+                          "type": "EncryptionConfig",
+                          "id": 29,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
                         }
                       },
                       "nested": {
+                        "BackupRetentionInheritance": {
+                          "values": {
+                            "BACKUP_RETENTION_INHERITANCE_UNSPECIFIED": 0,
+                            "INHERIT_VAULT_RETENTION": 1,
+                            "MATCH_BACKUP_EXPIRE_TIME": 2
+                          }
+                        },
                         "State": {
                           "values": {
                             "STATE_UNSPECIFIED": 0,
@@ -2592,6 +2625,26 @@
                             "WITHIN_ORGANIZATION": 2,
                             "UNRESTRICTED": 3,
                             "WITHIN_ORG_BUT_UNRESTRICTED_FOR_BA": 4
+                          }
+                        },
+                        "EncryptionConfig": {
+                          "oneofs": {
+                            "_kmsKeyName": {
+                              "oneof": [
+                                "kmsKeyName"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "kmsKeyName": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey",
+                                "proto3_optional": true
+                              }
+                            }
                           }
                         }
                       }
@@ -3047,6 +3100,11 @@
                             "enforcedRetentionEndTime"
                           ]
                         },
+                        "_backupRetentionInheritance": {
+                          "oneof": [
+                            "backupRetentionInheritance"
+                          ]
+                        },
                         "_expireTime": {
                           "oneof": [
                             "expireTime"
@@ -3136,6 +3194,14 @@
                           "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "backupRetentionInheritance": {
+                          "type": "BackupVault.BackupRetentionInheritance",
+                          "id": 30,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "proto3_optional": true
                           }
                         },
@@ -3256,6 +3322,15 @@
                           "id": 31,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "kmsKeyVersions": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 33,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKeyVersion"
                           }
                         }
                       },
@@ -3899,6 +3974,11 @@
                             "computeInstanceRestoreProperties",
                             "diskRestoreProperties"
                           ]
+                        },
+                        "_clearOverridesFieldMask": {
+                          "oneof": [
+                            "clearOverridesFieldMask"
+                          ]
                         }
                       },
                       "fields": {
@@ -3937,6 +4017,14 @@
                         "diskRestoreProperties": {
                           "type": "DiskRestoreProperties",
                           "id": 7
+                        },
+                        "clearOverridesFieldMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },

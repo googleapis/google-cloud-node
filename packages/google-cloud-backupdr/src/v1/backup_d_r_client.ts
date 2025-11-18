@@ -2382,6 +2382,19 @@ export class BackupDRClient {
  *   Compute Engine instance properties to be overridden during restore.
  * @param {google.cloud.backupdr.v1.DiskRestoreProperties} request.diskRestoreProperties
  *   Disk properties to be overridden during restore.
+ * @param {google.protobuf.FieldMask} [request.clearOverridesFieldMask]
+ *   Optional. A field mask used to clear server-side default values
+ *   for fields within the `instance_properties` oneof.
+ *
+ *   When a field in this mask is cleared, the server will not apply its
+ *   default logic (like inheriting a value from the source) for that field.
+ *
+ *   The most common current use case is clearing default encryption keys.
+ *
+ *   Examples of field mask paths:
+ *   - Compute Instance Disks:
+ *   `compute_instance_restore_properties.disks.*.disk_encryption_key`
+ *   - Single Disk: `disk_restore_properties.disk_encryption_key`
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.

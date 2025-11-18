@@ -962,7 +962,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 89,
+          "end": 101,
           "type": "FULL"
         }
       ],
@@ -998,6 +998,10 @@
           {
             "name": "disk_restore_properties",
             "type": ".google.cloud.backupdr.v1.DiskRestoreProperties"
+          },
+          {
+            "name": "clear_overrides_field_mask",
+            "type": ".google.protobuf.FieldMask"
           }
         ],
         "resultType": ".google.longrunning.Operation",

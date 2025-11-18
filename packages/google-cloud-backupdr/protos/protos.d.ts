@@ -6015,6 +6015,9 @@ export namespace google {
                     /** BackupVault backupMinimumEnforcedRetentionDuration */
                     backupMinimumEnforcedRetentionDuration?: (google.protobuf.IDuration|null);
 
+                    /** BackupVault backupRetentionInheritance */
+                    backupRetentionInheritance?: (google.cloud.backupdr.v1.BackupVault.BackupRetentionInheritance|keyof typeof google.cloud.backupdr.v1.BackupVault.BackupRetentionInheritance|null);
+
                     /** BackupVault deletable */
                     deletable?: (boolean|null);
 
@@ -6044,6 +6047,9 @@ export namespace google {
 
                     /** BackupVault accessRestriction */
                     accessRestriction?: (google.cloud.backupdr.v1.BackupVault.AccessRestriction|keyof typeof google.cloud.backupdr.v1.BackupVault.AccessRestriction|null);
+
+                    /** BackupVault encryptionConfig */
+                    encryptionConfig?: (google.cloud.backupdr.v1.BackupVault.IEncryptionConfig|null);
                 }
 
                 /** Represents a BackupVault. */
@@ -6072,6 +6078,9 @@ export namespace google {
 
                     /** BackupVault backupMinimumEnforcedRetentionDuration. */
                     public backupMinimumEnforcedRetentionDuration?: (google.protobuf.IDuration|null);
+
+                    /** BackupVault backupRetentionInheritance. */
+                    public backupRetentionInheritance?: (google.cloud.backupdr.v1.BackupVault.BackupRetentionInheritance|keyof typeof google.cloud.backupdr.v1.BackupVault.BackupRetentionInheritance|null);
 
                     /** BackupVault deletable. */
                     public deletable?: (boolean|null);
@@ -6102,6 +6111,9 @@ export namespace google {
 
                     /** BackupVault accessRestriction. */
                     public accessRestriction: (google.cloud.backupdr.v1.BackupVault.AccessRestriction|keyof typeof google.cloud.backupdr.v1.BackupVault.AccessRestriction);
+
+                    /** BackupVault encryptionConfig. */
+                    public encryptionConfig?: (google.cloud.backupdr.v1.BackupVault.IEncryptionConfig|null);
 
                     /**
                      * Creates a new BackupVault instance using the specified properties.
@@ -6183,6 +6195,13 @@ export namespace google {
 
                 namespace BackupVault {
 
+                    /** BackupRetentionInheritance enum. */
+                    enum BackupRetentionInheritance {
+                        BACKUP_RETENTION_INHERITANCE_UNSPECIFIED = 0,
+                        INHERIT_VAULT_RETENTION = 1,
+                        MATCH_BACKUP_EXPIRE_TIME = 2
+                    }
+
                     /** State enum. */
                     enum State {
                         STATE_UNSPECIFIED = 0,
@@ -6200,6 +6219,103 @@ export namespace google {
                         WITHIN_ORGANIZATION = 2,
                         UNRESTRICTED = 3,
                         WITHIN_ORG_BUT_UNRESTRICTED_FOR_BA = 4
+                    }
+
+                    /** Properties of an EncryptionConfig. */
+                    interface IEncryptionConfig {
+
+                        /** EncryptionConfig kmsKeyName */
+                        kmsKeyName?: (string|null);
+                    }
+
+                    /** Represents an EncryptionConfig. */
+                    class EncryptionConfig implements IEncryptionConfig {
+
+                        /**
+                         * Constructs a new EncryptionConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.backupdr.v1.BackupVault.IEncryptionConfig);
+
+                        /** EncryptionConfig kmsKeyName. */
+                        public kmsKeyName?: (string|null);
+
+                        /**
+                         * Creates a new EncryptionConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns EncryptionConfig instance
+                         */
+                        public static create(properties?: google.cloud.backupdr.v1.BackupVault.IEncryptionConfig): google.cloud.backupdr.v1.BackupVault.EncryptionConfig;
+
+                        /**
+                         * Encodes the specified EncryptionConfig message. Does not implicitly {@link google.cloud.backupdr.v1.BackupVault.EncryptionConfig.verify|verify} messages.
+                         * @param message EncryptionConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.backupdr.v1.BackupVault.IEncryptionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified EncryptionConfig message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.BackupVault.EncryptionConfig.verify|verify} messages.
+                         * @param message EncryptionConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.backupdr.v1.BackupVault.IEncryptionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an EncryptionConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns EncryptionConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.BackupVault.EncryptionConfig;
+
+                        /**
+                         * Decodes an EncryptionConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns EncryptionConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.BackupVault.EncryptionConfig;
+
+                        /**
+                         * Verifies an EncryptionConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an EncryptionConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns EncryptionConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.BackupVault.EncryptionConfig;
+
+                        /**
+                         * Creates a plain object from an EncryptionConfig message. Also converts values to other types if specified.
+                         * @param message EncryptionConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.backupdr.v1.BackupVault.EncryptionConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this EncryptionConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for EncryptionConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
 
@@ -7406,6 +7522,9 @@ export namespace google {
                     /** Backup enforcedRetentionEndTime */
                     enforcedRetentionEndTime?: (google.protobuf.ITimestamp|null);
 
+                    /** Backup backupRetentionInheritance */
+                    backupRetentionInheritance?: (google.cloud.backupdr.v1.BackupVault.BackupRetentionInheritance|keyof typeof google.cloud.backupdr.v1.BackupVault.BackupRetentionInheritance|null);
+
                     /** Backup expireTime */
                     expireTime?: (google.protobuf.ITimestamp|null);
 
@@ -7453,6 +7572,9 @@ export namespace google {
 
                     /** Backup gcpResource */
                     gcpResource?: (google.cloud.backupdr.v1.IBackupGcpResource|null);
+
+                    /** Backup kmsKeyVersions */
+                    kmsKeyVersions?: (string[]|null);
                 }
 
                 /** Represents a Backup. */
@@ -7481,6 +7603,9 @@ export namespace google {
 
                     /** Backup enforcedRetentionEndTime. */
                     public enforcedRetentionEndTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Backup backupRetentionInheritance. */
+                    public backupRetentionInheritance?: (google.cloud.backupdr.v1.BackupVault.BackupRetentionInheritance|keyof typeof google.cloud.backupdr.v1.BackupVault.BackupRetentionInheritance|null);
 
                     /** Backup expireTime. */
                     public expireTime?: (google.protobuf.ITimestamp|null);
@@ -7529,6 +7654,9 @@ export namespace google {
 
                     /** Backup gcpResource. */
                     public gcpResource?: (google.cloud.backupdr.v1.IBackupGcpResource|null);
+
+                    /** Backup kmsKeyVersions. */
+                    public kmsKeyVersions: string[];
 
                     /** Backup backupProperties. */
                     public backupProperties?: ("computeInstanceBackupProperties"|"cloudSqlInstanceBackupProperties"|"backupApplianceBackupProperties"|"diskBackupProperties");
@@ -9955,6 +10083,9 @@ export namespace google {
 
                     /** RestoreBackupRequest diskRestoreProperties */
                     diskRestoreProperties?: (google.cloud.backupdr.v1.IDiskRestoreProperties|null);
+
+                    /** RestoreBackupRequest clearOverridesFieldMask */
+                    clearOverridesFieldMask?: (google.protobuf.IFieldMask|null);
                 }
 
                 /** Represents a RestoreBackupRequest. */
@@ -9986,6 +10117,9 @@ export namespace google {
 
                     /** RestoreBackupRequest diskRestoreProperties. */
                     public diskRestoreProperties?: (google.cloud.backupdr.v1.IDiskRestoreProperties|null);
+
+                    /** RestoreBackupRequest clearOverridesFieldMask. */
+                    public clearOverridesFieldMask?: (google.protobuf.IFieldMask|null);
 
                     /** RestoreBackupRequest targetEnvironment. */
                     public targetEnvironment?: ("computeInstanceTargetEnvironment"|"diskTargetEnvironment"|"regionDiskTargetEnvironment");

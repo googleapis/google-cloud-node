@@ -14782,6 +14782,7 @@
                          * @property {google.protobuf.ITimestamp|null} [createTime] BackupVault createTime
                          * @property {google.protobuf.ITimestamp|null} [updateTime] BackupVault updateTime
                          * @property {google.protobuf.IDuration|null} [backupMinimumEnforcedRetentionDuration] BackupVault backupMinimumEnforcedRetentionDuration
+                         * @property {google.cloud.backupdr.v1.BackupVault.BackupRetentionInheritance|null} [backupRetentionInheritance] BackupVault backupRetentionInheritance
                          * @property {boolean|null} [deletable] BackupVault deletable
                          * @property {string|null} [etag] BackupVault etag
                          * @property {google.cloud.backupdr.v1.BackupVault.State|null} [state] BackupVault state
@@ -14792,6 +14793,7 @@
                          * @property {string|null} [uid] BackupVault uid
                          * @property {Object.<string,string>|null} [annotations] BackupVault annotations
                          * @property {google.cloud.backupdr.v1.BackupVault.AccessRestriction|null} [accessRestriction] BackupVault accessRestriction
+                         * @property {google.cloud.backupdr.v1.BackupVault.IEncryptionConfig|null} [encryptionConfig] BackupVault encryptionConfig
                          */
     
                         /**
@@ -14858,6 +14860,14 @@
                          * @instance
                          */
                         BackupVault.prototype.backupMinimumEnforcedRetentionDuration = null;
+    
+                        /**
+                         * BackupVault backupRetentionInheritance.
+                         * @member {google.cloud.backupdr.v1.BackupVault.BackupRetentionInheritance|null|undefined} backupRetentionInheritance
+                         * @memberof google.cloud.backupdr.v1.BackupVault
+                         * @instance
+                         */
+                        BackupVault.prototype.backupRetentionInheritance = null;
     
                         /**
                          * BackupVault deletable.
@@ -14939,6 +14949,14 @@
                          */
                         BackupVault.prototype.accessRestriction = 0;
     
+                        /**
+                         * BackupVault encryptionConfig.
+                         * @member {google.cloud.backupdr.v1.BackupVault.IEncryptionConfig|null|undefined} encryptionConfig
+                         * @memberof google.cloud.backupdr.v1.BackupVault
+                         * @instance
+                         */
+                        BackupVault.prototype.encryptionConfig = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -14967,6 +14985,12 @@
                         });
     
                         // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(BackupVault.prototype, "_backupRetentionInheritance", {
+                            get: $util.oneOfGetter($oneOfFields = ["backupRetentionInheritance"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(BackupVault.prototype, "_deletable", {
                             get: $util.oneOfGetter($oneOfFields = ["deletable"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -14981,6 +15005,12 @@
                         // Virtual OneOf for proto3 optional field
                         Object.defineProperty(BackupVault.prototype, "_effectiveTime", {
                             get: $util.oneOfGetter($oneOfFields = ["effectiveTime"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(BackupVault.prototype, "_encryptionConfig", {
+                            get: $util.oneOfGetter($oneOfFields = ["encryptionConfig"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -15042,6 +15072,10 @@
                                     writer.uint32(/* id 22, wireType 2 =*/178).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.annotations[keys[i]]).ldelim();
                             if (message.accessRestriction != null && Object.hasOwnProperty.call(message, "accessRestriction"))
                                 writer.uint32(/* id 24, wireType 0 =*/192).int32(message.accessRestriction);
+                            if (message.backupRetentionInheritance != null && Object.hasOwnProperty.call(message, "backupRetentionInheritance"))
+                                writer.uint32(/* id 27, wireType 0 =*/216).int32(message.backupRetentionInheritance);
+                            if (message.encryptionConfig != null && Object.hasOwnProperty.call(message, "encryptionConfig"))
+                                $root.google.cloud.backupdr.v1.BackupVault.EncryptionConfig.encode(message.encryptionConfig, writer.uint32(/* id 29, wireType 2 =*/234).fork()).ldelim();
                             return writer;
                         };
     
@@ -15121,6 +15155,10 @@
                                         message.backupMinimumEnforcedRetentionDuration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 27: {
+                                        message.backupRetentionInheritance = reader.int32();
+                                        break;
+                                    }
                                 case 8: {
                                         message.deletable = reader.bool();
                                         break;
@@ -15178,6 +15216,10 @@
                                     }
                                 case 24: {
                                         message.accessRestriction = reader.int32();
+                                        break;
+                                    }
+                                case 29: {
+                                        message.encryptionConfig = $root.google.cloud.backupdr.v1.BackupVault.EncryptionConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -15256,6 +15298,17 @@
                                         return "backupMinimumEnforcedRetentionDuration." + error;
                                 }
                             }
+                            if (message.backupRetentionInheritance != null && message.hasOwnProperty("backupRetentionInheritance")) {
+                                properties._backupRetentionInheritance = 1;
+                                switch (message.backupRetentionInheritance) {
+                                default:
+                                    return "backupRetentionInheritance: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            }
                             if (message.deletable != null && message.hasOwnProperty("deletable")) {
                                 properties._deletable = 1;
                                 if (typeof message.deletable !== "boolean")
@@ -15317,6 +15370,14 @@
                                 case 4:
                                     break;
                                 }
+                            if (message.encryptionConfig != null && message.hasOwnProperty("encryptionConfig")) {
+                                properties._encryptionConfig = 1;
+                                {
+                                    var error = $root.google.cloud.backupdr.v1.BackupVault.EncryptionConfig.verify(message.encryptionConfig);
+                                    if (error)
+                                        return "encryptionConfig." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -15357,6 +15418,26 @@
                                 if (typeof object.backupMinimumEnforcedRetentionDuration !== "object")
                                     throw TypeError(".google.cloud.backupdr.v1.BackupVault.backupMinimumEnforcedRetentionDuration: object expected");
                                 message.backupMinimumEnforcedRetentionDuration = $root.google.protobuf.Duration.fromObject(object.backupMinimumEnforcedRetentionDuration);
+                            }
+                            switch (object.backupRetentionInheritance) {
+                            default:
+                                if (typeof object.backupRetentionInheritance === "number") {
+                                    message.backupRetentionInheritance = object.backupRetentionInheritance;
+                                    break;
+                                }
+                                break;
+                            case "BACKUP_RETENTION_INHERITANCE_UNSPECIFIED":
+                            case 0:
+                                message.backupRetentionInheritance = 0;
+                                break;
+                            case "INHERIT_VAULT_RETENTION":
+                            case 1:
+                                message.backupRetentionInheritance = 1;
+                                break;
+                            case "MATCH_BACKUP_EXPIRE_TIME":
+                            case 2:
+                                message.backupRetentionInheritance = 2;
+                                break;
                             }
                             if (object.deletable != null)
                                 message.deletable = Boolean(object.deletable);
@@ -15455,6 +15536,11 @@
                             case 4:
                                 message.accessRestriction = 4;
                                 break;
+                            }
+                            if (object.encryptionConfig != null) {
+                                if (typeof object.encryptionConfig !== "object")
+                                    throw TypeError(".google.cloud.backupdr.v1.BackupVault.encryptionConfig: object expected");
+                                message.encryptionConfig = $root.google.cloud.backupdr.v1.BackupVault.EncryptionConfig.fromObject(object.encryptionConfig);
                             }
                             return message;
                         };
@@ -15559,6 +15645,16 @@
                             }
                             if (message.accessRestriction != null && message.hasOwnProperty("accessRestriction"))
                                 object.accessRestriction = options.enums === String ? $root.google.cloud.backupdr.v1.BackupVault.AccessRestriction[message.accessRestriction] === undefined ? message.accessRestriction : $root.google.cloud.backupdr.v1.BackupVault.AccessRestriction[message.accessRestriction] : message.accessRestriction;
+                            if (message.backupRetentionInheritance != null && message.hasOwnProperty("backupRetentionInheritance")) {
+                                object.backupRetentionInheritance = options.enums === String ? $root.google.cloud.backupdr.v1.BackupVault.BackupRetentionInheritance[message.backupRetentionInheritance] === undefined ? message.backupRetentionInheritance : $root.google.cloud.backupdr.v1.BackupVault.BackupRetentionInheritance[message.backupRetentionInheritance] : message.backupRetentionInheritance;
+                                if (options.oneofs)
+                                    object._backupRetentionInheritance = "backupRetentionInheritance";
+                            }
+                            if (message.encryptionConfig != null && message.hasOwnProperty("encryptionConfig")) {
+                                object.encryptionConfig = $root.google.cloud.backupdr.v1.BackupVault.EncryptionConfig.toObject(message.encryptionConfig, options);
+                                if (options.oneofs)
+                                    object._encryptionConfig = "encryptionConfig";
+                            }
                             return object;
                         };
     
@@ -15587,6 +15683,22 @@
                             }
                             return typeUrlPrefix + "/google.cloud.backupdr.v1.BackupVault";
                         };
+    
+                        /**
+                         * BackupRetentionInheritance enum.
+                         * @name google.cloud.backupdr.v1.BackupVault.BackupRetentionInheritance
+                         * @enum {number}
+                         * @property {number} BACKUP_RETENTION_INHERITANCE_UNSPECIFIED=0 BACKUP_RETENTION_INHERITANCE_UNSPECIFIED value
+                         * @property {number} INHERIT_VAULT_RETENTION=1 INHERIT_VAULT_RETENTION value
+                         * @property {number} MATCH_BACKUP_EXPIRE_TIME=2 MATCH_BACKUP_EXPIRE_TIME value
+                         */
+                        BackupVault.BackupRetentionInheritance = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "BACKUP_RETENTION_INHERITANCE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "INHERIT_VAULT_RETENTION"] = 1;
+                            values[valuesById[2] = "MATCH_BACKUP_EXPIRE_TIME"] = 2;
+                            return values;
+                        })();
     
                         /**
                          * State enum.
@@ -15628,6 +15740,224 @@
                             values[valuesById[3] = "UNRESTRICTED"] = 3;
                             values[valuesById[4] = "WITHIN_ORG_BUT_UNRESTRICTED_FOR_BA"] = 4;
                             return values;
+                        })();
+    
+                        BackupVault.EncryptionConfig = (function() {
+    
+                            /**
+                             * Properties of an EncryptionConfig.
+                             * @memberof google.cloud.backupdr.v1.BackupVault
+                             * @interface IEncryptionConfig
+                             * @property {string|null} [kmsKeyName] EncryptionConfig kmsKeyName
+                             */
+    
+                            /**
+                             * Constructs a new EncryptionConfig.
+                             * @memberof google.cloud.backupdr.v1.BackupVault
+                             * @classdesc Represents an EncryptionConfig.
+                             * @implements IEncryptionConfig
+                             * @constructor
+                             * @param {google.cloud.backupdr.v1.BackupVault.IEncryptionConfig=} [properties] Properties to set
+                             */
+                            function EncryptionConfig(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * EncryptionConfig kmsKeyName.
+                             * @member {string|null|undefined} kmsKeyName
+                             * @memberof google.cloud.backupdr.v1.BackupVault.EncryptionConfig
+                             * @instance
+                             */
+                            EncryptionConfig.prototype.kmsKeyName = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(EncryptionConfig.prototype, "_kmsKeyName", {
+                                get: $util.oneOfGetter($oneOfFields = ["kmsKeyName"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new EncryptionConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.backupdr.v1.BackupVault.EncryptionConfig
+                             * @static
+                             * @param {google.cloud.backupdr.v1.BackupVault.IEncryptionConfig=} [properties] Properties to set
+                             * @returns {google.cloud.backupdr.v1.BackupVault.EncryptionConfig} EncryptionConfig instance
+                             */
+                            EncryptionConfig.create = function create(properties) {
+                                return new EncryptionConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified EncryptionConfig message. Does not implicitly {@link google.cloud.backupdr.v1.BackupVault.EncryptionConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.backupdr.v1.BackupVault.EncryptionConfig
+                             * @static
+                             * @param {google.cloud.backupdr.v1.BackupVault.IEncryptionConfig} message EncryptionConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            EncryptionConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.kmsKeyName != null && Object.hasOwnProperty.call(message, "kmsKeyName"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.kmsKeyName);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified EncryptionConfig message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.BackupVault.EncryptionConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.backupdr.v1.BackupVault.EncryptionConfig
+                             * @static
+                             * @param {google.cloud.backupdr.v1.BackupVault.IEncryptionConfig} message EncryptionConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            EncryptionConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an EncryptionConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.backupdr.v1.BackupVault.EncryptionConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.backupdr.v1.BackupVault.EncryptionConfig} EncryptionConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            EncryptionConfig.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.backupdr.v1.BackupVault.EncryptionConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.kmsKeyName = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an EncryptionConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.backupdr.v1.BackupVault.EncryptionConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.backupdr.v1.BackupVault.EncryptionConfig} EncryptionConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            EncryptionConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an EncryptionConfig message.
+                             * @function verify
+                             * @memberof google.cloud.backupdr.v1.BackupVault.EncryptionConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            EncryptionConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName")) {
+                                    properties._kmsKeyName = 1;
+                                    if (!$util.isString(message.kmsKeyName))
+                                        return "kmsKeyName: string expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an EncryptionConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.backupdr.v1.BackupVault.EncryptionConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.backupdr.v1.BackupVault.EncryptionConfig} EncryptionConfig
+                             */
+                            EncryptionConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.backupdr.v1.BackupVault.EncryptionConfig)
+                                    return object;
+                                var message = new $root.google.cloud.backupdr.v1.BackupVault.EncryptionConfig();
+                                if (object.kmsKeyName != null)
+                                    message.kmsKeyName = String(object.kmsKeyName);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an EncryptionConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.backupdr.v1.BackupVault.EncryptionConfig
+                             * @static
+                             * @param {google.cloud.backupdr.v1.BackupVault.EncryptionConfig} message EncryptionConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            EncryptionConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName")) {
+                                    object.kmsKeyName = message.kmsKeyName;
+                                    if (options.oneofs)
+                                        object._kmsKeyName = "kmsKeyName";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this EncryptionConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.backupdr.v1.BackupVault.EncryptionConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            EncryptionConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for EncryptionConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.backupdr.v1.BackupVault.EncryptionConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            EncryptionConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.backupdr.v1.BackupVault.EncryptionConfig";
+                            };
+    
+                            return EncryptionConfig;
                         })();
     
                         return BackupVault;
@@ -19104,6 +19434,7 @@
                          * @property {google.protobuf.ITimestamp|null} [updateTime] Backup updateTime
                          * @property {Object.<string,string>|null} [labels] Backup labels
                          * @property {google.protobuf.ITimestamp|null} [enforcedRetentionEndTime] Backup enforcedRetentionEndTime
+                         * @property {google.cloud.backupdr.v1.BackupVault.BackupRetentionInheritance|null} [backupRetentionInheritance] Backup backupRetentionInheritance
                          * @property {google.protobuf.ITimestamp|null} [expireTime] Backup expireTime
                          * @property {google.protobuf.ITimestamp|null} [consistencyTime] Backup consistencyTime
                          * @property {string|null} [etag] Backup etag
@@ -19120,6 +19451,7 @@
                          * @property {boolean|null} [satisfiesPzs] Backup satisfiesPzs
                          * @property {boolean|null} [satisfiesPzi] Backup satisfiesPzi
                          * @property {google.cloud.backupdr.v1.IBackupGcpResource|null} [gcpResource] Backup gcpResource
+                         * @property {Array.<string>|null} [kmsKeyVersions] Backup kmsKeyVersions
                          */
     
                         /**
@@ -19134,6 +19466,7 @@
                             this.labels = {};
                             this.serviceLocks = [];
                             this.backupApplianceLocks = [];
+                            this.kmsKeyVersions = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -19187,6 +19520,14 @@
                          * @instance
                          */
                         Backup.prototype.enforcedRetentionEndTime = null;
+    
+                        /**
+                         * Backup backupRetentionInheritance.
+                         * @member {google.cloud.backupdr.v1.BackupVault.BackupRetentionInheritance|null|undefined} backupRetentionInheritance
+                         * @memberof google.cloud.backupdr.v1.Backup
+                         * @instance
+                         */
+                        Backup.prototype.backupRetentionInheritance = null;
     
                         /**
                          * Backup expireTime.
@@ -19316,6 +19657,14 @@
                          */
                         Backup.prototype.gcpResource = null;
     
+                        /**
+                         * Backup kmsKeyVersions.
+                         * @member {Array.<string>} kmsKeyVersions
+                         * @memberof google.cloud.backupdr.v1.Backup
+                         * @instance
+                         */
+                        Backup.prototype.kmsKeyVersions = $util.emptyArray;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -19340,6 +19689,12 @@
                         // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Backup.prototype, "_enforcedRetentionEndTime", {
                             get: $util.oneOfGetter($oneOfFields = ["enforcedRetentionEndTime"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Backup.prototype, "_backupRetentionInheritance", {
+                            get: $util.oneOfGetter($oneOfFields = ["backupRetentionInheritance"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -19475,8 +19830,13 @@
                                 $root.google.cloud.backupdr.v1.CloudSqlInstanceBackupProperties.encode(message.cloudSqlInstanceBackupProperties, writer.uint32(/* id 26, wireType 2 =*/210).fork()).ldelim();
                             if (message.diskBackupProperties != null && Object.hasOwnProperty.call(message, "diskBackupProperties"))
                                 $root.google.cloud.backupdr.v1.DiskBackupProperties.encode(message.diskBackupProperties, writer.uint32(/* id 28, wireType 2 =*/226).fork()).ldelim();
+                            if (message.backupRetentionInheritance != null && Object.hasOwnProperty.call(message, "backupRetentionInheritance"))
+                                writer.uint32(/* id 30, wireType 0 =*/240).int32(message.backupRetentionInheritance);
                             if (message.gcpResource != null && Object.hasOwnProperty.call(message, "gcpResource"))
                                 $root.google.cloud.backupdr.v1.BackupGcpResource.encode(message.gcpResource, writer.uint32(/* id 31, wireType 2 =*/250).fork()).ldelim();
+                            if (message.kmsKeyVersions != null && message.kmsKeyVersions.length)
+                                for (var i = 0; i < message.kmsKeyVersions.length; ++i)
+                                    writer.uint32(/* id 33, wireType 2 =*/266).string(message.kmsKeyVersions[i]);
                             return writer;
                         };
     
@@ -19556,6 +19916,10 @@
                                         message.enforcedRetentionEndTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 30: {
+                                        message.backupRetentionInheritance = reader.int32();
+                                        break;
+                                    }
                                 case 7: {
                                         message.expireTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                         break;
@@ -19622,6 +19986,12 @@
                                     }
                                 case 31: {
                                         message.gcpResource = $root.google.cloud.backupdr.v1.BackupGcpResource.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 33: {
+                                        if (!(message.kmsKeyVersions && message.kmsKeyVersions.length))
+                                            message.kmsKeyVersions = [];
+                                        message.kmsKeyVersions.push(reader.string());
                                         break;
                                     }
                                 default:
@@ -19698,6 +20068,17 @@
                                     var error = $root.google.protobuf.Timestamp.verify(message.enforcedRetentionEndTime);
                                     if (error)
                                         return "enforcedRetentionEndTime." + error;
+                                }
+                            }
+                            if (message.backupRetentionInheritance != null && message.hasOwnProperty("backupRetentionInheritance")) {
+                                properties._backupRetentionInheritance = 1;
+                                switch (message.backupRetentionInheritance) {
+                                default:
+                                    return "backupRetentionInheritance: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
                                 }
                             }
                             if (message.expireTime != null && message.hasOwnProperty("expireTime")) {
@@ -19828,6 +20209,13 @@
                                         return "gcpResource." + error;
                                 }
                             }
+                            if (message.kmsKeyVersions != null && message.hasOwnProperty("kmsKeyVersions")) {
+                                if (!Array.isArray(message.kmsKeyVersions))
+                                    return "kmsKeyVersions: array expected";
+                                for (var i = 0; i < message.kmsKeyVersions.length; ++i)
+                                    if (!$util.isString(message.kmsKeyVersions[i]))
+                                        return "kmsKeyVersions: string[] expected";
+                            }
                             return null;
                         };
     
@@ -19868,6 +20256,26 @@
                                 if (typeof object.enforcedRetentionEndTime !== "object")
                                     throw TypeError(".google.cloud.backupdr.v1.Backup.enforcedRetentionEndTime: object expected");
                                 message.enforcedRetentionEndTime = $root.google.protobuf.Timestamp.fromObject(object.enforcedRetentionEndTime);
+                            }
+                            switch (object.backupRetentionInheritance) {
+                            default:
+                                if (typeof object.backupRetentionInheritance === "number") {
+                                    message.backupRetentionInheritance = object.backupRetentionInheritance;
+                                    break;
+                                }
+                                break;
+                            case "BACKUP_RETENTION_INHERITANCE_UNSPECIFIED":
+                            case 0:
+                                message.backupRetentionInheritance = 0;
+                                break;
+                            case "INHERIT_VAULT_RETENTION":
+                            case 1:
+                                message.backupRetentionInheritance = 1;
+                                break;
+                            case "MATCH_BACKUP_EXPIRE_TIME":
+                            case 2:
+                                message.backupRetentionInheritance = 2;
+                                break;
                             }
                             if (object.expireTime != null) {
                                 if (typeof object.expireTime !== "object")
@@ -20000,6 +20408,13 @@
                                     throw TypeError(".google.cloud.backupdr.v1.Backup.gcpResource: object expected");
                                 message.gcpResource = $root.google.cloud.backupdr.v1.BackupGcpResource.fromObject(object.gcpResource);
                             }
+                            if (object.kmsKeyVersions) {
+                                if (!Array.isArray(object.kmsKeyVersions))
+                                    throw TypeError(".google.cloud.backupdr.v1.Backup.kmsKeyVersions: array expected");
+                                message.kmsKeyVersions = [];
+                                for (var i = 0; i < object.kmsKeyVersions.length; ++i)
+                                    message.kmsKeyVersions[i] = String(object.kmsKeyVersions[i]);
+                            }
                             return message;
                         };
     
@@ -20019,6 +20434,7 @@
                             if (options.arrays || options.defaults) {
                                 object.serviceLocks = [];
                                 object.backupApplianceLocks = [];
+                                object.kmsKeyVersions = [];
                             }
                             if (options.objects || options.defaults)
                                 object.labels = {};
@@ -20129,10 +20545,20 @@
                                 if (options.oneofs)
                                     object.backupProperties = "diskBackupProperties";
                             }
+                            if (message.backupRetentionInheritance != null && message.hasOwnProperty("backupRetentionInheritance")) {
+                                object.backupRetentionInheritance = options.enums === String ? $root.google.cloud.backupdr.v1.BackupVault.BackupRetentionInheritance[message.backupRetentionInheritance] === undefined ? message.backupRetentionInheritance : $root.google.cloud.backupdr.v1.BackupVault.BackupRetentionInheritance[message.backupRetentionInheritance] : message.backupRetentionInheritance;
+                                if (options.oneofs)
+                                    object._backupRetentionInheritance = "backupRetentionInheritance";
+                            }
                             if (message.gcpResource != null && message.hasOwnProperty("gcpResource")) {
                                 object.gcpResource = $root.google.cloud.backupdr.v1.BackupGcpResource.toObject(message.gcpResource, options);
                                 if (options.oneofs)
                                     object.sourceResource = "gcpResource";
+                            }
+                            if (message.kmsKeyVersions && message.kmsKeyVersions.length) {
+                                object.kmsKeyVersions = [];
+                                for (var j = 0; j < message.kmsKeyVersions.length; ++j)
+                                    object.kmsKeyVersions[j] = message.kmsKeyVersions[j];
                             }
                             return object;
                         };
@@ -26023,6 +26449,7 @@
                          * @property {google.cloud.backupdr.v1.IRegionDiskTargetEnvironment|null} [regionDiskTargetEnvironment] RestoreBackupRequest regionDiskTargetEnvironment
                          * @property {google.cloud.backupdr.v1.IComputeInstanceRestoreProperties|null} [computeInstanceRestoreProperties] RestoreBackupRequest computeInstanceRestoreProperties
                          * @property {google.cloud.backupdr.v1.IDiskRestoreProperties|null} [diskRestoreProperties] RestoreBackupRequest diskRestoreProperties
+                         * @property {google.protobuf.IFieldMask|null} [clearOverridesFieldMask] RestoreBackupRequest clearOverridesFieldMask
                          */
     
                         /**
@@ -26096,6 +26523,14 @@
                          */
                         RestoreBackupRequest.prototype.diskRestoreProperties = null;
     
+                        /**
+                         * RestoreBackupRequest clearOverridesFieldMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} clearOverridesFieldMask
+                         * @memberof google.cloud.backupdr.v1.RestoreBackupRequest
+                         * @instance
+                         */
+                        RestoreBackupRequest.prototype.clearOverridesFieldMask = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -26118,6 +26553,12 @@
                          */
                         Object.defineProperty(RestoreBackupRequest.prototype, "instanceProperties", {
                             get: $util.oneOfGetter($oneOfFields = ["computeInstanceRestoreProperties", "diskRestoreProperties"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(RestoreBackupRequest.prototype, "_clearOverridesFieldMask", {
+                            get: $util.oneOfGetter($oneOfFields = ["clearOverridesFieldMask"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -26159,6 +26600,8 @@
                                 $root.google.cloud.backupdr.v1.RegionDiskTargetEnvironment.encode(message.regionDiskTargetEnvironment, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.diskRestoreProperties != null && Object.hasOwnProperty.call(message, "diskRestoreProperties"))
                                 $root.google.cloud.backupdr.v1.DiskRestoreProperties.encode(message.diskRestoreProperties, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.clearOverridesFieldMask != null && Object.hasOwnProperty.call(message, "clearOverridesFieldMask"))
+                                $root.google.protobuf.FieldMask.encode(message.clearOverridesFieldMask, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             return writer;
                         };
     
@@ -26221,6 +26664,10 @@
                                     }
                                 case 7: {
                                         message.diskRestoreProperties = $root.google.cloud.backupdr.v1.DiskRestoreProperties.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.clearOverridesFieldMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -26311,6 +26758,14 @@
                                         return "diskRestoreProperties." + error;
                                 }
                             }
+                            if (message.clearOverridesFieldMask != null && message.hasOwnProperty("clearOverridesFieldMask")) {
+                                properties._clearOverridesFieldMask = 1;
+                                {
+                                    var error = $root.google.protobuf.FieldMask.verify(message.clearOverridesFieldMask);
+                                    if (error)
+                                        return "clearOverridesFieldMask." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -26354,6 +26809,11 @@
                                 if (typeof object.diskRestoreProperties !== "object")
                                     throw TypeError(".google.cloud.backupdr.v1.RestoreBackupRequest.diskRestoreProperties: object expected");
                                 message.diskRestoreProperties = $root.google.cloud.backupdr.v1.DiskRestoreProperties.fromObject(object.diskRestoreProperties);
+                            }
+                            if (object.clearOverridesFieldMask != null) {
+                                if (typeof object.clearOverridesFieldMask !== "object")
+                                    throw TypeError(".google.cloud.backupdr.v1.RestoreBackupRequest.clearOverridesFieldMask: object expected");
+                                message.clearOverridesFieldMask = $root.google.protobuf.FieldMask.fromObject(object.clearOverridesFieldMask);
                             }
                             return message;
                         };
@@ -26403,6 +26863,11 @@
                                 object.diskRestoreProperties = $root.google.cloud.backupdr.v1.DiskRestoreProperties.toObject(message.diskRestoreProperties, options);
                                 if (options.oneofs)
                                     object.instanceProperties = "diskRestoreProperties";
+                            }
+                            if (message.clearOverridesFieldMask != null && message.hasOwnProperty("clearOverridesFieldMask")) {
+                                object.clearOverridesFieldMask = $root.google.protobuf.FieldMask.toObject(message.clearOverridesFieldMask, options);
+                                if (options.oneofs)
+                                    object._clearOverridesFieldMask = "clearOverridesFieldMask";
                             }
                             return object;
                         };
