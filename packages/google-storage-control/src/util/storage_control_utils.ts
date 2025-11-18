@@ -22,7 +22,7 @@ async function main() {
   fixV2Index('v2/index.ts');
   cleanObjectReferences(filesToUpdate, replacements);
   const finaloutput = await buildOutput();
-  fs.writeFile('../v2/uber_storage_control_client.ts', finaloutput, err => {
+  fs.writeFile('../storage_control_client.ts', finaloutput, err => {
     if (err) throw err;
   });
 }

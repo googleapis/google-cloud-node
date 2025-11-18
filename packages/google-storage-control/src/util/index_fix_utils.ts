@@ -36,7 +36,7 @@ export function fixIndexFile(filePath: string): void {
 // ** All changes to this file may be overwritten. **
 
 import * as v2 from './v2';
-import {StorageControlClient} from './v2/uber_storage_control_client';
+import {StorageControlClient} from './storage_control_client';
 
 export {v2, StorageControlClient};
 export default {v2, StorageControlClient};

@@ -47,9 +47,9 @@ export const LICENSE = `
  * @returns {string} The import statements.
  */
 function makeImports(clients: string[]) {
-  let imports = `import {protos} from '..';
-import {StorageControlClient as StorageControlInternal} from './storage_control_client';
-import {StorageClient} from './storage_client';`;
+  let imports = `import {protos} from './';
+import {StorageControlClient as StorageControlInternal} from './v2/storage_control_client';
+import {StorageClient} from './v2/storage_client';`;
   const staticImports = `
   import type * as gax from "google-gax";
   import {Callback, CallOptions, ClientOptions, PaginationCallback, LROperation, Descriptors} from "google-gax";
@@ -193,7 +193,7 @@ function buildClientConstructor(clients: string[]) {
  * @returns {Promise<string>} The formatted output.
  */
 export async function buildOutput() {
-  console.log('Regenerating uber_storage_control_client.ts');
+  console.log('Regenerating storage_control_client.ts');
   let output = '';
   output = LICENSE.concat(makeImports(CLIENTS));
   output = output.concat(buildOptionTypes(CLIENTS));
