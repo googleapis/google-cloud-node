@@ -65,7 +65,7 @@ import {Transform} from 'stream';
  *     HTTP implementation. Load only fallback version and pass it to the constructor:
  *     ```
  *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
- *     const client = new DatasetServiceClient({fallback: true}, gax);
+ *     const client = new StorageControlClient({fallback: true}, gax);
  *     ```
  */
 export interface StorageControlClientOptions extends ClientOptions {
@@ -178,19 +178,6 @@ export class StorageControlClient {
     return StorageControlInternal.scopes;
   }
 
-  getProjectId(
-    request?: Callback<string, undefined, undefined>,
-    options?: CallOptions,
-  ): Promise<string>;
-  getProjectId(
-    request: Callback<string, undefined, undefined>,
-    options: CallOptions,
-    callback: Callback<string, undefined, undefined>,
-  ): void;
-  getProjectId(
-    request: Callback<string, undefined, undefined>,
-    callback: Callback<string, undefined, undefined>,
-  ): void;
   getProjectId(
     callback?: Callback<string, undefined, undefined>,
   ): Promise<string> | void {
