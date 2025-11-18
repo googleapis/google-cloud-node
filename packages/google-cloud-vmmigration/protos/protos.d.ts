@@ -10049,8 +10049,14 @@ export namespace google {
                     /** ComputeEngineTargetDefaults bootConversion */
                     bootConversion?: (google.cloud.vmmigration.v1.BootConversion|keyof typeof google.cloud.vmmigration.v1.BootConversion|null);
 
+                    /** ComputeEngineTargetDefaults adaptationModifiers */
+                    adaptationModifiers?: (google.cloud.vmmigration.v1.IAdaptationModifier[]|null);
+
                     /** ComputeEngineTargetDefaults diskReplicaZones */
                     diskReplicaZones?: (string[]|null);
+
+                    /** ComputeEngineTargetDefaults storagePool */
+                    storagePool?: (string|null);
                 }
 
                 /** Represents a ComputeEngineTargetDefaults. */
@@ -10128,8 +10134,14 @@ export namespace google {
                     /** ComputeEngineTargetDefaults bootConversion. */
                     public bootConversion: (google.cloud.vmmigration.v1.BootConversion|keyof typeof google.cloud.vmmigration.v1.BootConversion);
 
+                    /** ComputeEngineTargetDefaults adaptationModifiers. */
+                    public adaptationModifiers: google.cloud.vmmigration.v1.IAdaptationModifier[];
+
                     /** ComputeEngineTargetDefaults diskReplicaZones. */
                     public diskReplicaZones: string[];
+
+                    /** ComputeEngineTargetDefaults storagePool. */
+                    public storagePool: string;
 
                     /**
                      * Creates a new ComputeEngineTargetDefaults instance using the specified properties.
@@ -10209,6 +10221,109 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an AdaptationModifier. */
+                interface IAdaptationModifier {
+
+                    /** AdaptationModifier modifier */
+                    modifier?: (string|null);
+
+                    /** AdaptationModifier value */
+                    value?: (string|null);
+                }
+
+                /** Represents an AdaptationModifier. */
+                class AdaptationModifier implements IAdaptationModifier {
+
+                    /**
+                     * Constructs a new AdaptationModifier.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IAdaptationModifier);
+
+                    /** AdaptationModifier modifier. */
+                    public modifier: string;
+
+                    /** AdaptationModifier value. */
+                    public value: string;
+
+                    /**
+                     * Creates a new AdaptationModifier instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AdaptationModifier instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IAdaptationModifier): google.cloud.vmmigration.v1.AdaptationModifier;
+
+                    /**
+                     * Encodes the specified AdaptationModifier message. Does not implicitly {@link google.cloud.vmmigration.v1.AdaptationModifier.verify|verify} messages.
+                     * @param message AdaptationModifier message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IAdaptationModifier, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AdaptationModifier message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.AdaptationModifier.verify|verify} messages.
+                     * @param message AdaptationModifier message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IAdaptationModifier, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AdaptationModifier message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AdaptationModifier
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.AdaptationModifier;
+
+                    /**
+                     * Decodes an AdaptationModifier message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AdaptationModifier
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.AdaptationModifier;
+
+                    /**
+                     * Verifies an AdaptationModifier message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AdaptationModifier message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AdaptationModifier
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.AdaptationModifier;
+
+                    /**
+                     * Creates a plain object from an AdaptationModifier message. Also converts values to other types if specified.
+                     * @param message AdaptationModifier
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.AdaptationModifier, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AdaptationModifier to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AdaptationModifier
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a ComputeEngineTargetDetails. */
                 interface IComputeEngineTargetDetails {
 
@@ -10278,8 +10393,14 @@ export namespace google {
                     /** ComputeEngineTargetDetails bootConversion */
                     bootConversion?: (google.cloud.vmmigration.v1.BootConversion|keyof typeof google.cloud.vmmigration.v1.BootConversion|null);
 
+                    /** ComputeEngineTargetDetails adaptationModifiers */
+                    adaptationModifiers?: (google.cloud.vmmigration.v1.IAdaptationModifier[]|null);
+
                     /** ComputeEngineTargetDetails diskReplicaZones */
                     diskReplicaZones?: (string[]|null);
+
+                    /** ComputeEngineTargetDetails storagePool */
+                    storagePool?: (string|null);
                 }
 
                 /** Represents a ComputeEngineTargetDetails. */
@@ -10357,8 +10478,14 @@ export namespace google {
                     /** ComputeEngineTargetDetails bootConversion. */
                     public bootConversion: (google.cloud.vmmigration.v1.BootConversion|keyof typeof google.cloud.vmmigration.v1.BootConversion);
 
+                    /** ComputeEngineTargetDetails adaptationModifiers. */
+                    public adaptationModifiers: google.cloud.vmmigration.v1.IAdaptationModifier[];
+
                     /** ComputeEngineTargetDetails diskReplicaZones. */
                     public diskReplicaZones: string[];
+
+                    /** ComputeEngineTargetDetails storagePool. */
+                    public storagePool: string;
 
                     /**
                      * Creates a new ComputeEngineTargetDetails instance using the specified properties.
@@ -19401,6 +19528,9 @@ export namespace google {
 
                     /** ImageImportOsAdaptationParameters bootConversion */
                     bootConversion?: (google.cloud.vmmigration.v1.BootConversion|keyof typeof google.cloud.vmmigration.v1.BootConversion|null);
+
+                    /** ImageImportOsAdaptationParameters adaptationModifiers */
+                    adaptationModifiers?: (google.cloud.vmmigration.v1.IAdaptationModifier[]|null);
                 }
 
                 /** Represents an ImageImportOsAdaptationParameters. */
@@ -19420,6 +19550,9 @@ export namespace google {
 
                     /** ImageImportOsAdaptationParameters bootConversion. */
                     public bootConversion: (google.cloud.vmmigration.v1.BootConversion|keyof typeof google.cloud.vmmigration.v1.BootConversion);
+
+                    /** ImageImportOsAdaptationParameters adaptationModifiers. */
+                    public adaptationModifiers: google.cloud.vmmigration.v1.IAdaptationModifier[];
 
                     /**
                      * Creates a new ImageImportOsAdaptationParameters instance using the specified properties.
@@ -19501,6 +19634,9 @@ export namespace google {
 
                 /** Properties of a DataDiskImageImport. */
                 interface IDataDiskImageImport {
+
+                    /** DataDiskImageImport guestOsFeatures */
+                    guestOsFeatures?: (string[]|null);
                 }
 
                 /** Represents a DataDiskImageImport. */
@@ -19511,6 +19647,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.cloud.vmmigration.v1.IDataDiskImageImport);
+
+                    /** DataDiskImageImport guestOsFeatures. */
+                    public guestOsFeatures: string[];
 
                     /**
                      * Creates a new DataDiskImageImport instance using the specified properties.

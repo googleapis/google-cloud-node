@@ -25137,7 +25137,9 @@
                          * @property {string|null} [hostname] ComputeEngineTargetDefaults hostname
                          * @property {google.cloud.vmmigration.v1.IEncryption|null} [encryption] ComputeEngineTargetDefaults encryption
                          * @property {google.cloud.vmmigration.v1.BootConversion|null} [bootConversion] ComputeEngineTargetDefaults bootConversion
+                         * @property {Array.<google.cloud.vmmigration.v1.IAdaptationModifier>|null} [adaptationModifiers] ComputeEngineTargetDefaults adaptationModifiers
                          * @property {Array.<string>|null} [diskReplicaZones] ComputeEngineTargetDefaults diskReplicaZones
+                         * @property {string|null} [storagePool] ComputeEngineTargetDefaults storagePool
                          */
     
                         /**
@@ -25154,6 +25156,7 @@
                             this.labels = {};
                             this.metadata = {};
                             this.additionalLicenses = [];
+                            this.adaptationModifiers = [];
                             this.diskReplicaZones = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
@@ -25338,12 +25341,28 @@
                         ComputeEngineTargetDefaults.prototype.bootConversion = 0;
     
                         /**
+                         * ComputeEngineTargetDefaults adaptationModifiers.
+                         * @member {Array.<google.cloud.vmmigration.v1.IAdaptationModifier>} adaptationModifiers
+                         * @memberof google.cloud.vmmigration.v1.ComputeEngineTargetDefaults
+                         * @instance
+                         */
+                        ComputeEngineTargetDefaults.prototype.adaptationModifiers = $util.emptyArray;
+    
+                        /**
                          * ComputeEngineTargetDefaults diskReplicaZones.
                          * @member {Array.<string>} diskReplicaZones
                          * @memberof google.cloud.vmmigration.v1.ComputeEngineTargetDefaults
                          * @instance
                          */
                         ComputeEngineTargetDefaults.prototype.diskReplicaZones = $util.emptyArray;
+    
+                        /**
+                         * ComputeEngineTargetDefaults storagePool.
+                         * @member {string} storagePool
+                         * @memberof google.cloud.vmmigration.v1.ComputeEngineTargetDefaults
+                         * @instance
+                         */
+                        ComputeEngineTargetDefaults.prototype.storagePool = "";
     
                         /**
                          * Creates a new ComputeEngineTargetDefaults instance using the specified properties.
@@ -25418,9 +25437,14 @@
                                 writer.uint32(/* id 21, wireType 0 =*/168).bool(message.enableVtpm);
                             if (message.enableIntegrityMonitoring != null && Object.hasOwnProperty.call(message, "enableIntegrityMonitoring"))
                                 writer.uint32(/* id 22, wireType 0 =*/176).bool(message.enableIntegrityMonitoring);
+                            if (message.adaptationModifiers != null && message.adaptationModifiers.length)
+                                for (var i = 0; i < message.adaptationModifiers.length; ++i)
+                                    $root.google.cloud.vmmigration.v1.AdaptationModifier.encode(message.adaptationModifiers[i], writer.uint32(/* id 23, wireType 2 =*/186).fork()).ldelim();
                             if (message.diskReplicaZones != null && message.diskReplicaZones.length)
                                 for (var i = 0; i < message.diskReplicaZones.length; ++i)
                                     writer.uint32(/* id 24, wireType 2 =*/194).string(message.diskReplicaZones[i]);
+                            if (message.storagePool != null && Object.hasOwnProperty.call(message, "storagePool"))
+                                writer.uint32(/* id 25, wireType 2 =*/202).string(message.storagePool);
                             return writer;
                         };
     
@@ -25589,10 +25613,20 @@
                                         message.bootConversion = reader.int32();
                                         break;
                                     }
+                                case 23: {
+                                        if (!(message.adaptationModifiers && message.adaptationModifiers.length))
+                                            message.adaptationModifiers = [];
+                                        message.adaptationModifiers.push($root.google.cloud.vmmigration.v1.AdaptationModifier.decode(reader, reader.uint32()));
+                                        break;
+                                    }
                                 case 24: {
                                         if (!(message.diskReplicaZones && message.diskReplicaZones.length))
                                             message.diskReplicaZones = [];
                                         message.diskReplicaZones.push(reader.string());
+                                        break;
+                                    }
+                                case 25: {
+                                        message.storagePool = reader.string();
                                         break;
                                     }
                                 default:
@@ -25752,6 +25786,15 @@
                                 case 2:
                                     break;
                                 }
+                            if (message.adaptationModifiers != null && message.hasOwnProperty("adaptationModifiers")) {
+                                if (!Array.isArray(message.adaptationModifiers))
+                                    return "adaptationModifiers: array expected";
+                                for (var i = 0; i < message.adaptationModifiers.length; ++i) {
+                                    var error = $root.google.cloud.vmmigration.v1.AdaptationModifier.verify(message.adaptationModifiers[i]);
+                                    if (error)
+                                        return "adaptationModifiers." + error;
+                                }
+                            }
                             if (message.diskReplicaZones != null && message.hasOwnProperty("diskReplicaZones")) {
                                 if (!Array.isArray(message.diskReplicaZones))
                                     return "diskReplicaZones: array expected";
@@ -25759,6 +25802,9 @@
                                     if (!$util.isString(message.diskReplicaZones[i]))
                                         return "diskReplicaZones: string[] expected";
                             }
+                            if (message.storagePool != null && message.hasOwnProperty("storagePool"))
+                                if (!$util.isString(message.storagePool))
+                                    return "storagePool: string expected";
                             return null;
                         };
     
@@ -25935,6 +25981,16 @@
                                 message.bootConversion = 2;
                                 break;
                             }
+                            if (object.adaptationModifiers) {
+                                if (!Array.isArray(object.adaptationModifiers))
+                                    throw TypeError(".google.cloud.vmmigration.v1.ComputeEngineTargetDefaults.adaptationModifiers: array expected");
+                                message.adaptationModifiers = [];
+                                for (var i = 0; i < object.adaptationModifiers.length; ++i) {
+                                    if (typeof object.adaptationModifiers[i] !== "object")
+                                        throw TypeError(".google.cloud.vmmigration.v1.ComputeEngineTargetDefaults.adaptationModifiers: object expected");
+                                    message.adaptationModifiers[i] = $root.google.cloud.vmmigration.v1.AdaptationModifier.fromObject(object.adaptationModifiers[i]);
+                                }
+                            }
                             if (object.diskReplicaZones) {
                                 if (!Array.isArray(object.diskReplicaZones))
                                     throw TypeError(".google.cloud.vmmigration.v1.ComputeEngineTargetDefaults.diskReplicaZones: array expected");
@@ -25942,6 +25998,8 @@
                                 for (var i = 0; i < object.diskReplicaZones.length; ++i)
                                     message.diskReplicaZones[i] = String(object.diskReplicaZones[i]);
                             }
+                            if (object.storagePool != null)
+                                message.storagePool = String(object.storagePool);
                             return message;
                         };
     
@@ -25962,6 +26020,7 @@
                                 object.networkTags = [];
                                 object.networkInterfaces = [];
                                 object.additionalLicenses = [];
+                                object.adaptationModifiers = [];
                                 object.diskReplicaZones = [];
                             }
                             if (options.objects || options.defaults) {
@@ -25986,6 +26045,7 @@
                                 object.bootConversion = options.enums === String ? "BOOT_CONVERSION_UNSPECIFIED" : 0;
                                 object.enableVtpm = false;
                                 object.enableIntegrityMonitoring = false;
+                                object.storagePool = "";
                             }
                             if (message.vmName != null && message.hasOwnProperty("vmName"))
                                 object.vmName = message.vmName;
@@ -26047,11 +26107,18 @@
                                 object.enableVtpm = message.enableVtpm;
                             if (message.enableIntegrityMonitoring != null && message.hasOwnProperty("enableIntegrityMonitoring"))
                                 object.enableIntegrityMonitoring = message.enableIntegrityMonitoring;
+                            if (message.adaptationModifiers && message.adaptationModifiers.length) {
+                                object.adaptationModifiers = [];
+                                for (var j = 0; j < message.adaptationModifiers.length; ++j)
+                                    object.adaptationModifiers[j] = $root.google.cloud.vmmigration.v1.AdaptationModifier.toObject(message.adaptationModifiers[j], options);
+                            }
                             if (message.diskReplicaZones && message.diskReplicaZones.length) {
                                 object.diskReplicaZones = [];
                                 for (var j = 0; j < message.diskReplicaZones.length; ++j)
                                     object.diskReplicaZones[j] = message.diskReplicaZones[j];
                             }
+                            if (message.storagePool != null && message.hasOwnProperty("storagePool"))
+                                object.storagePool = message.storagePool;
                             return object;
                         };
     
@@ -26084,6 +26151,235 @@
                         return ComputeEngineTargetDefaults;
                     })();
     
+                    v1.AdaptationModifier = (function() {
+    
+                        /**
+                         * Properties of an AdaptationModifier.
+                         * @memberof google.cloud.vmmigration.v1
+                         * @interface IAdaptationModifier
+                         * @property {string|null} [modifier] AdaptationModifier modifier
+                         * @property {string|null} [value] AdaptationModifier value
+                         */
+    
+                        /**
+                         * Constructs a new AdaptationModifier.
+                         * @memberof google.cloud.vmmigration.v1
+                         * @classdesc Represents an AdaptationModifier.
+                         * @implements IAdaptationModifier
+                         * @constructor
+                         * @param {google.cloud.vmmigration.v1.IAdaptationModifier=} [properties] Properties to set
+                         */
+                        function AdaptationModifier(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AdaptationModifier modifier.
+                         * @member {string} modifier
+                         * @memberof google.cloud.vmmigration.v1.AdaptationModifier
+                         * @instance
+                         */
+                        AdaptationModifier.prototype.modifier = "";
+    
+                        /**
+                         * AdaptationModifier value.
+                         * @member {string} value
+                         * @memberof google.cloud.vmmigration.v1.AdaptationModifier
+                         * @instance
+                         */
+                        AdaptationModifier.prototype.value = "";
+    
+                        /**
+                         * Creates a new AdaptationModifier instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmmigration.v1.AdaptationModifier
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IAdaptationModifier=} [properties] Properties to set
+                         * @returns {google.cloud.vmmigration.v1.AdaptationModifier} AdaptationModifier instance
+                         */
+                        AdaptationModifier.create = function create(properties) {
+                            return new AdaptationModifier(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AdaptationModifier message. Does not implicitly {@link google.cloud.vmmigration.v1.AdaptationModifier.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmmigration.v1.AdaptationModifier
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IAdaptationModifier} message AdaptationModifier message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AdaptationModifier.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.value);
+                            if (message.modifier != null && Object.hasOwnProperty.call(message, "modifier"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.modifier);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AdaptationModifier message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.AdaptationModifier.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmmigration.v1.AdaptationModifier
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IAdaptationModifier} message AdaptationModifier message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AdaptationModifier.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AdaptationModifier message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmmigration.v1.AdaptationModifier
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmmigration.v1.AdaptationModifier} AdaptationModifier
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AdaptationModifier.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmmigration.v1.AdaptationModifier();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 3: {
+                                        message.modifier = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.value = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AdaptationModifier message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmmigration.v1.AdaptationModifier
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmmigration.v1.AdaptationModifier} AdaptationModifier
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AdaptationModifier.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AdaptationModifier message.
+                         * @function verify
+                         * @memberof google.cloud.vmmigration.v1.AdaptationModifier
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AdaptationModifier.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.modifier != null && message.hasOwnProperty("modifier"))
+                                if (!$util.isString(message.modifier))
+                                    return "modifier: string expected";
+                            if (message.value != null && message.hasOwnProperty("value"))
+                                if (!$util.isString(message.value))
+                                    return "value: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AdaptationModifier message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmmigration.v1.AdaptationModifier
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmmigration.v1.AdaptationModifier} AdaptationModifier
+                         */
+                        AdaptationModifier.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmmigration.v1.AdaptationModifier)
+                                return object;
+                            var message = new $root.google.cloud.vmmigration.v1.AdaptationModifier();
+                            if (object.modifier != null)
+                                message.modifier = String(object.modifier);
+                            if (object.value != null)
+                                message.value = String(object.value);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AdaptationModifier message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmmigration.v1.AdaptationModifier
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.AdaptationModifier} message AdaptationModifier
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AdaptationModifier.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.value = "";
+                                object.modifier = "";
+                            }
+                            if (message.value != null && message.hasOwnProperty("value"))
+                                object.value = message.value;
+                            if (message.modifier != null && message.hasOwnProperty("modifier"))
+                                object.modifier = message.modifier;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AdaptationModifier to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmmigration.v1.AdaptationModifier
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AdaptationModifier.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AdaptationModifier
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmmigration.v1.AdaptationModifier
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AdaptationModifier.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmmigration.v1.AdaptationModifier";
+                        };
+    
+                        return AdaptationModifier;
+                    })();
+    
                     v1.ComputeEngineTargetDetails = (function() {
     
                         /**
@@ -26112,7 +26408,9 @@
                          * @property {string|null} [hostname] ComputeEngineTargetDetails hostname
                          * @property {google.cloud.vmmigration.v1.IEncryption|null} [encryption] ComputeEngineTargetDetails encryption
                          * @property {google.cloud.vmmigration.v1.BootConversion|null} [bootConversion] ComputeEngineTargetDetails bootConversion
+                         * @property {Array.<google.cloud.vmmigration.v1.IAdaptationModifier>|null} [adaptationModifiers] ComputeEngineTargetDetails adaptationModifiers
                          * @property {Array.<string>|null} [diskReplicaZones] ComputeEngineTargetDetails diskReplicaZones
+                         * @property {string|null} [storagePool] ComputeEngineTargetDetails storagePool
                          */
     
                         /**
@@ -26129,6 +26427,7 @@
                             this.labels = {};
                             this.metadata = {};
                             this.additionalLicenses = [];
+                            this.adaptationModifiers = [];
                             this.diskReplicaZones = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
@@ -26313,12 +26612,28 @@
                         ComputeEngineTargetDetails.prototype.bootConversion = 0;
     
                         /**
+                         * ComputeEngineTargetDetails adaptationModifiers.
+                         * @member {Array.<google.cloud.vmmigration.v1.IAdaptationModifier>} adaptationModifiers
+                         * @memberof google.cloud.vmmigration.v1.ComputeEngineTargetDetails
+                         * @instance
+                         */
+                        ComputeEngineTargetDetails.prototype.adaptationModifiers = $util.emptyArray;
+    
+                        /**
                          * ComputeEngineTargetDetails diskReplicaZones.
                          * @member {Array.<string>} diskReplicaZones
                          * @memberof google.cloud.vmmigration.v1.ComputeEngineTargetDetails
                          * @instance
                          */
                         ComputeEngineTargetDetails.prototype.diskReplicaZones = $util.emptyArray;
+    
+                        /**
+                         * ComputeEngineTargetDetails storagePool.
+                         * @member {string} storagePool
+                         * @memberof google.cloud.vmmigration.v1.ComputeEngineTargetDetails
+                         * @instance
+                         */
+                        ComputeEngineTargetDetails.prototype.storagePool = "";
     
                         /**
                          * Creates a new ComputeEngineTargetDetails instance using the specified properties.
@@ -26393,9 +26708,14 @@
                                 writer.uint32(/* id 21, wireType 0 =*/168).bool(message.enableVtpm);
                             if (message.enableIntegrityMonitoring != null && Object.hasOwnProperty.call(message, "enableIntegrityMonitoring"))
                                 writer.uint32(/* id 22, wireType 0 =*/176).bool(message.enableIntegrityMonitoring);
+                            if (message.adaptationModifiers != null && message.adaptationModifiers.length)
+                                for (var i = 0; i < message.adaptationModifiers.length; ++i)
+                                    $root.google.cloud.vmmigration.v1.AdaptationModifier.encode(message.adaptationModifiers[i], writer.uint32(/* id 23, wireType 2 =*/186).fork()).ldelim();
                             if (message.diskReplicaZones != null && message.diskReplicaZones.length)
                                 for (var i = 0; i < message.diskReplicaZones.length; ++i)
                                     writer.uint32(/* id 24, wireType 2 =*/194).string(message.diskReplicaZones[i]);
+                            if (message.storagePool != null && Object.hasOwnProperty.call(message, "storagePool"))
+                                writer.uint32(/* id 25, wireType 2 =*/202).string(message.storagePool);
                             return writer;
                         };
     
@@ -26564,10 +26884,20 @@
                                         message.bootConversion = reader.int32();
                                         break;
                                     }
+                                case 23: {
+                                        if (!(message.adaptationModifiers && message.adaptationModifiers.length))
+                                            message.adaptationModifiers = [];
+                                        message.adaptationModifiers.push($root.google.cloud.vmmigration.v1.AdaptationModifier.decode(reader, reader.uint32()));
+                                        break;
+                                    }
                                 case 24: {
                                         if (!(message.diskReplicaZones && message.diskReplicaZones.length))
                                             message.diskReplicaZones = [];
                                         message.diskReplicaZones.push(reader.string());
+                                        break;
+                                    }
+                                case 25: {
+                                        message.storagePool = reader.string();
                                         break;
                                     }
                                 default:
@@ -26727,6 +27057,15 @@
                                 case 2:
                                     break;
                                 }
+                            if (message.adaptationModifiers != null && message.hasOwnProperty("adaptationModifiers")) {
+                                if (!Array.isArray(message.adaptationModifiers))
+                                    return "adaptationModifiers: array expected";
+                                for (var i = 0; i < message.adaptationModifiers.length; ++i) {
+                                    var error = $root.google.cloud.vmmigration.v1.AdaptationModifier.verify(message.adaptationModifiers[i]);
+                                    if (error)
+                                        return "adaptationModifiers." + error;
+                                }
+                            }
                             if (message.diskReplicaZones != null && message.hasOwnProperty("diskReplicaZones")) {
                                 if (!Array.isArray(message.diskReplicaZones))
                                     return "diskReplicaZones: array expected";
@@ -26734,6 +27073,9 @@
                                     if (!$util.isString(message.diskReplicaZones[i]))
                                         return "diskReplicaZones: string[] expected";
                             }
+                            if (message.storagePool != null && message.hasOwnProperty("storagePool"))
+                                if (!$util.isString(message.storagePool))
+                                    return "storagePool: string expected";
                             return null;
                         };
     
@@ -26910,6 +27252,16 @@
                                 message.bootConversion = 2;
                                 break;
                             }
+                            if (object.adaptationModifiers) {
+                                if (!Array.isArray(object.adaptationModifiers))
+                                    throw TypeError(".google.cloud.vmmigration.v1.ComputeEngineTargetDetails.adaptationModifiers: array expected");
+                                message.adaptationModifiers = [];
+                                for (var i = 0; i < object.adaptationModifiers.length; ++i) {
+                                    if (typeof object.adaptationModifiers[i] !== "object")
+                                        throw TypeError(".google.cloud.vmmigration.v1.ComputeEngineTargetDetails.adaptationModifiers: object expected");
+                                    message.adaptationModifiers[i] = $root.google.cloud.vmmigration.v1.AdaptationModifier.fromObject(object.adaptationModifiers[i]);
+                                }
+                            }
                             if (object.diskReplicaZones) {
                                 if (!Array.isArray(object.diskReplicaZones))
                                     throw TypeError(".google.cloud.vmmigration.v1.ComputeEngineTargetDetails.diskReplicaZones: array expected");
@@ -26917,6 +27269,8 @@
                                 for (var i = 0; i < object.diskReplicaZones.length; ++i)
                                     message.diskReplicaZones[i] = String(object.diskReplicaZones[i]);
                             }
+                            if (object.storagePool != null)
+                                message.storagePool = String(object.storagePool);
                             return message;
                         };
     
@@ -26937,6 +27291,7 @@
                                 object.networkTags = [];
                                 object.networkInterfaces = [];
                                 object.additionalLicenses = [];
+                                object.adaptationModifiers = [];
                                 object.diskReplicaZones = [];
                             }
                             if (options.objects || options.defaults) {
@@ -26961,6 +27316,7 @@
                                 object.bootConversion = options.enums === String ? "BOOT_CONVERSION_UNSPECIFIED" : 0;
                                 object.enableVtpm = false;
                                 object.enableIntegrityMonitoring = false;
+                                object.storagePool = "";
                             }
                             if (message.vmName != null && message.hasOwnProperty("vmName"))
                                 object.vmName = message.vmName;
@@ -27022,11 +27378,18 @@
                                 object.enableVtpm = message.enableVtpm;
                             if (message.enableIntegrityMonitoring != null && message.hasOwnProperty("enableIntegrityMonitoring"))
                                 object.enableIntegrityMonitoring = message.enableIntegrityMonitoring;
+                            if (message.adaptationModifiers && message.adaptationModifiers.length) {
+                                object.adaptationModifiers = [];
+                                for (var j = 0; j < message.adaptationModifiers.length; ++j)
+                                    object.adaptationModifiers[j] = $root.google.cloud.vmmigration.v1.AdaptationModifier.toObject(message.adaptationModifiers[j], options);
+                            }
                             if (message.diskReplicaZones && message.diskReplicaZones.length) {
                                 object.diskReplicaZones = [];
                                 for (var j = 0; j < message.diskReplicaZones.length; ++j)
                                     object.diskReplicaZones[j] = message.diskReplicaZones[j];
                             }
+                            if (message.storagePool != null && message.hasOwnProperty("storagePool"))
+                                object.storagePool = message.storagePool;
                             return object;
                         };
     
@@ -49686,6 +50049,7 @@
                          * @property {boolean|null} [generalize] ImageImportOsAdaptationParameters generalize
                          * @property {google.cloud.vmmigration.v1.ComputeEngineLicenseType|null} [licenseType] ImageImportOsAdaptationParameters licenseType
                          * @property {google.cloud.vmmigration.v1.BootConversion|null} [bootConversion] ImageImportOsAdaptationParameters bootConversion
+                         * @property {Array.<google.cloud.vmmigration.v1.IAdaptationModifier>|null} [adaptationModifiers] ImageImportOsAdaptationParameters adaptationModifiers
                          */
     
                         /**
@@ -49697,6 +50061,7 @@
                          * @param {google.cloud.vmmigration.v1.IImageImportOsAdaptationParameters=} [properties] Properties to set
                          */
                         function ImageImportOsAdaptationParameters(properties) {
+                            this.adaptationModifiers = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -49728,6 +50093,14 @@
                         ImageImportOsAdaptationParameters.prototype.bootConversion = 0;
     
                         /**
+                         * ImageImportOsAdaptationParameters adaptationModifiers.
+                         * @member {Array.<google.cloud.vmmigration.v1.IAdaptationModifier>} adaptationModifiers
+                         * @memberof google.cloud.vmmigration.v1.ImageImportOsAdaptationParameters
+                         * @instance
+                         */
+                        ImageImportOsAdaptationParameters.prototype.adaptationModifiers = $util.emptyArray;
+    
+                        /**
                          * Creates a new ImageImportOsAdaptationParameters instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.vmmigration.v1.ImageImportOsAdaptationParameters
@@ -49757,6 +50130,9 @@
                                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.licenseType);
                             if (message.bootConversion != null && Object.hasOwnProperty.call(message, "bootConversion"))
                                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.bootConversion);
+                            if (message.adaptationModifiers != null && message.adaptationModifiers.length)
+                                for (var i = 0; i < message.adaptationModifiers.length; ++i)
+                                    $root.google.cloud.vmmigration.v1.AdaptationModifier.encode(message.adaptationModifiers[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             return writer;
                         };
     
@@ -49803,6 +50179,12 @@
                                     }
                                 case 3: {
                                         message.bootConversion = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.adaptationModifiers && message.adaptationModifiers.length))
+                                            message.adaptationModifiers = [];
+                                        message.adaptationModifiers.push($root.google.cloud.vmmigration.v1.AdaptationModifier.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -49861,6 +50243,15 @@
                                 case 2:
                                     break;
                                 }
+                            if (message.adaptationModifiers != null && message.hasOwnProperty("adaptationModifiers")) {
+                                if (!Array.isArray(message.adaptationModifiers))
+                                    return "adaptationModifiers: array expected";
+                                for (var i = 0; i < message.adaptationModifiers.length; ++i) {
+                                    var error = $root.google.cloud.vmmigration.v1.AdaptationModifier.verify(message.adaptationModifiers[i]);
+                                    if (error)
+                                        return "adaptationModifiers." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -49918,6 +50309,16 @@
                                 message.bootConversion = 2;
                                 break;
                             }
+                            if (object.adaptationModifiers) {
+                                if (!Array.isArray(object.adaptationModifiers))
+                                    throw TypeError(".google.cloud.vmmigration.v1.ImageImportOsAdaptationParameters.adaptationModifiers: array expected");
+                                message.adaptationModifiers = [];
+                                for (var i = 0; i < object.adaptationModifiers.length; ++i) {
+                                    if (typeof object.adaptationModifiers[i] !== "object")
+                                        throw TypeError(".google.cloud.vmmigration.v1.ImageImportOsAdaptationParameters.adaptationModifiers: object expected");
+                                    message.adaptationModifiers[i] = $root.google.cloud.vmmigration.v1.AdaptationModifier.fromObject(object.adaptationModifiers[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -49934,6 +50335,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.adaptationModifiers = [];
                             if (options.defaults) {
                                 object.generalize = false;
                                 object.licenseType = options.enums === String ? "COMPUTE_ENGINE_LICENSE_TYPE_DEFAULT" : 0;
@@ -49945,6 +50348,11 @@
                                 object.licenseType = options.enums === String ? $root.google.cloud.vmmigration.v1.ComputeEngineLicenseType[message.licenseType] === undefined ? message.licenseType : $root.google.cloud.vmmigration.v1.ComputeEngineLicenseType[message.licenseType] : message.licenseType;
                             if (message.bootConversion != null && message.hasOwnProperty("bootConversion"))
                                 object.bootConversion = options.enums === String ? $root.google.cloud.vmmigration.v1.BootConversion[message.bootConversion] === undefined ? message.bootConversion : $root.google.cloud.vmmigration.v1.BootConversion[message.bootConversion] : message.bootConversion;
+                            if (message.adaptationModifiers && message.adaptationModifiers.length) {
+                                object.adaptationModifiers = [];
+                                for (var j = 0; j < message.adaptationModifiers.length; ++j)
+                                    object.adaptationModifiers[j] = $root.google.cloud.vmmigration.v1.AdaptationModifier.toObject(message.adaptationModifiers[j], options);
+                            }
                             return object;
                         };
     
@@ -49983,6 +50391,7 @@
                          * Properties of a DataDiskImageImport.
                          * @memberof google.cloud.vmmigration.v1
                          * @interface IDataDiskImageImport
+                         * @property {Array.<string>|null} [guestOsFeatures] DataDiskImageImport guestOsFeatures
                          */
     
                         /**
@@ -49994,11 +50403,20 @@
                          * @param {google.cloud.vmmigration.v1.IDataDiskImageImport=} [properties] Properties to set
                          */
                         function DataDiskImageImport(properties) {
+                            this.guestOsFeatures = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
                                         this[keys[i]] = properties[keys[i]];
                         }
+    
+                        /**
+                         * DataDiskImageImport guestOsFeatures.
+                         * @member {Array.<string>} guestOsFeatures
+                         * @memberof google.cloud.vmmigration.v1.DataDiskImageImport
+                         * @instance
+                         */
+                        DataDiskImageImport.prototype.guestOsFeatures = $util.emptyArray;
     
                         /**
                          * Creates a new DataDiskImageImport instance using the specified properties.
@@ -50024,6 +50442,9 @@
                         DataDiskImageImport.encode = function encode(message, writer) {
                             if (!writer)
                                 writer = $Writer.create();
+                            if (message.guestOsFeatures != null && message.guestOsFeatures.length)
+                                for (var i = 0; i < message.guestOsFeatures.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.guestOsFeatures[i]);
                             return writer;
                         };
     
@@ -50060,6 +50481,12 @@
                                 if (tag === error)
                                     break;
                                 switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.guestOsFeatures && message.guestOsFeatures.length))
+                                            message.guestOsFeatures = [];
+                                        message.guestOsFeatures.push(reader.string());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -50095,6 +50522,13 @@
                         DataDiskImageImport.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (message.guestOsFeatures != null && message.hasOwnProperty("guestOsFeatures")) {
+                                if (!Array.isArray(message.guestOsFeatures))
+                                    return "guestOsFeatures: array expected";
+                                for (var i = 0; i < message.guestOsFeatures.length; ++i)
+                                    if (!$util.isString(message.guestOsFeatures[i]))
+                                        return "guestOsFeatures: string[] expected";
+                            }
                             return null;
                         };
     
@@ -50109,7 +50543,15 @@
                         DataDiskImageImport.fromObject = function fromObject(object) {
                             if (object instanceof $root.google.cloud.vmmigration.v1.DataDiskImageImport)
                                 return object;
-                            return new $root.google.cloud.vmmigration.v1.DataDiskImageImport();
+                            var message = new $root.google.cloud.vmmigration.v1.DataDiskImageImport();
+                            if (object.guestOsFeatures) {
+                                if (!Array.isArray(object.guestOsFeatures))
+                                    throw TypeError(".google.cloud.vmmigration.v1.DataDiskImageImport.guestOsFeatures: array expected");
+                                message.guestOsFeatures = [];
+                                for (var i = 0; i < object.guestOsFeatures.length; ++i)
+                                    message.guestOsFeatures[i] = String(object.guestOsFeatures[i]);
+                            }
+                            return message;
                         };
     
                         /**
@@ -50121,8 +50563,18 @@
                          * @param {$protobuf.IConversionOptions} [options] Conversion options
                          * @returns {Object.<string,*>} Plain object
                          */
-                        DataDiskImageImport.toObject = function toObject() {
-                            return {};
+                        DataDiskImageImport.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.guestOsFeatures = [];
+                            if (message.guestOsFeatures && message.guestOsFeatures.length) {
+                                object.guestOsFeatures = [];
+                                for (var j = 0; j < message.guestOsFeatures.length; ++j)
+                                    object.guestOsFeatures[j] = message.guestOsFeatures[j];
+                            }
+                            return object;
                         };
     
                         /**

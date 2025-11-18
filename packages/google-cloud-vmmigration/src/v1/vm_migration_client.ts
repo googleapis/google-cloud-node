@@ -5541,7 +5541,7 @@ export class VmMigrationClient {
     return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.vmmigration.v1.OperationMetadata>;
   }
 /**
- * Initiates the cancellation of a running clone job.
+ * Initiates the cancellation of a running ImageImportJob.
  *
  * @param {Object} request
  *   The request object that will be sent.
