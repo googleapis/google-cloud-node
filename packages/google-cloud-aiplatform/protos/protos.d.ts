@@ -158063,11 +158063,117 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a ReplicatedVoiceConfig. */
+                interface IReplicatedVoiceConfig {
+
+                    /** ReplicatedVoiceConfig mimeType */
+                    mimeType?: (string|null);
+
+                    /** ReplicatedVoiceConfig voiceSampleAudio */
+                    voiceSampleAudio?: (Uint8Array|Buffer|string|null);
+                }
+
+                /** Represents a ReplicatedVoiceConfig. */
+                class ReplicatedVoiceConfig implements IReplicatedVoiceConfig {
+
+                    /**
+                     * Constructs a new ReplicatedVoiceConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IReplicatedVoiceConfig);
+
+                    /** ReplicatedVoiceConfig mimeType. */
+                    public mimeType: string;
+
+                    /** ReplicatedVoiceConfig voiceSampleAudio. */
+                    public voiceSampleAudio: (Uint8Array|Buffer|string);
+
+                    /**
+                     * Creates a new ReplicatedVoiceConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ReplicatedVoiceConfig instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IReplicatedVoiceConfig): google.cloud.aiplatform.v1beta1.ReplicatedVoiceConfig;
+
+                    /**
+                     * Encodes the specified ReplicatedVoiceConfig message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ReplicatedVoiceConfig.verify|verify} messages.
+                     * @param message ReplicatedVoiceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IReplicatedVoiceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ReplicatedVoiceConfig message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ReplicatedVoiceConfig.verify|verify} messages.
+                     * @param message ReplicatedVoiceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IReplicatedVoiceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ReplicatedVoiceConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ReplicatedVoiceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.ReplicatedVoiceConfig;
+
+                    /**
+                     * Decodes a ReplicatedVoiceConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ReplicatedVoiceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.ReplicatedVoiceConfig;
+
+                    /**
+                     * Verifies a ReplicatedVoiceConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ReplicatedVoiceConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ReplicatedVoiceConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.ReplicatedVoiceConfig;
+
+                    /**
+                     * Creates a plain object from a ReplicatedVoiceConfig message. Also converts values to other types if specified.
+                     * @param message ReplicatedVoiceConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.ReplicatedVoiceConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ReplicatedVoiceConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ReplicatedVoiceConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a VoiceConfig. */
                 interface IVoiceConfig {
 
                     /** VoiceConfig prebuiltVoiceConfig */
                     prebuiltVoiceConfig?: (google.cloud.aiplatform.v1beta1.IPrebuiltVoiceConfig|null);
+
+                    /** VoiceConfig replicatedVoiceConfig */
+                    replicatedVoiceConfig?: (google.cloud.aiplatform.v1beta1.IReplicatedVoiceConfig|null);
                 }
 
                 /** Represents a VoiceConfig. */
@@ -158082,8 +158188,11 @@ export namespace google {
                     /** VoiceConfig prebuiltVoiceConfig. */
                     public prebuiltVoiceConfig?: (google.cloud.aiplatform.v1beta1.IPrebuiltVoiceConfig|null);
 
+                    /** VoiceConfig replicatedVoiceConfig. */
+                    public replicatedVoiceConfig?: (google.cloud.aiplatform.v1beta1.IReplicatedVoiceConfig|null);
+
                     /** VoiceConfig voiceConfig. */
-                    public voiceConfig?: "prebuiltVoiceConfig";
+                    public voiceConfig?: ("prebuiltVoiceConfig"|"replicatedVoiceConfig");
 
                     /**
                      * Creates a new VoiceConfig instance using the specified properties.
@@ -158163,11 +158272,217 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a SpeakerVoiceConfig. */
+                interface ISpeakerVoiceConfig {
+
+                    /** SpeakerVoiceConfig speaker */
+                    speaker?: (string|null);
+
+                    /** SpeakerVoiceConfig voiceConfig */
+                    voiceConfig?: (google.cloud.aiplatform.v1beta1.IVoiceConfig|null);
+                }
+
+                /** Represents a SpeakerVoiceConfig. */
+                class SpeakerVoiceConfig implements ISpeakerVoiceConfig {
+
+                    /**
+                     * Constructs a new SpeakerVoiceConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.ISpeakerVoiceConfig);
+
+                    /** SpeakerVoiceConfig speaker. */
+                    public speaker: string;
+
+                    /** SpeakerVoiceConfig voiceConfig. */
+                    public voiceConfig?: (google.cloud.aiplatform.v1beta1.IVoiceConfig|null);
+
+                    /**
+                     * Creates a new SpeakerVoiceConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SpeakerVoiceConfig instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.ISpeakerVoiceConfig): google.cloud.aiplatform.v1beta1.SpeakerVoiceConfig;
+
+                    /**
+                     * Encodes the specified SpeakerVoiceConfig message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.SpeakerVoiceConfig.verify|verify} messages.
+                     * @param message SpeakerVoiceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.ISpeakerVoiceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SpeakerVoiceConfig message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.SpeakerVoiceConfig.verify|verify} messages.
+                     * @param message SpeakerVoiceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.ISpeakerVoiceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SpeakerVoiceConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SpeakerVoiceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.SpeakerVoiceConfig;
+
+                    /**
+                     * Decodes a SpeakerVoiceConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SpeakerVoiceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.SpeakerVoiceConfig;
+
+                    /**
+                     * Verifies a SpeakerVoiceConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SpeakerVoiceConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SpeakerVoiceConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.SpeakerVoiceConfig;
+
+                    /**
+                     * Creates a plain object from a SpeakerVoiceConfig message. Also converts values to other types if specified.
+                     * @param message SpeakerVoiceConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.SpeakerVoiceConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SpeakerVoiceConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SpeakerVoiceConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a MultiSpeakerVoiceConfig. */
+                interface IMultiSpeakerVoiceConfig {
+
+                    /** MultiSpeakerVoiceConfig speakerVoiceConfigs */
+                    speakerVoiceConfigs?: (google.cloud.aiplatform.v1beta1.ISpeakerVoiceConfig[]|null);
+                }
+
+                /** Represents a MultiSpeakerVoiceConfig. */
+                class MultiSpeakerVoiceConfig implements IMultiSpeakerVoiceConfig {
+
+                    /**
+                     * Constructs a new MultiSpeakerVoiceConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IMultiSpeakerVoiceConfig);
+
+                    /** MultiSpeakerVoiceConfig speakerVoiceConfigs. */
+                    public speakerVoiceConfigs: google.cloud.aiplatform.v1beta1.ISpeakerVoiceConfig[];
+
+                    /**
+                     * Creates a new MultiSpeakerVoiceConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MultiSpeakerVoiceConfig instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IMultiSpeakerVoiceConfig): google.cloud.aiplatform.v1beta1.MultiSpeakerVoiceConfig;
+
+                    /**
+                     * Encodes the specified MultiSpeakerVoiceConfig message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.MultiSpeakerVoiceConfig.verify|verify} messages.
+                     * @param message MultiSpeakerVoiceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IMultiSpeakerVoiceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MultiSpeakerVoiceConfig message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.MultiSpeakerVoiceConfig.verify|verify} messages.
+                     * @param message MultiSpeakerVoiceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IMultiSpeakerVoiceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MultiSpeakerVoiceConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MultiSpeakerVoiceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.MultiSpeakerVoiceConfig;
+
+                    /**
+                     * Decodes a MultiSpeakerVoiceConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MultiSpeakerVoiceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.MultiSpeakerVoiceConfig;
+
+                    /**
+                     * Verifies a MultiSpeakerVoiceConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MultiSpeakerVoiceConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MultiSpeakerVoiceConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.MultiSpeakerVoiceConfig;
+
+                    /**
+                     * Creates a plain object from a MultiSpeakerVoiceConfig message. Also converts values to other types if specified.
+                     * @param message MultiSpeakerVoiceConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.MultiSpeakerVoiceConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MultiSpeakerVoiceConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MultiSpeakerVoiceConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a SpeechConfig. */
                 interface ISpeechConfig {
 
                     /** SpeechConfig voiceConfig */
                     voiceConfig?: (google.cloud.aiplatform.v1beta1.IVoiceConfig|null);
+
+                    /** SpeechConfig languageCode */
+                    languageCode?: (string|null);
+
+                    /** SpeechConfig multiSpeakerVoiceConfig */
+                    multiSpeakerVoiceConfig?: (google.cloud.aiplatform.v1beta1.IMultiSpeakerVoiceConfig|null);
                 }
 
                 /** Represents a SpeechConfig. */
@@ -158181,6 +158496,12 @@ export namespace google {
 
                     /** SpeechConfig voiceConfig. */
                     public voiceConfig?: (google.cloud.aiplatform.v1beta1.IVoiceConfig|null);
+
+                    /** SpeechConfig languageCode. */
+                    public languageCode: string;
+
+                    /** SpeechConfig multiSpeakerVoiceConfig. */
+                    public multiSpeakerVoiceConfig?: (google.cloud.aiplatform.v1beta1.IMultiSpeakerVoiceConfig|null);
 
                     /**
                      * Creates a new SpeechConfig instance using the specified properties.

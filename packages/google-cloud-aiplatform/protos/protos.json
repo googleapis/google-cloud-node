@@ -42182,11 +42182,30 @@
                         }
                       }
                     },
+                    "ReplicatedVoiceConfig": {
+                      "fields": {
+                        "mimeType": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "voiceSampleAudio": {
+                          "type": "bytes",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
                     "VoiceConfig": {
                       "oneofs": {
                         "voiceConfig": {
                           "oneof": [
-                            "prebuiltVoiceConfig"
+                            "prebuiltVoiceConfig",
+                            "replicatedVoiceConfig"
                           ]
                         }
                       },
@@ -42194,6 +42213,43 @@
                         "prebuiltVoiceConfig": {
                           "type": "PrebuiltVoiceConfig",
                           "id": 1
+                        },
+                        "replicatedVoiceConfig": {
+                          "type": "ReplicatedVoiceConfig",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "SpeakerVoiceConfig": {
+                      "fields": {
+                        "speaker": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "voiceConfig": {
+                          "type": "VoiceConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "MultiSpeakerVoiceConfig": {
+                      "fields": {
+                        "speakerVoiceConfigs": {
+                          "rule": "repeated",
+                          "type": "SpeakerVoiceConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -42202,6 +42258,17 @@
                         "voiceConfig": {
                           "type": "VoiceConfig",
                           "id": 1
+                        },
+                        "languageCode": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "multiSpeakerVoiceConfig": {
+                          "type": "MultiSpeakerVoiceConfig",
+                          "id": 3
                         }
                       }
                     },
