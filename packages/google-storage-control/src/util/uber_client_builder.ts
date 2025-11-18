@@ -104,7 +104,7 @@ function buildOptionTypes(clients: string[]) {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     \`\`\`
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new DatasetServiceClient({fallback: true}, gax);
+   *     const client = new StorageControlClient({fallback: true}, gax);
    *     \`\`\`
    */\n`;
 
