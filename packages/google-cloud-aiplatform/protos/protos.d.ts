@@ -296777,6 +296777,9 @@ export namespace google {
                         /** SourceCodeSpec inlineSource */
                         inlineSource?: (google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.SourceCodeSpec.IInlineSource|null);
 
+                        /** SourceCodeSpec developerConnectSource */
+                        developerConnectSource?: (google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.SourceCodeSpec.IDeveloperConnectSource|null);
+
                         /** SourceCodeSpec pythonSpec */
                         pythonSpec?: (google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.SourceCodeSpec.IPythonSpec|null);
                     }
@@ -296793,11 +296796,14 @@ export namespace google {
                         /** SourceCodeSpec inlineSource. */
                         public inlineSource?: (google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.SourceCodeSpec.IInlineSource|null);
 
+                        /** SourceCodeSpec developerConnectSource. */
+                        public developerConnectSource?: (google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.SourceCodeSpec.IDeveloperConnectSource|null);
+
                         /** SourceCodeSpec pythonSpec. */
                         public pythonSpec?: (google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.SourceCodeSpec.IPythonSpec|null);
 
                         /** SourceCodeSpec source. */
-                        public source?: "inlineSource";
+                        public source?: ("inlineSource"|"developerConnectSource");
 
                         /** SourceCodeSpec languageSpec. */
                         public languageSpec?: "pythonSpec";
@@ -296973,6 +296979,212 @@ export namespace google {
 
                             /**
                              * Gets the default type url for InlineSource
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a DeveloperConnectConfig. */
+                        interface IDeveloperConnectConfig {
+
+                            /** DeveloperConnectConfig gitRepositoryLink */
+                            gitRepositoryLink?: (string|null);
+
+                            /** DeveloperConnectConfig dir */
+                            dir?: (string|null);
+
+                            /** DeveloperConnectConfig revision */
+                            revision?: (string|null);
+                        }
+
+                        /** Represents a DeveloperConnectConfig. */
+                        class DeveloperConnectConfig implements IDeveloperConnectConfig {
+
+                            /**
+                             * Constructs a new DeveloperConnectConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.SourceCodeSpec.IDeveloperConnectConfig);
+
+                            /** DeveloperConnectConfig gitRepositoryLink. */
+                            public gitRepositoryLink: string;
+
+                            /** DeveloperConnectConfig dir. */
+                            public dir: string;
+
+                            /** DeveloperConnectConfig revision. */
+                            public revision: string;
+
+                            /**
+                             * Creates a new DeveloperConnectConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns DeveloperConnectConfig instance
+                             */
+                            public static create(properties?: google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.SourceCodeSpec.IDeveloperConnectConfig): google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.SourceCodeSpec.DeveloperConnectConfig;
+
+                            /**
+                             * Encodes the specified DeveloperConnectConfig message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.SourceCodeSpec.DeveloperConnectConfig.verify|verify} messages.
+                             * @param message DeveloperConnectConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.SourceCodeSpec.IDeveloperConnectConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified DeveloperConnectConfig message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.SourceCodeSpec.DeveloperConnectConfig.verify|verify} messages.
+                             * @param message DeveloperConnectConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.SourceCodeSpec.IDeveloperConnectConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a DeveloperConnectConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns DeveloperConnectConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.SourceCodeSpec.DeveloperConnectConfig;
+
+                            /**
+                             * Decodes a DeveloperConnectConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns DeveloperConnectConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.SourceCodeSpec.DeveloperConnectConfig;
+
+                            /**
+                             * Verifies a DeveloperConnectConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a DeveloperConnectConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns DeveloperConnectConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.SourceCodeSpec.DeveloperConnectConfig;
+
+                            /**
+                             * Creates a plain object from a DeveloperConnectConfig message. Also converts values to other types if specified.
+                             * @param message DeveloperConnectConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.SourceCodeSpec.DeveloperConnectConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this DeveloperConnectConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for DeveloperConnectConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a DeveloperConnectSource. */
+                        interface IDeveloperConnectSource {
+
+                            /** DeveloperConnectSource config */
+                            config?: (google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.SourceCodeSpec.IDeveloperConnectConfig|null);
+                        }
+
+                        /** Represents a DeveloperConnectSource. */
+                        class DeveloperConnectSource implements IDeveloperConnectSource {
+
+                            /**
+                             * Constructs a new DeveloperConnectSource.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.SourceCodeSpec.IDeveloperConnectSource);
+
+                            /** DeveloperConnectSource config. */
+                            public config?: (google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.SourceCodeSpec.IDeveloperConnectConfig|null);
+
+                            /**
+                             * Creates a new DeveloperConnectSource instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns DeveloperConnectSource instance
+                             */
+                            public static create(properties?: google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.SourceCodeSpec.IDeveloperConnectSource): google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.SourceCodeSpec.DeveloperConnectSource;
+
+                            /**
+                             * Encodes the specified DeveloperConnectSource message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.SourceCodeSpec.DeveloperConnectSource.verify|verify} messages.
+                             * @param message DeveloperConnectSource message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.SourceCodeSpec.IDeveloperConnectSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified DeveloperConnectSource message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.SourceCodeSpec.DeveloperConnectSource.verify|verify} messages.
+                             * @param message DeveloperConnectSource message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.SourceCodeSpec.IDeveloperConnectSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a DeveloperConnectSource message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns DeveloperConnectSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.SourceCodeSpec.DeveloperConnectSource;
+
+                            /**
+                             * Decodes a DeveloperConnectSource message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns DeveloperConnectSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.SourceCodeSpec.DeveloperConnectSource;
+
+                            /**
+                             * Verifies a DeveloperConnectSource message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a DeveloperConnectSource message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns DeveloperConnectSource
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.SourceCodeSpec.DeveloperConnectSource;
+
+                            /**
+                             * Creates a plain object from a DeveloperConnectSource message. Also converts values to other types if specified.
+                             * @param message DeveloperConnectSource
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.SourceCodeSpec.DeveloperConnectSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this DeveloperConnectSource to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for DeveloperConnectSource
                              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                              * @returns The default type url
                              */

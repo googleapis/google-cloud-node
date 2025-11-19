@@ -38631,8 +38631,8 @@
                     "java_package": "com.google.cloud.aiplatform.v1beta1",
                     "php_namespace": "Google\\Cloud\\AIPlatform\\V1beta1",
                     "ruby_package": "Google::Cloud::AIPlatform::V1beta1",
-                    "(google.api.resource_definition).type": "compute.googleapis.com/Network",
-                    "(google.api.resource_definition).pattern": "projects/{project}/global/networks/{network}"
+                    "(google.api.resource_definition).type": "developerconnect.googleapis.com/GitRepositoryLink",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/connections/{connection}/gitRepositoryLinks/{git_repository_link}"
                   },
                   "nested": {
                     "AcceleratorType": {
@@ -79793,7 +79793,8 @@
                           "oneofs": {
                             "source": {
                               "oneof": [
-                                "inlineSource"
+                                "inlineSource",
+                                "developerConnectSource"
                               ]
                             },
                             "languageSpec": {
@@ -79806,6 +79807,10 @@
                             "inlineSource": {
                               "type": "InlineSource",
                               "id": 1
+                            },
+                            "developerConnectSource": {
+                              "type": "DeveloperConnectSource",
+                              "id": 3
                             },
                             "pythonSpec": {
                               "type": "PythonSpec",
@@ -79820,6 +79825,43 @@
                                   "id": 1,
                                   "options": {
                                     "(google.api.field_behavior)": "INPUT_ONLY"
+                                  }
+                                }
+                              }
+                            },
+                            "DeveloperConnectConfig": {
+                              "fields": {
+                                "gitRepositoryLink": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED",
+                                    "(google.api.resource_reference).type": "developerconnect.googleapis.com/GitRepositoryLink"
+                                  }
+                                },
+                                "dir": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "revision": {
+                                  "type": "string",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            },
+                            "DeveloperConnectSource": {
+                              "fields": {
+                                "config": {
+                                  "type": "DeveloperConnectConfig",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
                                   }
                                 }
                               }
