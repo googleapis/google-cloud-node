@@ -6009,6 +6009,9 @@ export namespace google {
 
                     /** Settings enableDataplexIntegration */
                     enableDataplexIntegration?: (google.protobuf.IBoolValue|null);
+
+                    /** Settings autoUpgradeEnabled */
+                    autoUpgradeEnabled?: (boolean|null);
                 }
 
                 /** Represents a Settings. */
@@ -6121,6 +6124,9 @@ export namespace google {
 
                     /** Settings enableDataplexIntegration. */
                     public enableDataplexIntegration?: (google.protobuf.IBoolValue|null);
+
+                    /** Settings autoUpgradeEnabled. */
+                    public autoUpgradeEnabled?: (boolean|null);
 
                     /**
                      * Creates a new Settings instance using the specified properties.
@@ -37589,6 +37595,9 @@ export namespace google {
 
                     /** Settings enableDataplexIntegration */
                     enableDataplexIntegration?: (google.protobuf.IBoolValue|null);
+
+                    /** Settings autoUpgradeEnabled */
+                    autoUpgradeEnabled?: (boolean|null);
                 }
 
                 /** Represents a Settings. */
@@ -37701,6 +37710,9 @@ export namespace google {
 
                     /** Settings enableDataplexIntegration. */
                     public enableDataplexIntegration?: (google.protobuf.IBoolValue|null);
+
+                    /** Settings autoUpgradeEnabled. */
+                    public autoUpgradeEnabled?: (boolean|null);
 
                     /**
                      * Creates a new Settings instance using the specified properties.

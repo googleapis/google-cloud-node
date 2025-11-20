@@ -1440,6 +1440,13 @@
                       }
                     },
                     "Settings": {
+                      "oneofs": {
+                        "_autoUpgradeEnabled": {
+                          "oneof": [
+                            "autoUpgradeEnabled"
+                          ]
+                        }
+                      },
                       "fields": {
                         "settingsVersion": {
                           "type": "google.protobuf.Int64Value",
@@ -1597,6 +1604,14 @@
                           "id": 41,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "autoUpgradeEnabled": {
+                          "type": "bool",
+                          "id": 50,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         }
                       },
@@ -9425,6 +9440,13 @@
                       }
                     },
                     "Settings": {
+                      "oneofs": {
+                        "_autoUpgradeEnabled": {
+                          "oneof": [
+                            "autoUpgradeEnabled"
+                          ]
+                        }
+                      },
                       "fields": {
                         "settingsVersion": {
                           "type": "google.protobuf.Int64Value",
@@ -9582,6 +9604,14 @@
                           "id": 41,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "autoUpgradeEnabled": {
+                          "type": "bool",
+                          "id": 50,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         }
                       },
