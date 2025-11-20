@@ -10110,6 +10110,12 @@ export namespace google {
 
                     /** SimpleExportPolicyRule kerberos_5pReadWrite */
                     kerberos_5pReadWrite?: (boolean|null);
+
+                    /** SimpleExportPolicyRule squashMode */
+                    squashMode?: (google.cloud.netapp.v1.SimpleExportPolicyRule.SquashMode|keyof typeof google.cloud.netapp.v1.SimpleExportPolicyRule.SquashMode|null);
+
+                    /** SimpleExportPolicyRule anonUid */
+                    anonUid?: (number|Long|string|null);
                 }
 
                 /** Represents a SimpleExportPolicyRule. */
@@ -10153,6 +10159,12 @@ export namespace google {
 
                     /** SimpleExportPolicyRule kerberos_5pReadWrite. */
                     public kerberos_5pReadWrite?: (boolean|null);
+
+                    /** SimpleExportPolicyRule squashMode. */
+                    public squashMode?: (google.cloud.netapp.v1.SimpleExportPolicyRule.SquashMode|keyof typeof google.cloud.netapp.v1.SimpleExportPolicyRule.SquashMode|null);
+
+                    /** SimpleExportPolicyRule anonUid. */
+                    public anonUid?: (number|Long|string|null);
 
                     /**
                      * Creates a new SimpleExportPolicyRule instance using the specified properties.
@@ -10230,6 +10242,17 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SimpleExportPolicyRule {
+
+                    /** SquashMode enum. */
+                    enum SquashMode {
+                        SQUASH_MODE_UNSPECIFIED = 0,
+                        NO_ROOT_SQUASH = 1,
+                        ROOT_SQUASH = 2,
+                        ALL_SQUASH = 3
+                    }
                 }
 
                 /** Properties of a SnapshotPolicy. */

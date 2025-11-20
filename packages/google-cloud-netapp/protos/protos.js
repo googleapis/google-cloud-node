@@ -25398,6 +25398,8 @@
                          * @property {boolean|null} [kerberos_5iReadWrite] SimpleExportPolicyRule kerberos_5iReadWrite
                          * @property {boolean|null} [kerberos_5pReadOnly] SimpleExportPolicyRule kerberos_5pReadOnly
                          * @property {boolean|null} [kerberos_5pReadWrite] SimpleExportPolicyRule kerberos_5pReadWrite
+                         * @property {google.cloud.netapp.v1.SimpleExportPolicyRule.SquashMode|null} [squashMode] SimpleExportPolicyRule squashMode
+                         * @property {number|Long|null} [anonUid] SimpleExportPolicyRule anonUid
                          */
     
                         /**
@@ -25503,6 +25505,22 @@
                          */
                         SimpleExportPolicyRule.prototype.kerberos_5pReadWrite = null;
     
+                        /**
+                         * SimpleExportPolicyRule squashMode.
+                         * @member {google.cloud.netapp.v1.SimpleExportPolicyRule.SquashMode|null|undefined} squashMode
+                         * @memberof google.cloud.netapp.v1.SimpleExportPolicyRule
+                         * @instance
+                         */
+                        SimpleExportPolicyRule.prototype.squashMode = null;
+    
+                        /**
+                         * SimpleExportPolicyRule anonUid.
+                         * @member {number|Long|null|undefined} anonUid
+                         * @memberof google.cloud.netapp.v1.SimpleExportPolicyRule
+                         * @instance
+                         */
+                        SimpleExportPolicyRule.prototype.anonUid = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -25572,6 +25590,18 @@
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(SimpleExportPolicyRule.prototype, "_squashMode", {
+                            get: $util.oneOfGetter($oneOfFields = ["squashMode"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(SimpleExportPolicyRule.prototype, "_anonUid", {
+                            get: $util.oneOfGetter($oneOfFields = ["anonUid"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
                         /**
                          * Creates a new SimpleExportPolicyRule instance using the specified properties.
                          * @function create
@@ -25618,6 +25648,10 @@
                                 writer.uint32(/* id 10, wireType 0 =*/80).bool(message.kerberos_5pReadOnly);
                             if (message.kerberos_5pReadWrite != null && Object.hasOwnProperty.call(message, "kerberos_5pReadWrite"))
                                 writer.uint32(/* id 11, wireType 0 =*/88).bool(message.kerberos_5pReadWrite);
+                            if (message.squashMode != null && Object.hasOwnProperty.call(message, "squashMode"))
+                                writer.uint32(/* id 12, wireType 0 =*/96).int32(message.squashMode);
+                            if (message.anonUid != null && Object.hasOwnProperty.call(message, "anonUid"))
+                                writer.uint32(/* id 13, wireType 0 =*/104).int64(message.anonUid);
                             return writer;
                         };
     
@@ -25696,6 +25730,14 @@
                                     }
                                 case 11: {
                                         message.kerberos_5pReadWrite = reader.bool();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.squashMode = reader.int32();
+                                        break;
+                                    }
+                                case 13: {
+                                        message.anonUid = reader.int64();
                                         break;
                                     }
                                 default:
@@ -25796,6 +25838,23 @@
                                 if (typeof message.kerberos_5pReadWrite !== "boolean")
                                     return "kerberos_5pReadWrite: boolean expected";
                             }
+                            if (message.squashMode != null && message.hasOwnProperty("squashMode")) {
+                                properties._squashMode = 1;
+                                switch (message.squashMode) {
+                                default:
+                                    return "squashMode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            }
+                            if (message.anonUid != null && message.hasOwnProperty("anonUid")) {
+                                properties._anonUid = 1;
+                                if (!$util.isInteger(message.anonUid) && !(message.anonUid && $util.isInteger(message.anonUid.low) && $util.isInteger(message.anonUid.high)))
+                                    return "anonUid: integer|Long expected";
+                            }
                             return null;
                         };
     
@@ -25855,6 +25914,39 @@
                                 message.kerberos_5pReadOnly = Boolean(object.kerberos_5pReadOnly);
                             if (object.kerberos_5pReadWrite != null)
                                 message.kerberos_5pReadWrite = Boolean(object.kerberos_5pReadWrite);
+                            switch (object.squashMode) {
+                            default:
+                                if (typeof object.squashMode === "number") {
+                                    message.squashMode = object.squashMode;
+                                    break;
+                                }
+                                break;
+                            case "SQUASH_MODE_UNSPECIFIED":
+                            case 0:
+                                message.squashMode = 0;
+                                break;
+                            case "NO_ROOT_SQUASH":
+                            case 1:
+                                message.squashMode = 1;
+                                break;
+                            case "ROOT_SQUASH":
+                            case 2:
+                                message.squashMode = 2;
+                                break;
+                            case "ALL_SQUASH":
+                            case 3:
+                                message.squashMode = 3;
+                                break;
+                            }
+                            if (object.anonUid != null)
+                                if ($util.Long)
+                                    (message.anonUid = $util.Long.fromValue(object.anonUid)).unsigned = false;
+                                else if (typeof object.anonUid === "string")
+                                    message.anonUid = parseInt(object.anonUid, 10);
+                                else if (typeof object.anonUid === "number")
+                                    message.anonUid = object.anonUid;
+                                else if (typeof object.anonUid === "object")
+                                    message.anonUid = new $util.LongBits(object.anonUid.low >>> 0, object.anonUid.high >>> 0).toNumber();
                             return message;
                         };
     
@@ -25926,6 +26018,19 @@
                                 if (options.oneofs)
                                     object._kerberos_5pReadWrite = "kerberos_5pReadWrite";
                             }
+                            if (message.squashMode != null && message.hasOwnProperty("squashMode")) {
+                                object.squashMode = options.enums === String ? $root.google.cloud.netapp.v1.SimpleExportPolicyRule.SquashMode[message.squashMode] === undefined ? message.squashMode : $root.google.cloud.netapp.v1.SimpleExportPolicyRule.SquashMode[message.squashMode] : message.squashMode;
+                                if (options.oneofs)
+                                    object._squashMode = "squashMode";
+                            }
+                            if (message.anonUid != null && message.hasOwnProperty("anonUid")) {
+                                if (typeof message.anonUid === "number")
+                                    object.anonUid = options.longs === String ? String(message.anonUid) : message.anonUid;
+                                else
+                                    object.anonUid = options.longs === String ? $util.Long.prototype.toString.call(message.anonUid) : options.longs === Number ? new $util.LongBits(message.anonUid.low >>> 0, message.anonUid.high >>> 0).toNumber() : message.anonUid;
+                                if (options.oneofs)
+                                    object._anonUid = "anonUid";
+                            }
                             return object;
                         };
     
@@ -25954,6 +26059,24 @@
                             }
                             return typeUrlPrefix + "/google.cloud.netapp.v1.SimpleExportPolicyRule";
                         };
+    
+                        /**
+                         * SquashMode enum.
+                         * @name google.cloud.netapp.v1.SimpleExportPolicyRule.SquashMode
+                         * @enum {number}
+                         * @property {number} SQUASH_MODE_UNSPECIFIED=0 SQUASH_MODE_UNSPECIFIED value
+                         * @property {number} NO_ROOT_SQUASH=1 NO_ROOT_SQUASH value
+                         * @property {number} ROOT_SQUASH=2 ROOT_SQUASH value
+                         * @property {number} ALL_SQUASH=3 ALL_SQUASH value
+                         */
+                        SimpleExportPolicyRule.SquashMode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "SQUASH_MODE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "NO_ROOT_SQUASH"] = 1;
+                            values[valuesById[2] = "ROOT_SQUASH"] = 2;
+                            values[valuesById[3] = "ALL_SQUASH"] = 3;
+                            return values;
+                        })();
     
                         return SimpleExportPolicyRule;
                     })();
