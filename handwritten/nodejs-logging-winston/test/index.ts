@@ -31,7 +31,7 @@ describe('logging-winston', () => {
       level: string,
       message: string,
       metadata: {} | undefined,
-      callback: () => void
+      callback: () => void,
     ): void {
       // eslint-disable-next-line prefer-rest-params
       lastFakeLoggingArgs = arguments;
@@ -135,7 +135,7 @@ describe('logging-winston', () => {
     it('should pass the provided service context', () => {
       assert.strictEqual(
         fakeLoggingOptions_!.serviceContext,
-        OPTIONS.serviceContext
+        OPTIONS.serviceContext,
       );
     });
 
@@ -150,7 +150,7 @@ describe('logging-winston', () => {
         handleRejections: false,
       });
       new loggingWinstonLib.LoggingWinston(
-        optionsWithTransportStreamparameters
+        optionsWithTransportStreamparameters,
       );
       assert.strictEqual(fakeLoggingOptions_!.level, level);
       assert.strictEqual(fakeLoggingOptions_!.format, format);

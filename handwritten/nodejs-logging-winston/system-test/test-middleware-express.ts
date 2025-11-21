@@ -16,7 +16,7 @@
 
 import * as assert from 'assert';
 import {describe, it} from 'mocha';
-import * as uuid from 'uuid';
+import * as crypto from 'crypto';
 import {express as elb} from '../src/index';
 import * as winston from 'winston';
 import {REQUEST_LOG_SUFFIX} from '../src/middleware/express';
@@ -26,7 +26,7 @@ const logging = new Logging();
 
 const WRITE_CONSISTENCY_DELAY_MS = 20 * 1000;
 const TEST_TIMEOUT = WRITE_CONSISTENCY_DELAY_MS + 10 * 1000;
-const LOG_NAME = `winston-system-test-${uuid.v4()}`;
+const LOG_NAME = `winston-system-test-${crypto.randomBytes(16).toString('hex')}`;
 
 function delay(ms: number) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -42,7 +42,7 @@ describe(__filename, () => {
         level: 'info',
       });
 
-      const LOG_MESSAGE = `unique log message ${uuid.v4()}`;
+      const LOG_MESSAGE = `unique log message ${crypto.randomBytes(16).toString('hex')}`;
       logger.info(LOG_MESSAGE);
 
       await delay(WRITE_CONSISTENCY_DELAY_MS);
@@ -65,7 +65,7 @@ describe(__filename, () => {
           level: 'info',
         });
 
-        const LOG_MESSAGE = `correlated log message ${uuid.v4()}`;
+        const LOG_MESSAGE = `correlated log message ${crypto.randomBytes(16).toString('hex')}`;
         const fakeRequest = {
           headers: {
             'user-agent': 'Mocha/test-case',
@@ -111,7 +111,7 @@ describe(__filename, () => {
           const [requestLogEntry] = requestLogEntries;
           assert.strictEqual(
             requestLogEntry.metadata.trace,
-            appLogEntry.metadata.trace
+            appLogEntry.metadata.trace,
           );
 
           resolve();

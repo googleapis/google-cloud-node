@@ -145,7 +145,7 @@ export class LoggingCommon {
       {
         scopes: ['https://www.googleapis.com/auth/logging.write'],
       },
-      options
+      options,
     );
 
     this.logName = options.logName || 'winston_log';
@@ -168,7 +168,7 @@ export class LoggingCommon {
       this.cloudLog = new Logging(options).logSync(
         this.logName,
         undefined,
-        logSyncOptions
+        logSyncOptions,
       );
     }
     this.resource = options.resource;
@@ -182,7 +182,7 @@ export class LoggingCommon {
     level: string,
     message: string,
     metadata: MetadataArg | undefined,
-    callback: Callback
+    callback: Callback,
   ) {
     metadata = metadata || ({} as MetadataArg);
     // First create instrumentation record if it is never written before
@@ -190,7 +190,7 @@ export class LoggingCommon {
     if (!setInstrumentationStatus(true)) {
       instrumentationEntry = createDiagnosticEntry(
         'nodejs-winston',
-        getNodejsLibraryVersion()
+        getNodejsLibraryVersion(),
       );
       // Update instrumentation record resource, logName and timestamp
       instrumentationEntry.metadata.resource = this.resource;
@@ -305,7 +305,7 @@ export class LoggingCommon {
       // Make sure instrumentation entry is updated by underlying logger
       instrumentationEntry = this.entry(
         instrumentationEntry.metadata,
-        instrumentationEntry.data
+        instrumentationEntry.data,
       );
       if (levelCode !== NPM_LEVEL_NAME_TO_CODE.info) {
         // We using info level for diagnostic records

@@ -64,7 +64,7 @@ export class ErrorsApiTransport extends common.Service {
   async request(options: common.DecorateRequestOptions) {
     return new Promise<ApiResponse>((resolve, reject) => {
       super.request(options, (err, _, res) =>
-        err ? reject(err) : resolve(res as common.ResponseBody)
+        err ? reject(err) : resolve(res as common.ResponseBody),
       );
     });
   }
@@ -98,7 +98,7 @@ export class ErrorsApiTransport extends common.Service {
   async pollForNewEvents(
     service: string,
     time: number,
-    timeout: number
+    timeout: number,
   ): Promise<ErrorEvent[]> {
     const timeLimit = Date.now() + timeout;
     let groupId;
@@ -112,7 +112,7 @@ export class ErrorsApiTransport extends common.Service {
         // find an error group that matches the service
         groups.forEach(group => {
           const match = group.affectedServices.find(
-            context => context.service === service
+            context => context.service === service,
           );
           if (match) {
             groupId = group.group.groupId;
@@ -127,7 +127,7 @@ export class ErrorsApiTransport extends common.Service {
       const filteredEvents = events.filter(
         event =>
           event.serviceContext.service === service &&
-          new Date(event.eventTime).getTime() >= time
+          new Date(event.eventTime).getTime() >= time,
       );
       if (filteredEvents.length) {
         return filteredEvents;
