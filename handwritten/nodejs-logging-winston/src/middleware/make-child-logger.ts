@@ -23,7 +23,7 @@ export function makeChildLogger(
   logger: winston.Logger,
   trace: string,
   span?: string,
-  sampled?: boolean
+  sampled?: boolean,
 ) {
   return logger.child({
     [LOGGING_TRACE_KEY]: trace,

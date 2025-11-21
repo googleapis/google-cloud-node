@@ -66,7 +66,7 @@ let passedEmitRequestLog: Function | undefined;
 function fakeMakeMiddleware(
   projectId: string,
   makeChildLogger: Function,
-  emitRequestLog: Function
+  emitRequestLog: Function,
 ): Function {
   passedProjectId = projectId;
   passedEmitRequestLog = emitRequestLog;
@@ -104,7 +104,7 @@ describe('middleware/express', () => {
     assert.strictEqual(
       transport,
       t,
-      'makeMiddleware should not construct a transport'
+      'makeMiddleware should not construct a transport',
     );
   });
 

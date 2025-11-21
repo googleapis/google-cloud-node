@@ -116,7 +116,7 @@ describe('logging-common', () => {
       });
 
       const loggingCommon = new loggingCommonLib.LoggingCommon(
-        optionsWithInspectMetadata
+        optionsWithInspectMetadata,
       );
       assert.strictEqual(loggingCommon.inspectMetadata, true);
     });
@@ -130,7 +130,7 @@ describe('logging-common', () => {
       delete optionsWithoutLevels.levels;
 
       const loggingCommon = new loggingCommonLib.LoggingCommon(
-        optionsWithoutLevels
+        optionsWithoutLevels,
       );
       assert.deepStrictEqual(loggingCommon.levels, {
         error: 3,
@@ -150,7 +150,7 @@ describe('logging-common', () => {
       optionsWithLogName.logName = logName;
 
       const loggingCommon = new loggingCommonLib.LoggingCommon(
-        optionsWithLogName
+        optionsWithLogName,
       );
 
       const loggingOptions = Object.assign({}, fakeLoggingOptions_);
@@ -193,10 +193,10 @@ describe('logging-common', () => {
         {
           redirectToStdout: true,
           useMessageField: true,
-        }
+        },
       );
       const loggingCommon = new LoggingCommon(
-        optionsWithRedirectToStdoutAndUseMessage
+        optionsWithRedirectToStdoutAndUseMessage,
       );
       assert.ok(loggingCommon.cloudLog instanceof LogSync);
       assert.ok(loggingCommon.cloudLog.useMessageField_ === true);
@@ -230,7 +230,7 @@ describe('logging-common', () => {
           'non-existent-level',
           MESSAGE,
           METADATA,
-          assert.ifError
+          assert.ifError,
         );
       }, /Unknown log level: non-existent-level/);
     });
@@ -326,7 +326,7 @@ describe('logging-common', () => {
         {
           httpRequest: HTTP_REQUEST,
         },
-        METADATA
+        METADATA,
       );
 
       loggingCommon.cloudLog.entry = (entryMetadata: {}, data: {}) => {
@@ -349,7 +349,7 @@ describe('logging-common', () => {
         {
           timestamp: date,
         },
-        METADATA
+        METADATA,
       );
 
       loggingCommon.cloudLog.entry = (entryMetadata: {}, data: {}) => {
@@ -518,7 +518,7 @@ describe('logging-common', () => {
 
       loggingCommon.cloudLog[STACKDRIVER_LEVEL] = (
         entry_: Entry[],
-        callback: () => void
+        callback: () => void,
       ) => {
         assert.deepEqual(entry_[0], entry);
         callback(); // done()
@@ -533,14 +533,14 @@ describe('logging-common', () => {
       };
       loggingCommon.cloudLog['info'] = (
         entry_: Entry[],
-        callback: () => void
+        callback: () => void,
       ) => {
         assert.equal(entry_.length, 2);
         assert.equal(
           entry_[1].data[instrumentation.DIAGNOSTIC_INFO_KEY][
             instrumentation.INSTRUMENTATION_SOURCE_KEY
           ][0].name,
-          'nodejs-winston'
+          'nodejs-winston',
         );
         callback(); // done()
       };
@@ -558,7 +558,7 @@ describe('logging-common', () => {
           entry_[0].data[instrumentation.DIAGNOSTIC_INFO_KEY][
             instrumentation.INSTRUMENTATION_SOURCE_KEY
           ][0].name,
-          'nodejs-winston'
+          'nodejs-winston',
         );
       };
       loggingCommon.cloudLog[STACKDRIVER_LEVEL] = (entry_: Entry[]) => {
@@ -626,7 +626,7 @@ describe('logging-common', () => {
           LEVEL,
           MESSAGE,
           metadataWithoutLabels,
-          assert.ifError
+          assert.ifError,
         );
       };
 

@@ -26,7 +26,8 @@ s.copy(templates, excludes=[
     ".github/auto-label.yaml",
     ".github/release-please.yml",
     ".github/CODEOWNERS",
-    ".github/sync-repo-settings.yaml"
+    ".github/sync-repo-settings.yaml",
+    ".github/workflows/ci.yaml"
 ]) 
 node.fix()
 
