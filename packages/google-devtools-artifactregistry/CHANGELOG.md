@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.4.0](https://github.com/googleapis/google-cloud-node/compare/artifact-registry-v4.3.1...artifact-registry-v4.4.0) (2025-11-21)
+
+
+### Features
+
+* [artifactregistry] add image_manifest field in DockerImage ([#6888](https://github.com/googleapis/google-cloud-node/issues/6888)) ([ce760fd](https://github.com/googleapis/google-cloud-node/commit/ce760fd66ce4e290b00205f3c9f6a81863622fd1))
+
 ## [4.3.1](https://github.com/googleapis/google-cloud-node/compare/artifact-registry-v4.3.0...artifact-registry-v4.3.1) (2025-10-13)
 
 

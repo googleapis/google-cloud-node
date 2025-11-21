@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.15.0](https://github.com/googleapis/google-cloud-node/compare/netapp-v0.14.1...netapp-v0.15.0) (2025-11-21)
+
+
+### Features
+
+* [netapp] Add Squash Mode to Export Policy ([#6905](https://github.com/googleapis/google-cloud-node/issues/6905)) ([e77b12e](https://github.com/googleapis/google-cloud-node/commit/e77b12e03a97fa7c42df57561af6ab1c3bae3a3f))
+
 ## [0.14.1](https://github.com/googleapis/google-cloud-node/compare/netapp-v0.14.0...netapp-v0.14.1) (2025-10-13)
 
 

@@ -5,6 +5,184 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "1403b5b709a040898dbcd15b390485804840b778",
+          "message": "[marketingplatformadminapi] add the `ListOrganizations`, `FindSalesPartnerManagedClients`, and `ReportPropertyUsage` methods",
+          "issues": [
+            "6858"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ads/marketing-platform-admin",
+      "id": "d121492d-957b-4b9c-98ed-4fe833a0a826",
+      "createTime": "2025-11-21T23:14:19.352Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b26f79d452a55f26a309166362ca3a6a1cda89c1",
+          "message": "[backupdr] Adding new fields for CMEK and Retention Inheritance features",
+          "issues": [
+            "6901"
+          ]
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/backupdr",
+      "id": "fea4a715-ca58-401c-8207-ff5ab55c3a74",
+      "createTime": "2025-11-21T23:14:19.333Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7e76acee01946bf65d665ed04cd6305cdc331297",
+          "message": "[merchantapi] Add the AccountLimit resource and its service to the quota bundle",
+          "issues": [
+            "6883"
+          ]
+        }
+      ],
+      "version": "0.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/quota",
+      "id": "6837c0fd-e0c4-4905-86b3-3e244d2222b6",
+      "createTime": "2025-11-21T23:14:19.317Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "ce760fd66ce4e290b00205f3c9f6a81863622fd1",
+          "message": "[artifactregistry] add image_manifest field in DockerImage",
+          "issues": [
+            "6888"
+          ]
+        }
+      ],
+      "version": "4.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/artifact-registry",
+      "id": "f14ff9af-5137-4a00-92e6-57fb778b46da",
+      "createTime": "2025-11-21T23:14:19.298Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f3c58114c24765dfb3d3969ba5e411fb9fb9b3f8",
+          "message": "[sql] introduces auto_upgrade_enabled option for MySQL in DatabaseInstance.Settings",
+          "issues": [
+            "6904"
+          ]
+        }
+      ],
+      "version": "0.23.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/sql",
+      "id": "bbc70fe6-2114-40df-85dc-adc75100651c",
+      "createTime": "2025-11-21T23:14:19.282Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e77b12e03a97fa7c42df57561af6ab1c3bae3a3f",
+          "message": "[netapp] Add Squash Mode to Export Policy",
+          "issues": [
+            "6905"
+          ]
+        }
+      ],
+      "version": "0.15.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/netapp",
+      "id": "f0bebda4-5efb-4f4c-b40e-3d6a12cee012",
+      "createTime": "2025-11-21T23:14:19.263Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "54e3b03149fd8f91ea076b691ec0e32d45748421",
+          "message": "[cx] add support for defining custom actions in code. See https://cloud.google.com/dialogflow/cx/docs/concept/playbook/code-block for more information",
+          "issues": [
+            "6879"
+          ]
+        }
+      ],
+      "version": "5.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow-cx",
+      "id": "b1a6810a-6fc7-41e9-b27d-932746a0dbe6",
+      "createTime": "2025-11-21T23:14:19.240Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "68d767e5690cee2f953657ef74412d18212e056e",
+          "message": "[compute] Update Compute Engine v1beta API to revision 20251019",
+          "issues": [
+            "6869"
+          ]
+        }
+      ],
+      "version": "6.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "19a0c325-49f7-4c7a-ac8a-8fea111a475d",
+      "createTime": "2025-11-21T23:14:19.212Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "ea62cf5717fb0fcb8eb4d3e37260c9f89c3b8076",
+          "message": "[batch] added new provisioning models",
+          "issues": [
+            "6902"
+          ]
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/batch",
+      "id": "a2d7bf44-244d-4313-a9e9-47eb54eaff9d",
+      "createTime": "2025-11-21T23:14:19.189Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7b6c79b20551dde858cd932174c1fb558408172f",
+          "message": "Add support for developer connect based deployment",
+          "issues": [
+            "6900"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "beb5cac2dbd8cad292d67e3641306824c3ecab85",
+          "message": "Add `ReplicatedVoiceConfig` to `VoiceConfig` to enable Gemini TTS voice replication",
+          "issues": [
+            "6899"
+          ]
+        }
+      ],
+      "version": "5.14.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "6748c978-c276-4f5d-a0a0-997afac91035",
+      "createTime": "2025-11-21T23:14:19.156Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "a637d5caaa14186adaae5e8a708f5faee3a17084",
           "message": "[geminidataanalytics] Adding a new SchemaRelationship message to define relationships between table schema",
           "issues": [
@@ -66927,5 +67105,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-11-11T01:02:09.511Z"
+  "updateTime": "2025-11-21T23:14:19.352Z"
 }

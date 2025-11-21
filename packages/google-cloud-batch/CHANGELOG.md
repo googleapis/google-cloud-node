@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/batch-v2.2.1...batch-v2.3.0) (2025-11-21)
+
+
+### Features
+
+* [batch] added new provisioning models ([#6902](https://github.com/googleapis/google-cloud-node/issues/6902)) ([ea62cf5](https://github.com/googleapis/google-cloud-node/commit/ea62cf5717fb0fcb8eb4d3e37260c9f89c3b8076))
+
 ## [2.2.1](https://github.com/googleapis/google-cloud-node/compare/batch-v2.2.0...batch-v2.2.1) (2025-10-13)
 
 

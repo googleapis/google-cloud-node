@@ -1,5 +1,13 @@
 # Changelog
 
+## [5.14.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.13.0...aiplatform-v5.14.0) (2025-11-21)
+
+
+### Features
+
+* Add `ReplicatedVoiceConfig` to `VoiceConfig` to enable Gemini TTS voice replication ([#6899](https://github.com/googleapis/google-cloud-node/issues/6899)) ([beb5cac](https://github.com/googleapis/google-cloud-node/commit/beb5cac2dbd8cad292d67e3641306824c3ecab85))
+* Add support for developer connect based deployment ([#6900](https://github.com/googleapis/google-cloud-node/issues/6900)) ([7b6c79b](https://github.com/googleapis/google-cloud-node/commit/7b6c79b20551dde858cd932174c1fb558408172f))
+
 ## [5.13.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.12.0...aiplatform-v5.13.0) (2025-11-11)
 
 

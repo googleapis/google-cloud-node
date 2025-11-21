@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.5.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v5.4.0...dialogflow-cx-v5.5.0) (2025-11-21)
+
+
+### Features
+
+* [cx] add support for defining custom actions in code. See https://cloud.google.com/dialogflow/cx/docs/concept/playbook/code-block for more information ([#6879](https://github.com/googleapis/google-cloud-node/issues/6879)) ([54e3b03](https://github.com/googleapis/google-cloud-node/commit/54e3b03149fd8f91ea076b691ec0e32d45748421))
+
 ## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v5.3.0...dialogflow-cx-v5.4.0) (2025-10-13)
 
 

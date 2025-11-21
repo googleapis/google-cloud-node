@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.0](https://github.com/googleapis/google-cloud-node/compare/quota-v0.8.1...quota-v0.9.0) (2025-11-21)
+
+
+### Features
+
+* [merchantapi] Add the AccountLimit resource and its service to the quota bundle ([#6883](https://github.com/googleapis/google-cloud-node/issues/6883)) ([7e76ace](https://github.com/googleapis/google-cloud-node/commit/7e76acee01946bf65d665ed04cd6305cdc331297))
+
 ## [0.8.1](https://github.com/googleapis/google-cloud-node/compare/quota-v0.8.0...quota-v0.8.1) (2025-10-13)
 
 

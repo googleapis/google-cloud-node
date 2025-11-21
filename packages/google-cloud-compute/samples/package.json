@@ -14,7 +14,7 @@
     "test": "mocha test --timeout 1200000"
   },
   "dependencies": {
-    "@google-cloud/compute": "^6.4.0",
+    "@google-cloud/compute": "^6.5.0",
     "@sendgrid/mail": "^8.0.0",
     "nodemailer": "^7.0.0",
     "nodemailer-smtp-transport": "^2.7.4"

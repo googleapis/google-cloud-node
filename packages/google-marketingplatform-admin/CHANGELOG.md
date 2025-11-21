@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/marketing-platform-admin-v0.3.1...marketing-platform-admin-v0.4.0) (2025-11-21)
+
+
+### Features
+
+* [marketingplatformadminapi] add the `ListOrganizations`, `FindSalesPartnerManagedClients`, and `ReportPropertyUsage` methods ([#6858](https://github.com/googleapis/google-cloud-node/issues/6858)) ([1403b5b](https://github.com/googleapis/google-cloud-node/commit/1403b5b709a040898dbcd15b390485804840b778))
+
 ## [0.3.1](https://github.com/googleapis/google-cloud-node/compare/marketing-platform-admin-v0.3.0...marketing-platform-admin-v0.3.1) (2025-10-13)
 
 
