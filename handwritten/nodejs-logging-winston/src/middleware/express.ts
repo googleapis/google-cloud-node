@@ -36,23 +36,23 @@ type Middleware = ReturnType<typeof commonMiddleware.express.makeMiddleware>;
 export async function makeMiddleware(
   logger: winston.Logger,
   transport: LoggingWinston,
-  skipParentEntryForCloudRun?: boolean
+  skipParentEntryForCloudRun?: boolean,
 ): Promise<Middleware>;
 export async function makeMiddleware(
   logger: winston.Logger,
   options?: Options,
-  skipParentEntryForCloudRun?: boolean
+  skipParentEntryForCloudRun?: boolean,
 ): Promise<Middleware>;
 export async function makeMiddleware(
   logger: winston.Logger,
   optionsOrTransport?: Options | LoggingWinston,
-  skipParentEntryForCloudRun?: boolean
+  skipParentEntryForCloudRun?: boolean,
 ): Promise<Middleware> {
   let transport: LoggingWinston;
 
   // If no custom transports are provided, use default or instantiate one.
   const cloudTransport = logger.transports.find(
-    t => t instanceof LoggingWinston
+    t => t instanceof LoggingWinston,
   );
 
   // If user provides a custom transport, always add it to the logger.
@@ -93,14 +93,14 @@ export async function makeMiddleware(
   ) {
     const requestLogName = Log.formatName_(
       projectId,
-      `${transport.common.logName}${REQUEST_LOG_SUFFIX}`
+      `${transport.common.logName}${REQUEST_LOG_SUFFIX}`,
     );
 
     emitRequestLogEntry = (
       httpRequest: HttpRequest,
       trace: string,
       span?: string,
-      sampled?: boolean
+      sampled?: boolean,
     ) => {
       logger.info({
         // The request logs must have a log name distinct from the app logs
@@ -119,6 +119,6 @@ export async function makeMiddleware(
     projectId,
     (trace: string, span?: string, sampled?: boolean) =>
       makeChildLogger(logger, trace, span, sampled),
-    emitRequestLogEntry
+    emitRequestLogEntry,
   );
 }
