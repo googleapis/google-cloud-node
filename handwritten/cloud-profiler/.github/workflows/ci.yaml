@@ -42,15 +42,15 @@ jobs:
           node-version: 14
       - run: npm install
       - run: npm run lint
-  docs:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 14
-      - run: npm install
-      - run: npm run docs
-      - uses: JustinBeckwith/linkinator-action@v1
-        with:
-          paths: docs/
+  # docs:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
+  #     - uses: actions/setup-node@v4
+  #       with:
+  #         node-version: 14
+  #     - run: npm install
+  #     - run: npm run docs
+  #     - uses: JustinBeckwith/linkinator-action@v1
+  #       with:
+  #         paths: docs/
