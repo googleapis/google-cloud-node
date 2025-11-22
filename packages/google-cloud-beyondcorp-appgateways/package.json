@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/appgateways",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "BeyondCorp API client for Node.js",
   "repository": {
     "type": "git",

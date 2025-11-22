@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/config",
-  "version": "0.11.0",
+  "version": "0.11.1",
   "description": "Infrastructure Manager API client for Node.js",
   "repository": {
     "type": "git",

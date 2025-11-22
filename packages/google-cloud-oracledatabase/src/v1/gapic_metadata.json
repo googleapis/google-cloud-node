@@ -30,6 +30,41 @@
                 "generateAutonomousDatabaseWallet"
               ]
             },
+            "GetOdbNetwork": {
+              "methods": [
+                "getOdbNetwork"
+              ]
+            },
+            "GetOdbSubnet": {
+              "methods": [
+                "getOdbSubnet"
+              ]
+            },
+            "GetExadbVmCluster": {
+              "methods": [
+                "getExadbVmCluster"
+              ]
+            },
+            "GetExascaleDbStorageVault": {
+              "methods": [
+                "getExascaleDbStorageVault"
+              ]
+            },
+            "GetDatabase": {
+              "methods": [
+                "getDatabase"
+              ]
+            },
+            "GetPluggableDatabase": {
+              "methods": [
+                "getPluggableDatabase"
+              ]
+            },
+            "GetDbSystem": {
+              "methods": [
+                "getDbSystem"
+              ]
+            },
             "CreateCloudExadataInfrastructure": {
               "methods": [
                 "createCloudExadataInfrastructure"
@@ -55,6 +90,11 @@
                 "createAutonomousDatabase"
               ]
             },
+            "UpdateAutonomousDatabase": {
+              "methods": [
+                "updateAutonomousDatabase"
+              ]
+            },
             "DeleteAutonomousDatabase": {
               "methods": [
                 "deleteAutonomousDatabase"
@@ -78,6 +118,76 @@
             "RestartAutonomousDatabase": {
               "methods": [
                 "restartAutonomousDatabase"
+              ]
+            },
+            "SwitchoverAutonomousDatabase": {
+              "methods": [
+                "switchoverAutonomousDatabase"
+              ]
+            },
+            "FailoverAutonomousDatabase": {
+              "methods": [
+                "failoverAutonomousDatabase"
+              ]
+            },
+            "CreateOdbNetwork": {
+              "methods": [
+                "createOdbNetwork"
+              ]
+            },
+            "DeleteOdbNetwork": {
+              "methods": [
+                "deleteOdbNetwork"
+              ]
+            },
+            "CreateOdbSubnet": {
+              "methods": [
+                "createOdbSubnet"
+              ]
+            },
+            "DeleteOdbSubnet": {
+              "methods": [
+                "deleteOdbSubnet"
+              ]
+            },
+            "CreateExadbVmCluster": {
+              "methods": [
+                "createExadbVmCluster"
+              ]
+            },
+            "DeleteExadbVmCluster": {
+              "methods": [
+                "deleteExadbVmCluster"
+              ]
+            },
+            "UpdateExadbVmCluster": {
+              "methods": [
+                "updateExadbVmCluster"
+              ]
+            },
+            "RemoveVirtualMachineExadbVmCluster": {
+              "methods": [
+                "removeVirtualMachineExadbVmCluster"
+              ]
+            },
+            "CreateExascaleDbStorageVault": {
+              "methods": [
+                "createExascaleDbStorageVault"
+              ]
+            },
+            "DeleteExascaleDbStorageVault": {
+              "methods": [
+                "deleteExascaleDbStorageVault"
+              ]
+            },
+            "CreateDbSystem": {
+              "methods": [
+                "createDbSystem"
+              ]
+            },
+            "DeleteDbSystem": {
+              "methods": [
+                "deleteDbSystem"
               ]
             },
             "ListCloudExadataInfrastructures": {
@@ -122,6 +232,13 @@
                 "listGiVersionsAsync"
               ]
             },
+            "ListMinorVersions": {
+              "methods": [
+                "listMinorVersions",
+                "listMinorVersionsStream",
+                "listMinorVersionsAsync"
+              ]
+            },
             "ListDbSystemShapes": {
               "methods": [
                 "listDbSystemShapes",
@@ -155,6 +272,76 @@
                 "listAutonomousDatabaseBackups",
                 "listAutonomousDatabaseBackupsStream",
                 "listAutonomousDatabaseBackupsAsync"
+              ]
+            },
+            "ListOdbNetworks": {
+              "methods": [
+                "listOdbNetworks",
+                "listOdbNetworksStream",
+                "listOdbNetworksAsync"
+              ]
+            },
+            "ListOdbSubnets": {
+              "methods": [
+                "listOdbSubnets",
+                "listOdbSubnetsStream",
+                "listOdbSubnetsAsync"
+              ]
+            },
+            "ListExadbVmClusters": {
+              "methods": [
+                "listExadbVmClusters",
+                "listExadbVmClustersStream",
+                "listExadbVmClustersAsync"
+              ]
+            },
+            "ListExascaleDbStorageVaults": {
+              "methods": [
+                "listExascaleDbStorageVaults",
+                "listExascaleDbStorageVaultsStream",
+                "listExascaleDbStorageVaultsAsync"
+              ]
+            },
+            "ListDbSystemInitialStorageSizes": {
+              "methods": [
+                "listDbSystemInitialStorageSizes",
+                "listDbSystemInitialStorageSizesStream",
+                "listDbSystemInitialStorageSizesAsync"
+              ]
+            },
+            "ListDatabases": {
+              "methods": [
+                "listDatabases",
+                "listDatabasesStream",
+                "listDatabasesAsync"
+              ]
+            },
+            "ListPluggableDatabases": {
+              "methods": [
+                "listPluggableDatabases",
+                "listPluggableDatabasesStream",
+                "listPluggableDatabasesAsync"
+              ]
+            },
+            "ListDbSystems": {
+              "methods": [
+                "listDbSystems",
+                "listDbSystemsStream",
+                "listDbSystemsAsync"
+              ]
+            },
+            "ListDbVersions": {
+              "methods": [
+                "listDbVersions",
+                "listDbVersionsStream",
+                "listDbVersionsAsync"
+              ]
+            },
+            "ListDatabaseCharacterSets": {
+              "methods": [
+                "listDatabaseCharacterSets",
+                "listDatabaseCharacterSetsStream",
+                "listDatabaseCharacterSetsAsync"
               ]
             }
           }
@@ -182,6 +369,41 @@
                 "generateAutonomousDatabaseWallet"
               ]
             },
+            "GetOdbNetwork": {
+              "methods": [
+                "getOdbNetwork"
+              ]
+            },
+            "GetOdbSubnet": {
+              "methods": [
+                "getOdbSubnet"
+              ]
+            },
+            "GetExadbVmCluster": {
+              "methods": [
+                "getExadbVmCluster"
+              ]
+            },
+            "GetExascaleDbStorageVault": {
+              "methods": [
+                "getExascaleDbStorageVault"
+              ]
+            },
+            "GetDatabase": {
+              "methods": [
+                "getDatabase"
+              ]
+            },
+            "GetPluggableDatabase": {
+              "methods": [
+                "getPluggableDatabase"
+              ]
+            },
+            "GetDbSystem": {
+              "methods": [
+                "getDbSystem"
+              ]
+            },
             "CreateCloudExadataInfrastructure": {
               "methods": [
                 "createCloudExadataInfrastructure"
@@ -207,6 +429,11 @@
                 "createAutonomousDatabase"
               ]
             },
+            "UpdateAutonomousDatabase": {
+              "methods": [
+                "updateAutonomousDatabase"
+              ]
+            },
             "DeleteAutonomousDatabase": {
               "methods": [
                 "deleteAutonomousDatabase"
@@ -230,6 +457,76 @@
             "RestartAutonomousDatabase": {
               "methods": [
                 "restartAutonomousDatabase"
+              ]
+            },
+            "SwitchoverAutonomousDatabase": {
+              "methods": [
+                "switchoverAutonomousDatabase"
+              ]
+            },
+            "FailoverAutonomousDatabase": {
+              "methods": [
+                "failoverAutonomousDatabase"
+              ]
+            },
+            "CreateOdbNetwork": {
+              "methods": [
+                "createOdbNetwork"
+              ]
+            },
+            "DeleteOdbNetwork": {
+              "methods": [
+                "deleteOdbNetwork"
+              ]
+            },
+            "CreateOdbSubnet": {
+              "methods": [
+                "createOdbSubnet"
+              ]
+            },
+            "DeleteOdbSubnet": {
+              "methods": [
+                "deleteOdbSubnet"
+              ]
+            },
+            "CreateExadbVmCluster": {
+              "methods": [
+                "createExadbVmCluster"
+              ]
+            },
+            "DeleteExadbVmCluster": {
+              "methods": [
+                "deleteExadbVmCluster"
+              ]
+            },
+            "UpdateExadbVmCluster": {
+              "methods": [
+                "updateExadbVmCluster"
+              ]
+            },
+            "RemoveVirtualMachineExadbVmCluster": {
+              "methods": [
+                "removeVirtualMachineExadbVmCluster"
+              ]
+            },
+            "CreateExascaleDbStorageVault": {
+              "methods": [
+                "createExascaleDbStorageVault"
+              ]
+            },
+            "DeleteExascaleDbStorageVault": {
+              "methods": [
+                "deleteExascaleDbStorageVault"
+              ]
+            },
+            "CreateDbSystem": {
+              "methods": [
+                "createDbSystem"
+              ]
+            },
+            "DeleteDbSystem": {
+              "methods": [
+                "deleteDbSystem"
               ]
             },
             "ListCloudExadataInfrastructures": {
@@ -274,6 +571,13 @@
                 "listGiVersionsAsync"
               ]
             },
+            "ListMinorVersions": {
+              "methods": [
+                "listMinorVersions",
+                "listMinorVersionsStream",
+                "listMinorVersionsAsync"
+              ]
+            },
             "ListDbSystemShapes": {
               "methods": [
                 "listDbSystemShapes",
@@ -307,6 +611,76 @@
                 "listAutonomousDatabaseBackups",
                 "listAutonomousDatabaseBackupsStream",
                 "listAutonomousDatabaseBackupsAsync"
+              ]
+            },
+            "ListOdbNetworks": {
+              "methods": [
+                "listOdbNetworks",
+                "listOdbNetworksStream",
+                "listOdbNetworksAsync"
+              ]
+            },
+            "ListOdbSubnets": {
+              "methods": [
+                "listOdbSubnets",
+                "listOdbSubnetsStream",
+                "listOdbSubnetsAsync"
+              ]
+            },
+            "ListExadbVmClusters": {
+              "methods": [
+                "listExadbVmClusters",
+                "listExadbVmClustersStream",
+                "listExadbVmClustersAsync"
+              ]
+            },
+            "ListExascaleDbStorageVaults": {
+              "methods": [
+                "listExascaleDbStorageVaults",
+                "listExascaleDbStorageVaultsStream",
+                "listExascaleDbStorageVaultsAsync"
+              ]
+            },
+            "ListDbSystemInitialStorageSizes": {
+              "methods": [
+                "listDbSystemInitialStorageSizes",
+                "listDbSystemInitialStorageSizesStream",
+                "listDbSystemInitialStorageSizesAsync"
+              ]
+            },
+            "ListDatabases": {
+              "methods": [
+                "listDatabases",
+                "listDatabasesStream",
+                "listDatabasesAsync"
+              ]
+            },
+            "ListPluggableDatabases": {
+              "methods": [
+                "listPluggableDatabases",
+                "listPluggableDatabasesStream",
+                "listPluggableDatabasesAsync"
+              ]
+            },
+            "ListDbSystems": {
+              "methods": [
+                "listDbSystems",
+                "listDbSystemsStream",
+                "listDbSystemsAsync"
+              ]
+            },
+            "ListDbVersions": {
+              "methods": [
+                "listDbVersions",
+                "listDbVersionsStream",
+                "listDbVersionsAsync"
+              ]
+            },
+            "ListDatabaseCharacterSets": {
+              "methods": [
+                "listDatabaseCharacterSets",
+                "listDatabaseCharacterSetsStream",
+                "listDatabaseCharacterSetsAsync"
               ]
             }
           }

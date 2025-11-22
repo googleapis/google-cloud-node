@@ -15572,6 +15572,7 @@
                          * @property {google.cloud.sql.v1.IDataCacheConfig|null} [dataCacheConfig] Settings dataCacheConfig
                          * @property {google.protobuf.IBoolValue|null} [enableGoogleMlIntegration] Settings enableGoogleMlIntegration
                          * @property {google.protobuf.IBoolValue|null} [enableDataplexIntegration] Settings enableDataplexIntegration
+                         * @property {boolean|null} [autoUpgradeEnabled] Settings autoUpgradeEnabled
                          */
     
                         /**
@@ -15866,6 +15867,23 @@
                         Settings.prototype.enableDataplexIntegration = null;
     
                         /**
+                         * Settings autoUpgradeEnabled.
+                         * @member {boolean|null|undefined} autoUpgradeEnabled
+                         * @memberof google.cloud.sql.v1.Settings
+                         * @instance
+                         */
+                        Settings.prototype.autoUpgradeEnabled = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Settings.prototype, "_autoUpgradeEnabled", {
+                            get: $util.oneOfGetter($oneOfFields = ["autoUpgradeEnabled"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new Settings instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.sql.v1.Settings
@@ -15961,6 +15979,8 @@
                                 $root.google.protobuf.BoolValue.encode(message.enableGoogleMlIntegration, writer.uint32(/* id 40, wireType 2 =*/322).fork()).ldelim();
                             if (message.enableDataplexIntegration != null && Object.hasOwnProperty.call(message, "enableDataplexIntegration"))
                                 $root.google.protobuf.BoolValue.encode(message.enableDataplexIntegration, writer.uint32(/* id 41, wireType 2 =*/330).fork()).ldelim();
+                            if (message.autoUpgradeEnabled != null && Object.hasOwnProperty.call(message, "autoUpgradeEnabled"))
+                                writer.uint32(/* id 50, wireType 0 =*/400).bool(message.autoUpgradeEnabled);
                             return writer;
                         };
     
@@ -16158,6 +16178,10 @@
                                         message.enableDataplexIntegration = $root.google.protobuf.BoolValue.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 50: {
+                                        message.autoUpgradeEnabled = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -16193,6 +16217,7 @@
                         Settings.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.settingsVersion != null && message.hasOwnProperty("settingsVersion")) {
                                 var error = $root.google.protobuf.Int64Value.verify(message.settingsVersion);
                                 if (error)
@@ -16397,6 +16422,11 @@
                                 var error = $root.google.protobuf.BoolValue.verify(message.enableDataplexIntegration);
                                 if (error)
                                     return "enableDataplexIntegration." + error;
+                            }
+                            if (message.autoUpgradeEnabled != null && message.hasOwnProperty("autoUpgradeEnabled")) {
+                                properties._autoUpgradeEnabled = 1;
+                                if (typeof message.autoUpgradeEnabled !== "boolean")
+                                    return "autoUpgradeEnabled: boolean expected";
                             }
                             return null;
                         };
@@ -16698,6 +16728,8 @@
                                     throw TypeError(".google.cloud.sql.v1.Settings.enableDataplexIntegration: object expected");
                                 message.enableDataplexIntegration = $root.google.protobuf.BoolValue.fromObject(object.enableDataplexIntegration);
                             }
+                            if (object.autoUpgradeEnabled != null)
+                                message.autoUpgradeEnabled = Boolean(object.autoUpgradeEnabled);
                             return message;
                         };
     
@@ -16834,6 +16866,11 @@
                                 object.enableGoogleMlIntegration = $root.google.protobuf.BoolValue.toObject(message.enableGoogleMlIntegration, options);
                             if (message.enableDataplexIntegration != null && message.hasOwnProperty("enableDataplexIntegration"))
                                 object.enableDataplexIntegration = $root.google.protobuf.BoolValue.toObject(message.enableDataplexIntegration, options);
+                            if (message.autoUpgradeEnabled != null && message.hasOwnProperty("autoUpgradeEnabled")) {
+                                object.autoUpgradeEnabled = message.autoUpgradeEnabled;
+                                if (options.oneofs)
+                                    object._autoUpgradeEnabled = "autoUpgradeEnabled";
+                            }
                             return object;
                         };
     
@@ -18328,6 +18365,8 @@
                      * @property {number} POSTGRES_14=110 POSTGRES_14 value
                      * @property {number} POSTGRES_15=172 POSTGRES_15 value
                      * @property {number} POSTGRES_16=272 POSTGRES_16 value
+                     * @property {number} POSTGRES_17=408 POSTGRES_17 value
+                     * @property {number} POSTGRES_18=557 POSTGRES_18 value
                      * @property {number} MYSQL_8_0=20 MYSQL_8_0 value
                      * @property {number} MYSQL_8_0_18=41 MYSQL_8_0_18 value
                      * @property {number} MYSQL_8_0_26=85 MYSQL_8_0_26 value
@@ -18375,6 +18414,8 @@
                         values[valuesById[110] = "POSTGRES_14"] = 110;
                         values[valuesById[172] = "POSTGRES_15"] = 172;
                         values[valuesById[272] = "POSTGRES_16"] = 272;
+                        values[valuesById[408] = "POSTGRES_17"] = 408;
+                        values[valuesById[557] = "POSTGRES_18"] = 557;
                         values[valuesById[20] = "MYSQL_8_0"] = 20;
                         values[valuesById[41] = "MYSQL_8_0_18"] = 41;
                         values[valuesById[85] = "MYSQL_8_0_26"] = 85;
@@ -19468,6 +19509,8 @@
                                 case 110:
                                 case 172:
                                 case 272:
+                                case 408:
+                                case 557:
                                 case 20:
                                 case 41:
                                 case 85:
@@ -19630,6 +19673,14 @@
                             case "POSTGRES_16":
                             case 272:
                                 message.databaseVersion = 272;
+                                break;
+                            case "POSTGRES_17":
+                            case 408:
+                                message.databaseVersion = 408;
+                                break;
+                            case "POSTGRES_18":
+                            case 557:
+                                message.databaseVersion = 557;
                                 break;
                             case "MYSQL_8_0":
                             case 20:
@@ -23074,6 +23125,8 @@
                                     case 110:
                                     case 172:
                                     case 272:
+                                    case 408:
+                                    case 557:
                                     case 20:
                                     case 41:
                                     case 85:
@@ -23276,6 +23329,14 @@
                                     case "POSTGRES_16":
                                     case 272:
                                         message.appliesTo[i] = 272;
+                                        break;
+                                    case "POSTGRES_17":
+                                    case 408:
+                                        message.appliesTo[i] = 408;
+                                        break;
+                                    case "POSTGRES_18":
+                                    case 557:
+                                        message.appliesTo[i] = 557;
                                         break;
                                     case "MYSQL_8_0":
                                     case 20:
@@ -38980,6 +39041,8 @@
                                 case 110:
                                 case 172:
                                 case 272:
+                                case 408:
+                                case 557:
                                 case 20:
                                 case 41:
                                 case 85:
@@ -39374,6 +39437,14 @@
                             case "POSTGRES_16":
                             case 272:
                                 message.databaseVersion = 272;
+                                break;
+                            case "POSTGRES_17":
+                            case 408:
+                                message.databaseVersion = 408;
+                                break;
+                            case "POSTGRES_18":
+                            case 557:
+                                message.databaseVersion = 557;
                                 break;
                             case "MYSQL_8_0":
                             case 20:
@@ -74930,6 +75001,8 @@
                                 case 110:
                                 case 172:
                                 case 272:
+                                case 408:
+                                case 557:
                                 case 20:
                                 case 41:
                                 case 85:
@@ -75314,6 +75387,14 @@
                             case "POSTGRES_16":
                             case 272:
                                 message.databaseVersion = 272;
+                                break;
+                            case "POSTGRES_17":
+                            case 408:
+                                message.databaseVersion = 408;
+                                break;
+                            case "POSTGRES_18":
+                            case 557:
+                                message.databaseVersion = 557;
                                 break;
                             case "MYSQL_8_0":
                             case 20:
@@ -81266,6 +81347,8 @@
                                     case 110:
                                     case 172:
                                     case 272:
+                                    case 408:
+                                    case 557:
                                     case 20:
                                     case 41:
                                     case 85:
@@ -81468,6 +81551,14 @@
                                     case "POSTGRES_16":
                                     case 272:
                                         message.appliesTo[i] = 272;
+                                        break;
+                                    case "POSTGRES_17":
+                                    case 408:
+                                        message.appliesTo[i] = 408;
+                                        break;
+                                    case "POSTGRES_18":
+                                    case 557:
+                                        message.appliesTo[i] = 557;
                                         break;
                                     case "MYSQL_8_0":
                                     case 20:
@@ -94667,6 +94758,7 @@
                          * @property {google.cloud.sql.v1beta4.IDataCacheConfig|null} [dataCacheConfig] Settings dataCacheConfig
                          * @property {google.protobuf.IBoolValue|null} [enableGoogleMlIntegration] Settings enableGoogleMlIntegration
                          * @property {google.protobuf.IBoolValue|null} [enableDataplexIntegration] Settings enableDataplexIntegration
+                         * @property {boolean|null} [autoUpgradeEnabled] Settings autoUpgradeEnabled
                          */
     
                         /**
@@ -94961,6 +95053,23 @@
                         Settings.prototype.enableDataplexIntegration = null;
     
                         /**
+                         * Settings autoUpgradeEnabled.
+                         * @member {boolean|null|undefined} autoUpgradeEnabled
+                         * @memberof google.cloud.sql.v1beta4.Settings
+                         * @instance
+                         */
+                        Settings.prototype.autoUpgradeEnabled = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Settings.prototype, "_autoUpgradeEnabled", {
+                            get: $util.oneOfGetter($oneOfFields = ["autoUpgradeEnabled"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new Settings instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.sql.v1beta4.Settings
@@ -95056,6 +95165,8 @@
                                 $root.google.protobuf.BoolValue.encode(message.enableGoogleMlIntegration, writer.uint32(/* id 40, wireType 2 =*/322).fork()).ldelim();
                             if (message.enableDataplexIntegration != null && Object.hasOwnProperty.call(message, "enableDataplexIntegration"))
                                 $root.google.protobuf.BoolValue.encode(message.enableDataplexIntegration, writer.uint32(/* id 41, wireType 2 =*/330).fork()).ldelim();
+                            if (message.autoUpgradeEnabled != null && Object.hasOwnProperty.call(message, "autoUpgradeEnabled"))
+                                writer.uint32(/* id 50, wireType 0 =*/400).bool(message.autoUpgradeEnabled);
                             return writer;
                         };
     
@@ -95253,6 +95364,10 @@
                                         message.enableDataplexIntegration = $root.google.protobuf.BoolValue.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 50: {
+                                        message.autoUpgradeEnabled = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -95288,6 +95403,7 @@
                         Settings.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.settingsVersion != null && message.hasOwnProperty("settingsVersion")) {
                                 var error = $root.google.protobuf.Int64Value.verify(message.settingsVersion);
                                 if (error)
@@ -95492,6 +95608,11 @@
                                 var error = $root.google.protobuf.BoolValue.verify(message.enableDataplexIntegration);
                                 if (error)
                                     return "enableDataplexIntegration." + error;
+                            }
+                            if (message.autoUpgradeEnabled != null && message.hasOwnProperty("autoUpgradeEnabled")) {
+                                properties._autoUpgradeEnabled = 1;
+                                if (typeof message.autoUpgradeEnabled !== "boolean")
+                                    return "autoUpgradeEnabled: boolean expected";
                             }
                             return null;
                         };
@@ -95793,6 +95914,8 @@
                                     throw TypeError(".google.cloud.sql.v1beta4.Settings.enableDataplexIntegration: object expected");
                                 message.enableDataplexIntegration = $root.google.protobuf.BoolValue.fromObject(object.enableDataplexIntegration);
                             }
+                            if (object.autoUpgradeEnabled != null)
+                                message.autoUpgradeEnabled = Boolean(object.autoUpgradeEnabled);
                             return message;
                         };
     
@@ -95929,6 +96052,11 @@
                                 object.enableGoogleMlIntegration = $root.google.protobuf.BoolValue.toObject(message.enableGoogleMlIntegration, options);
                             if (message.enableDataplexIntegration != null && message.hasOwnProperty("enableDataplexIntegration"))
                                 object.enableDataplexIntegration = $root.google.protobuf.BoolValue.toObject(message.enableDataplexIntegration, options);
+                            if (message.autoUpgradeEnabled != null && message.hasOwnProperty("autoUpgradeEnabled")) {
+                                object.autoUpgradeEnabled = message.autoUpgradeEnabled;
+                                if (options.oneofs)
+                                    object._autoUpgradeEnabled = "autoUpgradeEnabled";
+                            }
                             return object;
                         };
     
@@ -99197,6 +99325,8 @@
                      * @property {number} POSTGRES_14=110 POSTGRES_14 value
                      * @property {number} POSTGRES_15=172 POSTGRES_15 value
                      * @property {number} POSTGRES_16=272 POSTGRES_16 value
+                     * @property {number} POSTGRES_17=408 POSTGRES_17 value
+                     * @property {number} POSTGRES_18=557 POSTGRES_18 value
                      * @property {number} MYSQL_8_0=20 MYSQL_8_0 value
                      * @property {number} MYSQL_8_0_18=41 MYSQL_8_0_18 value
                      * @property {number} MYSQL_8_0_26=85 MYSQL_8_0_26 value
@@ -99244,6 +99374,8 @@
                         values[valuesById[110] = "POSTGRES_14"] = 110;
                         values[valuesById[172] = "POSTGRES_15"] = 172;
                         values[valuesById[272] = "POSTGRES_16"] = 272;
+                        values[valuesById[408] = "POSTGRES_17"] = 408;
+                        values[valuesById[557] = "POSTGRES_18"] = 557;
                         values[valuesById[20] = "MYSQL_8_0"] = 20;
                         values[valuesById[41] = "MYSQL_8_0_18"] = 41;
                         values[valuesById[85] = "MYSQL_8_0_26"] = 85;
@@ -100368,6 +100500,8 @@
                                 case 110:
                                 case 172:
                                 case 272:
+                                case 408:
+                                case 557:
                                 case 20:
                                 case 41:
                                 case 85:
@@ -100521,6 +100655,14 @@
                             case "POSTGRES_16":
                             case 272:
                                 message.databaseVersion = 272;
+                                break;
+                            case "POSTGRES_17":
+                            case 408:
+                                message.databaseVersion = 408;
+                                break;
+                            case "POSTGRES_18":
+                            case 557:
+                                message.databaseVersion = 557;
                                 break;
                             case "MYSQL_8_0":
                             case 20:

@@ -642,6 +642,11 @@
                 "searchNearestEntities"
               ]
             },
+            "GenerateFetchAccessToken": {
+              "methods": [
+                "generateFetchAccessToken"
+              ]
+            },
             "FeatureViewDirectWrite": {
               "methods": [
                 "featureViewDirectWrite"
@@ -660,6 +665,11 @@
             "SearchNearestEntities": {
               "methods": [
                 "searchNearestEntities"
+              ]
+            },
+            "GenerateFetchAccessToken": {
+              "methods": [
+                "generateFetchAccessToken"
               ]
             }
           }
@@ -2954,6 +2964,11 @@
                 "generateContent"
               ]
             },
+            "EmbedContent": {
+              "methods": [
+                "embedContent"
+              ]
+            },
             "StreamRawPredict": {
               "methods": [
                 "streamRawPredict"
@@ -3022,6 +3037,11 @@
             "GenerateContent": {
               "methods": [
                 "generateContent"
+              ]
+            },
+            "EmbedContent": {
+              "methods": [
+                "embedContent"
               ]
             }
           }

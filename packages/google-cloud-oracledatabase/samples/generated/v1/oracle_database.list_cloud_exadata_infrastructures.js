@@ -43,6 +43,14 @@ function main(parent) {
    *  Optional. A token identifying a page of results the server should return.
    */
   // const pageToken = 'abc123'
+  /**
+   *  Optional. An expression for filtering the results of the request.
+   */
+  // const filter = 'abc123'
+  /**
+   *  Optional. An expression for ordering the results of the request.
+   */
+  // const orderBy = 'abc123'
 
   // Imports the Oracledatabase library
   const {OracleDatabaseClient} = require('@google-cloud/oracledatabase').v1;

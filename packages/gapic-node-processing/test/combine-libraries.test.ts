@@ -31,6 +31,8 @@ export const LIB_PRE_COMBINATION_ESM = 'google-cloud-tasks-nodejs';
 export const LIB_PRE_COMBINATION = 'google-cloud-speech-nodejs';
 export const LIB_POST_COMBINATION_ESM = 'google-cloud-tasks';
 export const LIB_POST_COMBINATION = 'google-cloud-speech';
+export const LIB_PRE_COMBINATION_DEFAULT_SYSTEM_TEST = 'google-analytics-data-nodejs';
+export const LIB_POST_COMBINATION_DEFAULT_SYSTEM_TEST = 'google-analytics-data';
 
 const libraryConfigCJS = new LibraryConfig({
   sourcePath: path.resolve(TEST_FIXTURES_PATH, LIB_PRE_COMBINATION),
@@ -49,6 +51,18 @@ const libraryConfigESM = new LibraryConfig({
   destinationPath: path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION_ESM),
   defaultVersion: 'v1',
   isEsm: true,
+});
+const libraryConfigDefaultSystemTest = new LibraryConfig({
+  sourcePath: path.resolve(
+    TEST_FIXTURES_PATH,
+    LIB_PRE_COMBINATION_DEFAULT_SYSTEM_TEST,
+  ),
+  destinationPath: path.resolve(
+    TEST_FIXTURES_PATH,
+    LIB_POST_COMBINATION_DEFAULT_SYSTEM_TEST,
+  ),
+  defaultVersion: 'v1beta',
+  isEsm: false,
 });
 
 describe('combine libraries', () => {
@@ -197,55 +211,32 @@ describe('combine libraries', () => {
   });
 
   it('should only have default system tests', async () => {
-    await combineLibraries(libraryConfigCJS);
+    await combineLibraries(libraryConfigDefaultSystemTest);
 
     assert.match(
       await fs.readFile(
         path.resolve(
           TEST_FIXTURES_PATH,
-          LIB_POST_COMBINATION,
+          LIB_POST_COMBINATION_DEFAULT_SYSTEM_TEST,
           'system-test/fixtures/sample/src/index.js',
         ),
         'utf-8',
       ),
-      /AdaptationClient/,
+      /BetaAnalyticsDataClient/,
     );
 
     assert.match(
       await fs.readFile(
         path.resolve(
           TEST_FIXTURES_PATH,
-          LIB_POST_COMBINATION,
-          'system-test/fixtures/sample/src/index.js',
-        ),
-        'utf-8',
-      ),
-      /SpeechClient/,
-    );
-
-        assert.match(
-      await fs.readFile(
-        path.resolve(
-          TEST_FIXTURES_PATH,
-          LIB_POST_COMBINATION,
+          LIB_POST_COMBINATION_DEFAULT_SYSTEM_TEST,
           'system-test/fixtures/sample/src/index.ts',
         ),
         'utf-8',
       ),
-      /AdaptationClient/,
+      /BetaAnalyticsDataClient/,
     );
 
-    assert.match(
-      await fs.readFile(
-        path.resolve(
-          TEST_FIXTURES_PATH,
-          LIB_POST_COMBINATION,
-          'system-test/fixtures/sample/src/index.ts',
-        ),
-        'utf-8',
-      ),
-      /SpeechClient/,
-    );
   });
 
   it('should create a directory and write files', async () => {

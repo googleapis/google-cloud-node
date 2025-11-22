@@ -15,6 +15,11 @@
                 "getOrganization"
               ]
             },
+            "FindSalesPartnerManagedClients": {
+              "methods": [
+                "findSalesPartnerManagedClients"
+              ]
+            },
             "CreateAnalyticsAccountLink": {
               "methods": [
                 "createAnalyticsAccountLink"
@@ -28,6 +33,18 @@
             "SetPropertyServiceLevel": {
               "methods": [
                 "setPropertyServiceLevel"
+              ]
+            },
+            "ReportPropertyUsage": {
+              "methods": [
+                "reportPropertyUsage"
+              ]
+            },
+            "ListOrganizations": {
+              "methods": [
+                "listOrganizations",
+                "listOrganizationsStream",
+                "listOrganizationsAsync"
               ]
             },
             "ListAnalyticsAccountLinks": {
@@ -47,6 +64,11 @@
                 "getOrganization"
               ]
             },
+            "FindSalesPartnerManagedClients": {
+              "methods": [
+                "findSalesPartnerManagedClients"
+              ]
+            },
             "CreateAnalyticsAccountLink": {
               "methods": [
                 "createAnalyticsAccountLink"
@@ -60,6 +82,18 @@
             "SetPropertyServiceLevel": {
               "methods": [
                 "setPropertyServiceLevel"
+              ]
+            },
+            "ReportPropertyUsage": {
+              "methods": [
+                "reportPropertyUsage"
+              ]
+            },
+            "ListOrganizations": {
+              "methods": [
+                "listOrganizations",
+                "listOrganizationsStream",
+                "listOrganizationsAsync"
               ]
             },
             "ListAnalyticsAccountLinks": {

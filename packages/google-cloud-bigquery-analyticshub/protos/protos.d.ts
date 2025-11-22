@@ -2795,6 +2795,9 @@ export namespace google {
                         /** Listing restrictedExportConfig */
                         restrictedExportConfig?: (google.cloud.bigquery.analyticshub.v1.Listing.IRestrictedExportConfig|null);
 
+                        /** Listing storedProcedureConfig */
+                        storedProcedureConfig?: (google.cloud.bigquery.analyticshub.v1.IStoredProcedureConfig|null);
+
                         /** Listing discoveryType */
                         discoveryType?: (google.cloud.bigquery.analyticshub.v1.DiscoveryType|keyof typeof google.cloud.bigquery.analyticshub.v1.DiscoveryType|null);
 
@@ -2861,6 +2864,9 @@ export namespace google {
 
                         /** Listing restrictedExportConfig. */
                         public restrictedExportConfig?: (google.cloud.bigquery.analyticshub.v1.Listing.IRestrictedExportConfig|null);
+
+                        /** Listing storedProcedureConfig. */
+                        public storedProcedureConfig?: (google.cloud.bigquery.analyticshub.v1.IStoredProcedureConfig|null);
 
                         /** Listing discoveryType. */
                         public discoveryType?: (google.cloud.bigquery.analyticshub.v1.DiscoveryType|keyof typeof google.cloud.bigquery.analyticshub.v1.DiscoveryType|null);
@@ -3878,6 +3884,118 @@ export namespace google {
                             CATEGORY_TRANSPORTATION_AND_LOGISTICS = 18,
                             CATEGORY_TRAVEL_AND_TOURISM = 19,
                             CATEGORY_GOOGLE_EARTH_ENGINE = 20
+                        }
+                    }
+
+                    /** Properties of a StoredProcedureConfig. */
+                    interface IStoredProcedureConfig {
+
+                        /** StoredProcedureConfig enabled */
+                        enabled?: (boolean|null);
+
+                        /** StoredProcedureConfig allowedStoredProcedureTypes */
+                        allowedStoredProcedureTypes?: (google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig.StoredProcedureType[]|null);
+                    }
+
+                    /** Represents a StoredProcedureConfig. */
+                    class StoredProcedureConfig implements IStoredProcedureConfig {
+
+                        /**
+                         * Constructs a new StoredProcedureConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.analyticshub.v1.IStoredProcedureConfig);
+
+                        /** StoredProcedureConfig enabled. */
+                        public enabled: boolean;
+
+                        /** StoredProcedureConfig allowedStoredProcedureTypes. */
+                        public allowedStoredProcedureTypes: google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig.StoredProcedureType[];
+
+                        /**
+                         * Creates a new StoredProcedureConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns StoredProcedureConfig instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.analyticshub.v1.IStoredProcedureConfig): google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig;
+
+                        /**
+                         * Encodes the specified StoredProcedureConfig message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig.verify|verify} messages.
+                         * @param message StoredProcedureConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.analyticshub.v1.IStoredProcedureConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified StoredProcedureConfig message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig.verify|verify} messages.
+                         * @param message StoredProcedureConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.analyticshub.v1.IStoredProcedureConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a StoredProcedureConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns StoredProcedureConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig;
+
+                        /**
+                         * Decodes a StoredProcedureConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns StoredProcedureConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig;
+
+                        /**
+                         * Verifies a StoredProcedureConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a StoredProcedureConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns StoredProcedureConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig;
+
+                        /**
+                         * Creates a plain object from a StoredProcedureConfig message. Also converts values to other types if specified.
+                         * @param message StoredProcedureConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this StoredProcedureConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for StoredProcedureConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace StoredProcedureConfig {
+
+                        /** StoredProcedureType enum. */
+                        enum StoredProcedureType {
+                            STORED_PROCEDURE_TYPE_UNSPECIFIED = 0,
+                            SQL_PROCEDURE = 1
                         }
                     }
 
@@ -7467,6 +7585,9 @@ export namespace google {
 
                         /** PubSubSubscription messageTransforms */
                         messageTransforms?: (google.cloud.bigquery.analyticshub.v1.IMessageTransform[]|null);
+
+                        /** PubSubSubscription tags */
+                        tags?: ({ [k: string]: string }|null);
                     }
 
                     /** Represents a PubSubSubscription. */
@@ -7525,6 +7646,9 @@ export namespace google {
 
                         /** PubSubSubscription messageTransforms. */
                         public messageTransforms: google.cloud.bigquery.analyticshub.v1.IMessageTransform[];
+
+                        /** PubSubSubscription tags. */
+                        public tags: { [k: string]: string };
 
                         /**
                          * Creates a new PubSubSubscription instance using the specified properties.

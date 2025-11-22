@@ -59,8 +59,11 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | --------------------------- | --------------------------------- |
 | create analytics account link | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-marketingplatform-admin/samples/generated/v1alpha/marketingplatform_admin_service.create_analytics_account_link.js) |
 | delete analytics account link | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-marketingplatform-admin/samples/generated/v1alpha/marketingplatform_admin_service.delete_analytics_account_link.js) |
+| find sales partner managed clients | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-marketingplatform-admin/samples/generated/v1alpha/marketingplatform_admin_service.find_sales_partner_managed_clients.js) |
 | get organization | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-marketingplatform-admin/samples/generated/v1alpha/marketingplatform_admin_service.get_organization.js) |
 | list analytics account links | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-marketingplatform-admin/samples/generated/v1alpha/marketingplatform_admin_service.list_analytics_account_links.js) |
+| list organizations | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-marketingplatform-admin/samples/generated/v1alpha/marketingplatform_admin_service.list_organizations.js) |
+| report property usage | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-marketingplatform-admin/samples/generated/v1alpha/marketingplatform_admin_service.report_property_usage.js) |
 | set property service level | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-marketingplatform-admin/samples/generated/v1alpha/marketingplatform_admin_service.set_property_service_level.js) |
 | marketingplatform | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-marketingplatform-admin/samples/generated/v1alpha/snippet_metadata_google.marketingplatform.admin.v1alpha.json) |
 

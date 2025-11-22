@@ -60,28 +60,61 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | create autonomous database | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.create_autonomous_database.js) |
 | create cloud exadata infrastructure | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.create_cloud_exadata_infrastructure.js) |
 | create cloud vm cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.create_cloud_vm_cluster.js) |
+| create db system | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.create_db_system.js) |
+| create exadb vm cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.create_exadb_vm_cluster.js) |
+| create exascale db storage vault | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.create_exascale_db_storage_vault.js) |
+| create odb network | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.create_odb_network.js) |
+| create odb subnet | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.create_odb_subnet.js) |
 | delete autonomous database | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.delete_autonomous_database.js) |
 | delete cloud exadata infrastructure | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.delete_cloud_exadata_infrastructure.js) |
 | delete cloud vm cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.delete_cloud_vm_cluster.js) |
+| delete db system | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.delete_db_system.js) |
+| delete exadb vm cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.delete_exadb_vm_cluster.js) |
+| delete exascale db storage vault | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.delete_exascale_db_storage_vault.js) |
+| delete odb network | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.delete_odb_network.js) |
+| delete odb subnet | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.delete_odb_subnet.js) |
+| failover autonomous database | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.failover_autonomous_database.js) |
 | generate autonomous database wallet | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.generate_autonomous_database_wallet.js) |
 | get autonomous database | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.get_autonomous_database.js) |
 | get cloud exadata infrastructure | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.get_cloud_exadata_infrastructure.js) |
 | get cloud vm cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.get_cloud_vm_cluster.js) |
+| get database | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.get_database.js) |
+| get db system | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.get_db_system.js) |
+| get exadb vm cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.get_exadb_vm_cluster.js) |
+| get exascale db storage vault | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.get_exascale_db_storage_vault.js) |
+| get odb network | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.get_odb_network.js) |
+| get odb subnet | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.get_odb_subnet.js) |
+| get pluggable database | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.get_pluggable_database.js) |
 | list autonomous database backups | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_autonomous_database_backups.js) |
 | list autonomous database character sets | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_autonomous_database_character_sets.js) |
 | list autonomous databases | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_autonomous_databases.js) |
 | list autonomous db versions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_autonomous_db_versions.js) |
 | list cloud exadata infrastructures | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_cloud_exadata_infrastructures.js) |
 | list cloud vm clusters | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_cloud_vm_clusters.js) |
+| list database character sets | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_database_character_sets.js) |
+| list databases | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_databases.js) |
 | list db nodes | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_db_nodes.js) |
 | list db servers | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_db_servers.js) |
+| list db system initial storage sizes | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_db_system_initial_storage_sizes.js) |
 | list db system shapes | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_db_system_shapes.js) |
+| list db systems | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_db_systems.js) |
+| list db versions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_db_versions.js) |
 | list entitlements | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_entitlements.js) |
+| list exadb vm clusters | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_exadb_vm_clusters.js) |
+| list exascale db storage vaults | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_exascale_db_storage_vaults.js) |
 | list gi versions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_gi_versions.js) |
+| list minor versions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_minor_versions.js) |
+| list odb networks | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_odb_networks.js) |
+| list odb subnets | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_odb_subnets.js) |
+| list pluggable databases | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.list_pluggable_databases.js) |
+| remove virtual machine exadb vm cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.remove_virtual_machine_exadb_vm_cluster.js) |
 | restart autonomous database | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.restart_autonomous_database.js) |
 | restore autonomous database | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.restore_autonomous_database.js) |
 | start autonomous database | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.start_autonomous_database.js) |
 | stop autonomous database | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.stop_autonomous_database.js) |
+| switchover autonomous database | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.switchover_autonomous_database.js) |
+| update autonomous database | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.update_autonomous_database.js) |
+| update exadb vm cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.update_exadb_vm_cluster.js) |
 | cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/snippet_metadata_google.cloud.oracledatabase.v1.json) |
 
 

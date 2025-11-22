@@ -31,16 +31,16 @@ function main(parent, frameworkId, framework) {
   /**
    *  Required. The parent resource name, in the format
    *  `organizations/{organization}/locations/{location}`.
+   *  The only supported location is `global`.
    */
   // const parent = 'abc123'
   /**
-   *  Required. ID of the framework.
-   *  This is not the full name of the framework.
-   *  This is the last part of the full name of the framework.
+   *  Required. The identifier (ID) of the framework. The ID is not the full name
+   *  of the framework; it's the last part of the full name of the framework.
    */
   // const frameworkId = 'abc123'
   /**
-   *  Required. The resource being created
+   *  Required. The resource being created.
    */
   // const framework = {}
 

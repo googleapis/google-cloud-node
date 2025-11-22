@@ -378,6 +378,766 @@ describe('v1.PlacementServiceClient', () => {
         });
     });
 
+    describe('createPlacement', () => {
+        it('invokes createPlacement without error', async () => {
+            const client = new placementserviceModule.v1.PlacementServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.CreatePlacementRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.CreatePlacementRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.Placement()
+            );
+            client.innerApiCalls.createPlacement = stubSimpleCall(expectedResponse);
+            const [response] = await client.createPlacement(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createPlacement as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createPlacement as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createPlacement without error using callback', async () => {
+            const client = new placementserviceModule.v1.PlacementServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.CreatePlacementRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.CreatePlacementRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.Placement()
+            );
+            client.innerApiCalls.createPlacement = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createPlacement(
+                    request,
+                    (err?: Error|null, result?: protos.google.ads.admanager.v1.IPlacement|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createPlacement as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createPlacement as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createPlacement with error', async () => {
+            const client = new placementserviceModule.v1.PlacementServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.CreatePlacementRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.CreatePlacementRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createPlacement = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createPlacement(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createPlacement as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createPlacement as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createPlacement with closed client', async () => {
+            const client = new placementserviceModule.v1.PlacementServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.CreatePlacementRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.CreatePlacementRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createPlacement(request), expectedError);
+        });
+    });
+
+    describe('updatePlacement', () => {
+        it('invokes updatePlacement without error', async () => {
+            const client = new placementserviceModule.v1.PlacementServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.UpdatePlacementRequest()
+            );
+            request.placement ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.UpdatePlacementRequest', ['placement', 'name']);
+            request.placement.name = defaultValue1;
+            const expectedHeaderRequestParams = `placement.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.Placement()
+            );
+            client.innerApiCalls.updatePlacement = stubSimpleCall(expectedResponse);
+            const [response] = await client.updatePlacement(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updatePlacement as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updatePlacement as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updatePlacement without error using callback', async () => {
+            const client = new placementserviceModule.v1.PlacementServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.UpdatePlacementRequest()
+            );
+            request.placement ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.UpdatePlacementRequest', ['placement', 'name']);
+            request.placement.name = defaultValue1;
+            const expectedHeaderRequestParams = `placement.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.Placement()
+            );
+            client.innerApiCalls.updatePlacement = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updatePlacement(
+                    request,
+                    (err?: Error|null, result?: protos.google.ads.admanager.v1.IPlacement|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updatePlacement as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updatePlacement as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updatePlacement with error', async () => {
+            const client = new placementserviceModule.v1.PlacementServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.UpdatePlacementRequest()
+            );
+            request.placement ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.UpdatePlacementRequest', ['placement', 'name']);
+            request.placement.name = defaultValue1;
+            const expectedHeaderRequestParams = `placement.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updatePlacement = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updatePlacement(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updatePlacement as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updatePlacement as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updatePlacement with closed client', async () => {
+            const client = new placementserviceModule.v1.PlacementServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.UpdatePlacementRequest()
+            );
+            request.placement ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.UpdatePlacementRequest', ['placement', 'name']);
+            request.placement.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updatePlacement(request), expectedError);
+        });
+    });
+
+    describe('batchCreatePlacements', () => {
+        it('invokes batchCreatePlacements without error', async () => {
+            const client = new placementserviceModule.v1.PlacementServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchCreatePlacementsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchCreatePlacementsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchCreatePlacementsResponse()
+            );
+            client.innerApiCalls.batchCreatePlacements = stubSimpleCall(expectedResponse);
+            const [response] = await client.batchCreatePlacements(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchCreatePlacements as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchCreatePlacements as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchCreatePlacements without error using callback', async () => {
+            const client = new placementserviceModule.v1.PlacementServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchCreatePlacementsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchCreatePlacementsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchCreatePlacementsResponse()
+            );
+            client.innerApiCalls.batchCreatePlacements = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.batchCreatePlacements(
+                    request,
+                    (err?: Error|null, result?: protos.google.ads.admanager.v1.IBatchCreatePlacementsResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchCreatePlacements as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchCreatePlacements as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchCreatePlacements with error', async () => {
+            const client = new placementserviceModule.v1.PlacementServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchCreatePlacementsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchCreatePlacementsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.batchCreatePlacements = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.batchCreatePlacements(request), expectedError);
+            const actualRequest = (client.innerApiCalls.batchCreatePlacements as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchCreatePlacements as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchCreatePlacements with closed client', async () => {
+            const client = new placementserviceModule.v1.PlacementServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchCreatePlacementsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchCreatePlacementsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.batchCreatePlacements(request), expectedError);
+        });
+    });
+
+    describe('batchUpdatePlacements', () => {
+        it('invokes batchUpdatePlacements without error', async () => {
+            const client = new placementserviceModule.v1.PlacementServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchUpdatePlacementsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchUpdatePlacementsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchUpdatePlacementsResponse()
+            );
+            client.innerApiCalls.batchUpdatePlacements = stubSimpleCall(expectedResponse);
+            const [response] = await client.batchUpdatePlacements(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchUpdatePlacements as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchUpdatePlacements as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchUpdatePlacements without error using callback', async () => {
+            const client = new placementserviceModule.v1.PlacementServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchUpdatePlacementsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchUpdatePlacementsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchUpdatePlacementsResponse()
+            );
+            client.innerApiCalls.batchUpdatePlacements = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.batchUpdatePlacements(
+                    request,
+                    (err?: Error|null, result?: protos.google.ads.admanager.v1.IBatchUpdatePlacementsResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchUpdatePlacements as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchUpdatePlacements as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchUpdatePlacements with error', async () => {
+            const client = new placementserviceModule.v1.PlacementServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchUpdatePlacementsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchUpdatePlacementsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.batchUpdatePlacements = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.batchUpdatePlacements(request), expectedError);
+            const actualRequest = (client.innerApiCalls.batchUpdatePlacements as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchUpdatePlacements as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchUpdatePlacements with closed client', async () => {
+            const client = new placementserviceModule.v1.PlacementServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchUpdatePlacementsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchUpdatePlacementsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.batchUpdatePlacements(request), expectedError);
+        });
+    });
+
+    describe('batchActivatePlacements', () => {
+        it('invokes batchActivatePlacements without error', async () => {
+            const client = new placementserviceModule.v1.PlacementServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchActivatePlacementsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchActivatePlacementsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchActivatePlacementsResponse()
+            );
+            client.innerApiCalls.batchActivatePlacements = stubSimpleCall(expectedResponse);
+            const [response] = await client.batchActivatePlacements(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchActivatePlacements as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchActivatePlacements as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchActivatePlacements without error using callback', async () => {
+            const client = new placementserviceModule.v1.PlacementServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchActivatePlacementsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchActivatePlacementsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchActivatePlacementsResponse()
+            );
+            client.innerApiCalls.batchActivatePlacements = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.batchActivatePlacements(
+                    request,
+                    (err?: Error|null, result?: protos.google.ads.admanager.v1.IBatchActivatePlacementsResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchActivatePlacements as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchActivatePlacements as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchActivatePlacements with error', async () => {
+            const client = new placementserviceModule.v1.PlacementServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchActivatePlacementsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchActivatePlacementsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.batchActivatePlacements = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.batchActivatePlacements(request), expectedError);
+            const actualRequest = (client.innerApiCalls.batchActivatePlacements as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchActivatePlacements as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchActivatePlacements with closed client', async () => {
+            const client = new placementserviceModule.v1.PlacementServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchActivatePlacementsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchActivatePlacementsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.batchActivatePlacements(request), expectedError);
+        });
+    });
+
+    describe('batchDeactivatePlacements', () => {
+        it('invokes batchDeactivatePlacements without error', async () => {
+            const client = new placementserviceModule.v1.PlacementServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchDeactivatePlacementsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchDeactivatePlacementsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchDeactivatePlacementsResponse()
+            );
+            client.innerApiCalls.batchDeactivatePlacements = stubSimpleCall(expectedResponse);
+            const [response] = await client.batchDeactivatePlacements(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchDeactivatePlacements as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchDeactivatePlacements as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchDeactivatePlacements without error using callback', async () => {
+            const client = new placementserviceModule.v1.PlacementServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchDeactivatePlacementsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchDeactivatePlacementsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchDeactivatePlacementsResponse()
+            );
+            client.innerApiCalls.batchDeactivatePlacements = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.batchDeactivatePlacements(
+                    request,
+                    (err?: Error|null, result?: protos.google.ads.admanager.v1.IBatchDeactivatePlacementsResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchDeactivatePlacements as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchDeactivatePlacements as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchDeactivatePlacements with error', async () => {
+            const client = new placementserviceModule.v1.PlacementServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchDeactivatePlacementsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchDeactivatePlacementsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.batchDeactivatePlacements = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.batchDeactivatePlacements(request), expectedError);
+            const actualRequest = (client.innerApiCalls.batchDeactivatePlacements as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchDeactivatePlacements as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchDeactivatePlacements with closed client', async () => {
+            const client = new placementserviceModule.v1.PlacementServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchDeactivatePlacementsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchDeactivatePlacementsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.batchDeactivatePlacements(request), expectedError);
+        });
+    });
+
+    describe('batchArchivePlacements', () => {
+        it('invokes batchArchivePlacements without error', async () => {
+            const client = new placementserviceModule.v1.PlacementServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchArchivePlacementsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchArchivePlacementsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchArchivePlacementsResponse()
+            );
+            client.innerApiCalls.batchArchivePlacements = stubSimpleCall(expectedResponse);
+            const [response] = await client.batchArchivePlacements(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchArchivePlacements as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchArchivePlacements as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchArchivePlacements without error using callback', async () => {
+            const client = new placementserviceModule.v1.PlacementServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchArchivePlacementsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchArchivePlacementsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchArchivePlacementsResponse()
+            );
+            client.innerApiCalls.batchArchivePlacements = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.batchArchivePlacements(
+                    request,
+                    (err?: Error|null, result?: protos.google.ads.admanager.v1.IBatchArchivePlacementsResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchArchivePlacements as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchArchivePlacements as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchArchivePlacements with error', async () => {
+            const client = new placementserviceModule.v1.PlacementServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchArchivePlacementsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchArchivePlacementsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.batchArchivePlacements = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.batchArchivePlacements(request), expectedError);
+            const actualRequest = (client.innerApiCalls.batchArchivePlacements as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchArchivePlacements as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchArchivePlacements with closed client', async () => {
+            const client = new placementserviceModule.v1.PlacementServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchArchivePlacementsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchArchivePlacementsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.batchArchivePlacements(request), expectedError);
+        });
+    });
+
     describe('listPlacements', () => {
         it('invokes listPlacements without error', async () => {
             const client = new placementserviceModule.v1.PlacementServiceClient({
@@ -671,6 +1431,52 @@ describe('v1.PlacementServiceClient', () => {
             });
         });
 
+        describe('adReviewCenterAd', async () => {
+            const fakePath = "/rendered/path/adReviewCenterAd";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                web_property_code: "webPropertyCodeValue",
+                ad_review_center_ad: "adReviewCenterAdValue",
+            };
+            const client = new placementserviceModule.v1.PlacementServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.adReviewCenterAdPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.adReviewCenterAdPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('adReviewCenterAdPath', () => {
+                const result = client.adReviewCenterAdPath("networkCodeValue", "webPropertyCodeValue", "adReviewCenterAdValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.adReviewCenterAdPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromAdReviewCenterAdName', () => {
+                const result = client.matchNetworkCodeFromAdReviewCenterAdName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.adReviewCenterAdPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchWebPropertyCodeFromAdReviewCenterAdName', () => {
+                const result = client.matchWebPropertyCodeFromAdReviewCenterAdName(fakePath);
+                assert.strictEqual(result, "webPropertyCodeValue");
+                assert((client.pathTemplates.adReviewCenterAdPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAdReviewCenterAdFromAdReviewCenterAdName', () => {
+                const result = client.matchAdReviewCenterAdFromAdReviewCenterAdName(fakePath);
+                assert.strictEqual(result, "adReviewCenterAdValue");
+                assert((client.pathTemplates.adReviewCenterAdPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('adUnit', async () => {
             const fakePath = "/rendered/path/adUnit";
             const expectedParameters = {
@@ -709,6 +1515,82 @@ describe('v1.PlacementServiceClient', () => {
             });
         });
 
+        describe('application', async () => {
+            const fakePath = "/rendered/path/application";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                application: "applicationValue",
+            };
+            const client = new placementserviceModule.v1.PlacementServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.applicationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.applicationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('applicationPath', () => {
+                const result = client.applicationPath("networkCodeValue", "applicationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.applicationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromApplicationName', () => {
+                const result = client.matchNetworkCodeFromApplicationName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.applicationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchApplicationFromApplicationName', () => {
+                const result = client.matchApplicationFromApplicationName(fakePath);
+                assert.strictEqual(result, "applicationValue");
+                assert((client.pathTemplates.applicationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('audienceSegment', async () => {
+            const fakePath = "/rendered/path/audienceSegment";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                audience_segment: "audienceSegmentValue",
+            };
+            const client = new placementserviceModule.v1.PlacementServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.audienceSegmentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.audienceSegmentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('audienceSegmentPath', () => {
+                const result = client.audienceSegmentPath("networkCodeValue", "audienceSegmentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.audienceSegmentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromAudienceSegmentName', () => {
+                const result = client.matchNetworkCodeFromAudienceSegmentName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.audienceSegmentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAudienceSegmentFromAudienceSegmentName', () => {
+                const result = client.matchAudienceSegmentFromAudienceSegmentName(fakePath);
+                assert.strictEqual(result, "audienceSegmentValue");
+                assert((client.pathTemplates.audienceSegmentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('bandwidthGroup', async () => {
             const fakePath = "/rendered/path/bandwidthGroup";
             const expectedParameters = {
@@ -743,6 +1625,158 @@ describe('v1.PlacementServiceClient', () => {
                 const result = client.matchBandwidthGroupFromBandwidthGroupName(fakePath);
                 assert.strictEqual(result, "bandwidthGroupValue");
                 assert((client.pathTemplates.bandwidthGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('browser', async () => {
+            const fakePath = "/rendered/path/browser";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                browser: "browserValue",
+            };
+            const client = new placementserviceModule.v1.PlacementServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.browserPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.browserPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('browserPath', () => {
+                const result = client.browserPath("networkCodeValue", "browserValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.browserPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromBrowserName', () => {
+                const result = client.matchNetworkCodeFromBrowserName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.browserPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchBrowserFromBrowserName', () => {
+                const result = client.matchBrowserFromBrowserName(fakePath);
+                assert.strictEqual(result, "browserValue");
+                assert((client.pathTemplates.browserPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('browserLanguage', async () => {
+            const fakePath = "/rendered/path/browserLanguage";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                browser_language: "browserLanguageValue",
+            };
+            const client = new placementserviceModule.v1.PlacementServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.browserLanguagePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.browserLanguagePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('browserLanguagePath', () => {
+                const result = client.browserLanguagePath("networkCodeValue", "browserLanguageValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.browserLanguagePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromBrowserLanguageName', () => {
+                const result = client.matchNetworkCodeFromBrowserLanguageName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.browserLanguagePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchBrowserLanguageFromBrowserLanguageName', () => {
+                const result = client.matchBrowserLanguageFromBrowserLanguageName(fakePath);
+                assert.strictEqual(result, "browserLanguageValue");
+                assert((client.pathTemplates.browserLanguagePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('cmsMetadataKey', async () => {
+            const fakePath = "/rendered/path/cmsMetadataKey";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                cms_metadata_key: "cmsMetadataKeyValue",
+            };
+            const client = new placementserviceModule.v1.PlacementServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.cmsMetadataKeyPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.cmsMetadataKeyPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('cmsMetadataKeyPath', () => {
+                const result = client.cmsMetadataKeyPath("networkCodeValue", "cmsMetadataKeyValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.cmsMetadataKeyPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromCmsMetadataKeyName', () => {
+                const result = client.matchNetworkCodeFromCmsMetadataKeyName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.cmsMetadataKeyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCmsMetadataKeyFromCmsMetadataKeyName', () => {
+                const result = client.matchCmsMetadataKeyFromCmsMetadataKeyName(fakePath);
+                assert.strictEqual(result, "cmsMetadataKeyValue");
+                assert((client.pathTemplates.cmsMetadataKeyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('cmsMetadataValue', async () => {
+            const fakePath = "/rendered/path/cmsMetadataValue";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                cms_metadata_value: "cmsMetadataValueValue",
+            };
+            const client = new placementserviceModule.v1.PlacementServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.cmsMetadataValuePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.cmsMetadataValuePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('cmsMetadataValuePath', () => {
+                const result = client.cmsMetadataValuePath("networkCodeValue", "cmsMetadataValueValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.cmsMetadataValuePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromCmsMetadataValueName', () => {
+                const result = client.matchNetworkCodeFromCmsMetadataValueName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.cmsMetadataValuePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCmsMetadataValueFromCmsMetadataValueName', () => {
+                const result = client.matchCmsMetadataValueFromCmsMetadataValueName(fakePath);
+                assert.strictEqual(result, "cmsMetadataValueValue");
+                assert((client.pathTemplates.cmsMetadataValuePathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
@@ -819,6 +1853,158 @@ describe('v1.PlacementServiceClient', () => {
                 const result = client.matchContactFromContactName(fakePath);
                 assert.strictEqual(result, "contactValue");
                 assert((client.pathTemplates.contactPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('content', async () => {
+            const fakePath = "/rendered/path/content";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                content: "contentValue",
+            };
+            const client = new placementserviceModule.v1.PlacementServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.contentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.contentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('contentPath', () => {
+                const result = client.contentPath("networkCodeValue", "contentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.contentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromContentName', () => {
+                const result = client.matchNetworkCodeFromContentName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.contentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchContentFromContentName', () => {
+                const result = client.matchContentFromContentName(fakePath);
+                assert.strictEqual(result, "contentValue");
+                assert((client.pathTemplates.contentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('contentBundle', async () => {
+            const fakePath = "/rendered/path/contentBundle";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                content_bundle: "contentBundleValue",
+            };
+            const client = new placementserviceModule.v1.PlacementServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.contentBundlePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.contentBundlePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('contentBundlePath', () => {
+                const result = client.contentBundlePath("networkCodeValue", "contentBundleValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.contentBundlePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromContentBundleName', () => {
+                const result = client.matchNetworkCodeFromContentBundleName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.contentBundlePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchContentBundleFromContentBundleName', () => {
+                const result = client.matchContentBundleFromContentBundleName(fakePath);
+                assert.strictEqual(result, "contentBundleValue");
+                assert((client.pathTemplates.contentBundlePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('contentLabel', async () => {
+            const fakePath = "/rendered/path/contentLabel";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                content_label: "contentLabelValue",
+            };
+            const client = new placementserviceModule.v1.PlacementServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.contentLabelPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.contentLabelPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('contentLabelPath', () => {
+                const result = client.contentLabelPath("networkCodeValue", "contentLabelValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.contentLabelPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromContentLabelName', () => {
+                const result = client.matchNetworkCodeFromContentLabelName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.contentLabelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchContentLabelFromContentLabelName', () => {
+                const result = client.matchContentLabelFromContentLabelName(fakePath);
+                assert.strictEqual(result, "contentLabelValue");
+                assert((client.pathTemplates.contentLabelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('creativeTemplate', async () => {
+            const fakePath = "/rendered/path/creativeTemplate";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                creative_template: "creativeTemplateValue",
+            };
+            const client = new placementserviceModule.v1.PlacementServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.creativeTemplatePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.creativeTemplatePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('creativeTemplatePath', () => {
+                const result = client.creativeTemplatePath("networkCodeValue", "creativeTemplateValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.creativeTemplatePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromCreativeTemplateName', () => {
+                const result = client.matchNetworkCodeFromCreativeTemplateName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.creativeTemplatePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCreativeTemplateFromCreativeTemplateName', () => {
+                const result = client.matchCreativeTemplateFromCreativeTemplateName(fakePath);
+                assert.strictEqual(result, "creativeTemplateValue");
+                assert((client.pathTemplates.creativeTemplatePathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
@@ -937,6 +2123,44 @@ describe('v1.PlacementServiceClient', () => {
             });
         });
 
+        describe('deviceCapability', async () => {
+            const fakePath = "/rendered/path/deviceCapability";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                device_capability: "deviceCapabilityValue",
+            };
+            const client = new placementserviceModule.v1.PlacementServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.deviceCapabilityPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.deviceCapabilityPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('deviceCapabilityPath', () => {
+                const result = client.deviceCapabilityPath("networkCodeValue", "deviceCapabilityValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.deviceCapabilityPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromDeviceCapabilityName', () => {
+                const result = client.matchNetworkCodeFromDeviceCapabilityName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.deviceCapabilityPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDeviceCapabilityFromDeviceCapabilityName', () => {
+                const result = client.matchDeviceCapabilityFromDeviceCapabilityName(fakePath);
+                assert.strictEqual(result, "deviceCapabilityValue");
+                assert((client.pathTemplates.deviceCapabilityPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('deviceCategory', async () => {
             const fakePath = "/rendered/path/deviceCategory";
             const expectedParameters = {
@@ -971,6 +2195,44 @@ describe('v1.PlacementServiceClient', () => {
                 const result = client.matchDeviceCategoryFromDeviceCategoryName(fakePath);
                 assert.strictEqual(result, "deviceCategoryValue");
                 assert((client.pathTemplates.deviceCategoryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('deviceManufacturer', async () => {
+            const fakePath = "/rendered/path/deviceManufacturer";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                device_manufacturer: "deviceManufacturerValue",
+            };
+            const client = new placementserviceModule.v1.PlacementServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.deviceManufacturerPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.deviceManufacturerPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('deviceManufacturerPath', () => {
+                const result = client.deviceManufacturerPath("networkCodeValue", "deviceManufacturerValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.deviceManufacturerPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromDeviceManufacturerName', () => {
+                const result = client.matchNetworkCodeFromDeviceManufacturerName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.deviceManufacturerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDeviceManufacturerFromDeviceManufacturerName', () => {
+                const result = client.matchDeviceManufacturerFromDeviceManufacturerName(fakePath);
+                assert.strictEqual(result, "deviceManufacturerValue");
+                assert((client.pathTemplates.deviceManufacturerPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
@@ -1123,6 +2385,120 @@ describe('v1.PlacementServiceClient', () => {
                 const result = client.matchLiveStreamEventFromLiveStreamEventName(fakePath);
                 assert.strictEqual(result, "liveStreamEventValue");
                 assert((client.pathTemplates.liveStreamEventPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('mobileCarrier', async () => {
+            const fakePath = "/rendered/path/mobileCarrier";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                mobile_carrier: "mobileCarrierValue",
+            };
+            const client = new placementserviceModule.v1.PlacementServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.mobileCarrierPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.mobileCarrierPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('mobileCarrierPath', () => {
+                const result = client.mobileCarrierPath("networkCodeValue", "mobileCarrierValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.mobileCarrierPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromMobileCarrierName', () => {
+                const result = client.matchNetworkCodeFromMobileCarrierName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.mobileCarrierPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchMobileCarrierFromMobileCarrierName', () => {
+                const result = client.matchMobileCarrierFromMobileCarrierName(fakePath);
+                assert.strictEqual(result, "mobileCarrierValue");
+                assert((client.pathTemplates.mobileCarrierPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('mobileDevice', async () => {
+            const fakePath = "/rendered/path/mobileDevice";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                mobile_device: "mobileDeviceValue",
+            };
+            const client = new placementserviceModule.v1.PlacementServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.mobileDevicePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.mobileDevicePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('mobileDevicePath', () => {
+                const result = client.mobileDevicePath("networkCodeValue", "mobileDeviceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.mobileDevicePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromMobileDeviceName', () => {
+                const result = client.matchNetworkCodeFromMobileDeviceName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.mobileDevicePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchMobileDeviceFromMobileDeviceName', () => {
+                const result = client.matchMobileDeviceFromMobileDeviceName(fakePath);
+                assert.strictEqual(result, "mobileDeviceValue");
+                assert((client.pathTemplates.mobileDevicePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('mobileDeviceSubmodel', async () => {
+            const fakePath = "/rendered/path/mobileDeviceSubmodel";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                mobile_device_submodel: "mobileDeviceSubmodelValue",
+            };
+            const client = new placementserviceModule.v1.PlacementServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.mobileDeviceSubmodelPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.mobileDeviceSubmodelPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('mobileDeviceSubmodelPath', () => {
+                const result = client.mobileDeviceSubmodelPath("networkCodeValue", "mobileDeviceSubmodelValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.mobileDeviceSubmodelPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromMobileDeviceSubmodelName', () => {
+                const result = client.matchNetworkCodeFromMobileDeviceSubmodelName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.mobileDeviceSubmodelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchMobileDeviceSubmodelFromMobileDeviceSubmodelName', () => {
+                const result = client.matchMobileDeviceSubmodelFromMobileDeviceSubmodelName(fakePath);
+                assert.strictEqual(result, "mobileDeviceSubmodelValue");
+                assert((client.pathTemplates.mobileDeviceSubmodelPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
@@ -1499,6 +2875,44 @@ describe('v1.PlacementServiceClient', () => {
             });
         });
 
+        describe('site', async () => {
+            const fakePath = "/rendered/path/site";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                site: "siteValue",
+            };
+            const client = new placementserviceModule.v1.PlacementServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.sitePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.sitePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('sitePath', () => {
+                const result = client.sitePath("networkCodeValue", "siteValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.sitePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromSiteName', () => {
+                const result = client.matchNetworkCodeFromSiteName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.sitePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSiteFromSiteName', () => {
+                const result = client.matchSiteFromSiteName(fakePath);
+                assert.strictEqual(result, "siteValue");
+                assert((client.pathTemplates.sitePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('taxonomyCategory', async () => {
             const fakePath = "/rendered/path/taxonomyCategory";
             const expectedParameters = {
@@ -1609,6 +3023,44 @@ describe('v1.PlacementServiceClient', () => {
                 const result = client.matchUserFromUserName(fakePath);
                 assert.strictEqual(result, "userValue");
                 assert((client.pathTemplates.userPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('webProperty', async () => {
+            const fakePath = "/rendered/path/webProperty";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                web_property: "webPropertyValue",
+            };
+            const client = new placementserviceModule.v1.PlacementServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.webPropertyPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.webPropertyPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('webPropertyPath', () => {
+                const result = client.webPropertyPath("networkCodeValue", "webPropertyValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.webPropertyPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromWebPropertyName', () => {
+                const result = client.matchNetworkCodeFromWebPropertyName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.webPropertyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchWebPropertyFromWebPropertyName', () => {
+                const result = client.matchWebPropertyFromWebPropertyName(fakePath);
+                assert.strictEqual(result, "webPropertyValue");
+                assert((client.pathTemplates.webPropertyPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

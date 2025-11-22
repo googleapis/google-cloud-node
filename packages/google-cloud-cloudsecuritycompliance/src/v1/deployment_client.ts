@@ -191,6 +191,18 @@ export class DeploymentClient {
       cloudControlDeploymentPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/locations/{location}/cloudControlDeployments/{cloud_control_deployment}'
       ),
+      folderLocationFindingSummariesPathTemplate: new this._gaxModule.PathTemplate(
+        'folders/{folder}/locations/{location}/findingSummaries/{finding_summary}'
+      ),
+      folderLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate: new this._gaxModule.PathTemplate(
+        'folders/{folder}/locations/{location}/frameworkComplianceReports/{framework_compliance_report}/controlComplianceSummaries/{control_compliance_summary}'
+      ),
+      folderLocationFrameworkComplianceReportsPathTemplate: new this._gaxModule.PathTemplate(
+        'folders/{folder}/locations/{location}/frameworkComplianceReports/{framework_compliance_report}'
+      ),
+      folderLocationFrameworkComplianceSummariesPathTemplate: new this._gaxModule.PathTemplate(
+        'folders/{folder}/locations/{location}/frameworkComplianceSummaries/{framework_compliance_summary}'
+      ),
       frameworkPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/locations/{location}/frameworks/{framework}'
       ),
@@ -202,6 +214,48 @@ export class DeploymentClient {
       ),
       organizationLocationPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/locations/{location}'
+      ),
+      organizationLocationCmEnrollmentPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/cmEnrollment'
+      ),
+      organizationLocationFindingSummariesPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/findingSummaries/{finding_summary}'
+      ),
+      organizationLocationFrameworkAuditScopeReportsPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/frameworkAuditScopeReports/{generate_framework_audit_scope_report_response}'
+      ),
+      organizationLocationFrameworkAuditsPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/frameworkAudits/{framework_audit}'
+      ),
+      organizationLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/frameworkComplianceReports/{framework_compliance_report}/controlComplianceSummaries/{control_compliance_summary}'
+      ),
+      organizationLocationFrameworkComplianceReportsPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/frameworkComplianceReports/{framework_compliance_report}'
+      ),
+      organizationLocationFrameworkComplianceSummariesPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/frameworkComplianceSummaries/{framework_compliance_summary}'
+      ),
+      projectLocationCmEnrollmentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/cmEnrollment'
+      ),
+      projectLocationFindingSummariesPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/findingSummaries/{finding_summary}'
+      ),
+      projectLocationFrameworkAuditScopeReportsPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/frameworkAuditScopeReports/{generate_framework_audit_scope_report_response}'
+      ),
+      projectLocationFrameworkAuditsPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/frameworkAudits/{framework_audit}'
+      ),
+      projectLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/frameworkComplianceReports/{framework_compliance_report}/controlComplianceSummaries/{control_compliance_summary}'
+      ),
+      projectLocationFrameworkComplianceReportsPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/frameworkComplianceReports/{framework_compliance_report}'
+      ),
+      projectLocationFrameworkComplianceSummariesPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/frameworkComplianceSummaries/{framework_compliance_summary}'
       ),
     };
 
@@ -396,13 +450,14 @@ export class DeploymentClient {
   // -- Service calls --
   // -------------------
 /**
- * Gets details of a single FrameworkDeployment.
+ * Gets details about a framework deployment.
  *
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.name
- *   Required. FrameworkDeployment name in the following format:
- *   organizations/{organization}/locations/{location}/frameworkDeployments/{framework_deployment_id}
+ *   Required. The name of the framework deployment, in the format
+ *   `organizations/{organization}/locations/{location}/frameworkDeployments/{framework_deployment_id}`.
+ *   The only supported location is `global`.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -491,13 +546,14 @@ export class DeploymentClient {
       });
   }
 /**
- * Gets details of a single CloudControlDeployment.
+ * Gets details about a cloud control deployment.
  *
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.name
- *   Required. CloudControlDeployment name in the following format:
- *   organizations/{organization}/locations/{location}/cloudControlDeployments/{cloud_control_deployment_id}
+ *   Required. The name for the cloud control deployment, in the format
+ *   `organizations/{organization}/locations/{location}/cloudControlDeployments/{cloud_control_deployment_id}`.
+ *   The only supported location is `global`.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -587,20 +643,23 @@ export class DeploymentClient {
   }
 
 /**
- * Creates a new FrameworkDeployment in a given parent resource.
+ * Creates a framework deployment in a given parent resource. A
+ * framework deployment lets you assign a particular framework version to an
+ * organization, folder, or project so that you can control and monitor
+ * those resources using the framework's cloud controls.
  *
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.parent
- *   Required. The parent resource of the FrameworkDeployment in the format:
- *   organizations/{organization}/locations/{location}
- *   Only global location is supported.
+ *   Required. The parent resource of the framework deployment in the format
+ *   `organizations/{organization}/locations/{location}`.
+ *   Only the global location is supported.
  * @param {string} [request.frameworkDeploymentId]
- *   Optional. User provided identifier. It should be unique in scope of a
- *   parent. This is optional and if not provided, a random UUID will be
+ *   Optional. An identifier for the framework deployment that's unique in scope
+ *   of the parent. If you don't specify a value, then a random UUID is
  *   generated.
  * @param {google.cloud.cloudsecuritycompliance.v1.FrameworkDeployment} request.frameworkDeployment
- *   Required. The FrameworkDeployment to be created.
+ *   Required. The framework deployment that you're creating.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -702,20 +761,21 @@ export class DeploymentClient {
     return decodeOperation as LROperation<protos.google.cloud.cloudsecuritycompliance.v1.FrameworkDeployment, protos.google.cloud.cloudsecuritycompliance.v1.OperationMetadata>;
   }
 /**
- * Deletes a single FrameworkDeployment.
+ * Deletes a framework deployment.
  *
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.name
- *   Required. name of the FrameworkDeployment to be deleted in the following
- *   format:
- *   organizations/{organization}/locations/{location}/frameworkDeployments/{framework_deployment_id}
+ *   Required. The name of the framework deployment that you want to delete,
+ *   in the format
+ *   `organizations/{organization}/locations/{location}/frameworkDeployments/{framework_deployment_id}`.
+ *   The only supported location is `global`.
  * @param {string} [request.etag]
  *   Optional. An opaque identifier for the current version of the resource.
  *
  *   If you provide this value, then it must match the existing value. If the
  *   values don't match, then the request fails with an
- *   {@link protos.google.rpc.Code.ABORTED|ABORTED} error.
+ *   {@link protos.google.rpc.Code.ABORTED|`ABORTED`} error.
  *
  *   If you omit this value, then the resource is deleted regardless of its
  *   current `etag` value.
@@ -820,24 +880,32 @@ export class DeploymentClient {
     return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.cloudsecuritycompliance.v1.OperationMetadata>;
   }
  /**
- * Lists FrameworkDeployments in a given parent resource.
+ * Lists the framework deployments in a given parent resource.
  *
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.parent
- *   Required. parent resource of the FrameworkDeployment in the format:
- *   organizations/{organization}/locations/{location}
- *   Only global location is supported.
+ *   Required. The parent resource of the framework deployment, in the format
+ *   `organizations/{organization}/locations/{location}`.
+ *   The only supported location is `global`.
  * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
+ *   Optional. The requested page size. The server might return fewer items than
+ *   requested.
+ *   If unspecified, the server picks an appropriate default.
  * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
+ *   Optional. A token that identifies a page of results the server should
+ *   return.
  * @param {string} [request.filter]
- *   Optional. Filter to be applied on the resource, defined by EBNF grammar
- *   https://google.aip.dev/assets/misc/ebnf-filtering.txt.
+ *   Optional. The filter to be applied on the resource, as defined by
+ *   [AIP-160: Filtering](https://google.aip.dev/160).
  * @param {string} [request.orderBy]
- *   Optional. Sort results. Supported are "name", "name desc" or "" (unsorted).
+ *   Optional. The sort order for the results. The following values are
+ *   supported:
+ *
+ *   * `name`
+ *   * `name desc`
+ *
+ *   If you do not specify a value, then the results are not sorted.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -931,19 +999,27 @@ export class DeploymentClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.parent
- *   Required. parent resource of the FrameworkDeployment in the format:
- *   organizations/{organization}/locations/{location}
- *   Only global location is supported.
+ *   Required. The parent resource of the framework deployment, in the format
+ *   `organizations/{organization}/locations/{location}`.
+ *   The only supported location is `global`.
  * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
+ *   Optional. The requested page size. The server might return fewer items than
+ *   requested.
+ *   If unspecified, the server picks an appropriate default.
  * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
+ *   Optional. A token that identifies a page of results the server should
+ *   return.
  * @param {string} [request.filter]
- *   Optional. Filter to be applied on the resource, defined by EBNF grammar
- *   https://google.aip.dev/assets/misc/ebnf-filtering.txt.
+ *   Optional. The filter to be applied on the resource, as defined by
+ *   [AIP-160: Filtering](https://google.aip.dev/160).
  * @param {string} [request.orderBy]
- *   Optional. Sort results. Supported are "name", "name desc" or "" (unsorted).
+ *   Optional. The sort order for the results. The following values are
+ *   supported:
+ *
+ *   * `name`
+ *   * `name desc`
+ *
+ *   If you do not specify a value, then the results are not sorted.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
@@ -986,19 +1062,27 @@ export class DeploymentClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.parent
- *   Required. parent resource of the FrameworkDeployment in the format:
- *   organizations/{organization}/locations/{location}
- *   Only global location is supported.
+ *   Required. The parent resource of the framework deployment, in the format
+ *   `organizations/{organization}/locations/{location}`.
+ *   The only supported location is `global`.
  * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
+ *   Optional. The requested page size. The server might return fewer items than
+ *   requested.
+ *   If unspecified, the server picks an appropriate default.
  * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
+ *   Optional. A token that identifies a page of results the server should
+ *   return.
  * @param {string} [request.filter]
- *   Optional. Filter to be applied on the resource, defined by EBNF grammar
- *   https://google.aip.dev/assets/misc/ebnf-filtering.txt.
+ *   Optional. The filter to be applied on the resource, as defined by
+ *   [AIP-160: Filtering](https://google.aip.dev/160).
  * @param {string} [request.orderBy]
- *   Optional. Sort results. Supported are "name", "name desc" or "" (unsorted).
+ *   Optional. The sort order for the results. The following values are
+ *   supported:
+ *
+ *   * `name`
+ *   * `name desc`
+ *
+ *   If you do not specify a value, then the results are not sorted.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}
@@ -1035,24 +1119,32 @@ export class DeploymentClient {
     ) as AsyncIterable<protos.google.cloud.cloudsecuritycompliance.v1.IFrameworkDeployment>;
   }
  /**
- * Lists CloudControlDeployments in a given parent resource.
+ * Lists the cloud conrol deployments in a given parent resource.
  *
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.parent
- *   Required. parent resource of the CloudControlDeployment in the format:
- *   organizations/{organization}/locations/{location}
- *   Only global location is supported.
+ *   Required. The parent resource for the cloud control deployment, in the
+ *   format `organizations/{organization}/locations/{location}`. The only
+ *   supported location is `global`.
  * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
+ *   Optional. The requested page size. The server might return fewer items than
+ *   you requested.
+ *   If unspecified, the server picks an appropriate default.
  * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
+ *   Optional. A token that identifies the page of results that the server
+ *   should return.
  * @param {string} [request.filter]
- *   Optional. Filter to be applied on the resource, defined by EBNF grammar
- *   https://google.aip.dev/assets/misc/ebnf-filtering.txt.
+ *   Optional. The filter to apply on the resource, as defined by
+ *   [AIP-160: Filtering](https://google.aip.dev/160).
  * @param {string} [request.orderBy]
- *   Optional. Sort results. Supported are "name", "name desc" or "" (unsorted).
+ *   Optional. The sort order for the results. The following values are
+ *   supported:
+ *
+ *   * `name`
+ *   * `name desc`
+ *
+ *   If you do not specify a value, then the results are not sorted.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -1146,19 +1238,27 @@ export class DeploymentClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.parent
- *   Required. parent resource of the CloudControlDeployment in the format:
- *   organizations/{organization}/locations/{location}
- *   Only global location is supported.
+ *   Required. The parent resource for the cloud control deployment, in the
+ *   format `organizations/{organization}/locations/{location}`. The only
+ *   supported location is `global`.
  * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
+ *   Optional. The requested page size. The server might return fewer items than
+ *   you requested.
+ *   If unspecified, the server picks an appropriate default.
  * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
+ *   Optional. A token that identifies the page of results that the server
+ *   should return.
  * @param {string} [request.filter]
- *   Optional. Filter to be applied on the resource, defined by EBNF grammar
- *   https://google.aip.dev/assets/misc/ebnf-filtering.txt.
+ *   Optional. The filter to apply on the resource, as defined by
+ *   [AIP-160: Filtering](https://google.aip.dev/160).
  * @param {string} [request.orderBy]
- *   Optional. Sort results. Supported are "name", "name desc" or "" (unsorted).
+ *   Optional. The sort order for the results. The following values are
+ *   supported:
+ *
+ *   * `name`
+ *   * `name desc`
+ *
+ *   If you do not specify a value, then the results are not sorted.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
@@ -1201,19 +1301,27 @@ export class DeploymentClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.parent
- *   Required. parent resource of the CloudControlDeployment in the format:
- *   organizations/{organization}/locations/{location}
- *   Only global location is supported.
+ *   Required. The parent resource for the cloud control deployment, in the
+ *   format `organizations/{organization}/locations/{location}`. The only
+ *   supported location is `global`.
  * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
+ *   Optional. The requested page size. The server might return fewer items than
+ *   you requested.
+ *   If unspecified, the server picks an appropriate default.
  * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
+ *   Optional. A token that identifies the page of results that the server
+ *   should return.
  * @param {string} [request.filter]
- *   Optional. Filter to be applied on the resource, defined by EBNF grammar
- *   https://google.aip.dev/assets/misc/ebnf-filtering.txt.
+ *   Optional. The filter to apply on the resource, as defined by
+ *   [AIP-160: Filtering](https://google.aip.dev/160).
  * @param {string} [request.orderBy]
- *   Optional. Sort results. Supported are "name", "name desc" or "" (unsorted).
+ *   Optional. The sort order for the results. The following values are
+ *   supported:
+ *
+ *   * `name`
+ *   * `name desc`
+ *
+ *   If you do not specify a value, then the results are not sorted.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}
@@ -1654,6 +1762,215 @@ export class DeploymentClient {
   }
 
   /**
+   * Return a fully-qualified folderLocationFindingSummaries resource name string.
+   *
+   * @param {string} folder
+   * @param {string} location
+   * @param {string} finding_summary
+   * @returns {string} Resource name string.
+   */
+  folderLocationFindingSummariesPath(folder:string,location:string,findingSummary:string) {
+    return this.pathTemplates.folderLocationFindingSummariesPathTemplate.render({
+      folder: folder,
+      location: location,
+      finding_summary: findingSummary,
+    });
+  }
+
+  /**
+   * Parse the folder from FolderLocationFindingSummaries resource.
+   *
+   * @param {string} folderLocationFindingSummariesName
+   *   A fully-qualified path representing folder_location_findingSummaries resource.
+   * @returns {string} A string representing the folder.
+   */
+  matchFolderFromFolderLocationFindingSummariesName(folderLocationFindingSummariesName: string) {
+    return this.pathTemplates.folderLocationFindingSummariesPathTemplate.match(folderLocationFindingSummariesName).folder;
+  }
+
+  /**
+   * Parse the location from FolderLocationFindingSummaries resource.
+   *
+   * @param {string} folderLocationFindingSummariesName
+   *   A fully-qualified path representing folder_location_findingSummaries resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromFolderLocationFindingSummariesName(folderLocationFindingSummariesName: string) {
+    return this.pathTemplates.folderLocationFindingSummariesPathTemplate.match(folderLocationFindingSummariesName).location;
+  }
+
+  /**
+   * Parse the finding_summary from FolderLocationFindingSummaries resource.
+   *
+   * @param {string} folderLocationFindingSummariesName
+   *   A fully-qualified path representing folder_location_findingSummaries resource.
+   * @returns {string} A string representing the finding_summary.
+   */
+  matchFindingSummaryFromFolderLocationFindingSummariesName(folderLocationFindingSummariesName: string) {
+    return this.pathTemplates.folderLocationFindingSummariesPathTemplate.match(folderLocationFindingSummariesName).finding_summary;
+  }
+
+  /**
+   * Return a fully-qualified folderLocationFrameworkComplianceReportControlComplianceSummaries resource name string.
+   *
+   * @param {string} folder
+   * @param {string} location
+   * @param {string} framework_compliance_report
+   * @param {string} control_compliance_summary
+   * @returns {string} Resource name string.
+   */
+  folderLocationFrameworkComplianceReportControlComplianceSummariesPath(folder:string,location:string,frameworkComplianceReport:string,controlComplianceSummary:string) {
+    return this.pathTemplates.folderLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.render({
+      folder: folder,
+      location: location,
+      framework_compliance_report: frameworkComplianceReport,
+      control_compliance_summary: controlComplianceSummary,
+    });
+  }
+
+  /**
+   * Parse the folder from FolderLocationFrameworkComplianceReportControlComplianceSummaries resource.
+   *
+   * @param {string} folderLocationFrameworkComplianceReportControlComplianceSummariesName
+   *   A fully-qualified path representing folder_location_framework_compliance_report_controlComplianceSummaries resource.
+   * @returns {string} A string representing the folder.
+   */
+  matchFolderFromFolderLocationFrameworkComplianceReportControlComplianceSummariesName(folderLocationFrameworkComplianceReportControlComplianceSummariesName: string) {
+    return this.pathTemplates.folderLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(folderLocationFrameworkComplianceReportControlComplianceSummariesName).folder;
+  }
+
+  /**
+   * Parse the location from FolderLocationFrameworkComplianceReportControlComplianceSummaries resource.
+   *
+   * @param {string} folderLocationFrameworkComplianceReportControlComplianceSummariesName
+   *   A fully-qualified path representing folder_location_framework_compliance_report_controlComplianceSummaries resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromFolderLocationFrameworkComplianceReportControlComplianceSummariesName(folderLocationFrameworkComplianceReportControlComplianceSummariesName: string) {
+    return this.pathTemplates.folderLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(folderLocationFrameworkComplianceReportControlComplianceSummariesName).location;
+  }
+
+  /**
+   * Parse the framework_compliance_report from FolderLocationFrameworkComplianceReportControlComplianceSummaries resource.
+   *
+   * @param {string} folderLocationFrameworkComplianceReportControlComplianceSummariesName
+   *   A fully-qualified path representing folder_location_framework_compliance_report_controlComplianceSummaries resource.
+   * @returns {string} A string representing the framework_compliance_report.
+   */
+  matchFrameworkComplianceReportFromFolderLocationFrameworkComplianceReportControlComplianceSummariesName(folderLocationFrameworkComplianceReportControlComplianceSummariesName: string) {
+    return this.pathTemplates.folderLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(folderLocationFrameworkComplianceReportControlComplianceSummariesName).framework_compliance_report;
+  }
+
+  /**
+   * Parse the control_compliance_summary from FolderLocationFrameworkComplianceReportControlComplianceSummaries resource.
+   *
+   * @param {string} folderLocationFrameworkComplianceReportControlComplianceSummariesName
+   *   A fully-qualified path representing folder_location_framework_compliance_report_controlComplianceSummaries resource.
+   * @returns {string} A string representing the control_compliance_summary.
+   */
+  matchControlComplianceSummaryFromFolderLocationFrameworkComplianceReportControlComplianceSummariesName(folderLocationFrameworkComplianceReportControlComplianceSummariesName: string) {
+    return this.pathTemplates.folderLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(folderLocationFrameworkComplianceReportControlComplianceSummariesName).control_compliance_summary;
+  }
+
+  /**
+   * Return a fully-qualified folderLocationFrameworkComplianceReports resource name string.
+   *
+   * @param {string} folder
+   * @param {string} location
+   * @param {string} framework_compliance_report
+   * @returns {string} Resource name string.
+   */
+  folderLocationFrameworkComplianceReportsPath(folder:string,location:string,frameworkComplianceReport:string) {
+    return this.pathTemplates.folderLocationFrameworkComplianceReportsPathTemplate.render({
+      folder: folder,
+      location: location,
+      framework_compliance_report: frameworkComplianceReport,
+    });
+  }
+
+  /**
+   * Parse the folder from FolderLocationFrameworkComplianceReports resource.
+   *
+   * @param {string} folderLocationFrameworkComplianceReportsName
+   *   A fully-qualified path representing folder_location_frameworkComplianceReports resource.
+   * @returns {string} A string representing the folder.
+   */
+  matchFolderFromFolderLocationFrameworkComplianceReportsName(folderLocationFrameworkComplianceReportsName: string) {
+    return this.pathTemplates.folderLocationFrameworkComplianceReportsPathTemplate.match(folderLocationFrameworkComplianceReportsName).folder;
+  }
+
+  /**
+   * Parse the location from FolderLocationFrameworkComplianceReports resource.
+   *
+   * @param {string} folderLocationFrameworkComplianceReportsName
+   *   A fully-qualified path representing folder_location_frameworkComplianceReports resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromFolderLocationFrameworkComplianceReportsName(folderLocationFrameworkComplianceReportsName: string) {
+    return this.pathTemplates.folderLocationFrameworkComplianceReportsPathTemplate.match(folderLocationFrameworkComplianceReportsName).location;
+  }
+
+  /**
+   * Parse the framework_compliance_report from FolderLocationFrameworkComplianceReports resource.
+   *
+   * @param {string} folderLocationFrameworkComplianceReportsName
+   *   A fully-qualified path representing folder_location_frameworkComplianceReports resource.
+   * @returns {string} A string representing the framework_compliance_report.
+   */
+  matchFrameworkComplianceReportFromFolderLocationFrameworkComplianceReportsName(folderLocationFrameworkComplianceReportsName: string) {
+    return this.pathTemplates.folderLocationFrameworkComplianceReportsPathTemplate.match(folderLocationFrameworkComplianceReportsName).framework_compliance_report;
+  }
+
+  /**
+   * Return a fully-qualified folderLocationFrameworkComplianceSummaries resource name string.
+   *
+   * @param {string} folder
+   * @param {string} location
+   * @param {string} framework_compliance_summary
+   * @returns {string} Resource name string.
+   */
+  folderLocationFrameworkComplianceSummariesPath(folder:string,location:string,frameworkComplianceSummary:string) {
+    return this.pathTemplates.folderLocationFrameworkComplianceSummariesPathTemplate.render({
+      folder: folder,
+      location: location,
+      framework_compliance_summary: frameworkComplianceSummary,
+    });
+  }
+
+  /**
+   * Parse the folder from FolderLocationFrameworkComplianceSummaries resource.
+   *
+   * @param {string} folderLocationFrameworkComplianceSummariesName
+   *   A fully-qualified path representing folder_location_frameworkComplianceSummaries resource.
+   * @returns {string} A string representing the folder.
+   */
+  matchFolderFromFolderLocationFrameworkComplianceSummariesName(folderLocationFrameworkComplianceSummariesName: string) {
+    return this.pathTemplates.folderLocationFrameworkComplianceSummariesPathTemplate.match(folderLocationFrameworkComplianceSummariesName).folder;
+  }
+
+  /**
+   * Parse the location from FolderLocationFrameworkComplianceSummaries resource.
+   *
+   * @param {string} folderLocationFrameworkComplianceSummariesName
+   *   A fully-qualified path representing folder_location_frameworkComplianceSummaries resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromFolderLocationFrameworkComplianceSummariesName(folderLocationFrameworkComplianceSummariesName: string) {
+    return this.pathTemplates.folderLocationFrameworkComplianceSummariesPathTemplate.match(folderLocationFrameworkComplianceSummariesName).location;
+  }
+
+  /**
+   * Parse the framework_compliance_summary from FolderLocationFrameworkComplianceSummaries resource.
+   *
+   * @param {string} folderLocationFrameworkComplianceSummariesName
+   *   A fully-qualified path representing folder_location_frameworkComplianceSummaries resource.
+   * @returns {string} A string representing the framework_compliance_summary.
+   */
+  matchFrameworkComplianceSummaryFromFolderLocationFrameworkComplianceSummariesName(folderLocationFrameworkComplianceSummariesName: string) {
+    return this.pathTemplates.folderLocationFrameworkComplianceSummariesPathTemplate.match(folderLocationFrameworkComplianceSummariesName).framework_compliance_summary;
+  }
+
+  /**
    * Return a fully-qualified framework resource name string.
    *
    * @param {string} organization
@@ -1808,6 +2125,692 @@ export class DeploymentClient {
    */
   matchLocationFromOrganizationLocationName(organizationLocationName: string) {
     return this.pathTemplates.organizationLocationPathTemplate.match(organizationLocationName).location;
+  }
+
+  /**
+   * Return a fully-qualified organizationLocationCmEnrollment resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  organizationLocationCmEnrollmentPath(organization:string,location:string) {
+    return this.pathTemplates.organizationLocationCmEnrollmentPathTemplate.render({
+      organization: organization,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationCmEnrollment resource.
+   *
+   * @param {string} organizationLocationCmEnrollmentName
+   *   A fully-qualified path representing organization_location_cmEnrollment resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationCmEnrollmentName(organizationLocationCmEnrollmentName: string) {
+    return this.pathTemplates.organizationLocationCmEnrollmentPathTemplate.match(organizationLocationCmEnrollmentName).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationCmEnrollment resource.
+   *
+   * @param {string} organizationLocationCmEnrollmentName
+   *   A fully-qualified path representing organization_location_cmEnrollment resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationCmEnrollmentName(organizationLocationCmEnrollmentName: string) {
+    return this.pathTemplates.organizationLocationCmEnrollmentPathTemplate.match(organizationLocationCmEnrollmentName).location;
+  }
+
+  /**
+   * Return a fully-qualified organizationLocationFindingSummaries resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} finding_summary
+   * @returns {string} Resource name string.
+   */
+  organizationLocationFindingSummariesPath(organization:string,location:string,findingSummary:string) {
+    return this.pathTemplates.organizationLocationFindingSummariesPathTemplate.render({
+      organization: organization,
+      location: location,
+      finding_summary: findingSummary,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationFindingSummaries resource.
+   *
+   * @param {string} organizationLocationFindingSummariesName
+   *   A fully-qualified path representing organization_location_findingSummaries resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationFindingSummariesName(organizationLocationFindingSummariesName: string) {
+    return this.pathTemplates.organizationLocationFindingSummariesPathTemplate.match(organizationLocationFindingSummariesName).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationFindingSummaries resource.
+   *
+   * @param {string} organizationLocationFindingSummariesName
+   *   A fully-qualified path representing organization_location_findingSummaries resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationFindingSummariesName(organizationLocationFindingSummariesName: string) {
+    return this.pathTemplates.organizationLocationFindingSummariesPathTemplate.match(organizationLocationFindingSummariesName).location;
+  }
+
+  /**
+   * Parse the finding_summary from OrganizationLocationFindingSummaries resource.
+   *
+   * @param {string} organizationLocationFindingSummariesName
+   *   A fully-qualified path representing organization_location_findingSummaries resource.
+   * @returns {string} A string representing the finding_summary.
+   */
+  matchFindingSummaryFromOrganizationLocationFindingSummariesName(organizationLocationFindingSummariesName: string) {
+    return this.pathTemplates.organizationLocationFindingSummariesPathTemplate.match(organizationLocationFindingSummariesName).finding_summary;
+  }
+
+  /**
+   * Return a fully-qualified organizationLocationFrameworkAuditScopeReports resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} generate_framework_audit_scope_report_response
+   * @returns {string} Resource name string.
+   */
+  organizationLocationFrameworkAuditScopeReportsPath(organization:string,location:string,generateFrameworkAuditScopeReportResponse:string) {
+    return this.pathTemplates.organizationLocationFrameworkAuditScopeReportsPathTemplate.render({
+      organization: organization,
+      location: location,
+      generate_framework_audit_scope_report_response: generateFrameworkAuditScopeReportResponse,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationFrameworkAuditScopeReports resource.
+   *
+   * @param {string} organizationLocationFrameworkAuditScopeReportsName
+   *   A fully-qualified path representing organization_location_frameworkAuditScopeReports resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationFrameworkAuditScopeReportsName(organizationLocationFrameworkAuditScopeReportsName: string) {
+    return this.pathTemplates.organizationLocationFrameworkAuditScopeReportsPathTemplate.match(organizationLocationFrameworkAuditScopeReportsName).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationFrameworkAuditScopeReports resource.
+   *
+   * @param {string} organizationLocationFrameworkAuditScopeReportsName
+   *   A fully-qualified path representing organization_location_frameworkAuditScopeReports resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationFrameworkAuditScopeReportsName(organizationLocationFrameworkAuditScopeReportsName: string) {
+    return this.pathTemplates.organizationLocationFrameworkAuditScopeReportsPathTemplate.match(organizationLocationFrameworkAuditScopeReportsName).location;
+  }
+
+  /**
+   * Parse the generate_framework_audit_scope_report_response from OrganizationLocationFrameworkAuditScopeReports resource.
+   *
+   * @param {string} organizationLocationFrameworkAuditScopeReportsName
+   *   A fully-qualified path representing organization_location_frameworkAuditScopeReports resource.
+   * @returns {string} A string representing the generate_framework_audit_scope_report_response.
+   */
+  matchGenerateFrameworkAuditScopeReportResponseFromOrganizationLocationFrameworkAuditScopeReportsName(organizationLocationFrameworkAuditScopeReportsName: string) {
+    return this.pathTemplates.organizationLocationFrameworkAuditScopeReportsPathTemplate.match(organizationLocationFrameworkAuditScopeReportsName).generate_framework_audit_scope_report_response;
+  }
+
+  /**
+   * Return a fully-qualified organizationLocationFrameworkAudits resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} framework_audit
+   * @returns {string} Resource name string.
+   */
+  organizationLocationFrameworkAuditsPath(organization:string,location:string,frameworkAudit:string) {
+    return this.pathTemplates.organizationLocationFrameworkAuditsPathTemplate.render({
+      organization: organization,
+      location: location,
+      framework_audit: frameworkAudit,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationFrameworkAudits resource.
+   *
+   * @param {string} organizationLocationFrameworkAuditsName
+   *   A fully-qualified path representing organization_location_frameworkAudits resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationFrameworkAuditsName(organizationLocationFrameworkAuditsName: string) {
+    return this.pathTemplates.organizationLocationFrameworkAuditsPathTemplate.match(organizationLocationFrameworkAuditsName).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationFrameworkAudits resource.
+   *
+   * @param {string} organizationLocationFrameworkAuditsName
+   *   A fully-qualified path representing organization_location_frameworkAudits resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationFrameworkAuditsName(organizationLocationFrameworkAuditsName: string) {
+    return this.pathTemplates.organizationLocationFrameworkAuditsPathTemplate.match(organizationLocationFrameworkAuditsName).location;
+  }
+
+  /**
+   * Parse the framework_audit from OrganizationLocationFrameworkAudits resource.
+   *
+   * @param {string} organizationLocationFrameworkAuditsName
+   *   A fully-qualified path representing organization_location_frameworkAudits resource.
+   * @returns {string} A string representing the framework_audit.
+   */
+  matchFrameworkAuditFromOrganizationLocationFrameworkAuditsName(organizationLocationFrameworkAuditsName: string) {
+    return this.pathTemplates.organizationLocationFrameworkAuditsPathTemplate.match(organizationLocationFrameworkAuditsName).framework_audit;
+  }
+
+  /**
+   * Return a fully-qualified organizationLocationFrameworkComplianceReportControlComplianceSummaries resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} framework_compliance_report
+   * @param {string} control_compliance_summary
+   * @returns {string} Resource name string.
+   */
+  organizationLocationFrameworkComplianceReportControlComplianceSummariesPath(organization:string,location:string,frameworkComplianceReport:string,controlComplianceSummary:string) {
+    return this.pathTemplates.organizationLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.render({
+      organization: organization,
+      location: location,
+      framework_compliance_report: frameworkComplianceReport,
+      control_compliance_summary: controlComplianceSummary,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationFrameworkComplianceReportControlComplianceSummaries resource.
+   *
+   * @param {string} organizationLocationFrameworkComplianceReportControlComplianceSummariesName
+   *   A fully-qualified path representing organization_location_framework_compliance_report_controlComplianceSummaries resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationFrameworkComplianceReportControlComplianceSummariesName(organizationLocationFrameworkComplianceReportControlComplianceSummariesName: string) {
+    return this.pathTemplates.organizationLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(organizationLocationFrameworkComplianceReportControlComplianceSummariesName).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationFrameworkComplianceReportControlComplianceSummaries resource.
+   *
+   * @param {string} organizationLocationFrameworkComplianceReportControlComplianceSummariesName
+   *   A fully-qualified path representing organization_location_framework_compliance_report_controlComplianceSummaries resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationFrameworkComplianceReportControlComplianceSummariesName(organizationLocationFrameworkComplianceReportControlComplianceSummariesName: string) {
+    return this.pathTemplates.organizationLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(organizationLocationFrameworkComplianceReportControlComplianceSummariesName).location;
+  }
+
+  /**
+   * Parse the framework_compliance_report from OrganizationLocationFrameworkComplianceReportControlComplianceSummaries resource.
+   *
+   * @param {string} organizationLocationFrameworkComplianceReportControlComplianceSummariesName
+   *   A fully-qualified path representing organization_location_framework_compliance_report_controlComplianceSummaries resource.
+   * @returns {string} A string representing the framework_compliance_report.
+   */
+  matchFrameworkComplianceReportFromOrganizationLocationFrameworkComplianceReportControlComplianceSummariesName(organizationLocationFrameworkComplianceReportControlComplianceSummariesName: string) {
+    return this.pathTemplates.organizationLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(organizationLocationFrameworkComplianceReportControlComplianceSummariesName).framework_compliance_report;
+  }
+
+  /**
+   * Parse the control_compliance_summary from OrganizationLocationFrameworkComplianceReportControlComplianceSummaries resource.
+   *
+   * @param {string} organizationLocationFrameworkComplianceReportControlComplianceSummariesName
+   *   A fully-qualified path representing organization_location_framework_compliance_report_controlComplianceSummaries resource.
+   * @returns {string} A string representing the control_compliance_summary.
+   */
+  matchControlComplianceSummaryFromOrganizationLocationFrameworkComplianceReportControlComplianceSummariesName(organizationLocationFrameworkComplianceReportControlComplianceSummariesName: string) {
+    return this.pathTemplates.organizationLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(organizationLocationFrameworkComplianceReportControlComplianceSummariesName).control_compliance_summary;
+  }
+
+  /**
+   * Return a fully-qualified organizationLocationFrameworkComplianceReports resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} framework_compliance_report
+   * @returns {string} Resource name string.
+   */
+  organizationLocationFrameworkComplianceReportsPath(organization:string,location:string,frameworkComplianceReport:string) {
+    return this.pathTemplates.organizationLocationFrameworkComplianceReportsPathTemplate.render({
+      organization: organization,
+      location: location,
+      framework_compliance_report: frameworkComplianceReport,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationFrameworkComplianceReports resource.
+   *
+   * @param {string} organizationLocationFrameworkComplianceReportsName
+   *   A fully-qualified path representing organization_location_frameworkComplianceReports resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationFrameworkComplianceReportsName(organizationLocationFrameworkComplianceReportsName: string) {
+    return this.pathTemplates.organizationLocationFrameworkComplianceReportsPathTemplate.match(organizationLocationFrameworkComplianceReportsName).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationFrameworkComplianceReports resource.
+   *
+   * @param {string} organizationLocationFrameworkComplianceReportsName
+   *   A fully-qualified path representing organization_location_frameworkComplianceReports resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationFrameworkComplianceReportsName(organizationLocationFrameworkComplianceReportsName: string) {
+    return this.pathTemplates.organizationLocationFrameworkComplianceReportsPathTemplate.match(organizationLocationFrameworkComplianceReportsName).location;
+  }
+
+  /**
+   * Parse the framework_compliance_report from OrganizationLocationFrameworkComplianceReports resource.
+   *
+   * @param {string} organizationLocationFrameworkComplianceReportsName
+   *   A fully-qualified path representing organization_location_frameworkComplianceReports resource.
+   * @returns {string} A string representing the framework_compliance_report.
+   */
+  matchFrameworkComplianceReportFromOrganizationLocationFrameworkComplianceReportsName(organizationLocationFrameworkComplianceReportsName: string) {
+    return this.pathTemplates.organizationLocationFrameworkComplianceReportsPathTemplate.match(organizationLocationFrameworkComplianceReportsName).framework_compliance_report;
+  }
+
+  /**
+   * Return a fully-qualified organizationLocationFrameworkComplianceSummaries resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} framework_compliance_summary
+   * @returns {string} Resource name string.
+   */
+  organizationLocationFrameworkComplianceSummariesPath(organization:string,location:string,frameworkComplianceSummary:string) {
+    return this.pathTemplates.organizationLocationFrameworkComplianceSummariesPathTemplate.render({
+      organization: organization,
+      location: location,
+      framework_compliance_summary: frameworkComplianceSummary,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationFrameworkComplianceSummaries resource.
+   *
+   * @param {string} organizationLocationFrameworkComplianceSummariesName
+   *   A fully-qualified path representing organization_location_frameworkComplianceSummaries resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationFrameworkComplianceSummariesName(organizationLocationFrameworkComplianceSummariesName: string) {
+    return this.pathTemplates.organizationLocationFrameworkComplianceSummariesPathTemplate.match(organizationLocationFrameworkComplianceSummariesName).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationFrameworkComplianceSummaries resource.
+   *
+   * @param {string} organizationLocationFrameworkComplianceSummariesName
+   *   A fully-qualified path representing organization_location_frameworkComplianceSummaries resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationFrameworkComplianceSummariesName(organizationLocationFrameworkComplianceSummariesName: string) {
+    return this.pathTemplates.organizationLocationFrameworkComplianceSummariesPathTemplate.match(organizationLocationFrameworkComplianceSummariesName).location;
+  }
+
+  /**
+   * Parse the framework_compliance_summary from OrganizationLocationFrameworkComplianceSummaries resource.
+   *
+   * @param {string} organizationLocationFrameworkComplianceSummariesName
+   *   A fully-qualified path representing organization_location_frameworkComplianceSummaries resource.
+   * @returns {string} A string representing the framework_compliance_summary.
+   */
+  matchFrameworkComplianceSummaryFromOrganizationLocationFrameworkComplianceSummariesName(organizationLocationFrameworkComplianceSummariesName: string) {
+    return this.pathTemplates.organizationLocationFrameworkComplianceSummariesPathTemplate.match(organizationLocationFrameworkComplianceSummariesName).framework_compliance_summary;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCmEnrollment resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  projectLocationCmEnrollmentPath(project:string,location:string) {
+    return this.pathTemplates.projectLocationCmEnrollmentPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationCmEnrollment resource.
+   *
+   * @param {string} projectLocationCmEnrollmentName
+   *   A fully-qualified path representing project_location_cmEnrollment resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCmEnrollmentName(projectLocationCmEnrollmentName: string) {
+    return this.pathTemplates.projectLocationCmEnrollmentPathTemplate.match(projectLocationCmEnrollmentName).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCmEnrollment resource.
+   *
+   * @param {string} projectLocationCmEnrollmentName
+   *   A fully-qualified path representing project_location_cmEnrollment resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCmEnrollmentName(projectLocationCmEnrollmentName: string) {
+    return this.pathTemplates.projectLocationCmEnrollmentPathTemplate.match(projectLocationCmEnrollmentName).location;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationFindingSummaries resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} finding_summary
+   * @returns {string} Resource name string.
+   */
+  projectLocationFindingSummariesPath(project:string,location:string,findingSummary:string) {
+    return this.pathTemplates.projectLocationFindingSummariesPathTemplate.render({
+      project: project,
+      location: location,
+      finding_summary: findingSummary,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationFindingSummaries resource.
+   *
+   * @param {string} projectLocationFindingSummariesName
+   *   A fully-qualified path representing project_location_findingSummaries resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationFindingSummariesName(projectLocationFindingSummariesName: string) {
+    return this.pathTemplates.projectLocationFindingSummariesPathTemplate.match(projectLocationFindingSummariesName).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationFindingSummaries resource.
+   *
+   * @param {string} projectLocationFindingSummariesName
+   *   A fully-qualified path representing project_location_findingSummaries resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationFindingSummariesName(projectLocationFindingSummariesName: string) {
+    return this.pathTemplates.projectLocationFindingSummariesPathTemplate.match(projectLocationFindingSummariesName).location;
+  }
+
+  /**
+   * Parse the finding_summary from ProjectLocationFindingSummaries resource.
+   *
+   * @param {string} projectLocationFindingSummariesName
+   *   A fully-qualified path representing project_location_findingSummaries resource.
+   * @returns {string} A string representing the finding_summary.
+   */
+  matchFindingSummaryFromProjectLocationFindingSummariesName(projectLocationFindingSummariesName: string) {
+    return this.pathTemplates.projectLocationFindingSummariesPathTemplate.match(projectLocationFindingSummariesName).finding_summary;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationFrameworkAuditScopeReports resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} generate_framework_audit_scope_report_response
+   * @returns {string} Resource name string.
+   */
+  projectLocationFrameworkAuditScopeReportsPath(project:string,location:string,generateFrameworkAuditScopeReportResponse:string) {
+    return this.pathTemplates.projectLocationFrameworkAuditScopeReportsPathTemplate.render({
+      project: project,
+      location: location,
+      generate_framework_audit_scope_report_response: generateFrameworkAuditScopeReportResponse,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationFrameworkAuditScopeReports resource.
+   *
+   * @param {string} projectLocationFrameworkAuditScopeReportsName
+   *   A fully-qualified path representing project_location_frameworkAuditScopeReports resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationFrameworkAuditScopeReportsName(projectLocationFrameworkAuditScopeReportsName: string) {
+    return this.pathTemplates.projectLocationFrameworkAuditScopeReportsPathTemplate.match(projectLocationFrameworkAuditScopeReportsName).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationFrameworkAuditScopeReports resource.
+   *
+   * @param {string} projectLocationFrameworkAuditScopeReportsName
+   *   A fully-qualified path representing project_location_frameworkAuditScopeReports resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationFrameworkAuditScopeReportsName(projectLocationFrameworkAuditScopeReportsName: string) {
+    return this.pathTemplates.projectLocationFrameworkAuditScopeReportsPathTemplate.match(projectLocationFrameworkAuditScopeReportsName).location;
+  }
+
+  /**
+   * Parse the generate_framework_audit_scope_report_response from ProjectLocationFrameworkAuditScopeReports resource.
+   *
+   * @param {string} projectLocationFrameworkAuditScopeReportsName
+   *   A fully-qualified path representing project_location_frameworkAuditScopeReports resource.
+   * @returns {string} A string representing the generate_framework_audit_scope_report_response.
+   */
+  matchGenerateFrameworkAuditScopeReportResponseFromProjectLocationFrameworkAuditScopeReportsName(projectLocationFrameworkAuditScopeReportsName: string) {
+    return this.pathTemplates.projectLocationFrameworkAuditScopeReportsPathTemplate.match(projectLocationFrameworkAuditScopeReportsName).generate_framework_audit_scope_report_response;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationFrameworkAudits resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} framework_audit
+   * @returns {string} Resource name string.
+   */
+  projectLocationFrameworkAuditsPath(project:string,location:string,frameworkAudit:string) {
+    return this.pathTemplates.projectLocationFrameworkAuditsPathTemplate.render({
+      project: project,
+      location: location,
+      framework_audit: frameworkAudit,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationFrameworkAudits resource.
+   *
+   * @param {string} projectLocationFrameworkAuditsName
+   *   A fully-qualified path representing project_location_frameworkAudits resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationFrameworkAuditsName(projectLocationFrameworkAuditsName: string) {
+    return this.pathTemplates.projectLocationFrameworkAuditsPathTemplate.match(projectLocationFrameworkAuditsName).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationFrameworkAudits resource.
+   *
+   * @param {string} projectLocationFrameworkAuditsName
+   *   A fully-qualified path representing project_location_frameworkAudits resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationFrameworkAuditsName(projectLocationFrameworkAuditsName: string) {
+    return this.pathTemplates.projectLocationFrameworkAuditsPathTemplate.match(projectLocationFrameworkAuditsName).location;
+  }
+
+  /**
+   * Parse the framework_audit from ProjectLocationFrameworkAudits resource.
+   *
+   * @param {string} projectLocationFrameworkAuditsName
+   *   A fully-qualified path representing project_location_frameworkAudits resource.
+   * @returns {string} A string representing the framework_audit.
+   */
+  matchFrameworkAuditFromProjectLocationFrameworkAuditsName(projectLocationFrameworkAuditsName: string) {
+    return this.pathTemplates.projectLocationFrameworkAuditsPathTemplate.match(projectLocationFrameworkAuditsName).framework_audit;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationFrameworkComplianceReportControlComplianceSummaries resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} framework_compliance_report
+   * @param {string} control_compliance_summary
+   * @returns {string} Resource name string.
+   */
+  projectLocationFrameworkComplianceReportControlComplianceSummariesPath(project:string,location:string,frameworkComplianceReport:string,controlComplianceSummary:string) {
+    return this.pathTemplates.projectLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.render({
+      project: project,
+      location: location,
+      framework_compliance_report: frameworkComplianceReport,
+      control_compliance_summary: controlComplianceSummary,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationFrameworkComplianceReportControlComplianceSummaries resource.
+   *
+   * @param {string} projectLocationFrameworkComplianceReportControlComplianceSummariesName
+   *   A fully-qualified path representing project_location_framework_compliance_report_controlComplianceSummaries resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationFrameworkComplianceReportControlComplianceSummariesName(projectLocationFrameworkComplianceReportControlComplianceSummariesName: string) {
+    return this.pathTemplates.projectLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(projectLocationFrameworkComplianceReportControlComplianceSummariesName).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationFrameworkComplianceReportControlComplianceSummaries resource.
+   *
+   * @param {string} projectLocationFrameworkComplianceReportControlComplianceSummariesName
+   *   A fully-qualified path representing project_location_framework_compliance_report_controlComplianceSummaries resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationFrameworkComplianceReportControlComplianceSummariesName(projectLocationFrameworkComplianceReportControlComplianceSummariesName: string) {
+    return this.pathTemplates.projectLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(projectLocationFrameworkComplianceReportControlComplianceSummariesName).location;
+  }
+
+  /**
+   * Parse the framework_compliance_report from ProjectLocationFrameworkComplianceReportControlComplianceSummaries resource.
+   *
+   * @param {string} projectLocationFrameworkComplianceReportControlComplianceSummariesName
+   *   A fully-qualified path representing project_location_framework_compliance_report_controlComplianceSummaries resource.
+   * @returns {string} A string representing the framework_compliance_report.
+   */
+  matchFrameworkComplianceReportFromProjectLocationFrameworkComplianceReportControlComplianceSummariesName(projectLocationFrameworkComplianceReportControlComplianceSummariesName: string) {
+    return this.pathTemplates.projectLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(projectLocationFrameworkComplianceReportControlComplianceSummariesName).framework_compliance_report;
+  }
+
+  /**
+   * Parse the control_compliance_summary from ProjectLocationFrameworkComplianceReportControlComplianceSummaries resource.
+   *
+   * @param {string} projectLocationFrameworkComplianceReportControlComplianceSummariesName
+   *   A fully-qualified path representing project_location_framework_compliance_report_controlComplianceSummaries resource.
+   * @returns {string} A string representing the control_compliance_summary.
+   */
+  matchControlComplianceSummaryFromProjectLocationFrameworkComplianceReportControlComplianceSummariesName(projectLocationFrameworkComplianceReportControlComplianceSummariesName: string) {
+    return this.pathTemplates.projectLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(projectLocationFrameworkComplianceReportControlComplianceSummariesName).control_compliance_summary;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationFrameworkComplianceReports resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} framework_compliance_report
+   * @returns {string} Resource name string.
+   */
+  projectLocationFrameworkComplianceReportsPath(project:string,location:string,frameworkComplianceReport:string) {
+    return this.pathTemplates.projectLocationFrameworkComplianceReportsPathTemplate.render({
+      project: project,
+      location: location,
+      framework_compliance_report: frameworkComplianceReport,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationFrameworkComplianceReports resource.
+   *
+   * @param {string} projectLocationFrameworkComplianceReportsName
+   *   A fully-qualified path representing project_location_frameworkComplianceReports resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationFrameworkComplianceReportsName(projectLocationFrameworkComplianceReportsName: string) {
+    return this.pathTemplates.projectLocationFrameworkComplianceReportsPathTemplate.match(projectLocationFrameworkComplianceReportsName).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationFrameworkComplianceReports resource.
+   *
+   * @param {string} projectLocationFrameworkComplianceReportsName
+   *   A fully-qualified path representing project_location_frameworkComplianceReports resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationFrameworkComplianceReportsName(projectLocationFrameworkComplianceReportsName: string) {
+    return this.pathTemplates.projectLocationFrameworkComplianceReportsPathTemplate.match(projectLocationFrameworkComplianceReportsName).location;
+  }
+
+  /**
+   * Parse the framework_compliance_report from ProjectLocationFrameworkComplianceReports resource.
+   *
+   * @param {string} projectLocationFrameworkComplianceReportsName
+   *   A fully-qualified path representing project_location_frameworkComplianceReports resource.
+   * @returns {string} A string representing the framework_compliance_report.
+   */
+  matchFrameworkComplianceReportFromProjectLocationFrameworkComplianceReportsName(projectLocationFrameworkComplianceReportsName: string) {
+    return this.pathTemplates.projectLocationFrameworkComplianceReportsPathTemplate.match(projectLocationFrameworkComplianceReportsName).framework_compliance_report;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationFrameworkComplianceSummaries resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} framework_compliance_summary
+   * @returns {string} Resource name string.
+   */
+  projectLocationFrameworkComplianceSummariesPath(project:string,location:string,frameworkComplianceSummary:string) {
+    return this.pathTemplates.projectLocationFrameworkComplianceSummariesPathTemplate.render({
+      project: project,
+      location: location,
+      framework_compliance_summary: frameworkComplianceSummary,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationFrameworkComplianceSummaries resource.
+   *
+   * @param {string} projectLocationFrameworkComplianceSummariesName
+   *   A fully-qualified path representing project_location_frameworkComplianceSummaries resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationFrameworkComplianceSummariesName(projectLocationFrameworkComplianceSummariesName: string) {
+    return this.pathTemplates.projectLocationFrameworkComplianceSummariesPathTemplate.match(projectLocationFrameworkComplianceSummariesName).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationFrameworkComplianceSummaries resource.
+   *
+   * @param {string} projectLocationFrameworkComplianceSummariesName
+   *   A fully-qualified path representing project_location_frameworkComplianceSummaries resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationFrameworkComplianceSummariesName(projectLocationFrameworkComplianceSummariesName: string) {
+    return this.pathTemplates.projectLocationFrameworkComplianceSummariesPathTemplate.match(projectLocationFrameworkComplianceSummariesName).location;
+  }
+
+  /**
+   * Parse the framework_compliance_summary from ProjectLocationFrameworkComplianceSummaries resource.
+   *
+   * @param {string} projectLocationFrameworkComplianceSummariesName
+   *   A fully-qualified path representing project_location_frameworkComplianceSummaries resource.
+   * @returns {string} A string representing the framework_compliance_summary.
+   */
+  matchFrameworkComplianceSummaryFromProjectLocationFrameworkComplianceSummariesName(projectLocationFrameworkComplianceSummariesName: string) {
+    return this.pathTemplates.projectLocationFrameworkComplianceSummariesPathTemplate.match(projectLocationFrameworkComplianceSummariesName).framework_compliance_summary;
   }
 
   /**

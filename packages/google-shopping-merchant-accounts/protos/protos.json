@@ -587,6 +587,14 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED"
                               }
+                            },
+                            "setAlias": {
+                              "rule": "repeated",
+                              "type": "SetAliasForRelationship",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           },
                           "nested": {
@@ -605,6 +613,13 @@
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
                                   }
+                                },
+                                "verificationMailSettings": {
+                                  "type": "VerificationMailSettings",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 }
                               }
                             },
@@ -612,7 +627,11 @@
                               "oneofs": {
                                 "serviceType": {
                                   "oneof": [
-                                    "accountAggregation"
+                                    "accountAggregation",
+                                    "accountManagement",
+                                    "comparisonShopping",
+                                    "productsManagement",
+                                    "campaignsManagement"
                                   ]
                                 },
                                 "_provider": {
@@ -626,12 +645,53 @@
                                   "type": "AccountAggregation",
                                   "id": 103
                                 },
+                                "accountManagement": {
+                                  "type": "AccountManagement",
+                                  "id": 104
+                                },
+                                "comparisonShopping": {
+                                  "type": "ComparisonShopping",
+                                  "id": 105
+                                },
+                                "productsManagement": {
+                                  "type": "ProductsManagement",
+                                  "id": 106
+                                },
+                                "campaignsManagement": {
+                                  "type": "CampaignsManagement",
+                                  "id": 107
+                                },
                                 "provider": {
                                   "type": "string",
                                   "id": 1,
                                   "options": {
                                     "(google.api.field_behavior)": "REQUIRED",
                                     "proto3_optional": true
+                                  }
+                                },
+                                "externalAccountId": {
+                                  "type": "string",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "IMMUTABLE"
+                                  }
+                                }
+                              }
+                            },
+                            "SetAliasForRelationship": {
+                              "fields": {
+                                "provider": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "accountIdAlias": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
                                   }
                                 }
                               }
@@ -870,7 +930,8 @@
                                 "campaignsManagement",
                                 "accountManagement",
                                 "accountAggregation",
-                                "localListingManagement"
+                                "localListingManagement",
+                                "comparisonShopping"
                               ]
                             },
                             "_provider": {
@@ -899,6 +960,10 @@
                             "localListingManagement": {
                               "type": "LocalListingManagement",
                               "id": 104
+                            },
+                            "comparisonShopping": {
+                              "type": "ComparisonShopping",
+                              "id": 105
                             },
                             "name": {
                               "type": "string",
@@ -1070,6 +1135,9 @@
                         "LocalListingManagement": {
                           "fields": {}
                         },
+                        "ComparisonShopping": {
+                          "fields": {}
+                        },
                         "Handshake": {
                           "fields": {
                             "approvalState": {
@@ -1202,6 +1270,26 @@
                                 },
                                 {
                                   "(google.api.method_signature)": "parent"
+                                }
+                              ]
+                            },
+                            "VerifySelf": {
+                              "requestType": "VerifySelfRequest",
+                              "responseType": "User",
+                              "options": {
+                                "(google.api.http).patch": "/accounts/v1/{account=accounts/*}/users/me:verifySelf",
+                                "(google.api.http).body": "*",
+                                "(google.api.method_signature)": "account"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "patch": "/accounts/v1/{account=accounts/*}/users/me:verifySelf",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "account"
                                 }
                               ]
                             }
@@ -1352,6 +1440,38 @@
                             "nextPageToken": {
                               "type": "string",
                               "id": 2
+                            }
+                          }
+                        },
+                        "VerifySelfRequest": {
+                          "fields": {
+                            "account": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "merchantapi.googleapis.com/Account"
+                              }
+                            }
+                          }
+                        },
+                        "VerificationMailSettings": {
+                          "fields": {
+                            "verificationMailMode": {
+                              "type": "VerificationMailMode",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "VerificationMailMode": {
+                              "values": {
+                                "VERIFICATION_MAIL_MODE_UNSPECIFIED": 0,
+                                "SEND_VERIFICATION_MAIL": 1,
+                                "SUPPRESS_VERIFICATION_MAIL": 2
+                              }
                             }
                           }
                         },
@@ -2464,6 +2584,20 @@
                                   }
                                 }
                               ]
+                            },
+                            "GetAccountForGcpRegistration": {
+                              "requestType": "google.protobuf.Empty",
+                              "responseType": "GetAccountForGcpRegistrationResponse",
+                              "options": {
+                                "(google.api.http).get": "/accounts/v1/accounts:getAccountForGcpRegistration"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/accounts/v1/accounts:getAccountForGcpRegistration"
+                                  }
+                                }
+                              ]
                             }
                           }
                         },
@@ -2532,6 +2666,14 @@
                                 "(google.api.field_behavior)": "REQUIRED",
                                 "(google.api.resource_reference).type": "merchantapi.googleapis.com/DeveloperRegistration"
                               }
+                            }
+                          }
+                        },
+                        "GetAccountForGcpRegistrationResponse": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1
                             }
                           }
                         },
@@ -6378,8 +6520,11 @@
                       "options": {
                         "go_package": "cloud.google.com/go/shopping/merchant/accounts/apiv1beta/accountspb;accountspb",
                         "java_multiple_files": true,
-                        "java_outer_classname": "TermsOfServiceAgreementStateProto",
-                        "java_package": "com.google.shopping.merchant.accounts.v1beta"
+                        "java_outer_classname": "VerificationMailSettingsProto",
+                        "java_package": "com.google.shopping.merchant.accounts.v1beta",
+                        "csharp_namespace": "Google.Shopping.Merchant.Accounts.V1Beta",
+                        "php_namespace": "Google\\Shopping\\Merchant\\Accounts\\V1beta",
+                        "ruby_package": "Google::Shopping::Merchant::Accounts::V1beta"
                       },
                       "nested": {
                         "AccessRight": {
@@ -12180,6 +12325,26 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED",
                                 "(google.api.resource_reference).child_type": "merchantapi.googleapis.com/TermsOfServiceAgreementState"
+                              }
+                            }
+                          }
+                        },
+                        "VerificationMailSettings": {
+                          "fields": {
+                            "verificationMailMode": {
+                              "type": "VerificationMailMode",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "VerificationMailMode": {
+                              "values": {
+                                "VERIFICATION_MAIL_MODE_UNSPECIFIED": 0,
+                                "SEND_VERIFICATION_MAIL": 1,
+                                "SUPPRESS_VERIFICATION_MAIL": 2
                               }
                             }
                           }

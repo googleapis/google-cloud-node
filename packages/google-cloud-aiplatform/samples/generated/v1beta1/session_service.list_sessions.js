@@ -52,7 +52,8 @@ function main(parent) {
    *  Optional. The standard list filter.
    *  Supported fields:
    *     * `display_name`
-   *  Example: `display_name=abc`.
+   *     * `user_id`
+   *  Example: `display_name="abc"`, `user_id="123"`.
    */
   // const filter = 'abc123'
   /**

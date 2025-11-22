@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/financialservices",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Financial Services API client for Node.js",
   "repository": {
     "type": "git",

@@ -73,6 +73,34 @@ export namespace google {
                      * @returns Promise
                      */
                     public batchOptimizeTours(request: google.maps.routeoptimization.v1.IBatchOptimizeToursRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls OptimizeToursLongRunning.
+                     * @param request OptimizeToursRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public optimizeToursLongRunning(request: google.maps.routeoptimization.v1.IOptimizeToursRequest, callback: google.maps.routeoptimization.v1.RouteOptimization.OptimizeToursLongRunningCallback): void;
+
+                    /**
+                     * Calls OptimizeToursLongRunning.
+                     * @param request OptimizeToursRequest message or plain object
+                     * @returns Promise
+                     */
+                    public optimizeToursLongRunning(request: google.maps.routeoptimization.v1.IOptimizeToursRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls OptimizeToursUri.
+                     * @param request OptimizeToursUriRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public optimizeToursUri(request: google.maps.routeoptimization.v1.IOptimizeToursUriRequest, callback: google.maps.routeoptimization.v1.RouteOptimization.OptimizeToursUriCallback): void;
+
+                    /**
+                     * Calls OptimizeToursUri.
+                     * @param request OptimizeToursUriRequest message or plain object
+                     * @returns Promise
+                     */
+                    public optimizeToursUri(request: google.maps.routeoptimization.v1.IOptimizeToursUriRequest): Promise<google.longrunning.Operation>;
                 }
 
                 namespace RouteOptimization {
@@ -90,6 +118,414 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type BatchOptimizeToursCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.maps.routeoptimization.v1.RouteOptimization|optimizeToursLongRunning}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type OptimizeToursLongRunningCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.maps.routeoptimization.v1.RouteOptimization|optimizeToursUri}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type OptimizeToursUriCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+                }
+
+                /** Properties of an Uri. */
+                interface IUri {
+
+                    /** Uri uri */
+                    uri?: (string|null);
+                }
+
+                /** Represents an Uri. */
+                class Uri implements IUri {
+
+                    /**
+                     * Constructs a new Uri.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.routeoptimization.v1.IUri);
+
+                    /** Uri uri. */
+                    public uri: string;
+
+                    /**
+                     * Creates a new Uri instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Uri instance
+                     */
+                    public static create(properties?: google.maps.routeoptimization.v1.IUri): google.maps.routeoptimization.v1.Uri;
+
+                    /**
+                     * Encodes the specified Uri message. Does not implicitly {@link google.maps.routeoptimization.v1.Uri.verify|verify} messages.
+                     * @param message Uri message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.routeoptimization.v1.IUri, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Uri message, length delimited. Does not implicitly {@link google.maps.routeoptimization.v1.Uri.verify|verify} messages.
+                     * @param message Uri message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.routeoptimization.v1.IUri, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Uri message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Uri
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.routeoptimization.v1.Uri;
+
+                    /**
+                     * Decodes an Uri message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Uri
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.routeoptimization.v1.Uri;
+
+                    /**
+                     * Verifies an Uri message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Uri message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Uri
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.routeoptimization.v1.Uri;
+
+                    /**
+                     * Creates a plain object from an Uri message. Also converts values to other types if specified.
+                     * @param message Uri
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.routeoptimization.v1.Uri, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Uri to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Uri
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an OptimizeToursUriRequest. */
+                interface IOptimizeToursUriRequest {
+
+                    /** OptimizeToursUriRequest parent */
+                    parent?: (string|null);
+
+                    /** OptimizeToursUriRequest input */
+                    input?: (google.maps.routeoptimization.v1.IUri|null);
+
+                    /** OptimizeToursUriRequest output */
+                    output?: (google.maps.routeoptimization.v1.IUri|null);
+                }
+
+                /** Represents an OptimizeToursUriRequest. */
+                class OptimizeToursUriRequest implements IOptimizeToursUriRequest {
+
+                    /**
+                     * Constructs a new OptimizeToursUriRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.routeoptimization.v1.IOptimizeToursUriRequest);
+
+                    /** OptimizeToursUriRequest parent. */
+                    public parent: string;
+
+                    /** OptimizeToursUriRequest input. */
+                    public input?: (google.maps.routeoptimization.v1.IUri|null);
+
+                    /** OptimizeToursUriRequest output. */
+                    public output?: (google.maps.routeoptimization.v1.IUri|null);
+
+                    /**
+                     * Creates a new OptimizeToursUriRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OptimizeToursUriRequest instance
+                     */
+                    public static create(properties?: google.maps.routeoptimization.v1.IOptimizeToursUriRequest): google.maps.routeoptimization.v1.OptimizeToursUriRequest;
+
+                    /**
+                     * Encodes the specified OptimizeToursUriRequest message. Does not implicitly {@link google.maps.routeoptimization.v1.OptimizeToursUriRequest.verify|verify} messages.
+                     * @param message OptimizeToursUriRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.routeoptimization.v1.IOptimizeToursUriRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OptimizeToursUriRequest message, length delimited. Does not implicitly {@link google.maps.routeoptimization.v1.OptimizeToursUriRequest.verify|verify} messages.
+                     * @param message OptimizeToursUriRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.routeoptimization.v1.IOptimizeToursUriRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OptimizeToursUriRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OptimizeToursUriRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.routeoptimization.v1.OptimizeToursUriRequest;
+
+                    /**
+                     * Decodes an OptimizeToursUriRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OptimizeToursUriRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.routeoptimization.v1.OptimizeToursUriRequest;
+
+                    /**
+                     * Verifies an OptimizeToursUriRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OptimizeToursUriRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OptimizeToursUriRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.routeoptimization.v1.OptimizeToursUriRequest;
+
+                    /**
+                     * Creates a plain object from an OptimizeToursUriRequest message. Also converts values to other types if specified.
+                     * @param message OptimizeToursUriRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.routeoptimization.v1.OptimizeToursUriRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OptimizeToursUriRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OptimizeToursUriRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an OptimizeToursUriResponse. */
+                interface IOptimizeToursUriResponse {
+
+                    /** OptimizeToursUriResponse output */
+                    output?: (google.maps.routeoptimization.v1.IUri|null);
+                }
+
+                /** Represents an OptimizeToursUriResponse. */
+                class OptimizeToursUriResponse implements IOptimizeToursUriResponse {
+
+                    /**
+                     * Constructs a new OptimizeToursUriResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.routeoptimization.v1.IOptimizeToursUriResponse);
+
+                    /** OptimizeToursUriResponse output. */
+                    public output?: (google.maps.routeoptimization.v1.IUri|null);
+
+                    /**
+                     * Creates a new OptimizeToursUriResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OptimizeToursUriResponse instance
+                     */
+                    public static create(properties?: google.maps.routeoptimization.v1.IOptimizeToursUriResponse): google.maps.routeoptimization.v1.OptimizeToursUriResponse;
+
+                    /**
+                     * Encodes the specified OptimizeToursUriResponse message. Does not implicitly {@link google.maps.routeoptimization.v1.OptimizeToursUriResponse.verify|verify} messages.
+                     * @param message OptimizeToursUriResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.routeoptimization.v1.IOptimizeToursUriResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OptimizeToursUriResponse message, length delimited. Does not implicitly {@link google.maps.routeoptimization.v1.OptimizeToursUriResponse.verify|verify} messages.
+                     * @param message OptimizeToursUriResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.routeoptimization.v1.IOptimizeToursUriResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OptimizeToursUriResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OptimizeToursUriResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.routeoptimization.v1.OptimizeToursUriResponse;
+
+                    /**
+                     * Decodes an OptimizeToursUriResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OptimizeToursUriResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.routeoptimization.v1.OptimizeToursUriResponse;
+
+                    /**
+                     * Verifies an OptimizeToursUriResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OptimizeToursUriResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OptimizeToursUriResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.routeoptimization.v1.OptimizeToursUriResponse;
+
+                    /**
+                     * Creates a plain object from an OptimizeToursUriResponse message. Also converts values to other types if specified.
+                     * @param message OptimizeToursUriResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.routeoptimization.v1.OptimizeToursUriResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OptimizeToursUriResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OptimizeToursUriResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an OptimizeToursUriMetadata. */
+                interface IOptimizeToursUriMetadata {
+                }
+
+                /** Represents an OptimizeToursUriMetadata. */
+                class OptimizeToursUriMetadata implements IOptimizeToursUriMetadata {
+
+                    /**
+                     * Constructs a new OptimizeToursUriMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.routeoptimization.v1.IOptimizeToursUriMetadata);
+
+                    /**
+                     * Creates a new OptimizeToursUriMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OptimizeToursUriMetadata instance
+                     */
+                    public static create(properties?: google.maps.routeoptimization.v1.IOptimizeToursUriMetadata): google.maps.routeoptimization.v1.OptimizeToursUriMetadata;
+
+                    /**
+                     * Encodes the specified OptimizeToursUriMetadata message. Does not implicitly {@link google.maps.routeoptimization.v1.OptimizeToursUriMetadata.verify|verify} messages.
+                     * @param message OptimizeToursUriMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.routeoptimization.v1.IOptimizeToursUriMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OptimizeToursUriMetadata message, length delimited. Does not implicitly {@link google.maps.routeoptimization.v1.OptimizeToursUriMetadata.verify|verify} messages.
+                     * @param message OptimizeToursUriMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.routeoptimization.v1.IOptimizeToursUriMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OptimizeToursUriMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OptimizeToursUriMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.routeoptimization.v1.OptimizeToursUriMetadata;
+
+                    /**
+                     * Decodes an OptimizeToursUriMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OptimizeToursUriMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.routeoptimization.v1.OptimizeToursUriMetadata;
+
+                    /**
+                     * Verifies an OptimizeToursUriMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OptimizeToursUriMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OptimizeToursUriMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.routeoptimization.v1.OptimizeToursUriMetadata;
+
+                    /**
+                     * Creates a plain object from an OptimizeToursUriMetadata message. Also converts values to other types if specified.
+                     * @param message OptimizeToursUriMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.routeoptimization.v1.OptimizeToursUriMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OptimizeToursUriMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OptimizeToursUriMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a BatchOptimizeToursRequest. */
@@ -489,6 +925,97 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an OptimizeToursLongRunningMetadata. */
+                interface IOptimizeToursLongRunningMetadata {
+                }
+
+                /** Represents an OptimizeToursLongRunningMetadata. */
+                class OptimizeToursLongRunningMetadata implements IOptimizeToursLongRunningMetadata {
+
+                    /**
+                     * Constructs a new OptimizeToursLongRunningMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.routeoptimization.v1.IOptimizeToursLongRunningMetadata);
+
+                    /**
+                     * Creates a new OptimizeToursLongRunningMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OptimizeToursLongRunningMetadata instance
+                     */
+                    public static create(properties?: google.maps.routeoptimization.v1.IOptimizeToursLongRunningMetadata): google.maps.routeoptimization.v1.OptimizeToursLongRunningMetadata;
+
+                    /**
+                     * Encodes the specified OptimizeToursLongRunningMetadata message. Does not implicitly {@link google.maps.routeoptimization.v1.OptimizeToursLongRunningMetadata.verify|verify} messages.
+                     * @param message OptimizeToursLongRunningMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.routeoptimization.v1.IOptimizeToursLongRunningMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OptimizeToursLongRunningMetadata message, length delimited. Does not implicitly {@link google.maps.routeoptimization.v1.OptimizeToursLongRunningMetadata.verify|verify} messages.
+                     * @param message OptimizeToursLongRunningMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.routeoptimization.v1.IOptimizeToursLongRunningMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OptimizeToursLongRunningMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OptimizeToursLongRunningMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.routeoptimization.v1.OptimizeToursLongRunningMetadata;
+
+                    /**
+                     * Decodes an OptimizeToursLongRunningMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OptimizeToursLongRunningMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.routeoptimization.v1.OptimizeToursLongRunningMetadata;
+
+                    /**
+                     * Verifies an OptimizeToursLongRunningMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OptimizeToursLongRunningMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OptimizeToursLongRunningMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.routeoptimization.v1.OptimizeToursLongRunningMetadata;
+
+                    /**
+                     * Creates a plain object from an OptimizeToursLongRunningMetadata message. Also converts values to other types if specified.
+                     * @param message OptimizeToursLongRunningMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.routeoptimization.v1.OptimizeToursLongRunningMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OptimizeToursLongRunningMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OptimizeToursLongRunningMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an OptimizeToursRequest. */
                 interface IOptimizeToursRequest {
 
@@ -688,7 +1215,8 @@ export namespace google {
                     enum SolvingMode {
                         DEFAULT_SOLVE = 0,
                         VALIDATE_ONLY = 1,
-                        DETECT_SOME_INFEASIBLE_SHIPMENTS = 2
+                        DETECT_SOME_INFEASIBLE_SHIPMENTS = 2,
+                        TRANSFORM_AND_RETURN_REQUEST = 3
                     }
 
                     /** SearchMode enum. */
@@ -714,6 +1242,9 @@ export namespace google {
                     /** OptimizeToursResponse validationErrors */
                     validationErrors?: (google.maps.routeoptimization.v1.IOptimizeToursValidationError[]|null);
 
+                    /** OptimizeToursResponse processedRequest */
+                    processedRequest?: (google.maps.routeoptimization.v1.IOptimizeToursRequest|null);
+
                     /** OptimizeToursResponse metrics */
                     metrics?: (google.maps.routeoptimization.v1.OptimizeToursResponse.IMetrics|null);
                 }
@@ -738,6 +1269,9 @@ export namespace google {
 
                     /** OptimizeToursResponse validationErrors. */
                     public validationErrors: google.maps.routeoptimization.v1.IOptimizeToursValidationError[];
+
+                    /** OptimizeToursResponse processedRequest. */
+                    public processedRequest?: (google.maps.routeoptimization.v1.IOptimizeToursRequest|null);
 
                     /** OptimizeToursResponse metrics. */
                     public metrics?: (google.maps.routeoptimization.v1.OptimizeToursResponse.IMetrics|null);
@@ -965,6 +1499,9 @@ export namespace google {
                     /** ShipmentModel vehicles */
                     vehicles?: (google.maps.routeoptimization.v1.IVehicle[]|null);
 
+                    /** ShipmentModel objectives */
+                    objectives?: (google.maps.routeoptimization.v1.ShipmentModel.IObjective[]|null);
+
                     /** ShipmentModel maxActiveVehicles */
                     maxActiveVehicles?: (number|null);
 
@@ -1013,6 +1550,9 @@ export namespace google {
 
                     /** ShipmentModel vehicles. */
                     public vehicles: google.maps.routeoptimization.v1.IVehicle[];
+
+                    /** ShipmentModel objectives. */
+                    public objectives: google.maps.routeoptimization.v1.ShipmentModel.IObjective[];
 
                     /** ShipmentModel maxActiveVehicles. */
                     public maxActiveVehicles?: (number|null);
@@ -1126,6 +1666,121 @@ export namespace google {
                 }
 
                 namespace ShipmentModel {
+
+                    /** Properties of an Objective. */
+                    interface IObjective {
+
+                        /** Objective type */
+                        type?: (google.maps.routeoptimization.v1.ShipmentModel.Objective.Type|keyof typeof google.maps.routeoptimization.v1.ShipmentModel.Objective.Type|null);
+
+                        /** Objective weight */
+                        weight?: (number|null);
+                    }
+
+                    /** Represents an Objective. */
+                    class Objective implements IObjective {
+
+                        /**
+                         * Constructs a new Objective.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.maps.routeoptimization.v1.ShipmentModel.IObjective);
+
+                        /** Objective type. */
+                        public type?: (google.maps.routeoptimization.v1.ShipmentModel.Objective.Type|keyof typeof google.maps.routeoptimization.v1.ShipmentModel.Objective.Type|null);
+
+                        /** Objective weight. */
+                        public weight?: (number|null);
+
+                        /**
+                         * Creates a new Objective instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Objective instance
+                         */
+                        public static create(properties?: google.maps.routeoptimization.v1.ShipmentModel.IObjective): google.maps.routeoptimization.v1.ShipmentModel.Objective;
+
+                        /**
+                         * Encodes the specified Objective message. Does not implicitly {@link google.maps.routeoptimization.v1.ShipmentModel.Objective.verify|verify} messages.
+                         * @param message Objective message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.maps.routeoptimization.v1.ShipmentModel.IObjective, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Objective message, length delimited. Does not implicitly {@link google.maps.routeoptimization.v1.ShipmentModel.Objective.verify|verify} messages.
+                         * @param message Objective message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.maps.routeoptimization.v1.ShipmentModel.IObjective, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an Objective message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Objective
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.routeoptimization.v1.ShipmentModel.Objective;
+
+                        /**
+                         * Decodes an Objective message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Objective
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.routeoptimization.v1.ShipmentModel.Objective;
+
+                        /**
+                         * Verifies an Objective message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an Objective message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Objective
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.maps.routeoptimization.v1.ShipmentModel.Objective;
+
+                        /**
+                         * Creates a plain object from an Objective message. Also converts values to other types if specified.
+                         * @param message Objective
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.maps.routeoptimization.v1.ShipmentModel.Objective, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Objective to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Objective
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Objective {
+
+                        /** Type enum. */
+                        enum Type {
+                            DEFAULT = 0,
+                            MIN_DISTANCE = 10,
+                            MIN_WORKING_TIME = 11,
+                            MIN_TRAVEL_TIME = 12,
+                            MIN_NUM_VEHICLES = 13
+                        }
+                    }
 
                     /** Properties of a DurationDistanceMatrix. */
                     interface IDurationDistanceMatrix {
@@ -1670,6 +2325,9 @@ export namespace google {
 
                         /** VisitRequest label */
                         label?: (string|null);
+
+                        /** VisitRequest avoidUTurns */
+                        avoidUTurns?: (boolean|null);
                     }
 
                     /** Represents a VisitRequest. */
@@ -1713,6 +2371,9 @@ export namespace google {
 
                         /** VisitRequest label. */
                         public label: string;
+
+                        /** VisitRequest avoidUTurns. */
+                        public avoidUTurns?: (boolean|null);
 
                         /**
                          * Creates a new VisitRequest instance using the specified properties.
@@ -2518,6 +3179,12 @@ export namespace google {
 
                         /** LoadLimit endLoadInterval */
                         endLoadInterval?: (google.maps.routeoptimization.v1.Vehicle.LoadLimit.IInterval|null);
+
+                        /** LoadLimit costPerKilometer */
+                        costPerKilometer?: (google.maps.routeoptimization.v1.Vehicle.LoadLimit.ILoadCost|null);
+
+                        /** LoadLimit costPerTraveledHour */
+                        costPerTraveledHour?: (google.maps.routeoptimization.v1.Vehicle.LoadLimit.ILoadCost|null);
                     }
 
                     /** Represents a LoadLimit. */
@@ -2543,6 +3210,12 @@ export namespace google {
 
                         /** LoadLimit endLoadInterval. */
                         public endLoadInterval?: (google.maps.routeoptimization.v1.Vehicle.LoadLimit.IInterval|null);
+
+                        /** LoadLimit costPerKilometer. */
+                        public costPerKilometer?: (google.maps.routeoptimization.v1.Vehicle.LoadLimit.ILoadCost|null);
+
+                        /** LoadLimit costPerTraveledHour. */
+                        public costPerTraveledHour?: (google.maps.routeoptimization.v1.Vehicle.LoadLimit.ILoadCost|null);
 
                         /**
                          * Creates a new LoadLimit instance using the specified properties.
@@ -2721,6 +3394,115 @@ export namespace google {
 
                             /**
                              * Gets the default type url for Interval
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a LoadCost. */
+                        interface ILoadCost {
+
+                            /** LoadCost loadThreshold */
+                            loadThreshold?: (number|Long|string|null);
+
+                            /** LoadCost costPerUnitBelowThreshold */
+                            costPerUnitBelowThreshold?: (number|null);
+
+                            /** LoadCost costPerUnitAboveThreshold */
+                            costPerUnitAboveThreshold?: (number|null);
+                        }
+
+                        /** Represents a LoadCost. */
+                        class LoadCost implements ILoadCost {
+
+                            /**
+                             * Constructs a new LoadCost.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.maps.routeoptimization.v1.Vehicle.LoadLimit.ILoadCost);
+
+                            /** LoadCost loadThreshold. */
+                            public loadThreshold?: (number|Long|string|null);
+
+                            /** LoadCost costPerUnitBelowThreshold. */
+                            public costPerUnitBelowThreshold?: (number|null);
+
+                            /** LoadCost costPerUnitAboveThreshold. */
+                            public costPerUnitAboveThreshold?: (number|null);
+
+                            /**
+                             * Creates a new LoadCost instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns LoadCost instance
+                             */
+                            public static create(properties?: google.maps.routeoptimization.v1.Vehicle.LoadLimit.ILoadCost): google.maps.routeoptimization.v1.Vehicle.LoadLimit.LoadCost;
+
+                            /**
+                             * Encodes the specified LoadCost message. Does not implicitly {@link google.maps.routeoptimization.v1.Vehicle.LoadLimit.LoadCost.verify|verify} messages.
+                             * @param message LoadCost message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.maps.routeoptimization.v1.Vehicle.LoadLimit.ILoadCost, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified LoadCost message, length delimited. Does not implicitly {@link google.maps.routeoptimization.v1.Vehicle.LoadLimit.LoadCost.verify|verify} messages.
+                             * @param message LoadCost message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.maps.routeoptimization.v1.Vehicle.LoadLimit.ILoadCost, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a LoadCost message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns LoadCost
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.routeoptimization.v1.Vehicle.LoadLimit.LoadCost;
+
+                            /**
+                             * Decodes a LoadCost message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns LoadCost
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.routeoptimization.v1.Vehicle.LoadLimit.LoadCost;
+
+                            /**
+                             * Verifies a LoadCost message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a LoadCost message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns LoadCost
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.maps.routeoptimization.v1.Vehicle.LoadLimit.LoadCost;
+
+                            /**
+                             * Creates a plain object from a LoadCost message. Also converts values to other types if specified.
+                             * @param message LoadCost
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.maps.routeoptimization.v1.Vehicle.LoadLimit.LoadCost, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this LoadCost to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for LoadCost
                              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                              * @returns The default type url
                              */
@@ -3242,6 +4024,9 @@ export namespace google {
 
                     /** Waypoint sideOfRoad */
                     sideOfRoad?: (boolean|null);
+
+                    /** Waypoint vehicleStopover */
+                    vehicleStopover?: (boolean|null);
                 }
 
                 /** Represents a Waypoint. */
@@ -3261,6 +4046,9 @@ export namespace google {
 
                     /** Waypoint sideOfRoad. */
                     public sideOfRoad: boolean;
+
+                    /** Waypoint vehicleStopover. */
+                    public vehicleStopover: boolean;
 
                     /** Waypoint locationType. */
                     public locationType?: ("location"|"placeId");
@@ -3797,6 +4585,9 @@ export namespace google {
                     /** ShipmentRoute metrics */
                     metrics?: (google.maps.routeoptimization.v1.IAggregatedMetrics|null);
 
+                    /** ShipmentRoute vehicleFullness */
+                    vehicleFullness?: (google.maps.routeoptimization.v1.IVehicleFullness|null);
+
                     /** ShipmentRoute routeCosts */
                     routeCosts?: ({ [k: string]: number }|null);
 
@@ -3842,6 +4633,9 @@ export namespace google {
 
                     /** ShipmentRoute metrics. */
                     public metrics?: (google.maps.routeoptimization.v1.IAggregatedMetrics|null);
+
+                    /** ShipmentRoute vehicleFullness. */
+                    public vehicleFullness?: (google.maps.routeoptimization.v1.IVehicleFullness|null);
 
                     /** ShipmentRoute routeCosts. */
                     public routeCosts: { [k: string]: number };
@@ -3955,6 +4749,9 @@ export namespace google {
 
                         /** Visit visitLabel */
                         visitLabel?: (string|null);
+
+                        /** Visit injectedSolutionLocationToken */
+                        injectedSolutionLocationToken?: (number|null);
                     }
 
                     /** Represents a Visit. */
@@ -3989,6 +4786,9 @@ export namespace google {
 
                         /** Visit visitLabel. */
                         public visitLabel: string;
+
+                        /** Visit injectedSolutionLocationToken. */
+                        public injectedSolutionLocationToken?: (number|null);
 
                         /**
                          * Creates a new Visit instance using the specified properties.
@@ -4532,6 +5332,12 @@ export namespace google {
                     /** SkippedShipment label */
                     label?: (string|null);
 
+                    /** SkippedShipment penaltyCost */
+                    penaltyCost?: (number|null);
+
+                    /** SkippedShipment estimatedIncompatibleVehicleRatio */
+                    estimatedIncompatibleVehicleRatio?: (number|null);
+
                     /** SkippedShipment reasons */
                     reasons?: (google.maps.routeoptimization.v1.SkippedShipment.IReason[]|null);
                 }
@@ -4550,6 +5356,12 @@ export namespace google {
 
                     /** SkippedShipment label. */
                     public label: string;
+
+                    /** SkippedShipment penaltyCost. */
+                    public penaltyCost?: (number|null);
+
+                    /** SkippedShipment estimatedIncompatibleVehicleRatio. */
+                    public estimatedIncompatibleVehicleRatio?: (number|null);
 
                     /** SkippedShipment reasons. */
                     public reasons: google.maps.routeoptimization.v1.SkippedShipment.IReason[];
@@ -4643,6 +5455,9 @@ export namespace google {
                         /** Reason exampleVehicleIndex */
                         exampleVehicleIndex?: (number|null);
 
+                        /** Reason exampleVehicleIndices */
+                        exampleVehicleIndices?: (number[]|null);
+
                         /** Reason exampleExceededCapacityType */
                         exampleExceededCapacityType?: (string|null);
                     }
@@ -4661,6 +5476,9 @@ export namespace google {
 
                         /** Reason exampleVehicleIndex. */
                         public exampleVehicleIndex?: (number|null);
+
+                        /** Reason exampleVehicleIndices. */
+                        public exampleVehicleIndices: number[];
 
                         /** Reason exampleExceededCapacityType. */
                         public exampleExceededCapacityType: string;
@@ -4754,7 +5572,12 @@ export namespace google {
                             CANNOT_BE_PERFORMED_WITHIN_VEHICLE_DURATION_LIMIT = 4,
                             CANNOT_BE_PERFORMED_WITHIN_VEHICLE_TRAVEL_DURATION_LIMIT = 5,
                             CANNOT_BE_PERFORMED_WITHIN_VEHICLE_TIME_WINDOWS = 6,
-                            VEHICLE_NOT_ALLOWED = 7
+                            VEHICLE_NOT_ALLOWED = 7,
+                            VEHICLE_IGNORED = 8,
+                            SHIPMENT_IGNORED = 9,
+                            SKIPPED_IN_INJECTED_SOLUTION_CONSTRAINT = 10,
+                            VEHICLE_ROUTE_IS_FULLY_SEQUENCE_CONSTRAINED = 11,
+                            ZERO_PENALTY_COST = 13
                         }
                     }
                 }
@@ -4764,6 +5587,12 @@ export namespace google {
 
                     /** AggregatedMetrics performedShipmentCount */
                     performedShipmentCount?: (number|null);
+
+                    /** AggregatedMetrics performedMandatoryShipmentCount */
+                    performedMandatoryShipmentCount?: (number|null);
+
+                    /** AggregatedMetrics performedShipmentPenaltyCostSum */
+                    performedShipmentPenaltyCostSum?: (number|null);
 
                     /** AggregatedMetrics travelDuration */
                     travelDuration?: (google.protobuf.IDuration|null);
@@ -4801,6 +5630,12 @@ export namespace google {
 
                     /** AggregatedMetrics performedShipmentCount. */
                     public performedShipmentCount: number;
+
+                    /** AggregatedMetrics performedMandatoryShipmentCount. */
+                    public performedMandatoryShipmentCount?: (number|null);
+
+                    /** AggregatedMetrics performedShipmentPenaltyCostSum. */
+                    public performedShipmentPenaltyCostSum?: (number|null);
 
                     /** AggregatedMetrics travelDuration. */
                     public travelDuration?: (google.protobuf.IDuration|null);
@@ -4898,6 +5733,133 @@ export namespace google {
 
                     /**
                      * Gets the default type url for AggregatedMetrics
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a VehicleFullness. */
+                interface IVehicleFullness {
+
+                    /** VehicleFullness maxFullness */
+                    maxFullness?: (number|null);
+
+                    /** VehicleFullness distance */
+                    distance?: (number|null);
+
+                    /** VehicleFullness travelDuration */
+                    travelDuration?: (number|null);
+
+                    /** VehicleFullness activeDuration */
+                    activeDuration?: (number|null);
+
+                    /** VehicleFullness maxLoad */
+                    maxLoad?: (number|null);
+
+                    /** VehicleFullness activeSpan */
+                    activeSpan?: (number|null);
+                }
+
+                /** Represents a VehicleFullness. */
+                class VehicleFullness implements IVehicleFullness {
+
+                    /**
+                     * Constructs a new VehicleFullness.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.routeoptimization.v1.IVehicleFullness);
+
+                    /** VehicleFullness maxFullness. */
+                    public maxFullness?: (number|null);
+
+                    /** VehicleFullness distance. */
+                    public distance?: (number|null);
+
+                    /** VehicleFullness travelDuration. */
+                    public travelDuration?: (number|null);
+
+                    /** VehicleFullness activeDuration. */
+                    public activeDuration?: (number|null);
+
+                    /** VehicleFullness maxLoad. */
+                    public maxLoad?: (number|null);
+
+                    /** VehicleFullness activeSpan. */
+                    public activeSpan?: (number|null);
+
+                    /**
+                     * Creates a new VehicleFullness instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VehicleFullness instance
+                     */
+                    public static create(properties?: google.maps.routeoptimization.v1.IVehicleFullness): google.maps.routeoptimization.v1.VehicleFullness;
+
+                    /**
+                     * Encodes the specified VehicleFullness message. Does not implicitly {@link google.maps.routeoptimization.v1.VehicleFullness.verify|verify} messages.
+                     * @param message VehicleFullness message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.routeoptimization.v1.IVehicleFullness, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VehicleFullness message, length delimited. Does not implicitly {@link google.maps.routeoptimization.v1.VehicleFullness.verify|verify} messages.
+                     * @param message VehicleFullness message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.routeoptimization.v1.IVehicleFullness, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VehicleFullness message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VehicleFullness
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.routeoptimization.v1.VehicleFullness;
+
+                    /**
+                     * Decodes a VehicleFullness message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VehicleFullness
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.routeoptimization.v1.VehicleFullness;
+
+                    /**
+                     * Verifies a VehicleFullness message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VehicleFullness message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VehicleFullness
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.routeoptimization.v1.VehicleFullness;
+
+                    /**
+                     * Creates a plain object from a VehicleFullness message. Also converts values to other types if specified.
+                     * @param message VehicleFullness
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.routeoptimization.v1.VehicleFullness, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VehicleFullness to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VehicleFullness
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

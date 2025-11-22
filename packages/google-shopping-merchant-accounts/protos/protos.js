@@ -3901,6 +3901,7 @@
                              * @property {google.shopping.merchant.accounts.v1.IAccount|null} [account] CreateAndConfigureAccountRequest account
                              * @property {Array.<google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.IAddUser>|null} [user] CreateAndConfigureAccountRequest user
                              * @property {Array.<google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.IAddAccountService>|null} [service] CreateAndConfigureAccountRequest service
+                             * @property {Array.<google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.ISetAliasForRelationship>|null} [setAlias] CreateAndConfigureAccountRequest setAlias
                              */
     
                             /**
@@ -3914,6 +3915,7 @@
                             function CreateAndConfigureAccountRequest(properties) {
                                 this.user = [];
                                 this.service = [];
+                                this.setAlias = [];
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null)
@@ -3943,6 +3945,14 @@
                              * @instance
                              */
                             CreateAndConfigureAccountRequest.prototype.service = $util.emptyArray;
+    
+                            /**
+                             * CreateAndConfigureAccountRequest setAlias.
+                             * @member {Array.<google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.ISetAliasForRelationship>} setAlias
+                             * @memberof google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest
+                             * @instance
+                             */
+                            CreateAndConfigureAccountRequest.prototype.setAlias = $util.emptyArray;
     
                             /**
                              * Creates a new CreateAndConfigureAccountRequest instance using the specified properties.
@@ -3976,6 +3986,9 @@
                                 if (message.service != null && message.service.length)
                                     for (var i = 0; i < message.service.length; ++i)
                                         $root.google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.AddAccountService.encode(message.service[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.setAlias != null && message.setAlias.length)
+                                    for (var i = 0; i < message.setAlias.length; ++i)
+                                        $root.google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.SetAliasForRelationship.encode(message.setAlias[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                                 return writer;
                             };
     
@@ -4026,6 +4039,12 @@
                                             if (!(message.service && message.service.length))
                                                 message.service = [];
                                             message.service.push($root.google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.AddAccountService.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 5: {
+                                            if (!(message.setAlias && message.setAlias.length))
+                                                message.setAlias = [];
+                                            message.setAlias.push($root.google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.SetAliasForRelationship.decode(reader, reader.uint32()));
                                             break;
                                         }
                                     default:
@@ -4086,6 +4105,15 @@
                                             return "service." + error;
                                     }
                                 }
+                                if (message.setAlias != null && message.hasOwnProperty("setAlias")) {
+                                    if (!Array.isArray(message.setAlias))
+                                        return "setAlias: array expected";
+                                    for (var i = 0; i < message.setAlias.length; ++i) {
+                                        var error = $root.google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.SetAliasForRelationship.verify(message.setAlias[i]);
+                                        if (error)
+                                            return "setAlias." + error;
+                                    }
+                                }
                                 return null;
                             };
     
@@ -4126,6 +4154,16 @@
                                         message.service[i] = $root.google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.AddAccountService.fromObject(object.service[i]);
                                     }
                                 }
+                                if (object.setAlias) {
+                                    if (!Array.isArray(object.setAlias))
+                                        throw TypeError(".google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.setAlias: array expected");
+                                    message.setAlias = [];
+                                    for (var i = 0; i < object.setAlias.length; ++i) {
+                                        if (typeof object.setAlias[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.setAlias: object expected");
+                                        message.setAlias[i] = $root.google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.SetAliasForRelationship.fromObject(object.setAlias[i]);
+                                    }
+                                }
                                 return message;
                             };
     
@@ -4145,6 +4183,7 @@
                                 if (options.arrays || options.defaults) {
                                     object.user = [];
                                     object.service = [];
+                                    object.setAlias = [];
                                 }
                                 if (options.defaults)
                                     object.account = null;
@@ -4159,6 +4198,11 @@
                                     object.service = [];
                                     for (var j = 0; j < message.service.length; ++j)
                                         object.service[j] = $root.google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.AddAccountService.toObject(message.service[j], options);
+                                }
+                                if (message.setAlias && message.setAlias.length) {
+                                    object.setAlias = [];
+                                    for (var j = 0; j < message.setAlias.length; ++j)
+                                        object.setAlias[j] = $root.google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.SetAliasForRelationship.toObject(message.setAlias[j], options);
                                 }
                                 return object;
                             };
@@ -4197,6 +4241,7 @@
                                  * @interface IAddUser
                                  * @property {string|null} [userId] AddUser userId
                                  * @property {google.shopping.merchant.accounts.v1.IUser|null} [user] AddUser user
+                                 * @property {google.shopping.merchant.accounts.v1.IVerificationMailSettings|null} [verificationMailSettings] AddUser verificationMailSettings
                                  */
     
                                 /**
@@ -4231,6 +4276,14 @@
                                 AddUser.prototype.user = null;
     
                                 /**
+                                 * AddUser verificationMailSettings.
+                                 * @member {google.shopping.merchant.accounts.v1.IVerificationMailSettings|null|undefined} verificationMailSettings
+                                 * @memberof google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.AddUser
+                                 * @instance
+                                 */
+                                AddUser.prototype.verificationMailSettings = null;
+    
+                                /**
                                  * Creates a new AddUser instance using the specified properties.
                                  * @function create
                                  * @memberof google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.AddUser
@@ -4258,6 +4311,8 @@
                                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.userId);
                                     if (message.user != null && Object.hasOwnProperty.call(message, "user"))
                                         $root.google.shopping.merchant.accounts.v1.User.encode(message.user, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    if (message.verificationMailSettings != null && Object.hasOwnProperty.call(message, "verificationMailSettings"))
+                                        $root.google.shopping.merchant.accounts.v1.VerificationMailSettings.encode(message.verificationMailSettings, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                                     return writer;
                                 };
     
@@ -4300,6 +4355,10 @@
                                             }
                                         case 2: {
                                                 message.user = $root.google.shopping.merchant.accounts.v1.User.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.verificationMailSettings = $root.google.shopping.merchant.accounts.v1.VerificationMailSettings.decode(reader, reader.uint32());
                                                 break;
                                             }
                                         default:
@@ -4345,6 +4404,11 @@
                                         if (error)
                                             return "user." + error;
                                     }
+                                    if (message.verificationMailSettings != null && message.hasOwnProperty("verificationMailSettings")) {
+                                        var error = $root.google.shopping.merchant.accounts.v1.VerificationMailSettings.verify(message.verificationMailSettings);
+                                        if (error)
+                                            return "verificationMailSettings." + error;
+                                    }
                                     return null;
                                 };
     
@@ -4367,6 +4431,11 @@
                                             throw TypeError(".google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.AddUser.user: object expected");
                                         message.user = $root.google.shopping.merchant.accounts.v1.User.fromObject(object.user);
                                     }
+                                    if (object.verificationMailSettings != null) {
+                                        if (typeof object.verificationMailSettings !== "object")
+                                            throw TypeError(".google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.AddUser.verificationMailSettings: object expected");
+                                        message.verificationMailSettings = $root.google.shopping.merchant.accounts.v1.VerificationMailSettings.fromObject(object.verificationMailSettings);
+                                    }
                                     return message;
                                 };
     
@@ -4386,11 +4455,14 @@
                                     if (options.defaults) {
                                         object.userId = "";
                                         object.user = null;
+                                        object.verificationMailSettings = null;
                                     }
                                     if (message.userId != null && message.hasOwnProperty("userId"))
                                         object.userId = message.userId;
                                     if (message.user != null && message.hasOwnProperty("user"))
                                         object.user = $root.google.shopping.merchant.accounts.v1.User.toObject(message.user, options);
+                                    if (message.verificationMailSettings != null && message.hasOwnProperty("verificationMailSettings"))
+                                        object.verificationMailSettings = $root.google.shopping.merchant.accounts.v1.VerificationMailSettings.toObject(message.verificationMailSettings, options);
                                     return object;
                                 };
     
@@ -4430,7 +4502,12 @@
                                  * @memberof google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest
                                  * @interface IAddAccountService
                                  * @property {google.shopping.merchant.accounts.v1.IAccountAggregation|null} [accountAggregation] AddAccountService accountAggregation
+                                 * @property {google.shopping.merchant.accounts.v1.IAccountManagement|null} [accountManagement] AddAccountService accountManagement
+                                 * @property {google.shopping.merchant.accounts.v1.IComparisonShopping|null} [comparisonShopping] AddAccountService comparisonShopping
+                                 * @property {google.shopping.merchant.accounts.v1.IProductsManagement|null} [productsManagement] AddAccountService productsManagement
+                                 * @property {google.shopping.merchant.accounts.v1.ICampaignsManagement|null} [campaignsManagement] AddAccountService campaignsManagement
                                  * @property {string|null} [provider] AddAccountService provider
+                                 * @property {string|null} [externalAccountId] AddAccountService externalAccountId
                                  */
     
                                 /**
@@ -4457,6 +4534,38 @@
                                 AddAccountService.prototype.accountAggregation = null;
     
                                 /**
+                                 * AddAccountService accountManagement.
+                                 * @member {google.shopping.merchant.accounts.v1.IAccountManagement|null|undefined} accountManagement
+                                 * @memberof google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.AddAccountService
+                                 * @instance
+                                 */
+                                AddAccountService.prototype.accountManagement = null;
+    
+                                /**
+                                 * AddAccountService comparisonShopping.
+                                 * @member {google.shopping.merchant.accounts.v1.IComparisonShopping|null|undefined} comparisonShopping
+                                 * @memberof google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.AddAccountService
+                                 * @instance
+                                 */
+                                AddAccountService.prototype.comparisonShopping = null;
+    
+                                /**
+                                 * AddAccountService productsManagement.
+                                 * @member {google.shopping.merchant.accounts.v1.IProductsManagement|null|undefined} productsManagement
+                                 * @memberof google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.AddAccountService
+                                 * @instance
+                                 */
+                                AddAccountService.prototype.productsManagement = null;
+    
+                                /**
+                                 * AddAccountService campaignsManagement.
+                                 * @member {google.shopping.merchant.accounts.v1.ICampaignsManagement|null|undefined} campaignsManagement
+                                 * @memberof google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.AddAccountService
+                                 * @instance
+                                 */
+                                AddAccountService.prototype.campaignsManagement = null;
+    
+                                /**
                                  * AddAccountService provider.
                                  * @member {string|null|undefined} provider
                                  * @memberof google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.AddAccountService
@@ -4464,17 +4573,25 @@
                                  */
                                 AddAccountService.prototype.provider = null;
     
+                                /**
+                                 * AddAccountService externalAccountId.
+                                 * @member {string} externalAccountId
+                                 * @memberof google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.AddAccountService
+                                 * @instance
+                                 */
+                                AddAccountService.prototype.externalAccountId = "";
+    
                                 // OneOf field names bound to virtual getters and setters
                                 var $oneOfFields;
     
                                 /**
                                  * AddAccountService serviceType.
-                                 * @member {"accountAggregation"|undefined} serviceType
+                                 * @member {"accountAggregation"|"accountManagement"|"comparisonShopping"|"productsManagement"|"campaignsManagement"|undefined} serviceType
                                  * @memberof google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.AddAccountService
                                  * @instance
                                  */
                                 Object.defineProperty(AddAccountService.prototype, "serviceType", {
-                                    get: $util.oneOfGetter($oneOfFields = ["accountAggregation"]),
+                                    get: $util.oneOfGetter($oneOfFields = ["accountAggregation", "accountManagement", "comparisonShopping", "productsManagement", "campaignsManagement"]),
                                     set: $util.oneOfSetter($oneOfFields)
                                 });
     
@@ -4510,8 +4627,18 @@
                                         writer = $Writer.create();
                                     if (message.provider != null && Object.hasOwnProperty.call(message, "provider"))
                                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.provider);
+                                    if (message.externalAccountId != null && Object.hasOwnProperty.call(message, "externalAccountId"))
+                                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.externalAccountId);
                                     if (message.accountAggregation != null && Object.hasOwnProperty.call(message, "accountAggregation"))
                                         $root.google.shopping.merchant.accounts.v1.AccountAggregation.encode(message.accountAggregation, writer.uint32(/* id 103, wireType 2 =*/826).fork()).ldelim();
+                                    if (message.accountManagement != null && Object.hasOwnProperty.call(message, "accountManagement"))
+                                        $root.google.shopping.merchant.accounts.v1.AccountManagement.encode(message.accountManagement, writer.uint32(/* id 104, wireType 2 =*/834).fork()).ldelim();
+                                    if (message.comparisonShopping != null && Object.hasOwnProperty.call(message, "comparisonShopping"))
+                                        $root.google.shopping.merchant.accounts.v1.ComparisonShopping.encode(message.comparisonShopping, writer.uint32(/* id 105, wireType 2 =*/842).fork()).ldelim();
+                                    if (message.productsManagement != null && Object.hasOwnProperty.call(message, "productsManagement"))
+                                        $root.google.shopping.merchant.accounts.v1.ProductsManagement.encode(message.productsManagement, writer.uint32(/* id 106, wireType 2 =*/850).fork()).ldelim();
+                                    if (message.campaignsManagement != null && Object.hasOwnProperty.call(message, "campaignsManagement"))
+                                        $root.google.shopping.merchant.accounts.v1.CampaignsManagement.encode(message.campaignsManagement, writer.uint32(/* id 107, wireType 2 =*/858).fork()).ldelim();
                                     return writer;
                                 };
     
@@ -4552,8 +4679,28 @@
                                                 message.accountAggregation = $root.google.shopping.merchant.accounts.v1.AccountAggregation.decode(reader, reader.uint32());
                                                 break;
                                             }
+                                        case 104: {
+                                                message.accountManagement = $root.google.shopping.merchant.accounts.v1.AccountManagement.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 105: {
+                                                message.comparisonShopping = $root.google.shopping.merchant.accounts.v1.ComparisonShopping.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 106: {
+                                                message.productsManagement = $root.google.shopping.merchant.accounts.v1.ProductsManagement.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 107: {
+                                                message.campaignsManagement = $root.google.shopping.merchant.accounts.v1.CampaignsManagement.decode(reader, reader.uint32());
+                                                break;
+                                            }
                                         case 1: {
                                                 message.provider = reader.string();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.externalAccountId = reader.string();
                                                 break;
                                             }
                                         default:
@@ -4600,11 +4747,54 @@
                                                 return "accountAggregation." + error;
                                         }
                                     }
+                                    if (message.accountManagement != null && message.hasOwnProperty("accountManagement")) {
+                                        if (properties.serviceType === 1)
+                                            return "serviceType: multiple values";
+                                        properties.serviceType = 1;
+                                        {
+                                            var error = $root.google.shopping.merchant.accounts.v1.AccountManagement.verify(message.accountManagement);
+                                            if (error)
+                                                return "accountManagement." + error;
+                                        }
+                                    }
+                                    if (message.comparisonShopping != null && message.hasOwnProperty("comparisonShopping")) {
+                                        if (properties.serviceType === 1)
+                                            return "serviceType: multiple values";
+                                        properties.serviceType = 1;
+                                        {
+                                            var error = $root.google.shopping.merchant.accounts.v1.ComparisonShopping.verify(message.comparisonShopping);
+                                            if (error)
+                                                return "comparisonShopping." + error;
+                                        }
+                                    }
+                                    if (message.productsManagement != null && message.hasOwnProperty("productsManagement")) {
+                                        if (properties.serviceType === 1)
+                                            return "serviceType: multiple values";
+                                        properties.serviceType = 1;
+                                        {
+                                            var error = $root.google.shopping.merchant.accounts.v1.ProductsManagement.verify(message.productsManagement);
+                                            if (error)
+                                                return "productsManagement." + error;
+                                        }
+                                    }
+                                    if (message.campaignsManagement != null && message.hasOwnProperty("campaignsManagement")) {
+                                        if (properties.serviceType === 1)
+                                            return "serviceType: multiple values";
+                                        properties.serviceType = 1;
+                                        {
+                                            var error = $root.google.shopping.merchant.accounts.v1.CampaignsManagement.verify(message.campaignsManagement);
+                                            if (error)
+                                                return "campaignsManagement." + error;
+                                        }
+                                    }
                                     if (message.provider != null && message.hasOwnProperty("provider")) {
                                         properties._provider = 1;
                                         if (!$util.isString(message.provider))
                                             return "provider: string expected";
                                     }
+                                    if (message.externalAccountId != null && message.hasOwnProperty("externalAccountId"))
+                                        if (!$util.isString(message.externalAccountId))
+                                            return "externalAccountId: string expected";
                                     return null;
                                 };
     
@@ -4625,8 +4815,30 @@
                                             throw TypeError(".google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.AddAccountService.accountAggregation: object expected");
                                         message.accountAggregation = $root.google.shopping.merchant.accounts.v1.AccountAggregation.fromObject(object.accountAggregation);
                                     }
+                                    if (object.accountManagement != null) {
+                                        if (typeof object.accountManagement !== "object")
+                                            throw TypeError(".google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.AddAccountService.accountManagement: object expected");
+                                        message.accountManagement = $root.google.shopping.merchant.accounts.v1.AccountManagement.fromObject(object.accountManagement);
+                                    }
+                                    if (object.comparisonShopping != null) {
+                                        if (typeof object.comparisonShopping !== "object")
+                                            throw TypeError(".google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.AddAccountService.comparisonShopping: object expected");
+                                        message.comparisonShopping = $root.google.shopping.merchant.accounts.v1.ComparisonShopping.fromObject(object.comparisonShopping);
+                                    }
+                                    if (object.productsManagement != null) {
+                                        if (typeof object.productsManagement !== "object")
+                                            throw TypeError(".google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.AddAccountService.productsManagement: object expected");
+                                        message.productsManagement = $root.google.shopping.merchant.accounts.v1.ProductsManagement.fromObject(object.productsManagement);
+                                    }
+                                    if (object.campaignsManagement != null) {
+                                        if (typeof object.campaignsManagement !== "object")
+                                            throw TypeError(".google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.AddAccountService.campaignsManagement: object expected");
+                                        message.campaignsManagement = $root.google.shopping.merchant.accounts.v1.CampaignsManagement.fromObject(object.campaignsManagement);
+                                    }
                                     if (object.provider != null)
                                         message.provider = String(object.provider);
+                                    if (object.externalAccountId != null)
+                                        message.externalAccountId = String(object.externalAccountId);
                                     return message;
                                 };
     
@@ -4643,15 +4855,39 @@
                                     if (!options)
                                         options = {};
                                     var object = {};
+                                    if (options.defaults)
+                                        object.externalAccountId = "";
                                     if (message.provider != null && message.hasOwnProperty("provider")) {
                                         object.provider = message.provider;
                                         if (options.oneofs)
                                             object._provider = "provider";
                                     }
+                                    if (message.externalAccountId != null && message.hasOwnProperty("externalAccountId"))
+                                        object.externalAccountId = message.externalAccountId;
                                     if (message.accountAggregation != null && message.hasOwnProperty("accountAggregation")) {
                                         object.accountAggregation = $root.google.shopping.merchant.accounts.v1.AccountAggregation.toObject(message.accountAggregation, options);
                                         if (options.oneofs)
                                             object.serviceType = "accountAggregation";
+                                    }
+                                    if (message.accountManagement != null && message.hasOwnProperty("accountManagement")) {
+                                        object.accountManagement = $root.google.shopping.merchant.accounts.v1.AccountManagement.toObject(message.accountManagement, options);
+                                        if (options.oneofs)
+                                            object.serviceType = "accountManagement";
+                                    }
+                                    if (message.comparisonShopping != null && message.hasOwnProperty("comparisonShopping")) {
+                                        object.comparisonShopping = $root.google.shopping.merchant.accounts.v1.ComparisonShopping.toObject(message.comparisonShopping, options);
+                                        if (options.oneofs)
+                                            object.serviceType = "comparisonShopping";
+                                    }
+                                    if (message.productsManagement != null && message.hasOwnProperty("productsManagement")) {
+                                        object.productsManagement = $root.google.shopping.merchant.accounts.v1.ProductsManagement.toObject(message.productsManagement, options);
+                                        if (options.oneofs)
+                                            object.serviceType = "productsManagement";
+                                    }
+                                    if (message.campaignsManagement != null && message.hasOwnProperty("campaignsManagement")) {
+                                        object.campaignsManagement = $root.google.shopping.merchant.accounts.v1.CampaignsManagement.toObject(message.campaignsManagement, options);
+                                        if (options.oneofs)
+                                            object.serviceType = "campaignsManagement";
                                     }
                                     return object;
                                 };
@@ -4683,6 +4919,235 @@
                                 };
     
                                 return AddAccountService;
+                            })();
+    
+                            CreateAndConfigureAccountRequest.SetAliasForRelationship = (function() {
+    
+                                /**
+                                 * Properties of a SetAliasForRelationship.
+                                 * @memberof google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest
+                                 * @interface ISetAliasForRelationship
+                                 * @property {string|null} [provider] SetAliasForRelationship provider
+                                 * @property {string|null} [accountIdAlias] SetAliasForRelationship accountIdAlias
+                                 */
+    
+                                /**
+                                 * Constructs a new SetAliasForRelationship.
+                                 * @memberof google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest
+                                 * @classdesc Represents a SetAliasForRelationship.
+                                 * @implements ISetAliasForRelationship
+                                 * @constructor
+                                 * @param {google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.ISetAliasForRelationship=} [properties] Properties to set
+                                 */
+                                function SetAliasForRelationship(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * SetAliasForRelationship provider.
+                                 * @member {string} provider
+                                 * @memberof google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.SetAliasForRelationship
+                                 * @instance
+                                 */
+                                SetAliasForRelationship.prototype.provider = "";
+    
+                                /**
+                                 * SetAliasForRelationship accountIdAlias.
+                                 * @member {string} accountIdAlias
+                                 * @memberof google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.SetAliasForRelationship
+                                 * @instance
+                                 */
+                                SetAliasForRelationship.prototype.accountIdAlias = "";
+    
+                                /**
+                                 * Creates a new SetAliasForRelationship instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.SetAliasForRelationship
+                                 * @static
+                                 * @param {google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.ISetAliasForRelationship=} [properties] Properties to set
+                                 * @returns {google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.SetAliasForRelationship} SetAliasForRelationship instance
+                                 */
+                                SetAliasForRelationship.create = function create(properties) {
+                                    return new SetAliasForRelationship(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified SetAliasForRelationship message. Does not implicitly {@link google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.SetAliasForRelationship.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.SetAliasForRelationship
+                                 * @static
+                                 * @param {google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.ISetAliasForRelationship} message SetAliasForRelationship message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                SetAliasForRelationship.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.provider != null && Object.hasOwnProperty.call(message, "provider"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.provider);
+                                    if (message.accountIdAlias != null && Object.hasOwnProperty.call(message, "accountIdAlias"))
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.accountIdAlias);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified SetAliasForRelationship message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.SetAliasForRelationship.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.SetAliasForRelationship
+                                 * @static
+                                 * @param {google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.ISetAliasForRelationship} message SetAliasForRelationship message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                SetAliasForRelationship.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a SetAliasForRelationship message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.SetAliasForRelationship
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.SetAliasForRelationship} SetAliasForRelationship
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                SetAliasForRelationship.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.SetAliasForRelationship();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.provider = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.accountIdAlias = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a SetAliasForRelationship message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.SetAliasForRelationship
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.SetAliasForRelationship} SetAliasForRelationship
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                SetAliasForRelationship.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a SetAliasForRelationship message.
+                                 * @function verify
+                                 * @memberof google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.SetAliasForRelationship
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                SetAliasForRelationship.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.provider != null && message.hasOwnProperty("provider"))
+                                        if (!$util.isString(message.provider))
+                                            return "provider: string expected";
+                                    if (message.accountIdAlias != null && message.hasOwnProperty("accountIdAlias"))
+                                        if (!$util.isString(message.accountIdAlias))
+                                            return "accountIdAlias: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a SetAliasForRelationship message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.SetAliasForRelationship
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.SetAliasForRelationship} SetAliasForRelationship
+                                 */
+                                SetAliasForRelationship.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.SetAliasForRelationship)
+                                        return object;
+                                    var message = new $root.google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.SetAliasForRelationship();
+                                    if (object.provider != null)
+                                        message.provider = String(object.provider);
+                                    if (object.accountIdAlias != null)
+                                        message.accountIdAlias = String(object.accountIdAlias);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a SetAliasForRelationship message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.SetAliasForRelationship
+                                 * @static
+                                 * @param {google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.SetAliasForRelationship} message SetAliasForRelationship
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                SetAliasForRelationship.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.provider = "";
+                                        object.accountIdAlias = "";
+                                    }
+                                    if (message.provider != null && message.hasOwnProperty("provider"))
+                                        object.provider = message.provider;
+                                    if (message.accountIdAlias != null && message.hasOwnProperty("accountIdAlias"))
+                                        object.accountIdAlias = message.accountIdAlias;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this SetAliasForRelationship to JSON.
+                                 * @function toJSON
+                                 * @memberof google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.SetAliasForRelationship
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                SetAliasForRelationship.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for SetAliasForRelationship
+                                 * @function getTypeUrl
+                                 * @memberof google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.SetAliasForRelationship
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                SetAliasForRelationship.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.shopping.merchant.accounts.v1.CreateAndConfigureAccountRequest.SetAliasForRelationship";
+                                };
+    
+                                return SetAliasForRelationship;
                             })();
     
                             return CreateAndConfigureAccountRequest;
@@ -6371,6 +6836,7 @@
                              * @property {google.shopping.merchant.accounts.v1.IAccountManagement|null} [accountManagement] AccountService accountManagement
                              * @property {google.shopping.merchant.accounts.v1.IAccountAggregation|null} [accountAggregation] AccountService accountAggregation
                              * @property {google.shopping.merchant.accounts.v1.ILocalListingManagement|null} [localListingManagement] AccountService localListingManagement
+                             * @property {google.shopping.merchant.accounts.v1.IComparisonShopping|null} [comparisonShopping] AccountService comparisonShopping
                              * @property {string|null} [name] AccountService name
                              * @property {string|null} [provider] AccountService provider
                              * @property {string|null} [providerDisplayName] AccountService providerDisplayName
@@ -6435,6 +6901,14 @@
                             AccountService.prototype.localListingManagement = null;
     
                             /**
+                             * AccountService comparisonShopping.
+                             * @member {google.shopping.merchant.accounts.v1.IComparisonShopping|null|undefined} comparisonShopping
+                             * @memberof google.shopping.merchant.accounts.v1.AccountService
+                             * @instance
+                             */
+                            AccountService.prototype.comparisonShopping = null;
+    
+                            /**
                              * AccountService name.
                              * @member {string} name
                              * @memberof google.shopping.merchant.accounts.v1.AccountService
@@ -6487,12 +6961,12 @@
     
                             /**
                              * AccountService serviceType.
-                             * @member {"productsManagement"|"campaignsManagement"|"accountManagement"|"accountAggregation"|"localListingManagement"|undefined} serviceType
+                             * @member {"productsManagement"|"campaignsManagement"|"accountManagement"|"accountAggregation"|"localListingManagement"|"comparisonShopping"|undefined} serviceType
                              * @memberof google.shopping.merchant.accounts.v1.AccountService
                              * @instance
                              */
                             Object.defineProperty(AccountService.prototype, "serviceType", {
-                                get: $util.oneOfGetter($oneOfFields = ["productsManagement", "campaignsManagement", "accountManagement", "accountAggregation", "localListingManagement"]),
+                                get: $util.oneOfGetter($oneOfFields = ["productsManagement", "campaignsManagement", "accountManagement", "accountAggregation", "localListingManagement", "comparisonShopping"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -6548,6 +7022,8 @@
                                     $root.google.shopping.merchant.accounts.v1.AccountAggregation.encode(message.accountAggregation, writer.uint32(/* id 103, wireType 2 =*/826).fork()).ldelim();
                                 if (message.localListingManagement != null && Object.hasOwnProperty.call(message, "localListingManagement"))
                                     $root.google.shopping.merchant.accounts.v1.LocalListingManagement.encode(message.localListingManagement, writer.uint32(/* id 104, wireType 2 =*/834).fork()).ldelim();
+                                if (message.comparisonShopping != null && Object.hasOwnProperty.call(message, "comparisonShopping"))
+                                    $root.google.shopping.merchant.accounts.v1.ComparisonShopping.encode(message.comparisonShopping, writer.uint32(/* id 105, wireType 2 =*/842).fork()).ldelim();
                                 return writer;
                             };
     
@@ -6602,6 +7078,10 @@
                                         }
                                     case 104: {
                                             message.localListingManagement = $root.google.shopping.merchant.accounts.v1.LocalListingManagement.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 105: {
+                                            message.comparisonShopping = $root.google.shopping.merchant.accounts.v1.ComparisonShopping.decode(reader, reader.uint32());
                                             break;
                                         }
                                     case 1: {
@@ -6712,6 +7192,16 @@
                                             return "localListingManagement." + error;
                                     }
                                 }
+                                if (message.comparisonShopping != null && message.hasOwnProperty("comparisonShopping")) {
+                                    if (properties.serviceType === 1)
+                                        return "serviceType: multiple values";
+                                    properties.serviceType = 1;
+                                    {
+                                        var error = $root.google.shopping.merchant.accounts.v1.ComparisonShopping.verify(message.comparisonShopping);
+                                        if (error)
+                                            return "comparisonShopping." + error;
+                                    }
+                                }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     if (!$util.isString(message.name))
                                         return "name: string expected";
@@ -6779,6 +7269,11 @@
                                     if (typeof object.localListingManagement !== "object")
                                         throw TypeError(".google.shopping.merchant.accounts.v1.AccountService.localListingManagement: object expected");
                                     message.localListingManagement = $root.google.shopping.merchant.accounts.v1.LocalListingManagement.fromObject(object.localListingManagement);
+                                }
+                                if (object.comparisonShopping != null) {
+                                    if (typeof object.comparisonShopping !== "object")
+                                        throw TypeError(".google.shopping.merchant.accounts.v1.AccountService.comparisonShopping: object expected");
+                                    message.comparisonShopping = $root.google.shopping.merchant.accounts.v1.ComparisonShopping.fromObject(object.comparisonShopping);
                                 }
                                 if (object.name != null)
                                     message.name = String(object.name);
@@ -6875,6 +7370,11 @@
                                     object.localListingManagement = $root.google.shopping.merchant.accounts.v1.LocalListingManagement.toObject(message.localListingManagement, options);
                                     if (options.oneofs)
                                         object.serviceType = "localListingManagement";
+                                }
+                                if (message.comparisonShopping != null && message.hasOwnProperty("comparisonShopping")) {
+                                    object.comparisonShopping = $root.google.shopping.merchant.accounts.v1.ComparisonShopping.toObject(message.comparisonShopping, options);
+                                    if (options.oneofs)
+                                        object.serviceType = "comparisonShopping";
                                 }
                                 return object;
                             };
@@ -9183,6 +9683,183 @@
                             return LocalListingManagement;
                         })();
     
+                        v1.ComparisonShopping = (function() {
+    
+                            /**
+                             * Properties of a ComparisonShopping.
+                             * @memberof google.shopping.merchant.accounts.v1
+                             * @interface IComparisonShopping
+                             */
+    
+                            /**
+                             * Constructs a new ComparisonShopping.
+                             * @memberof google.shopping.merchant.accounts.v1
+                             * @classdesc Represents a ComparisonShopping.
+                             * @implements IComparisonShopping
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1.IComparisonShopping=} [properties] Properties to set
+                             */
+                            function ComparisonShopping(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new ComparisonShopping instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1.ComparisonShopping
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1.IComparisonShopping=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1.ComparisonShopping} ComparisonShopping instance
+                             */
+                            ComparisonShopping.create = function create(properties) {
+                                return new ComparisonShopping(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ComparisonShopping message. Does not implicitly {@link google.shopping.merchant.accounts.v1.ComparisonShopping.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1.ComparisonShopping
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1.IComparisonShopping} message ComparisonShopping message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ComparisonShopping.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ComparisonShopping message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1.ComparisonShopping.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1.ComparisonShopping
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1.IComparisonShopping} message ComparisonShopping message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ComparisonShopping.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ComparisonShopping message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1.ComparisonShopping
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1.ComparisonShopping} ComparisonShopping
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ComparisonShopping.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1.ComparisonShopping();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ComparisonShopping message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1.ComparisonShopping
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1.ComparisonShopping} ComparisonShopping
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ComparisonShopping.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ComparisonShopping message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1.ComparisonShopping
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ComparisonShopping.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ComparisonShopping message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1.ComparisonShopping
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1.ComparisonShopping} ComparisonShopping
+                             */
+                            ComparisonShopping.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1.ComparisonShopping)
+                                    return object;
+                                return new $root.google.shopping.merchant.accounts.v1.ComparisonShopping();
+                            };
+    
+                            /**
+                             * Creates a plain object from a ComparisonShopping message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1.ComparisonShopping
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1.ComparisonShopping} message ComparisonShopping
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ComparisonShopping.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this ComparisonShopping to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1.ComparisonShopping
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ComparisonShopping.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ComparisonShopping
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1.ComparisonShopping
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ComparisonShopping.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1.ComparisonShopping";
+                            };
+    
+                            return ComparisonShopping;
+                        })();
+    
                         v1.Handshake = (function() {
     
                             /**
@@ -9693,6 +10370,39 @@
                              * @instance
                              * @param {google.shopping.merchant.accounts.v1.IListUsersRequest} request ListUsersRequest message or plain object
                              * @returns {Promise<google.shopping.merchant.accounts.v1.ListUsersResponse>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.accounts.v1.UserService|verifySelf}.
+                             * @memberof google.shopping.merchant.accounts.v1.UserService
+                             * @typedef VerifySelfCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.accounts.v1.User} [response] User
+                             */
+    
+                            /**
+                             * Calls VerifySelf.
+                             * @function verifySelf
+                             * @memberof google.shopping.merchant.accounts.v1.UserService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1.IVerifySelfRequest} request VerifySelfRequest message or plain object
+                             * @param {google.shopping.merchant.accounts.v1.UserService.VerifySelfCallback} callback Node-style callback called with the error, if any, and User
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(UserService.prototype.verifySelf = function verifySelf(request, callback) {
+                                return this.rpcCall(verifySelf, $root.google.shopping.merchant.accounts.v1.VerifySelfRequest, $root.google.shopping.merchant.accounts.v1.User, request, callback);
+                            }, "name", { value: "VerifySelf" });
+    
+                            /**
+                             * Calls VerifySelf.
+                             * @function verifySelf
+                             * @memberof google.shopping.merchant.accounts.v1.UserService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1.IVerifySelfRequest} request VerifySelfRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.accounts.v1.User>} Promise
                              * @variation 2
                              */
     
@@ -11461,6 +12171,456 @@
                             };
     
                             return ListUsersResponse;
+                        })();
+    
+                        v1.VerifySelfRequest = (function() {
+    
+                            /**
+                             * Properties of a VerifySelfRequest.
+                             * @memberof google.shopping.merchant.accounts.v1
+                             * @interface IVerifySelfRequest
+                             * @property {string|null} [account] VerifySelfRequest account
+                             */
+    
+                            /**
+                             * Constructs a new VerifySelfRequest.
+                             * @memberof google.shopping.merchant.accounts.v1
+                             * @classdesc Represents a VerifySelfRequest.
+                             * @implements IVerifySelfRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1.IVerifySelfRequest=} [properties] Properties to set
+                             */
+                            function VerifySelfRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * VerifySelfRequest account.
+                             * @member {string} account
+                             * @memberof google.shopping.merchant.accounts.v1.VerifySelfRequest
+                             * @instance
+                             */
+                            VerifySelfRequest.prototype.account = "";
+    
+                            /**
+                             * Creates a new VerifySelfRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1.VerifySelfRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1.IVerifySelfRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1.VerifySelfRequest} VerifySelfRequest instance
+                             */
+                            VerifySelfRequest.create = function create(properties) {
+                                return new VerifySelfRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified VerifySelfRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1.VerifySelfRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1.VerifySelfRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1.IVerifySelfRequest} message VerifySelfRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            VerifySelfRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.account != null && Object.hasOwnProperty.call(message, "account"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.account);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified VerifySelfRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1.VerifySelfRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1.VerifySelfRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1.IVerifySelfRequest} message VerifySelfRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            VerifySelfRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a VerifySelfRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1.VerifySelfRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1.VerifySelfRequest} VerifySelfRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            VerifySelfRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1.VerifySelfRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.account = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a VerifySelfRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1.VerifySelfRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1.VerifySelfRequest} VerifySelfRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            VerifySelfRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a VerifySelfRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1.VerifySelfRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            VerifySelfRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.account != null && message.hasOwnProperty("account"))
+                                    if (!$util.isString(message.account))
+                                        return "account: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a VerifySelfRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1.VerifySelfRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1.VerifySelfRequest} VerifySelfRequest
+                             */
+                            VerifySelfRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1.VerifySelfRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1.VerifySelfRequest();
+                                if (object.account != null)
+                                    message.account = String(object.account);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a VerifySelfRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1.VerifySelfRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1.VerifySelfRequest} message VerifySelfRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            VerifySelfRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.account = "";
+                                if (message.account != null && message.hasOwnProperty("account"))
+                                    object.account = message.account;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this VerifySelfRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1.VerifySelfRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            VerifySelfRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for VerifySelfRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1.VerifySelfRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            VerifySelfRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1.VerifySelfRequest";
+                            };
+    
+                            return VerifySelfRequest;
+                        })();
+    
+                        v1.VerificationMailSettings = (function() {
+    
+                            /**
+                             * Properties of a VerificationMailSettings.
+                             * @memberof google.shopping.merchant.accounts.v1
+                             * @interface IVerificationMailSettings
+                             * @property {google.shopping.merchant.accounts.v1.VerificationMailSettings.VerificationMailMode|null} [verificationMailMode] VerificationMailSettings verificationMailMode
+                             */
+    
+                            /**
+                             * Constructs a new VerificationMailSettings.
+                             * @memberof google.shopping.merchant.accounts.v1
+                             * @classdesc Represents a VerificationMailSettings.
+                             * @implements IVerificationMailSettings
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1.IVerificationMailSettings=} [properties] Properties to set
+                             */
+                            function VerificationMailSettings(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * VerificationMailSettings verificationMailMode.
+                             * @member {google.shopping.merchant.accounts.v1.VerificationMailSettings.VerificationMailMode} verificationMailMode
+                             * @memberof google.shopping.merchant.accounts.v1.VerificationMailSettings
+                             * @instance
+                             */
+                            VerificationMailSettings.prototype.verificationMailMode = 0;
+    
+                            /**
+                             * Creates a new VerificationMailSettings instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1.VerificationMailSettings
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1.IVerificationMailSettings=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1.VerificationMailSettings} VerificationMailSettings instance
+                             */
+                            VerificationMailSettings.create = function create(properties) {
+                                return new VerificationMailSettings(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified VerificationMailSettings message. Does not implicitly {@link google.shopping.merchant.accounts.v1.VerificationMailSettings.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1.VerificationMailSettings
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1.IVerificationMailSettings} message VerificationMailSettings message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            VerificationMailSettings.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.verificationMailMode != null && Object.hasOwnProperty.call(message, "verificationMailMode"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.verificationMailMode);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified VerificationMailSettings message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1.VerificationMailSettings.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1.VerificationMailSettings
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1.IVerificationMailSettings} message VerificationMailSettings message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            VerificationMailSettings.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a VerificationMailSettings message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1.VerificationMailSettings
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1.VerificationMailSettings} VerificationMailSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            VerificationMailSettings.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1.VerificationMailSettings();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.verificationMailMode = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a VerificationMailSettings message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1.VerificationMailSettings
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1.VerificationMailSettings} VerificationMailSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            VerificationMailSettings.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a VerificationMailSettings message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1.VerificationMailSettings
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            VerificationMailSettings.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.verificationMailMode != null && message.hasOwnProperty("verificationMailMode"))
+                                    switch (message.verificationMailMode) {
+                                    default:
+                                        return "verificationMailMode: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a VerificationMailSettings message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1.VerificationMailSettings
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1.VerificationMailSettings} VerificationMailSettings
+                             */
+                            VerificationMailSettings.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1.VerificationMailSettings)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1.VerificationMailSettings();
+                                switch (object.verificationMailMode) {
+                                default:
+                                    if (typeof object.verificationMailMode === "number") {
+                                        message.verificationMailMode = object.verificationMailMode;
+                                        break;
+                                    }
+                                    break;
+                                case "VERIFICATION_MAIL_MODE_UNSPECIFIED":
+                                case 0:
+                                    message.verificationMailMode = 0;
+                                    break;
+                                case "SEND_VERIFICATION_MAIL":
+                                case 1:
+                                    message.verificationMailMode = 1;
+                                    break;
+                                case "SUPPRESS_VERIFICATION_MAIL":
+                                case 2:
+                                    message.verificationMailMode = 2;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a VerificationMailSettings message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1.VerificationMailSettings
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1.VerificationMailSettings} message VerificationMailSettings
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            VerificationMailSettings.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.verificationMailMode = options.enums === String ? "VERIFICATION_MAIL_MODE_UNSPECIFIED" : 0;
+                                if (message.verificationMailMode != null && message.hasOwnProperty("verificationMailMode"))
+                                    object.verificationMailMode = options.enums === String ? $root.google.shopping.merchant.accounts.v1.VerificationMailSettings.VerificationMailMode[message.verificationMailMode] === undefined ? message.verificationMailMode : $root.google.shopping.merchant.accounts.v1.VerificationMailSettings.VerificationMailMode[message.verificationMailMode] : message.verificationMailMode;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this VerificationMailSettings to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1.VerificationMailSettings
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            VerificationMailSettings.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for VerificationMailSettings
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1.VerificationMailSettings
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            VerificationMailSettings.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1.VerificationMailSettings";
+                            };
+    
+                            /**
+                             * VerificationMailMode enum.
+                             * @name google.shopping.merchant.accounts.v1.VerificationMailSettings.VerificationMailMode
+                             * @enum {number}
+                             * @property {number} VERIFICATION_MAIL_MODE_UNSPECIFIED=0 VERIFICATION_MAIL_MODE_UNSPECIFIED value
+                             * @property {number} SEND_VERIFICATION_MAIL=1 SEND_VERIFICATION_MAIL value
+                             * @property {number} SUPPRESS_VERIFICATION_MAIL=2 SUPPRESS_VERIFICATION_MAIL value
+                             */
+                            VerificationMailSettings.VerificationMailMode = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "VERIFICATION_MAIL_MODE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "SEND_VERIFICATION_MAIL"] = 1;
+                                values[valuesById[2] = "SUPPRESS_VERIFICATION_MAIL"] = 2;
+                                return values;
+                            })();
+    
+                            return VerificationMailSettings;
                         })();
     
                         v1.AutofeedSettingsService = (function() {
@@ -18987,6 +20147,39 @@
                              * @variation 2
                              */
     
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.accounts.v1.DeveloperRegistrationService|getAccountForGcpRegistration}.
+                             * @memberof google.shopping.merchant.accounts.v1.DeveloperRegistrationService
+                             * @typedef GetAccountForGcpRegistrationCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.accounts.v1.GetAccountForGcpRegistrationResponse} [response] GetAccountForGcpRegistrationResponse
+                             */
+    
+                            /**
+                             * Calls GetAccountForGcpRegistration.
+                             * @function getAccountForGcpRegistration
+                             * @memberof google.shopping.merchant.accounts.v1.DeveloperRegistrationService
+                             * @instance
+                             * @param {google.protobuf.IEmpty} request Empty message or plain object
+                             * @param {google.shopping.merchant.accounts.v1.DeveloperRegistrationService.GetAccountForGcpRegistrationCallback} callback Node-style callback called with the error, if any, and GetAccountForGcpRegistrationResponse
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(DeveloperRegistrationService.prototype.getAccountForGcpRegistration = function getAccountForGcpRegistration(request, callback) {
+                                return this.rpcCall(getAccountForGcpRegistration, $root.google.protobuf.Empty, $root.google.shopping.merchant.accounts.v1.GetAccountForGcpRegistrationResponse, request, callback);
+                            }, "name", { value: "GetAccountForGcpRegistration" });
+    
+                            /**
+                             * Calls GetAccountForGcpRegistration.
+                             * @function getAccountForGcpRegistration
+                             * @memberof google.shopping.merchant.accounts.v1.DeveloperRegistrationService
+                             * @instance
+                             * @param {google.protobuf.IEmpty} request Empty message or plain object
+                             * @returns {Promise<google.shopping.merchant.accounts.v1.GetAccountForGcpRegistrationResponse>} Promise
+                             * @variation 2
+                             */
+    
                             return DeveloperRegistrationService;
                         })();
     
@@ -19872,6 +21065,211 @@
                             };
     
                             return GetDeveloperRegistrationRequest;
+                        })();
+    
+                        v1.GetAccountForGcpRegistrationResponse = (function() {
+    
+                            /**
+                             * Properties of a GetAccountForGcpRegistrationResponse.
+                             * @memberof google.shopping.merchant.accounts.v1
+                             * @interface IGetAccountForGcpRegistrationResponse
+                             * @property {string|null} [name] GetAccountForGcpRegistrationResponse name
+                             */
+    
+                            /**
+                             * Constructs a new GetAccountForGcpRegistrationResponse.
+                             * @memberof google.shopping.merchant.accounts.v1
+                             * @classdesc Represents a GetAccountForGcpRegistrationResponse.
+                             * @implements IGetAccountForGcpRegistrationResponse
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1.IGetAccountForGcpRegistrationResponse=} [properties] Properties to set
+                             */
+                            function GetAccountForGcpRegistrationResponse(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GetAccountForGcpRegistrationResponse name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.accounts.v1.GetAccountForGcpRegistrationResponse
+                             * @instance
+                             */
+                            GetAccountForGcpRegistrationResponse.prototype.name = "";
+    
+                            /**
+                             * Creates a new GetAccountForGcpRegistrationResponse instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1.GetAccountForGcpRegistrationResponse
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1.IGetAccountForGcpRegistrationResponse=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1.GetAccountForGcpRegistrationResponse} GetAccountForGcpRegistrationResponse instance
+                             */
+                            GetAccountForGcpRegistrationResponse.create = function create(properties) {
+                                return new GetAccountForGcpRegistrationResponse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GetAccountForGcpRegistrationResponse message. Does not implicitly {@link google.shopping.merchant.accounts.v1.GetAccountForGcpRegistrationResponse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1.GetAccountForGcpRegistrationResponse
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1.IGetAccountForGcpRegistrationResponse} message GetAccountForGcpRegistrationResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetAccountForGcpRegistrationResponse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GetAccountForGcpRegistrationResponse message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1.GetAccountForGcpRegistrationResponse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1.GetAccountForGcpRegistrationResponse
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1.IGetAccountForGcpRegistrationResponse} message GetAccountForGcpRegistrationResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetAccountForGcpRegistrationResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GetAccountForGcpRegistrationResponse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1.GetAccountForGcpRegistrationResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1.GetAccountForGcpRegistrationResponse} GetAccountForGcpRegistrationResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetAccountForGcpRegistrationResponse.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1.GetAccountForGcpRegistrationResponse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GetAccountForGcpRegistrationResponse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1.GetAccountForGcpRegistrationResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1.GetAccountForGcpRegistrationResponse} GetAccountForGcpRegistrationResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetAccountForGcpRegistrationResponse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GetAccountForGcpRegistrationResponse message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1.GetAccountForGcpRegistrationResponse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GetAccountForGcpRegistrationResponse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GetAccountForGcpRegistrationResponse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1.GetAccountForGcpRegistrationResponse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1.GetAccountForGcpRegistrationResponse} GetAccountForGcpRegistrationResponse
+                             */
+                            GetAccountForGcpRegistrationResponse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1.GetAccountForGcpRegistrationResponse)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1.GetAccountForGcpRegistrationResponse();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GetAccountForGcpRegistrationResponse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1.GetAccountForGcpRegistrationResponse
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1.GetAccountForGcpRegistrationResponse} message GetAccountForGcpRegistrationResponse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GetAccountForGcpRegistrationResponse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GetAccountForGcpRegistrationResponse to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1.GetAccountForGcpRegistrationResponse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GetAccountForGcpRegistrationResponse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GetAccountForGcpRegistrationResponse
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1.GetAccountForGcpRegistrationResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GetAccountForGcpRegistrationResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1.GetAccountForGcpRegistrationResponse";
+                            };
+    
+                            return GetAccountForGcpRegistrationResponse;
                         })();
     
                         v1.EmailPreferencesService = (function() {
@@ -95251,6 +96649,251 @@
                             };
     
                             return RetrieveForApplicationTermsOfServiceAgreementStateRequest;
+                        })();
+    
+                        v1beta.VerificationMailSettings = (function() {
+    
+                            /**
+                             * Properties of a VerificationMailSettings.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @interface IVerificationMailSettings
+                             * @property {google.shopping.merchant.accounts.v1beta.VerificationMailSettings.VerificationMailMode|null} [verificationMailMode] VerificationMailSettings verificationMailMode
+                             */
+    
+                            /**
+                             * Constructs a new VerificationMailSettings.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents a VerificationMailSettings.
+                             * @implements IVerificationMailSettings
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1beta.IVerificationMailSettings=} [properties] Properties to set
+                             */
+                            function VerificationMailSettings(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * VerificationMailSettings verificationMailMode.
+                             * @member {google.shopping.merchant.accounts.v1beta.VerificationMailSettings.VerificationMailMode} verificationMailMode
+                             * @memberof google.shopping.merchant.accounts.v1beta.VerificationMailSettings
+                             * @instance
+                             */
+                            VerificationMailSettings.prototype.verificationMailMode = 0;
+    
+                            /**
+                             * Creates a new VerificationMailSettings instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.VerificationMailSettings
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IVerificationMailSettings=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1beta.VerificationMailSettings} VerificationMailSettings instance
+                             */
+                            VerificationMailSettings.create = function create(properties) {
+                                return new VerificationMailSettings(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified VerificationMailSettings message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.VerificationMailSettings.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1beta.VerificationMailSettings
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IVerificationMailSettings} message VerificationMailSettings message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            VerificationMailSettings.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.verificationMailMode != null && Object.hasOwnProperty.call(message, "verificationMailMode"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.verificationMailMode);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified VerificationMailSettings message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.VerificationMailSettings.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.VerificationMailSettings
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IVerificationMailSettings} message VerificationMailSettings message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            VerificationMailSettings.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a VerificationMailSettings message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1beta.VerificationMailSettings
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1beta.VerificationMailSettings} VerificationMailSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            VerificationMailSettings.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.VerificationMailSettings();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.verificationMailMode = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a VerificationMailSettings message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.VerificationMailSettings
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1beta.VerificationMailSettings} VerificationMailSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            VerificationMailSettings.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a VerificationMailSettings message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1beta.VerificationMailSettings
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            VerificationMailSettings.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.verificationMailMode != null && message.hasOwnProperty("verificationMailMode"))
+                                    switch (message.verificationMailMode) {
+                                    default:
+                                        return "verificationMailMode: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a VerificationMailSettings message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.VerificationMailSettings
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1beta.VerificationMailSettings} VerificationMailSettings
+                             */
+                            VerificationMailSettings.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1beta.VerificationMailSettings)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1beta.VerificationMailSettings();
+                                switch (object.verificationMailMode) {
+                                default:
+                                    if (typeof object.verificationMailMode === "number") {
+                                        message.verificationMailMode = object.verificationMailMode;
+                                        break;
+                                    }
+                                    break;
+                                case "VERIFICATION_MAIL_MODE_UNSPECIFIED":
+                                case 0:
+                                    message.verificationMailMode = 0;
+                                    break;
+                                case "SEND_VERIFICATION_MAIL":
+                                case 1:
+                                    message.verificationMailMode = 1;
+                                    break;
+                                case "SUPPRESS_VERIFICATION_MAIL":
+                                case 2:
+                                    message.verificationMailMode = 2;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a VerificationMailSettings message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.VerificationMailSettings
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.VerificationMailSettings} message VerificationMailSettings
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            VerificationMailSettings.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.verificationMailMode = options.enums === String ? "VERIFICATION_MAIL_MODE_UNSPECIFIED" : 0;
+                                if (message.verificationMailMode != null && message.hasOwnProperty("verificationMailMode"))
+                                    object.verificationMailMode = options.enums === String ? $root.google.shopping.merchant.accounts.v1beta.VerificationMailSettings.VerificationMailMode[message.verificationMailMode] === undefined ? message.verificationMailMode : $root.google.shopping.merchant.accounts.v1beta.VerificationMailSettings.VerificationMailMode[message.verificationMailMode] : message.verificationMailMode;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this VerificationMailSettings to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1beta.VerificationMailSettings
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            VerificationMailSettings.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for VerificationMailSettings
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1beta.VerificationMailSettings
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            VerificationMailSettings.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.VerificationMailSettings";
+                            };
+    
+                            /**
+                             * VerificationMailMode enum.
+                             * @name google.shopping.merchant.accounts.v1beta.VerificationMailSettings.VerificationMailMode
+                             * @enum {number}
+                             * @property {number} VERIFICATION_MAIL_MODE_UNSPECIFIED=0 VERIFICATION_MAIL_MODE_UNSPECIFIED value
+                             * @property {number} SEND_VERIFICATION_MAIL=1 SEND_VERIFICATION_MAIL value
+                             * @property {number} SUPPRESS_VERIFICATION_MAIL=2 SUPPRESS_VERIFICATION_MAIL value
+                             */
+                            VerificationMailSettings.VerificationMailMode = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "VERIFICATION_MAIL_MODE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "SEND_VERIFICATION_MAIL"] = 1;
+                                values[valuesById[2] = "SUPPRESS_VERIFICATION_MAIL"] = 2;
+                                return values;
+                            })();
+    
+                            return VerificationMailSettings;
                         })();
     
                         return v1beta;

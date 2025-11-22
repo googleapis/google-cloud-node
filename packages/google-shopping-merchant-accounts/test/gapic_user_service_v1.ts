@@ -695,6 +695,114 @@ describe('v1.UserServiceClient', () => {
         });
     });
 
+    describe('verifySelf', () => {
+        it('invokes verifySelf without error', async () => {
+            const client = new userserviceModule.v1.UserServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.merchant.accounts.v1.VerifySelfRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.merchant.accounts.v1.VerifySelfRequest', ['account']);
+            request.account = defaultValue1;
+            const expectedHeaderRequestParams = `account=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.shopping.merchant.accounts.v1.User()
+            );
+            client.innerApiCalls.verifySelf = stubSimpleCall(expectedResponse);
+            const [response] = await client.verifySelf(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.verifySelf as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.verifySelf as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes verifySelf without error using callback', async () => {
+            const client = new userserviceModule.v1.UserServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.merchant.accounts.v1.VerifySelfRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.merchant.accounts.v1.VerifySelfRequest', ['account']);
+            request.account = defaultValue1;
+            const expectedHeaderRequestParams = `account=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.shopping.merchant.accounts.v1.User()
+            );
+            client.innerApiCalls.verifySelf = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.verifySelf(
+                    request,
+                    (err?: Error|null, result?: protos.google.shopping.merchant.accounts.v1.IUser|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.verifySelf as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.verifySelf as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes verifySelf with error', async () => {
+            const client = new userserviceModule.v1.UserServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.merchant.accounts.v1.VerifySelfRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.merchant.accounts.v1.VerifySelfRequest', ['account']);
+            request.account = defaultValue1;
+            const expectedHeaderRequestParams = `account=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.verifySelf = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.verifySelf(request), expectedError);
+            const actualRequest = (client.innerApiCalls.verifySelf as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.verifySelf as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes verifySelf with closed client', async () => {
+            const client = new userserviceModule.v1.UserServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.merchant.accounts.v1.VerifySelfRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.merchant.accounts.v1.VerifySelfRequest', ['account']);
+            request.account = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.verifySelf(request), expectedError);
+        });
+    });
+
     describe('listUsers', () => {
         it('invokes listUsers without error', async () => {
             const client = new userserviceModule.v1.UserServiceClient({

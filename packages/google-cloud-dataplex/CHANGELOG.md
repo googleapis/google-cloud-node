@@ -1,5 +1,27 @@
 # Changelog
 
+## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v5.2.0...dataplex-v5.3.0) (2025-11-11)
+
+
+### Features
+
+* **dataplex:** [dataplex] Allow publishing Data Profile scan results to the Dataplex Catalog ([#6868](https://github.com/googleapis/google-cloud-node/issues/6868)) ([524ca3c](https://github.com/googleapis/google-cloud-node/commit/524ca3cabe52d2e58e83467f94968cdf28c79fe9))
+* **dataplex:** Add GetIamPolicy method for DataProduct resources ([524ca3c](https://github.com/googleapis/google-cloud-node/commit/524ca3cabe52d2e58e83467f94968cdf28c79fe9))
+
+## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v5.1.1...dataplex-v5.2.0) (2025-10-23)
+
+
+### Features
+
+* [dataplex] A new message `DataDocumentationSpec` is added representing Data Documentation Spec ([#6837](https://github.com/googleapis/google-cloud-node/issues/6837)) ([8cd5a4a](https://github.com/googleapis/google-cloud-node/commit/8cd5a4acb6460d56f4267abff60b00be93cf2a55))
+
+## [5.1.1](https://github.com/googleapis/google-cloud-node/compare/dataplex-v5.1.0...dataplex-v5.1.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
 ## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v5.0.0...dataplex-v5.1.0) (2025-09-16)
 
 

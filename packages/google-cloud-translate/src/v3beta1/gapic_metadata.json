@@ -35,6 +35,11 @@
                 "getGlossary"
               ]
             },
+            "RefineText": {
+              "methods": [
+                "refineText"
+              ]
+            },
             "BatchTranslateText": {
               "methods": [
                 "batchTranslateText"
@@ -90,6 +95,11 @@
             "GetGlossary": {
               "methods": [
                 "getGlossary"
+              ]
+            },
+            "RefineText": {
+              "methods": [
+                "refineText"
               ]
             },
             "BatchTranslateText": {

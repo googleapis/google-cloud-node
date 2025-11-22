@@ -4,6 +4,27 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [7.4.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v7.3.0...dialogflow-v7.4.0) (2025-11-11)
+
+
+### Features
+
+* [dialogflow] add agentDesktopSource field to the Participant object ([#6878](https://github.com/googleapis/google-cloud-node/issues/6878)) ([e6cfcde](https://github.com/googleapis/google-cloud-node/commit/e6cfcdea780819b0c84daf0325127be322803fac))
+
+## [7.3.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v7.2.1...dialogflow-v7.3.0) (2025-10-23)
+
+
+### Features
+
+* [dialogflow] Added support for Build Your Own Assist feature ([#6835](https://github.com/googleapis/google-cloud-node/issues/6835)) ([b334162](https://github.com/googleapis/google-cloud-node/commit/b334162c5081489ffc9a970157723b3ffb9cc063))
+
+## [7.2.1](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v7.2.0...dialogflow-v7.2.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
 ## [7.2.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v7.1.0...dialogflow-v7.2.0) (2025-07-09)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/chronicle",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Chronicle API client for Node.js",
   "repository": {
     "type": "git",

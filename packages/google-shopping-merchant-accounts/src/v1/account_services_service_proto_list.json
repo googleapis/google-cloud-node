@@ -25,5 +25,6 @@
   "../../protos/google/shopping/merchant/accounts/v1/termsofserviceagreementstate.proto",
   "../../protos/google/shopping/merchant/accounts/v1/termsofservicekind.proto",
   "../../protos/google/shopping/merchant/accounts/v1/user.proto",
+  "../../protos/google/shopping/merchant/accounts/v1/verificationmailsettings.proto",
   "../../protos/google/shopping/type/types.proto"
 ]

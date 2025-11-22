@@ -56,6 +56,13 @@ function main(parent) {
    *  More detail in AIP-160 (https://google.aip.dev/160).
    */
   // const filter = 'abc123'
+  /**
+   *  Optional. A comma-separated list of fields to order by, sorted in ascending
+   *  order. Use "desc" after a field name for descending. Supported fields:
+   *    * `timestamp`
+   *  Example: `timestamp desc`.
+   */
+  // const orderBy = 'abc123'
 
   // Imports the Aiplatform library
   const {SessionServiceClient} = require('@google-cloud/aiplatform').v1beta1;

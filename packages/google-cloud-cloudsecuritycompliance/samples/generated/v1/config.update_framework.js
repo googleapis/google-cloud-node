@@ -29,16 +29,15 @@ function main(framework) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Optional. Field mask is used to specify the fields to be overwritten in the
-   *  Framework resource by the update.
-   *  The fields specified in the update_mask are relative to the resource, not
-   *  the full request. A field will be overwritten if it is in the mask. If the
-   *  user does not provide a mask then all fields present in the request will be
-   *  overwritten.
+   *  Optional. A field mask is used to specify the fields to be overwritten in
+   *  the framework resource by the update. The fields specified in the
+   *  `update_mask` are relative to the resource, not the full request. A field
+   *  is overwritten if it is in the mask. If you don't provide a mask then all
+   *  fields present in the request will be overwritten.
    */
   // const updateMask = {}
   /**
-   *  Required. The resource being updated
+   *  Required. The resource that is being updated.
    */
   // const framework = {}
   /**

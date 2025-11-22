@@ -2858,6 +2858,14 @@
                           "type": "Turn",
                           "id": 4
                         },
+                        "labels": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "startTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 5,
@@ -2901,6 +2909,13 @@
                             "detailedAnswer": {
                               "type": "Answer",
                               "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "detailedAssistAnswer": {
+                              "type": "AssistAnswer",
+                              "id": 8,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }

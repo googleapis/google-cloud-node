@@ -1,5 +1,55 @@
 # Changelog
 
+## [5.13.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.12.0...aiplatform-v5.13.0) (2025-11-11)
+
+
+### Features
+
+* Add order_by to list_events ([#6864](https://github.com/googleapis/google-cloud-node/issues/6864)) ([8d71bbf](https://github.com/googleapis/google-cloud-node/commit/8d71bbf30bc7ae1a54a3e37b8740d46dfbe418dd))
+
+## [5.12.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.11.0...aiplatform-v5.12.0) (2025-10-25)
+
+
+### Features
+
+* Add EmbedContent method v1 ([#6844](https://github.com/googleapis/google-cloud-node/issues/6844)) ([da2c718](https://github.com/googleapis/google-cloud-node/commit/da2c71816dc16c6ec4d64d74b7913ae5e399a0bc))
+
+## [5.11.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.10.0...aiplatform-v5.11.0) (2025-10-23)
+
+
+### Features
+
+* Add EmbedContent method v1beta1 ([#6833](https://github.com/googleapis/google-cloud-node/issues/6833)) ([8a7ce8e](https://github.com/googleapis/google-cloud-node/commit/8a7ce8e898273557543277bcdb664d5aee9183ce))
+
+## [5.10.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.9.0...aiplatform-v5.10.0) (2025-10-21)
+
+
+### Features
+
+* Add FunctionResponsePart and excluded_predefined_functions in ComputerUse ([#6825](https://github.com/googleapis/google-cloud-node/issues/6825)) ([0d3274e](https://github.com/googleapis/google-cloud-node/commit/0d3274e0fa00cf2cf9cc15488b2f33672a97fe00))
+* Add FunctionResponsePart and excluded_predefined_functions in ComputerUse ([#6829](https://github.com/googleapis/google-cloud-node/issues/6829)) ([6001de8](https://github.com/googleapis/google-cloud-node/commit/6001de8c9b62274d067b58b346e835c97dc249ea))
+
+## [5.9.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.8.0...aiplatform-v5.9.0) (2025-10-16)
+
+
+### Features
+
+* Add aspect_ratio and image_config for v1 version ([#6817](https://github.com/googleapis/google-cloud-node/issues/6817)) ([9f40bf1](https://github.com/googleapis/google-cloud-node/commit/9f40bf125a2e32fee4da4cd391265e9d4b380bcd))
+* Add aspect_ratio and image_config for v1beta1 version ([#6814](https://github.com/googleapis/google-cloud-node/issues/6814)) ([8d38a09](https://github.com/googleapis/google-cloud-node/commit/8d38a0919218be1c4ba6de4e283786facf2eb0b4))
+
+## [5.8.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.7.0...aiplatform-v5.8.0) (2025-10-13)
+
+
+### Features
+
+* Add JAILBREAK category to SafetySettings for prediction service ([#6801](https://github.com/googleapis/google-cloud-node/issues/6801)) ([fcf84bf](https://github.com/googleapis/google-cloud-node/commit/fcf84bf1ece803b25b8719e80afb852ea515a4c0))
+* Add labels field for Predict API for Imagen use case (v1beta and v1) ([#6788](https://github.com/googleapis/google-cloud-node/issues/6788)) ([6a0eeb4](https://github.com/googleapis/google-cloud-node/commit/6a0eeb493f3f2eef6bbec8baa2f27aa9b9841bda))
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
 ## [5.7.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.6.0...aiplatform-v5.7.0) (2025-09-09)
 
 

@@ -707,6 +707,762 @@ describe('v1.OracleDatabaseClient', () => {
         });
     });
 
+    describe('getOdbNetwork', () => {
+        it('invokes getOdbNetwork without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.GetOdbNetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.GetOdbNetworkRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.OdbNetwork()
+            );
+            client.innerApiCalls.getOdbNetwork = stubSimpleCall(expectedResponse);
+            const [response] = await client.getOdbNetwork(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getOdbNetwork as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getOdbNetwork as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getOdbNetwork without error using callback', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.GetOdbNetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.GetOdbNetworkRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.OdbNetwork()
+            );
+            client.innerApiCalls.getOdbNetwork = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getOdbNetwork(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.oracledatabase.v1.IOdbNetwork|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getOdbNetwork as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getOdbNetwork as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getOdbNetwork with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.GetOdbNetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.GetOdbNetworkRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getOdbNetwork = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getOdbNetwork(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getOdbNetwork as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getOdbNetwork as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getOdbNetwork with closed client', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.GetOdbNetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.GetOdbNetworkRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getOdbNetwork(request), expectedError);
+        });
+    });
+
+    describe('getOdbSubnet', () => {
+        it('invokes getOdbSubnet without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.GetOdbSubnetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.GetOdbSubnetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.OdbSubnet()
+            );
+            client.innerApiCalls.getOdbSubnet = stubSimpleCall(expectedResponse);
+            const [response] = await client.getOdbSubnet(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getOdbSubnet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getOdbSubnet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getOdbSubnet without error using callback', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.GetOdbSubnetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.GetOdbSubnetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.OdbSubnet()
+            );
+            client.innerApiCalls.getOdbSubnet = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getOdbSubnet(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.oracledatabase.v1.IOdbSubnet|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getOdbSubnet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getOdbSubnet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getOdbSubnet with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.GetOdbSubnetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.GetOdbSubnetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getOdbSubnet = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getOdbSubnet(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getOdbSubnet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getOdbSubnet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getOdbSubnet with closed client', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.GetOdbSubnetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.GetOdbSubnetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getOdbSubnet(request), expectedError);
+        });
+    });
+
+    describe('getExadbVmCluster', () => {
+        it('invokes getExadbVmCluster without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.GetExadbVmClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.GetExadbVmClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ExadbVmCluster()
+            );
+            client.innerApiCalls.getExadbVmCluster = stubSimpleCall(expectedResponse);
+            const [response] = await client.getExadbVmCluster(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getExadbVmCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getExadbVmCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getExadbVmCluster without error using callback', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.GetExadbVmClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.GetExadbVmClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ExadbVmCluster()
+            );
+            client.innerApiCalls.getExadbVmCluster = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getExadbVmCluster(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.oracledatabase.v1.IExadbVmCluster|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getExadbVmCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getExadbVmCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getExadbVmCluster with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.GetExadbVmClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.GetExadbVmClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getExadbVmCluster = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getExadbVmCluster(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getExadbVmCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getExadbVmCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getExadbVmCluster with closed client', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.GetExadbVmClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.GetExadbVmClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getExadbVmCluster(request), expectedError);
+        });
+    });
+
+    describe('getExascaleDbStorageVault', () => {
+        it('invokes getExascaleDbStorageVault without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.GetExascaleDbStorageVaultRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.GetExascaleDbStorageVaultRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ExascaleDbStorageVault()
+            );
+            client.innerApiCalls.getExascaleDbStorageVault = stubSimpleCall(expectedResponse);
+            const [response] = await client.getExascaleDbStorageVault(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getExascaleDbStorageVault as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getExascaleDbStorageVault as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getExascaleDbStorageVault without error using callback', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.GetExascaleDbStorageVaultRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.GetExascaleDbStorageVaultRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ExascaleDbStorageVault()
+            );
+            client.innerApiCalls.getExascaleDbStorageVault = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getExascaleDbStorageVault(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.oracledatabase.v1.IExascaleDbStorageVault|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getExascaleDbStorageVault as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getExascaleDbStorageVault as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getExascaleDbStorageVault with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.GetExascaleDbStorageVaultRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.GetExascaleDbStorageVaultRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getExascaleDbStorageVault = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getExascaleDbStorageVault(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getExascaleDbStorageVault as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getExascaleDbStorageVault as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getExascaleDbStorageVault with closed client', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.GetExascaleDbStorageVaultRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.GetExascaleDbStorageVaultRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getExascaleDbStorageVault(request), expectedError);
+        });
+    });
+
+    describe('getDatabase', () => {
+        it('invokes getDatabase without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.GetDatabaseRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.GetDatabaseRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.Database()
+            );
+            client.innerApiCalls.getDatabase = stubSimpleCall(expectedResponse);
+            const [response] = await client.getDatabase(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getDatabase as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getDatabase as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getDatabase without error using callback', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.GetDatabaseRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.GetDatabaseRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.Database()
+            );
+            client.innerApiCalls.getDatabase = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getDatabase(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.oracledatabase.v1.IDatabase|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getDatabase as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getDatabase as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getDatabase with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.GetDatabaseRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.GetDatabaseRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getDatabase = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getDatabase(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getDatabase as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getDatabase as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getDatabase with closed client', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.GetDatabaseRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.GetDatabaseRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getDatabase(request), expectedError);
+        });
+    });
+
+    describe('getPluggableDatabase', () => {
+        it('invokes getPluggableDatabase without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.GetPluggableDatabaseRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.GetPluggableDatabaseRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.PluggableDatabase()
+            );
+            client.innerApiCalls.getPluggableDatabase = stubSimpleCall(expectedResponse);
+            const [response] = await client.getPluggableDatabase(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getPluggableDatabase as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getPluggableDatabase as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getPluggableDatabase without error using callback', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.GetPluggableDatabaseRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.GetPluggableDatabaseRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.PluggableDatabase()
+            );
+            client.innerApiCalls.getPluggableDatabase = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getPluggableDatabase(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.oracledatabase.v1.IPluggableDatabase|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getPluggableDatabase as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getPluggableDatabase as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getPluggableDatabase with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.GetPluggableDatabaseRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.GetPluggableDatabaseRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getPluggableDatabase = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getPluggableDatabase(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getPluggableDatabase as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getPluggableDatabase as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getPluggableDatabase with closed client', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.GetPluggableDatabaseRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.GetPluggableDatabaseRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getPluggableDatabase(request), expectedError);
+        });
+    });
+
+    describe('getDbSystem', () => {
+        it('invokes getDbSystem without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.GetDbSystemRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.GetDbSystemRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.DbSystem()
+            );
+            client.innerApiCalls.getDbSystem = stubSimpleCall(expectedResponse);
+            const [response] = await client.getDbSystem(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getDbSystem as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getDbSystem as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getDbSystem without error using callback', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.GetDbSystemRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.GetDbSystemRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.DbSystem()
+            );
+            client.innerApiCalls.getDbSystem = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getDbSystem(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.oracledatabase.v1.IDbSystem|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getDbSystem as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getDbSystem as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getDbSystem with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.GetDbSystemRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.GetDbSystemRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getDbSystem = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getDbSystem(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getDbSystem as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getDbSystem as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getDbSystem with closed client', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.GetDbSystemRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.GetDbSystemRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getDbSystem(request), expectedError);
+        });
+    });
+
     describe('createCloudExadataInfrastructure', () => {
         it('invokes createCloudExadataInfrastructure without error', async () => {
             const client = new oracledatabaseModule.v1.OracleDatabaseClient({
@@ -1477,6 +2233,164 @@ describe('v1.OracleDatabaseClient', () => {
         });
     });
 
+    describe('updateAutonomousDatabase', () => {
+        it('invokes updateAutonomousDatabase without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.UpdateAutonomousDatabaseRequest()
+            );
+            request.autonomousDatabase ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.UpdateAutonomousDatabaseRequest', ['autonomousDatabase', 'name']);
+            request.autonomousDatabase.name = defaultValue1;
+            const expectedHeaderRequestParams = `autonomous_database.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateAutonomousDatabase = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateAutonomousDatabase(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateAutonomousDatabase as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAutonomousDatabase as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAutonomousDatabase without error using callback', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.UpdateAutonomousDatabaseRequest()
+            );
+            request.autonomousDatabase ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.UpdateAutonomousDatabaseRequest', ['autonomousDatabase', 'name']);
+            request.autonomousDatabase.name = defaultValue1;
+            const expectedHeaderRequestParams = `autonomous_database.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateAutonomousDatabase = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateAutonomousDatabase(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.oracledatabase.v1.IAutonomousDatabase, protos.google.cloud.oracledatabase.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.oracledatabase.v1.IAutonomousDatabase, protos.google.cloud.oracledatabase.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateAutonomousDatabase as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAutonomousDatabase as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAutonomousDatabase with call error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.UpdateAutonomousDatabaseRequest()
+            );
+            request.autonomousDatabase ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.UpdateAutonomousDatabaseRequest', ['autonomousDatabase', 'name']);
+            request.autonomousDatabase.name = defaultValue1;
+            const expectedHeaderRequestParams = `autonomous_database.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateAutonomousDatabase = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateAutonomousDatabase(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateAutonomousDatabase as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAutonomousDatabase as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAutonomousDatabase with LRO error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.UpdateAutonomousDatabaseRequest()
+            );
+            request.autonomousDatabase ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.UpdateAutonomousDatabaseRequest', ['autonomousDatabase', 'name']);
+            request.autonomousDatabase.name = defaultValue1;
+            const expectedHeaderRequestParams = `autonomous_database.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateAutonomousDatabase = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateAutonomousDatabase(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateAutonomousDatabase as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAutonomousDatabase as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateAutonomousDatabaseProgress without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateAutonomousDatabaseProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateAutonomousDatabaseProgress with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateAutonomousDatabaseProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
     describe('deleteAutonomousDatabase', () => {
         it('invokes deleteAutonomousDatabase without error', async () => {
             const client = new oracledatabaseModule.v1.OracleDatabaseClient({
@@ -2242,6 +3156,2166 @@ describe('v1.OracleDatabaseClient', () => {
 
             client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.checkRestartAutonomousDatabaseProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('switchoverAutonomousDatabase', () => {
+        it('invokes switchoverAutonomousDatabase without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.SwitchoverAutonomousDatabaseRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.SwitchoverAutonomousDatabaseRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.switchoverAutonomousDatabase = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.switchoverAutonomousDatabase(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.switchoverAutonomousDatabase as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.switchoverAutonomousDatabase as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes switchoverAutonomousDatabase without error using callback', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.SwitchoverAutonomousDatabaseRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.SwitchoverAutonomousDatabaseRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.switchoverAutonomousDatabase = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.switchoverAutonomousDatabase(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.oracledatabase.v1.IAutonomousDatabase, protos.google.cloud.oracledatabase.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.oracledatabase.v1.IAutonomousDatabase, protos.google.cloud.oracledatabase.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.switchoverAutonomousDatabase as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.switchoverAutonomousDatabase as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes switchoverAutonomousDatabase with call error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.SwitchoverAutonomousDatabaseRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.SwitchoverAutonomousDatabaseRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.switchoverAutonomousDatabase = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.switchoverAutonomousDatabase(request), expectedError);
+            const actualRequest = (client.innerApiCalls.switchoverAutonomousDatabase as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.switchoverAutonomousDatabase as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes switchoverAutonomousDatabase with LRO error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.SwitchoverAutonomousDatabaseRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.SwitchoverAutonomousDatabaseRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.switchoverAutonomousDatabase = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.switchoverAutonomousDatabase(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.switchoverAutonomousDatabase as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.switchoverAutonomousDatabase as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkSwitchoverAutonomousDatabaseProgress without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkSwitchoverAutonomousDatabaseProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkSwitchoverAutonomousDatabaseProgress with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkSwitchoverAutonomousDatabaseProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('failoverAutonomousDatabase', () => {
+        it('invokes failoverAutonomousDatabase without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.FailoverAutonomousDatabaseRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.FailoverAutonomousDatabaseRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.failoverAutonomousDatabase = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.failoverAutonomousDatabase(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.failoverAutonomousDatabase as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.failoverAutonomousDatabase as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes failoverAutonomousDatabase without error using callback', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.FailoverAutonomousDatabaseRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.FailoverAutonomousDatabaseRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.failoverAutonomousDatabase = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.failoverAutonomousDatabase(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.oracledatabase.v1.IAutonomousDatabase, protos.google.cloud.oracledatabase.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.oracledatabase.v1.IAutonomousDatabase, protos.google.cloud.oracledatabase.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.failoverAutonomousDatabase as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.failoverAutonomousDatabase as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes failoverAutonomousDatabase with call error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.FailoverAutonomousDatabaseRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.FailoverAutonomousDatabaseRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.failoverAutonomousDatabase = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.failoverAutonomousDatabase(request), expectedError);
+            const actualRequest = (client.innerApiCalls.failoverAutonomousDatabase as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.failoverAutonomousDatabase as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes failoverAutonomousDatabase with LRO error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.FailoverAutonomousDatabaseRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.FailoverAutonomousDatabaseRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.failoverAutonomousDatabase = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.failoverAutonomousDatabase(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.failoverAutonomousDatabase as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.failoverAutonomousDatabase as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkFailoverAutonomousDatabaseProgress without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkFailoverAutonomousDatabaseProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkFailoverAutonomousDatabaseProgress with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkFailoverAutonomousDatabaseProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createOdbNetwork', () => {
+        it('invokes createOdbNetwork without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.CreateOdbNetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.CreateOdbNetworkRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createOdbNetwork = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createOdbNetwork(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createOdbNetwork as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createOdbNetwork as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createOdbNetwork without error using callback', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.CreateOdbNetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.CreateOdbNetworkRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createOdbNetwork = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createOdbNetwork(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.oracledatabase.v1.IOdbNetwork, protos.google.cloud.oracledatabase.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.oracledatabase.v1.IOdbNetwork, protos.google.cloud.oracledatabase.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createOdbNetwork as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createOdbNetwork as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createOdbNetwork with call error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.CreateOdbNetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.CreateOdbNetworkRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createOdbNetwork = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createOdbNetwork(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createOdbNetwork as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createOdbNetwork as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createOdbNetwork with LRO error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.CreateOdbNetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.CreateOdbNetworkRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createOdbNetwork = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createOdbNetwork(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createOdbNetwork as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createOdbNetwork as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateOdbNetworkProgress without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateOdbNetworkProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateOdbNetworkProgress with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateOdbNetworkProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteOdbNetwork', () => {
+        it('invokes deleteOdbNetwork without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.DeleteOdbNetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.DeleteOdbNetworkRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteOdbNetwork = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteOdbNetwork(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteOdbNetwork as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteOdbNetwork as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteOdbNetwork without error using callback', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.DeleteOdbNetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.DeleteOdbNetworkRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteOdbNetwork = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteOdbNetwork(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.oracledatabase.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.oracledatabase.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteOdbNetwork as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteOdbNetwork as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteOdbNetwork with call error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.DeleteOdbNetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.DeleteOdbNetworkRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteOdbNetwork = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteOdbNetwork(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteOdbNetwork as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteOdbNetwork as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteOdbNetwork with LRO error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.DeleteOdbNetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.DeleteOdbNetworkRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteOdbNetwork = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteOdbNetwork(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteOdbNetwork as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteOdbNetwork as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteOdbNetworkProgress without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteOdbNetworkProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteOdbNetworkProgress with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteOdbNetworkProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createOdbSubnet', () => {
+        it('invokes createOdbSubnet without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.CreateOdbSubnetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.CreateOdbSubnetRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createOdbSubnet = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createOdbSubnet(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createOdbSubnet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createOdbSubnet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createOdbSubnet without error using callback', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.CreateOdbSubnetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.CreateOdbSubnetRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createOdbSubnet = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createOdbSubnet(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.oracledatabase.v1.IOdbSubnet, protos.google.cloud.oracledatabase.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.oracledatabase.v1.IOdbSubnet, protos.google.cloud.oracledatabase.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createOdbSubnet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createOdbSubnet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createOdbSubnet with call error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.CreateOdbSubnetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.CreateOdbSubnetRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createOdbSubnet = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createOdbSubnet(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createOdbSubnet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createOdbSubnet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createOdbSubnet with LRO error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.CreateOdbSubnetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.CreateOdbSubnetRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createOdbSubnet = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createOdbSubnet(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createOdbSubnet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createOdbSubnet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateOdbSubnetProgress without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateOdbSubnetProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateOdbSubnetProgress with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateOdbSubnetProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteOdbSubnet', () => {
+        it('invokes deleteOdbSubnet without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.DeleteOdbSubnetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.DeleteOdbSubnetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteOdbSubnet = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteOdbSubnet(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteOdbSubnet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteOdbSubnet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteOdbSubnet without error using callback', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.DeleteOdbSubnetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.DeleteOdbSubnetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteOdbSubnet = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteOdbSubnet(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.oracledatabase.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.oracledatabase.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteOdbSubnet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteOdbSubnet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteOdbSubnet with call error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.DeleteOdbSubnetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.DeleteOdbSubnetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteOdbSubnet = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteOdbSubnet(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteOdbSubnet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteOdbSubnet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteOdbSubnet with LRO error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.DeleteOdbSubnetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.DeleteOdbSubnetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteOdbSubnet = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteOdbSubnet(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteOdbSubnet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteOdbSubnet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteOdbSubnetProgress without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteOdbSubnetProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteOdbSubnetProgress with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteOdbSubnetProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createExadbVmCluster', () => {
+        it('invokes createExadbVmCluster without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.CreateExadbVmClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.CreateExadbVmClusterRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createExadbVmCluster = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createExadbVmCluster(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createExadbVmCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createExadbVmCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createExadbVmCluster without error using callback', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.CreateExadbVmClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.CreateExadbVmClusterRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createExadbVmCluster = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createExadbVmCluster(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.oracledatabase.v1.IExadbVmCluster, protos.google.cloud.oracledatabase.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.oracledatabase.v1.IExadbVmCluster, protos.google.cloud.oracledatabase.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createExadbVmCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createExadbVmCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createExadbVmCluster with call error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.CreateExadbVmClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.CreateExadbVmClusterRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createExadbVmCluster = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createExadbVmCluster(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createExadbVmCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createExadbVmCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createExadbVmCluster with LRO error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.CreateExadbVmClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.CreateExadbVmClusterRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createExadbVmCluster = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createExadbVmCluster(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createExadbVmCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createExadbVmCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateExadbVmClusterProgress without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateExadbVmClusterProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateExadbVmClusterProgress with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateExadbVmClusterProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteExadbVmCluster', () => {
+        it('invokes deleteExadbVmCluster without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.DeleteExadbVmClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.DeleteExadbVmClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteExadbVmCluster = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteExadbVmCluster(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteExadbVmCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteExadbVmCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteExadbVmCluster without error using callback', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.DeleteExadbVmClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.DeleteExadbVmClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteExadbVmCluster = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteExadbVmCluster(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.oracledatabase.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.oracledatabase.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteExadbVmCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteExadbVmCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteExadbVmCluster with call error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.DeleteExadbVmClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.DeleteExadbVmClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteExadbVmCluster = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteExadbVmCluster(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteExadbVmCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteExadbVmCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteExadbVmCluster with LRO error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.DeleteExadbVmClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.DeleteExadbVmClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteExadbVmCluster = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteExadbVmCluster(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteExadbVmCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteExadbVmCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteExadbVmClusterProgress without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteExadbVmClusterProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteExadbVmClusterProgress with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteExadbVmClusterProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateExadbVmCluster', () => {
+        it('invokes updateExadbVmCluster without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.UpdateExadbVmClusterRequest()
+            );
+            request.exadbVmCluster ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.UpdateExadbVmClusterRequest', ['exadbVmCluster', 'name']);
+            request.exadbVmCluster.name = defaultValue1;
+            const expectedHeaderRequestParams = `exadb_vm_cluster.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateExadbVmCluster = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateExadbVmCluster(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateExadbVmCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateExadbVmCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateExadbVmCluster without error using callback', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.UpdateExadbVmClusterRequest()
+            );
+            request.exadbVmCluster ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.UpdateExadbVmClusterRequest', ['exadbVmCluster', 'name']);
+            request.exadbVmCluster.name = defaultValue1;
+            const expectedHeaderRequestParams = `exadb_vm_cluster.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateExadbVmCluster = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateExadbVmCluster(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.oracledatabase.v1.IExadbVmCluster, protos.google.cloud.oracledatabase.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.oracledatabase.v1.IExadbVmCluster, protos.google.cloud.oracledatabase.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateExadbVmCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateExadbVmCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateExadbVmCluster with call error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.UpdateExadbVmClusterRequest()
+            );
+            request.exadbVmCluster ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.UpdateExadbVmClusterRequest', ['exadbVmCluster', 'name']);
+            request.exadbVmCluster.name = defaultValue1;
+            const expectedHeaderRequestParams = `exadb_vm_cluster.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateExadbVmCluster = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateExadbVmCluster(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateExadbVmCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateExadbVmCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateExadbVmCluster with LRO error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.UpdateExadbVmClusterRequest()
+            );
+            request.exadbVmCluster ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.UpdateExadbVmClusterRequest', ['exadbVmCluster', 'name']);
+            request.exadbVmCluster.name = defaultValue1;
+            const expectedHeaderRequestParams = `exadb_vm_cluster.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateExadbVmCluster = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateExadbVmCluster(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateExadbVmCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateExadbVmCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateExadbVmClusterProgress without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateExadbVmClusterProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateExadbVmClusterProgress with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateExadbVmClusterProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('removeVirtualMachineExadbVmCluster', () => {
+        it('invokes removeVirtualMachineExadbVmCluster without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.RemoveVirtualMachineExadbVmClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.RemoveVirtualMachineExadbVmClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.removeVirtualMachineExadbVmCluster = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.removeVirtualMachineExadbVmCluster(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.removeVirtualMachineExadbVmCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.removeVirtualMachineExadbVmCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes removeVirtualMachineExadbVmCluster without error using callback', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.RemoveVirtualMachineExadbVmClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.RemoveVirtualMachineExadbVmClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.removeVirtualMachineExadbVmCluster = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.removeVirtualMachineExadbVmCluster(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.oracledatabase.v1.IExadbVmCluster, protos.google.cloud.oracledatabase.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.oracledatabase.v1.IExadbVmCluster, protos.google.cloud.oracledatabase.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.removeVirtualMachineExadbVmCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.removeVirtualMachineExadbVmCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes removeVirtualMachineExadbVmCluster with call error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.RemoveVirtualMachineExadbVmClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.RemoveVirtualMachineExadbVmClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.removeVirtualMachineExadbVmCluster = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.removeVirtualMachineExadbVmCluster(request), expectedError);
+            const actualRequest = (client.innerApiCalls.removeVirtualMachineExadbVmCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.removeVirtualMachineExadbVmCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes removeVirtualMachineExadbVmCluster with LRO error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.RemoveVirtualMachineExadbVmClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.RemoveVirtualMachineExadbVmClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.removeVirtualMachineExadbVmCluster = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.removeVirtualMachineExadbVmCluster(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.removeVirtualMachineExadbVmCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.removeVirtualMachineExadbVmCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkRemoveVirtualMachineExadbVmClusterProgress without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkRemoveVirtualMachineExadbVmClusterProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkRemoveVirtualMachineExadbVmClusterProgress with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkRemoveVirtualMachineExadbVmClusterProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createExascaleDbStorageVault', () => {
+        it('invokes createExascaleDbStorageVault without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.CreateExascaleDbStorageVaultRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.CreateExascaleDbStorageVaultRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createExascaleDbStorageVault = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createExascaleDbStorageVault(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createExascaleDbStorageVault as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createExascaleDbStorageVault as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createExascaleDbStorageVault without error using callback', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.CreateExascaleDbStorageVaultRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.CreateExascaleDbStorageVaultRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createExascaleDbStorageVault = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createExascaleDbStorageVault(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.oracledatabase.v1.IExascaleDbStorageVault, protos.google.cloud.oracledatabase.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.oracledatabase.v1.IExascaleDbStorageVault, protos.google.cloud.oracledatabase.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createExascaleDbStorageVault as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createExascaleDbStorageVault as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createExascaleDbStorageVault with call error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.CreateExascaleDbStorageVaultRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.CreateExascaleDbStorageVaultRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createExascaleDbStorageVault = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createExascaleDbStorageVault(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createExascaleDbStorageVault as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createExascaleDbStorageVault as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createExascaleDbStorageVault with LRO error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.CreateExascaleDbStorageVaultRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.CreateExascaleDbStorageVaultRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createExascaleDbStorageVault = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createExascaleDbStorageVault(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createExascaleDbStorageVault as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createExascaleDbStorageVault as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateExascaleDbStorageVaultProgress without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateExascaleDbStorageVaultProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateExascaleDbStorageVaultProgress with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateExascaleDbStorageVaultProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteExascaleDbStorageVault', () => {
+        it('invokes deleteExascaleDbStorageVault without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.DeleteExascaleDbStorageVaultRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.DeleteExascaleDbStorageVaultRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteExascaleDbStorageVault = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteExascaleDbStorageVault(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteExascaleDbStorageVault as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteExascaleDbStorageVault as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteExascaleDbStorageVault without error using callback', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.DeleteExascaleDbStorageVaultRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.DeleteExascaleDbStorageVaultRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteExascaleDbStorageVault = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteExascaleDbStorageVault(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.oracledatabase.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.oracledatabase.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteExascaleDbStorageVault as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteExascaleDbStorageVault as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteExascaleDbStorageVault with call error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.DeleteExascaleDbStorageVaultRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.DeleteExascaleDbStorageVaultRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteExascaleDbStorageVault = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteExascaleDbStorageVault(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteExascaleDbStorageVault as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteExascaleDbStorageVault as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteExascaleDbStorageVault with LRO error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.DeleteExascaleDbStorageVaultRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.DeleteExascaleDbStorageVaultRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteExascaleDbStorageVault = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteExascaleDbStorageVault(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteExascaleDbStorageVault as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteExascaleDbStorageVault as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteExascaleDbStorageVaultProgress without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteExascaleDbStorageVaultProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteExascaleDbStorageVaultProgress with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteExascaleDbStorageVaultProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createDbSystem', () => {
+        it('invokes createDbSystem without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.CreateDbSystemRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.CreateDbSystemRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createDbSystem = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createDbSystem(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createDbSystem as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createDbSystem as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createDbSystem without error using callback', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.CreateDbSystemRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.CreateDbSystemRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createDbSystem = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createDbSystem(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.oracledatabase.v1.IDbSystem, protos.google.cloud.oracledatabase.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.oracledatabase.v1.IDbSystem, protos.google.cloud.oracledatabase.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createDbSystem as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createDbSystem as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createDbSystem with call error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.CreateDbSystemRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.CreateDbSystemRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createDbSystem = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createDbSystem(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createDbSystem as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createDbSystem as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createDbSystem with LRO error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.CreateDbSystemRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.CreateDbSystemRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createDbSystem = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createDbSystem(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createDbSystem as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createDbSystem as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateDbSystemProgress without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateDbSystemProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateDbSystemProgress with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateDbSystemProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteDbSystem', () => {
+        it('invokes deleteDbSystem without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.DeleteDbSystemRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.DeleteDbSystemRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteDbSystem = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteDbSystem(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteDbSystem as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteDbSystem as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteDbSystem without error using callback', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.DeleteDbSystemRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.DeleteDbSystemRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteDbSystem = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteDbSystem(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.oracledatabase.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.oracledatabase.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteDbSystem as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteDbSystem as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteDbSystem with call error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.DeleteDbSystemRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.DeleteDbSystemRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteDbSystem = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteDbSystem(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteDbSystem as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteDbSystem as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteDbSystem with LRO error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.DeleteDbSystemRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.DeleteDbSystemRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteDbSystem = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteDbSystem(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteDbSystem as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteDbSystem as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteDbSystemProgress without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteDbSystemProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteDbSystemProgress with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteDbSystemProgress(''), expectedError);
             assert((client.operationsClient.getOperation as SinonStub)
                 .getCall(0));
         });
@@ -3717,6 +6791,251 @@ describe('v1.OracleDatabaseClient', () => {
         });
     });
 
+    describe('listMinorVersions', () => {
+        it('invokes listMinorVersions without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListMinorVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListMinorVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.MinorVersion()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.MinorVersion()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.MinorVersion()),
+            ];
+            client.innerApiCalls.listMinorVersions = stubSimpleCall(expectedResponse);
+            const [response] = await client.listMinorVersions(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listMinorVersions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listMinorVersions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listMinorVersions without error using callback', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListMinorVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListMinorVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.MinorVersion()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.MinorVersion()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.MinorVersion()),
+            ];
+            client.innerApiCalls.listMinorVersions = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listMinorVersions(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.oracledatabase.v1.IMinorVersion[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listMinorVersions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listMinorVersions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listMinorVersions with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListMinorVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListMinorVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listMinorVersions = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listMinorVersions(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listMinorVersions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listMinorVersions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listMinorVersionsStream without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListMinorVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListMinorVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.MinorVersion()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.MinorVersion()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.MinorVersion()),
+            ];
+            client.descriptors.page.listMinorVersions.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listMinorVersionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.oracledatabase.v1.MinorVersion[] = [];
+                stream.on('data', (response: protos.google.cloud.oracledatabase.v1.MinorVersion) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listMinorVersions.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listMinorVersions, request));
+            assert(
+                (client.descriptors.page.listMinorVersions.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listMinorVersionsStream with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListMinorVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListMinorVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listMinorVersions.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listMinorVersionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.oracledatabase.v1.MinorVersion[] = [];
+                stream.on('data', (response: protos.google.cloud.oracledatabase.v1.MinorVersion) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listMinorVersions.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listMinorVersions, request));
+            assert(
+                (client.descriptors.page.listMinorVersions.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listMinorVersions without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListMinorVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListMinorVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.MinorVersion()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.MinorVersion()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.MinorVersion()),
+            ];
+            client.descriptors.page.listMinorVersions.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.oracledatabase.v1.IMinorVersion[] = [];
+            const iterable = client.listMinorVersionsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listMinorVersions.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listMinorVersions.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listMinorVersions with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListMinorVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListMinorVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listMinorVersions.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listMinorVersionsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.oracledatabase.v1.IMinorVersion[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listMinorVersions.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listMinorVersions.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
     describe('listDbSystemShapes', () => {
         it('invokes listDbSystemShapes without error', async () => {
             const client = new oracledatabaseModule.v1.OracleDatabaseClient({
@@ -4941,6 +8260,2456 @@ describe('v1.OracleDatabaseClient', () => {
             );
         });
     });
+
+    describe('listOdbNetworks', () => {
+        it('invokes listOdbNetworks without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListOdbNetworksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListOdbNetworksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.OdbNetwork()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.OdbNetwork()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.OdbNetwork()),
+            ];
+            client.innerApiCalls.listOdbNetworks = stubSimpleCall(expectedResponse);
+            const [response] = await client.listOdbNetworks(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listOdbNetworks as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listOdbNetworks as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listOdbNetworks without error using callback', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListOdbNetworksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListOdbNetworksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.OdbNetwork()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.OdbNetwork()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.OdbNetwork()),
+            ];
+            client.innerApiCalls.listOdbNetworks = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listOdbNetworks(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.oracledatabase.v1.IOdbNetwork[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listOdbNetworks as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listOdbNetworks as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listOdbNetworks with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListOdbNetworksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListOdbNetworksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listOdbNetworks = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listOdbNetworks(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listOdbNetworks as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listOdbNetworks as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listOdbNetworksStream without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListOdbNetworksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListOdbNetworksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.OdbNetwork()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.OdbNetwork()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.OdbNetwork()),
+            ];
+            client.descriptors.page.listOdbNetworks.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listOdbNetworksStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.oracledatabase.v1.OdbNetwork[] = [];
+                stream.on('data', (response: protos.google.cloud.oracledatabase.v1.OdbNetwork) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listOdbNetworks.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listOdbNetworks, request));
+            assert(
+                (client.descriptors.page.listOdbNetworks.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listOdbNetworksStream with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListOdbNetworksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListOdbNetworksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listOdbNetworks.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listOdbNetworksStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.oracledatabase.v1.OdbNetwork[] = [];
+                stream.on('data', (response: protos.google.cloud.oracledatabase.v1.OdbNetwork) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listOdbNetworks.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listOdbNetworks, request));
+            assert(
+                (client.descriptors.page.listOdbNetworks.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listOdbNetworks without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListOdbNetworksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListOdbNetworksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.OdbNetwork()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.OdbNetwork()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.OdbNetwork()),
+            ];
+            client.descriptors.page.listOdbNetworks.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.oracledatabase.v1.IOdbNetwork[] = [];
+            const iterable = client.listOdbNetworksAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listOdbNetworks.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listOdbNetworks.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listOdbNetworks with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListOdbNetworksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListOdbNetworksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listOdbNetworks.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listOdbNetworksAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.oracledatabase.v1.IOdbNetwork[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listOdbNetworks.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listOdbNetworks.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('listOdbSubnets', () => {
+        it('invokes listOdbSubnets without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListOdbSubnetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListOdbSubnetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.OdbSubnet()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.OdbSubnet()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.OdbSubnet()),
+            ];
+            client.innerApiCalls.listOdbSubnets = stubSimpleCall(expectedResponse);
+            const [response] = await client.listOdbSubnets(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listOdbSubnets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listOdbSubnets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listOdbSubnets without error using callback', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListOdbSubnetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListOdbSubnetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.OdbSubnet()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.OdbSubnet()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.OdbSubnet()),
+            ];
+            client.innerApiCalls.listOdbSubnets = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listOdbSubnets(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.oracledatabase.v1.IOdbSubnet[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listOdbSubnets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listOdbSubnets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listOdbSubnets with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListOdbSubnetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListOdbSubnetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listOdbSubnets = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listOdbSubnets(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listOdbSubnets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listOdbSubnets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listOdbSubnetsStream without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListOdbSubnetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListOdbSubnetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.OdbSubnet()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.OdbSubnet()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.OdbSubnet()),
+            ];
+            client.descriptors.page.listOdbSubnets.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listOdbSubnetsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.oracledatabase.v1.OdbSubnet[] = [];
+                stream.on('data', (response: protos.google.cloud.oracledatabase.v1.OdbSubnet) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listOdbSubnets.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listOdbSubnets, request));
+            assert(
+                (client.descriptors.page.listOdbSubnets.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listOdbSubnetsStream with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListOdbSubnetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListOdbSubnetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listOdbSubnets.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listOdbSubnetsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.oracledatabase.v1.OdbSubnet[] = [];
+                stream.on('data', (response: protos.google.cloud.oracledatabase.v1.OdbSubnet) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listOdbSubnets.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listOdbSubnets, request));
+            assert(
+                (client.descriptors.page.listOdbSubnets.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listOdbSubnets without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListOdbSubnetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListOdbSubnetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.OdbSubnet()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.OdbSubnet()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.OdbSubnet()),
+            ];
+            client.descriptors.page.listOdbSubnets.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.oracledatabase.v1.IOdbSubnet[] = [];
+            const iterable = client.listOdbSubnetsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listOdbSubnets.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listOdbSubnets.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listOdbSubnets with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListOdbSubnetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListOdbSubnetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listOdbSubnets.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listOdbSubnetsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.oracledatabase.v1.IOdbSubnet[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listOdbSubnets.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listOdbSubnets.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('listExadbVmClusters', () => {
+        it('invokes listExadbVmClusters without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListExadbVmClustersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListExadbVmClustersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.ExadbVmCluster()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.ExadbVmCluster()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.ExadbVmCluster()),
+            ];
+            client.innerApiCalls.listExadbVmClusters = stubSimpleCall(expectedResponse);
+            const [response] = await client.listExadbVmClusters(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listExadbVmClusters as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listExadbVmClusters as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listExadbVmClusters without error using callback', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListExadbVmClustersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListExadbVmClustersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.ExadbVmCluster()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.ExadbVmCluster()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.ExadbVmCluster()),
+            ];
+            client.innerApiCalls.listExadbVmClusters = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listExadbVmClusters(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.oracledatabase.v1.IExadbVmCluster[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listExadbVmClusters as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listExadbVmClusters as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listExadbVmClusters with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListExadbVmClustersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListExadbVmClustersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listExadbVmClusters = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listExadbVmClusters(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listExadbVmClusters as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listExadbVmClusters as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listExadbVmClustersStream without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListExadbVmClustersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListExadbVmClustersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.ExadbVmCluster()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.ExadbVmCluster()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.ExadbVmCluster()),
+            ];
+            client.descriptors.page.listExadbVmClusters.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listExadbVmClustersStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.oracledatabase.v1.ExadbVmCluster[] = [];
+                stream.on('data', (response: protos.google.cloud.oracledatabase.v1.ExadbVmCluster) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listExadbVmClusters.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listExadbVmClusters, request));
+            assert(
+                (client.descriptors.page.listExadbVmClusters.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listExadbVmClustersStream with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListExadbVmClustersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListExadbVmClustersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listExadbVmClusters.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listExadbVmClustersStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.oracledatabase.v1.ExadbVmCluster[] = [];
+                stream.on('data', (response: protos.google.cloud.oracledatabase.v1.ExadbVmCluster) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listExadbVmClusters.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listExadbVmClusters, request));
+            assert(
+                (client.descriptors.page.listExadbVmClusters.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listExadbVmClusters without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListExadbVmClustersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListExadbVmClustersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.ExadbVmCluster()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.ExadbVmCluster()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.ExadbVmCluster()),
+            ];
+            client.descriptors.page.listExadbVmClusters.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.oracledatabase.v1.IExadbVmCluster[] = [];
+            const iterable = client.listExadbVmClustersAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listExadbVmClusters.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listExadbVmClusters.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listExadbVmClusters with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListExadbVmClustersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListExadbVmClustersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listExadbVmClusters.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listExadbVmClustersAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.oracledatabase.v1.IExadbVmCluster[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listExadbVmClusters.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listExadbVmClusters.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('listExascaleDbStorageVaults', () => {
+        it('invokes listExascaleDbStorageVaults without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListExascaleDbStorageVaultsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListExascaleDbStorageVaultsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.ExascaleDbStorageVault()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.ExascaleDbStorageVault()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.ExascaleDbStorageVault()),
+            ];
+            client.innerApiCalls.listExascaleDbStorageVaults = stubSimpleCall(expectedResponse);
+            const [response] = await client.listExascaleDbStorageVaults(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listExascaleDbStorageVaults as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listExascaleDbStorageVaults as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listExascaleDbStorageVaults without error using callback', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListExascaleDbStorageVaultsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListExascaleDbStorageVaultsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.ExascaleDbStorageVault()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.ExascaleDbStorageVault()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.ExascaleDbStorageVault()),
+            ];
+            client.innerApiCalls.listExascaleDbStorageVaults = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listExascaleDbStorageVaults(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.oracledatabase.v1.IExascaleDbStorageVault[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listExascaleDbStorageVaults as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listExascaleDbStorageVaults as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listExascaleDbStorageVaults with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListExascaleDbStorageVaultsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListExascaleDbStorageVaultsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listExascaleDbStorageVaults = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listExascaleDbStorageVaults(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listExascaleDbStorageVaults as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listExascaleDbStorageVaults as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listExascaleDbStorageVaultsStream without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListExascaleDbStorageVaultsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListExascaleDbStorageVaultsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.ExascaleDbStorageVault()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.ExascaleDbStorageVault()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.ExascaleDbStorageVault()),
+            ];
+            client.descriptors.page.listExascaleDbStorageVaults.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listExascaleDbStorageVaultsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.oracledatabase.v1.ExascaleDbStorageVault[] = [];
+                stream.on('data', (response: protos.google.cloud.oracledatabase.v1.ExascaleDbStorageVault) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listExascaleDbStorageVaults.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listExascaleDbStorageVaults, request));
+            assert(
+                (client.descriptors.page.listExascaleDbStorageVaults.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listExascaleDbStorageVaultsStream with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListExascaleDbStorageVaultsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListExascaleDbStorageVaultsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listExascaleDbStorageVaults.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listExascaleDbStorageVaultsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.oracledatabase.v1.ExascaleDbStorageVault[] = [];
+                stream.on('data', (response: protos.google.cloud.oracledatabase.v1.ExascaleDbStorageVault) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listExascaleDbStorageVaults.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listExascaleDbStorageVaults, request));
+            assert(
+                (client.descriptors.page.listExascaleDbStorageVaults.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listExascaleDbStorageVaults without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListExascaleDbStorageVaultsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListExascaleDbStorageVaultsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.ExascaleDbStorageVault()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.ExascaleDbStorageVault()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.ExascaleDbStorageVault()),
+            ];
+            client.descriptors.page.listExascaleDbStorageVaults.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.oracledatabase.v1.IExascaleDbStorageVault[] = [];
+            const iterable = client.listExascaleDbStorageVaultsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listExascaleDbStorageVaults.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listExascaleDbStorageVaults.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listExascaleDbStorageVaults with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListExascaleDbStorageVaultsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListExascaleDbStorageVaultsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listExascaleDbStorageVaults.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listExascaleDbStorageVaultsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.oracledatabase.v1.IExascaleDbStorageVault[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listExascaleDbStorageVaults.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listExascaleDbStorageVaults.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('listDbSystemInitialStorageSizes', () => {
+        it('invokes listDbSystemInitialStorageSizes without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListDbSystemInitialStorageSizesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListDbSystemInitialStorageSizesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.DbSystemInitialStorageSize()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.DbSystemInitialStorageSize()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.DbSystemInitialStorageSize()),
+            ];
+            client.innerApiCalls.listDbSystemInitialStorageSizes = stubSimpleCall(expectedResponse);
+            const [response] = await client.listDbSystemInitialStorageSizes(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listDbSystemInitialStorageSizes as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDbSystemInitialStorageSizes as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listDbSystemInitialStorageSizes without error using callback', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListDbSystemInitialStorageSizesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListDbSystemInitialStorageSizesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.DbSystemInitialStorageSize()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.DbSystemInitialStorageSize()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.DbSystemInitialStorageSize()),
+            ];
+            client.innerApiCalls.listDbSystemInitialStorageSizes = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listDbSystemInitialStorageSizes(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.oracledatabase.v1.IDbSystemInitialStorageSize[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listDbSystemInitialStorageSizes as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDbSystemInitialStorageSizes as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listDbSystemInitialStorageSizes with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListDbSystemInitialStorageSizesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListDbSystemInitialStorageSizesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listDbSystemInitialStorageSizes = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listDbSystemInitialStorageSizes(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listDbSystemInitialStorageSizes as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDbSystemInitialStorageSizes as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listDbSystemInitialStorageSizesStream without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListDbSystemInitialStorageSizesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListDbSystemInitialStorageSizesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.DbSystemInitialStorageSize()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.DbSystemInitialStorageSize()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.DbSystemInitialStorageSize()),
+            ];
+            client.descriptors.page.listDbSystemInitialStorageSizes.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listDbSystemInitialStorageSizesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.oracledatabase.v1.DbSystemInitialStorageSize[] = [];
+                stream.on('data', (response: protos.google.cloud.oracledatabase.v1.DbSystemInitialStorageSize) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listDbSystemInitialStorageSizes.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listDbSystemInitialStorageSizes, request));
+            assert(
+                (client.descriptors.page.listDbSystemInitialStorageSizes.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listDbSystemInitialStorageSizesStream with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListDbSystemInitialStorageSizesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListDbSystemInitialStorageSizesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listDbSystemInitialStorageSizes.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listDbSystemInitialStorageSizesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.oracledatabase.v1.DbSystemInitialStorageSize[] = [];
+                stream.on('data', (response: protos.google.cloud.oracledatabase.v1.DbSystemInitialStorageSize) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listDbSystemInitialStorageSizes.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listDbSystemInitialStorageSizes, request));
+            assert(
+                (client.descriptors.page.listDbSystemInitialStorageSizes.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listDbSystemInitialStorageSizes without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListDbSystemInitialStorageSizesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListDbSystemInitialStorageSizesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.DbSystemInitialStorageSize()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.DbSystemInitialStorageSize()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.DbSystemInitialStorageSize()),
+            ];
+            client.descriptors.page.listDbSystemInitialStorageSizes.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.oracledatabase.v1.IDbSystemInitialStorageSize[] = [];
+            const iterable = client.listDbSystemInitialStorageSizesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listDbSystemInitialStorageSizes.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listDbSystemInitialStorageSizes.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listDbSystemInitialStorageSizes with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListDbSystemInitialStorageSizesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListDbSystemInitialStorageSizesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listDbSystemInitialStorageSizes.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listDbSystemInitialStorageSizesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.oracledatabase.v1.IDbSystemInitialStorageSize[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listDbSystemInitialStorageSizes.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listDbSystemInitialStorageSizes.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('listDatabases', () => {
+        it('invokes listDatabases without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListDatabasesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListDatabasesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.Database()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.Database()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.Database()),
+            ];
+            client.innerApiCalls.listDatabases = stubSimpleCall(expectedResponse);
+            const [response] = await client.listDatabases(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listDatabases as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDatabases as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listDatabases without error using callback', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListDatabasesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListDatabasesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.Database()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.Database()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.Database()),
+            ];
+            client.innerApiCalls.listDatabases = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listDatabases(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.oracledatabase.v1.IDatabase[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listDatabases as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDatabases as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listDatabases with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListDatabasesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListDatabasesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listDatabases = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listDatabases(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listDatabases as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDatabases as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listDatabasesStream without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListDatabasesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListDatabasesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.Database()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.Database()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.Database()),
+            ];
+            client.descriptors.page.listDatabases.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listDatabasesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.oracledatabase.v1.Database[] = [];
+                stream.on('data', (response: protos.google.cloud.oracledatabase.v1.Database) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listDatabases.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listDatabases, request));
+            assert(
+                (client.descriptors.page.listDatabases.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listDatabasesStream with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListDatabasesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListDatabasesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listDatabases.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listDatabasesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.oracledatabase.v1.Database[] = [];
+                stream.on('data', (response: protos.google.cloud.oracledatabase.v1.Database) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listDatabases.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listDatabases, request));
+            assert(
+                (client.descriptors.page.listDatabases.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listDatabases without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListDatabasesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListDatabasesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.Database()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.Database()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.Database()),
+            ];
+            client.descriptors.page.listDatabases.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.oracledatabase.v1.IDatabase[] = [];
+            const iterable = client.listDatabasesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listDatabases.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listDatabases.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listDatabases with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListDatabasesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListDatabasesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listDatabases.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listDatabasesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.oracledatabase.v1.IDatabase[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listDatabases.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listDatabases.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('listPluggableDatabases', () => {
+        it('invokes listPluggableDatabases without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListPluggableDatabasesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListPluggableDatabasesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.PluggableDatabase()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.PluggableDatabase()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.PluggableDatabase()),
+            ];
+            client.innerApiCalls.listPluggableDatabases = stubSimpleCall(expectedResponse);
+            const [response] = await client.listPluggableDatabases(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listPluggableDatabases as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPluggableDatabases as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listPluggableDatabases without error using callback', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListPluggableDatabasesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListPluggableDatabasesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.PluggableDatabase()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.PluggableDatabase()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.PluggableDatabase()),
+            ];
+            client.innerApiCalls.listPluggableDatabases = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listPluggableDatabases(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.oracledatabase.v1.IPluggableDatabase[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listPluggableDatabases as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPluggableDatabases as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listPluggableDatabases with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListPluggableDatabasesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListPluggableDatabasesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listPluggableDatabases = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listPluggableDatabases(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listPluggableDatabases as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPluggableDatabases as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listPluggableDatabasesStream without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListPluggableDatabasesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListPluggableDatabasesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.PluggableDatabase()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.PluggableDatabase()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.PluggableDatabase()),
+            ];
+            client.descriptors.page.listPluggableDatabases.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listPluggableDatabasesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.oracledatabase.v1.PluggableDatabase[] = [];
+                stream.on('data', (response: protos.google.cloud.oracledatabase.v1.PluggableDatabase) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listPluggableDatabases.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listPluggableDatabases, request));
+            assert(
+                (client.descriptors.page.listPluggableDatabases.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listPluggableDatabasesStream with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListPluggableDatabasesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListPluggableDatabasesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listPluggableDatabases.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listPluggableDatabasesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.oracledatabase.v1.PluggableDatabase[] = [];
+                stream.on('data', (response: protos.google.cloud.oracledatabase.v1.PluggableDatabase) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listPluggableDatabases.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listPluggableDatabases, request));
+            assert(
+                (client.descriptors.page.listPluggableDatabases.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listPluggableDatabases without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListPluggableDatabasesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListPluggableDatabasesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.PluggableDatabase()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.PluggableDatabase()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.PluggableDatabase()),
+            ];
+            client.descriptors.page.listPluggableDatabases.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.oracledatabase.v1.IPluggableDatabase[] = [];
+            const iterable = client.listPluggableDatabasesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listPluggableDatabases.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listPluggableDatabases.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listPluggableDatabases with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListPluggableDatabasesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListPluggableDatabasesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listPluggableDatabases.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listPluggableDatabasesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.oracledatabase.v1.IPluggableDatabase[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listPluggableDatabases.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listPluggableDatabases.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('listDbSystems', () => {
+        it('invokes listDbSystems without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListDbSystemsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListDbSystemsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.DbSystem()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.DbSystem()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.DbSystem()),
+            ];
+            client.innerApiCalls.listDbSystems = stubSimpleCall(expectedResponse);
+            const [response] = await client.listDbSystems(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listDbSystems as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDbSystems as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listDbSystems without error using callback', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListDbSystemsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListDbSystemsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.DbSystem()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.DbSystem()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.DbSystem()),
+            ];
+            client.innerApiCalls.listDbSystems = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listDbSystems(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.oracledatabase.v1.IDbSystem[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listDbSystems as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDbSystems as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listDbSystems with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListDbSystemsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListDbSystemsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listDbSystems = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listDbSystems(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listDbSystems as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDbSystems as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listDbSystemsStream without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListDbSystemsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListDbSystemsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.DbSystem()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.DbSystem()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.DbSystem()),
+            ];
+            client.descriptors.page.listDbSystems.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listDbSystemsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.oracledatabase.v1.DbSystem[] = [];
+                stream.on('data', (response: protos.google.cloud.oracledatabase.v1.DbSystem) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listDbSystems.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listDbSystems, request));
+            assert(
+                (client.descriptors.page.listDbSystems.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listDbSystemsStream with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListDbSystemsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListDbSystemsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listDbSystems.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listDbSystemsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.oracledatabase.v1.DbSystem[] = [];
+                stream.on('data', (response: protos.google.cloud.oracledatabase.v1.DbSystem) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listDbSystems.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listDbSystems, request));
+            assert(
+                (client.descriptors.page.listDbSystems.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listDbSystems without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListDbSystemsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListDbSystemsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.DbSystem()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.DbSystem()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.DbSystem()),
+            ];
+            client.descriptors.page.listDbSystems.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.oracledatabase.v1.IDbSystem[] = [];
+            const iterable = client.listDbSystemsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listDbSystems.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listDbSystems.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listDbSystems with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListDbSystemsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListDbSystemsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listDbSystems.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listDbSystemsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.oracledatabase.v1.IDbSystem[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listDbSystems.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listDbSystems.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('listDbVersions', () => {
+        it('invokes listDbVersions without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListDbVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListDbVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.DbVersion()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.DbVersion()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.DbVersion()),
+            ];
+            client.innerApiCalls.listDbVersions = stubSimpleCall(expectedResponse);
+            const [response] = await client.listDbVersions(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listDbVersions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDbVersions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listDbVersions without error using callback', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListDbVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListDbVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.DbVersion()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.DbVersion()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.DbVersion()),
+            ];
+            client.innerApiCalls.listDbVersions = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listDbVersions(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.oracledatabase.v1.IDbVersion[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listDbVersions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDbVersions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listDbVersions with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListDbVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListDbVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listDbVersions = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listDbVersions(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listDbVersions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDbVersions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listDbVersionsStream without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListDbVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListDbVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.DbVersion()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.DbVersion()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.DbVersion()),
+            ];
+            client.descriptors.page.listDbVersions.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listDbVersionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.oracledatabase.v1.DbVersion[] = [];
+                stream.on('data', (response: protos.google.cloud.oracledatabase.v1.DbVersion) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listDbVersions.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listDbVersions, request));
+            assert(
+                (client.descriptors.page.listDbVersions.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listDbVersionsStream with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListDbVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListDbVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listDbVersions.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listDbVersionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.oracledatabase.v1.DbVersion[] = [];
+                stream.on('data', (response: protos.google.cloud.oracledatabase.v1.DbVersion) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listDbVersions.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listDbVersions, request));
+            assert(
+                (client.descriptors.page.listDbVersions.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listDbVersions without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListDbVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListDbVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.DbVersion()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.DbVersion()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.DbVersion()),
+            ];
+            client.descriptors.page.listDbVersions.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.oracledatabase.v1.IDbVersion[] = [];
+            const iterable = client.listDbVersionsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listDbVersions.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listDbVersions.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listDbVersions with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListDbVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListDbVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listDbVersions.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listDbVersionsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.oracledatabase.v1.IDbVersion[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listDbVersions.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listDbVersions.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('listDatabaseCharacterSets', () => {
+        it('invokes listDatabaseCharacterSets without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListDatabaseCharacterSetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListDatabaseCharacterSetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.DatabaseCharacterSet()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.DatabaseCharacterSet()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.DatabaseCharacterSet()),
+            ];
+            client.innerApiCalls.listDatabaseCharacterSets = stubSimpleCall(expectedResponse);
+            const [response] = await client.listDatabaseCharacterSets(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listDatabaseCharacterSets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDatabaseCharacterSets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listDatabaseCharacterSets without error using callback', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListDatabaseCharacterSetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListDatabaseCharacterSetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.DatabaseCharacterSet()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.DatabaseCharacterSet()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.DatabaseCharacterSet()),
+            ];
+            client.innerApiCalls.listDatabaseCharacterSets = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listDatabaseCharacterSets(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.oracledatabase.v1.IDatabaseCharacterSet[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listDatabaseCharacterSets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDatabaseCharacterSets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listDatabaseCharacterSets with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListDatabaseCharacterSetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListDatabaseCharacterSetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listDatabaseCharacterSets = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listDatabaseCharacterSets(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listDatabaseCharacterSets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDatabaseCharacterSets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listDatabaseCharacterSetsStream without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListDatabaseCharacterSetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListDatabaseCharacterSetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.DatabaseCharacterSet()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.DatabaseCharacterSet()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.DatabaseCharacterSet()),
+            ];
+            client.descriptors.page.listDatabaseCharacterSets.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listDatabaseCharacterSetsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.oracledatabase.v1.DatabaseCharacterSet[] = [];
+                stream.on('data', (response: protos.google.cloud.oracledatabase.v1.DatabaseCharacterSet) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listDatabaseCharacterSets.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listDatabaseCharacterSets, request));
+            assert(
+                (client.descriptors.page.listDatabaseCharacterSets.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listDatabaseCharacterSetsStream with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListDatabaseCharacterSetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListDatabaseCharacterSetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listDatabaseCharacterSets.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listDatabaseCharacterSetsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.oracledatabase.v1.DatabaseCharacterSet[] = [];
+                stream.on('data', (response: protos.google.cloud.oracledatabase.v1.DatabaseCharacterSet) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listDatabaseCharacterSets.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listDatabaseCharacterSets, request));
+            assert(
+                (client.descriptors.page.listDatabaseCharacterSets.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listDatabaseCharacterSets without error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListDatabaseCharacterSetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListDatabaseCharacterSetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.DatabaseCharacterSet()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.DatabaseCharacterSet()),
+              generateSampleMessage(new protos.google.cloud.oracledatabase.v1.DatabaseCharacterSet()),
+            ];
+            client.descriptors.page.listDatabaseCharacterSets.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.oracledatabase.v1.IDatabaseCharacterSet[] = [];
+            const iterable = client.listDatabaseCharacterSetsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listDatabaseCharacterSets.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listDatabaseCharacterSets.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listDatabaseCharacterSets with error', async () => {
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oracledatabase.v1.ListDatabaseCharacterSetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oracledatabase.v1.ListDatabaseCharacterSetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listDatabaseCharacterSets.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listDatabaseCharacterSetsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.oracledatabase.v1.IDatabaseCharacterSet[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listDatabaseCharacterSets.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listDatabaseCharacterSets.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
     describe('getLocation', () => {
         it('invokes getLocation without error', async () => {
             const client = new oracledatabaseModule.v1.OracleDatabaseClient({
@@ -5641,56 +11410,94 @@ describe('v1.OracleDatabaseClient', () => {
             });
         });
 
-        describe('dbNode', async () => {
-            const fakePath = "/rendered/path/dbNode";
+        describe('database', async () => {
+            const fakePath = "/rendered/path/database";
             const expectedParameters = {
                 project: "projectValue",
                 location: "locationValue",
-                cloud_vm_cluster: "cloudVmClusterValue",
-                db_node: "dbNodeValue",
+                database: "databaseValue",
             };
             const client = new oracledatabaseModule.v1.OracleDatabaseClient({
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
             await client.initialize();
-            client.pathTemplates.dbNodePathTemplate.render =
+            client.pathTemplates.databasePathTemplate.render =
                 sinon.stub().returns(fakePath);
-            client.pathTemplates.dbNodePathTemplate.match =
+            client.pathTemplates.databasePathTemplate.match =
                 sinon.stub().returns(expectedParameters);
 
-            it('dbNodePath', () => {
-                const result = client.dbNodePath("projectValue", "locationValue", "cloudVmClusterValue", "dbNodeValue");
+            it('databasePath', () => {
+                const result = client.databasePath("projectValue", "locationValue", "databaseValue");
                 assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.dbNodePathTemplate.render as SinonStub)
+                assert((client.pathTemplates.databasePathTemplate.render as SinonStub)
                     .getCall(-1).calledWith(expectedParameters));
             });
 
-            it('matchProjectFromDbNodeName', () => {
-                const result = client.matchProjectFromDbNodeName(fakePath);
+            it('matchProjectFromDatabaseName', () => {
+                const result = client.matchProjectFromDatabaseName(fakePath);
                 assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.dbNodePathTemplate.match as SinonStub)
+                assert((client.pathTemplates.databasePathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
 
-            it('matchLocationFromDbNodeName', () => {
-                const result = client.matchLocationFromDbNodeName(fakePath);
+            it('matchLocationFromDatabaseName', () => {
+                const result = client.matchLocationFromDatabaseName(fakePath);
                 assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.dbNodePathTemplate.match as SinonStub)
+                assert((client.pathTemplates.databasePathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
 
-            it('matchCloudVmClusterFromDbNodeName', () => {
-                const result = client.matchCloudVmClusterFromDbNodeName(fakePath);
-                assert.strictEqual(result, "cloudVmClusterValue");
-                assert((client.pathTemplates.dbNodePathTemplate.match as SinonStub)
+            it('matchDatabaseFromDatabaseName', () => {
+                const result = client.matchDatabaseFromDatabaseName(fakePath);
+                assert.strictEqual(result, "databaseValue");
+                assert((client.pathTemplates.databasePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('databaseCharacterSet', async () => {
+            const fakePath = "/rendered/path/databaseCharacterSet";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                database_character_set: "databaseCharacterSetValue",
+            };
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.databaseCharacterSetPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.databaseCharacterSetPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('databaseCharacterSetPath', () => {
+                const result = client.databaseCharacterSetPath("projectValue", "locationValue", "databaseCharacterSetValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.databaseCharacterSetPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromDatabaseCharacterSetName', () => {
+                const result = client.matchProjectFromDatabaseCharacterSetName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.databaseCharacterSetPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
 
-            it('matchDbNodeFromDbNodeName', () => {
-                const result = client.matchDbNodeFromDbNodeName(fakePath);
-                assert.strictEqual(result, "dbNodeValue");
-                assert((client.pathTemplates.dbNodePathTemplate.match as SinonStub)
+            it('matchLocationFromDatabaseCharacterSetName', () => {
+                const result = client.matchLocationFromDatabaseCharacterSetName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.databaseCharacterSetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDatabaseCharacterSetFromDatabaseCharacterSetName', () => {
+                const result = client.matchDatabaseCharacterSetFromDatabaseCharacterSetName(fakePath);
+                assert.strictEqual(result, "databaseCharacterSetValue");
+                assert((client.pathTemplates.databaseCharacterSetPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
@@ -5749,6 +11556,98 @@ describe('v1.OracleDatabaseClient', () => {
             });
         });
 
+        describe('dbSystem', async () => {
+            const fakePath = "/rendered/path/dbSystem";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                db_system: "dbSystemValue",
+            };
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.dbSystemPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.dbSystemPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('dbSystemPath', () => {
+                const result = client.dbSystemPath("projectValue", "locationValue", "dbSystemValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.dbSystemPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromDbSystemName', () => {
+                const result = client.matchProjectFromDbSystemName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.dbSystemPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromDbSystemName', () => {
+                const result = client.matchLocationFromDbSystemName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.dbSystemPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDbSystemFromDbSystemName', () => {
+                const result = client.matchDbSystemFromDbSystemName(fakePath);
+                assert.strictEqual(result, "dbSystemValue");
+                assert((client.pathTemplates.dbSystemPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('dbSystemInitialStorageSize', async () => {
+            const fakePath = "/rendered/path/dbSystemInitialStorageSize";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                db_system_initial_storage_size: "dbSystemInitialStorageSizeValue",
+            };
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.dbSystemInitialStorageSizePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.dbSystemInitialStorageSizePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('dbSystemInitialStorageSizePath', () => {
+                const result = client.dbSystemInitialStorageSizePath("projectValue", "locationValue", "dbSystemInitialStorageSizeValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.dbSystemInitialStorageSizePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromDbSystemInitialStorageSizeName', () => {
+                const result = client.matchProjectFromDbSystemInitialStorageSizeName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.dbSystemInitialStorageSizePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromDbSystemInitialStorageSizeName', () => {
+                const result = client.matchLocationFromDbSystemInitialStorageSizeName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.dbSystemInitialStorageSizePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDbSystemInitialStorageSizeFromDbSystemInitialStorageSizeName', () => {
+                const result = client.matchDbSystemInitialStorageSizeFromDbSystemInitialStorageSizeName(fakePath);
+                assert.strictEqual(result, "dbSystemInitialStorageSizeValue");
+                assert((client.pathTemplates.dbSystemInitialStorageSizePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('dbSystemShape', async () => {
             const fakePath = "/rendered/path/dbSystemShape";
             const expectedParameters = {
@@ -5795,6 +11694,52 @@ describe('v1.OracleDatabaseClient', () => {
             });
         });
 
+        describe('dbVersion', async () => {
+            const fakePath = "/rendered/path/dbVersion";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                db_version: "dbVersionValue",
+            };
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.dbVersionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.dbVersionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('dbVersionPath', () => {
+                const result = client.dbVersionPath("projectValue", "locationValue", "dbVersionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.dbVersionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromDbVersionName', () => {
+                const result = client.matchProjectFromDbVersionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.dbVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromDbVersionName', () => {
+                const result = client.matchLocationFromDbVersionName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.dbVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDbVersionFromDbVersionName', () => {
+                const result = client.matchDbVersionFromDbVersionName(fakePath);
+                assert.strictEqual(result, "dbVersionValue");
+                assert((client.pathTemplates.dbVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('entitlement', async () => {
             const fakePath = "/rendered/path/entitlement";
             const expectedParameters = {
@@ -5837,6 +11782,98 @@ describe('v1.OracleDatabaseClient', () => {
                 const result = client.matchEntitlementFromEntitlementName(fakePath);
                 assert.strictEqual(result, "entitlementValue");
                 assert((client.pathTemplates.entitlementPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('exadbVmCluster', async () => {
+            const fakePath = "/rendered/path/exadbVmCluster";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                exadb_vm_cluster: "exadbVmClusterValue",
+            };
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.exadbVmClusterPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.exadbVmClusterPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('exadbVmClusterPath', () => {
+                const result = client.exadbVmClusterPath("projectValue", "locationValue", "exadbVmClusterValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.exadbVmClusterPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromExadbVmClusterName', () => {
+                const result = client.matchProjectFromExadbVmClusterName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.exadbVmClusterPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromExadbVmClusterName', () => {
+                const result = client.matchLocationFromExadbVmClusterName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.exadbVmClusterPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchExadbVmClusterFromExadbVmClusterName', () => {
+                const result = client.matchExadbVmClusterFromExadbVmClusterName(fakePath);
+                assert.strictEqual(result, "exadbVmClusterValue");
+                assert((client.pathTemplates.exadbVmClusterPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('exascaleDbStorageVault', async () => {
+            const fakePath = "/rendered/path/exascaleDbStorageVault";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                exascale_db_storage_vault: "exascaleDbStorageVaultValue",
+            };
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.exascaleDbStorageVaultPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.exascaleDbStorageVaultPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('exascaleDbStorageVaultPath', () => {
+                const result = client.exascaleDbStorageVaultPath("projectValue", "locationValue", "exascaleDbStorageVaultValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.exascaleDbStorageVaultPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromExascaleDbStorageVaultName', () => {
+                const result = client.matchProjectFromExascaleDbStorageVaultName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.exascaleDbStorageVaultPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromExascaleDbStorageVaultName', () => {
+                const result = client.matchLocationFromExascaleDbStorageVaultName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.exascaleDbStorageVaultPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchExascaleDbStorageVaultFromExascaleDbStorageVaultName', () => {
+                const result = client.matchExascaleDbStorageVaultFromExascaleDbStorageVaultName(fakePath);
+                assert.strictEqual(result, "exascaleDbStorageVaultValue");
+                assert((client.pathTemplates.exascaleDbStorageVaultPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
@@ -5925,6 +11962,206 @@ describe('v1.OracleDatabaseClient', () => {
             });
         });
 
+        describe('minorVersion', async () => {
+            const fakePath = "/rendered/path/minorVersion";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                gi_version: "giVersionValue",
+                minor_version: "minorVersionValue",
+            };
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.minorVersionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.minorVersionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('minorVersionPath', () => {
+                const result = client.minorVersionPath("projectValue", "locationValue", "giVersionValue", "minorVersionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.minorVersionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromMinorVersionName', () => {
+                const result = client.matchProjectFromMinorVersionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.minorVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromMinorVersionName', () => {
+                const result = client.matchLocationFromMinorVersionName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.minorVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchGiVersionFromMinorVersionName', () => {
+                const result = client.matchGiVersionFromMinorVersionName(fakePath);
+                assert.strictEqual(result, "giVersionValue");
+                assert((client.pathTemplates.minorVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchMinorVersionFromMinorVersionName', () => {
+                const result = client.matchMinorVersionFromMinorVersionName(fakePath);
+                assert.strictEqual(result, "minorVersionValue");
+                assert((client.pathTemplates.minorVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('odbNetwork', async () => {
+            const fakePath = "/rendered/path/odbNetwork";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                odb_network: "odbNetworkValue",
+            };
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.odbNetworkPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.odbNetworkPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('odbNetworkPath', () => {
+                const result = client.odbNetworkPath("projectValue", "locationValue", "odbNetworkValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.odbNetworkPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromOdbNetworkName', () => {
+                const result = client.matchProjectFromOdbNetworkName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.odbNetworkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOdbNetworkName', () => {
+                const result = client.matchLocationFromOdbNetworkName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.odbNetworkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchOdbNetworkFromOdbNetworkName', () => {
+                const result = client.matchOdbNetworkFromOdbNetworkName(fakePath);
+                assert.strictEqual(result, "odbNetworkValue");
+                assert((client.pathTemplates.odbNetworkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('odbSubnet', async () => {
+            const fakePath = "/rendered/path/odbSubnet";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                odb_network: "odbNetworkValue",
+                odb_subnet: "odbSubnetValue",
+            };
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.odbSubnetPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.odbSubnetPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('odbSubnetPath', () => {
+                const result = client.odbSubnetPath("projectValue", "locationValue", "odbNetworkValue", "odbSubnetValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.odbSubnetPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromOdbSubnetName', () => {
+                const result = client.matchProjectFromOdbSubnetName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.odbSubnetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOdbSubnetName', () => {
+                const result = client.matchLocationFromOdbSubnetName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.odbSubnetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchOdbNetworkFromOdbSubnetName', () => {
+                const result = client.matchOdbNetworkFromOdbSubnetName(fakePath);
+                assert.strictEqual(result, "odbNetworkValue");
+                assert((client.pathTemplates.odbSubnetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchOdbSubnetFromOdbSubnetName', () => {
+                const result = client.matchOdbSubnetFromOdbSubnetName(fakePath);
+                assert.strictEqual(result, "odbSubnetValue");
+                assert((client.pathTemplates.odbSubnetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('pluggableDatabase', async () => {
+            const fakePath = "/rendered/path/pluggableDatabase";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                pluggable_database: "pluggableDatabaseValue",
+            };
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.pluggableDatabasePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.pluggableDatabasePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('pluggableDatabasePath', () => {
+                const result = client.pluggableDatabasePath("projectValue", "locationValue", "pluggableDatabaseValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.pluggableDatabasePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromPluggableDatabaseName', () => {
+                const result = client.matchProjectFromPluggableDatabaseName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.pluggableDatabasePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromPluggableDatabaseName', () => {
+                const result = client.matchLocationFromPluggableDatabaseName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.pluggableDatabasePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchPluggableDatabaseFromPluggableDatabaseName', () => {
+                const result = client.matchPluggableDatabaseFromPluggableDatabaseName(fakePath);
+                assert.strictEqual(result, "pluggableDatabaseValue");
+                assert((client.pathTemplates.pluggableDatabasePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('project', async () => {
             const fakePath = "/rendered/path/project";
             const expectedParameters = {
@@ -5951,6 +12188,114 @@ describe('v1.OracleDatabaseClient', () => {
                 const result = client.matchProjectFromProjectName(fakePath);
                 assert.strictEqual(result, "projectValue");
                 assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationCloudVmClusterDbNodes', async () => {
+            const fakePath = "/rendered/path/projectLocationCloudVmClusterDbNodes";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                cloud_vm_cluster: "cloudVmClusterValue",
+                db_node: "dbNodeValue",
+            };
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationCloudVmClusterDbNodesPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationCloudVmClusterDbNodesPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationCloudVmClusterDbNodesPath', () => {
+                const result = client.projectLocationCloudVmClusterDbNodesPath("projectValue", "locationValue", "cloudVmClusterValue", "dbNodeValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationCloudVmClusterDbNodesPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationCloudVmClusterDbNodesName', () => {
+                const result = client.matchProjectFromProjectLocationCloudVmClusterDbNodesName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationCloudVmClusterDbNodesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationCloudVmClusterDbNodesName', () => {
+                const result = client.matchLocationFromProjectLocationCloudVmClusterDbNodesName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationCloudVmClusterDbNodesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCloudVmClusterFromProjectLocationCloudVmClusterDbNodesName', () => {
+                const result = client.matchCloudVmClusterFromProjectLocationCloudVmClusterDbNodesName(fakePath);
+                assert.strictEqual(result, "cloudVmClusterValue");
+                assert((client.pathTemplates.projectLocationCloudVmClusterDbNodesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDbNodeFromProjectLocationCloudVmClusterDbNodesName', () => {
+                const result = client.matchDbNodeFromProjectLocationCloudVmClusterDbNodesName(fakePath);
+                assert.strictEqual(result, "dbNodeValue");
+                assert((client.pathTemplates.projectLocationCloudVmClusterDbNodesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationExadbVmClusterDbNodes', async () => {
+            const fakePath = "/rendered/path/projectLocationExadbVmClusterDbNodes";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                exadb_vm_cluster: "exadbVmClusterValue",
+                db_node: "dbNodeValue",
+            };
+            const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationExadbVmClusterDbNodesPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationExadbVmClusterDbNodesPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationExadbVmClusterDbNodesPath', () => {
+                const result = client.projectLocationExadbVmClusterDbNodesPath("projectValue", "locationValue", "exadbVmClusterValue", "dbNodeValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationExadbVmClusterDbNodesPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationExadbVmClusterDbNodesName', () => {
+                const result = client.matchProjectFromProjectLocationExadbVmClusterDbNodesName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationExadbVmClusterDbNodesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationExadbVmClusterDbNodesName', () => {
+                const result = client.matchLocationFromProjectLocationExadbVmClusterDbNodesName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationExadbVmClusterDbNodesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchExadbVmClusterFromProjectLocationExadbVmClusterDbNodesName', () => {
+                const result = client.matchExadbVmClusterFromProjectLocationExadbVmClusterDbNodesName(fakePath);
+                assert.strictEqual(result, "exadbVmClusterValue");
+                assert((client.pathTemplates.projectLocationExadbVmClusterDbNodesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDbNodeFromProjectLocationExadbVmClusterDbNodesName', () => {
+                const result = client.matchDbNodeFromProjectLocationExadbVmClusterDbNodesName(fakePath);
+                assert.strictEqual(result, "dbNodeValue");
+                assert((client.pathTemplates.projectLocationExadbVmClusterDbNodesPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

@@ -2563,7 +2563,7 @@
       "regionTag": "vmmigration_v1_generated_VmMigration_CancelImageImportJob_async",
       "title": "VmMigration cancelImageImportJob Sample",
       "origin": "API_DEFINITION",
-      "description": " Initiates the cancellation of a running clone job.",
+      "description": " Initiates the cancellation of a running ImageImportJob.",
       "canonical": true,
       "file": "vm_migration.cancel_image_import_job.js",
       "language": "JAVASCRIPT",

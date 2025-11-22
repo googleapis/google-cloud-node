@@ -72,13 +72,14 @@ function main(participant) {
   /**
    *  The intent to be triggered on V3 agent.
    *  Format: `projects/<Project ID>/locations/<Location ID>/locations/
-   *  <Location ID>/agents/<Agent ID>/intents/<Intent ID>`.
+   *  <Location ID>/agents/<Agent ID>/intents/<Intent ID>`. This can only be
+   *  used to trigger the Welcome intent id if you are using text_config.
    */
   // const inputIntent = 'abc123'
   /**
    *  The input event name.
    *  This can only be sent once and would cancel the ongoing speech
-   *  recognition if any.
+   *  recognition if any. To trigger the Welcome intent use the event "WELCOME"
    */
   // const inputEvent = 'abc123'
   /**

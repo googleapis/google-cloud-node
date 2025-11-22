@@ -132,6 +132,72 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.marketingplatform.admin.v1alpha.MarketingplatformAdminService|listOrganizations}.
+                         * @memberof google.marketingplatform.admin.v1alpha.MarketingplatformAdminService
+                         * @typedef ListOrganizationsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.marketingplatform.admin.v1alpha.ListOrganizationsResponse} [response] ListOrganizationsResponse
+                         */
+    
+                        /**
+                         * Calls ListOrganizations.
+                         * @function listOrganizations
+                         * @memberof google.marketingplatform.admin.v1alpha.MarketingplatformAdminService
+                         * @instance
+                         * @param {google.marketingplatform.admin.v1alpha.IListOrganizationsRequest} request ListOrganizationsRequest message or plain object
+                         * @param {google.marketingplatform.admin.v1alpha.MarketingplatformAdminService.ListOrganizationsCallback} callback Node-style callback called with the error, if any, and ListOrganizationsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(MarketingplatformAdminService.prototype.listOrganizations = function listOrganizations(request, callback) {
+                            return this.rpcCall(listOrganizations, $root.google.marketingplatform.admin.v1alpha.ListOrganizationsRequest, $root.google.marketingplatform.admin.v1alpha.ListOrganizationsResponse, request, callback);
+                        }, "name", { value: "ListOrganizations" });
+    
+                        /**
+                         * Calls ListOrganizations.
+                         * @function listOrganizations
+                         * @memberof google.marketingplatform.admin.v1alpha.MarketingplatformAdminService
+                         * @instance
+                         * @param {google.marketingplatform.admin.v1alpha.IListOrganizationsRequest} request ListOrganizationsRequest message or plain object
+                         * @returns {Promise<google.marketingplatform.admin.v1alpha.ListOrganizationsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.marketingplatform.admin.v1alpha.MarketingplatformAdminService|findSalesPartnerManagedClients}.
+                         * @memberof google.marketingplatform.admin.v1alpha.MarketingplatformAdminService
+                         * @typedef FindSalesPartnerManagedClientsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse} [response] FindSalesPartnerManagedClientsResponse
+                         */
+    
+                        /**
+                         * Calls FindSalesPartnerManagedClients.
+                         * @function findSalesPartnerManagedClients
+                         * @memberof google.marketingplatform.admin.v1alpha.MarketingplatformAdminService
+                         * @instance
+                         * @param {google.marketingplatform.admin.v1alpha.IFindSalesPartnerManagedClientsRequest} request FindSalesPartnerManagedClientsRequest message or plain object
+                         * @param {google.marketingplatform.admin.v1alpha.MarketingplatformAdminService.FindSalesPartnerManagedClientsCallback} callback Node-style callback called with the error, if any, and FindSalesPartnerManagedClientsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(MarketingplatformAdminService.prototype.findSalesPartnerManagedClients = function findSalesPartnerManagedClients(request, callback) {
+                            return this.rpcCall(findSalesPartnerManagedClients, $root.google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsRequest, $root.google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse, request, callback);
+                        }, "name", { value: "FindSalesPartnerManagedClients" });
+    
+                        /**
+                         * Calls FindSalesPartnerManagedClients.
+                         * @function findSalesPartnerManagedClients
+                         * @memberof google.marketingplatform.admin.v1alpha.MarketingplatformAdminService
+                         * @instance
+                         * @param {google.marketingplatform.admin.v1alpha.IFindSalesPartnerManagedClientsRequest} request FindSalesPartnerManagedClientsRequest message or plain object
+                         * @returns {Promise<google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.marketingplatform.admin.v1alpha.MarketingplatformAdminService|listAnalyticsAccountLinks}.
                          * @memberof google.marketingplatform.admin.v1alpha.MarketingplatformAdminService
                          * @typedef ListAnalyticsAccountLinksCallback
@@ -263,23 +329,40 @@
                          * @variation 2
                          */
     
-                        return MarketingplatformAdminService;
-                    })();
+                        /**
+                         * Callback as used by {@link google.marketingplatform.admin.v1alpha.MarketingplatformAdminService|reportPropertyUsage}.
+                         * @memberof google.marketingplatform.admin.v1alpha.MarketingplatformAdminService
+                         * @typedef ReportPropertyUsageCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse} [response] ReportPropertyUsageResponse
+                         */
     
-                    /**
-                     * AnalyticsServiceLevel enum.
-                     * @name google.marketingplatform.admin.v1alpha.AnalyticsServiceLevel
-                     * @enum {number}
-                     * @property {number} ANALYTICS_SERVICE_LEVEL_UNSPECIFIED=0 ANALYTICS_SERVICE_LEVEL_UNSPECIFIED value
-                     * @property {number} ANALYTICS_SERVICE_LEVEL_STANDARD=1 ANALYTICS_SERVICE_LEVEL_STANDARD value
-                     * @property {number} ANALYTICS_SERVICE_LEVEL_360=2 ANALYTICS_SERVICE_LEVEL_360 value
-                     */
-                    v1alpha.AnalyticsServiceLevel = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "ANALYTICS_SERVICE_LEVEL_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "ANALYTICS_SERVICE_LEVEL_STANDARD"] = 1;
-                        values[valuesById[2] = "ANALYTICS_SERVICE_LEVEL_360"] = 2;
-                        return values;
+                        /**
+                         * Calls ReportPropertyUsage.
+                         * @function reportPropertyUsage
+                         * @memberof google.marketingplatform.admin.v1alpha.MarketingplatformAdminService
+                         * @instance
+                         * @param {google.marketingplatform.admin.v1alpha.IReportPropertyUsageRequest} request ReportPropertyUsageRequest message or plain object
+                         * @param {google.marketingplatform.admin.v1alpha.MarketingplatformAdminService.ReportPropertyUsageCallback} callback Node-style callback called with the error, if any, and ReportPropertyUsageResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(MarketingplatformAdminService.prototype.reportPropertyUsage = function reportPropertyUsage(request, callback) {
+                            return this.rpcCall(reportPropertyUsage, $root.google.marketingplatform.admin.v1alpha.ReportPropertyUsageRequest, $root.google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse, request, callback);
+                        }, "name", { value: "ReportPropertyUsage" });
+    
+                        /**
+                         * Calls ReportPropertyUsage.
+                         * @function reportPropertyUsage
+                         * @memberof google.marketingplatform.admin.v1alpha.MarketingplatformAdminService
+                         * @instance
+                         * @param {google.marketingplatform.admin.v1alpha.IReportPropertyUsageRequest} request ReportPropertyUsageRequest message or plain object
+                         * @returns {Promise<google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        return MarketingplatformAdminService;
                     })();
     
                     v1alpha.GetOrganizationRequest = (function() {
@@ -485,6 +568,1207 @@
                         };
     
                         return GetOrganizationRequest;
+                    })();
+    
+                    v1alpha.ListOrganizationsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListOrganizationsRequest.
+                         * @memberof google.marketingplatform.admin.v1alpha
+                         * @interface IListOrganizationsRequest
+                         * @property {number|null} [pageSize] ListOrganizationsRequest pageSize
+                         * @property {string|null} [pageToken] ListOrganizationsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListOrganizationsRequest.
+                         * @memberof google.marketingplatform.admin.v1alpha
+                         * @classdesc Represents a ListOrganizationsRequest.
+                         * @implements IListOrganizationsRequest
+                         * @constructor
+                         * @param {google.marketingplatform.admin.v1alpha.IListOrganizationsRequest=} [properties] Properties to set
+                         */
+                        function ListOrganizationsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListOrganizationsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.marketingplatform.admin.v1alpha.ListOrganizationsRequest
+                         * @instance
+                         */
+                        ListOrganizationsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListOrganizationsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.marketingplatform.admin.v1alpha.ListOrganizationsRequest
+                         * @instance
+                         */
+                        ListOrganizationsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListOrganizationsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.marketingplatform.admin.v1alpha.ListOrganizationsRequest
+                         * @static
+                         * @param {google.marketingplatform.admin.v1alpha.IListOrganizationsRequest=} [properties] Properties to set
+                         * @returns {google.marketingplatform.admin.v1alpha.ListOrganizationsRequest} ListOrganizationsRequest instance
+                         */
+                        ListOrganizationsRequest.create = function create(properties) {
+                            return new ListOrganizationsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListOrganizationsRequest message. Does not implicitly {@link google.marketingplatform.admin.v1alpha.ListOrganizationsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.marketingplatform.admin.v1alpha.ListOrganizationsRequest
+                         * @static
+                         * @param {google.marketingplatform.admin.v1alpha.IListOrganizationsRequest} message ListOrganizationsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListOrganizationsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListOrganizationsRequest message, length delimited. Does not implicitly {@link google.marketingplatform.admin.v1alpha.ListOrganizationsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.marketingplatform.admin.v1alpha.ListOrganizationsRequest
+                         * @static
+                         * @param {google.marketingplatform.admin.v1alpha.IListOrganizationsRequest} message ListOrganizationsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListOrganizationsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListOrganizationsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.marketingplatform.admin.v1alpha.ListOrganizationsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.marketingplatform.admin.v1alpha.ListOrganizationsRequest} ListOrganizationsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListOrganizationsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.marketingplatform.admin.v1alpha.ListOrganizationsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListOrganizationsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.marketingplatform.admin.v1alpha.ListOrganizationsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.marketingplatform.admin.v1alpha.ListOrganizationsRequest} ListOrganizationsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListOrganizationsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListOrganizationsRequest message.
+                         * @function verify
+                         * @memberof google.marketingplatform.admin.v1alpha.ListOrganizationsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListOrganizationsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListOrganizationsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.marketingplatform.admin.v1alpha.ListOrganizationsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.marketingplatform.admin.v1alpha.ListOrganizationsRequest} ListOrganizationsRequest
+                         */
+                        ListOrganizationsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.marketingplatform.admin.v1alpha.ListOrganizationsRequest)
+                                return object;
+                            var message = new $root.google.marketingplatform.admin.v1alpha.ListOrganizationsRequest();
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListOrganizationsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.marketingplatform.admin.v1alpha.ListOrganizationsRequest
+                         * @static
+                         * @param {google.marketingplatform.admin.v1alpha.ListOrganizationsRequest} message ListOrganizationsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListOrganizationsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListOrganizationsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.marketingplatform.admin.v1alpha.ListOrganizationsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListOrganizationsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListOrganizationsRequest
+                         * @function getTypeUrl
+                         * @memberof google.marketingplatform.admin.v1alpha.ListOrganizationsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListOrganizationsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.marketingplatform.admin.v1alpha.ListOrganizationsRequest";
+                        };
+    
+                        return ListOrganizationsRequest;
+                    })();
+    
+                    v1alpha.ListOrganizationsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListOrganizationsResponse.
+                         * @memberof google.marketingplatform.admin.v1alpha
+                         * @interface IListOrganizationsResponse
+                         * @property {Array.<google.marketingplatform.admin.v1alpha.IOrganization>|null} [organizations] ListOrganizationsResponse organizations
+                         * @property {string|null} [nextPageToken] ListOrganizationsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListOrganizationsResponse.
+                         * @memberof google.marketingplatform.admin.v1alpha
+                         * @classdesc Represents a ListOrganizationsResponse.
+                         * @implements IListOrganizationsResponse
+                         * @constructor
+                         * @param {google.marketingplatform.admin.v1alpha.IListOrganizationsResponse=} [properties] Properties to set
+                         */
+                        function ListOrganizationsResponse(properties) {
+                            this.organizations = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListOrganizationsResponse organizations.
+                         * @member {Array.<google.marketingplatform.admin.v1alpha.IOrganization>} organizations
+                         * @memberof google.marketingplatform.admin.v1alpha.ListOrganizationsResponse
+                         * @instance
+                         */
+                        ListOrganizationsResponse.prototype.organizations = $util.emptyArray;
+    
+                        /**
+                         * ListOrganizationsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.marketingplatform.admin.v1alpha.ListOrganizationsResponse
+                         * @instance
+                         */
+                        ListOrganizationsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListOrganizationsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.marketingplatform.admin.v1alpha.ListOrganizationsResponse
+                         * @static
+                         * @param {google.marketingplatform.admin.v1alpha.IListOrganizationsResponse=} [properties] Properties to set
+                         * @returns {google.marketingplatform.admin.v1alpha.ListOrganizationsResponse} ListOrganizationsResponse instance
+                         */
+                        ListOrganizationsResponse.create = function create(properties) {
+                            return new ListOrganizationsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListOrganizationsResponse message. Does not implicitly {@link google.marketingplatform.admin.v1alpha.ListOrganizationsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.marketingplatform.admin.v1alpha.ListOrganizationsResponse
+                         * @static
+                         * @param {google.marketingplatform.admin.v1alpha.IListOrganizationsResponse} message ListOrganizationsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListOrganizationsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.organizations != null && message.organizations.length)
+                                for (var i = 0; i < message.organizations.length; ++i)
+                                    $root.google.marketingplatform.admin.v1alpha.Organization.encode(message.organizations[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListOrganizationsResponse message, length delimited. Does not implicitly {@link google.marketingplatform.admin.v1alpha.ListOrganizationsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.marketingplatform.admin.v1alpha.ListOrganizationsResponse
+                         * @static
+                         * @param {google.marketingplatform.admin.v1alpha.IListOrganizationsResponse} message ListOrganizationsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListOrganizationsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListOrganizationsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.marketingplatform.admin.v1alpha.ListOrganizationsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.marketingplatform.admin.v1alpha.ListOrganizationsResponse} ListOrganizationsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListOrganizationsResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.marketingplatform.admin.v1alpha.ListOrganizationsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.organizations && message.organizations.length))
+                                            message.organizations = [];
+                                        message.organizations.push($root.google.marketingplatform.admin.v1alpha.Organization.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListOrganizationsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.marketingplatform.admin.v1alpha.ListOrganizationsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.marketingplatform.admin.v1alpha.ListOrganizationsResponse} ListOrganizationsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListOrganizationsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListOrganizationsResponse message.
+                         * @function verify
+                         * @memberof google.marketingplatform.admin.v1alpha.ListOrganizationsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListOrganizationsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.organizations != null && message.hasOwnProperty("organizations")) {
+                                if (!Array.isArray(message.organizations))
+                                    return "organizations: array expected";
+                                for (var i = 0; i < message.organizations.length; ++i) {
+                                    var error = $root.google.marketingplatform.admin.v1alpha.Organization.verify(message.organizations[i]);
+                                    if (error)
+                                        return "organizations." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListOrganizationsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.marketingplatform.admin.v1alpha.ListOrganizationsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.marketingplatform.admin.v1alpha.ListOrganizationsResponse} ListOrganizationsResponse
+                         */
+                        ListOrganizationsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.marketingplatform.admin.v1alpha.ListOrganizationsResponse)
+                                return object;
+                            var message = new $root.google.marketingplatform.admin.v1alpha.ListOrganizationsResponse();
+                            if (object.organizations) {
+                                if (!Array.isArray(object.organizations))
+                                    throw TypeError(".google.marketingplatform.admin.v1alpha.ListOrganizationsResponse.organizations: array expected");
+                                message.organizations = [];
+                                for (var i = 0; i < object.organizations.length; ++i) {
+                                    if (typeof object.organizations[i] !== "object")
+                                        throw TypeError(".google.marketingplatform.admin.v1alpha.ListOrganizationsResponse.organizations: object expected");
+                                    message.organizations[i] = $root.google.marketingplatform.admin.v1alpha.Organization.fromObject(object.organizations[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListOrganizationsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.marketingplatform.admin.v1alpha.ListOrganizationsResponse
+                         * @static
+                         * @param {google.marketingplatform.admin.v1alpha.ListOrganizationsResponse} message ListOrganizationsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListOrganizationsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.organizations = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.organizations && message.organizations.length) {
+                                object.organizations = [];
+                                for (var j = 0; j < message.organizations.length; ++j)
+                                    object.organizations[j] = $root.google.marketingplatform.admin.v1alpha.Organization.toObject(message.organizations[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListOrganizationsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.marketingplatform.admin.v1alpha.ListOrganizationsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListOrganizationsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListOrganizationsResponse
+                         * @function getTypeUrl
+                         * @memberof google.marketingplatform.admin.v1alpha.ListOrganizationsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListOrganizationsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.marketingplatform.admin.v1alpha.ListOrganizationsResponse";
+                        };
+    
+                        return ListOrganizationsResponse;
+                    })();
+    
+                    v1alpha.FindSalesPartnerManagedClientsRequest = (function() {
+    
+                        /**
+                         * Properties of a FindSalesPartnerManagedClientsRequest.
+                         * @memberof google.marketingplatform.admin.v1alpha
+                         * @interface IFindSalesPartnerManagedClientsRequest
+                         * @property {string|null} [organization] FindSalesPartnerManagedClientsRequest organization
+                         * @property {boolean|null} [isActive] FindSalesPartnerManagedClientsRequest isActive
+                         */
+    
+                        /**
+                         * Constructs a new FindSalesPartnerManagedClientsRequest.
+                         * @memberof google.marketingplatform.admin.v1alpha
+                         * @classdesc Represents a FindSalesPartnerManagedClientsRequest.
+                         * @implements IFindSalesPartnerManagedClientsRequest
+                         * @constructor
+                         * @param {google.marketingplatform.admin.v1alpha.IFindSalesPartnerManagedClientsRequest=} [properties] Properties to set
+                         */
+                        function FindSalesPartnerManagedClientsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * FindSalesPartnerManagedClientsRequest organization.
+                         * @member {string} organization
+                         * @memberof google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsRequest
+                         * @instance
+                         */
+                        FindSalesPartnerManagedClientsRequest.prototype.organization = "";
+    
+                        /**
+                         * FindSalesPartnerManagedClientsRequest isActive.
+                         * @member {boolean} isActive
+                         * @memberof google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsRequest
+                         * @instance
+                         */
+                        FindSalesPartnerManagedClientsRequest.prototype.isActive = false;
+    
+                        /**
+                         * Creates a new FindSalesPartnerManagedClientsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsRequest
+                         * @static
+                         * @param {google.marketingplatform.admin.v1alpha.IFindSalesPartnerManagedClientsRequest=} [properties] Properties to set
+                         * @returns {google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsRequest} FindSalesPartnerManagedClientsRequest instance
+                         */
+                        FindSalesPartnerManagedClientsRequest.create = function create(properties) {
+                            return new FindSalesPartnerManagedClientsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FindSalesPartnerManagedClientsRequest message. Does not implicitly {@link google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsRequest
+                         * @static
+                         * @param {google.marketingplatform.admin.v1alpha.IFindSalesPartnerManagedClientsRequest} message FindSalesPartnerManagedClientsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FindSalesPartnerManagedClientsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.organization != null && Object.hasOwnProperty.call(message, "organization"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.organization);
+                            if (message.isActive != null && Object.hasOwnProperty.call(message, "isActive"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.isActive);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FindSalesPartnerManagedClientsRequest message, length delimited. Does not implicitly {@link google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsRequest
+                         * @static
+                         * @param {google.marketingplatform.admin.v1alpha.IFindSalesPartnerManagedClientsRequest} message FindSalesPartnerManagedClientsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FindSalesPartnerManagedClientsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FindSalesPartnerManagedClientsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsRequest} FindSalesPartnerManagedClientsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FindSalesPartnerManagedClientsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.organization = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.isActive = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FindSalesPartnerManagedClientsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsRequest} FindSalesPartnerManagedClientsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FindSalesPartnerManagedClientsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FindSalesPartnerManagedClientsRequest message.
+                         * @function verify
+                         * @memberof google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FindSalesPartnerManagedClientsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.organization != null && message.hasOwnProperty("organization"))
+                                if (!$util.isString(message.organization))
+                                    return "organization: string expected";
+                            if (message.isActive != null && message.hasOwnProperty("isActive"))
+                                if (typeof message.isActive !== "boolean")
+                                    return "isActive: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FindSalesPartnerManagedClientsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsRequest} FindSalesPartnerManagedClientsRequest
+                         */
+                        FindSalesPartnerManagedClientsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsRequest)
+                                return object;
+                            var message = new $root.google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsRequest();
+                            if (object.organization != null)
+                                message.organization = String(object.organization);
+                            if (object.isActive != null)
+                                message.isActive = Boolean(object.isActive);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a FindSalesPartnerManagedClientsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsRequest
+                         * @static
+                         * @param {google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsRequest} message FindSalesPartnerManagedClientsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FindSalesPartnerManagedClientsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.organization = "";
+                                object.isActive = false;
+                            }
+                            if (message.organization != null && message.hasOwnProperty("organization"))
+                                object.organization = message.organization;
+                            if (message.isActive != null && message.hasOwnProperty("isActive"))
+                                object.isActive = message.isActive;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this FindSalesPartnerManagedClientsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FindSalesPartnerManagedClientsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FindSalesPartnerManagedClientsRequest
+                         * @function getTypeUrl
+                         * @memberof google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FindSalesPartnerManagedClientsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsRequest";
+                        };
+    
+                        return FindSalesPartnerManagedClientsRequest;
+                    })();
+    
+                    v1alpha.FindSalesPartnerManagedClientsResponse = (function() {
+    
+                        /**
+                         * Properties of a FindSalesPartnerManagedClientsResponse.
+                         * @memberof google.marketingplatform.admin.v1alpha
+                         * @interface IFindSalesPartnerManagedClientsResponse
+                         * @property {Array.<google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.IClientData>|null} [clientData] FindSalesPartnerManagedClientsResponse clientData
+                         */
+    
+                        /**
+                         * Constructs a new FindSalesPartnerManagedClientsResponse.
+                         * @memberof google.marketingplatform.admin.v1alpha
+                         * @classdesc Represents a FindSalesPartnerManagedClientsResponse.
+                         * @implements IFindSalesPartnerManagedClientsResponse
+                         * @constructor
+                         * @param {google.marketingplatform.admin.v1alpha.IFindSalesPartnerManagedClientsResponse=} [properties] Properties to set
+                         */
+                        function FindSalesPartnerManagedClientsResponse(properties) {
+                            this.clientData = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * FindSalesPartnerManagedClientsResponse clientData.
+                         * @member {Array.<google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.IClientData>} clientData
+                         * @memberof google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse
+                         * @instance
+                         */
+                        FindSalesPartnerManagedClientsResponse.prototype.clientData = $util.emptyArray;
+    
+                        /**
+                         * Creates a new FindSalesPartnerManagedClientsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse
+                         * @static
+                         * @param {google.marketingplatform.admin.v1alpha.IFindSalesPartnerManagedClientsResponse=} [properties] Properties to set
+                         * @returns {google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse} FindSalesPartnerManagedClientsResponse instance
+                         */
+                        FindSalesPartnerManagedClientsResponse.create = function create(properties) {
+                            return new FindSalesPartnerManagedClientsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FindSalesPartnerManagedClientsResponse message. Does not implicitly {@link google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse
+                         * @static
+                         * @param {google.marketingplatform.admin.v1alpha.IFindSalesPartnerManagedClientsResponse} message FindSalesPartnerManagedClientsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FindSalesPartnerManagedClientsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.clientData != null && message.clientData.length)
+                                for (var i = 0; i < message.clientData.length; ++i)
+                                    $root.google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.ClientData.encode(message.clientData[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FindSalesPartnerManagedClientsResponse message, length delimited. Does not implicitly {@link google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse
+                         * @static
+                         * @param {google.marketingplatform.admin.v1alpha.IFindSalesPartnerManagedClientsResponse} message FindSalesPartnerManagedClientsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FindSalesPartnerManagedClientsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FindSalesPartnerManagedClientsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse} FindSalesPartnerManagedClientsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FindSalesPartnerManagedClientsResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.clientData && message.clientData.length))
+                                            message.clientData = [];
+                                        message.clientData.push($root.google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.ClientData.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FindSalesPartnerManagedClientsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse} FindSalesPartnerManagedClientsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FindSalesPartnerManagedClientsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FindSalesPartnerManagedClientsResponse message.
+                         * @function verify
+                         * @memberof google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FindSalesPartnerManagedClientsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.clientData != null && message.hasOwnProperty("clientData")) {
+                                if (!Array.isArray(message.clientData))
+                                    return "clientData: array expected";
+                                for (var i = 0; i < message.clientData.length; ++i) {
+                                    var error = $root.google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.ClientData.verify(message.clientData[i]);
+                                    if (error)
+                                        return "clientData." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FindSalesPartnerManagedClientsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse} FindSalesPartnerManagedClientsResponse
+                         */
+                        FindSalesPartnerManagedClientsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse)
+                                return object;
+                            var message = new $root.google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse();
+                            if (object.clientData) {
+                                if (!Array.isArray(object.clientData))
+                                    throw TypeError(".google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.clientData: array expected");
+                                message.clientData = [];
+                                for (var i = 0; i < object.clientData.length; ++i) {
+                                    if (typeof object.clientData[i] !== "object")
+                                        throw TypeError(".google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.clientData: object expected");
+                                    message.clientData[i] = $root.google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.ClientData.fromObject(object.clientData[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a FindSalesPartnerManagedClientsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse
+                         * @static
+                         * @param {google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse} message FindSalesPartnerManagedClientsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FindSalesPartnerManagedClientsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.clientData = [];
+                            if (message.clientData && message.clientData.length) {
+                                object.clientData = [];
+                                for (var j = 0; j < message.clientData.length; ++j)
+                                    object.clientData[j] = $root.google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.ClientData.toObject(message.clientData[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this FindSalesPartnerManagedClientsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FindSalesPartnerManagedClientsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FindSalesPartnerManagedClientsResponse
+                         * @function getTypeUrl
+                         * @memberof google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FindSalesPartnerManagedClientsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse";
+                        };
+    
+                        FindSalesPartnerManagedClientsResponse.ClientData = (function() {
+    
+                            /**
+                             * Properties of a ClientData.
+                             * @memberof google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse
+                             * @interface IClientData
+                             * @property {google.marketingplatform.admin.v1alpha.IOrganization|null} [organization] ClientData organization
+                             * @property {google.type.IDate|null} [startDate] ClientData startDate
+                             * @property {google.type.IDate|null} [endDate] ClientData endDate
+                             */
+    
+                            /**
+                             * Constructs a new ClientData.
+                             * @memberof google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse
+                             * @classdesc Represents a ClientData.
+                             * @implements IClientData
+                             * @constructor
+                             * @param {google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.IClientData=} [properties] Properties to set
+                             */
+                            function ClientData(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ClientData organization.
+                             * @member {google.marketingplatform.admin.v1alpha.IOrganization|null|undefined} organization
+                             * @memberof google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.ClientData
+                             * @instance
+                             */
+                            ClientData.prototype.organization = null;
+    
+                            /**
+                             * ClientData startDate.
+                             * @member {google.type.IDate|null|undefined} startDate
+                             * @memberof google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.ClientData
+                             * @instance
+                             */
+                            ClientData.prototype.startDate = null;
+    
+                            /**
+                             * ClientData endDate.
+                             * @member {google.type.IDate|null|undefined} endDate
+                             * @memberof google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.ClientData
+                             * @instance
+                             */
+                            ClientData.prototype.endDate = null;
+    
+                            /**
+                             * Creates a new ClientData instance using the specified properties.
+                             * @function create
+                             * @memberof google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.ClientData
+                             * @static
+                             * @param {google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.IClientData=} [properties] Properties to set
+                             * @returns {google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.ClientData} ClientData instance
+                             */
+                            ClientData.create = function create(properties) {
+                                return new ClientData(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ClientData message. Does not implicitly {@link google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.ClientData.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.ClientData
+                             * @static
+                             * @param {google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.IClientData} message ClientData message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ClientData.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.organization != null && Object.hasOwnProperty.call(message, "organization"))
+                                    $root.google.marketingplatform.admin.v1alpha.Organization.encode(message.organization, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.startDate != null && Object.hasOwnProperty.call(message, "startDate"))
+                                    $root.google.type.Date.encode(message.startDate, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.endDate != null && Object.hasOwnProperty.call(message, "endDate"))
+                                    $root.google.type.Date.encode(message.endDate, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ClientData message, length delimited. Does not implicitly {@link google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.ClientData.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.ClientData
+                             * @static
+                             * @param {google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.IClientData} message ClientData message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ClientData.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ClientData message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.ClientData
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.ClientData} ClientData
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ClientData.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.ClientData();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.organization = $root.google.marketingplatform.admin.v1alpha.Organization.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.startDate = $root.google.type.Date.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.endDate = $root.google.type.Date.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ClientData message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.ClientData
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.ClientData} ClientData
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ClientData.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ClientData message.
+                             * @function verify
+                             * @memberof google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.ClientData
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ClientData.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.organization != null && message.hasOwnProperty("organization")) {
+                                    var error = $root.google.marketingplatform.admin.v1alpha.Organization.verify(message.organization);
+                                    if (error)
+                                        return "organization." + error;
+                                }
+                                if (message.startDate != null && message.hasOwnProperty("startDate")) {
+                                    var error = $root.google.type.Date.verify(message.startDate);
+                                    if (error)
+                                        return "startDate." + error;
+                                }
+                                if (message.endDate != null && message.hasOwnProperty("endDate")) {
+                                    var error = $root.google.type.Date.verify(message.endDate);
+                                    if (error)
+                                        return "endDate." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ClientData message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.ClientData
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.ClientData} ClientData
+                             */
+                            ClientData.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.ClientData)
+                                    return object;
+                                var message = new $root.google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.ClientData();
+                                if (object.organization != null) {
+                                    if (typeof object.organization !== "object")
+                                        throw TypeError(".google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.ClientData.organization: object expected");
+                                    message.organization = $root.google.marketingplatform.admin.v1alpha.Organization.fromObject(object.organization);
+                                }
+                                if (object.startDate != null) {
+                                    if (typeof object.startDate !== "object")
+                                        throw TypeError(".google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.ClientData.startDate: object expected");
+                                    message.startDate = $root.google.type.Date.fromObject(object.startDate);
+                                }
+                                if (object.endDate != null) {
+                                    if (typeof object.endDate !== "object")
+                                        throw TypeError(".google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.ClientData.endDate: object expected");
+                                    message.endDate = $root.google.type.Date.fromObject(object.endDate);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ClientData message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.ClientData
+                             * @static
+                             * @param {google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.ClientData} message ClientData
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ClientData.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.organization = null;
+                                    object.startDate = null;
+                                    object.endDate = null;
+                                }
+                                if (message.organization != null && message.hasOwnProperty("organization"))
+                                    object.organization = $root.google.marketingplatform.admin.v1alpha.Organization.toObject(message.organization, options);
+                                if (message.startDate != null && message.hasOwnProperty("startDate"))
+                                    object.startDate = $root.google.type.Date.toObject(message.startDate, options);
+                                if (message.endDate != null && message.hasOwnProperty("endDate"))
+                                    object.endDate = $root.google.type.Date.toObject(message.endDate, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ClientData to JSON.
+                             * @function toJSON
+                             * @memberof google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.ClientData
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ClientData.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ClientData
+                             * @function getTypeUrl
+                             * @memberof google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.ClientData
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ClientData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.ClientData";
+                            };
+    
+                            return ClientData;
+                        })();
+    
+                        return FindSalesPartnerManagedClientsResponse;
                     })();
     
                     v1alpha.ListAnalyticsAccountLinksRequest = (function() {
@@ -1881,6 +3165,1224 @@
                         return SetPropertyServiceLevelResponse;
                     })();
     
+                    v1alpha.ReportPropertyUsageRequest = (function() {
+    
+                        /**
+                         * Properties of a ReportPropertyUsageRequest.
+                         * @memberof google.marketingplatform.admin.v1alpha
+                         * @interface IReportPropertyUsageRequest
+                         * @property {string|null} [organization] ReportPropertyUsageRequest organization
+                         * @property {string|null} [month] ReportPropertyUsageRequest month
+                         */
+    
+                        /**
+                         * Constructs a new ReportPropertyUsageRequest.
+                         * @memberof google.marketingplatform.admin.v1alpha
+                         * @classdesc Represents a ReportPropertyUsageRequest.
+                         * @implements IReportPropertyUsageRequest
+                         * @constructor
+                         * @param {google.marketingplatform.admin.v1alpha.IReportPropertyUsageRequest=} [properties] Properties to set
+                         */
+                        function ReportPropertyUsageRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ReportPropertyUsageRequest organization.
+                         * @member {string} organization
+                         * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageRequest
+                         * @instance
+                         */
+                        ReportPropertyUsageRequest.prototype.organization = "";
+    
+                        /**
+                         * ReportPropertyUsageRequest month.
+                         * @member {string} month
+                         * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageRequest
+                         * @instance
+                         */
+                        ReportPropertyUsageRequest.prototype.month = "";
+    
+                        /**
+                         * Creates a new ReportPropertyUsageRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageRequest
+                         * @static
+                         * @param {google.marketingplatform.admin.v1alpha.IReportPropertyUsageRequest=} [properties] Properties to set
+                         * @returns {google.marketingplatform.admin.v1alpha.ReportPropertyUsageRequest} ReportPropertyUsageRequest instance
+                         */
+                        ReportPropertyUsageRequest.create = function create(properties) {
+                            return new ReportPropertyUsageRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ReportPropertyUsageRequest message. Does not implicitly {@link google.marketingplatform.admin.v1alpha.ReportPropertyUsageRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageRequest
+                         * @static
+                         * @param {google.marketingplatform.admin.v1alpha.IReportPropertyUsageRequest} message ReportPropertyUsageRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ReportPropertyUsageRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.organization != null && Object.hasOwnProperty.call(message, "organization"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.organization);
+                            if (message.month != null && Object.hasOwnProperty.call(message, "month"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.month);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ReportPropertyUsageRequest message, length delimited. Does not implicitly {@link google.marketingplatform.admin.v1alpha.ReportPropertyUsageRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageRequest
+                         * @static
+                         * @param {google.marketingplatform.admin.v1alpha.IReportPropertyUsageRequest} message ReportPropertyUsageRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ReportPropertyUsageRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ReportPropertyUsageRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.marketingplatform.admin.v1alpha.ReportPropertyUsageRequest} ReportPropertyUsageRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ReportPropertyUsageRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.marketingplatform.admin.v1alpha.ReportPropertyUsageRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.organization = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.month = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ReportPropertyUsageRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.marketingplatform.admin.v1alpha.ReportPropertyUsageRequest} ReportPropertyUsageRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ReportPropertyUsageRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ReportPropertyUsageRequest message.
+                         * @function verify
+                         * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ReportPropertyUsageRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.organization != null && message.hasOwnProperty("organization"))
+                                if (!$util.isString(message.organization))
+                                    return "organization: string expected";
+                            if (message.month != null && message.hasOwnProperty("month"))
+                                if (!$util.isString(message.month))
+                                    return "month: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ReportPropertyUsageRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.marketingplatform.admin.v1alpha.ReportPropertyUsageRequest} ReportPropertyUsageRequest
+                         */
+                        ReportPropertyUsageRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.marketingplatform.admin.v1alpha.ReportPropertyUsageRequest)
+                                return object;
+                            var message = new $root.google.marketingplatform.admin.v1alpha.ReportPropertyUsageRequest();
+                            if (object.organization != null)
+                                message.organization = String(object.organization);
+                            if (object.month != null)
+                                message.month = String(object.month);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ReportPropertyUsageRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageRequest
+                         * @static
+                         * @param {google.marketingplatform.admin.v1alpha.ReportPropertyUsageRequest} message ReportPropertyUsageRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ReportPropertyUsageRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.organization = "";
+                                object.month = "";
+                            }
+                            if (message.organization != null && message.hasOwnProperty("organization"))
+                                object.organization = message.organization;
+                            if (message.month != null && message.hasOwnProperty("month"))
+                                object.month = message.month;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ReportPropertyUsageRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ReportPropertyUsageRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ReportPropertyUsageRequest
+                         * @function getTypeUrl
+                         * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ReportPropertyUsageRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.marketingplatform.admin.v1alpha.ReportPropertyUsageRequest";
+                        };
+    
+                        return ReportPropertyUsageRequest;
+                    })();
+    
+                    v1alpha.ReportPropertyUsageResponse = (function() {
+    
+                        /**
+                         * Properties of a ReportPropertyUsageResponse.
+                         * @memberof google.marketingplatform.admin.v1alpha
+                         * @interface IReportPropertyUsageResponse
+                         * @property {Array.<google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.IPropertyUsage>|null} [propertyUsages] ReportPropertyUsageResponse propertyUsages
+                         * @property {google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.IBillInfo|null} [billInfo] ReportPropertyUsageResponse billInfo
+                         */
+    
+                        /**
+                         * Constructs a new ReportPropertyUsageResponse.
+                         * @memberof google.marketingplatform.admin.v1alpha
+                         * @classdesc Represents a ReportPropertyUsageResponse.
+                         * @implements IReportPropertyUsageResponse
+                         * @constructor
+                         * @param {google.marketingplatform.admin.v1alpha.IReportPropertyUsageResponse=} [properties] Properties to set
+                         */
+                        function ReportPropertyUsageResponse(properties) {
+                            this.propertyUsages = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ReportPropertyUsageResponse propertyUsages.
+                         * @member {Array.<google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.IPropertyUsage>} propertyUsages
+                         * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse
+                         * @instance
+                         */
+                        ReportPropertyUsageResponse.prototype.propertyUsages = $util.emptyArray;
+    
+                        /**
+                         * ReportPropertyUsageResponse billInfo.
+                         * @member {google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.IBillInfo|null|undefined} billInfo
+                         * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse
+                         * @instance
+                         */
+                        ReportPropertyUsageResponse.prototype.billInfo = null;
+    
+                        /**
+                         * Creates a new ReportPropertyUsageResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse
+                         * @static
+                         * @param {google.marketingplatform.admin.v1alpha.IReportPropertyUsageResponse=} [properties] Properties to set
+                         * @returns {google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse} ReportPropertyUsageResponse instance
+                         */
+                        ReportPropertyUsageResponse.create = function create(properties) {
+                            return new ReportPropertyUsageResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ReportPropertyUsageResponse message. Does not implicitly {@link google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse
+                         * @static
+                         * @param {google.marketingplatform.admin.v1alpha.IReportPropertyUsageResponse} message ReportPropertyUsageResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ReportPropertyUsageResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.propertyUsages != null && message.propertyUsages.length)
+                                for (var i = 0; i < message.propertyUsages.length; ++i)
+                                    $root.google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.PropertyUsage.encode(message.propertyUsages[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.billInfo != null && Object.hasOwnProperty.call(message, "billInfo"))
+                                $root.google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.BillInfo.encode(message.billInfo, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ReportPropertyUsageResponse message, length delimited. Does not implicitly {@link google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse
+                         * @static
+                         * @param {google.marketingplatform.admin.v1alpha.IReportPropertyUsageResponse} message ReportPropertyUsageResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ReportPropertyUsageResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ReportPropertyUsageResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse} ReportPropertyUsageResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ReportPropertyUsageResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.propertyUsages && message.propertyUsages.length))
+                                            message.propertyUsages = [];
+                                        message.propertyUsages.push($root.google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.PropertyUsage.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.billInfo = $root.google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.BillInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ReportPropertyUsageResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse} ReportPropertyUsageResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ReportPropertyUsageResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ReportPropertyUsageResponse message.
+                         * @function verify
+                         * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ReportPropertyUsageResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.propertyUsages != null && message.hasOwnProperty("propertyUsages")) {
+                                if (!Array.isArray(message.propertyUsages))
+                                    return "propertyUsages: array expected";
+                                for (var i = 0; i < message.propertyUsages.length; ++i) {
+                                    var error = $root.google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.PropertyUsage.verify(message.propertyUsages[i]);
+                                    if (error)
+                                        return "propertyUsages." + error;
+                                }
+                            }
+                            if (message.billInfo != null && message.hasOwnProperty("billInfo")) {
+                                var error = $root.google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.BillInfo.verify(message.billInfo);
+                                if (error)
+                                    return "billInfo." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ReportPropertyUsageResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse} ReportPropertyUsageResponse
+                         */
+                        ReportPropertyUsageResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse)
+                                return object;
+                            var message = new $root.google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse();
+                            if (object.propertyUsages) {
+                                if (!Array.isArray(object.propertyUsages))
+                                    throw TypeError(".google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.propertyUsages: array expected");
+                                message.propertyUsages = [];
+                                for (var i = 0; i < object.propertyUsages.length; ++i) {
+                                    if (typeof object.propertyUsages[i] !== "object")
+                                        throw TypeError(".google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.propertyUsages: object expected");
+                                    message.propertyUsages[i] = $root.google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.PropertyUsage.fromObject(object.propertyUsages[i]);
+                                }
+                            }
+                            if (object.billInfo != null) {
+                                if (typeof object.billInfo !== "object")
+                                    throw TypeError(".google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.billInfo: object expected");
+                                message.billInfo = $root.google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.BillInfo.fromObject(object.billInfo);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ReportPropertyUsageResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse
+                         * @static
+                         * @param {google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse} message ReportPropertyUsageResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ReportPropertyUsageResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.propertyUsages = [];
+                            if (options.defaults)
+                                object.billInfo = null;
+                            if (message.propertyUsages && message.propertyUsages.length) {
+                                object.propertyUsages = [];
+                                for (var j = 0; j < message.propertyUsages.length; ++j)
+                                    object.propertyUsages[j] = $root.google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.PropertyUsage.toObject(message.propertyUsages[j], options);
+                            }
+                            if (message.billInfo != null && message.hasOwnProperty("billInfo"))
+                                object.billInfo = $root.google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.BillInfo.toObject(message.billInfo, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ReportPropertyUsageResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ReportPropertyUsageResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ReportPropertyUsageResponse
+                         * @function getTypeUrl
+                         * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ReportPropertyUsageResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse";
+                        };
+    
+                        ReportPropertyUsageResponse.PropertyUsage = (function() {
+    
+                            /**
+                             * Properties of a PropertyUsage.
+                             * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse
+                             * @interface IPropertyUsage
+                             * @property {string|null} [property] PropertyUsage property
+                             * @property {string|null} [displayName] PropertyUsage displayName
+                             * @property {number|Long|null} [accountId] PropertyUsage accountId
+                             * @property {google.marketingplatform.admin.v1alpha.AnalyticsServiceLevel|null} [serviceLevel] PropertyUsage serviceLevel
+                             * @property {google.marketingplatform.admin.v1alpha.AnalyticsPropertyType|null} [propertyType] PropertyUsage propertyType
+                             * @property {number|Long|null} [totalEventCount] PropertyUsage totalEventCount
+                             * @property {number|Long|null} [billableEventCount] PropertyUsage billableEventCount
+                             */
+    
+                            /**
+                             * Constructs a new PropertyUsage.
+                             * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse
+                             * @classdesc Represents a PropertyUsage.
+                             * @implements IPropertyUsage
+                             * @constructor
+                             * @param {google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.IPropertyUsage=} [properties] Properties to set
+                             */
+                            function PropertyUsage(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * PropertyUsage property.
+                             * @member {string} property
+                             * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.PropertyUsage
+                             * @instance
+                             */
+                            PropertyUsage.prototype.property = "";
+    
+                            /**
+                             * PropertyUsage displayName.
+                             * @member {string} displayName
+                             * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.PropertyUsage
+                             * @instance
+                             */
+                            PropertyUsage.prototype.displayName = "";
+    
+                            /**
+                             * PropertyUsage accountId.
+                             * @member {number|Long} accountId
+                             * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.PropertyUsage
+                             * @instance
+                             */
+                            PropertyUsage.prototype.accountId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * PropertyUsage serviceLevel.
+                             * @member {google.marketingplatform.admin.v1alpha.AnalyticsServiceLevel} serviceLevel
+                             * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.PropertyUsage
+                             * @instance
+                             */
+                            PropertyUsage.prototype.serviceLevel = 0;
+    
+                            /**
+                             * PropertyUsage propertyType.
+                             * @member {google.marketingplatform.admin.v1alpha.AnalyticsPropertyType} propertyType
+                             * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.PropertyUsage
+                             * @instance
+                             */
+                            PropertyUsage.prototype.propertyType = 0;
+    
+                            /**
+                             * PropertyUsage totalEventCount.
+                             * @member {number|Long} totalEventCount
+                             * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.PropertyUsage
+                             * @instance
+                             */
+                            PropertyUsage.prototype.totalEventCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * PropertyUsage billableEventCount.
+                             * @member {number|Long} billableEventCount
+                             * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.PropertyUsage
+                             * @instance
+                             */
+                            PropertyUsage.prototype.billableEventCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * Creates a new PropertyUsage instance using the specified properties.
+                             * @function create
+                             * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.PropertyUsage
+                             * @static
+                             * @param {google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.IPropertyUsage=} [properties] Properties to set
+                             * @returns {google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.PropertyUsage} PropertyUsage instance
+                             */
+                            PropertyUsage.create = function create(properties) {
+                                return new PropertyUsage(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified PropertyUsage message. Does not implicitly {@link google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.PropertyUsage.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.PropertyUsage
+                             * @static
+                             * @param {google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.IPropertyUsage} message PropertyUsage message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PropertyUsage.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.property != null && Object.hasOwnProperty.call(message, "property"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.property);
+                                if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                                if (message.accountId != null && Object.hasOwnProperty.call(message, "accountId"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int64(message.accountId);
+                                if (message.serviceLevel != null && Object.hasOwnProperty.call(message, "serviceLevel"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.serviceLevel);
+                                if (message.propertyType != null && Object.hasOwnProperty.call(message, "propertyType"))
+                                    writer.uint32(/* id 5, wireType 0 =*/40).int32(message.propertyType);
+                                if (message.totalEventCount != null && Object.hasOwnProperty.call(message, "totalEventCount"))
+                                    writer.uint32(/* id 6, wireType 0 =*/48).int64(message.totalEventCount);
+                                if (message.billableEventCount != null && Object.hasOwnProperty.call(message, "billableEventCount"))
+                                    writer.uint32(/* id 7, wireType 0 =*/56).int64(message.billableEventCount);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified PropertyUsage message, length delimited. Does not implicitly {@link google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.PropertyUsage.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.PropertyUsage
+                             * @static
+                             * @param {google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.IPropertyUsage} message PropertyUsage message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PropertyUsage.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a PropertyUsage message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.PropertyUsage
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.PropertyUsage} PropertyUsage
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PropertyUsage.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.PropertyUsage();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.property = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.displayName = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.accountId = reader.int64();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.serviceLevel = reader.int32();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.propertyType = reader.int32();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.totalEventCount = reader.int64();
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.billableEventCount = reader.int64();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a PropertyUsage message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.PropertyUsage
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.PropertyUsage} PropertyUsage
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PropertyUsage.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a PropertyUsage message.
+                             * @function verify
+                             * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.PropertyUsage
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            PropertyUsage.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.property != null && message.hasOwnProperty("property"))
+                                    if (!$util.isString(message.property))
+                                        return "property: string expected";
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    if (!$util.isString(message.displayName))
+                                        return "displayName: string expected";
+                                if (message.accountId != null && message.hasOwnProperty("accountId"))
+                                    if (!$util.isInteger(message.accountId) && !(message.accountId && $util.isInteger(message.accountId.low) && $util.isInteger(message.accountId.high)))
+                                        return "accountId: integer|Long expected";
+                                if (message.serviceLevel != null && message.hasOwnProperty("serviceLevel"))
+                                    switch (message.serviceLevel) {
+                                    default:
+                                        return "serviceLevel: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                if (message.propertyType != null && message.hasOwnProperty("propertyType"))
+                                    switch (message.propertyType) {
+                                    default:
+                                        return "propertyType: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                if (message.totalEventCount != null && message.hasOwnProperty("totalEventCount"))
+                                    if (!$util.isInteger(message.totalEventCount) && !(message.totalEventCount && $util.isInteger(message.totalEventCount.low) && $util.isInteger(message.totalEventCount.high)))
+                                        return "totalEventCount: integer|Long expected";
+                                if (message.billableEventCount != null && message.hasOwnProperty("billableEventCount"))
+                                    if (!$util.isInteger(message.billableEventCount) && !(message.billableEventCount && $util.isInteger(message.billableEventCount.low) && $util.isInteger(message.billableEventCount.high)))
+                                        return "billableEventCount: integer|Long expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a PropertyUsage message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.PropertyUsage
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.PropertyUsage} PropertyUsage
+                             */
+                            PropertyUsage.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.PropertyUsage)
+                                    return object;
+                                var message = new $root.google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.PropertyUsage();
+                                if (object.property != null)
+                                    message.property = String(object.property);
+                                if (object.displayName != null)
+                                    message.displayName = String(object.displayName);
+                                if (object.accountId != null)
+                                    if ($util.Long)
+                                        (message.accountId = $util.Long.fromValue(object.accountId)).unsigned = false;
+                                    else if (typeof object.accountId === "string")
+                                        message.accountId = parseInt(object.accountId, 10);
+                                    else if (typeof object.accountId === "number")
+                                        message.accountId = object.accountId;
+                                    else if (typeof object.accountId === "object")
+                                        message.accountId = new $util.LongBits(object.accountId.low >>> 0, object.accountId.high >>> 0).toNumber();
+                                switch (object.serviceLevel) {
+                                default:
+                                    if (typeof object.serviceLevel === "number") {
+                                        message.serviceLevel = object.serviceLevel;
+                                        break;
+                                    }
+                                    break;
+                                case "ANALYTICS_SERVICE_LEVEL_UNSPECIFIED":
+                                case 0:
+                                    message.serviceLevel = 0;
+                                    break;
+                                case "ANALYTICS_SERVICE_LEVEL_STANDARD":
+                                case 1:
+                                    message.serviceLevel = 1;
+                                    break;
+                                case "ANALYTICS_SERVICE_LEVEL_360":
+                                case 2:
+                                    message.serviceLevel = 2;
+                                    break;
+                                }
+                                switch (object.propertyType) {
+                                default:
+                                    if (typeof object.propertyType === "number") {
+                                        message.propertyType = object.propertyType;
+                                        break;
+                                    }
+                                    break;
+                                case "ANALYTICS_PROPERTY_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.propertyType = 0;
+                                    break;
+                                case "ANALYTICS_PROPERTY_TYPE_ORDINARY":
+                                case 1:
+                                    message.propertyType = 1;
+                                    break;
+                                case "ANALYTICS_PROPERTY_TYPE_SUBPROPERTY":
+                                case 2:
+                                    message.propertyType = 2;
+                                    break;
+                                case "ANALYTICS_PROPERTY_TYPE_ROLLUP":
+                                case 3:
+                                    message.propertyType = 3;
+                                    break;
+                                }
+                                if (object.totalEventCount != null)
+                                    if ($util.Long)
+                                        (message.totalEventCount = $util.Long.fromValue(object.totalEventCount)).unsigned = false;
+                                    else if (typeof object.totalEventCount === "string")
+                                        message.totalEventCount = parseInt(object.totalEventCount, 10);
+                                    else if (typeof object.totalEventCount === "number")
+                                        message.totalEventCount = object.totalEventCount;
+                                    else if (typeof object.totalEventCount === "object")
+                                        message.totalEventCount = new $util.LongBits(object.totalEventCount.low >>> 0, object.totalEventCount.high >>> 0).toNumber();
+                                if (object.billableEventCount != null)
+                                    if ($util.Long)
+                                        (message.billableEventCount = $util.Long.fromValue(object.billableEventCount)).unsigned = false;
+                                    else if (typeof object.billableEventCount === "string")
+                                        message.billableEventCount = parseInt(object.billableEventCount, 10);
+                                    else if (typeof object.billableEventCount === "number")
+                                        message.billableEventCount = object.billableEventCount;
+                                    else if (typeof object.billableEventCount === "object")
+                                        message.billableEventCount = new $util.LongBits(object.billableEventCount.low >>> 0, object.billableEventCount.high >>> 0).toNumber();
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a PropertyUsage message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.PropertyUsage
+                             * @static
+                             * @param {google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.PropertyUsage} message PropertyUsage
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            PropertyUsage.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.property = "";
+                                    object.displayName = "";
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.accountId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.accountId = options.longs === String ? "0" : 0;
+                                    object.serviceLevel = options.enums === String ? "ANALYTICS_SERVICE_LEVEL_UNSPECIFIED" : 0;
+                                    object.propertyType = options.enums === String ? "ANALYTICS_PROPERTY_TYPE_UNSPECIFIED" : 0;
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.totalEventCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.totalEventCount = options.longs === String ? "0" : 0;
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.billableEventCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.billableEventCount = options.longs === String ? "0" : 0;
+                                }
+                                if (message.property != null && message.hasOwnProperty("property"))
+                                    object.property = message.property;
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    object.displayName = message.displayName;
+                                if (message.accountId != null && message.hasOwnProperty("accountId"))
+                                    if (typeof message.accountId === "number")
+                                        object.accountId = options.longs === String ? String(message.accountId) : message.accountId;
+                                    else
+                                        object.accountId = options.longs === String ? $util.Long.prototype.toString.call(message.accountId) : options.longs === Number ? new $util.LongBits(message.accountId.low >>> 0, message.accountId.high >>> 0).toNumber() : message.accountId;
+                                if (message.serviceLevel != null && message.hasOwnProperty("serviceLevel"))
+                                    object.serviceLevel = options.enums === String ? $root.google.marketingplatform.admin.v1alpha.AnalyticsServiceLevel[message.serviceLevel] === undefined ? message.serviceLevel : $root.google.marketingplatform.admin.v1alpha.AnalyticsServiceLevel[message.serviceLevel] : message.serviceLevel;
+                                if (message.propertyType != null && message.hasOwnProperty("propertyType"))
+                                    object.propertyType = options.enums === String ? $root.google.marketingplatform.admin.v1alpha.AnalyticsPropertyType[message.propertyType] === undefined ? message.propertyType : $root.google.marketingplatform.admin.v1alpha.AnalyticsPropertyType[message.propertyType] : message.propertyType;
+                                if (message.totalEventCount != null && message.hasOwnProperty("totalEventCount"))
+                                    if (typeof message.totalEventCount === "number")
+                                        object.totalEventCount = options.longs === String ? String(message.totalEventCount) : message.totalEventCount;
+                                    else
+                                        object.totalEventCount = options.longs === String ? $util.Long.prototype.toString.call(message.totalEventCount) : options.longs === Number ? new $util.LongBits(message.totalEventCount.low >>> 0, message.totalEventCount.high >>> 0).toNumber() : message.totalEventCount;
+                                if (message.billableEventCount != null && message.hasOwnProperty("billableEventCount"))
+                                    if (typeof message.billableEventCount === "number")
+                                        object.billableEventCount = options.longs === String ? String(message.billableEventCount) : message.billableEventCount;
+                                    else
+                                        object.billableEventCount = options.longs === String ? $util.Long.prototype.toString.call(message.billableEventCount) : options.longs === Number ? new $util.LongBits(message.billableEventCount.low >>> 0, message.billableEventCount.high >>> 0).toNumber() : message.billableEventCount;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this PropertyUsage to JSON.
+                             * @function toJSON
+                             * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.PropertyUsage
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            PropertyUsage.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for PropertyUsage
+                             * @function getTypeUrl
+                             * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.PropertyUsage
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            PropertyUsage.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.PropertyUsage";
+                            };
+    
+                            return PropertyUsage;
+                        })();
+    
+                        ReportPropertyUsageResponse.BillInfo = (function() {
+    
+                            /**
+                             * Properties of a BillInfo.
+                             * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse
+                             * @interface IBillInfo
+                             * @property {google.type.IMoney|null} [baseFee] BillInfo baseFee
+                             * @property {google.type.IMoney|null} [eventFee] BillInfo eventFee
+                             * @property {google.type.IMoney|null} [priceProtectionCredit] BillInfo priceProtectionCredit
+                             * @property {google.type.IMoney|null} [total] BillInfo total
+                             */
+    
+                            /**
+                             * Constructs a new BillInfo.
+                             * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse
+                             * @classdesc Represents a BillInfo.
+                             * @implements IBillInfo
+                             * @constructor
+                             * @param {google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.IBillInfo=} [properties] Properties to set
+                             */
+                            function BillInfo(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * BillInfo baseFee.
+                             * @member {google.type.IMoney|null|undefined} baseFee
+                             * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.BillInfo
+                             * @instance
+                             */
+                            BillInfo.prototype.baseFee = null;
+    
+                            /**
+                             * BillInfo eventFee.
+                             * @member {google.type.IMoney|null|undefined} eventFee
+                             * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.BillInfo
+                             * @instance
+                             */
+                            BillInfo.prototype.eventFee = null;
+    
+                            /**
+                             * BillInfo priceProtectionCredit.
+                             * @member {google.type.IMoney|null|undefined} priceProtectionCredit
+                             * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.BillInfo
+                             * @instance
+                             */
+                            BillInfo.prototype.priceProtectionCredit = null;
+    
+                            /**
+                             * BillInfo total.
+                             * @member {google.type.IMoney|null|undefined} total
+                             * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.BillInfo
+                             * @instance
+                             */
+                            BillInfo.prototype.total = null;
+    
+                            /**
+                             * Creates a new BillInfo instance using the specified properties.
+                             * @function create
+                             * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.BillInfo
+                             * @static
+                             * @param {google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.IBillInfo=} [properties] Properties to set
+                             * @returns {google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.BillInfo} BillInfo instance
+                             */
+                            BillInfo.create = function create(properties) {
+                                return new BillInfo(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified BillInfo message. Does not implicitly {@link google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.BillInfo.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.BillInfo
+                             * @static
+                             * @param {google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.IBillInfo} message BillInfo message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BillInfo.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.baseFee != null && Object.hasOwnProperty.call(message, "baseFee"))
+                                    $root.google.type.Money.encode(message.baseFee, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.eventFee != null && Object.hasOwnProperty.call(message, "eventFee"))
+                                    $root.google.type.Money.encode(message.eventFee, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.priceProtectionCredit != null && Object.hasOwnProperty.call(message, "priceProtectionCredit"))
+                                    $root.google.type.Money.encode(message.priceProtectionCredit, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.total != null && Object.hasOwnProperty.call(message, "total"))
+                                    $root.google.type.Money.encode(message.total, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified BillInfo message, length delimited. Does not implicitly {@link google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.BillInfo.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.BillInfo
+                             * @static
+                             * @param {google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.IBillInfo} message BillInfo message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BillInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a BillInfo message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.BillInfo
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.BillInfo} BillInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BillInfo.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.BillInfo();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.baseFee = $root.google.type.Money.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.eventFee = $root.google.type.Money.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.priceProtectionCredit = $root.google.type.Money.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.total = $root.google.type.Money.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a BillInfo message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.BillInfo
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.BillInfo} BillInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BillInfo.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a BillInfo message.
+                             * @function verify
+                             * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.BillInfo
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            BillInfo.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.baseFee != null && message.hasOwnProperty("baseFee")) {
+                                    var error = $root.google.type.Money.verify(message.baseFee);
+                                    if (error)
+                                        return "baseFee." + error;
+                                }
+                                if (message.eventFee != null && message.hasOwnProperty("eventFee")) {
+                                    var error = $root.google.type.Money.verify(message.eventFee);
+                                    if (error)
+                                        return "eventFee." + error;
+                                }
+                                if (message.priceProtectionCredit != null && message.hasOwnProperty("priceProtectionCredit")) {
+                                    var error = $root.google.type.Money.verify(message.priceProtectionCredit);
+                                    if (error)
+                                        return "priceProtectionCredit." + error;
+                                }
+                                if (message.total != null && message.hasOwnProperty("total")) {
+                                    var error = $root.google.type.Money.verify(message.total);
+                                    if (error)
+                                        return "total." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a BillInfo message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.BillInfo
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.BillInfo} BillInfo
+                             */
+                            BillInfo.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.BillInfo)
+                                    return object;
+                                var message = new $root.google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.BillInfo();
+                                if (object.baseFee != null) {
+                                    if (typeof object.baseFee !== "object")
+                                        throw TypeError(".google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.BillInfo.baseFee: object expected");
+                                    message.baseFee = $root.google.type.Money.fromObject(object.baseFee);
+                                }
+                                if (object.eventFee != null) {
+                                    if (typeof object.eventFee !== "object")
+                                        throw TypeError(".google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.BillInfo.eventFee: object expected");
+                                    message.eventFee = $root.google.type.Money.fromObject(object.eventFee);
+                                }
+                                if (object.priceProtectionCredit != null) {
+                                    if (typeof object.priceProtectionCredit !== "object")
+                                        throw TypeError(".google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.BillInfo.priceProtectionCredit: object expected");
+                                    message.priceProtectionCredit = $root.google.type.Money.fromObject(object.priceProtectionCredit);
+                                }
+                                if (object.total != null) {
+                                    if (typeof object.total !== "object")
+                                        throw TypeError(".google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.BillInfo.total: object expected");
+                                    message.total = $root.google.type.Money.fromObject(object.total);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a BillInfo message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.BillInfo
+                             * @static
+                             * @param {google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.BillInfo} message BillInfo
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            BillInfo.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.baseFee = null;
+                                    object.eventFee = null;
+                                    object.priceProtectionCredit = null;
+                                    object.total = null;
+                                }
+                                if (message.baseFee != null && message.hasOwnProperty("baseFee"))
+                                    object.baseFee = $root.google.type.Money.toObject(message.baseFee, options);
+                                if (message.eventFee != null && message.hasOwnProperty("eventFee"))
+                                    object.eventFee = $root.google.type.Money.toObject(message.eventFee, options);
+                                if (message.priceProtectionCredit != null && message.hasOwnProperty("priceProtectionCredit"))
+                                    object.priceProtectionCredit = $root.google.type.Money.toObject(message.priceProtectionCredit, options);
+                                if (message.total != null && message.hasOwnProperty("total"))
+                                    object.total = $root.google.type.Money.toObject(message.total, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this BillInfo to JSON.
+                             * @function toJSON
+                             * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.BillInfo
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            BillInfo.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for BillInfo
+                             * @function getTypeUrl
+                             * @memberof google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.BillInfo
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            BillInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.BillInfo";
+                            };
+    
+                            return BillInfo;
+                        })();
+    
+                        return ReportPropertyUsageResponse;
+                    })();
+    
                     /**
                      * LinkVerificationState enum.
                      * @name google.marketingplatform.admin.v1alpha.LinkVerificationState
@@ -1894,6 +4396,40 @@
                         values[valuesById[0] = "LINK_VERIFICATION_STATE_UNSPECIFIED"] = 0;
                         values[valuesById[1] = "LINK_VERIFICATION_STATE_VERIFIED"] = 1;
                         values[valuesById[2] = "LINK_VERIFICATION_STATE_NOT_VERIFIED"] = 2;
+                        return values;
+                    })();
+    
+                    /**
+                     * AnalyticsServiceLevel enum.
+                     * @name google.marketingplatform.admin.v1alpha.AnalyticsServiceLevel
+                     * @enum {number}
+                     * @property {number} ANALYTICS_SERVICE_LEVEL_UNSPECIFIED=0 ANALYTICS_SERVICE_LEVEL_UNSPECIFIED value
+                     * @property {number} ANALYTICS_SERVICE_LEVEL_STANDARD=1 ANALYTICS_SERVICE_LEVEL_STANDARD value
+                     * @property {number} ANALYTICS_SERVICE_LEVEL_360=2 ANALYTICS_SERVICE_LEVEL_360 value
+                     */
+                    v1alpha.AnalyticsServiceLevel = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "ANALYTICS_SERVICE_LEVEL_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "ANALYTICS_SERVICE_LEVEL_STANDARD"] = 1;
+                        values[valuesById[2] = "ANALYTICS_SERVICE_LEVEL_360"] = 2;
+                        return values;
+                    })();
+    
+                    /**
+                     * AnalyticsPropertyType enum.
+                     * @name google.marketingplatform.admin.v1alpha.AnalyticsPropertyType
+                     * @enum {number}
+                     * @property {number} ANALYTICS_PROPERTY_TYPE_UNSPECIFIED=0 ANALYTICS_PROPERTY_TYPE_UNSPECIFIED value
+                     * @property {number} ANALYTICS_PROPERTY_TYPE_ORDINARY=1 ANALYTICS_PROPERTY_TYPE_ORDINARY value
+                     * @property {number} ANALYTICS_PROPERTY_TYPE_SUBPROPERTY=2 ANALYTICS_PROPERTY_TYPE_SUBPROPERTY value
+                     * @property {number} ANALYTICS_PROPERTY_TYPE_ROLLUP=3 ANALYTICS_PROPERTY_TYPE_ROLLUP value
+                     */
+                    v1alpha.AnalyticsPropertyType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "ANALYTICS_PROPERTY_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "ANALYTICS_PROPERTY_TYPE_ORDINARY"] = 1;
+                        values[valuesById[2] = "ANALYTICS_PROPERTY_TYPE_SUBPROPERTY"] = 2;
+                        values[valuesById[3] = "ANALYTICS_PROPERTY_TYPE_ROLLUP"] = 3;
                         return values;
                     })();
     
@@ -20611,6 +23147,536 @@
             })();
     
             return protobuf;
+        })();
+    
+        google.type = (function() {
+    
+            /**
+             * Namespace type.
+             * @memberof google
+             * @namespace
+             */
+            var type = {};
+    
+            type.Date = (function() {
+    
+                /**
+                 * Properties of a Date.
+                 * @memberof google.type
+                 * @interface IDate
+                 * @property {number|null} [year] Date year
+                 * @property {number|null} [month] Date month
+                 * @property {number|null} [day] Date day
+                 */
+    
+                /**
+                 * Constructs a new Date.
+                 * @memberof google.type
+                 * @classdesc Represents a Date.
+                 * @implements IDate
+                 * @constructor
+                 * @param {google.type.IDate=} [properties] Properties to set
+                 */
+                function Date(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Date year.
+                 * @member {number} year
+                 * @memberof google.type.Date
+                 * @instance
+                 */
+                Date.prototype.year = 0;
+    
+                /**
+                 * Date month.
+                 * @member {number} month
+                 * @memberof google.type.Date
+                 * @instance
+                 */
+                Date.prototype.month = 0;
+    
+                /**
+                 * Date day.
+                 * @member {number} day
+                 * @memberof google.type.Date
+                 * @instance
+                 */
+                Date.prototype.day = 0;
+    
+                /**
+                 * Creates a new Date instance using the specified properties.
+                 * @function create
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {google.type.IDate=} [properties] Properties to set
+                 * @returns {google.type.Date} Date instance
+                 */
+                Date.create = function create(properties) {
+                    return new Date(properties);
+                };
+    
+                /**
+                 * Encodes the specified Date message. Does not implicitly {@link google.type.Date.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {google.type.IDate} message Date message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Date.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.year != null && Object.hasOwnProperty.call(message, "year"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.year);
+                    if (message.month != null && Object.hasOwnProperty.call(message, "month"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.month);
+                    if (message.day != null && Object.hasOwnProperty.call(message, "day"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).int32(message.day);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Date message, length delimited. Does not implicitly {@link google.type.Date.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {google.type.IDate} message Date message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Date.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Date message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.type.Date} Date
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Date.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.Date();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.year = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                message.month = reader.int32();
+                                break;
+                            }
+                        case 3: {
+                                message.day = reader.int32();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Date message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.type.Date} Date
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Date.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Date message.
+                 * @function verify
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Date.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.year != null && message.hasOwnProperty("year"))
+                        if (!$util.isInteger(message.year))
+                            return "year: integer expected";
+                    if (message.month != null && message.hasOwnProperty("month"))
+                        if (!$util.isInteger(message.month))
+                            return "month: integer expected";
+                    if (message.day != null && message.hasOwnProperty("day"))
+                        if (!$util.isInteger(message.day))
+                            return "day: integer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a Date message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.type.Date} Date
+                 */
+                Date.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.type.Date)
+                        return object;
+                    var message = new $root.google.type.Date();
+                    if (object.year != null)
+                        message.year = object.year | 0;
+                    if (object.month != null)
+                        message.month = object.month | 0;
+                    if (object.day != null)
+                        message.day = object.day | 0;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Date message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {google.type.Date} message Date
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Date.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.year = 0;
+                        object.month = 0;
+                        object.day = 0;
+                    }
+                    if (message.year != null && message.hasOwnProperty("year"))
+                        object.year = message.year;
+                    if (message.month != null && message.hasOwnProperty("month"))
+                        object.month = message.month;
+                    if (message.day != null && message.hasOwnProperty("day"))
+                        object.day = message.day;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Date to JSON.
+                 * @function toJSON
+                 * @memberof google.type.Date
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Date.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Date
+                 * @function getTypeUrl
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Date.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.type.Date";
+                };
+    
+                return Date;
+            })();
+    
+            type.Money = (function() {
+    
+                /**
+                 * Properties of a Money.
+                 * @memberof google.type
+                 * @interface IMoney
+                 * @property {string|null} [currencyCode] Money currencyCode
+                 * @property {number|Long|null} [units] Money units
+                 * @property {number|null} [nanos] Money nanos
+                 */
+    
+                /**
+                 * Constructs a new Money.
+                 * @memberof google.type
+                 * @classdesc Represents a Money.
+                 * @implements IMoney
+                 * @constructor
+                 * @param {google.type.IMoney=} [properties] Properties to set
+                 */
+                function Money(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Money currencyCode.
+                 * @member {string} currencyCode
+                 * @memberof google.type.Money
+                 * @instance
+                 */
+                Money.prototype.currencyCode = "";
+    
+                /**
+                 * Money units.
+                 * @member {number|Long} units
+                 * @memberof google.type.Money
+                 * @instance
+                 */
+                Money.prototype.units = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                /**
+                 * Money nanos.
+                 * @member {number} nanos
+                 * @memberof google.type.Money
+                 * @instance
+                 */
+                Money.prototype.nanos = 0;
+    
+                /**
+                 * Creates a new Money instance using the specified properties.
+                 * @function create
+                 * @memberof google.type.Money
+                 * @static
+                 * @param {google.type.IMoney=} [properties] Properties to set
+                 * @returns {google.type.Money} Money instance
+                 */
+                Money.create = function create(properties) {
+                    return new Money(properties);
+                };
+    
+                /**
+                 * Encodes the specified Money message. Does not implicitly {@link google.type.Money.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.type.Money
+                 * @static
+                 * @param {google.type.IMoney} message Money message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Money.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.currencyCode != null && Object.hasOwnProperty.call(message, "currencyCode"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.currencyCode);
+                    if (message.units != null && Object.hasOwnProperty.call(message, "units"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int64(message.units);
+                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).int32(message.nanos);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Money message, length delimited. Does not implicitly {@link google.type.Money.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.type.Money
+                 * @static
+                 * @param {google.type.IMoney} message Money message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Money.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Money message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.type.Money
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.type.Money} Money
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Money.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.Money();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.currencyCode = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.units = reader.int64();
+                                break;
+                            }
+                        case 3: {
+                                message.nanos = reader.int32();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Money message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.type.Money
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.type.Money} Money
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Money.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Money message.
+                 * @function verify
+                 * @memberof google.type.Money
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Money.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.currencyCode != null && message.hasOwnProperty("currencyCode"))
+                        if (!$util.isString(message.currencyCode))
+                            return "currencyCode: string expected";
+                    if (message.units != null && message.hasOwnProperty("units"))
+                        if (!$util.isInteger(message.units) && !(message.units && $util.isInteger(message.units.low) && $util.isInteger(message.units.high)))
+                            return "units: integer|Long expected";
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        if (!$util.isInteger(message.nanos))
+                            return "nanos: integer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a Money message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.type.Money
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.type.Money} Money
+                 */
+                Money.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.type.Money)
+                        return object;
+                    var message = new $root.google.type.Money();
+                    if (object.currencyCode != null)
+                        message.currencyCode = String(object.currencyCode);
+                    if (object.units != null)
+                        if ($util.Long)
+                            (message.units = $util.Long.fromValue(object.units)).unsigned = false;
+                        else if (typeof object.units === "string")
+                            message.units = parseInt(object.units, 10);
+                        else if (typeof object.units === "number")
+                            message.units = object.units;
+                        else if (typeof object.units === "object")
+                            message.units = new $util.LongBits(object.units.low >>> 0, object.units.high >>> 0).toNumber();
+                    if (object.nanos != null)
+                        message.nanos = object.nanos | 0;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Money message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.type.Money
+                 * @static
+                 * @param {google.type.Money} message Money
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Money.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.currencyCode = "";
+                        if ($util.Long) {
+                            var long = new $util.Long(0, 0, false);
+                            object.units = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                        } else
+                            object.units = options.longs === String ? "0" : 0;
+                        object.nanos = 0;
+                    }
+                    if (message.currencyCode != null && message.hasOwnProperty("currencyCode"))
+                        object.currencyCode = message.currencyCode;
+                    if (message.units != null && message.hasOwnProperty("units"))
+                        if (typeof message.units === "number")
+                            object.units = options.longs === String ? String(message.units) : message.units;
+                        else
+                            object.units = options.longs === String ? $util.Long.prototype.toString.call(message.units) : options.longs === Number ? new $util.LongBits(message.units.low >>> 0, message.units.high >>> 0).toNumber() : message.units;
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        object.nanos = message.nanos;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Money to JSON.
+                 * @function toJSON
+                 * @memberof google.type.Money
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Money.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Money
+                 * @function getTypeUrl
+                 * @memberof google.type.Money
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Money.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.type.Money";
+                };
+    
+                return Money;
+            })();
+    
+            return type;
         })();
     
         return google;

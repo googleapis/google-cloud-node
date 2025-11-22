@@ -29,8 +29,7 @@ function main() {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Optional. Session configuration sent in the first and only first client
-   *  message.
+   *  Optional. Session configuration sent only in the first client message.
    */
   // const setup = {}
   /**

@@ -1003,6 +1003,7 @@
                          * @memberof google.cloud.texttospeech.v1
                          * @interface IAdvancedVoiceOptions
                          * @property {boolean|null} [lowLatencyJourneySynthesis] AdvancedVoiceOptions lowLatencyJourneySynthesis
+                         * @property {boolean|null} [relaxSafetyFilters] AdvancedVoiceOptions relaxSafetyFilters
                          */
     
                         /**
@@ -1027,6 +1028,14 @@
                          * @instance
                          */
                         AdvancedVoiceOptions.prototype.lowLatencyJourneySynthesis = null;
+    
+                        /**
+                         * AdvancedVoiceOptions relaxSafetyFilters.
+                         * @member {boolean} relaxSafetyFilters
+                         * @memberof google.cloud.texttospeech.v1.AdvancedVoiceOptions
+                         * @instance
+                         */
+                        AdvancedVoiceOptions.prototype.relaxSafetyFilters = false;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -1063,6 +1072,8 @@
                                 writer = $Writer.create();
                             if (message.lowLatencyJourneySynthesis != null && Object.hasOwnProperty.call(message, "lowLatencyJourneySynthesis"))
                                 writer.uint32(/* id 1, wireType 0 =*/8).bool(message.lowLatencyJourneySynthesis);
+                            if (message.relaxSafetyFilters != null && Object.hasOwnProperty.call(message, "relaxSafetyFilters"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).bool(message.relaxSafetyFilters);
                             return writer;
                         };
     
@@ -1101,6 +1112,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.lowLatencyJourneySynthesis = reader.bool();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.relaxSafetyFilters = reader.bool();
                                         break;
                                     }
                                 default:
@@ -1144,6 +1159,9 @@
                                 if (typeof message.lowLatencyJourneySynthesis !== "boolean")
                                     return "lowLatencyJourneySynthesis: boolean expected";
                             }
+                            if (message.relaxSafetyFilters != null && message.hasOwnProperty("relaxSafetyFilters"))
+                                if (typeof message.relaxSafetyFilters !== "boolean")
+                                    return "relaxSafetyFilters: boolean expected";
                             return null;
                         };
     
@@ -1161,6 +1179,8 @@
                             var message = new $root.google.cloud.texttospeech.v1.AdvancedVoiceOptions();
                             if (object.lowLatencyJourneySynthesis != null)
                                 message.lowLatencyJourneySynthesis = Boolean(object.lowLatencyJourneySynthesis);
+                            if (object.relaxSafetyFilters != null)
+                                message.relaxSafetyFilters = Boolean(object.relaxSafetyFilters);
                             return message;
                         };
     
@@ -1177,11 +1197,15 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.defaults)
+                                object.relaxSafetyFilters = false;
                             if (message.lowLatencyJourneySynthesis != null && message.hasOwnProperty("lowLatencyJourneySynthesis")) {
                                 object.lowLatencyJourneySynthesis = message.lowLatencyJourneySynthesis;
                                 if (options.oneofs)
                                     object._lowLatencyJourneySynthesis = "lowLatencyJourneySynthesis";
                             }
+                            if (message.relaxSafetyFilters != null && message.hasOwnProperty("relaxSafetyFilters"))
+                                object.relaxSafetyFilters = message.relaxSafetyFilters;
                             return object;
                         };
     
@@ -7976,6 +8000,7 @@
                          * @memberof google.cloud.texttospeech.v1beta1
                          * @interface IAdvancedVoiceOptions
                          * @property {boolean|null} [lowLatencyJourneySynthesis] AdvancedVoiceOptions lowLatencyJourneySynthesis
+                         * @property {boolean|null} [relaxSafetyFilters] AdvancedVoiceOptions relaxSafetyFilters
                          */
     
                         /**
@@ -8000,6 +8025,14 @@
                          * @instance
                          */
                         AdvancedVoiceOptions.prototype.lowLatencyJourneySynthesis = null;
+    
+                        /**
+                         * AdvancedVoiceOptions relaxSafetyFilters.
+                         * @member {boolean} relaxSafetyFilters
+                         * @memberof google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions
+                         * @instance
+                         */
+                        AdvancedVoiceOptions.prototype.relaxSafetyFilters = false;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -8036,6 +8069,8 @@
                                 writer = $Writer.create();
                             if (message.lowLatencyJourneySynthesis != null && Object.hasOwnProperty.call(message, "lowLatencyJourneySynthesis"))
                                 writer.uint32(/* id 1, wireType 0 =*/8).bool(message.lowLatencyJourneySynthesis);
+                            if (message.relaxSafetyFilters != null && Object.hasOwnProperty.call(message, "relaxSafetyFilters"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).bool(message.relaxSafetyFilters);
                             return writer;
                         };
     
@@ -8074,6 +8109,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.lowLatencyJourneySynthesis = reader.bool();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.relaxSafetyFilters = reader.bool();
                                         break;
                                     }
                                 default:
@@ -8117,6 +8156,9 @@
                                 if (typeof message.lowLatencyJourneySynthesis !== "boolean")
                                     return "lowLatencyJourneySynthesis: boolean expected";
                             }
+                            if (message.relaxSafetyFilters != null && message.hasOwnProperty("relaxSafetyFilters"))
+                                if (typeof message.relaxSafetyFilters !== "boolean")
+                                    return "relaxSafetyFilters: boolean expected";
                             return null;
                         };
     
@@ -8134,6 +8176,8 @@
                             var message = new $root.google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions();
                             if (object.lowLatencyJourneySynthesis != null)
                                 message.lowLatencyJourneySynthesis = Boolean(object.lowLatencyJourneySynthesis);
+                            if (object.relaxSafetyFilters != null)
+                                message.relaxSafetyFilters = Boolean(object.relaxSafetyFilters);
                             return message;
                         };
     
@@ -8150,11 +8194,15 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.defaults)
+                                object.relaxSafetyFilters = false;
                             if (message.lowLatencyJourneySynthesis != null && message.hasOwnProperty("lowLatencyJourneySynthesis")) {
                                 object.lowLatencyJourneySynthesis = message.lowLatencyJourneySynthesis;
                                 if (options.oneofs)
                                     object._lowLatencyJourneySynthesis = "lowLatencyJourneySynthesis";
                             }
+                            if (message.relaxSafetyFilters != null && message.hasOwnProperty("relaxSafetyFilters"))
+                                object.relaxSafetyFilters = message.relaxSafetyFilters;
                             return object;
                         };
     

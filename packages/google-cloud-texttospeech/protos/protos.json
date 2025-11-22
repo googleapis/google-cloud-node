@@ -148,6 +148,13 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        },
+                        "relaxSafetyFilters": {
+                          "type": "bool",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -851,6 +858,13 @@
                           "id": 1,
                           "options": {
                             "proto3_optional": true
+                          }
+                        },
+                        "relaxSafetyFilters": {
+                          "type": "bool",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }

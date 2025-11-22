@@ -78,7 +78,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 80,
+          "end": 99,
           "type": "FULL"
         }
       ],
@@ -110,6 +110,14 @@
           {
             "name": "byte_item",
             "type": ".google.privacy.dlp.v2.ByteContentItem"
+          },
+          {
+            "name": "inspect_template",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "deidentify_template",
+            "type": "TYPE_STRING"
           }
         ],
         "resultType": ".google.privacy.dlp.v2.RedactImageResponse",
@@ -974,7 +982,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 117,
+          "end": 118,
           "type": "FULL"
         }
       ],
@@ -1402,7 +1410,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 117,
+          "end": 118,
           "type": "FULL"
         }
       ],
@@ -1822,7 +1830,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 99,
+          "end": 105,
           "type": "FULL"
         }
       ],
@@ -1878,7 +1886,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 112,
+          "end": 117,
           "type": "FULL"
         }
       ],
@@ -1934,7 +1942,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 113,
+          "end": 118,
           "type": "FULL"
         }
       ],
@@ -2030,7 +2038,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 116,
+          "end": 121,
           "type": "FULL"
         }
       ],
@@ -2454,7 +2462,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 70,
+          "end": 71,
           "type": "FULL"
         }
       ],
@@ -2506,7 +2514,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 70,
+          "end": 71,
           "type": "FULL"
         }
       ],

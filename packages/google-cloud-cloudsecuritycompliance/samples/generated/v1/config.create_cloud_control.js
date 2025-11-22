@@ -31,16 +31,17 @@ function main(parent, cloudControlId, cloudControl) {
   /**
    *  Required. The parent resource name, in the format
    *  `organizations/{organization}/locations/{location}`.
+   *  The only supported location is `global`.
    */
   // const parent = 'abc123'
   /**
-   *  Required. ID of the CloudControl.
-   *  This is the last segment of the CloudControl resource name.
-   *  Format: `^[a-zA-Z][a-zA-Z0-9-]{0,61}[a-zA-Z0-9]$`.
+   *  Required. The identifier for the cloud control, which is the last segment
+   *  of the cloud control name. The format is
+   *  `^[a-zA-Z][a-zA-Z0-9-]{0,61}[a-zA-Z0-9]$`.
    */
   // const cloudControlId = 'abc123'
   /**
-   *  Required. The resource being created
+   *  Required. The cloud control that's being created.
    */
   // const cloudControl = {}
 

@@ -1011,6 +1011,114 @@ describe('v1beta1.PredictionServiceClient', () => {
         });
     });
 
+    describe('embedContent', () => {
+        it('invokes embedContent without error', async () => {
+            const client = new predictionserviceModule.v1beta1.PredictionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1beta1.EmbedContentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.EmbedContentRequest', ['model']);
+            request.model = defaultValue1;
+            const expectedHeaderRequestParams = `model=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1beta1.EmbedContentResponse()
+            );
+            client.innerApiCalls.embedContent = stubSimpleCall(expectedResponse);
+            const [response] = await client.embedContent(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.embedContent as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.embedContent as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes embedContent without error using callback', async () => {
+            const client = new predictionserviceModule.v1beta1.PredictionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1beta1.EmbedContentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.EmbedContentRequest', ['model']);
+            request.model = defaultValue1;
+            const expectedHeaderRequestParams = `model=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1beta1.EmbedContentResponse()
+            );
+            client.innerApiCalls.embedContent = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.embedContent(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.aiplatform.v1beta1.IEmbedContentResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.embedContent as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.embedContent as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes embedContent with error', async () => {
+            const client = new predictionserviceModule.v1beta1.PredictionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1beta1.EmbedContentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.EmbedContentRequest', ['model']);
+            request.model = defaultValue1;
+            const expectedHeaderRequestParams = `model=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.embedContent = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.embedContent(request), expectedError);
+            const actualRequest = (client.innerApiCalls.embedContent as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.embedContent as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes embedContent with closed client', async () => {
+            const client = new predictionserviceModule.v1beta1.PredictionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1beta1.EmbedContentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.EmbedContentRequest', ['model']);
+            request.model = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.embedContent(request), expectedError);
+        });
+    });
+
     describe('streamRawPredict', () => {
         it('invokes streamRawPredict without error', async () => {
             const client = new predictionserviceModule.v1beta1.PredictionServiceClient({

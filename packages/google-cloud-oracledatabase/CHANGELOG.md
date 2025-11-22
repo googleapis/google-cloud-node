@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/oracledatabase-v0.6.1...oracledatabase-v0.7.0) (2025-10-21)
+
+
+### Features
+
+* [oracledatabase] Expand Oracle Database v1 API to add support for Exadata Exascale (`ExadbVmCluster`, `ExascaleDbStorageVault`), Base Database (`DbSystem`, `Database`, `PluggableDatabase`), and Networking (`OdbNetwork`, `OdbSubnet`). Adds enhance... ([#6831](https://github.com/googleapis/google-cloud-node/issues/6831)) ([a00faa8](https://github.com/googleapis/google-cloud-node/commit/a00faa8f3da51868df3e5d7a4a418bdb2f0de840))
+
+## [0.6.1](https://github.com/googleapis/google-cloud-node/compare/oracledatabase-v0.6.0...oracledatabase-v0.6.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
 ## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/oracledatabase-v0.5.0...oracledatabase-v0.6.0) (2025-07-09)
 
 

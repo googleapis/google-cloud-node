@@ -11592,6 +11592,9 @@ export namespace google {
                     /** Session turns */
                     turns?: (google.cloud.discoveryengine.v1.Session.ITurn[]|null);
 
+                    /** Session labels */
+                    labels?: (string[]|null);
+
                     /** Session startTime */
                     startTime?: (google.protobuf.ITimestamp|null);
 
@@ -11625,6 +11628,9 @@ export namespace google {
 
                     /** Session turns. */
                     public turns: google.cloud.discoveryengine.v1.Session.ITurn[];
+
+                    /** Session labels. */
+                    public labels: string[];
 
                     /** Session startTime. */
                     public startTime?: (google.protobuf.ITimestamp|null);
@@ -11727,6 +11733,9 @@ export namespace google {
                         /** Turn detailedAnswer */
                         detailedAnswer?: (google.cloud.discoveryengine.v1.IAnswer|null);
 
+                        /** Turn detailedAssistAnswer */
+                        detailedAssistAnswer?: (google.cloud.discoveryengine.v1.IAssistAnswer|null);
+
                         /** Turn queryConfig */
                         queryConfig?: ({ [k: string]: string }|null);
                     }
@@ -11748,6 +11757,9 @@ export namespace google {
 
                         /** Turn detailedAnswer. */
                         public detailedAnswer?: (google.cloud.discoveryengine.v1.IAnswer|null);
+
+                        /** Turn detailedAssistAnswer. */
+                        public detailedAssistAnswer?: (google.cloud.discoveryengine.v1.IAssistAnswer|null);
 
                         /** Turn queryConfig. */
                         public queryConfig: { [k: string]: string };

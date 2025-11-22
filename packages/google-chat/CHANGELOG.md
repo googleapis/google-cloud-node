@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.21.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.20.0...chat-v0.21.0) (2025-10-25)
+
+
+### Features
+
+* [chat] add ROLE_ASSISTANT_MANAGER to the MembershipRole enum in the Membership proto and assistant_managers_allowed to the PermissionSetting ([#6843](https://github.com/googleapis/google-cloud-node/issues/6843)) ([84654a5](https://github.com/googleapis/google-cloud-node/commit/84654a5c0cc56d940b96a85b0e439dc6ac140699))
+
+## [0.20.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.19.1...chat-v0.20.0) (2025-10-16)
+
+
+### Features
+
+* [chat] Add `Carousel` widget ([#6821](https://github.com/googleapis/google-cloud-node/issues/6821)) ([7365b32](https://github.com/googleapis/google-cloud-node/commit/7365b32f30e259c4839aad81e4c5cc5a91e6ebee))
+
+## [0.19.1](https://github.com/googleapis/google-cloud-node/compare/chat-v0.19.0...chat-v0.19.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
 ## [0.19.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.18.0...chat-v0.19.0) (2025-08-27)
 
 

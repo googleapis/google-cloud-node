@@ -29,8 +29,9 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the resource, in the format
+   *  Required. The name of the cloud control to delete, in the format
    *  `organizations/{organization}/locations/{location}/CloudControls/{CloudControl}`.
+   *  The only supported location is `global`.
    */
   // const name = 'abc123'
 

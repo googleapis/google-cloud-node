@@ -408,7 +408,7 @@ export class PredictionServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const predictionServiceStubMethods =
-        ['predict', 'rawPredict', 'streamRawPredict', 'directPredict', 'directRawPredict', 'streamDirectPredict', 'streamDirectRawPredict', 'streamingPredict', 'serverStreamingPredict', 'streamingRawPredict', 'explain', 'generateContent', 'streamGenerateContent'];
+        ['predict', 'rawPredict', 'streamRawPredict', 'directPredict', 'directRawPredict', 'streamDirectPredict', 'streamDirectRawPredict', 'streamingPredict', 'serverStreamingPredict', 'streamingRawPredict', 'explain', 'generateContent', 'streamGenerateContent', 'embedContent'];
     for (const methodName of predictionServiceStubMethods) {
       const callPromise = this.predictionServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -1233,6 +1233,114 @@ export class PredictionServiceClient {
         {}|undefined
       ]) => {
         this._log.info('generateContent response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Embed content with multimodal inputs.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.model
+ *   Required. The name of the publisher model requested to serve the
+ *   prediction. Format:
+ *   `projects/{project}/locations/{location}/publishers/* /models/*`
+ * @param {google.cloud.aiplatform.v1.Content} request.content
+ *   Required. Input content to be embedded. Required.
+ * @param {string} [request.title]
+ *   Optional. An optional title for the text.
+ * @param {google.cloud.aiplatform.v1.EmbedContentRequest.EmbeddingTaskType} [request.taskType]
+ *   Optional. The task type of the embedding.
+ * @param {number} [request.outputDimensionality]
+ *   Optional. Optional reduced dimension for the output embedding. If set,
+ *   excessive values in the output embedding are truncated from the end.
+ * @param {boolean} [request.autoTruncate]
+ *   Optional. Whether to silently truncate the input content if it's longer
+ *   than the maximum sequence length.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.EmbedContentResponse|EmbedContentResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/prediction_service.embed_content.js</caption>
+ * region_tag:aiplatform_v1_generated_PredictionService_EmbedContent_async
+ */
+  embedContent(
+      request?: protos.google.cloud.aiplatform.v1.IEmbedContentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1.IEmbedContentResponse,
+        protos.google.cloud.aiplatform.v1.IEmbedContentRequest|undefined, {}|undefined
+      ]>;
+  embedContent(
+      request: protos.google.cloud.aiplatform.v1.IEmbedContentRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1.IEmbedContentResponse,
+          protos.google.cloud.aiplatform.v1.IEmbedContentRequest|null|undefined,
+          {}|null|undefined>): void;
+  embedContent(
+      request: protos.google.cloud.aiplatform.v1.IEmbedContentRequest,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1.IEmbedContentResponse,
+          protos.google.cloud.aiplatform.v1.IEmbedContentRequest|null|undefined,
+          {}|null|undefined>): void;
+  embedContent(
+      request?: protos.google.cloud.aiplatform.v1.IEmbedContentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.aiplatform.v1.IEmbedContentResponse,
+          protos.google.cloud.aiplatform.v1.IEmbedContentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.aiplatform.v1.IEmbedContentResponse,
+          protos.google.cloud.aiplatform.v1.IEmbedContentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1.IEmbedContentResponse,
+        protos.google.cloud.aiplatform.v1.IEmbedContentRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'model': request.model ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('embedContent request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.aiplatform.v1.IEmbedContentResponse,
+        protos.google.cloud.aiplatform.v1.IEmbedContentRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('embedContent response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.embedContent(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.aiplatform.v1.IEmbedContentResponse,
+        protos.google.cloud.aiplatform.v1.IEmbedContentRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('embedContent response %j', response);
         return [response, options, rawResponse];
       }).catch((error: any) => {
         if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {

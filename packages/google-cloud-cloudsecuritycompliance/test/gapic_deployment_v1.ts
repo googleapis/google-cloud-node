@@ -1804,6 +1804,198 @@ describe('v1.DeploymentClient', () => {
             });
         });
 
+        describe('folderLocationFindingSummaries', async () => {
+            const fakePath = "/rendered/path/folderLocationFindingSummaries";
+            const expectedParameters = {
+                folder: "folderValue",
+                location: "locationValue",
+                finding_summary: "findingSummaryValue",
+            };
+            const client = new deploymentModule.v1.DeploymentClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.folderLocationFindingSummariesPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.folderLocationFindingSummariesPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('folderLocationFindingSummariesPath', () => {
+                const result = client.folderLocationFindingSummariesPath("folderValue", "locationValue", "findingSummaryValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.folderLocationFindingSummariesPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchFolderFromFolderLocationFindingSummariesName', () => {
+                const result = client.matchFolderFromFolderLocationFindingSummariesName(fakePath);
+                assert.strictEqual(result, "folderValue");
+                assert((client.pathTemplates.folderLocationFindingSummariesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromFolderLocationFindingSummariesName', () => {
+                const result = client.matchLocationFromFolderLocationFindingSummariesName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.folderLocationFindingSummariesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFindingSummaryFromFolderLocationFindingSummariesName', () => {
+                const result = client.matchFindingSummaryFromFolderLocationFindingSummariesName(fakePath);
+                assert.strictEqual(result, "findingSummaryValue");
+                assert((client.pathTemplates.folderLocationFindingSummariesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('folderLocationFrameworkComplianceReportControlComplianceSummaries', async () => {
+            const fakePath = "/rendered/path/folderLocationFrameworkComplianceReportControlComplianceSummaries";
+            const expectedParameters = {
+                folder: "folderValue",
+                location: "locationValue",
+                framework_compliance_report: "frameworkComplianceReportValue",
+                control_compliance_summary: "controlComplianceSummaryValue",
+            };
+            const client = new deploymentModule.v1.DeploymentClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.folderLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.folderLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('folderLocationFrameworkComplianceReportControlComplianceSummariesPath', () => {
+                const result = client.folderLocationFrameworkComplianceReportControlComplianceSummariesPath("folderValue", "locationValue", "frameworkComplianceReportValue", "controlComplianceSummaryValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.folderLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchFolderFromFolderLocationFrameworkComplianceReportControlComplianceSummariesName', () => {
+                const result = client.matchFolderFromFolderLocationFrameworkComplianceReportControlComplianceSummariesName(fakePath);
+                assert.strictEqual(result, "folderValue");
+                assert((client.pathTemplates.folderLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromFolderLocationFrameworkComplianceReportControlComplianceSummariesName', () => {
+                const result = client.matchLocationFromFolderLocationFrameworkComplianceReportControlComplianceSummariesName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.folderLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFrameworkComplianceReportFromFolderLocationFrameworkComplianceReportControlComplianceSummariesName', () => {
+                const result = client.matchFrameworkComplianceReportFromFolderLocationFrameworkComplianceReportControlComplianceSummariesName(fakePath);
+                assert.strictEqual(result, "frameworkComplianceReportValue");
+                assert((client.pathTemplates.folderLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchControlComplianceSummaryFromFolderLocationFrameworkComplianceReportControlComplianceSummariesName', () => {
+                const result = client.matchControlComplianceSummaryFromFolderLocationFrameworkComplianceReportControlComplianceSummariesName(fakePath);
+                assert.strictEqual(result, "controlComplianceSummaryValue");
+                assert((client.pathTemplates.folderLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('folderLocationFrameworkComplianceReports', async () => {
+            const fakePath = "/rendered/path/folderLocationFrameworkComplianceReports";
+            const expectedParameters = {
+                folder: "folderValue",
+                location: "locationValue",
+                framework_compliance_report: "frameworkComplianceReportValue",
+            };
+            const client = new deploymentModule.v1.DeploymentClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.folderLocationFrameworkComplianceReportsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.folderLocationFrameworkComplianceReportsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('folderLocationFrameworkComplianceReportsPath', () => {
+                const result = client.folderLocationFrameworkComplianceReportsPath("folderValue", "locationValue", "frameworkComplianceReportValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.folderLocationFrameworkComplianceReportsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchFolderFromFolderLocationFrameworkComplianceReportsName', () => {
+                const result = client.matchFolderFromFolderLocationFrameworkComplianceReportsName(fakePath);
+                assert.strictEqual(result, "folderValue");
+                assert((client.pathTemplates.folderLocationFrameworkComplianceReportsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromFolderLocationFrameworkComplianceReportsName', () => {
+                const result = client.matchLocationFromFolderLocationFrameworkComplianceReportsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.folderLocationFrameworkComplianceReportsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFrameworkComplianceReportFromFolderLocationFrameworkComplianceReportsName', () => {
+                const result = client.matchFrameworkComplianceReportFromFolderLocationFrameworkComplianceReportsName(fakePath);
+                assert.strictEqual(result, "frameworkComplianceReportValue");
+                assert((client.pathTemplates.folderLocationFrameworkComplianceReportsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('folderLocationFrameworkComplianceSummaries', async () => {
+            const fakePath = "/rendered/path/folderLocationFrameworkComplianceSummaries";
+            const expectedParameters = {
+                folder: "folderValue",
+                location: "locationValue",
+                framework_compliance_summary: "frameworkComplianceSummaryValue",
+            };
+            const client = new deploymentModule.v1.DeploymentClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.folderLocationFrameworkComplianceSummariesPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.folderLocationFrameworkComplianceSummariesPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('folderLocationFrameworkComplianceSummariesPath', () => {
+                const result = client.folderLocationFrameworkComplianceSummariesPath("folderValue", "locationValue", "frameworkComplianceSummaryValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.folderLocationFrameworkComplianceSummariesPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchFolderFromFolderLocationFrameworkComplianceSummariesName', () => {
+                const result = client.matchFolderFromFolderLocationFrameworkComplianceSummariesName(fakePath);
+                assert.strictEqual(result, "folderValue");
+                assert((client.pathTemplates.folderLocationFrameworkComplianceSummariesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromFolderLocationFrameworkComplianceSummariesName', () => {
+                const result = client.matchLocationFromFolderLocationFrameworkComplianceSummariesName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.folderLocationFrameworkComplianceSummariesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFrameworkComplianceSummaryFromFolderLocationFrameworkComplianceSummariesName', () => {
+                const result = client.matchFrameworkComplianceSummaryFromFolderLocationFrameworkComplianceSummariesName(fakePath);
+                assert.strictEqual(result, "frameworkComplianceSummaryValue");
+                assert((client.pathTemplates.folderLocationFrameworkComplianceSummariesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('framework', async () => {
             const fakePath = "/rendered/path/framework";
             const expectedParameters = {
@@ -1960,6 +2152,650 @@ describe('v1.DeploymentClient', () => {
                 const result = client.matchLocationFromOrganizationLocationName(fakePath);
                 assert.strictEqual(result, "locationValue");
                 assert((client.pathTemplates.organizationLocationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationLocationCmEnrollment', async () => {
+            const fakePath = "/rendered/path/organizationLocationCmEnrollment";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+            };
+            const client = new deploymentModule.v1.DeploymentClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationLocationCmEnrollmentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationLocationCmEnrollmentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationLocationCmEnrollmentPath', () => {
+                const result = client.organizationLocationCmEnrollmentPath("organizationValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationLocationCmEnrollmentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationLocationCmEnrollmentName', () => {
+                const result = client.matchOrganizationFromOrganizationLocationCmEnrollmentName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationLocationCmEnrollmentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOrganizationLocationCmEnrollmentName', () => {
+                const result = client.matchLocationFromOrganizationLocationCmEnrollmentName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.organizationLocationCmEnrollmentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationLocationFindingSummaries', async () => {
+            const fakePath = "/rendered/path/organizationLocationFindingSummaries";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+                finding_summary: "findingSummaryValue",
+            };
+            const client = new deploymentModule.v1.DeploymentClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationLocationFindingSummariesPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationLocationFindingSummariesPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationLocationFindingSummariesPath', () => {
+                const result = client.organizationLocationFindingSummariesPath("organizationValue", "locationValue", "findingSummaryValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationLocationFindingSummariesPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationLocationFindingSummariesName', () => {
+                const result = client.matchOrganizationFromOrganizationLocationFindingSummariesName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationLocationFindingSummariesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOrganizationLocationFindingSummariesName', () => {
+                const result = client.matchLocationFromOrganizationLocationFindingSummariesName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.organizationLocationFindingSummariesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFindingSummaryFromOrganizationLocationFindingSummariesName', () => {
+                const result = client.matchFindingSummaryFromOrganizationLocationFindingSummariesName(fakePath);
+                assert.strictEqual(result, "findingSummaryValue");
+                assert((client.pathTemplates.organizationLocationFindingSummariesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationLocationFrameworkAuditScopeReports', async () => {
+            const fakePath = "/rendered/path/organizationLocationFrameworkAuditScopeReports";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+                generate_framework_audit_scope_report_response: "generateFrameworkAuditScopeReportResponseValue",
+            };
+            const client = new deploymentModule.v1.DeploymentClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationLocationFrameworkAuditScopeReportsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationLocationFrameworkAuditScopeReportsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationLocationFrameworkAuditScopeReportsPath', () => {
+                const result = client.organizationLocationFrameworkAuditScopeReportsPath("organizationValue", "locationValue", "generateFrameworkAuditScopeReportResponseValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationLocationFrameworkAuditScopeReportsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationLocationFrameworkAuditScopeReportsName', () => {
+                const result = client.matchOrganizationFromOrganizationLocationFrameworkAuditScopeReportsName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationLocationFrameworkAuditScopeReportsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOrganizationLocationFrameworkAuditScopeReportsName', () => {
+                const result = client.matchLocationFromOrganizationLocationFrameworkAuditScopeReportsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.organizationLocationFrameworkAuditScopeReportsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchGenerateFrameworkAuditScopeReportResponseFromOrganizationLocationFrameworkAuditScopeReportsName', () => {
+                const result = client.matchGenerateFrameworkAuditScopeReportResponseFromOrganizationLocationFrameworkAuditScopeReportsName(fakePath);
+                assert.strictEqual(result, "generateFrameworkAuditScopeReportResponseValue");
+                assert((client.pathTemplates.organizationLocationFrameworkAuditScopeReportsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationLocationFrameworkAudits', async () => {
+            const fakePath = "/rendered/path/organizationLocationFrameworkAudits";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+                framework_audit: "frameworkAuditValue",
+            };
+            const client = new deploymentModule.v1.DeploymentClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationLocationFrameworkAuditsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationLocationFrameworkAuditsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationLocationFrameworkAuditsPath', () => {
+                const result = client.organizationLocationFrameworkAuditsPath("organizationValue", "locationValue", "frameworkAuditValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationLocationFrameworkAuditsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationLocationFrameworkAuditsName', () => {
+                const result = client.matchOrganizationFromOrganizationLocationFrameworkAuditsName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationLocationFrameworkAuditsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOrganizationLocationFrameworkAuditsName', () => {
+                const result = client.matchLocationFromOrganizationLocationFrameworkAuditsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.organizationLocationFrameworkAuditsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFrameworkAuditFromOrganizationLocationFrameworkAuditsName', () => {
+                const result = client.matchFrameworkAuditFromOrganizationLocationFrameworkAuditsName(fakePath);
+                assert.strictEqual(result, "frameworkAuditValue");
+                assert((client.pathTemplates.organizationLocationFrameworkAuditsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationLocationFrameworkComplianceReportControlComplianceSummaries', async () => {
+            const fakePath = "/rendered/path/organizationLocationFrameworkComplianceReportControlComplianceSummaries";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+                framework_compliance_report: "frameworkComplianceReportValue",
+                control_compliance_summary: "controlComplianceSummaryValue",
+            };
+            const client = new deploymentModule.v1.DeploymentClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationLocationFrameworkComplianceReportControlComplianceSummariesPath', () => {
+                const result = client.organizationLocationFrameworkComplianceReportControlComplianceSummariesPath("organizationValue", "locationValue", "frameworkComplianceReportValue", "controlComplianceSummaryValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationLocationFrameworkComplianceReportControlComplianceSummariesName', () => {
+                const result = client.matchOrganizationFromOrganizationLocationFrameworkComplianceReportControlComplianceSummariesName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOrganizationLocationFrameworkComplianceReportControlComplianceSummariesName', () => {
+                const result = client.matchLocationFromOrganizationLocationFrameworkComplianceReportControlComplianceSummariesName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.organizationLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFrameworkComplianceReportFromOrganizationLocationFrameworkComplianceReportControlComplianceSummariesName', () => {
+                const result = client.matchFrameworkComplianceReportFromOrganizationLocationFrameworkComplianceReportControlComplianceSummariesName(fakePath);
+                assert.strictEqual(result, "frameworkComplianceReportValue");
+                assert((client.pathTemplates.organizationLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchControlComplianceSummaryFromOrganizationLocationFrameworkComplianceReportControlComplianceSummariesName', () => {
+                const result = client.matchControlComplianceSummaryFromOrganizationLocationFrameworkComplianceReportControlComplianceSummariesName(fakePath);
+                assert.strictEqual(result, "controlComplianceSummaryValue");
+                assert((client.pathTemplates.organizationLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationLocationFrameworkComplianceReports', async () => {
+            const fakePath = "/rendered/path/organizationLocationFrameworkComplianceReports";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+                framework_compliance_report: "frameworkComplianceReportValue",
+            };
+            const client = new deploymentModule.v1.DeploymentClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationLocationFrameworkComplianceReportsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationLocationFrameworkComplianceReportsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationLocationFrameworkComplianceReportsPath', () => {
+                const result = client.organizationLocationFrameworkComplianceReportsPath("organizationValue", "locationValue", "frameworkComplianceReportValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationLocationFrameworkComplianceReportsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationLocationFrameworkComplianceReportsName', () => {
+                const result = client.matchOrganizationFromOrganizationLocationFrameworkComplianceReportsName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationLocationFrameworkComplianceReportsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOrganizationLocationFrameworkComplianceReportsName', () => {
+                const result = client.matchLocationFromOrganizationLocationFrameworkComplianceReportsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.organizationLocationFrameworkComplianceReportsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFrameworkComplianceReportFromOrganizationLocationFrameworkComplianceReportsName', () => {
+                const result = client.matchFrameworkComplianceReportFromOrganizationLocationFrameworkComplianceReportsName(fakePath);
+                assert.strictEqual(result, "frameworkComplianceReportValue");
+                assert((client.pathTemplates.organizationLocationFrameworkComplianceReportsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationLocationFrameworkComplianceSummaries', async () => {
+            const fakePath = "/rendered/path/organizationLocationFrameworkComplianceSummaries";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+                framework_compliance_summary: "frameworkComplianceSummaryValue",
+            };
+            const client = new deploymentModule.v1.DeploymentClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationLocationFrameworkComplianceSummariesPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationLocationFrameworkComplianceSummariesPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationLocationFrameworkComplianceSummariesPath', () => {
+                const result = client.organizationLocationFrameworkComplianceSummariesPath("organizationValue", "locationValue", "frameworkComplianceSummaryValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationLocationFrameworkComplianceSummariesPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationLocationFrameworkComplianceSummariesName', () => {
+                const result = client.matchOrganizationFromOrganizationLocationFrameworkComplianceSummariesName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationLocationFrameworkComplianceSummariesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOrganizationLocationFrameworkComplianceSummariesName', () => {
+                const result = client.matchLocationFromOrganizationLocationFrameworkComplianceSummariesName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.organizationLocationFrameworkComplianceSummariesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFrameworkComplianceSummaryFromOrganizationLocationFrameworkComplianceSummariesName', () => {
+                const result = client.matchFrameworkComplianceSummaryFromOrganizationLocationFrameworkComplianceSummariesName(fakePath);
+                assert.strictEqual(result, "frameworkComplianceSummaryValue");
+                assert((client.pathTemplates.organizationLocationFrameworkComplianceSummariesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationCmEnrollment', async () => {
+            const fakePath = "/rendered/path/projectLocationCmEnrollment";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new deploymentModule.v1.DeploymentClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationCmEnrollmentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationCmEnrollmentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationCmEnrollmentPath', () => {
+                const result = client.projectLocationCmEnrollmentPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationCmEnrollmentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationCmEnrollmentName', () => {
+                const result = client.matchProjectFromProjectLocationCmEnrollmentName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationCmEnrollmentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationCmEnrollmentName', () => {
+                const result = client.matchLocationFromProjectLocationCmEnrollmentName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationCmEnrollmentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationFindingSummaries', async () => {
+            const fakePath = "/rendered/path/projectLocationFindingSummaries";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                finding_summary: "findingSummaryValue",
+            };
+            const client = new deploymentModule.v1.DeploymentClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationFindingSummariesPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationFindingSummariesPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationFindingSummariesPath', () => {
+                const result = client.projectLocationFindingSummariesPath("projectValue", "locationValue", "findingSummaryValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationFindingSummariesPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationFindingSummariesName', () => {
+                const result = client.matchProjectFromProjectLocationFindingSummariesName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationFindingSummariesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationFindingSummariesName', () => {
+                const result = client.matchLocationFromProjectLocationFindingSummariesName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationFindingSummariesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFindingSummaryFromProjectLocationFindingSummariesName', () => {
+                const result = client.matchFindingSummaryFromProjectLocationFindingSummariesName(fakePath);
+                assert.strictEqual(result, "findingSummaryValue");
+                assert((client.pathTemplates.projectLocationFindingSummariesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationFrameworkAuditScopeReports', async () => {
+            const fakePath = "/rendered/path/projectLocationFrameworkAuditScopeReports";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                generate_framework_audit_scope_report_response: "generateFrameworkAuditScopeReportResponseValue",
+            };
+            const client = new deploymentModule.v1.DeploymentClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationFrameworkAuditScopeReportsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationFrameworkAuditScopeReportsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationFrameworkAuditScopeReportsPath', () => {
+                const result = client.projectLocationFrameworkAuditScopeReportsPath("projectValue", "locationValue", "generateFrameworkAuditScopeReportResponseValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationFrameworkAuditScopeReportsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationFrameworkAuditScopeReportsName', () => {
+                const result = client.matchProjectFromProjectLocationFrameworkAuditScopeReportsName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationFrameworkAuditScopeReportsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationFrameworkAuditScopeReportsName', () => {
+                const result = client.matchLocationFromProjectLocationFrameworkAuditScopeReportsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationFrameworkAuditScopeReportsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchGenerateFrameworkAuditScopeReportResponseFromProjectLocationFrameworkAuditScopeReportsName', () => {
+                const result = client.matchGenerateFrameworkAuditScopeReportResponseFromProjectLocationFrameworkAuditScopeReportsName(fakePath);
+                assert.strictEqual(result, "generateFrameworkAuditScopeReportResponseValue");
+                assert((client.pathTemplates.projectLocationFrameworkAuditScopeReportsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationFrameworkAudits', async () => {
+            const fakePath = "/rendered/path/projectLocationFrameworkAudits";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                framework_audit: "frameworkAuditValue",
+            };
+            const client = new deploymentModule.v1.DeploymentClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationFrameworkAuditsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationFrameworkAuditsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationFrameworkAuditsPath', () => {
+                const result = client.projectLocationFrameworkAuditsPath("projectValue", "locationValue", "frameworkAuditValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationFrameworkAuditsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationFrameworkAuditsName', () => {
+                const result = client.matchProjectFromProjectLocationFrameworkAuditsName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationFrameworkAuditsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationFrameworkAuditsName', () => {
+                const result = client.matchLocationFromProjectLocationFrameworkAuditsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationFrameworkAuditsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFrameworkAuditFromProjectLocationFrameworkAuditsName', () => {
+                const result = client.matchFrameworkAuditFromProjectLocationFrameworkAuditsName(fakePath);
+                assert.strictEqual(result, "frameworkAuditValue");
+                assert((client.pathTemplates.projectLocationFrameworkAuditsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationFrameworkComplianceReportControlComplianceSummaries', async () => {
+            const fakePath = "/rendered/path/projectLocationFrameworkComplianceReportControlComplianceSummaries";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                framework_compliance_report: "frameworkComplianceReportValue",
+                control_compliance_summary: "controlComplianceSummaryValue",
+            };
+            const client = new deploymentModule.v1.DeploymentClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationFrameworkComplianceReportControlComplianceSummariesPath', () => {
+                const result = client.projectLocationFrameworkComplianceReportControlComplianceSummariesPath("projectValue", "locationValue", "frameworkComplianceReportValue", "controlComplianceSummaryValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationFrameworkComplianceReportControlComplianceSummariesName', () => {
+                const result = client.matchProjectFromProjectLocationFrameworkComplianceReportControlComplianceSummariesName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationFrameworkComplianceReportControlComplianceSummariesName', () => {
+                const result = client.matchLocationFromProjectLocationFrameworkComplianceReportControlComplianceSummariesName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFrameworkComplianceReportFromProjectLocationFrameworkComplianceReportControlComplianceSummariesName', () => {
+                const result = client.matchFrameworkComplianceReportFromProjectLocationFrameworkComplianceReportControlComplianceSummariesName(fakePath);
+                assert.strictEqual(result, "frameworkComplianceReportValue");
+                assert((client.pathTemplates.projectLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchControlComplianceSummaryFromProjectLocationFrameworkComplianceReportControlComplianceSummariesName', () => {
+                const result = client.matchControlComplianceSummaryFromProjectLocationFrameworkComplianceReportControlComplianceSummariesName(fakePath);
+                assert.strictEqual(result, "controlComplianceSummaryValue");
+                assert((client.pathTemplates.projectLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationFrameworkComplianceReports', async () => {
+            const fakePath = "/rendered/path/projectLocationFrameworkComplianceReports";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                framework_compliance_report: "frameworkComplianceReportValue",
+            };
+            const client = new deploymentModule.v1.DeploymentClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationFrameworkComplianceReportsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationFrameworkComplianceReportsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationFrameworkComplianceReportsPath', () => {
+                const result = client.projectLocationFrameworkComplianceReportsPath("projectValue", "locationValue", "frameworkComplianceReportValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationFrameworkComplianceReportsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationFrameworkComplianceReportsName', () => {
+                const result = client.matchProjectFromProjectLocationFrameworkComplianceReportsName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationFrameworkComplianceReportsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationFrameworkComplianceReportsName', () => {
+                const result = client.matchLocationFromProjectLocationFrameworkComplianceReportsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationFrameworkComplianceReportsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFrameworkComplianceReportFromProjectLocationFrameworkComplianceReportsName', () => {
+                const result = client.matchFrameworkComplianceReportFromProjectLocationFrameworkComplianceReportsName(fakePath);
+                assert.strictEqual(result, "frameworkComplianceReportValue");
+                assert((client.pathTemplates.projectLocationFrameworkComplianceReportsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationFrameworkComplianceSummaries', async () => {
+            const fakePath = "/rendered/path/projectLocationFrameworkComplianceSummaries";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                framework_compliance_summary: "frameworkComplianceSummaryValue",
+            };
+            const client = new deploymentModule.v1.DeploymentClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationFrameworkComplianceSummariesPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationFrameworkComplianceSummariesPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationFrameworkComplianceSummariesPath', () => {
+                const result = client.projectLocationFrameworkComplianceSummariesPath("projectValue", "locationValue", "frameworkComplianceSummaryValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationFrameworkComplianceSummariesPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationFrameworkComplianceSummariesName', () => {
+                const result = client.matchProjectFromProjectLocationFrameworkComplianceSummariesName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationFrameworkComplianceSummariesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationFrameworkComplianceSummariesName', () => {
+                const result = client.matchLocationFromProjectLocationFrameworkComplianceSummariesName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationFrameworkComplianceSummariesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFrameworkComplianceSummaryFromProjectLocationFrameworkComplianceSummariesName', () => {
+                const result = client.matchFrameworkComplianceSummaryFromProjectLocationFrameworkComplianceSummariesName(fakePath);
+                assert.strictEqual(result, "frameworkComplianceSummaryValue");
+                assert((client.pathTemplates.projectLocationFrameworkComplianceSummariesPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

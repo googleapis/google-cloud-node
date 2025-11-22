@@ -1440,6 +1440,13 @@
                       }
                     },
                     "Settings": {
+                      "oneofs": {
+                        "_autoUpgradeEnabled": {
+                          "oneof": [
+                            "autoUpgradeEnabled"
+                          ]
+                        }
+                      },
                       "fields": {
                         "settingsVersion": {
                           "type": "google.protobuf.Int64Value",
@@ -1597,6 +1604,14 @@
                           "id": 41,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "autoUpgradeEnabled": {
+                          "type": "bool",
+                          "id": 50,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         }
                       },
@@ -1774,6 +1789,8 @@
                         "POSTGRES_14": 110,
                         "POSTGRES_15": 172,
                         "POSTGRES_16": 272,
+                        "POSTGRES_17": 408,
+                        "POSTGRES_18": 557,
                         "MYSQL_8_0": 20,
                         "MYSQL_8_0_18": 41,
                         "MYSQL_8_0_26": 85,
@@ -9423,6 +9440,13 @@
                       }
                     },
                     "Settings": {
+                      "oneofs": {
+                        "_autoUpgradeEnabled": {
+                          "oneof": [
+                            "autoUpgradeEnabled"
+                          ]
+                        }
+                      },
                       "fields": {
                         "settingsVersion": {
                           "type": "google.protobuf.Int64Value",
@@ -9580,6 +9604,14 @@
                           "id": 41,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "autoUpgradeEnabled": {
+                          "type": "bool",
+                          "id": 50,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         }
                       },
@@ -9891,6 +9923,8 @@
                         "POSTGRES_14": 110,
                         "POSTGRES_15": 172,
                         "POSTGRES_16": 272,
+                        "POSTGRES_17": 408,
+                        "POSTGRES_18": 557,
                         "MYSQL_8_0": 20,
                         "MYSQL_8_0_18": 41,
                         "MYSQL_8_0_26": 85,

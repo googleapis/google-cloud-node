@@ -1062,6 +1062,9 @@ export namespace google {
                     /** GenerationConfig seed */
                     seed?: (number|null);
 
+                    /** GenerationConfig responseJsonSchemaOrdered */
+                    responseJsonSchemaOrdered?: (google.protobuf.IValue|null);
+
                     /** GenerationConfig presencePenalty */
                     presencePenalty?: (number|null);
 
@@ -1107,6 +1110,9 @@ export namespace google {
 
                     /** GenerationConfig seed. */
                     public seed?: (number|null);
+
+                    /** GenerationConfig responseJsonSchemaOrdered. */
+                    public responseJsonSchemaOrdered?: (google.protobuf.IValue|null);
 
                     /** GenerationConfig presencePenalty. */
                     public presencePenalty?: (number|null);
@@ -1598,6 +1604,9 @@ export namespace google {
                     /** Candidate finishReason */
                     finishReason?: (google.ai.generativelanguage.v1.Candidate.FinishReason|keyof typeof google.ai.generativelanguage.v1.Candidate.FinishReason|null);
 
+                    /** Candidate finishMessage */
+                    finishMessage?: (string|null);
+
                     /** Candidate safetyRatings */
                     safetyRatings?: (google.ai.generativelanguage.v1.ISafetyRating[]|null);
 
@@ -1637,6 +1646,9 @@ export namespace google {
 
                     /** Candidate finishReason. */
                     public finishReason: (google.ai.generativelanguage.v1.Candidate.FinishReason|keyof typeof google.ai.generativelanguage.v1.Candidate.FinishReason);
+
+                    /** Candidate finishMessage. */
+                    public finishMessage?: (string|null);
 
                     /** Candidate safetyRatings. */
                     public safetyRatings: google.ai.generativelanguage.v1.ISafetyRating[];
@@ -1753,7 +1765,11 @@ export namespace google {
                         SPII = 9,
                         MALFORMED_FUNCTION_CALL = 10,
                         IMAGE_SAFETY = 11,
-                        UNEXPECTED_TOOL_CALL = 12
+                        IMAGE_PROHIBITED_CONTENT = 14,
+                        IMAGE_OTHER = 15,
+                        NO_IMAGE = 16,
+                        UNEXPECTED_TOOL_CALL = 12,
+                        TOO_MANY_TOOL_CALLS = 13
                     }
                 }
 
@@ -1963,12 +1979,17 @@ export namespace google {
                     enum UrlRetrievalStatus {
                         URL_RETRIEVAL_STATUS_UNSPECIFIED = 0,
                         URL_RETRIEVAL_STATUS_SUCCESS = 1,
-                        URL_RETRIEVAL_STATUS_ERROR = 2
+                        URL_RETRIEVAL_STATUS_ERROR = 2,
+                        URL_RETRIEVAL_STATUS_PAYWALL = 3,
+                        URL_RETRIEVAL_STATUS_UNSAFE = 4
                     }
                 }
 
                 /** Properties of a LogprobsResult. */
                 interface ILogprobsResult {
+
+                    /** LogprobsResult logProbabilitySum */
+                    logProbabilitySum?: (number|null);
 
                     /** LogprobsResult topCandidates */
                     topCandidates?: (google.ai.generativelanguage.v1.LogprobsResult.ITopCandidates[]|null);
@@ -1985,6 +2006,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.ai.generativelanguage.v1.ILogprobsResult);
+
+                    /** LogprobsResult logProbabilitySum. */
+                    public logProbabilitySum?: (number|null);
 
                     /** LogprobsResult topCandidates. */
                     public topCandidates: google.ai.generativelanguage.v1.LogprobsResult.ITopCandidates[];
@@ -25818,6 +25842,9 @@ export namespace google {
 
                     /** Part thoughtSignature */
                     thoughtSignature?: (Uint8Array|Buffer|string|null);
+
+                    /** Part partMetadata */
+                    partMetadata?: (google.protobuf.IStruct|null);
                 }
 
                 /** Represents a Part. */
@@ -25858,6 +25885,9 @@ export namespace google {
 
                     /** Part thoughtSignature. */
                     public thoughtSignature: (Uint8Array|Buffer|string);
+
+                    /** Part partMetadata. */
+                    public partMetadata?: (google.protobuf.IStruct|null);
 
                     /** Part data. */
                     public data?: ("text"|"inlineData"|"functionCall"|"functionResponse"|"fileData"|"executableCode"|"codeExecutionResult");
@@ -25937,6 +25967,106 @@ export namespace google {
 
                     /**
                      * Gets the default type url for Part
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FunctionResponsePart. */
+                interface IFunctionResponsePart {
+
+                    /** FunctionResponsePart inlineData */
+                    inlineData?: (google.ai.generativelanguage.v1beta.IFunctionResponseBlob|null);
+                }
+
+                /** Represents a FunctionResponsePart. */
+                class FunctionResponsePart implements IFunctionResponsePart {
+
+                    /**
+                     * Constructs a new FunctionResponsePart.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ai.generativelanguage.v1beta.IFunctionResponsePart);
+
+                    /** FunctionResponsePart inlineData. */
+                    public inlineData?: (google.ai.generativelanguage.v1beta.IFunctionResponseBlob|null);
+
+                    /** FunctionResponsePart data. */
+                    public data?: "inlineData";
+
+                    /**
+                     * Creates a new FunctionResponsePart instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FunctionResponsePart instance
+                     */
+                    public static create(properties?: google.ai.generativelanguage.v1beta.IFunctionResponsePart): google.ai.generativelanguage.v1beta.FunctionResponsePart;
+
+                    /**
+                     * Encodes the specified FunctionResponsePart message. Does not implicitly {@link google.ai.generativelanguage.v1beta.FunctionResponsePart.verify|verify} messages.
+                     * @param message FunctionResponsePart message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ai.generativelanguage.v1beta.IFunctionResponsePart, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FunctionResponsePart message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.FunctionResponsePart.verify|verify} messages.
+                     * @param message FunctionResponsePart message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta.IFunctionResponsePart, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FunctionResponsePart message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FunctionResponsePart
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.FunctionResponsePart;
+
+                    /**
+                     * Decodes a FunctionResponsePart message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FunctionResponsePart
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.FunctionResponsePart;
+
+                    /**
+                     * Verifies a FunctionResponsePart message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FunctionResponsePart message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FunctionResponsePart
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.FunctionResponsePart;
+
+                    /**
+                     * Creates a plain object from a FunctionResponsePart message. Also converts values to other types if specified.
+                     * @param message FunctionResponsePart
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ai.generativelanguage.v1beta.FunctionResponsePart, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FunctionResponsePart to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FunctionResponsePart
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -26040,6 +26170,109 @@ export namespace google {
 
                     /**
                      * Gets the default type url for Blob
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FunctionResponseBlob. */
+                interface IFunctionResponseBlob {
+
+                    /** FunctionResponseBlob mimeType */
+                    mimeType?: (string|null);
+
+                    /** FunctionResponseBlob data */
+                    data?: (Uint8Array|Buffer|string|null);
+                }
+
+                /** Represents a FunctionResponseBlob. */
+                class FunctionResponseBlob implements IFunctionResponseBlob {
+
+                    /**
+                     * Constructs a new FunctionResponseBlob.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ai.generativelanguage.v1beta.IFunctionResponseBlob);
+
+                    /** FunctionResponseBlob mimeType. */
+                    public mimeType: string;
+
+                    /** FunctionResponseBlob data. */
+                    public data: (Uint8Array|Buffer|string);
+
+                    /**
+                     * Creates a new FunctionResponseBlob instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FunctionResponseBlob instance
+                     */
+                    public static create(properties?: google.ai.generativelanguage.v1beta.IFunctionResponseBlob): google.ai.generativelanguage.v1beta.FunctionResponseBlob;
+
+                    /**
+                     * Encodes the specified FunctionResponseBlob message. Does not implicitly {@link google.ai.generativelanguage.v1beta.FunctionResponseBlob.verify|verify} messages.
+                     * @param message FunctionResponseBlob message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ai.generativelanguage.v1beta.IFunctionResponseBlob, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FunctionResponseBlob message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.FunctionResponseBlob.verify|verify} messages.
+                     * @param message FunctionResponseBlob message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta.IFunctionResponseBlob, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FunctionResponseBlob message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FunctionResponseBlob
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.FunctionResponseBlob;
+
+                    /**
+                     * Decodes a FunctionResponseBlob message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FunctionResponseBlob
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.FunctionResponseBlob;
+
+                    /**
+                     * Verifies a FunctionResponseBlob message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FunctionResponseBlob message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FunctionResponseBlob
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.FunctionResponseBlob;
+
+                    /**
+                     * Creates a plain object from a FunctionResponseBlob message. Also converts values to other types if specified.
+                     * @param message FunctionResponseBlob
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ai.generativelanguage.v1beta.FunctionResponseBlob, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FunctionResponseBlob to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FunctionResponseBlob
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -26499,6 +26732,9 @@ export namespace google {
                     /** Tool googleSearch */
                     googleSearch?: (google.ai.generativelanguage.v1beta.Tool.IGoogleSearch|null);
 
+                    /** Tool computerUse */
+                    computerUse?: (google.ai.generativelanguage.v1beta.Tool.IComputerUse|null);
+
                     /** Tool urlContext */
                     urlContext?: (google.ai.generativelanguage.v1beta.IUrlContext|null);
                 }
@@ -26523,6 +26759,9 @@ export namespace google {
 
                     /** Tool googleSearch. */
                     public googleSearch?: (google.ai.generativelanguage.v1beta.Tool.IGoogleSearch|null);
+
+                    /** Tool computerUse. */
+                    public computerUse?: (google.ai.generativelanguage.v1beta.Tool.IComputerUse|null);
 
                     /** Tool urlContext. */
                     public urlContext?: (google.ai.generativelanguage.v1beta.IUrlContext|null);
@@ -26702,6 +26941,118 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ComputerUse. */
+                    interface IComputerUse {
+
+                        /** ComputerUse environment */
+                        environment?: (google.ai.generativelanguage.v1beta.Tool.ComputerUse.Environment|keyof typeof google.ai.generativelanguage.v1beta.Tool.ComputerUse.Environment|null);
+
+                        /** ComputerUse excludedPredefinedFunctions */
+                        excludedPredefinedFunctions?: (string[]|null);
+                    }
+
+                    /** Represents a ComputerUse. */
+                    class ComputerUse implements IComputerUse {
+
+                        /**
+                         * Constructs a new ComputerUse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.ai.generativelanguage.v1beta.Tool.IComputerUse);
+
+                        /** ComputerUse environment. */
+                        public environment: (google.ai.generativelanguage.v1beta.Tool.ComputerUse.Environment|keyof typeof google.ai.generativelanguage.v1beta.Tool.ComputerUse.Environment);
+
+                        /** ComputerUse excludedPredefinedFunctions. */
+                        public excludedPredefinedFunctions: string[];
+
+                        /**
+                         * Creates a new ComputerUse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ComputerUse instance
+                         */
+                        public static create(properties?: google.ai.generativelanguage.v1beta.Tool.IComputerUse): google.ai.generativelanguage.v1beta.Tool.ComputerUse;
+
+                        /**
+                         * Encodes the specified ComputerUse message. Does not implicitly {@link google.ai.generativelanguage.v1beta.Tool.ComputerUse.verify|verify} messages.
+                         * @param message ComputerUse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.ai.generativelanguage.v1beta.Tool.IComputerUse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ComputerUse message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.Tool.ComputerUse.verify|verify} messages.
+                         * @param message ComputerUse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.ai.generativelanguage.v1beta.Tool.IComputerUse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ComputerUse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ComputerUse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.Tool.ComputerUse;
+
+                        /**
+                         * Decodes a ComputerUse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ComputerUse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.Tool.ComputerUse;
+
+                        /**
+                         * Verifies a ComputerUse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ComputerUse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ComputerUse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.Tool.ComputerUse;
+
+                        /**
+                         * Creates a plain object from a ComputerUse message. Also converts values to other types if specified.
+                         * @param message ComputerUse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.ai.generativelanguage.v1beta.Tool.ComputerUse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ComputerUse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ComputerUse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ComputerUse {
+
+                        /** Environment enum. */
+                        enum Environment {
+                            ENVIRONMENT_UNSPECIFIED = 0,
+                            ENVIRONMENT_BROWSER = 1
+                        }
                     }
                 }
 
@@ -27572,6 +27923,9 @@ export namespace google {
                     /** FunctionResponse response */
                     response?: (google.protobuf.IStruct|null);
 
+                    /** FunctionResponse parts */
+                    parts?: (google.ai.generativelanguage.v1beta.IFunctionResponsePart[]|null);
+
                     /** FunctionResponse willContinue */
                     willContinue?: (boolean|null);
 
@@ -27596,6 +27950,9 @@ export namespace google {
 
                     /** FunctionResponse response. */
                     public response?: (google.protobuf.IStruct|null);
+
+                    /** FunctionResponse parts. */
+                    public parts: google.ai.generativelanguage.v1beta.IFunctionResponsePart[];
 
                     /** FunctionResponse willContinue. */
                     public willContinue: boolean;
@@ -29914,7 +30271,8 @@ export namespace google {
                     enum Source {
                         SOURCE_UNSPECIFIED = 0,
                         UPLOADED = 1,
-                        GENERATED = 2
+                        GENERATED = 2,
+                        REGISTERED = 3
                     }
                 }
 
@@ -31858,6 +32216,103 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an ImageConfig. */
+                interface IImageConfig {
+
+                    /** ImageConfig aspectRatio */
+                    aspectRatio?: (string|null);
+                }
+
+                /** Represents an ImageConfig. */
+                class ImageConfig implements IImageConfig {
+
+                    /**
+                     * Constructs a new ImageConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ai.generativelanguage.v1beta.IImageConfig);
+
+                    /** ImageConfig aspectRatio. */
+                    public aspectRatio?: (string|null);
+
+                    /**
+                     * Creates a new ImageConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImageConfig instance
+                     */
+                    public static create(properties?: google.ai.generativelanguage.v1beta.IImageConfig): google.ai.generativelanguage.v1beta.ImageConfig;
+
+                    /**
+                     * Encodes the specified ImageConfig message. Does not implicitly {@link google.ai.generativelanguage.v1beta.ImageConfig.verify|verify} messages.
+                     * @param message ImageConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ai.generativelanguage.v1beta.IImageConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImageConfig message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.ImageConfig.verify|verify} messages.
+                     * @param message ImageConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta.IImageConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImageConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImageConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.ImageConfig;
+
+                    /**
+                     * Decodes an ImageConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImageConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.ImageConfig;
+
+                    /**
+                     * Verifies an ImageConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImageConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImageConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.ImageConfig;
+
+                    /**
+                     * Creates a plain object from an ImageConfig message. Also converts values to other types if specified.
+                     * @param message ImageConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ai.generativelanguage.v1beta.ImageConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImageConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ImageConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a GenerationConfig. */
                 interface IGenerationConfig {
 
@@ -31891,6 +32346,9 @@ export namespace google {
                     /** GenerationConfig responseJsonSchema */
                     responseJsonSchema?: (google.protobuf.IValue|null);
 
+                    /** GenerationConfig responseJsonSchemaOrdered */
+                    responseJsonSchemaOrdered?: (google.protobuf.IValue|null);
+
                     /** GenerationConfig presencePenalty */
                     presencePenalty?: (number|null);
 
@@ -31914,6 +32372,9 @@ export namespace google {
 
                     /** GenerationConfig thinkingConfig */
                     thinkingConfig?: (google.ai.generativelanguage.v1beta.IThinkingConfig|null);
+
+                    /** GenerationConfig imageConfig */
+                    imageConfig?: (google.ai.generativelanguage.v1beta.IImageConfig|null);
 
                     /** GenerationConfig mediaResolution */
                     mediaResolution?: (google.ai.generativelanguage.v1beta.GenerationConfig.MediaResolution|keyof typeof google.ai.generativelanguage.v1beta.GenerationConfig.MediaResolution|null);
@@ -31958,6 +32419,9 @@ export namespace google {
                     /** GenerationConfig responseJsonSchema. */
                     public responseJsonSchema?: (google.protobuf.IValue|null);
 
+                    /** GenerationConfig responseJsonSchemaOrdered. */
+                    public responseJsonSchemaOrdered?: (google.protobuf.IValue|null);
+
                     /** GenerationConfig presencePenalty. */
                     public presencePenalty?: (number|null);
 
@@ -31981,6 +32445,9 @@ export namespace google {
 
                     /** GenerationConfig thinkingConfig. */
                     public thinkingConfig?: (google.ai.generativelanguage.v1beta.IThinkingConfig|null);
+
+                    /** GenerationConfig imageConfig. */
+                    public imageConfig?: (google.ai.generativelanguage.v1beta.IImageConfig|null);
 
                     /** GenerationConfig mediaResolution. */
                     public mediaResolution?: (google.ai.generativelanguage.v1beta.GenerationConfig.MediaResolution|keyof typeof google.ai.generativelanguage.v1beta.GenerationConfig.MediaResolution|null);
@@ -32606,6 +33073,9 @@ export namespace google {
                     /** Candidate finishReason */
                     finishReason?: (google.ai.generativelanguage.v1beta.Candidate.FinishReason|keyof typeof google.ai.generativelanguage.v1beta.Candidate.FinishReason|null);
 
+                    /** Candidate finishMessage */
+                    finishMessage?: (string|null);
+
                     /** Candidate safetyRatings */
                     safetyRatings?: (google.ai.generativelanguage.v1beta.ISafetyRating[]|null);
 
@@ -32648,6 +33118,9 @@ export namespace google {
 
                     /** Candidate finishReason. */
                     public finishReason: (google.ai.generativelanguage.v1beta.Candidate.FinishReason|keyof typeof google.ai.generativelanguage.v1beta.Candidate.FinishReason);
+
+                    /** Candidate finishMessage. */
+                    public finishMessage?: (string|null);
 
                     /** Candidate safetyRatings. */
                     public safetyRatings: google.ai.generativelanguage.v1beta.ISafetyRating[];
@@ -32767,7 +33240,12 @@ export namespace google {
                         SPII = 9,
                         MALFORMED_FUNCTION_CALL = 10,
                         IMAGE_SAFETY = 11,
-                        UNEXPECTED_TOOL_CALL = 12
+                        IMAGE_PROHIBITED_CONTENT = 14,
+                        IMAGE_OTHER = 15,
+                        NO_IMAGE = 16,
+                        IMAGE_RECITATION = 17,
+                        UNEXPECTED_TOOL_CALL = 12,
+                        TOO_MANY_TOOL_CALLS = 13
                     }
                 }
 
@@ -32977,12 +33455,17 @@ export namespace google {
                     enum UrlRetrievalStatus {
                         URL_RETRIEVAL_STATUS_UNSPECIFIED = 0,
                         URL_RETRIEVAL_STATUS_SUCCESS = 1,
-                        URL_RETRIEVAL_STATUS_ERROR = 2
+                        URL_RETRIEVAL_STATUS_ERROR = 2,
+                        URL_RETRIEVAL_STATUS_PAYWALL = 3,
+                        URL_RETRIEVAL_STATUS_UNSAFE = 4
                     }
                 }
 
                 /** Properties of a LogprobsResult. */
                 interface ILogprobsResult {
+
+                    /** LogprobsResult logProbabilitySum */
+                    logProbabilitySum?: (number|null);
 
                     /** LogprobsResult topCandidates */
                     topCandidates?: (google.ai.generativelanguage.v1beta.LogprobsResult.ITopCandidates[]|null);
@@ -32999,6 +33482,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.ai.generativelanguage.v1beta.ILogprobsResult);
+
+                    /** LogprobsResult logProbabilitySum. */
+                    public logProbabilitySum?: (number|null);
 
                     /** LogprobsResult topCandidates. */
                     public topCandidates: google.ai.generativelanguage.v1beta.LogprobsResult.ITopCandidates[];
@@ -37129,6 +37615,9 @@ export namespace google {
 
                     /** BidiGenerateContentServerContent urlContextMetadata */
                     urlContextMetadata?: (google.ai.generativelanguage.v1beta.IUrlContextMetadata|null);
+
+                    /** BidiGenerateContentServerContent waitingForInput */
+                    waitingForInput?: (boolean|null);
                 }
 
                 /** Represents a BidiGenerateContentServerContent. */
@@ -37163,6 +37652,9 @@ export namespace google {
 
                     /** BidiGenerateContentServerContent urlContextMetadata. */
                     public urlContextMetadata?: (google.ai.generativelanguage.v1beta.IUrlContextMetadata|null);
+
+                    /** BidiGenerateContentServerContent waitingForInput. */
+                    public waitingForInput: boolean;
 
                     /**
                      * Creates a new BidiGenerateContentServerContent instance using the specified properties.
@@ -42734,7 +43226,7 @@ export namespace google {
                 interface IPredictLongRunningResponse {
 
                     /** PredictLongRunningResponse generateVideoResponse */
-                    generateVideoResponse?: (google.ai.generativelanguage.v1beta.IGenerateVideoResponse|null);
+                    generateVideoResponse?: (google.ai.generativelanguage.v1beta.IPredictLongRunningGeneratedVideoResponse|null);
                 }
 
                 /** Represents a PredictLongRunningResponse. */
@@ -42747,7 +43239,7 @@ export namespace google {
                     constructor(properties?: google.ai.generativelanguage.v1beta.IPredictLongRunningResponse);
 
                     /** PredictLongRunningResponse generateVideoResponse. */
-                    public generateVideoResponse?: (google.ai.generativelanguage.v1beta.IGenerateVideoResponse|null);
+                    public generateVideoResponse?: (google.ai.generativelanguage.v1beta.IPredictLongRunningGeneratedVideoResponse|null);
 
                     /** PredictLongRunningResponse response. */
                     public response?: "generateVideoResponse";
@@ -43127,109 +43619,109 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
-                /** Properties of a GenerateVideoResponse. */
-                interface IGenerateVideoResponse {
+                /** Properties of a PredictLongRunningGeneratedVideoResponse. */
+                interface IPredictLongRunningGeneratedVideoResponse {
 
-                    /** GenerateVideoResponse generatedSamples */
+                    /** PredictLongRunningGeneratedVideoResponse generatedSamples */
                     generatedSamples?: (google.ai.generativelanguage.v1beta.IMedia[]|null);
 
-                    /** GenerateVideoResponse raiMediaFilteredCount */
+                    /** PredictLongRunningGeneratedVideoResponse raiMediaFilteredCount */
                     raiMediaFilteredCount?: (number|null);
 
-                    /** GenerateVideoResponse raiMediaFilteredReasons */
+                    /** PredictLongRunningGeneratedVideoResponse raiMediaFilteredReasons */
                     raiMediaFilteredReasons?: (string[]|null);
                 }
 
-                /** Represents a GenerateVideoResponse. */
-                class GenerateVideoResponse implements IGenerateVideoResponse {
+                /** Represents a PredictLongRunningGeneratedVideoResponse. */
+                class PredictLongRunningGeneratedVideoResponse implements IPredictLongRunningGeneratedVideoResponse {
 
                     /**
-                     * Constructs a new GenerateVideoResponse.
+                     * Constructs a new PredictLongRunningGeneratedVideoResponse.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.ai.generativelanguage.v1beta.IGenerateVideoResponse);
+                    constructor(properties?: google.ai.generativelanguage.v1beta.IPredictLongRunningGeneratedVideoResponse);
 
-                    /** GenerateVideoResponse generatedSamples. */
+                    /** PredictLongRunningGeneratedVideoResponse generatedSamples. */
                     public generatedSamples: google.ai.generativelanguage.v1beta.IMedia[];
 
-                    /** GenerateVideoResponse raiMediaFilteredCount. */
+                    /** PredictLongRunningGeneratedVideoResponse raiMediaFilteredCount. */
                     public raiMediaFilteredCount: number;
 
-                    /** GenerateVideoResponse raiMediaFilteredReasons. */
+                    /** PredictLongRunningGeneratedVideoResponse raiMediaFilteredReasons. */
                     public raiMediaFilteredReasons: string[];
 
                     /**
-                     * Creates a new GenerateVideoResponse instance using the specified properties.
+                     * Creates a new PredictLongRunningGeneratedVideoResponse instance using the specified properties.
                      * @param [properties] Properties to set
-                     * @returns GenerateVideoResponse instance
+                     * @returns PredictLongRunningGeneratedVideoResponse instance
                      */
-                    public static create(properties?: google.ai.generativelanguage.v1beta.IGenerateVideoResponse): google.ai.generativelanguage.v1beta.GenerateVideoResponse;
+                    public static create(properties?: google.ai.generativelanguage.v1beta.IPredictLongRunningGeneratedVideoResponse): google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse;
 
                     /**
-                     * Encodes the specified GenerateVideoResponse message. Does not implicitly {@link google.ai.generativelanguage.v1beta.GenerateVideoResponse.verify|verify} messages.
-                     * @param message GenerateVideoResponse message or plain object to encode
+                     * Encodes the specified PredictLongRunningGeneratedVideoResponse message. Does not implicitly {@link google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse.verify|verify} messages.
+                     * @param message PredictLongRunningGeneratedVideoResponse message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.ai.generativelanguage.v1beta.IGenerateVideoResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.ai.generativelanguage.v1beta.IPredictLongRunningGeneratedVideoResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified GenerateVideoResponse message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.GenerateVideoResponse.verify|verify} messages.
-                     * @param message GenerateVideoResponse message or plain object to encode
+                     * Encodes the specified PredictLongRunningGeneratedVideoResponse message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse.verify|verify} messages.
+                     * @param message PredictLongRunningGeneratedVideoResponse message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta.IGenerateVideoResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta.IPredictLongRunningGeneratedVideoResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Decodes a GenerateVideoResponse message from the specified reader or buffer.
+                     * Decodes a PredictLongRunningGeneratedVideoResponse message from the specified reader or buffer.
                      * @param reader Reader or buffer to decode from
                      * @param [length] Message length if known beforehand
-                     * @returns GenerateVideoResponse
+                     * @returns PredictLongRunningGeneratedVideoResponse
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.GenerateVideoResponse;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse;
 
                     /**
-                     * Decodes a GenerateVideoResponse message from the specified reader or buffer, length delimited.
+                     * Decodes a PredictLongRunningGeneratedVideoResponse message from the specified reader or buffer, length delimited.
                      * @param reader Reader or buffer to decode from
-                     * @returns GenerateVideoResponse
+                     * @returns PredictLongRunningGeneratedVideoResponse
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.GenerateVideoResponse;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse;
 
                     /**
-                     * Verifies a GenerateVideoResponse message.
+                     * Verifies a PredictLongRunningGeneratedVideoResponse message.
                      * @param message Plain object to verify
                      * @returns `null` if valid, otherwise the reason why it is not
                      */
                     public static verify(message: { [k: string]: any }): (string|null);
 
                     /**
-                     * Creates a GenerateVideoResponse message from a plain object. Also converts values to their respective internal types.
+                     * Creates a PredictLongRunningGeneratedVideoResponse message from a plain object. Also converts values to their respective internal types.
                      * @param object Plain object
-                     * @returns GenerateVideoResponse
+                     * @returns PredictLongRunningGeneratedVideoResponse
                      */
-                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.GenerateVideoResponse;
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse;
 
                     /**
-                     * Creates a plain object from a GenerateVideoResponse message. Also converts values to other types if specified.
-                     * @param message GenerateVideoResponse
+                     * Creates a plain object from a PredictLongRunningGeneratedVideoResponse message. Also converts values to other types if specified.
+                     * @param message PredictLongRunningGeneratedVideoResponse
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.ai.generativelanguage.v1beta.GenerateVideoResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
-                     * Converts this GenerateVideoResponse to JSON.
+                     * Converts this PredictLongRunningGeneratedVideoResponse to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
 
                     /**
-                     * Gets the default type url for GenerateVideoResponse
+                     * Gets the default type url for PredictLongRunningGeneratedVideoResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

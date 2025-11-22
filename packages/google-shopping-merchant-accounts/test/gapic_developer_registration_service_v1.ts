@@ -536,6 +536,81 @@ describe('v1.DeveloperRegistrationServiceClient', () => {
         });
     });
 
+    describe('getAccountForGcpRegistration', () => {
+        it('invokes getAccountForGcpRegistration without error', async () => {
+            const client = new developerregistrationserviceModule.v1.DeveloperRegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            const expectedResponse = generateSampleMessage(
+              new protos.google.shopping.merchant.accounts.v1.GetAccountForGcpRegistrationResponse()
+            );
+            client.innerApiCalls.getAccountForGcpRegistration = stubSimpleCall(expectedResponse);
+            const [response] = await client.getAccountForGcpRegistration(request);
+            assert.deepStrictEqual(response, expectedResponse);
+        });
+
+        it('invokes getAccountForGcpRegistration without error using callback', async () => {
+            const client = new developerregistrationserviceModule.v1.DeveloperRegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            const expectedResponse = generateSampleMessage(
+              new protos.google.shopping.merchant.accounts.v1.GetAccountForGcpRegistrationResponse()
+            );
+            client.innerApiCalls.getAccountForGcpRegistration = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getAccountForGcpRegistration(
+                    request,
+                    (err?: Error|null, result?: protos.google.shopping.merchant.accounts.v1.IGetAccountForGcpRegistrationResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+        });
+
+        it('invokes getAccountForGcpRegistration with error', async () => {
+            const client = new developerregistrationserviceModule.v1.DeveloperRegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getAccountForGcpRegistration = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getAccountForGcpRegistration(request), expectedError);
+        });
+
+        it('invokes getAccountForGcpRegistration with closed client', async () => {
+            const client = new developerregistrationserviceModule.v1.DeveloperRegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getAccountForGcpRegistration(request), expectedError);
+        });
+    });
+
     describe('Path templates', () => {
 
         describe('account', async () => {

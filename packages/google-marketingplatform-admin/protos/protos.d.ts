@@ -61,6 +61,34 @@ export namespace google {
                     public getOrganization(request: google.marketingplatform.admin.v1alpha.IGetOrganizationRequest): Promise<google.marketingplatform.admin.v1alpha.Organization>;
 
                     /**
+                     * Calls ListOrganizations.
+                     * @param request ListOrganizationsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListOrganizationsResponse
+                     */
+                    public listOrganizations(request: google.marketingplatform.admin.v1alpha.IListOrganizationsRequest, callback: google.marketingplatform.admin.v1alpha.MarketingplatformAdminService.ListOrganizationsCallback): void;
+
+                    /**
+                     * Calls ListOrganizations.
+                     * @param request ListOrganizationsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listOrganizations(request: google.marketingplatform.admin.v1alpha.IListOrganizationsRequest): Promise<google.marketingplatform.admin.v1alpha.ListOrganizationsResponse>;
+
+                    /**
+                     * Calls FindSalesPartnerManagedClients.
+                     * @param request FindSalesPartnerManagedClientsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and FindSalesPartnerManagedClientsResponse
+                     */
+                    public findSalesPartnerManagedClients(request: google.marketingplatform.admin.v1alpha.IFindSalesPartnerManagedClientsRequest, callback: google.marketingplatform.admin.v1alpha.MarketingplatformAdminService.FindSalesPartnerManagedClientsCallback): void;
+
+                    /**
+                     * Calls FindSalesPartnerManagedClients.
+                     * @param request FindSalesPartnerManagedClientsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public findSalesPartnerManagedClients(request: google.marketingplatform.admin.v1alpha.IFindSalesPartnerManagedClientsRequest): Promise<google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse>;
+
+                    /**
                      * Calls ListAnalyticsAccountLinks.
                      * @param request ListAnalyticsAccountLinksRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and ListAnalyticsAccountLinksResponse
@@ -115,6 +143,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public setPropertyServiceLevel(request: google.marketingplatform.admin.v1alpha.ISetPropertyServiceLevelRequest): Promise<google.marketingplatform.admin.v1alpha.SetPropertyServiceLevelResponse>;
+
+                    /**
+                     * Calls ReportPropertyUsage.
+                     * @param request ReportPropertyUsageRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ReportPropertyUsageResponse
+                     */
+                    public reportPropertyUsage(request: google.marketingplatform.admin.v1alpha.IReportPropertyUsageRequest, callback: google.marketingplatform.admin.v1alpha.MarketingplatformAdminService.ReportPropertyUsageCallback): void;
+
+                    /**
+                     * Calls ReportPropertyUsage.
+                     * @param request ReportPropertyUsageRequest message or plain object
+                     * @returns Promise
+                     */
+                    public reportPropertyUsage(request: google.marketingplatform.admin.v1alpha.IReportPropertyUsageRequest): Promise<google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse>;
                 }
 
                 namespace MarketingplatformAdminService {
@@ -125,6 +167,20 @@ export namespace google {
                      * @param [response] Organization
                      */
                     type GetOrganizationCallback = (error: (Error|null), response?: google.marketingplatform.admin.v1alpha.Organization) => void;
+
+                    /**
+                     * Callback as used by {@link google.marketingplatform.admin.v1alpha.MarketingplatformAdminService|listOrganizations}.
+                     * @param error Error, if any
+                     * @param [response] ListOrganizationsResponse
+                     */
+                    type ListOrganizationsCallback = (error: (Error|null), response?: google.marketingplatform.admin.v1alpha.ListOrganizationsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.marketingplatform.admin.v1alpha.MarketingplatformAdminService|findSalesPartnerManagedClients}.
+                     * @param error Error, if any
+                     * @param [response] FindSalesPartnerManagedClientsResponse
+                     */
+                    type FindSalesPartnerManagedClientsCallback = (error: (Error|null), response?: google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse) => void;
 
                     /**
                      * Callback as used by {@link google.marketingplatform.admin.v1alpha.MarketingplatformAdminService|listAnalyticsAccountLinks}.
@@ -153,13 +209,13 @@ export namespace google {
                      * @param [response] SetPropertyServiceLevelResponse
                      */
                     type SetPropertyServiceLevelCallback = (error: (Error|null), response?: google.marketingplatform.admin.v1alpha.SetPropertyServiceLevelResponse) => void;
-                }
 
-                /** AnalyticsServiceLevel enum. */
-                enum AnalyticsServiceLevel {
-                    ANALYTICS_SERVICE_LEVEL_UNSPECIFIED = 0,
-                    ANALYTICS_SERVICE_LEVEL_STANDARD = 1,
-                    ANALYTICS_SERVICE_LEVEL_360 = 2
+                    /**
+                     * Callback as used by {@link google.marketingplatform.admin.v1alpha.MarketingplatformAdminService|reportPropertyUsage}.
+                     * @param error Error, if any
+                     * @param [response] ReportPropertyUsageResponse
+                     */
+                    type ReportPropertyUsageCallback = (error: (Error|null), response?: google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse) => void;
                 }
 
                 /** Properties of a GetOrganizationRequest. */
@@ -257,6 +313,524 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListOrganizationsRequest. */
+                interface IListOrganizationsRequest {
+
+                    /** ListOrganizationsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListOrganizationsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListOrganizationsRequest. */
+                class ListOrganizationsRequest implements IListOrganizationsRequest {
+
+                    /**
+                     * Constructs a new ListOrganizationsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.marketingplatform.admin.v1alpha.IListOrganizationsRequest);
+
+                    /** ListOrganizationsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListOrganizationsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListOrganizationsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListOrganizationsRequest instance
+                     */
+                    public static create(properties?: google.marketingplatform.admin.v1alpha.IListOrganizationsRequest): google.marketingplatform.admin.v1alpha.ListOrganizationsRequest;
+
+                    /**
+                     * Encodes the specified ListOrganizationsRequest message. Does not implicitly {@link google.marketingplatform.admin.v1alpha.ListOrganizationsRequest.verify|verify} messages.
+                     * @param message ListOrganizationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.marketingplatform.admin.v1alpha.IListOrganizationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListOrganizationsRequest message, length delimited. Does not implicitly {@link google.marketingplatform.admin.v1alpha.ListOrganizationsRequest.verify|verify} messages.
+                     * @param message ListOrganizationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.marketingplatform.admin.v1alpha.IListOrganizationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListOrganizationsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListOrganizationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.marketingplatform.admin.v1alpha.ListOrganizationsRequest;
+
+                    /**
+                     * Decodes a ListOrganizationsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListOrganizationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.marketingplatform.admin.v1alpha.ListOrganizationsRequest;
+
+                    /**
+                     * Verifies a ListOrganizationsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListOrganizationsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListOrganizationsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.marketingplatform.admin.v1alpha.ListOrganizationsRequest;
+
+                    /**
+                     * Creates a plain object from a ListOrganizationsRequest message. Also converts values to other types if specified.
+                     * @param message ListOrganizationsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.marketingplatform.admin.v1alpha.ListOrganizationsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListOrganizationsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListOrganizationsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListOrganizationsResponse. */
+                interface IListOrganizationsResponse {
+
+                    /** ListOrganizationsResponse organizations */
+                    organizations?: (google.marketingplatform.admin.v1alpha.IOrganization[]|null);
+
+                    /** ListOrganizationsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListOrganizationsResponse. */
+                class ListOrganizationsResponse implements IListOrganizationsResponse {
+
+                    /**
+                     * Constructs a new ListOrganizationsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.marketingplatform.admin.v1alpha.IListOrganizationsResponse);
+
+                    /** ListOrganizationsResponse organizations. */
+                    public organizations: google.marketingplatform.admin.v1alpha.IOrganization[];
+
+                    /** ListOrganizationsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListOrganizationsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListOrganizationsResponse instance
+                     */
+                    public static create(properties?: google.marketingplatform.admin.v1alpha.IListOrganizationsResponse): google.marketingplatform.admin.v1alpha.ListOrganizationsResponse;
+
+                    /**
+                     * Encodes the specified ListOrganizationsResponse message. Does not implicitly {@link google.marketingplatform.admin.v1alpha.ListOrganizationsResponse.verify|verify} messages.
+                     * @param message ListOrganizationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.marketingplatform.admin.v1alpha.IListOrganizationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListOrganizationsResponse message, length delimited. Does not implicitly {@link google.marketingplatform.admin.v1alpha.ListOrganizationsResponse.verify|verify} messages.
+                     * @param message ListOrganizationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.marketingplatform.admin.v1alpha.IListOrganizationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListOrganizationsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListOrganizationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.marketingplatform.admin.v1alpha.ListOrganizationsResponse;
+
+                    /**
+                     * Decodes a ListOrganizationsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListOrganizationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.marketingplatform.admin.v1alpha.ListOrganizationsResponse;
+
+                    /**
+                     * Verifies a ListOrganizationsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListOrganizationsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListOrganizationsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.marketingplatform.admin.v1alpha.ListOrganizationsResponse;
+
+                    /**
+                     * Creates a plain object from a ListOrganizationsResponse message. Also converts values to other types if specified.
+                     * @param message ListOrganizationsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.marketingplatform.admin.v1alpha.ListOrganizationsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListOrganizationsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListOrganizationsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FindSalesPartnerManagedClientsRequest. */
+                interface IFindSalesPartnerManagedClientsRequest {
+
+                    /** FindSalesPartnerManagedClientsRequest organization */
+                    organization?: (string|null);
+
+                    /** FindSalesPartnerManagedClientsRequest isActive */
+                    isActive?: (boolean|null);
+                }
+
+                /** Represents a FindSalesPartnerManagedClientsRequest. */
+                class FindSalesPartnerManagedClientsRequest implements IFindSalesPartnerManagedClientsRequest {
+
+                    /**
+                     * Constructs a new FindSalesPartnerManagedClientsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.marketingplatform.admin.v1alpha.IFindSalesPartnerManagedClientsRequest);
+
+                    /** FindSalesPartnerManagedClientsRequest organization. */
+                    public organization: string;
+
+                    /** FindSalesPartnerManagedClientsRequest isActive. */
+                    public isActive: boolean;
+
+                    /**
+                     * Creates a new FindSalesPartnerManagedClientsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FindSalesPartnerManagedClientsRequest instance
+                     */
+                    public static create(properties?: google.marketingplatform.admin.v1alpha.IFindSalesPartnerManagedClientsRequest): google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsRequest;
+
+                    /**
+                     * Encodes the specified FindSalesPartnerManagedClientsRequest message. Does not implicitly {@link google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsRequest.verify|verify} messages.
+                     * @param message FindSalesPartnerManagedClientsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.marketingplatform.admin.v1alpha.IFindSalesPartnerManagedClientsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FindSalesPartnerManagedClientsRequest message, length delimited. Does not implicitly {@link google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsRequest.verify|verify} messages.
+                     * @param message FindSalesPartnerManagedClientsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.marketingplatform.admin.v1alpha.IFindSalesPartnerManagedClientsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FindSalesPartnerManagedClientsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FindSalesPartnerManagedClientsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsRequest;
+
+                    /**
+                     * Decodes a FindSalesPartnerManagedClientsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FindSalesPartnerManagedClientsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsRequest;
+
+                    /**
+                     * Verifies a FindSalesPartnerManagedClientsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FindSalesPartnerManagedClientsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FindSalesPartnerManagedClientsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsRequest;
+
+                    /**
+                     * Creates a plain object from a FindSalesPartnerManagedClientsRequest message. Also converts values to other types if specified.
+                     * @param message FindSalesPartnerManagedClientsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FindSalesPartnerManagedClientsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FindSalesPartnerManagedClientsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FindSalesPartnerManagedClientsResponse. */
+                interface IFindSalesPartnerManagedClientsResponse {
+
+                    /** FindSalesPartnerManagedClientsResponse clientData */
+                    clientData?: (google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.IClientData[]|null);
+                }
+
+                /** Represents a FindSalesPartnerManagedClientsResponse. */
+                class FindSalesPartnerManagedClientsResponse implements IFindSalesPartnerManagedClientsResponse {
+
+                    /**
+                     * Constructs a new FindSalesPartnerManagedClientsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.marketingplatform.admin.v1alpha.IFindSalesPartnerManagedClientsResponse);
+
+                    /** FindSalesPartnerManagedClientsResponse clientData. */
+                    public clientData: google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.IClientData[];
+
+                    /**
+                     * Creates a new FindSalesPartnerManagedClientsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FindSalesPartnerManagedClientsResponse instance
+                     */
+                    public static create(properties?: google.marketingplatform.admin.v1alpha.IFindSalesPartnerManagedClientsResponse): google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse;
+
+                    /**
+                     * Encodes the specified FindSalesPartnerManagedClientsResponse message. Does not implicitly {@link google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.verify|verify} messages.
+                     * @param message FindSalesPartnerManagedClientsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.marketingplatform.admin.v1alpha.IFindSalesPartnerManagedClientsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FindSalesPartnerManagedClientsResponse message, length delimited. Does not implicitly {@link google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.verify|verify} messages.
+                     * @param message FindSalesPartnerManagedClientsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.marketingplatform.admin.v1alpha.IFindSalesPartnerManagedClientsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FindSalesPartnerManagedClientsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FindSalesPartnerManagedClientsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse;
+
+                    /**
+                     * Decodes a FindSalesPartnerManagedClientsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FindSalesPartnerManagedClientsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse;
+
+                    /**
+                     * Verifies a FindSalesPartnerManagedClientsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FindSalesPartnerManagedClientsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FindSalesPartnerManagedClientsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse;
+
+                    /**
+                     * Creates a plain object from a FindSalesPartnerManagedClientsResponse message. Also converts values to other types if specified.
+                     * @param message FindSalesPartnerManagedClientsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FindSalesPartnerManagedClientsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FindSalesPartnerManagedClientsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace FindSalesPartnerManagedClientsResponse {
+
+                    /** Properties of a ClientData. */
+                    interface IClientData {
+
+                        /** ClientData organization */
+                        organization?: (google.marketingplatform.admin.v1alpha.IOrganization|null);
+
+                        /** ClientData startDate */
+                        startDate?: (google.type.IDate|null);
+
+                        /** ClientData endDate */
+                        endDate?: (google.type.IDate|null);
+                    }
+
+                    /** Represents a ClientData. */
+                    class ClientData implements IClientData {
+
+                        /**
+                         * Constructs a new ClientData.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.IClientData);
+
+                        /** ClientData organization. */
+                        public organization?: (google.marketingplatform.admin.v1alpha.IOrganization|null);
+
+                        /** ClientData startDate. */
+                        public startDate?: (google.type.IDate|null);
+
+                        /** ClientData endDate. */
+                        public endDate?: (google.type.IDate|null);
+
+                        /**
+                         * Creates a new ClientData instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ClientData instance
+                         */
+                        public static create(properties?: google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.IClientData): google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.ClientData;
+
+                        /**
+                         * Encodes the specified ClientData message. Does not implicitly {@link google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.ClientData.verify|verify} messages.
+                         * @param message ClientData message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.IClientData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ClientData message, length delimited. Does not implicitly {@link google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.ClientData.verify|verify} messages.
+                         * @param message ClientData message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.IClientData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ClientData message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ClientData
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.ClientData;
+
+                        /**
+                         * Decodes a ClientData message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ClientData
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.ClientData;
+
+                        /**
+                         * Verifies a ClientData message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ClientData message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ClientData
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.ClientData;
+
+                        /**
+                         * Creates a plain object from a ClientData message. Also converts values to other types if specified.
+                         * @param message ClientData
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse.ClientData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ClientData to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ClientData
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a ListAnalyticsAccountLinksRequest. */
@@ -871,11 +1445,483 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a ReportPropertyUsageRequest. */
+                interface IReportPropertyUsageRequest {
+
+                    /** ReportPropertyUsageRequest organization */
+                    organization?: (string|null);
+
+                    /** ReportPropertyUsageRequest month */
+                    month?: (string|null);
+                }
+
+                /** Represents a ReportPropertyUsageRequest. */
+                class ReportPropertyUsageRequest implements IReportPropertyUsageRequest {
+
+                    /**
+                     * Constructs a new ReportPropertyUsageRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.marketingplatform.admin.v1alpha.IReportPropertyUsageRequest);
+
+                    /** ReportPropertyUsageRequest organization. */
+                    public organization: string;
+
+                    /** ReportPropertyUsageRequest month. */
+                    public month: string;
+
+                    /**
+                     * Creates a new ReportPropertyUsageRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ReportPropertyUsageRequest instance
+                     */
+                    public static create(properties?: google.marketingplatform.admin.v1alpha.IReportPropertyUsageRequest): google.marketingplatform.admin.v1alpha.ReportPropertyUsageRequest;
+
+                    /**
+                     * Encodes the specified ReportPropertyUsageRequest message. Does not implicitly {@link google.marketingplatform.admin.v1alpha.ReportPropertyUsageRequest.verify|verify} messages.
+                     * @param message ReportPropertyUsageRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.marketingplatform.admin.v1alpha.IReportPropertyUsageRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ReportPropertyUsageRequest message, length delimited. Does not implicitly {@link google.marketingplatform.admin.v1alpha.ReportPropertyUsageRequest.verify|verify} messages.
+                     * @param message ReportPropertyUsageRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.marketingplatform.admin.v1alpha.IReportPropertyUsageRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ReportPropertyUsageRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ReportPropertyUsageRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.marketingplatform.admin.v1alpha.ReportPropertyUsageRequest;
+
+                    /**
+                     * Decodes a ReportPropertyUsageRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ReportPropertyUsageRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.marketingplatform.admin.v1alpha.ReportPropertyUsageRequest;
+
+                    /**
+                     * Verifies a ReportPropertyUsageRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ReportPropertyUsageRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ReportPropertyUsageRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.marketingplatform.admin.v1alpha.ReportPropertyUsageRequest;
+
+                    /**
+                     * Creates a plain object from a ReportPropertyUsageRequest message. Also converts values to other types if specified.
+                     * @param message ReportPropertyUsageRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.marketingplatform.admin.v1alpha.ReportPropertyUsageRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ReportPropertyUsageRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ReportPropertyUsageRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ReportPropertyUsageResponse. */
+                interface IReportPropertyUsageResponse {
+
+                    /** ReportPropertyUsageResponse propertyUsages */
+                    propertyUsages?: (google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.IPropertyUsage[]|null);
+
+                    /** ReportPropertyUsageResponse billInfo */
+                    billInfo?: (google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.IBillInfo|null);
+                }
+
+                /** Represents a ReportPropertyUsageResponse. */
+                class ReportPropertyUsageResponse implements IReportPropertyUsageResponse {
+
+                    /**
+                     * Constructs a new ReportPropertyUsageResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.marketingplatform.admin.v1alpha.IReportPropertyUsageResponse);
+
+                    /** ReportPropertyUsageResponse propertyUsages. */
+                    public propertyUsages: google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.IPropertyUsage[];
+
+                    /** ReportPropertyUsageResponse billInfo. */
+                    public billInfo?: (google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.IBillInfo|null);
+
+                    /**
+                     * Creates a new ReportPropertyUsageResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ReportPropertyUsageResponse instance
+                     */
+                    public static create(properties?: google.marketingplatform.admin.v1alpha.IReportPropertyUsageResponse): google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse;
+
+                    /**
+                     * Encodes the specified ReportPropertyUsageResponse message. Does not implicitly {@link google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.verify|verify} messages.
+                     * @param message ReportPropertyUsageResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.marketingplatform.admin.v1alpha.IReportPropertyUsageResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ReportPropertyUsageResponse message, length delimited. Does not implicitly {@link google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.verify|verify} messages.
+                     * @param message ReportPropertyUsageResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.marketingplatform.admin.v1alpha.IReportPropertyUsageResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ReportPropertyUsageResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ReportPropertyUsageResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse;
+
+                    /**
+                     * Decodes a ReportPropertyUsageResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ReportPropertyUsageResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse;
+
+                    /**
+                     * Verifies a ReportPropertyUsageResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ReportPropertyUsageResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ReportPropertyUsageResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse;
+
+                    /**
+                     * Creates a plain object from a ReportPropertyUsageResponse message. Also converts values to other types if specified.
+                     * @param message ReportPropertyUsageResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ReportPropertyUsageResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ReportPropertyUsageResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ReportPropertyUsageResponse {
+
+                    /** Properties of a PropertyUsage. */
+                    interface IPropertyUsage {
+
+                        /** PropertyUsage property */
+                        property?: (string|null);
+
+                        /** PropertyUsage displayName */
+                        displayName?: (string|null);
+
+                        /** PropertyUsage accountId */
+                        accountId?: (number|Long|string|null);
+
+                        /** PropertyUsage serviceLevel */
+                        serviceLevel?: (google.marketingplatform.admin.v1alpha.AnalyticsServiceLevel|keyof typeof google.marketingplatform.admin.v1alpha.AnalyticsServiceLevel|null);
+
+                        /** PropertyUsage propertyType */
+                        propertyType?: (google.marketingplatform.admin.v1alpha.AnalyticsPropertyType|keyof typeof google.marketingplatform.admin.v1alpha.AnalyticsPropertyType|null);
+
+                        /** PropertyUsage totalEventCount */
+                        totalEventCount?: (number|Long|string|null);
+
+                        /** PropertyUsage billableEventCount */
+                        billableEventCount?: (number|Long|string|null);
+                    }
+
+                    /** Represents a PropertyUsage. */
+                    class PropertyUsage implements IPropertyUsage {
+
+                        /**
+                         * Constructs a new PropertyUsage.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.IPropertyUsage);
+
+                        /** PropertyUsage property. */
+                        public property: string;
+
+                        /** PropertyUsage displayName. */
+                        public displayName: string;
+
+                        /** PropertyUsage accountId. */
+                        public accountId: (number|Long|string);
+
+                        /** PropertyUsage serviceLevel. */
+                        public serviceLevel: (google.marketingplatform.admin.v1alpha.AnalyticsServiceLevel|keyof typeof google.marketingplatform.admin.v1alpha.AnalyticsServiceLevel);
+
+                        /** PropertyUsage propertyType. */
+                        public propertyType: (google.marketingplatform.admin.v1alpha.AnalyticsPropertyType|keyof typeof google.marketingplatform.admin.v1alpha.AnalyticsPropertyType);
+
+                        /** PropertyUsage totalEventCount. */
+                        public totalEventCount: (number|Long|string);
+
+                        /** PropertyUsage billableEventCount. */
+                        public billableEventCount: (number|Long|string);
+
+                        /**
+                         * Creates a new PropertyUsage instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PropertyUsage instance
+                         */
+                        public static create(properties?: google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.IPropertyUsage): google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.PropertyUsage;
+
+                        /**
+                         * Encodes the specified PropertyUsage message. Does not implicitly {@link google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.PropertyUsage.verify|verify} messages.
+                         * @param message PropertyUsage message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.IPropertyUsage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PropertyUsage message, length delimited. Does not implicitly {@link google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.PropertyUsage.verify|verify} messages.
+                         * @param message PropertyUsage message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.IPropertyUsage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PropertyUsage message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PropertyUsage
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.PropertyUsage;
+
+                        /**
+                         * Decodes a PropertyUsage message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PropertyUsage
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.PropertyUsage;
+
+                        /**
+                         * Verifies a PropertyUsage message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PropertyUsage message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PropertyUsage
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.PropertyUsage;
+
+                        /**
+                         * Creates a plain object from a PropertyUsage message. Also converts values to other types if specified.
+                         * @param message PropertyUsage
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.PropertyUsage, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PropertyUsage to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PropertyUsage
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a BillInfo. */
+                    interface IBillInfo {
+
+                        /** BillInfo baseFee */
+                        baseFee?: (google.type.IMoney|null);
+
+                        /** BillInfo eventFee */
+                        eventFee?: (google.type.IMoney|null);
+
+                        /** BillInfo priceProtectionCredit */
+                        priceProtectionCredit?: (google.type.IMoney|null);
+
+                        /** BillInfo total */
+                        total?: (google.type.IMoney|null);
+                    }
+
+                    /** Represents a BillInfo. */
+                    class BillInfo implements IBillInfo {
+
+                        /**
+                         * Constructs a new BillInfo.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.IBillInfo);
+
+                        /** BillInfo baseFee. */
+                        public baseFee?: (google.type.IMoney|null);
+
+                        /** BillInfo eventFee. */
+                        public eventFee?: (google.type.IMoney|null);
+
+                        /** BillInfo priceProtectionCredit. */
+                        public priceProtectionCredit?: (google.type.IMoney|null);
+
+                        /** BillInfo total. */
+                        public total?: (google.type.IMoney|null);
+
+                        /**
+                         * Creates a new BillInfo instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BillInfo instance
+                         */
+                        public static create(properties?: google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.IBillInfo): google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.BillInfo;
+
+                        /**
+                         * Encodes the specified BillInfo message. Does not implicitly {@link google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.BillInfo.verify|verify} messages.
+                         * @param message BillInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.IBillInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BillInfo message, length delimited. Does not implicitly {@link google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.BillInfo.verify|verify} messages.
+                         * @param message BillInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.IBillInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BillInfo message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BillInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.BillInfo;
+
+                        /**
+                         * Decodes a BillInfo message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BillInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.BillInfo;
+
+                        /**
+                         * Verifies a BillInfo message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BillInfo message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BillInfo
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.BillInfo;
+
+                        /**
+                         * Creates a plain object from a BillInfo message. Also converts values to other types if specified.
+                         * @param message BillInfo
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse.BillInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BillInfo to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for BillInfo
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
                 /** LinkVerificationState enum. */
                 enum LinkVerificationState {
                     LINK_VERIFICATION_STATE_UNSPECIFIED = 0,
                     LINK_VERIFICATION_STATE_VERIFIED = 1,
                     LINK_VERIFICATION_STATE_NOT_VERIFIED = 2
+                }
+
+                /** AnalyticsServiceLevel enum. */
+                enum AnalyticsServiceLevel {
+                    ANALYTICS_SERVICE_LEVEL_UNSPECIFIED = 0,
+                    ANALYTICS_SERVICE_LEVEL_STANDARD = 1,
+                    ANALYTICS_SERVICE_LEVEL_360 = 2
+                }
+
+                /** AnalyticsPropertyType enum. */
+                enum AnalyticsPropertyType {
+                    ANALYTICS_PROPERTY_TYPE_UNSPECIFIED = 0,
+                    ANALYTICS_PROPERTY_TYPE_ORDINARY = 1,
+                    ANALYTICS_PROPERTY_TYPE_SUBPROPERTY = 2,
+                    ANALYTICS_PROPERTY_TYPE_ROLLUP = 3
                 }
 
                 /** Properties of an Organization. */
@@ -7517,6 +8563,228 @@ export namespace google {
 
             /**
              * Gets the default type url for Empty
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+    }
+
+    /** Namespace type. */
+    namespace type {
+
+        /** Properties of a Date. */
+        interface IDate {
+
+            /** Date year */
+            year?: (number|null);
+
+            /** Date month */
+            month?: (number|null);
+
+            /** Date day */
+            day?: (number|null);
+        }
+
+        /** Represents a Date. */
+        class Date implements IDate {
+
+            /**
+             * Constructs a new Date.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.type.IDate);
+
+            /** Date year. */
+            public year: number;
+
+            /** Date month. */
+            public month: number;
+
+            /** Date day. */
+            public day: number;
+
+            /**
+             * Creates a new Date instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Date instance
+             */
+            public static create(properties?: google.type.IDate): google.type.Date;
+
+            /**
+             * Encodes the specified Date message. Does not implicitly {@link google.type.Date.verify|verify} messages.
+             * @param message Date message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.type.IDate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Date message, length delimited. Does not implicitly {@link google.type.Date.verify|verify} messages.
+             * @param message Date message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.type.IDate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Date message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Date
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.Date;
+
+            /**
+             * Decodes a Date message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Date
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.Date;
+
+            /**
+             * Verifies a Date message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Date message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Date
+             */
+            public static fromObject(object: { [k: string]: any }): google.type.Date;
+
+            /**
+             * Creates a plain object from a Date message. Also converts values to other types if specified.
+             * @param message Date
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.type.Date, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Date to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Date
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a Money. */
+        interface IMoney {
+
+            /** Money currencyCode */
+            currencyCode?: (string|null);
+
+            /** Money units */
+            units?: (number|Long|string|null);
+
+            /** Money nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a Money. */
+        class Money implements IMoney {
+
+            /**
+             * Constructs a new Money.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.type.IMoney);
+
+            /** Money currencyCode. */
+            public currencyCode: string;
+
+            /** Money units. */
+            public units: (number|Long|string);
+
+            /** Money nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new Money instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Money instance
+             */
+            public static create(properties?: google.type.IMoney): google.type.Money;
+
+            /**
+             * Encodes the specified Money message. Does not implicitly {@link google.type.Money.verify|verify} messages.
+             * @param message Money message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.type.IMoney, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Money message, length delimited. Does not implicitly {@link google.type.Money.verify|verify} messages.
+             * @param message Money message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.type.IMoney, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Money message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Money
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.Money;
+
+            /**
+             * Decodes a Money message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Money
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.Money;
+
+            /**
+             * Verifies a Money message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Money message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Money
+             */
+            public static fromObject(object: { [k: string]: any }): google.type.Money;
+
+            /**
+             * Creates a plain object from a Money message. Also converts values to other types if specified.
+             * @param message Money
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.type.Money, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Money to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Money
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

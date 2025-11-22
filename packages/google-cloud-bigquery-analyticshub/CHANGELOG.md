@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.4.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-analyticshub-v2.3.1...bigquery-analyticshub-v2.4.0) (2025-11-11)
+
+
+### Features
+
+* [bigquery-analyticshub] add Stored Procedure Sharing support for analyticshub listings ([#6866](https://github.com/googleapis/google-cloud-node/issues/6866)) ([e4faaba](https://github.com/googleapis/google-cloud-node/commit/e4faaba9f6d3c28cf81d816fbd3758af80b6a45d))
+
+## [2.3.1](https://github.com/googleapis/google-cloud-node/compare/bigquery-analyticshub-v2.3.0...bigquery-analyticshub-v2.3.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
 ## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-analyticshub-v2.2.0...bigquery-analyticshub-v2.3.0) (2025-07-09)
 
 

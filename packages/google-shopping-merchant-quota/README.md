@@ -58,6 +58,8 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 
 | Sample                      | Source Code                       |
 | --------------------------- | --------------------------------- |
+| get account limit | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-quota/samples/generated/v1/account_limits_service.get_account_limit.js) |
+| list account limits | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-quota/samples/generated/v1/account_limits_service.list_account_limits.js) |
 | list quota groups | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-quota/samples/generated/v1/quota_service.list_quota_groups.js) |
 | shopping | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-quota/samples/generated/v1/snippet_metadata_google.shopping.merchant.quota.v1.json) |
 | list quota groups | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-quota/samples/generated/v1beta/quota_service.list_quota_groups.js) |

@@ -14,7 +14,7 @@
     "publish": "echo 'sample test; do not publish'"
   },
   "dependencies": {
-    "@google-cloud/subscriptions": "^0.1.0"
+    "@google-cloud/subscriptions": "^0.1.1"
   },
   "devDependencies": {
     "c8": "^9.0.0",

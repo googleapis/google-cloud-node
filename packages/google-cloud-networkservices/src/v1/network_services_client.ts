@@ -205,6 +205,9 @@ export class NetworkServicesClient {
       httpRoutePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/httpRoutes/{http_route}'
       ),
+      lbEdgeExtensionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/lbEdgeExtensions/{lb_edge_extension}'
+      ),
       lbRouteExtensionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lbRouteExtensions/{lb_route_extension}'
       ),
@@ -8960,6 +8963,55 @@ export class NetworkServicesClient {
    */
   matchHttpRouteFromHttpRouteName(httpRouteName: string) {
     return this.pathTemplates.httpRoutePathTemplate.match(httpRouteName).http_route;
+  }
+
+  /**
+   * Return a fully-qualified lbEdgeExtension resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} lb_edge_extension
+   * @returns {string} Resource name string.
+   */
+  lbEdgeExtensionPath(project:string,location:string,lbEdgeExtension:string) {
+    return this.pathTemplates.lbEdgeExtensionPathTemplate.render({
+      project: project,
+      location: location,
+      lb_edge_extension: lbEdgeExtension,
+    });
+  }
+
+  /**
+   * Parse the project from LbEdgeExtension resource.
+   *
+   * @param {string} lbEdgeExtensionName
+   *   A fully-qualified path representing LbEdgeExtension resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromLbEdgeExtensionName(lbEdgeExtensionName: string) {
+    return this.pathTemplates.lbEdgeExtensionPathTemplate.match(lbEdgeExtensionName).project;
+  }
+
+  /**
+   * Parse the location from LbEdgeExtension resource.
+   *
+   * @param {string} lbEdgeExtensionName
+   *   A fully-qualified path representing LbEdgeExtension resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromLbEdgeExtensionName(lbEdgeExtensionName: string) {
+    return this.pathTemplates.lbEdgeExtensionPathTemplate.match(lbEdgeExtensionName).location;
+  }
+
+  /**
+   * Parse the lb_edge_extension from LbEdgeExtension resource.
+   *
+   * @param {string} lbEdgeExtensionName
+   *   A fully-qualified path representing LbEdgeExtension resource.
+   * @returns {string} A string representing the lb_edge_extension.
+   */
+  matchLbEdgeExtensionFromLbEdgeExtensionName(lbEdgeExtensionName: string) {
+    return this.pathTemplates.lbEdgeExtensionPathTemplate.match(lbEdgeExtensionName).lb_edge_extension;
   }
 
   /**

@@ -9680,6 +9680,8 @@
                          * @property {Array.<google.privacy.dlp.v2.RedactImageRequest.IImageRedactionConfig>|null} [imageRedactionConfigs] RedactImageRequest imageRedactionConfigs
                          * @property {boolean|null} [includeFindings] RedactImageRequest includeFindings
                          * @property {google.privacy.dlp.v2.IByteContentItem|null} [byteItem] RedactImageRequest byteItem
+                         * @property {string|null} [inspectTemplate] RedactImageRequest inspectTemplate
+                         * @property {string|null} [deidentifyTemplate] RedactImageRequest deidentifyTemplate
                          */
     
                         /**
@@ -9747,6 +9749,22 @@
                         RedactImageRequest.prototype.byteItem = null;
     
                         /**
+                         * RedactImageRequest inspectTemplate.
+                         * @member {string} inspectTemplate
+                         * @memberof google.privacy.dlp.v2.RedactImageRequest
+                         * @instance
+                         */
+                        RedactImageRequest.prototype.inspectTemplate = "";
+    
+                        /**
+                         * RedactImageRequest deidentifyTemplate.
+                         * @member {string} deidentifyTemplate
+                         * @memberof google.privacy.dlp.v2.RedactImageRequest
+                         * @instance
+                         */
+                        RedactImageRequest.prototype.deidentifyTemplate = "";
+    
+                        /**
                          * Creates a new RedactImageRequest instance using the specified properties.
                          * @function create
                          * @memberof google.privacy.dlp.v2.RedactImageRequest
@@ -9783,6 +9801,10 @@
                                 $root.google.privacy.dlp.v2.ByteContentItem.encode(message.byteItem, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             if (message.locationId != null && Object.hasOwnProperty.call(message, "locationId"))
                                 writer.uint32(/* id 8, wireType 2 =*/66).string(message.locationId);
+                            if (message.inspectTemplate != null && Object.hasOwnProperty.call(message, "inspectTemplate"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.inspectTemplate);
+                            if (message.deidentifyTemplate != null && Object.hasOwnProperty.call(message, "deidentifyTemplate"))
+                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.deidentifyTemplate);
                             return writer;
                         };
     
@@ -9843,6 +9865,14 @@
                                     }
                                 case 7: {
                                         message.byteItem = $root.google.privacy.dlp.v2.ByteContentItem.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.inspectTemplate = reader.string();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.deidentifyTemplate = reader.string();
                                         break;
                                     }
                                 default:
@@ -9908,6 +9938,12 @@
                                 if (error)
                                     return "byteItem." + error;
                             }
+                            if (message.inspectTemplate != null && message.hasOwnProperty("inspectTemplate"))
+                                if (!$util.isString(message.inspectTemplate))
+                                    return "inspectTemplate: string expected";
+                            if (message.deidentifyTemplate != null && message.hasOwnProperty("deidentifyTemplate"))
+                                if (!$util.isString(message.deidentifyTemplate))
+                                    return "deidentifyTemplate: string expected";
                             return null;
                         };
     
@@ -9949,6 +9985,10 @@
                                     throw TypeError(".google.privacy.dlp.v2.RedactImageRequest.byteItem: object expected");
                                 message.byteItem = $root.google.privacy.dlp.v2.ByteContentItem.fromObject(object.byteItem);
                             }
+                            if (object.inspectTemplate != null)
+                                message.inspectTemplate = String(object.inspectTemplate);
+                            if (object.deidentifyTemplate != null)
+                                message.deidentifyTemplate = String(object.deidentifyTemplate);
                             return message;
                         };
     
@@ -9973,6 +10013,8 @@
                                 object.includeFindings = false;
                                 object.byteItem = null;
                                 object.locationId = "";
+                                object.inspectTemplate = "";
+                                object.deidentifyTemplate = "";
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -9989,6 +10031,10 @@
                                 object.byteItem = $root.google.privacy.dlp.v2.ByteContentItem.toObject(message.byteItem, options);
                             if (message.locationId != null && message.hasOwnProperty("locationId"))
                                 object.locationId = message.locationId;
+                            if (message.inspectTemplate != null && message.hasOwnProperty("inspectTemplate"))
+                                object.inspectTemplate = message.inspectTemplate;
+                            if (message.deidentifyTemplate != null && message.hasOwnProperty("deidentifyTemplate"))
+                                object.deidentifyTemplate = message.deidentifyTemplate;
                             return object;
                         };
     
@@ -12547,6 +12593,7 @@
                          * @memberof google.privacy.dlp.v2
                          * @interface IOutputStorageConfig
                          * @property {google.privacy.dlp.v2.IBigQueryTable|null} [table] OutputStorageConfig table
+                         * @property {google.privacy.dlp.v2.ICloudStoragePath|null} [storagePath] OutputStorageConfig storagePath
                          * @property {google.privacy.dlp.v2.OutputStorageConfig.OutputSchema|null} [outputSchema] OutputStorageConfig outputSchema
                          */
     
@@ -12574,6 +12621,14 @@
                         OutputStorageConfig.prototype.table = null;
     
                         /**
+                         * OutputStorageConfig storagePath.
+                         * @member {google.privacy.dlp.v2.ICloudStoragePath|null|undefined} storagePath
+                         * @memberof google.privacy.dlp.v2.OutputStorageConfig
+                         * @instance
+                         */
+                        OutputStorageConfig.prototype.storagePath = null;
+    
+                        /**
                          * OutputStorageConfig outputSchema.
                          * @member {google.privacy.dlp.v2.OutputStorageConfig.OutputSchema} outputSchema
                          * @memberof google.privacy.dlp.v2.OutputStorageConfig
@@ -12586,12 +12641,12 @@
     
                         /**
                          * OutputStorageConfig type.
-                         * @member {"table"|undefined} type
+                         * @member {"table"|"storagePath"|undefined} type
                          * @memberof google.privacy.dlp.v2.OutputStorageConfig
                          * @instance
                          */
                         Object.defineProperty(OutputStorageConfig.prototype, "type", {
-                            get: $util.oneOfGetter($oneOfFields = ["table"]),
+                            get: $util.oneOfGetter($oneOfFields = ["table", "storagePath"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -12623,6 +12678,8 @@
                                 $root.google.privacy.dlp.v2.BigQueryTable.encode(message.table, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.outputSchema != null && Object.hasOwnProperty.call(message, "outputSchema"))
                                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.outputSchema);
+                            if (message.storagePath != null && Object.hasOwnProperty.call(message, "storagePath"))
+                                $root.google.privacy.dlp.v2.CloudStoragePath.encode(message.storagePath, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             return writer;
                         };
     
@@ -12661,6 +12718,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.table = $root.google.privacy.dlp.v2.BigQueryTable.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.storagePath = $root.google.privacy.dlp.v2.CloudStoragePath.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 3: {
@@ -12711,6 +12772,16 @@
                                         return "table." + error;
                                 }
                             }
+                            if (message.storagePath != null && message.hasOwnProperty("storagePath")) {
+                                if (properties.type === 1)
+                                    return "type: multiple values";
+                                properties.type = 1;
+                                {
+                                    var error = $root.google.privacy.dlp.v2.CloudStoragePath.verify(message.storagePath);
+                                    if (error)
+                                        return "storagePath." + error;
+                                }
+                            }
                             if (message.outputSchema != null && message.hasOwnProperty("outputSchema"))
                                 switch (message.outputSchema) {
                                 default:
@@ -12742,6 +12813,11 @@
                                 if (typeof object.table !== "object")
                                     throw TypeError(".google.privacy.dlp.v2.OutputStorageConfig.table: object expected");
                                 message.table = $root.google.privacy.dlp.v2.BigQueryTable.fromObject(object.table);
+                            }
+                            if (object.storagePath != null) {
+                                if (typeof object.storagePath !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.OutputStorageConfig.storagePath: object expected");
+                                message.storagePath = $root.google.privacy.dlp.v2.CloudStoragePath.fromObject(object.storagePath);
                             }
                             switch (object.outputSchema) {
                             default:
@@ -12800,6 +12876,11 @@
                             }
                             if (message.outputSchema != null && message.hasOwnProperty("outputSchema"))
                                 object.outputSchema = options.enums === String ? $root.google.privacy.dlp.v2.OutputStorageConfig.OutputSchema[message.outputSchema] === undefined ? message.outputSchema : $root.google.privacy.dlp.v2.OutputStorageConfig.OutputSchema[message.outputSchema] : message.outputSchema;
+                            if (message.storagePath != null && message.hasOwnProperty("storagePath")) {
+                                object.storagePath = $root.google.privacy.dlp.v2.CloudStoragePath.toObject(message.storagePath, options);
+                                if (options.oneofs)
+                                    object.type = "storagePath";
+                            }
                             return object;
                         };
     
@@ -43121,6 +43202,7 @@
                          * @property {google.privacy.dlp.v2.Action.IPublishToPubSub|null} [pubSub] Action pubSub
                          * @property {google.privacy.dlp.v2.Action.IPublishSummaryToCscc|null} [publishSummaryToCscc] Action publishSummaryToCscc
                          * @property {google.privacy.dlp.v2.Action.IPublishFindingsToCloudDataCatalog|null} [publishFindingsToCloudDataCatalog] Action publishFindingsToCloudDataCatalog
+                         * @property {google.privacy.dlp.v2.Action.IPublishFindingsToDataplexCatalog|null} [publishFindingsToDataplexCatalog] Action publishFindingsToDataplexCatalog
                          * @property {google.privacy.dlp.v2.Action.IDeidentify|null} [deidentify] Action deidentify
                          * @property {google.privacy.dlp.v2.Action.IJobNotificationEmails|null} [jobNotificationEmails] Action jobNotificationEmails
                          * @property {google.privacy.dlp.v2.Action.IPublishToStackdriver|null} [publishToStackdriver] Action publishToStackdriver
@@ -43174,6 +43256,14 @@
                         Action.prototype.publishFindingsToCloudDataCatalog = null;
     
                         /**
+                         * Action publishFindingsToDataplexCatalog.
+                         * @member {google.privacy.dlp.v2.Action.IPublishFindingsToDataplexCatalog|null|undefined} publishFindingsToDataplexCatalog
+                         * @memberof google.privacy.dlp.v2.Action
+                         * @instance
+                         */
+                        Action.prototype.publishFindingsToDataplexCatalog = null;
+    
+                        /**
                          * Action deidentify.
                          * @member {google.privacy.dlp.v2.Action.IDeidentify|null|undefined} deidentify
                          * @memberof google.privacy.dlp.v2.Action
@@ -43202,12 +43292,12 @@
     
                         /**
                          * Action action.
-                         * @member {"saveFindings"|"pubSub"|"publishSummaryToCscc"|"publishFindingsToCloudDataCatalog"|"deidentify"|"jobNotificationEmails"|"publishToStackdriver"|undefined} action
+                         * @member {"saveFindings"|"pubSub"|"publishSummaryToCscc"|"publishFindingsToCloudDataCatalog"|"publishFindingsToDataplexCatalog"|"deidentify"|"jobNotificationEmails"|"publishToStackdriver"|undefined} action
                          * @memberof google.privacy.dlp.v2.Action
                          * @instance
                          */
                         Object.defineProperty(Action.prototype, "action", {
-                            get: $util.oneOfGetter($oneOfFields = ["saveFindings", "pubSub", "publishSummaryToCscc", "publishFindingsToCloudDataCatalog", "deidentify", "jobNotificationEmails", "publishToStackdriver"]),
+                            get: $util.oneOfGetter($oneOfFields = ["saveFindings", "pubSub", "publishSummaryToCscc", "publishFindingsToCloudDataCatalog", "publishFindingsToDataplexCatalog", "deidentify", "jobNotificationEmails", "publishToStackdriver"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -43249,6 +43339,8 @@
                                 $root.google.privacy.dlp.v2.Action.JobNotificationEmails.encode(message.jobNotificationEmails, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             if (message.publishToStackdriver != null && Object.hasOwnProperty.call(message, "publishToStackdriver"))
                                 $root.google.privacy.dlp.v2.Action.PublishToStackdriver.encode(message.publishToStackdriver, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.publishFindingsToDataplexCatalog != null && Object.hasOwnProperty.call(message, "publishFindingsToDataplexCatalog"))
+                                $root.google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog.encode(message.publishFindingsToDataplexCatalog, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                             return writer;
                         };
     
@@ -43299,6 +43391,10 @@
                                     }
                                 case 5: {
                                         message.publishFindingsToCloudDataCatalog = $root.google.privacy.dlp.v2.Action.PublishFindingsToCloudDataCatalog.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 10: {
+                                        message.publishFindingsToDataplexCatalog = $root.google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 7: {
@@ -43387,6 +43483,16 @@
                                         return "publishFindingsToCloudDataCatalog." + error;
                                 }
                             }
+                            if (message.publishFindingsToDataplexCatalog != null && message.hasOwnProperty("publishFindingsToDataplexCatalog")) {
+                                if (properties.action === 1)
+                                    return "action: multiple values";
+                                properties.action = 1;
+                                {
+                                    var error = $root.google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog.verify(message.publishFindingsToDataplexCatalog);
+                                    if (error)
+                                        return "publishFindingsToDataplexCatalog." + error;
+                                }
+                            }
                             if (message.deidentify != null && message.hasOwnProperty("deidentify")) {
                                 if (properties.action === 1)
                                     return "action: multiple values";
@@ -43451,6 +43557,11 @@
                                 if (typeof object.publishFindingsToCloudDataCatalog !== "object")
                                     throw TypeError(".google.privacy.dlp.v2.Action.publishFindingsToCloudDataCatalog: object expected");
                                 message.publishFindingsToCloudDataCatalog = $root.google.privacy.dlp.v2.Action.PublishFindingsToCloudDataCatalog.fromObject(object.publishFindingsToCloudDataCatalog);
+                            }
+                            if (object.publishFindingsToDataplexCatalog != null) {
+                                if (typeof object.publishFindingsToDataplexCatalog !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.Action.publishFindingsToDataplexCatalog: object expected");
+                                message.publishFindingsToDataplexCatalog = $root.google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog.fromObject(object.publishFindingsToDataplexCatalog);
                             }
                             if (object.deidentify != null) {
                                 if (typeof object.deidentify !== "object")
@@ -43517,6 +43628,11 @@
                                 object.publishToStackdriver = $root.google.privacy.dlp.v2.Action.PublishToStackdriver.toObject(message.publishToStackdriver, options);
                                 if (options.oneofs)
                                     object.action = "publishToStackdriver";
+                            }
+                            if (message.publishFindingsToDataplexCatalog != null && message.hasOwnProperty("publishFindingsToDataplexCatalog")) {
+                                object.publishFindingsToDataplexCatalog = $root.google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog.toObject(message.publishFindingsToDataplexCatalog, options);
+                                if (options.oneofs)
+                                    object.action = "publishFindingsToDataplexCatalog";
                             }
                             return object;
                         };
@@ -44314,6 +44430,183 @@
                             };
     
                             return PublishFindingsToCloudDataCatalog;
+                        })();
+    
+                        Action.PublishFindingsToDataplexCatalog = (function() {
+    
+                            /**
+                             * Properties of a PublishFindingsToDataplexCatalog.
+                             * @memberof google.privacy.dlp.v2.Action
+                             * @interface IPublishFindingsToDataplexCatalog
+                             */
+    
+                            /**
+                             * Constructs a new PublishFindingsToDataplexCatalog.
+                             * @memberof google.privacy.dlp.v2.Action
+                             * @classdesc Represents a PublishFindingsToDataplexCatalog.
+                             * @implements IPublishFindingsToDataplexCatalog
+                             * @constructor
+                             * @param {google.privacy.dlp.v2.Action.IPublishFindingsToDataplexCatalog=} [properties] Properties to set
+                             */
+                            function PublishFindingsToDataplexCatalog(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new PublishFindingsToDataplexCatalog instance using the specified properties.
+                             * @function create
+                             * @memberof google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog
+                             * @static
+                             * @param {google.privacy.dlp.v2.Action.IPublishFindingsToDataplexCatalog=} [properties] Properties to set
+                             * @returns {google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog} PublishFindingsToDataplexCatalog instance
+                             */
+                            PublishFindingsToDataplexCatalog.create = function create(properties) {
+                                return new PublishFindingsToDataplexCatalog(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified PublishFindingsToDataplexCatalog message. Does not implicitly {@link google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog
+                             * @static
+                             * @param {google.privacy.dlp.v2.Action.IPublishFindingsToDataplexCatalog} message PublishFindingsToDataplexCatalog message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PublishFindingsToDataplexCatalog.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified PublishFindingsToDataplexCatalog message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog
+                             * @static
+                             * @param {google.privacy.dlp.v2.Action.IPublishFindingsToDataplexCatalog} message PublishFindingsToDataplexCatalog message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PublishFindingsToDataplexCatalog.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a PublishFindingsToDataplexCatalog message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog} PublishFindingsToDataplexCatalog
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PublishFindingsToDataplexCatalog.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a PublishFindingsToDataplexCatalog message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog} PublishFindingsToDataplexCatalog
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PublishFindingsToDataplexCatalog.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a PublishFindingsToDataplexCatalog message.
+                             * @function verify
+                             * @memberof google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            PublishFindingsToDataplexCatalog.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a PublishFindingsToDataplexCatalog message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog} PublishFindingsToDataplexCatalog
+                             */
+                            PublishFindingsToDataplexCatalog.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog)
+                                    return object;
+                                return new $root.google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog();
+                            };
+    
+                            /**
+                             * Creates a plain object from a PublishFindingsToDataplexCatalog message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog
+                             * @static
+                             * @param {google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog} message PublishFindingsToDataplexCatalog
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            PublishFindingsToDataplexCatalog.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this PublishFindingsToDataplexCatalog to JSON.
+                             * @function toJSON
+                             * @memberof google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            PublishFindingsToDataplexCatalog.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for PublishFindingsToDataplexCatalog
+                             * @function getTypeUrl
+                             * @memberof google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            PublishFindingsToDataplexCatalog.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog";
+                            };
+    
+                            return PublishFindingsToDataplexCatalog;
                         })();
     
                         Action.Deidentify = (function() {
@@ -63252,6 +63545,7 @@
                          * @memberof google.privacy.dlp.v2
                          * @interface IFileStoreCollection
                          * @property {google.privacy.dlp.v2.IFileStoreRegexes|null} [includeRegexes] FileStoreCollection includeRegexes
+                         * @property {google.privacy.dlp.v2.ITagFilters|null} [includeTags] FileStoreCollection includeTags
                          */
     
                         /**
@@ -63276,6 +63570,14 @@
                          * @instance
                          */
                         FileStoreCollection.prototype.includeRegexes = null;
+    
+                        /**
+                         * FileStoreCollection includeTags.
+                         * @member {google.privacy.dlp.v2.ITagFilters|null|undefined} includeTags
+                         * @memberof google.privacy.dlp.v2.FileStoreCollection
+                         * @instance
+                         */
+                        FileStoreCollection.prototype.includeTags = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -63317,6 +63619,8 @@
                                 writer = $Writer.create();
                             if (message.includeRegexes != null && Object.hasOwnProperty.call(message, "includeRegexes"))
                                 $root.google.privacy.dlp.v2.FileStoreRegexes.encode(message.includeRegexes, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.includeTags != null && Object.hasOwnProperty.call(message, "includeTags"))
+                                $root.google.privacy.dlp.v2.TagFilters.encode(message.includeTags, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             return writer;
                         };
     
@@ -63355,6 +63659,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.includeRegexes = $root.google.privacy.dlp.v2.FileStoreRegexes.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.includeTags = $root.google.privacy.dlp.v2.TagFilters.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -63401,6 +63709,11 @@
                                         return "includeRegexes." + error;
                                 }
                             }
+                            if (message.includeTags != null && message.hasOwnProperty("includeTags")) {
+                                var error = $root.google.privacy.dlp.v2.TagFilters.verify(message.includeTags);
+                                if (error)
+                                    return "includeTags." + error;
+                            }
                             return null;
                         };
     
@@ -63421,6 +63734,11 @@
                                     throw TypeError(".google.privacy.dlp.v2.FileStoreCollection.includeRegexes: object expected");
                                 message.includeRegexes = $root.google.privacy.dlp.v2.FileStoreRegexes.fromObject(object.includeRegexes);
                             }
+                            if (object.includeTags != null) {
+                                if (typeof object.includeTags !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.FileStoreCollection.includeTags: object expected");
+                                message.includeTags = $root.google.privacy.dlp.v2.TagFilters.fromObject(object.includeTags);
+                            }
                             return message;
                         };
     
@@ -63437,11 +63755,15 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.defaults)
+                                object.includeTags = null;
                             if (message.includeRegexes != null && message.hasOwnProperty("includeRegexes")) {
                                 object.includeRegexes = $root.google.privacy.dlp.v2.FileStoreRegexes.toObject(message.includeRegexes, options);
                                 if (options.oneofs)
                                     object.pattern = "includeRegexes";
                             }
+                            if (message.includeTags != null && message.hasOwnProperty("includeTags"))
+                                object.includeTags = $root.google.privacy.dlp.v2.TagFilters.toObject(message.includeTags, options);
                             return object;
                         };
     
@@ -86808,6 +87130,484 @@
                         };
     
                         return Tag;
+                    })();
+    
+                    v2.TagFilters = (function() {
+    
+                        /**
+                         * Properties of a TagFilters.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface ITagFilters
+                         * @property {Array.<google.privacy.dlp.v2.ITagFilter>|null} [tagFilters] TagFilters tagFilters
+                         */
+    
+                        /**
+                         * Constructs a new TagFilters.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents a TagFilters.
+                         * @implements ITagFilters
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.ITagFilters=} [properties] Properties to set
+                         */
+                        function TagFilters(properties) {
+                            this.tagFilters = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TagFilters tagFilters.
+                         * @member {Array.<google.privacy.dlp.v2.ITagFilter>} tagFilters
+                         * @memberof google.privacy.dlp.v2.TagFilters
+                         * @instance
+                         */
+                        TagFilters.prototype.tagFilters = $util.emptyArray;
+    
+                        /**
+                         * Creates a new TagFilters instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.TagFilters
+                         * @static
+                         * @param {google.privacy.dlp.v2.ITagFilters=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.TagFilters} TagFilters instance
+                         */
+                        TagFilters.create = function create(properties) {
+                            return new TagFilters(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TagFilters message. Does not implicitly {@link google.privacy.dlp.v2.TagFilters.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.TagFilters
+                         * @static
+                         * @param {google.privacy.dlp.v2.ITagFilters} message TagFilters message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TagFilters.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.tagFilters != null && message.tagFilters.length)
+                                for (var i = 0; i < message.tagFilters.length; ++i)
+                                    $root.google.privacy.dlp.v2.TagFilter.encode(message.tagFilters[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TagFilters message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.TagFilters.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.TagFilters
+                         * @static
+                         * @param {google.privacy.dlp.v2.ITagFilters} message TagFilters message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TagFilters.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TagFilters message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.TagFilters
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.TagFilters} TagFilters
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TagFilters.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.TagFilters();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.tagFilters && message.tagFilters.length))
+                                            message.tagFilters = [];
+                                        message.tagFilters.push($root.google.privacy.dlp.v2.TagFilter.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TagFilters message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.TagFilters
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.TagFilters} TagFilters
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TagFilters.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TagFilters message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.TagFilters
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TagFilters.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.tagFilters != null && message.hasOwnProperty("tagFilters")) {
+                                if (!Array.isArray(message.tagFilters))
+                                    return "tagFilters: array expected";
+                                for (var i = 0; i < message.tagFilters.length; ++i) {
+                                    var error = $root.google.privacy.dlp.v2.TagFilter.verify(message.tagFilters[i]);
+                                    if (error)
+                                        return "tagFilters." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TagFilters message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.TagFilters
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.TagFilters} TagFilters
+                         */
+                        TagFilters.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.TagFilters)
+                                return object;
+                            var message = new $root.google.privacy.dlp.v2.TagFilters();
+                            if (object.tagFilters) {
+                                if (!Array.isArray(object.tagFilters))
+                                    throw TypeError(".google.privacy.dlp.v2.TagFilters.tagFilters: array expected");
+                                message.tagFilters = [];
+                                for (var i = 0; i < object.tagFilters.length; ++i) {
+                                    if (typeof object.tagFilters[i] !== "object")
+                                        throw TypeError(".google.privacy.dlp.v2.TagFilters.tagFilters: object expected");
+                                    message.tagFilters[i] = $root.google.privacy.dlp.v2.TagFilter.fromObject(object.tagFilters[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TagFilters message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.TagFilters
+                         * @static
+                         * @param {google.privacy.dlp.v2.TagFilters} message TagFilters
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TagFilters.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.tagFilters = [];
+                            if (message.tagFilters && message.tagFilters.length) {
+                                object.tagFilters = [];
+                                for (var j = 0; j < message.tagFilters.length; ++j)
+                                    object.tagFilters[j] = $root.google.privacy.dlp.v2.TagFilter.toObject(message.tagFilters[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TagFilters to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.TagFilters
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TagFilters.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for TagFilters
+                         * @function getTypeUrl
+                         * @memberof google.privacy.dlp.v2.TagFilters
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        TagFilters.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.privacy.dlp.v2.TagFilters";
+                        };
+    
+                        return TagFilters;
+                    })();
+    
+                    v2.TagFilter = (function() {
+    
+                        /**
+                         * Properties of a TagFilter.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface ITagFilter
+                         * @property {string|null} [namespacedTagValue] TagFilter namespacedTagValue
+                         * @property {string|null} [namespacedTagKey] TagFilter namespacedTagKey
+                         */
+    
+                        /**
+                         * Constructs a new TagFilter.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents a TagFilter.
+                         * @implements ITagFilter
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.ITagFilter=} [properties] Properties to set
+                         */
+                        function TagFilter(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TagFilter namespacedTagValue.
+                         * @member {string|null|undefined} namespacedTagValue
+                         * @memberof google.privacy.dlp.v2.TagFilter
+                         * @instance
+                         */
+                        TagFilter.prototype.namespacedTagValue = null;
+    
+                        /**
+                         * TagFilter namespacedTagKey.
+                         * @member {string|null|undefined} namespacedTagKey
+                         * @memberof google.privacy.dlp.v2.TagFilter
+                         * @instance
+                         */
+                        TagFilter.prototype.namespacedTagKey = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * TagFilter format.
+                         * @member {"namespacedTagValue"|"namespacedTagKey"|undefined} format
+                         * @memberof google.privacy.dlp.v2.TagFilter
+                         * @instance
+                         */
+                        Object.defineProperty(TagFilter.prototype, "format", {
+                            get: $util.oneOfGetter($oneOfFields = ["namespacedTagValue", "namespacedTagKey"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new TagFilter instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.TagFilter
+                         * @static
+                         * @param {google.privacy.dlp.v2.ITagFilter=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.TagFilter} TagFilter instance
+                         */
+                        TagFilter.create = function create(properties) {
+                            return new TagFilter(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TagFilter message. Does not implicitly {@link google.privacy.dlp.v2.TagFilter.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.TagFilter
+                         * @static
+                         * @param {google.privacy.dlp.v2.ITagFilter} message TagFilter message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TagFilter.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.namespacedTagValue != null && Object.hasOwnProperty.call(message, "namespacedTagValue"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.namespacedTagValue);
+                            if (message.namespacedTagKey != null && Object.hasOwnProperty.call(message, "namespacedTagKey"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.namespacedTagKey);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TagFilter message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.TagFilter.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.TagFilter
+                         * @static
+                         * @param {google.privacy.dlp.v2.ITagFilter} message TagFilter message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TagFilter.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TagFilter message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.TagFilter
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.TagFilter} TagFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TagFilter.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.TagFilter();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.namespacedTagValue = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.namespacedTagKey = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TagFilter message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.TagFilter
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.TagFilter} TagFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TagFilter.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TagFilter message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.TagFilter
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TagFilter.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.namespacedTagValue != null && message.hasOwnProperty("namespacedTagValue")) {
+                                properties.format = 1;
+                                if (!$util.isString(message.namespacedTagValue))
+                                    return "namespacedTagValue: string expected";
+                            }
+                            if (message.namespacedTagKey != null && message.hasOwnProperty("namespacedTagKey")) {
+                                if (properties.format === 1)
+                                    return "format: multiple values";
+                                properties.format = 1;
+                                if (!$util.isString(message.namespacedTagKey))
+                                    return "namespacedTagKey: string expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TagFilter message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.TagFilter
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.TagFilter} TagFilter
+                         */
+                        TagFilter.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.TagFilter)
+                                return object;
+                            var message = new $root.google.privacy.dlp.v2.TagFilter();
+                            if (object.namespacedTagValue != null)
+                                message.namespacedTagValue = String(object.namespacedTagValue);
+                            if (object.namespacedTagKey != null)
+                                message.namespacedTagKey = String(object.namespacedTagKey);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TagFilter message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.TagFilter
+                         * @static
+                         * @param {google.privacy.dlp.v2.TagFilter} message TagFilter
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TagFilter.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.namespacedTagValue != null && message.hasOwnProperty("namespacedTagValue")) {
+                                object.namespacedTagValue = message.namespacedTagValue;
+                                if (options.oneofs)
+                                    object.format = "namespacedTagValue";
+                            }
+                            if (message.namespacedTagKey != null && message.hasOwnProperty("namespacedTagKey")) {
+                                object.namespacedTagKey = message.namespacedTagKey;
+                                if (options.oneofs)
+                                    object.format = "namespacedTagKey";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TagFilter to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.TagFilter
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TagFilter.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for TagFilter
+                         * @function getTypeUrl
+                         * @memberof google.privacy.dlp.v2.TagFilter
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        TagFilter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.privacy.dlp.v2.TagFilter";
+                        };
+    
+                        return TagFilter;
                     })();
     
                     v2.RelatedResource = (function() {

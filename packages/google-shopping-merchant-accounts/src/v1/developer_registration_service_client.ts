@@ -288,7 +288,7 @@ export class DeveloperRegistrationServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const developerRegistrationServiceStubMethods =
-        ['registerGcp', 'getDeveloperRegistration', 'unregisterGcp'];
+        ['registerGcp', 'getDeveloperRegistration', 'unregisterGcp', 'getAccountForGcpRegistration'];
     for (const methodName of developerRegistrationServiceStubMethods) {
       const callPromise = this.developerRegistrationServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -409,7 +409,9 @@ export class DeveloperRegistrationServiceClient {
  *   updated to have the new "API notifications" preference. If the developer
  *   email provided is not associated with any user we will just add it as a
  *   contact. The email preference corresponding to that contact will have the
- *   new "API notifications" preference
+ *   new "API notifications" preference. Make sure the email used is associated
+ *   with a Google Account (Google Workspace account or Gmail account)
+ *   and is not a service account as service accounts can't receive emails.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -680,6 +682,93 @@ export class DeveloperRegistrationServiceClient {
         {}|undefined
       ]) => {
         this._log.info('unregisterGcp response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Retrieves the merchant account that the calling GCP is registered with.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.shopping.merchant.accounts.v1.GetAccountForGcpRegistrationResponse|GetAccountForGcpRegistrationResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/developer_registration_service.get_account_for_gcp_registration.js</caption>
+ * region_tag:merchantapi_v1_generated_DeveloperRegistrationService_GetAccountForGcpRegistration_async
+ */
+  getAccountForGcpRegistration(
+      request?: protos.google.protobuf.IEmpty,
+      options?: CallOptions):
+      Promise<[
+        protos.google.shopping.merchant.accounts.v1.IGetAccountForGcpRegistrationResponse,
+        protos.google.protobuf.IEmpty|undefined, {}|undefined
+      ]>;
+  getAccountForGcpRegistration(
+      request: protos.google.protobuf.IEmpty,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.shopping.merchant.accounts.v1.IGetAccountForGcpRegistrationResponse,
+          protos.google.protobuf.IEmpty|null|undefined,
+          {}|null|undefined>): void;
+  getAccountForGcpRegistration(
+      request: protos.google.protobuf.IEmpty,
+      callback: Callback<
+          protos.google.shopping.merchant.accounts.v1.IGetAccountForGcpRegistrationResponse,
+          protos.google.protobuf.IEmpty|null|undefined,
+          {}|null|undefined>): void;
+  getAccountForGcpRegistration(
+      request?: protos.google.protobuf.IEmpty,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.shopping.merchant.accounts.v1.IGetAccountForGcpRegistrationResponse,
+          protos.google.protobuf.IEmpty|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.shopping.merchant.accounts.v1.IGetAccountForGcpRegistrationResponse,
+          protos.google.protobuf.IEmpty|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.shopping.merchant.accounts.v1.IGetAccountForGcpRegistrationResponse,
+        protos.google.protobuf.IEmpty|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    this.initialize().catch(err => {throw err});
+    this._log.info('getAccountForGcpRegistration request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.shopping.merchant.accounts.v1.IGetAccountForGcpRegistrationResponse,
+        protos.google.protobuf.IEmpty|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAccountForGcpRegistration response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getAccountForGcpRegistration(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.shopping.merchant.accounts.v1.IGetAccountForGcpRegistrationResponse,
+        protos.google.protobuf.IEmpty|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getAccountForGcpRegistration response %j', response);
         return [response, options, rawResponse];
       }).catch((error: any) => {
         if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {

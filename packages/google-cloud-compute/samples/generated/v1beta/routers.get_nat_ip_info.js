@@ -29,7 +29,9 @@ function main(project, region, router) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Name of the nat service to filter the NAT IP information. If it is omitted, all nats for this router will be returned. Name should conform to RFC1035.
+   *  Name of the nat service to filter the NAT IP information.
+   *  If it is omitted, all nats for this router will be returned.
+   *  Name should conform to RFC1035.
    */
   // const natName = 'abc123'
   /**
@@ -41,7 +43,8 @@ function main(project, region, router) {
    */
   // const region = 'us-central1'
   /**
-   *  Name of the Router resource to query for Nat IP information. The name should conform to RFC1035.
+   *  Name of the Router resource to query for Nat IP information. The name
+   *  should conform to RFC1035.
    */
   // const router = 'abc123'
 

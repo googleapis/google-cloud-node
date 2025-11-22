@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/text-to-speech?activeTab=versions
 
+## [6.4.0](https://github.com/googleapis/google-cloud-node/compare/text-to-speech-v6.3.1...text-to-speech-v6.4.0) (2025-10-21)
+
+
+### Features
+
+* [texttospeech] add `relax_safety_filters` proto field for Gemini TTS ([#6823](https://github.com/googleapis/google-cloud-node/issues/6823)) ([eeaccdb](https://github.com/googleapis/google-cloud-node/commit/eeaccdba2f06c01d6fca5427bc5b2fa9b22b5021))
+
+## [6.3.1](https://github.com/googleapis/google-cloud-node/compare/text-to-speech-v6.3.0...text-to-speech-v6.3.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
 ## [6.3.0](https://github.com/googleapis/google-cloud-node/compare/text-to-speech-v6.2.0...text-to-speech-v6.3.0) (2025-08-27)
 
 

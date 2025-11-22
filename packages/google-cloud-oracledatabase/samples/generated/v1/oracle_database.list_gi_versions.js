@@ -44,6 +44,12 @@ function main(parent) {
    *  Optional. A token identifying a page of results the server should return.
    */
   // const pageToken = 'abc123'
+  /**
+   *  Optional. An expression for filtering the results of the request. Only the
+   *  shape, gcp_oracle_zone and gi_version fields are supported in this format:
+   *  `shape="{shape}"`.
+   */
+  // const filter = 'abc123'
 
   // Imports the Oracledatabase library
   const {OracleDatabaseClient} = require('@google-cloud/oracledatabase').v1;

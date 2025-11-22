@@ -2530,6 +2530,7 @@
                          * @property {number|null} [topP] GenerationConfig topP
                          * @property {number|null} [topK] GenerationConfig topK
                          * @property {number|null} [seed] GenerationConfig seed
+                         * @property {google.protobuf.IValue|null} [responseJsonSchemaOrdered] GenerationConfig responseJsonSchemaOrdered
                          * @property {number|null} [presencePenalty] GenerationConfig presencePenalty
                          * @property {number|null} [frequencyPenalty] GenerationConfig frequencyPenalty
                          * @property {boolean|null} [responseLogprobs] GenerationConfig responseLogprobs
@@ -2608,6 +2609,14 @@
                          * @instance
                          */
                         GenerationConfig.prototype.seed = null;
+    
+                        /**
+                         * GenerationConfig responseJsonSchemaOrdered.
+                         * @member {google.protobuf.IValue|null|undefined} responseJsonSchemaOrdered
+                         * @memberof google.ai.generativelanguage.v1.GenerationConfig
+                         * @instance
+                         */
+                        GenerationConfig.prototype.responseJsonSchemaOrdered = null;
     
                         /**
                          * GenerationConfig presencePenalty.
@@ -2767,6 +2776,8 @@
                                 writer.uint32(/* id 18, wireType 0 =*/144).int32(message.logprobs);
                             if (message.enableEnhancedCivicAnswers != null && Object.hasOwnProperty.call(message, "enableEnhancedCivicAnswers"))
                                 writer.uint32(/* id 19, wireType 0 =*/152).bool(message.enableEnhancedCivicAnswers);
+                            if (message.responseJsonSchemaOrdered != null && Object.hasOwnProperty.call(message, "responseJsonSchemaOrdered"))
+                                $root.google.protobuf.Value.encode(message.responseJsonSchemaOrdered, writer.uint32(/* id 28, wireType 2 =*/226).fork()).ldelim();
                             return writer;
                         };
     
@@ -2831,6 +2842,10 @@
                                     }
                                 case 8: {
                                         message.seed = reader.int32();
+                                        break;
+                                    }
+                                case 28: {
+                                        message.responseJsonSchemaOrdered = $root.google.protobuf.Value.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 15: {
@@ -2926,6 +2941,11 @@
                                 if (!$util.isInteger(message.seed))
                                     return "seed: integer expected";
                             }
+                            if (message.responseJsonSchemaOrdered != null && message.hasOwnProperty("responseJsonSchemaOrdered")) {
+                                var error = $root.google.protobuf.Value.verify(message.responseJsonSchemaOrdered);
+                                if (error)
+                                    return "responseJsonSchemaOrdered." + error;
+                            }
                             if (message.presencePenalty != null && message.hasOwnProperty("presencePenalty")) {
                                 properties._presencePenalty = 1;
                                 if (typeof message.presencePenalty !== "number")
@@ -2985,6 +3005,11 @@
                                 message.topK = object.topK | 0;
                             if (object.seed != null)
                                 message.seed = object.seed | 0;
+                            if (object.responseJsonSchemaOrdered != null) {
+                                if (typeof object.responseJsonSchemaOrdered !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1.GenerationConfig.responseJsonSchemaOrdered: object expected");
+                                message.responseJsonSchemaOrdered = $root.google.protobuf.Value.fromObject(object.responseJsonSchemaOrdered);
+                            }
                             if (object.presencePenalty != null)
                                 message.presencePenalty = Number(object.presencePenalty);
                             if (object.frequencyPenalty != null)
@@ -3013,6 +3038,8 @@
                             var object = {};
                             if (options.arrays || options.defaults)
                                 object.stopSequences = [];
+                            if (options.defaults)
+                                object.responseJsonSchemaOrdered = null;
                             if (message.candidateCount != null && message.hasOwnProperty("candidateCount")) {
                                 object.candidateCount = message.candidateCount;
                                 if (options.oneofs)
@@ -3073,6 +3100,8 @@
                                 if (options.oneofs)
                                     object._enableEnhancedCivicAnswers = "enableEnhancedCivicAnswers";
                             }
+                            if (message.responseJsonSchemaOrdered != null && message.hasOwnProperty("responseJsonSchemaOrdered"))
+                                object.responseJsonSchemaOrdered = $root.google.protobuf.Value.toObject(message.responseJsonSchemaOrdered, options);
                             return object;
                         };
     
@@ -4231,6 +4260,7 @@
                          * @property {number|null} [index] Candidate index
                          * @property {google.ai.generativelanguage.v1.IContent|null} [content] Candidate content
                          * @property {google.ai.generativelanguage.v1.Candidate.FinishReason|null} [finishReason] Candidate finishReason
+                         * @property {string|null} [finishMessage] Candidate finishMessage
                          * @property {Array.<google.ai.generativelanguage.v1.ISafetyRating>|null} [safetyRatings] Candidate safetyRatings
                          * @property {google.ai.generativelanguage.v1.ICitationMetadata|null} [citationMetadata] Candidate citationMetadata
                          * @property {number|null} [tokenCount] Candidate tokenCount
@@ -4279,6 +4309,14 @@
                          * @instance
                          */
                         Candidate.prototype.finishReason = 0;
+    
+                        /**
+                         * Candidate finishMessage.
+                         * @member {string|null|undefined} finishMessage
+                         * @memberof google.ai.generativelanguage.v1.Candidate
+                         * @instance
+                         */
+                        Candidate.prototype.finishMessage = null;
     
                         /**
                          * Candidate safetyRatings.
@@ -4345,6 +4383,12 @@
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Candidate.prototype, "_finishMessage", {
+                            get: $util.oneOfGetter($oneOfFields = ["finishMessage"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
                         /**
                          * Creates a new Candidate instance using the specified properties.
                          * @function create
@@ -4375,6 +4419,8 @@
                                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.finishReason);
                             if (message.index != null && Object.hasOwnProperty.call(message, "index"))
                                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.index);
+                            if (message.finishMessage != null && Object.hasOwnProperty.call(message, "finishMessage"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.finishMessage);
                             if (message.safetyRatings != null && message.safetyRatings.length)
                                 for (var i = 0; i < message.safetyRatings.length; ++i)
                                     $root.google.ai.generativelanguage.v1.SafetyRating.encode(message.safetyRatings[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
@@ -4436,6 +4482,10 @@
                                     }
                                 case 2: {
                                         message.finishReason = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.finishMessage = reader.string();
                                         break;
                                     }
                                 case 5: {
@@ -4530,9 +4580,18 @@
                                 case 9:
                                 case 10:
                                 case 11:
+                                case 14:
+                                case 15:
+                                case 16:
                                 case 12:
+                                case 13:
                                     break;
                                 }
+                            if (message.finishMessage != null && message.hasOwnProperty("finishMessage")) {
+                                properties._finishMessage = 1;
+                                if (!$util.isString(message.finishMessage))
+                                    return "finishMessage: string expected";
+                            }
                             if (message.safetyRatings != null && message.hasOwnProperty("safetyRatings")) {
                                 if (!Array.isArray(message.safetyRatings))
                                     return "safetyRatings: array expected";
@@ -4645,11 +4704,29 @@
                             case 11:
                                 message.finishReason = 11;
                                 break;
+                            case "IMAGE_PROHIBITED_CONTENT":
+                            case 14:
+                                message.finishReason = 14;
+                                break;
+                            case "IMAGE_OTHER":
+                            case 15:
+                                message.finishReason = 15;
+                                break;
+                            case "NO_IMAGE":
+                            case 16:
+                                message.finishReason = 16;
+                                break;
                             case "UNEXPECTED_TOOL_CALL":
                             case 12:
                                 message.finishReason = 12;
                                 break;
+                            case "TOO_MANY_TOOL_CALLS":
+                            case 13:
+                                message.finishReason = 13;
+                                break;
                             }
+                            if (object.finishMessage != null)
+                                message.finishMessage = String(object.finishMessage);
                             if (object.safetyRatings) {
                                 if (!Array.isArray(object.safetyRatings))
                                     throw TypeError(".google.ai.generativelanguage.v1.Candidate.safetyRatings: array expected");
@@ -4721,6 +4798,11 @@
                                 if (options.oneofs)
                                     object._index = "index";
                             }
+                            if (message.finishMessage != null && message.hasOwnProperty("finishMessage")) {
+                                object.finishMessage = message.finishMessage;
+                                if (options.oneofs)
+                                    object._finishMessage = "finishMessage";
+                            }
                             if (message.safetyRatings && message.safetyRatings.length) {
                                 object.safetyRatings = [];
                                 for (var j = 0; j < message.safetyRatings.length; ++j)
@@ -4783,7 +4865,11 @@
                          * @property {number} SPII=9 SPII value
                          * @property {number} MALFORMED_FUNCTION_CALL=10 MALFORMED_FUNCTION_CALL value
                          * @property {number} IMAGE_SAFETY=11 IMAGE_SAFETY value
+                         * @property {number} IMAGE_PROHIBITED_CONTENT=14 IMAGE_PROHIBITED_CONTENT value
+                         * @property {number} IMAGE_OTHER=15 IMAGE_OTHER value
+                         * @property {number} NO_IMAGE=16 NO_IMAGE value
                          * @property {number} UNEXPECTED_TOOL_CALL=12 UNEXPECTED_TOOL_CALL value
+                         * @property {number} TOO_MANY_TOOL_CALLS=13 TOO_MANY_TOOL_CALLS value
                          */
                         Candidate.FinishReason = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -4799,7 +4885,11 @@
                             values[valuesById[9] = "SPII"] = 9;
                             values[valuesById[10] = "MALFORMED_FUNCTION_CALL"] = 10;
                             values[valuesById[11] = "IMAGE_SAFETY"] = 11;
+                            values[valuesById[14] = "IMAGE_PROHIBITED_CONTENT"] = 14;
+                            values[valuesById[15] = "IMAGE_OTHER"] = 15;
+                            values[valuesById[16] = "NO_IMAGE"] = 16;
                             values[valuesById[12] = "UNEXPECTED_TOOL_CALL"] = 12;
+                            values[valuesById[13] = "TOO_MANY_TOOL_CALLS"] = 13;
                             return values;
                         })();
     
@@ -5190,6 +5280,8 @@
                                 case 0:
                                 case 1:
                                 case 2:
+                                case 3:
+                                case 4:
                                     break;
                                 }
                             return null;
@@ -5227,6 +5319,14 @@
                             case "URL_RETRIEVAL_STATUS_ERROR":
                             case 2:
                                 message.urlRetrievalStatus = 2;
+                                break;
+                            case "URL_RETRIEVAL_STATUS_PAYWALL":
+                            case 3:
+                                message.urlRetrievalStatus = 3;
+                                break;
+                            case "URL_RETRIEVAL_STATUS_UNSAFE":
+                            case 4:
+                                message.urlRetrievalStatus = 4;
                                 break;
                             }
                             return message;
@@ -5289,12 +5389,16 @@
                          * @property {number} URL_RETRIEVAL_STATUS_UNSPECIFIED=0 URL_RETRIEVAL_STATUS_UNSPECIFIED value
                          * @property {number} URL_RETRIEVAL_STATUS_SUCCESS=1 URL_RETRIEVAL_STATUS_SUCCESS value
                          * @property {number} URL_RETRIEVAL_STATUS_ERROR=2 URL_RETRIEVAL_STATUS_ERROR value
+                         * @property {number} URL_RETRIEVAL_STATUS_PAYWALL=3 URL_RETRIEVAL_STATUS_PAYWALL value
+                         * @property {number} URL_RETRIEVAL_STATUS_UNSAFE=4 URL_RETRIEVAL_STATUS_UNSAFE value
                          */
                         UrlMetadata.UrlRetrievalStatus = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "URL_RETRIEVAL_STATUS_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "URL_RETRIEVAL_STATUS_SUCCESS"] = 1;
                             values[valuesById[2] = "URL_RETRIEVAL_STATUS_ERROR"] = 2;
+                            values[valuesById[3] = "URL_RETRIEVAL_STATUS_PAYWALL"] = 3;
+                            values[valuesById[4] = "URL_RETRIEVAL_STATUS_UNSAFE"] = 4;
                             return values;
                         })();
     
@@ -5307,6 +5411,7 @@
                          * Properties of a LogprobsResult.
                          * @memberof google.ai.generativelanguage.v1
                          * @interface ILogprobsResult
+                         * @property {number|null} [logProbabilitySum] LogprobsResult logProbabilitySum
                          * @property {Array.<google.ai.generativelanguage.v1.LogprobsResult.ITopCandidates>|null} [topCandidates] LogprobsResult topCandidates
                          * @property {Array.<google.ai.generativelanguage.v1.LogprobsResult.ICandidate>|null} [chosenCandidates] LogprobsResult chosenCandidates
                          */
@@ -5329,6 +5434,14 @@
                         }
     
                         /**
+                         * LogprobsResult logProbabilitySum.
+                         * @member {number|null|undefined} logProbabilitySum
+                         * @memberof google.ai.generativelanguage.v1.LogprobsResult
+                         * @instance
+                         */
+                        LogprobsResult.prototype.logProbabilitySum = null;
+    
+                        /**
                          * LogprobsResult topCandidates.
                          * @member {Array.<google.ai.generativelanguage.v1.LogprobsResult.ITopCandidates>} topCandidates
                          * @memberof google.ai.generativelanguage.v1.LogprobsResult
@@ -5343,6 +5456,15 @@
                          * @instance
                          */
                         LogprobsResult.prototype.chosenCandidates = $util.emptyArray;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(LogprobsResult.prototype, "_logProbabilitySum", {
+                            get: $util.oneOfGetter($oneOfFields = ["logProbabilitySum"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new LogprobsResult instance using the specified properties.
@@ -5374,6 +5496,8 @@
                             if (message.chosenCandidates != null && message.chosenCandidates.length)
                                 for (var i = 0; i < message.chosenCandidates.length; ++i)
                                     $root.google.ai.generativelanguage.v1.LogprobsResult.Candidate.encode(message.chosenCandidates[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.logProbabilitySum != null && Object.hasOwnProperty.call(message, "logProbabilitySum"))
+                                writer.uint32(/* id 3, wireType 5 =*/29).float(message.logProbabilitySum);
                             return writer;
                         };
     
@@ -5410,6 +5534,10 @@
                                 if (tag === error)
                                     break;
                                 switch (tag >>> 3) {
+                                case 3: {
+                                        message.logProbabilitySum = reader.float();
+                                        break;
+                                    }
                                 case 1: {
                                         if (!(message.topCandidates && message.topCandidates.length))
                                             message.topCandidates = [];
@@ -5457,6 +5585,12 @@
                         LogprobsResult.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
+                            if (message.logProbabilitySum != null && message.hasOwnProperty("logProbabilitySum")) {
+                                properties._logProbabilitySum = 1;
+                                if (typeof message.logProbabilitySum !== "number")
+                                    return "logProbabilitySum: number expected";
+                            }
                             if (message.topCandidates != null && message.hasOwnProperty("topCandidates")) {
                                 if (!Array.isArray(message.topCandidates))
                                     return "topCandidates: array expected";
@@ -5490,6 +5624,8 @@
                             if (object instanceof $root.google.ai.generativelanguage.v1.LogprobsResult)
                                 return object;
                             var message = new $root.google.ai.generativelanguage.v1.LogprobsResult();
+                            if (object.logProbabilitySum != null)
+                                message.logProbabilitySum = Number(object.logProbabilitySum);
                             if (object.topCandidates) {
                                 if (!Array.isArray(object.topCandidates))
                                     throw TypeError(".google.ai.generativelanguage.v1.LogprobsResult.topCandidates: array expected");
@@ -5539,6 +5675,11 @@
                                 object.chosenCandidates = [];
                                 for (var j = 0; j < message.chosenCandidates.length; ++j)
                                     object.chosenCandidates[j] = $root.google.ai.generativelanguage.v1.LogprobsResult.Candidate.toObject(message.chosenCandidates[j], options);
+                            }
+                            if (message.logProbabilitySum != null && message.hasOwnProperty("logProbabilitySum")) {
+                                object.logProbabilitySum = options.json && !isFinite(message.logProbabilitySum) ? String(message.logProbabilitySum) : message.logProbabilitySum;
+                                if (options.oneofs)
+                                    object._logProbabilitySum = "logProbabilitySum";
                             }
                             return object;
                         };
@@ -63843,6 +63984,7 @@
                          * @property {google.ai.generativelanguage.v1beta.IVideoMetadata|null} [videoMetadata] Part videoMetadata
                          * @property {boolean|null} [thought] Part thought
                          * @property {Uint8Array|null} [thoughtSignature] Part thoughtSignature
+                         * @property {google.protobuf.IStruct|null} [partMetadata] Part partMetadata
                          */
     
                         /**
@@ -63940,6 +64082,14 @@
                          */
                         Part.prototype.thoughtSignature = $util.newBuffer([]);
     
+                        /**
+                         * Part partMetadata.
+                         * @member {google.protobuf.IStruct|null|undefined} partMetadata
+                         * @memberof google.ai.generativelanguage.v1beta.Part
+                         * @instance
+                         */
+                        Part.prototype.partMetadata = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -63999,6 +64149,8 @@
                                 $root.google.ai.generativelanguage.v1beta.FunctionResponse.encode(message.functionResponse, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             if (message.fileData != null && Object.hasOwnProperty.call(message, "fileData"))
                                 $root.google.ai.generativelanguage.v1beta.FileData.encode(message.fileData, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.partMetadata != null && Object.hasOwnProperty.call(message, "partMetadata"))
+                                $root.google.protobuf.Struct.encode(message.partMetadata, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             if (message.executableCode != null && Object.hasOwnProperty.call(message, "executableCode"))
                                 $root.google.ai.generativelanguage.v1beta.ExecutableCode.encode(message.executableCode, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                             if (message.codeExecutionResult != null && Object.hasOwnProperty.call(message, "codeExecutionResult"))
@@ -64083,6 +64235,10 @@
                                     }
                                 case 13: {
                                         message.thoughtSignature = reader.bytes();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.partMetadata = $root.google.protobuf.Struct.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -64200,6 +64356,11 @@
                             if (message.thoughtSignature != null && message.hasOwnProperty("thoughtSignature"))
                                 if (!(message.thoughtSignature && typeof message.thoughtSignature.length === "number" || $util.isString(message.thoughtSignature)))
                                     return "thoughtSignature: buffer expected";
+                            if (message.partMetadata != null && message.hasOwnProperty("partMetadata")) {
+                                var error = $root.google.protobuf.Struct.verify(message.partMetadata);
+                                if (error)
+                                    return "partMetadata." + error;
+                            }
                             return null;
                         };
     
@@ -64259,6 +64420,11 @@
                                     $util.base64.decode(object.thoughtSignature, message.thoughtSignature = $util.newBuffer($util.base64.length(object.thoughtSignature)), 0);
                                 else if (object.thoughtSignature.length >= 0)
                                     message.thoughtSignature = object.thoughtSignature;
+                            if (object.partMetadata != null) {
+                                if (typeof object.partMetadata !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.Part.partMetadata: object expected");
+                                message.partMetadata = $root.google.protobuf.Struct.fromObject(object.partMetadata);
+                            }
                             return message;
                         };
     
@@ -64276,6 +64442,7 @@
                                 options = {};
                             var object = {};
                             if (options.defaults) {
+                                object.partMetadata = null;
                                 object.thought = false;
                                 if (options.bytes === String)
                                     object.thoughtSignature = "";
@@ -64310,6 +64477,8 @@
                                 if (options.oneofs)
                                     object.data = "fileData";
                             }
+                            if (message.partMetadata != null && message.hasOwnProperty("partMetadata"))
+                                object.partMetadata = $root.google.protobuf.Struct.toObject(message.partMetadata, options);
                             if (message.executableCode != null && message.hasOwnProperty("executableCode")) {
                                 object.executableCode = $root.google.ai.generativelanguage.v1beta.ExecutableCode.toObject(message.executableCode, options);
                                 if (options.oneofs)
@@ -64359,6 +64528,235 @@
                         };
     
                         return Part;
+                    })();
+    
+                    v1beta.FunctionResponsePart = (function() {
+    
+                        /**
+                         * Properties of a FunctionResponsePart.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @interface IFunctionResponsePart
+                         * @property {google.ai.generativelanguage.v1beta.IFunctionResponseBlob|null} [inlineData] FunctionResponsePart inlineData
+                         */
+    
+                        /**
+                         * Constructs a new FunctionResponsePart.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @classdesc Represents a FunctionResponsePart.
+                         * @implements IFunctionResponsePart
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta.IFunctionResponsePart=} [properties] Properties to set
+                         */
+                        function FunctionResponsePart(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * FunctionResponsePart inlineData.
+                         * @member {google.ai.generativelanguage.v1beta.IFunctionResponseBlob|null|undefined} inlineData
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponsePart
+                         * @instance
+                         */
+                        FunctionResponsePart.prototype.inlineData = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * FunctionResponsePart data.
+                         * @member {"inlineData"|undefined} data
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponsePart
+                         * @instance
+                         */
+                        Object.defineProperty(FunctionResponsePart.prototype, "data", {
+                            get: $util.oneOfGetter($oneOfFields = ["inlineData"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new FunctionResponsePart instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponsePart
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IFunctionResponsePart=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta.FunctionResponsePart} FunctionResponsePart instance
+                         */
+                        FunctionResponsePart.create = function create(properties) {
+                            return new FunctionResponsePart(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FunctionResponsePart message. Does not implicitly {@link google.ai.generativelanguage.v1beta.FunctionResponsePart.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponsePart
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IFunctionResponsePart} message FunctionResponsePart message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FunctionResponsePart.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.inlineData != null && Object.hasOwnProperty.call(message, "inlineData"))
+                                $root.google.ai.generativelanguage.v1beta.FunctionResponseBlob.encode(message.inlineData, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FunctionResponsePart message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.FunctionResponsePart.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponsePart
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IFunctionResponsePart} message FunctionResponsePart message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FunctionResponsePart.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FunctionResponsePart message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponsePart
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta.FunctionResponsePart} FunctionResponsePart
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FunctionResponsePart.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.FunctionResponsePart();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.inlineData = $root.google.ai.generativelanguage.v1beta.FunctionResponseBlob.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FunctionResponsePart message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponsePart
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta.FunctionResponsePart} FunctionResponsePart
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FunctionResponsePart.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FunctionResponsePart message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponsePart
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FunctionResponsePart.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.inlineData != null && message.hasOwnProperty("inlineData")) {
+                                properties.data = 1;
+                                {
+                                    var error = $root.google.ai.generativelanguage.v1beta.FunctionResponseBlob.verify(message.inlineData);
+                                    if (error)
+                                        return "inlineData." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FunctionResponsePart message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponsePart
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta.FunctionResponsePart} FunctionResponsePart
+                         */
+                        FunctionResponsePart.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta.FunctionResponsePart)
+                                return object;
+                            var message = new $root.google.ai.generativelanguage.v1beta.FunctionResponsePart();
+                            if (object.inlineData != null) {
+                                if (typeof object.inlineData !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.FunctionResponsePart.inlineData: object expected");
+                                message.inlineData = $root.google.ai.generativelanguage.v1beta.FunctionResponseBlob.fromObject(object.inlineData);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a FunctionResponsePart message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponsePart
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.FunctionResponsePart} message FunctionResponsePart
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FunctionResponsePart.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.inlineData != null && message.hasOwnProperty("inlineData")) {
+                                object.inlineData = $root.google.ai.generativelanguage.v1beta.FunctionResponseBlob.toObject(message.inlineData, options);
+                                if (options.oneofs)
+                                    object.data = "inlineData";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this FunctionResponsePart to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponsePart
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FunctionResponsePart.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FunctionResponsePart
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponsePart
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FunctionResponsePart.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.FunctionResponsePart";
+                        };
+    
+                        return FunctionResponsePart;
                     })();
     
                     v1beta.Blob = (function() {
@@ -64597,6 +64995,244 @@
                         };
     
                         return Blob;
+                    })();
+    
+                    v1beta.FunctionResponseBlob = (function() {
+    
+                        /**
+                         * Properties of a FunctionResponseBlob.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @interface IFunctionResponseBlob
+                         * @property {string|null} [mimeType] FunctionResponseBlob mimeType
+                         * @property {Uint8Array|null} [data] FunctionResponseBlob data
+                         */
+    
+                        /**
+                         * Constructs a new FunctionResponseBlob.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @classdesc Represents a FunctionResponseBlob.
+                         * @implements IFunctionResponseBlob
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta.IFunctionResponseBlob=} [properties] Properties to set
+                         */
+                        function FunctionResponseBlob(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * FunctionResponseBlob mimeType.
+                         * @member {string} mimeType
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponseBlob
+                         * @instance
+                         */
+                        FunctionResponseBlob.prototype.mimeType = "";
+    
+                        /**
+                         * FunctionResponseBlob data.
+                         * @member {Uint8Array} data
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponseBlob
+                         * @instance
+                         */
+                        FunctionResponseBlob.prototype.data = $util.newBuffer([]);
+    
+                        /**
+                         * Creates a new FunctionResponseBlob instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponseBlob
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IFunctionResponseBlob=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta.FunctionResponseBlob} FunctionResponseBlob instance
+                         */
+                        FunctionResponseBlob.create = function create(properties) {
+                            return new FunctionResponseBlob(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FunctionResponseBlob message. Does not implicitly {@link google.ai.generativelanguage.v1beta.FunctionResponseBlob.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponseBlob
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IFunctionResponseBlob} message FunctionResponseBlob message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FunctionResponseBlob.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.mimeType != null && Object.hasOwnProperty.call(message, "mimeType"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.mimeType);
+                            if (message.data != null && Object.hasOwnProperty.call(message, "data"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.data);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FunctionResponseBlob message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.FunctionResponseBlob.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponseBlob
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IFunctionResponseBlob} message FunctionResponseBlob message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FunctionResponseBlob.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FunctionResponseBlob message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponseBlob
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta.FunctionResponseBlob} FunctionResponseBlob
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FunctionResponseBlob.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.FunctionResponseBlob();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.mimeType = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.data = reader.bytes();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FunctionResponseBlob message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponseBlob
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta.FunctionResponseBlob} FunctionResponseBlob
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FunctionResponseBlob.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FunctionResponseBlob message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponseBlob
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FunctionResponseBlob.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.mimeType != null && message.hasOwnProperty("mimeType"))
+                                if (!$util.isString(message.mimeType))
+                                    return "mimeType: string expected";
+                            if (message.data != null && message.hasOwnProperty("data"))
+                                if (!(message.data && typeof message.data.length === "number" || $util.isString(message.data)))
+                                    return "data: buffer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FunctionResponseBlob message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponseBlob
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta.FunctionResponseBlob} FunctionResponseBlob
+                         */
+                        FunctionResponseBlob.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta.FunctionResponseBlob)
+                                return object;
+                            var message = new $root.google.ai.generativelanguage.v1beta.FunctionResponseBlob();
+                            if (object.mimeType != null)
+                                message.mimeType = String(object.mimeType);
+                            if (object.data != null)
+                                if (typeof object.data === "string")
+                                    $util.base64.decode(object.data, message.data = $util.newBuffer($util.base64.length(object.data)), 0);
+                                else if (object.data.length >= 0)
+                                    message.data = object.data;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a FunctionResponseBlob message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponseBlob
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.FunctionResponseBlob} message FunctionResponseBlob
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FunctionResponseBlob.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.mimeType = "";
+                                if (options.bytes === String)
+                                    object.data = "";
+                                else {
+                                    object.data = [];
+                                    if (options.bytes !== Array)
+                                        object.data = $util.newBuffer(object.data);
+                                }
+                            }
+                            if (message.mimeType != null && message.hasOwnProperty("mimeType"))
+                                object.mimeType = message.mimeType;
+                            if (message.data != null && message.hasOwnProperty("data"))
+                                object.data = options.bytes === String ? $util.base64.encode(message.data, 0, message.data.length) : options.bytes === Array ? Array.prototype.slice.call(message.data) : message.data;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this FunctionResponseBlob to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponseBlob
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FunctionResponseBlob.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FunctionResponseBlob
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponseBlob
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FunctionResponseBlob.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.FunctionResponseBlob";
+                        };
+    
+                        return FunctionResponseBlob;
                     })();
     
                     v1beta.FileData = (function() {
@@ -65638,6 +66274,7 @@
                          * @property {google.ai.generativelanguage.v1beta.IGoogleSearchRetrieval|null} [googleSearchRetrieval] Tool googleSearchRetrieval
                          * @property {google.ai.generativelanguage.v1beta.ICodeExecution|null} [codeExecution] Tool codeExecution
                          * @property {google.ai.generativelanguage.v1beta.Tool.IGoogleSearch|null} [googleSearch] Tool googleSearch
+                         * @property {google.ai.generativelanguage.v1beta.Tool.IComputerUse|null} [computerUse] Tool computerUse
                          * @property {google.ai.generativelanguage.v1beta.IUrlContext|null} [urlContext] Tool urlContext
                          */
     
@@ -65690,6 +66327,14 @@
                         Tool.prototype.googleSearch = null;
     
                         /**
+                         * Tool computerUse.
+                         * @member {google.ai.generativelanguage.v1beta.Tool.IComputerUse|null|undefined} computerUse
+                         * @memberof google.ai.generativelanguage.v1beta.Tool
+                         * @instance
+                         */
+                        Tool.prototype.computerUse = null;
+    
+                        /**
                          * Tool urlContext.
                          * @member {google.ai.generativelanguage.v1beta.IUrlContext|null|undefined} urlContext
                          * @memberof google.ai.generativelanguage.v1beta.Tool
@@ -65730,6 +66375,8 @@
                                 $root.google.ai.generativelanguage.v1beta.CodeExecution.encode(message.codeExecution, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.googleSearch != null && Object.hasOwnProperty.call(message, "googleSearch"))
                                 $root.google.ai.generativelanguage.v1beta.Tool.GoogleSearch.encode(message.googleSearch, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.computerUse != null && Object.hasOwnProperty.call(message, "computerUse"))
+                                $root.google.ai.generativelanguage.v1beta.Tool.ComputerUse.encode(message.computerUse, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.urlContext != null && Object.hasOwnProperty.call(message, "urlContext"))
                                 $root.google.ai.generativelanguage.v1beta.UrlContext.encode(message.urlContext, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             return writer;
@@ -65784,6 +66431,10 @@
                                     }
                                 case 4: {
                                         message.googleSearch = $root.google.ai.generativelanguage.v1beta.Tool.GoogleSearch.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.computerUse = $root.google.ai.generativelanguage.v1beta.Tool.ComputerUse.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 8: {
@@ -65849,6 +66500,11 @@
                                 if (error)
                                     return "googleSearch." + error;
                             }
+                            if (message.computerUse != null && message.hasOwnProperty("computerUse")) {
+                                var error = $root.google.ai.generativelanguage.v1beta.Tool.ComputerUse.verify(message.computerUse);
+                                if (error)
+                                    return "computerUse." + error;
+                            }
                             if (message.urlContext != null && message.hasOwnProperty("urlContext")) {
                                 var error = $root.google.ai.generativelanguage.v1beta.UrlContext.verify(message.urlContext);
                                 if (error)
@@ -65894,6 +66550,11 @@
                                     throw TypeError(".google.ai.generativelanguage.v1beta.Tool.googleSearch: object expected");
                                 message.googleSearch = $root.google.ai.generativelanguage.v1beta.Tool.GoogleSearch.fromObject(object.googleSearch);
                             }
+                            if (object.computerUse != null) {
+                                if (typeof object.computerUse !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.Tool.computerUse: object expected");
+                                message.computerUse = $root.google.ai.generativelanguage.v1beta.Tool.ComputerUse.fromObject(object.computerUse);
+                            }
                             if (object.urlContext != null) {
                                 if (typeof object.urlContext !== "object")
                                     throw TypeError(".google.ai.generativelanguage.v1beta.Tool.urlContext: object expected");
@@ -65921,6 +66582,7 @@
                                 object.googleSearchRetrieval = null;
                                 object.codeExecution = null;
                                 object.googleSearch = null;
+                                object.computerUse = null;
                                 object.urlContext = null;
                             }
                             if (message.functionDeclarations && message.functionDeclarations.length) {
@@ -65934,6 +66596,8 @@
                                 object.codeExecution = $root.google.ai.generativelanguage.v1beta.CodeExecution.toObject(message.codeExecution, options);
                             if (message.googleSearch != null && message.hasOwnProperty("googleSearch"))
                                 object.googleSearch = $root.google.ai.generativelanguage.v1beta.Tool.GoogleSearch.toObject(message.googleSearch, options);
+                            if (message.computerUse != null && message.hasOwnProperty("computerUse"))
+                                object.computerUse = $root.google.ai.generativelanguage.v1beta.Tool.ComputerUse.toObject(message.computerUse, options);
                             if (message.urlContext != null && message.hasOwnProperty("urlContext"))
                                 object.urlContext = $root.google.ai.generativelanguage.v1beta.UrlContext.toObject(message.urlContext, options);
                             return object;
@@ -66173,6 +66837,284 @@
                             };
     
                             return GoogleSearch;
+                        })();
+    
+                        Tool.ComputerUse = (function() {
+    
+                            /**
+                             * Properties of a ComputerUse.
+                             * @memberof google.ai.generativelanguage.v1beta.Tool
+                             * @interface IComputerUse
+                             * @property {google.ai.generativelanguage.v1beta.Tool.ComputerUse.Environment|null} [environment] ComputerUse environment
+                             * @property {Array.<string>|null} [excludedPredefinedFunctions] ComputerUse excludedPredefinedFunctions
+                             */
+    
+                            /**
+                             * Constructs a new ComputerUse.
+                             * @memberof google.ai.generativelanguage.v1beta.Tool
+                             * @classdesc Represents a ComputerUse.
+                             * @implements IComputerUse
+                             * @constructor
+                             * @param {google.ai.generativelanguage.v1beta.Tool.IComputerUse=} [properties] Properties to set
+                             */
+                            function ComputerUse(properties) {
+                                this.excludedPredefinedFunctions = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ComputerUse environment.
+                             * @member {google.ai.generativelanguage.v1beta.Tool.ComputerUse.Environment} environment
+                             * @memberof google.ai.generativelanguage.v1beta.Tool.ComputerUse
+                             * @instance
+                             */
+                            ComputerUse.prototype.environment = 0;
+    
+                            /**
+                             * ComputerUse excludedPredefinedFunctions.
+                             * @member {Array.<string>} excludedPredefinedFunctions
+                             * @memberof google.ai.generativelanguage.v1beta.Tool.ComputerUse
+                             * @instance
+                             */
+                            ComputerUse.prototype.excludedPredefinedFunctions = $util.emptyArray;
+    
+                            /**
+                             * Creates a new ComputerUse instance using the specified properties.
+                             * @function create
+                             * @memberof google.ai.generativelanguage.v1beta.Tool.ComputerUse
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.Tool.IComputerUse=} [properties] Properties to set
+                             * @returns {google.ai.generativelanguage.v1beta.Tool.ComputerUse} ComputerUse instance
+                             */
+                            ComputerUse.create = function create(properties) {
+                                return new ComputerUse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ComputerUse message. Does not implicitly {@link google.ai.generativelanguage.v1beta.Tool.ComputerUse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.ai.generativelanguage.v1beta.Tool.ComputerUse
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.Tool.IComputerUse} message ComputerUse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ComputerUse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.environment != null && Object.hasOwnProperty.call(message, "environment"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.environment);
+                                if (message.excludedPredefinedFunctions != null && message.excludedPredefinedFunctions.length)
+                                    for (var i = 0; i < message.excludedPredefinedFunctions.length; ++i)
+                                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.excludedPredefinedFunctions[i]);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ComputerUse message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.Tool.ComputerUse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.ai.generativelanguage.v1beta.Tool.ComputerUse
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.Tool.IComputerUse} message ComputerUse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ComputerUse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ComputerUse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.ai.generativelanguage.v1beta.Tool.ComputerUse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.ai.generativelanguage.v1beta.Tool.ComputerUse} ComputerUse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ComputerUse.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.Tool.ComputerUse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 3: {
+                                            message.environment = reader.int32();
+                                            break;
+                                        }
+                                    case 5: {
+                                            if (!(message.excludedPredefinedFunctions && message.excludedPredefinedFunctions.length))
+                                                message.excludedPredefinedFunctions = [];
+                                            message.excludedPredefinedFunctions.push(reader.string());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ComputerUse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.ai.generativelanguage.v1beta.Tool.ComputerUse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.ai.generativelanguage.v1beta.Tool.ComputerUse} ComputerUse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ComputerUse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ComputerUse message.
+                             * @function verify
+                             * @memberof google.ai.generativelanguage.v1beta.Tool.ComputerUse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ComputerUse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.environment != null && message.hasOwnProperty("environment"))
+                                    switch (message.environment) {
+                                    default:
+                                        return "environment: enum value expected";
+                                    case 0:
+                                    case 1:
+                                        break;
+                                    }
+                                if (message.excludedPredefinedFunctions != null && message.hasOwnProperty("excludedPredefinedFunctions")) {
+                                    if (!Array.isArray(message.excludedPredefinedFunctions))
+                                        return "excludedPredefinedFunctions: array expected";
+                                    for (var i = 0; i < message.excludedPredefinedFunctions.length; ++i)
+                                        if (!$util.isString(message.excludedPredefinedFunctions[i]))
+                                            return "excludedPredefinedFunctions: string[] expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ComputerUse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.ai.generativelanguage.v1beta.Tool.ComputerUse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.ai.generativelanguage.v1beta.Tool.ComputerUse} ComputerUse
+                             */
+                            ComputerUse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.ai.generativelanguage.v1beta.Tool.ComputerUse)
+                                    return object;
+                                var message = new $root.google.ai.generativelanguage.v1beta.Tool.ComputerUse();
+                                switch (object.environment) {
+                                default:
+                                    if (typeof object.environment === "number") {
+                                        message.environment = object.environment;
+                                        break;
+                                    }
+                                    break;
+                                case "ENVIRONMENT_UNSPECIFIED":
+                                case 0:
+                                    message.environment = 0;
+                                    break;
+                                case "ENVIRONMENT_BROWSER":
+                                case 1:
+                                    message.environment = 1;
+                                    break;
+                                }
+                                if (object.excludedPredefinedFunctions) {
+                                    if (!Array.isArray(object.excludedPredefinedFunctions))
+                                        throw TypeError(".google.ai.generativelanguage.v1beta.Tool.ComputerUse.excludedPredefinedFunctions: array expected");
+                                    message.excludedPredefinedFunctions = [];
+                                    for (var i = 0; i < object.excludedPredefinedFunctions.length; ++i)
+                                        message.excludedPredefinedFunctions[i] = String(object.excludedPredefinedFunctions[i]);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ComputerUse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.ai.generativelanguage.v1beta.Tool.ComputerUse
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.Tool.ComputerUse} message ComputerUse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ComputerUse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.excludedPredefinedFunctions = [];
+                                if (options.defaults)
+                                    object.environment = options.enums === String ? "ENVIRONMENT_UNSPECIFIED" : 0;
+                                if (message.environment != null && message.hasOwnProperty("environment"))
+                                    object.environment = options.enums === String ? $root.google.ai.generativelanguage.v1beta.Tool.ComputerUse.Environment[message.environment] === undefined ? message.environment : $root.google.ai.generativelanguage.v1beta.Tool.ComputerUse.Environment[message.environment] : message.environment;
+                                if (message.excludedPredefinedFunctions && message.excludedPredefinedFunctions.length) {
+                                    object.excludedPredefinedFunctions = [];
+                                    for (var j = 0; j < message.excludedPredefinedFunctions.length; ++j)
+                                        object.excludedPredefinedFunctions[j] = message.excludedPredefinedFunctions[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ComputerUse to JSON.
+                             * @function toJSON
+                             * @memberof google.ai.generativelanguage.v1beta.Tool.ComputerUse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ComputerUse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ComputerUse
+                             * @function getTypeUrl
+                             * @memberof google.ai.generativelanguage.v1beta.Tool.ComputerUse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ComputerUse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.Tool.ComputerUse";
+                            };
+    
+                            /**
+                             * Environment enum.
+                             * @name google.ai.generativelanguage.v1beta.Tool.ComputerUse.Environment
+                             * @enum {number}
+                             * @property {number} ENVIRONMENT_UNSPECIFIED=0 ENVIRONMENT_UNSPECIFIED value
+                             * @property {number} ENVIRONMENT_BROWSER=1 ENVIRONMENT_BROWSER value
+                             */
+                            ComputerUse.Environment = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "ENVIRONMENT_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "ENVIRONMENT_BROWSER"] = 1;
+                                return values;
+                            })();
+    
+                            return ComputerUse;
                         })();
     
                         return Tool;
@@ -68259,6 +69201,7 @@
                          * @property {string|null} [id] FunctionResponse id
                          * @property {string|null} [name] FunctionResponse name
                          * @property {google.protobuf.IStruct|null} [response] FunctionResponse response
+                         * @property {Array.<google.ai.generativelanguage.v1beta.IFunctionResponsePart>|null} [parts] FunctionResponse parts
                          * @property {boolean|null} [willContinue] FunctionResponse willContinue
                          * @property {google.ai.generativelanguage.v1beta.FunctionResponse.Scheduling|null} [scheduling] FunctionResponse scheduling
                          */
@@ -68272,6 +69215,7 @@
                          * @param {google.ai.generativelanguage.v1beta.IFunctionResponse=} [properties] Properties to set
                          */
                         function FunctionResponse(properties) {
+                            this.parts = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -68301,6 +69245,14 @@
                          * @instance
                          */
                         FunctionResponse.prototype.response = null;
+    
+                        /**
+                         * FunctionResponse parts.
+                         * @member {Array.<google.ai.generativelanguage.v1beta.IFunctionResponsePart>} parts
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponse
+                         * @instance
+                         */
+                        FunctionResponse.prototype.parts = $util.emptyArray;
     
                         /**
                          * FunctionResponse willContinue.
@@ -68361,6 +69313,9 @@
                                 writer.uint32(/* id 4, wireType 0 =*/32).bool(message.willContinue);
                             if (message.scheduling != null && Object.hasOwnProperty.call(message, "scheduling"))
                                 writer.uint32(/* id 5, wireType 0 =*/40).int32(message.scheduling);
+                            if (message.parts != null && message.parts.length)
+                                for (var i = 0; i < message.parts.length; ++i)
+                                    $root.google.ai.generativelanguage.v1beta.FunctionResponsePart.encode(message.parts[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             return writer;
                         };
     
@@ -68407,6 +69362,12 @@
                                     }
                                 case 2: {
                                         message.response = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        if (!(message.parts && message.parts.length))
+                                            message.parts = [];
+                                        message.parts.push($root.google.ai.generativelanguage.v1beta.FunctionResponsePart.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 case 4: {
@@ -68464,6 +69425,15 @@
                                 if (error)
                                     return "response." + error;
                             }
+                            if (message.parts != null && message.hasOwnProperty("parts")) {
+                                if (!Array.isArray(message.parts))
+                                    return "parts: array expected";
+                                for (var i = 0; i < message.parts.length; ++i) {
+                                    var error = $root.google.ai.generativelanguage.v1beta.FunctionResponsePart.verify(message.parts[i]);
+                                    if (error)
+                                        return "parts." + error;
+                                }
+                            }
                             if (message.willContinue != null && message.hasOwnProperty("willContinue"))
                                 if (typeof message.willContinue !== "boolean")
                                     return "willContinue: boolean expected";
@@ -68502,6 +69472,16 @@
                                 if (typeof object.response !== "object")
                                     throw TypeError(".google.ai.generativelanguage.v1beta.FunctionResponse.response: object expected");
                                 message.response = $root.google.protobuf.Struct.fromObject(object.response);
+                            }
+                            if (object.parts) {
+                                if (!Array.isArray(object.parts))
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.FunctionResponse.parts: array expected");
+                                message.parts = [];
+                                for (var i = 0; i < object.parts.length; ++i) {
+                                    if (typeof object.parts[i] !== "object")
+                                        throw TypeError(".google.ai.generativelanguage.v1beta.FunctionResponse.parts: object expected");
+                                    message.parts[i] = $root.google.ai.generativelanguage.v1beta.FunctionResponsePart.fromObject(object.parts[i]);
+                                }
                             }
                             if (object.willContinue != null)
                                 message.willContinue = Boolean(object.willContinue);
@@ -68545,6 +69525,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.parts = [];
                             if (options.defaults) {
                                 object.name = "";
                                 object.response = null;
@@ -68563,6 +69545,11 @@
                                 object.scheduling = options.enums === String ? $root.google.ai.generativelanguage.v1beta.FunctionResponse.Scheduling[message.scheduling] === undefined ? message.scheduling : $root.google.ai.generativelanguage.v1beta.FunctionResponse.Scheduling[message.scheduling] : message.scheduling;
                                 if (options.oneofs)
                                     object._scheduling = "scheduling";
+                            }
+                            if (message.parts && message.parts.length) {
+                                object.parts = [];
+                                for (var j = 0; j < message.parts.length; ++j)
+                                    object.parts[j] = $root.google.ai.generativelanguage.v1beta.FunctionResponsePart.toObject(message.parts[j], options);
                             }
                             return object;
                         };
@@ -74595,6 +75582,7 @@
                                 case 0:
                                 case 1:
                                 case 2:
+                                case 3:
                                     break;
                                 }
                             if (message.error != null && message.hasOwnProperty("error")) {
@@ -74703,6 +75691,10 @@
                             case "GENERATED":
                             case 2:
                                 message.source = 2;
+                                break;
+                            case "REGISTERED":
+                            case 3:
+                                message.source = 3;
                                 break;
                             }
                             if (object.error != null) {
@@ -74839,12 +75831,14 @@
                          * @property {number} SOURCE_UNSPECIFIED=0 SOURCE_UNSPECIFIED value
                          * @property {number} UPLOADED=1 UPLOADED value
                          * @property {number} GENERATED=2 GENERATED value
+                         * @property {number} REGISTERED=3 REGISTERED value
                          */
                         File.Source = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "SOURCE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "UPLOADED"] = 1;
                             values[valuesById[2] = "GENERATED"] = 2;
+                            values[valuesById[3] = "REGISTERED"] = 3;
                             return values;
                         })();
     
@@ -79149,6 +80143,224 @@
                         return ThinkingConfig;
                     })();
     
+                    v1beta.ImageConfig = (function() {
+    
+                        /**
+                         * Properties of an ImageConfig.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @interface IImageConfig
+                         * @property {string|null} [aspectRatio] ImageConfig aspectRatio
+                         */
+    
+                        /**
+                         * Constructs a new ImageConfig.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @classdesc Represents an ImageConfig.
+                         * @implements IImageConfig
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta.IImageConfig=} [properties] Properties to set
+                         */
+                        function ImageConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ImageConfig aspectRatio.
+                         * @member {string|null|undefined} aspectRatio
+                         * @memberof google.ai.generativelanguage.v1beta.ImageConfig
+                         * @instance
+                         */
+                        ImageConfig.prototype.aspectRatio = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(ImageConfig.prototype, "_aspectRatio", {
+                            get: $util.oneOfGetter($oneOfFields = ["aspectRatio"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ImageConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta.ImageConfig
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IImageConfig=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta.ImageConfig} ImageConfig instance
+                         */
+                        ImageConfig.create = function create(properties) {
+                            return new ImageConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ImageConfig message. Does not implicitly {@link google.ai.generativelanguage.v1beta.ImageConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta.ImageConfig
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IImageConfig} message ImageConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImageConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.aspectRatio != null && Object.hasOwnProperty.call(message, "aspectRatio"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.aspectRatio);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ImageConfig message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.ImageConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.ImageConfig
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IImageConfig} message ImageConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImageConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ImageConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta.ImageConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta.ImageConfig} ImageConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImageConfig.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.ImageConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.aspectRatio = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ImageConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.ImageConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta.ImageConfig} ImageConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImageConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ImageConfig message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta.ImageConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ImageConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.aspectRatio != null && message.hasOwnProperty("aspectRatio")) {
+                                properties._aspectRatio = 1;
+                                if (!$util.isString(message.aspectRatio))
+                                    return "aspectRatio: string expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ImageConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta.ImageConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta.ImageConfig} ImageConfig
+                         */
+                        ImageConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta.ImageConfig)
+                                return object;
+                            var message = new $root.google.ai.generativelanguage.v1beta.ImageConfig();
+                            if (object.aspectRatio != null)
+                                message.aspectRatio = String(object.aspectRatio);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ImageConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta.ImageConfig
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.ImageConfig} message ImageConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ImageConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.aspectRatio != null && message.hasOwnProperty("aspectRatio")) {
+                                object.aspectRatio = message.aspectRatio;
+                                if (options.oneofs)
+                                    object._aspectRatio = "aspectRatio";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ImageConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta.ImageConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ImageConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ImageConfig
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta.ImageConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ImageConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.ImageConfig";
+                        };
+    
+                        return ImageConfig;
+                    })();
+    
                     v1beta.GenerationConfig = (function() {
     
                         /**
@@ -79165,6 +80377,7 @@
                          * @property {string|null} [responseMimeType] GenerationConfig responseMimeType
                          * @property {google.ai.generativelanguage.v1beta.ISchema|null} [responseSchema] GenerationConfig responseSchema
                          * @property {google.protobuf.IValue|null} [responseJsonSchema] GenerationConfig responseJsonSchema
+                         * @property {google.protobuf.IValue|null} [responseJsonSchemaOrdered] GenerationConfig responseJsonSchemaOrdered
                          * @property {number|null} [presencePenalty] GenerationConfig presencePenalty
                          * @property {number|null} [frequencyPenalty] GenerationConfig frequencyPenalty
                          * @property {boolean|null} [responseLogprobs] GenerationConfig responseLogprobs
@@ -79173,6 +80386,7 @@
                          * @property {Array.<google.ai.generativelanguage.v1beta.GenerationConfig.Modality>|null} [responseModalities] GenerationConfig responseModalities
                          * @property {google.ai.generativelanguage.v1beta.ISpeechConfig|null} [speechConfig] GenerationConfig speechConfig
                          * @property {google.ai.generativelanguage.v1beta.IThinkingConfig|null} [thinkingConfig] GenerationConfig thinkingConfig
+                         * @property {google.ai.generativelanguage.v1beta.IImageConfig|null} [imageConfig] GenerationConfig imageConfig
                          * @property {google.ai.generativelanguage.v1beta.GenerationConfig.MediaResolution|null} [mediaResolution] GenerationConfig mediaResolution
                          */
     
@@ -79274,6 +80488,14 @@
                         GenerationConfig.prototype.responseJsonSchema = null;
     
                         /**
+                         * GenerationConfig responseJsonSchemaOrdered.
+                         * @member {google.protobuf.IValue|null|undefined} responseJsonSchemaOrdered
+                         * @memberof google.ai.generativelanguage.v1beta.GenerationConfig
+                         * @instance
+                         */
+                        GenerationConfig.prototype.responseJsonSchemaOrdered = null;
+    
+                        /**
                          * GenerationConfig presencePenalty.
                          * @member {number|null|undefined} presencePenalty
                          * @memberof google.ai.generativelanguage.v1beta.GenerationConfig
@@ -79336,6 +80558,14 @@
                          * @instance
                          */
                         GenerationConfig.prototype.thinkingConfig = null;
+    
+                        /**
+                         * GenerationConfig imageConfig.
+                         * @member {google.ai.generativelanguage.v1beta.IImageConfig|null|undefined} imageConfig
+                         * @memberof google.ai.generativelanguage.v1beta.GenerationConfig
+                         * @instance
+                         */
+                        GenerationConfig.prototype.imageConfig = null;
     
                         /**
                          * GenerationConfig mediaResolution.
@@ -79427,6 +80657,12 @@
                         });
     
                         // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(GenerationConfig.prototype, "_imageConfig", {
+                            get: $util.oneOfGetter($oneOfFields = ["imageConfig"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerationConfig.prototype, "_mediaResolution", {
                             get: $util.oneOfGetter($oneOfFields = ["mediaResolution"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -79499,6 +80735,10 @@
                                 writer.uint32(/* id 23, wireType 0 =*/184).int32(message.mediaResolution);
                             if (message.responseJsonSchema != null && Object.hasOwnProperty.call(message, "responseJsonSchema"))
                                 $root.google.protobuf.Value.encode(message.responseJsonSchema, writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
+                            if (message.imageConfig != null && Object.hasOwnProperty.call(message, "imageConfig"))
+                                $root.google.ai.generativelanguage.v1beta.ImageConfig.encode(message.imageConfig, writer.uint32(/* id 27, wireType 2 =*/218).fork()).ldelim();
+                            if (message.responseJsonSchemaOrdered != null && Object.hasOwnProperty.call(message, "responseJsonSchemaOrdered"))
+                                $root.google.protobuf.Value.encode(message.responseJsonSchemaOrdered, writer.uint32(/* id 28, wireType 2 =*/226).fork()).ldelim();
                             return writer;
                         };
     
@@ -79577,6 +80817,10 @@
                                         message.responseJsonSchema = $root.google.protobuf.Value.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 28: {
+                                        message.responseJsonSchemaOrdered = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 15: {
                                         message.presencePenalty = reader.float();
                                         break;
@@ -79614,6 +80858,10 @@
                                     }
                                 case 22: {
                                         message.thinkingConfig = $root.google.ai.generativelanguage.v1beta.ThinkingConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 27: {
+                                        message.imageConfig = $root.google.ai.generativelanguage.v1beta.ImageConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 23: {
@@ -79706,6 +80954,11 @@
                                 if (error)
                                     return "responseJsonSchema." + error;
                             }
+                            if (message.responseJsonSchemaOrdered != null && message.hasOwnProperty("responseJsonSchemaOrdered")) {
+                                var error = $root.google.protobuf.Value.verify(message.responseJsonSchemaOrdered);
+                                if (error)
+                                    return "responseJsonSchemaOrdered." + error;
+                            }
                             if (message.presencePenalty != null && message.hasOwnProperty("presencePenalty")) {
                                 properties._presencePenalty = 1;
                                 if (typeof message.presencePenalty !== "number")
@@ -79759,6 +81012,14 @@
                                     var error = $root.google.ai.generativelanguage.v1beta.ThinkingConfig.verify(message.thinkingConfig);
                                     if (error)
                                         return "thinkingConfig." + error;
+                                }
+                            }
+                            if (message.imageConfig != null && message.hasOwnProperty("imageConfig")) {
+                                properties._imageConfig = 1;
+                                {
+                                    var error = $root.google.ai.generativelanguage.v1beta.ImageConfig.verify(message.imageConfig);
+                                    if (error)
+                                        return "imageConfig." + error;
                                 }
                             }
                             if (message.mediaResolution != null && message.hasOwnProperty("mediaResolution")) {
@@ -79819,6 +81080,11 @@
                                     throw TypeError(".google.ai.generativelanguage.v1beta.GenerationConfig.responseJsonSchema: object expected");
                                 message.responseJsonSchema = $root.google.protobuf.Value.fromObject(object.responseJsonSchema);
                             }
+                            if (object.responseJsonSchemaOrdered != null) {
+                                if (typeof object.responseJsonSchemaOrdered !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.GenerationConfig.responseJsonSchemaOrdered: object expected");
+                                message.responseJsonSchemaOrdered = $root.google.protobuf.Value.fromObject(object.responseJsonSchemaOrdered);
+                            }
                             if (object.presencePenalty != null)
                                 message.presencePenalty = Number(object.presencePenalty);
                             if (object.frequencyPenalty != null)
@@ -79868,6 +81134,11 @@
                                     throw TypeError(".google.ai.generativelanguage.v1beta.GenerationConfig.thinkingConfig: object expected");
                                 message.thinkingConfig = $root.google.ai.generativelanguage.v1beta.ThinkingConfig.fromObject(object.thinkingConfig);
                             }
+                            if (object.imageConfig != null) {
+                                if (typeof object.imageConfig !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.GenerationConfig.imageConfig: object expected");
+                                message.imageConfig = $root.google.ai.generativelanguage.v1beta.ImageConfig.fromObject(object.imageConfig);
+                            }
                             switch (object.mediaResolution) {
                             default:
                                 if (typeof object.mediaResolution === "number") {
@@ -79916,6 +81187,7 @@
                                 object.responseMimeType = "";
                                 object.responseSchema = null;
                                 object.responseJsonSchema = null;
+                                object.responseJsonSchemaOrdered = null;
                             }
                             if (message.candidateCount != null && message.hasOwnProperty("candidateCount")) {
                                 object.candidateCount = message.candidateCount;
@@ -80003,6 +81275,13 @@
                             }
                             if (message.responseJsonSchema != null && message.hasOwnProperty("responseJsonSchema"))
                                 object.responseJsonSchema = $root.google.protobuf.Value.toObject(message.responseJsonSchema, options);
+                            if (message.imageConfig != null && message.hasOwnProperty("imageConfig")) {
+                                object.imageConfig = $root.google.ai.generativelanguage.v1beta.ImageConfig.toObject(message.imageConfig, options);
+                                if (options.oneofs)
+                                    object._imageConfig = "imageConfig";
+                            }
+                            if (message.responseJsonSchemaOrdered != null && message.hasOwnProperty("responseJsonSchemaOrdered"))
+                                object.responseJsonSchemaOrdered = $root.google.protobuf.Value.toObject(message.responseJsonSchemaOrdered, options);
                             return object;
                         };
     
@@ -81569,6 +82848,7 @@
                          * @property {number|null} [index] Candidate index
                          * @property {google.ai.generativelanguage.v1beta.IContent|null} [content] Candidate content
                          * @property {google.ai.generativelanguage.v1beta.Candidate.FinishReason|null} [finishReason] Candidate finishReason
+                         * @property {string|null} [finishMessage] Candidate finishMessage
                          * @property {Array.<google.ai.generativelanguage.v1beta.ISafetyRating>|null} [safetyRatings] Candidate safetyRatings
                          * @property {google.ai.generativelanguage.v1beta.ICitationMetadata|null} [citationMetadata] Candidate citationMetadata
                          * @property {number|null} [tokenCount] Candidate tokenCount
@@ -81619,6 +82899,14 @@
                          * @instance
                          */
                         Candidate.prototype.finishReason = 0;
+    
+                        /**
+                         * Candidate finishMessage.
+                         * @member {string|null|undefined} finishMessage
+                         * @memberof google.ai.generativelanguage.v1beta.Candidate
+                         * @instance
+                         */
+                        Candidate.prototype.finishMessage = null;
     
                         /**
                          * Candidate safetyRatings.
@@ -81693,6 +82981,12 @@
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Candidate.prototype, "_finishMessage", {
+                            get: $util.oneOfGetter($oneOfFields = ["finishMessage"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
                         /**
                          * Creates a new Candidate instance using the specified properties.
                          * @function create
@@ -81723,6 +83017,8 @@
                                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.finishReason);
                             if (message.index != null && Object.hasOwnProperty.call(message, "index"))
                                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.index);
+                            if (message.finishMessage != null && Object.hasOwnProperty.call(message, "finishMessage"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.finishMessage);
                             if (message.safetyRatings != null && message.safetyRatings.length)
                                 for (var i = 0; i < message.safetyRatings.length; ++i)
                                     $root.google.ai.generativelanguage.v1beta.SafetyRating.encode(message.safetyRatings[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
@@ -81787,6 +83083,10 @@
                                     }
                                 case 2: {
                                         message.finishReason = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.finishMessage = reader.string();
                                         break;
                                     }
                                 case 5: {
@@ -81887,9 +83187,19 @@
                                 case 9:
                                 case 10:
                                 case 11:
+                                case 14:
+                                case 15:
+                                case 16:
+                                case 17:
                                 case 12:
+                                case 13:
                                     break;
                                 }
+                            if (message.finishMessage != null && message.hasOwnProperty("finishMessage")) {
+                                properties._finishMessage = 1;
+                                if (!$util.isString(message.finishMessage))
+                                    return "finishMessage: string expected";
+                            }
                             if (message.safetyRatings != null && message.hasOwnProperty("safetyRatings")) {
                                 if (!Array.isArray(message.safetyRatings))
                                     return "safetyRatings: array expected";
@@ -82011,11 +83321,33 @@
                             case 11:
                                 message.finishReason = 11;
                                 break;
+                            case "IMAGE_PROHIBITED_CONTENT":
+                            case 14:
+                                message.finishReason = 14;
+                                break;
+                            case "IMAGE_OTHER":
+                            case 15:
+                                message.finishReason = 15;
+                                break;
+                            case "NO_IMAGE":
+                            case 16:
+                                message.finishReason = 16;
+                                break;
+                            case "IMAGE_RECITATION":
+                            case 17:
+                                message.finishReason = 17;
+                                break;
                             case "UNEXPECTED_TOOL_CALL":
                             case 12:
                                 message.finishReason = 12;
                                 break;
+                            case "TOO_MANY_TOOL_CALLS":
+                            case 13:
+                                message.finishReason = 13;
+                                break;
                             }
+                            if (object.finishMessage != null)
+                                message.finishMessage = String(object.finishMessage);
                             if (object.safetyRatings) {
                                 if (!Array.isArray(object.safetyRatings))
                                     throw TypeError(".google.ai.generativelanguage.v1beta.Candidate.safetyRatings: array expected");
@@ -82099,6 +83431,11 @@
                                 if (options.oneofs)
                                     object._index = "index";
                             }
+                            if (message.finishMessage != null && message.hasOwnProperty("finishMessage")) {
+                                object.finishMessage = message.finishMessage;
+                                if (options.oneofs)
+                                    object._finishMessage = "finishMessage";
+                            }
                             if (message.safetyRatings && message.safetyRatings.length) {
                                 object.safetyRatings = [];
                                 for (var j = 0; j < message.safetyRatings.length; ++j)
@@ -82166,7 +83503,12 @@
                          * @property {number} SPII=9 SPII value
                          * @property {number} MALFORMED_FUNCTION_CALL=10 MALFORMED_FUNCTION_CALL value
                          * @property {number} IMAGE_SAFETY=11 IMAGE_SAFETY value
+                         * @property {number} IMAGE_PROHIBITED_CONTENT=14 IMAGE_PROHIBITED_CONTENT value
+                         * @property {number} IMAGE_OTHER=15 IMAGE_OTHER value
+                         * @property {number} NO_IMAGE=16 NO_IMAGE value
+                         * @property {number} IMAGE_RECITATION=17 IMAGE_RECITATION value
                          * @property {number} UNEXPECTED_TOOL_CALL=12 UNEXPECTED_TOOL_CALL value
+                         * @property {number} TOO_MANY_TOOL_CALLS=13 TOO_MANY_TOOL_CALLS value
                          */
                         Candidate.FinishReason = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -82182,7 +83524,12 @@
                             values[valuesById[9] = "SPII"] = 9;
                             values[valuesById[10] = "MALFORMED_FUNCTION_CALL"] = 10;
                             values[valuesById[11] = "IMAGE_SAFETY"] = 11;
+                            values[valuesById[14] = "IMAGE_PROHIBITED_CONTENT"] = 14;
+                            values[valuesById[15] = "IMAGE_OTHER"] = 15;
+                            values[valuesById[16] = "NO_IMAGE"] = 16;
+                            values[valuesById[17] = "IMAGE_RECITATION"] = 17;
                             values[valuesById[12] = "UNEXPECTED_TOOL_CALL"] = 12;
+                            values[valuesById[13] = "TOO_MANY_TOOL_CALLS"] = 13;
                             return values;
                         })();
     
@@ -82573,6 +83920,8 @@
                                 case 0:
                                 case 1:
                                 case 2:
+                                case 3:
+                                case 4:
                                     break;
                                 }
                             return null;
@@ -82610,6 +83959,14 @@
                             case "URL_RETRIEVAL_STATUS_ERROR":
                             case 2:
                                 message.urlRetrievalStatus = 2;
+                                break;
+                            case "URL_RETRIEVAL_STATUS_PAYWALL":
+                            case 3:
+                                message.urlRetrievalStatus = 3;
+                                break;
+                            case "URL_RETRIEVAL_STATUS_UNSAFE":
+                            case 4:
+                                message.urlRetrievalStatus = 4;
                                 break;
                             }
                             return message;
@@ -82672,12 +84029,16 @@
                          * @property {number} URL_RETRIEVAL_STATUS_UNSPECIFIED=0 URL_RETRIEVAL_STATUS_UNSPECIFIED value
                          * @property {number} URL_RETRIEVAL_STATUS_SUCCESS=1 URL_RETRIEVAL_STATUS_SUCCESS value
                          * @property {number} URL_RETRIEVAL_STATUS_ERROR=2 URL_RETRIEVAL_STATUS_ERROR value
+                         * @property {number} URL_RETRIEVAL_STATUS_PAYWALL=3 URL_RETRIEVAL_STATUS_PAYWALL value
+                         * @property {number} URL_RETRIEVAL_STATUS_UNSAFE=4 URL_RETRIEVAL_STATUS_UNSAFE value
                          */
                         UrlMetadata.UrlRetrievalStatus = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "URL_RETRIEVAL_STATUS_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "URL_RETRIEVAL_STATUS_SUCCESS"] = 1;
                             values[valuesById[2] = "URL_RETRIEVAL_STATUS_ERROR"] = 2;
+                            values[valuesById[3] = "URL_RETRIEVAL_STATUS_PAYWALL"] = 3;
+                            values[valuesById[4] = "URL_RETRIEVAL_STATUS_UNSAFE"] = 4;
                             return values;
                         })();
     
@@ -82690,6 +84051,7 @@
                          * Properties of a LogprobsResult.
                          * @memberof google.ai.generativelanguage.v1beta
                          * @interface ILogprobsResult
+                         * @property {number|null} [logProbabilitySum] LogprobsResult logProbabilitySum
                          * @property {Array.<google.ai.generativelanguage.v1beta.LogprobsResult.ITopCandidates>|null} [topCandidates] LogprobsResult topCandidates
                          * @property {Array.<google.ai.generativelanguage.v1beta.LogprobsResult.ICandidate>|null} [chosenCandidates] LogprobsResult chosenCandidates
                          */
@@ -82712,6 +84074,14 @@
                         }
     
                         /**
+                         * LogprobsResult logProbabilitySum.
+                         * @member {number|null|undefined} logProbabilitySum
+                         * @memberof google.ai.generativelanguage.v1beta.LogprobsResult
+                         * @instance
+                         */
+                        LogprobsResult.prototype.logProbabilitySum = null;
+    
+                        /**
                          * LogprobsResult topCandidates.
                          * @member {Array.<google.ai.generativelanguage.v1beta.LogprobsResult.ITopCandidates>} topCandidates
                          * @memberof google.ai.generativelanguage.v1beta.LogprobsResult
@@ -82726,6 +84096,15 @@
                          * @instance
                          */
                         LogprobsResult.prototype.chosenCandidates = $util.emptyArray;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(LogprobsResult.prototype, "_logProbabilitySum", {
+                            get: $util.oneOfGetter($oneOfFields = ["logProbabilitySum"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new LogprobsResult instance using the specified properties.
@@ -82757,6 +84136,8 @@
                             if (message.chosenCandidates != null && message.chosenCandidates.length)
                                 for (var i = 0; i < message.chosenCandidates.length; ++i)
                                     $root.google.ai.generativelanguage.v1beta.LogprobsResult.Candidate.encode(message.chosenCandidates[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.logProbabilitySum != null && Object.hasOwnProperty.call(message, "logProbabilitySum"))
+                                writer.uint32(/* id 3, wireType 5 =*/29).float(message.logProbabilitySum);
                             return writer;
                         };
     
@@ -82793,6 +84174,10 @@
                                 if (tag === error)
                                     break;
                                 switch (tag >>> 3) {
+                                case 3: {
+                                        message.logProbabilitySum = reader.float();
+                                        break;
+                                    }
                                 case 1: {
                                         if (!(message.topCandidates && message.topCandidates.length))
                                             message.topCandidates = [];
@@ -82840,6 +84225,12 @@
                         LogprobsResult.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
+                            if (message.logProbabilitySum != null && message.hasOwnProperty("logProbabilitySum")) {
+                                properties._logProbabilitySum = 1;
+                                if (typeof message.logProbabilitySum !== "number")
+                                    return "logProbabilitySum: number expected";
+                            }
                             if (message.topCandidates != null && message.hasOwnProperty("topCandidates")) {
                                 if (!Array.isArray(message.topCandidates))
                                     return "topCandidates: array expected";
@@ -82873,6 +84264,8 @@
                             if (object instanceof $root.google.ai.generativelanguage.v1beta.LogprobsResult)
                                 return object;
                             var message = new $root.google.ai.generativelanguage.v1beta.LogprobsResult();
+                            if (object.logProbabilitySum != null)
+                                message.logProbabilitySum = Number(object.logProbabilitySum);
                             if (object.topCandidates) {
                                 if (!Array.isArray(object.topCandidates))
                                     throw TypeError(".google.ai.generativelanguage.v1beta.LogprobsResult.topCandidates: array expected");
@@ -82922,6 +84315,11 @@
                                 object.chosenCandidates = [];
                                 for (var j = 0; j < message.chosenCandidates.length; ++j)
                                     object.chosenCandidates[j] = $root.google.ai.generativelanguage.v1beta.LogprobsResult.Candidate.toObject(message.chosenCandidates[j], options);
+                            }
+                            if (message.logProbabilitySum != null && message.hasOwnProperty("logProbabilitySum")) {
+                                object.logProbabilitySum = options.json && !isFinite(message.logProbabilitySum) ? String(message.logProbabilitySum) : message.logProbabilitySum;
+                                if (options.oneofs)
+                                    object._logProbabilitySum = "logProbabilitySum";
                             }
                             return object;
                         };
@@ -93208,6 +94606,7 @@
                          * @property {google.ai.generativelanguage.v1beta.IBidiGenerateContentTranscription|null} [inputTranscription] BidiGenerateContentServerContent inputTranscription
                          * @property {google.ai.generativelanguage.v1beta.IBidiGenerateContentTranscription|null} [outputTranscription] BidiGenerateContentServerContent outputTranscription
                          * @property {google.ai.generativelanguage.v1beta.IUrlContextMetadata|null} [urlContextMetadata] BidiGenerateContentServerContent urlContextMetadata
+                         * @property {boolean|null} [waitingForInput] BidiGenerateContentServerContent waitingForInput
                          */
     
                         /**
@@ -93289,6 +94688,14 @@
                          */
                         BidiGenerateContentServerContent.prototype.urlContextMetadata = null;
     
+                        /**
+                         * BidiGenerateContentServerContent waitingForInput.
+                         * @member {boolean} waitingForInput
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentServerContent
+                         * @instance
+                         */
+                        BidiGenerateContentServerContent.prototype.waitingForInput = false;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -93338,6 +94745,8 @@
                                 $root.google.ai.generativelanguage.v1beta.BidiGenerateContentTranscription.encode(message.outputTranscription, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             if (message.urlContextMetadata != null && Object.hasOwnProperty.call(message, "urlContextMetadata"))
                                 $root.google.ai.generativelanguage.v1beta.UrlContextMetadata.encode(message.urlContextMetadata, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.waitingForInput != null && Object.hasOwnProperty.call(message, "waitingForInput"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).bool(message.waitingForInput);
                             return writer;
                         };
     
@@ -93404,6 +94813,10 @@
                                     }
                                 case 9: {
                                         message.urlContextMetadata = $root.google.ai.generativelanguage.v1beta.UrlContextMetadata.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 10: {
+                                        message.waitingForInput = reader.bool();
                                         break;
                                     }
                                 default:
@@ -93479,6 +94892,9 @@
                                 if (error)
                                     return "urlContextMetadata." + error;
                             }
+                            if (message.waitingForInput != null && message.hasOwnProperty("waitingForInput"))
+                                if (typeof message.waitingForInput !== "boolean")
+                                    return "waitingForInput: boolean expected";
                             return null;
                         };
     
@@ -93525,6 +94941,8 @@
                                     throw TypeError(".google.ai.generativelanguage.v1beta.BidiGenerateContentServerContent.urlContextMetadata: object expected");
                                 message.urlContextMetadata = $root.google.ai.generativelanguage.v1beta.UrlContextMetadata.fromObject(object.urlContextMetadata);
                             }
+                            if (object.waitingForInput != null)
+                                message.waitingForInput = Boolean(object.waitingForInput);
                             return message;
                         };
     
@@ -93549,6 +94967,7 @@
                                 object.inputTranscription = null;
                                 object.outputTranscription = null;
                                 object.urlContextMetadata = null;
+                                object.waitingForInput = false;
                             }
                             if (message.modelTurn != null && message.hasOwnProperty("modelTurn")) {
                                 object.modelTurn = $root.google.ai.generativelanguage.v1beta.Content.toObject(message.modelTurn, options);
@@ -93569,6 +94988,8 @@
                                 object.outputTranscription = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentTranscription.toObject(message.outputTranscription, options);
                             if (message.urlContextMetadata != null && message.hasOwnProperty("urlContextMetadata"))
                                 object.urlContextMetadata = $root.google.ai.generativelanguage.v1beta.UrlContextMetadata.toObject(message.urlContextMetadata, options);
+                            if (message.waitingForInput != null && message.hasOwnProperty("waitingForInput"))
+                                object.waitingForInput = message.waitingForInput;
                             return object;
                         };
     
@@ -107044,7 +108465,7 @@
                          * Properties of a PredictLongRunningResponse.
                          * @memberof google.ai.generativelanguage.v1beta
                          * @interface IPredictLongRunningResponse
-                         * @property {google.ai.generativelanguage.v1beta.IGenerateVideoResponse|null} [generateVideoResponse] PredictLongRunningResponse generateVideoResponse
+                         * @property {google.ai.generativelanguage.v1beta.IPredictLongRunningGeneratedVideoResponse|null} [generateVideoResponse] PredictLongRunningResponse generateVideoResponse
                          */
     
                         /**
@@ -107064,7 +108485,7 @@
     
                         /**
                          * PredictLongRunningResponse generateVideoResponse.
-                         * @member {google.ai.generativelanguage.v1beta.IGenerateVideoResponse|null|undefined} generateVideoResponse
+                         * @member {google.ai.generativelanguage.v1beta.IPredictLongRunningGeneratedVideoResponse|null|undefined} generateVideoResponse
                          * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningResponse
                          * @instance
                          */
@@ -107109,7 +108530,7 @@
                             if (!writer)
                                 writer = $Writer.create();
                             if (message.generateVideoResponse != null && Object.hasOwnProperty.call(message, "generateVideoResponse"))
-                                $root.google.ai.generativelanguage.v1beta.GenerateVideoResponse.encode(message.generateVideoResponse, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                $root.google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse.encode(message.generateVideoResponse, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             return writer;
                         };
     
@@ -107147,7 +108568,7 @@
                                     break;
                                 switch (tag >>> 3) {
                                 case 1: {
-                                        message.generateVideoResponse = $root.google.ai.generativelanguage.v1beta.GenerateVideoResponse.decode(reader, reader.uint32());
+                                        message.generateVideoResponse = $root.google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -107189,7 +108610,7 @@
                             if (message.generateVideoResponse != null && message.hasOwnProperty("generateVideoResponse")) {
                                 properties.response = 1;
                                 {
-                                    var error = $root.google.ai.generativelanguage.v1beta.GenerateVideoResponse.verify(message.generateVideoResponse);
+                                    var error = $root.google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse.verify(message.generateVideoResponse);
                                     if (error)
                                         return "generateVideoResponse." + error;
                                 }
@@ -107212,7 +108633,7 @@
                             if (object.generateVideoResponse != null) {
                                 if (typeof object.generateVideoResponse !== "object")
                                     throw TypeError(".google.ai.generativelanguage.v1beta.PredictLongRunningResponse.generateVideoResponse: object expected");
-                                message.generateVideoResponse = $root.google.ai.generativelanguage.v1beta.GenerateVideoResponse.fromObject(object.generateVideoResponse);
+                                message.generateVideoResponse = $root.google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse.fromObject(object.generateVideoResponse);
                             }
                             return message;
                         };
@@ -107231,7 +108652,7 @@
                                 options = {};
                             var object = {};
                             if (message.generateVideoResponse != null && message.hasOwnProperty("generateVideoResponse")) {
-                                object.generateVideoResponse = $root.google.ai.generativelanguage.v1beta.GenerateVideoResponse.toObject(message.generateVideoResponse, options);
+                                object.generateVideoResponse = $root.google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse.toObject(message.generateVideoResponse, options);
                                 if (options.oneofs)
                                     object.response = "generateVideoResponse";
                             }
@@ -107928,26 +109349,26 @@
                         return Video;
                     })();
     
-                    v1beta.GenerateVideoResponse = (function() {
+                    v1beta.PredictLongRunningGeneratedVideoResponse = (function() {
     
                         /**
-                         * Properties of a GenerateVideoResponse.
+                         * Properties of a PredictLongRunningGeneratedVideoResponse.
                          * @memberof google.ai.generativelanguage.v1beta
-                         * @interface IGenerateVideoResponse
-                         * @property {Array.<google.ai.generativelanguage.v1beta.IMedia>|null} [generatedSamples] GenerateVideoResponse generatedSamples
-                         * @property {number|null} [raiMediaFilteredCount] GenerateVideoResponse raiMediaFilteredCount
-                         * @property {Array.<string>|null} [raiMediaFilteredReasons] GenerateVideoResponse raiMediaFilteredReasons
+                         * @interface IPredictLongRunningGeneratedVideoResponse
+                         * @property {Array.<google.ai.generativelanguage.v1beta.IMedia>|null} [generatedSamples] PredictLongRunningGeneratedVideoResponse generatedSamples
+                         * @property {number|null} [raiMediaFilteredCount] PredictLongRunningGeneratedVideoResponse raiMediaFilteredCount
+                         * @property {Array.<string>|null} [raiMediaFilteredReasons] PredictLongRunningGeneratedVideoResponse raiMediaFilteredReasons
                          */
     
                         /**
-                         * Constructs a new GenerateVideoResponse.
+                         * Constructs a new PredictLongRunningGeneratedVideoResponse.
                          * @memberof google.ai.generativelanguage.v1beta
-                         * @classdesc Represents a GenerateVideoResponse.
-                         * @implements IGenerateVideoResponse
+                         * @classdesc Represents a PredictLongRunningGeneratedVideoResponse.
+                         * @implements IPredictLongRunningGeneratedVideoResponse
                          * @constructor
-                         * @param {google.ai.generativelanguage.v1beta.IGenerateVideoResponse=} [properties] Properties to set
+                         * @param {google.ai.generativelanguage.v1beta.IPredictLongRunningGeneratedVideoResponse=} [properties] Properties to set
                          */
-                        function GenerateVideoResponse(properties) {
+                        function PredictLongRunningGeneratedVideoResponse(properties) {
                             this.generatedSamples = [];
                             this.raiMediaFilteredReasons = [];
                             if (properties)
@@ -107957,51 +109378,51 @@
                         }
     
                         /**
-                         * GenerateVideoResponse generatedSamples.
+                         * PredictLongRunningGeneratedVideoResponse generatedSamples.
                          * @member {Array.<google.ai.generativelanguage.v1beta.IMedia>} generatedSamples
-                         * @memberof google.ai.generativelanguage.v1beta.GenerateVideoResponse
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse
                          * @instance
                          */
-                        GenerateVideoResponse.prototype.generatedSamples = $util.emptyArray;
+                        PredictLongRunningGeneratedVideoResponse.prototype.generatedSamples = $util.emptyArray;
     
                         /**
-                         * GenerateVideoResponse raiMediaFilteredCount.
+                         * PredictLongRunningGeneratedVideoResponse raiMediaFilteredCount.
                          * @member {number} raiMediaFilteredCount
-                         * @memberof google.ai.generativelanguage.v1beta.GenerateVideoResponse
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse
                          * @instance
                          */
-                        GenerateVideoResponse.prototype.raiMediaFilteredCount = 0;
+                        PredictLongRunningGeneratedVideoResponse.prototype.raiMediaFilteredCount = 0;
     
                         /**
-                         * GenerateVideoResponse raiMediaFilteredReasons.
+                         * PredictLongRunningGeneratedVideoResponse raiMediaFilteredReasons.
                          * @member {Array.<string>} raiMediaFilteredReasons
-                         * @memberof google.ai.generativelanguage.v1beta.GenerateVideoResponse
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse
                          * @instance
                          */
-                        GenerateVideoResponse.prototype.raiMediaFilteredReasons = $util.emptyArray;
+                        PredictLongRunningGeneratedVideoResponse.prototype.raiMediaFilteredReasons = $util.emptyArray;
     
                         /**
-                         * Creates a new GenerateVideoResponse instance using the specified properties.
+                         * Creates a new PredictLongRunningGeneratedVideoResponse instance using the specified properties.
                          * @function create
-                         * @memberof google.ai.generativelanguage.v1beta.GenerateVideoResponse
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse
                          * @static
-                         * @param {google.ai.generativelanguage.v1beta.IGenerateVideoResponse=} [properties] Properties to set
-                         * @returns {google.ai.generativelanguage.v1beta.GenerateVideoResponse} GenerateVideoResponse instance
+                         * @param {google.ai.generativelanguage.v1beta.IPredictLongRunningGeneratedVideoResponse=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse} PredictLongRunningGeneratedVideoResponse instance
                          */
-                        GenerateVideoResponse.create = function create(properties) {
-                            return new GenerateVideoResponse(properties);
+                        PredictLongRunningGeneratedVideoResponse.create = function create(properties) {
+                            return new PredictLongRunningGeneratedVideoResponse(properties);
                         };
     
                         /**
-                         * Encodes the specified GenerateVideoResponse message. Does not implicitly {@link google.ai.generativelanguage.v1beta.GenerateVideoResponse.verify|verify} messages.
+                         * Encodes the specified PredictLongRunningGeneratedVideoResponse message. Does not implicitly {@link google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse.verify|verify} messages.
                          * @function encode
-                         * @memberof google.ai.generativelanguage.v1beta.GenerateVideoResponse
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse
                          * @static
-                         * @param {google.ai.generativelanguage.v1beta.IGenerateVideoResponse} message GenerateVideoResponse message or plain object to encode
+                         * @param {google.ai.generativelanguage.v1beta.IPredictLongRunningGeneratedVideoResponse} message PredictLongRunningGeneratedVideoResponse message or plain object to encode
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        GenerateVideoResponse.encode = function encode(message, writer) {
+                        PredictLongRunningGeneratedVideoResponse.encode = function encode(message, writer) {
                             if (!writer)
                                 writer = $Writer.create();
                             if (message.generatedSamples != null && message.generatedSamples.length)
@@ -108016,33 +109437,33 @@
                         };
     
                         /**
-                         * Encodes the specified GenerateVideoResponse message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.GenerateVideoResponse.verify|verify} messages.
+                         * Encodes the specified PredictLongRunningGeneratedVideoResponse message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse.verify|verify} messages.
                          * @function encodeDelimited
-                         * @memberof google.ai.generativelanguage.v1beta.GenerateVideoResponse
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse
                          * @static
-                         * @param {google.ai.generativelanguage.v1beta.IGenerateVideoResponse} message GenerateVideoResponse message or plain object to encode
+                         * @param {google.ai.generativelanguage.v1beta.IPredictLongRunningGeneratedVideoResponse} message PredictLongRunningGeneratedVideoResponse message or plain object to encode
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        GenerateVideoResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                        PredictLongRunningGeneratedVideoResponse.encodeDelimited = function encodeDelimited(message, writer) {
                             return this.encode(message, writer).ldelim();
                         };
     
                         /**
-                         * Decodes a GenerateVideoResponse message from the specified reader or buffer.
+                         * Decodes a PredictLongRunningGeneratedVideoResponse message from the specified reader or buffer.
                          * @function decode
-                         * @memberof google.ai.generativelanguage.v1beta.GenerateVideoResponse
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse
                          * @static
                          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                          * @param {number} [length] Message length if known beforehand
-                         * @returns {google.ai.generativelanguage.v1beta.GenerateVideoResponse} GenerateVideoResponse
+                         * @returns {google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse} PredictLongRunningGeneratedVideoResponse
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GenerateVideoResponse.decode = function decode(reader, length, error) {
+                        PredictLongRunningGeneratedVideoResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.GenerateVideoResponse();
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -108073,30 +109494,30 @@
                         };
     
                         /**
-                         * Decodes a GenerateVideoResponse message from the specified reader or buffer, length delimited.
+                         * Decodes a PredictLongRunningGeneratedVideoResponse message from the specified reader or buffer, length delimited.
                          * @function decodeDelimited
-                         * @memberof google.ai.generativelanguage.v1beta.GenerateVideoResponse
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse
                          * @static
                          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.ai.generativelanguage.v1beta.GenerateVideoResponse} GenerateVideoResponse
+                         * @returns {google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse} PredictLongRunningGeneratedVideoResponse
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GenerateVideoResponse.decodeDelimited = function decodeDelimited(reader) {
+                        PredictLongRunningGeneratedVideoResponse.decodeDelimited = function decodeDelimited(reader) {
                             if (!(reader instanceof $Reader))
                                 reader = new $Reader(reader);
                             return this.decode(reader, reader.uint32());
                         };
     
                         /**
-                         * Verifies a GenerateVideoResponse message.
+                         * Verifies a PredictLongRunningGeneratedVideoResponse message.
                          * @function verify
-                         * @memberof google.ai.generativelanguage.v1beta.GenerateVideoResponse
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse
                          * @static
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        GenerateVideoResponse.verify = function verify(message) {
+                        PredictLongRunningGeneratedVideoResponse.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
                             if (message.generatedSamples != null && message.hasOwnProperty("generatedSamples")) {
@@ -108122,24 +109543,24 @@
                         };
     
                         /**
-                         * Creates a GenerateVideoResponse message from a plain object. Also converts values to their respective internal types.
+                         * Creates a PredictLongRunningGeneratedVideoResponse message from a plain object. Also converts values to their respective internal types.
                          * @function fromObject
-                         * @memberof google.ai.generativelanguage.v1beta.GenerateVideoResponse
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse
                          * @static
                          * @param {Object.<string,*>} object Plain object
-                         * @returns {google.ai.generativelanguage.v1beta.GenerateVideoResponse} GenerateVideoResponse
+                         * @returns {google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse} PredictLongRunningGeneratedVideoResponse
                          */
-                        GenerateVideoResponse.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.ai.generativelanguage.v1beta.GenerateVideoResponse)
+                        PredictLongRunningGeneratedVideoResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse)
                                 return object;
-                            var message = new $root.google.ai.generativelanguage.v1beta.GenerateVideoResponse();
+                            var message = new $root.google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse();
                             if (object.generatedSamples) {
                                 if (!Array.isArray(object.generatedSamples))
-                                    throw TypeError(".google.ai.generativelanguage.v1beta.GenerateVideoResponse.generatedSamples: array expected");
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse.generatedSamples: array expected");
                                 message.generatedSamples = [];
                                 for (var i = 0; i < object.generatedSamples.length; ++i) {
                                     if (typeof object.generatedSamples[i] !== "object")
-                                        throw TypeError(".google.ai.generativelanguage.v1beta.GenerateVideoResponse.generatedSamples: object expected");
+                                        throw TypeError(".google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse.generatedSamples: object expected");
                                     message.generatedSamples[i] = $root.google.ai.generativelanguage.v1beta.Media.fromObject(object.generatedSamples[i]);
                                 }
                             }
@@ -108147,7 +109568,7 @@
                                 message.raiMediaFilteredCount = object.raiMediaFilteredCount | 0;
                             if (object.raiMediaFilteredReasons) {
                                 if (!Array.isArray(object.raiMediaFilteredReasons))
-                                    throw TypeError(".google.ai.generativelanguage.v1beta.GenerateVideoResponse.raiMediaFilteredReasons: array expected");
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse.raiMediaFilteredReasons: array expected");
                                 message.raiMediaFilteredReasons = [];
                                 for (var i = 0; i < object.raiMediaFilteredReasons.length; ++i)
                                     message.raiMediaFilteredReasons[i] = String(object.raiMediaFilteredReasons[i]);
@@ -108156,15 +109577,15 @@
                         };
     
                         /**
-                         * Creates a plain object from a GenerateVideoResponse message. Also converts values to other types if specified.
+                         * Creates a plain object from a PredictLongRunningGeneratedVideoResponse message. Also converts values to other types if specified.
                          * @function toObject
-                         * @memberof google.ai.generativelanguage.v1beta.GenerateVideoResponse
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse
                          * @static
-                         * @param {google.ai.generativelanguage.v1beta.GenerateVideoResponse} message GenerateVideoResponse
+                         * @param {google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse} message PredictLongRunningGeneratedVideoResponse
                          * @param {$protobuf.IConversionOptions} [options] Conversion options
                          * @returns {Object.<string,*>} Plain object
                          */
-                        GenerateVideoResponse.toObject = function toObject(message, options) {
+                        PredictLongRunningGeneratedVideoResponse.toObject = function toObject(message, options) {
                             if (!options)
                                 options = {};
                             var object = {};
@@ -108190,32 +109611,32 @@
                         };
     
                         /**
-                         * Converts this GenerateVideoResponse to JSON.
+                         * Converts this PredictLongRunningGeneratedVideoResponse to JSON.
                          * @function toJSON
-                         * @memberof google.ai.generativelanguage.v1beta.GenerateVideoResponse
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse
                          * @instance
                          * @returns {Object.<string,*>} JSON object
                          */
-                        GenerateVideoResponse.prototype.toJSON = function toJSON() {
+                        PredictLongRunningGeneratedVideoResponse.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
                         /**
-                         * Gets the default type url for GenerateVideoResponse
+                         * Gets the default type url for PredictLongRunningGeneratedVideoResponse
                          * @function getTypeUrl
-                         * @memberof google.ai.generativelanguage.v1beta.GenerateVideoResponse
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse
                          * @static
                          * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns {string} The default type url
                          */
-                        GenerateVideoResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        PredictLongRunningGeneratedVideoResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
                             if (typeUrlPrefix === undefined) {
                                 typeUrlPrefix = "type.googleapis.com";
                             }
-                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.GenerateVideoResponse";
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse";
                         };
     
-                        return GenerateVideoResponse;
+                        return PredictLongRunningGeneratedVideoResponse;
                     })();
     
                     v1beta.RetrieverService = (function() {

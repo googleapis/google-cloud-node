@@ -190,6 +190,9 @@ export class ParticipantsClient {
       generatorPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/generators/{generator}'
       ),
+      generatorEvaluationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/generators/{generator}/evaluations/{evaluation}'
+      ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
@@ -304,6 +307,9 @@ export class ParticipantsClient {
       sipTrunkPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/sipTrunks/{siptrunk}'
       ),
+      toolPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/tools/{tool}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -319,7 +325,8 @@ export class ParticipantsClient {
     // Some of the methods on this service provide streaming responses.
     // Provide descriptors for these.
     this.descriptors.stream = {
-      streamingAnalyzeContent: new this._gaxModule.StreamDescriptor(this._gaxModule.StreamType.BIDI_STREAMING, !!opts.fallback, !!opts.gaxServerStreamingRetries)
+      streamingAnalyzeContent: new this._gaxModule.StreamDescriptor(this._gaxModule.StreamType.BIDI_STREAMING, !!opts.fallback, !!opts.gaxServerStreamingRetries),
+      bidiStreamingAnalyzeContent: new this._gaxModule.StreamDescriptor(this._gaxModule.StreamType.BIDI_STREAMING, !!opts.fallback, !!opts.gaxServerStreamingRetries)
     };
 
     // Put together the default options sent with requests.
@@ -365,7 +372,7 @@ export class ParticipantsClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const participantsStubMethods =
-        ['createParticipant', 'getParticipant', 'listParticipants', 'updateParticipant', 'analyzeContent', 'streamingAnalyzeContent', 'suggestArticles', 'suggestFaqAnswers', 'suggestSmartReplies', 'suggestKnowledgeAssist', 'listSuggestions', 'compileSuggestion'];
+        ['createParticipant', 'getParticipant', 'listParticipants', 'updateParticipant', 'analyzeContent', 'streamingAnalyzeContent', 'bidiStreamingAnalyzeContent', 'suggestArticles', 'suggestFaqAnswers', 'suggestSmartReplies', 'suggestKnowledgeAssist', 'listSuggestions', 'compileSuggestion'];
     for (const methodName of participantsStubMethods) {
       const callPromise = this.participantsStub.then(
         stub => (...args: Array<{}>) => {
@@ -1537,6 +1544,29 @@ export class ParticipantsClient {
     return this.innerApiCalls.streamingAnalyzeContent(null, options);
   }
 
+/**
+ * Bidirectional endless streaming version of
+ * {@link protos.google.cloud.dialogflow.v2beta1.Participants.StreamingAnalyzeContent|StreamingAnalyzeContent}.
+ *
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which is both readable and writable. It accepts objects
+ *   representing {@link protos.google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest|BidiStreamingAnalyzeContentRequest} for write() method, and
+ *   will emit objects representing {@link protos.google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse|BidiStreamingAnalyzeContentResponse} on 'data' event asynchronously.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2beta1/participants.bidi_streaming_analyze_content.js</caption>
+ * region_tag:dialogflow_v2beta1_generated_Participants_BidiStreamingAnalyzeContent_async
+ */
+  bidiStreamingAnalyzeContent(
+      options?: CallOptions):
+    gax.CancellableStream {
+    this.initialize().catch(err => {throw err});
+    this._log.info('bidiStreamingAnalyzeContent stream %j', options);
+    return this.innerApiCalls.bidiStreamingAnalyzeContent(null, options);
+  }
+
  /**
  * Returns the list of all participants in the specified conversation.
  *
@@ -2154,6 +2184,68 @@ export class ParticipantsClient {
    */
   matchGeneratorFromGeneratorName(generatorName: string) {
     return this.pathTemplates.generatorPathTemplate.match(generatorName).generator;
+  }
+
+  /**
+   * Return a fully-qualified generatorEvaluation resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} generator
+   * @param {string} evaluation
+   * @returns {string} Resource name string.
+   */
+  generatorEvaluationPath(project:string,location:string,generator:string,evaluation:string) {
+    return this.pathTemplates.generatorEvaluationPathTemplate.render({
+      project: project,
+      location: location,
+      generator: generator,
+      evaluation: evaluation,
+    });
+  }
+
+  /**
+   * Parse the project from GeneratorEvaluation resource.
+   *
+   * @param {string} generatorEvaluationName
+   *   A fully-qualified path representing GeneratorEvaluation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromGeneratorEvaluationName(generatorEvaluationName: string) {
+    return this.pathTemplates.generatorEvaluationPathTemplate.match(generatorEvaluationName).project;
+  }
+
+  /**
+   * Parse the location from GeneratorEvaluation resource.
+   *
+   * @param {string} generatorEvaluationName
+   *   A fully-qualified path representing GeneratorEvaluation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromGeneratorEvaluationName(generatorEvaluationName: string) {
+    return this.pathTemplates.generatorEvaluationPathTemplate.match(generatorEvaluationName).location;
+  }
+
+  /**
+   * Parse the generator from GeneratorEvaluation resource.
+   *
+   * @param {string} generatorEvaluationName
+   *   A fully-qualified path representing GeneratorEvaluation resource.
+   * @returns {string} A string representing the generator.
+   */
+  matchGeneratorFromGeneratorEvaluationName(generatorEvaluationName: string) {
+    return this.pathTemplates.generatorEvaluationPathTemplate.match(generatorEvaluationName).generator;
+  }
+
+  /**
+   * Parse the evaluation from GeneratorEvaluation resource.
+   *
+   * @param {string} generatorEvaluationName
+   *   A fully-qualified path representing GeneratorEvaluation resource.
+   * @returns {string} A string representing the evaluation.
+   */
+  matchEvaluationFromGeneratorEvaluationName(generatorEvaluationName: string) {
+    return this.pathTemplates.generatorEvaluationPathTemplate.match(generatorEvaluationName).evaluation;
   }
 
   /**
@@ -3990,6 +4082,55 @@ export class ParticipantsClient {
    */
   matchSiptrunkFromSipTrunkName(sipTrunkName: string) {
     return this.pathTemplates.sipTrunkPathTemplate.match(sipTrunkName).siptrunk;
+  }
+
+  /**
+   * Return a fully-qualified tool resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} tool
+   * @returns {string} Resource name string.
+   */
+  toolPath(project:string,location:string,tool:string) {
+    return this.pathTemplates.toolPathTemplate.render({
+      project: project,
+      location: location,
+      tool: tool,
+    });
+  }
+
+  /**
+   * Parse the project from Tool resource.
+   *
+   * @param {string} toolName
+   *   A fully-qualified path representing Tool resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromToolName(toolName: string) {
+    return this.pathTemplates.toolPathTemplate.match(toolName).project;
+  }
+
+  /**
+   * Parse the location from Tool resource.
+   *
+   * @param {string} toolName
+   *   A fully-qualified path representing Tool resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromToolName(toolName: string) {
+    return this.pathTemplates.toolPathTemplate.match(toolName).location;
+  }
+
+  /**
+   * Parse the tool from Tool resource.
+   *
+   * @param {string} toolName
+   *   A fully-qualified path representing Tool resource.
+   * @returns {string} A string representing the tool.
+   */
+  matchToolFromToolName(toolName: string) {
+    return this.pathTemplates.toolPathTemplate.match(toolName).tool;
   }
 
   /**

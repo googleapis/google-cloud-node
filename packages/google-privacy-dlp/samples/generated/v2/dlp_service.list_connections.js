@@ -45,6 +45,7 @@ function main(parent) {
   // const pageToken = 'abc123'
   /**
    *  Optional. Supported field/value: `state` - MISSING|AVAILABLE|ERROR
+   *  The syntax is based on https://google.aip.dev/160.
    */
   // const filter = 'abc123'
 

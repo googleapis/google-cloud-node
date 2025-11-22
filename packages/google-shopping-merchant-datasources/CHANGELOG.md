@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.10.0](https://github.com/googleapis/google-cloud-node/compare/datasources-v0.9.1...datasources-v0.10.0) (2025-10-31)
+
+
+### ⚠ BREAKING CHANGES
+
+* [merchantapi] An existing field `contains_custom_rules` is removed from message `.google.shopping.merchant.datasources.v1.PrimaryProductDataSource` ([#6860](https://github.com/googleapis/google-cloud-node/issues/6860))
+
+### Bug Fixes
+
+* [merchantapi] An existing field `contains_custom_rules` is removed from message `.google.shopping.merchant.datasources.v1.PrimaryProductDataSource` ([#6860](https://github.com/googleapis/google-cloud-node/issues/6860)) ([9120793](https://github.com/googleapis/google-cloud-node/commit/91207939dad2b0c1e258bd8f24ec70d6a0bbe35b))
+
+## [0.9.1](https://github.com/googleapis/google-cloud-node/compare/datasources-v0.9.0...datasources-v0.9.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
 ## [0.9.0](https://github.com/googleapis/google-cloud-node/compare/datasources-v0.8.0...datasources-v0.9.0) (2025-08-21)
 
 

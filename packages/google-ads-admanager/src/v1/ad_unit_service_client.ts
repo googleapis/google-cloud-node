@@ -186,17 +186,50 @@ export class AdUnitServiceClient {
       adBreakPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/liveStreamEventsByAssetKey/{asset_key}/adBreaks/{ad_break}'
       ),
+      adReviewCenterAdPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/webProperties/{web_property_code}/adReviewCenterAds/{ad_review_center_ad}'
+      ),
       adUnitPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/adUnits/{ad_unit}'
       ),
+      applicationPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/applications/{application}'
+      ),
+      audienceSegmentPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/audienceSegments/{audience_segment}'
+      ),
       bandwidthGroupPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/bandwidthGroups/{bandwidth_group}'
+      ),
+      browserPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/browsers/{browser}'
+      ),
+      browserLanguagePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/browserLanguages/{browser_language}'
+      ),
+      cmsMetadataKeyPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/cmsMetadataKeys/{cms_metadata_key}'
+      ),
+      cmsMetadataValuePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/cmsMetadataValues/{cms_metadata_value}'
       ),
       companyPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/companies/{company}'
       ),
       contactPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/contacts/{contact}'
+      ),
+      contentPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/content/{content}'
+      ),
+      contentBundlePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/contentBundles/{content_bundle}'
+      ),
+      contentLabelPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/contentLabels/{content_label}'
+      ),
+      creativeTemplatePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/creativeTemplates/{creative_template}'
       ),
       customFieldPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/customFields/{custom_field}'
@@ -207,8 +240,14 @@ export class AdUnitServiceClient {
       customTargetingValuePathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/customTargetingValues/{custom_targeting_value}'
       ),
+      deviceCapabilityPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/deviceCapabilities/{device_capability}'
+      ),
       deviceCategoryPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/deviceCategories/{device_category}'
+      ),
+      deviceManufacturerPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/deviceManufacturers/{device_manufacturer}'
       ),
       entitySignalsMappingPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/entitySignalsMappings/{entity_signals_mapping}'
@@ -221,6 +260,15 @@ export class AdUnitServiceClient {
       ),
       liveStreamEventPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/liveStreamEvents/{live_stream_event}'
+      ),
+      mobileCarrierPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/mobileCarriers/{mobile_carrier}'
+      ),
+      mobileDevicePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/mobileDevices/{mobile_device}'
+      ),
+      mobileDeviceSubmodelPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/mobileDeviceSubmodels/{mobile_device_submodel}'
       ),
       networkPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}'
@@ -252,6 +300,9 @@ export class AdUnitServiceClient {
       rolePathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/roles/{role}'
       ),
+      sitePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/sites/{site}'
+      ),
       taxonomyCategoryPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/taxonomyCategories/{taxonomy_category}'
       ),
@@ -260,6 +311,9 @@ export class AdUnitServiceClient {
       ),
       userPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/users/{user}'
+      ),
+      webPropertyPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/webProperties/{web_property}'
       ),
     };
 
@@ -526,8 +580,8 @@ export class AdUnitServiceClient {
  * @param {number} [request.pageSize]
  *   Optional. The maximum number of AdUnits to return. The service may return
  *   fewer than this value. If unspecified, at most 50 ad units will be
- *   returned. The maximum value is 1000; values above 1000 will be coerced to
- *   1000.
+ *   returned. The maximum value is 1000; values greater than 1000 will be
+ *   coerced to 1000.
  * @param {string} [request.pageToken]
  *   Optional. A page token, received from a previous `ListAdUnits` call.
  *   Provide this to retrieve the subsequent page.
@@ -642,8 +696,8 @@ export class AdUnitServiceClient {
  * @param {number} [request.pageSize]
  *   Optional. The maximum number of AdUnits to return. The service may return
  *   fewer than this value. If unspecified, at most 50 ad units will be
- *   returned. The maximum value is 1000; values above 1000 will be coerced to
- *   1000.
+ *   returned. The maximum value is 1000; values greater than 1000 will be
+ *   coerced to 1000.
  * @param {string} [request.pageToken]
  *   Optional. A page token, received from a previous `ListAdUnits` call.
  *   Provide this to retrieve the subsequent page.
@@ -707,8 +761,8 @@ export class AdUnitServiceClient {
  * @param {number} [request.pageSize]
  *   Optional. The maximum number of AdUnits to return. The service may return
  *   fewer than this value. If unspecified, at most 50 ad units will be
- *   returned. The maximum value is 1000; values above 1000 will be coerced to
- *   1000.
+ *   returned. The maximum value is 1000; values greater than 1000 will be
+ *   coerced to 1000.
  * @param {string} [request.pageToken]
  *   Optional. A page token, received from a previous `ListAdUnits` call.
  *   Provide this to retrieve the subsequent page.
@@ -771,8 +825,8 @@ export class AdUnitServiceClient {
  * @param {number} [request.pageSize]
  *   Optional. The maximum number of AdUnitSizes to return. The service may
  *   return fewer than this value. If unspecified, at most 50 ad unit sizes will
- *   be returned. The maximum value is 1000; values above 1000 will be coerced
- *   to 1000.
+ *   be returned. The maximum value is 1000; values greater than 1000 will be
+ *   coerced to 1000.
  * @param {string} [request.pageToken]
  *   Optional. A page token, received from a previous `ListAdUnitSizes` call.
  *   Provide this to retrieve the subsequent page.
@@ -887,8 +941,8 @@ export class AdUnitServiceClient {
  * @param {number} [request.pageSize]
  *   Optional. The maximum number of AdUnitSizes to return. The service may
  *   return fewer than this value. If unspecified, at most 50 ad unit sizes will
- *   be returned. The maximum value is 1000; values above 1000 will be coerced
- *   to 1000.
+ *   be returned. The maximum value is 1000; values greater than 1000 will be
+ *   coerced to 1000.
  * @param {string} [request.pageToken]
  *   Optional. A page token, received from a previous `ListAdUnitSizes` call.
  *   Provide this to retrieve the subsequent page.
@@ -952,8 +1006,8 @@ export class AdUnitServiceClient {
  * @param {number} [request.pageSize]
  *   Optional. The maximum number of AdUnitSizes to return. The service may
  *   return fewer than this value. If unspecified, at most 50 ad unit sizes will
- *   be returned. The maximum value is 1000; values above 1000 will be coerced
- *   to 1000.
+ *   be returned. The maximum value is 1000; values greater than 1000 will be
+ *   coerced to 1000.
  * @param {string} [request.pageToken]
  *   Optional. A page token, received from a previous `ListAdUnitSizes` call.
  *   Provide this to retrieve the subsequent page.
@@ -1059,6 +1113,55 @@ export class AdUnitServiceClient {
   }
 
   /**
+   * Return a fully-qualified adReviewCenterAd resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} web_property_code
+   * @param {string} ad_review_center_ad
+   * @returns {string} Resource name string.
+   */
+  adReviewCenterAdPath(networkCode:string,webPropertyCode:string,adReviewCenterAd:string) {
+    return this.pathTemplates.adReviewCenterAdPathTemplate.render({
+      network_code: networkCode,
+      web_property_code: webPropertyCode,
+      ad_review_center_ad: adReviewCenterAd,
+    });
+  }
+
+  /**
+   * Parse the network_code from AdReviewCenterAd resource.
+   *
+   * @param {string} adReviewCenterAdName
+   *   A fully-qualified path representing AdReviewCenterAd resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromAdReviewCenterAdName(adReviewCenterAdName: string) {
+    return this.pathTemplates.adReviewCenterAdPathTemplate.match(adReviewCenterAdName).network_code;
+  }
+
+  /**
+   * Parse the web_property_code from AdReviewCenterAd resource.
+   *
+   * @param {string} adReviewCenterAdName
+   *   A fully-qualified path representing AdReviewCenterAd resource.
+   * @returns {string} A string representing the web_property_code.
+   */
+  matchWebPropertyCodeFromAdReviewCenterAdName(adReviewCenterAdName: string) {
+    return this.pathTemplates.adReviewCenterAdPathTemplate.match(adReviewCenterAdName).web_property_code;
+  }
+
+  /**
+   * Parse the ad_review_center_ad from AdReviewCenterAd resource.
+   *
+   * @param {string} adReviewCenterAdName
+   *   A fully-qualified path representing AdReviewCenterAd resource.
+   * @returns {string} A string representing the ad_review_center_ad.
+   */
+  matchAdReviewCenterAdFromAdReviewCenterAdName(adReviewCenterAdName: string) {
+    return this.pathTemplates.adReviewCenterAdPathTemplate.match(adReviewCenterAdName).ad_review_center_ad;
+  }
+
+  /**
    * Return a fully-qualified adUnit resource name string.
    *
    * @param {string} network_code
@@ -1095,6 +1198,78 @@ export class AdUnitServiceClient {
   }
 
   /**
+   * Return a fully-qualified application resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} application
+   * @returns {string} Resource name string.
+   */
+  applicationPath(networkCode:string,application:string) {
+    return this.pathTemplates.applicationPathTemplate.render({
+      network_code: networkCode,
+      application: application,
+    });
+  }
+
+  /**
+   * Parse the network_code from Application resource.
+   *
+   * @param {string} applicationName
+   *   A fully-qualified path representing Application resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromApplicationName(applicationName: string) {
+    return this.pathTemplates.applicationPathTemplate.match(applicationName).network_code;
+  }
+
+  /**
+   * Parse the application from Application resource.
+   *
+   * @param {string} applicationName
+   *   A fully-qualified path representing Application resource.
+   * @returns {string} A string representing the application.
+   */
+  matchApplicationFromApplicationName(applicationName: string) {
+    return this.pathTemplates.applicationPathTemplate.match(applicationName).application;
+  }
+
+  /**
+   * Return a fully-qualified audienceSegment resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} audience_segment
+   * @returns {string} Resource name string.
+   */
+  audienceSegmentPath(networkCode:string,audienceSegment:string) {
+    return this.pathTemplates.audienceSegmentPathTemplate.render({
+      network_code: networkCode,
+      audience_segment: audienceSegment,
+    });
+  }
+
+  /**
+   * Parse the network_code from AudienceSegment resource.
+   *
+   * @param {string} audienceSegmentName
+   *   A fully-qualified path representing AudienceSegment resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromAudienceSegmentName(audienceSegmentName: string) {
+    return this.pathTemplates.audienceSegmentPathTemplate.match(audienceSegmentName).network_code;
+  }
+
+  /**
+   * Parse the audience_segment from AudienceSegment resource.
+   *
+   * @param {string} audienceSegmentName
+   *   A fully-qualified path representing AudienceSegment resource.
+   * @returns {string} A string representing the audience_segment.
+   */
+  matchAudienceSegmentFromAudienceSegmentName(audienceSegmentName: string) {
+    return this.pathTemplates.audienceSegmentPathTemplate.match(audienceSegmentName).audience_segment;
+  }
+
+  /**
    * Return a fully-qualified bandwidthGroup resource name string.
    *
    * @param {string} network_code
@@ -1128,6 +1303,150 @@ export class AdUnitServiceClient {
    */
   matchBandwidthGroupFromBandwidthGroupName(bandwidthGroupName: string) {
     return this.pathTemplates.bandwidthGroupPathTemplate.match(bandwidthGroupName).bandwidth_group;
+  }
+
+  /**
+   * Return a fully-qualified browser resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} browser
+   * @returns {string} Resource name string.
+   */
+  browserPath(networkCode:string,browser:string) {
+    return this.pathTemplates.browserPathTemplate.render({
+      network_code: networkCode,
+      browser: browser,
+    });
+  }
+
+  /**
+   * Parse the network_code from Browser resource.
+   *
+   * @param {string} browserName
+   *   A fully-qualified path representing Browser resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromBrowserName(browserName: string) {
+    return this.pathTemplates.browserPathTemplate.match(browserName).network_code;
+  }
+
+  /**
+   * Parse the browser from Browser resource.
+   *
+   * @param {string} browserName
+   *   A fully-qualified path representing Browser resource.
+   * @returns {string} A string representing the browser.
+   */
+  matchBrowserFromBrowserName(browserName: string) {
+    return this.pathTemplates.browserPathTemplate.match(browserName).browser;
+  }
+
+  /**
+   * Return a fully-qualified browserLanguage resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} browser_language
+   * @returns {string} Resource name string.
+   */
+  browserLanguagePath(networkCode:string,browserLanguage:string) {
+    return this.pathTemplates.browserLanguagePathTemplate.render({
+      network_code: networkCode,
+      browser_language: browserLanguage,
+    });
+  }
+
+  /**
+   * Parse the network_code from BrowserLanguage resource.
+   *
+   * @param {string} browserLanguageName
+   *   A fully-qualified path representing BrowserLanguage resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromBrowserLanguageName(browserLanguageName: string) {
+    return this.pathTemplates.browserLanguagePathTemplate.match(browserLanguageName).network_code;
+  }
+
+  /**
+   * Parse the browser_language from BrowserLanguage resource.
+   *
+   * @param {string} browserLanguageName
+   *   A fully-qualified path representing BrowserLanguage resource.
+   * @returns {string} A string representing the browser_language.
+   */
+  matchBrowserLanguageFromBrowserLanguageName(browserLanguageName: string) {
+    return this.pathTemplates.browserLanguagePathTemplate.match(browserLanguageName).browser_language;
+  }
+
+  /**
+   * Return a fully-qualified cmsMetadataKey resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} cms_metadata_key
+   * @returns {string} Resource name string.
+   */
+  cmsMetadataKeyPath(networkCode:string,cmsMetadataKey:string) {
+    return this.pathTemplates.cmsMetadataKeyPathTemplate.render({
+      network_code: networkCode,
+      cms_metadata_key: cmsMetadataKey,
+    });
+  }
+
+  /**
+   * Parse the network_code from CmsMetadataKey resource.
+   *
+   * @param {string} cmsMetadataKeyName
+   *   A fully-qualified path representing CmsMetadataKey resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromCmsMetadataKeyName(cmsMetadataKeyName: string) {
+    return this.pathTemplates.cmsMetadataKeyPathTemplate.match(cmsMetadataKeyName).network_code;
+  }
+
+  /**
+   * Parse the cms_metadata_key from CmsMetadataKey resource.
+   *
+   * @param {string} cmsMetadataKeyName
+   *   A fully-qualified path representing CmsMetadataKey resource.
+   * @returns {string} A string representing the cms_metadata_key.
+   */
+  matchCmsMetadataKeyFromCmsMetadataKeyName(cmsMetadataKeyName: string) {
+    return this.pathTemplates.cmsMetadataKeyPathTemplate.match(cmsMetadataKeyName).cms_metadata_key;
+  }
+
+  /**
+   * Return a fully-qualified cmsMetadataValue resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} cms_metadata_value
+   * @returns {string} Resource name string.
+   */
+  cmsMetadataValuePath(networkCode:string,cmsMetadataValue:string) {
+    return this.pathTemplates.cmsMetadataValuePathTemplate.render({
+      network_code: networkCode,
+      cms_metadata_value: cmsMetadataValue,
+    });
+  }
+
+  /**
+   * Parse the network_code from CmsMetadataValue resource.
+   *
+   * @param {string} cmsMetadataValueName
+   *   A fully-qualified path representing CmsMetadataValue resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromCmsMetadataValueName(cmsMetadataValueName: string) {
+    return this.pathTemplates.cmsMetadataValuePathTemplate.match(cmsMetadataValueName).network_code;
+  }
+
+  /**
+   * Parse the cms_metadata_value from CmsMetadataValue resource.
+   *
+   * @param {string} cmsMetadataValueName
+   *   A fully-qualified path representing CmsMetadataValue resource.
+   * @returns {string} A string representing the cms_metadata_value.
+   */
+  matchCmsMetadataValueFromCmsMetadataValueName(cmsMetadataValueName: string) {
+    return this.pathTemplates.cmsMetadataValuePathTemplate.match(cmsMetadataValueName).cms_metadata_value;
   }
 
   /**
@@ -1200,6 +1519,150 @@ export class AdUnitServiceClient {
    */
   matchContactFromContactName(contactName: string) {
     return this.pathTemplates.contactPathTemplate.match(contactName).contact;
+  }
+
+  /**
+   * Return a fully-qualified content resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} content
+   * @returns {string} Resource name string.
+   */
+  contentPath(networkCode:string,content:string) {
+    return this.pathTemplates.contentPathTemplate.render({
+      network_code: networkCode,
+      content: content,
+    });
+  }
+
+  /**
+   * Parse the network_code from Content resource.
+   *
+   * @param {string} contentName
+   *   A fully-qualified path representing Content resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromContentName(contentName: string) {
+    return this.pathTemplates.contentPathTemplate.match(contentName).network_code;
+  }
+
+  /**
+   * Parse the content from Content resource.
+   *
+   * @param {string} contentName
+   *   A fully-qualified path representing Content resource.
+   * @returns {string} A string representing the content.
+   */
+  matchContentFromContentName(contentName: string) {
+    return this.pathTemplates.contentPathTemplate.match(contentName).content;
+  }
+
+  /**
+   * Return a fully-qualified contentBundle resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} content_bundle
+   * @returns {string} Resource name string.
+   */
+  contentBundlePath(networkCode:string,contentBundle:string) {
+    return this.pathTemplates.contentBundlePathTemplate.render({
+      network_code: networkCode,
+      content_bundle: contentBundle,
+    });
+  }
+
+  /**
+   * Parse the network_code from ContentBundle resource.
+   *
+   * @param {string} contentBundleName
+   *   A fully-qualified path representing ContentBundle resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromContentBundleName(contentBundleName: string) {
+    return this.pathTemplates.contentBundlePathTemplate.match(contentBundleName).network_code;
+  }
+
+  /**
+   * Parse the content_bundle from ContentBundle resource.
+   *
+   * @param {string} contentBundleName
+   *   A fully-qualified path representing ContentBundle resource.
+   * @returns {string} A string representing the content_bundle.
+   */
+  matchContentBundleFromContentBundleName(contentBundleName: string) {
+    return this.pathTemplates.contentBundlePathTemplate.match(contentBundleName).content_bundle;
+  }
+
+  /**
+   * Return a fully-qualified contentLabel resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} content_label
+   * @returns {string} Resource name string.
+   */
+  contentLabelPath(networkCode:string,contentLabel:string) {
+    return this.pathTemplates.contentLabelPathTemplate.render({
+      network_code: networkCode,
+      content_label: contentLabel,
+    });
+  }
+
+  /**
+   * Parse the network_code from ContentLabel resource.
+   *
+   * @param {string} contentLabelName
+   *   A fully-qualified path representing ContentLabel resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromContentLabelName(contentLabelName: string) {
+    return this.pathTemplates.contentLabelPathTemplate.match(contentLabelName).network_code;
+  }
+
+  /**
+   * Parse the content_label from ContentLabel resource.
+   *
+   * @param {string} contentLabelName
+   *   A fully-qualified path representing ContentLabel resource.
+   * @returns {string} A string representing the content_label.
+   */
+  matchContentLabelFromContentLabelName(contentLabelName: string) {
+    return this.pathTemplates.contentLabelPathTemplate.match(contentLabelName).content_label;
+  }
+
+  /**
+   * Return a fully-qualified creativeTemplate resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} creative_template
+   * @returns {string} Resource name string.
+   */
+  creativeTemplatePath(networkCode:string,creativeTemplate:string) {
+    return this.pathTemplates.creativeTemplatePathTemplate.render({
+      network_code: networkCode,
+      creative_template: creativeTemplate,
+    });
+  }
+
+  /**
+   * Parse the network_code from CreativeTemplate resource.
+   *
+   * @param {string} creativeTemplateName
+   *   A fully-qualified path representing CreativeTemplate resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromCreativeTemplateName(creativeTemplateName: string) {
+    return this.pathTemplates.creativeTemplatePathTemplate.match(creativeTemplateName).network_code;
+  }
+
+  /**
+   * Parse the creative_template from CreativeTemplate resource.
+   *
+   * @param {string} creativeTemplateName
+   *   A fully-qualified path representing CreativeTemplate resource.
+   * @returns {string} A string representing the creative_template.
+   */
+  matchCreativeTemplateFromCreativeTemplateName(creativeTemplateName: string) {
+    return this.pathTemplates.creativeTemplatePathTemplate.match(creativeTemplateName).creative_template;
   }
 
   /**
@@ -1311,6 +1774,42 @@ export class AdUnitServiceClient {
   }
 
   /**
+   * Return a fully-qualified deviceCapability resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} device_capability
+   * @returns {string} Resource name string.
+   */
+  deviceCapabilityPath(networkCode:string,deviceCapability:string) {
+    return this.pathTemplates.deviceCapabilityPathTemplate.render({
+      network_code: networkCode,
+      device_capability: deviceCapability,
+    });
+  }
+
+  /**
+   * Parse the network_code from DeviceCapability resource.
+   *
+   * @param {string} deviceCapabilityName
+   *   A fully-qualified path representing DeviceCapability resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromDeviceCapabilityName(deviceCapabilityName: string) {
+    return this.pathTemplates.deviceCapabilityPathTemplate.match(deviceCapabilityName).network_code;
+  }
+
+  /**
+   * Parse the device_capability from DeviceCapability resource.
+   *
+   * @param {string} deviceCapabilityName
+   *   A fully-qualified path representing DeviceCapability resource.
+   * @returns {string} A string representing the device_capability.
+   */
+  matchDeviceCapabilityFromDeviceCapabilityName(deviceCapabilityName: string) {
+    return this.pathTemplates.deviceCapabilityPathTemplate.match(deviceCapabilityName).device_capability;
+  }
+
+  /**
    * Return a fully-qualified deviceCategory resource name string.
    *
    * @param {string} network_code
@@ -1344,6 +1843,42 @@ export class AdUnitServiceClient {
    */
   matchDeviceCategoryFromDeviceCategoryName(deviceCategoryName: string) {
     return this.pathTemplates.deviceCategoryPathTemplate.match(deviceCategoryName).device_category;
+  }
+
+  /**
+   * Return a fully-qualified deviceManufacturer resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} device_manufacturer
+   * @returns {string} Resource name string.
+   */
+  deviceManufacturerPath(networkCode:string,deviceManufacturer:string) {
+    return this.pathTemplates.deviceManufacturerPathTemplate.render({
+      network_code: networkCode,
+      device_manufacturer: deviceManufacturer,
+    });
+  }
+
+  /**
+   * Parse the network_code from DeviceManufacturer resource.
+   *
+   * @param {string} deviceManufacturerName
+   *   A fully-qualified path representing DeviceManufacturer resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromDeviceManufacturerName(deviceManufacturerName: string) {
+    return this.pathTemplates.deviceManufacturerPathTemplate.match(deviceManufacturerName).network_code;
+  }
+
+  /**
+   * Parse the device_manufacturer from DeviceManufacturer resource.
+   *
+   * @param {string} deviceManufacturerName
+   *   A fully-qualified path representing DeviceManufacturer resource.
+   * @returns {string} A string representing the device_manufacturer.
+   */
+  matchDeviceManufacturerFromDeviceManufacturerName(deviceManufacturerName: string) {
+    return this.pathTemplates.deviceManufacturerPathTemplate.match(deviceManufacturerName).device_manufacturer;
   }
 
   /**
@@ -1488,6 +2023,114 @@ export class AdUnitServiceClient {
    */
   matchLiveStreamEventFromLiveStreamEventName(liveStreamEventName: string) {
     return this.pathTemplates.liveStreamEventPathTemplate.match(liveStreamEventName).live_stream_event;
+  }
+
+  /**
+   * Return a fully-qualified mobileCarrier resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} mobile_carrier
+   * @returns {string} Resource name string.
+   */
+  mobileCarrierPath(networkCode:string,mobileCarrier:string) {
+    return this.pathTemplates.mobileCarrierPathTemplate.render({
+      network_code: networkCode,
+      mobile_carrier: mobileCarrier,
+    });
+  }
+
+  /**
+   * Parse the network_code from MobileCarrier resource.
+   *
+   * @param {string} mobileCarrierName
+   *   A fully-qualified path representing MobileCarrier resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromMobileCarrierName(mobileCarrierName: string) {
+    return this.pathTemplates.mobileCarrierPathTemplate.match(mobileCarrierName).network_code;
+  }
+
+  /**
+   * Parse the mobile_carrier from MobileCarrier resource.
+   *
+   * @param {string} mobileCarrierName
+   *   A fully-qualified path representing MobileCarrier resource.
+   * @returns {string} A string representing the mobile_carrier.
+   */
+  matchMobileCarrierFromMobileCarrierName(mobileCarrierName: string) {
+    return this.pathTemplates.mobileCarrierPathTemplate.match(mobileCarrierName).mobile_carrier;
+  }
+
+  /**
+   * Return a fully-qualified mobileDevice resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} mobile_device
+   * @returns {string} Resource name string.
+   */
+  mobileDevicePath(networkCode:string,mobileDevice:string) {
+    return this.pathTemplates.mobileDevicePathTemplate.render({
+      network_code: networkCode,
+      mobile_device: mobileDevice,
+    });
+  }
+
+  /**
+   * Parse the network_code from MobileDevice resource.
+   *
+   * @param {string} mobileDeviceName
+   *   A fully-qualified path representing MobileDevice resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromMobileDeviceName(mobileDeviceName: string) {
+    return this.pathTemplates.mobileDevicePathTemplate.match(mobileDeviceName).network_code;
+  }
+
+  /**
+   * Parse the mobile_device from MobileDevice resource.
+   *
+   * @param {string} mobileDeviceName
+   *   A fully-qualified path representing MobileDevice resource.
+   * @returns {string} A string representing the mobile_device.
+   */
+  matchMobileDeviceFromMobileDeviceName(mobileDeviceName: string) {
+    return this.pathTemplates.mobileDevicePathTemplate.match(mobileDeviceName).mobile_device;
+  }
+
+  /**
+   * Return a fully-qualified mobileDeviceSubmodel resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} mobile_device_submodel
+   * @returns {string} Resource name string.
+   */
+  mobileDeviceSubmodelPath(networkCode:string,mobileDeviceSubmodel:string) {
+    return this.pathTemplates.mobileDeviceSubmodelPathTemplate.render({
+      network_code: networkCode,
+      mobile_device_submodel: mobileDeviceSubmodel,
+    });
+  }
+
+  /**
+   * Parse the network_code from MobileDeviceSubmodel resource.
+   *
+   * @param {string} mobileDeviceSubmodelName
+   *   A fully-qualified path representing MobileDeviceSubmodel resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromMobileDeviceSubmodelName(mobileDeviceSubmodelName: string) {
+    return this.pathTemplates.mobileDeviceSubmodelPathTemplate.match(mobileDeviceSubmodelName).network_code;
+  }
+
+  /**
+   * Parse the mobile_device_submodel from MobileDeviceSubmodel resource.
+   *
+   * @param {string} mobileDeviceSubmodelName
+   *   A fully-qualified path representing MobileDeviceSubmodel resource.
+   * @returns {string} A string representing the mobile_device_submodel.
+   */
+  matchMobileDeviceSubmodelFromMobileDeviceSubmodelName(mobileDeviceSubmodelName: string) {
+    return this.pathTemplates.mobileDeviceSubmodelPathTemplate.match(mobileDeviceSubmodelName).mobile_device_submodel;
   }
 
   /**
@@ -1838,6 +2481,42 @@ export class AdUnitServiceClient {
   }
 
   /**
+   * Return a fully-qualified site resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} site
+   * @returns {string} Resource name string.
+   */
+  sitePath(networkCode:string,site:string) {
+    return this.pathTemplates.sitePathTemplate.render({
+      network_code: networkCode,
+      site: site,
+    });
+  }
+
+  /**
+   * Parse the network_code from Site resource.
+   *
+   * @param {string} siteName
+   *   A fully-qualified path representing Site resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromSiteName(siteName: string) {
+    return this.pathTemplates.sitePathTemplate.match(siteName).network_code;
+  }
+
+  /**
+   * Parse the site from Site resource.
+   *
+   * @param {string} siteName
+   *   A fully-qualified path representing Site resource.
+   * @returns {string} A string representing the site.
+   */
+  matchSiteFromSiteName(siteName: string) {
+    return this.pathTemplates.sitePathTemplate.match(siteName).site;
+  }
+
+  /**
    * Return a fully-qualified taxonomyCategory resource name string.
    *
    * @param {string} network_code
@@ -1943,6 +2622,42 @@ export class AdUnitServiceClient {
    */
   matchUserFromUserName(userName: string) {
     return this.pathTemplates.userPathTemplate.match(userName).user;
+  }
+
+  /**
+   * Return a fully-qualified webProperty resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} web_property
+   * @returns {string} Resource name string.
+   */
+  webPropertyPath(networkCode:string,webProperty:string) {
+    return this.pathTemplates.webPropertyPathTemplate.render({
+      network_code: networkCode,
+      web_property: webProperty,
+    });
+  }
+
+  /**
+   * Parse the network_code from WebProperty resource.
+   *
+   * @param {string} webPropertyName
+   *   A fully-qualified path representing WebProperty resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromWebPropertyName(webPropertyName: string) {
+    return this.pathTemplates.webPropertyPathTemplate.match(webPropertyName).network_code;
+  }
+
+  /**
+   * Parse the web_property from WebProperty resource.
+   *
+   * @param {string} webPropertyName
+   *   A fully-qualified path representing WebProperty resource.
+   * @returns {string} A string representing the web_property.
+   */
+  matchWebPropertyFromWebPropertyName(webPropertyName: string) {
+    return this.pathTemplates.webPropertyPathTemplate.match(webPropertyName).web_property;
   }
 
   /**

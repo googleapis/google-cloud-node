@@ -239,6 +239,10 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update environment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/environments.update_environment.js) |
 | get fulfillment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/fulfillments.get_fulfillment.js) |
 | update fulfillment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/fulfillments.update_fulfillment.js) |
+| create generator evaluation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/generator_evaluations.create_generator_evaluation.js) |
+| delete generator evaluation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/generator_evaluations.delete_generator_evaluation.js) |
+| get generator evaluation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/generator_evaluations.get_generator_evaluation.js) |
+| list generator evaluations | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/generator_evaluations.list_generator_evaluations.js) |
 | create generator | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/generators.create_generator.js) |
 | delete generator | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/generators.delete_generator.js) |
 | get generator | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/generators.get_generator.js) |
@@ -257,6 +261,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list knowledge bases | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/knowledge_bases.list_knowledge_bases.js) |
 | update knowledge base | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/knowledge_bases.update_knowledge_base.js) |
 | analyze content | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/participants.analyze_content.js) |
+| bidi streaming analyze content | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/participants.bidi_streaming_analyze_content.js) |
 | compile suggestion | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/participants.compile_suggestion.js) |
 | create participant | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/participants.create_participant.js) |
 | get participant | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/participants.get_participant.js) |
@@ -285,6 +290,11 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list sip trunks | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/sip_trunks.list_sip_trunks.js) |
 | update sip trunk | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/sip_trunks.update_sip_trunk.js) |
 | cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/snippet_metadata_google.cloud.dialogflow.v2beta1.json) |
+| create tool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/tools.create_tool.js) |
+| delete tool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/tools.delete_tool.js) |
+| get tool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/tools.get_tool.js) |
+| list tools | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/tools.list_tools.js) |
+| update tool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/tools.update_tool.js) |
 | create version | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/versions.create_version.js) |
 | delete version | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/versions.delete_version.js) |
 | get version | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/versions.get_version.js) |

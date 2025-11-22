@@ -4011,10 +4011,43 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "adaptationModifiers": {
+                          "rule": "repeated",
+                          "type": "AdaptationModifier",
+                          "id": 23,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "diskReplicaZones": {
                           "rule": "repeated",
                           "type": "string",
                           "id": 24,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "storagePool": {
+                          "type": "string",
+                          "id": 25,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "AdaptationModifier": {
+                      "fields": {
+                        "modifier": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "value": {
+                          "type": "string",
+                          "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -4128,10 +4161,25 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "adaptationModifiers": {
+                          "rule": "repeated",
+                          "type": "AdaptationModifier",
+                          "id": 23,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "diskReplicaZones": {
                           "rule": "repeated",
                           "type": "string",
                           "id": 24,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "storagePool": {
+                          "type": "string",
+                          "id": 25,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -6386,11 +6434,28 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "adaptationModifiers": {
+                          "rule": "repeated",
+                          "type": "AdaptationModifier",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
                     "DataDiskImageImport": {
-                      "fields": {}
+                      "fields": {
+                        "guestOsFeatures": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
                     },
                     "SkipOsAdaptation": {
                       "fields": {}

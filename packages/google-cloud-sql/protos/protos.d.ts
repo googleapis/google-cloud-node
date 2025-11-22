@@ -6009,6 +6009,9 @@ export namespace google {
 
                     /** Settings enableDataplexIntegration */
                     enableDataplexIntegration?: (google.protobuf.IBoolValue|null);
+
+                    /** Settings autoUpgradeEnabled */
+                    autoUpgradeEnabled?: (boolean|null);
                 }
 
                 /** Represents a Settings. */
@@ -6121,6 +6124,9 @@ export namespace google {
 
                     /** Settings enableDataplexIntegration. */
                     public enableDataplexIntegration?: (google.protobuf.IBoolValue|null);
+
+                    /** Settings autoUpgradeEnabled. */
+                    public autoUpgradeEnabled?: (boolean|null);
 
                     /**
                      * Creates a new Settings instance using the specified properties.
@@ -6824,6 +6830,8 @@ export namespace google {
                     POSTGRES_14 = 110,
                     POSTGRES_15 = 172,
                     POSTGRES_16 = 272,
+                    POSTGRES_17 = 408,
+                    POSTGRES_18 = 557,
                     MYSQL_8_0 = 20,
                     MYSQL_8_0_18 = 41,
                     MYSQL_8_0_26 = 85,
@@ -37587,6 +37595,9 @@ export namespace google {
 
                     /** Settings enableDataplexIntegration */
                     enableDataplexIntegration?: (google.protobuf.IBoolValue|null);
+
+                    /** Settings autoUpgradeEnabled */
+                    autoUpgradeEnabled?: (boolean|null);
                 }
 
                 /** Represents a Settings. */
@@ -37699,6 +37710,9 @@ export namespace google {
 
                     /** Settings enableDataplexIntegration. */
                     public enableDataplexIntegration?: (google.protobuf.IBoolValue|null);
+
+                    /** Settings autoUpgradeEnabled. */
+                    public autoUpgradeEnabled?: (boolean|null);
 
                     /**
                      * Creates a new Settings instance using the specified properties.
@@ -39170,6 +39184,8 @@ export namespace google {
                     POSTGRES_14 = 110,
                     POSTGRES_15 = 172,
                     POSTGRES_16 = 272,
+                    POSTGRES_17 = 408,
+                    POSTGRES_18 = 557,
                     MYSQL_8_0 = 20,
                     MYSQL_8_0_18 = 41,
                     MYSQL_8_0_26 = 85,

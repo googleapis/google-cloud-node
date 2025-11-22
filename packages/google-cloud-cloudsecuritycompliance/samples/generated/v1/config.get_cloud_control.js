@@ -29,10 +29,16 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the cloudcontrol to retrieve in the format:
-   *  organizations/{organization}/locations/{location}/cloudControls/{cloud_control}
+   *  Required. The name of the cloud control to retrieve, in the format
+   *  `organizations/{organization}/locations/{location}/cloudControls/{cloud_control}`.
+   *  The only supported location is `global`.
    */
   // const name = 'abc123'
+  /**
+   *  Optional. The major version of the cloud control to retrieve. If not
+   *  specified, the most recently updated `revision_id` is retrieved.
+   */
+  // const majorRevisionId = 1234
 
   // Imports the Cloudsecuritycompliance library
   const {ConfigClient} = require('@google-cloud/cloudsecuritycompliance').v1;

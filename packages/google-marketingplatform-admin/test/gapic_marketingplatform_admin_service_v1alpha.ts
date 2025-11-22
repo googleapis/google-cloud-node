@@ -367,6 +367,114 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
         });
     });
 
+    describe('findSalesPartnerManagedClients', () => {
+        it('invokes findSalesPartnerManagedClients without error', async () => {
+            const client = new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsRequest', ['organization']);
+            request.organization = defaultValue1;
+            const expectedHeaderRequestParams = `organization=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse()
+            );
+            client.innerApiCalls.findSalesPartnerManagedClients = stubSimpleCall(expectedResponse);
+            const [response] = await client.findSalesPartnerManagedClients(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.findSalesPartnerManagedClients as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.findSalesPartnerManagedClients as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes findSalesPartnerManagedClients without error using callback', async () => {
+            const client = new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsRequest', ['organization']);
+            request.organization = defaultValue1;
+            const expectedHeaderRequestParams = `organization=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse()
+            );
+            client.innerApiCalls.findSalesPartnerManagedClients = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.findSalesPartnerManagedClients(
+                    request,
+                    (err?: Error|null, result?: protos.google.marketingplatform.admin.v1alpha.IFindSalesPartnerManagedClientsResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.findSalesPartnerManagedClients as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.findSalesPartnerManagedClients as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes findSalesPartnerManagedClients with error', async () => {
+            const client = new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsRequest', ['organization']);
+            request.organization = defaultValue1;
+            const expectedHeaderRequestParams = `organization=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.findSalesPartnerManagedClients = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.findSalesPartnerManagedClients(request), expectedError);
+            const actualRequest = (client.innerApiCalls.findSalesPartnerManagedClients as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.findSalesPartnerManagedClients as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes findSalesPartnerManagedClients with closed client', async () => {
+            const client = new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsRequest', ['organization']);
+            request.organization = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.findSalesPartnerManagedClients(request), expectedError);
+        });
+    });
+
     describe('createAnalyticsAccountLink', () => {
         it('invokes createAnalyticsAccountLink without error', async () => {
             const client = new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient({
@@ -688,6 +796,289 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
             const expectedError = new Error('The client has already been closed.');
             client.close().catch(err => {throw err});
             await assert.rejects(client.setPropertyServiceLevel(request), expectedError);
+        });
+    });
+
+    describe('reportPropertyUsage', () => {
+        it('invokes reportPropertyUsage without error', async () => {
+            const client = new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.marketingplatform.admin.v1alpha.ReportPropertyUsageRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.marketingplatform.admin.v1alpha.ReportPropertyUsageRequest', ['organization']);
+            request.organization = defaultValue1;
+            const expectedHeaderRequestParams = `organization=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse()
+            );
+            client.innerApiCalls.reportPropertyUsage = stubSimpleCall(expectedResponse);
+            const [response] = await client.reportPropertyUsage(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.reportPropertyUsage as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.reportPropertyUsage as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes reportPropertyUsage without error using callback', async () => {
+            const client = new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.marketingplatform.admin.v1alpha.ReportPropertyUsageRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.marketingplatform.admin.v1alpha.ReportPropertyUsageRequest', ['organization']);
+            request.organization = defaultValue1;
+            const expectedHeaderRequestParams = `organization=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse()
+            );
+            client.innerApiCalls.reportPropertyUsage = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.reportPropertyUsage(
+                    request,
+                    (err?: Error|null, result?: protos.google.marketingplatform.admin.v1alpha.IReportPropertyUsageResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.reportPropertyUsage as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.reportPropertyUsage as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes reportPropertyUsage with error', async () => {
+            const client = new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.marketingplatform.admin.v1alpha.ReportPropertyUsageRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.marketingplatform.admin.v1alpha.ReportPropertyUsageRequest', ['organization']);
+            request.organization = defaultValue1;
+            const expectedHeaderRequestParams = `organization=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.reportPropertyUsage = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.reportPropertyUsage(request), expectedError);
+            const actualRequest = (client.innerApiCalls.reportPropertyUsage as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.reportPropertyUsage as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes reportPropertyUsage with closed client', async () => {
+            const client = new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.marketingplatform.admin.v1alpha.ReportPropertyUsageRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.marketingplatform.admin.v1alpha.ReportPropertyUsageRequest', ['organization']);
+            request.organization = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.reportPropertyUsage(request), expectedError);
+        });
+    });
+
+    describe('listOrganizations', () => {
+        it('invokes listOrganizations without error', async () => {
+            const client = new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.marketingplatform.admin.v1alpha.ListOrganizationsRequest()
+            );const expectedResponse = [
+              generateSampleMessage(new protos.google.marketingplatform.admin.v1alpha.Organization()),
+              generateSampleMessage(new protos.google.marketingplatform.admin.v1alpha.Organization()),
+              generateSampleMessage(new protos.google.marketingplatform.admin.v1alpha.Organization()),
+            ];
+            client.innerApiCalls.listOrganizations = stubSimpleCall(expectedResponse);
+            const [response] = await client.listOrganizations(request);
+            assert.deepStrictEqual(response, expectedResponse);
+        });
+
+        it('invokes listOrganizations without error using callback', async () => {
+            const client = new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.marketingplatform.admin.v1alpha.ListOrganizationsRequest()
+            );const expectedResponse = [
+              generateSampleMessage(new protos.google.marketingplatform.admin.v1alpha.Organization()),
+              generateSampleMessage(new protos.google.marketingplatform.admin.v1alpha.Organization()),
+              generateSampleMessage(new protos.google.marketingplatform.admin.v1alpha.Organization()),
+            ];
+            client.innerApiCalls.listOrganizations = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listOrganizations(
+                    request,
+                    (err?: Error|null, result?: protos.google.marketingplatform.admin.v1alpha.IOrganization[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+        });
+
+        it('invokes listOrganizations with error', async () => {
+            const client = new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.marketingplatform.admin.v1alpha.ListOrganizationsRequest()
+            );
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listOrganizations = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listOrganizations(request), expectedError);
+        });
+
+        it('invokes listOrganizationsStream without error', async () => {
+            const client = new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.marketingplatform.admin.v1alpha.ListOrganizationsRequest()
+            );
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.marketingplatform.admin.v1alpha.Organization()),
+              generateSampleMessage(new protos.google.marketingplatform.admin.v1alpha.Organization()),
+              generateSampleMessage(new protos.google.marketingplatform.admin.v1alpha.Organization()),
+            ];
+            client.descriptors.page.listOrganizations.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listOrganizationsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.marketingplatform.admin.v1alpha.Organization[] = [];
+                stream.on('data', (response: protos.google.marketingplatform.admin.v1alpha.Organization) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listOrganizations.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listOrganizations, request));
+        });
+
+        it('invokes listOrganizationsStream with error', async () => {
+            const client = new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.marketingplatform.admin.v1alpha.ListOrganizationsRequest()
+            );
+            const expectedError = new Error('expected');
+            client.descriptors.page.listOrganizations.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listOrganizationsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.marketingplatform.admin.v1alpha.Organization[] = [];
+                stream.on('data', (response: protos.google.marketingplatform.admin.v1alpha.Organization) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listOrganizations.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listOrganizations, request));
+        });
+
+        it('uses async iteration with listOrganizations without error', async () => {
+            const client = new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.marketingplatform.admin.v1alpha.ListOrganizationsRequest()
+            );
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.marketingplatform.admin.v1alpha.Organization()),
+              generateSampleMessage(new protos.google.marketingplatform.admin.v1alpha.Organization()),
+              generateSampleMessage(new protos.google.marketingplatform.admin.v1alpha.Organization()),
+            ];
+            client.descriptors.page.listOrganizations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.marketingplatform.admin.v1alpha.IOrganization[] = [];
+            const iterable = client.listOrganizationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listOrganizations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
+
+        it('uses async iteration with listOrganizations with error', async () => {
+            const client = new marketingplatformadminserviceModule.v1alpha.MarketingplatformAdminServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.marketingplatform.admin.v1alpha.ListOrganizationsRequest()
+            );
+            const expectedError = new Error('expected');
+            client.descriptors.page.listOrganizations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listOrganizationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.marketingplatform.admin.v1alpha.IOrganization[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listOrganizations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
         });
     });
 

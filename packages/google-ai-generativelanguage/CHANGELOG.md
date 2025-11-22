@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.5.0](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v3.4.1...generativelanguage-v3.5.0) (2025-10-16)
+
+
+### Features
+
+* [generativelanguage] add support for additional reasons to stop image generation ([#6820](https://github.com/googleapis/google-cloud-node/issues/6820)) ([3290633](https://github.com/googleapis/google-cloud-node/commit/3290633a3b1d99a8c696aebe79f38984fda44460))
+
+## [3.4.1](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v3.4.0...generativelanguage-v3.4.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
 ## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v3.3.0...generativelanguage-v3.4.0) (2025-08-27)
 
 

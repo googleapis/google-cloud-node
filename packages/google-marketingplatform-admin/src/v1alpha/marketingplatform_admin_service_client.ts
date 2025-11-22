@@ -192,6 +192,8 @@ export class MarketingplatformAdminServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
+      listOrganizations:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'organizations'),
       listAnalyticsAccountLinks:
           new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'analyticsAccountLinks')
     };
@@ -239,7 +241,7 @@ export class MarketingplatformAdminServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const marketingplatformAdminServiceStubMethods =
-        ['getOrganization', 'listAnalyticsAccountLinks', 'createAnalyticsAccountLink', 'deleteAnalyticsAccountLink', 'setPropertyServiceLevel'];
+        ['getOrganization', 'listOrganizations', 'findSalesPartnerManagedClients', 'listAnalyticsAccountLinks', 'createAnalyticsAccountLink', 'deleteAnalyticsAccountLink', 'setPropertyServiceLevel', 'reportPropertyUsage'];
     for (const methodName of marketingplatformAdminServiceStubMethods) {
       const callPromise = this.marketingplatformAdminServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -429,6 +431,106 @@ export class MarketingplatformAdminServiceClient {
         {}|undefined
       ]) => {
         this._log.info('getOrganization response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Returns a list of clients managed by the sales partner organization.
+ *
+ * User needs to be an OrgAdmin/BillingAdmin on the sales partner organization
+ * in order to view the end clients.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.organization
+ *   Required. The name of the sales partner organization.
+ *   Format: organizations/{org_id}
+ * @param {boolean} [request.isActive]
+ *   Optional. If set, only active and just ended clients will be returned.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.marketingplatform.admin.v1alpha.FindSalesPartnerManagedClientsResponse|FindSalesPartnerManagedClientsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/marketingplatform_admin_service.find_sales_partner_managed_clients.js</caption>
+ * region_tag:marketingplatformadmin_v1alpha_generated_MarketingplatformAdminService_FindSalesPartnerManagedClients_async
+ */
+  findSalesPartnerManagedClients(
+      request?: protos.google.marketingplatform.admin.v1alpha.IFindSalesPartnerManagedClientsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.marketingplatform.admin.v1alpha.IFindSalesPartnerManagedClientsResponse,
+        protos.google.marketingplatform.admin.v1alpha.IFindSalesPartnerManagedClientsRequest|undefined, {}|undefined
+      ]>;
+  findSalesPartnerManagedClients(
+      request: protos.google.marketingplatform.admin.v1alpha.IFindSalesPartnerManagedClientsRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.marketingplatform.admin.v1alpha.IFindSalesPartnerManagedClientsResponse,
+          protos.google.marketingplatform.admin.v1alpha.IFindSalesPartnerManagedClientsRequest|null|undefined,
+          {}|null|undefined>): void;
+  findSalesPartnerManagedClients(
+      request: protos.google.marketingplatform.admin.v1alpha.IFindSalesPartnerManagedClientsRequest,
+      callback: Callback<
+          protos.google.marketingplatform.admin.v1alpha.IFindSalesPartnerManagedClientsResponse,
+          protos.google.marketingplatform.admin.v1alpha.IFindSalesPartnerManagedClientsRequest|null|undefined,
+          {}|null|undefined>): void;
+  findSalesPartnerManagedClients(
+      request?: protos.google.marketingplatform.admin.v1alpha.IFindSalesPartnerManagedClientsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.marketingplatform.admin.v1alpha.IFindSalesPartnerManagedClientsResponse,
+          protos.google.marketingplatform.admin.v1alpha.IFindSalesPartnerManagedClientsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.marketingplatform.admin.v1alpha.IFindSalesPartnerManagedClientsResponse,
+          protos.google.marketingplatform.admin.v1alpha.IFindSalesPartnerManagedClientsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.marketingplatform.admin.v1alpha.IFindSalesPartnerManagedClientsResponse,
+        protos.google.marketingplatform.admin.v1alpha.IFindSalesPartnerManagedClientsRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'organization': request.organization ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('findSalesPartnerManagedClients request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.marketingplatform.admin.v1alpha.IFindSalesPartnerManagedClientsResponse,
+        protos.google.marketingplatform.admin.v1alpha.IFindSalesPartnerManagedClientsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('findSalesPartnerManagedClients response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.findSalesPartnerManagedClients(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.marketingplatform.admin.v1alpha.IFindSalesPartnerManagedClientsResponse,
+        protos.google.marketingplatform.admin.v1alpha.IFindSalesPartnerManagedClientsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('findSalesPartnerManagedClients response %j', response);
         return [response, options, rawResponse];
       }).catch((error: any) => {
         if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
@@ -743,7 +845,313 @@ export class MarketingplatformAdminServiceClient {
         throw error;
       });
   }
+/**
+ * Get the usage and billing data for properties within the organization for
+ * the specified month.
+ *
+ * Per direct client org, user needs to be OrgAdmin/BillingAdmin on the
+ * organization in order to view the billing and usage data.
+ *
+ * Per sales partner client org, user needs to be OrgAdmin/BillingAdmin on
+ * the sales partner org in order to view the billing and usage data, or
+ * OrgAdmin/BillingAdmin on the sales partner client org in order to view the
+ * usage data only.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.organization
+ *   Required. Specifies the organization whose property usage will be listed.
+ *
+ *   Format: organizations/{org_id}
+ * @param {string} request.month
+ *   Required. The target month to list property usages.
+ *
+ *   Format: YYYY-MM. For example, "2025-05"
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.marketingplatform.admin.v1alpha.ReportPropertyUsageResponse|ReportPropertyUsageResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/marketingplatform_admin_service.report_property_usage.js</caption>
+ * region_tag:marketingplatformadmin_v1alpha_generated_MarketingplatformAdminService_ReportPropertyUsage_async
+ */
+  reportPropertyUsage(
+      request?: protos.google.marketingplatform.admin.v1alpha.IReportPropertyUsageRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.marketingplatform.admin.v1alpha.IReportPropertyUsageResponse,
+        protos.google.marketingplatform.admin.v1alpha.IReportPropertyUsageRequest|undefined, {}|undefined
+      ]>;
+  reportPropertyUsage(
+      request: protos.google.marketingplatform.admin.v1alpha.IReportPropertyUsageRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.marketingplatform.admin.v1alpha.IReportPropertyUsageResponse,
+          protos.google.marketingplatform.admin.v1alpha.IReportPropertyUsageRequest|null|undefined,
+          {}|null|undefined>): void;
+  reportPropertyUsage(
+      request: protos.google.marketingplatform.admin.v1alpha.IReportPropertyUsageRequest,
+      callback: Callback<
+          protos.google.marketingplatform.admin.v1alpha.IReportPropertyUsageResponse,
+          protos.google.marketingplatform.admin.v1alpha.IReportPropertyUsageRequest|null|undefined,
+          {}|null|undefined>): void;
+  reportPropertyUsage(
+      request?: protos.google.marketingplatform.admin.v1alpha.IReportPropertyUsageRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.marketingplatform.admin.v1alpha.IReportPropertyUsageResponse,
+          protos.google.marketingplatform.admin.v1alpha.IReportPropertyUsageRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.marketingplatform.admin.v1alpha.IReportPropertyUsageResponse,
+          protos.google.marketingplatform.admin.v1alpha.IReportPropertyUsageRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.marketingplatform.admin.v1alpha.IReportPropertyUsageResponse,
+        protos.google.marketingplatform.admin.v1alpha.IReportPropertyUsageRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'organization': request.organization ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('reportPropertyUsage request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.marketingplatform.admin.v1alpha.IReportPropertyUsageResponse,
+        protos.google.marketingplatform.admin.v1alpha.IReportPropertyUsageRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('reportPropertyUsage response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.reportPropertyUsage(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.marketingplatform.admin.v1alpha.IReportPropertyUsageResponse,
+        protos.google.marketingplatform.admin.v1alpha.IReportPropertyUsageRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('reportPropertyUsage response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
 
+ /**
+ * Returns a list of organizations that the user has access to.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of organizations to return in one call. The
+ *   service may return fewer than this value.
+ *
+ *   If unspecified, at most 50 organizations will be returned. The
+ *   maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous ListOrganizations call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `ListOrganizations` must match the call that provided the page
+ *   token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.marketingplatform.admin.v1alpha.Organization|Organization}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listOrganizationsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listOrganizations(
+      request?: protos.google.marketingplatform.admin.v1alpha.IListOrganizationsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.marketingplatform.admin.v1alpha.IOrganization[],
+        protos.google.marketingplatform.admin.v1alpha.IListOrganizationsRequest|null,
+        protos.google.marketingplatform.admin.v1alpha.IListOrganizationsResponse
+      ]>;
+  listOrganizations(
+      request: protos.google.marketingplatform.admin.v1alpha.IListOrganizationsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
+          protos.google.marketingplatform.admin.v1alpha.IListOrganizationsRequest,
+          protos.google.marketingplatform.admin.v1alpha.IListOrganizationsResponse|null|undefined,
+          protos.google.marketingplatform.admin.v1alpha.IOrganization>): void;
+  listOrganizations(
+      request: protos.google.marketingplatform.admin.v1alpha.IListOrganizationsRequest,
+      callback: PaginationCallback<
+          protos.google.marketingplatform.admin.v1alpha.IListOrganizationsRequest,
+          protos.google.marketingplatform.admin.v1alpha.IListOrganizationsResponse|null|undefined,
+          protos.google.marketingplatform.admin.v1alpha.IOrganization>): void;
+  listOrganizations(
+      request?: protos.google.marketingplatform.admin.v1alpha.IListOrganizationsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.marketingplatform.admin.v1alpha.IListOrganizationsRequest,
+          protos.google.marketingplatform.admin.v1alpha.IListOrganizationsResponse|null|undefined,
+          protos.google.marketingplatform.admin.v1alpha.IOrganization>,
+      callback?: PaginationCallback<
+          protos.google.marketingplatform.admin.v1alpha.IListOrganizationsRequest,
+          protos.google.marketingplatform.admin.v1alpha.IListOrganizationsResponse|null|undefined,
+          protos.google.marketingplatform.admin.v1alpha.IOrganization>):
+      Promise<[
+        protos.google.marketingplatform.admin.v1alpha.IOrganization[],
+        protos.google.marketingplatform.admin.v1alpha.IListOrganizationsRequest|null,
+        protos.google.marketingplatform.admin.v1alpha.IListOrganizationsResponse
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.marketingplatform.admin.v1alpha.IListOrganizationsRequest,
+      protos.google.marketingplatform.admin.v1alpha.IListOrganizationsResponse|null|undefined,
+      protos.google.marketingplatform.admin.v1alpha.IOrganization>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listOrganizations values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listOrganizations request %j', request);
+    return this.innerApiCalls
+      .listOrganizations(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.marketingplatform.admin.v1alpha.IOrganization[],
+        protos.google.marketingplatform.admin.v1alpha.IListOrganizationsRequest|null,
+        protos.google.marketingplatform.admin.v1alpha.IListOrganizationsResponse
+      ]) => {
+        this._log.info('listOrganizations values %j', response);
+        return [response, input, output];
+      });
+  }
+
+/**
+ * Equivalent to `listOrganizations`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of organizations to return in one call. The
+ *   service may return fewer than this value.
+ *
+ *   If unspecified, at most 50 organizations will be returned. The
+ *   maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous ListOrganizations call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `ListOrganizations` must match the call that provided the page
+ *   token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.marketingplatform.admin.v1alpha.Organization|Organization} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listOrganizationsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listOrganizationsStream(
+      request?: protos.google.marketingplatform.admin.v1alpha.IListOrganizationsRequest,
+      options?: CallOptions):
+    Transform{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    const defaultCallSettings = this._defaults['listOrganizations'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listOrganizations stream %j', request);
+    return this.descriptors.page.listOrganizations.createStream(
+      this.innerApiCalls.listOrganizations as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+/**
+ * Equivalent to `listOrganizations`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of organizations to return in one call. The
+ *   service may return fewer than this value.
+ *
+ *   If unspecified, at most 50 organizations will be returned. The
+ *   maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous ListOrganizations call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `ListOrganizations` must match the call that provided the page
+ *   token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.marketingplatform.admin.v1alpha.Organization|Organization}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/marketingplatform_admin_service.list_organizations.js</caption>
+ * region_tag:marketingplatformadmin_v1alpha_generated_MarketingplatformAdminService_ListOrganizations_async
+ */
+  listOrganizationsAsync(
+      request?: protos.google.marketingplatform.admin.v1alpha.IListOrganizationsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.marketingplatform.admin.v1alpha.IOrganization>{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    const defaultCallSettings = this._defaults['listOrganizations'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listOrganizations iterate %j', request);
+    return this.descriptors.page.listOrganizations.asyncIterate(
+      this.innerApiCalls['listOrganizations'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.marketingplatform.admin.v1alpha.IOrganization>;
+  }
  /**
  * Lists the Google Analytics accounts link to the specified Google Marketing
  * Platform organization.

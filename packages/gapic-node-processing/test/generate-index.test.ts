@@ -31,10 +31,10 @@ describe('generate index.ts', () => {
   beforeEach(async () => {
     await combineLibraries(
       new LibraryConfig({
-        sourcePath: path.resolve(TEST_FIXTURES_PATH, LIB_PRE_COMBINATION_ESM),
+        sourcePath: path.resolve(TEST_FIXTURES_PATH, LIB_PRE_COMBINATION),
         destinationPath: path.resolve(
           TEST_FIXTURES_PATH,
-          LIB_POST_COMBINATION_ESM,
+          LIB_POST_COMBINATION,
         ),
         defaultVersion: 'v2',
         isEsm: false,

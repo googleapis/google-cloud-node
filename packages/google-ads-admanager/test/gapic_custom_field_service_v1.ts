@@ -378,6 +378,658 @@ describe('v1.CustomFieldServiceClient', () => {
         });
     });
 
+    describe('createCustomField', () => {
+        it('invokes createCustomField without error', async () => {
+            const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.CreateCustomFieldRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.CreateCustomFieldRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.CustomField()
+            );
+            client.innerApiCalls.createCustomField = stubSimpleCall(expectedResponse);
+            const [response] = await client.createCustomField(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createCustomField as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createCustomField as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createCustomField without error using callback', async () => {
+            const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.CreateCustomFieldRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.CreateCustomFieldRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.CustomField()
+            );
+            client.innerApiCalls.createCustomField = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createCustomField(
+                    request,
+                    (err?: Error|null, result?: protos.google.ads.admanager.v1.ICustomField|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createCustomField as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createCustomField as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createCustomField with error', async () => {
+            const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.CreateCustomFieldRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.CreateCustomFieldRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createCustomField = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createCustomField(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createCustomField as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createCustomField as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createCustomField with closed client', async () => {
+            const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.CreateCustomFieldRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.CreateCustomFieldRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createCustomField(request), expectedError);
+        });
+    });
+
+    describe('batchCreateCustomFields', () => {
+        it('invokes batchCreateCustomFields without error', async () => {
+            const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchCreateCustomFieldsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchCreateCustomFieldsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchCreateCustomFieldsResponse()
+            );
+            client.innerApiCalls.batchCreateCustomFields = stubSimpleCall(expectedResponse);
+            const [response] = await client.batchCreateCustomFields(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchCreateCustomFields as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchCreateCustomFields as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchCreateCustomFields without error using callback', async () => {
+            const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchCreateCustomFieldsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchCreateCustomFieldsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchCreateCustomFieldsResponse()
+            );
+            client.innerApiCalls.batchCreateCustomFields = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.batchCreateCustomFields(
+                    request,
+                    (err?: Error|null, result?: protos.google.ads.admanager.v1.IBatchCreateCustomFieldsResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchCreateCustomFields as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchCreateCustomFields as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchCreateCustomFields with error', async () => {
+            const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchCreateCustomFieldsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchCreateCustomFieldsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.batchCreateCustomFields = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.batchCreateCustomFields(request), expectedError);
+            const actualRequest = (client.innerApiCalls.batchCreateCustomFields as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchCreateCustomFields as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchCreateCustomFields with closed client', async () => {
+            const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchCreateCustomFieldsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchCreateCustomFieldsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.batchCreateCustomFields(request), expectedError);
+        });
+    });
+
+    describe('updateCustomField', () => {
+        it('invokes updateCustomField without error', async () => {
+            const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.UpdateCustomFieldRequest()
+            );
+            request.customField ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.UpdateCustomFieldRequest', ['customField', 'name']);
+            request.customField.name = defaultValue1;
+            const expectedHeaderRequestParams = `custom_field.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.CustomField()
+            );
+            client.innerApiCalls.updateCustomField = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateCustomField(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateCustomField as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateCustomField as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateCustomField without error using callback', async () => {
+            const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.UpdateCustomFieldRequest()
+            );
+            request.customField ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.UpdateCustomFieldRequest', ['customField', 'name']);
+            request.customField.name = defaultValue1;
+            const expectedHeaderRequestParams = `custom_field.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.CustomField()
+            );
+            client.innerApiCalls.updateCustomField = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateCustomField(
+                    request,
+                    (err?: Error|null, result?: protos.google.ads.admanager.v1.ICustomField|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateCustomField as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateCustomField as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateCustomField with error', async () => {
+            const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.UpdateCustomFieldRequest()
+            );
+            request.customField ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.UpdateCustomFieldRequest', ['customField', 'name']);
+            request.customField.name = defaultValue1;
+            const expectedHeaderRequestParams = `custom_field.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateCustomField = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateCustomField(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateCustomField as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateCustomField as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateCustomField with closed client', async () => {
+            const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.UpdateCustomFieldRequest()
+            );
+            request.customField ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.UpdateCustomFieldRequest', ['customField', 'name']);
+            request.customField.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateCustomField(request), expectedError);
+        });
+    });
+
+    describe('batchUpdateCustomFields', () => {
+        it('invokes batchUpdateCustomFields without error', async () => {
+            const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchUpdateCustomFieldsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchUpdateCustomFieldsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchUpdateCustomFieldsResponse()
+            );
+            client.innerApiCalls.batchUpdateCustomFields = stubSimpleCall(expectedResponse);
+            const [response] = await client.batchUpdateCustomFields(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchUpdateCustomFields as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchUpdateCustomFields as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchUpdateCustomFields without error using callback', async () => {
+            const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchUpdateCustomFieldsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchUpdateCustomFieldsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchUpdateCustomFieldsResponse()
+            );
+            client.innerApiCalls.batchUpdateCustomFields = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.batchUpdateCustomFields(
+                    request,
+                    (err?: Error|null, result?: protos.google.ads.admanager.v1.IBatchUpdateCustomFieldsResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchUpdateCustomFields as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchUpdateCustomFields as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchUpdateCustomFields with error', async () => {
+            const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchUpdateCustomFieldsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchUpdateCustomFieldsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.batchUpdateCustomFields = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.batchUpdateCustomFields(request), expectedError);
+            const actualRequest = (client.innerApiCalls.batchUpdateCustomFields as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchUpdateCustomFields as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchUpdateCustomFields with closed client', async () => {
+            const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchUpdateCustomFieldsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchUpdateCustomFieldsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.batchUpdateCustomFields(request), expectedError);
+        });
+    });
+
+    describe('batchActivateCustomFields', () => {
+        it('invokes batchActivateCustomFields without error', async () => {
+            const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchActivateCustomFieldsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchActivateCustomFieldsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchActivateCustomFieldsResponse()
+            );
+            client.innerApiCalls.batchActivateCustomFields = stubSimpleCall(expectedResponse);
+            const [response] = await client.batchActivateCustomFields(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchActivateCustomFields as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchActivateCustomFields as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchActivateCustomFields without error using callback', async () => {
+            const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchActivateCustomFieldsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchActivateCustomFieldsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchActivateCustomFieldsResponse()
+            );
+            client.innerApiCalls.batchActivateCustomFields = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.batchActivateCustomFields(
+                    request,
+                    (err?: Error|null, result?: protos.google.ads.admanager.v1.IBatchActivateCustomFieldsResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchActivateCustomFields as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchActivateCustomFields as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchActivateCustomFields with error', async () => {
+            const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchActivateCustomFieldsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchActivateCustomFieldsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.batchActivateCustomFields = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.batchActivateCustomFields(request), expectedError);
+            const actualRequest = (client.innerApiCalls.batchActivateCustomFields as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchActivateCustomFields as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchActivateCustomFields with closed client', async () => {
+            const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchActivateCustomFieldsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchActivateCustomFieldsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.batchActivateCustomFields(request), expectedError);
+        });
+    });
+
+    describe('batchDeactivateCustomFields', () => {
+        it('invokes batchDeactivateCustomFields without error', async () => {
+            const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchDeactivateCustomFieldsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchDeactivateCustomFieldsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchDeactivateCustomFieldsResponse()
+            );
+            client.innerApiCalls.batchDeactivateCustomFields = stubSimpleCall(expectedResponse);
+            const [response] = await client.batchDeactivateCustomFields(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchDeactivateCustomFields as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchDeactivateCustomFields as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchDeactivateCustomFields without error using callback', async () => {
+            const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchDeactivateCustomFieldsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchDeactivateCustomFieldsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchDeactivateCustomFieldsResponse()
+            );
+            client.innerApiCalls.batchDeactivateCustomFields = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.batchDeactivateCustomFields(
+                    request,
+                    (err?: Error|null, result?: protos.google.ads.admanager.v1.IBatchDeactivateCustomFieldsResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchDeactivateCustomFields as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchDeactivateCustomFields as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchDeactivateCustomFields with error', async () => {
+            const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchDeactivateCustomFieldsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchDeactivateCustomFieldsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.batchDeactivateCustomFields = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.batchDeactivateCustomFields(request), expectedError);
+            const actualRequest = (client.innerApiCalls.batchDeactivateCustomFields as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchDeactivateCustomFields as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchDeactivateCustomFields with closed client', async () => {
+            const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchDeactivateCustomFieldsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchDeactivateCustomFieldsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.batchDeactivateCustomFields(request), expectedError);
+        });
+    });
+
     describe('listCustomFields', () => {
         it('invokes listCustomFields without error', async () => {
             const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
@@ -671,6 +1323,52 @@ describe('v1.CustomFieldServiceClient', () => {
             });
         });
 
+        describe('adReviewCenterAd', async () => {
+            const fakePath = "/rendered/path/adReviewCenterAd";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                web_property_code: "webPropertyCodeValue",
+                ad_review_center_ad: "adReviewCenterAdValue",
+            };
+            const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.adReviewCenterAdPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.adReviewCenterAdPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('adReviewCenterAdPath', () => {
+                const result = client.adReviewCenterAdPath("networkCodeValue", "webPropertyCodeValue", "adReviewCenterAdValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.adReviewCenterAdPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromAdReviewCenterAdName', () => {
+                const result = client.matchNetworkCodeFromAdReviewCenterAdName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.adReviewCenterAdPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchWebPropertyCodeFromAdReviewCenterAdName', () => {
+                const result = client.matchWebPropertyCodeFromAdReviewCenterAdName(fakePath);
+                assert.strictEqual(result, "webPropertyCodeValue");
+                assert((client.pathTemplates.adReviewCenterAdPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAdReviewCenterAdFromAdReviewCenterAdName', () => {
+                const result = client.matchAdReviewCenterAdFromAdReviewCenterAdName(fakePath);
+                assert.strictEqual(result, "adReviewCenterAdValue");
+                assert((client.pathTemplates.adReviewCenterAdPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('adUnit', async () => {
             const fakePath = "/rendered/path/adUnit";
             const expectedParameters = {
@@ -709,6 +1407,82 @@ describe('v1.CustomFieldServiceClient', () => {
             });
         });
 
+        describe('application', async () => {
+            const fakePath = "/rendered/path/application";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                application: "applicationValue",
+            };
+            const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.applicationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.applicationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('applicationPath', () => {
+                const result = client.applicationPath("networkCodeValue", "applicationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.applicationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromApplicationName', () => {
+                const result = client.matchNetworkCodeFromApplicationName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.applicationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchApplicationFromApplicationName', () => {
+                const result = client.matchApplicationFromApplicationName(fakePath);
+                assert.strictEqual(result, "applicationValue");
+                assert((client.pathTemplates.applicationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('audienceSegment', async () => {
+            const fakePath = "/rendered/path/audienceSegment";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                audience_segment: "audienceSegmentValue",
+            };
+            const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.audienceSegmentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.audienceSegmentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('audienceSegmentPath', () => {
+                const result = client.audienceSegmentPath("networkCodeValue", "audienceSegmentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.audienceSegmentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromAudienceSegmentName', () => {
+                const result = client.matchNetworkCodeFromAudienceSegmentName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.audienceSegmentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAudienceSegmentFromAudienceSegmentName', () => {
+                const result = client.matchAudienceSegmentFromAudienceSegmentName(fakePath);
+                assert.strictEqual(result, "audienceSegmentValue");
+                assert((client.pathTemplates.audienceSegmentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('bandwidthGroup', async () => {
             const fakePath = "/rendered/path/bandwidthGroup";
             const expectedParameters = {
@@ -743,6 +1517,158 @@ describe('v1.CustomFieldServiceClient', () => {
                 const result = client.matchBandwidthGroupFromBandwidthGroupName(fakePath);
                 assert.strictEqual(result, "bandwidthGroupValue");
                 assert((client.pathTemplates.bandwidthGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('browser', async () => {
+            const fakePath = "/rendered/path/browser";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                browser: "browserValue",
+            };
+            const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.browserPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.browserPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('browserPath', () => {
+                const result = client.browserPath("networkCodeValue", "browserValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.browserPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromBrowserName', () => {
+                const result = client.matchNetworkCodeFromBrowserName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.browserPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchBrowserFromBrowserName', () => {
+                const result = client.matchBrowserFromBrowserName(fakePath);
+                assert.strictEqual(result, "browserValue");
+                assert((client.pathTemplates.browserPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('browserLanguage', async () => {
+            const fakePath = "/rendered/path/browserLanguage";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                browser_language: "browserLanguageValue",
+            };
+            const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.browserLanguagePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.browserLanguagePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('browserLanguagePath', () => {
+                const result = client.browserLanguagePath("networkCodeValue", "browserLanguageValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.browserLanguagePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromBrowserLanguageName', () => {
+                const result = client.matchNetworkCodeFromBrowserLanguageName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.browserLanguagePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchBrowserLanguageFromBrowserLanguageName', () => {
+                const result = client.matchBrowserLanguageFromBrowserLanguageName(fakePath);
+                assert.strictEqual(result, "browserLanguageValue");
+                assert((client.pathTemplates.browserLanguagePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('cmsMetadataKey', async () => {
+            const fakePath = "/rendered/path/cmsMetadataKey";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                cms_metadata_key: "cmsMetadataKeyValue",
+            };
+            const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.cmsMetadataKeyPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.cmsMetadataKeyPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('cmsMetadataKeyPath', () => {
+                const result = client.cmsMetadataKeyPath("networkCodeValue", "cmsMetadataKeyValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.cmsMetadataKeyPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromCmsMetadataKeyName', () => {
+                const result = client.matchNetworkCodeFromCmsMetadataKeyName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.cmsMetadataKeyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCmsMetadataKeyFromCmsMetadataKeyName', () => {
+                const result = client.matchCmsMetadataKeyFromCmsMetadataKeyName(fakePath);
+                assert.strictEqual(result, "cmsMetadataKeyValue");
+                assert((client.pathTemplates.cmsMetadataKeyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('cmsMetadataValue', async () => {
+            const fakePath = "/rendered/path/cmsMetadataValue";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                cms_metadata_value: "cmsMetadataValueValue",
+            };
+            const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.cmsMetadataValuePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.cmsMetadataValuePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('cmsMetadataValuePath', () => {
+                const result = client.cmsMetadataValuePath("networkCodeValue", "cmsMetadataValueValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.cmsMetadataValuePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromCmsMetadataValueName', () => {
+                const result = client.matchNetworkCodeFromCmsMetadataValueName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.cmsMetadataValuePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCmsMetadataValueFromCmsMetadataValueName', () => {
+                const result = client.matchCmsMetadataValueFromCmsMetadataValueName(fakePath);
+                assert.strictEqual(result, "cmsMetadataValueValue");
+                assert((client.pathTemplates.cmsMetadataValuePathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
@@ -819,6 +1745,158 @@ describe('v1.CustomFieldServiceClient', () => {
                 const result = client.matchContactFromContactName(fakePath);
                 assert.strictEqual(result, "contactValue");
                 assert((client.pathTemplates.contactPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('content', async () => {
+            const fakePath = "/rendered/path/content";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                content: "contentValue",
+            };
+            const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.contentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.contentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('contentPath', () => {
+                const result = client.contentPath("networkCodeValue", "contentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.contentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromContentName', () => {
+                const result = client.matchNetworkCodeFromContentName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.contentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchContentFromContentName', () => {
+                const result = client.matchContentFromContentName(fakePath);
+                assert.strictEqual(result, "contentValue");
+                assert((client.pathTemplates.contentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('contentBundle', async () => {
+            const fakePath = "/rendered/path/contentBundle";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                content_bundle: "contentBundleValue",
+            };
+            const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.contentBundlePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.contentBundlePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('contentBundlePath', () => {
+                const result = client.contentBundlePath("networkCodeValue", "contentBundleValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.contentBundlePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromContentBundleName', () => {
+                const result = client.matchNetworkCodeFromContentBundleName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.contentBundlePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchContentBundleFromContentBundleName', () => {
+                const result = client.matchContentBundleFromContentBundleName(fakePath);
+                assert.strictEqual(result, "contentBundleValue");
+                assert((client.pathTemplates.contentBundlePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('contentLabel', async () => {
+            const fakePath = "/rendered/path/contentLabel";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                content_label: "contentLabelValue",
+            };
+            const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.contentLabelPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.contentLabelPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('contentLabelPath', () => {
+                const result = client.contentLabelPath("networkCodeValue", "contentLabelValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.contentLabelPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromContentLabelName', () => {
+                const result = client.matchNetworkCodeFromContentLabelName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.contentLabelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchContentLabelFromContentLabelName', () => {
+                const result = client.matchContentLabelFromContentLabelName(fakePath);
+                assert.strictEqual(result, "contentLabelValue");
+                assert((client.pathTemplates.contentLabelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('creativeTemplate', async () => {
+            const fakePath = "/rendered/path/creativeTemplate";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                creative_template: "creativeTemplateValue",
+            };
+            const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.creativeTemplatePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.creativeTemplatePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('creativeTemplatePath', () => {
+                const result = client.creativeTemplatePath("networkCodeValue", "creativeTemplateValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.creativeTemplatePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromCreativeTemplateName', () => {
+                const result = client.matchNetworkCodeFromCreativeTemplateName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.creativeTemplatePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCreativeTemplateFromCreativeTemplateName', () => {
+                const result = client.matchCreativeTemplateFromCreativeTemplateName(fakePath);
+                assert.strictEqual(result, "creativeTemplateValue");
+                assert((client.pathTemplates.creativeTemplatePathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
@@ -937,6 +2015,44 @@ describe('v1.CustomFieldServiceClient', () => {
             });
         });
 
+        describe('deviceCapability', async () => {
+            const fakePath = "/rendered/path/deviceCapability";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                device_capability: "deviceCapabilityValue",
+            };
+            const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.deviceCapabilityPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.deviceCapabilityPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('deviceCapabilityPath', () => {
+                const result = client.deviceCapabilityPath("networkCodeValue", "deviceCapabilityValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.deviceCapabilityPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromDeviceCapabilityName', () => {
+                const result = client.matchNetworkCodeFromDeviceCapabilityName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.deviceCapabilityPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDeviceCapabilityFromDeviceCapabilityName', () => {
+                const result = client.matchDeviceCapabilityFromDeviceCapabilityName(fakePath);
+                assert.strictEqual(result, "deviceCapabilityValue");
+                assert((client.pathTemplates.deviceCapabilityPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('deviceCategory', async () => {
             const fakePath = "/rendered/path/deviceCategory";
             const expectedParameters = {
@@ -971,6 +2087,44 @@ describe('v1.CustomFieldServiceClient', () => {
                 const result = client.matchDeviceCategoryFromDeviceCategoryName(fakePath);
                 assert.strictEqual(result, "deviceCategoryValue");
                 assert((client.pathTemplates.deviceCategoryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('deviceManufacturer', async () => {
+            const fakePath = "/rendered/path/deviceManufacturer";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                device_manufacturer: "deviceManufacturerValue",
+            };
+            const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.deviceManufacturerPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.deviceManufacturerPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('deviceManufacturerPath', () => {
+                const result = client.deviceManufacturerPath("networkCodeValue", "deviceManufacturerValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.deviceManufacturerPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromDeviceManufacturerName', () => {
+                const result = client.matchNetworkCodeFromDeviceManufacturerName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.deviceManufacturerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDeviceManufacturerFromDeviceManufacturerName', () => {
+                const result = client.matchDeviceManufacturerFromDeviceManufacturerName(fakePath);
+                assert.strictEqual(result, "deviceManufacturerValue");
+                assert((client.pathTemplates.deviceManufacturerPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
@@ -1123,6 +2277,120 @@ describe('v1.CustomFieldServiceClient', () => {
                 const result = client.matchLiveStreamEventFromLiveStreamEventName(fakePath);
                 assert.strictEqual(result, "liveStreamEventValue");
                 assert((client.pathTemplates.liveStreamEventPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('mobileCarrier', async () => {
+            const fakePath = "/rendered/path/mobileCarrier";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                mobile_carrier: "mobileCarrierValue",
+            };
+            const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.mobileCarrierPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.mobileCarrierPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('mobileCarrierPath', () => {
+                const result = client.mobileCarrierPath("networkCodeValue", "mobileCarrierValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.mobileCarrierPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromMobileCarrierName', () => {
+                const result = client.matchNetworkCodeFromMobileCarrierName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.mobileCarrierPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchMobileCarrierFromMobileCarrierName', () => {
+                const result = client.matchMobileCarrierFromMobileCarrierName(fakePath);
+                assert.strictEqual(result, "mobileCarrierValue");
+                assert((client.pathTemplates.mobileCarrierPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('mobileDevice', async () => {
+            const fakePath = "/rendered/path/mobileDevice";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                mobile_device: "mobileDeviceValue",
+            };
+            const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.mobileDevicePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.mobileDevicePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('mobileDevicePath', () => {
+                const result = client.mobileDevicePath("networkCodeValue", "mobileDeviceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.mobileDevicePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromMobileDeviceName', () => {
+                const result = client.matchNetworkCodeFromMobileDeviceName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.mobileDevicePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchMobileDeviceFromMobileDeviceName', () => {
+                const result = client.matchMobileDeviceFromMobileDeviceName(fakePath);
+                assert.strictEqual(result, "mobileDeviceValue");
+                assert((client.pathTemplates.mobileDevicePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('mobileDeviceSubmodel', async () => {
+            const fakePath = "/rendered/path/mobileDeviceSubmodel";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                mobile_device_submodel: "mobileDeviceSubmodelValue",
+            };
+            const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.mobileDeviceSubmodelPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.mobileDeviceSubmodelPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('mobileDeviceSubmodelPath', () => {
+                const result = client.mobileDeviceSubmodelPath("networkCodeValue", "mobileDeviceSubmodelValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.mobileDeviceSubmodelPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromMobileDeviceSubmodelName', () => {
+                const result = client.matchNetworkCodeFromMobileDeviceSubmodelName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.mobileDeviceSubmodelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchMobileDeviceSubmodelFromMobileDeviceSubmodelName', () => {
+                const result = client.matchMobileDeviceSubmodelFromMobileDeviceSubmodelName(fakePath);
+                assert.strictEqual(result, "mobileDeviceSubmodelValue");
+                assert((client.pathTemplates.mobileDeviceSubmodelPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
@@ -1499,6 +2767,44 @@ describe('v1.CustomFieldServiceClient', () => {
             });
         });
 
+        describe('site', async () => {
+            const fakePath = "/rendered/path/site";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                site: "siteValue",
+            };
+            const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.sitePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.sitePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('sitePath', () => {
+                const result = client.sitePath("networkCodeValue", "siteValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.sitePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromSiteName', () => {
+                const result = client.matchNetworkCodeFromSiteName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.sitePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSiteFromSiteName', () => {
+                const result = client.matchSiteFromSiteName(fakePath);
+                assert.strictEqual(result, "siteValue");
+                assert((client.pathTemplates.sitePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('taxonomyCategory', async () => {
             const fakePath = "/rendered/path/taxonomyCategory";
             const expectedParameters = {
@@ -1609,6 +2915,44 @@ describe('v1.CustomFieldServiceClient', () => {
                 const result = client.matchUserFromUserName(fakePath);
                 assert.strictEqual(result, "userValue");
                 assert((client.pathTemplates.userPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('webProperty', async () => {
+            const fakePath = "/rendered/path/webProperty";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                web_property: "webPropertyValue",
+            };
+            const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.webPropertyPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.webPropertyPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('webPropertyPath', () => {
+                const result = client.webPropertyPath("networkCodeValue", "webPropertyValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.webPropertyPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromWebPropertyName', () => {
+                const result = client.matchNetworkCodeFromWebPropertyName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.webPropertyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchWebPropertyFromWebPropertyName', () => {
+                const result = client.matchWebPropertyFromWebPropertyName(fakePath);
+                assert.strictEqual(result, "webPropertyValue");
+                assert((client.pathTemplates.webPropertyPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

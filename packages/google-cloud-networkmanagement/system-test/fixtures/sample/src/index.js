@@ -21,6 +21,7 @@
 const networkmanagement = require('@google-cloud/network-management');
 
 function main() {
+  const organizationVpcFlowLogsServiceClient = new networkmanagement.OrganizationVpcFlowLogsServiceClient();
   const reachabilityServiceClient = new networkmanagement.ReachabilityServiceClient();
   const vpcFlowLogsServiceClient = new networkmanagement.VpcFlowLogsServiceClient();
 }

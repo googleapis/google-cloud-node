@@ -79,6 +79,8 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | --------------------------- | --------------------------------- |
 | batch optimize tours | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-routeoptimization/samples/generated/v1/route_optimization.batch_optimize_tours.js) |
 | optimize tours | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-routeoptimization/samples/generated/v1/route_optimization.optimize_tours.js) |
+| optimize tours long running | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-routeoptimization/samples/generated/v1/route_optimization.optimize_tours_long_running.js) |
+| optimize tours uri | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-routeoptimization/samples/generated/v1/route_optimization.optimize_tours_uri.js) |
 | maps | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-routeoptimization/samples/generated/v1/snippet_metadata_google.maps.routeoptimization.v1.json) |
 
 

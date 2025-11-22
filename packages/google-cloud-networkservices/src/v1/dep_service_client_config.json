@@ -70,6 +70,31 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "ListLbEdgeExtensions": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetLbEdgeExtension": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateLbEdgeExtension": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateLbEdgeExtension": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteLbEdgeExtension": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "ListAuthzExtensions": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",

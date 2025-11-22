@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/routeoptimization-v0.5.1...routeoptimization-v0.6.0) (2025-10-16)
+
+
+### Features
+
+* [routeoptimization] add experimental Load Costs feature ([#6819](https://github.com/googleapis/google-cloud-node/issues/6819)) ([68fd63c](https://github.com/googleapis/google-cloud-node/commit/68fd63cd8c3d91e7f0c8e0193c9521e51fdeb33f))
+
+## [0.5.1](https://github.com/googleapis/google-cloud-node/compare/routeoptimization-v0.5.0...routeoptimization-v0.5.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
 ## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/routeoptimization-v0.4.1...routeoptimization-v0.5.0) (2025-07-09)
 
 

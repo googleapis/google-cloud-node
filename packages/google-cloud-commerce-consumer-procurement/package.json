@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/procurement",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "Cloud Commerce Consumer Procurement API client for Node.js",
   "repository": {
     "type": "git",

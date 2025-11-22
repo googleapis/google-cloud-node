@@ -743,6 +743,76 @@ export namespace google {
                     public deleteLbRouteExtension(request: google.cloud.networkservices.v1.IDeleteLbRouteExtensionRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls ListLbEdgeExtensions.
+                     * @param request ListLbEdgeExtensionsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListLbEdgeExtensionsResponse
+                     */
+                    public listLbEdgeExtensions(request: google.cloud.networkservices.v1.IListLbEdgeExtensionsRequest, callback: google.cloud.networkservices.v1.DepService.ListLbEdgeExtensionsCallback): void;
+
+                    /**
+                     * Calls ListLbEdgeExtensions.
+                     * @param request ListLbEdgeExtensionsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listLbEdgeExtensions(request: google.cloud.networkservices.v1.IListLbEdgeExtensionsRequest): Promise<google.cloud.networkservices.v1.ListLbEdgeExtensionsResponse>;
+
+                    /**
+                     * Calls GetLbEdgeExtension.
+                     * @param request GetLbEdgeExtensionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and LbEdgeExtension
+                     */
+                    public getLbEdgeExtension(request: google.cloud.networkservices.v1.IGetLbEdgeExtensionRequest, callback: google.cloud.networkservices.v1.DepService.GetLbEdgeExtensionCallback): void;
+
+                    /**
+                     * Calls GetLbEdgeExtension.
+                     * @param request GetLbEdgeExtensionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getLbEdgeExtension(request: google.cloud.networkservices.v1.IGetLbEdgeExtensionRequest): Promise<google.cloud.networkservices.v1.LbEdgeExtension>;
+
+                    /**
+                     * Calls CreateLbEdgeExtension.
+                     * @param request CreateLbEdgeExtensionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createLbEdgeExtension(request: google.cloud.networkservices.v1.ICreateLbEdgeExtensionRequest, callback: google.cloud.networkservices.v1.DepService.CreateLbEdgeExtensionCallback): void;
+
+                    /**
+                     * Calls CreateLbEdgeExtension.
+                     * @param request CreateLbEdgeExtensionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createLbEdgeExtension(request: google.cloud.networkservices.v1.ICreateLbEdgeExtensionRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateLbEdgeExtension.
+                     * @param request UpdateLbEdgeExtensionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateLbEdgeExtension(request: google.cloud.networkservices.v1.IUpdateLbEdgeExtensionRequest, callback: google.cloud.networkservices.v1.DepService.UpdateLbEdgeExtensionCallback): void;
+
+                    /**
+                     * Calls UpdateLbEdgeExtension.
+                     * @param request UpdateLbEdgeExtensionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateLbEdgeExtension(request: google.cloud.networkservices.v1.IUpdateLbEdgeExtensionRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteLbEdgeExtension.
+                     * @param request DeleteLbEdgeExtensionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteLbEdgeExtension(request: google.cloud.networkservices.v1.IDeleteLbEdgeExtensionRequest, callback: google.cloud.networkservices.v1.DepService.DeleteLbEdgeExtensionCallback): void;
+
+                    /**
+                     * Calls DeleteLbEdgeExtension.
+                     * @param request DeleteLbEdgeExtensionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteLbEdgeExtension(request: google.cloud.networkservices.v1.IDeleteLbEdgeExtensionRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls ListAuthzExtensions.
                      * @param request ListAuthzExtensionsRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and ListAuthzExtensionsResponse
@@ -884,6 +954,41 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type DeleteLbRouteExtensionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkservices.v1.DepService|listLbEdgeExtensions}.
+                     * @param error Error, if any
+                     * @param [response] ListLbEdgeExtensionsResponse
+                     */
+                    type ListLbEdgeExtensionsCallback = (error: (Error|null), response?: google.cloud.networkservices.v1.ListLbEdgeExtensionsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkservices.v1.DepService|getLbEdgeExtension}.
+                     * @param error Error, if any
+                     * @param [response] LbEdgeExtension
+                     */
+                    type GetLbEdgeExtensionCallback = (error: (Error|null), response?: google.cloud.networkservices.v1.LbEdgeExtension) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkservices.v1.DepService|createLbEdgeExtension}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateLbEdgeExtensionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkservices.v1.DepService|updateLbEdgeExtension}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateLbEdgeExtensionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkservices.v1.DepService|deleteLbEdgeExtension}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteLbEdgeExtensionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.networkservices.v1.DepService|listAuthzExtensions}.
@@ -2885,6 +2990,799 @@ export namespace google {
 
                     /**
                      * Gets the default type url for DeleteLbRouteExtensionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a LbEdgeExtension. */
+                interface ILbEdgeExtension {
+
+                    /** LbEdgeExtension name */
+                    name?: (string|null);
+
+                    /** LbEdgeExtension createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** LbEdgeExtension updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** LbEdgeExtension description */
+                    description?: (string|null);
+
+                    /** LbEdgeExtension labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** LbEdgeExtension forwardingRules */
+                    forwardingRules?: (string[]|null);
+
+                    /** LbEdgeExtension extensionChains */
+                    extensionChains?: (google.cloud.networkservices.v1.IExtensionChain[]|null);
+
+                    /** LbEdgeExtension loadBalancingScheme */
+                    loadBalancingScheme?: (google.cloud.networkservices.v1.LoadBalancingScheme|keyof typeof google.cloud.networkservices.v1.LoadBalancingScheme|null);
+                }
+
+                /** Represents a LbEdgeExtension. */
+                class LbEdgeExtension implements ILbEdgeExtension {
+
+                    /**
+                     * Constructs a new LbEdgeExtension.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.ILbEdgeExtension);
+
+                    /** LbEdgeExtension name. */
+                    public name: string;
+
+                    /** LbEdgeExtension createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** LbEdgeExtension updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** LbEdgeExtension description. */
+                    public description: string;
+
+                    /** LbEdgeExtension labels. */
+                    public labels: { [k: string]: string };
+
+                    /** LbEdgeExtension forwardingRules. */
+                    public forwardingRules: string[];
+
+                    /** LbEdgeExtension extensionChains. */
+                    public extensionChains: google.cloud.networkservices.v1.IExtensionChain[];
+
+                    /** LbEdgeExtension loadBalancingScheme. */
+                    public loadBalancingScheme: (google.cloud.networkservices.v1.LoadBalancingScheme|keyof typeof google.cloud.networkservices.v1.LoadBalancingScheme);
+
+                    /**
+                     * Creates a new LbEdgeExtension instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns LbEdgeExtension instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.ILbEdgeExtension): google.cloud.networkservices.v1.LbEdgeExtension;
+
+                    /**
+                     * Encodes the specified LbEdgeExtension message. Does not implicitly {@link google.cloud.networkservices.v1.LbEdgeExtension.verify|verify} messages.
+                     * @param message LbEdgeExtension message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.ILbEdgeExtension, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified LbEdgeExtension message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.LbEdgeExtension.verify|verify} messages.
+                     * @param message LbEdgeExtension message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.ILbEdgeExtension, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a LbEdgeExtension message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns LbEdgeExtension
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.LbEdgeExtension;
+
+                    /**
+                     * Decodes a LbEdgeExtension message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns LbEdgeExtension
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.LbEdgeExtension;
+
+                    /**
+                     * Verifies a LbEdgeExtension message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a LbEdgeExtension message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns LbEdgeExtension
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.LbEdgeExtension;
+
+                    /**
+                     * Creates a plain object from a LbEdgeExtension message. Also converts values to other types if specified.
+                     * @param message LbEdgeExtension
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.LbEdgeExtension, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this LbEdgeExtension to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for LbEdgeExtension
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListLbEdgeExtensionsRequest. */
+                interface IListLbEdgeExtensionsRequest {
+
+                    /** ListLbEdgeExtensionsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListLbEdgeExtensionsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListLbEdgeExtensionsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListLbEdgeExtensionsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListLbEdgeExtensionsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListLbEdgeExtensionsRequest. */
+                class ListLbEdgeExtensionsRequest implements IListLbEdgeExtensionsRequest {
+
+                    /**
+                     * Constructs a new ListLbEdgeExtensionsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.IListLbEdgeExtensionsRequest);
+
+                    /** ListLbEdgeExtensionsRequest parent. */
+                    public parent: string;
+
+                    /** ListLbEdgeExtensionsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListLbEdgeExtensionsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListLbEdgeExtensionsRequest filter. */
+                    public filter: string;
+
+                    /** ListLbEdgeExtensionsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListLbEdgeExtensionsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListLbEdgeExtensionsRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.IListLbEdgeExtensionsRequest): google.cloud.networkservices.v1.ListLbEdgeExtensionsRequest;
+
+                    /**
+                     * Encodes the specified ListLbEdgeExtensionsRequest message. Does not implicitly {@link google.cloud.networkservices.v1.ListLbEdgeExtensionsRequest.verify|verify} messages.
+                     * @param message ListLbEdgeExtensionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.IListLbEdgeExtensionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListLbEdgeExtensionsRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.ListLbEdgeExtensionsRequest.verify|verify} messages.
+                     * @param message ListLbEdgeExtensionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.IListLbEdgeExtensionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListLbEdgeExtensionsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListLbEdgeExtensionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.ListLbEdgeExtensionsRequest;
+
+                    /**
+                     * Decodes a ListLbEdgeExtensionsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListLbEdgeExtensionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.ListLbEdgeExtensionsRequest;
+
+                    /**
+                     * Verifies a ListLbEdgeExtensionsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListLbEdgeExtensionsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListLbEdgeExtensionsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.ListLbEdgeExtensionsRequest;
+
+                    /**
+                     * Creates a plain object from a ListLbEdgeExtensionsRequest message. Also converts values to other types if specified.
+                     * @param message ListLbEdgeExtensionsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.ListLbEdgeExtensionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListLbEdgeExtensionsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListLbEdgeExtensionsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListLbEdgeExtensionsResponse. */
+                interface IListLbEdgeExtensionsResponse {
+
+                    /** ListLbEdgeExtensionsResponse lbEdgeExtensions */
+                    lbEdgeExtensions?: (google.cloud.networkservices.v1.ILbEdgeExtension[]|null);
+
+                    /** ListLbEdgeExtensionsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListLbEdgeExtensionsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListLbEdgeExtensionsResponse. */
+                class ListLbEdgeExtensionsResponse implements IListLbEdgeExtensionsResponse {
+
+                    /**
+                     * Constructs a new ListLbEdgeExtensionsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.IListLbEdgeExtensionsResponse);
+
+                    /** ListLbEdgeExtensionsResponse lbEdgeExtensions. */
+                    public lbEdgeExtensions: google.cloud.networkservices.v1.ILbEdgeExtension[];
+
+                    /** ListLbEdgeExtensionsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListLbEdgeExtensionsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListLbEdgeExtensionsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListLbEdgeExtensionsResponse instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.IListLbEdgeExtensionsResponse): google.cloud.networkservices.v1.ListLbEdgeExtensionsResponse;
+
+                    /**
+                     * Encodes the specified ListLbEdgeExtensionsResponse message. Does not implicitly {@link google.cloud.networkservices.v1.ListLbEdgeExtensionsResponse.verify|verify} messages.
+                     * @param message ListLbEdgeExtensionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.IListLbEdgeExtensionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListLbEdgeExtensionsResponse message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.ListLbEdgeExtensionsResponse.verify|verify} messages.
+                     * @param message ListLbEdgeExtensionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.IListLbEdgeExtensionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListLbEdgeExtensionsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListLbEdgeExtensionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.ListLbEdgeExtensionsResponse;
+
+                    /**
+                     * Decodes a ListLbEdgeExtensionsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListLbEdgeExtensionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.ListLbEdgeExtensionsResponse;
+
+                    /**
+                     * Verifies a ListLbEdgeExtensionsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListLbEdgeExtensionsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListLbEdgeExtensionsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.ListLbEdgeExtensionsResponse;
+
+                    /**
+                     * Creates a plain object from a ListLbEdgeExtensionsResponse message. Also converts values to other types if specified.
+                     * @param message ListLbEdgeExtensionsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.ListLbEdgeExtensionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListLbEdgeExtensionsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListLbEdgeExtensionsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetLbEdgeExtensionRequest. */
+                interface IGetLbEdgeExtensionRequest {
+
+                    /** GetLbEdgeExtensionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetLbEdgeExtensionRequest. */
+                class GetLbEdgeExtensionRequest implements IGetLbEdgeExtensionRequest {
+
+                    /**
+                     * Constructs a new GetLbEdgeExtensionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.IGetLbEdgeExtensionRequest);
+
+                    /** GetLbEdgeExtensionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetLbEdgeExtensionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetLbEdgeExtensionRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.IGetLbEdgeExtensionRequest): google.cloud.networkservices.v1.GetLbEdgeExtensionRequest;
+
+                    /**
+                     * Encodes the specified GetLbEdgeExtensionRequest message. Does not implicitly {@link google.cloud.networkservices.v1.GetLbEdgeExtensionRequest.verify|verify} messages.
+                     * @param message GetLbEdgeExtensionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.IGetLbEdgeExtensionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetLbEdgeExtensionRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.GetLbEdgeExtensionRequest.verify|verify} messages.
+                     * @param message GetLbEdgeExtensionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.IGetLbEdgeExtensionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetLbEdgeExtensionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetLbEdgeExtensionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.GetLbEdgeExtensionRequest;
+
+                    /**
+                     * Decodes a GetLbEdgeExtensionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetLbEdgeExtensionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.GetLbEdgeExtensionRequest;
+
+                    /**
+                     * Verifies a GetLbEdgeExtensionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetLbEdgeExtensionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetLbEdgeExtensionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.GetLbEdgeExtensionRequest;
+
+                    /**
+                     * Creates a plain object from a GetLbEdgeExtensionRequest message. Also converts values to other types if specified.
+                     * @param message GetLbEdgeExtensionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.GetLbEdgeExtensionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetLbEdgeExtensionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetLbEdgeExtensionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateLbEdgeExtensionRequest. */
+                interface ICreateLbEdgeExtensionRequest {
+
+                    /** CreateLbEdgeExtensionRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateLbEdgeExtensionRequest lbEdgeExtensionId */
+                    lbEdgeExtensionId?: (string|null);
+
+                    /** CreateLbEdgeExtensionRequest lbEdgeExtension */
+                    lbEdgeExtension?: (google.cloud.networkservices.v1.ILbEdgeExtension|null);
+
+                    /** CreateLbEdgeExtensionRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateLbEdgeExtensionRequest. */
+                class CreateLbEdgeExtensionRequest implements ICreateLbEdgeExtensionRequest {
+
+                    /**
+                     * Constructs a new CreateLbEdgeExtensionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.ICreateLbEdgeExtensionRequest);
+
+                    /** CreateLbEdgeExtensionRequest parent. */
+                    public parent: string;
+
+                    /** CreateLbEdgeExtensionRequest lbEdgeExtensionId. */
+                    public lbEdgeExtensionId: string;
+
+                    /** CreateLbEdgeExtensionRequest lbEdgeExtension. */
+                    public lbEdgeExtension?: (google.cloud.networkservices.v1.ILbEdgeExtension|null);
+
+                    /** CreateLbEdgeExtensionRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateLbEdgeExtensionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateLbEdgeExtensionRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.ICreateLbEdgeExtensionRequest): google.cloud.networkservices.v1.CreateLbEdgeExtensionRequest;
+
+                    /**
+                     * Encodes the specified CreateLbEdgeExtensionRequest message. Does not implicitly {@link google.cloud.networkservices.v1.CreateLbEdgeExtensionRequest.verify|verify} messages.
+                     * @param message CreateLbEdgeExtensionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.ICreateLbEdgeExtensionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateLbEdgeExtensionRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.CreateLbEdgeExtensionRequest.verify|verify} messages.
+                     * @param message CreateLbEdgeExtensionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.ICreateLbEdgeExtensionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateLbEdgeExtensionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateLbEdgeExtensionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.CreateLbEdgeExtensionRequest;
+
+                    /**
+                     * Decodes a CreateLbEdgeExtensionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateLbEdgeExtensionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.CreateLbEdgeExtensionRequest;
+
+                    /**
+                     * Verifies a CreateLbEdgeExtensionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateLbEdgeExtensionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateLbEdgeExtensionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.CreateLbEdgeExtensionRequest;
+
+                    /**
+                     * Creates a plain object from a CreateLbEdgeExtensionRequest message. Also converts values to other types if specified.
+                     * @param message CreateLbEdgeExtensionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.CreateLbEdgeExtensionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateLbEdgeExtensionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateLbEdgeExtensionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateLbEdgeExtensionRequest. */
+                interface IUpdateLbEdgeExtensionRequest {
+
+                    /** UpdateLbEdgeExtensionRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateLbEdgeExtensionRequest lbEdgeExtension */
+                    lbEdgeExtension?: (google.cloud.networkservices.v1.ILbEdgeExtension|null);
+
+                    /** UpdateLbEdgeExtensionRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdateLbEdgeExtensionRequest. */
+                class UpdateLbEdgeExtensionRequest implements IUpdateLbEdgeExtensionRequest {
+
+                    /**
+                     * Constructs a new UpdateLbEdgeExtensionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.IUpdateLbEdgeExtensionRequest);
+
+                    /** UpdateLbEdgeExtensionRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateLbEdgeExtensionRequest lbEdgeExtension. */
+                    public lbEdgeExtension?: (google.cloud.networkservices.v1.ILbEdgeExtension|null);
+
+                    /** UpdateLbEdgeExtensionRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdateLbEdgeExtensionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateLbEdgeExtensionRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.IUpdateLbEdgeExtensionRequest): google.cloud.networkservices.v1.UpdateLbEdgeExtensionRequest;
+
+                    /**
+                     * Encodes the specified UpdateLbEdgeExtensionRequest message. Does not implicitly {@link google.cloud.networkservices.v1.UpdateLbEdgeExtensionRequest.verify|verify} messages.
+                     * @param message UpdateLbEdgeExtensionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.IUpdateLbEdgeExtensionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateLbEdgeExtensionRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.UpdateLbEdgeExtensionRequest.verify|verify} messages.
+                     * @param message UpdateLbEdgeExtensionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.IUpdateLbEdgeExtensionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateLbEdgeExtensionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateLbEdgeExtensionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.UpdateLbEdgeExtensionRequest;
+
+                    /**
+                     * Decodes an UpdateLbEdgeExtensionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateLbEdgeExtensionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.UpdateLbEdgeExtensionRequest;
+
+                    /**
+                     * Verifies an UpdateLbEdgeExtensionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateLbEdgeExtensionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateLbEdgeExtensionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.UpdateLbEdgeExtensionRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateLbEdgeExtensionRequest message. Also converts values to other types if specified.
+                     * @param message UpdateLbEdgeExtensionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.UpdateLbEdgeExtensionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateLbEdgeExtensionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateLbEdgeExtensionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteLbEdgeExtensionRequest. */
+                interface IDeleteLbEdgeExtensionRequest {
+
+                    /** DeleteLbEdgeExtensionRequest name */
+                    name?: (string|null);
+
+                    /** DeleteLbEdgeExtensionRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeleteLbEdgeExtensionRequest. */
+                class DeleteLbEdgeExtensionRequest implements IDeleteLbEdgeExtensionRequest {
+
+                    /**
+                     * Constructs a new DeleteLbEdgeExtensionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.IDeleteLbEdgeExtensionRequest);
+
+                    /** DeleteLbEdgeExtensionRequest name. */
+                    public name: string;
+
+                    /** DeleteLbEdgeExtensionRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeleteLbEdgeExtensionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteLbEdgeExtensionRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.IDeleteLbEdgeExtensionRequest): google.cloud.networkservices.v1.DeleteLbEdgeExtensionRequest;
+
+                    /**
+                     * Encodes the specified DeleteLbEdgeExtensionRequest message. Does not implicitly {@link google.cloud.networkservices.v1.DeleteLbEdgeExtensionRequest.verify|verify} messages.
+                     * @param message DeleteLbEdgeExtensionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.IDeleteLbEdgeExtensionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteLbEdgeExtensionRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.DeleteLbEdgeExtensionRequest.verify|verify} messages.
+                     * @param message DeleteLbEdgeExtensionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.IDeleteLbEdgeExtensionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteLbEdgeExtensionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteLbEdgeExtensionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.DeleteLbEdgeExtensionRequest;
+
+                    /**
+                     * Decodes a DeleteLbEdgeExtensionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteLbEdgeExtensionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.DeleteLbEdgeExtensionRequest;
+
+                    /**
+                     * Verifies a DeleteLbEdgeExtensionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteLbEdgeExtensionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteLbEdgeExtensionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.DeleteLbEdgeExtensionRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteLbEdgeExtensionRequest message. Also converts values to other types if specified.
+                     * @param message DeleteLbEdgeExtensionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.DeleteLbEdgeExtensionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteLbEdgeExtensionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteLbEdgeExtensionRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

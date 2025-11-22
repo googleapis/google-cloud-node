@@ -4246,6 +4246,16 @@
                           "oneof": [
                             "kerberos_5pReadWrite"
                           ]
+                        },
+                        "_squashMode": {
+                          "oneof": [
+                            "squashMode"
+                          ]
+                        },
+                        "_anonUid": {
+                          "oneof": [
+                            "anonUid"
+                          ]
                         }
                       },
                       "fields": {
@@ -4324,6 +4334,32 @@
                           "id": 11,
                           "options": {
                             "proto3_optional": true
+                          }
+                        },
+                        "squashMode": {
+                          "type": "SquashMode",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "anonUid": {
+                          "type": "int64",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "SquashMode": {
+                          "values": {
+                            "SQUASH_MODE_UNSPECIFIED": 0,
+                            "NO_ROOT_SQUASH": 1,
+                            "ROOT_SQUASH": 2,
+                            "ALL_SQUASH": 3
                           }
                         }
                       }

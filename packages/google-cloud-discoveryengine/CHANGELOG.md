@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.5.2](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v2.5.1...discoveryengine-v2.5.2) (2025-10-21)
+
+
+### Bug Fixes
+
+* [discoveryengine] Include AssistAnswer as a part of the Session ([#6824](https://github.com/googleapis/google-cloud-node/issues/6824)) ([9eb1fef](https://github.com/googleapis/google-cloud-node/commit/9eb1fef3ff79fc73a5b890d69b5187baf87897e3))
+
+## [2.5.1](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v2.5.0...discoveryengine-v2.5.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
 ## [2.5.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v2.4.0...discoveryengine-v2.5.0) (2025-09-16)
 
 

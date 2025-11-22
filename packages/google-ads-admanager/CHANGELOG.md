@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/admanager-v0.4.1...admanager-v0.5.0) (2025-10-23)
+
+
+### Features
+
+* [admanager] Added Application resource ([#6834](https://github.com/googleapis/google-cloud-node/issues/6834)) ([79e9ddf](https://github.com/googleapis/google-cloud-node/commit/79e9ddf22a87f114cb7c692be5ee3b34424ad5d5))
+
+## [0.4.1](https://github.com/googleapis/google-cloud-node/compare/admanager-v0.4.0...admanager-v0.4.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
 ## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/admanager-v0.3.0...admanager-v0.4.0) (2025-07-09)
 
 

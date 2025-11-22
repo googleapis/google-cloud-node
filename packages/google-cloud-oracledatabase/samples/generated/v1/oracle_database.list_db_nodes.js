@@ -31,6 +31,7 @@ function main(parent) {
   /**
    *  Required. The parent value for database node in the following format:
    *  projects/{project}/locations/{location}/cloudVmClusters/{cloudVmCluster}.
+   *  .
    */
   // const parent = 'abc123'
   /**

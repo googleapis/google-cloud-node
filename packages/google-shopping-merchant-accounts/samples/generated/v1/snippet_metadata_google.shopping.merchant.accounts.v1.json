@@ -466,7 +466,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 68,
+          "end": 74,
           "type": "FULL"
         }
       ],
@@ -485,6 +485,10 @@
           },
           {
             "name": "service",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "set_alias",
             "type": "TYPE_MESSAGE[]"
           }
         ],
@@ -507,7 +511,7 @@
       "regionTag": "merchantapi_v1_generated_AccountsService_DeleteAccount_async",
       "title": "AccountIssueService deleteAccount Sample",
       "origin": "API_DEFINITION",
-      "description": " Deletes the specified account regardless of its type: standalone, advanced account or sub-account. Deleting an advanced account leads to the deletion of all of its sub-accounts. Executing this method requires admin access. The deletion succeeds only if the account does not provide services to any other account and has no processed offers. You can use the `force` parameter to override this.",
+      "description": " Deletes the specified account regardless of its type: standalone, advanced account or sub-account. Deleting an advanced account leads to the deletion of all of its sub-accounts. This also deletes the account's [developer registration entity](/merchant/api/reference/rest/accounts_v1/accounts.developerRegistration) and any associated GCP project to the account. Executing this method requires admin access. The deletion succeeds only if the account does not provide services to any other account and has no processed offers. You can use the `force` parameter to override this.",
       "canonical": true,
       "file": "accounts_service.delete_account.js",
       "language": "JAVASCRIPT",
@@ -1202,7 +1206,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 66,
+          "end": 68,
           "type": "FULL"
         }
       ],
@@ -1308,6 +1312,41 @@
         "method": {
           "shortName": "UnregisterGcp",
           "fullName": "google.shopping.merchant.accounts.v1.DeveloperRegistrationService.UnregisterGcp",
+          "service": {
+            "shortName": "DeveloperRegistrationService",
+            "fullName": "google.shopping.merchant.accounts.v1.DeveloperRegistrationService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "merchantapi_v1_generated_DeveloperRegistrationService_GetAccountForGcpRegistration_async",
+      "title": "AccountIssueService getAccountForGcpRegistration Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves the merchant account that the calling GCP is registered with.",
+      "canonical": true,
+      "file": "developer_registration_service.get_account_for_gcp_registration.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 48,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetAccountForGcpRegistration",
+        "fullName": "google.shopping.merchant.accounts.v1.DeveloperRegistrationService.GetAccountForGcpRegistration",
+        "async": true,
+        "parameters": [],
+        "resultType": ".google.shopping.merchant.accounts.v1.GetAccountForGcpRegistrationResponse",
+        "client": {
+          "shortName": "DeveloperRegistrationServiceClient",
+          "fullName": "google.shopping.merchant.accounts.v1.DeveloperRegistrationServiceClient"
+        },
+        "method": {
+          "shortName": "GetAccountForGcpRegistration",
+          "fullName": "google.shopping.merchant.accounts.v1.DeveloperRegistrationService.GetAccountForGcpRegistration",
           "service": {
             "shortName": "DeveloperRegistrationService",
             "fullName": "google.shopping.merchant.accounts.v1.DeveloperRegistrationService"
@@ -3168,6 +3207,46 @@
         "method": {
           "shortName": "ListUsers",
           "fullName": "google.shopping.merchant.accounts.v1.UserService.ListUsers",
+          "service": {
+            "shortName": "UserService",
+            "fullName": "google.shopping.merchant.accounts.v1.UserService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "merchantapi_v1_generated_UserService_VerifySelf_async",
+      "title": "AccountIssueService verifySelf Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the user that is represented by the caller from pending to verified.",
+      "canonical": true,
+      "file": "user_service.verify_self.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "VerifySelf",
+        "fullName": "google.shopping.merchant.accounts.v1.UserService.VerifySelf",
+        "async": true,
+        "parameters": [
+          {
+            "name": "account",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.shopping.merchant.accounts.v1.User",
+        "client": {
+          "shortName": "UserServiceClient",
+          "fullName": "google.shopping.merchant.accounts.v1.UserServiceClient"
+        },
+        "method": {
+          "shortName": "VerifySelf",
+          "fullName": "google.shopping.merchant.accounts.v1.UserService.VerifySelf",
           "service": {
             "shortName": "UserService",
             "fullName": "google.shopping.merchant.accounts.v1.UserService"

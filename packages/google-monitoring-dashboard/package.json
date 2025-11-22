@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/monitoring-dashboards",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "description": "interact with dashboards for viewing and analyzing metric data",
   "repository": {
     "type": "git",

@@ -29,8 +29,9 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the resource, in the format
+   *  Required. The name of the resource, in the format
    *  `organizations/{organization}/locations/{location}/frameworks/{framework}`.
+   *  The only supported location is `global`.
    */
   // const name = 'abc123'
 

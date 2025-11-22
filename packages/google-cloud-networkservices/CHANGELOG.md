@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.12.0](https://github.com/googleapis/google-cloud-node/compare/networkservices-v0.11.1...networkservices-v0.12.0) (2025-11-11)
+
+
+### Features
+
+* [networkservices] Add support for LbEdgeExtension resource in NetworkServices API ([#6863](https://github.com/googleapis/google-cloud-node/issues/6863)) ([4bc9aa9](https://github.com/googleapis/google-cloud-node/commit/4bc9aa903b6385f9eec79c71320959da9c65764a))
+
+## [0.11.1](https://github.com/googleapis/google-cloud-node/compare/networkservices-v0.11.0...networkservices-v0.11.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
 ## [0.11.0](https://github.com/googleapis/google-cloud-node/compare/networkservices-v0.10.0...networkservices-v0.11.0) (2025-07-28)
 
 

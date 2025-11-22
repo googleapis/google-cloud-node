@@ -37,7 +37,8 @@ function main(instanceGroup, project, zone) {
    */
   // const project = 'my-project'
   /**
-   *  The name of the zone where the instance group is located.
+   *  The name of the zone
+   *  where the instance group is located.
    */
   // const zone = 'abc123'
 

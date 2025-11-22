@@ -164,7 +164,927 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.maps.routeoptimization.v1.RouteOptimization|optimizeToursLongRunning}.
+                         * @memberof google.maps.routeoptimization.v1.RouteOptimization
+                         * @typedef OptimizeToursLongRunningCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls OptimizeToursLongRunning.
+                         * @function optimizeToursLongRunning
+                         * @memberof google.maps.routeoptimization.v1.RouteOptimization
+                         * @instance
+                         * @param {google.maps.routeoptimization.v1.IOptimizeToursRequest} request OptimizeToursRequest message or plain object
+                         * @param {google.maps.routeoptimization.v1.RouteOptimization.OptimizeToursLongRunningCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(RouteOptimization.prototype.optimizeToursLongRunning = function optimizeToursLongRunning(request, callback) {
+                            return this.rpcCall(optimizeToursLongRunning, $root.google.maps.routeoptimization.v1.OptimizeToursRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "OptimizeToursLongRunning" });
+    
+                        /**
+                         * Calls OptimizeToursLongRunning.
+                         * @function optimizeToursLongRunning
+                         * @memberof google.maps.routeoptimization.v1.RouteOptimization
+                         * @instance
+                         * @param {google.maps.routeoptimization.v1.IOptimizeToursRequest} request OptimizeToursRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.maps.routeoptimization.v1.RouteOptimization|optimizeToursUri}.
+                         * @memberof google.maps.routeoptimization.v1.RouteOptimization
+                         * @typedef OptimizeToursUriCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls OptimizeToursUri.
+                         * @function optimizeToursUri
+                         * @memberof google.maps.routeoptimization.v1.RouteOptimization
+                         * @instance
+                         * @param {google.maps.routeoptimization.v1.IOptimizeToursUriRequest} request OptimizeToursUriRequest message or plain object
+                         * @param {google.maps.routeoptimization.v1.RouteOptimization.OptimizeToursUriCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(RouteOptimization.prototype.optimizeToursUri = function optimizeToursUri(request, callback) {
+                            return this.rpcCall(optimizeToursUri, $root.google.maps.routeoptimization.v1.OptimizeToursUriRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "OptimizeToursUri" });
+    
+                        /**
+                         * Calls OptimizeToursUri.
+                         * @function optimizeToursUri
+                         * @memberof google.maps.routeoptimization.v1.RouteOptimization
+                         * @instance
+                         * @param {google.maps.routeoptimization.v1.IOptimizeToursUriRequest} request OptimizeToursUriRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
                         return RouteOptimization;
+                    })();
+    
+                    v1.Uri = (function() {
+    
+                        /**
+                         * Properties of an Uri.
+                         * @memberof google.maps.routeoptimization.v1
+                         * @interface IUri
+                         * @property {string|null} [uri] Uri uri
+                         */
+    
+                        /**
+                         * Constructs a new Uri.
+                         * @memberof google.maps.routeoptimization.v1
+                         * @classdesc Represents an Uri.
+                         * @implements IUri
+                         * @constructor
+                         * @param {google.maps.routeoptimization.v1.IUri=} [properties] Properties to set
+                         */
+                        function Uri(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Uri uri.
+                         * @member {string} uri
+                         * @memberof google.maps.routeoptimization.v1.Uri
+                         * @instance
+                         */
+                        Uri.prototype.uri = "";
+    
+                        /**
+                         * Creates a new Uri instance using the specified properties.
+                         * @function create
+                         * @memberof google.maps.routeoptimization.v1.Uri
+                         * @static
+                         * @param {google.maps.routeoptimization.v1.IUri=} [properties] Properties to set
+                         * @returns {google.maps.routeoptimization.v1.Uri} Uri instance
+                         */
+                        Uri.create = function create(properties) {
+                            return new Uri(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Uri message. Does not implicitly {@link google.maps.routeoptimization.v1.Uri.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.maps.routeoptimization.v1.Uri
+                         * @static
+                         * @param {google.maps.routeoptimization.v1.IUri} message Uri message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Uri.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Uri message, length delimited. Does not implicitly {@link google.maps.routeoptimization.v1.Uri.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.maps.routeoptimization.v1.Uri
+                         * @static
+                         * @param {google.maps.routeoptimization.v1.IUri} message Uri message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Uri.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an Uri message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.maps.routeoptimization.v1.Uri
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.maps.routeoptimization.v1.Uri} Uri
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Uri.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.routeoptimization.v1.Uri();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.uri = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an Uri message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.maps.routeoptimization.v1.Uri
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.maps.routeoptimization.v1.Uri} Uri
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Uri.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an Uri message.
+                         * @function verify
+                         * @memberof google.maps.routeoptimization.v1.Uri
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Uri.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                if (!$util.isString(message.uri))
+                                    return "uri: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an Uri message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.maps.routeoptimization.v1.Uri
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.maps.routeoptimization.v1.Uri} Uri
+                         */
+                        Uri.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.maps.routeoptimization.v1.Uri)
+                                return object;
+                            var message = new $root.google.maps.routeoptimization.v1.Uri();
+                            if (object.uri != null)
+                                message.uri = String(object.uri);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an Uri message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.maps.routeoptimization.v1.Uri
+                         * @static
+                         * @param {google.maps.routeoptimization.v1.Uri} message Uri
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Uri.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.uri = "";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                object.uri = message.uri;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Uri to JSON.
+                         * @function toJSON
+                         * @memberof google.maps.routeoptimization.v1.Uri
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Uri.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Uri
+                         * @function getTypeUrl
+                         * @memberof google.maps.routeoptimization.v1.Uri
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Uri.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.maps.routeoptimization.v1.Uri";
+                        };
+    
+                        return Uri;
+                    })();
+    
+                    v1.OptimizeToursUriRequest = (function() {
+    
+                        /**
+                         * Properties of an OptimizeToursUriRequest.
+                         * @memberof google.maps.routeoptimization.v1
+                         * @interface IOptimizeToursUriRequest
+                         * @property {string|null} [parent] OptimizeToursUriRequest parent
+                         * @property {google.maps.routeoptimization.v1.IUri|null} [input] OptimizeToursUriRequest input
+                         * @property {google.maps.routeoptimization.v1.IUri|null} [output] OptimizeToursUriRequest output
+                         */
+    
+                        /**
+                         * Constructs a new OptimizeToursUriRequest.
+                         * @memberof google.maps.routeoptimization.v1
+                         * @classdesc Represents an OptimizeToursUriRequest.
+                         * @implements IOptimizeToursUriRequest
+                         * @constructor
+                         * @param {google.maps.routeoptimization.v1.IOptimizeToursUriRequest=} [properties] Properties to set
+                         */
+                        function OptimizeToursUriRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * OptimizeToursUriRequest parent.
+                         * @member {string} parent
+                         * @memberof google.maps.routeoptimization.v1.OptimizeToursUriRequest
+                         * @instance
+                         */
+                        OptimizeToursUriRequest.prototype.parent = "";
+    
+                        /**
+                         * OptimizeToursUriRequest input.
+                         * @member {google.maps.routeoptimization.v1.IUri|null|undefined} input
+                         * @memberof google.maps.routeoptimization.v1.OptimizeToursUriRequest
+                         * @instance
+                         */
+                        OptimizeToursUriRequest.prototype.input = null;
+    
+                        /**
+                         * OptimizeToursUriRequest output.
+                         * @member {google.maps.routeoptimization.v1.IUri|null|undefined} output
+                         * @memberof google.maps.routeoptimization.v1.OptimizeToursUriRequest
+                         * @instance
+                         */
+                        OptimizeToursUriRequest.prototype.output = null;
+    
+                        /**
+                         * Creates a new OptimizeToursUriRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.maps.routeoptimization.v1.OptimizeToursUriRequest
+                         * @static
+                         * @param {google.maps.routeoptimization.v1.IOptimizeToursUriRequest=} [properties] Properties to set
+                         * @returns {google.maps.routeoptimization.v1.OptimizeToursUriRequest} OptimizeToursUriRequest instance
+                         */
+                        OptimizeToursUriRequest.create = function create(properties) {
+                            return new OptimizeToursUriRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified OptimizeToursUriRequest message. Does not implicitly {@link google.maps.routeoptimization.v1.OptimizeToursUriRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.maps.routeoptimization.v1.OptimizeToursUriRequest
+                         * @static
+                         * @param {google.maps.routeoptimization.v1.IOptimizeToursUriRequest} message OptimizeToursUriRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OptimizeToursUriRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.input != null && Object.hasOwnProperty.call(message, "input"))
+                                $root.google.maps.routeoptimization.v1.Uri.encode(message.input, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.output != null && Object.hasOwnProperty.call(message, "output"))
+                                $root.google.maps.routeoptimization.v1.Uri.encode(message.output, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified OptimizeToursUriRequest message, length delimited. Does not implicitly {@link google.maps.routeoptimization.v1.OptimizeToursUriRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.maps.routeoptimization.v1.OptimizeToursUriRequest
+                         * @static
+                         * @param {google.maps.routeoptimization.v1.IOptimizeToursUriRequest} message OptimizeToursUriRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OptimizeToursUriRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an OptimizeToursUriRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.maps.routeoptimization.v1.OptimizeToursUriRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.maps.routeoptimization.v1.OptimizeToursUriRequest} OptimizeToursUriRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OptimizeToursUriRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.routeoptimization.v1.OptimizeToursUriRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.input = $root.google.maps.routeoptimization.v1.Uri.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.output = $root.google.maps.routeoptimization.v1.Uri.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an OptimizeToursUriRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.maps.routeoptimization.v1.OptimizeToursUriRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.maps.routeoptimization.v1.OptimizeToursUriRequest} OptimizeToursUriRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OptimizeToursUriRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an OptimizeToursUriRequest message.
+                         * @function verify
+                         * @memberof google.maps.routeoptimization.v1.OptimizeToursUriRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        OptimizeToursUriRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.input != null && message.hasOwnProperty("input")) {
+                                var error = $root.google.maps.routeoptimization.v1.Uri.verify(message.input);
+                                if (error)
+                                    return "input." + error;
+                            }
+                            if (message.output != null && message.hasOwnProperty("output")) {
+                                var error = $root.google.maps.routeoptimization.v1.Uri.verify(message.output);
+                                if (error)
+                                    return "output." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an OptimizeToursUriRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.maps.routeoptimization.v1.OptimizeToursUriRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.maps.routeoptimization.v1.OptimizeToursUriRequest} OptimizeToursUriRequest
+                         */
+                        OptimizeToursUriRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.maps.routeoptimization.v1.OptimizeToursUriRequest)
+                                return object;
+                            var message = new $root.google.maps.routeoptimization.v1.OptimizeToursUriRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.input != null) {
+                                if (typeof object.input !== "object")
+                                    throw TypeError(".google.maps.routeoptimization.v1.OptimizeToursUriRequest.input: object expected");
+                                message.input = $root.google.maps.routeoptimization.v1.Uri.fromObject(object.input);
+                            }
+                            if (object.output != null) {
+                                if (typeof object.output !== "object")
+                                    throw TypeError(".google.maps.routeoptimization.v1.OptimizeToursUriRequest.output: object expected");
+                                message.output = $root.google.maps.routeoptimization.v1.Uri.fromObject(object.output);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an OptimizeToursUriRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.maps.routeoptimization.v1.OptimizeToursUriRequest
+                         * @static
+                         * @param {google.maps.routeoptimization.v1.OptimizeToursUriRequest} message OptimizeToursUriRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        OptimizeToursUriRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.input = null;
+                                object.output = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.input != null && message.hasOwnProperty("input"))
+                                object.input = $root.google.maps.routeoptimization.v1.Uri.toObject(message.input, options);
+                            if (message.output != null && message.hasOwnProperty("output"))
+                                object.output = $root.google.maps.routeoptimization.v1.Uri.toObject(message.output, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this OptimizeToursUriRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.maps.routeoptimization.v1.OptimizeToursUriRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        OptimizeToursUriRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for OptimizeToursUriRequest
+                         * @function getTypeUrl
+                         * @memberof google.maps.routeoptimization.v1.OptimizeToursUriRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        OptimizeToursUriRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.maps.routeoptimization.v1.OptimizeToursUriRequest";
+                        };
+    
+                        return OptimizeToursUriRequest;
+                    })();
+    
+                    v1.OptimizeToursUriResponse = (function() {
+    
+                        /**
+                         * Properties of an OptimizeToursUriResponse.
+                         * @memberof google.maps.routeoptimization.v1
+                         * @interface IOptimizeToursUriResponse
+                         * @property {google.maps.routeoptimization.v1.IUri|null} [output] OptimizeToursUriResponse output
+                         */
+    
+                        /**
+                         * Constructs a new OptimizeToursUriResponse.
+                         * @memberof google.maps.routeoptimization.v1
+                         * @classdesc Represents an OptimizeToursUriResponse.
+                         * @implements IOptimizeToursUriResponse
+                         * @constructor
+                         * @param {google.maps.routeoptimization.v1.IOptimizeToursUriResponse=} [properties] Properties to set
+                         */
+                        function OptimizeToursUriResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * OptimizeToursUriResponse output.
+                         * @member {google.maps.routeoptimization.v1.IUri|null|undefined} output
+                         * @memberof google.maps.routeoptimization.v1.OptimizeToursUriResponse
+                         * @instance
+                         */
+                        OptimizeToursUriResponse.prototype.output = null;
+    
+                        /**
+                         * Creates a new OptimizeToursUriResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.maps.routeoptimization.v1.OptimizeToursUriResponse
+                         * @static
+                         * @param {google.maps.routeoptimization.v1.IOptimizeToursUriResponse=} [properties] Properties to set
+                         * @returns {google.maps.routeoptimization.v1.OptimizeToursUriResponse} OptimizeToursUriResponse instance
+                         */
+                        OptimizeToursUriResponse.create = function create(properties) {
+                            return new OptimizeToursUriResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified OptimizeToursUriResponse message. Does not implicitly {@link google.maps.routeoptimization.v1.OptimizeToursUriResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.maps.routeoptimization.v1.OptimizeToursUriResponse
+                         * @static
+                         * @param {google.maps.routeoptimization.v1.IOptimizeToursUriResponse} message OptimizeToursUriResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OptimizeToursUriResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.output != null && Object.hasOwnProperty.call(message, "output"))
+                                $root.google.maps.routeoptimization.v1.Uri.encode(message.output, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified OptimizeToursUriResponse message, length delimited. Does not implicitly {@link google.maps.routeoptimization.v1.OptimizeToursUriResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.maps.routeoptimization.v1.OptimizeToursUriResponse
+                         * @static
+                         * @param {google.maps.routeoptimization.v1.IOptimizeToursUriResponse} message OptimizeToursUriResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OptimizeToursUriResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an OptimizeToursUriResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.maps.routeoptimization.v1.OptimizeToursUriResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.maps.routeoptimization.v1.OptimizeToursUriResponse} OptimizeToursUriResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OptimizeToursUriResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.routeoptimization.v1.OptimizeToursUriResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.output = $root.google.maps.routeoptimization.v1.Uri.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an OptimizeToursUriResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.maps.routeoptimization.v1.OptimizeToursUriResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.maps.routeoptimization.v1.OptimizeToursUriResponse} OptimizeToursUriResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OptimizeToursUriResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an OptimizeToursUriResponse message.
+                         * @function verify
+                         * @memberof google.maps.routeoptimization.v1.OptimizeToursUriResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        OptimizeToursUriResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.output != null && message.hasOwnProperty("output")) {
+                                var error = $root.google.maps.routeoptimization.v1.Uri.verify(message.output);
+                                if (error)
+                                    return "output." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an OptimizeToursUriResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.maps.routeoptimization.v1.OptimizeToursUriResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.maps.routeoptimization.v1.OptimizeToursUriResponse} OptimizeToursUriResponse
+                         */
+                        OptimizeToursUriResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.maps.routeoptimization.v1.OptimizeToursUriResponse)
+                                return object;
+                            var message = new $root.google.maps.routeoptimization.v1.OptimizeToursUriResponse();
+                            if (object.output != null) {
+                                if (typeof object.output !== "object")
+                                    throw TypeError(".google.maps.routeoptimization.v1.OptimizeToursUriResponse.output: object expected");
+                                message.output = $root.google.maps.routeoptimization.v1.Uri.fromObject(object.output);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an OptimizeToursUriResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.maps.routeoptimization.v1.OptimizeToursUriResponse
+                         * @static
+                         * @param {google.maps.routeoptimization.v1.OptimizeToursUriResponse} message OptimizeToursUriResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        OptimizeToursUriResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.output = null;
+                            if (message.output != null && message.hasOwnProperty("output"))
+                                object.output = $root.google.maps.routeoptimization.v1.Uri.toObject(message.output, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this OptimizeToursUriResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.maps.routeoptimization.v1.OptimizeToursUriResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        OptimizeToursUriResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for OptimizeToursUriResponse
+                         * @function getTypeUrl
+                         * @memberof google.maps.routeoptimization.v1.OptimizeToursUriResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        OptimizeToursUriResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.maps.routeoptimization.v1.OptimizeToursUriResponse";
+                        };
+    
+                        return OptimizeToursUriResponse;
+                    })();
+    
+                    v1.OptimizeToursUriMetadata = (function() {
+    
+                        /**
+                         * Properties of an OptimizeToursUriMetadata.
+                         * @memberof google.maps.routeoptimization.v1
+                         * @interface IOptimizeToursUriMetadata
+                         */
+    
+                        /**
+                         * Constructs a new OptimizeToursUriMetadata.
+                         * @memberof google.maps.routeoptimization.v1
+                         * @classdesc Represents an OptimizeToursUriMetadata.
+                         * @implements IOptimizeToursUriMetadata
+                         * @constructor
+                         * @param {google.maps.routeoptimization.v1.IOptimizeToursUriMetadata=} [properties] Properties to set
+                         */
+                        function OptimizeToursUriMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new OptimizeToursUriMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.maps.routeoptimization.v1.OptimizeToursUriMetadata
+                         * @static
+                         * @param {google.maps.routeoptimization.v1.IOptimizeToursUriMetadata=} [properties] Properties to set
+                         * @returns {google.maps.routeoptimization.v1.OptimizeToursUriMetadata} OptimizeToursUriMetadata instance
+                         */
+                        OptimizeToursUriMetadata.create = function create(properties) {
+                            return new OptimizeToursUriMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified OptimizeToursUriMetadata message. Does not implicitly {@link google.maps.routeoptimization.v1.OptimizeToursUriMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.maps.routeoptimization.v1.OptimizeToursUriMetadata
+                         * @static
+                         * @param {google.maps.routeoptimization.v1.IOptimizeToursUriMetadata} message OptimizeToursUriMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OptimizeToursUriMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified OptimizeToursUriMetadata message, length delimited. Does not implicitly {@link google.maps.routeoptimization.v1.OptimizeToursUriMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.maps.routeoptimization.v1.OptimizeToursUriMetadata
+                         * @static
+                         * @param {google.maps.routeoptimization.v1.IOptimizeToursUriMetadata} message OptimizeToursUriMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OptimizeToursUriMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an OptimizeToursUriMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.maps.routeoptimization.v1.OptimizeToursUriMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.maps.routeoptimization.v1.OptimizeToursUriMetadata} OptimizeToursUriMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OptimizeToursUriMetadata.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.routeoptimization.v1.OptimizeToursUriMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an OptimizeToursUriMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.maps.routeoptimization.v1.OptimizeToursUriMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.maps.routeoptimization.v1.OptimizeToursUriMetadata} OptimizeToursUriMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OptimizeToursUriMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an OptimizeToursUriMetadata message.
+                         * @function verify
+                         * @memberof google.maps.routeoptimization.v1.OptimizeToursUriMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        OptimizeToursUriMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an OptimizeToursUriMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.maps.routeoptimization.v1.OptimizeToursUriMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.maps.routeoptimization.v1.OptimizeToursUriMetadata} OptimizeToursUriMetadata
+                         */
+                        OptimizeToursUriMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.maps.routeoptimization.v1.OptimizeToursUriMetadata)
+                                return object;
+                            return new $root.google.maps.routeoptimization.v1.OptimizeToursUriMetadata();
+                        };
+    
+                        /**
+                         * Creates a plain object from an OptimizeToursUriMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.maps.routeoptimization.v1.OptimizeToursUriMetadata
+                         * @static
+                         * @param {google.maps.routeoptimization.v1.OptimizeToursUriMetadata} message OptimizeToursUriMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        OptimizeToursUriMetadata.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this OptimizeToursUriMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.maps.routeoptimization.v1.OptimizeToursUriMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        OptimizeToursUriMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for OptimizeToursUriMetadata
+                         * @function getTypeUrl
+                         * @memberof google.maps.routeoptimization.v1.OptimizeToursUriMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        OptimizeToursUriMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.maps.routeoptimization.v1.OptimizeToursUriMetadata";
+                        };
+    
+                        return OptimizeToursUriMetadata;
                     })();
     
                     v1.BatchOptimizeToursRequest = (function() {
@@ -1033,6 +1953,183 @@
                         return BatchOptimizeToursMetadata;
                     })();
     
+                    v1.OptimizeToursLongRunningMetadata = (function() {
+    
+                        /**
+                         * Properties of an OptimizeToursLongRunningMetadata.
+                         * @memberof google.maps.routeoptimization.v1
+                         * @interface IOptimizeToursLongRunningMetadata
+                         */
+    
+                        /**
+                         * Constructs a new OptimizeToursLongRunningMetadata.
+                         * @memberof google.maps.routeoptimization.v1
+                         * @classdesc Represents an OptimizeToursLongRunningMetadata.
+                         * @implements IOptimizeToursLongRunningMetadata
+                         * @constructor
+                         * @param {google.maps.routeoptimization.v1.IOptimizeToursLongRunningMetadata=} [properties] Properties to set
+                         */
+                        function OptimizeToursLongRunningMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new OptimizeToursLongRunningMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.maps.routeoptimization.v1.OptimizeToursLongRunningMetadata
+                         * @static
+                         * @param {google.maps.routeoptimization.v1.IOptimizeToursLongRunningMetadata=} [properties] Properties to set
+                         * @returns {google.maps.routeoptimization.v1.OptimizeToursLongRunningMetadata} OptimizeToursLongRunningMetadata instance
+                         */
+                        OptimizeToursLongRunningMetadata.create = function create(properties) {
+                            return new OptimizeToursLongRunningMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified OptimizeToursLongRunningMetadata message. Does not implicitly {@link google.maps.routeoptimization.v1.OptimizeToursLongRunningMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.maps.routeoptimization.v1.OptimizeToursLongRunningMetadata
+                         * @static
+                         * @param {google.maps.routeoptimization.v1.IOptimizeToursLongRunningMetadata} message OptimizeToursLongRunningMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OptimizeToursLongRunningMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified OptimizeToursLongRunningMetadata message, length delimited. Does not implicitly {@link google.maps.routeoptimization.v1.OptimizeToursLongRunningMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.maps.routeoptimization.v1.OptimizeToursLongRunningMetadata
+                         * @static
+                         * @param {google.maps.routeoptimization.v1.IOptimizeToursLongRunningMetadata} message OptimizeToursLongRunningMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OptimizeToursLongRunningMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an OptimizeToursLongRunningMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.maps.routeoptimization.v1.OptimizeToursLongRunningMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.maps.routeoptimization.v1.OptimizeToursLongRunningMetadata} OptimizeToursLongRunningMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OptimizeToursLongRunningMetadata.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.routeoptimization.v1.OptimizeToursLongRunningMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an OptimizeToursLongRunningMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.maps.routeoptimization.v1.OptimizeToursLongRunningMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.maps.routeoptimization.v1.OptimizeToursLongRunningMetadata} OptimizeToursLongRunningMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OptimizeToursLongRunningMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an OptimizeToursLongRunningMetadata message.
+                         * @function verify
+                         * @memberof google.maps.routeoptimization.v1.OptimizeToursLongRunningMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        OptimizeToursLongRunningMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an OptimizeToursLongRunningMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.maps.routeoptimization.v1.OptimizeToursLongRunningMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.maps.routeoptimization.v1.OptimizeToursLongRunningMetadata} OptimizeToursLongRunningMetadata
+                         */
+                        OptimizeToursLongRunningMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.maps.routeoptimization.v1.OptimizeToursLongRunningMetadata)
+                                return object;
+                            return new $root.google.maps.routeoptimization.v1.OptimizeToursLongRunningMetadata();
+                        };
+    
+                        /**
+                         * Creates a plain object from an OptimizeToursLongRunningMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.maps.routeoptimization.v1.OptimizeToursLongRunningMetadata
+                         * @static
+                         * @param {google.maps.routeoptimization.v1.OptimizeToursLongRunningMetadata} message OptimizeToursLongRunningMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        OptimizeToursLongRunningMetadata.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this OptimizeToursLongRunningMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.maps.routeoptimization.v1.OptimizeToursLongRunningMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        OptimizeToursLongRunningMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for OptimizeToursLongRunningMetadata
+                         * @function getTypeUrl
+                         * @memberof google.maps.routeoptimization.v1.OptimizeToursLongRunningMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        OptimizeToursLongRunningMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.maps.routeoptimization.v1.OptimizeToursLongRunningMetadata";
+                        };
+    
+                        return OptimizeToursLongRunningMetadata;
+                    })();
+    
                     v1.OptimizeToursRequest = (function() {
     
                         /**
@@ -1450,6 +2547,7 @@
                                 case 0:
                                 case 1:
                                 case 2:
+                                case 3:
                                     break;
                                 }
                             if (message.searchMode != null && message.hasOwnProperty("searchMode"))
@@ -1560,6 +2658,10 @@
                             case "DETECT_SOME_INFEASIBLE_SHIPMENTS":
                             case 2:
                                 message.solvingMode = 2;
+                                break;
+                            case "TRANSFORM_AND_RETURN_REQUEST":
+                            case 3:
+                                message.solvingMode = 3;
                                 break;
                             }
                             switch (object.searchMode) {
@@ -1742,12 +2844,14 @@
                          * @property {number} DEFAULT_SOLVE=0 DEFAULT_SOLVE value
                          * @property {number} VALIDATE_ONLY=1 VALIDATE_ONLY value
                          * @property {number} DETECT_SOME_INFEASIBLE_SHIPMENTS=2 DETECT_SOME_INFEASIBLE_SHIPMENTS value
+                         * @property {number} TRANSFORM_AND_RETURN_REQUEST=3 TRANSFORM_AND_RETURN_REQUEST value
                          */
                         OptimizeToursRequest.SolvingMode = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "DEFAULT_SOLVE"] = 0;
                             values[valuesById[1] = "VALIDATE_ONLY"] = 1;
                             values[valuesById[2] = "DETECT_SOME_INFEASIBLE_SHIPMENTS"] = 2;
+                            values[valuesById[3] = "TRANSFORM_AND_RETURN_REQUEST"] = 3;
                             return values;
                         })();
     
@@ -1780,6 +2884,7 @@
                          * @property {string|null} [requestLabel] OptimizeToursResponse requestLabel
                          * @property {Array.<google.maps.routeoptimization.v1.ISkippedShipment>|null} [skippedShipments] OptimizeToursResponse skippedShipments
                          * @property {Array.<google.maps.routeoptimization.v1.IOptimizeToursValidationError>|null} [validationErrors] OptimizeToursResponse validationErrors
+                         * @property {google.maps.routeoptimization.v1.IOptimizeToursRequest|null} [processedRequest] OptimizeToursResponse processedRequest
                          * @property {google.maps.routeoptimization.v1.OptimizeToursResponse.IMetrics|null} [metrics] OptimizeToursResponse metrics
                          */
     
@@ -1834,6 +2939,14 @@
                         OptimizeToursResponse.prototype.validationErrors = $util.emptyArray;
     
                         /**
+                         * OptimizeToursResponse processedRequest.
+                         * @member {google.maps.routeoptimization.v1.IOptimizeToursRequest|null|undefined} processedRequest
+                         * @memberof google.maps.routeoptimization.v1.OptimizeToursResponse
+                         * @instance
+                         */
+                        OptimizeToursResponse.prototype.processedRequest = null;
+    
+                        /**
                          * OptimizeToursResponse metrics.
                          * @member {google.maps.routeoptimization.v1.OptimizeToursResponse.IMetrics|null|undefined} metrics
                          * @memberof google.maps.routeoptimization.v1.OptimizeToursResponse
@@ -1878,6 +2991,8 @@
                                     $root.google.maps.routeoptimization.v1.OptimizeToursValidationError.encode(message.validationErrors[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             if (message.metrics != null && Object.hasOwnProperty.call(message, "metrics"))
                                 $root.google.maps.routeoptimization.v1.OptimizeToursResponse.Metrics.encode(message.metrics, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.processedRequest != null && Object.hasOwnProperty.call(message, "processedRequest"))
+                                $root.google.maps.routeoptimization.v1.OptimizeToursRequest.encode(message.processedRequest, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
                             return writer;
                         };
     
@@ -1934,6 +3049,10 @@
                                         if (!(message.validationErrors && message.validationErrors.length))
                                             message.validationErrors = [];
                                         message.validationErrors.push($root.google.maps.routeoptimization.v1.OptimizeToursValidationError.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 21: {
+                                        message.processedRequest = $root.google.maps.routeoptimization.v1.OptimizeToursRequest.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 6: {
@@ -2005,6 +3124,11 @@
                                         return "validationErrors." + error;
                                 }
                             }
+                            if (message.processedRequest != null && message.hasOwnProperty("processedRequest")) {
+                                var error = $root.google.maps.routeoptimization.v1.OptimizeToursRequest.verify(message.processedRequest);
+                                if (error)
+                                    return "processedRequest." + error;
+                            }
                             if (message.metrics != null && message.hasOwnProperty("metrics")) {
                                 var error = $root.google.maps.routeoptimization.v1.OptimizeToursResponse.Metrics.verify(message.metrics);
                                 if (error)
@@ -2057,6 +3181,11 @@
                                     message.validationErrors[i] = $root.google.maps.routeoptimization.v1.OptimizeToursValidationError.fromObject(object.validationErrors[i]);
                                 }
                             }
+                            if (object.processedRequest != null) {
+                                if (typeof object.processedRequest !== "object")
+                                    throw TypeError(".google.maps.routeoptimization.v1.OptimizeToursResponse.processedRequest: object expected");
+                                message.processedRequest = $root.google.maps.routeoptimization.v1.OptimizeToursRequest.fromObject(object.processedRequest);
+                            }
                             if (object.metrics != null) {
                                 if (typeof object.metrics !== "object")
                                     throw TypeError(".google.maps.routeoptimization.v1.OptimizeToursResponse.metrics: object expected");
@@ -2086,6 +3215,7 @@
                             if (options.defaults) {
                                 object.requestLabel = "";
                                 object.metrics = null;
+                                object.processedRequest = null;
                             }
                             if (message.routes && message.routes.length) {
                                 object.routes = [];
@@ -2106,6 +3236,8 @@
                             }
                             if (message.metrics != null && message.hasOwnProperty("metrics"))
                                 object.metrics = $root.google.maps.routeoptimization.v1.OptimizeToursResponse.Metrics.toObject(message.metrics, options);
+                            if (message.processedRequest != null && message.hasOwnProperty("processedRequest"))
+                                object.processedRequest = $root.google.maps.routeoptimization.v1.OptimizeToursRequest.toObject(message.processedRequest, options);
                             return object;
                         };
     
@@ -2541,6 +3673,7 @@
                          * @interface IShipmentModel
                          * @property {Array.<google.maps.routeoptimization.v1.IShipment>|null} [shipments] ShipmentModel shipments
                          * @property {Array.<google.maps.routeoptimization.v1.IVehicle>|null} [vehicles] ShipmentModel vehicles
+                         * @property {Array.<google.maps.routeoptimization.v1.ShipmentModel.IObjective>|null} [objectives] ShipmentModel objectives
                          * @property {number|null} [maxActiveVehicles] ShipmentModel maxActiveVehicles
                          * @property {google.protobuf.ITimestamp|null} [globalStartTime] ShipmentModel globalStartTime
                          * @property {google.protobuf.ITimestamp|null} [globalEndTime] ShipmentModel globalEndTime
@@ -2565,6 +3698,7 @@
                         function ShipmentModel(properties) {
                             this.shipments = [];
                             this.vehicles = [];
+                            this.objectives = [];
                             this.durationDistanceMatrices = [];
                             this.durationDistanceMatrixSrcTags = [];
                             this.durationDistanceMatrixDstTags = [];
@@ -2593,6 +3727,14 @@
                          * @instance
                          */
                         ShipmentModel.prototype.vehicles = $util.emptyArray;
+    
+                        /**
+                         * ShipmentModel objectives.
+                         * @member {Array.<google.maps.routeoptimization.v1.ShipmentModel.IObjective>} objectives
+                         * @memberof google.maps.routeoptimization.v1.ShipmentModel
+                         * @instance
+                         */
+                        ShipmentModel.prototype.objectives = $util.emptyArray;
     
                         /**
                          * ShipmentModel maxActiveVehicles.
@@ -2750,6 +3892,9 @@
                             if (message.precedenceRules != null && message.precedenceRules.length)
                                 for (var i = 0; i < message.precedenceRules.length; ++i)
                                     $root.google.maps.routeoptimization.v1.ShipmentModel.PrecedenceRule.encode(message.precedenceRules[i], writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                            if (message.objectives != null && message.objectives.length)
+                                for (var i = 0; i < message.objectives.length; ++i)
+                                    $root.google.maps.routeoptimization.v1.ShipmentModel.Objective.encode(message.objectives[i], writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
                             return writer;
                         };
     
@@ -2796,6 +3941,12 @@
                                         if (!(message.vehicles && message.vehicles.length))
                                             message.vehicles = [];
                                         message.vehicles.push($root.google.maps.routeoptimization.v1.Vehicle.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 17: {
+                                        if (!(message.objectives && message.objectives.length))
+                                            message.objectives = [];
+                                        message.objectives.push($root.google.maps.routeoptimization.v1.ShipmentModel.Objective.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 case 4: {
@@ -2910,6 +4061,15 @@
                                         return "vehicles." + error;
                                 }
                             }
+                            if (message.objectives != null && message.hasOwnProperty("objectives")) {
+                                if (!Array.isArray(message.objectives))
+                                    return "objectives: array expected";
+                                for (var i = 0; i < message.objectives.length; ++i) {
+                                    var error = $root.google.maps.routeoptimization.v1.ShipmentModel.Objective.verify(message.objectives[i]);
+                                    if (error)
+                                        return "objectives." + error;
+                                }
+                            }
                             if (message.maxActiveVehicles != null && message.hasOwnProperty("maxActiveVehicles")) {
                                 properties._maxActiveVehicles = 1;
                                 if (!$util.isInteger(message.maxActiveVehicles))
@@ -3022,6 +4182,16 @@
                                     message.vehicles[i] = $root.google.maps.routeoptimization.v1.Vehicle.fromObject(object.vehicles[i]);
                                 }
                             }
+                            if (object.objectives) {
+                                if (!Array.isArray(object.objectives))
+                                    throw TypeError(".google.maps.routeoptimization.v1.ShipmentModel.objectives: array expected");
+                                message.objectives = [];
+                                for (var i = 0; i < object.objectives.length; ++i) {
+                                    if (typeof object.objectives[i] !== "object")
+                                        throw TypeError(".google.maps.routeoptimization.v1.ShipmentModel.objectives: object expected");
+                                    message.objectives[i] = $root.google.maps.routeoptimization.v1.ShipmentModel.Objective.fromObject(object.objectives[i]);
+                                }
+                            }
                             if (object.maxActiveVehicles != null)
                                 message.maxActiveVehicles = object.maxActiveVehicles | 0;
                             if (object.globalStartTime != null) {
@@ -3126,6 +4296,7 @@
                                 object.shipmentTypeIncompatibilities = [];
                                 object.shipmentTypeRequirements = [];
                                 object.precedenceRules = [];
+                                object.objectives = [];
                             }
                             if (options.defaults) {
                                 object.globalStartTime = null;
@@ -3188,6 +4359,11 @@
                                 for (var j = 0; j < message.precedenceRules.length; ++j)
                                     object.precedenceRules[j] = $root.google.maps.routeoptimization.v1.ShipmentModel.PrecedenceRule.toObject(message.precedenceRules[j], options);
                             }
+                            if (message.objectives && message.objectives.length) {
+                                object.objectives = [];
+                                for (var j = 0; j < message.objectives.length; ++j)
+                                    object.objectives[j] = $root.google.maps.routeoptimization.v1.ShipmentModel.Objective.toObject(message.objectives[j], options);
+                            }
                             return object;
                         };
     
@@ -3216,6 +4392,311 @@
                             }
                             return typeUrlPrefix + "/google.maps.routeoptimization.v1.ShipmentModel";
                         };
+    
+                        ShipmentModel.Objective = (function() {
+    
+                            /**
+                             * Properties of an Objective.
+                             * @memberof google.maps.routeoptimization.v1.ShipmentModel
+                             * @interface IObjective
+                             * @property {google.maps.routeoptimization.v1.ShipmentModel.Objective.Type|null} [type] Objective type
+                             * @property {number|null} [weight] Objective weight
+                             */
+    
+                            /**
+                             * Constructs a new Objective.
+                             * @memberof google.maps.routeoptimization.v1.ShipmentModel
+                             * @classdesc Represents an Objective.
+                             * @implements IObjective
+                             * @constructor
+                             * @param {google.maps.routeoptimization.v1.ShipmentModel.IObjective=} [properties] Properties to set
+                             */
+                            function Objective(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Objective type.
+                             * @member {google.maps.routeoptimization.v1.ShipmentModel.Objective.Type|null|undefined} type
+                             * @memberof google.maps.routeoptimization.v1.ShipmentModel.Objective
+                             * @instance
+                             */
+                            Objective.prototype.type = null;
+    
+                            /**
+                             * Objective weight.
+                             * @member {number|null|undefined} weight
+                             * @memberof google.maps.routeoptimization.v1.ShipmentModel.Objective
+                             * @instance
+                             */
+                            Objective.prototype.weight = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(Objective.prototype, "_type", {
+                                get: $util.oneOfGetter($oneOfFields = ["type"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(Objective.prototype, "_weight", {
+                                get: $util.oneOfGetter($oneOfFields = ["weight"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new Objective instance using the specified properties.
+                             * @function create
+                             * @memberof google.maps.routeoptimization.v1.ShipmentModel.Objective
+                             * @static
+                             * @param {google.maps.routeoptimization.v1.ShipmentModel.IObjective=} [properties] Properties to set
+                             * @returns {google.maps.routeoptimization.v1.ShipmentModel.Objective} Objective instance
+                             */
+                            Objective.create = function create(properties) {
+                                return new Objective(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Objective message. Does not implicitly {@link google.maps.routeoptimization.v1.ShipmentModel.Objective.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.maps.routeoptimization.v1.ShipmentModel.Objective
+                             * @static
+                             * @param {google.maps.routeoptimization.v1.ShipmentModel.IObjective} message Objective message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Objective.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.type);
+                                if (message.weight != null && Object.hasOwnProperty.call(message, "weight"))
+                                    writer.uint32(/* id 2, wireType 1 =*/17).double(message.weight);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Objective message, length delimited. Does not implicitly {@link google.maps.routeoptimization.v1.ShipmentModel.Objective.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.maps.routeoptimization.v1.ShipmentModel.Objective
+                             * @static
+                             * @param {google.maps.routeoptimization.v1.ShipmentModel.IObjective} message Objective message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Objective.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an Objective message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.maps.routeoptimization.v1.ShipmentModel.Objective
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.maps.routeoptimization.v1.ShipmentModel.Objective} Objective
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Objective.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.routeoptimization.v1.ShipmentModel.Objective();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.type = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.weight = reader.double();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an Objective message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.maps.routeoptimization.v1.ShipmentModel.Objective
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.maps.routeoptimization.v1.ShipmentModel.Objective} Objective
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Objective.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an Objective message.
+                             * @function verify
+                             * @memberof google.maps.routeoptimization.v1.ShipmentModel.Objective
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Objective.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.type != null && message.hasOwnProperty("type")) {
+                                    properties._type = 1;
+                                    switch (message.type) {
+                                    default:
+                                        return "type: enum value expected";
+                                    case 0:
+                                    case 10:
+                                    case 11:
+                                    case 12:
+                                    case 13:
+                                        break;
+                                    }
+                                }
+                                if (message.weight != null && message.hasOwnProperty("weight")) {
+                                    properties._weight = 1;
+                                    if (typeof message.weight !== "number")
+                                        return "weight: number expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an Objective message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.maps.routeoptimization.v1.ShipmentModel.Objective
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.maps.routeoptimization.v1.ShipmentModel.Objective} Objective
+                             */
+                            Objective.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.maps.routeoptimization.v1.ShipmentModel.Objective)
+                                    return object;
+                                var message = new $root.google.maps.routeoptimization.v1.ShipmentModel.Objective();
+                                switch (object.type) {
+                                default:
+                                    if (typeof object.type === "number") {
+                                        message.type = object.type;
+                                        break;
+                                    }
+                                    break;
+                                case "DEFAULT":
+                                case 0:
+                                    message.type = 0;
+                                    break;
+                                case "MIN_DISTANCE":
+                                case 10:
+                                    message.type = 10;
+                                    break;
+                                case "MIN_WORKING_TIME":
+                                case 11:
+                                    message.type = 11;
+                                    break;
+                                case "MIN_TRAVEL_TIME":
+                                case 12:
+                                    message.type = 12;
+                                    break;
+                                case "MIN_NUM_VEHICLES":
+                                case 13:
+                                    message.type = 13;
+                                    break;
+                                }
+                                if (object.weight != null)
+                                    message.weight = Number(object.weight);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an Objective message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.maps.routeoptimization.v1.ShipmentModel.Objective
+                             * @static
+                             * @param {google.maps.routeoptimization.v1.ShipmentModel.Objective} message Objective
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Objective.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.type != null && message.hasOwnProperty("type")) {
+                                    object.type = options.enums === String ? $root.google.maps.routeoptimization.v1.ShipmentModel.Objective.Type[message.type] === undefined ? message.type : $root.google.maps.routeoptimization.v1.ShipmentModel.Objective.Type[message.type] : message.type;
+                                    if (options.oneofs)
+                                        object._type = "type";
+                                }
+                                if (message.weight != null && message.hasOwnProperty("weight")) {
+                                    object.weight = options.json && !isFinite(message.weight) ? String(message.weight) : message.weight;
+                                    if (options.oneofs)
+                                        object._weight = "weight";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Objective to JSON.
+                             * @function toJSON
+                             * @memberof google.maps.routeoptimization.v1.ShipmentModel.Objective
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Objective.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Objective
+                             * @function getTypeUrl
+                             * @memberof google.maps.routeoptimization.v1.ShipmentModel.Objective
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Objective.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.maps.routeoptimization.v1.ShipmentModel.Objective";
+                            };
+    
+                            /**
+                             * Type enum.
+                             * @name google.maps.routeoptimization.v1.ShipmentModel.Objective.Type
+                             * @enum {number}
+                             * @property {number} DEFAULT=0 DEFAULT value
+                             * @property {number} MIN_DISTANCE=10 MIN_DISTANCE value
+                             * @property {number} MIN_WORKING_TIME=11 MIN_WORKING_TIME value
+                             * @property {number} MIN_TRAVEL_TIME=12 MIN_TRAVEL_TIME value
+                             * @property {number} MIN_NUM_VEHICLES=13 MIN_NUM_VEHICLES value
+                             */
+                            Objective.Type = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "DEFAULT"] = 0;
+                                values[valuesById[10] = "MIN_DISTANCE"] = 10;
+                                values[valuesById[11] = "MIN_WORKING_TIME"] = 11;
+                                values[valuesById[12] = "MIN_TRAVEL_TIME"] = 12;
+                                values[valuesById[13] = "MIN_NUM_VEHICLES"] = 13;
+                                return values;
+                            })();
+    
+                            return Objective;
+                        })();
     
                         ShipmentModel.DurationDistanceMatrix = (function() {
     
@@ -4783,6 +6264,7 @@
                              * @property {Object.<string,google.maps.routeoptimization.v1.Shipment.ILoad>|null} [loadDemands] VisitRequest loadDemands
                              * @property {Array.<string>|null} [visitTypes] VisitRequest visitTypes
                              * @property {string|null} [label] VisitRequest label
+                             * @property {boolean|null} [avoidUTurns] VisitRequest avoidUTurns
                              */
     
                             /**
@@ -4893,6 +6375,23 @@
                             VisitRequest.prototype.label = "";
     
                             /**
+                             * VisitRequest avoidUTurns.
+                             * @member {boolean|null|undefined} avoidUTurns
+                             * @memberof google.maps.routeoptimization.v1.Shipment.VisitRequest
+                             * @instance
+                             */
+                            VisitRequest.prototype.avoidUTurns = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(VisitRequest.prototype, "_avoidUTurns", {
+                                get: $util.oneOfGetter($oneOfFields = ["avoidUTurns"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
                              * Creates a new VisitRequest instance using the specified properties.
                              * @function create
                              * @memberof google.maps.routeoptimization.v1.Shipment.VisitRequest
@@ -4944,6 +6443,8 @@
                                         writer.uint32(/* id 12, wireType 2 =*/98).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
                                         $root.google.maps.routeoptimization.v1.Shipment.Load.encode(message.loadDemands[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
                                     }
+                                if (message.avoidUTurns != null && Object.hasOwnProperty.call(message, "avoidUTurns"))
+                                    writer.uint32(/* id 13, wireType 0 =*/104).bool(message.avoidUTurns);
                                 return writer;
                             };
     
@@ -5049,6 +6550,10 @@
                                             message.label = reader.string();
                                             break;
                                         }
+                                    case 13: {
+                                            message.avoidUTurns = reader.bool();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -5084,6 +6589,7 @@
                             VisitRequest.verify = function verify(message) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                var properties = {};
                                 if (message.arrivalLocation != null && message.hasOwnProperty("arrivalLocation")) {
                                     var error = $root.google.type.LatLng.verify(message.arrivalLocation);
                                     if (error)
@@ -5148,6 +6654,11 @@
                                 if (message.label != null && message.hasOwnProperty("label"))
                                     if (!$util.isString(message.label))
                                         return "label: string expected";
+                                if (message.avoidUTurns != null && message.hasOwnProperty("avoidUTurns")) {
+                                    properties._avoidUTurns = 1;
+                                    if (typeof message.avoidUTurns !== "boolean")
+                                        return "avoidUTurns: boolean expected";
+                                }
                                 return null;
                             };
     
@@ -5226,6 +6737,8 @@
                                 }
                                 if (object.label != null)
                                     message.label = String(object.label);
+                                if (object.avoidUTurns != null)
+                                    message.avoidUTurns = Boolean(object.avoidUTurns);
                                 return message;
                             };
     
@@ -5292,6 +6805,11 @@
                                     object.loadDemands = {};
                                     for (var j = 0; j < keys2.length; ++j)
                                         object.loadDemands[keys2[j]] = $root.google.maps.routeoptimization.v1.Shipment.Load.toObject(message.loadDemands[keys2[j]], options);
+                                }
+                                if (message.avoidUTurns != null && message.hasOwnProperty("avoidUTurns")) {
+                                    object.avoidUTurns = message.avoidUTurns;
+                                    if (options.oneofs)
+                                        object._avoidUTurns = "avoidUTurns";
                                 }
                                 return object;
                             };
@@ -7528,6 +9046,8 @@
                              * @property {number|null} [costPerUnitAboveSoftMax] LoadLimit costPerUnitAboveSoftMax
                              * @property {google.maps.routeoptimization.v1.Vehicle.LoadLimit.IInterval|null} [startLoadInterval] LoadLimit startLoadInterval
                              * @property {google.maps.routeoptimization.v1.Vehicle.LoadLimit.IInterval|null} [endLoadInterval] LoadLimit endLoadInterval
+                             * @property {google.maps.routeoptimization.v1.Vehicle.LoadLimit.ILoadCost|null} [costPerKilometer] LoadLimit costPerKilometer
+                             * @property {google.maps.routeoptimization.v1.Vehicle.LoadLimit.ILoadCost|null} [costPerTraveledHour] LoadLimit costPerTraveledHour
                              */
     
                             /**
@@ -7585,12 +9105,40 @@
                              */
                             LoadLimit.prototype.endLoadInterval = null;
     
+                            /**
+                             * LoadLimit costPerKilometer.
+                             * @member {google.maps.routeoptimization.v1.Vehicle.LoadLimit.ILoadCost|null|undefined} costPerKilometer
+                             * @memberof google.maps.routeoptimization.v1.Vehicle.LoadLimit
+                             * @instance
+                             */
+                            LoadLimit.prototype.costPerKilometer = null;
+    
+                            /**
+                             * LoadLimit costPerTraveledHour.
+                             * @member {google.maps.routeoptimization.v1.Vehicle.LoadLimit.ILoadCost|null|undefined} costPerTraveledHour
+                             * @memberof google.maps.routeoptimization.v1.Vehicle.LoadLimit
+                             * @instance
+                             */
+                            LoadLimit.prototype.costPerTraveledHour = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
                             // Virtual OneOf for proto3 optional field
                             Object.defineProperty(LoadLimit.prototype, "_maxLoad", {
                                 get: $util.oneOfGetter($oneOfFields = ["maxLoad"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(LoadLimit.prototype, "_costPerKilometer", {
+                                get: $util.oneOfGetter($oneOfFields = ["costPerKilometer"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(LoadLimit.prototype, "_costPerTraveledHour", {
+                                get: $util.oneOfGetter($oneOfFields = ["costPerTraveledHour"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -7628,6 +9176,10 @@
                                     $root.google.maps.routeoptimization.v1.Vehicle.LoadLimit.Interval.encode(message.startLoadInterval, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                                 if (message.endLoadInterval != null && Object.hasOwnProperty.call(message, "endLoadInterval"))
                                     $root.google.maps.routeoptimization.v1.Vehicle.LoadLimit.Interval.encode(message.endLoadInterval, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.costPerKilometer != null && Object.hasOwnProperty.call(message, "costPerKilometer"))
+                                    $root.google.maps.routeoptimization.v1.Vehicle.LoadLimit.LoadCost.encode(message.costPerKilometer, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                if (message.costPerTraveledHour != null && Object.hasOwnProperty.call(message, "costPerTraveledHour"))
+                                    $root.google.maps.routeoptimization.v1.Vehicle.LoadLimit.LoadCost.encode(message.costPerTraveledHour, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                                 return writer;
                             };
     
@@ -7682,6 +9234,14 @@
                                         }
                                     case 5: {
                                             message.endLoadInterval = $root.google.maps.routeoptimization.v1.Vehicle.LoadLimit.Interval.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.costPerKilometer = $root.google.maps.routeoptimization.v1.Vehicle.LoadLimit.LoadCost.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.costPerTraveledHour = $root.google.maps.routeoptimization.v1.Vehicle.LoadLimit.LoadCost.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -7741,6 +9301,22 @@
                                     if (error)
                                         return "endLoadInterval." + error;
                                 }
+                                if (message.costPerKilometer != null && message.hasOwnProperty("costPerKilometer")) {
+                                    properties._costPerKilometer = 1;
+                                    {
+                                        var error = $root.google.maps.routeoptimization.v1.Vehicle.LoadLimit.LoadCost.verify(message.costPerKilometer);
+                                        if (error)
+                                            return "costPerKilometer." + error;
+                                    }
+                                }
+                                if (message.costPerTraveledHour != null && message.hasOwnProperty("costPerTraveledHour")) {
+                                    properties._costPerTraveledHour = 1;
+                                    {
+                                        var error = $root.google.maps.routeoptimization.v1.Vehicle.LoadLimit.LoadCost.verify(message.costPerTraveledHour);
+                                        if (error)
+                                            return "costPerTraveledHour." + error;
+                                    }
+                                }
                                 return null;
                             };
     
@@ -7785,6 +9361,16 @@
                                     if (typeof object.endLoadInterval !== "object")
                                         throw TypeError(".google.maps.routeoptimization.v1.Vehicle.LoadLimit.endLoadInterval: object expected");
                                     message.endLoadInterval = $root.google.maps.routeoptimization.v1.Vehicle.LoadLimit.Interval.fromObject(object.endLoadInterval);
+                                }
+                                if (object.costPerKilometer != null) {
+                                    if (typeof object.costPerKilometer !== "object")
+                                        throw TypeError(".google.maps.routeoptimization.v1.Vehicle.LoadLimit.costPerKilometer: object expected");
+                                    message.costPerKilometer = $root.google.maps.routeoptimization.v1.Vehicle.LoadLimit.LoadCost.fromObject(object.costPerKilometer);
+                                }
+                                if (object.costPerTraveledHour != null) {
+                                    if (typeof object.costPerTraveledHour !== "object")
+                                        throw TypeError(".google.maps.routeoptimization.v1.Vehicle.LoadLimit.costPerTraveledHour: object expected");
+                                    message.costPerTraveledHour = $root.google.maps.routeoptimization.v1.Vehicle.LoadLimit.LoadCost.fromObject(object.costPerTraveledHour);
                                 }
                                 return message;
                             };
@@ -7831,6 +9417,16 @@
                                     object.startLoadInterval = $root.google.maps.routeoptimization.v1.Vehicle.LoadLimit.Interval.toObject(message.startLoadInterval, options);
                                 if (message.endLoadInterval != null && message.hasOwnProperty("endLoadInterval"))
                                     object.endLoadInterval = $root.google.maps.routeoptimization.v1.Vehicle.LoadLimit.Interval.toObject(message.endLoadInterval, options);
+                                if (message.costPerKilometer != null && message.hasOwnProperty("costPerKilometer")) {
+                                    object.costPerKilometer = $root.google.maps.routeoptimization.v1.Vehicle.LoadLimit.LoadCost.toObject(message.costPerKilometer, options);
+                                    if (options.oneofs)
+                                        object._costPerKilometer = "costPerKilometer";
+                                }
+                                if (message.costPerTraveledHour != null && message.hasOwnProperty("costPerTraveledHour")) {
+                                    object.costPerTraveledHour = $root.google.maps.routeoptimization.v1.Vehicle.LoadLimit.LoadCost.toObject(message.costPerTraveledHour, options);
+                                    if (options.oneofs)
+                                        object._costPerTraveledHour = "costPerTraveledHour";
+                                }
                                 return object;
                             };
     
@@ -8124,6 +9720,300 @@
                                 };
     
                                 return Interval;
+                            })();
+    
+                            LoadLimit.LoadCost = (function() {
+    
+                                /**
+                                 * Properties of a LoadCost.
+                                 * @memberof google.maps.routeoptimization.v1.Vehicle.LoadLimit
+                                 * @interface ILoadCost
+                                 * @property {number|Long|null} [loadThreshold] LoadCost loadThreshold
+                                 * @property {number|null} [costPerUnitBelowThreshold] LoadCost costPerUnitBelowThreshold
+                                 * @property {number|null} [costPerUnitAboveThreshold] LoadCost costPerUnitAboveThreshold
+                                 */
+    
+                                /**
+                                 * Constructs a new LoadCost.
+                                 * @memberof google.maps.routeoptimization.v1.Vehicle.LoadLimit
+                                 * @classdesc Represents a LoadCost.
+                                 * @implements ILoadCost
+                                 * @constructor
+                                 * @param {google.maps.routeoptimization.v1.Vehicle.LoadLimit.ILoadCost=} [properties] Properties to set
+                                 */
+                                function LoadCost(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * LoadCost loadThreshold.
+                                 * @member {number|Long|null|undefined} loadThreshold
+                                 * @memberof google.maps.routeoptimization.v1.Vehicle.LoadLimit.LoadCost
+                                 * @instance
+                                 */
+                                LoadCost.prototype.loadThreshold = null;
+    
+                                /**
+                                 * LoadCost costPerUnitBelowThreshold.
+                                 * @member {number|null|undefined} costPerUnitBelowThreshold
+                                 * @memberof google.maps.routeoptimization.v1.Vehicle.LoadLimit.LoadCost
+                                 * @instance
+                                 */
+                                LoadCost.prototype.costPerUnitBelowThreshold = null;
+    
+                                /**
+                                 * LoadCost costPerUnitAboveThreshold.
+                                 * @member {number|null|undefined} costPerUnitAboveThreshold
+                                 * @memberof google.maps.routeoptimization.v1.Vehicle.LoadLimit.LoadCost
+                                 * @instance
+                                 */
+                                LoadCost.prototype.costPerUnitAboveThreshold = null;
+    
+                                // OneOf field names bound to virtual getters and setters
+                                var $oneOfFields;
+    
+                                // Virtual OneOf for proto3 optional field
+                                Object.defineProperty(LoadCost.prototype, "_loadThreshold", {
+                                    get: $util.oneOfGetter($oneOfFields = ["loadThreshold"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                // Virtual OneOf for proto3 optional field
+                                Object.defineProperty(LoadCost.prototype, "_costPerUnitBelowThreshold", {
+                                    get: $util.oneOfGetter($oneOfFields = ["costPerUnitBelowThreshold"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                // Virtual OneOf for proto3 optional field
+                                Object.defineProperty(LoadCost.prototype, "_costPerUnitAboveThreshold", {
+                                    get: $util.oneOfGetter($oneOfFields = ["costPerUnitAboveThreshold"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                /**
+                                 * Creates a new LoadCost instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.maps.routeoptimization.v1.Vehicle.LoadLimit.LoadCost
+                                 * @static
+                                 * @param {google.maps.routeoptimization.v1.Vehicle.LoadLimit.ILoadCost=} [properties] Properties to set
+                                 * @returns {google.maps.routeoptimization.v1.Vehicle.LoadLimit.LoadCost} LoadCost instance
+                                 */
+                                LoadCost.create = function create(properties) {
+                                    return new LoadCost(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified LoadCost message. Does not implicitly {@link google.maps.routeoptimization.v1.Vehicle.LoadLimit.LoadCost.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.maps.routeoptimization.v1.Vehicle.LoadLimit.LoadCost
+                                 * @static
+                                 * @param {google.maps.routeoptimization.v1.Vehicle.LoadLimit.ILoadCost} message LoadCost message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                LoadCost.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.loadThreshold != null && Object.hasOwnProperty.call(message, "loadThreshold"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).int64(message.loadThreshold);
+                                    if (message.costPerUnitBelowThreshold != null && Object.hasOwnProperty.call(message, "costPerUnitBelowThreshold"))
+                                        writer.uint32(/* id 2, wireType 1 =*/17).double(message.costPerUnitBelowThreshold);
+                                    if (message.costPerUnitAboveThreshold != null && Object.hasOwnProperty.call(message, "costPerUnitAboveThreshold"))
+                                        writer.uint32(/* id 3, wireType 1 =*/25).double(message.costPerUnitAboveThreshold);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified LoadCost message, length delimited. Does not implicitly {@link google.maps.routeoptimization.v1.Vehicle.LoadLimit.LoadCost.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.maps.routeoptimization.v1.Vehicle.LoadLimit.LoadCost
+                                 * @static
+                                 * @param {google.maps.routeoptimization.v1.Vehicle.LoadLimit.ILoadCost} message LoadCost message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                LoadCost.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a LoadCost message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.maps.routeoptimization.v1.Vehicle.LoadLimit.LoadCost
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.maps.routeoptimization.v1.Vehicle.LoadLimit.LoadCost} LoadCost
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                LoadCost.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.routeoptimization.v1.Vehicle.LoadLimit.LoadCost();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.loadThreshold = reader.int64();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.costPerUnitBelowThreshold = reader.double();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.costPerUnitAboveThreshold = reader.double();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a LoadCost message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.maps.routeoptimization.v1.Vehicle.LoadLimit.LoadCost
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.maps.routeoptimization.v1.Vehicle.LoadLimit.LoadCost} LoadCost
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                LoadCost.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a LoadCost message.
+                                 * @function verify
+                                 * @memberof google.maps.routeoptimization.v1.Vehicle.LoadLimit.LoadCost
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                LoadCost.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    var properties = {};
+                                    if (message.loadThreshold != null && message.hasOwnProperty("loadThreshold")) {
+                                        properties._loadThreshold = 1;
+                                        if (!$util.isInteger(message.loadThreshold) && !(message.loadThreshold && $util.isInteger(message.loadThreshold.low) && $util.isInteger(message.loadThreshold.high)))
+                                            return "loadThreshold: integer|Long expected";
+                                    }
+                                    if (message.costPerUnitBelowThreshold != null && message.hasOwnProperty("costPerUnitBelowThreshold")) {
+                                        properties._costPerUnitBelowThreshold = 1;
+                                        if (typeof message.costPerUnitBelowThreshold !== "number")
+                                            return "costPerUnitBelowThreshold: number expected";
+                                    }
+                                    if (message.costPerUnitAboveThreshold != null && message.hasOwnProperty("costPerUnitAboveThreshold")) {
+                                        properties._costPerUnitAboveThreshold = 1;
+                                        if (typeof message.costPerUnitAboveThreshold !== "number")
+                                            return "costPerUnitAboveThreshold: number expected";
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a LoadCost message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.maps.routeoptimization.v1.Vehicle.LoadLimit.LoadCost
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.maps.routeoptimization.v1.Vehicle.LoadLimit.LoadCost} LoadCost
+                                 */
+                                LoadCost.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.maps.routeoptimization.v1.Vehicle.LoadLimit.LoadCost)
+                                        return object;
+                                    var message = new $root.google.maps.routeoptimization.v1.Vehicle.LoadLimit.LoadCost();
+                                    if (object.loadThreshold != null)
+                                        if ($util.Long)
+                                            (message.loadThreshold = $util.Long.fromValue(object.loadThreshold)).unsigned = false;
+                                        else if (typeof object.loadThreshold === "string")
+                                            message.loadThreshold = parseInt(object.loadThreshold, 10);
+                                        else if (typeof object.loadThreshold === "number")
+                                            message.loadThreshold = object.loadThreshold;
+                                        else if (typeof object.loadThreshold === "object")
+                                            message.loadThreshold = new $util.LongBits(object.loadThreshold.low >>> 0, object.loadThreshold.high >>> 0).toNumber();
+                                    if (object.costPerUnitBelowThreshold != null)
+                                        message.costPerUnitBelowThreshold = Number(object.costPerUnitBelowThreshold);
+                                    if (object.costPerUnitAboveThreshold != null)
+                                        message.costPerUnitAboveThreshold = Number(object.costPerUnitAboveThreshold);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a LoadCost message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.maps.routeoptimization.v1.Vehicle.LoadLimit.LoadCost
+                                 * @static
+                                 * @param {google.maps.routeoptimization.v1.Vehicle.LoadLimit.LoadCost} message LoadCost
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                LoadCost.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (message.loadThreshold != null && message.hasOwnProperty("loadThreshold")) {
+                                        if (typeof message.loadThreshold === "number")
+                                            object.loadThreshold = options.longs === String ? String(message.loadThreshold) : message.loadThreshold;
+                                        else
+                                            object.loadThreshold = options.longs === String ? $util.Long.prototype.toString.call(message.loadThreshold) : options.longs === Number ? new $util.LongBits(message.loadThreshold.low >>> 0, message.loadThreshold.high >>> 0).toNumber() : message.loadThreshold;
+                                        if (options.oneofs)
+                                            object._loadThreshold = "loadThreshold";
+                                    }
+                                    if (message.costPerUnitBelowThreshold != null && message.hasOwnProperty("costPerUnitBelowThreshold")) {
+                                        object.costPerUnitBelowThreshold = options.json && !isFinite(message.costPerUnitBelowThreshold) ? String(message.costPerUnitBelowThreshold) : message.costPerUnitBelowThreshold;
+                                        if (options.oneofs)
+                                            object._costPerUnitBelowThreshold = "costPerUnitBelowThreshold";
+                                    }
+                                    if (message.costPerUnitAboveThreshold != null && message.hasOwnProperty("costPerUnitAboveThreshold")) {
+                                        object.costPerUnitAboveThreshold = options.json && !isFinite(message.costPerUnitAboveThreshold) ? String(message.costPerUnitAboveThreshold) : message.costPerUnitAboveThreshold;
+                                        if (options.oneofs)
+                                            object._costPerUnitAboveThreshold = "costPerUnitAboveThreshold";
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this LoadCost to JSON.
+                                 * @function toJSON
+                                 * @memberof google.maps.routeoptimization.v1.Vehicle.LoadLimit.LoadCost
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                LoadCost.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for LoadCost
+                                 * @function getTypeUrl
+                                 * @memberof google.maps.routeoptimization.v1.Vehicle.LoadLimit.LoadCost
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                LoadCost.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.maps.routeoptimization.v1.Vehicle.LoadLimit.LoadCost";
+                                };
+    
+                                return LoadCost;
                             })();
     
                             return LoadLimit;
@@ -9557,6 +11447,7 @@
                          * @property {google.maps.routeoptimization.v1.ILocation|null} [location] Waypoint location
                          * @property {string|null} [placeId] Waypoint placeId
                          * @property {boolean|null} [sideOfRoad] Waypoint sideOfRoad
+                         * @property {boolean|null} [vehicleStopover] Waypoint vehicleStopover
                          */
     
                         /**
@@ -9597,6 +11488,14 @@
                          * @instance
                          */
                         Waypoint.prototype.sideOfRoad = false;
+    
+                        /**
+                         * Waypoint vehicleStopover.
+                         * @member {boolean} vehicleStopover
+                         * @memberof google.maps.routeoptimization.v1.Waypoint
+                         * @instance
+                         */
+                        Waypoint.prototype.vehicleStopover = false;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -9642,6 +11541,8 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.placeId);
                             if (message.sideOfRoad != null && Object.hasOwnProperty.call(message, "sideOfRoad"))
                                 writer.uint32(/* id 3, wireType 0 =*/24).bool(message.sideOfRoad);
+                            if (message.vehicleStopover != null && Object.hasOwnProperty.call(message, "vehicleStopover"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.vehicleStopover);
                             return writer;
                         };
     
@@ -9688,6 +11589,10 @@
                                     }
                                 case 3: {
                                         message.sideOfRoad = reader.bool();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.vehicleStopover = reader.bool();
                                         break;
                                     }
                                 default:
@@ -9744,6 +11649,9 @@
                             if (message.sideOfRoad != null && message.hasOwnProperty("sideOfRoad"))
                                 if (typeof message.sideOfRoad !== "boolean")
                                     return "sideOfRoad: boolean expected";
+                            if (message.vehicleStopover != null && message.hasOwnProperty("vehicleStopover"))
+                                if (typeof message.vehicleStopover !== "boolean")
+                                    return "vehicleStopover: boolean expected";
                             return null;
                         };
     
@@ -9768,6 +11676,8 @@
                                 message.placeId = String(object.placeId);
                             if (object.sideOfRoad != null)
                                 message.sideOfRoad = Boolean(object.sideOfRoad);
+                            if (object.vehicleStopover != null)
+                                message.vehicleStopover = Boolean(object.vehicleStopover);
                             return message;
                         };
     
@@ -9784,8 +11694,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.sideOfRoad = false;
+                                object.vehicleStopover = false;
+                            }
                             if (message.location != null && message.hasOwnProperty("location")) {
                                 object.location = $root.google.maps.routeoptimization.v1.Location.toObject(message.location, options);
                                 if (options.oneofs)
@@ -9798,6 +11710,8 @@
                             }
                             if (message.sideOfRoad != null && message.hasOwnProperty("sideOfRoad"))
                                 object.sideOfRoad = message.sideOfRoad;
+                            if (message.vehicleStopover != null && message.hasOwnProperty("vehicleStopover"))
+                                object.vehicleStopover = message.vehicleStopover;
                             return object;
                         };
     
@@ -10870,6 +12784,7 @@
                          * @property {google.maps.routeoptimization.v1.ShipmentRoute.IEncodedPolyline|null} [routePolyline] ShipmentRoute routePolyline
                          * @property {Array.<google.maps.routeoptimization.v1.ShipmentRoute.IBreak>|null} [breaks] ShipmentRoute breaks
                          * @property {google.maps.routeoptimization.v1.IAggregatedMetrics|null} [metrics] ShipmentRoute metrics
+                         * @property {google.maps.routeoptimization.v1.IVehicleFullness|null} [vehicleFullness] ShipmentRoute vehicleFullness
                          * @property {Object.<string,number>|null} [routeCosts] ShipmentRoute routeCosts
                          * @property {number|null} [routeTotalCost] ShipmentRoute routeTotalCost
                          */
@@ -10974,6 +12889,14 @@
                         ShipmentRoute.prototype.metrics = null;
     
                         /**
+                         * ShipmentRoute vehicleFullness.
+                         * @member {google.maps.routeoptimization.v1.IVehicleFullness|null|undefined} vehicleFullness
+                         * @memberof google.maps.routeoptimization.v1.ShipmentRoute
+                         * @instance
+                         */
+                        ShipmentRoute.prototype.vehicleFullness = null;
+    
+                        /**
                          * ShipmentRoute routeCosts.
                          * @member {Object.<string,number>} routeCosts
                          * @memberof google.maps.routeoptimization.v1.ShipmentRoute
@@ -11041,6 +12964,8 @@
                                     writer.uint32(/* id 17, wireType 2 =*/138).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 1 =*/17).double(message.routeCosts[keys[i]]).ldelim();
                             if (message.routeTotalCost != null && Object.hasOwnProperty.call(message, "routeTotalCost"))
                                 writer.uint32(/* id 18, wireType 1 =*/145).double(message.routeTotalCost);
+                            if (message.vehicleFullness != null && Object.hasOwnProperty.call(message, "vehicleFullness"))
+                                $root.google.maps.routeoptimization.v1.VehicleFullness.encode(message.vehicleFullness, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                             return writer;
                         };
     
@@ -11121,6 +13046,10 @@
                                     }
                                 case 12: {
                                         message.metrics = $root.google.maps.routeoptimization.v1.AggregatedMetrics.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 20: {
+                                        message.vehicleFullness = $root.google.maps.routeoptimization.v1.VehicleFullness.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 17: {
@@ -11241,6 +13170,11 @@
                                 if (error)
                                     return "metrics." + error;
                             }
+                            if (message.vehicleFullness != null && message.hasOwnProperty("vehicleFullness")) {
+                                var error = $root.google.maps.routeoptimization.v1.VehicleFullness.verify(message.vehicleFullness);
+                                if (error)
+                                    return "vehicleFullness." + error;
+                            }
                             if (message.routeCosts != null && message.hasOwnProperty("routeCosts")) {
                                 if (!$util.isObject(message.routeCosts))
                                     return "routeCosts: object expected";
@@ -11323,6 +13257,11 @@
                                     throw TypeError(".google.maps.routeoptimization.v1.ShipmentRoute.metrics: object expected");
                                 message.metrics = $root.google.maps.routeoptimization.v1.AggregatedMetrics.fromObject(object.metrics);
                             }
+                            if (object.vehicleFullness != null) {
+                                if (typeof object.vehicleFullness !== "object")
+                                    throw TypeError(".google.maps.routeoptimization.v1.ShipmentRoute.vehicleFullness: object expected");
+                                message.vehicleFullness = $root.google.maps.routeoptimization.v1.VehicleFullness.fromObject(object.vehicleFullness);
+                            }
                             if (object.routeCosts) {
                                 if (typeof object.routeCosts !== "object")
                                     throw TypeError(".google.maps.routeoptimization.v1.ShipmentRoute.routeCosts: object expected");
@@ -11364,6 +13303,7 @@
                                 object.routePolyline = null;
                                 object.metrics = null;
                                 object.routeTotalCost = 0;
+                                object.vehicleFullness = null;
                             }
                             if (message.vehicleIndex != null && message.hasOwnProperty("vehicleIndex"))
                                 object.vehicleIndex = message.vehicleIndex;
@@ -11402,6 +13342,8 @@
                             }
                             if (message.routeTotalCost != null && message.hasOwnProperty("routeTotalCost"))
                                 object.routeTotalCost = options.json && !isFinite(message.routeTotalCost) ? String(message.routeTotalCost) : message.routeTotalCost;
+                            if (message.vehicleFullness != null && message.hasOwnProperty("vehicleFullness"))
+                                object.vehicleFullness = $root.google.maps.routeoptimization.v1.VehicleFullness.toObject(message.vehicleFullness, options);
                             return object;
                         };
     
@@ -11445,6 +13387,7 @@
                              * @property {google.protobuf.IDuration|null} [detour] Visit detour
                              * @property {string|null} [shipmentLabel] Visit shipmentLabel
                              * @property {string|null} [visitLabel] Visit visitLabel
+                             * @property {number|null} [injectedSolutionLocationToken] Visit injectedSolutionLocationToken
                              */
     
                             /**
@@ -11528,6 +13471,23 @@
                             Visit.prototype.visitLabel = "";
     
                             /**
+                             * Visit injectedSolutionLocationToken.
+                             * @member {number|null|undefined} injectedSolutionLocationToken
+                             * @memberof google.maps.routeoptimization.v1.ShipmentRoute.Visit
+                             * @instance
+                             */
+                            Visit.prototype.injectedSolutionLocationToken = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(Visit.prototype, "_injectedSolutionLocationToken", {
+                                get: $util.oneOfGetter($oneOfFields = ["injectedSolutionLocationToken"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
                              * Creates a new Visit instance using the specified properties.
                              * @function create
                              * @memberof google.maps.routeoptimization.v1.ShipmentRoute.Visit
@@ -11570,6 +13530,8 @@
                                         writer.uint32(/* id 11, wireType 2 =*/90).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
                                         $root.google.maps.routeoptimization.v1.Shipment.Load.encode(message.loadDemands[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
                                     }
+                                if (message.injectedSolutionLocationToken != null && Object.hasOwnProperty.call(message, "injectedSolutionLocationToken"))
+                                    writer.uint32(/* id 13, wireType 0 =*/104).int32(message.injectedSolutionLocationToken);
                                 return writer;
                             };
     
@@ -11657,6 +13619,10 @@
                                             message.visitLabel = reader.string();
                                             break;
                                         }
+                                    case 13: {
+                                            message.injectedSolutionLocationToken = reader.int32();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -11692,6 +13658,7 @@
                             Visit.verify = function verify(message) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                var properties = {};
                                 if (message.shipmentIndex != null && message.hasOwnProperty("shipmentIndex"))
                                     if (!$util.isInteger(message.shipmentIndex))
                                         return "shipmentIndex: integer expected";
@@ -11727,6 +13694,11 @@
                                 if (message.visitLabel != null && message.hasOwnProperty("visitLabel"))
                                     if (!$util.isString(message.visitLabel))
                                         return "visitLabel: string expected";
+                                if (message.injectedSolutionLocationToken != null && message.hasOwnProperty("injectedSolutionLocationToken")) {
+                                    properties._injectedSolutionLocationToken = 1;
+                                    if (!$util.isInteger(message.injectedSolutionLocationToken))
+                                        return "injectedSolutionLocationToken: integer expected";
+                                }
                                 return null;
                             };
     
@@ -11772,6 +13744,8 @@
                                     message.shipmentLabel = String(object.shipmentLabel);
                                 if (object.visitLabel != null)
                                     message.visitLabel = String(object.visitLabel);
+                                if (object.injectedSolutionLocationToken != null)
+                                    message.injectedSolutionLocationToken = object.injectedSolutionLocationToken | 0;
                                 return message;
                             };
     
@@ -11818,6 +13792,11 @@
                                     object.loadDemands = {};
                                     for (var j = 0; j < keys2.length; ++j)
                                         object.loadDemands[keys2[j]] = $root.google.maps.routeoptimization.v1.Shipment.Load.toObject(message.loadDemands[keys2[j]], options);
+                                }
+                                if (message.injectedSolutionLocationToken != null && message.hasOwnProperty("injectedSolutionLocationToken")) {
+                                    object.injectedSolutionLocationToken = message.injectedSolutionLocationToken;
+                                    if (options.oneofs)
+                                        object._injectedSolutionLocationToken = "injectedSolutionLocationToken";
                                 }
                                 return object;
                             };
@@ -13039,6 +15018,8 @@
                          * @interface ISkippedShipment
                          * @property {number|null} [index] SkippedShipment index
                          * @property {string|null} [label] SkippedShipment label
+                         * @property {number|null} [penaltyCost] SkippedShipment penaltyCost
+                         * @property {number|null} [estimatedIncompatibleVehicleRatio] SkippedShipment estimatedIncompatibleVehicleRatio
                          * @property {Array.<google.maps.routeoptimization.v1.SkippedShipment.IReason>|null} [reasons] SkippedShipment reasons
                          */
     
@@ -13075,12 +15056,43 @@
                         SkippedShipment.prototype.label = "";
     
                         /**
+                         * SkippedShipment penaltyCost.
+                         * @member {number|null|undefined} penaltyCost
+                         * @memberof google.maps.routeoptimization.v1.SkippedShipment
+                         * @instance
+                         */
+                        SkippedShipment.prototype.penaltyCost = null;
+    
+                        /**
+                         * SkippedShipment estimatedIncompatibleVehicleRatio.
+                         * @member {number|null|undefined} estimatedIncompatibleVehicleRatio
+                         * @memberof google.maps.routeoptimization.v1.SkippedShipment
+                         * @instance
+                         */
+                        SkippedShipment.prototype.estimatedIncompatibleVehicleRatio = null;
+    
+                        /**
                          * SkippedShipment reasons.
                          * @member {Array.<google.maps.routeoptimization.v1.SkippedShipment.IReason>} reasons
                          * @memberof google.maps.routeoptimization.v1.SkippedShipment
                          * @instance
                          */
                         SkippedShipment.prototype.reasons = $util.emptyArray;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(SkippedShipment.prototype, "_penaltyCost", {
+                            get: $util.oneOfGetter($oneOfFields = ["penaltyCost"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(SkippedShipment.prototype, "_estimatedIncompatibleVehicleRatio", {
+                            get: $util.oneOfGetter($oneOfFields = ["estimatedIncompatibleVehicleRatio"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new SkippedShipment instance using the specified properties.
@@ -13113,6 +15125,10 @@
                             if (message.reasons != null && message.reasons.length)
                                 for (var i = 0; i < message.reasons.length; ++i)
                                     $root.google.maps.routeoptimization.v1.SkippedShipment.Reason.encode(message.reasons[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.estimatedIncompatibleVehicleRatio != null && Object.hasOwnProperty.call(message, "estimatedIncompatibleVehicleRatio"))
+                                writer.uint32(/* id 5, wireType 1 =*/41).double(message.estimatedIncompatibleVehicleRatio);
+                            if (message.penaltyCost != null && Object.hasOwnProperty.call(message, "penaltyCost"))
+                                writer.uint32(/* id 6, wireType 1 =*/49).double(message.penaltyCost);
                             return writer;
                         };
     
@@ -13157,6 +15173,14 @@
                                         message.label = reader.string();
                                         break;
                                     }
+                                case 6: {
+                                        message.penaltyCost = reader.double();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.estimatedIncompatibleVehicleRatio = reader.double();
+                                        break;
+                                    }
                                 case 3: {
                                         if (!(message.reasons && message.reasons.length))
                                             message.reasons = [];
@@ -13198,12 +15222,23 @@
                         SkippedShipment.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.index != null && message.hasOwnProperty("index"))
                                 if (!$util.isInteger(message.index))
                                     return "index: integer expected";
                             if (message.label != null && message.hasOwnProperty("label"))
                                 if (!$util.isString(message.label))
                                     return "label: string expected";
+                            if (message.penaltyCost != null && message.hasOwnProperty("penaltyCost")) {
+                                properties._penaltyCost = 1;
+                                if (typeof message.penaltyCost !== "number")
+                                    return "penaltyCost: number expected";
+                            }
+                            if (message.estimatedIncompatibleVehicleRatio != null && message.hasOwnProperty("estimatedIncompatibleVehicleRatio")) {
+                                properties._estimatedIncompatibleVehicleRatio = 1;
+                                if (typeof message.estimatedIncompatibleVehicleRatio !== "number")
+                                    return "estimatedIncompatibleVehicleRatio: number expected";
+                            }
                             if (message.reasons != null && message.hasOwnProperty("reasons")) {
                                 if (!Array.isArray(message.reasons))
                                     return "reasons: array expected";
@@ -13232,6 +15267,10 @@
                                 message.index = object.index | 0;
                             if (object.label != null)
                                 message.label = String(object.label);
+                            if (object.penaltyCost != null)
+                                message.penaltyCost = Number(object.penaltyCost);
+                            if (object.estimatedIncompatibleVehicleRatio != null)
+                                message.estimatedIncompatibleVehicleRatio = Number(object.estimatedIncompatibleVehicleRatio);
                             if (object.reasons) {
                                 if (!Array.isArray(object.reasons))
                                     throw TypeError(".google.maps.routeoptimization.v1.SkippedShipment.reasons: array expected");
@@ -13273,6 +15312,16 @@
                                 for (var j = 0; j < message.reasons.length; ++j)
                                     object.reasons[j] = $root.google.maps.routeoptimization.v1.SkippedShipment.Reason.toObject(message.reasons[j], options);
                             }
+                            if (message.estimatedIncompatibleVehicleRatio != null && message.hasOwnProperty("estimatedIncompatibleVehicleRatio")) {
+                                object.estimatedIncompatibleVehicleRatio = options.json && !isFinite(message.estimatedIncompatibleVehicleRatio) ? String(message.estimatedIncompatibleVehicleRatio) : message.estimatedIncompatibleVehicleRatio;
+                                if (options.oneofs)
+                                    object._estimatedIncompatibleVehicleRatio = "estimatedIncompatibleVehicleRatio";
+                            }
+                            if (message.penaltyCost != null && message.hasOwnProperty("penaltyCost")) {
+                                object.penaltyCost = options.json && !isFinite(message.penaltyCost) ? String(message.penaltyCost) : message.penaltyCost;
+                                if (options.oneofs)
+                                    object._penaltyCost = "penaltyCost";
+                            }
                             return object;
                         };
     
@@ -13310,6 +15359,7 @@
                              * @interface IReason
                              * @property {google.maps.routeoptimization.v1.SkippedShipment.Reason.Code|null} [code] Reason code
                              * @property {number|null} [exampleVehicleIndex] Reason exampleVehicleIndex
+                             * @property {Array.<number>|null} [exampleVehicleIndices] Reason exampleVehicleIndices
                              * @property {string|null} [exampleExceededCapacityType] Reason exampleExceededCapacityType
                              */
     
@@ -13322,6 +15372,7 @@
                              * @param {google.maps.routeoptimization.v1.SkippedShipment.IReason=} [properties] Properties to set
                              */
                             function Reason(properties) {
+                                this.exampleVehicleIndices = [];
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null)
@@ -13343,6 +15394,14 @@
                              * @instance
                              */
                             Reason.prototype.exampleVehicleIndex = null;
+    
+                            /**
+                             * Reason exampleVehicleIndices.
+                             * @member {Array.<number>} exampleVehicleIndices
+                             * @memberof google.maps.routeoptimization.v1.SkippedShipment.Reason
+                             * @instance
+                             */
+                            Reason.prototype.exampleVehicleIndices = $util.emptyArray;
     
                             /**
                              * Reason exampleExceededCapacityType.
@@ -13391,6 +15450,12 @@
                                     writer.uint32(/* id 2, wireType 0 =*/16).int32(message.exampleVehicleIndex);
                                 if (message.exampleExceededCapacityType != null && Object.hasOwnProperty.call(message, "exampleExceededCapacityType"))
                                     writer.uint32(/* id 3, wireType 2 =*/26).string(message.exampleExceededCapacityType);
+                                if (message.exampleVehicleIndices != null && message.exampleVehicleIndices.length) {
+                                    writer.uint32(/* id 5, wireType 2 =*/42).fork();
+                                    for (var i = 0; i < message.exampleVehicleIndices.length; ++i)
+                                        writer.int32(message.exampleVehicleIndices[i]);
+                                    writer.ldelim();
+                                }
                                 return writer;
                             };
     
@@ -13433,6 +15498,17 @@
                                         }
                                     case 2: {
                                             message.exampleVehicleIndex = reader.int32();
+                                            break;
+                                        }
+                                    case 5: {
+                                            if (!(message.exampleVehicleIndices && message.exampleVehicleIndices.length))
+                                                message.exampleVehicleIndices = [];
+                                            if ((tag & 7) === 2) {
+                                                var end2 = reader.uint32() + reader.pos;
+                                                while (reader.pos < end2)
+                                                    message.exampleVehicleIndices.push(reader.int32());
+                                            } else
+                                                message.exampleVehicleIndices.push(reader.int32());
                                             break;
                                         }
                                     case 3: {
@@ -13487,12 +15563,24 @@
                                     case 5:
                                     case 6:
                                     case 7:
+                                    case 8:
+                                    case 9:
+                                    case 10:
+                                    case 11:
+                                    case 13:
                                         break;
                                     }
                                 if (message.exampleVehicleIndex != null && message.hasOwnProperty("exampleVehicleIndex")) {
                                     properties._exampleVehicleIndex = 1;
                                     if (!$util.isInteger(message.exampleVehicleIndex))
                                         return "exampleVehicleIndex: integer expected";
+                                }
+                                if (message.exampleVehicleIndices != null && message.hasOwnProperty("exampleVehicleIndices")) {
+                                    if (!Array.isArray(message.exampleVehicleIndices))
+                                        return "exampleVehicleIndices: array expected";
+                                    for (var i = 0; i < message.exampleVehicleIndices.length; ++i)
+                                        if (!$util.isInteger(message.exampleVehicleIndices[i]))
+                                            return "exampleVehicleIndices: integer[] expected";
                                 }
                                 if (message.exampleExceededCapacityType != null && message.hasOwnProperty("exampleExceededCapacityType"))
                                     if (!$util.isString(message.exampleExceededCapacityType))
@@ -13551,9 +15639,36 @@
                                 case 7:
                                     message.code = 7;
                                     break;
+                                case "VEHICLE_IGNORED":
+                                case 8:
+                                    message.code = 8;
+                                    break;
+                                case "SHIPMENT_IGNORED":
+                                case 9:
+                                    message.code = 9;
+                                    break;
+                                case "SKIPPED_IN_INJECTED_SOLUTION_CONSTRAINT":
+                                case 10:
+                                    message.code = 10;
+                                    break;
+                                case "VEHICLE_ROUTE_IS_FULLY_SEQUENCE_CONSTRAINED":
+                                case 11:
+                                    message.code = 11;
+                                    break;
+                                case "ZERO_PENALTY_COST":
+                                case 13:
+                                    message.code = 13;
+                                    break;
                                 }
                                 if (object.exampleVehicleIndex != null)
                                     message.exampleVehicleIndex = object.exampleVehicleIndex | 0;
+                                if (object.exampleVehicleIndices) {
+                                    if (!Array.isArray(object.exampleVehicleIndices))
+                                        throw TypeError(".google.maps.routeoptimization.v1.SkippedShipment.Reason.exampleVehicleIndices: array expected");
+                                    message.exampleVehicleIndices = [];
+                                    for (var i = 0; i < object.exampleVehicleIndices.length; ++i)
+                                        message.exampleVehicleIndices[i] = object.exampleVehicleIndices[i] | 0;
+                                }
                                 if (object.exampleExceededCapacityType != null)
                                     message.exampleExceededCapacityType = String(object.exampleExceededCapacityType);
                                 return message;
@@ -13572,6 +15687,8 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.exampleVehicleIndices = [];
                                 if (options.defaults) {
                                     object.code = options.enums === String ? "CODE_UNSPECIFIED" : 0;
                                     object.exampleExceededCapacityType = "";
@@ -13585,6 +15702,11 @@
                                 }
                                 if (message.exampleExceededCapacityType != null && message.hasOwnProperty("exampleExceededCapacityType"))
                                     object.exampleExceededCapacityType = message.exampleExceededCapacityType;
+                                if (message.exampleVehicleIndices && message.exampleVehicleIndices.length) {
+                                    object.exampleVehicleIndices = [];
+                                    for (var j = 0; j < message.exampleVehicleIndices.length; ++j)
+                                        object.exampleVehicleIndices[j] = message.exampleVehicleIndices[j];
+                                }
                                 return object;
                             };
     
@@ -13626,6 +15748,11 @@
                              * @property {number} CANNOT_BE_PERFORMED_WITHIN_VEHICLE_TRAVEL_DURATION_LIMIT=5 CANNOT_BE_PERFORMED_WITHIN_VEHICLE_TRAVEL_DURATION_LIMIT value
                              * @property {number} CANNOT_BE_PERFORMED_WITHIN_VEHICLE_TIME_WINDOWS=6 CANNOT_BE_PERFORMED_WITHIN_VEHICLE_TIME_WINDOWS value
                              * @property {number} VEHICLE_NOT_ALLOWED=7 VEHICLE_NOT_ALLOWED value
+                             * @property {number} VEHICLE_IGNORED=8 VEHICLE_IGNORED value
+                             * @property {number} SHIPMENT_IGNORED=9 SHIPMENT_IGNORED value
+                             * @property {number} SKIPPED_IN_INJECTED_SOLUTION_CONSTRAINT=10 SKIPPED_IN_INJECTED_SOLUTION_CONSTRAINT value
+                             * @property {number} VEHICLE_ROUTE_IS_FULLY_SEQUENCE_CONSTRAINED=11 VEHICLE_ROUTE_IS_FULLY_SEQUENCE_CONSTRAINED value
+                             * @property {number} ZERO_PENALTY_COST=13 ZERO_PENALTY_COST value
                              */
                             Reason.Code = (function() {
                                 var valuesById = {}, values = Object.create(valuesById);
@@ -13637,6 +15764,11 @@
                                 values[valuesById[5] = "CANNOT_BE_PERFORMED_WITHIN_VEHICLE_TRAVEL_DURATION_LIMIT"] = 5;
                                 values[valuesById[6] = "CANNOT_BE_PERFORMED_WITHIN_VEHICLE_TIME_WINDOWS"] = 6;
                                 values[valuesById[7] = "VEHICLE_NOT_ALLOWED"] = 7;
+                                values[valuesById[8] = "VEHICLE_IGNORED"] = 8;
+                                values[valuesById[9] = "SHIPMENT_IGNORED"] = 9;
+                                values[valuesById[10] = "SKIPPED_IN_INJECTED_SOLUTION_CONSTRAINT"] = 10;
+                                values[valuesById[11] = "VEHICLE_ROUTE_IS_FULLY_SEQUENCE_CONSTRAINED"] = 11;
+                                values[valuesById[13] = "ZERO_PENALTY_COST"] = 13;
                                 return values;
                             })();
     
@@ -13653,6 +15785,8 @@
                          * @memberof google.maps.routeoptimization.v1
                          * @interface IAggregatedMetrics
                          * @property {number|null} [performedShipmentCount] AggregatedMetrics performedShipmentCount
+                         * @property {number|null} [performedMandatoryShipmentCount] AggregatedMetrics performedMandatoryShipmentCount
+                         * @property {number|null} [performedShipmentPenaltyCostSum] AggregatedMetrics performedShipmentPenaltyCostSum
                          * @property {google.protobuf.IDuration|null} [travelDuration] AggregatedMetrics travelDuration
                          * @property {google.protobuf.IDuration|null} [waitDuration] AggregatedMetrics waitDuration
                          * @property {google.protobuf.IDuration|null} [delayDuration] AggregatedMetrics delayDuration
@@ -13686,6 +15820,22 @@
                          * @instance
                          */
                         AggregatedMetrics.prototype.performedShipmentCount = 0;
+    
+                        /**
+                         * AggregatedMetrics performedMandatoryShipmentCount.
+                         * @member {number|null|undefined} performedMandatoryShipmentCount
+                         * @memberof google.maps.routeoptimization.v1.AggregatedMetrics
+                         * @instance
+                         */
+                        AggregatedMetrics.prototype.performedMandatoryShipmentCount = null;
+    
+                        /**
+                         * AggregatedMetrics performedShipmentPenaltyCostSum.
+                         * @member {number|null|undefined} performedShipmentPenaltyCostSum
+                         * @memberof google.maps.routeoptimization.v1.AggregatedMetrics
+                         * @instance
+                         */
+                        AggregatedMetrics.prototype.performedShipmentPenaltyCostSum = null;
     
                         /**
                          * AggregatedMetrics travelDuration.
@@ -13751,6 +15901,21 @@
                          */
                         AggregatedMetrics.prototype.maxLoads = $util.emptyObject;
     
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(AggregatedMetrics.prototype, "_performedMandatoryShipmentCount", {
+                            get: $util.oneOfGetter($oneOfFields = ["performedMandatoryShipmentCount"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(AggregatedMetrics.prototype, "_performedShipmentPenaltyCostSum", {
+                            get: $util.oneOfGetter($oneOfFields = ["performedShipmentPenaltyCostSum"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
                         /**
                          * Creates a new AggregatedMetrics instance using the specified properties.
                          * @function create
@@ -13796,6 +15961,10 @@
                                     writer.uint32(/* id 9, wireType 2 =*/74).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
                                     $root.google.maps.routeoptimization.v1.ShipmentRoute.VehicleLoad.encode(message.maxLoads[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
                                 }
+                            if (message.performedMandatoryShipmentCount != null && Object.hasOwnProperty.call(message, "performedMandatoryShipmentCount"))
+                                writer.uint32(/* id 12, wireType 0 =*/96).int32(message.performedMandatoryShipmentCount);
+                            if (message.performedShipmentPenaltyCostSum != null && Object.hasOwnProperty.call(message, "performedShipmentPenaltyCostSum"))
+                                writer.uint32(/* id 13, wireType 1 =*/105).double(message.performedShipmentPenaltyCostSum);
                             return writer;
                         };
     
@@ -13834,6 +16003,14 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.performedShipmentCount = reader.int32();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.performedMandatoryShipmentCount = reader.int32();
+                                        break;
+                                    }
+                                case 13: {
+                                        message.performedShipmentPenaltyCostSum = reader.double();
                                         break;
                                     }
                                 case 2: {
@@ -13922,9 +16099,20 @@
                         AggregatedMetrics.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.performedShipmentCount != null && message.hasOwnProperty("performedShipmentCount"))
                                 if (!$util.isInteger(message.performedShipmentCount))
                                     return "performedShipmentCount: integer expected";
+                            if (message.performedMandatoryShipmentCount != null && message.hasOwnProperty("performedMandatoryShipmentCount")) {
+                                properties._performedMandatoryShipmentCount = 1;
+                                if (!$util.isInteger(message.performedMandatoryShipmentCount))
+                                    return "performedMandatoryShipmentCount: integer expected";
+                            }
+                            if (message.performedShipmentPenaltyCostSum != null && message.hasOwnProperty("performedShipmentPenaltyCostSum")) {
+                                properties._performedShipmentPenaltyCostSum = 1;
+                                if (typeof message.performedShipmentPenaltyCostSum !== "number")
+                                    return "performedShipmentPenaltyCostSum: number expected";
+                            }
                             if (message.travelDuration != null && message.hasOwnProperty("travelDuration")) {
                                 var error = $root.google.protobuf.Duration.verify(message.travelDuration);
                                 if (error)
@@ -13985,6 +16173,10 @@
                             var message = new $root.google.maps.routeoptimization.v1.AggregatedMetrics();
                             if (object.performedShipmentCount != null)
                                 message.performedShipmentCount = object.performedShipmentCount | 0;
+                            if (object.performedMandatoryShipmentCount != null)
+                                message.performedMandatoryShipmentCount = object.performedMandatoryShipmentCount | 0;
+                            if (object.performedShipmentPenaltyCostSum != null)
+                                message.performedShipmentPenaltyCostSum = Number(object.performedShipmentPenaltyCostSum);
                             if (object.travelDuration != null) {
                                 if (typeof object.travelDuration !== "object")
                                     throw TypeError(".google.maps.routeoptimization.v1.AggregatedMetrics.travelDuration: object expected");
@@ -14077,6 +16269,16 @@
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.maxLoads[keys2[j]] = $root.google.maps.routeoptimization.v1.ShipmentRoute.VehicleLoad.toObject(message.maxLoads[keys2[j]], options);
                             }
+                            if (message.performedMandatoryShipmentCount != null && message.hasOwnProperty("performedMandatoryShipmentCount")) {
+                                object.performedMandatoryShipmentCount = message.performedMandatoryShipmentCount;
+                                if (options.oneofs)
+                                    object._performedMandatoryShipmentCount = "performedMandatoryShipmentCount";
+                            }
+                            if (message.performedShipmentPenaltyCostSum != null && message.hasOwnProperty("performedShipmentPenaltyCostSum")) {
+                                object.performedShipmentPenaltyCostSum = options.json && !isFinite(message.performedShipmentPenaltyCostSum) ? String(message.performedShipmentPenaltyCostSum) : message.performedShipmentPenaltyCostSum;
+                                if (options.oneofs)
+                                    object._performedShipmentPenaltyCostSum = "performedShipmentPenaltyCostSum";
+                            }
                             return object;
                         };
     
@@ -14107,6 +16309,389 @@
                         };
     
                         return AggregatedMetrics;
+                    })();
+    
+                    v1.VehicleFullness = (function() {
+    
+                        /**
+                         * Properties of a VehicleFullness.
+                         * @memberof google.maps.routeoptimization.v1
+                         * @interface IVehicleFullness
+                         * @property {number|null} [maxFullness] VehicleFullness maxFullness
+                         * @property {number|null} [distance] VehicleFullness distance
+                         * @property {number|null} [travelDuration] VehicleFullness travelDuration
+                         * @property {number|null} [activeDuration] VehicleFullness activeDuration
+                         * @property {number|null} [maxLoad] VehicleFullness maxLoad
+                         * @property {number|null} [activeSpan] VehicleFullness activeSpan
+                         */
+    
+                        /**
+                         * Constructs a new VehicleFullness.
+                         * @memberof google.maps.routeoptimization.v1
+                         * @classdesc Represents a VehicleFullness.
+                         * @implements IVehicleFullness
+                         * @constructor
+                         * @param {google.maps.routeoptimization.v1.IVehicleFullness=} [properties] Properties to set
+                         */
+                        function VehicleFullness(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * VehicleFullness maxFullness.
+                         * @member {number|null|undefined} maxFullness
+                         * @memberof google.maps.routeoptimization.v1.VehicleFullness
+                         * @instance
+                         */
+                        VehicleFullness.prototype.maxFullness = null;
+    
+                        /**
+                         * VehicleFullness distance.
+                         * @member {number|null|undefined} distance
+                         * @memberof google.maps.routeoptimization.v1.VehicleFullness
+                         * @instance
+                         */
+                        VehicleFullness.prototype.distance = null;
+    
+                        /**
+                         * VehicleFullness travelDuration.
+                         * @member {number|null|undefined} travelDuration
+                         * @memberof google.maps.routeoptimization.v1.VehicleFullness
+                         * @instance
+                         */
+                        VehicleFullness.prototype.travelDuration = null;
+    
+                        /**
+                         * VehicleFullness activeDuration.
+                         * @member {number|null|undefined} activeDuration
+                         * @memberof google.maps.routeoptimization.v1.VehicleFullness
+                         * @instance
+                         */
+                        VehicleFullness.prototype.activeDuration = null;
+    
+                        /**
+                         * VehicleFullness maxLoad.
+                         * @member {number|null|undefined} maxLoad
+                         * @memberof google.maps.routeoptimization.v1.VehicleFullness
+                         * @instance
+                         */
+                        VehicleFullness.prototype.maxLoad = null;
+    
+                        /**
+                         * VehicleFullness activeSpan.
+                         * @member {number|null|undefined} activeSpan
+                         * @memberof google.maps.routeoptimization.v1.VehicleFullness
+                         * @instance
+                         */
+                        VehicleFullness.prototype.activeSpan = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(VehicleFullness.prototype, "_maxFullness", {
+                            get: $util.oneOfGetter($oneOfFields = ["maxFullness"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(VehicleFullness.prototype, "_distance", {
+                            get: $util.oneOfGetter($oneOfFields = ["distance"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(VehicleFullness.prototype, "_travelDuration", {
+                            get: $util.oneOfGetter($oneOfFields = ["travelDuration"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(VehicleFullness.prototype, "_activeDuration", {
+                            get: $util.oneOfGetter($oneOfFields = ["activeDuration"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(VehicleFullness.prototype, "_maxLoad", {
+                            get: $util.oneOfGetter($oneOfFields = ["maxLoad"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(VehicleFullness.prototype, "_activeSpan", {
+                            get: $util.oneOfGetter($oneOfFields = ["activeSpan"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new VehicleFullness instance using the specified properties.
+                         * @function create
+                         * @memberof google.maps.routeoptimization.v1.VehicleFullness
+                         * @static
+                         * @param {google.maps.routeoptimization.v1.IVehicleFullness=} [properties] Properties to set
+                         * @returns {google.maps.routeoptimization.v1.VehicleFullness} VehicleFullness instance
+                         */
+                        VehicleFullness.create = function create(properties) {
+                            return new VehicleFullness(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified VehicleFullness message. Does not implicitly {@link google.maps.routeoptimization.v1.VehicleFullness.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.maps.routeoptimization.v1.VehicleFullness
+                         * @static
+                         * @param {google.maps.routeoptimization.v1.IVehicleFullness} message VehicleFullness message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        VehicleFullness.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.maxFullness != null && Object.hasOwnProperty.call(message, "maxFullness"))
+                                writer.uint32(/* id 1, wireType 1 =*/9).double(message.maxFullness);
+                            if (message.distance != null && Object.hasOwnProperty.call(message, "distance"))
+                                writer.uint32(/* id 2, wireType 1 =*/17).double(message.distance);
+                            if (message.travelDuration != null && Object.hasOwnProperty.call(message, "travelDuration"))
+                                writer.uint32(/* id 3, wireType 1 =*/25).double(message.travelDuration);
+                            if (message.activeDuration != null && Object.hasOwnProperty.call(message, "activeDuration"))
+                                writer.uint32(/* id 4, wireType 1 =*/33).double(message.activeDuration);
+                            if (message.maxLoad != null && Object.hasOwnProperty.call(message, "maxLoad"))
+                                writer.uint32(/* id 5, wireType 1 =*/41).double(message.maxLoad);
+                            if (message.activeSpan != null && Object.hasOwnProperty.call(message, "activeSpan"))
+                                writer.uint32(/* id 6, wireType 1 =*/49).double(message.activeSpan);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified VehicleFullness message, length delimited. Does not implicitly {@link google.maps.routeoptimization.v1.VehicleFullness.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.maps.routeoptimization.v1.VehicleFullness
+                         * @static
+                         * @param {google.maps.routeoptimization.v1.IVehicleFullness} message VehicleFullness message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        VehicleFullness.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a VehicleFullness message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.maps.routeoptimization.v1.VehicleFullness
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.maps.routeoptimization.v1.VehicleFullness} VehicleFullness
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        VehicleFullness.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.routeoptimization.v1.VehicleFullness();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.maxFullness = reader.double();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.distance = reader.double();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.travelDuration = reader.double();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.activeDuration = reader.double();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.maxLoad = reader.double();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.activeSpan = reader.double();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a VehicleFullness message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.maps.routeoptimization.v1.VehicleFullness
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.maps.routeoptimization.v1.VehicleFullness} VehicleFullness
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        VehicleFullness.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a VehicleFullness message.
+                         * @function verify
+                         * @memberof google.maps.routeoptimization.v1.VehicleFullness
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        VehicleFullness.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.maxFullness != null && message.hasOwnProperty("maxFullness")) {
+                                properties._maxFullness = 1;
+                                if (typeof message.maxFullness !== "number")
+                                    return "maxFullness: number expected";
+                            }
+                            if (message.distance != null && message.hasOwnProperty("distance")) {
+                                properties._distance = 1;
+                                if (typeof message.distance !== "number")
+                                    return "distance: number expected";
+                            }
+                            if (message.travelDuration != null && message.hasOwnProperty("travelDuration")) {
+                                properties._travelDuration = 1;
+                                if (typeof message.travelDuration !== "number")
+                                    return "travelDuration: number expected";
+                            }
+                            if (message.activeDuration != null && message.hasOwnProperty("activeDuration")) {
+                                properties._activeDuration = 1;
+                                if (typeof message.activeDuration !== "number")
+                                    return "activeDuration: number expected";
+                            }
+                            if (message.maxLoad != null && message.hasOwnProperty("maxLoad")) {
+                                properties._maxLoad = 1;
+                                if (typeof message.maxLoad !== "number")
+                                    return "maxLoad: number expected";
+                            }
+                            if (message.activeSpan != null && message.hasOwnProperty("activeSpan")) {
+                                properties._activeSpan = 1;
+                                if (typeof message.activeSpan !== "number")
+                                    return "activeSpan: number expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a VehicleFullness message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.maps.routeoptimization.v1.VehicleFullness
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.maps.routeoptimization.v1.VehicleFullness} VehicleFullness
+                         */
+                        VehicleFullness.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.maps.routeoptimization.v1.VehicleFullness)
+                                return object;
+                            var message = new $root.google.maps.routeoptimization.v1.VehicleFullness();
+                            if (object.maxFullness != null)
+                                message.maxFullness = Number(object.maxFullness);
+                            if (object.distance != null)
+                                message.distance = Number(object.distance);
+                            if (object.travelDuration != null)
+                                message.travelDuration = Number(object.travelDuration);
+                            if (object.activeDuration != null)
+                                message.activeDuration = Number(object.activeDuration);
+                            if (object.maxLoad != null)
+                                message.maxLoad = Number(object.maxLoad);
+                            if (object.activeSpan != null)
+                                message.activeSpan = Number(object.activeSpan);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a VehicleFullness message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.maps.routeoptimization.v1.VehicleFullness
+                         * @static
+                         * @param {google.maps.routeoptimization.v1.VehicleFullness} message VehicleFullness
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        VehicleFullness.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.maxFullness != null && message.hasOwnProperty("maxFullness")) {
+                                object.maxFullness = options.json && !isFinite(message.maxFullness) ? String(message.maxFullness) : message.maxFullness;
+                                if (options.oneofs)
+                                    object._maxFullness = "maxFullness";
+                            }
+                            if (message.distance != null && message.hasOwnProperty("distance")) {
+                                object.distance = options.json && !isFinite(message.distance) ? String(message.distance) : message.distance;
+                                if (options.oneofs)
+                                    object._distance = "distance";
+                            }
+                            if (message.travelDuration != null && message.hasOwnProperty("travelDuration")) {
+                                object.travelDuration = options.json && !isFinite(message.travelDuration) ? String(message.travelDuration) : message.travelDuration;
+                                if (options.oneofs)
+                                    object._travelDuration = "travelDuration";
+                            }
+                            if (message.activeDuration != null && message.hasOwnProperty("activeDuration")) {
+                                object.activeDuration = options.json && !isFinite(message.activeDuration) ? String(message.activeDuration) : message.activeDuration;
+                                if (options.oneofs)
+                                    object._activeDuration = "activeDuration";
+                            }
+                            if (message.maxLoad != null && message.hasOwnProperty("maxLoad")) {
+                                object.maxLoad = options.json && !isFinite(message.maxLoad) ? String(message.maxLoad) : message.maxLoad;
+                                if (options.oneofs)
+                                    object._maxLoad = "maxLoad";
+                            }
+                            if (message.activeSpan != null && message.hasOwnProperty("activeSpan")) {
+                                object.activeSpan = options.json && !isFinite(message.activeSpan) ? String(message.activeSpan) : message.activeSpan;
+                                if (options.oneofs)
+                                    object._activeSpan = "activeSpan";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this VehicleFullness to JSON.
+                         * @function toJSON
+                         * @memberof google.maps.routeoptimization.v1.VehicleFullness
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        VehicleFullness.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for VehicleFullness
+                         * @function getTypeUrl
+                         * @memberof google.maps.routeoptimization.v1.VehicleFullness
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        VehicleFullness.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.maps.routeoptimization.v1.VehicleFullness";
+                        };
+    
+                        return VehicleFullness;
                     })();
     
                     v1.InjectedSolutionConstraint = (function() {

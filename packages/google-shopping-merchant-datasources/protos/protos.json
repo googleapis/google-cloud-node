@@ -400,13 +400,6 @@
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
-                            "containsCustomRules": {
-                              "type": "bool",
-                              "id": 9,
-                              "options": {
-                                "(google.api.field_behavior)": "OUTPUT_ONLY"
-                              }
-                            },
                             "destinations": {
                               "rule": "repeated",
                               "type": "Destination",

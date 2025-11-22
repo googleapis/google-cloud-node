@@ -36,8 +36,8 @@ function main(parent) {
   /**
    *  Optional. The maximum number of `CustomFields` to return. The service may
    *  return fewer than this value. If unspecified, at most 50 `CustomFields`
-   *  will be returned. The maximum value is 1000; values above 1000 will be
-   *  coerced to 1000.
+   *  will be returned. The maximum value is 1000; values greater than 1000 will
+   *  be coerced to 1000.
    */
   // const pageSize = 1234
   /**

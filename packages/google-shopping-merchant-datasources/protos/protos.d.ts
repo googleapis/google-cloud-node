@@ -1084,9 +1084,6 @@ export namespace google {
                         /** PrimaryProductDataSource defaultRule */
                         defaultRule?: (google.shopping.merchant.datasources.v1.PrimaryProductDataSource.IDefaultRule|null);
 
-                        /** PrimaryProductDataSource containsCustomRules */
-                        containsCustomRules?: (boolean|null);
-
                         /** PrimaryProductDataSource destinations */
                         destinations?: (google.shopping.merchant.datasources.v1.PrimaryProductDataSource.IDestination[]|null);
                     }
@@ -1114,9 +1111,6 @@ export namespace google {
 
                         /** PrimaryProductDataSource defaultRule. */
                         public defaultRule?: (google.shopping.merchant.datasources.v1.PrimaryProductDataSource.IDefaultRule|null);
-
-                        /** PrimaryProductDataSource containsCustomRules. */
-                        public containsCustomRules: boolean;
 
                         /** PrimaryProductDataSource destinations. */
                         public destinations: google.shopping.merchant.datasources.v1.PrimaryProductDataSource.IDestination[];
