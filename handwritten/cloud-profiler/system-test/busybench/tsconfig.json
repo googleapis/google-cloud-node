@@ -4,7 +4,8 @@
     "rootDir": ".",
     "outDir": "build",
     "lib": [ "es2015" ],
-    "target": "es2015"
+    "target": "es2015",
+    "skipLibCheck": true
   },
   "include": [
     "src/*.ts"
