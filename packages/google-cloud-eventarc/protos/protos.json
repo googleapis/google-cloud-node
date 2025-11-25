@@ -2483,6 +2483,14 @@
                         "(google.api.resource).plural": "googleApiSources",
                         "(google.api.resource).singular": "googleApiSource"
                       },
+                      "oneofs": {
+                        "wideScopeSubscription": {
+                          "oneof": [
+                            "organizationSubscription",
+                            "projectSubscriptions"
+                          ]
+                        }
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -2564,6 +2572,45 @@
                           "id": 11,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "organizationSubscription": {
+                          "type": "OrganizationSubscription",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "projectSubscriptions": {
+                          "type": "ProjectSubscriptions",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ProjectSubscriptions": {
+                          "fields": {
+                            "list": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "OrganizationSubscription": {
+                          "fields": {
+                            "enabled": {
+                              "type": "bool",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
                           }
                         }
                       }
@@ -3225,11 +3272,31 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "retryPolicy": {
+                          "type": "RetryPolicy",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "etag": {
                           "type": "string",
                           "id": 99,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "RetryPolicy": {
+                          "fields": {
+                            "maxAttempts": {
+                              "type": "int32",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
                           }
                         }
                       }
