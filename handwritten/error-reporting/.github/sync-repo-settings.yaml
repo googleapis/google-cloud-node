@@ -7,12 +7,11 @@ branchProtectionRules:
     requiredStatusCheckContexts:
       - "ci/kokoro: Samples test"
       - "ci/kokoro: System test"
-      - docs
       - lint
-      - test (14)
-      - test (16)
       - test (18)
       - test (20)
+      - test (22)
+      - test (24)
       - cla/google
       - windows
       - OwlBot Post Processor

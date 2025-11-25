@@ -21,6 +21,6 @@ const errors = new ErrorReporting();
     '\tError: ',
     err,
     '\n',
-    '\tResponse Body:'
+    '\tResponse Body:',
   );
 });

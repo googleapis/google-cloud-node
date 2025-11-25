@@ -47,7 +47,7 @@ export function handlerSetup(config: Configuration) {
 
     const em = new ErrorMessage().setServiceContext(
       config.getServiceContext().service,
-      config.getServiceContext().version
+      config.getServiceContext().version,
     );
     (
       em as {} as {

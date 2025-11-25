@@ -86,10 +86,10 @@ describe('populate-error-message', () => {
 
   it('Should not throw given an object of invalid form', () => {
     assert.doesNotThrow(
-      populateErrorMessage.bind(null, adversarialObjectInput, em)
+      populateErrorMessage.bind(null, adversarialObjectInput, em),
     );
     assert.doesNotThrow(
-      populateErrorMessage.bind(null, adversarialObjectInputTwo, em)
+      populateErrorMessage.bind(null, adversarialObjectInputTwo, em),
     );
   });
 
@@ -100,7 +100,7 @@ describe('populate-error-message', () => {
       em.message,
       err.stack,
       'Given a valid message the ' +
-        'error message should absorb the error stack as the message'
+        'error message should absorb the error stack as the message',
     );
   });
 
@@ -119,7 +119,7 @@ describe('populate-error-message', () => {
       const err = {error: 'some error message'};
       populateErrorMessage(err, em);
       assert(em.message.startsWith("{ error: 'some error message' }"));
-    }
+    },
   );
 
   it('User Field: Should set the field given valid input given an Error', () => {
@@ -152,7 +152,7 @@ describe('populate-error-message', () => {
       const err = {};
       populateErrorMessage(err, em);
       assert.strictEqual(em.context.user, '');
-    }
+    },
   );
 
   it(
@@ -164,7 +164,7 @@ describe('populate-error-message', () => {
       err.serviceContext = TEST_SERVICE_VALID;
       populateErrorMessage(err, em);
       deepStrictEqual(err.serviceContext, TEST_SERVICE_VALID);
-    }
+    },
   );
 
   it(
@@ -176,7 +176,7 @@ describe('populate-error-message', () => {
       err.serviceContext = TEST_SERVICE_INVALID;
       populateErrorMessage(err, em);
       deepStrictEqual(em.serviceContext, TEST_SERVICE_DEFAULT);
-    }
+    },
   );
 
   it(
@@ -186,7 +186,7 @@ describe('populate-error-message', () => {
       const err = new Error();
       populateErrorMessage(err, em);
       deepStrictEqual(em.serviceContext, TEST_SERVICE_DEFAULT);
-    }
+    },
   );
 
   it(
@@ -198,7 +198,7 @@ describe('populate-error-message', () => {
       err.serviceContext = TEST_SERVICE_VALID;
       populateErrorMessage(err, em);
       deepStrictEqual(em.serviceContext, TEST_SERVICE_VALID);
-    }
+    },
   );
 
   it(
@@ -210,7 +210,7 @@ describe('populate-error-message', () => {
       err.serviceContext = TEST_SERVICE_INVALID;
       populateErrorMessage(err, em);
       deepStrictEqual(em.serviceContext, TEST_SERVICE_DEFAULT);
-    }
+    },
   );
 
   it(
@@ -220,7 +220,7 @@ describe('populate-error-message', () => {
       const err = {};
       populateErrorMessage(err, em);
       deepStrictEqual(em.serviceContext, TEST_SERVICE_DEFAULT);
-    }
+    },
   );
 
   it(
@@ -236,7 +236,7 @@ describe('populate-error-message', () => {
       err.stack = TEST_STACK_INVALID_CONTENTS;
       populateErrorMessage(err, em);
       deepStrictEqual(em.context.reportLocation, TEST_STACK_DEFAULT);
-    }
+    },
   );
 
   it(
@@ -248,7 +248,7 @@ describe('populate-error-message', () => {
       err.stack = TEST_STACK_INVALID_TYPE;
       populateErrorMessage(err, em);
       deepStrictEqual(em.context.reportLocation, TEST_STACK_DEFAULT);
-    }
+    },
   );
 
   it('FilePath Field: Should set the field given valid input given an object', () => {
@@ -266,7 +266,7 @@ describe('populate-error-message', () => {
       const err = {};
       populateErrorMessage(err, em);
       assert.strictEqual(em.context.reportLocation.filePath, '');
-    }
+    },
   );
 
   it('LineNumber Field: Should set the field given valid input given an object', () => {
@@ -284,7 +284,7 @@ describe('populate-error-message', () => {
       const err = {};
       populateErrorMessage(err, em);
       assert.strictEqual(em.context.reportLocation.lineNumber, 0);
-    }
+    },
   );
 
   it(
@@ -296,7 +296,7 @@ describe('populate-error-message', () => {
       err.functionName = FUNCTION_NAME;
       populateErrorMessage(err, em);
       assert.strictEqual(em.context.reportLocation.functionName, FUNCTION_NAME);
-    }
+    },
   );
 
   it(
@@ -306,6 +306,6 @@ describe('populate-error-message', () => {
       const err = {};
       populateErrorMessage(err, em);
       assert.strictEqual(em.context.reportLocation.functionName, '');
-    }
+    },
   );
 });

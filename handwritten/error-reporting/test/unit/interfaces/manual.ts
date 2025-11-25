@@ -53,7 +53,7 @@ describe('Manual handler', () => {
         'Encountered a manually constructed error ' +
           'with message "builder test" but without a construction site stack ' +
           'trace.  This error might not be visible in the error reporting ' +
-          'console.'
+          'console.',
       );
     },
   } as {} as Logger);
@@ -94,7 +94,7 @@ describe('Manual handler', () => {
       assert.strictEqual(
         r.message,
         'wrench',
-        'additional message should replace'
+        'additional message should replace',
       );
     });
     it('Should allow a full array of optional arguments', done => {
@@ -115,7 +115,7 @@ describe('Manual handler', () => {
       });
       assert(
         r.message.match(/ticky/) && !r.message.match(/TACKEY/),
-        'original message should be preserved'
+        'original message should be preserved',
       );
       assert.strictEqual(r.context.httpRequest.method, 'TACKEY');
     });
@@ -125,11 +125,11 @@ describe('Manual handler', () => {
         (() => {
           done();
         }) as unknown as string,
-        'field' as unknown as manual.Callback
+        'field' as unknown as manual.Callback,
       );
       assert(
         r.message.match('hockey') && !r.message.match('field'),
-        'string after callback should be ignored'
+        'string after callback should be ignored',
       );
     });
     it('Should ignore arguments', done => {
@@ -138,7 +138,7 @@ describe('Manual handler', () => {
         (() => {
           done();
         }) as unknown as string,
-        {method: 'HONK'} as unknown as manual.Callback
+        {method: 'HONK'} as unknown as manual.Callback,
       );
       assert.notStrictEqual(r.context.httpRequest.method, 'HONK');
     });
@@ -155,7 +155,7 @@ describe('Manual handler', () => {
         undefined as unknown as string,
         () => {
           done();
-        }
+        },
       );
       assert(r.message.match(/Turkey/), 'string error should propagate');
     });
@@ -166,7 +166,7 @@ describe('Manual handler', () => {
         'solution',
         () => {
           done();
-        }
+        },
       );
       assert.strictEqual(r.message, 'solution', 'error should propagate');
     });
@@ -177,11 +177,11 @@ describe('Manual handler', () => {
         undefined as unknown as string,
         () => {
           done();
-        }
+        },
       );
       assert(
         r.message.match(/Mickey/) && !r.message.match(/SNIFF/),
-        'string error should propagate'
+        'string error should propagate',
       );
       assert.strictEqual(r.context.httpRequest.method, 'SNIFF');
     });
@@ -193,7 +193,7 @@ describe('Manual handler', () => {
       const r = report(new ErrorMessage().setMessage(msg));
       assert(
         r.message.startsWith(msg),
-        'string message should propagate from error message inst'
+        'string message should propagate from error message inst',
       );
     });
     it('Should accept builder and request as arguments', () => {
@@ -204,11 +204,11 @@ describe('Manual handler', () => {
         new ErrorMessage()
           .setMessage(msg)
           .consumeRequestInformation(oldReq as RequestInformationContainer),
-        newReq
+        newReq,
       );
       assert(
         r.message.startsWith(msg),
-        'string message should propagate from error message inst'
+        'string message should propagate from error message inst',
       );
       assert.strictEqual(
         r.context.httpRequest.method,
@@ -216,7 +216,7 @@ describe('Manual handler', () => {
         [
           'request argument supplied at report invocation should propagte and',
           'if supplied, should overwrite any prexisting data in the field.',
-        ].join('\n')
+        ].join('\n'),
       );
     });
     it('Should accept message and additional message params as', () => {
@@ -229,7 +229,7 @@ describe('Manual handler', () => {
         [
           'message supplied at report invocation should propagte and, if',
           'supplied, should overwrite any prexisting data in the message field.',
-        ].join('\n')
+        ].join('\n'),
       );
     });
     it('Should accept message and callback function', done => {

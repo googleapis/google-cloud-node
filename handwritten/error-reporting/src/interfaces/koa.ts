@@ -42,7 +42,7 @@ export function koaErrorHandler(client: RequestHandler, config: Configuration) {
    */
   return function* (
     this: {request: Request; response: Response},
-    next: Function
+    next: Function,
   ) {
     const svc = config.getServiceContext();
 
@@ -51,7 +51,7 @@ export function koaErrorHandler(client: RequestHandler, config: Configuration) {
     } catch (err) {
       const em = new ErrorMessage()
         .consumeRequestInformation(
-          koaRequestInformationExtractor(this.request, this.response)
+          koaRequestInformationExtractor(this.request, this.response),
         )
         .setServiceContext(svc.service, svc.version);
 

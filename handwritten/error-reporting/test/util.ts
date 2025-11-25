@@ -20,7 +20,7 @@ export type Anything = {} | undefined | null;
 export function deepStrictEqual(
   actual: Anything,
   expected: Anything,
-  message?: string
+  message?: string,
 ) {
   assert.deepStrictEqual(stringify(actual), stringify(expected), message);
 }

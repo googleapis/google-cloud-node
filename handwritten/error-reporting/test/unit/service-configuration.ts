@@ -51,7 +51,7 @@ function setEnv(envData: {
     envData.gaeModuleVersion && {GAE_MODULE_VERSION: envData.gaeModuleVersion},
     envData.functionName && {FUNCTION_NAME: envData.functionName},
     envData.kService && {K_SERVICE: envData.kService},
-    envData.kRevision && {K_REVISION: envData.kRevision}
+    envData.kRevision && {K_REVISION: envData.kRevision},
   );
 }
 function restoreServiceConfigEnv() {
@@ -83,7 +83,7 @@ describe('Testing service configuration', () => {
       // FUNCTION_NAME is set and the user didn't specify a version, and so
       // the version should not be defined
       deepStrictEqual(c.getServiceContext().version, undefined);
-    }
+    },
   );
   it(
     'A Configuration uses the function name as the service name on GCF ' +
@@ -104,7 +104,7 @@ describe('Testing service configuration', () => {
       // The user didn't specify a version and FUNCTION_NAME is defined, and
       // so the version should not be defined
       deepStrictEqual(c.getServiceContext().version, undefined);
-    }
+    },
   );
   it(
     'A Configuration uses the GAE_SERVICE env value as the service name ' +
@@ -125,7 +125,7 @@ describe('Testing service configuration', () => {
       // The user didn't specify a version, and FUNCTION_NAME is not defined,
       // and so use the GAE_MODULE_VERSION
       deepStrictEqual(c.getServiceContext().version, '1.0');
-    }
+    },
   );
   it(
     'A Configuration uses the service name in the given config if it ' +
@@ -147,13 +147,13 @@ describe('Testing service configuration', () => {
             service: 'customService',
           },
         },
-        logger
+        logger,
       );
       deepStrictEqual(c.getServiceContext().service, 'customService');
       // The user didn't specify a version, but FUNCTION_NAME is defined, and
       // so the version should not be defined
       deepStrictEqual(c.getServiceContext().version, undefined);
-    }
+    },
   );
   it(
     'A Configuration uses the service name and version in the given config' +
@@ -176,12 +176,12 @@ describe('Testing service configuration', () => {
             version: '2.0',
           },
         },
-        logger
+        logger,
       );
       deepStrictEqual(c.getServiceContext().service, 'customService');
       // The user specified version should be used
       deepStrictEqual(c.getServiceContext().version, '2.0');
-    }
+    },
   );
   it(
     'A Configuration uses the service name in the given config if it ' +
@@ -202,13 +202,13 @@ describe('Testing service configuration', () => {
             service: 'customService',
           },
         },
-        logger
+        logger,
       );
       deepStrictEqual(c.getServiceContext().service, 'customService');
       // The user didn't specify a version and FUNCTION_NAME is not defined
       // and so the GAE_MODULE_VERSION should be used
       deepStrictEqual(c.getServiceContext().version, '1.0');
-    }
+    },
   );
   it(
     'A Configuration uses the service name and version in the given config ' +
@@ -230,12 +230,12 @@ describe('Testing service configuration', () => {
             version: '2.0',
           },
         },
-        logger
+        logger,
       );
       deepStrictEqual(c.getServiceContext().service, 'customService');
       // The user specified version should be used
       deepStrictEqual(c.getServiceContext().version, '2.0');
-    }
+    },
   );
   it(
     'A Configuration uses the service name in the given config if it ' +
@@ -256,13 +256,13 @@ describe('Testing service configuration', () => {
             service: 'customService',
           },
         },
-        logger
+        logger,
       );
       deepStrictEqual(c.getServiceContext().service, 'customService');
       // The user didn't specify a version and thus because FUNCTION_NAME is
       // defined the version should not be defined
       deepStrictEqual(c.getServiceContext().version, undefined);
-    }
+    },
   );
   it(
     'A Configuration uses the service name and version in the given config ' +
@@ -284,12 +284,12 @@ describe('Testing service configuration', () => {
             version: '2.0',
           },
         },
-        logger
+        logger,
       );
       assert.strictEqual(c.getServiceContext().service, 'customService');
       // The user specified version should be used
       assert.strictEqual(c.getServiceContext().version, '2.0');
-    }
+    },
   );
   it(
     'A Configuration uses the service name "node" and no version if ' +
@@ -299,7 +299,7 @@ describe('Testing service configuration', () => {
       const c = new Configuration({}, logger);
       assert.strictEqual(c.getServiceContext().service, 'node');
       assert.strictEqual(c.getServiceContext().version, undefined);
-    }
+    },
   );
   it(
     'A Configuration uses the service name "node" and no version if ' +
@@ -319,7 +319,7 @@ describe('Testing service configuration', () => {
       const c = new Configuration({}, logger);
       assert.strictEqual(c.getServiceContext().service, 'node');
       assert.strictEqual(c.getServiceContext().version, undefined);
-    }
+    },
   );
   it(
     'A Configuration uses the service name "node" and the user specified ' +
@@ -332,11 +332,11 @@ describe('Testing service configuration', () => {
             version: '2.0',
           },
         },
-        logger
+        logger,
       );
       deepStrictEqual(c.getServiceContext().service, 'node');
       deepStrictEqual(c.getServiceContext().version, '2.0');
-    }
+    },
   );
   it('A Configuration uses the K_SERVICE and K_REVISION env variables if set', () => {
     setEnv({

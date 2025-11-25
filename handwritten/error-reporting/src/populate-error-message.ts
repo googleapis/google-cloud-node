@@ -66,7 +66,7 @@ export function populateErrorMessage(ob: any, em: ErrorMessage) {
  */
 function populateFromError(
   err: Error & PopulatedObject,
-  errorMessage: ErrorMessage
+  errorMessage: ErrorMessage,
 ) {
   errorMessage.setMessage(err.stack!);
 
@@ -80,7 +80,7 @@ function populateFromError(
   ) {
     errorMessage.setServiceContext(
       err.serviceContext!.service!,
-      err.serviceContext!.version
+      err.serviceContext!.version,
     );
   }
 }
@@ -138,7 +138,7 @@ function populateFromObject(ob: PopulatedObject, errorMessage: ErrorMessage) {
   ) {
     errorMessage.setServiceContext(
       ob.serviceContext!.service!,
-      ob.serviceContext!.version
+      ob.serviceContext!.version,
     );
   }
 }

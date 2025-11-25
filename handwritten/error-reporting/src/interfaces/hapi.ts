@@ -79,7 +79,7 @@ export function makeHapiPlugin(client: RequestHandler, config: Configuration) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     server: any,
     options: {},
-    next?: Function
+    next?: Function,
   ) {
     if (server) {
       if (server.events && server.events.on) {
@@ -96,7 +96,7 @@ export function makeHapiPlugin(client: RequestHandler, config: Configuration) {
             if (event.error && event.channel === 'error') {
               client.sendError(hapiErrorHandler(event.error, request));
             }
-          }
+          },
         );
       } else {
         if (typeof server.on === 'function') {
@@ -120,7 +120,7 @@ export function makeHapiPlugin(client: RequestHandler, config: Configuration) {
               const em = hapiErrorHandler(
                 new Error(boom.message),
                 request,
-                config
+                config,
               );
               client.sendError(em);
             }
