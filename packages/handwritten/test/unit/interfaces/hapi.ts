@@ -66,7 +66,7 @@ describe('Hapi interface', () => {
     it("the plugin's attribute property should have a name property", () => {
       assert.strictEqual(
         plugin.register!.attributes!.name,
-        '@google-cloud/error-reporting'
+        '@google-cloud/error-reporting',
       );
     });
     it("the plugin's attribute property should have a version property", () => {
@@ -83,7 +83,7 @@ describe('Hapi interface', () => {
         sendError(errMsg: ErrorMessage) {
           assert(
             errMsg instanceof ErrorMessage,
-            'should be an instance of Error message'
+            'should be an instance of Error message',
           );
         },
       } as {} as RequestHandler;
@@ -138,7 +138,7 @@ describe('Hapi interface', () => {
             // The continue function should be called
             done();
           },
-        }
+        },
       );
     });
     it('Should call continue when a boom is emitted if reply is a function', done => {
@@ -156,7 +156,7 @@ describe('Hapi interface', () => {
       fakeServer.emit(
         EVENT,
         {response: new boom('message', {statusCode: 427})},
-        reply
+        reply,
       );
     });
     it('Should call sendError when a boom is received', done => {
@@ -180,7 +180,7 @@ describe('Hapi interface', () => {
       fakeServer.emit(
         EVENT,
         {response: new boom('message', {statusCode: 427})},
-        {continue() {}}
+        {continue() {}},
       );
     });
   });
@@ -194,8 +194,8 @@ describe('Hapi interface', () => {
         userCb?: (
           err: Error | null,
           response: http.ServerResponse | null,
-          body: {}
-        ) => void
+          body: {},
+        ) => void,
       ) => {
         errorsSent.push(errorMessage);
       },
@@ -278,24 +278,24 @@ describe('Hapi interface', () => {
       assert.strictEqual(errorMessage.message, testError.stack);
       assert.strictEqual(
         errorMessage.context.httpRequest.method,
-        'custom-method'
+        'custom-method',
       );
       assert.strictEqual(errorMessage.context.httpRequest.url, 'custom-url');
       assert.strictEqual(
         errorMessage.context.httpRequest.userAgent,
-        'custom-user-agent'
+        'custom-user-agent',
       );
       assert.strictEqual(
         errorMessage.context.httpRequest.referrer,
-        'custom-referrer'
+        'custom-referrer',
       );
       assert.strictEqual(
         errorMessage.context.httpRequest.remoteIp,
-        'some-remote-address'
+        'some-remote-address',
       );
       assert.strictEqual(
         errorMessage.context.httpRequest.responseStatusCode,
-        42
+        42,
       );
     });
   });

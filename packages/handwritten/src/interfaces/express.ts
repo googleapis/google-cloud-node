@@ -31,7 +31,7 @@ import {expressRequestInformationExtractor} from '../request-extractors/express'
  */
 export function makeExpressHandler(
   client: RequestHandler,
-  config: Configuration
+  config: Configuration,
 ) {
   /**
    * The Express Error Handler function is an interface for the error handler
@@ -57,8 +57,8 @@ export function makeExpressHandler(
       .consumeRequestInformation(
         expressRequestInformationExtractor(
           req as express.Request,
-          res as express.Response
-        )
+          res as express.Response,
+        ),
       )
       .setServiceContext(ctxService, ctxVersion);
 

@@ -54,7 +54,7 @@ export class ErrorsApiTransport extends AuthClient {
     service: string,
     version: string,
     pageSize: number,
-    pageToken?: string
+    pageToken?: string,
   ): Promise<GroupStatesResponse> {
     const id = await this.getProjectId();
     const options = {

@@ -67,7 +67,7 @@ describe('Configuration class', () => {
             c = new Configuration(givenConfigFuzz, logger);
             deepStrictEqual(c._givenConfiguration, {});
           },
-          ['object']
+          ['object'],
         );
       });
     });
@@ -130,7 +130,7 @@ describe('Configuration class', () => {
         assert.strictEqual(
           warnText,
           'The "ignoreEnvironmentCheck" config option is deprecated.  ' +
-            'Use the "reportMode" config option instead.\n'
+            'Use the "reportMode" config option instead.\n',
         );
       });
 
@@ -144,14 +144,14 @@ describe('Configuration class', () => {
         // tslint:disable-next-line:no-unused-expression
         new Configuration(
           {ignoreEnvironmentCheck: true, reportMode: 'never'},
-          logger
+          logger,
         );
         assert.strictEqual(
           warnText,
           'The "ignoreEnvironmentCheck" config option is deprecated.  ' +
             'Use the "reportMode" config option instead.\nBoth the "ignoreEnvironmentCheck" ' +
             'and "reportMode" configuration options have been specified.  The "reportMode" ' +
-            'option will take precedence.\n'
+            'option will take precedence.\n',
         );
       });
 
@@ -168,7 +168,7 @@ describe('Configuration class', () => {
       it('Should prefer "reportMode" config if "ignoreEnvironmentCheck" is also set', () => {
         const conf = new Configuration(
           {ignoreEnvironmentCheck: true, reportMode: 'never'},
-          logger
+          logger,
         );
         assert.strictEqual(conf._reportMode, 'never');
       });
@@ -233,7 +233,7 @@ describe('Configuration class', () => {
       const conf = Object.assign(
         {},
         {projectId: 'some-id'},
-        {ignoreEnvironmentCheck: true}
+        {ignoreEnvironmentCheck: true},
       );
       const c = new Configuration(conf, logger);
       it('Should reportErrorsToAPI', () => {
@@ -262,7 +262,7 @@ describe('Configuration class', () => {
           // tslint:disable-next-line:no-unused-expression
           new Configuration(
             {reportMode: new Date()} as {} as ConfigurationOptions,
-            logger
+            logger,
           );
         });
       });
@@ -271,7 +271,7 @@ describe('Configuration class', () => {
           // tslint:disable-next-line:no-unused-expression
           new Configuration(
             {reportMode: 'invalid-mode'} as {} as ConfigurationOptions,
-            logger
+            logger,
           );
         });
       });
@@ -290,7 +290,7 @@ describe('Configuration class', () => {
           // tslint:disable-next-line:no-unused-expression
           new Configuration(
             {ignoreEnvironmentCheck: null} as {} as ConfigurationOptions,
-            logger
+            logger,
           );
         });
       });
@@ -301,7 +301,7 @@ describe('Configuration class', () => {
           // tslint:disable-next-line:no-unused-expression
           new Configuration(
             {serviceContext: {service: false}} as {} as ConfigurationOptions,
-            logger
+            logger,
           );
         });
       });
@@ -312,7 +312,7 @@ describe('Configuration class', () => {
           // tslint:disable-next-line:no-unused-expression
           new Configuration(
             {serviceContext: {version: true}} as {} as ConfigurationOptions,
-            logger
+            logger,
           );
         });
       });
@@ -325,7 +325,7 @@ describe('Configuration class', () => {
             {
               reportUnhandledRejections: 'INVALID',
             } as {} as ConfigurationOptions,
-            logger
+            logger,
           );
         });
       });
@@ -360,7 +360,7 @@ describe('Configuration class', () => {
           sterilizeConfigEnv();
           c = new Configuration(
             {projectId: pn} as {} as ConfigurationOptions,
-            logger
+            logger,
           );
         });
         after(() => {
@@ -397,7 +397,7 @@ describe('Configuration class', () => {
           // thus an explicit cast is needed
           c = new Configuration(
             {projectId: null} as {} as ConfigurationOptions,
-            logger
+            logger,
           );
         });
         after(() => {
@@ -487,7 +487,7 @@ describe('Configuration class', () => {
                 key,
                 projectId,
               },
-              logger
+              logger,
             );
           });
           it('Should assign', () => {
@@ -505,7 +505,7 @@ describe('Configuration class', () => {
           it('Should assign', () => {
             assert.strictEqual(
               c.getReportUnhandledRejections(),
-              reportRejections
+              reportRejections,
             );
           });
         });

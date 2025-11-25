@@ -40,10 +40,11 @@ server.route({
   },
 });
 
-server.register({plugin: errorHandler.hapi}).then(() => {
+const startServer = async () => {
+  await server.register({plugin: errorHandler.hapi});
   log('Plugin registered.');
-});
-
-server.start().then(() => {
+  await server.start();
   log('Server running at', server.info!.uri);
-});
+};
+
+void startServer();

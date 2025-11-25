@@ -51,7 +51,7 @@ app.get('/customError', (req, res, next) => {
         log('Successfully sent custom get error to api');
         log(EXCLAMATION_LN);
       }
-    }
+    },
   );
 
   res.send('Success');
@@ -92,7 +92,7 @@ function reportManualError() {
       if (process.env.THROW_ON_STARTUP) {
         throwUncaughtError();
       }
-    }
+    },
   );
 }
 log('reporting a manual error first');
