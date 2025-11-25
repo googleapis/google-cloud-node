@@ -35,7 +35,7 @@ describe('manualRequestInformationExtractor', () => {
       f.fuzzFunctionForTypes(
         manualRequestInformationExtractor,
         ['object'],
-        cbFn
+        cbFn,
       );
     });
   });
@@ -55,7 +55,7 @@ describe('manualRequestInformationExtractor', () => {
         [
           'Given a full valid input object these values should be reflected by',
           'the output of the request extraction',
-        ].join(' ')
+        ].join(' '),
       );
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const {method, ...sansMethod} = FULL_VALID_INPUT;
@@ -65,7 +65,7 @@ describe('manualRequestInformationExtractor', () => {
         [
           'Given a full valid input object sans the method property values',
           'should be reflected by the output of the request extraction',
-        ].join(' ')
+        ].join(' '),
       );
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const {url, ...sansUrl} = FULL_VALID_INPUT;
@@ -75,7 +75,7 @@ describe('manualRequestInformationExtractor', () => {
         [
           'Given a valid input sans the url property these values should be',
           'reflected by the output of the request extraction',
-        ].join('')
+        ].join(''),
       );
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const {userAgent, ...sansUserAgent} = FULL_VALID_INPUT;
@@ -85,7 +85,7 @@ describe('manualRequestInformationExtractor', () => {
         [
           'Given a full valid input sans the userAgent property these values',
           'should be reflected by the output of the request extraction',
-        ].join('')
+        ].join(''),
       );
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const {referrer, ...sansReferrer} = FULL_VALID_INPUT;
@@ -95,7 +95,7 @@ describe('manualRequestInformationExtractor', () => {
         [
           'Given a full valid input sans the referrer property these values',
           'should be reflected by the output of the request extraction',
-        ].join('')
+        ].join(''),
       );
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const {statusCode, ...sansStatusCode} = FULL_VALID_INPUT;
@@ -105,7 +105,7 @@ describe('manualRequestInformationExtractor', () => {
         [
           'Given a full valid input sans the statusCode property these values',
           'should be reflected by the output of the request extraction',
-        ].join('')
+        ].join(''),
       );
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const {remoteAddress, ...sansRemoteAddress} = FULL_VALID_INPUT;
@@ -115,7 +115,7 @@ describe('manualRequestInformationExtractor', () => {
         [
           'Given a valid input sans the remoteAddress property these values',
           'should be reflected by the output of the request extraction',
-        ].join('')
+        ].join(''),
       );
     });
   });

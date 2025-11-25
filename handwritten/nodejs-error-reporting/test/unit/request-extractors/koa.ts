@@ -37,7 +37,7 @@ describe('koaRequestInformationExtractor', () => {
       f.fuzzFunctionForTypes(
         koaRequestInformationExtractor,
         ['object', 'object'],
-        cbFn
+        cbFn,
       );
     });
   });
@@ -66,9 +66,9 @@ describe('koaRequestInformationExtractor', () => {
       deepStrictEqual(
         koaRequestInformationExtractor(
           FULL_REQ_DERIVATION_VALUE as unknown as Request,
-          FULL_RES_DERIVATION_VALUE as Response
+          FULL_RES_DERIVATION_VALUE as Response,
         ),
-        FULL_REQ_EXPECTED_VALUE
+        FULL_REQ_EXPECTED_VALUE,
       );
     });
   });

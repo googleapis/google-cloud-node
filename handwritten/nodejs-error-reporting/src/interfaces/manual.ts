@@ -24,7 +24,7 @@ import {Request} from '../request-extractors/manual';
 export type Callback = (
   err: Error | null,
   response: http.ServerResponse | null,
-  body: {}
+  body: {},
 ) => void;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -47,7 +47,7 @@ type AnyError = any;
 export function handlerSetup(
   client: RequestHandler,
   config: Configuration,
-  logger: Logger
+  logger: Logger,
 ) {
   /**
    * The interface for manually reporting errors to the Google Error API in
@@ -72,35 +72,35 @@ export function handlerSetup(
   function reportManualError(err: AnyError, request: Request): ErrorMessage;
   function reportManualError(
     err: AnyError,
-    customMessage: string
+    customMessage: string,
   ): ErrorMessage;
   function reportManualError(err: AnyError, callback: Callback): ErrorMessage;
   function reportManualError(
     err: AnyError,
     request: Request,
-    callback: Callback
-  ): ErrorMessage;
-  function reportManualError(
-    err: AnyError,
-    request: Request,
-    customMessage: string
-  ): ErrorMessage;
-  function reportManualError(
-    err: AnyError,
-    customMessage: string,
-    callback: Callback
+    callback: Callback,
   ): ErrorMessage;
   function reportManualError(
     err: AnyError,
     request: Request,
     customMessage: string,
-    callback: Callback
+  ): ErrorMessage;
+  function reportManualError(
+    err: AnyError,
+    customMessage: string,
+    callback: Callback,
+  ): ErrorMessage;
+  function reportManualError(
+    err: AnyError,
+    request: Request,
+    customMessage: string,
+    callback: Callback,
   ): ErrorMessage;
   function reportManualError(
     err: AnyError,
     request?: Request | Callback | string,
     customMessage?: Callback | string,
-    callback?: Callback | {} | string
+    callback?: Callback | {} | string,
   ): ErrorMessage {
     let em;
     if (typeof request === 'string') {
@@ -140,7 +140,7 @@ export function handlerSetup(
             err.message +
             '" but without a construction site ' +
             'stack trace.  This error might not be visible in the ' +
-            'error reporting console.'
+            'error reporting console.',
         );
       }
       em = err;
@@ -148,7 +148,7 @@ export function handlerSetup(
       em = new ErrorMessage();
       em.setServiceContext(
         config.getServiceContext().service,
-        config.getServiceContext().version
+        config.getServiceContext().version,
       );
       populateErrorMessage(err, em);
     }
@@ -156,7 +156,7 @@ export function handlerSetup(
     if (request?.toString() === '[object Object]') {
       // TODO: Address this explicit cast
       em.consumeRequestInformation(
-        manualRequestInformationExtractor(request as Request)
+        manualRequestInformationExtractor(request as Request),
       );
     }
 

@@ -39,7 +39,7 @@ function restifyErrorHandler(
   client: RequestHandler,
   config: Configuration,
   err: {},
-  em: ErrorMessage
+  em: ErrorMessage,
 ) {
   const svc = config.getServiceContext();
   em.setServiceContext(svc.service, svc.version);
@@ -68,7 +68,7 @@ function restifyRequestFinishHandler(
   client: RequestHandler,
   config: Configuration,
   req: restify.Request,
-  res: restify.Response
+  res: restify.Response,
 ) {
   let em;
 
@@ -82,8 +82,8 @@ function restifyRequestFinishHandler(
       //       expected for `expressRequestInformationExtractor`
       expressRequestInformationExtractor.expressRequestInformationExtractor(
         req as {} as express.Request,
-        res as {} as express.Response
-      )
+        res as {} as express.Response,
+      ),
     );
 
     restifyErrorHandler(client, config, (res as {} as {_body: {}})._body, em);
@@ -113,7 +113,7 @@ function restifyRequestHandler(
   config: Configuration,
   req: restify.Request,
   res: restify.Response,
-  next: Function
+  next: Function,
 ) {
   // TODO: Address the fact that a cast is needed to use `listener`
   let listener = {};
@@ -127,7 +127,7 @@ function restifyRequestHandler(
       restifyRequestFinishHandler(client, config, req, res);
       res.removeListener(
         'finish',
-        listener as {} as (...args: Array<{}>) => void
+        listener as {} as (...args: Array<{}>) => void,
       );
     };
 
@@ -157,14 +157,14 @@ function restifyRequestHandler(
 function serverErrorHandler(
   client: RequestHandler,
   config: Configuration,
-  server: restify.Server
+  server: restify.Server,
 ) {
   server.on('uncaughtException', (req, res, reqConfig, err) => {
     const em = new ErrorMessage().consumeRequestInformation(
       expressRequestInformationExtractor.expressRequestInformationExtractor(
         req,
-        res
-      )
+        res,
+      ),
     );
 
     restifyErrorHandler(client, config, err, em);

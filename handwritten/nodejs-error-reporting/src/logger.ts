@@ -76,7 +76,7 @@ export function createLogger(config?: ConfigurationOptions): Logger {
     } else {
       throw new Error(
         'config.logLevel must be a number or decimal ' +
-          'representation of a number in string form'
+          'representation of a number in string form',
       );
     }
   }

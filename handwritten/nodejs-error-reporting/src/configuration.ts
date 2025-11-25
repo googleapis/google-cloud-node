@@ -306,7 +306,7 @@ export class Configuration {
     if (!isReportModeValid) {
       throw new Error(
         'config.reportMode must a string that is one ' +
-          'of "production", "always", or "never".'
+          'of "production", "always", or "never".',
       );
     }
 
@@ -316,7 +316,7 @@ export class Configuration {
     if (hasEnvCheck) {
       this._logger.warn(
         'The "ignoreEnvironmentCheck" config option is deprecated.  ' +
-          'Use the "reportMode" config option instead.'
+          'Use the "reportMode" config option instead.',
       );
     }
     if (hasEnvCheck && hasReportMode) {
@@ -324,7 +324,7 @@ export class Configuration {
         [
           'Both the "ignoreEnvironmentCheck" and "reportMode" configuration options',
           'have been specified.  The "reportMode" option will take precedence.',
-        ].join(' ')
+        ].join(' '),
       );
       this._determineReportMode();
     } else if (hasEnvCheck) {
@@ -349,7 +349,7 @@ export class Configuration {
           'if and only if the NODE_ENV environment variable is set to "production".',
           'Errors will not be reported.  To have errors always reported, regardless of the',
           'value of NODE_ENV, set the reportMode configuration option to "always".',
-        ].join(' ')
+        ].join(' '),
       );
     }
 

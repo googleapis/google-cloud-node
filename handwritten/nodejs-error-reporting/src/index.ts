@@ -110,7 +110,7 @@ export class ErrorReporting {
     err: any,
     request?: manualRequestExtractor.Request,
     customMessage?: string,
-    callback?: manualInterface.Callback | {} | string
+    callback?: manualInterface.Callback | {} | string,
   ) => ErrorMessage;
   event!: () => ErrorMessage;
   hapi!: {
@@ -142,7 +142,7 @@ export class ErrorReporting {
             'Unhandled promise rejection: ' +
             reason +
             '.  This rejection has been reported to the ' +
-            'Google Cloud Platform error-reporting console.'
+            'Google Cloud Platform error-reporting console.',
         );
         this.report(reason);
       });
@@ -159,7 +159,7 @@ export class ErrorReporting {
     this.report = manualInterface.handlerSetup(
       this._client,
       this._config,
-      this._logger
+      this._logger,
     );
 
     /**
@@ -196,7 +196,7 @@ export class ErrorReporting {
      */
     this.express = expressInterface.makeExpressHandler(
       this._client,
-      this._config
+      this._config,
     );
 
     /**
