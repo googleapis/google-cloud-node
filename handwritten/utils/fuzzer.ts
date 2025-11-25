@@ -95,7 +95,7 @@ export class Fuzzer {
       len?: number,
       ofOneType?: string,
       currentDepth?: number,
-      allowedDepth?: number
+      allowedDepth?: number,
     ) {
       const lenChecked = (typeof len === 'number' ? len : _random(1, 10))!;
       let availableTypes = (
@@ -116,7 +116,7 @@ export class Fuzzer {
       // Deny the ability to nest more objects
       if (currentDepthChecked >= allowedDepthChecked) {
         availableTypes = this.types().filter(
-          i => i !== 'object' && i !== 'array'
+          i => i !== 'object' && i !== 'array',
         );
       }
 
@@ -129,8 +129,8 @@ export class Fuzzer {
             this[currentTypeBeingGenerated](
               null!,
               currentDepthChecked,
-              allowedDepthChecked
-            )
+              allowedDepthChecked,
+            ),
           );
         } else if (currentTypeBeingGenerated === 'array') {
           arr.push(
@@ -138,12 +138,12 @@ export class Fuzzer {
               null!,
               ofOneType,
               currentDepthChecked,
-              allowedDepthChecked
-            )
+              allowedDepthChecked,
+            ),
           );
         } else {
           arr.push(
-            (this as {[key: string]: Function})[currentTypeBeingGenerated!]()
+            (this as {[key: string]: Function})[currentTypeBeingGenerated!](),
           );
         }
       }
@@ -154,7 +154,7 @@ export class Fuzzer {
     object(
       numProperties?: number,
       currentDepth?: number,
-      allowedDepth?: number
+      allowedDepth?: number,
     ) {
       const numPropertiesChecked = (
         typeof numProperties === 'number' ? numProperties : _random(1, 10)
@@ -173,7 +173,7 @@ export class Fuzzer {
       // Deny the ability to nest more objects
       if (currentDepth! >= allowedDepth!) {
         availableTypes = availableTypes.filter(
-          i => i !== 'object' && i !== 'array'
+          i => i !== 'object' && i !== 'array',
         );
       }
 
@@ -189,14 +189,14 @@ export class Fuzzer {
           obj[currentKey] = this[currentTypeBeingGenerated](
             null!,
             currentDepthChecked,
-            allowedDepthChecked
+            allowedDepthChecked,
           );
         } else if (currentTypeBeingGenerated === 'array') {
           obj[currentKey] = this[currentTypeBeingGenerated](
             null!,
             null!,
             currentDepthChecked,
-            allowedDepthChecked
+            allowedDepthChecked,
           );
         } else {
           obj[currentKey] = (this as {[key: string]: Function})[
@@ -221,7 +221,7 @@ export class Fuzzer {
       if (argsTypesArray[i].length !== largestLength) {
         while (argsTypesArray[i].length < largestLength) {
           argsTypesArray[i].push(
-            argsTypesArray[i][_random(0, argsTypesArray[i].length - 1)]
+            argsTypesArray[i][_random(0, argsTypesArray[i].length - 1)],
           );
         }
       }
@@ -255,7 +255,7 @@ export class Fuzzer {
     for (let i = 0; i < expectsArgTypes.length; i++) {
       if (!Array.isArray(expectsArgTypes[i])) {
         argsTypesArray.push(
-          this.generate.types().filter(item => item !== expectsArgTypes[i])
+          this.generate.types().filter(item => item !== expectsArgTypes[i]),
         );
       } else {
         for (let j = 0; j < expectsArgTypes[i].length; j++) {
@@ -289,13 +289,13 @@ export class Fuzzer {
     fnToFuzz: Function,
     expectsArgTypes?: string[],
     cb?: Function,
-    withContext?: {}
+    withContext?: {},
   ) {
     const expectsArgTypesChecked = (
       Array.isArray(expectsArgTypes) ? expectsArgTypes : []
     )!;
     const typesToFuzzOnEach = this._generateTypesToFuzzWith(
-      expectsArgTypesChecked
+      expectsArgTypesChecked,
     ) as string[][];
 
     let returnValue = undefined;
@@ -303,7 +303,7 @@ export class Fuzzer {
     for (let i = 0; i < typesToFuzzOnEach[0].length; i++) {
       returnValue = fnToFuzz.apply(
         withContext,
-        this._generateValuesForFuzzTyping(typesToFuzzOnEach, i)
+        this._generateValuesForFuzzTyping(typesToFuzzOnEach, i),
       );
 
       if (typeof cb === 'function') {

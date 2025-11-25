@@ -105,14 +105,14 @@ export class RequestHandler extends Service {
         scopes: SCOPES,
         projectIdRequired: true,
       },
-      serviceOptions
+      serviceOptions,
     );
     this._config = config;
     this._logger = logger;
 
     if (!this._config.getShouldReportErrorsToAPI()) {
       this._logger.info(
-        'Not configured to send errors to the API; skipping Google Cloud API Authentication.'
+        'Not configured to send errors to the API; skipping Google Cloud API Authentication.',
       );
     } else if (tryAuthenticate) {
       this.authClient.getAccessToken().then(
@@ -123,9 +123,9 @@ export class RequestHandler extends Service {
               'Unable to find credential information on instance. This library',
               'will be unable to communicate with the Google Cloud API to save',
               'errors.  Message: ' + err.message,
-            ].join(' ')
+            ].join(' '),
           );
-        }
+        },
       );
     } else {
       this.request(
@@ -147,10 +147,10 @@ export class RequestHandler extends Service {
                 'Encountered an error while attempting to validate the provided',
                 'API key',
               ].join(' '),
-              err
+              err,
             );
           }
-        }
+        },
       );
       this._logger.info('API key provided; skipping OAuth2 token request.');
     }
@@ -172,8 +172,8 @@ export class RequestHandler extends Service {
     userCb?: (
       err: Error | null,
       response: http.ServerResponse | null,
-      body: {}
-    ) => void
+      body: {},
+    ) => void,
   ) {
     const cb: Function = (
       typeof userCb === 'function' ? userCb : RequestHandler.noOp
@@ -197,11 +197,11 @@ export class RequestHandler extends Service {
                 'Encountered an error while attempting to transmit an error to',
                 'the Error Reporting API.',
               ].join(' '),
-              err
+              err,
             );
           }
           cb(err, response, body);
-        }
+        },
       );
     } else {
       cb(
@@ -211,10 +211,10 @@ export class RequestHandler extends Service {
             'if and only if the NODE_ENV environment variable is set to "production".',
             'Errors will not be reported.  To have errors always reported, regardless of the',
             'value of NODE_ENV, set the reportMode configuration option to "always".',
-          ].join(' ')
+          ].join(' '),
         ),
         null,
-        null
+        null,
       );
     }
   }

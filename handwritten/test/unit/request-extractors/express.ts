@@ -38,7 +38,7 @@ describe('Behaviour under varying input', () => {
     f.fuzzFunctionForTypes(
       expressRequestInformationExtractor,
       ['object', 'object'],
-      cbFn
+      cbFn,
     );
   });
   it('Should return valid request object given valid input', () => {
@@ -115,7 +115,7 @@ describe('Behaviour under varying input', () => {
     };
     let tmpOutput = expressRequestInformationExtractor(
       headerFactory(FULL_REQ_DERIVATION_VALUE),
-      FULL_RES_DERIVATION_VALUE as Response
+      FULL_RES_DERIVATION_VALUE as Response,
     );
     deepStrictEqual(
       tmpOutput,
@@ -125,11 +125,11 @@ describe('Behaviour under varying input', () => {
         "'x-forwarded-for' parameter the request extractor should return",
         "the expected full req output and the 'x-forwarded-for' value",
         "as the value for the 'remoteAddress' property.",
-      ].join(' ')
+      ].join(' '),
     );
     tmpOutput = expressRequestInformationExtractor(
       headerFactory(PARTIAL_REQ_DERIVATION_VALUE),
-      PARTIAL_RES_DERIVATION_VALUE as Response
+      PARTIAL_RES_DERIVATION_VALUE as Response,
     );
     deepStrictEqual(
       tmpOutput,
@@ -139,11 +139,11 @@ describe('Behaviour under varying input', () => {
         "'x-forwarded-for' parameter the request extractor should return",
         'the expected parital req output and the remoteAddress value',
         "as the value for the 'remoteAddress' property.",
-      ].join(' ')
+      ].join(' '),
     );
     tmpOutput = expressRequestInformationExtractor(
       headerFactory(ANOTHER_PARTIAL_REQ_DERIVATION_VALUE),
-      ANOTHER_PARTIAL_RES_DERIVATION_VALUE as Response
+      ANOTHER_PARTIAL_RES_DERIVATION_VALUE as Response,
     );
     deepStrictEqual(
       tmpOutput,
@@ -153,7 +153,7 @@ describe('Behaviour under varying input', () => {
         "'x-forwarded-for' parameter or a remoteAddress parameter",
         'the request extractor should return an empty string',
         "as the value for the 'remoteAddress' property.",
-      ].join(' ')
+      ].join(' '),
     );
   });
 });

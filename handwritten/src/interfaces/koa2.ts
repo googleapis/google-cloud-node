@@ -40,7 +40,7 @@ type KoaNext = Function;
  */
 export function koa2ErrorHandler(
   client: RequestHandler,
-  config: Configuration
+  config: Configuration,
 ) {
   /**
    * The actual error handler for the Koa plugin attempts to await the results
@@ -59,7 +59,7 @@ export function koa2ErrorHandler(
     } catch (err) {
       const em = new ErrorMessage()
         .consumeRequestInformation(
-          koaRequestInformationExtractor(ctx.request, ctx.response)
+          koaRequestInformationExtractor(ctx.request, ctx.response),
         )
         .setServiceContext(svc.service, svc.version);
 

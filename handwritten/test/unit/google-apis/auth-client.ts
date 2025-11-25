@@ -26,7 +26,7 @@ function verifyReportedMessage(
   config1: ConfigurationOptions,
   errToReturn: Error | null | undefined,
   expectedLogs: {error?: string; info?: string; warn?: string},
-  done: () => void
+  done: () => void,
 ) {
   class ServiceStub {
     authClient: {};
@@ -106,7 +106,7 @@ describe('RequestHandler', () => {
       {
         info: 'API key provided; skipping OAuth2 token request.',
       },
-      done
+      done,
     );
   });
 
@@ -117,7 +117,7 @@ describe('RequestHandler', () => {
       {
         info: 'Not configured to send errors to the API; skipping Google Cloud API Authentication.',
       },
-      done
+      done,
     );
   });
 
@@ -129,7 +129,7 @@ describe('RequestHandler', () => {
       {
         info: 'Not configured to send errors to the API; skipping Google Cloud API Authentication.',
       },
-      done
+      done,
     );
   });
 
@@ -141,7 +141,7 @@ describe('RequestHandler', () => {
       {
         info: 'Not configured to send errors to the API; skipping Google Cloud API Authentication.',
       },
-      done
+      done,
     );
   });
 
@@ -151,7 +151,7 @@ describe('RequestHandler', () => {
       {reportMode: 'production'},
       null, // no access token error
       {}, // no expected logs
-      done
+      done,
     );
   });
 
@@ -161,7 +161,7 @@ describe('RequestHandler', () => {
       {},
       null, // no access token error
       {}, // no expected logs
-      done
+      done,
     );
   });
 
@@ -189,7 +189,7 @@ describe('RequestHandler', () => {
           'reported, regardless of the value of NODE_ENV, set the reportMode ' +
           'configuration option to "always".',
       },
-      done
+      done,
     );
   });
 
@@ -207,7 +207,7 @@ describe('RequestHandler', () => {
           'reported, regardless of the value of NODE_ENV, set the reportMode ' +
           'configuration option to "always".',
       },
-      done
+      done,
     );
   });
 
@@ -227,7 +227,7 @@ describe('RequestHandler', () => {
           'The "ignoreEnvironmentCheck" config option is deprecated.  ' +
           'Use the "reportMode" config option instead.',
       },
-      done
+      done,
     );
   });
 });

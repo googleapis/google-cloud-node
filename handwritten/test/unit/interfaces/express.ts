@@ -43,7 +43,7 @@ describe('expressInterface', () => {
           version: 'a_version',
         },
       },
-      createLogger({logLevel: 4})
+      createLogger({logLevel: 4}),
     );
     (
       stubbedConfig as {} as {
@@ -60,7 +60,7 @@ describe('expressInterface', () => {
     const testError = new Error('This is a test');
     const validBoundHandler = expressInterface(
       client as {} as RequestHandler,
-      stubbedConfig
+      stubbedConfig,
     );
     it('Should return the error message', () => {
       const res = validBoundHandler(testError, null!, null!, null!);
@@ -71,10 +71,10 @@ describe('expressInterface', () => {
             .setMessage(testError.stack!)
             .setServiceContext(
               stubbedConfig._serviceContext.service,
-              stubbedConfig._serviceContext.version
+              stubbedConfig._serviceContext.version,
             ),
-          {eventTime: res.eventTime}
-        )
+          {eventTime: res.eventTime},
+        ),
       );
     });
     describe('Calling back to express builtins', () => {
@@ -93,7 +93,7 @@ describe('expressInterface', () => {
         };
         const handler = expressInterface(
           client as {} as RequestHandler,
-          stubbedConfig
+          stubbedConfig,
         );
         handler(testError, null!, null!, () => {
           return;

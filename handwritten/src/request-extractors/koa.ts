@@ -28,7 +28,7 @@ import {RequestInformationContainer} from '../classes/request-information-contai
  */
 export function koaRequestInformationExtractor(
   req: koa.Request,
-  res: koa.Response
+  res: koa.Response,
 ) {
   const returnObject = new RequestInformationContainer();
 
