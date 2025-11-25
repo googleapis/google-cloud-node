@@ -275,6 +275,330 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         });
     });
 
+    describe('getAuthorizationPolicy', () => {
+        it('invokes getAuthorizationPolicy without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.GetAuthorizationPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.GetAuthorizationPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.AuthorizationPolicy()
+            );
+            client.innerApiCalls.getAuthorizationPolicy = stubSimpleCall(expectedResponse);
+            const [response] = await client.getAuthorizationPolicy(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getAuthorizationPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAuthorizationPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAuthorizationPolicy without error using callback', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.GetAuthorizationPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.GetAuthorizationPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.AuthorizationPolicy()
+            );
+            client.innerApiCalls.getAuthorizationPolicy = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getAuthorizationPolicy(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.networksecurity.v1alpha1.IAuthorizationPolicy|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getAuthorizationPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAuthorizationPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAuthorizationPolicy with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.GetAuthorizationPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.GetAuthorizationPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getAuthorizationPolicy = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getAuthorizationPolicy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getAuthorizationPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAuthorizationPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAuthorizationPolicy with closed client', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.GetAuthorizationPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.GetAuthorizationPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getAuthorizationPolicy(request), expectedError);
+        });
+    });
+
+    describe('getBackendAuthenticationConfig', () => {
+        it('invokes getBackendAuthenticationConfig without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.GetBackendAuthenticationConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.GetBackendAuthenticationConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.BackendAuthenticationConfig()
+            );
+            client.innerApiCalls.getBackendAuthenticationConfig = stubSimpleCall(expectedResponse);
+            const [response] = await client.getBackendAuthenticationConfig(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getBackendAuthenticationConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBackendAuthenticationConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getBackendAuthenticationConfig without error using callback', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.GetBackendAuthenticationConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.GetBackendAuthenticationConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.BackendAuthenticationConfig()
+            );
+            client.innerApiCalls.getBackendAuthenticationConfig = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getBackendAuthenticationConfig(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.networksecurity.v1alpha1.IBackendAuthenticationConfig|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getBackendAuthenticationConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBackendAuthenticationConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getBackendAuthenticationConfig with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.GetBackendAuthenticationConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.GetBackendAuthenticationConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getBackendAuthenticationConfig = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getBackendAuthenticationConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getBackendAuthenticationConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBackendAuthenticationConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getBackendAuthenticationConfig with closed client', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.GetBackendAuthenticationConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.GetBackendAuthenticationConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getBackendAuthenticationConfig(request), expectedError);
+        });
+    });
+
+    describe('getServerTlsPolicy', () => {
+        it('invokes getServerTlsPolicy without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.GetServerTlsPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.GetServerTlsPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ServerTlsPolicy()
+            );
+            client.innerApiCalls.getServerTlsPolicy = stubSimpleCall(expectedResponse);
+            const [response] = await client.getServerTlsPolicy(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getServerTlsPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getServerTlsPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getServerTlsPolicy without error using callback', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.GetServerTlsPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.GetServerTlsPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ServerTlsPolicy()
+            );
+            client.innerApiCalls.getServerTlsPolicy = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getServerTlsPolicy(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.networksecurity.v1alpha1.IServerTlsPolicy|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getServerTlsPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getServerTlsPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getServerTlsPolicy with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.GetServerTlsPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.GetServerTlsPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getServerTlsPolicy = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getServerTlsPolicy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getServerTlsPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getServerTlsPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getServerTlsPolicy with closed client', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.GetServerTlsPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.GetServerTlsPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getServerTlsPolicy(request), expectedError);
+        });
+    });
+
     describe('getClientTlsPolicy', () => {
         it('invokes getClientTlsPolicy without error', async () => {
             const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
@@ -380,6 +704,1944 @@ describe('v1alpha1.NetworkSecurityClient', () => {
             const expectedError = new Error('The client has already been closed.');
             client.close().catch(err => {throw err});
             await assert.rejects(client.getClientTlsPolicy(request), expectedError);
+        });
+    });
+
+    describe('getGatewaySecurityPolicy', () => {
+        it('invokes getGatewaySecurityPolicy without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.GetGatewaySecurityPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.GetGatewaySecurityPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicy()
+            );
+            client.innerApiCalls.getGatewaySecurityPolicy = stubSimpleCall(expectedResponse);
+            const [response] = await client.getGatewaySecurityPolicy(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getGatewaySecurityPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getGatewaySecurityPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getGatewaySecurityPolicy without error using callback', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.GetGatewaySecurityPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.GetGatewaySecurityPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicy()
+            );
+            client.innerApiCalls.getGatewaySecurityPolicy = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getGatewaySecurityPolicy(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicy|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getGatewaySecurityPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getGatewaySecurityPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getGatewaySecurityPolicy with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.GetGatewaySecurityPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.GetGatewaySecurityPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getGatewaySecurityPolicy = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getGatewaySecurityPolicy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getGatewaySecurityPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getGatewaySecurityPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getGatewaySecurityPolicy with closed client', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.GetGatewaySecurityPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.GetGatewaySecurityPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getGatewaySecurityPolicy(request), expectedError);
+        });
+    });
+
+    describe('getGatewaySecurityPolicyRule', () => {
+        it('invokes getGatewaySecurityPolicyRule without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.GetGatewaySecurityPolicyRuleRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.GetGatewaySecurityPolicyRuleRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicyRule()
+            );
+            client.innerApiCalls.getGatewaySecurityPolicyRule = stubSimpleCall(expectedResponse);
+            const [response] = await client.getGatewaySecurityPolicyRule(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getGatewaySecurityPolicyRule as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getGatewaySecurityPolicyRule as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getGatewaySecurityPolicyRule without error using callback', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.GetGatewaySecurityPolicyRuleRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.GetGatewaySecurityPolicyRuleRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicyRule()
+            );
+            client.innerApiCalls.getGatewaySecurityPolicyRule = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getGatewaySecurityPolicyRule(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicyRule|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getGatewaySecurityPolicyRule as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getGatewaySecurityPolicyRule as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getGatewaySecurityPolicyRule with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.GetGatewaySecurityPolicyRuleRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.GetGatewaySecurityPolicyRuleRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getGatewaySecurityPolicyRule = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getGatewaySecurityPolicyRule(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getGatewaySecurityPolicyRule as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getGatewaySecurityPolicyRule as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getGatewaySecurityPolicyRule with closed client', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.GetGatewaySecurityPolicyRuleRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.GetGatewaySecurityPolicyRuleRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getGatewaySecurityPolicyRule(request), expectedError);
+        });
+    });
+
+    describe('getUrlList', () => {
+        it('invokes getUrlList without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.GetUrlListRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.GetUrlListRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.UrlList()
+            );
+            client.innerApiCalls.getUrlList = stubSimpleCall(expectedResponse);
+            const [response] = await client.getUrlList(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getUrlList as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getUrlList as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getUrlList without error using callback', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.GetUrlListRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.GetUrlListRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.UrlList()
+            );
+            client.innerApiCalls.getUrlList = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getUrlList(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.networksecurity.v1alpha1.IUrlList|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getUrlList as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getUrlList as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getUrlList with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.GetUrlListRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.GetUrlListRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getUrlList = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getUrlList(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getUrlList as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getUrlList as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getUrlList with closed client', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.GetUrlListRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.GetUrlListRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getUrlList(request), expectedError);
+        });
+    });
+
+    describe('getTlsInspectionPolicy', () => {
+        it('invokes getTlsInspectionPolicy without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.GetTlsInspectionPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.GetTlsInspectionPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.TlsInspectionPolicy()
+            );
+            client.innerApiCalls.getTlsInspectionPolicy = stubSimpleCall(expectedResponse);
+            const [response] = await client.getTlsInspectionPolicy(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getTlsInspectionPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getTlsInspectionPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getTlsInspectionPolicy without error using callback', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.GetTlsInspectionPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.GetTlsInspectionPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.TlsInspectionPolicy()
+            );
+            client.innerApiCalls.getTlsInspectionPolicy = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getTlsInspectionPolicy(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.networksecurity.v1alpha1.ITlsInspectionPolicy|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getTlsInspectionPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getTlsInspectionPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getTlsInspectionPolicy with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.GetTlsInspectionPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.GetTlsInspectionPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getTlsInspectionPolicy = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getTlsInspectionPolicy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getTlsInspectionPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getTlsInspectionPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getTlsInspectionPolicy with closed client', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.GetTlsInspectionPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.GetTlsInspectionPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getTlsInspectionPolicy(request), expectedError);
+        });
+    });
+
+    describe('getAuthzPolicy', () => {
+        it('invokes getAuthzPolicy without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.GetAuthzPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.GetAuthzPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.AuthzPolicy()
+            );
+            client.innerApiCalls.getAuthzPolicy = stubSimpleCall(expectedResponse);
+            const [response] = await client.getAuthzPolicy(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getAuthzPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAuthzPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAuthzPolicy without error using callback', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.GetAuthzPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.GetAuthzPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.AuthzPolicy()
+            );
+            client.innerApiCalls.getAuthzPolicy = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getAuthzPolicy(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.networksecurity.v1alpha1.IAuthzPolicy|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getAuthzPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAuthzPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAuthzPolicy with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.GetAuthzPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.GetAuthzPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getAuthzPolicy = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getAuthzPolicy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getAuthzPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAuthzPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAuthzPolicy with closed client', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.GetAuthzPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.GetAuthzPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getAuthzPolicy(request), expectedError);
+        });
+    });
+
+    describe('createAuthorizationPolicy', () => {
+        it('invokes createAuthorizationPolicy without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.CreateAuthorizationPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.CreateAuthorizationPolicyRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createAuthorizationPolicy = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createAuthorizationPolicy(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createAuthorizationPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createAuthorizationPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createAuthorizationPolicy without error using callback', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.CreateAuthorizationPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.CreateAuthorizationPolicyRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createAuthorizationPolicy = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createAuthorizationPolicy(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.networksecurity.v1alpha1.IAuthorizationPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.networksecurity.v1alpha1.IAuthorizationPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createAuthorizationPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createAuthorizationPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createAuthorizationPolicy with call error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.CreateAuthorizationPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.CreateAuthorizationPolicyRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createAuthorizationPolicy = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createAuthorizationPolicy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createAuthorizationPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createAuthorizationPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createAuthorizationPolicy with LRO error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.CreateAuthorizationPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.CreateAuthorizationPolicyRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createAuthorizationPolicy = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createAuthorizationPolicy(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createAuthorizationPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createAuthorizationPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateAuthorizationPolicyProgress without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateAuthorizationPolicyProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateAuthorizationPolicyProgress with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateAuthorizationPolicyProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateAuthorizationPolicy', () => {
+        it('invokes updateAuthorizationPolicy without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.UpdateAuthorizationPolicyRequest()
+            );
+            request.authorizationPolicy ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.UpdateAuthorizationPolicyRequest', ['authorizationPolicy', 'name']);
+            request.authorizationPolicy.name = defaultValue1;
+            const expectedHeaderRequestParams = `authorization_policy.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateAuthorizationPolicy = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateAuthorizationPolicy(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateAuthorizationPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAuthorizationPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAuthorizationPolicy without error using callback', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.UpdateAuthorizationPolicyRequest()
+            );
+            request.authorizationPolicy ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.UpdateAuthorizationPolicyRequest', ['authorizationPolicy', 'name']);
+            request.authorizationPolicy.name = defaultValue1;
+            const expectedHeaderRequestParams = `authorization_policy.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateAuthorizationPolicy = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateAuthorizationPolicy(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.networksecurity.v1alpha1.IAuthorizationPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.networksecurity.v1alpha1.IAuthorizationPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateAuthorizationPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAuthorizationPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAuthorizationPolicy with call error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.UpdateAuthorizationPolicyRequest()
+            );
+            request.authorizationPolicy ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.UpdateAuthorizationPolicyRequest', ['authorizationPolicy', 'name']);
+            request.authorizationPolicy.name = defaultValue1;
+            const expectedHeaderRequestParams = `authorization_policy.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateAuthorizationPolicy = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateAuthorizationPolicy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateAuthorizationPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAuthorizationPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAuthorizationPolicy with LRO error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.UpdateAuthorizationPolicyRequest()
+            );
+            request.authorizationPolicy ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.UpdateAuthorizationPolicyRequest', ['authorizationPolicy', 'name']);
+            request.authorizationPolicy.name = defaultValue1;
+            const expectedHeaderRequestParams = `authorization_policy.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateAuthorizationPolicy = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateAuthorizationPolicy(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateAuthorizationPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAuthorizationPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateAuthorizationPolicyProgress without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateAuthorizationPolicyProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateAuthorizationPolicyProgress with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateAuthorizationPolicyProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteAuthorizationPolicy', () => {
+        it('invokes deleteAuthorizationPolicy without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.DeleteAuthorizationPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.DeleteAuthorizationPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteAuthorizationPolicy = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteAuthorizationPolicy(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteAuthorizationPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAuthorizationPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteAuthorizationPolicy without error using callback', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.DeleteAuthorizationPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.DeleteAuthorizationPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteAuthorizationPolicy = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteAuthorizationPolicy(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteAuthorizationPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAuthorizationPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteAuthorizationPolicy with call error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.DeleteAuthorizationPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.DeleteAuthorizationPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteAuthorizationPolicy = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteAuthorizationPolicy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteAuthorizationPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAuthorizationPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteAuthorizationPolicy with LRO error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.DeleteAuthorizationPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.DeleteAuthorizationPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteAuthorizationPolicy = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteAuthorizationPolicy(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteAuthorizationPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAuthorizationPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteAuthorizationPolicyProgress without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteAuthorizationPolicyProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteAuthorizationPolicyProgress with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteAuthorizationPolicyProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createBackendAuthenticationConfig', () => {
+        it('invokes createBackendAuthenticationConfig without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.CreateBackendAuthenticationConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.CreateBackendAuthenticationConfigRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createBackendAuthenticationConfig = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createBackendAuthenticationConfig(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createBackendAuthenticationConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createBackendAuthenticationConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createBackendAuthenticationConfig without error using callback', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.CreateBackendAuthenticationConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.CreateBackendAuthenticationConfigRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createBackendAuthenticationConfig = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createBackendAuthenticationConfig(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.networksecurity.v1alpha1.IBackendAuthenticationConfig, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.networksecurity.v1alpha1.IBackendAuthenticationConfig, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createBackendAuthenticationConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createBackendAuthenticationConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createBackendAuthenticationConfig with call error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.CreateBackendAuthenticationConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.CreateBackendAuthenticationConfigRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createBackendAuthenticationConfig = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createBackendAuthenticationConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createBackendAuthenticationConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createBackendAuthenticationConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createBackendAuthenticationConfig with LRO error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.CreateBackendAuthenticationConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.CreateBackendAuthenticationConfigRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createBackendAuthenticationConfig = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createBackendAuthenticationConfig(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createBackendAuthenticationConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createBackendAuthenticationConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateBackendAuthenticationConfigProgress without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateBackendAuthenticationConfigProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateBackendAuthenticationConfigProgress with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateBackendAuthenticationConfigProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateBackendAuthenticationConfig', () => {
+        it('invokes updateBackendAuthenticationConfig without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.UpdateBackendAuthenticationConfigRequest()
+            );
+            request.backendAuthenticationConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.UpdateBackendAuthenticationConfigRequest', ['backendAuthenticationConfig', 'name']);
+            request.backendAuthenticationConfig.name = defaultValue1;
+            const expectedHeaderRequestParams = `backend_authentication_config.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateBackendAuthenticationConfig = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateBackendAuthenticationConfig(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateBackendAuthenticationConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateBackendAuthenticationConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateBackendAuthenticationConfig without error using callback', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.UpdateBackendAuthenticationConfigRequest()
+            );
+            request.backendAuthenticationConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.UpdateBackendAuthenticationConfigRequest', ['backendAuthenticationConfig', 'name']);
+            request.backendAuthenticationConfig.name = defaultValue1;
+            const expectedHeaderRequestParams = `backend_authentication_config.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateBackendAuthenticationConfig = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateBackendAuthenticationConfig(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.networksecurity.v1alpha1.IBackendAuthenticationConfig, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.networksecurity.v1alpha1.IBackendAuthenticationConfig, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateBackendAuthenticationConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateBackendAuthenticationConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateBackendAuthenticationConfig with call error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.UpdateBackendAuthenticationConfigRequest()
+            );
+            request.backendAuthenticationConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.UpdateBackendAuthenticationConfigRequest', ['backendAuthenticationConfig', 'name']);
+            request.backendAuthenticationConfig.name = defaultValue1;
+            const expectedHeaderRequestParams = `backend_authentication_config.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateBackendAuthenticationConfig = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateBackendAuthenticationConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateBackendAuthenticationConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateBackendAuthenticationConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateBackendAuthenticationConfig with LRO error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.UpdateBackendAuthenticationConfigRequest()
+            );
+            request.backendAuthenticationConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.UpdateBackendAuthenticationConfigRequest', ['backendAuthenticationConfig', 'name']);
+            request.backendAuthenticationConfig.name = defaultValue1;
+            const expectedHeaderRequestParams = `backend_authentication_config.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateBackendAuthenticationConfig = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateBackendAuthenticationConfig(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateBackendAuthenticationConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateBackendAuthenticationConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateBackendAuthenticationConfigProgress without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateBackendAuthenticationConfigProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateBackendAuthenticationConfigProgress with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateBackendAuthenticationConfigProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteBackendAuthenticationConfig', () => {
+        it('invokes deleteBackendAuthenticationConfig without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.DeleteBackendAuthenticationConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.DeleteBackendAuthenticationConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteBackendAuthenticationConfig = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteBackendAuthenticationConfig(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteBackendAuthenticationConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteBackendAuthenticationConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteBackendAuthenticationConfig without error using callback', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.DeleteBackendAuthenticationConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.DeleteBackendAuthenticationConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteBackendAuthenticationConfig = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteBackendAuthenticationConfig(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteBackendAuthenticationConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteBackendAuthenticationConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteBackendAuthenticationConfig with call error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.DeleteBackendAuthenticationConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.DeleteBackendAuthenticationConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteBackendAuthenticationConfig = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteBackendAuthenticationConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteBackendAuthenticationConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteBackendAuthenticationConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteBackendAuthenticationConfig with LRO error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.DeleteBackendAuthenticationConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.DeleteBackendAuthenticationConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteBackendAuthenticationConfig = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteBackendAuthenticationConfig(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteBackendAuthenticationConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteBackendAuthenticationConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteBackendAuthenticationConfigProgress without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteBackendAuthenticationConfigProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteBackendAuthenticationConfigProgress with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteBackendAuthenticationConfigProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createServerTlsPolicy', () => {
+        it('invokes createServerTlsPolicy without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.CreateServerTlsPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.CreateServerTlsPolicyRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createServerTlsPolicy = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createServerTlsPolicy(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createServerTlsPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createServerTlsPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createServerTlsPolicy without error using callback', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.CreateServerTlsPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.CreateServerTlsPolicyRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createServerTlsPolicy = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createServerTlsPolicy(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.networksecurity.v1alpha1.IServerTlsPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.networksecurity.v1alpha1.IServerTlsPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createServerTlsPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createServerTlsPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createServerTlsPolicy with call error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.CreateServerTlsPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.CreateServerTlsPolicyRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createServerTlsPolicy = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createServerTlsPolicy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createServerTlsPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createServerTlsPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createServerTlsPolicy with LRO error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.CreateServerTlsPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.CreateServerTlsPolicyRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createServerTlsPolicy = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createServerTlsPolicy(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createServerTlsPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createServerTlsPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateServerTlsPolicyProgress without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateServerTlsPolicyProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateServerTlsPolicyProgress with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateServerTlsPolicyProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateServerTlsPolicy', () => {
+        it('invokes updateServerTlsPolicy without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.UpdateServerTlsPolicyRequest()
+            );
+            request.serverTlsPolicy ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.UpdateServerTlsPolicyRequest', ['serverTlsPolicy', 'name']);
+            request.serverTlsPolicy.name = defaultValue1;
+            const expectedHeaderRequestParams = `server_tls_policy.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateServerTlsPolicy = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateServerTlsPolicy(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateServerTlsPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateServerTlsPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateServerTlsPolicy without error using callback', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.UpdateServerTlsPolicyRequest()
+            );
+            request.serverTlsPolicy ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.UpdateServerTlsPolicyRequest', ['serverTlsPolicy', 'name']);
+            request.serverTlsPolicy.name = defaultValue1;
+            const expectedHeaderRequestParams = `server_tls_policy.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateServerTlsPolicy = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateServerTlsPolicy(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.networksecurity.v1alpha1.IServerTlsPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.networksecurity.v1alpha1.IServerTlsPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateServerTlsPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateServerTlsPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateServerTlsPolicy with call error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.UpdateServerTlsPolicyRequest()
+            );
+            request.serverTlsPolicy ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.UpdateServerTlsPolicyRequest', ['serverTlsPolicy', 'name']);
+            request.serverTlsPolicy.name = defaultValue1;
+            const expectedHeaderRequestParams = `server_tls_policy.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateServerTlsPolicy = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateServerTlsPolicy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateServerTlsPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateServerTlsPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateServerTlsPolicy with LRO error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.UpdateServerTlsPolicyRequest()
+            );
+            request.serverTlsPolicy ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.UpdateServerTlsPolicyRequest', ['serverTlsPolicy', 'name']);
+            request.serverTlsPolicy.name = defaultValue1;
+            const expectedHeaderRequestParams = `server_tls_policy.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateServerTlsPolicy = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateServerTlsPolicy(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateServerTlsPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateServerTlsPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateServerTlsPolicyProgress without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateServerTlsPolicyProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateServerTlsPolicyProgress with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateServerTlsPolicyProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteServerTlsPolicy', () => {
+        it('invokes deleteServerTlsPolicy without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.DeleteServerTlsPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.DeleteServerTlsPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteServerTlsPolicy = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteServerTlsPolicy(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteServerTlsPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteServerTlsPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteServerTlsPolicy without error using callback', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.DeleteServerTlsPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.DeleteServerTlsPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteServerTlsPolicy = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteServerTlsPolicy(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteServerTlsPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteServerTlsPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteServerTlsPolicy with call error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.DeleteServerTlsPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.DeleteServerTlsPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteServerTlsPolicy = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteServerTlsPolicy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteServerTlsPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteServerTlsPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteServerTlsPolicy with LRO error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.DeleteServerTlsPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.DeleteServerTlsPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteServerTlsPolicy = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteServerTlsPolicy(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteServerTlsPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteServerTlsPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteServerTlsPolicyProgress without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteServerTlsPolicyProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteServerTlsPolicyProgress with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteServerTlsPolicyProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
         });
     });
 
@@ -849,6 +3111,3071 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         });
     });
 
+    describe('createGatewaySecurityPolicy', () => {
+        it('invokes createGatewaySecurityPolicy without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.CreateGatewaySecurityPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.CreateGatewaySecurityPolicyRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createGatewaySecurityPolicy = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createGatewaySecurityPolicy(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createGatewaySecurityPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createGatewaySecurityPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createGatewaySecurityPolicy without error using callback', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.CreateGatewaySecurityPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.CreateGatewaySecurityPolicyRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createGatewaySecurityPolicy = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createGatewaySecurityPolicy(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createGatewaySecurityPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createGatewaySecurityPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createGatewaySecurityPolicy with call error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.CreateGatewaySecurityPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.CreateGatewaySecurityPolicyRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createGatewaySecurityPolicy = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createGatewaySecurityPolicy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createGatewaySecurityPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createGatewaySecurityPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createGatewaySecurityPolicy with LRO error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.CreateGatewaySecurityPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.CreateGatewaySecurityPolicyRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createGatewaySecurityPolicy = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createGatewaySecurityPolicy(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createGatewaySecurityPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createGatewaySecurityPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateGatewaySecurityPolicyProgress without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateGatewaySecurityPolicyProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateGatewaySecurityPolicyProgress with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateGatewaySecurityPolicyProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateGatewaySecurityPolicy', () => {
+        it('invokes updateGatewaySecurityPolicy without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.UpdateGatewaySecurityPolicyRequest()
+            );
+            request.gatewaySecurityPolicy ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.UpdateGatewaySecurityPolicyRequest', ['gatewaySecurityPolicy', 'name']);
+            request.gatewaySecurityPolicy.name = defaultValue1;
+            const expectedHeaderRequestParams = `gateway_security_policy.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateGatewaySecurityPolicy = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateGatewaySecurityPolicy(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateGatewaySecurityPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateGatewaySecurityPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateGatewaySecurityPolicy without error using callback', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.UpdateGatewaySecurityPolicyRequest()
+            );
+            request.gatewaySecurityPolicy ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.UpdateGatewaySecurityPolicyRequest', ['gatewaySecurityPolicy', 'name']);
+            request.gatewaySecurityPolicy.name = defaultValue1;
+            const expectedHeaderRequestParams = `gateway_security_policy.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateGatewaySecurityPolicy = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateGatewaySecurityPolicy(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateGatewaySecurityPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateGatewaySecurityPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateGatewaySecurityPolicy with call error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.UpdateGatewaySecurityPolicyRequest()
+            );
+            request.gatewaySecurityPolicy ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.UpdateGatewaySecurityPolicyRequest', ['gatewaySecurityPolicy', 'name']);
+            request.gatewaySecurityPolicy.name = defaultValue1;
+            const expectedHeaderRequestParams = `gateway_security_policy.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateGatewaySecurityPolicy = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateGatewaySecurityPolicy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateGatewaySecurityPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateGatewaySecurityPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateGatewaySecurityPolicy with LRO error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.UpdateGatewaySecurityPolicyRequest()
+            );
+            request.gatewaySecurityPolicy ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.UpdateGatewaySecurityPolicyRequest', ['gatewaySecurityPolicy', 'name']);
+            request.gatewaySecurityPolicy.name = defaultValue1;
+            const expectedHeaderRequestParams = `gateway_security_policy.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateGatewaySecurityPolicy = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateGatewaySecurityPolicy(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateGatewaySecurityPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateGatewaySecurityPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateGatewaySecurityPolicyProgress without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateGatewaySecurityPolicyProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateGatewaySecurityPolicyProgress with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateGatewaySecurityPolicyProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteGatewaySecurityPolicy', () => {
+        it('invokes deleteGatewaySecurityPolicy without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.DeleteGatewaySecurityPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.DeleteGatewaySecurityPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteGatewaySecurityPolicy = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteGatewaySecurityPolicy(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteGatewaySecurityPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteGatewaySecurityPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteGatewaySecurityPolicy without error using callback', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.DeleteGatewaySecurityPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.DeleteGatewaySecurityPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteGatewaySecurityPolicy = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteGatewaySecurityPolicy(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteGatewaySecurityPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteGatewaySecurityPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteGatewaySecurityPolicy with call error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.DeleteGatewaySecurityPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.DeleteGatewaySecurityPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteGatewaySecurityPolicy = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteGatewaySecurityPolicy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteGatewaySecurityPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteGatewaySecurityPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteGatewaySecurityPolicy with LRO error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.DeleteGatewaySecurityPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.DeleteGatewaySecurityPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteGatewaySecurityPolicy = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteGatewaySecurityPolicy(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteGatewaySecurityPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteGatewaySecurityPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteGatewaySecurityPolicyProgress without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteGatewaySecurityPolicyProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteGatewaySecurityPolicyProgress with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteGatewaySecurityPolicyProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createGatewaySecurityPolicyRule', () => {
+        it('invokes createGatewaySecurityPolicyRule without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.CreateGatewaySecurityPolicyRuleRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.CreateGatewaySecurityPolicyRuleRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createGatewaySecurityPolicyRule = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createGatewaySecurityPolicyRule(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createGatewaySecurityPolicyRule as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createGatewaySecurityPolicyRule as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createGatewaySecurityPolicyRule without error using callback', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.CreateGatewaySecurityPolicyRuleRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.CreateGatewaySecurityPolicyRuleRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createGatewaySecurityPolicyRule = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createGatewaySecurityPolicyRule(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicyRule, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicyRule, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createGatewaySecurityPolicyRule as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createGatewaySecurityPolicyRule as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createGatewaySecurityPolicyRule with call error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.CreateGatewaySecurityPolicyRuleRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.CreateGatewaySecurityPolicyRuleRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createGatewaySecurityPolicyRule = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createGatewaySecurityPolicyRule(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createGatewaySecurityPolicyRule as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createGatewaySecurityPolicyRule as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createGatewaySecurityPolicyRule with LRO error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.CreateGatewaySecurityPolicyRuleRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.CreateGatewaySecurityPolicyRuleRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createGatewaySecurityPolicyRule = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createGatewaySecurityPolicyRule(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createGatewaySecurityPolicyRule as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createGatewaySecurityPolicyRule as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateGatewaySecurityPolicyRuleProgress without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateGatewaySecurityPolicyRuleProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateGatewaySecurityPolicyRuleProgress with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateGatewaySecurityPolicyRuleProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateGatewaySecurityPolicyRule', () => {
+        it('invokes updateGatewaySecurityPolicyRule without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.UpdateGatewaySecurityPolicyRuleRequest()
+            );
+            request.gatewaySecurityPolicyRule ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.UpdateGatewaySecurityPolicyRuleRequest', ['gatewaySecurityPolicyRule', 'name']);
+            request.gatewaySecurityPolicyRule.name = defaultValue1;
+            const expectedHeaderRequestParams = `gateway_security_policy_rule.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateGatewaySecurityPolicyRule = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateGatewaySecurityPolicyRule(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateGatewaySecurityPolicyRule as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateGatewaySecurityPolicyRule as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateGatewaySecurityPolicyRule without error using callback', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.UpdateGatewaySecurityPolicyRuleRequest()
+            );
+            request.gatewaySecurityPolicyRule ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.UpdateGatewaySecurityPolicyRuleRequest', ['gatewaySecurityPolicyRule', 'name']);
+            request.gatewaySecurityPolicyRule.name = defaultValue1;
+            const expectedHeaderRequestParams = `gateway_security_policy_rule.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateGatewaySecurityPolicyRule = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateGatewaySecurityPolicyRule(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicyRule, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicyRule, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateGatewaySecurityPolicyRule as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateGatewaySecurityPolicyRule as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateGatewaySecurityPolicyRule with call error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.UpdateGatewaySecurityPolicyRuleRequest()
+            );
+            request.gatewaySecurityPolicyRule ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.UpdateGatewaySecurityPolicyRuleRequest', ['gatewaySecurityPolicyRule', 'name']);
+            request.gatewaySecurityPolicyRule.name = defaultValue1;
+            const expectedHeaderRequestParams = `gateway_security_policy_rule.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateGatewaySecurityPolicyRule = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateGatewaySecurityPolicyRule(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateGatewaySecurityPolicyRule as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateGatewaySecurityPolicyRule as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateGatewaySecurityPolicyRule with LRO error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.UpdateGatewaySecurityPolicyRuleRequest()
+            );
+            request.gatewaySecurityPolicyRule ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.UpdateGatewaySecurityPolicyRuleRequest', ['gatewaySecurityPolicyRule', 'name']);
+            request.gatewaySecurityPolicyRule.name = defaultValue1;
+            const expectedHeaderRequestParams = `gateway_security_policy_rule.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateGatewaySecurityPolicyRule = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateGatewaySecurityPolicyRule(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateGatewaySecurityPolicyRule as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateGatewaySecurityPolicyRule as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateGatewaySecurityPolicyRuleProgress without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateGatewaySecurityPolicyRuleProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateGatewaySecurityPolicyRuleProgress with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateGatewaySecurityPolicyRuleProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteGatewaySecurityPolicyRule', () => {
+        it('invokes deleteGatewaySecurityPolicyRule without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.DeleteGatewaySecurityPolicyRuleRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.DeleteGatewaySecurityPolicyRuleRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteGatewaySecurityPolicyRule = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteGatewaySecurityPolicyRule(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteGatewaySecurityPolicyRule as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteGatewaySecurityPolicyRule as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteGatewaySecurityPolicyRule without error using callback', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.DeleteGatewaySecurityPolicyRuleRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.DeleteGatewaySecurityPolicyRuleRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteGatewaySecurityPolicyRule = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteGatewaySecurityPolicyRule(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteGatewaySecurityPolicyRule as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteGatewaySecurityPolicyRule as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteGatewaySecurityPolicyRule with call error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.DeleteGatewaySecurityPolicyRuleRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.DeleteGatewaySecurityPolicyRuleRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteGatewaySecurityPolicyRule = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteGatewaySecurityPolicyRule(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteGatewaySecurityPolicyRule as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteGatewaySecurityPolicyRule as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteGatewaySecurityPolicyRule with LRO error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.DeleteGatewaySecurityPolicyRuleRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.DeleteGatewaySecurityPolicyRuleRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteGatewaySecurityPolicyRule = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteGatewaySecurityPolicyRule(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteGatewaySecurityPolicyRule as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteGatewaySecurityPolicyRule as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteGatewaySecurityPolicyRuleProgress without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteGatewaySecurityPolicyRuleProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteGatewaySecurityPolicyRuleProgress with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteGatewaySecurityPolicyRuleProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createUrlList', () => {
+        it('invokes createUrlList without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.CreateUrlListRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.CreateUrlListRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createUrlList = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createUrlList(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createUrlList as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createUrlList as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createUrlList without error using callback', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.CreateUrlListRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.CreateUrlListRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createUrlList = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createUrlList(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.networksecurity.v1alpha1.IUrlList, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.networksecurity.v1alpha1.IUrlList, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createUrlList as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createUrlList as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createUrlList with call error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.CreateUrlListRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.CreateUrlListRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createUrlList = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createUrlList(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createUrlList as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createUrlList as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createUrlList with LRO error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.CreateUrlListRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.CreateUrlListRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createUrlList = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createUrlList(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createUrlList as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createUrlList as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateUrlListProgress without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateUrlListProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateUrlListProgress with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateUrlListProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateUrlList', () => {
+        it('invokes updateUrlList without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.UpdateUrlListRequest()
+            );
+            request.urlList ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.UpdateUrlListRequest', ['urlList', 'name']);
+            request.urlList.name = defaultValue1;
+            const expectedHeaderRequestParams = `url_list.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateUrlList = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateUrlList(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateUrlList as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateUrlList as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateUrlList without error using callback', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.UpdateUrlListRequest()
+            );
+            request.urlList ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.UpdateUrlListRequest', ['urlList', 'name']);
+            request.urlList.name = defaultValue1;
+            const expectedHeaderRequestParams = `url_list.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateUrlList = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateUrlList(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.networksecurity.v1alpha1.IUrlList, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.networksecurity.v1alpha1.IUrlList, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateUrlList as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateUrlList as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateUrlList with call error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.UpdateUrlListRequest()
+            );
+            request.urlList ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.UpdateUrlListRequest', ['urlList', 'name']);
+            request.urlList.name = defaultValue1;
+            const expectedHeaderRequestParams = `url_list.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateUrlList = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateUrlList(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateUrlList as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateUrlList as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateUrlList with LRO error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.UpdateUrlListRequest()
+            );
+            request.urlList ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.UpdateUrlListRequest', ['urlList', 'name']);
+            request.urlList.name = defaultValue1;
+            const expectedHeaderRequestParams = `url_list.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateUrlList = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateUrlList(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateUrlList as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateUrlList as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateUrlListProgress without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateUrlListProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateUrlListProgress with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateUrlListProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteUrlList', () => {
+        it('invokes deleteUrlList without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.DeleteUrlListRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.DeleteUrlListRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteUrlList = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteUrlList(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteUrlList as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteUrlList as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteUrlList without error using callback', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.DeleteUrlListRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.DeleteUrlListRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteUrlList = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteUrlList(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteUrlList as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteUrlList as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteUrlList with call error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.DeleteUrlListRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.DeleteUrlListRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteUrlList = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteUrlList(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteUrlList as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteUrlList as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteUrlList with LRO error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.DeleteUrlListRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.DeleteUrlListRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteUrlList = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteUrlList(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteUrlList as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteUrlList as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteUrlListProgress without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteUrlListProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteUrlListProgress with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteUrlListProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createTlsInspectionPolicy', () => {
+        it('invokes createTlsInspectionPolicy without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.CreateTlsInspectionPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.CreateTlsInspectionPolicyRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createTlsInspectionPolicy = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createTlsInspectionPolicy(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createTlsInspectionPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createTlsInspectionPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createTlsInspectionPolicy without error using callback', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.CreateTlsInspectionPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.CreateTlsInspectionPolicyRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createTlsInspectionPolicy = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createTlsInspectionPolicy(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.networksecurity.v1alpha1.ITlsInspectionPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.networksecurity.v1alpha1.ITlsInspectionPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createTlsInspectionPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createTlsInspectionPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createTlsInspectionPolicy with call error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.CreateTlsInspectionPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.CreateTlsInspectionPolicyRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createTlsInspectionPolicy = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createTlsInspectionPolicy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createTlsInspectionPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createTlsInspectionPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createTlsInspectionPolicy with LRO error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.CreateTlsInspectionPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.CreateTlsInspectionPolicyRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createTlsInspectionPolicy = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createTlsInspectionPolicy(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createTlsInspectionPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createTlsInspectionPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateTlsInspectionPolicyProgress without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateTlsInspectionPolicyProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateTlsInspectionPolicyProgress with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateTlsInspectionPolicyProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateTlsInspectionPolicy', () => {
+        it('invokes updateTlsInspectionPolicy without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.UpdateTlsInspectionPolicyRequest()
+            );
+            request.tlsInspectionPolicy ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.UpdateTlsInspectionPolicyRequest', ['tlsInspectionPolicy', 'name']);
+            request.tlsInspectionPolicy.name = defaultValue1;
+            const expectedHeaderRequestParams = `tls_inspection_policy.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateTlsInspectionPolicy = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateTlsInspectionPolicy(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateTlsInspectionPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateTlsInspectionPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateTlsInspectionPolicy without error using callback', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.UpdateTlsInspectionPolicyRequest()
+            );
+            request.tlsInspectionPolicy ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.UpdateTlsInspectionPolicyRequest', ['tlsInspectionPolicy', 'name']);
+            request.tlsInspectionPolicy.name = defaultValue1;
+            const expectedHeaderRequestParams = `tls_inspection_policy.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateTlsInspectionPolicy = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateTlsInspectionPolicy(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.networksecurity.v1alpha1.ITlsInspectionPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.networksecurity.v1alpha1.ITlsInspectionPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateTlsInspectionPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateTlsInspectionPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateTlsInspectionPolicy with call error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.UpdateTlsInspectionPolicyRequest()
+            );
+            request.tlsInspectionPolicy ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.UpdateTlsInspectionPolicyRequest', ['tlsInspectionPolicy', 'name']);
+            request.tlsInspectionPolicy.name = defaultValue1;
+            const expectedHeaderRequestParams = `tls_inspection_policy.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateTlsInspectionPolicy = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateTlsInspectionPolicy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateTlsInspectionPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateTlsInspectionPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateTlsInspectionPolicy with LRO error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.UpdateTlsInspectionPolicyRequest()
+            );
+            request.tlsInspectionPolicy ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.UpdateTlsInspectionPolicyRequest', ['tlsInspectionPolicy', 'name']);
+            request.tlsInspectionPolicy.name = defaultValue1;
+            const expectedHeaderRequestParams = `tls_inspection_policy.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateTlsInspectionPolicy = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateTlsInspectionPolicy(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateTlsInspectionPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateTlsInspectionPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateTlsInspectionPolicyProgress without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateTlsInspectionPolicyProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateTlsInspectionPolicyProgress with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateTlsInspectionPolicyProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteTlsInspectionPolicy', () => {
+        it('invokes deleteTlsInspectionPolicy without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.DeleteTlsInspectionPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.DeleteTlsInspectionPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteTlsInspectionPolicy = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteTlsInspectionPolicy(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteTlsInspectionPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteTlsInspectionPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteTlsInspectionPolicy without error using callback', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.DeleteTlsInspectionPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.DeleteTlsInspectionPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteTlsInspectionPolicy = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteTlsInspectionPolicy(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteTlsInspectionPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteTlsInspectionPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteTlsInspectionPolicy with call error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.DeleteTlsInspectionPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.DeleteTlsInspectionPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteTlsInspectionPolicy = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteTlsInspectionPolicy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteTlsInspectionPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteTlsInspectionPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteTlsInspectionPolicy with LRO error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.DeleteTlsInspectionPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.DeleteTlsInspectionPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteTlsInspectionPolicy = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteTlsInspectionPolicy(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteTlsInspectionPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteTlsInspectionPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteTlsInspectionPolicyProgress without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteTlsInspectionPolicyProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteTlsInspectionPolicyProgress with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteTlsInspectionPolicyProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createAuthzPolicy', () => {
+        it('invokes createAuthzPolicy without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.CreateAuthzPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.CreateAuthzPolicyRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createAuthzPolicy = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createAuthzPolicy(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createAuthzPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createAuthzPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createAuthzPolicy without error using callback', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.CreateAuthzPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.CreateAuthzPolicyRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createAuthzPolicy = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createAuthzPolicy(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.networksecurity.v1alpha1.IAuthzPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.networksecurity.v1alpha1.IAuthzPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createAuthzPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createAuthzPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createAuthzPolicy with call error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.CreateAuthzPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.CreateAuthzPolicyRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createAuthzPolicy = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createAuthzPolicy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createAuthzPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createAuthzPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createAuthzPolicy with LRO error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.CreateAuthzPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.CreateAuthzPolicyRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createAuthzPolicy = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createAuthzPolicy(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createAuthzPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createAuthzPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateAuthzPolicyProgress without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateAuthzPolicyProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateAuthzPolicyProgress with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateAuthzPolicyProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateAuthzPolicy', () => {
+        it('invokes updateAuthzPolicy without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.UpdateAuthzPolicyRequest()
+            );
+            request.authzPolicy ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.UpdateAuthzPolicyRequest', ['authzPolicy', 'name']);
+            request.authzPolicy.name = defaultValue1;
+            const expectedHeaderRequestParams = `authz_policy.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateAuthzPolicy = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateAuthzPolicy(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateAuthzPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAuthzPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAuthzPolicy without error using callback', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.UpdateAuthzPolicyRequest()
+            );
+            request.authzPolicy ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.UpdateAuthzPolicyRequest', ['authzPolicy', 'name']);
+            request.authzPolicy.name = defaultValue1;
+            const expectedHeaderRequestParams = `authz_policy.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateAuthzPolicy = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateAuthzPolicy(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.networksecurity.v1alpha1.IAuthzPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.networksecurity.v1alpha1.IAuthzPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateAuthzPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAuthzPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAuthzPolicy with call error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.UpdateAuthzPolicyRequest()
+            );
+            request.authzPolicy ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.UpdateAuthzPolicyRequest', ['authzPolicy', 'name']);
+            request.authzPolicy.name = defaultValue1;
+            const expectedHeaderRequestParams = `authz_policy.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateAuthzPolicy = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateAuthzPolicy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateAuthzPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAuthzPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAuthzPolicy with LRO error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.UpdateAuthzPolicyRequest()
+            );
+            request.authzPolicy ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.UpdateAuthzPolicyRequest', ['authzPolicy', 'name']);
+            request.authzPolicy.name = defaultValue1;
+            const expectedHeaderRequestParams = `authz_policy.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateAuthzPolicy = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateAuthzPolicy(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateAuthzPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAuthzPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateAuthzPolicyProgress without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateAuthzPolicyProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateAuthzPolicyProgress with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateAuthzPolicyProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteAuthzPolicy', () => {
+        it('invokes deleteAuthzPolicy without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.DeleteAuthzPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.DeleteAuthzPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteAuthzPolicy = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteAuthzPolicy(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteAuthzPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAuthzPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteAuthzPolicy without error using callback', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.DeleteAuthzPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.DeleteAuthzPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteAuthzPolicy = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteAuthzPolicy(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteAuthzPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAuthzPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteAuthzPolicy with call error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.DeleteAuthzPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.DeleteAuthzPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteAuthzPolicy = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteAuthzPolicy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteAuthzPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAuthzPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteAuthzPolicy with LRO error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.DeleteAuthzPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.DeleteAuthzPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteAuthzPolicy = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteAuthzPolicy(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteAuthzPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAuthzPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteAuthzPolicyProgress without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteAuthzPolicyProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteAuthzPolicyProgress with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteAuthzPolicyProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('listAuthorizationPolicies', () => {
+        it('invokes listAuthorizationPolicies without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListAuthorizationPoliciesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListAuthorizationPoliciesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.AuthorizationPolicy()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.AuthorizationPolicy()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.AuthorizationPolicy()),
+            ];
+            client.innerApiCalls.listAuthorizationPolicies = stubSimpleCall(expectedResponse);
+            const [response] = await client.listAuthorizationPolicies(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listAuthorizationPolicies as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAuthorizationPolicies as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listAuthorizationPolicies without error using callback', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListAuthorizationPoliciesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListAuthorizationPoliciesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.AuthorizationPolicy()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.AuthorizationPolicy()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.AuthorizationPolicy()),
+            ];
+            client.innerApiCalls.listAuthorizationPolicies = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listAuthorizationPolicies(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.networksecurity.v1alpha1.IAuthorizationPolicy[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listAuthorizationPolicies as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAuthorizationPolicies as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listAuthorizationPolicies with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListAuthorizationPoliciesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListAuthorizationPoliciesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listAuthorizationPolicies = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listAuthorizationPolicies(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listAuthorizationPolicies as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAuthorizationPolicies as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listAuthorizationPoliciesStream without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListAuthorizationPoliciesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListAuthorizationPoliciesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.AuthorizationPolicy()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.AuthorizationPolicy()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.AuthorizationPolicy()),
+            ];
+            client.descriptors.page.listAuthorizationPolicies.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listAuthorizationPoliciesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.networksecurity.v1alpha1.AuthorizationPolicy[] = [];
+                stream.on('data', (response: protos.google.cloud.networksecurity.v1alpha1.AuthorizationPolicy) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listAuthorizationPolicies.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listAuthorizationPolicies, request));
+            assert(
+                (client.descriptors.page.listAuthorizationPolicies.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listAuthorizationPoliciesStream with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListAuthorizationPoliciesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListAuthorizationPoliciesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listAuthorizationPolicies.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listAuthorizationPoliciesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.networksecurity.v1alpha1.AuthorizationPolicy[] = [];
+                stream.on('data', (response: protos.google.cloud.networksecurity.v1alpha1.AuthorizationPolicy) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listAuthorizationPolicies.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listAuthorizationPolicies, request));
+            assert(
+                (client.descriptors.page.listAuthorizationPolicies.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listAuthorizationPolicies without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListAuthorizationPoliciesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListAuthorizationPoliciesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.AuthorizationPolicy()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.AuthorizationPolicy()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.AuthorizationPolicy()),
+            ];
+            client.descriptors.page.listAuthorizationPolicies.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.networksecurity.v1alpha1.IAuthorizationPolicy[] = [];
+            const iterable = client.listAuthorizationPoliciesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listAuthorizationPolicies.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listAuthorizationPolicies.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listAuthorizationPolicies with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListAuthorizationPoliciesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListAuthorizationPoliciesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listAuthorizationPolicies.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listAuthorizationPoliciesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.networksecurity.v1alpha1.IAuthorizationPolicy[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listAuthorizationPolicies.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listAuthorizationPolicies.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('listBackendAuthenticationConfigs', () => {
+        it('invokes listBackendAuthenticationConfigs without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListBackendAuthenticationConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListBackendAuthenticationConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.BackendAuthenticationConfig()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.BackendAuthenticationConfig()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.BackendAuthenticationConfig()),
+            ];
+            client.innerApiCalls.listBackendAuthenticationConfigs = stubSimpleCall(expectedResponse);
+            const [response] = await client.listBackendAuthenticationConfigs(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listBackendAuthenticationConfigs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBackendAuthenticationConfigs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listBackendAuthenticationConfigs without error using callback', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListBackendAuthenticationConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListBackendAuthenticationConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.BackendAuthenticationConfig()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.BackendAuthenticationConfig()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.BackendAuthenticationConfig()),
+            ];
+            client.innerApiCalls.listBackendAuthenticationConfigs = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listBackendAuthenticationConfigs(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.networksecurity.v1alpha1.IBackendAuthenticationConfig[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listBackendAuthenticationConfigs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBackendAuthenticationConfigs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listBackendAuthenticationConfigs with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListBackendAuthenticationConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListBackendAuthenticationConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listBackendAuthenticationConfigs = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listBackendAuthenticationConfigs(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listBackendAuthenticationConfigs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBackendAuthenticationConfigs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listBackendAuthenticationConfigsStream without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListBackendAuthenticationConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListBackendAuthenticationConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.BackendAuthenticationConfig()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.BackendAuthenticationConfig()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.BackendAuthenticationConfig()),
+            ];
+            client.descriptors.page.listBackendAuthenticationConfigs.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listBackendAuthenticationConfigsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.networksecurity.v1alpha1.BackendAuthenticationConfig[] = [];
+                stream.on('data', (response: protos.google.cloud.networksecurity.v1alpha1.BackendAuthenticationConfig) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listBackendAuthenticationConfigs.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listBackendAuthenticationConfigs, request));
+            assert(
+                (client.descriptors.page.listBackendAuthenticationConfigs.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listBackendAuthenticationConfigsStream with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListBackendAuthenticationConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListBackendAuthenticationConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listBackendAuthenticationConfigs.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listBackendAuthenticationConfigsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.networksecurity.v1alpha1.BackendAuthenticationConfig[] = [];
+                stream.on('data', (response: protos.google.cloud.networksecurity.v1alpha1.BackendAuthenticationConfig) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listBackendAuthenticationConfigs.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listBackendAuthenticationConfigs, request));
+            assert(
+                (client.descriptors.page.listBackendAuthenticationConfigs.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listBackendAuthenticationConfigs without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListBackendAuthenticationConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListBackendAuthenticationConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.BackendAuthenticationConfig()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.BackendAuthenticationConfig()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.BackendAuthenticationConfig()),
+            ];
+            client.descriptors.page.listBackendAuthenticationConfigs.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.networksecurity.v1alpha1.IBackendAuthenticationConfig[] = [];
+            const iterable = client.listBackendAuthenticationConfigsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listBackendAuthenticationConfigs.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listBackendAuthenticationConfigs.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listBackendAuthenticationConfigs with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListBackendAuthenticationConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListBackendAuthenticationConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listBackendAuthenticationConfigs.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listBackendAuthenticationConfigsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.networksecurity.v1alpha1.IBackendAuthenticationConfig[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listBackendAuthenticationConfigs.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listBackendAuthenticationConfigs.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('listServerTlsPolicies', () => {
+        it('invokes listServerTlsPolicies without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListServerTlsPoliciesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListServerTlsPoliciesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.ServerTlsPolicy()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.ServerTlsPolicy()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.ServerTlsPolicy()),
+            ];
+            client.innerApiCalls.listServerTlsPolicies = stubSimpleCall(expectedResponse);
+            const [response] = await client.listServerTlsPolicies(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listServerTlsPolicies as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listServerTlsPolicies as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listServerTlsPolicies without error using callback', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListServerTlsPoliciesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListServerTlsPoliciesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.ServerTlsPolicy()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.ServerTlsPolicy()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.ServerTlsPolicy()),
+            ];
+            client.innerApiCalls.listServerTlsPolicies = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listServerTlsPolicies(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.networksecurity.v1alpha1.IServerTlsPolicy[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listServerTlsPolicies as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listServerTlsPolicies as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listServerTlsPolicies with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListServerTlsPoliciesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListServerTlsPoliciesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listServerTlsPolicies = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listServerTlsPolicies(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listServerTlsPolicies as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listServerTlsPolicies as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listServerTlsPoliciesStream without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListServerTlsPoliciesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListServerTlsPoliciesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.ServerTlsPolicy()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.ServerTlsPolicy()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.ServerTlsPolicy()),
+            ];
+            client.descriptors.page.listServerTlsPolicies.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listServerTlsPoliciesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.networksecurity.v1alpha1.ServerTlsPolicy[] = [];
+                stream.on('data', (response: protos.google.cloud.networksecurity.v1alpha1.ServerTlsPolicy) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listServerTlsPolicies.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listServerTlsPolicies, request));
+            assert(
+                (client.descriptors.page.listServerTlsPolicies.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listServerTlsPoliciesStream with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListServerTlsPoliciesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListServerTlsPoliciesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listServerTlsPolicies.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listServerTlsPoliciesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.networksecurity.v1alpha1.ServerTlsPolicy[] = [];
+                stream.on('data', (response: protos.google.cloud.networksecurity.v1alpha1.ServerTlsPolicy) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listServerTlsPolicies.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listServerTlsPolicies, request));
+            assert(
+                (client.descriptors.page.listServerTlsPolicies.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listServerTlsPolicies without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListServerTlsPoliciesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListServerTlsPoliciesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.ServerTlsPolicy()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.ServerTlsPolicy()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.ServerTlsPolicy()),
+            ];
+            client.descriptors.page.listServerTlsPolicies.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.networksecurity.v1alpha1.IServerTlsPolicy[] = [];
+            const iterable = client.listServerTlsPoliciesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listServerTlsPolicies.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listServerTlsPolicies.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listServerTlsPolicies with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListServerTlsPoliciesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListServerTlsPoliciesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listServerTlsPolicies.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listServerTlsPoliciesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.networksecurity.v1alpha1.IServerTlsPolicy[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listServerTlsPolicies.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listServerTlsPolicies.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
     describe('listClientTlsPolicies', () => {
         it('invokes listClientTlsPolicies without error', async () => {
             const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
@@ -1087,6 +6414,1231 @@ describe('v1alpha1.NetworkSecurityClient', () => {
                     .getCall(0).args[1], request);
             assert(
                 (client.descriptors.page.listClientTlsPolicies.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('listGatewaySecurityPolicies', () => {
+        it('invokes listGatewaySecurityPolicies without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListGatewaySecurityPoliciesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListGatewaySecurityPoliciesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicy()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicy()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicy()),
+            ];
+            client.innerApiCalls.listGatewaySecurityPolicies = stubSimpleCall(expectedResponse);
+            const [response] = await client.listGatewaySecurityPolicies(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listGatewaySecurityPolicies as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listGatewaySecurityPolicies as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listGatewaySecurityPolicies without error using callback', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListGatewaySecurityPoliciesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListGatewaySecurityPoliciesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicy()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicy()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicy()),
+            ];
+            client.innerApiCalls.listGatewaySecurityPolicies = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listGatewaySecurityPolicies(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicy[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listGatewaySecurityPolicies as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listGatewaySecurityPolicies as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listGatewaySecurityPolicies with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListGatewaySecurityPoliciesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListGatewaySecurityPoliciesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listGatewaySecurityPolicies = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listGatewaySecurityPolicies(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listGatewaySecurityPolicies as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listGatewaySecurityPolicies as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listGatewaySecurityPoliciesStream without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListGatewaySecurityPoliciesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListGatewaySecurityPoliciesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicy()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicy()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicy()),
+            ];
+            client.descriptors.page.listGatewaySecurityPolicies.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listGatewaySecurityPoliciesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicy[] = [];
+                stream.on('data', (response: protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicy) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listGatewaySecurityPolicies.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listGatewaySecurityPolicies, request));
+            assert(
+                (client.descriptors.page.listGatewaySecurityPolicies.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listGatewaySecurityPoliciesStream with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListGatewaySecurityPoliciesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListGatewaySecurityPoliciesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listGatewaySecurityPolicies.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listGatewaySecurityPoliciesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicy[] = [];
+                stream.on('data', (response: protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicy) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listGatewaySecurityPolicies.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listGatewaySecurityPolicies, request));
+            assert(
+                (client.descriptors.page.listGatewaySecurityPolicies.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listGatewaySecurityPolicies without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListGatewaySecurityPoliciesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListGatewaySecurityPoliciesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicy()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicy()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicy()),
+            ];
+            client.descriptors.page.listGatewaySecurityPolicies.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicy[] = [];
+            const iterable = client.listGatewaySecurityPoliciesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listGatewaySecurityPolicies.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listGatewaySecurityPolicies.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listGatewaySecurityPolicies with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListGatewaySecurityPoliciesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListGatewaySecurityPoliciesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listGatewaySecurityPolicies.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listGatewaySecurityPoliciesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicy[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listGatewaySecurityPolicies.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listGatewaySecurityPolicies.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('listGatewaySecurityPolicyRules', () => {
+        it('invokes listGatewaySecurityPolicyRules without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListGatewaySecurityPolicyRulesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListGatewaySecurityPolicyRulesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicyRule()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicyRule()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicyRule()),
+            ];
+            client.innerApiCalls.listGatewaySecurityPolicyRules = stubSimpleCall(expectedResponse);
+            const [response] = await client.listGatewaySecurityPolicyRules(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listGatewaySecurityPolicyRules as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listGatewaySecurityPolicyRules as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listGatewaySecurityPolicyRules without error using callback', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListGatewaySecurityPolicyRulesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListGatewaySecurityPolicyRulesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicyRule()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicyRule()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicyRule()),
+            ];
+            client.innerApiCalls.listGatewaySecurityPolicyRules = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listGatewaySecurityPolicyRules(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicyRule[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listGatewaySecurityPolicyRules as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listGatewaySecurityPolicyRules as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listGatewaySecurityPolicyRules with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListGatewaySecurityPolicyRulesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListGatewaySecurityPolicyRulesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listGatewaySecurityPolicyRules = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listGatewaySecurityPolicyRules(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listGatewaySecurityPolicyRules as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listGatewaySecurityPolicyRules as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listGatewaySecurityPolicyRulesStream without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListGatewaySecurityPolicyRulesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListGatewaySecurityPolicyRulesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicyRule()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicyRule()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicyRule()),
+            ];
+            client.descriptors.page.listGatewaySecurityPolicyRules.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listGatewaySecurityPolicyRulesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicyRule[] = [];
+                stream.on('data', (response: protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicyRule) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listGatewaySecurityPolicyRules.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listGatewaySecurityPolicyRules, request));
+            assert(
+                (client.descriptors.page.listGatewaySecurityPolicyRules.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listGatewaySecurityPolicyRulesStream with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListGatewaySecurityPolicyRulesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListGatewaySecurityPolicyRulesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listGatewaySecurityPolicyRules.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listGatewaySecurityPolicyRulesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicyRule[] = [];
+                stream.on('data', (response: protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicyRule) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listGatewaySecurityPolicyRules.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listGatewaySecurityPolicyRules, request));
+            assert(
+                (client.descriptors.page.listGatewaySecurityPolicyRules.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listGatewaySecurityPolicyRules without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListGatewaySecurityPolicyRulesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListGatewaySecurityPolicyRulesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicyRule()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicyRule()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicyRule()),
+            ];
+            client.descriptors.page.listGatewaySecurityPolicyRules.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicyRule[] = [];
+            const iterable = client.listGatewaySecurityPolicyRulesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listGatewaySecurityPolicyRules.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listGatewaySecurityPolicyRules.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listGatewaySecurityPolicyRules with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListGatewaySecurityPolicyRulesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListGatewaySecurityPolicyRulesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listGatewaySecurityPolicyRules.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listGatewaySecurityPolicyRulesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicyRule[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listGatewaySecurityPolicyRules.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listGatewaySecurityPolicyRules.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('listUrlLists', () => {
+        it('invokes listUrlLists without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListUrlListsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListUrlListsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.UrlList()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.UrlList()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.UrlList()),
+            ];
+            client.innerApiCalls.listUrlLists = stubSimpleCall(expectedResponse);
+            const [response] = await client.listUrlLists(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listUrlLists as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listUrlLists as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listUrlLists without error using callback', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListUrlListsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListUrlListsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.UrlList()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.UrlList()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.UrlList()),
+            ];
+            client.innerApiCalls.listUrlLists = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listUrlLists(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.networksecurity.v1alpha1.IUrlList[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listUrlLists as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listUrlLists as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listUrlLists with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListUrlListsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListUrlListsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listUrlLists = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listUrlLists(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listUrlLists as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listUrlLists as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listUrlListsStream without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListUrlListsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListUrlListsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.UrlList()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.UrlList()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.UrlList()),
+            ];
+            client.descriptors.page.listUrlLists.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listUrlListsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.networksecurity.v1alpha1.UrlList[] = [];
+                stream.on('data', (response: protos.google.cloud.networksecurity.v1alpha1.UrlList) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listUrlLists.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listUrlLists, request));
+            assert(
+                (client.descriptors.page.listUrlLists.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listUrlListsStream with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListUrlListsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListUrlListsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listUrlLists.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listUrlListsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.networksecurity.v1alpha1.UrlList[] = [];
+                stream.on('data', (response: protos.google.cloud.networksecurity.v1alpha1.UrlList) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listUrlLists.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listUrlLists, request));
+            assert(
+                (client.descriptors.page.listUrlLists.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listUrlLists without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListUrlListsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListUrlListsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.UrlList()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.UrlList()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.UrlList()),
+            ];
+            client.descriptors.page.listUrlLists.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.networksecurity.v1alpha1.IUrlList[] = [];
+            const iterable = client.listUrlListsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listUrlLists.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listUrlLists.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listUrlLists with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListUrlListsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListUrlListsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listUrlLists.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listUrlListsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.networksecurity.v1alpha1.IUrlList[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listUrlLists.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listUrlLists.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('listTlsInspectionPolicies', () => {
+        it('invokes listTlsInspectionPolicies without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListTlsInspectionPoliciesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListTlsInspectionPoliciesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.TlsInspectionPolicy()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.TlsInspectionPolicy()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.TlsInspectionPolicy()),
+            ];
+            client.innerApiCalls.listTlsInspectionPolicies = stubSimpleCall(expectedResponse);
+            const [response] = await client.listTlsInspectionPolicies(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listTlsInspectionPolicies as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listTlsInspectionPolicies as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listTlsInspectionPolicies without error using callback', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListTlsInspectionPoliciesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListTlsInspectionPoliciesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.TlsInspectionPolicy()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.TlsInspectionPolicy()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.TlsInspectionPolicy()),
+            ];
+            client.innerApiCalls.listTlsInspectionPolicies = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listTlsInspectionPolicies(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.networksecurity.v1alpha1.ITlsInspectionPolicy[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listTlsInspectionPolicies as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listTlsInspectionPolicies as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listTlsInspectionPolicies with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListTlsInspectionPoliciesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListTlsInspectionPoliciesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listTlsInspectionPolicies = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listTlsInspectionPolicies(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listTlsInspectionPolicies as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listTlsInspectionPolicies as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listTlsInspectionPoliciesStream without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListTlsInspectionPoliciesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListTlsInspectionPoliciesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.TlsInspectionPolicy()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.TlsInspectionPolicy()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.TlsInspectionPolicy()),
+            ];
+            client.descriptors.page.listTlsInspectionPolicies.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listTlsInspectionPoliciesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.networksecurity.v1alpha1.TlsInspectionPolicy[] = [];
+                stream.on('data', (response: protos.google.cloud.networksecurity.v1alpha1.TlsInspectionPolicy) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listTlsInspectionPolicies.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listTlsInspectionPolicies, request));
+            assert(
+                (client.descriptors.page.listTlsInspectionPolicies.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listTlsInspectionPoliciesStream with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListTlsInspectionPoliciesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListTlsInspectionPoliciesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listTlsInspectionPolicies.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listTlsInspectionPoliciesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.networksecurity.v1alpha1.TlsInspectionPolicy[] = [];
+                stream.on('data', (response: protos.google.cloud.networksecurity.v1alpha1.TlsInspectionPolicy) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listTlsInspectionPolicies.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listTlsInspectionPolicies, request));
+            assert(
+                (client.descriptors.page.listTlsInspectionPolicies.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listTlsInspectionPolicies without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListTlsInspectionPoliciesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListTlsInspectionPoliciesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.TlsInspectionPolicy()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.TlsInspectionPolicy()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.TlsInspectionPolicy()),
+            ];
+            client.descriptors.page.listTlsInspectionPolicies.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.networksecurity.v1alpha1.ITlsInspectionPolicy[] = [];
+            const iterable = client.listTlsInspectionPoliciesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listTlsInspectionPolicies.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listTlsInspectionPolicies.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listTlsInspectionPolicies with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListTlsInspectionPoliciesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListTlsInspectionPoliciesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listTlsInspectionPolicies.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listTlsInspectionPoliciesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.networksecurity.v1alpha1.ITlsInspectionPolicy[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listTlsInspectionPolicies.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listTlsInspectionPolicies.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('listAuthzPolicies', () => {
+        it('invokes listAuthzPolicies without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListAuthzPoliciesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListAuthzPoliciesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.AuthzPolicy()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.AuthzPolicy()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.AuthzPolicy()),
+            ];
+            client.innerApiCalls.listAuthzPolicies = stubSimpleCall(expectedResponse);
+            const [response] = await client.listAuthzPolicies(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listAuthzPolicies as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAuthzPolicies as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listAuthzPolicies without error using callback', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListAuthzPoliciesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListAuthzPoliciesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.AuthzPolicy()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.AuthzPolicy()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.AuthzPolicy()),
+            ];
+            client.innerApiCalls.listAuthzPolicies = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listAuthzPolicies(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.networksecurity.v1alpha1.IAuthzPolicy[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listAuthzPolicies as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAuthzPolicies as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listAuthzPolicies with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListAuthzPoliciesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListAuthzPoliciesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listAuthzPolicies = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listAuthzPolicies(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listAuthzPolicies as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAuthzPolicies as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listAuthzPoliciesStream without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListAuthzPoliciesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListAuthzPoliciesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.AuthzPolicy()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.AuthzPolicy()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.AuthzPolicy()),
+            ];
+            client.descriptors.page.listAuthzPolicies.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listAuthzPoliciesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.networksecurity.v1alpha1.AuthzPolicy[] = [];
+                stream.on('data', (response: protos.google.cloud.networksecurity.v1alpha1.AuthzPolicy) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listAuthzPolicies.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listAuthzPolicies, request));
+            assert(
+                (client.descriptors.page.listAuthzPolicies.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listAuthzPoliciesStream with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListAuthzPoliciesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListAuthzPoliciesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listAuthzPolicies.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listAuthzPoliciesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.networksecurity.v1alpha1.AuthzPolicy[] = [];
+                stream.on('data', (response: protos.google.cloud.networksecurity.v1alpha1.AuthzPolicy) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listAuthzPolicies.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listAuthzPolicies, request));
+            assert(
+                (client.descriptors.page.listAuthzPolicies.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listAuthzPolicies without error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListAuthzPoliciesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListAuthzPoliciesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.AuthzPolicy()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.AuthzPolicy()),
+              generateSampleMessage(new protos.google.cloud.networksecurity.v1alpha1.AuthzPolicy()),
+            ];
+            client.descriptors.page.listAuthzPolicies.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.networksecurity.v1alpha1.IAuthzPolicy[] = [];
+            const iterable = client.listAuthzPoliciesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listAuthzPolicies.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listAuthzPolicies.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listAuthzPolicies with error', async () => {
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networksecurity.v1alpha1.ListAuthzPoliciesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networksecurity.v1alpha1.ListAuthzPoliciesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listAuthzPolicies.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listAuthzPoliciesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.networksecurity.v1alpha1.IAuthzPolicy[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listAuthzPolicies.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listAuthzPolicies.asyncIterate as SinonStub)
                     .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
                         expectedHeaderRequestParams
                     )
@@ -1793,6 +8345,144 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     describe('Path templates', () => {
 
+        describe('authorizationPolicy', async () => {
+            const fakePath = "/rendered/path/authorizationPolicy";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                authorization_policy: "authorizationPolicyValue",
+            };
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.authorizationPolicyPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.authorizationPolicyPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('authorizationPolicyPath', () => {
+                const result = client.authorizationPolicyPath("projectValue", "locationValue", "authorizationPolicyValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.authorizationPolicyPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromAuthorizationPolicyName', () => {
+                const result = client.matchProjectFromAuthorizationPolicyName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.authorizationPolicyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromAuthorizationPolicyName', () => {
+                const result = client.matchLocationFromAuthorizationPolicyName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.authorizationPolicyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAuthorizationPolicyFromAuthorizationPolicyName', () => {
+                const result = client.matchAuthorizationPolicyFromAuthorizationPolicyName(fakePath);
+                assert.strictEqual(result, "authorizationPolicyValue");
+                assert((client.pathTemplates.authorizationPolicyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('authzPolicy', async () => {
+            const fakePath = "/rendered/path/authzPolicy";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                authz_policy: "authzPolicyValue",
+            };
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.authzPolicyPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.authzPolicyPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('authzPolicyPath', () => {
+                const result = client.authzPolicyPath("projectValue", "locationValue", "authzPolicyValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.authzPolicyPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromAuthzPolicyName', () => {
+                const result = client.matchProjectFromAuthzPolicyName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.authzPolicyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromAuthzPolicyName', () => {
+                const result = client.matchLocationFromAuthzPolicyName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.authzPolicyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAuthzPolicyFromAuthzPolicyName', () => {
+                const result = client.matchAuthzPolicyFromAuthzPolicyName(fakePath);
+                assert.strictEqual(result, "authzPolicyValue");
+                assert((client.pathTemplates.authzPolicyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('backendAuthenticationConfig', async () => {
+            const fakePath = "/rendered/path/backendAuthenticationConfig";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                backend_authentication_config: "backendAuthenticationConfigValue",
+            };
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.backendAuthenticationConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.backendAuthenticationConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('backendAuthenticationConfigPath', () => {
+                const result = client.backendAuthenticationConfigPath("projectValue", "locationValue", "backendAuthenticationConfigValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.backendAuthenticationConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromBackendAuthenticationConfigName', () => {
+                const result = client.matchProjectFromBackendAuthenticationConfigName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.backendAuthenticationConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromBackendAuthenticationConfigName', () => {
+                const result = client.matchLocationFromBackendAuthenticationConfigName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.backendAuthenticationConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchBackendAuthenticationConfigFromBackendAuthenticationConfigName', () => {
+                const result = client.matchBackendAuthenticationConfigFromBackendAuthenticationConfigName(fakePath);
+                assert.strictEqual(result, "backendAuthenticationConfigValue");
+                assert((client.pathTemplates.backendAuthenticationConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('clientTlsPolicy', async () => {
             const fakePath = "/rendered/path/clientTlsPolicy";
             const expectedParameters = {
@@ -1835,6 +8525,1210 @@ describe('v1alpha1.NetworkSecurityClient', () => {
                 const result = client.matchClientTlsPolicyFromClientTlsPolicyName(fakePath);
                 assert.strictEqual(result, "clientTlsPolicyValue");
                 assert((client.pathTemplates.clientTlsPolicyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('dnsThreatDetector', async () => {
+            const fakePath = "/rendered/path/dnsThreatDetector";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                dns_threat_detector: "dnsThreatDetectorValue",
+            };
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.dnsThreatDetectorPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.dnsThreatDetectorPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('dnsThreatDetectorPath', () => {
+                const result = client.dnsThreatDetectorPath("projectValue", "locationValue", "dnsThreatDetectorValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.dnsThreatDetectorPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromDnsThreatDetectorName', () => {
+                const result = client.matchProjectFromDnsThreatDetectorName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.dnsThreatDetectorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromDnsThreatDetectorName', () => {
+                const result = client.matchLocationFromDnsThreatDetectorName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.dnsThreatDetectorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDnsThreatDetectorFromDnsThreatDetectorName', () => {
+                const result = client.matchDnsThreatDetectorFromDnsThreatDetectorName(fakePath);
+                assert.strictEqual(result, "dnsThreatDetectorValue");
+                assert((client.pathTemplates.dnsThreatDetectorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('firewallEndpointAssociation', async () => {
+            const fakePath = "/rendered/path/firewallEndpointAssociation";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                firewall_endpoint_association: "firewallEndpointAssociationValue",
+            };
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.firewallEndpointAssociationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.firewallEndpointAssociationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('firewallEndpointAssociationPath', () => {
+                const result = client.firewallEndpointAssociationPath("projectValue", "locationValue", "firewallEndpointAssociationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.firewallEndpointAssociationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromFirewallEndpointAssociationName', () => {
+                const result = client.matchProjectFromFirewallEndpointAssociationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.firewallEndpointAssociationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromFirewallEndpointAssociationName', () => {
+                const result = client.matchLocationFromFirewallEndpointAssociationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.firewallEndpointAssociationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFirewallEndpointAssociationFromFirewallEndpointAssociationName', () => {
+                const result = client.matchFirewallEndpointAssociationFromFirewallEndpointAssociationName(fakePath);
+                assert.strictEqual(result, "firewallEndpointAssociationValue");
+                assert((client.pathTemplates.firewallEndpointAssociationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('gatewaySecurityPolicy', async () => {
+            const fakePath = "/rendered/path/gatewaySecurityPolicy";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                gateway_security_policy: "gatewaySecurityPolicyValue",
+            };
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.gatewaySecurityPolicyPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.gatewaySecurityPolicyPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('gatewaySecurityPolicyPath', () => {
+                const result = client.gatewaySecurityPolicyPath("projectValue", "locationValue", "gatewaySecurityPolicyValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.gatewaySecurityPolicyPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromGatewaySecurityPolicyName', () => {
+                const result = client.matchProjectFromGatewaySecurityPolicyName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.gatewaySecurityPolicyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromGatewaySecurityPolicyName', () => {
+                const result = client.matchLocationFromGatewaySecurityPolicyName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.gatewaySecurityPolicyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchGatewaySecurityPolicyFromGatewaySecurityPolicyName', () => {
+                const result = client.matchGatewaySecurityPolicyFromGatewaySecurityPolicyName(fakePath);
+                assert.strictEqual(result, "gatewaySecurityPolicyValue");
+                assert((client.pathTemplates.gatewaySecurityPolicyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('gatewaySecurityPolicyRule', async () => {
+            const fakePath = "/rendered/path/gatewaySecurityPolicyRule";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                gateway_security_policy: "gatewaySecurityPolicyValue",
+                rule: "ruleValue",
+            };
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.gatewaySecurityPolicyRulePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('gatewaySecurityPolicyRulePath', () => {
+                const result = client.gatewaySecurityPolicyRulePath("projectValue", "locationValue", "gatewaySecurityPolicyValue", "ruleValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.gatewaySecurityPolicyRulePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromGatewaySecurityPolicyRuleName', () => {
+                const result = client.matchProjectFromGatewaySecurityPolicyRuleName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromGatewaySecurityPolicyRuleName', () => {
+                const result = client.matchLocationFromGatewaySecurityPolicyRuleName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchGatewaySecurityPolicyFromGatewaySecurityPolicyRuleName', () => {
+                const result = client.matchGatewaySecurityPolicyFromGatewaySecurityPolicyRuleName(fakePath);
+                assert.strictEqual(result, "gatewaySecurityPolicyValue");
+                assert((client.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRuleFromGatewaySecurityPolicyRuleName', () => {
+                const result = client.matchRuleFromGatewaySecurityPolicyRuleName(fakePath);
+                assert.strictEqual(result, "ruleValue");
+                assert((client.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('interceptDeployment', async () => {
+            const fakePath = "/rendered/path/interceptDeployment";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                intercept_deployment: "interceptDeploymentValue",
+            };
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.interceptDeploymentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.interceptDeploymentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('interceptDeploymentPath', () => {
+                const result = client.interceptDeploymentPath("projectValue", "locationValue", "interceptDeploymentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.interceptDeploymentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromInterceptDeploymentName', () => {
+                const result = client.matchProjectFromInterceptDeploymentName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.interceptDeploymentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromInterceptDeploymentName', () => {
+                const result = client.matchLocationFromInterceptDeploymentName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.interceptDeploymentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInterceptDeploymentFromInterceptDeploymentName', () => {
+                const result = client.matchInterceptDeploymentFromInterceptDeploymentName(fakePath);
+                assert.strictEqual(result, "interceptDeploymentValue");
+                assert((client.pathTemplates.interceptDeploymentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('interceptDeploymentGroup', async () => {
+            const fakePath = "/rendered/path/interceptDeploymentGroup";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                intercept_deployment_group: "interceptDeploymentGroupValue",
+            };
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.interceptDeploymentGroupPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.interceptDeploymentGroupPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('interceptDeploymentGroupPath', () => {
+                const result = client.interceptDeploymentGroupPath("projectValue", "locationValue", "interceptDeploymentGroupValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.interceptDeploymentGroupPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromInterceptDeploymentGroupName', () => {
+                const result = client.matchProjectFromInterceptDeploymentGroupName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.interceptDeploymentGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromInterceptDeploymentGroupName', () => {
+                const result = client.matchLocationFromInterceptDeploymentGroupName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.interceptDeploymentGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInterceptDeploymentGroupFromInterceptDeploymentGroupName', () => {
+                const result = client.matchInterceptDeploymentGroupFromInterceptDeploymentGroupName(fakePath);
+                assert.strictEqual(result, "interceptDeploymentGroupValue");
+                assert((client.pathTemplates.interceptDeploymentGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('interceptEndpointGroup', async () => {
+            const fakePath = "/rendered/path/interceptEndpointGroup";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                intercept_endpoint_group: "interceptEndpointGroupValue",
+            };
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.interceptEndpointGroupPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.interceptEndpointGroupPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('interceptEndpointGroupPath', () => {
+                const result = client.interceptEndpointGroupPath("projectValue", "locationValue", "interceptEndpointGroupValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.interceptEndpointGroupPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromInterceptEndpointGroupName', () => {
+                const result = client.matchProjectFromInterceptEndpointGroupName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.interceptEndpointGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromInterceptEndpointGroupName', () => {
+                const result = client.matchLocationFromInterceptEndpointGroupName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.interceptEndpointGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInterceptEndpointGroupFromInterceptEndpointGroupName', () => {
+                const result = client.matchInterceptEndpointGroupFromInterceptEndpointGroupName(fakePath);
+                assert.strictEqual(result, "interceptEndpointGroupValue");
+                assert((client.pathTemplates.interceptEndpointGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('interceptEndpointGroupAssociation', async () => {
+            const fakePath = "/rendered/path/interceptEndpointGroupAssociation";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                intercept_endpoint_group_association: "interceptEndpointGroupAssociationValue",
+            };
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.interceptEndpointGroupAssociationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.interceptEndpointGroupAssociationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('interceptEndpointGroupAssociationPath', () => {
+                const result = client.interceptEndpointGroupAssociationPath("projectValue", "locationValue", "interceptEndpointGroupAssociationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.interceptEndpointGroupAssociationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromInterceptEndpointGroupAssociationName', () => {
+                const result = client.matchProjectFromInterceptEndpointGroupAssociationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.interceptEndpointGroupAssociationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromInterceptEndpointGroupAssociationName', () => {
+                const result = client.matchLocationFromInterceptEndpointGroupAssociationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.interceptEndpointGroupAssociationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInterceptEndpointGroupAssociationFromInterceptEndpointGroupAssociationName', () => {
+                const result = client.matchInterceptEndpointGroupAssociationFromInterceptEndpointGroupAssociationName(fakePath);
+                assert.strictEqual(result, "interceptEndpointGroupAssociationValue");
+                assert((client.pathTemplates.interceptEndpointGroupAssociationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('mirroringDeployment', async () => {
+            const fakePath = "/rendered/path/mirroringDeployment";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                mirroring_deployment: "mirroringDeploymentValue",
+            };
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.mirroringDeploymentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.mirroringDeploymentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('mirroringDeploymentPath', () => {
+                const result = client.mirroringDeploymentPath("projectValue", "locationValue", "mirroringDeploymentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.mirroringDeploymentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromMirroringDeploymentName', () => {
+                const result = client.matchProjectFromMirroringDeploymentName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.mirroringDeploymentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromMirroringDeploymentName', () => {
+                const result = client.matchLocationFromMirroringDeploymentName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.mirroringDeploymentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchMirroringDeploymentFromMirroringDeploymentName', () => {
+                const result = client.matchMirroringDeploymentFromMirroringDeploymentName(fakePath);
+                assert.strictEqual(result, "mirroringDeploymentValue");
+                assert((client.pathTemplates.mirroringDeploymentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('mirroringDeploymentGroup', async () => {
+            const fakePath = "/rendered/path/mirroringDeploymentGroup";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                mirroring_deployment_group: "mirroringDeploymentGroupValue",
+            };
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.mirroringDeploymentGroupPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.mirroringDeploymentGroupPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('mirroringDeploymentGroupPath', () => {
+                const result = client.mirroringDeploymentGroupPath("projectValue", "locationValue", "mirroringDeploymentGroupValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.mirroringDeploymentGroupPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromMirroringDeploymentGroupName', () => {
+                const result = client.matchProjectFromMirroringDeploymentGroupName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.mirroringDeploymentGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromMirroringDeploymentGroupName', () => {
+                const result = client.matchLocationFromMirroringDeploymentGroupName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.mirroringDeploymentGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchMirroringDeploymentGroupFromMirroringDeploymentGroupName', () => {
+                const result = client.matchMirroringDeploymentGroupFromMirroringDeploymentGroupName(fakePath);
+                assert.strictEqual(result, "mirroringDeploymentGroupValue");
+                assert((client.pathTemplates.mirroringDeploymentGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('mirroringEndpointGroup', async () => {
+            const fakePath = "/rendered/path/mirroringEndpointGroup";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                mirroring_endpoint_group: "mirroringEndpointGroupValue",
+            };
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.mirroringEndpointGroupPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.mirroringEndpointGroupPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('mirroringEndpointGroupPath', () => {
+                const result = client.mirroringEndpointGroupPath("projectValue", "locationValue", "mirroringEndpointGroupValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.mirroringEndpointGroupPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromMirroringEndpointGroupName', () => {
+                const result = client.matchProjectFromMirroringEndpointGroupName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.mirroringEndpointGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromMirroringEndpointGroupName', () => {
+                const result = client.matchLocationFromMirroringEndpointGroupName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.mirroringEndpointGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchMirroringEndpointGroupFromMirroringEndpointGroupName', () => {
+                const result = client.matchMirroringEndpointGroupFromMirroringEndpointGroupName(fakePath);
+                assert.strictEqual(result, "mirroringEndpointGroupValue");
+                assert((client.pathTemplates.mirroringEndpointGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('mirroringEndpointGroupAssociation', async () => {
+            const fakePath = "/rendered/path/mirroringEndpointGroupAssociation";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                mirroring_endpoint_group_association: "mirroringEndpointGroupAssociationValue",
+            };
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('mirroringEndpointGroupAssociationPath', () => {
+                const result = client.mirroringEndpointGroupAssociationPath("projectValue", "locationValue", "mirroringEndpointGroupAssociationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromMirroringEndpointGroupAssociationName', () => {
+                const result = client.matchProjectFromMirroringEndpointGroupAssociationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromMirroringEndpointGroupAssociationName', () => {
+                const result = client.matchLocationFromMirroringEndpointGroupAssociationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchMirroringEndpointGroupAssociationFromMirroringEndpointGroupAssociationName', () => {
+                const result = client.matchMirroringEndpointGroupAssociationFromMirroringEndpointGroupAssociationName(fakePath);
+                assert.strictEqual(result, "mirroringEndpointGroupAssociationValue");
+                assert((client.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationLocationFirewallEndpoints', async () => {
+            const fakePath = "/rendered/path/organizationLocationFirewallEndpoints";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+                firewall_endpoint: "firewallEndpointValue",
+            };
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationLocationFirewallEndpointsPath', () => {
+                const result = client.organizationLocationFirewallEndpointsPath("organizationValue", "locationValue", "firewallEndpointValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationLocationFirewallEndpointsName', () => {
+                const result = client.matchOrganizationFromOrganizationLocationFirewallEndpointsName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOrganizationLocationFirewallEndpointsName', () => {
+                const result = client.matchLocationFromOrganizationLocationFirewallEndpointsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFirewallEndpointFromOrganizationLocationFirewallEndpointsName', () => {
+                const result = client.matchFirewallEndpointFromOrganizationLocationFirewallEndpointsName(fakePath);
+                assert.strictEqual(result, "firewallEndpointValue");
+                assert((client.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationLocationSecurityProfile', async () => {
+            const fakePath = "/rendered/path/organizationLocationSecurityProfile";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+                security_profile: "securityProfileValue",
+            };
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationLocationSecurityProfilePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationLocationSecurityProfilePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationLocationSecurityProfilePath', () => {
+                const result = client.organizationLocationSecurityProfilePath("organizationValue", "locationValue", "securityProfileValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationLocationSecurityProfilePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationLocationSecurityProfileName', () => {
+                const result = client.matchOrganizationFromOrganizationLocationSecurityProfileName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationLocationSecurityProfilePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOrganizationLocationSecurityProfileName', () => {
+                const result = client.matchLocationFromOrganizationLocationSecurityProfileName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.organizationLocationSecurityProfilePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSecurityProfileFromOrganizationLocationSecurityProfileName', () => {
+                const result = client.matchSecurityProfileFromOrganizationLocationSecurityProfileName(fakePath);
+                assert.strictEqual(result, "securityProfileValue");
+                assert((client.pathTemplates.organizationLocationSecurityProfilePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationLocationSecurityProfileGroup', async () => {
+            const fakePath = "/rendered/path/organizationLocationSecurityProfileGroup";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+                security_profile_group: "securityProfileGroupValue",
+            };
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationLocationSecurityProfileGroupPath', () => {
+                const result = client.organizationLocationSecurityProfileGroupPath("organizationValue", "locationValue", "securityProfileGroupValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationLocationSecurityProfileGroupName', () => {
+                const result = client.matchOrganizationFromOrganizationLocationSecurityProfileGroupName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOrganizationLocationSecurityProfileGroupName', () => {
+                const result = client.matchLocationFromOrganizationLocationSecurityProfileGroupName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSecurityProfileGroupFromOrganizationLocationSecurityProfileGroupName', () => {
+                const result = client.matchSecurityProfileGroupFromOrganizationLocationSecurityProfileGroupName(fakePath);
+                assert.strictEqual(result, "securityProfileGroupValue");
+                assert((client.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('partnerSSEGateway', async () => {
+            const fakePath = "/rendered/path/partnerSSEGateway";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                partner_sse_gateway: "partnerSseGatewayValue",
+            };
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.partnerSSEGatewayPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.partnerSSEGatewayPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('partnerSSEGatewayPath', () => {
+                const result = client.partnerSSEGatewayPath("projectValue", "locationValue", "partnerSseGatewayValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.partnerSSEGatewayPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromPartnerSSEGatewayName', () => {
+                const result = client.matchProjectFromPartnerSSEGatewayName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.partnerSSEGatewayPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromPartnerSSEGatewayName', () => {
+                const result = client.matchLocationFromPartnerSSEGatewayName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.partnerSSEGatewayPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchPartnerSseGatewayFromPartnerSSEGatewayName', () => {
+                const result = client.matchPartnerSseGatewayFromPartnerSSEGatewayName(fakePath);
+                assert.strictEqual(result, "partnerSseGatewayValue");
+                assert((client.pathTemplates.partnerSSEGatewayPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('partnerSSERealm', async () => {
+            const fakePath = "/rendered/path/partnerSSERealm";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                partner_sse_realm: "partnerSseRealmValue",
+            };
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.partnerSSERealmPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.partnerSSERealmPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('partnerSSERealmPath', () => {
+                const result = client.partnerSSERealmPath("projectValue", "locationValue", "partnerSseRealmValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.partnerSSERealmPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromPartnerSSERealmName', () => {
+                const result = client.matchProjectFromPartnerSSERealmName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.partnerSSERealmPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromPartnerSSERealmName', () => {
+                const result = client.matchLocationFromPartnerSSERealmName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.partnerSSERealmPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchPartnerSseRealmFromPartnerSSERealmName', () => {
+                const result = client.matchPartnerSseRealmFromPartnerSSERealmName(fakePath);
+                assert.strictEqual(result, "partnerSseRealmValue");
+                assert((client.pathTemplates.partnerSSERealmPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationFirewallEndpoints', async () => {
+            const fakePath = "/rendered/path/projectLocationFirewallEndpoints";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                firewall_endpoint: "firewallEndpointValue",
+            };
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationFirewallEndpointsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationFirewallEndpointsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationFirewallEndpointsPath', () => {
+                const result = client.projectLocationFirewallEndpointsPath("projectValue", "locationValue", "firewallEndpointValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationFirewallEndpointsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationFirewallEndpointsName', () => {
+                const result = client.matchProjectFromProjectLocationFirewallEndpointsName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationFirewallEndpointsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationFirewallEndpointsName', () => {
+                const result = client.matchLocationFromProjectLocationFirewallEndpointsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationFirewallEndpointsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFirewallEndpointFromProjectLocationFirewallEndpointsName', () => {
+                const result = client.matchFirewallEndpointFromProjectLocationFirewallEndpointsName(fakePath);
+                assert.strictEqual(result, "firewallEndpointValue");
+                assert((client.pathTemplates.projectLocationFirewallEndpointsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationSecurityProfile', async () => {
+            const fakePath = "/rendered/path/projectLocationSecurityProfile";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                security_profile: "securityProfileValue",
+            };
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationSecurityProfilePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationSecurityProfilePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationSecurityProfilePath', () => {
+                const result = client.projectLocationSecurityProfilePath("projectValue", "locationValue", "securityProfileValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationSecurityProfilePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationSecurityProfileName', () => {
+                const result = client.matchProjectFromProjectLocationSecurityProfileName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationSecurityProfilePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationSecurityProfileName', () => {
+                const result = client.matchLocationFromProjectLocationSecurityProfileName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationSecurityProfilePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSecurityProfileFromProjectLocationSecurityProfileName', () => {
+                const result = client.matchSecurityProfileFromProjectLocationSecurityProfileName(fakePath);
+                assert.strictEqual(result, "securityProfileValue");
+                assert((client.pathTemplates.projectLocationSecurityProfilePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationSecurityProfileGroup', async () => {
+            const fakePath = "/rendered/path/projectLocationSecurityProfileGroup";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                security_profile_group: "securityProfileGroupValue",
+            };
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationSecurityProfileGroupPath', () => {
+                const result = client.projectLocationSecurityProfileGroupPath("projectValue", "locationValue", "securityProfileGroupValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationSecurityProfileGroupName', () => {
+                const result = client.matchProjectFromProjectLocationSecurityProfileGroupName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationSecurityProfileGroupName', () => {
+                const result = client.matchLocationFromProjectLocationSecurityProfileGroupName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSecurityProfileGroupFromProjectLocationSecurityProfileGroupName', () => {
+                const result = client.matchSecurityProfileGroupFromProjectLocationSecurityProfileGroupName(fakePath);
+                assert.strictEqual(result, "securityProfileGroupValue");
+                assert((client.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('sACAttachment', async () => {
+            const fakePath = "/rendered/path/sACAttachment";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                sac_attachment: "sacAttachmentValue",
+            };
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.sACAttachmentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.sACAttachmentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('sACAttachmentPath', () => {
+                const result = client.sACAttachmentPath("projectValue", "locationValue", "sacAttachmentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.sACAttachmentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromSACAttachmentName', () => {
+                const result = client.matchProjectFromSACAttachmentName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.sACAttachmentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromSACAttachmentName', () => {
+                const result = client.matchLocationFromSACAttachmentName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.sACAttachmentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSacAttachmentFromSACAttachmentName', () => {
+                const result = client.matchSacAttachmentFromSACAttachmentName(fakePath);
+                assert.strictEqual(result, "sacAttachmentValue");
+                assert((client.pathTemplates.sACAttachmentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('sACRealm', async () => {
+            const fakePath = "/rendered/path/sACRealm";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                sac_realm: "sacRealmValue",
+            };
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.sACRealmPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.sACRealmPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('sACRealmPath', () => {
+                const result = client.sACRealmPath("projectValue", "locationValue", "sacRealmValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.sACRealmPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromSACRealmName', () => {
+                const result = client.matchProjectFromSACRealmName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.sACRealmPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromSACRealmName', () => {
+                const result = client.matchLocationFromSACRealmName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.sACRealmPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSacRealmFromSACRealmName', () => {
+                const result = client.matchSacRealmFromSACRealmName(fakePath);
+                assert.strictEqual(result, "sacRealmValue");
+                assert((client.pathTemplates.sACRealmPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('sSEGatewayReference', async () => {
+            const fakePath = "/rendered/path/sSEGatewayReference";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                sse_gateway_reference: "sseGatewayReferenceValue",
+            };
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.sSEGatewayReferencePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.sSEGatewayReferencePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('sSEGatewayReferencePath', () => {
+                const result = client.sSEGatewayReferencePath("projectValue", "locationValue", "sseGatewayReferenceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.sSEGatewayReferencePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromSSEGatewayReferenceName', () => {
+                const result = client.matchProjectFromSSEGatewayReferenceName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.sSEGatewayReferencePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromSSEGatewayReferenceName', () => {
+                const result = client.matchLocationFromSSEGatewayReferenceName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.sSEGatewayReferencePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSseGatewayReferenceFromSSEGatewayReferenceName', () => {
+                const result = client.matchSseGatewayReferenceFromSSEGatewayReferenceName(fakePath);
+                assert.strictEqual(result, "sseGatewayReferenceValue");
+                assert((client.pathTemplates.sSEGatewayReferencePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('serverTlsPolicy', async () => {
+            const fakePath = "/rendered/path/serverTlsPolicy";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                server_tls_policy: "serverTlsPolicyValue",
+            };
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.serverTlsPolicyPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.serverTlsPolicyPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('serverTlsPolicyPath', () => {
+                const result = client.serverTlsPolicyPath("projectValue", "locationValue", "serverTlsPolicyValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.serverTlsPolicyPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromServerTlsPolicyName', () => {
+                const result = client.matchProjectFromServerTlsPolicyName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.serverTlsPolicyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromServerTlsPolicyName', () => {
+                const result = client.matchLocationFromServerTlsPolicyName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.serverTlsPolicyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchServerTlsPolicyFromServerTlsPolicyName', () => {
+                const result = client.matchServerTlsPolicyFromServerTlsPolicyName(fakePath);
+                assert.strictEqual(result, "serverTlsPolicyValue");
+                assert((client.pathTemplates.serverTlsPolicyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('tlsInspectionPolicy', async () => {
+            const fakePath = "/rendered/path/tlsInspectionPolicy";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                tls_inspection_policy: "tlsInspectionPolicyValue",
+            };
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.tlsInspectionPolicyPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.tlsInspectionPolicyPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('tlsInspectionPolicyPath', () => {
+                const result = client.tlsInspectionPolicyPath("projectValue", "locationValue", "tlsInspectionPolicyValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.tlsInspectionPolicyPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromTlsInspectionPolicyName', () => {
+                const result = client.matchProjectFromTlsInspectionPolicyName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.tlsInspectionPolicyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromTlsInspectionPolicyName', () => {
+                const result = client.matchLocationFromTlsInspectionPolicyName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.tlsInspectionPolicyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchTlsInspectionPolicyFromTlsInspectionPolicyName', () => {
+                const result = client.matchTlsInspectionPolicyFromTlsInspectionPolicyName(fakePath);
+                assert.strictEqual(result, "tlsInspectionPolicyValue");
+                assert((client.pathTemplates.tlsInspectionPolicyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('urlList', async () => {
+            const fakePath = "/rendered/path/urlList";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                url_list: "urlListValue",
+            };
+            const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.urlListPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.urlListPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('urlListPath', () => {
+                const result = client.urlListPath("projectValue", "locationValue", "urlListValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.urlListPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromUrlListName', () => {
+                const result = client.matchProjectFromUrlListName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.urlListPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromUrlListName', () => {
+                const result = client.matchLocationFromUrlListName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.urlListPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchUrlListFromUrlListName', () => {
+                const result = client.matchUrlListFromUrlListName(fakePath);
+                assert.strictEqual(result, "urlListValue");
+                assert((client.pathTemplates.urlListPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
