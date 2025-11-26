@@ -188,6 +188,9 @@ export class CloudBuildClient {
       cryptoKeyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/keyRings/{keyring}/cryptoKeys/{key}'
       ),
+      defaultServiceAccountPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/defaultServiceAccount'
+      ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
@@ -365,7 +368,7 @@ export class CloudBuildClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const cloudBuildStubMethods =
-        ['createBuild', 'getBuild', 'listBuilds', 'cancelBuild', 'retryBuild', 'approveBuild', 'createBuildTrigger', 'getBuildTrigger', 'listBuildTriggers', 'deleteBuildTrigger', 'updateBuildTrigger', 'runBuildTrigger', 'receiveTriggerWebhook', 'createWorkerPool', 'getWorkerPool', 'deleteWorkerPool', 'updateWorkerPool', 'listWorkerPools'];
+        ['createBuild', 'getBuild', 'listBuilds', 'cancelBuild', 'retryBuild', 'approveBuild', 'createBuildTrigger', 'getBuildTrigger', 'listBuildTriggers', 'deleteBuildTrigger', 'updateBuildTrigger', 'runBuildTrigger', 'receiveTriggerWebhook', 'createWorkerPool', 'getWorkerPool', 'deleteWorkerPool', 'updateWorkerPool', 'listWorkerPools', 'getDefaultServiceAccount'];
     for (const methodName of cloudBuildStubMethods) {
       const callPromise = this.cloudBuildStub.then(
         stub => (...args: Array<{}>) => {
@@ -695,8 +698,6 @@ export class CloudBuildClient {
 /**
  * Creates a new `BuildTrigger`.
  *
- * This API is experimental.
- *
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.parent
@@ -806,8 +807,6 @@ export class CloudBuildClient {
   }
 /**
  * Returns information about a `BuildTrigger`.
- *
- * This API is experimental.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -919,8 +918,6 @@ export class CloudBuildClient {
 /**
  * Deletes a `BuildTrigger` by its project ID and trigger ID.
  *
- * This API is experimental.
- *
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.name
@@ -1030,8 +1027,6 @@ export class CloudBuildClient {
   }
 /**
  * Updates a `BuildTrigger` by its project ID and trigger ID.
- *
- * This API is experimental.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -1355,6 +1350,113 @@ export class CloudBuildClient {
         throw error;
       });
   }
+/**
+ * Returns the `DefaultServiceAccount` used by the project.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the `DefaultServiceAccount` to retrieve.
+ *   Format:
+ *   `projects/{project}/locations/{location}/defaultServiceAccount`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.devtools.cloudbuild.v1.DefaultServiceAccount|DefaultServiceAccount}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/cloud_build.get_default_service_account.js</caption>
+ * region_tag:cloudbuild_v1_generated_CloudBuild_GetDefaultServiceAccount_async
+ */
+  getDefaultServiceAccount(
+      request?: protos.google.devtools.cloudbuild.v1.IGetDefaultServiceAccountRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.devtools.cloudbuild.v1.IDefaultServiceAccount,
+        protos.google.devtools.cloudbuild.v1.IGetDefaultServiceAccountRequest|undefined, {}|undefined
+      ]>;
+  getDefaultServiceAccount(
+      request: protos.google.devtools.cloudbuild.v1.IGetDefaultServiceAccountRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.devtools.cloudbuild.v1.IDefaultServiceAccount,
+          protos.google.devtools.cloudbuild.v1.IGetDefaultServiceAccountRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDefaultServiceAccount(
+      request: protos.google.devtools.cloudbuild.v1.IGetDefaultServiceAccountRequest,
+      callback: Callback<
+          protos.google.devtools.cloudbuild.v1.IDefaultServiceAccount,
+          protos.google.devtools.cloudbuild.v1.IGetDefaultServiceAccountRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDefaultServiceAccount(
+      request?: protos.google.devtools.cloudbuild.v1.IGetDefaultServiceAccountRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.devtools.cloudbuild.v1.IDefaultServiceAccount,
+          protos.google.devtools.cloudbuild.v1.IGetDefaultServiceAccountRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.devtools.cloudbuild.v1.IDefaultServiceAccount,
+          protos.google.devtools.cloudbuild.v1.IGetDefaultServiceAccountRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.devtools.cloudbuild.v1.IDefaultServiceAccount,
+        protos.google.devtools.cloudbuild.v1.IGetDefaultServiceAccountRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    let routingParameter = {};
+    {
+      const fieldValue = request.name;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue.toString().match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)/defaultServiceAccount'));
+        if (match) {
+          const parameterValue = match.groups?.['location'] ?? fieldValue;
+          Object.assign(routingParameter, { location: parameterValue });
+        }
+      }
+    }
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams(
+      routingParameter
+    );
+    this.initialize().catch(err => {throw err});
+    this._log.info('getDefaultServiceAccount request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.devtools.cloudbuild.v1.IDefaultServiceAccount,
+        protos.google.devtools.cloudbuild.v1.IGetDefaultServiceAccountRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDefaultServiceAccount response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getDefaultServiceAccount(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.devtools.cloudbuild.v1.IDefaultServiceAccount,
+        protos.google.devtools.cloudbuild.v1.IGetDefaultServiceAccountRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getDefaultServiceAccount response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
 
 /**
  * Starts a build with the specified configuration.
@@ -1635,8 +1737,8 @@ export class CloudBuildClient {
 /**
  * Approves or rejects a pending build.
  *
- * If approved, the returned LRO will be analogous to the LRO returned from
- * a CreateBuild call.
+ * If approved, the returned long-running operation (LRO) will be analogous to
+ * the LRO returned from a CreateBuild call.
  *
  * If rejected, the returned LRO will be immediately done.
  *
@@ -2159,8 +2261,8 @@ export class CloudBuildClient {
  *
  *   The `name` field is used to identify the `WorkerPool` to update.
  *   Format: `projects/{project}/locations/{location}/workerPools/{workerPool}`.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   A mask specifying which fields in `worker_pool` to update.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. A mask specifying which fields in `worker_pool` to update.
  * @param {boolean} request.validateOnly
  *   If set, validate the request and preview the response, but do not actually
  *   post it.
@@ -2543,8 +2645,6 @@ export class CloudBuildClient {
   }
  /**
  * Lists existing `BuildTrigger`s.
- *
- * This API is experimental.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -3073,6 +3173,42 @@ export class CloudBuildClient {
    */
   matchKeyFromCryptoKeyName(cryptoKeyName: string) {
     return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName).key;
+  }
+
+  /**
+   * Return a fully-qualified defaultServiceAccount resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  defaultServiceAccountPath(project:string,location:string) {
+    return this.pathTemplates.defaultServiceAccountPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from DefaultServiceAccount resource.
+   *
+   * @param {string} defaultServiceAccountName
+   *   A fully-qualified path representing DefaultServiceAccount resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDefaultServiceAccountName(defaultServiceAccountName: string) {
+    return this.pathTemplates.defaultServiceAccountPathTemplate.match(defaultServiceAccountName).project;
+  }
+
+  /**
+   * Parse the location from DefaultServiceAccount resource.
+   *
+   * @param {string} defaultServiceAccountName
+   *   A fully-qualified path representing DefaultServiceAccount resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDefaultServiceAccountName(defaultServiceAccountName: string) {
+    return this.pathTemplates.defaultServiceAccountPathTemplate.match(defaultServiceAccountName).location;
   }
 
   /**
