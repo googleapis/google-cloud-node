@@ -49502,6 +49502,9 @@ export namespace google {
 
                         /** Bigtable bigtableMetadata */
                         bigtableMetadata?: (google.cloud.aiplatform.v1.FeatureOnlineStore.Bigtable.IBigtableMetadata|null);
+
+                        /** Bigtable zone */
+                        zone?: (string|null);
                     }
 
                     /** Represents a Bigtable. */
@@ -49521,6 +49524,9 @@ export namespace google {
 
                         /** Bigtable bigtableMetadata. */
                         public bigtableMetadata?: (google.cloud.aiplatform.v1.FeatureOnlineStore.Bigtable.IBigtableMetadata|null);
+
+                        /** Bigtable zone. */
+                        public zone: string;
 
                         /**
                          * Creates a new Bigtable instance using the specified properties.
@@ -212022,6 +212028,9 @@ export namespace google {
 
                         /** Bigtable bigtableMetadata */
                         bigtableMetadata?: (google.cloud.aiplatform.v1beta1.FeatureOnlineStore.Bigtable.IBigtableMetadata|null);
+
+                        /** Bigtable zone */
+                        zone?: (string|null);
                     }
 
                     /** Represents a Bigtable. */
@@ -212041,6 +212050,9 @@ export namespace google {
 
                         /** Bigtable bigtableMetadata. */
                         public bigtableMetadata?: (google.cloud.aiplatform.v1beta1.FeatureOnlineStore.Bigtable.IBigtableMetadata|null);
+
+                        /** Bigtable zone. */
+                        public zone: string;
 
                         /**
                          * Creates a new Bigtable instance using the specified properties.
