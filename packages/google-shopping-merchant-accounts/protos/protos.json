@@ -4784,6 +4784,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
+                            },
+                            "radiusArea": {
+                              "type": "RadiusArea",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           },
                           "nested": {
@@ -4834,6 +4841,47 @@
                                   "id": 1,
                                   "options": {
                                     "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            },
+                            "RadiusArea": {
+                              "fields": {
+                                "regionCode": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "latLng": {
+                                  "type": "google.type.LatLng",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "radius": {
+                                  "type": "double",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "radiusUnits": {
+                                  "type": "RadiusUnits",
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "RadiusUnits": {
+                                  "values": {
+                                    "RADIUS_UNITS_UNSPECIFIED": 0,
+                                    "MILES": 1,
+                                    "KILOMETERS": 2
                                   }
                                 }
                               }
@@ -14615,6 +14663,18 @@
                 "day": {
                   "type": "int32",
                   "id": 3
+                }
+              }
+            },
+            "LatLng": {
+              "fields": {
+                "latitude": {
+                  "type": "double",
+                  "id": 1
+                },
+                "longitude": {
+                  "type": "double",
+                  "id": 2
                 }
               }
             },
