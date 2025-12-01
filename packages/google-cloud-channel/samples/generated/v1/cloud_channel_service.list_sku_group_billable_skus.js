@@ -42,7 +42,8 @@ function main(parent) {
   /**
    *  Optional. A token identifying a page of results beyond the first page.
    *  Obtained through
-   *  ListSkuGroupBillableSkus.next_page_token   of the previous
+   *  ListSkuGroupBillableSkusResponse.next_page_token google.cloud.channel.v1.ListSkuGroupBillableSkusResponse.next_page_token 
+   *  of the previous
    *  CloudChannelService.ListSkuGroupBillableSkus google.cloud.channel.v1.CloudChannelService.ListSkuGroupBillableSkus 
    *  call.
    */

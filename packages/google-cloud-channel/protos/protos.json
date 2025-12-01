@@ -11,7 +11,9 @@
                     "go_package": "cloud.google.com/go/channel/apiv1/channelpb;channelpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "SubscriberEventProto",
-                    "java_package": "com.google.cloud.channel.v1"
+                    "java_package": "com.google.cloud.channel.v1",
+                    "(google.api.resource_definition).type": "cloudchannel.googleapis.com/Account",
+                    "(google.api.resource_definition).pattern": "accounts/{account}"
                   },
                   "nested": {
                     "BillingAccount": {
@@ -624,6 +626,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "priceReferenceId": {
+                          "type": "string",
+                          "id": 29,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -849,6 +858,16 @@
                         "YEAR": 3
                       }
                     },
+                    "DiscountType": {
+                      "values": {
+                        "DISCOUNT_TYPE_UNSPECIFIED": 0,
+                        "REGIONAL_DISCOUNT": 1,
+                        "PROMOTIONAL_DISCOUNT": 2,
+                        "SALES_DISCOUNT": 3,
+                        "RESELLER_MARGIN": 4,
+                        "DEAL_CODE": 5
+                      }
+                    },
                     "Offer": {
                       "options": {
                         "(google.api.resource).type": "cloudchannel.googleapis.com/Offer",
@@ -1024,9 +1043,18 @@
                           "type": "google.type.Money",
                           "id": 3
                         },
+                        "pricePeriod": {
+                          "type": "Period",
+                          "id": 6
+                        },
                         "externalPriceUri": {
                           "type": "string",
                           "id": 4
+                        },
+                        "discountComponents": {
+                          "rule": "repeated",
+                          "type": "DiscountComponent",
+                          "id": 5
                         }
                       }
                     },
@@ -1079,6 +1107,30 @@
                         },
                         "periodType": {
                           "type": "PeriodType",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DiscountComponent": {
+                      "oneofs": {
+                        "discountValue": {
+                          "oneof": [
+                            "discountPercentage",
+                            "discountAbsolute"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "discountPercentage": {
+                          "type": "double",
+                          "id": 3
+                        },
+                        "discountAbsolute": {
+                          "type": "google.type.Money",
+                          "id": 4
+                        },
+                        "discountType": {
+                          "type": "DiscountType",
                           "id": 2
                         }
                       }
@@ -1718,7 +1770,10 @@
                       "fields": {
                         "entitlementGranularity": {
                           "type": "EntitlementGranularity",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "channelPartnerGranularity": {
                           "type": "ChannelPartnerGranularity",
@@ -2706,13 +2761,19 @@
                           "responseType": "RegisterSubscriberResponse",
                           "options": {
                             "(google.api.http).post": "/v1/{account=accounts/*}:register",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1/{integrator=integrators/*}:registerSubscriber",
+                            "(google.api.http).additional_bindings.body": "*"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "post": "/v1/{account=accounts/*}:register",
-                                "body": "*"
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1/{integrator=integrators/*}:registerSubscriber",
+                                  "body": "*"
+                                }
                               }
                             }
                           ]
@@ -2722,13 +2783,19 @@
                           "responseType": "UnregisterSubscriberResponse",
                           "options": {
                             "(google.api.http).post": "/v1/{account=accounts/*}:unregister",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1/{integrator=integrators/*}:unregisterSubscriber",
+                            "(google.api.http).additional_bindings.body": "*"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "post": "/v1/{account=accounts/*}:unregister",
-                                "body": "*"
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1/{integrator=integrators/*}:unregisterSubscriber",
+                                  "body": "*"
+                                }
                               }
                             }
                           ]
@@ -2737,12 +2804,16 @@
                           "requestType": "ListSubscribersRequest",
                           "responseType": "ListSubscribersResponse",
                           "options": {
-                            "(google.api.http).get": "/v1/{account=accounts/*}:listSubscribers"
+                            "(google.api.http).get": "/v1/{account=accounts/*}:listSubscribers",
+                            "(google.api.http).additional_bindings.get": "/v1/{integrator=integrators/*}:listSubscribers"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v1/{account=accounts/*}:listSubscribers"
+                                "get": "/v1/{account=accounts/*}:listSubscribers",
+                                "additional_bindings": {
+                                  "get": "/v1/{integrator=integrators/*}:listSubscribers"
+                                }
                               }
                             }
                           ]
@@ -3197,6 +3268,13 @@
                         "offer": {
                           "type": "Offer",
                           "id": 1
+                        },
+                        "priceReferenceId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -3825,6 +3903,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "priceReferenceId": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -4291,6 +4376,13 @@
                         "offer": {
                           "type": "Offer",
                           "id": 1
+                        },
+                        "priceReferenceId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -4346,12 +4438,20 @@
                       }
                     },
                     "RegisterSubscriberRequest": {
+                      "oneofs": {
+                        "_integrator": {
+                          "oneof": [
+                            "integrator"
+                          ]
+                        }
+                      },
                       "fields": {
                         "account": {
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "cloudchannel.googleapis.com/Account"
                           }
                         },
                         "serviceAccount": {
@@ -4359,6 +4459,14 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "integrator": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -4372,12 +4480,20 @@
                       }
                     },
                     "UnregisterSubscriberRequest": {
+                      "oneofs": {
+                        "_integrator": {
+                          "oneof": [
+                            "integrator"
+                          ]
+                        }
+                      },
                       "fields": {
                         "account": {
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "cloudchannel.googleapis.com/Account"
                           }
                         },
                         "serviceAccount": {
@@ -4385,6 +4501,14 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "integrator": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -4398,12 +4522,20 @@
                       }
                     },
                     "ListSubscribersRequest": {
+                      "oneofs": {
+                        "_integrator": {
+                          "oneof": [
+                            "integrator"
+                          ]
+                        }
+                      },
                       "fields": {
                         "account": {
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "cloudchannel.googleapis.com/Account"
                           }
                         },
                         "pageSize": {
@@ -4418,6 +4550,14 @@
                           "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "integrator": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         }
                       }

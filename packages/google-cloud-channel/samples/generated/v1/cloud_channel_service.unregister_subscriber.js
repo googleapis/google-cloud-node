@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(account, serviceAccount) {
+function main(serviceAccount) {
   // [START cloudchannel_v1_generated_CloudChannelService_UnregisterSubscriber_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -29,7 +29,8 @@ function main(account, serviceAccount) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Resource name of the account.
+   *  Optional. Resource name of the account. Required if integrator is not
+   *  provided. Otherwise, leave this field empty/unset.
    */
   // const account = 'abc123'
   /**
@@ -37,6 +38,11 @@ function main(account, serviceAccount) {
    *  topic.
    */
   // const serviceAccount = 'abc123'
+  /**
+   *  Optional. Resource name of the integrator. Required if account is not
+   *  provided. Otherwise, leave this field empty/unset.
+   */
+  // const integrator = 'abc123'
 
   // Imports the Channel library
   const {CloudChannelServiceClient} = require('@google-cloud/channel').v1;
@@ -47,7 +53,6 @@ function main(account, serviceAccount) {
   async function callUnregisterSubscriber() {
     // Construct request
     const request = {
-      account,
       serviceAccount,
     };
 

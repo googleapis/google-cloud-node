@@ -1382,6 +1382,9 @@ export namespace google {
 
                     /** Entitlement billingAccount */
                     billingAccount?: (string|null);
+
+                    /** Entitlement priceReferenceId */
+                    priceReferenceId?: (string|null);
                 }
 
                 /** Represents an Entitlement. */
@@ -1431,6 +1434,9 @@ export namespace google {
 
                     /** Entitlement billingAccount. */
                     public billingAccount: string;
+
+                    /** Entitlement priceReferenceId. */
+                    public priceReferenceId: string;
 
                     /**
                      * Creates a new Entitlement instance using the specified properties.
@@ -2447,6 +2453,16 @@ export namespace google {
                     YEAR = 3
                 }
 
+                /** DiscountType enum. */
+                enum DiscountType {
+                    DISCOUNT_TYPE_UNSPECIFIED = 0,
+                    REGIONAL_DISCOUNT = 1,
+                    PROMOTIONAL_DISCOUNT = 2,
+                    SALES_DISCOUNT = 3,
+                    RESELLER_MARGIN = 4,
+                    DEAL_CODE = 5
+                }
+
                 /** Properties of an Offer. */
                 interface IOffer {
 
@@ -3185,8 +3201,14 @@ export namespace google {
                     /** Price effectivePrice */
                     effectivePrice?: (google.type.IMoney|null);
 
+                    /** Price pricePeriod */
+                    pricePeriod?: (google.cloud.channel.v1.IPeriod|null);
+
                     /** Price externalPriceUri */
                     externalPriceUri?: (string|null);
+
+                    /** Price discountComponents */
+                    discountComponents?: (google.cloud.channel.v1.IDiscountComponent[]|null);
                 }
 
                 /** Represents a Price. */
@@ -3207,8 +3229,14 @@ export namespace google {
                     /** Price effectivePrice. */
                     public effectivePrice?: (google.type.IMoney|null);
 
+                    /** Price pricePeriod. */
+                    public pricePeriod?: (google.cloud.channel.v1.IPeriod|null);
+
                     /** Price externalPriceUri. */
                     public externalPriceUri: string;
+
+                    /** Price discountComponents. */
+                    public discountComponents: google.cloud.channel.v1.IDiscountComponent[];
 
                     /**
                      * Creates a new Price instance using the specified properties.
@@ -3615,6 +3643,118 @@ export namespace google {
 
                     /**
                      * Gets the default type url for Period
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DiscountComponent. */
+                interface IDiscountComponent {
+
+                    /** DiscountComponent discountPercentage */
+                    discountPercentage?: (number|null);
+
+                    /** DiscountComponent discountAbsolute */
+                    discountAbsolute?: (google.type.IMoney|null);
+
+                    /** DiscountComponent discountType */
+                    discountType?: (google.cloud.channel.v1.DiscountType|keyof typeof google.cloud.channel.v1.DiscountType|null);
+                }
+
+                /** Represents a DiscountComponent. */
+                class DiscountComponent implements IDiscountComponent {
+
+                    /**
+                     * Constructs a new DiscountComponent.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.channel.v1.IDiscountComponent);
+
+                    /** DiscountComponent discountPercentage. */
+                    public discountPercentage?: (number|null);
+
+                    /** DiscountComponent discountAbsolute. */
+                    public discountAbsolute?: (google.type.IMoney|null);
+
+                    /** DiscountComponent discountType. */
+                    public discountType: (google.cloud.channel.v1.DiscountType|keyof typeof google.cloud.channel.v1.DiscountType);
+
+                    /** DiscountComponent discountValue. */
+                    public discountValue?: ("discountPercentage"|"discountAbsolute");
+
+                    /**
+                     * Creates a new DiscountComponent instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DiscountComponent instance
+                     */
+                    public static create(properties?: google.cloud.channel.v1.IDiscountComponent): google.cloud.channel.v1.DiscountComponent;
+
+                    /**
+                     * Encodes the specified DiscountComponent message. Does not implicitly {@link google.cloud.channel.v1.DiscountComponent.verify|verify} messages.
+                     * @param message DiscountComponent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.channel.v1.IDiscountComponent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DiscountComponent message, length delimited. Does not implicitly {@link google.cloud.channel.v1.DiscountComponent.verify|verify} messages.
+                     * @param message DiscountComponent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.channel.v1.IDiscountComponent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DiscountComponent message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DiscountComponent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.channel.v1.DiscountComponent;
+
+                    /**
+                     * Decodes a DiscountComponent message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DiscountComponent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.channel.v1.DiscountComponent;
+
+                    /**
+                     * Verifies a DiscountComponent message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DiscountComponent message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DiscountComponent
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.channel.v1.DiscountComponent;
+
+                    /**
+                     * Creates a plain object from a DiscountComponent message. Also converts values to other types if specified.
+                     * @param message DiscountComponent
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.channel.v1.DiscountComponent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DiscountComponent to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DiscountComponent
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -9856,6 +9996,9 @@ export namespace google {
 
                     /** TransferableOffer offer */
                     offer?: (google.cloud.channel.v1.IOffer|null);
+
+                    /** TransferableOffer priceReferenceId */
+                    priceReferenceId?: (string|null);
                 }
 
                 /** Represents a TransferableOffer. */
@@ -9869,6 +10012,9 @@ export namespace google {
 
                     /** TransferableOffer offer. */
                     public offer?: (google.cloud.channel.v1.IOffer|null);
+
+                    /** TransferableOffer priceReferenceId. */
+                    public priceReferenceId: string;
 
                     /**
                      * Creates a new TransferableOffer instance using the specified properties.
@@ -13118,6 +13264,9 @@ export namespace google {
 
                     /** ChangeOfferRequest billingAccount */
                     billingAccount?: (string|null);
+
+                    /** ChangeOfferRequest priceReferenceId */
+                    priceReferenceId?: (string|null);
                 }
 
                 /** Represents a ChangeOfferRequest. */
@@ -13146,6 +13295,9 @@ export namespace google {
 
                     /** ChangeOfferRequest billingAccount. */
                     public billingAccount: string;
+
+                    /** ChangeOfferRequest priceReferenceId. */
+                    public priceReferenceId: string;
 
                     /**
                      * Creates a new ChangeOfferRequest instance using the specified properties.
@@ -15402,6 +15554,9 @@ export namespace google {
 
                     /** PurchasableOffer offer */
                     offer?: (google.cloud.channel.v1.IOffer|null);
+
+                    /** PurchasableOffer priceReferenceId */
+                    priceReferenceId?: (string|null);
                 }
 
                 /** Represents a PurchasableOffer. */
@@ -15415,6 +15570,9 @@ export namespace google {
 
                     /** PurchasableOffer offer. */
                     public offer?: (google.cloud.channel.v1.IOffer|null);
+
+                    /** PurchasableOffer priceReferenceId. */
+                    public priceReferenceId: string;
 
                     /**
                      * Creates a new PurchasableOffer instance using the specified properties.
@@ -15902,6 +16060,9 @@ export namespace google {
 
                     /** RegisterSubscriberRequest serviceAccount */
                     serviceAccount?: (string|null);
+
+                    /** RegisterSubscriberRequest integrator */
+                    integrator?: (string|null);
                 }
 
                 /** Represents a RegisterSubscriberRequest. */
@@ -15918,6 +16079,9 @@ export namespace google {
 
                     /** RegisterSubscriberRequest serviceAccount. */
                     public serviceAccount: string;
+
+                    /** RegisterSubscriberRequest integrator. */
+                    public integrator?: (string|null);
 
                     /**
                      * Creates a new RegisterSubscriberRequest instance using the specified properties.
@@ -16102,6 +16266,9 @@ export namespace google {
 
                     /** UnregisterSubscriberRequest serviceAccount */
                     serviceAccount?: (string|null);
+
+                    /** UnregisterSubscriberRequest integrator */
+                    integrator?: (string|null);
                 }
 
                 /** Represents an UnregisterSubscriberRequest. */
@@ -16118,6 +16285,9 @@ export namespace google {
 
                     /** UnregisterSubscriberRequest serviceAccount. */
                     public serviceAccount: string;
+
+                    /** UnregisterSubscriberRequest integrator. */
+                    public integrator?: (string|null);
 
                     /**
                      * Creates a new UnregisterSubscriberRequest instance using the specified properties.
@@ -16305,6 +16475,9 @@ export namespace google {
 
                     /** ListSubscribersRequest pageToken */
                     pageToken?: (string|null);
+
+                    /** ListSubscribersRequest integrator */
+                    integrator?: (string|null);
                 }
 
                 /** Represents a ListSubscribersRequest. */
@@ -16324,6 +16497,9 @@ export namespace google {
 
                     /** ListSubscribersRequest pageToken. */
                     public pageToken: string;
+
+                    /** ListSubscribersRequest integrator. */
+                    public integrator?: (string|null);
 
                     /**
                      * Creates a new ListSubscribersRequest instance using the specified properties.
