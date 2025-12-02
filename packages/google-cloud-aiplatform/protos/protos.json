@@ -40302,6 +40302,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "minGpuDriverVersion": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
                         }
                       }
                     },

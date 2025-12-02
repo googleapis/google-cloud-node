@@ -150675,6 +150675,9 @@ export namespace google {
 
                     /** MachineSpec reservationAffinity */
                     reservationAffinity?: (google.cloud.aiplatform.v1beta1.IReservationAffinity|null);
+
+                    /** MachineSpec minGpuDriverVersion */
+                    minGpuDriverVersion?: (string|null);
                 }
 
                 /** Represents a MachineSpec. */
@@ -150706,6 +150709,9 @@ export namespace google {
 
                     /** MachineSpec reservationAffinity. */
                     public reservationAffinity?: (google.cloud.aiplatform.v1beta1.IReservationAffinity|null);
+
+                    /** MachineSpec minGpuDriverVersion. */
+                    public minGpuDriverVersion: string;
 
                     /**
                      * Creates a new MachineSpec instance using the specified properties.
