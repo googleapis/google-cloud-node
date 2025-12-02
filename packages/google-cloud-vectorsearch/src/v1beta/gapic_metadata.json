@@ -1,0 +1,277 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.vectorsearch.v1beta",
+  "libraryPackage": "@google-cloud/vectorsearch",
+  "services": {
+    "DataObjectSearchService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DataObjectSearchServiceClient",
+          "rpcs": {
+            "AggregateDataObjects": {
+              "methods": [
+                "aggregateDataObjects"
+              ]
+            },
+            "BatchSearchDataObjects": {
+              "methods": [
+                "batchSearchDataObjects"
+              ]
+            },
+            "SearchDataObjects": {
+              "methods": [
+                "searchDataObjects",
+                "searchDataObjectsStream",
+                "searchDataObjectsAsync"
+              ]
+            },
+            "QueryDataObjects": {
+              "methods": [
+                "queryDataObjects",
+                "queryDataObjectsStream",
+                "queryDataObjectsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DataObjectSearchServiceClient",
+          "rpcs": {
+            "AggregateDataObjects": {
+              "methods": [
+                "aggregateDataObjects"
+              ]
+            },
+            "BatchSearchDataObjects": {
+              "methods": [
+                "batchSearchDataObjects"
+              ]
+            },
+            "SearchDataObjects": {
+              "methods": [
+                "searchDataObjects",
+                "searchDataObjectsStream",
+                "searchDataObjectsAsync"
+              ]
+            },
+            "QueryDataObjects": {
+              "methods": [
+                "queryDataObjects",
+                "queryDataObjectsStream",
+                "queryDataObjectsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "DataObjectService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DataObjectServiceClient",
+          "rpcs": {
+            "CreateDataObject": {
+              "methods": [
+                "createDataObject"
+              ]
+            },
+            "BatchCreateDataObjects": {
+              "methods": [
+                "batchCreateDataObjects"
+              ]
+            },
+            "GetDataObject": {
+              "methods": [
+                "getDataObject"
+              ]
+            },
+            "UpdateDataObject": {
+              "methods": [
+                "updateDataObject"
+              ]
+            },
+            "BatchUpdateDataObjects": {
+              "methods": [
+                "batchUpdateDataObjects"
+              ]
+            },
+            "DeleteDataObject": {
+              "methods": [
+                "deleteDataObject"
+              ]
+            },
+            "BatchDeleteDataObjects": {
+              "methods": [
+                "batchDeleteDataObjects"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DataObjectServiceClient",
+          "rpcs": {
+            "CreateDataObject": {
+              "methods": [
+                "createDataObject"
+              ]
+            },
+            "BatchCreateDataObjects": {
+              "methods": [
+                "batchCreateDataObjects"
+              ]
+            },
+            "GetDataObject": {
+              "methods": [
+                "getDataObject"
+              ]
+            },
+            "UpdateDataObject": {
+              "methods": [
+                "updateDataObject"
+              ]
+            },
+            "BatchUpdateDataObjects": {
+              "methods": [
+                "batchUpdateDataObjects"
+              ]
+            },
+            "DeleteDataObject": {
+              "methods": [
+                "deleteDataObject"
+              ]
+            },
+            "BatchDeleteDataObjects": {
+              "methods": [
+                "batchDeleteDataObjects"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "VectorSearchService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "VectorSearchServiceClient",
+          "rpcs": {
+            "GetCollection": {
+              "methods": [
+                "getCollection"
+              ]
+            },
+            "GetIndex": {
+              "methods": [
+                "getIndex"
+              ]
+            },
+            "CreateCollection": {
+              "methods": [
+                "createCollection"
+              ]
+            },
+            "UpdateCollection": {
+              "methods": [
+                "updateCollection"
+              ]
+            },
+            "DeleteCollection": {
+              "methods": [
+                "deleteCollection"
+              ]
+            },
+            "CreateIndex": {
+              "methods": [
+                "createIndex"
+              ]
+            },
+            "DeleteIndex": {
+              "methods": [
+                "deleteIndex"
+              ]
+            },
+            "ImportDataObjects": {
+              "methods": [
+                "importDataObjects"
+              ]
+            },
+            "ListCollections": {
+              "methods": [
+                "listCollections",
+                "listCollectionsStream",
+                "listCollectionsAsync"
+              ]
+            },
+            "ListIndexes": {
+              "methods": [
+                "listIndexes",
+                "listIndexesStream",
+                "listIndexesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "VectorSearchServiceClient",
+          "rpcs": {
+            "GetCollection": {
+              "methods": [
+                "getCollection"
+              ]
+            },
+            "GetIndex": {
+              "methods": [
+                "getIndex"
+              ]
+            },
+            "CreateCollection": {
+              "methods": [
+                "createCollection"
+              ]
+            },
+            "UpdateCollection": {
+              "methods": [
+                "updateCollection"
+              ]
+            },
+            "DeleteCollection": {
+              "methods": [
+                "deleteCollection"
+              ]
+            },
+            "CreateIndex": {
+              "methods": [
+                "createIndex"
+              ]
+            },
+            "DeleteIndex": {
+              "methods": [
+                "deleteIndex"
+              ]
+            },
+            "ImportDataObjects": {
+              "methods": [
+                "importDataObjects"
+              ]
+            },
+            "ListCollections": {
+              "methods": [
+                "listCollections",
+                "listCollectionsStream",
+                "listCollectionsAsync"
+              ]
+            },
+            "ListIndexes": {
+              "methods": [
+                "listIndexes",
+                "listIndexesStream",
+                "listIndexesAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -3944,22 +3944,5 @@
     "api_shortname": "storagebatchoperations",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-storagebatchoperations",
     "support_documentation": "https://cloud.google.com/storage/docs/getting-support"
-  },
-  {
-    "name": "trace",
-    "name_pretty": "Trace",
-    "product_documentation": "https://cloud.google.com/trace",
-    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/trace-agent/latest",
-    "issue_tracker": "https://issuetracker.google.com/savedsearches/559776",
-    "release_level": "preview",
-    "language": "nodejs",
-    "repo": "googleapis/cloud-trace-nodejs",
-    "distribution_name": "@google-cloud/trace-agent",
-    "api_id": "cloudtrace.googleapis.com",
-    "codeowner_team": "@googleapis/google-cloud-trace",
-    "api_shortname": "cloudtrace",
-    "library_type": "AGENT",
-    "linkToRepoHomepage": "https://github.com/googleapis/cloud-trace-nodejs",
-    "support_documentation": "https://cloud.google.com/trace/docs/getting-support"
   }
 ]

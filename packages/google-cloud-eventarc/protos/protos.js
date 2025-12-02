@@ -16749,6 +16749,8 @@
                          * @property {string|null} [destination] GoogleApiSource destination
                          * @property {string|null} [cryptoKeyName] GoogleApiSource cryptoKeyName
                          * @property {google.cloud.eventarc.v1.ILoggingConfig|null} [loggingConfig] GoogleApiSource loggingConfig
+                         * @property {google.cloud.eventarc.v1.GoogleApiSource.IOrganizationSubscription|null} [organizationSubscription] GoogleApiSource organizationSubscription
+                         * @property {google.cloud.eventarc.v1.GoogleApiSource.IProjectSubscriptions|null} [projectSubscriptions] GoogleApiSource projectSubscriptions
                          */
     
                         /**
@@ -16857,6 +16859,36 @@
                         GoogleApiSource.prototype.loggingConfig = null;
     
                         /**
+                         * GoogleApiSource organizationSubscription.
+                         * @member {google.cloud.eventarc.v1.GoogleApiSource.IOrganizationSubscription|null|undefined} organizationSubscription
+                         * @memberof google.cloud.eventarc.v1.GoogleApiSource
+                         * @instance
+                         */
+                        GoogleApiSource.prototype.organizationSubscription = null;
+    
+                        /**
+                         * GoogleApiSource projectSubscriptions.
+                         * @member {google.cloud.eventarc.v1.GoogleApiSource.IProjectSubscriptions|null|undefined} projectSubscriptions
+                         * @memberof google.cloud.eventarc.v1.GoogleApiSource
+                         * @instance
+                         */
+                        GoogleApiSource.prototype.projectSubscriptions = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * GoogleApiSource wideScopeSubscription.
+                         * @member {"organizationSubscription"|"projectSubscriptions"|undefined} wideScopeSubscription
+                         * @memberof google.cloud.eventarc.v1.GoogleApiSource
+                         * @instance
+                         */
+                        Object.defineProperty(GoogleApiSource.prototype, "wideScopeSubscription", {
+                            get: $util.oneOfGetter($oneOfFields = ["organizationSubscription", "projectSubscriptions"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new GoogleApiSource instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.eventarc.v1.GoogleApiSource
@@ -16904,6 +16936,10 @@
                                 writer.uint32(/* id 10, wireType 2 =*/82).string(message.cryptoKeyName);
                             if (message.loggingConfig != null && Object.hasOwnProperty.call(message, "loggingConfig"))
                                 $root.google.cloud.eventarc.v1.LoggingConfig.encode(message.loggingConfig, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            if (message.organizationSubscription != null && Object.hasOwnProperty.call(message, "organizationSubscription"))
+                                $root.google.cloud.eventarc.v1.GoogleApiSource.OrganizationSubscription.encode(message.organizationSubscription, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                            if (message.projectSubscriptions != null && Object.hasOwnProperty.call(message, "projectSubscriptions"))
+                                $root.google.cloud.eventarc.v1.GoogleApiSource.ProjectSubscriptions.encode(message.projectSubscriptions, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                             return writer;
                         };
     
@@ -17022,6 +17058,14 @@
                                         message.loggingConfig = $root.google.cloud.eventarc.v1.LoggingConfig.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 12: {
+                                        message.organizationSubscription = $root.google.cloud.eventarc.v1.GoogleApiSource.OrganizationSubscription.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 13: {
+                                        message.projectSubscriptions = $root.google.cloud.eventarc.v1.GoogleApiSource.ProjectSubscriptions.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -17057,6 +17101,7 @@
                         GoogleApiSource.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -17105,6 +17150,24 @@
                                 var error = $root.google.cloud.eventarc.v1.LoggingConfig.verify(message.loggingConfig);
                                 if (error)
                                     return "loggingConfig." + error;
+                            }
+                            if (message.organizationSubscription != null && message.hasOwnProperty("organizationSubscription")) {
+                                properties.wideScopeSubscription = 1;
+                                {
+                                    var error = $root.google.cloud.eventarc.v1.GoogleApiSource.OrganizationSubscription.verify(message.organizationSubscription);
+                                    if (error)
+                                        return "organizationSubscription." + error;
+                                }
+                            }
+                            if (message.projectSubscriptions != null && message.hasOwnProperty("projectSubscriptions")) {
+                                if (properties.wideScopeSubscription === 1)
+                                    return "wideScopeSubscription: multiple values";
+                                properties.wideScopeSubscription = 1;
+                                {
+                                    var error = $root.google.cloud.eventarc.v1.GoogleApiSource.ProjectSubscriptions.verify(message.projectSubscriptions);
+                                    if (error)
+                                        return "projectSubscriptions." + error;
+                                }
                             }
                             return null;
                         };
@@ -17161,6 +17224,16 @@
                                 if (typeof object.loggingConfig !== "object")
                                     throw TypeError(".google.cloud.eventarc.v1.GoogleApiSource.loggingConfig: object expected");
                                 message.loggingConfig = $root.google.cloud.eventarc.v1.LoggingConfig.fromObject(object.loggingConfig);
+                            }
+                            if (object.organizationSubscription != null) {
+                                if (typeof object.organizationSubscription !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.GoogleApiSource.organizationSubscription: object expected");
+                                message.organizationSubscription = $root.google.cloud.eventarc.v1.GoogleApiSource.OrganizationSubscription.fromObject(object.organizationSubscription);
+                            }
+                            if (object.projectSubscriptions != null) {
+                                if (typeof object.projectSubscriptions !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.GoogleApiSource.projectSubscriptions: object expected");
+                                message.projectSubscriptions = $root.google.cloud.eventarc.v1.GoogleApiSource.ProjectSubscriptions.fromObject(object.projectSubscriptions);
                             }
                             return message;
                         };
@@ -17222,6 +17295,16 @@
                                 object.cryptoKeyName = message.cryptoKeyName;
                             if (message.loggingConfig != null && message.hasOwnProperty("loggingConfig"))
                                 object.loggingConfig = $root.google.cloud.eventarc.v1.LoggingConfig.toObject(message.loggingConfig, options);
+                            if (message.organizationSubscription != null && message.hasOwnProperty("organizationSubscription")) {
+                                object.organizationSubscription = $root.google.cloud.eventarc.v1.GoogleApiSource.OrganizationSubscription.toObject(message.organizationSubscription, options);
+                                if (options.oneofs)
+                                    object.wideScopeSubscription = "organizationSubscription";
+                            }
+                            if (message.projectSubscriptions != null && message.hasOwnProperty("projectSubscriptions")) {
+                                object.projectSubscriptions = $root.google.cloud.eventarc.v1.GoogleApiSource.ProjectSubscriptions.toObject(message.projectSubscriptions, options);
+                                if (options.oneofs)
+                                    object.wideScopeSubscription = "projectSubscriptions";
+                            }
                             return object;
                         };
     
@@ -17250,6 +17333,432 @@
                             }
                             return typeUrlPrefix + "/google.cloud.eventarc.v1.GoogleApiSource";
                         };
+    
+                        GoogleApiSource.ProjectSubscriptions = (function() {
+    
+                            /**
+                             * Properties of a ProjectSubscriptions.
+                             * @memberof google.cloud.eventarc.v1.GoogleApiSource
+                             * @interface IProjectSubscriptions
+                             * @property {Array.<string>|null} [list] ProjectSubscriptions list
+                             */
+    
+                            /**
+                             * Constructs a new ProjectSubscriptions.
+                             * @memberof google.cloud.eventarc.v1.GoogleApiSource
+                             * @classdesc Represents a ProjectSubscriptions.
+                             * @implements IProjectSubscriptions
+                             * @constructor
+                             * @param {google.cloud.eventarc.v1.GoogleApiSource.IProjectSubscriptions=} [properties] Properties to set
+                             */
+                            function ProjectSubscriptions(properties) {
+                                this.list = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ProjectSubscriptions list.
+                             * @member {Array.<string>} list
+                             * @memberof google.cloud.eventarc.v1.GoogleApiSource.ProjectSubscriptions
+                             * @instance
+                             */
+                            ProjectSubscriptions.prototype.list = $util.emptyArray;
+    
+                            /**
+                             * Creates a new ProjectSubscriptions instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.eventarc.v1.GoogleApiSource.ProjectSubscriptions
+                             * @static
+                             * @param {google.cloud.eventarc.v1.GoogleApiSource.IProjectSubscriptions=} [properties] Properties to set
+                             * @returns {google.cloud.eventarc.v1.GoogleApiSource.ProjectSubscriptions} ProjectSubscriptions instance
+                             */
+                            ProjectSubscriptions.create = function create(properties) {
+                                return new ProjectSubscriptions(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ProjectSubscriptions message. Does not implicitly {@link google.cloud.eventarc.v1.GoogleApiSource.ProjectSubscriptions.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.eventarc.v1.GoogleApiSource.ProjectSubscriptions
+                             * @static
+                             * @param {google.cloud.eventarc.v1.GoogleApiSource.IProjectSubscriptions} message ProjectSubscriptions message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ProjectSubscriptions.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.list != null && message.list.length)
+                                    for (var i = 0; i < message.list.length; ++i)
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.list[i]);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ProjectSubscriptions message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.GoogleApiSource.ProjectSubscriptions.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.eventarc.v1.GoogleApiSource.ProjectSubscriptions
+                             * @static
+                             * @param {google.cloud.eventarc.v1.GoogleApiSource.IProjectSubscriptions} message ProjectSubscriptions message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ProjectSubscriptions.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ProjectSubscriptions message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.eventarc.v1.GoogleApiSource.ProjectSubscriptions
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.eventarc.v1.GoogleApiSource.ProjectSubscriptions} ProjectSubscriptions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ProjectSubscriptions.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.GoogleApiSource.ProjectSubscriptions();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.list && message.list.length))
+                                                message.list = [];
+                                            message.list.push(reader.string());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ProjectSubscriptions message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.eventarc.v1.GoogleApiSource.ProjectSubscriptions
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.eventarc.v1.GoogleApiSource.ProjectSubscriptions} ProjectSubscriptions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ProjectSubscriptions.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ProjectSubscriptions message.
+                             * @function verify
+                             * @memberof google.cloud.eventarc.v1.GoogleApiSource.ProjectSubscriptions
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ProjectSubscriptions.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.list != null && message.hasOwnProperty("list")) {
+                                    if (!Array.isArray(message.list))
+                                        return "list: array expected";
+                                    for (var i = 0; i < message.list.length; ++i)
+                                        if (!$util.isString(message.list[i]))
+                                            return "list: string[] expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ProjectSubscriptions message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.eventarc.v1.GoogleApiSource.ProjectSubscriptions
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.eventarc.v1.GoogleApiSource.ProjectSubscriptions} ProjectSubscriptions
+                             */
+                            ProjectSubscriptions.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.eventarc.v1.GoogleApiSource.ProjectSubscriptions)
+                                    return object;
+                                var message = new $root.google.cloud.eventarc.v1.GoogleApiSource.ProjectSubscriptions();
+                                if (object.list) {
+                                    if (!Array.isArray(object.list))
+                                        throw TypeError(".google.cloud.eventarc.v1.GoogleApiSource.ProjectSubscriptions.list: array expected");
+                                    message.list = [];
+                                    for (var i = 0; i < object.list.length; ++i)
+                                        message.list[i] = String(object.list[i]);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ProjectSubscriptions message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.eventarc.v1.GoogleApiSource.ProjectSubscriptions
+                             * @static
+                             * @param {google.cloud.eventarc.v1.GoogleApiSource.ProjectSubscriptions} message ProjectSubscriptions
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ProjectSubscriptions.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.list = [];
+                                if (message.list && message.list.length) {
+                                    object.list = [];
+                                    for (var j = 0; j < message.list.length; ++j)
+                                        object.list[j] = message.list[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ProjectSubscriptions to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.eventarc.v1.GoogleApiSource.ProjectSubscriptions
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ProjectSubscriptions.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ProjectSubscriptions
+                             * @function getTypeUrl
+                             * @memberof google.cloud.eventarc.v1.GoogleApiSource.ProjectSubscriptions
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ProjectSubscriptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.eventarc.v1.GoogleApiSource.ProjectSubscriptions";
+                            };
+    
+                            return ProjectSubscriptions;
+                        })();
+    
+                        GoogleApiSource.OrganizationSubscription = (function() {
+    
+                            /**
+                             * Properties of an OrganizationSubscription.
+                             * @memberof google.cloud.eventarc.v1.GoogleApiSource
+                             * @interface IOrganizationSubscription
+                             * @property {boolean|null} [enabled] OrganizationSubscription enabled
+                             */
+    
+                            /**
+                             * Constructs a new OrganizationSubscription.
+                             * @memberof google.cloud.eventarc.v1.GoogleApiSource
+                             * @classdesc Represents an OrganizationSubscription.
+                             * @implements IOrganizationSubscription
+                             * @constructor
+                             * @param {google.cloud.eventarc.v1.GoogleApiSource.IOrganizationSubscription=} [properties] Properties to set
+                             */
+                            function OrganizationSubscription(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * OrganizationSubscription enabled.
+                             * @member {boolean} enabled
+                             * @memberof google.cloud.eventarc.v1.GoogleApiSource.OrganizationSubscription
+                             * @instance
+                             */
+                            OrganizationSubscription.prototype.enabled = false;
+    
+                            /**
+                             * Creates a new OrganizationSubscription instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.eventarc.v1.GoogleApiSource.OrganizationSubscription
+                             * @static
+                             * @param {google.cloud.eventarc.v1.GoogleApiSource.IOrganizationSubscription=} [properties] Properties to set
+                             * @returns {google.cloud.eventarc.v1.GoogleApiSource.OrganizationSubscription} OrganizationSubscription instance
+                             */
+                            OrganizationSubscription.create = function create(properties) {
+                                return new OrganizationSubscription(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified OrganizationSubscription message. Does not implicitly {@link google.cloud.eventarc.v1.GoogleApiSource.OrganizationSubscription.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.eventarc.v1.GoogleApiSource.OrganizationSubscription
+                             * @static
+                             * @param {google.cloud.eventarc.v1.GoogleApiSource.IOrganizationSubscription} message OrganizationSubscription message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            OrganizationSubscription.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enabled);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified OrganizationSubscription message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.GoogleApiSource.OrganizationSubscription.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.eventarc.v1.GoogleApiSource.OrganizationSubscription
+                             * @static
+                             * @param {google.cloud.eventarc.v1.GoogleApiSource.IOrganizationSubscription} message OrganizationSubscription message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            OrganizationSubscription.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an OrganizationSubscription message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.eventarc.v1.GoogleApiSource.OrganizationSubscription
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.eventarc.v1.GoogleApiSource.OrganizationSubscription} OrganizationSubscription
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            OrganizationSubscription.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.GoogleApiSource.OrganizationSubscription();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.enabled = reader.bool();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an OrganizationSubscription message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.eventarc.v1.GoogleApiSource.OrganizationSubscription
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.eventarc.v1.GoogleApiSource.OrganizationSubscription} OrganizationSubscription
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            OrganizationSubscription.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an OrganizationSubscription message.
+                             * @function verify
+                             * @memberof google.cloud.eventarc.v1.GoogleApiSource.OrganizationSubscription
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            OrganizationSubscription.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                    if (typeof message.enabled !== "boolean")
+                                        return "enabled: boolean expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an OrganizationSubscription message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.eventarc.v1.GoogleApiSource.OrganizationSubscription
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.eventarc.v1.GoogleApiSource.OrganizationSubscription} OrganizationSubscription
+                             */
+                            OrganizationSubscription.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.eventarc.v1.GoogleApiSource.OrganizationSubscription)
+                                    return object;
+                                var message = new $root.google.cloud.eventarc.v1.GoogleApiSource.OrganizationSubscription();
+                                if (object.enabled != null)
+                                    message.enabled = Boolean(object.enabled);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an OrganizationSubscription message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.eventarc.v1.GoogleApiSource.OrganizationSubscription
+                             * @static
+                             * @param {google.cloud.eventarc.v1.GoogleApiSource.OrganizationSubscription} message OrganizationSubscription
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            OrganizationSubscription.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.enabled = false;
+                                if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                    object.enabled = message.enabled;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this OrganizationSubscription to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.eventarc.v1.GoogleApiSource.OrganizationSubscription
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            OrganizationSubscription.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for OrganizationSubscription
+                             * @function getTypeUrl
+                             * @memberof google.cloud.eventarc.v1.GoogleApiSource.OrganizationSubscription
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            OrganizationSubscription.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.eventarc.v1.GoogleApiSource.OrganizationSubscription";
+                            };
+    
+                            return OrganizationSubscription;
+                        })();
     
                         return GoogleApiSource;
                     })();
@@ -22190,6 +22699,7 @@
                          * @property {Object.<string,google.cloud.eventarc.v1.IStateCondition>|null} [conditions] Trigger conditions
                          * @property {string|null} [eventDataContentType] Trigger eventDataContentType
                          * @property {boolean|null} [satisfiesPzs] Trigger satisfiesPzs
+                         * @property {google.cloud.eventarc.v1.Trigger.IRetryPolicy|null} [retryPolicy] Trigger retryPolicy
                          * @property {string|null} [etag] Trigger etag
                          */
     
@@ -22316,6 +22826,14 @@
                         Trigger.prototype.satisfiesPzs = false;
     
                         /**
+                         * Trigger retryPolicy.
+                         * @member {google.cloud.eventarc.v1.Trigger.IRetryPolicy|null|undefined} retryPolicy
+                         * @memberof google.cloud.eventarc.v1.Trigger
+                         * @instance
+                         */
+                        Trigger.prototype.retryPolicy = null;
+    
+                        /**
                          * Trigger etag.
                          * @member {string} etag
                          * @memberof google.cloud.eventarc.v1.Trigger
@@ -22378,6 +22896,8 @@
                                 writer.uint32(/* id 16, wireType 2 =*/130).string(message.eventDataContentType);
                             if (message.satisfiesPzs != null && Object.hasOwnProperty.call(message, "satisfiesPzs"))
                                 writer.uint32(/* id 19, wireType 0 =*/152).bool(message.satisfiesPzs);
+                            if (message.retryPolicy != null && Object.hasOwnProperty.call(message, "retryPolicy"))
+                                $root.google.cloud.eventarc.v1.Trigger.RetryPolicy.encode(message.retryPolicy, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                             if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
                                 writer.uint32(/* id 99, wireType 2 =*/794).string(message.etag);
                             return writer;
@@ -22508,6 +23028,10 @@
                                         message.satisfiesPzs = reader.bool();
                                         break;
                                     }
+                                case 20: {
+                                        message.retryPolicy = $root.google.cloud.eventarc.v1.Trigger.RetryPolicy.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 99: {
                                         message.etag = reader.string();
                                         break;
@@ -22612,6 +23136,11 @@
                             if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs"))
                                 if (typeof message.satisfiesPzs !== "boolean")
                                     return "satisfiesPzs: boolean expected";
+                            if (message.retryPolicy != null && message.hasOwnProperty("retryPolicy")) {
+                                var error = $root.google.cloud.eventarc.v1.Trigger.RetryPolicy.verify(message.retryPolicy);
+                                if (error)
+                                    return "retryPolicy." + error;
+                            }
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 if (!$util.isString(message.etag))
                                     return "etag: string expected";
@@ -22689,6 +23218,11 @@
                                 message.eventDataContentType = String(object.eventDataContentType);
                             if (object.satisfiesPzs != null)
                                 message.satisfiesPzs = Boolean(object.satisfiesPzs);
+                            if (object.retryPolicy != null) {
+                                if (typeof object.retryPolicy !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.Trigger.retryPolicy: object expected");
+                                message.retryPolicy = $root.google.cloud.eventarc.v1.Trigger.RetryPolicy.fromObject(object.retryPolicy);
+                            }
                             if (object.etag != null)
                                 message.etag = String(object.etag);
                             return message;
@@ -22724,6 +23258,7 @@
                                 object.channel = "";
                                 object.eventDataContentType = "";
                                 object.satisfiesPzs = false;
+                                object.retryPolicy = null;
                                 object.etag = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
@@ -22762,6 +23297,8 @@
                                 object.eventDataContentType = message.eventDataContentType;
                             if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs"))
                                 object.satisfiesPzs = message.satisfiesPzs;
+                            if (message.retryPolicy != null && message.hasOwnProperty("retryPolicy"))
+                                object.retryPolicy = $root.google.cloud.eventarc.v1.Trigger.RetryPolicy.toObject(message.retryPolicy, options);
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 object.etag = message.etag;
                             return object;
@@ -22792,6 +23329,211 @@
                             }
                             return typeUrlPrefix + "/google.cloud.eventarc.v1.Trigger";
                         };
+    
+                        Trigger.RetryPolicy = (function() {
+    
+                            /**
+                             * Properties of a RetryPolicy.
+                             * @memberof google.cloud.eventarc.v1.Trigger
+                             * @interface IRetryPolicy
+                             * @property {number|null} [maxAttempts] RetryPolicy maxAttempts
+                             */
+    
+                            /**
+                             * Constructs a new RetryPolicy.
+                             * @memberof google.cloud.eventarc.v1.Trigger
+                             * @classdesc Represents a RetryPolicy.
+                             * @implements IRetryPolicy
+                             * @constructor
+                             * @param {google.cloud.eventarc.v1.Trigger.IRetryPolicy=} [properties] Properties to set
+                             */
+                            function RetryPolicy(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * RetryPolicy maxAttempts.
+                             * @member {number} maxAttempts
+                             * @memberof google.cloud.eventarc.v1.Trigger.RetryPolicy
+                             * @instance
+                             */
+                            RetryPolicy.prototype.maxAttempts = 0;
+    
+                            /**
+                             * Creates a new RetryPolicy instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.eventarc.v1.Trigger.RetryPolicy
+                             * @static
+                             * @param {google.cloud.eventarc.v1.Trigger.IRetryPolicy=} [properties] Properties to set
+                             * @returns {google.cloud.eventarc.v1.Trigger.RetryPolicy} RetryPolicy instance
+                             */
+                            RetryPolicy.create = function create(properties) {
+                                return new RetryPolicy(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified RetryPolicy message. Does not implicitly {@link google.cloud.eventarc.v1.Trigger.RetryPolicy.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.eventarc.v1.Trigger.RetryPolicy
+                             * @static
+                             * @param {google.cloud.eventarc.v1.Trigger.IRetryPolicy} message RetryPolicy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RetryPolicy.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.maxAttempts != null && Object.hasOwnProperty.call(message, "maxAttempts"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.maxAttempts);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified RetryPolicy message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.Trigger.RetryPolicy.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.eventarc.v1.Trigger.RetryPolicy
+                             * @static
+                             * @param {google.cloud.eventarc.v1.Trigger.IRetryPolicy} message RetryPolicy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RetryPolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a RetryPolicy message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.eventarc.v1.Trigger.RetryPolicy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.eventarc.v1.Trigger.RetryPolicy} RetryPolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RetryPolicy.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.Trigger.RetryPolicy();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.maxAttempts = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a RetryPolicy message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.eventarc.v1.Trigger.RetryPolicy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.eventarc.v1.Trigger.RetryPolicy} RetryPolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RetryPolicy.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a RetryPolicy message.
+                             * @function verify
+                             * @memberof google.cloud.eventarc.v1.Trigger.RetryPolicy
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            RetryPolicy.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.maxAttempts != null && message.hasOwnProperty("maxAttempts"))
+                                    if (!$util.isInteger(message.maxAttempts))
+                                        return "maxAttempts: integer expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a RetryPolicy message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.eventarc.v1.Trigger.RetryPolicy
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.eventarc.v1.Trigger.RetryPolicy} RetryPolicy
+                             */
+                            RetryPolicy.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.eventarc.v1.Trigger.RetryPolicy)
+                                    return object;
+                                var message = new $root.google.cloud.eventarc.v1.Trigger.RetryPolicy();
+                                if (object.maxAttempts != null)
+                                    message.maxAttempts = object.maxAttempts | 0;
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a RetryPolicy message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.eventarc.v1.Trigger.RetryPolicy
+                             * @static
+                             * @param {google.cloud.eventarc.v1.Trigger.RetryPolicy} message RetryPolicy
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            RetryPolicy.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.maxAttempts = 0;
+                                if (message.maxAttempts != null && message.hasOwnProperty("maxAttempts"))
+                                    object.maxAttempts = message.maxAttempts;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this RetryPolicy to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.eventarc.v1.Trigger.RetryPolicy
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            RetryPolicy.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for RetryPolicy
+                             * @function getTypeUrl
+                             * @memberof google.cloud.eventarc.v1.Trigger.RetryPolicy
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            RetryPolicy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.eventarc.v1.Trigger.RetryPolicy";
+                            };
+    
+                            return RetryPolicy;
+                        })();
     
                         return Trigger;
                     })();
