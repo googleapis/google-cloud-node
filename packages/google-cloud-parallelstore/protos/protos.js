@@ -1155,6 +1155,378 @@
                         return Instance;
                     })();
     
+                    v1.TransferMetadataOptions = (function() {
+    
+                        /**
+                         * Properties of a TransferMetadataOptions.
+                         * @memberof google.cloud.parallelstore.v1
+                         * @interface ITransferMetadataOptions
+                         * @property {google.cloud.parallelstore.v1.TransferMetadataOptions.Uid|null} [uid] TransferMetadataOptions uid
+                         * @property {google.cloud.parallelstore.v1.TransferMetadataOptions.Gid|null} [gid] TransferMetadataOptions gid
+                         * @property {google.cloud.parallelstore.v1.TransferMetadataOptions.Mode|null} [mode] TransferMetadataOptions mode
+                         */
+    
+                        /**
+                         * Constructs a new TransferMetadataOptions.
+                         * @memberof google.cloud.parallelstore.v1
+                         * @classdesc Represents a TransferMetadataOptions.
+                         * @implements ITransferMetadataOptions
+                         * @constructor
+                         * @param {google.cloud.parallelstore.v1.ITransferMetadataOptions=} [properties] Properties to set
+                         */
+                        function TransferMetadataOptions(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TransferMetadataOptions uid.
+                         * @member {google.cloud.parallelstore.v1.TransferMetadataOptions.Uid} uid
+                         * @memberof google.cloud.parallelstore.v1.TransferMetadataOptions
+                         * @instance
+                         */
+                        TransferMetadataOptions.prototype.uid = 0;
+    
+                        /**
+                         * TransferMetadataOptions gid.
+                         * @member {google.cloud.parallelstore.v1.TransferMetadataOptions.Gid} gid
+                         * @memberof google.cloud.parallelstore.v1.TransferMetadataOptions
+                         * @instance
+                         */
+                        TransferMetadataOptions.prototype.gid = 0;
+    
+                        /**
+                         * TransferMetadataOptions mode.
+                         * @member {google.cloud.parallelstore.v1.TransferMetadataOptions.Mode} mode
+                         * @memberof google.cloud.parallelstore.v1.TransferMetadataOptions
+                         * @instance
+                         */
+                        TransferMetadataOptions.prototype.mode = 0;
+    
+                        /**
+                         * Creates a new TransferMetadataOptions instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.parallelstore.v1.TransferMetadataOptions
+                         * @static
+                         * @param {google.cloud.parallelstore.v1.ITransferMetadataOptions=} [properties] Properties to set
+                         * @returns {google.cloud.parallelstore.v1.TransferMetadataOptions} TransferMetadataOptions instance
+                         */
+                        TransferMetadataOptions.create = function create(properties) {
+                            return new TransferMetadataOptions(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TransferMetadataOptions message. Does not implicitly {@link google.cloud.parallelstore.v1.TransferMetadataOptions.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.parallelstore.v1.TransferMetadataOptions
+                         * @static
+                         * @param {google.cloud.parallelstore.v1.ITransferMetadataOptions} message TransferMetadataOptions message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TransferMetadataOptions.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.uid);
+                            if (message.gid != null && Object.hasOwnProperty.call(message, "gid"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.gid);
+                            if (message.mode != null && Object.hasOwnProperty.call(message, "mode"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.mode);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TransferMetadataOptions message, length delimited. Does not implicitly {@link google.cloud.parallelstore.v1.TransferMetadataOptions.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.parallelstore.v1.TransferMetadataOptions
+                         * @static
+                         * @param {google.cloud.parallelstore.v1.ITransferMetadataOptions} message TransferMetadataOptions message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TransferMetadataOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TransferMetadataOptions message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.parallelstore.v1.TransferMetadataOptions
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.parallelstore.v1.TransferMetadataOptions} TransferMetadataOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TransferMetadataOptions.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1.TransferMetadataOptions();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.uid = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.gid = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.mode = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TransferMetadataOptions message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.parallelstore.v1.TransferMetadataOptions
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.parallelstore.v1.TransferMetadataOptions} TransferMetadataOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TransferMetadataOptions.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TransferMetadataOptions message.
+                         * @function verify
+                         * @memberof google.cloud.parallelstore.v1.TransferMetadataOptions
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TransferMetadataOptions.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                switch (message.uid) {
+                                default:
+                                    return "uid: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.gid != null && message.hasOwnProperty("gid"))
+                                switch (message.gid) {
+                                default:
+                                    return "gid: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.mode != null && message.hasOwnProperty("mode"))
+                                switch (message.mode) {
+                                default:
+                                    return "mode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TransferMetadataOptions message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.parallelstore.v1.TransferMetadataOptions
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.parallelstore.v1.TransferMetadataOptions} TransferMetadataOptions
+                         */
+                        TransferMetadataOptions.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.parallelstore.v1.TransferMetadataOptions)
+                                return object;
+                            var message = new $root.google.cloud.parallelstore.v1.TransferMetadataOptions();
+                            switch (object.uid) {
+                            default:
+                                if (typeof object.uid === "number") {
+                                    message.uid = object.uid;
+                                    break;
+                                }
+                                break;
+                            case "UID_UNSPECIFIED":
+                            case 0:
+                                message.uid = 0;
+                                break;
+                            case "UID_SKIP":
+                            case 1:
+                                message.uid = 1;
+                                break;
+                            case "UID_NUMBER_PRESERVE":
+                            case 2:
+                                message.uid = 2;
+                                break;
+                            }
+                            switch (object.gid) {
+                            default:
+                                if (typeof object.gid === "number") {
+                                    message.gid = object.gid;
+                                    break;
+                                }
+                                break;
+                            case "GID_UNSPECIFIED":
+                            case 0:
+                                message.gid = 0;
+                                break;
+                            case "GID_SKIP":
+                            case 1:
+                                message.gid = 1;
+                                break;
+                            case "GID_NUMBER_PRESERVE":
+                            case 2:
+                                message.gid = 2;
+                                break;
+                            }
+                            switch (object.mode) {
+                            default:
+                                if (typeof object.mode === "number") {
+                                    message.mode = object.mode;
+                                    break;
+                                }
+                                break;
+                            case "MODE_UNSPECIFIED":
+                            case 0:
+                                message.mode = 0;
+                                break;
+                            case "MODE_SKIP":
+                            case 1:
+                                message.mode = 1;
+                                break;
+                            case "MODE_PRESERVE":
+                            case 2:
+                                message.mode = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TransferMetadataOptions message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.parallelstore.v1.TransferMetadataOptions
+                         * @static
+                         * @param {google.cloud.parallelstore.v1.TransferMetadataOptions} message TransferMetadataOptions
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TransferMetadataOptions.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.uid = options.enums === String ? "UID_UNSPECIFIED" : 0;
+                                object.gid = options.enums === String ? "GID_UNSPECIFIED" : 0;
+                                object.mode = options.enums === String ? "MODE_UNSPECIFIED" : 0;
+                            }
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                object.uid = options.enums === String ? $root.google.cloud.parallelstore.v1.TransferMetadataOptions.Uid[message.uid] === undefined ? message.uid : $root.google.cloud.parallelstore.v1.TransferMetadataOptions.Uid[message.uid] : message.uid;
+                            if (message.gid != null && message.hasOwnProperty("gid"))
+                                object.gid = options.enums === String ? $root.google.cloud.parallelstore.v1.TransferMetadataOptions.Gid[message.gid] === undefined ? message.gid : $root.google.cloud.parallelstore.v1.TransferMetadataOptions.Gid[message.gid] : message.gid;
+                            if (message.mode != null && message.hasOwnProperty("mode"))
+                                object.mode = options.enums === String ? $root.google.cloud.parallelstore.v1.TransferMetadataOptions.Mode[message.mode] === undefined ? message.mode : $root.google.cloud.parallelstore.v1.TransferMetadataOptions.Mode[message.mode] : message.mode;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TransferMetadataOptions to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.parallelstore.v1.TransferMetadataOptions
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TransferMetadataOptions.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for TransferMetadataOptions
+                         * @function getTypeUrl
+                         * @memberof google.cloud.parallelstore.v1.TransferMetadataOptions
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        TransferMetadataOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.parallelstore.v1.TransferMetadataOptions";
+                        };
+    
+                        /**
+                         * Uid enum.
+                         * @name google.cloud.parallelstore.v1.TransferMetadataOptions.Uid
+                         * @enum {number}
+                         * @property {number} UID_UNSPECIFIED=0 UID_UNSPECIFIED value
+                         * @property {number} UID_SKIP=1 UID_SKIP value
+                         * @property {number} UID_NUMBER_PRESERVE=2 UID_NUMBER_PRESERVE value
+                         */
+                        TransferMetadataOptions.Uid = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "UID_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "UID_SKIP"] = 1;
+                            values[valuesById[2] = "UID_NUMBER_PRESERVE"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * Gid enum.
+                         * @name google.cloud.parallelstore.v1.TransferMetadataOptions.Gid
+                         * @enum {number}
+                         * @property {number} GID_UNSPECIFIED=0 GID_UNSPECIFIED value
+                         * @property {number} GID_SKIP=1 GID_SKIP value
+                         * @property {number} GID_NUMBER_PRESERVE=2 GID_NUMBER_PRESERVE value
+                         */
+                        TransferMetadataOptions.Gid = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "GID_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "GID_SKIP"] = 1;
+                            values[valuesById[2] = "GID_NUMBER_PRESERVE"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * Mode enum.
+                         * @name google.cloud.parallelstore.v1.TransferMetadataOptions.Mode
+                         * @enum {number}
+                         * @property {number} MODE_UNSPECIFIED=0 MODE_UNSPECIFIED value
+                         * @property {number} MODE_SKIP=1 MODE_SKIP value
+                         * @property {number} MODE_PRESERVE=2 MODE_PRESERVE value
+                         */
+                        TransferMetadataOptions.Mode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "MODE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "MODE_SKIP"] = 1;
+                            values[valuesById[2] = "MODE_PRESERVE"] = 2;
+                            return values;
+                        })();
+    
+                        return TransferMetadataOptions;
+                    })();
+    
                     v1.ListInstancesRequest = (function() {
     
                         /**
@@ -3904,6 +4276,7 @@
                          * @property {string|null} [name] ImportDataRequest name
                          * @property {string|null} [requestId] ImportDataRequest requestId
                          * @property {string|null} [serviceAccount] ImportDataRequest serviceAccount
+                         * @property {google.cloud.parallelstore.v1.ITransferMetadataOptions|null} [metadataOptions] ImportDataRequest metadataOptions
                          */
     
                         /**
@@ -3960,6 +4333,14 @@
                          * @instance
                          */
                         ImportDataRequest.prototype.serviceAccount = "";
+    
+                        /**
+                         * ImportDataRequest metadataOptions.
+                         * @member {google.cloud.parallelstore.v1.ITransferMetadataOptions|null|undefined} metadataOptions
+                         * @memberof google.cloud.parallelstore.v1.ImportDataRequest
+                         * @instance
+                         */
+                        ImportDataRequest.prototype.metadataOptions = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -4020,6 +4401,8 @@
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
                             if (message.serviceAccount != null && Object.hasOwnProperty.call(message, "serviceAccount"))
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.serviceAccount);
+                            if (message.metadataOptions != null && Object.hasOwnProperty.call(message, "metadataOptions"))
+                                $root.google.cloud.parallelstore.v1.TransferMetadataOptions.encode(message.metadataOptions, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             return writer;
                         };
     
@@ -4074,6 +4457,10 @@
                                     }
                                 case 5: {
                                         message.serviceAccount = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.metadataOptions = $root.google.cloud.parallelstore.v1.TransferMetadataOptions.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -4137,6 +4524,11 @@
                             if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
                                 if (!$util.isString(message.serviceAccount))
                                     return "serviceAccount: string expected";
+                            if (message.metadataOptions != null && message.hasOwnProperty("metadataOptions")) {
+                                var error = $root.google.cloud.parallelstore.v1.TransferMetadataOptions.verify(message.metadataOptions);
+                                if (error)
+                                    return "metadataOptions." + error;
+                            }
                             return null;
                         };
     
@@ -4168,6 +4560,11 @@
                                 message.requestId = String(object.requestId);
                             if (object.serviceAccount != null)
                                 message.serviceAccount = String(object.serviceAccount);
+                            if (object.metadataOptions != null) {
+                                if (typeof object.metadataOptions !== "object")
+                                    throw TypeError(".google.cloud.parallelstore.v1.ImportDataRequest.metadataOptions: object expected");
+                                message.metadataOptions = $root.google.cloud.parallelstore.v1.TransferMetadataOptions.fromObject(object.metadataOptions);
+                            }
                             return message;
                         };
     
@@ -4188,6 +4585,7 @@
                                 object.name = "";
                                 object.requestId = "";
                                 object.serviceAccount = "";
+                                object.metadataOptions = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -4205,6 +4603,8 @@
                                 object.requestId = message.requestId;
                             if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
                                 object.serviceAccount = message.serviceAccount;
+                            if (message.metadataOptions != null && message.hasOwnProperty("metadataOptions"))
+                                object.metadataOptions = $root.google.cloud.parallelstore.v1.TransferMetadataOptions.toObject(message.metadataOptions, options);
                             return object;
                         };
     
@@ -4248,6 +4648,7 @@
                          * @property {string|null} [name] ExportDataRequest name
                          * @property {string|null} [requestId] ExportDataRequest requestId
                          * @property {string|null} [serviceAccount] ExportDataRequest serviceAccount
+                         * @property {google.cloud.parallelstore.v1.ITransferMetadataOptions|null} [metadataOptions] ExportDataRequest metadataOptions
                          */
     
                         /**
@@ -4304,6 +4705,14 @@
                          * @instance
                          */
                         ExportDataRequest.prototype.serviceAccount = "";
+    
+                        /**
+                         * ExportDataRequest metadataOptions.
+                         * @member {google.cloud.parallelstore.v1.ITransferMetadataOptions|null|undefined} metadataOptions
+                         * @memberof google.cloud.parallelstore.v1.ExportDataRequest
+                         * @instance
+                         */
+                        ExportDataRequest.prototype.metadataOptions = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -4364,6 +4773,8 @@
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
                             if (message.serviceAccount != null && Object.hasOwnProperty.call(message, "serviceAccount"))
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.serviceAccount);
+                            if (message.metadataOptions != null && Object.hasOwnProperty.call(message, "metadataOptions"))
+                                $root.google.cloud.parallelstore.v1.TransferMetadataOptions.encode(message.metadataOptions, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             return writer;
                         };
     
@@ -4418,6 +4829,10 @@
                                     }
                                 case 5: {
                                         message.serviceAccount = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.metadataOptions = $root.google.cloud.parallelstore.v1.TransferMetadataOptions.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -4481,6 +4896,11 @@
                             if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
                                 if (!$util.isString(message.serviceAccount))
                                     return "serviceAccount: string expected";
+                            if (message.metadataOptions != null && message.hasOwnProperty("metadataOptions")) {
+                                var error = $root.google.cloud.parallelstore.v1.TransferMetadataOptions.verify(message.metadataOptions);
+                                if (error)
+                                    return "metadataOptions." + error;
+                            }
                             return null;
                         };
     
@@ -4512,6 +4932,11 @@
                                 message.requestId = String(object.requestId);
                             if (object.serviceAccount != null)
                                 message.serviceAccount = String(object.serviceAccount);
+                            if (object.metadataOptions != null) {
+                                if (typeof object.metadataOptions !== "object")
+                                    throw TypeError(".google.cloud.parallelstore.v1.ExportDataRequest.metadataOptions: object expected");
+                                message.metadataOptions = $root.google.cloud.parallelstore.v1.TransferMetadataOptions.fromObject(object.metadataOptions);
+                            }
                             return message;
                         };
     
@@ -4532,6 +4957,7 @@
                                 object.name = "";
                                 object.requestId = "";
                                 object.serviceAccount = "";
+                                object.metadataOptions = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -4549,6 +4975,8 @@
                                 object.requestId = message.requestId;
                             if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
                                 object.serviceAccount = message.serviceAccount;
+                            if (message.metadataOptions != null && message.hasOwnProperty("metadataOptions"))
+                                object.metadataOptions = $root.google.cloud.parallelstore.v1.TransferMetadataOptions.toObject(message.metadataOptions, options);
                             return object;
                         };
     

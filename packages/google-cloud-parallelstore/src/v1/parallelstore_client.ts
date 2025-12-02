@@ -551,8 +551,8 @@ export class ParallelstoreClient {
  *   ignore the request if it has already been completed. The server will
  *   guarantee that for at least 60 minutes since the first request.
  *
- *   For example, consider a situation where you make an initial request and t
- *   he request times out. If you make the request again with the same request
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
  *   ID, the server can check if original operation with the same request ID
  *   was received, and if so, will ignore the second request. This prevents
  *   clients from accidentally creating duplicate commitments.
@@ -677,8 +677,8 @@ export class ParallelstoreClient {
  *   ignore the request if it has already been completed. The server will
  *   guarantee that for at least 60 minutes since the first request.
  *
- *   For example, consider a situation where you make an initial request and t
- *   he request times out. If you make the request again with the same request
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
  *   ID, the server can check if original operation with the same request ID
  *   was received, and if so, will ignore the second request. This prevents
  *   clients from accidentally creating duplicate commitments.
@@ -798,8 +798,8 @@ export class ParallelstoreClient {
  *   ignore the request if it has already been completed. The server will
  *   guarantee that for at least 60 minutes after the first request.
  *
- *   For example, consider a situation where you make an initial request and t
- *   he request times out. If you make the request again with the same request
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
  *   ID, the server can check if original operation with the same request ID
  *   was received, and if so, will ignore the second request. This prevents
  *   clients from accidentally creating duplicate commitments.
@@ -923,8 +923,8 @@ export class ParallelstoreClient {
  *   ignore the request if it has already been completed. The server will
  *   guarantee that for at least 60 minutes since the first request.
  *
- *   For example, consider a situation where you make an initial request and t
- *   he request times out. If you make the request again with the same request
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
  *   ID, the server can check if original operation with the same request ID
  *   was received, and if so, will ignore the second request. This prevents
  *   clients from accidentally creating duplicate commitments.
@@ -943,6 +943,8 @@ export class ParallelstoreClient {
  *
  *   If unspecified, the Parallelstore service agent is used:
  *   `service-<PROJECT_NUMBER>@gcp-sa-parallelstore.iam.gserviceaccount.com`
+ * @param {google.cloud.parallelstore.v1.TransferMetadataOptions} [request.metadataOptions]
+ *   Optional. The transfer metadata options for the import data.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -1060,8 +1062,8 @@ export class ParallelstoreClient {
  *   ignore the request if it has already been completed. The server will
  *   guarantee that for at least 60 minutes since the first request.
  *
- *   For example, consider a situation where you make an initial request and t
- *   he request times out. If you make the request again with the same request
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
  *   ID, the server can check if original operation with the same request ID
  *   was received, and if so, will ignore the second request. This prevents
  *   clients from accidentally creating duplicate commitments.
@@ -1079,6 +1081,8 @@ export class ParallelstoreClient {
  *
  *   If unspecified, the Parallelstore service agent is used:
  *   `service-<PROJECT_NUMBER>@gcp-sa-parallelstore.iam.gserviceaccount.com`
+ * @param {google.cloud.parallelstore.v1.TransferMetadataOptions} [request.metadataOptions]
+ *   Optional. The metadata options for the export data.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
