@@ -2,6 +2,7 @@
   "../../protos/google/cloud/networksecurity/v1beta1/authorization_policy.proto",
   "../../protos/google/cloud/networksecurity/v1beta1/client_tls_policy.proto",
   "../../protos/google/cloud/networksecurity/v1beta1/common.proto",
+  "../../protos/google/cloud/networksecurity/v1beta1/dns_threat_detector.proto",
   "../../protos/google/cloud/networksecurity/v1beta1/network_security.proto",
   "../../protos/google/cloud/networksecurity/v1beta1/server_tls_policy.proto",
   "../../protos/google/cloud/networksecurity/v1beta1/tls.proto"

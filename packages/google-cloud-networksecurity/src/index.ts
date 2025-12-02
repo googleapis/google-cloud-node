@@ -20,10 +20,12 @@ import * as v1 from './v1';
 import * as v1alpha1 from './v1alpha1';
 import * as v1beta1 from './v1beta1';
 
+const DnsThreatDetectorServiceClient = v1beta1.DnsThreatDetectorServiceClient;
+type DnsThreatDetectorServiceClient = v1beta1.DnsThreatDetectorServiceClient;
 const NetworkSecurityClient = v1beta1.NetworkSecurityClient;
 type NetworkSecurityClient = v1beta1.NetworkSecurityClient;
 
-export {v1, v1alpha1, v1beta1, NetworkSecurityClient};
-export default {v1, v1alpha1, v1beta1, NetworkSecurityClient};
+export {v1, v1alpha1, v1beta1, DnsThreatDetectorServiceClient, NetworkSecurityClient};
+export default {v1, v1alpha1, v1beta1, DnsThreatDetectorServiceClient, NetworkSecurityClient};
 import * as protos from '../protos/protos';
 export {protos};

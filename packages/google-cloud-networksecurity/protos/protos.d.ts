@@ -37765,6 +37765,895 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Represents a DnsThreatDetectorService */
+                class DnsThreatDetectorService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new DnsThreatDetectorService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new DnsThreatDetectorService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): DnsThreatDetectorService;
+
+                    /**
+                     * Calls ListDnsThreatDetectors.
+                     * @param request ListDnsThreatDetectorsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListDnsThreatDetectorsResponse
+                     */
+                    public listDnsThreatDetectors(request: google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsRequest, callback: google.cloud.networksecurity.v1beta1.DnsThreatDetectorService.ListDnsThreatDetectorsCallback): void;
+
+                    /**
+                     * Calls ListDnsThreatDetectors.
+                     * @param request ListDnsThreatDetectorsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listDnsThreatDetectors(request: google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsRequest): Promise<google.cloud.networksecurity.v1beta1.ListDnsThreatDetectorsResponse>;
+
+                    /**
+                     * Calls GetDnsThreatDetector.
+                     * @param request GetDnsThreatDetectorRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DnsThreatDetector
+                     */
+                    public getDnsThreatDetector(request: google.cloud.networksecurity.v1beta1.IGetDnsThreatDetectorRequest, callback: google.cloud.networksecurity.v1beta1.DnsThreatDetectorService.GetDnsThreatDetectorCallback): void;
+
+                    /**
+                     * Calls GetDnsThreatDetector.
+                     * @param request GetDnsThreatDetectorRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getDnsThreatDetector(request: google.cloud.networksecurity.v1beta1.IGetDnsThreatDetectorRequest): Promise<google.cloud.networksecurity.v1beta1.DnsThreatDetector>;
+
+                    /**
+                     * Calls CreateDnsThreatDetector.
+                     * @param request CreateDnsThreatDetectorRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DnsThreatDetector
+                     */
+                    public createDnsThreatDetector(request: google.cloud.networksecurity.v1beta1.ICreateDnsThreatDetectorRequest, callback: google.cloud.networksecurity.v1beta1.DnsThreatDetectorService.CreateDnsThreatDetectorCallback): void;
+
+                    /**
+                     * Calls CreateDnsThreatDetector.
+                     * @param request CreateDnsThreatDetectorRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createDnsThreatDetector(request: google.cloud.networksecurity.v1beta1.ICreateDnsThreatDetectorRequest): Promise<google.cloud.networksecurity.v1beta1.DnsThreatDetector>;
+
+                    /**
+                     * Calls UpdateDnsThreatDetector.
+                     * @param request UpdateDnsThreatDetectorRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DnsThreatDetector
+                     */
+                    public updateDnsThreatDetector(request: google.cloud.networksecurity.v1beta1.IUpdateDnsThreatDetectorRequest, callback: google.cloud.networksecurity.v1beta1.DnsThreatDetectorService.UpdateDnsThreatDetectorCallback): void;
+
+                    /**
+                     * Calls UpdateDnsThreatDetector.
+                     * @param request UpdateDnsThreatDetectorRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateDnsThreatDetector(request: google.cloud.networksecurity.v1beta1.IUpdateDnsThreatDetectorRequest): Promise<google.cloud.networksecurity.v1beta1.DnsThreatDetector>;
+
+                    /**
+                     * Calls DeleteDnsThreatDetector.
+                     * @param request DeleteDnsThreatDetectorRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteDnsThreatDetector(request: google.cloud.networksecurity.v1beta1.IDeleteDnsThreatDetectorRequest, callback: google.cloud.networksecurity.v1beta1.DnsThreatDetectorService.DeleteDnsThreatDetectorCallback): void;
+
+                    /**
+                     * Calls DeleteDnsThreatDetector.
+                     * @param request DeleteDnsThreatDetectorRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteDnsThreatDetector(request: google.cloud.networksecurity.v1beta1.IDeleteDnsThreatDetectorRequest): Promise<google.protobuf.Empty>;
+                }
+
+                namespace DnsThreatDetectorService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1beta1.DnsThreatDetectorService|listDnsThreatDetectors}.
+                     * @param error Error, if any
+                     * @param [response] ListDnsThreatDetectorsResponse
+                     */
+                    type ListDnsThreatDetectorsCallback = (error: (Error|null), response?: google.cloud.networksecurity.v1beta1.ListDnsThreatDetectorsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1beta1.DnsThreatDetectorService|getDnsThreatDetector}.
+                     * @param error Error, if any
+                     * @param [response] DnsThreatDetector
+                     */
+                    type GetDnsThreatDetectorCallback = (error: (Error|null), response?: google.cloud.networksecurity.v1beta1.DnsThreatDetector) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1beta1.DnsThreatDetectorService|createDnsThreatDetector}.
+                     * @param error Error, if any
+                     * @param [response] DnsThreatDetector
+                     */
+                    type CreateDnsThreatDetectorCallback = (error: (Error|null), response?: google.cloud.networksecurity.v1beta1.DnsThreatDetector) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1beta1.DnsThreatDetectorService|updateDnsThreatDetector}.
+                     * @param error Error, if any
+                     * @param [response] DnsThreatDetector
+                     */
+                    type UpdateDnsThreatDetectorCallback = (error: (Error|null), response?: google.cloud.networksecurity.v1beta1.DnsThreatDetector) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networksecurity.v1beta1.DnsThreatDetectorService|deleteDnsThreatDetector}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteDnsThreatDetectorCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+                }
+
+                /** Properties of a DnsThreatDetector. */
+                interface IDnsThreatDetector {
+
+                    /** DnsThreatDetector name */
+                    name?: (string|null);
+
+                    /** DnsThreatDetector createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DnsThreatDetector updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DnsThreatDetector labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** DnsThreatDetector excludedNetworks */
+                    excludedNetworks?: (string[]|null);
+
+                    /** DnsThreatDetector provider */
+                    provider?: (google.cloud.networksecurity.v1beta1.DnsThreatDetector.Provider|keyof typeof google.cloud.networksecurity.v1beta1.DnsThreatDetector.Provider|null);
+                }
+
+                /** Represents a DnsThreatDetector. */
+                class DnsThreatDetector implements IDnsThreatDetector {
+
+                    /**
+                     * Constructs a new DnsThreatDetector.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1beta1.IDnsThreatDetector);
+
+                    /** DnsThreatDetector name. */
+                    public name: string;
+
+                    /** DnsThreatDetector createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DnsThreatDetector updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DnsThreatDetector labels. */
+                    public labels: { [k: string]: string };
+
+                    /** DnsThreatDetector excludedNetworks. */
+                    public excludedNetworks: string[];
+
+                    /** DnsThreatDetector provider. */
+                    public provider: (google.cloud.networksecurity.v1beta1.DnsThreatDetector.Provider|keyof typeof google.cloud.networksecurity.v1beta1.DnsThreatDetector.Provider);
+
+                    /**
+                     * Creates a new DnsThreatDetector instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DnsThreatDetector instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1beta1.IDnsThreatDetector): google.cloud.networksecurity.v1beta1.DnsThreatDetector;
+
+                    /**
+                     * Encodes the specified DnsThreatDetector message. Does not implicitly {@link google.cloud.networksecurity.v1beta1.DnsThreatDetector.verify|verify} messages.
+                     * @param message DnsThreatDetector message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1beta1.IDnsThreatDetector, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DnsThreatDetector message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1beta1.DnsThreatDetector.verify|verify} messages.
+                     * @param message DnsThreatDetector message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1beta1.IDnsThreatDetector, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DnsThreatDetector message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DnsThreatDetector
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1beta1.DnsThreatDetector;
+
+                    /**
+                     * Decodes a DnsThreatDetector message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DnsThreatDetector
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1beta1.DnsThreatDetector;
+
+                    /**
+                     * Verifies a DnsThreatDetector message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DnsThreatDetector message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DnsThreatDetector
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1beta1.DnsThreatDetector;
+
+                    /**
+                     * Creates a plain object from a DnsThreatDetector message. Also converts values to other types if specified.
+                     * @param message DnsThreatDetector
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1beta1.DnsThreatDetector, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DnsThreatDetector to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DnsThreatDetector
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DnsThreatDetector {
+
+                    /** Provider enum. */
+                    enum Provider {
+                        PROVIDER_UNSPECIFIED = 0,
+                        INFOBLOX = 1
+                    }
+                }
+
+                /** Properties of a ListDnsThreatDetectorsRequest. */
+                interface IListDnsThreatDetectorsRequest {
+
+                    /** ListDnsThreatDetectorsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListDnsThreatDetectorsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListDnsThreatDetectorsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListDnsThreatDetectorsRequest. */
+                class ListDnsThreatDetectorsRequest implements IListDnsThreatDetectorsRequest {
+
+                    /**
+                     * Constructs a new ListDnsThreatDetectorsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsRequest);
+
+                    /** ListDnsThreatDetectorsRequest parent. */
+                    public parent: string;
+
+                    /** ListDnsThreatDetectorsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListDnsThreatDetectorsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListDnsThreatDetectorsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDnsThreatDetectorsRequest instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsRequest): google.cloud.networksecurity.v1beta1.ListDnsThreatDetectorsRequest;
+
+                    /**
+                     * Encodes the specified ListDnsThreatDetectorsRequest message. Does not implicitly {@link google.cloud.networksecurity.v1beta1.ListDnsThreatDetectorsRequest.verify|verify} messages.
+                     * @param message ListDnsThreatDetectorsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDnsThreatDetectorsRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1beta1.ListDnsThreatDetectorsRequest.verify|verify} messages.
+                     * @param message ListDnsThreatDetectorsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDnsThreatDetectorsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDnsThreatDetectorsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1beta1.ListDnsThreatDetectorsRequest;
+
+                    /**
+                     * Decodes a ListDnsThreatDetectorsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDnsThreatDetectorsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1beta1.ListDnsThreatDetectorsRequest;
+
+                    /**
+                     * Verifies a ListDnsThreatDetectorsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDnsThreatDetectorsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDnsThreatDetectorsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1beta1.ListDnsThreatDetectorsRequest;
+
+                    /**
+                     * Creates a plain object from a ListDnsThreatDetectorsRequest message. Also converts values to other types if specified.
+                     * @param message ListDnsThreatDetectorsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1beta1.ListDnsThreatDetectorsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDnsThreatDetectorsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDnsThreatDetectorsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListDnsThreatDetectorsResponse. */
+                interface IListDnsThreatDetectorsResponse {
+
+                    /** ListDnsThreatDetectorsResponse dnsThreatDetectors */
+                    dnsThreatDetectors?: (google.cloud.networksecurity.v1beta1.IDnsThreatDetector[]|null);
+
+                    /** ListDnsThreatDetectorsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListDnsThreatDetectorsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListDnsThreatDetectorsResponse. */
+                class ListDnsThreatDetectorsResponse implements IListDnsThreatDetectorsResponse {
+
+                    /**
+                     * Constructs a new ListDnsThreatDetectorsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsResponse);
+
+                    /** ListDnsThreatDetectorsResponse dnsThreatDetectors. */
+                    public dnsThreatDetectors: google.cloud.networksecurity.v1beta1.IDnsThreatDetector[];
+
+                    /** ListDnsThreatDetectorsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListDnsThreatDetectorsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListDnsThreatDetectorsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDnsThreatDetectorsResponse instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsResponse): google.cloud.networksecurity.v1beta1.ListDnsThreatDetectorsResponse;
+
+                    /**
+                     * Encodes the specified ListDnsThreatDetectorsResponse message. Does not implicitly {@link google.cloud.networksecurity.v1beta1.ListDnsThreatDetectorsResponse.verify|verify} messages.
+                     * @param message ListDnsThreatDetectorsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDnsThreatDetectorsResponse message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1beta1.ListDnsThreatDetectorsResponse.verify|verify} messages.
+                     * @param message ListDnsThreatDetectorsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1beta1.IListDnsThreatDetectorsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDnsThreatDetectorsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDnsThreatDetectorsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1beta1.ListDnsThreatDetectorsResponse;
+
+                    /**
+                     * Decodes a ListDnsThreatDetectorsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDnsThreatDetectorsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1beta1.ListDnsThreatDetectorsResponse;
+
+                    /**
+                     * Verifies a ListDnsThreatDetectorsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDnsThreatDetectorsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDnsThreatDetectorsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1beta1.ListDnsThreatDetectorsResponse;
+
+                    /**
+                     * Creates a plain object from a ListDnsThreatDetectorsResponse message. Also converts values to other types if specified.
+                     * @param message ListDnsThreatDetectorsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1beta1.ListDnsThreatDetectorsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDnsThreatDetectorsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDnsThreatDetectorsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetDnsThreatDetectorRequest. */
+                interface IGetDnsThreatDetectorRequest {
+
+                    /** GetDnsThreatDetectorRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetDnsThreatDetectorRequest. */
+                class GetDnsThreatDetectorRequest implements IGetDnsThreatDetectorRequest {
+
+                    /**
+                     * Constructs a new GetDnsThreatDetectorRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1beta1.IGetDnsThreatDetectorRequest);
+
+                    /** GetDnsThreatDetectorRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetDnsThreatDetectorRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetDnsThreatDetectorRequest instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1beta1.IGetDnsThreatDetectorRequest): google.cloud.networksecurity.v1beta1.GetDnsThreatDetectorRequest;
+
+                    /**
+                     * Encodes the specified GetDnsThreatDetectorRequest message. Does not implicitly {@link google.cloud.networksecurity.v1beta1.GetDnsThreatDetectorRequest.verify|verify} messages.
+                     * @param message GetDnsThreatDetectorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1beta1.IGetDnsThreatDetectorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetDnsThreatDetectorRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1beta1.GetDnsThreatDetectorRequest.verify|verify} messages.
+                     * @param message GetDnsThreatDetectorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1beta1.IGetDnsThreatDetectorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetDnsThreatDetectorRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetDnsThreatDetectorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1beta1.GetDnsThreatDetectorRequest;
+
+                    /**
+                     * Decodes a GetDnsThreatDetectorRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetDnsThreatDetectorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1beta1.GetDnsThreatDetectorRequest;
+
+                    /**
+                     * Verifies a GetDnsThreatDetectorRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetDnsThreatDetectorRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetDnsThreatDetectorRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1beta1.GetDnsThreatDetectorRequest;
+
+                    /**
+                     * Creates a plain object from a GetDnsThreatDetectorRequest message. Also converts values to other types if specified.
+                     * @param message GetDnsThreatDetectorRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1beta1.GetDnsThreatDetectorRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetDnsThreatDetectorRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetDnsThreatDetectorRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateDnsThreatDetectorRequest. */
+                interface ICreateDnsThreatDetectorRequest {
+
+                    /** CreateDnsThreatDetectorRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateDnsThreatDetectorRequest dnsThreatDetectorId */
+                    dnsThreatDetectorId?: (string|null);
+
+                    /** CreateDnsThreatDetectorRequest dnsThreatDetector */
+                    dnsThreatDetector?: (google.cloud.networksecurity.v1beta1.IDnsThreatDetector|null);
+                }
+
+                /** Represents a CreateDnsThreatDetectorRequest. */
+                class CreateDnsThreatDetectorRequest implements ICreateDnsThreatDetectorRequest {
+
+                    /**
+                     * Constructs a new CreateDnsThreatDetectorRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1beta1.ICreateDnsThreatDetectorRequest);
+
+                    /** CreateDnsThreatDetectorRequest parent. */
+                    public parent: string;
+
+                    /** CreateDnsThreatDetectorRequest dnsThreatDetectorId. */
+                    public dnsThreatDetectorId: string;
+
+                    /** CreateDnsThreatDetectorRequest dnsThreatDetector. */
+                    public dnsThreatDetector?: (google.cloud.networksecurity.v1beta1.IDnsThreatDetector|null);
+
+                    /**
+                     * Creates a new CreateDnsThreatDetectorRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateDnsThreatDetectorRequest instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1beta1.ICreateDnsThreatDetectorRequest): google.cloud.networksecurity.v1beta1.CreateDnsThreatDetectorRequest;
+
+                    /**
+                     * Encodes the specified CreateDnsThreatDetectorRequest message. Does not implicitly {@link google.cloud.networksecurity.v1beta1.CreateDnsThreatDetectorRequest.verify|verify} messages.
+                     * @param message CreateDnsThreatDetectorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1beta1.ICreateDnsThreatDetectorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateDnsThreatDetectorRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1beta1.CreateDnsThreatDetectorRequest.verify|verify} messages.
+                     * @param message CreateDnsThreatDetectorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1beta1.ICreateDnsThreatDetectorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateDnsThreatDetectorRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateDnsThreatDetectorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1beta1.CreateDnsThreatDetectorRequest;
+
+                    /**
+                     * Decodes a CreateDnsThreatDetectorRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateDnsThreatDetectorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1beta1.CreateDnsThreatDetectorRequest;
+
+                    /**
+                     * Verifies a CreateDnsThreatDetectorRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateDnsThreatDetectorRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateDnsThreatDetectorRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1beta1.CreateDnsThreatDetectorRequest;
+
+                    /**
+                     * Creates a plain object from a CreateDnsThreatDetectorRequest message. Also converts values to other types if specified.
+                     * @param message CreateDnsThreatDetectorRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1beta1.CreateDnsThreatDetectorRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateDnsThreatDetectorRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateDnsThreatDetectorRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateDnsThreatDetectorRequest. */
+                interface IUpdateDnsThreatDetectorRequest {
+
+                    /** UpdateDnsThreatDetectorRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateDnsThreatDetectorRequest dnsThreatDetector */
+                    dnsThreatDetector?: (google.cloud.networksecurity.v1beta1.IDnsThreatDetector|null);
+                }
+
+                /** Represents an UpdateDnsThreatDetectorRequest. */
+                class UpdateDnsThreatDetectorRequest implements IUpdateDnsThreatDetectorRequest {
+
+                    /**
+                     * Constructs a new UpdateDnsThreatDetectorRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1beta1.IUpdateDnsThreatDetectorRequest);
+
+                    /** UpdateDnsThreatDetectorRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateDnsThreatDetectorRequest dnsThreatDetector. */
+                    public dnsThreatDetector?: (google.cloud.networksecurity.v1beta1.IDnsThreatDetector|null);
+
+                    /**
+                     * Creates a new UpdateDnsThreatDetectorRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateDnsThreatDetectorRequest instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1beta1.IUpdateDnsThreatDetectorRequest): google.cloud.networksecurity.v1beta1.UpdateDnsThreatDetectorRequest;
+
+                    /**
+                     * Encodes the specified UpdateDnsThreatDetectorRequest message. Does not implicitly {@link google.cloud.networksecurity.v1beta1.UpdateDnsThreatDetectorRequest.verify|verify} messages.
+                     * @param message UpdateDnsThreatDetectorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1beta1.IUpdateDnsThreatDetectorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateDnsThreatDetectorRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1beta1.UpdateDnsThreatDetectorRequest.verify|verify} messages.
+                     * @param message UpdateDnsThreatDetectorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1beta1.IUpdateDnsThreatDetectorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateDnsThreatDetectorRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateDnsThreatDetectorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1beta1.UpdateDnsThreatDetectorRequest;
+
+                    /**
+                     * Decodes an UpdateDnsThreatDetectorRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateDnsThreatDetectorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1beta1.UpdateDnsThreatDetectorRequest;
+
+                    /**
+                     * Verifies an UpdateDnsThreatDetectorRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateDnsThreatDetectorRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateDnsThreatDetectorRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1beta1.UpdateDnsThreatDetectorRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateDnsThreatDetectorRequest message. Also converts values to other types if specified.
+                     * @param message UpdateDnsThreatDetectorRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1beta1.UpdateDnsThreatDetectorRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateDnsThreatDetectorRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateDnsThreatDetectorRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteDnsThreatDetectorRequest. */
+                interface IDeleteDnsThreatDetectorRequest {
+
+                    /** DeleteDnsThreatDetectorRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteDnsThreatDetectorRequest. */
+                class DeleteDnsThreatDetectorRequest implements IDeleteDnsThreatDetectorRequest {
+
+                    /**
+                     * Constructs a new DeleteDnsThreatDetectorRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networksecurity.v1beta1.IDeleteDnsThreatDetectorRequest);
+
+                    /** DeleteDnsThreatDetectorRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteDnsThreatDetectorRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteDnsThreatDetectorRequest instance
+                     */
+                    public static create(properties?: google.cloud.networksecurity.v1beta1.IDeleteDnsThreatDetectorRequest): google.cloud.networksecurity.v1beta1.DeleteDnsThreatDetectorRequest;
+
+                    /**
+                     * Encodes the specified DeleteDnsThreatDetectorRequest message. Does not implicitly {@link google.cloud.networksecurity.v1beta1.DeleteDnsThreatDetectorRequest.verify|verify} messages.
+                     * @param message DeleteDnsThreatDetectorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networksecurity.v1beta1.IDeleteDnsThreatDetectorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteDnsThreatDetectorRequest message, length delimited. Does not implicitly {@link google.cloud.networksecurity.v1beta1.DeleteDnsThreatDetectorRequest.verify|verify} messages.
+                     * @param message DeleteDnsThreatDetectorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networksecurity.v1beta1.IDeleteDnsThreatDetectorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteDnsThreatDetectorRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteDnsThreatDetectorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networksecurity.v1beta1.DeleteDnsThreatDetectorRequest;
+
+                    /**
+                     * Decodes a DeleteDnsThreatDetectorRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteDnsThreatDetectorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networksecurity.v1beta1.DeleteDnsThreatDetectorRequest;
+
+                    /**
+                     * Verifies a DeleteDnsThreatDetectorRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteDnsThreatDetectorRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteDnsThreatDetectorRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networksecurity.v1beta1.DeleteDnsThreatDetectorRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteDnsThreatDetectorRequest message. Also converts values to other types if specified.
+                     * @param message DeleteDnsThreatDetectorRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networksecurity.v1beta1.DeleteDnsThreatDetectorRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteDnsThreatDetectorRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteDnsThreatDetectorRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Represents a NetworkSecurity */
                 class NetworkSecurity extends $protobuf.rpc.Service {
 
