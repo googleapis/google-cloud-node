@@ -1087,7 +1087,11 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/global_public_delegated_prefixes.list.js) |
 | patch | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/global_public_delegated_prefixes.patch.js) |
 | aggregated list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/global_vm_extension_policies.aggregated_list.js) |
+| delete | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/global_vm_extension_policies.delete.js) |
 | get | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/global_vm_extension_policies.get.js) |
+| insert | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/global_vm_extension_policies.insert.js) |
+| list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/global_vm_extension_policies.list.js) |
+| update | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/global_vm_extension_policies.update.js) |
 | aggregated list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/health_checks.aggregated_list.js) |
 | delete | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/health_checks.delete.js) |
 | get | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/health_checks.get.js) |
@@ -1716,6 +1720,14 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | patch | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/resource_policies.patch.js) |
 | set iam policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/resource_policies.set_iam_policy.js) |
 | test iam permissions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/resource_policies.test_iam_permissions.js) |
+| delete | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/rollout_plans.delete.js) |
+| get | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/rollout_plans.get.js) |
+| insert | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/rollout_plans.insert.js) |
+| list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/rollout_plans.list.js) |
+| cancel | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/rollouts.cancel.js) |
+| delete | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/rollouts.delete.js) |
+| get | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/rollouts.get.js) |
+| list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/rollouts.list.js) |
 | aggregated list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/routers.aggregated_list.js) |
 | delete | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/routers.delete.js) |
 | delete route policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/routers.delete_route_policy.js) |

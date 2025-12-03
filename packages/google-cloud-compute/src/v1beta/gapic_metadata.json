@@ -2092,9 +2092,24 @@
         "grpc": {
           "libraryClient": "GlobalVmExtensionPoliciesClient",
           "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
             "Get": {
               "methods": [
                 "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "Update": {
+              "methods": [
+                "update"
               ]
             },
             "AggregatedList": {
@@ -2102,6 +2117,13 @@
                 "aggregatedList",
                 "aggregatedListStream",
                 "aggregatedListAsync"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
               ]
             }
           }
@@ -2109,9 +2131,24 @@
         "grpc-fallback": {
           "libraryClient": "GlobalVmExtensionPoliciesClient",
           "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
             "Get": {
               "methods": [
                 "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "Update": {
+              "methods": [
+                "update"
               ]
             },
             "AggregatedList": {
@@ -2119,6 +2156,13 @@
                 "aggregatedList",
                 "aggregatedListStream",
                 "aggregatedListAsync"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
               ]
             }
           }
@@ -9856,6 +9900,122 @@
                 "aggregatedList",
                 "aggregatedListStream",
                 "aggregatedListAsync"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RolloutPlans": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RolloutPlansClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RolloutPlansClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Rollouts": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RolloutsClient",
+          "rpcs": {
+            "Cancel": {
+              "methods": [
+                "cancel"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RolloutsClient",
+          "rpcs": {
+            "Cancel": {
+              "methods": [
+                "cancel"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
               ]
             },
             "List": {

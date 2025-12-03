@@ -270,6 +270,126 @@ describe('v1beta.GlobalVmExtensionPoliciesClient', () => {
         });
     });
 
+    describe('delete', () => {
+        it('invokes delete without error', async () => {
+            const client = new globalvmextensionpoliciesModule.v1beta.GlobalVmExtensionPoliciesClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.DeleteGlobalVmExtensionPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.DeleteGlobalVmExtensionPolicyRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.DeleteGlobalVmExtensionPolicyRequest', ['globalVmExtensionPolicy']);
+            request.globalVmExtensionPolicy = defaultValue2;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&global_vm_extension_policy=${defaultValue2 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.Operation()
+            );
+            client.innerApiCalls.delete = stubSimpleCall(expectedResponse);
+            const [response] = await client.delete(request);
+            assert.deepStrictEqual(response.latestResponse, expectedResponse);
+            const actualRequest = (client.innerApiCalls.delete as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.delete as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes delete without error using callback', async () => {
+            const client = new globalvmextensionpoliciesModule.v1beta.GlobalVmExtensionPoliciesClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.DeleteGlobalVmExtensionPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.DeleteGlobalVmExtensionPolicyRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.DeleteGlobalVmExtensionPolicyRequest', ['globalVmExtensionPolicy']);
+            request.globalVmExtensionPolicy = defaultValue2;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&global_vm_extension_policy=${defaultValue2 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.Operation()
+            );
+            client.innerApiCalls.delete = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.delete(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.compute.v1beta.IOperation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.delete as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.delete as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes delete with error', async () => {
+            const client = new globalvmextensionpoliciesModule.v1beta.GlobalVmExtensionPoliciesClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.DeleteGlobalVmExtensionPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.DeleteGlobalVmExtensionPolicyRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.DeleteGlobalVmExtensionPolicyRequest', ['globalVmExtensionPolicy']);
+            request.globalVmExtensionPolicy = defaultValue2;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&global_vm_extension_policy=${defaultValue2 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.delete = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.delete(request), expectedError);
+            const actualRequest = (client.innerApiCalls.delete as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.delete as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes delete with closed client', async () => {
+            const client = new globalvmextensionpoliciesModule.v1beta.GlobalVmExtensionPoliciesClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.DeleteGlobalVmExtensionPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.DeleteGlobalVmExtensionPolicyRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.DeleteGlobalVmExtensionPolicyRequest', ['globalVmExtensionPolicy']);
+            request.globalVmExtensionPolicy = defaultValue2;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.delete(request), expectedError);
+        });
+    });
+
     describe('get', () => {
         it('invokes get without error', async () => {
             const client = new globalvmextensionpoliciesModule.v1beta.GlobalVmExtensionPoliciesClient({
@@ -390,6 +510,234 @@ describe('v1beta.GlobalVmExtensionPoliciesClient', () => {
         });
     });
 
+    describe('insert', () => {
+        it('invokes insert without error', async () => {
+            const client = new globalvmextensionpoliciesModule.v1beta.GlobalVmExtensionPoliciesClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.InsertGlobalVmExtensionPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.InsertGlobalVmExtensionPolicyRequest', ['project']);
+            request.project = defaultValue1;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.Operation()
+            );
+            client.innerApiCalls.insert = stubSimpleCall(expectedResponse);
+            const [response] = await client.insert(request);
+            assert.deepStrictEqual(response.latestResponse, expectedResponse);
+            const actualRequest = (client.innerApiCalls.insert as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.insert as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes insert without error using callback', async () => {
+            const client = new globalvmextensionpoliciesModule.v1beta.GlobalVmExtensionPoliciesClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.InsertGlobalVmExtensionPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.InsertGlobalVmExtensionPolicyRequest', ['project']);
+            request.project = defaultValue1;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.Operation()
+            );
+            client.innerApiCalls.insert = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.insert(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.compute.v1beta.IOperation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.insert as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.insert as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes insert with error', async () => {
+            const client = new globalvmextensionpoliciesModule.v1beta.GlobalVmExtensionPoliciesClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.InsertGlobalVmExtensionPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.InsertGlobalVmExtensionPolicyRequest', ['project']);
+            request.project = defaultValue1;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.insert = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.insert(request), expectedError);
+            const actualRequest = (client.innerApiCalls.insert as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.insert as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes insert with closed client', async () => {
+            const client = new globalvmextensionpoliciesModule.v1beta.GlobalVmExtensionPoliciesClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.InsertGlobalVmExtensionPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.InsertGlobalVmExtensionPolicyRequest', ['project']);
+            request.project = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.insert(request), expectedError);
+        });
+    });
+
+    describe('update', () => {
+        it('invokes update without error', async () => {
+            const client = new globalvmextensionpoliciesModule.v1beta.GlobalVmExtensionPoliciesClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.UpdateGlobalVmExtensionPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.UpdateGlobalVmExtensionPolicyRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.UpdateGlobalVmExtensionPolicyRequest', ['globalVmExtensionPolicy']);
+            request.globalVmExtensionPolicy = defaultValue2;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&global_vm_extension_policy=${defaultValue2 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.Operation()
+            );
+            client.innerApiCalls.update = stubSimpleCall(expectedResponse);
+            const [response] = await client.update(request);
+            assert.deepStrictEqual(response.latestResponse, expectedResponse);
+            const actualRequest = (client.innerApiCalls.update as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.update as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes update without error using callback', async () => {
+            const client = new globalvmextensionpoliciesModule.v1beta.GlobalVmExtensionPoliciesClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.UpdateGlobalVmExtensionPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.UpdateGlobalVmExtensionPolicyRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.UpdateGlobalVmExtensionPolicyRequest', ['globalVmExtensionPolicy']);
+            request.globalVmExtensionPolicy = defaultValue2;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&global_vm_extension_policy=${defaultValue2 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.Operation()
+            );
+            client.innerApiCalls.update = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.update(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.compute.v1beta.IOperation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.update as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.update as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes update with error', async () => {
+            const client = new globalvmextensionpoliciesModule.v1beta.GlobalVmExtensionPoliciesClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.UpdateGlobalVmExtensionPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.UpdateGlobalVmExtensionPolicyRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.UpdateGlobalVmExtensionPolicyRequest', ['globalVmExtensionPolicy']);
+            request.globalVmExtensionPolicy = defaultValue2;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&global_vm_extension_policy=${defaultValue2 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.update = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.update(request), expectedError);
+            const actualRequest = (client.innerApiCalls.update as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.update as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes update with closed client', async () => {
+            const client = new globalvmextensionpoliciesModule.v1beta.GlobalVmExtensionPoliciesClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.UpdateGlobalVmExtensionPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.UpdateGlobalVmExtensionPolicyRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.UpdateGlobalVmExtensionPolicyRequest', ['globalVmExtensionPolicy']);
+            request.globalVmExtensionPolicy = defaultValue2;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.update(request), expectedError);
+        });
+    });
+
     describe('aggregatedList', () => {
 
         it('uses async iteration with aggregatedList without error', async () => {
@@ -455,6 +803,251 @@ describe('v1beta.GlobalVmExtensionPoliciesClient', () => {
                     .getCall(0).args[1], request);
             assert(
                 (client.descriptors.page.aggregatedList.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('list', () => {
+        it('invokes list without error', async () => {
+            const client = new globalvmextensionpoliciesModule.v1beta.GlobalVmExtensionPoliciesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.ListGlobalVmExtensionPoliciesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ListGlobalVmExtensionPoliciesRequest', ['project']);
+            request.project = defaultValue1;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.compute.v1beta.GlobalVmExtensionPolicy()),
+              generateSampleMessage(new protos.google.cloud.compute.v1beta.GlobalVmExtensionPolicy()),
+              generateSampleMessage(new protos.google.cloud.compute.v1beta.GlobalVmExtensionPolicy()),
+            ];
+            client.innerApiCalls.list = stubSimpleCall(expectedResponse);
+            const [response] = await client.list(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.list as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.list as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes list without error using callback', async () => {
+            const client = new globalvmextensionpoliciesModule.v1beta.GlobalVmExtensionPoliciesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.ListGlobalVmExtensionPoliciesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ListGlobalVmExtensionPoliciesRequest', ['project']);
+            request.project = defaultValue1;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.compute.v1beta.GlobalVmExtensionPolicy()),
+              generateSampleMessage(new protos.google.cloud.compute.v1beta.GlobalVmExtensionPolicy()),
+              generateSampleMessage(new protos.google.cloud.compute.v1beta.GlobalVmExtensionPolicy()),
+            ];
+            client.innerApiCalls.list = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.list(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.compute.v1beta.IGlobalVmExtensionPolicy[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.list as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.list as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes list with error', async () => {
+            const client = new globalvmextensionpoliciesModule.v1beta.GlobalVmExtensionPoliciesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.ListGlobalVmExtensionPoliciesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ListGlobalVmExtensionPoliciesRequest', ['project']);
+            request.project = defaultValue1;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.list = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.list(request), expectedError);
+            const actualRequest = (client.innerApiCalls.list as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.list as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listStream without error', async () => {
+            const client = new globalvmextensionpoliciesModule.v1beta.GlobalVmExtensionPoliciesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.ListGlobalVmExtensionPoliciesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ListGlobalVmExtensionPoliciesRequest', ['project']);
+            request.project = defaultValue1;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.compute.v1beta.GlobalVmExtensionPolicy()),
+              generateSampleMessage(new protos.google.cloud.compute.v1beta.GlobalVmExtensionPolicy()),
+              generateSampleMessage(new protos.google.cloud.compute.v1beta.GlobalVmExtensionPolicy()),
+            ];
+            client.descriptors.page.list.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.compute.v1beta.GlobalVmExtensionPolicy[] = [];
+                stream.on('data', (response: protos.google.cloud.compute.v1beta.GlobalVmExtensionPolicy) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.list.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.list, request));
+            assert(
+                (client.descriptors.page.list.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listStream with error', async () => {
+            const client = new globalvmextensionpoliciesModule.v1beta.GlobalVmExtensionPoliciesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.ListGlobalVmExtensionPoliciesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ListGlobalVmExtensionPoliciesRequest', ['project']);
+            request.project = defaultValue1;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.list.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.compute.v1beta.GlobalVmExtensionPolicy[] = [];
+                stream.on('data', (response: protos.google.cloud.compute.v1beta.GlobalVmExtensionPolicy) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.list.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.list, request));
+            assert(
+                (client.descriptors.page.list.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with list without error', async () => {
+            const client = new globalvmextensionpoliciesModule.v1beta.GlobalVmExtensionPoliciesClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.ListGlobalVmExtensionPoliciesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ListGlobalVmExtensionPoliciesRequest', ['project']);
+            request.project = defaultValue1;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.compute.v1beta.GlobalVmExtensionPolicy()),
+              generateSampleMessage(new protos.google.cloud.compute.v1beta.GlobalVmExtensionPolicy()),
+              generateSampleMessage(new protos.google.cloud.compute.v1beta.GlobalVmExtensionPolicy()),
+            ];
+            client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.compute.v1beta.IGlobalVmExtensionPolicy[] = [];
+            const iterable = client.listAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.list.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.list.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with list with error', async () => {
+            const client = new globalvmextensionpoliciesModule.v1beta.GlobalVmExtensionPoliciesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.ListGlobalVmExtensionPoliciesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ListGlobalVmExtensionPoliciesRequest', ['project']);
+            request.project = defaultValue1;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.compute.v1beta.IGlobalVmExtensionPolicy[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.list.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.list.asyncIterate as SinonStub)
                     .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
                         expectedHeaderRequestParams
                     )

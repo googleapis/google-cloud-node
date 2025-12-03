@@ -126869,6 +126869,51 @@
                         }
                       }
                     },
+                    "CancelRolloutRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        },
+                        "_rollback": {
+                          "oneof": [
+                            "rollback"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "rollback": {
+                          "type": "bool",
+                          "id": 277151460,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "rollout": {
+                          "type": "string",
+                          "id": 303366577,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "CircuitBreakers": {
                       "oneofs": {
                         "_connectTimeout": {
@@ -127384,6 +127429,7 @@
                             "GENERAL_PURPOSE_N2": 301912156,
                             "GENERAL_PURPOSE_N2D": 232471400,
                             "GENERAL_PURPOSE_N4": 301912158,
+                            "GENERAL_PURPOSE_N4D": 232471462,
                             "GENERAL_PURPOSE_T2D": 232477166,
                             "GRAPHICS_OPTIMIZED": 68500563,
                             "MEMORY_OPTIMIZED": 281753417,
@@ -129377,6 +129423,46 @@
                           "id": 204238440,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "DeleteGlobalVmExtensionPolicyRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "globalVmExtensionPolicy": {
+                          "type": "string",
+                          "id": 8334110,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "globalVmExtensionPolicyRolloutOperationRolloutInputResource": {
+                          "type": "GlobalVmExtensionPolicyRolloutOperationRolloutInput",
+                          "id": 147209176,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
                           }
                         },
                         "requestId": {
@@ -131777,6 +131863,72 @@
                         "resourcePolicy": {
                           "type": "string",
                           "id": 159240835,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteRolloutPlanRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "rolloutPlan": {
+                          "type": "string",
+                          "id": 459057399,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteRolloutRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "rollout": {
+                          "type": "string",
+                          "id": 303366577,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
@@ -143058,6 +143210,42 @@
                         }
                       }
                     },
+                    "GetRolloutPlanRequest": {
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "rolloutPlan": {
+                          "type": "string",
+                          "id": 459057399,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetRolloutRequest": {
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "rollout": {
+                          "type": "string",
+                          "id": 303366577,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "GetRoutePolicyRouterRequest": {
                       "oneofs": {
                         "_policy": {
@@ -144530,6 +144718,94 @@
                           "keyType": "string",
                           "type": "string",
                           "id": 501312642
+                        }
+                      }
+                    },
+                    "GlobalVmExtensionPolicyList": {
+                      "oneofs": {
+                        "_etag": {
+                          "oneof": [
+                            "etag"
+                          ]
+                        },
+                        "_id": {
+                          "oneof": [
+                            "id"
+                          ]
+                        },
+                        "_kind": {
+                          "oneof": [
+                            "kind"
+                          ]
+                        },
+                        "_nextPageToken": {
+                          "oneof": [
+                            "nextPageToken"
+                          ]
+                        },
+                        "_selfLink": {
+                          "oneof": [
+                            "selfLink"
+                          ]
+                        },
+                        "_warning": {
+                          "oneof": [
+                            "warning"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "etag": {
+                          "type": "string",
+                          "id": 3123477,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "id": {
+                          "type": "string",
+                          "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "items": {
+                          "rule": "repeated",
+                          "type": "GlobalVmExtensionPolicy",
+                          "id": 100526016
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 3292052,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 79797525,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLink": {
+                          "type": "string",
+                          "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "unreachables": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 243372063
+                        },
+                        "warning": {
+                          "type": "Warning",
+                          "id": 50704284,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },
@@ -148891,6 +149167,39 @@
                         }
                       }
                     },
+                    "InsertGlobalVmExtensionPolicyRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "globalVmExtensionPolicyResource": {
+                          "type": "GlobalVmExtensionPolicy",
+                          "id": 101542927,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "InsertHealthCheckRequest": {
                       "oneofs": {
                         "_requestId": {
@@ -151125,6 +151434,39 @@
                         "resourcePolicyResource": {
                           "type": "ResourcePolicy",
                           "id": 76826186,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "InsertRolloutPlanRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "rolloutPlanResource": {
+                          "type": "RolloutPlan",
+                          "id": 38629974,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
@@ -153791,6 +154133,11 @@
                     },
                     "InstanceGroupManagerInstanceFlexibilityPolicyInstanceSelection": {
                       "oneofs": {
+                        "_minCpuPlatform": {
+                          "oneof": [
+                            "minCpuPlatform"
+                          ]
+                        },
                         "_rank": {
                           "oneof": [
                             "rank"
@@ -153798,10 +154145,22 @@
                         }
                       },
                       "fields": {
+                        "disks": {
+                          "rule": "repeated",
+                          "type": "AttachedDisk",
+                          "id": 95594102
+                        },
                         "machineTypes": {
                           "rule": "repeated",
                           "type": "string",
                           "id": 79720065
+                        },
+                        "minCpuPlatform": {
+                          "type": "string",
+                          "id": 242912759,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         },
                         "rank": {
                           "type": "int32",
@@ -164822,6 +165181,79 @@
                         }
                       }
                     },
+                    "ListGlobalVmExtensionPoliciesRequest": {
+                      "oneofs": {
+                        "_filter": {
+                          "oneof": [
+                            "filter"
+                          ]
+                        },
+                        "_maxResults": {
+                          "oneof": [
+                            "maxResults"
+                          ]
+                        },
+                        "_orderBy": {
+                          "oneof": [
+                            "orderBy"
+                          ]
+                        },
+                        "_pageToken": {
+                          "oneof": [
+                            "pageToken"
+                          ]
+                        },
+                        "_returnPartialSuccess": {
+                          "oneof": [
+                            "returnPartialSuccess"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "filter": {
+                          "type": "string",
+                          "id": 336120696,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxResults": {
+                          "type": "uint32",
+                          "id": 54715419,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 160562920,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 19994697,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "returnPartialSuccess": {
+                          "type": "bool",
+                          "id": 517198390,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "ListHealthChecksRequest": {
                       "oneofs": {
                         "_filter": {
@@ -171341,6 +171773,152 @@
                         }
                       }
                     },
+                    "ListRolloutPlansRequest": {
+                      "oneofs": {
+                        "_filter": {
+                          "oneof": [
+                            "filter"
+                          ]
+                        },
+                        "_maxResults": {
+                          "oneof": [
+                            "maxResults"
+                          ]
+                        },
+                        "_orderBy": {
+                          "oneof": [
+                            "orderBy"
+                          ]
+                        },
+                        "_pageToken": {
+                          "oneof": [
+                            "pageToken"
+                          ]
+                        },
+                        "_returnPartialSuccess": {
+                          "oneof": [
+                            "returnPartialSuccess"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "filter": {
+                          "type": "string",
+                          "id": 336120696,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxResults": {
+                          "type": "uint32",
+                          "id": 54715419,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 160562920,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 19994697,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "returnPartialSuccess": {
+                          "type": "bool",
+                          "id": 517198390,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "ListRolloutsRequest": {
+                      "oneofs": {
+                        "_filter": {
+                          "oneof": [
+                            "filter"
+                          ]
+                        },
+                        "_maxResults": {
+                          "oneof": [
+                            "maxResults"
+                          ]
+                        },
+                        "_orderBy": {
+                          "oneof": [
+                            "orderBy"
+                          ]
+                        },
+                        "_pageToken": {
+                          "oneof": [
+                            "pageToken"
+                          ]
+                        },
+                        "_returnPartialSuccess": {
+                          "oneof": [
+                            "returnPartialSuccess"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "filter": {
+                          "type": "string",
+                          "id": 336120696,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxResults": {
+                          "type": "uint32",
+                          "id": 54715419,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 160562920,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 19994697,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "returnPartialSuccess": {
+                          "type": "bool",
+                          "id": 517198390,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "ListRoutePoliciesRoutersRequest": {
                       "oneofs": {
                         "_filter": {
@@ -174986,6 +175564,11 @@
                             "machineType"
                           ]
                         },
+                        "_minCpuPlatform": {
+                          "oneof": [
+                            "minCpuPlatform"
+                          ]
+                        },
                         "_provisioningModel": {
                           "oneof": [
                             "provisioningModel"
@@ -174993,9 +175576,21 @@
                         }
                       },
                       "fields": {
+                        "disks": {
+                          "rule": "repeated",
+                          "type": "AttachedDisk",
+                          "id": 95594102
+                        },
                         "machineType": {
                           "type": "string",
                           "id": 227711026,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "minCpuPlatform": {
+                          "type": "string",
+                          "id": 242912759,
                           "options": {
                             "proto3_optional": true
                           }
@@ -195930,6 +196525,663 @@
                         }
                       }
                     },
+                    "Rollout": {
+                      "oneofs": {
+                        "_cancellationTime": {
+                          "oneof": [
+                            "cancellationTime"
+                          ]
+                        },
+                        "_completionTime": {
+                          "oneof": [
+                            "completionTime"
+                          ]
+                        },
+                        "_creationTimestamp": {
+                          "oneof": [
+                            "creationTimestamp"
+                          ]
+                        },
+                        "_currentWaveNumber": {
+                          "oneof": [
+                            "currentWaveNumber"
+                          ]
+                        },
+                        "_description": {
+                          "oneof": [
+                            "description"
+                          ]
+                        },
+                        "_etag": {
+                          "oneof": [
+                            "etag"
+                          ]
+                        },
+                        "_id": {
+                          "oneof": [
+                            "id"
+                          ]
+                        },
+                        "_kind": {
+                          "oneof": [
+                            "kind"
+                          ]
+                        },
+                        "_name": {
+                          "oneof": [
+                            "name"
+                          ]
+                        },
+                        "_rolloutEntity": {
+                          "oneof": [
+                            "rolloutEntity"
+                          ]
+                        },
+                        "_rolloutPlan": {
+                          "oneof": [
+                            "rolloutPlan"
+                          ]
+                        },
+                        "_selfLink": {
+                          "oneof": [
+                            "selfLink"
+                          ]
+                        },
+                        "_selfLinkWithId": {
+                          "oneof": [
+                            "selfLinkWithId"
+                          ]
+                        },
+                        "_state": {
+                          "oneof": [
+                            "state"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "cancellationTime": {
+                          "type": "string",
+                          "id": 323792009,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "completionTime": {
+                          "type": "string",
+                          "id": 122892624,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "creationTimestamp": {
+                          "type": "string",
+                          "id": 30525366,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "currentWaveNumber": {
+                          "type": "int64",
+                          "id": 178280841,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 422937596,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 3123477,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "id": {
+                          "type": "uint64",
+                          "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 3292052,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 3373707,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "rolloutEntity": {
+                          "type": "RolloutRolloutEntity",
+                          "id": 70633009,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "rolloutPlan": {
+                          "type": "string",
+                          "id": 459057399,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLink": {
+                          "type": "string",
+                          "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLinkWithId": {
+                          "type": "string",
+                          "id": 44520962,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "state": {
+                          "type": "string",
+                          "id": 109757585,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "waveDetails": {
+                          "rule": "repeated",
+                          "type": "RolloutWaveDetails",
+                          "id": 8266492
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "UNDEFINED_STATE": 0,
+                            "CANCELLED": 41957681,
+                            "CANCELLING": 226950512,
+                            "CANCEL_FAILED": 389121442,
+                            "COMPLETED": 309921323,
+                            "COMPLETE_FAILED": 188367363,
+                            "COMPLETING": 480759734,
+                            "FAILED": 455706685,
+                            "PAUSED": 205491502,
+                            "PAUSE_FAILED": 7486150,
+                            "PAUSING": 464660755,
+                            "PROCESSING": 370416403,
+                            "READY": 77848963,
+                            "RESUMING": 446856618,
+                            "ROLLBACK_WAVE_FAILED": 326793064,
+                            "ROLLING_BACK": 259411649,
+                            "STATE_UNSPECIFIED": 470755401,
+                            "UNINITIALIZED": 327337595,
+                            "WAVE_FAILED": 195452995
+                          }
+                        }
+                      }
+                    },
+                    "RolloutPlan": {
+                      "oneofs": {
+                        "_creationTimestamp": {
+                          "oneof": [
+                            "creationTimestamp"
+                          ]
+                        },
+                        "_description": {
+                          "oneof": [
+                            "description"
+                          ]
+                        },
+                        "_id": {
+                          "oneof": [
+                            "id"
+                          ]
+                        },
+                        "_kind": {
+                          "oneof": [
+                            "kind"
+                          ]
+                        },
+                        "_locationScope": {
+                          "oneof": [
+                            "locationScope"
+                          ]
+                        },
+                        "_name": {
+                          "oneof": [
+                            "name"
+                          ]
+                        },
+                        "_selfLink": {
+                          "oneof": [
+                            "selfLink"
+                          ]
+                        },
+                        "_selfLinkWithId": {
+                          "oneof": [
+                            "selfLinkWithId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "creationTimestamp": {
+                          "type": "string",
+                          "id": 30525366,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 422937596,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "id": {
+                          "type": "uint64",
+                          "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 3292052,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "locationScope": {
+                          "type": "string",
+                          "id": 138667338,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 3373707,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLink": {
+                          "type": "string",
+                          "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLinkWithId": {
+                          "type": "string",
+                          "id": 44520962,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "waves": {
+                          "rule": "repeated",
+                          "type": "RolloutPlanWave",
+                          "id": 112905370
+                        }
+                      },
+                      "nested": {
+                        "LocationScope": {
+                          "values": {
+                            "UNDEFINED_LOCATION_SCOPE": 0,
+                            "LOCATION_SCOPE_UNSPECIFIED": 416410498,
+                            "REGIONAL": 92288543,
+                            "ZONAL": 85547428
+                          }
+                        }
+                      }
+                    },
+                    "RolloutPlanWave": {
+                      "oneofs": {
+                        "_displayName": {
+                          "oneof": [
+                            "displayName"
+                          ]
+                        },
+                        "_number": {
+                          "oneof": [
+                            "number"
+                          ]
+                        },
+                        "_orchestrationOptions": {
+                          "oneof": [
+                            "orchestrationOptions"
+                          ]
+                        },
+                        "_validation": {
+                          "oneof": [
+                            "validation"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 4473832,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "number": {
+                          "type": "int64",
+                          "id": 39377737,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "orchestrationOptions": {
+                          "type": "RolloutPlanWaveOrchestrationOptions",
+                          "id": 93218464,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selectors": {
+                          "rule": "repeated",
+                          "type": "RolloutPlanWaveSelector",
+                          "id": 431523956
+                        },
+                        "validation": {
+                          "type": "RolloutPlanWaveValidation",
+                          "id": 493308025,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "RolloutPlanWaveOrchestrationOptions": {
+                      "oneofs": {
+                        "_maxConcurrentLocations": {
+                          "oneof": [
+                            "maxConcurrentLocations"
+                          ]
+                        },
+                        "_maxConcurrentResourcesPerLocation": {
+                          "oneof": [
+                            "maxConcurrentResourcesPerLocation"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "delays": {
+                          "rule": "repeated",
+                          "type": "RolloutPlanWaveOrchestrationOptionsDelay",
+                          "id": 275150672
+                        },
+                        "maxConcurrentLocations": {
+                          "type": "int64",
+                          "id": 493763281,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxConcurrentResourcesPerLocation": {
+                          "type": "int64",
+                          "id": 178401246,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "RolloutPlanWaveOrchestrationOptionsDelay": {
+                      "oneofs": {
+                        "_delimiter": {
+                          "oneof": [
+                            "delimiter"
+                          ]
+                        },
+                        "_duration": {
+                          "oneof": [
+                            "duration"
+                          ]
+                        },
+                        "_type": {
+                          "oneof": [
+                            "type"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "delimiter": {
+                          "type": "string",
+                          "id": 286352903,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "duration": {
+                          "type": "string",
+                          "id": 155471252,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "type": {
+                          "type": "string",
+                          "id": 3575610,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Delimiter": {
+                          "values": {
+                            "UNDEFINED_DELIMITER": 0,
+                            "DELIMITER_BATCH": 253390530,
+                            "DELIMITER_LOCATION": 189398797,
+                            "DELIMITER_UNSPECIFIED": 372199615
+                          }
+                        },
+                        "Type": {
+                          "values": {
+                            "UNDEFINED_TYPE": 0,
+                            "TYPE_MINIMUM": 234909673,
+                            "TYPE_OFFSET": 165747000,
+                            "TYPE_UNSPECIFIED": 437714322
+                          }
+                        }
+                      }
+                    },
+                    "RolloutPlanWaveSelector": {
+                      "oneofs": {
+                        "_locationSelector": {
+                          "oneof": [
+                            "locationSelector"
+                          ]
+                        },
+                        "_resourceHierarchySelector": {
+                          "oneof": [
+                            "resourceHierarchySelector"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "locationSelector": {
+                          "type": "RolloutPlanWaveSelectorLocationSelector",
+                          "id": 422273321,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "resourceHierarchySelector": {
+                          "type": "RolloutPlanWaveSelectorResourceHierarchySelector",
+                          "id": 66779770,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "RolloutPlanWaveSelectorLocationSelector": {
+                      "fields": {
+                        "includedLocations": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 78239643
+                        }
+                      }
+                    },
+                    "RolloutPlanWaveSelectorResourceHierarchySelector": {
+                      "fields": {
+                        "includedFolders": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 372825410
+                        },
+                        "includedOrganizations": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 318362461
+                        },
+                        "includedProjects": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 64232605
+                        }
+                      }
+                    },
+                    "RolloutPlanWaveValidation": {
+                      "oneofs": {
+                        "_timeBasedValidationMetadata": {
+                          "oneof": [
+                            "timeBasedValidationMetadata"
+                          ]
+                        },
+                        "_type": {
+                          "oneof": [
+                            "type"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "timeBasedValidationMetadata": {
+                          "type": "RolloutPlanWaveValidationTimeBasedValidationMetadata",
+                          "id": 69499575,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "type": {
+                          "type": "string",
+                          "id": 3575610,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "RolloutPlanWaveValidationTimeBasedValidationMetadata": {
+                      "oneofs": {
+                        "_waitDuration": {
+                          "oneof": [
+                            "waitDuration"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "waitDuration": {
+                          "type": "string",
+                          "id": 452313374,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "RolloutPlansListResponse": {
+                      "oneofs": {
+                        "_etag": {
+                          "oneof": [
+                            "etag"
+                          ]
+                        },
+                        "_id": {
+                          "oneof": [
+                            "id"
+                          ]
+                        },
+                        "_nextPageToken": {
+                          "oneof": [
+                            "nextPageToken"
+                          ]
+                        },
+                        "_selfLink": {
+                          "oneof": [
+                            "selfLink"
+                          ]
+                        },
+                        "_warning": {
+                          "oneof": [
+                            "warning"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "etag": {
+                          "type": "string",
+                          "id": 3123477,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "id": {
+                          "type": "string",
+                          "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "items": {
+                          "rule": "repeated",
+                          "type": "RolloutPlan",
+                          "id": 100526016
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 79797525,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLink": {
+                          "type": "string",
+                          "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "unreachables": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 243372063
+                        },
+                        "warning": {
+                          "type": "Warning",
+                          "id": 50704284,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "RolloutPolicy": {
                       "oneofs": {
                         "_defaultRolloutTime": {
@@ -195950,6 +197202,231 @@
                           "keyType": "string",
                           "type": "string",
                           "id": 133299048
+                        }
+                      }
+                    },
+                    "RolloutRolloutEntity": {
+                      "oneofs": {
+                        "_orchestratedEntity": {
+                          "oneof": [
+                            "orchestratedEntity"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "orchestratedEntity": {
+                          "type": "RolloutRolloutEntityOrchestratedEntity",
+                          "id": 409556732,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "RolloutRolloutEntityOrchestratedEntity": {
+                      "oneofs": {
+                        "_conflictBehavior": {
+                          "oneof": [
+                            "conflictBehavior"
+                          ]
+                        },
+                        "_orchestrationAction": {
+                          "oneof": [
+                            "orchestrationAction"
+                          ]
+                        },
+                        "_orchestrationSource": {
+                          "oneof": [
+                            "orchestrationSource"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "conflictBehavior": {
+                          "type": "string",
+                          "id": 115729439,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "orchestrationAction": {
+                          "type": "string",
+                          "id": 109745652,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "orchestrationSource": {
+                          "type": "string",
+                          "id": 99319769,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "RolloutWaveDetails": {
+                      "oneofs": {
+                        "_orchestratedWaveDetails": {
+                          "oneof": [
+                            "orchestratedWaveDetails"
+                          ]
+                        },
+                        "_waveDisplayName": {
+                          "oneof": [
+                            "waveDisplayName"
+                          ]
+                        },
+                        "_waveNumber": {
+                          "oneof": [
+                            "waveNumber"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "orchestratedWaveDetails": {
+                          "type": "RolloutWaveDetailsOrchestratedWaveDetails",
+                          "id": 421732181,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "waveDisplayName": {
+                          "type": "string",
+                          "id": 29521774,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "waveNumber": {
+                          "type": "int64",
+                          "id": 491629391,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "RolloutWaveDetailsOrchestratedWaveDetails": {
+                      "oneofs": {
+                        "_completedResourcesCount": {
+                          "oneof": [
+                            "completedResourcesCount"
+                          ]
+                        },
+                        "_estimatedTotalResourcesCount": {
+                          "oneof": [
+                            "estimatedTotalResourcesCount"
+                          ]
+                        },
+                        "_failedResourcesCount": {
+                          "oneof": [
+                            "failedResourcesCount"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "completedResourcesCount": {
+                          "type": "int64",
+                          "id": 208328833,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "estimatedTotalResourcesCount": {
+                          "type": "int64",
+                          "id": 457594807,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "failedLocations": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 30506460
+                        },
+                        "failedResourcesCount": {
+                          "type": "int64",
+                          "id": 391795315,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "RolloutsListResponse": {
+                      "oneofs": {
+                        "_etag": {
+                          "oneof": [
+                            "etag"
+                          ]
+                        },
+                        "_id": {
+                          "oneof": [
+                            "id"
+                          ]
+                        },
+                        "_nextPageToken": {
+                          "oneof": [
+                            "nextPageToken"
+                          ]
+                        },
+                        "_selfLink": {
+                          "oneof": [
+                            "selfLink"
+                          ]
+                        },
+                        "_warning": {
+                          "oneof": [
+                            "warning"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "etag": {
+                          "type": "string",
+                          "id": 3123477,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "id": {
+                          "type": "string",
+                          "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "items": {
+                          "rule": "repeated",
+                          "type": "Rollout",
+                          "id": 100526016
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 79797525,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLink": {
+                          "type": "string",
+                          "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "unreachables": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 243372063
+                        },
+                        "warning": {
+                          "type": "Warning",
+                          "id": 50704284,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },
@@ -217372,6 +218849,46 @@
                         }
                       }
                     },
+                    "UpdateGlobalVmExtensionPolicyRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "globalVmExtensionPolicy": {
+                          "type": "string",
+                          "id": 8334110,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "globalVmExtensionPolicyResource": {
+                          "type": "GlobalVmExtensionPolicy",
+                          "id": 101542927,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "UpdateHealthCheckRequest": {
                       "oneofs": {
                         "_requestId": {
@@ -226311,7 +227828,7 @@
                     "GlobalVmExtensionPolicies": {
                       "options": {
                         "(google.api.default_host)": "compute.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/compute.readonly,https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/cloud-platform"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/cloud-platform"
                       },
                       "methods": {
                         "AggregatedList": {
@@ -226332,6 +227849,30 @@
                             }
                           ]
                         },
+                        "Delete": {
+                          "requestType": "DeleteGlobalVmExtensionPolicyRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "global_vm_extension_policy_rollout_operation_rollout_input_resource",
+                            "(google.api.http).post": "/compute/beta/projects/{project}/global/vmExtensionPolicies/{global_vm_extension_policy}/delete",
+                            "(google.api.method_signature)": "project,global_vm_extension_policy,global_vm_extension_policy_rollout_operation_rollout_input_resource",
+                            "(google.cloud.operation_service)": "GlobalOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "global_vm_extension_policy_rollout_operation_rollout_input_resource",
+                                "post": "/compute/beta/projects/{project}/global/vmExtensionPolicies/{global_vm_extension_policy}/delete"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,global_vm_extension_policy,global_vm_extension_policy_rollout_operation_rollout_input_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "GlobalOperations"
+                            }
+                          ]
+                        },
                         "Get": {
                           "requestType": "GetGlobalVmExtensionPolicyRequest",
                           "responseType": "GlobalVmExtensionPolicy",
@@ -226347,6 +227888,72 @@
                             },
                             {
                               "(google.api.method_signature)": "project,global_vm_extension_policy"
+                            }
+                          ]
+                        },
+                        "Insert": {
+                          "requestType": "InsertGlobalVmExtensionPolicyRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "global_vm_extension_policy_resource",
+                            "(google.api.http).post": "/compute/beta/projects/{project}/global/vmExtensionPolicies",
+                            "(google.api.method_signature)": "project,global_vm_extension_policy_resource",
+                            "(google.cloud.operation_service)": "GlobalOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "global_vm_extension_policy_resource",
+                                "post": "/compute/beta/projects/{project}/global/vmExtensionPolicies"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,global_vm_extension_policy_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "GlobalOperations"
+                            }
+                          ]
+                        },
+                        "List": {
+                          "requestType": "ListGlobalVmExtensionPoliciesRequest",
+                          "responseType": "GlobalVmExtensionPolicyList",
+                          "options": {
+                            "(google.api.http).get": "/compute/beta/projects/{project}/global/vmExtensionPolicies",
+                            "(google.api.method_signature)": "project"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/beta/projects/{project}/global/vmExtensionPolicies"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project"
+                            }
+                          ]
+                        },
+                        "Update": {
+                          "requestType": "UpdateGlobalVmExtensionPolicyRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "global_vm_extension_policy_resource",
+                            "(google.api.http).patch": "/compute/beta/projects/{project}/global/vmExtensionPolicies/{global_vm_extension_policy}",
+                            "(google.api.method_signature)": "project,global_vm_extension_policy,global_vm_extension_policy_resource",
+                            "(google.cloud.operation_service)": "GlobalOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "global_vm_extension_policy_resource",
+                                "patch": "/compute/beta/projects/{project}/global/vmExtensionPolicies/{global_vm_extension_policy}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,global_vm_extension_policy,global_vm_extension_policy_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "GlobalOperations"
                             }
                           ]
                         }
@@ -240159,6 +241766,184 @@
                             },
                             {
                               "(google.api.method_signature)": "project,region,resource,test_permissions_request_resource"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "RolloutPlans": {
+                      "options": {
+                        "(google.api.default_host)": "compute.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "Delete": {
+                          "requestType": "DeleteRolloutPlanRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).delete": "/compute/beta/projects/{project}/global/rolloutPlans/{rollout_plan}",
+                            "(google.api.method_signature)": "project,rollout_plan",
+                            "(google.cloud.operation_service)": "GlobalOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/compute/beta/projects/{project}/global/rolloutPlans/{rollout_plan}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,rollout_plan"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "GlobalOperations"
+                            }
+                          ]
+                        },
+                        "Get": {
+                          "requestType": "GetRolloutPlanRequest",
+                          "responseType": "RolloutPlan",
+                          "options": {
+                            "(google.api.http).get": "/compute/beta/projects/{project}/global/rolloutPlans/{rollout_plan}",
+                            "(google.api.method_signature)": "project,rollout_plan"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/beta/projects/{project}/global/rolloutPlans/{rollout_plan}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,rollout_plan"
+                            }
+                          ]
+                        },
+                        "Insert": {
+                          "requestType": "InsertRolloutPlanRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "rollout_plan_resource",
+                            "(google.api.http).post": "/compute/beta/projects/{project}/global/rolloutPlans",
+                            "(google.api.method_signature)": "project,rollout_plan_resource",
+                            "(google.cloud.operation_service)": "GlobalOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "rollout_plan_resource",
+                                "post": "/compute/beta/projects/{project}/global/rolloutPlans"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,rollout_plan_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "GlobalOperations"
+                            }
+                          ]
+                        },
+                        "List": {
+                          "requestType": "ListRolloutPlansRequest",
+                          "responseType": "RolloutPlansListResponse",
+                          "options": {
+                            "(google.api.http).get": "/compute/beta/projects/{project}/global/rolloutPlans",
+                            "(google.api.method_signature)": "project"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/beta/projects/{project}/global/rolloutPlans"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "Rollouts": {
+                      "options": {
+                        "(google.api.default_host)": "compute.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "Cancel": {
+                          "requestType": "CancelRolloutRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).patch": "/compute/beta/projects/{project}/global/rollouts/{rollout}",
+                            "(google.api.method_signature)": "project,rollout",
+                            "(google.cloud.operation_service)": "GlobalOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/compute/beta/projects/{project}/global/rollouts/{rollout}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,rollout"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "GlobalOperations"
+                            }
+                          ]
+                        },
+                        "Delete": {
+                          "requestType": "DeleteRolloutRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).delete": "/compute/beta/projects/{project}/global/rollouts/{rollout}",
+                            "(google.api.method_signature)": "project,rollout",
+                            "(google.cloud.operation_service)": "GlobalOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/compute/beta/projects/{project}/global/rollouts/{rollout}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,rollout"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "GlobalOperations"
+                            }
+                          ]
+                        },
+                        "Get": {
+                          "requestType": "GetRolloutRequest",
+                          "responseType": "Rollout",
+                          "options": {
+                            "(google.api.http).get": "/compute/beta/projects/{project}/global/rollouts/{rollout}",
+                            "(google.api.method_signature)": "project,rollout"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/beta/projects/{project}/global/rollouts/{rollout}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,rollout"
+                            }
+                          ]
+                        },
+                        "List": {
+                          "requestType": "ListRolloutsRequest",
+                          "responseType": "RolloutsListResponse",
+                          "options": {
+                            "(google.api.http).get": "/compute/beta/projects/{project}/global/rollouts",
+                            "(google.api.method_signature)": "project"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/beta/projects/{project}/global/rollouts"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project"
                             }
                           ]
                         }
