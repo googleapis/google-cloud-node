@@ -5,6 +5,48 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "cad552ea0441d9f636bbbb7d0298326a14baad8e",
+          "message": "Add initial files for google.cloud.vectorsearch.v1beta",
+          "issues": [
+            "6906"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vectorsearch",
+      "id": "eba97f8f-98e2-410a-9504-18dde6c20e2b",
+      "createTime": "2025-12-03T02:42:21.544Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "4a62a4cd4bdded4811488b25f56f8fa4b165d4ed",
+          "message": "[eventarc] add wide-scope Eventarc GoogleApiSource flags",
+          "issues": [
+            "6909"
+          ]
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/eventarc",
+      "id": "de07a942-99c3-4365-864f-5b64ecd9b5bc",
+      "createTime": "2025-12-03T02:42:21.520Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "1403b5b709a040898dbcd15b390485804840b778",
           "message": "[marketingplatformadminapi] add the `ListOrganizations`, `FindSalesPartnerManagedClients`, and `ReportPropertyUsage` methods",
           "issues": [
@@ -67105,5 +67147,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-11-21T23:14:19.352Z"
+  "updateTime": "2025-12-03T02:42:21.544Z"
 }

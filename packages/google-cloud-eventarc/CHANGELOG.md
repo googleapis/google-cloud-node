@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/eventarc-v4.2.1...eventarc-v4.3.0) (2025-12-03)
+
+
+### Features
+
+* [eventarc] add wide-scope Eventarc GoogleApiSource flags ([#6909](https://github.com/googleapis/google-cloud-node/issues/6909)) ([4a62a4c](https://github.com/googleapis/google-cloud-node/commit/4a62a4cd4bdded4811488b25f56f8fa4b165d4ed))
+
 ## [4.2.1](https://github.com/googleapis/google-cloud-node/compare/eventarc-v4.2.0...eventarc-v4.2.1) (2025-10-13)
 
 

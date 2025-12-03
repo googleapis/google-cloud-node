@@ -64,7 +64,7 @@
   "packages/google-cloud-domains": "4.2.1",
   "packages/google-cloud-edgecontainer": "0.8.1",
   "packages/google-cloud-essentialcontacts": "4.2.1",
-  "packages/google-cloud-eventarc": "4.2.1",
+  "packages/google-cloud-eventarc": "4.3.0",
   "packages/google-cloud-eventarc-publishing": "4.2.1",
   "packages/google-cloud-filestore": "4.2.1",
   "packages/google-cloud-functions": "4.2.1",
@@ -214,5 +214,6 @@
   "packages/google-cloud-capacityplanner": "0.1.2",
   "packages/google-cloud-locationfinder": "0.1.1",
   "packages/google-cloud-geminidataanalytics": "0.2.0",
-  "packages/google-ads-datamanager": "0.1.0"
+  "packages/google-ads-datamanager": "0.1.0",
+  "packages/google-cloud-vectorsearch": "0.1.0"
 }
