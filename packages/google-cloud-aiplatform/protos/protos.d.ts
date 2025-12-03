@@ -166964,6 +166964,9 @@ export namespace google {
                     /** RagVectorDbConfig vertexVectorSearch */
                     vertexVectorSearch?: (google.cloud.aiplatform.v1beta1.RagVectorDbConfig.IVertexVectorSearch|null);
 
+                    /** RagVectorDbConfig ragManagedVertexVectorSearch */
+                    ragManagedVertexVectorSearch?: (google.cloud.aiplatform.v1beta1.RagVectorDbConfig.IRagManagedVertexVectorSearch|null);
+
                     /** RagVectorDbConfig apiAuth */
                     apiAuth?: (google.cloud.aiplatform.v1beta1.IApiAuth|null);
 
@@ -166995,6 +166998,9 @@ export namespace google {
                     /** RagVectorDbConfig vertexVectorSearch. */
                     public vertexVectorSearch?: (google.cloud.aiplatform.v1beta1.RagVectorDbConfig.IVertexVectorSearch|null);
 
+                    /** RagVectorDbConfig ragManagedVertexVectorSearch. */
+                    public ragManagedVertexVectorSearch?: (google.cloud.aiplatform.v1beta1.RagVectorDbConfig.IRagManagedVertexVectorSearch|null);
+
                     /** RagVectorDbConfig apiAuth. */
                     public apiAuth?: (google.cloud.aiplatform.v1beta1.IApiAuth|null);
 
@@ -167002,7 +167008,7 @@ export namespace google {
                     public ragEmbeddingModelConfig?: (google.cloud.aiplatform.v1beta1.IRagEmbeddingModelConfig|null);
 
                     /** RagVectorDbConfig vectorDb. */
-                    public vectorDb?: ("ragManagedDb"|"weaviate"|"pinecone"|"vertexFeatureStore"|"vertexVectorSearch");
+                    public vectorDb?: ("ragManagedDb"|"weaviate"|"pinecone"|"vertexFeatureStore"|"vertexVectorSearch"|"ragManagedVertexVectorSearch");
 
                     /**
                      * Creates a new RagVectorDbConfig instance using the specified properties.
@@ -167786,6 +167792,103 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+
+                    /** Properties of a RagManagedVertexVectorSearch. */
+                    interface IRagManagedVertexVectorSearch {
+
+                        /** RagManagedVertexVectorSearch collectionName */
+                        collectionName?: (string|null);
+                    }
+
+                    /** Represents a RagManagedVertexVectorSearch. */
+                    class RagManagedVertexVectorSearch implements IRagManagedVertexVectorSearch {
+
+                        /**
+                         * Constructs a new RagManagedVertexVectorSearch.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1beta1.RagVectorDbConfig.IRagManagedVertexVectorSearch);
+
+                        /** RagManagedVertexVectorSearch collectionName. */
+                        public collectionName: string;
+
+                        /**
+                         * Creates a new RagManagedVertexVectorSearch instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RagManagedVertexVectorSearch instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1beta1.RagVectorDbConfig.IRagManagedVertexVectorSearch): google.cloud.aiplatform.v1beta1.RagVectorDbConfig.RagManagedVertexVectorSearch;
+
+                        /**
+                         * Encodes the specified RagManagedVertexVectorSearch message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.RagVectorDbConfig.RagManagedVertexVectorSearch.verify|verify} messages.
+                         * @param message RagManagedVertexVectorSearch message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1beta1.RagVectorDbConfig.IRagManagedVertexVectorSearch, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RagManagedVertexVectorSearch message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.RagVectorDbConfig.RagManagedVertexVectorSearch.verify|verify} messages.
+                         * @param message RagManagedVertexVectorSearch message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.RagVectorDbConfig.IRagManagedVertexVectorSearch, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RagManagedVertexVectorSearch message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RagManagedVertexVectorSearch
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.RagVectorDbConfig.RagManagedVertexVectorSearch;
+
+                        /**
+                         * Decodes a RagManagedVertexVectorSearch message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RagManagedVertexVectorSearch
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.RagVectorDbConfig.RagManagedVertexVectorSearch;
+
+                        /**
+                         * Verifies a RagManagedVertexVectorSearch message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RagManagedVertexVectorSearch message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RagManagedVertexVectorSearch
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.RagVectorDbConfig.RagManagedVertexVectorSearch;
+
+                        /**
+                         * Creates a plain object from a RagManagedVertexVectorSearch message. Also converts values to other types if specified.
+                         * @param message RagManagedVertexVectorSearch
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1beta1.RagVectorDbConfig.RagManagedVertexVectorSearch, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RagManagedVertexVectorSearch to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RagManagedVertexVectorSearch
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a FileStatus. */
@@ -168153,6 +168256,12 @@ export namespace google {
 
                     /** RagCorpus corpusTypeConfig */
                     corpusTypeConfig?: (google.cloud.aiplatform.v1beta1.RagCorpus.ICorpusTypeConfig|null);
+
+                    /** RagCorpus satisfiesPzs */
+                    satisfiesPzs?: (boolean|null);
+
+                    /** RagCorpus satisfiesPzi */
+                    satisfiesPzi?: (boolean|null);
                 }
 
                 /** Represents a RagCorpus. */
@@ -168202,6 +168311,12 @@ export namespace google {
 
                     /** RagCorpus corpusTypeConfig. */
                     public corpusTypeConfig?: (google.cloud.aiplatform.v1beta1.RagCorpus.ICorpusTypeConfig|null);
+
+                    /** RagCorpus satisfiesPzs. */
+                    public satisfiesPzs: boolean;
+
+                    /** RagCorpus satisfiesPzi. */
+                    public satisfiesPzi: boolean;
 
                     /** RagCorpus backendConfig. */
                     public backendConfig?: ("vectorDbConfig"|"vertexAiSearchConfig");

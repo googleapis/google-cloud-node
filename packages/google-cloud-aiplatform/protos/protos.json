@@ -44819,7 +44819,8 @@
                             "weaviate",
                             "pinecone",
                             "vertexFeatureStore",
-                            "vertexVectorSearch"
+                            "vertexVectorSearch",
+                            "ragManagedVertexVectorSearch"
                           ]
                         }
                       },
@@ -44843,6 +44844,10 @@
                         "vertexVectorSearch": {
                           "type": "VertexVectorSearch",
                           "id": 6
+                        },
+                        "ragManagedVertexVectorSearch": {
+                          "type": "RagManagedVertexVectorSearch",
+                          "id": 8
                         },
                         "apiAuth": {
                           "type": "ApiAuth",
@@ -44931,6 +44936,17 @@
                             "index": {
                               "type": "string",
                               "id": 2
+                            }
+                          }
+                        },
+                        "RagManagedVertexVectorSearch": {
+                          "fields": {
+                            "collectionName": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           }
                         }
@@ -45106,6 +45122,20 @@
                           "id": 13,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "satisfiesPzs": {
+                          "type": "bool",
+                          "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "satisfiesPzi": {
+                          "type": "bool",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       },
