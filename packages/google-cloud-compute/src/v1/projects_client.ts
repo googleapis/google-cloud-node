@@ -337,7 +337,19 @@ export class ProjectsClient {
  * @param {string} request.project
  *   Project ID for this request.
  * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ *   An optional request ID to identify requests. Specify a unique request ID so
+ *   that if you must retry your request, the server will know to ignore the
+ *   request if it has already been completed.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same
+ *   request ID, the server can check if original operation with the same
+ *   request ID was received, and if so, will ignore the second request. This
+ *   prevents clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be
+ *   a valid UUID with the exception that zero UUID is not supported
+ *   (00000000-0000-0000-0000-000000000000).
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -430,7 +442,8 @@ export class ProjectsClient {
       });
   }
 /**
- * Disable a service resource (also known as service project) associated with this host project.
+ * Disable a service resource (also known as service project) associated with
+ * this host project.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -439,7 +452,19 @@ export class ProjectsClient {
  * @param {google.cloud.compute.v1.ProjectsDisableXpnResourceRequest} request.projectsDisableXpnResourceRequestResource
  *   The body resource for this request
  * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ *   An optional request ID to identify requests. Specify a unique request ID so
+ *   that if you must retry your request, the server will know to ignore the
+ *   request if it has already been completed.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same
+ *   request ID, the server can check if original operation with the same
+ *   request ID was received, and if so, will ignore the second request. This
+ *   prevents clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be
+ *   a valid UUID with the exception that zero UUID is not supported
+ *   (00000000-0000-0000-0000-000000000000).
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -539,7 +564,19 @@ export class ProjectsClient {
  * @param {string} request.project
  *   Project ID for this request.
  * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ *   An optional request ID to identify requests. Specify a unique request ID so
+ *   that if you must retry your request, the server will know to ignore the
+ *   request if it has already been completed.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same
+ *   request ID, the server can check if original operation with the same
+ *   request ID was received, and if so, will ignore the second request. This
+ *   prevents clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be
+ *   a valid UUID with the exception that zero UUID is not supported
+ *   (00000000-0000-0000-0000-000000000000).
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -632,7 +669,9 @@ export class ProjectsClient {
       });
   }
 /**
- * Enable service resource (a.k.a service project) for a host project, so that subnets in the host project can be used by instances in the service project.
+ * Enable service resource (a.k.a service project) for a host project, so that
+ * subnets in the host project can be used by instances in the service
+ * project.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -641,7 +680,19 @@ export class ProjectsClient {
  * @param {google.cloud.compute.v1.ProjectsEnableXpnResourceRequest} request.projectsEnableXpnResourceRequestResource
  *   The body resource for this request
  * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ *   An optional request ID to identify requests. Specify a unique request ID so
+ *   that if you must retry your request, the server will know to ignore the
+ *   request if it has already been completed.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same
+ *   request ID, the server can check if original operation with the same
+ *   request ID was received, and if so, will ignore the second request. This
+ *   prevents clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be
+ *   a valid UUID with the exception that zero UUID is not supported
+ *   (00000000-0000-0000-0000-000000000000).
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -734,7 +785,15 @@ export class ProjectsClient {
       });
   }
 /**
- * Returns the specified Project resource. To decrease latency for this method, you can optionally omit any unneeded information from the response by using a field mask. This practice is especially recommended for unused quota information (the `quotas` field). To exclude one or more fields, set your request's `fields` query parameter to only include the fields you need. For example, to only include the `id` and `selfLink` fields, add the query parameter `?fields=id,selfLink` to your request.
+ * Returns the specified Project resource.
+ *
+ * To decrease latency for this method, you can optionally omit any unneeded
+ * information from the response by using a field mask. This practice is
+ * especially recommended for unused quota information (the `quotas` field).
+ * To exclude one or more fields, set your request's `fields` query parameter
+ * to only include the fields you need. For example, to only include the `id`
+ * and `selfLink` fields, add the query parameter `?fields=id,selfLink` to
+ * your request.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -828,7 +887,8 @@ export class ProjectsClient {
       });
   }
 /**
- * Gets the shared VPC host project that this project links to. May be empty if no link exists.
+ * Gets the shared VPC host project that this project links to. May be empty
+ * if no link exists.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -922,7 +982,20 @@ export class ProjectsClient {
       });
   }
 /**
- * Starting September 29, 2025, you can't use the moveDisk API on new projects. To move a disk to a different region or zone, follow the steps in [Change the location of a disk](https://{$universe.dns_names.final_documentation_domain}/compute/docs/disks/migrate-to-hyperdisk#migrate-to-hd). Projects that already use the moveDisk API can continue usage until September 29, 2026. Starting November 1, 2025, API responses will include a warning message in the response body about the upcoming deprecation. You can skip the message to continue using the service without interruption.
+ * Moves a persistent disk from one zone to another.
+ * *Note*: The moveDisk API will be deprecated on September 29, 2026.
+ *
+ * Starting September 29, 2025, you can't use the moveDisk API on new
+ * projects. To move a disk to a different region or zone, follow the steps in
+ * [Change the location of a
+ * disk](https://cloud.google.com/compute/docs/disks/migrate-to-hyperdisk#migrate-to-hd).
+ *
+ * Projects that already use the moveDisk API can continue usage until
+ * September 29, 2026.
+ *
+ * Starting November 1, 2025, API responses will include a warning message in
+ * the response body about the upcoming deprecation. You can skip the message
+ * to continue using the service without interruption.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -931,7 +1004,19 @@ export class ProjectsClient {
  * @param {string} request.project
  *   Project ID for this request.
  * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ *   An optional request ID to identify requests. Specify a unique request ID so
+ *   that if you must retry your request, the server will know to ignore the
+ *   request if it has already been completed.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same
+ *   request ID, the server can check if original operation with the same
+ *   request ID was received, and if so, will ignore the second request. This
+ *   prevents clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be
+ *   a valid UUID with the exception that zero UUID is not supported
+ *   (00000000-0000-0000-0000-000000000000).
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -1024,7 +1109,13 @@ export class ProjectsClient {
       });
   }
 /**
- * Moves an instance and its attached persistent disks from one zone to another. *Note*: Moving VMs or disks by using this method might cause unexpected behavior. For more information, see the [known issue](/compute/docs/troubleshooting/known-issues#moving_vms_or_disks_using_the_moveinstance_api_or_the_causes_unexpected_behavior). [Deprecated] This method is deprecated. See [moving instance across zones](/compute/docs/instances/moving-instance-across-zones) instead.
+ * Moves an instance and its attached persistent disks from one zone to
+ * another.
+ * *Note*: Moving VMs or disks by using this method might
+ *  cause unexpected behavior. For more information, see the [known
+ *  issue](/compute/docs/troubleshooting/known-issues#moving_vms_or_disks_using_the_moveinstance_api_or_the_causes_unexpected_behavior).
+ * [Deprecated] This method is deprecated. See [moving instance across
+ * zones](/compute/docs/instances/moving-instance-across-zones) instead.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -1033,7 +1124,19 @@ export class ProjectsClient {
  * @param {string} request.project
  *   Project ID for this request.
  * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ *   An optional request ID to identify requests. Specify a unique request ID so
+ *   that if you must retry your request, the server will know to ignore the
+ *   request if it has already been completed.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same
+ *   request ID, the server can check if original operation with the same
+ *   request ID was received, and if so, will ignore the second request. This
+ *   prevents clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be
+ *   a valid UUID with the exception that zero UUID is not supported
+ *   (00000000-0000-0000-0000-000000000000).
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -1126,7 +1229,10 @@ export class ProjectsClient {
       });
   }
 /**
- * Sets the Cloud Armor tier of the project. To set ENTERPRISE or above the billing account of the project must be subscribed to Cloud Armor Enterprise. See Subscribing to Cloud Armor Enterprise for more information.
+ * Sets the Cloud Armor tier of the project. To set ENTERPRISE or above the
+ * billing account of the project must be subscribed to Cloud Armor
+ * Enterprise. See Subscribing
+ * to Cloud Armor Enterprise for more information.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -1135,7 +1241,19 @@ export class ProjectsClient {
  * @param {google.cloud.compute.v1.ProjectsSetCloudArmorTierRequest} request.projectsSetCloudArmorTierRequestResource
  *   The body resource for this request
  * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ *   An optional request ID to identify requests. Specify a unique request ID so
+ *   that if you must retry your request, the server will know to ignore the
+ *   request if it has already been completed.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same
+ *   request ID, the server can check if original operation with the same
+ *   request ID was received, and if so, will ignore the second request. This
+ *   prevents clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be
+ *   a valid UUID with the exception that zero UUID is not supported
+ *   (00000000-0000-0000-0000-000000000000).
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -1228,7 +1346,8 @@ export class ProjectsClient {
       });
   }
 /**
- * Sets metadata common to all instances within the specified project using the data included in the request.
+ * Sets metadata common to all instances within the specified project using
+ * the data included in the request.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -1237,7 +1356,19 @@ export class ProjectsClient {
  * @param {string} request.project
  *   Project ID for this request.
  * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ *   An optional request ID to identify requests. Specify a unique request ID so
+ *   that if you must retry your request, the server will know to ignore the
+ *   request if it has already been completed.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same
+ *   request ID, the server can check if original operation with the same
+ *   request ID was received, and if so, will ignore the second request. This
+ *   prevents clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be
+ *   a valid UUID with the exception that zero UUID is not supported
+ *   (00000000-0000-0000-0000-000000000000).
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -1330,7 +1461,9 @@ export class ProjectsClient {
       });
   }
 /**
- * Sets the default network tier of the project. The default network tier is used when an address/forwardingRule/instance is created without specifying the network tier field.
+ * Sets the default network tier of the project. The default network tier is
+ * used when an address/forwardingRule/instance is created without specifying
+ * the network tier field.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -1339,7 +1472,19 @@ export class ProjectsClient {
  * @param {google.cloud.compute.v1.ProjectsSetDefaultNetworkTierRequest} request.projectsSetDefaultNetworkTierRequestResource
  *   The body resource for this request
  * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ *   An optional request ID to identify requests. Specify a unique request ID so
+ *   that if you must retry your request, the server will know to ignore the
+ *   request if it has already been completed.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same
+ *   request ID, the server can check if original operation with the same
+ *   request ID was received, and if so, will ignore the second request. This
+ *   prevents clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be
+ *   a valid UUID with the exception that zero UUID is not supported
+ *   (00000000-0000-0000-0000-000000000000).
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -1432,14 +1577,28 @@ export class ProjectsClient {
       });
   }
 /**
- * Enables the usage export feature and sets the usage export bucket where reports are stored. If you provide an empty request body using this method, the usage export feature will be disabled.
+ * Enables the usage export feature and sets theusage export bucket
+ * where reports are stored. If you provide an empty request body using this
+ * method, the usage export feature will be disabled.
  *
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.project
  *   Project ID for this request.
  * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ *   An optional request ID to identify requests. Specify a unique request ID so
+ *   that if you must retry your request, the server will know to ignore the
+ *   request if it has already been completed.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same
+ *   request ID, the server can check if original operation with the same
+ *   request ID was received, and if so, will ignore the second request. This
+ *   prevents clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be
+ *   a valid UUID with the exception that zero UUID is not supported
+ *   (00000000-0000-0000-0000-000000000000).
  * @param {google.cloud.compute.v1.UsageExportLocation} request.usageExportLocationResource
  *   The body resource for this request
  * @param {object} [options]
@@ -1535,22 +1694,101 @@ export class ProjectsClient {
   }
 
  /**
- * Gets service resources (a.k.a service project) associated with this host project.
+ * Gets service resources (a.k.a service project) associated with this host
+ * project.
  *
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.filter
- *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+ *   A filter expression that filters resources listed in the response. Most
+ *   Compute resources support two types of filter expressions:
+ *   expressions that support regular expressions and expressions that follow
+ *   API improvement proposal AIP-160.
+ *   These two types of filter expressions cannot be mixed in one request.
+ *
+ *   If you want to use AIP-160, your expression must specify the field name, an
+ *   operator, and the value that you want to use for filtering. The value
+ *   must be a string, a number, or a boolean. The operator
+ *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+ *
+ *   For example, if you are filtering Compute Engine instances, you can
+ *   exclude instances named `example-instance` by specifying
+ *   `name != example-instance`.
+ *
+ *   The `:*` comparison can be used to test whether a key has been defined.
+ *   For example, to find all objects with `owner` label use:
+ *   ```
+ *   labels.owner:*
+ *   ```
+ *
+ *   You can also filter nested fields. For example, you could specify
+ *   `scheduling.automaticRestart = false` to include instances only
+ *   if they are not scheduled for automatic restarts. You can use filtering
+ *   on nested fields to filter based onresource labels.
+ *
+ *   To filter on multiple expressions, provide each separate expression within
+ *   parentheses. For example:
+ *   ```
+ *   (scheduling.automaticRestart = true)
+ *   (cpuPlatform = "Intel Skylake")
+ *   ```
+ *   By default, each expression is an `AND` expression. However, you
+ *   can include `AND` and `OR` expressions explicitly.
+ *   For example:
+ *   ```
+ *   (cpuPlatform = "Intel Skylake") OR
+ *   (cpuPlatform = "Intel Broadwell") AND
+ *   (scheduling.automaticRestart = true)
+ *   ```
+ *
+ *   If you want to use a regular expression, use the `eq` (equal) or `ne`
+ *   (not equal) operator against a single un-parenthesized expression with or
+ *   without quotes or against multiple parenthesized expressions. Examples:
+ *
+ *   `fieldname eq unquoted literal`
+ *   `fieldname eq 'single quoted literal'`
+ *   `fieldname eq "double quoted literal"`
+ *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
+ *
+ *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+ *   The literal value must match the entire field.
+ *
+ *   For example, to filter for instances that do not end with name "instance",
+ *   you would use `name ne .*instance`.
+ *
+ *   You cannot combine constraints on multiple fields using regular
+ *   expressions.
  * @param {number} request.maxResults
- *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+ *   The maximum number of results per page that should be returned.
+ *   If the number of available results is larger than `maxResults`,
+ *   Compute Engine returns a `nextPageToken` that can be used to get
+ *   the next page of results in subsequent list requests. Acceptable values are
+ *   `0` to `500`, inclusive. (Default: `500`)
  * @param {string} request.orderBy
- *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+ *   Sorts list results by a certain order. By default, results
+ *   are returned in alphanumerical order based on the resource name.
+ *
+ *   You can also sort results in descending order based on the creation
+ *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
+ *   results based on the `creationTimestamp` field in
+ *   reverse chronological order (newest result first). Use this to sort
+ *   resources like operations so that the newest operation is returned first.
+ *
+ *   Currently, only sorting by `name` or
+ *   `creationTimestamp desc` is supported.
  * @param {string} request.pageToken
- *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+ *   Specifies a page token to use. Set `pageToken` to the
+ *   `nextPageToken` returned by a previous list request to get
+ *   the next page of results.
  * @param {string} request.project
  *   Project ID for this request.
  * @param {boolean} request.returnPartialSuccess
- *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+ *   Opt-in for partial success behavior which provides partial results in case
+ *   of failure. The default value is false.
+ *
+ *   For example, when partial success behavior is enabled, aggregatedList for a
+ *   single zone scope either returns all resources in the zone or no resources,
+ *   with an error code.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -1644,17 +1882,95 @@ export class ProjectsClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.filter
- *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+ *   A filter expression that filters resources listed in the response. Most
+ *   Compute resources support two types of filter expressions:
+ *   expressions that support regular expressions and expressions that follow
+ *   API improvement proposal AIP-160.
+ *   These two types of filter expressions cannot be mixed in one request.
+ *
+ *   If you want to use AIP-160, your expression must specify the field name, an
+ *   operator, and the value that you want to use for filtering. The value
+ *   must be a string, a number, or a boolean. The operator
+ *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+ *
+ *   For example, if you are filtering Compute Engine instances, you can
+ *   exclude instances named `example-instance` by specifying
+ *   `name != example-instance`.
+ *
+ *   The `:*` comparison can be used to test whether a key has been defined.
+ *   For example, to find all objects with `owner` label use:
+ *   ```
+ *   labels.owner:*
+ *   ```
+ *
+ *   You can also filter nested fields. For example, you could specify
+ *   `scheduling.automaticRestart = false` to include instances only
+ *   if they are not scheduled for automatic restarts. You can use filtering
+ *   on nested fields to filter based onresource labels.
+ *
+ *   To filter on multiple expressions, provide each separate expression within
+ *   parentheses. For example:
+ *   ```
+ *   (scheduling.automaticRestart = true)
+ *   (cpuPlatform = "Intel Skylake")
+ *   ```
+ *   By default, each expression is an `AND` expression. However, you
+ *   can include `AND` and `OR` expressions explicitly.
+ *   For example:
+ *   ```
+ *   (cpuPlatform = "Intel Skylake") OR
+ *   (cpuPlatform = "Intel Broadwell") AND
+ *   (scheduling.automaticRestart = true)
+ *   ```
+ *
+ *   If you want to use a regular expression, use the `eq` (equal) or `ne`
+ *   (not equal) operator against a single un-parenthesized expression with or
+ *   without quotes or against multiple parenthesized expressions. Examples:
+ *
+ *   `fieldname eq unquoted literal`
+ *   `fieldname eq 'single quoted literal'`
+ *   `fieldname eq "double quoted literal"`
+ *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
+ *
+ *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+ *   The literal value must match the entire field.
+ *
+ *   For example, to filter for instances that do not end with name "instance",
+ *   you would use `name ne .*instance`.
+ *
+ *   You cannot combine constraints on multiple fields using regular
+ *   expressions.
  * @param {number} request.maxResults
- *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+ *   The maximum number of results per page that should be returned.
+ *   If the number of available results is larger than `maxResults`,
+ *   Compute Engine returns a `nextPageToken` that can be used to get
+ *   the next page of results in subsequent list requests. Acceptable values are
+ *   `0` to `500`, inclusive. (Default: `500`)
  * @param {string} request.orderBy
- *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+ *   Sorts list results by a certain order. By default, results
+ *   are returned in alphanumerical order based on the resource name.
+ *
+ *   You can also sort results in descending order based on the creation
+ *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
+ *   results based on the `creationTimestamp` field in
+ *   reverse chronological order (newest result first). Use this to sort
+ *   resources like operations so that the newest operation is returned first.
+ *
+ *   Currently, only sorting by `name` or
+ *   `creationTimestamp desc` is supported.
  * @param {string} request.pageToken
- *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+ *   Specifies a page token to use. Set `pageToken` to the
+ *   `nextPageToken` returned by a previous list request to get
+ *   the next page of results.
  * @param {string} request.project
  *   Project ID for this request.
  * @param {boolean} request.returnPartialSuccess
- *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+ *   Opt-in for partial success behavior which provides partial results in case
+ *   of failure. The default value is false.
+ *
+ *   For example, when partial success behavior is enabled, aggregatedList for a
+ *   single zone scope either returns all resources in the zone or no resources,
+ *   with an error code.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
@@ -1697,17 +2013,95 @@ export class ProjectsClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.filter
- *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+ *   A filter expression that filters resources listed in the response. Most
+ *   Compute resources support two types of filter expressions:
+ *   expressions that support regular expressions and expressions that follow
+ *   API improvement proposal AIP-160.
+ *   These two types of filter expressions cannot be mixed in one request.
+ *
+ *   If you want to use AIP-160, your expression must specify the field name, an
+ *   operator, and the value that you want to use for filtering. The value
+ *   must be a string, a number, or a boolean. The operator
+ *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+ *
+ *   For example, if you are filtering Compute Engine instances, you can
+ *   exclude instances named `example-instance` by specifying
+ *   `name != example-instance`.
+ *
+ *   The `:*` comparison can be used to test whether a key has been defined.
+ *   For example, to find all objects with `owner` label use:
+ *   ```
+ *   labels.owner:*
+ *   ```
+ *
+ *   You can also filter nested fields. For example, you could specify
+ *   `scheduling.automaticRestart = false` to include instances only
+ *   if they are not scheduled for automatic restarts. You can use filtering
+ *   on nested fields to filter based onresource labels.
+ *
+ *   To filter on multiple expressions, provide each separate expression within
+ *   parentheses. For example:
+ *   ```
+ *   (scheduling.automaticRestart = true)
+ *   (cpuPlatform = "Intel Skylake")
+ *   ```
+ *   By default, each expression is an `AND` expression. However, you
+ *   can include `AND` and `OR` expressions explicitly.
+ *   For example:
+ *   ```
+ *   (cpuPlatform = "Intel Skylake") OR
+ *   (cpuPlatform = "Intel Broadwell") AND
+ *   (scheduling.automaticRestart = true)
+ *   ```
+ *
+ *   If you want to use a regular expression, use the `eq` (equal) or `ne`
+ *   (not equal) operator against a single un-parenthesized expression with or
+ *   without quotes or against multiple parenthesized expressions. Examples:
+ *
+ *   `fieldname eq unquoted literal`
+ *   `fieldname eq 'single quoted literal'`
+ *   `fieldname eq "double quoted literal"`
+ *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
+ *
+ *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+ *   The literal value must match the entire field.
+ *
+ *   For example, to filter for instances that do not end with name "instance",
+ *   you would use `name ne .*instance`.
+ *
+ *   You cannot combine constraints on multiple fields using regular
+ *   expressions.
  * @param {number} request.maxResults
- *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+ *   The maximum number of results per page that should be returned.
+ *   If the number of available results is larger than `maxResults`,
+ *   Compute Engine returns a `nextPageToken` that can be used to get
+ *   the next page of results in subsequent list requests. Acceptable values are
+ *   `0` to `500`, inclusive. (Default: `500`)
  * @param {string} request.orderBy
- *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+ *   Sorts list results by a certain order. By default, results
+ *   are returned in alphanumerical order based on the resource name.
+ *
+ *   You can also sort results in descending order based on the creation
+ *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
+ *   results based on the `creationTimestamp` field in
+ *   reverse chronological order (newest result first). Use this to sort
+ *   resources like operations so that the newest operation is returned first.
+ *
+ *   Currently, only sorting by `name` or
+ *   `creationTimestamp desc` is supported.
  * @param {string} request.pageToken
- *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+ *   Specifies a page token to use. Set `pageToken` to the
+ *   `nextPageToken` returned by a previous list request to get
+ *   the next page of results.
  * @param {string} request.project
  *   Project ID for this request.
  * @param {boolean} request.returnPartialSuccess
- *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+ *   Opt-in for partial success behavior which provides partial results in case
+ *   of failure. The default value is false.
+ *
+ *   For example, when partial success behavior is enabled, aggregatedList for a
+ *   single zone scope either returns all resources in the zone or no resources,
+ *   with an error code.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}
@@ -1749,19 +2143,97 @@ export class ProjectsClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.filter
- *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+ *   A filter expression that filters resources listed in the response. Most
+ *   Compute resources support two types of filter expressions:
+ *   expressions that support regular expressions and expressions that follow
+ *   API improvement proposal AIP-160.
+ *   These two types of filter expressions cannot be mixed in one request.
+ *
+ *   If you want to use AIP-160, your expression must specify the field name, an
+ *   operator, and the value that you want to use for filtering. The value
+ *   must be a string, a number, or a boolean. The operator
+ *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+ *
+ *   For example, if you are filtering Compute Engine instances, you can
+ *   exclude instances named `example-instance` by specifying
+ *   `name != example-instance`.
+ *
+ *   The `:*` comparison can be used to test whether a key has been defined.
+ *   For example, to find all objects with `owner` label use:
+ *   ```
+ *   labels.owner:*
+ *   ```
+ *
+ *   You can also filter nested fields. For example, you could specify
+ *   `scheduling.automaticRestart = false` to include instances only
+ *   if they are not scheduled for automatic restarts. You can use filtering
+ *   on nested fields to filter based onresource labels.
+ *
+ *   To filter on multiple expressions, provide each separate expression within
+ *   parentheses. For example:
+ *   ```
+ *   (scheduling.automaticRestart = true)
+ *   (cpuPlatform = "Intel Skylake")
+ *   ```
+ *   By default, each expression is an `AND` expression. However, you
+ *   can include `AND` and `OR` expressions explicitly.
+ *   For example:
+ *   ```
+ *   (cpuPlatform = "Intel Skylake") OR
+ *   (cpuPlatform = "Intel Broadwell") AND
+ *   (scheduling.automaticRestart = true)
+ *   ```
+ *
+ *   If you want to use a regular expression, use the `eq` (equal) or `ne`
+ *   (not equal) operator against a single un-parenthesized expression with or
+ *   without quotes or against multiple parenthesized expressions. Examples:
+ *
+ *   `fieldname eq unquoted literal`
+ *   `fieldname eq 'single quoted literal'`
+ *   `fieldname eq "double quoted literal"`
+ *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
+ *
+ *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+ *   The literal value must match the entire field.
+ *
+ *   For example, to filter for instances that do not end with name "instance",
+ *   you would use `name ne .*instance`.
+ *
+ *   You cannot combine constraints on multiple fields using regular
+ *   expressions.
  * @param {number} request.maxResults
- *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+ *   The maximum number of results per page that should be returned.
+ *   If the number of available results is larger than `maxResults`,
+ *   Compute Engine returns a `nextPageToken` that can be used to get
+ *   the next page of results in subsequent list requests. Acceptable values are
+ *   `0` to `500`, inclusive. (Default: `500`)
  * @param {string} request.orderBy
- *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+ *   Sorts list results by a certain order. By default, results
+ *   are returned in alphanumerical order based on the resource name.
+ *
+ *   You can also sort results in descending order based on the creation
+ *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
+ *   results based on the `creationTimestamp` field in
+ *   reverse chronological order (newest result first). Use this to sort
+ *   resources like operations so that the newest operation is returned first.
+ *
+ *   Currently, only sorting by `name` or
+ *   `creationTimestamp desc` is supported.
  * @param {string} request.pageToken
- *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+ *   Specifies a page token to use. Set `pageToken` to the
+ *   `nextPageToken` returned by a previous list request to get
+ *   the next page of results.
  * @param {string} request.project
  *   Project ID for this request.
  * @param {google.cloud.compute.v1.ProjectsListXpnHostsRequest} request.projectsListXpnHostsRequestResource
  *   The body resource for this request
  * @param {boolean} request.returnPartialSuccess
- *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+ *   Opt-in for partial success behavior which provides partial results in case
+ *   of failure. The default value is false.
+ *
+ *   For example, when partial success behavior is enabled, aggregatedList for a
+ *   single zone scope either returns all resources in the zone or no resources,
+ *   with an error code.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -1855,19 +2327,97 @@ export class ProjectsClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.filter
- *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+ *   A filter expression that filters resources listed in the response. Most
+ *   Compute resources support two types of filter expressions:
+ *   expressions that support regular expressions and expressions that follow
+ *   API improvement proposal AIP-160.
+ *   These two types of filter expressions cannot be mixed in one request.
+ *
+ *   If you want to use AIP-160, your expression must specify the field name, an
+ *   operator, and the value that you want to use for filtering. The value
+ *   must be a string, a number, or a boolean. The operator
+ *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+ *
+ *   For example, if you are filtering Compute Engine instances, you can
+ *   exclude instances named `example-instance` by specifying
+ *   `name != example-instance`.
+ *
+ *   The `:*` comparison can be used to test whether a key has been defined.
+ *   For example, to find all objects with `owner` label use:
+ *   ```
+ *   labels.owner:*
+ *   ```
+ *
+ *   You can also filter nested fields. For example, you could specify
+ *   `scheduling.automaticRestart = false` to include instances only
+ *   if they are not scheduled for automatic restarts. You can use filtering
+ *   on nested fields to filter based onresource labels.
+ *
+ *   To filter on multiple expressions, provide each separate expression within
+ *   parentheses. For example:
+ *   ```
+ *   (scheduling.automaticRestart = true)
+ *   (cpuPlatform = "Intel Skylake")
+ *   ```
+ *   By default, each expression is an `AND` expression. However, you
+ *   can include `AND` and `OR` expressions explicitly.
+ *   For example:
+ *   ```
+ *   (cpuPlatform = "Intel Skylake") OR
+ *   (cpuPlatform = "Intel Broadwell") AND
+ *   (scheduling.automaticRestart = true)
+ *   ```
+ *
+ *   If you want to use a regular expression, use the `eq` (equal) or `ne`
+ *   (not equal) operator against a single un-parenthesized expression with or
+ *   without quotes or against multiple parenthesized expressions. Examples:
+ *
+ *   `fieldname eq unquoted literal`
+ *   `fieldname eq 'single quoted literal'`
+ *   `fieldname eq "double quoted literal"`
+ *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
+ *
+ *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+ *   The literal value must match the entire field.
+ *
+ *   For example, to filter for instances that do not end with name "instance",
+ *   you would use `name ne .*instance`.
+ *
+ *   You cannot combine constraints on multiple fields using regular
+ *   expressions.
  * @param {number} request.maxResults
- *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+ *   The maximum number of results per page that should be returned.
+ *   If the number of available results is larger than `maxResults`,
+ *   Compute Engine returns a `nextPageToken` that can be used to get
+ *   the next page of results in subsequent list requests. Acceptable values are
+ *   `0` to `500`, inclusive. (Default: `500`)
  * @param {string} request.orderBy
- *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+ *   Sorts list results by a certain order. By default, results
+ *   are returned in alphanumerical order based on the resource name.
+ *
+ *   You can also sort results in descending order based on the creation
+ *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
+ *   results based on the `creationTimestamp` field in
+ *   reverse chronological order (newest result first). Use this to sort
+ *   resources like operations so that the newest operation is returned first.
+ *
+ *   Currently, only sorting by `name` or
+ *   `creationTimestamp desc` is supported.
  * @param {string} request.pageToken
- *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+ *   Specifies a page token to use. Set `pageToken` to the
+ *   `nextPageToken` returned by a previous list request to get
+ *   the next page of results.
  * @param {string} request.project
  *   Project ID for this request.
  * @param {google.cloud.compute.v1.ProjectsListXpnHostsRequest} request.projectsListXpnHostsRequestResource
  *   The body resource for this request
  * @param {boolean} request.returnPartialSuccess
- *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+ *   Opt-in for partial success behavior which provides partial results in case
+ *   of failure. The default value is false.
+ *
+ *   For example, when partial success behavior is enabled, aggregatedList for a
+ *   single zone scope either returns all resources in the zone or no resources,
+ *   with an error code.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
@@ -1910,19 +2460,97 @@ export class ProjectsClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.filter
- *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+ *   A filter expression that filters resources listed in the response. Most
+ *   Compute resources support two types of filter expressions:
+ *   expressions that support regular expressions and expressions that follow
+ *   API improvement proposal AIP-160.
+ *   These two types of filter expressions cannot be mixed in one request.
+ *
+ *   If you want to use AIP-160, your expression must specify the field name, an
+ *   operator, and the value that you want to use for filtering. The value
+ *   must be a string, a number, or a boolean. The operator
+ *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+ *
+ *   For example, if you are filtering Compute Engine instances, you can
+ *   exclude instances named `example-instance` by specifying
+ *   `name != example-instance`.
+ *
+ *   The `:*` comparison can be used to test whether a key has been defined.
+ *   For example, to find all objects with `owner` label use:
+ *   ```
+ *   labels.owner:*
+ *   ```
+ *
+ *   You can also filter nested fields. For example, you could specify
+ *   `scheduling.automaticRestart = false` to include instances only
+ *   if they are not scheduled for automatic restarts. You can use filtering
+ *   on nested fields to filter based onresource labels.
+ *
+ *   To filter on multiple expressions, provide each separate expression within
+ *   parentheses. For example:
+ *   ```
+ *   (scheduling.automaticRestart = true)
+ *   (cpuPlatform = "Intel Skylake")
+ *   ```
+ *   By default, each expression is an `AND` expression. However, you
+ *   can include `AND` and `OR` expressions explicitly.
+ *   For example:
+ *   ```
+ *   (cpuPlatform = "Intel Skylake") OR
+ *   (cpuPlatform = "Intel Broadwell") AND
+ *   (scheduling.automaticRestart = true)
+ *   ```
+ *
+ *   If you want to use a regular expression, use the `eq` (equal) or `ne`
+ *   (not equal) operator against a single un-parenthesized expression with or
+ *   without quotes or against multiple parenthesized expressions. Examples:
+ *
+ *   `fieldname eq unquoted literal`
+ *   `fieldname eq 'single quoted literal'`
+ *   `fieldname eq "double quoted literal"`
+ *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
+ *
+ *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+ *   The literal value must match the entire field.
+ *
+ *   For example, to filter for instances that do not end with name "instance",
+ *   you would use `name ne .*instance`.
+ *
+ *   You cannot combine constraints on multiple fields using regular
+ *   expressions.
  * @param {number} request.maxResults
- *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+ *   The maximum number of results per page that should be returned.
+ *   If the number of available results is larger than `maxResults`,
+ *   Compute Engine returns a `nextPageToken` that can be used to get
+ *   the next page of results in subsequent list requests. Acceptable values are
+ *   `0` to `500`, inclusive. (Default: `500`)
  * @param {string} request.orderBy
- *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+ *   Sorts list results by a certain order. By default, results
+ *   are returned in alphanumerical order based on the resource name.
+ *
+ *   You can also sort results in descending order based on the creation
+ *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
+ *   results based on the `creationTimestamp` field in
+ *   reverse chronological order (newest result first). Use this to sort
+ *   resources like operations so that the newest operation is returned first.
+ *
+ *   Currently, only sorting by `name` or
+ *   `creationTimestamp desc` is supported.
  * @param {string} request.pageToken
- *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+ *   Specifies a page token to use. Set `pageToken` to the
+ *   `nextPageToken` returned by a previous list request to get
+ *   the next page of results.
  * @param {string} request.project
  *   Project ID for this request.
  * @param {google.cloud.compute.v1.ProjectsListXpnHostsRequest} request.projectsListXpnHostsRequestResource
  *   The body resource for this request
  * @param {boolean} request.returnPartialSuccess
- *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+ *   Opt-in for partial success behavior which provides partial results in case
+ *   of failure. The default value is false.
+ *
+ *   For example, when partial success behavior is enabled, aggregatedList for a
+ *   single zone scope either returns all resources in the zone or no resources,
+ *   with an error code.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}

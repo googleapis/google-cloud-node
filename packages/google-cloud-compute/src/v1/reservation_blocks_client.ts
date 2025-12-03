@@ -223,7 +223,7 @@ export class ReservationBlocksClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const reservationBlocksStubMethods =
-        ['get', 'list', 'performMaintenance'];
+        ['get', 'getIamPolicy', 'list', 'performMaintenance', 'setIamPolicy', 'testIamPermissions'];
     for (const methodName of reservationBlocksStubMethods) {
       const callPromise = this.reservationBlocksStub.then(
         stub => (...args: Array<{}>) => {
@@ -335,9 +335,11 @@ export class ReservationBlocksClient {
  * @param {string} request.project
  *   Project ID for this request.
  * @param {string} request.reservation
- *   The name of the reservation. Name should conform to RFC1035 or be a resource ID.
+ *   The name of the reservation.
+ *   Name should conform to RFC1035 or be a resource ID.
  * @param {string} request.reservationBlock
- *   The name of the reservation block. Name should conform to RFC1035 or be a resource ID.
+ *   The name of the reservation block.
+ *   Name should conform to RFC1035 or be a resource ID.
  * @param {string} request.view
  *   View of the Block.
  *   Check the View enum for the list of possible values.
@@ -434,6 +436,112 @@ export class ReservationBlocksClient {
       });
   }
 /**
+ * Gets the access control policy for a resource. May be empty if no such
+ * policy or resource exists.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {number} request.optionsRequestedPolicyVersion
+ *   Requested IAM Policy version.
+ * @param {string} request.parentResource
+ *   Name or id of parent resource of the resource for this request.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.resource
+ *   Name or id of the resource for this request.
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.Policy|Policy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/reservation_blocks.get_iam_policy.js</caption>
+ * region_tag:compute_v1_generated_ReservationBlocks_GetIamPolicy_async
+ */
+  getIamPolicy(
+      request?: protos.google.cloud.compute.v1.IGetIamPolicyReservationBlockRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IPolicy,
+        protos.google.cloud.compute.v1.IGetIamPolicyReservationBlockRequest|undefined, {}|undefined
+      ]>;
+  getIamPolicy(
+      request: protos.google.cloud.compute.v1.IGetIamPolicyReservationBlockRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IPolicy,
+          protos.google.cloud.compute.v1.IGetIamPolicyReservationBlockRequest|null|undefined,
+          {}|null|undefined>): void;
+  getIamPolicy(
+      request: protos.google.cloud.compute.v1.IGetIamPolicyReservationBlockRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IPolicy,
+          protos.google.cloud.compute.v1.IGetIamPolicyReservationBlockRequest|null|undefined,
+          {}|null|undefined>): void;
+  getIamPolicy(
+      request?: protos.google.cloud.compute.v1.IGetIamPolicyReservationBlockRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IPolicy,
+          protos.google.cloud.compute.v1.IGetIamPolicyReservationBlockRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IPolicy,
+          protos.google.cloud.compute.v1.IGetIamPolicyReservationBlockRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.IPolicy,
+        protos.google.cloud.compute.v1.IGetIamPolicyReservationBlockRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'parent_resource': request.parentResource ?? '',
+      'resource': request.resource ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('getIamPolicy request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.compute.v1.IPolicy,
+        protos.google.cloud.compute.v1.IGetIamPolicyReservationBlockRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getIamPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.compute.v1.IPolicy,
+        protos.google.cloud.compute.v1.IGetIamPolicyReservationBlockRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getIamPolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
  * Allows customers to perform maintenance on a reservation block
  *
  * @param {Object} request
@@ -441,11 +549,25 @@ export class ReservationBlocksClient {
  * @param {string} request.project
  *   Project ID for this request.
  * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ *   An optional request ID to identify requests. Specify a unique request ID so
+ *   that if you must retry your request, the server will know to ignore the
+ *   request if it has already been completed.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same
+ *   request ID, the server can check if original operation with the same
+ *   request ID was received, and if so, will ignore the second request. This
+ *   prevents clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be
+ *   a valid UUID with the exception that zero UUID is not supported
+ *   (00000000-0000-0000-0000-000000000000).
  * @param {string} request.reservation
- *   The name of the reservation. Name should conform to RFC1035 or be a resource ID.
+ *   The name of the reservation.
+ *   Name should conform to RFC1035 or be a resource ID.
  * @param {string} request.reservationBlock
- *   The name of the reservation block. Name should conform to RFC1035 or be a resource ID.
+ *   The name of the reservation block.
+ *   Name should conform to RFC1035 or be a resource ID.
  * @param {google.cloud.compute.v1.ReservationsBlocksPerformMaintenanceRequest} request.reservationsBlocksPerformMaintenanceRequestResource
  *   The body resource for this request
  * @param {string} request.zone
@@ -544,6 +666,217 @@ export class ReservationBlocksClient {
         throw error;
       });
   }
+/**
+ * Sets the access control policy on the specified resource.
+ * Replaces any existing policy.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parentResource
+ *   Name or id of parent resource of the resource for this request.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.resource
+ *   Name or id of the resource for this request.
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {google.cloud.compute.v1.ZoneSetNestedPolicyRequest} request.zoneSetNestedPolicyRequestResource
+ *   The body resource for this request
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.Policy|Policy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/reservation_blocks.set_iam_policy.js</caption>
+ * region_tag:compute_v1_generated_ReservationBlocks_SetIamPolicy_async
+ */
+  setIamPolicy(
+      request?: protos.google.cloud.compute.v1.ISetIamPolicyReservationBlockRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IPolicy,
+        protos.google.cloud.compute.v1.ISetIamPolicyReservationBlockRequest|undefined, {}|undefined
+      ]>;
+  setIamPolicy(
+      request: protos.google.cloud.compute.v1.ISetIamPolicyReservationBlockRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IPolicy,
+          protos.google.cloud.compute.v1.ISetIamPolicyReservationBlockRequest|null|undefined,
+          {}|null|undefined>): void;
+  setIamPolicy(
+      request: protos.google.cloud.compute.v1.ISetIamPolicyReservationBlockRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IPolicy,
+          protos.google.cloud.compute.v1.ISetIamPolicyReservationBlockRequest|null|undefined,
+          {}|null|undefined>): void;
+  setIamPolicy(
+      request?: protos.google.cloud.compute.v1.ISetIamPolicyReservationBlockRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IPolicy,
+          protos.google.cloud.compute.v1.ISetIamPolicyReservationBlockRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IPolicy,
+          protos.google.cloud.compute.v1.ISetIamPolicyReservationBlockRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.IPolicy,
+        protos.google.cloud.compute.v1.ISetIamPolicyReservationBlockRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'parent_resource': request.parentResource ?? '',
+      'resource': request.resource ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('setIamPolicy request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.compute.v1.IPolicy,
+        protos.google.cloud.compute.v1.ISetIamPolicyReservationBlockRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('setIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.setIamPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.compute.v1.IPolicy,
+        protos.google.cloud.compute.v1.ISetIamPolicyReservationBlockRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('setIamPolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Returns permissions that a caller has on the specified resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parentResource
+ *   Name or id of parent resource of the resource for this request.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.resource
+ *   Name or id of the resource for this request.
+ * @param {google.cloud.compute.v1.TestPermissionsRequest} request.testPermissionsRequestResource
+ *   The body resource for this request
+ * @param {string} request.zone
+ *   The name of the zone for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.TestPermissionsResponse|TestPermissionsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/reservation_blocks.test_iam_permissions.js</caption>
+ * region_tag:compute_v1_generated_ReservationBlocks_TestIamPermissions_async
+ */
+  testIamPermissions(
+      request?: protos.google.cloud.compute.v1.ITestIamPermissionsReservationBlockRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.ITestPermissionsResponse,
+        protos.google.cloud.compute.v1.ITestIamPermissionsReservationBlockRequest|undefined, {}|undefined
+      ]>;
+  testIamPermissions(
+      request: protos.google.cloud.compute.v1.ITestIamPermissionsReservationBlockRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.compute.v1.ITestPermissionsResponse,
+          protos.google.cloud.compute.v1.ITestIamPermissionsReservationBlockRequest|null|undefined,
+          {}|null|undefined>): void;
+  testIamPermissions(
+      request: protos.google.cloud.compute.v1.ITestIamPermissionsReservationBlockRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.ITestPermissionsResponse,
+          protos.google.cloud.compute.v1.ITestIamPermissionsReservationBlockRequest|null|undefined,
+          {}|null|undefined>): void;
+  testIamPermissions(
+      request?: protos.google.cloud.compute.v1.ITestIamPermissionsReservationBlockRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.ITestPermissionsResponse,
+          protos.google.cloud.compute.v1.ITestIamPermissionsReservationBlockRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.ITestPermissionsResponse,
+          protos.google.cloud.compute.v1.ITestIamPermissionsReservationBlockRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.ITestPermissionsResponse,
+        protos.google.cloud.compute.v1.ITestIamPermissionsReservationBlockRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'parent_resource': request.parentResource ?? '',
+      'resource': request.resource ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('testIamPermissions request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.compute.v1.ITestPermissionsResponse,
+        protos.google.cloud.compute.v1.ITestIamPermissionsReservationBlockRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('testIamPermissions response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.testIamPermissions(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.compute.v1.ITestPermissionsResponse,
+        protos.google.cloud.compute.v1.ITestIamPermissionsReservationBlockRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('testIamPermissions response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
 
  /**
  * Retrieves a list of reservation blocks under a single reservation.
@@ -551,19 +884,98 @@ export class ReservationBlocksClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.filter
- *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+ *   A filter expression that filters resources listed in the response. Most
+ *   Compute resources support two types of filter expressions:
+ *   expressions that support regular expressions and expressions that follow
+ *   API improvement proposal AIP-160.
+ *   These two types of filter expressions cannot be mixed in one request.
+ *
+ *   If you want to use AIP-160, your expression must specify the field name, an
+ *   operator, and the value that you want to use for filtering. The value
+ *   must be a string, a number, or a boolean. The operator
+ *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+ *
+ *   For example, if you are filtering Compute Engine instances, you can
+ *   exclude instances named `example-instance` by specifying
+ *   `name != example-instance`.
+ *
+ *   The `:*` comparison can be used to test whether a key has been defined.
+ *   For example, to find all objects with `owner` label use:
+ *   ```
+ *   labels.owner:*
+ *   ```
+ *
+ *   You can also filter nested fields. For example, you could specify
+ *   `scheduling.automaticRestart = false` to include instances only
+ *   if they are not scheduled for automatic restarts. You can use filtering
+ *   on nested fields to filter based onresource labels.
+ *
+ *   To filter on multiple expressions, provide each separate expression within
+ *   parentheses. For example:
+ *   ```
+ *   (scheduling.automaticRestart = true)
+ *   (cpuPlatform = "Intel Skylake")
+ *   ```
+ *   By default, each expression is an `AND` expression. However, you
+ *   can include `AND` and `OR` expressions explicitly.
+ *   For example:
+ *   ```
+ *   (cpuPlatform = "Intel Skylake") OR
+ *   (cpuPlatform = "Intel Broadwell") AND
+ *   (scheduling.automaticRestart = true)
+ *   ```
+ *
+ *   If you want to use a regular expression, use the `eq` (equal) or `ne`
+ *   (not equal) operator against a single un-parenthesized expression with or
+ *   without quotes or against multiple parenthesized expressions. Examples:
+ *
+ *   `fieldname eq unquoted literal`
+ *   `fieldname eq 'single quoted literal'`
+ *   `fieldname eq "double quoted literal"`
+ *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
+ *
+ *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+ *   The literal value must match the entire field.
+ *
+ *   For example, to filter for instances that do not end with name "instance",
+ *   you would use `name ne .*instance`.
+ *
+ *   You cannot combine constraints on multiple fields using regular
+ *   expressions.
  * @param {number} request.maxResults
- *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+ *   The maximum number of results per page that should be returned.
+ *   If the number of available results is larger than `maxResults`,
+ *   Compute Engine returns a `nextPageToken` that can be used to get
+ *   the next page of results in subsequent list requests. Acceptable values are
+ *   `0` to `500`, inclusive. (Default: `500`)
  * @param {string} request.orderBy
- *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+ *   Sorts list results by a certain order. By default, results
+ *   are returned in alphanumerical order based on the resource name.
+ *
+ *   You can also sort results in descending order based on the creation
+ *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
+ *   results based on the `creationTimestamp` field in
+ *   reverse chronological order (newest result first). Use this to sort
+ *   resources like operations so that the newest operation is returned first.
+ *
+ *   Currently, only sorting by `name` or
+ *   `creationTimestamp desc` is supported.
  * @param {string} request.pageToken
- *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+ *   Specifies a page token to use. Set `pageToken` to the
+ *   `nextPageToken` returned by a previous list request to get
+ *   the next page of results.
  * @param {string} request.project
  *   Project ID for this request.
  * @param {string} request.reservation
- *   The name of the reservation. Name should conform to RFC1035 or be a resource ID.
+ *   The name of the reservation.
+ *   Name should conform to RFC1035 or be a resource ID.
  * @param {boolean} request.returnPartialSuccess
- *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+ *   Opt-in for partial success behavior which provides partial results in case
+ *   of failure. The default value is false.
+ *
+ *   For example, when partial success behavior is enabled, aggregatedList for a
+ *   single zone scope either returns all resources in the zone or no resources,
+ *   with an error code.
  * @param {string} request.zone
  *   Name of the zone for this request. Zone name should conform to RFC1035.
  * @param {object} [options]
@@ -661,19 +1073,98 @@ export class ReservationBlocksClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.filter
- *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+ *   A filter expression that filters resources listed in the response. Most
+ *   Compute resources support two types of filter expressions:
+ *   expressions that support regular expressions and expressions that follow
+ *   API improvement proposal AIP-160.
+ *   These two types of filter expressions cannot be mixed in one request.
+ *
+ *   If you want to use AIP-160, your expression must specify the field name, an
+ *   operator, and the value that you want to use for filtering. The value
+ *   must be a string, a number, or a boolean. The operator
+ *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+ *
+ *   For example, if you are filtering Compute Engine instances, you can
+ *   exclude instances named `example-instance` by specifying
+ *   `name != example-instance`.
+ *
+ *   The `:*` comparison can be used to test whether a key has been defined.
+ *   For example, to find all objects with `owner` label use:
+ *   ```
+ *   labels.owner:*
+ *   ```
+ *
+ *   You can also filter nested fields. For example, you could specify
+ *   `scheduling.automaticRestart = false` to include instances only
+ *   if they are not scheduled for automatic restarts. You can use filtering
+ *   on nested fields to filter based onresource labels.
+ *
+ *   To filter on multiple expressions, provide each separate expression within
+ *   parentheses. For example:
+ *   ```
+ *   (scheduling.automaticRestart = true)
+ *   (cpuPlatform = "Intel Skylake")
+ *   ```
+ *   By default, each expression is an `AND` expression. However, you
+ *   can include `AND` and `OR` expressions explicitly.
+ *   For example:
+ *   ```
+ *   (cpuPlatform = "Intel Skylake") OR
+ *   (cpuPlatform = "Intel Broadwell") AND
+ *   (scheduling.automaticRestart = true)
+ *   ```
+ *
+ *   If you want to use a regular expression, use the `eq` (equal) or `ne`
+ *   (not equal) operator against a single un-parenthesized expression with or
+ *   without quotes or against multiple parenthesized expressions. Examples:
+ *
+ *   `fieldname eq unquoted literal`
+ *   `fieldname eq 'single quoted literal'`
+ *   `fieldname eq "double quoted literal"`
+ *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
+ *
+ *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+ *   The literal value must match the entire field.
+ *
+ *   For example, to filter for instances that do not end with name "instance",
+ *   you would use `name ne .*instance`.
+ *
+ *   You cannot combine constraints on multiple fields using regular
+ *   expressions.
  * @param {number} request.maxResults
- *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+ *   The maximum number of results per page that should be returned.
+ *   If the number of available results is larger than `maxResults`,
+ *   Compute Engine returns a `nextPageToken` that can be used to get
+ *   the next page of results in subsequent list requests. Acceptable values are
+ *   `0` to `500`, inclusive. (Default: `500`)
  * @param {string} request.orderBy
- *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+ *   Sorts list results by a certain order. By default, results
+ *   are returned in alphanumerical order based on the resource name.
+ *
+ *   You can also sort results in descending order based on the creation
+ *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
+ *   results based on the `creationTimestamp` field in
+ *   reverse chronological order (newest result first). Use this to sort
+ *   resources like operations so that the newest operation is returned first.
+ *
+ *   Currently, only sorting by `name` or
+ *   `creationTimestamp desc` is supported.
  * @param {string} request.pageToken
- *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+ *   Specifies a page token to use. Set `pageToken` to the
+ *   `nextPageToken` returned by a previous list request to get
+ *   the next page of results.
  * @param {string} request.project
  *   Project ID for this request.
  * @param {string} request.reservation
- *   The name of the reservation. Name should conform to RFC1035 or be a resource ID.
+ *   The name of the reservation.
+ *   Name should conform to RFC1035 or be a resource ID.
  * @param {boolean} request.returnPartialSuccess
- *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+ *   Opt-in for partial success behavior which provides partial results in case
+ *   of failure. The default value is false.
+ *
+ *   For example, when partial success behavior is enabled, aggregatedList for a
+ *   single zone scope either returns all resources in the zone or no resources,
+ *   with an error code.
  * @param {string} request.zone
  *   Name of the zone for this request. Zone name should conform to RFC1035.
  * @param {object} [options]
@@ -720,19 +1211,98 @@ export class ReservationBlocksClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.filter
- *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+ *   A filter expression that filters resources listed in the response. Most
+ *   Compute resources support two types of filter expressions:
+ *   expressions that support regular expressions and expressions that follow
+ *   API improvement proposal AIP-160.
+ *   These two types of filter expressions cannot be mixed in one request.
+ *
+ *   If you want to use AIP-160, your expression must specify the field name, an
+ *   operator, and the value that you want to use for filtering. The value
+ *   must be a string, a number, or a boolean. The operator
+ *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+ *
+ *   For example, if you are filtering Compute Engine instances, you can
+ *   exclude instances named `example-instance` by specifying
+ *   `name != example-instance`.
+ *
+ *   The `:*` comparison can be used to test whether a key has been defined.
+ *   For example, to find all objects with `owner` label use:
+ *   ```
+ *   labels.owner:*
+ *   ```
+ *
+ *   You can also filter nested fields. For example, you could specify
+ *   `scheduling.automaticRestart = false` to include instances only
+ *   if they are not scheduled for automatic restarts. You can use filtering
+ *   on nested fields to filter based onresource labels.
+ *
+ *   To filter on multiple expressions, provide each separate expression within
+ *   parentheses. For example:
+ *   ```
+ *   (scheduling.automaticRestart = true)
+ *   (cpuPlatform = "Intel Skylake")
+ *   ```
+ *   By default, each expression is an `AND` expression. However, you
+ *   can include `AND` and `OR` expressions explicitly.
+ *   For example:
+ *   ```
+ *   (cpuPlatform = "Intel Skylake") OR
+ *   (cpuPlatform = "Intel Broadwell") AND
+ *   (scheduling.automaticRestart = true)
+ *   ```
+ *
+ *   If you want to use a regular expression, use the `eq` (equal) or `ne`
+ *   (not equal) operator against a single un-parenthesized expression with or
+ *   without quotes or against multiple parenthesized expressions. Examples:
+ *
+ *   `fieldname eq unquoted literal`
+ *   `fieldname eq 'single quoted literal'`
+ *   `fieldname eq "double quoted literal"`
+ *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
+ *
+ *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+ *   The literal value must match the entire field.
+ *
+ *   For example, to filter for instances that do not end with name "instance",
+ *   you would use `name ne .*instance`.
+ *
+ *   You cannot combine constraints on multiple fields using regular
+ *   expressions.
  * @param {number} request.maxResults
- *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+ *   The maximum number of results per page that should be returned.
+ *   If the number of available results is larger than `maxResults`,
+ *   Compute Engine returns a `nextPageToken` that can be used to get
+ *   the next page of results in subsequent list requests. Acceptable values are
+ *   `0` to `500`, inclusive. (Default: `500`)
  * @param {string} request.orderBy
- *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+ *   Sorts list results by a certain order. By default, results
+ *   are returned in alphanumerical order based on the resource name.
+ *
+ *   You can also sort results in descending order based on the creation
+ *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
+ *   results based on the `creationTimestamp` field in
+ *   reverse chronological order (newest result first). Use this to sort
+ *   resources like operations so that the newest operation is returned first.
+ *
+ *   Currently, only sorting by `name` or
+ *   `creationTimestamp desc` is supported.
  * @param {string} request.pageToken
- *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+ *   Specifies a page token to use. Set `pageToken` to the
+ *   `nextPageToken` returned by a previous list request to get
+ *   the next page of results.
  * @param {string} request.project
  *   Project ID for this request.
  * @param {string} request.reservation
- *   The name of the reservation. Name should conform to RFC1035 or be a resource ID.
+ *   The name of the reservation.
+ *   Name should conform to RFC1035 or be a resource ID.
  * @param {boolean} request.returnPartialSuccess
- *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+ *   Opt-in for partial success behavior which provides partial results in case
+ *   of failure. The default value is false.
+ *
+ *   For example, when partial success behavior is enabled, aggregatedList for a
+ *   single zone scope either returns all resources in the zone or no resources,
+ *   with an error code.
  * @param {string} request.zone
  *   Name of the zone for this request. Zone name should conform to RFC1035.
  * @param {object} [options]
