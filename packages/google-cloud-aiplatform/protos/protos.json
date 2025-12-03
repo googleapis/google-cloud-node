@@ -40457,6 +40457,33 @@
                         }
                       }
                     },
+                    "FullFineTunedResources": {
+                      "fields": {
+                        "deploymentType": {
+                          "type": "DeploymentType",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "modelInferenceUnitCount": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "DeploymentType": {
+                          "values": {
+                            "DEPLOYMENT_TYPE_UNSPECIFIED": 0,
+                            "DEPLOYMENT_TYPE_EVAL": 1,
+                            "DEPLOYMENT_TYPE_PROD": 2
+                          }
+                        }
+                      }
+                    },
                     "ResourcesConsumed": {
                       "fields": {
                         "replicaHours": {
@@ -48933,7 +48960,8 @@
                           "oneof": [
                             "dedicatedResources",
                             "automaticResources",
-                            "sharedResources"
+                            "sharedResources",
+                            "fullFineTunedResources"
                           ]
                         }
                       },
@@ -48951,6 +48979,13 @@
                           "id": 17,
                           "options": {
                             "(google.api.resource_reference).type": "aiplatform.googleapis.com/DeploymentResourcePool"
+                          }
+                        },
+                        "fullFineTunedResources": {
+                          "type": "FullFineTunedResources",
+                          "id": 36,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "id": {

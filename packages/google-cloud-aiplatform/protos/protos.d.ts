@@ -151266,6 +151266,119 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a FullFineTunedResources. */
+                interface IFullFineTunedResources {
+
+                    /** FullFineTunedResources deploymentType */
+                    deploymentType?: (google.cloud.aiplatform.v1beta1.FullFineTunedResources.DeploymentType|keyof typeof google.cloud.aiplatform.v1beta1.FullFineTunedResources.DeploymentType|null);
+
+                    /** FullFineTunedResources modelInferenceUnitCount */
+                    modelInferenceUnitCount?: (number|null);
+                }
+
+                /** Represents a FullFineTunedResources. */
+                class FullFineTunedResources implements IFullFineTunedResources {
+
+                    /**
+                     * Constructs a new FullFineTunedResources.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IFullFineTunedResources);
+
+                    /** FullFineTunedResources deploymentType. */
+                    public deploymentType: (google.cloud.aiplatform.v1beta1.FullFineTunedResources.DeploymentType|keyof typeof google.cloud.aiplatform.v1beta1.FullFineTunedResources.DeploymentType);
+
+                    /** FullFineTunedResources modelInferenceUnitCount. */
+                    public modelInferenceUnitCount: number;
+
+                    /**
+                     * Creates a new FullFineTunedResources instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FullFineTunedResources instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IFullFineTunedResources): google.cloud.aiplatform.v1beta1.FullFineTunedResources;
+
+                    /**
+                     * Encodes the specified FullFineTunedResources message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.FullFineTunedResources.verify|verify} messages.
+                     * @param message FullFineTunedResources message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IFullFineTunedResources, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FullFineTunedResources message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.FullFineTunedResources.verify|verify} messages.
+                     * @param message FullFineTunedResources message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IFullFineTunedResources, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FullFineTunedResources message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FullFineTunedResources
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.FullFineTunedResources;
+
+                    /**
+                     * Decodes a FullFineTunedResources message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FullFineTunedResources
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.FullFineTunedResources;
+
+                    /**
+                     * Verifies a FullFineTunedResources message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FullFineTunedResources message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FullFineTunedResources
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.FullFineTunedResources;
+
+                    /**
+                     * Creates a plain object from a FullFineTunedResources message. Also converts values to other types if specified.
+                     * @param message FullFineTunedResources
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.FullFineTunedResources, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FullFineTunedResources to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FullFineTunedResources
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace FullFineTunedResources {
+
+                    /** DeploymentType enum. */
+                    enum DeploymentType {
+                        DEPLOYMENT_TYPE_UNSPECIFIED = 0,
+                        DEPLOYMENT_TYPE_EVAL = 1,
+                        DEPLOYMENT_TYPE_PROD = 2
+                    }
+                }
+
                 /** Properties of a ResourcesConsumed. */
                 interface IResourcesConsumed {
 
@@ -181540,6 +181653,9 @@ export namespace google {
                     /** DeployedModel sharedResources */
                     sharedResources?: (string|null);
 
+                    /** DeployedModel fullFineTunedResources */
+                    fullFineTunedResources?: (google.cloud.aiplatform.v1beta1.IFullFineTunedResources|null);
+
                     /** DeployedModel id */
                     id?: (string|null);
 
@@ -181613,6 +181729,9 @@ export namespace google {
                     /** DeployedModel sharedResources. */
                     public sharedResources?: (string|null);
 
+                    /** DeployedModel fullFineTunedResources. */
+                    public fullFineTunedResources?: (google.cloud.aiplatform.v1beta1.IFullFineTunedResources|null);
+
                     /** DeployedModel id. */
                     public id: string;
 
@@ -181668,7 +181787,7 @@ export namespace google {
                     public speculativeDecodingSpec?: (google.cloud.aiplatform.v1beta1.ISpeculativeDecodingSpec|null);
 
                     /** DeployedModel predictionResources. */
-                    public predictionResources?: ("dedicatedResources"|"automaticResources"|"sharedResources");
+                    public predictionResources?: ("dedicatedResources"|"automaticResources"|"sharedResources"|"fullFineTunedResources");
 
                     /**
                      * Creates a new DeployedModel instance using the specified properties.
