@@ -2210,6 +2210,58 @@
           }
         }
       }
+    },
+    {
+      "regionTag": "artifactregistry_v1_generated_ArtifactRegistry_ExportArtifact_async",
+      "title": "ArtifactRegistry exportArtifact Sample",
+      "origin": "API_DEFINITION",
+      "description": " Exports an artifact.",
+      "canonical": true,
+      "file": "artifact_registry.export_artifact.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 73,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ExportArtifact",
+        "fullName": "google.devtools.artifactregistry.v1.ArtifactRegistry.ExportArtifact",
+        "async": true,
+        "parameters": [
+          {
+            "name": "source_version",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "source_tag",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "gcs_path",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "repository",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ArtifactRegistryClient",
+          "fullName": "google.devtools.artifactregistry.v1.ArtifactRegistryClient"
+        },
+        "method": {
+          "shortName": "ExportArtifact",
+          "fullName": "google.devtools.artifactregistry.v1.ArtifactRegistry.ExportArtifact",
+          "service": {
+            "shortName": "ArtifactRegistry",
+            "fullName": "google.devtools.artifactregistry.v1.ArtifactRegistry"
+          }
+        }
+      }
     }
   ]
 }

@@ -734,6 +734,95 @@
                         }
                       }
                     },
+                    "ExportArtifactRequest": {
+                      "oneofs": {
+                        "sourceArtifact": {
+                          "oneof": [
+                            "sourceVersion",
+                            "sourceTag"
+                          ]
+                        },
+                        "destination": {
+                          "oneof": [
+                            "gcsPath"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "sourceVersion": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.resource_reference).type": "artifactregistry.googleapis.com/Version"
+                          }
+                        },
+                        "sourceTag": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.resource_reference).type": "artifactregistry.googleapis.com/Tag"
+                          }
+                        },
+                        "gcsPath": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "repository": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "artifactregistry.googleapis.com/Repository"
+                          }
+                        }
+                      }
+                    },
+                    "ExportArtifactResponse": {
+                      "fields": {
+                        "exportedVersion": {
+                          "type": "Version",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ExportArtifactMetadata": {
+                      "fields": {
+                        "exportedFiles": {
+                          "rule": "repeated",
+                          "type": "ExportedFile",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "ExportedFile": {
+                          "oneofs": {
+                            "destination": {
+                              "oneof": [
+                                "gcsObjectPath"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "gcsObjectPath": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.resource_reference).type": "artifactregistry.googleapis.com/File"
+                              }
+                            },
+                            "hashes": {
+                              "rule": "repeated",
+                              "type": "Hash",
+                              "id": 3
+                            }
+                          }
+                        }
+                      }
+                    },
                     "Hash": {
                       "fields": {
                         "type": {
@@ -889,6 +978,269 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        }
+                      }
+                    },
+                    "VersionView": {
+                      "values": {
+                        "VERSION_VIEW_UNSPECIFIED": 0,
+                        "BASIC": 1,
+                        "FULL": 2
+                      }
+                    },
+                    "Version": {
+                      "options": {
+                        "(google.api.resource).type": "artifactregistry.googleapis.com/Version",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/repositories/{repository}/packages/{package}/versions/{version}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6
+                        },
+                        "relatedTags": {
+                          "rule": "repeated",
+                          "type": "Tag",
+                          "id": 7
+                        },
+                        "metadata": {
+                          "type": "google.protobuf.Struct",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "annotations": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListVersionsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "view": {
+                          "type": "VersionView",
+                          "id": 4
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListVersionsResponse": {
+                      "fields": {
+                        "versions": {
+                          "rule": "repeated",
+                          "type": "Version",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetVersionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "view": {
+                          "type": "VersionView",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DeleteVersionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "force": {
+                          "type": "bool",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "BatchDeleteVersionsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).child_type": "artifactregistry.googleapis.com/Version"
+                          }
+                        },
+                        "names": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "artifactregistry.googleapis.com/Version"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "BatchDeleteVersionsMetadata": {
+                      "fields": {
+                        "failedVersions": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "UpdateVersionRequest": {
+                      "fields": {
+                        "version": {
+                          "type": "Version",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "Tag": {
+                      "options": {
+                        "(google.api.resource).type": "artifactregistry.googleapis.com/Tag",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/repositories/{repository}/packages/{package}/tags/{tag}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "version": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ListTagsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListTagsResponse": {
+                      "fields": {
+                        "tags": {
+                          "rule": "repeated",
+                          "type": "Tag",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetTagRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "CreateTagRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "tagId": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "tag": {
+                          "type": "Tag",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "UpdateTagRequest": {
+                      "fields": {
+                        "tag": {
+                          "type": "Tag",
+                          "id": 1
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DeleteTagRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
                         }
                       }
                     },
@@ -3068,6 +3420,30 @@
                               }
                             }
                           ]
+                        },
+                        "ExportArtifact": {
+                          "requestType": "ExportArtifactRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{repository=projects/*/locations/*/repositories/*}:exportArtifact",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "google.devtools.artifactregistry.v1.ExportArtifactResponse",
+                            "(google.longrunning.operation_info).metadata_type": "google.devtools.artifactregistry.v1.ExportArtifactMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{repository=projects/*/locations/*/repositories/*}:exportArtifact",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.devtools.artifactregistry.v1.ExportArtifactResponse",
+                                "metadata_type": "google.devtools.artifactregistry.v1.ExportArtifactMetadata"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -3132,269 +3508,6 @@
                         "updateMask": {
                           "type": "google.protobuf.FieldMask",
                           "id": 3
-                        }
-                      }
-                    },
-                    "Tag": {
-                      "options": {
-                        "(google.api.resource).type": "artifactregistry.googleapis.com/Tag",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/repositories/{repository}/packages/{package}/tags/{tag}"
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "version": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "ListTagsRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "filter": {
-                          "type": "string",
-                          "id": 4
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 2
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "ListTagsResponse": {
-                      "fields": {
-                        "tags": {
-                          "rule": "repeated",
-                          "type": "Tag",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "GetTagRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "CreateTagRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "tagId": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "tag": {
-                          "type": "Tag",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "UpdateTagRequest": {
-                      "fields": {
-                        "tag": {
-                          "type": "Tag",
-                          "id": 1
-                        },
-                        "updateMask": {
-                          "type": "google.protobuf.FieldMask",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "DeleteTagRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "VersionView": {
-                      "values": {
-                        "VERSION_VIEW_UNSPECIFIED": 0,
-                        "BASIC": 1,
-                        "FULL": 2
-                      }
-                    },
-                    "Version": {
-                      "options": {
-                        "(google.api.resource).type": "artifactregistry.googleapis.com/Version",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/repositories/{repository}/packages/{package}/versions/{version}"
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "description": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 5
-                        },
-                        "updateTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 6
-                        },
-                        "relatedTags": {
-                          "rule": "repeated",
-                          "type": "Tag",
-                          "id": 7
-                        },
-                        "metadata": {
-                          "type": "google.protobuf.Struct",
-                          "id": 8,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "annotations": {
-                          "keyType": "string",
-                          "type": "string",
-                          "id": 9,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "ListVersionsRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 2
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "view": {
-                          "type": "VersionView",
-                          "id": 4
-                        },
-                        "orderBy": {
-                          "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "filter": {
-                          "type": "string",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "ListVersionsResponse": {
-                      "fields": {
-                        "versions": {
-                          "rule": "repeated",
-                          "type": "Version",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "GetVersionRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "view": {
-                          "type": "VersionView",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "DeleteVersionRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "force": {
-                          "type": "bool",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "BatchDeleteVersionsRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.resource_reference).child_type": "artifactregistry.googleapis.com/Version"
-                          }
-                        },
-                        "names": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "artifactregistry.googleapis.com/Version"
-                          }
-                        },
-                        "validateOnly": {
-                          "type": "bool",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "BatchDeleteVersionsMetadata": {
-                      "fields": {
-                        "failedVersions": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "UpdateVersionRequest": {
-                      "fields": {
-                        "version": {
-                          "type": "Version",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "updateMask": {
-                          "type": "google.protobuf.FieldMask",
-                          "id": 2
                         }
                       }
                     },
@@ -6753,18 +6866,6 @@
                 }
               }
             },
-            "Duration": {
-              "fields": {
-                "seconds": {
-                  "type": "int64",
-                  "id": 1
-                },
-                "nanos": {
-                  "type": "int32",
-                  "id": 2
-                }
-              }
-            },
             "Struct": {
               "fields": {
                 "fields": {
@@ -6825,6 +6926,18 @@
                   "rule": "repeated",
                   "type": "Value",
                   "id": 1
+                }
+              }
+            },
+            "Duration": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
                 }
               }
             },
