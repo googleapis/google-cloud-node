@@ -200,6 +200,11 @@
                 "deleteAttachment"
               ]
             },
+            "ExportArtifact": {
+              "methods": [
+                "exportArtifact"
+              ]
+            },
             "ListDockerImages": {
               "methods": [
                 "listDockerImages",
@@ -470,6 +475,11 @@
             "DeleteAttachment": {
               "methods": [
                 "deleteAttachment"
+              ]
+            },
+            "ExportArtifact": {
+              "methods": [
+                "exportArtifact"
               ]
             },
             "ListDockerImages": {

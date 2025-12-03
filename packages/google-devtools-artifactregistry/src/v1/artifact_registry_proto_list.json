@@ -2,6 +2,7 @@
   "../../protos/google/devtools/artifactregistry/v1/apt_artifact.proto",
   "../../protos/google/devtools/artifactregistry/v1/artifact.proto",
   "../../protos/google/devtools/artifactregistry/v1/attachment.proto",
+  "../../protos/google/devtools/artifactregistry/v1/export.proto",
   "../../protos/google/devtools/artifactregistry/v1/file.proto",
   "../../protos/google/devtools/artifactregistry/v1/generic.proto",
   "../../protos/google/devtools/artifactregistry/v1/go.proto",
