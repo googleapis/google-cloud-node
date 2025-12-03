@@ -16,12 +16,12 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 export const filesToUpdate: string[] = [
-    'protos/google/storage/v2/storage.proto',
+  'protos/google/storage/v2/storage.proto',
 ];
 
 export interface Replacement {
-    pattern: RegExp;
-    replacement: string;
+  pattern: RegExp;
+  replacement: string;
 }
 
 export const replacements: Replacement[] = [
@@ -36,20 +36,23 @@ export const replacements: Replacement[] = [
  * @param {string[]} filePaths - An array of file paths to update.
  * @param {Replacement[]} replacements - An array of replacement objects.
  */
-export function cleanObjectReferences(filePaths: string[], replacements: Replacement[]): void {
-    filePaths.forEach((filePath) => {
-        const fullPath = path.join(__dirname, '..', '..', filePath);
-        if (fs.existsSync(fullPath)) {
-            replacements.forEach(({pattern, replacement}) => {
-                try {
-                    const data = fs.readFileSync(fullPath, 'utf8');
-                    const result = data.replace(pattern, replacement);
-                    fs.writeFileSync(fullPath, result, 'utf8');
-                    console.log(`Successfully updated: ${fullPath}`);
-                } catch (err) {
-                    console.error(`Error processing file ${fullPath}:`, err);
-                }
-            });
+export function cleanObjectReferences(
+  filePaths: string[],
+  replacements: Replacement[],
+): void {
+  filePaths.forEach(filePath => {
+    const fullPath = path.join(__dirname, '..', '..', filePath);
+    if (fs.existsSync(fullPath)) {
+      replacements.forEach(({pattern, replacement}) => {
+        try {
+          const data = fs.readFileSync(fullPath, 'utf8');
+          const result = data.replace(pattern, replacement);
+          fs.writeFileSync(fullPath, result, 'utf8');
+          console.log(`Successfully updated: ${fullPath}`);
+        } catch (err) {
+          console.error(`Error processing file ${fullPath}:`, err);
         }
-    });
+      });
+    }
+  });
 }

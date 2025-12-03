@@ -13,9 +13,13 @@
 // limitations under the License.
 
 import * as fs from 'fs';
-import { cleanObjectReferences, filesToUpdate, replacements } from './proto_utils';
-import { buildOutput } from './uber_client_builder';
-import { fixIndexFile, fixV2Index } from './index_fix_utils';
+import {
+  cleanObjectReferences,
+  filesToUpdate,
+  replacements,
+} from './proto_utils';
+import {buildOutput} from './uber_client_builder';
+import {fixIndexFile, fixV2Index} from './index_fix_utils';
 
 async function main() {
   fixIndexFile('src/index.ts');

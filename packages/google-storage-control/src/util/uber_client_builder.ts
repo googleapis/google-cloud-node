@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import * as prettier from 'prettier';
-import { astHelper, parseClientName, getPropertyDeclarations } from './ast_utils';
+import {astHelper, parseClientName, getPropertyDeclarations} from './ast_utils';
 
 export const CLIENTS = ['StorageControlInternal', 'StorageClient'];
 export const FILES = [
@@ -113,13 +113,13 @@ function buildOptionTypes(clients: string[]) {
   let storageControlOptionsType =
     'export interface StorageControlClientOptions extends ClientOptions {\n';
   storageControlOptionsType = storageControlOptionsType.concat(
-    'gaxInstance?: typeof gax | typeof gax.fallback;\n'
+    'gaxInstance?: typeof gax | typeof gax.fallback;\n',
   );
   for (const client in clients) {
     let variableDecl = '';
     const clientName = parseClientName(clients[client]);
     variableDecl = variableDecl.concat(
-      `\t ${clientName}?: ${clients[client]};\n`
+      `\t ${clientName}?: ${clients[client]};\n`,
     );
     storageControlOptionsType = storageControlOptionsType.concat(variableDecl);
   }
@@ -146,10 +146,10 @@ function buildClientConstructor(clients: string[]) {
   for (const client in clients) {
     const clientName = parseClientName(clients[client]);
     variableDecl = variableDecl.concat(
-      `\t${clientName}: ${clients[client]};\n`
+      `\t${clientName}: ${clients[client]};\n`,
     );
     constructorInitializers = constructorInitializers.concat(
-      `\t\tthis.${clientName} = options?.${clientName} ?? new ${clients[client]}(options);\n`
+      `\t\tthis.${clientName} = options?.${clientName} ?? new ${clients[client]}(options);\n`,
     );
     // add statement about auth only after the first subClient
     if (clientCounter === 0) {
@@ -165,7 +165,7 @@ function buildClientConstructor(clients: string[]) {
   const properties = getPropertyDeclarations(FILES[0]);
   properties.forEach((property, key) => {
     constructorInitializers = constructorInitializers.concat(
-      `\t\tthis.${key} = this.storageControlInternal.${key};\n`
+      `\t\tthis.${key} = this.storageControlInternal.${key};\n`,
     );
   });
   constructorInitializers = constructorInitializers.concat('\t}');
@@ -178,7 +178,7 @@ function buildClientConstructor(clients: string[]) {
     '\n',
     comment,
     '\n',
-    constructorInitializers
+    constructorInitializers,
   );
 
   return output;

@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-const { execSync } = require('child_process');
+const {execSync} = require('child_process');
 const path = require('path');
 const fs = require('fs');
 
@@ -20,12 +20,15 @@ const packageRoot = __dirname;
 const utilDir = path.join(packageRoot, 'src', 'util');
 
 try {
-  execSync('npm install', { cwd: packageRoot, stdio: 'inherit' });
+  execSync('npm install', {cwd: packageRoot, stdio: 'inherit'});
 
   const tscPath = path.join(packageRoot, 'node_modules', '.bin', 'tsc');
-  execSync(`${tscPath} src/util/storage_control_utils.ts`, { cwd: packageRoot, stdio: 'inherit' });
-  
-  execSync('node storage_control_utils.js', { cwd: utilDir, stdio: 'inherit' });
+  execSync(`${tscPath} src/util/storage_control_utils.ts`, {
+    cwd: packageRoot,
+    stdio: 'inherit',
+  });
+
+  execSync('node storage_control_utils.js', {cwd: utilDir, stdio: 'inherit'});
 
   const files = fs.readdirSync(utilDir);
   for (const file of files) {

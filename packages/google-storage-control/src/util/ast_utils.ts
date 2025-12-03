@@ -17,7 +17,10 @@ import * as ts from 'typescript';
 const EXCLUDED_FUNCTION_TERMS: string[] = [];
 const AST_TYPES_TO_INCLUDE: string[] = ['MethodDeclaration', 'GetAccessor'];
 
-type NameMethodPair = [ts.PropertyName, ts.MethodDeclaration | ts.GetAccessorDeclaration];
+type NameMethodPair = [
+  ts.PropertyName,
+  ts.MethodDeclaration | ts.GetAccessorDeclaration,
+];
 type MethodDocstringMap = Map<string, string>;
 let foundNodes: NameMethodPair[] = [];
 const methodDocstrings: MethodDocstringMap = new Map();
@@ -45,7 +48,7 @@ function getEscapedText(name: ts.PropertyName | ts.BindingName): string {
  * @returns {string} The overloaded method signatures.
  */
 function getOverloadedMethod(
-  node: ts.MethodDeclaration | ts.GetAccessorDeclaration
+  node: ts.MethodDeclaration | ts.GetAccessorDeclaration,
 ): string {
   if (ts.isGetAccessorDeclaration(node) || !node.body) {
     return '';
@@ -76,7 +79,7 @@ function getOverloadedMethod(
     const promiseTypeNode = node.type.types.find(
       t =>
         t.kind === ts.SyntaxKind.TypeReference &&
-        t.getText(sourceFile).startsWith('Promise')
+        t.getText(sourceFile).startsWith('Promise'),
     );
     if (promiseTypeNode) {
       promiseReturnType = promiseTypeNode.getText(sourceFile);
@@ -97,7 +100,7 @@ function getOverloadedMethod(
       t =>
         t.kind === ts.SyntaxKind.TypeReference &&
         (t.getText(sourceFile).startsWith('Callback') ||
-          t.getText(sourceFile).startsWith('PaginationCallback'))
+          t.getText(sourceFile).startsWith('PaginationCallback')),
     );
     if (callbackTypeNode) {
       callbackType = callbackTypeNode.getText(sourceFile);
@@ -130,10 +133,10 @@ function getOverloadedMethod(
  * @returns {string} The kind of the node.
  */
 function getKind(node: ts.Node) {
-    if (!node) {
-      return '';
-    }
-    return ts.SyntaxKind[node.kind];
+  if (!node) {
+    return '';
+  }
+  return ts.SyntaxKind[node.kind];
 }
 
 /**
@@ -148,28 +151,28 @@ function extract(node: ts.Node, client: string): void {
   if (AST_TYPES_TO_INCLUDE.includes(kind)) {
     if (ts.isMethodDeclaration(node) || ts.isGetAccessorDeclaration(node)) {
       const nameEscapedText = getEscapedText(node.name);
-        if (methodDocstrings.get(nameEscapedText) === undefined) {
-          const commentRanges = ts.getLeadingCommentRanges(
-            sourceFile.getFullText(),
-            node.getFullStart()
-          );
-          let docString = '';
-          if (commentRanges) {
-            commentRanges.map(r => {
-              docString = docString.concat(
-                sourceFile!.getFullText().slice(r.pos, r.end)
-              );
-              if (r.hasTrailingNewLine) {
-                docString = docString.concat('\n');
-              }
-            });
-          }
-          methodDocstrings.set(nameEscapedText, docString);
+      if (methodDocstrings.get(nameEscapedText) === undefined) {
+        const commentRanges = ts.getLeadingCommentRanges(
+          sourceFile.getFullText(),
+          node.getFullStart(),
+        );
+        let docString = '';
+        if (commentRanges) {
+          commentRanges.map(r => {
+            docString = docString.concat(
+              sourceFile!.getFullText().slice(r.pos, r.end),
+            );
+            if (r.hasTrailingNewLine) {
+              docString = docString.concat('\n');
+            }
+          });
         }
+        methodDocstrings.set(nameEscapedText, docString);
+      }
 
-        if (node.body) {
-          foundNodes.push([node.name, node]);
-        }
+      if (node.body) {
+        foundNodes.push([node.name, node]);
+      }
     }
   }
   ts.forEachChild(node, childNode => {
@@ -213,7 +216,7 @@ function ast(file: string, client: string): [string, string][] {
     }
 
     const isStatic = node.modifiers?.some(
-      m => m.kind === ts.SyntaxKind.StaticKeyword
+      m => m.kind === ts.SyntaxKind.StaticKeyword,
     );
     if (!isExcludedFunction) {
       const docString = methodDocstrings.get(functionName);
@@ -233,21 +236,21 @@ function ast(file: string, client: string): [string, string][] {
         for (let i = 0; i < node.parameters.length; i++) {
           const name = getEscapedText(node.parameters[i].name);
           const questionToken = node.parameters[i].questionToken ? '?' : '';
-        const typeString = node.parameters[i].type?.getFullText();
-        let parameter = `${name}${questionToken}: ${typeString}`;
+          const typeString = node.parameters[i].type?.getFullText();
+          let parameter = `${name}${questionToken}: ${typeString}`;
 
-        parametersList = parametersList.concat(name);
-        if (name === 'optionsOrCallback') {
-          argumentsList = argumentsList.concat('options');
-        } else {
-          argumentsList = argumentsList.concat(name);
-        }
-        if (i !== node.parameters.length - 1) {
-          parameter += ',';
-          parametersList += ',';
-          argumentsList += ',';
-        }
-        output = output.concat(`\n\t\t${parameter}`);
+          parametersList = parametersList.concat(name);
+          if (name === 'optionsOrCallback') {
+            argumentsList = argumentsList.concat('options');
+          } else {
+            argumentsList = argumentsList.concat(name);
+          }
+          if (i !== node.parameters.length - 1) {
+            parameter += ',';
+            parametersList += ',';
+            argumentsList += ',';
+          }
+          output = output.concat(`\n\t\t${parameter}`);
         }
       }
       output = output.concat(')');
@@ -286,16 +289,20 @@ function ast(file: string, client: string): [string, string][] {
 `;
         } else {
           const hasRequestArg = node.parameters.some(
-            p => getEscapedText(p.name) === 'request'
+            p => getEscapedText(p.name) === 'request',
           );
 
           // If there's no 'request' parameter, it's a simple helper method.
-        if (!hasRequestArg || functionName.endsWith('Stream') || functionName.endsWith('Async')) {
-          body = `
+          if (
+            !hasRequestArg ||
+            functionName.endsWith('Stream') ||
+            functionName.endsWith('Async')
+          ) {
+            body = `
               return this.${clientName}.${functionName}(${argumentsList});`;
-        }
-        // Otherwise, it's a GAPIC method (streaming or standard).
-        else {
+          }
+          // Otherwise, it's a GAPIC method (streaming or standard).
+          else {
             body = `
                 request = request || {};
                 let options: any;
@@ -311,7 +318,7 @@ function ast(file: string, client: string): [string, string][] {
                 }
                 return this.${clientName}.${functionName}(${argumentsList});
             `;
-        }
+          }
         }
         output = output.concat(`{\n${body}\n}`);
       }
@@ -378,7 +385,7 @@ export function getPropertyDeclarations(file: string): Map<string, string> {
   function visit(node: ts.Node) {
     if (ts.isPropertyDeclaration(node)) {
       const isPrivate = node.modifiers?.some(
-        m => m.kind === ts.SyntaxKind.PrivateKeyword
+        m => m.kind === ts.SyntaxKind.PrivateKeyword,
       );
       if (!isPrivate) {
         const propertyName = getEscapedText(node.name);

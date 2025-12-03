@@ -22,17 +22,17 @@ describe('Backwards compatibility', () => {
     const originalClient = new OriginalStorageControlClient();
 
     const uberClientMethods = Object.getOwnPropertyNames(
-      Object.getPrototypeOf(uberClient)
+      Object.getPrototypeOf(uberClient),
     );
     const originalClientMethods = Object.getOwnPropertyNames(
-      Object.getPrototypeOf(originalClient)
+      Object.getPrototypeOf(originalClient),
     );
 
     for (const method of originalClientMethods) {
       if (method !== 'constructor') {
         assert.ok(
           uberClientMethods.includes(method),
-          `Method ${method} is missing from the uber client`
+          `Method ${method} is missing from the uber client`,
         );
       }
     }
@@ -42,20 +42,23 @@ describe('Backwards compatibility', () => {
     const uberClient = new UberStorageControlClient();
     assert.ok(
       uberClient.storageControlInternal instanceof OriginalStorageControlClient,
-      'storageControlInternal should be an instance of StorageControlClient'
+      'storageControlInternal should be an instance of StorageControlClient',
     );
   });
 
   it('uber client should have all the static members of the original client', () => {
-    const uberClientStatics = Object.getOwnPropertyNames(UberStorageControlClient);
-    const originalClientStatics =
-      Object.getOwnPropertyNames(OriginalStorageControlClient);
+    const uberClientStatics = Object.getOwnPropertyNames(
+      UberStorageControlClient,
+    );
+    const originalClientStatics = Object.getOwnPropertyNames(
+      OriginalStorageControlClient,
+    );
 
     for (const staticMember of originalClientStatics) {
       if (staticMember !== 'constructor') {
         assert.ok(
           uberClientStatics.includes(staticMember),
-          `Static member ${staticMember} is missing from the uber client`
+          `Static member ${staticMember} is missing from the uber client`,
         );
       }
     }
@@ -72,7 +75,7 @@ describe('Backwards compatibility', () => {
       if (!prop.startsWith('_')) {
         assert.ok(
           uberClientProperties.includes(prop),
-          `Property or accessor ${prop} is missing from the uber client`
+          `Property or accessor ${prop} is missing from the uber client`,
         );
       }
     }
@@ -83,7 +86,7 @@ describe('Backwards compatibility', () => {
     const originalClient = new OriginalStorageControlClient();
 
     const originalClientMethods = Object.getOwnPropertyNames(
-      Object.getPrototypeOf(originalClient)
+      Object.getPrototypeOf(originalClient),
     );
 
     for (const method of originalClientMethods) {
@@ -97,7 +100,7 @@ describe('Backwards compatibility', () => {
           assert.strictEqual(
             uberClientMethod.length,
             originalClientMethod.length,
-            `Method ${method} has a different arity in the uber client`
+            `Method ${method} has a different arity in the uber client`,
           );
         }
       }

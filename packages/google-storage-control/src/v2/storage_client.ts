@@ -18,7 +18,14 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  PaginationCallback,
+  GaxCall,
+} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -125,20 +132,41 @@ export class StorageClient {
    *     const client = new StorageClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof StorageClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'storage.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -164,7 +192,7 @@ export class StorageClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -178,10 +206,7 @@ export class StorageClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -203,13 +228,13 @@ export class StorageClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       bucketPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/buckets/{bucket}'
+        'projects/{project}/buckets/{bucket}',
       ),
       cryptoKeyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}'
+        'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}',
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
+        'projects/{project}',
       ),
     };
 
@@ -217,14 +242,20 @@ export class StorageClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listBuckets:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'buckets')
+      listBuckets: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'buckets',
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.storage.v2.Storage', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.storage.v2.Storage',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      {'x-goog-api-client': clientHeader.join(' ')},
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -255,37 +286,47 @@ export class StorageClient {
     // Put together the "service stub" for
     // google.storage.v2.Storage.
     this.storageStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.storage.v2.Storage') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.storage.v2.Storage',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.storage.v2.Storage,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const storageStubMethods =
-        ['deleteBucket', 'getBucket', 'createBucket', 'listBuckets', 'lockBucketRetentionPolicy', 'updateBucket'];
+    const storageStubMethods = [
+      'deleteBucket',
+      'getBucket',
+      'createBucket',
+      'listBuckets',
+      'lockBucketRetentionPolicy',
+      'updateBucket',
+    ];
     for (const methodName of storageStubMethods) {
       const callPromise = this.storageStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        stub =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        this.descriptors.page[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -300,8 +341,14 @@ export class StorageClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'storage.googleapis.com';
   }
@@ -312,8 +359,14 @@ export class StorageClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'storage.googleapis.com';
   }
@@ -349,7 +402,7 @@ export class StorageClient {
       'https://www.googleapis.com/auth/cloud-platform.read-only',
       'https://www.googleapis.com/auth/devstorage.full_control',
       'https://www.googleapis.com/auth/devstorage.read_only',
-      'https://www.googleapis.com/auth/devstorage.read_write'
+      'https://www.googleapis.com/auth/devstorage.read_write',
     ];
   }
 
@@ -359,8 +412,9 @@ export class StorageClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -371,797 +425,969 @@ export class StorageClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Permanently deletes an empty bucket.
- * The request fails if there are any live or
- * noncurrent objects in the bucket, but the request succeeds if the
- * bucket only contains soft-deleted objects or incomplete uploads, such
- * as ongoing XML API multipart uploads. Does not permanently delete
- * soft-deleted objects.
- *
- * When this API is used to delete a bucket containing an object that has a
- * soft delete policy
- * enabled, the object becomes soft deleted, and the
- * `softDeleteTime` and `hardDeleteTime` properties are set on the
- * object.
- *
- * Objects and multipart uploads that were in the bucket at the time of
- * deletion are also retained for the specified retention duration. When
- * a soft-deleted bucket reaches the end of its retention duration, it
- * is permanently deleted. The `hardDeleteTime` of the bucket always
- * equals
- * or exceeds the expiration time of the last soft-deleted object in the
- * bucket.
- *
- * **IAM Permissions**:
- *
- * Requires `storage.buckets.delete` IAM permission on the bucket.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of a bucket to delete.
- * @param {number} request.ifMetagenerationMatch
- *   If set, only deletes the bucket if its metageneration matches this value.
- * @param {number} request.ifMetagenerationNotMatch
- *   If set, only deletes the bucket if its metageneration does not match this
- *   value.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2/storage.delete_bucket.js</caption>
- * region_tag:storage_v2_generated_Storage_DeleteBucket_async
- */
+  /**
+   * Permanently deletes an empty bucket.
+   * The request fails if there are any live or
+   * noncurrent objects in the bucket, but the request succeeds if the
+   * bucket only contains soft-deleted objects or incomplete uploads, such
+   * as ongoing XML API multipart uploads. Does not permanently delete
+   * soft-deleted objects.
+   *
+   * When this API is used to delete a bucket containing an object that has a
+   * soft delete policy
+   * enabled, the object becomes soft deleted, and the
+   * `softDeleteTime` and `hardDeleteTime` properties are set on the
+   * object.
+   *
+   * Objects and multipart uploads that were in the bucket at the time of
+   * deletion are also retained for the specified retention duration. When
+   * a soft-deleted bucket reaches the end of its retention duration, it
+   * is permanently deleted. The `hardDeleteTime` of the bucket always
+   * equals
+   * or exceeds the expiration time of the last soft-deleted object in the
+   * bucket.
+   *
+   * **IAM Permissions**:
+   *
+   * Requires `storage.buckets.delete` IAM permission on the bucket.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of a bucket to delete.
+   * @param {number} request.ifMetagenerationMatch
+   *   If set, only deletes the bucket if its metageneration matches this value.
+   * @param {number} request.ifMetagenerationNotMatch
+   *   If set, only deletes the bucket if its metageneration does not match this
+   *   value.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage.delete_bucket.js</caption>
+   * region_tag:storage_v2_generated_Storage_DeleteBucket_async
+   */
   deleteBucket(
-      request?: protos.google.storage.v2.IDeleteBucketRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.storage.v2.IDeleteBucketRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.storage.v2.IDeleteBucketRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.storage.v2.IDeleteBucketRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteBucket(
-      request: protos.google.storage.v2.IDeleteBucketRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.storage.v2.IDeleteBucketRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.storage.v2.IDeleteBucketRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.storage.v2.IDeleteBucketRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteBucket(
-      request: protos.google.storage.v2.IDeleteBucketRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.storage.v2.IDeleteBucketRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.storage.v2.IDeleteBucketRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.storage.v2.IDeleteBucketRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteBucket(
-      request?: protos.google.storage.v2.IDeleteBucketRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.storage.v2.IDeleteBucketRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.storage.v2.IDeleteBucketRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.storage.v2.IDeleteBucketRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.storage.v2.IDeleteBucketRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.storage.v2.IDeleteBucketRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.storage.v2.IDeleteBucketRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.storage.v2.IDeleteBucketRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    let routingParameter = {};
+    const routingParameter = {};
     {
       const fieldValue = request.name;
       if (fieldValue !== undefined && fieldValue !== null) {
         const match = fieldValue.toString().match(RegExp('(?<bucket>(?:.*)?)'));
         if (match) {
           const parameterValue = match.groups?.['bucket'] ?? fieldValue;
-          Object.assign(routingParameter, { bucket: parameterValue });
+          Object.assign(routingParameter, {bucket: parameterValue});
         }
       }
     }
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams(
-      routingParameter
-    );
-    this.initialize().catch(err => {throw err});
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams(routingParameter);
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteBucket request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.storage.v2.IDeleteBucketRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.storage.v2.IDeleteBucketRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteBucket response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteBucket(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.storage.v2.IDeleteBucketRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteBucket response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteBucket(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.storage.v2.IDeleteBucketRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteBucket response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Returns metadata for the specified bucket.
- *
- * **IAM Permissions**:
- *
- * Requires `storage.buckets.get`
- * IAM permission on
- * the bucket. Additionally, to return specific bucket metadata, the
- * authenticated user must have the following permissions:
- *
- * - To return the IAM policies: `storage.buckets.getIamPolicy`
- * - To return the bucket IP filtering rules: `storage.buckets.getIpFilter`
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of a bucket.
- * @param {number} request.ifMetagenerationMatch
- *   If set, only gets the bucket metadata if its metageneration matches this
- *   value.
- * @param {number} request.ifMetagenerationNotMatch
- *   If set, and if the bucket's current metageneration matches the specified
- *   value, the request returns an error.
- * @param {google.protobuf.FieldMask} request.readMask
- *   Mask specifying which fields to read.
- *   A `*` field might be used to indicate all fields.
- *   If no mask is specified, it defaults to all fields.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.storage.v2.Bucket|Bucket}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2/storage.get_bucket.js</caption>
- * region_tag:storage_v2_generated_Storage_GetBucket_async
- */
+  /**
+   * Returns metadata for the specified bucket.
+   *
+   * **IAM Permissions**:
+   *
+   * Requires `storage.buckets.get`
+   * IAM permission on
+   * the bucket. Additionally, to return specific bucket metadata, the
+   * authenticated user must have the following permissions:
+   *
+   * - To return the IAM policies: `storage.buckets.getIamPolicy`
+   * - To return the bucket IP filtering rules: `storage.buckets.getIpFilter`
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of a bucket.
+   * @param {number} request.ifMetagenerationMatch
+   *   If set, only gets the bucket metadata if its metageneration matches this
+   *   value.
+   * @param {number} request.ifMetagenerationNotMatch
+   *   If set, and if the bucket's current metageneration matches the specified
+   *   value, the request returns an error.
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read.
+   *   A `*` field might be used to indicate all fields.
+   *   If no mask is specified, it defaults to all fields.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.storage.v2.Bucket|Bucket}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage.get_bucket.js</caption>
+   * region_tag:storage_v2_generated_Storage_GetBucket_async
+   */
   getBucket(
-      request?: protos.google.storage.v2.IGetBucketRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.storage.v2.IBucket,
-        protos.google.storage.v2.IGetBucketRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.storage.v2.IGetBucketRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.storage.v2.IBucket,
+      protos.google.storage.v2.IGetBucketRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getBucket(
-      request: protos.google.storage.v2.IGetBucketRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.storage.v2.IBucket,
-          protos.google.storage.v2.IGetBucketRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.storage.v2.IGetBucketRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.storage.v2.IBucket,
+      protos.google.storage.v2.IGetBucketRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getBucket(
-      request: protos.google.storage.v2.IGetBucketRequest,
-      callback: Callback<
-          protos.google.storage.v2.IBucket,
-          protos.google.storage.v2.IGetBucketRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.storage.v2.IGetBucketRequest,
+    callback: Callback<
+      protos.google.storage.v2.IBucket,
+      protos.google.storage.v2.IGetBucketRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getBucket(
-      request?: protos.google.storage.v2.IGetBucketRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.storage.v2.IGetBucketRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.storage.v2.IBucket,
-          protos.google.storage.v2.IGetBucketRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.storage.v2.IBucket,
-          protos.google.storage.v2.IGetBucketRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.storage.v2.IBucket,
-        protos.google.storage.v2.IGetBucketRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.storage.v2.IGetBucketRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.storage.v2.IBucket,
+      protos.google.storage.v2.IGetBucketRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.storage.v2.IBucket,
+      protos.google.storage.v2.IGetBucketRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    let routingParameter = {};
+    const routingParameter = {};
     {
       const fieldValue = request.name;
       if (fieldValue !== undefined && fieldValue !== null) {
         const match = fieldValue.toString().match(RegExp('(?<bucket>(?:.*)?)'));
         if (match) {
           const parameterValue = match.groups?.['bucket'] ?? fieldValue;
-          Object.assign(routingParameter, { bucket: parameterValue });
+          Object.assign(routingParameter, {bucket: parameterValue});
         }
       }
     }
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams(
-      routingParameter
-    );
-    this.initialize().catch(err => {throw err});
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams(routingParameter);
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getBucket request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.storage.v2.IBucket,
-        protos.google.storage.v2.IGetBucketRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.storage.v2.IBucket,
+          protos.google.storage.v2.IGetBucketRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getBucket response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getBucket(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.storage.v2.IBucket,
-        protos.google.storage.v2.IGetBucketRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getBucket response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getBucket(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.storage.v2.IBucket,
+          protos.google.storage.v2.IGetBucketRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getBucket response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Creates a new bucket.
- *
- * **IAM Permissions**:
- *
- * Requires `storage.buckets.create` IAM permission on the bucket.
- * Additionally, to enable specific bucket features, the authenticated user
- * must have the following permissions:
- *
- * - To enable object retention using the `enableObjectRetention` query
- * parameter: `storage.buckets.enableObjectRetention`
- * - To set the bucket IP filtering rules: `storage.buckets.setIpFilter`
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The project to which this bucket belongs. This field must either
- *   be empty or `projects/_`. The project ID that owns this bucket should be
- *   specified in the `bucket.project` field.
- * @param {google.storage.v2.Bucket} [request.bucket]
- *   Optional. Properties of the new bucket being inserted.
- *   The name of the bucket is specified in the `bucket_id` field. Populating
- *   `bucket.name` field results in an error.
- *   The project of the bucket must be specified in the `bucket.project` field.
- *   This field must be in `projects/{projectIdentifier}` format,
- *   {projectIdentifier} can be the project ID or project number. The `parent`
- *   field must be either empty or `projects/_`.
- * @param {string} request.bucketId
- *   Required. The ID to use for this bucket, which becomes the final component
- *   of the bucket's resource name. For example, the value `foo` might result in
- *   a bucket with the name `projects/123456/buckets/foo`.
- * @param {string} [request.predefinedAcl]
- *   Optional. Apply a predefined set of access controls to this bucket.
- *   Valid values are `authenticatedRead`, `private`, `projectPrivate`,
- *   `publicRead`, or `publicReadWrite`.
- * @param {string} [request.predefinedDefaultObjectAcl]
- *   Optional. Apply a predefined set of default object access controls to this
- *   bucket. Valid values are `authenticatedRead`, `bucketOwnerFullControl`,
- *   `bucketOwnerRead`, `private`, `projectPrivate`, or `publicRead`.
- * @param {boolean} [request.enableObjectRetention]
- *   Optional. If true, enable object retention on the bucket.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.storage.v2.Bucket|Bucket}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2/storage.create_bucket.js</caption>
- * region_tag:storage_v2_generated_Storage_CreateBucket_async
- */
+  /**
+   * Creates a new bucket.
+   *
+   * **IAM Permissions**:
+   *
+   * Requires `storage.buckets.create` IAM permission on the bucket.
+   * Additionally, to enable specific bucket features, the authenticated user
+   * must have the following permissions:
+   *
+   * - To enable object retention using the `enableObjectRetention` query
+   * parameter: `storage.buckets.enableObjectRetention`
+   * - To set the bucket IP filtering rules: `storage.buckets.setIpFilter`
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project to which this bucket belongs. This field must either
+   *   be empty or `projects/_`. The project ID that owns this bucket should be
+   *   specified in the `bucket.project` field.
+   * @param {google.storage.v2.Bucket} [request.bucket]
+   *   Optional. Properties of the new bucket being inserted.
+   *   The name of the bucket is specified in the `bucket_id` field. Populating
+   *   `bucket.name` field results in an error.
+   *   The project of the bucket must be specified in the `bucket.project` field.
+   *   This field must be in `projects/{projectIdentifier}` format,
+   *   {projectIdentifier} can be the project ID or project number. The `parent`
+   *   field must be either empty or `projects/_`.
+   * @param {string} request.bucketId
+   *   Required. The ID to use for this bucket, which becomes the final component
+   *   of the bucket's resource name. For example, the value `foo` might result in
+   *   a bucket with the name `projects/123456/buckets/foo`.
+   * @param {string} [request.predefinedAcl]
+   *   Optional. Apply a predefined set of access controls to this bucket.
+   *   Valid values are `authenticatedRead`, `private`, `projectPrivate`,
+   *   `publicRead`, or `publicReadWrite`.
+   * @param {string} [request.predefinedDefaultObjectAcl]
+   *   Optional. Apply a predefined set of default object access controls to this
+   *   bucket. Valid values are `authenticatedRead`, `bucketOwnerFullControl`,
+   *   `bucketOwnerRead`, `private`, `projectPrivate`, or `publicRead`.
+   * @param {boolean} [request.enableObjectRetention]
+   *   Optional. If true, enable object retention on the bucket.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.storage.v2.Bucket|Bucket}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage.create_bucket.js</caption>
+   * region_tag:storage_v2_generated_Storage_CreateBucket_async
+   */
   createBucket(
-      request?: protos.google.storage.v2.ICreateBucketRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.storage.v2.IBucket,
-        protos.google.storage.v2.ICreateBucketRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.storage.v2.ICreateBucketRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.storage.v2.IBucket,
+      protos.google.storage.v2.ICreateBucketRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   createBucket(
-      request: protos.google.storage.v2.ICreateBucketRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.storage.v2.IBucket,
-          protos.google.storage.v2.ICreateBucketRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.storage.v2.ICreateBucketRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.storage.v2.IBucket,
+      protos.google.storage.v2.ICreateBucketRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createBucket(
-      request: protos.google.storage.v2.ICreateBucketRequest,
-      callback: Callback<
-          protos.google.storage.v2.IBucket,
-          protos.google.storage.v2.ICreateBucketRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.storage.v2.ICreateBucketRequest,
+    callback: Callback<
+      protos.google.storage.v2.IBucket,
+      protos.google.storage.v2.ICreateBucketRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createBucket(
-      request?: protos.google.storage.v2.ICreateBucketRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.storage.v2.ICreateBucketRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.storage.v2.IBucket,
-          protos.google.storage.v2.ICreateBucketRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.storage.v2.IBucket,
-          protos.google.storage.v2.ICreateBucketRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.storage.v2.IBucket,
-        protos.google.storage.v2.ICreateBucketRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.storage.v2.ICreateBucketRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.storage.v2.IBucket,
+      protos.google.storage.v2.ICreateBucketRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.storage.v2.IBucket,
+      protos.google.storage.v2.ICreateBucketRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    let routingParameter = {};
+    const routingParameter = {};
     {
       const fieldValue = request.parent;
       if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue.toString().match(RegExp('(?<project>(?:.*)?)'));
+        const match = fieldValue
+          .toString()
+          .match(RegExp('(?<project>(?:.*)?)'));
         if (match) {
           const parameterValue = match.groups?.['project'] ?? fieldValue;
-          Object.assign(routingParameter, { project: parameterValue });
+          Object.assign(routingParameter, {project: parameterValue});
         }
       }
     }
     {
       const fieldValue = request.bucket?.project;
       if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue.toString().match(RegExp('(?<project>(?:.*)?)'));
+        const match = fieldValue
+          .toString()
+          .match(RegExp('(?<project>(?:.*)?)'));
         if (match) {
           const parameterValue = match.groups?.['project'] ?? fieldValue;
-          Object.assign(routingParameter, { project: parameterValue });
+          Object.assign(routingParameter, {project: parameterValue});
         }
       }
     }
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams(
-      routingParameter
-    );
-    this.initialize().catch(err => {throw err});
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams(routingParameter);
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createBucket request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.storage.v2.IBucket,
-        protos.google.storage.v2.ICreateBucketRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.storage.v2.IBucket,
+          protos.google.storage.v2.ICreateBucketRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createBucket response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createBucket(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.storage.v2.IBucket,
-        protos.google.storage.v2.ICreateBucketRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createBucket response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createBucket(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.storage.v2.IBucket,
+          protos.google.storage.v2.ICreateBucketRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createBucket response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Permanently locks the retention
- * policy that is
- * currently applied to the specified bucket.
- *
- * Caution: Locking a bucket is an
- * irreversible action. Once you lock a bucket:
- *
- * - You cannot remove the retention policy from the bucket.
- * - You cannot decrease the retention period for the policy.
- *
- * Once locked, you must delete the entire bucket in order to remove the
- * bucket's retention policy. However, before you can delete the bucket, you
- * must delete all the objects in the bucket, which is only
- * possible if all the objects have reached the retention period set by the
- * retention policy.
- *
- * **IAM Permissions**:
- *
- * Requires `storage.buckets.update` IAM permission on the bucket.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.bucket
- *   Required. Name of a bucket.
- * @param {number} request.ifMetagenerationMatch
- *   Required. Makes the operation conditional on whether bucket's current
- *   metageneration matches the given value. Must be positive.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.storage.v2.Bucket|Bucket}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2/storage.lock_bucket_retention_policy.js</caption>
- * region_tag:storage_v2_generated_Storage_LockBucketRetentionPolicy_async
- */
+  /**
+   * Permanently locks the retention
+   * policy that is
+   * currently applied to the specified bucket.
+   *
+   * Caution: Locking a bucket is an
+   * irreversible action. Once you lock a bucket:
+   *
+   * - You cannot remove the retention policy from the bucket.
+   * - You cannot decrease the retention period for the policy.
+   *
+   * Once locked, you must delete the entire bucket in order to remove the
+   * bucket's retention policy. However, before you can delete the bucket, you
+   * must delete all the objects in the bucket, which is only
+   * possible if all the objects have reached the retention period set by the
+   * retention policy.
+   *
+   * **IAM Permissions**:
+   *
+   * Requires `storage.buckets.update` IAM permission on the bucket.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.bucket
+   *   Required. Name of a bucket.
+   * @param {number} request.ifMetagenerationMatch
+   *   Required. Makes the operation conditional on whether bucket's current
+   *   metageneration matches the given value. Must be positive.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.storage.v2.Bucket|Bucket}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage.lock_bucket_retention_policy.js</caption>
+   * region_tag:storage_v2_generated_Storage_LockBucketRetentionPolicy_async
+   */
   lockBucketRetentionPolicy(
-      request?: protos.google.storage.v2.ILockBucketRetentionPolicyRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.storage.v2.IBucket,
-        protos.google.storage.v2.ILockBucketRetentionPolicyRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.storage.v2.ILockBucketRetentionPolicyRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.storage.v2.IBucket,
+      protos.google.storage.v2.ILockBucketRetentionPolicyRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   lockBucketRetentionPolicy(
-      request: protos.google.storage.v2.ILockBucketRetentionPolicyRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.storage.v2.IBucket,
-          protos.google.storage.v2.ILockBucketRetentionPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.storage.v2.ILockBucketRetentionPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.storage.v2.IBucket,
+      | protos.google.storage.v2.ILockBucketRetentionPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   lockBucketRetentionPolicy(
-      request: protos.google.storage.v2.ILockBucketRetentionPolicyRequest,
-      callback: Callback<
-          protos.google.storage.v2.IBucket,
-          protos.google.storage.v2.ILockBucketRetentionPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.storage.v2.ILockBucketRetentionPolicyRequest,
+    callback: Callback<
+      protos.google.storage.v2.IBucket,
+      | protos.google.storage.v2.ILockBucketRetentionPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   lockBucketRetentionPolicy(
-      request?: protos.google.storage.v2.ILockBucketRetentionPolicyRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.storage.v2.ILockBucketRetentionPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.storage.v2.IBucket,
-          protos.google.storage.v2.ILockBucketRetentionPolicyRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.storage.v2.IBucket,
-          protos.google.storage.v2.ILockBucketRetentionPolicyRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.storage.v2.IBucket,
-        protos.google.storage.v2.ILockBucketRetentionPolicyRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.storage.v2.ILockBucketRetentionPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.storage.v2.IBucket,
+      | protos.google.storage.v2.ILockBucketRetentionPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.storage.v2.IBucket,
+      protos.google.storage.v2.ILockBucketRetentionPolicyRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    let routingParameter = {};
+    const routingParameter = {};
     {
       const fieldValue = request.bucket;
       if (fieldValue !== undefined && fieldValue !== null) {
         const match = fieldValue.toString().match(RegExp('(?<bucket>(?:.*)?)'));
         if (match) {
           const parameterValue = match.groups?.['bucket'] ?? fieldValue;
-          Object.assign(routingParameter, { bucket: parameterValue });
+          Object.assign(routingParameter, {bucket: parameterValue});
         }
       }
     }
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams(
-      routingParameter
-    );
-    this.initialize().catch(err => {throw err});
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams(routingParameter);
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('lockBucketRetentionPolicy request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.storage.v2.IBucket,
-        protos.google.storage.v2.ILockBucketRetentionPolicyRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.storage.v2.IBucket,
+          | protos.google.storage.v2.ILockBucketRetentionPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('lockBucketRetentionPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.lockBucketRetentionPolicy(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.storage.v2.IBucket,
-        protos.google.storage.v2.ILockBucketRetentionPolicyRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('lockBucketRetentionPolicy response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .lockBucketRetentionPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.storage.v2.IBucket,
+          (
+            | protos.google.storage.v2.ILockBucketRetentionPolicyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('lockBucketRetentionPolicy response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Updates a bucket. Changes to the bucket are readable immediately after
- * writing, but configuration changes might take time to propagate. This
- * method supports `patch` semantics.
- *
- * **IAM Permissions**:
- *
- * Requires `storage.buckets.update` IAM permission on the bucket.
- * Additionally, to enable specific bucket features, the authenticated user
- * must have the following permissions:
- *
- * - To set bucket IP filtering rules: `storage.buckets.setIpFilter`
- * - To update public access prevention policies or access control lists
- * (ACLs): `storage.buckets.setIamPolicy`
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.storage.v2.Bucket} request.bucket
- *   Required. The bucket to update.
- *   The bucket's `name` field is used to identify the bucket.
- * @param {number} request.ifMetagenerationMatch
- *   If set, the request modifies the bucket if its metageneration matches this
- *   value.
- * @param {number} request.ifMetagenerationNotMatch
- *   If set, the request modifies the bucket if its metageneration doesn't
- *   match this value.
- * @param {string} [request.predefinedAcl]
- *   Optional. Apply a predefined set of access controls to this bucket.
- *   Valid values are `authenticatedRead`, `private`, `projectPrivate`,
- *   `publicRead`, or `publicReadWrite`.
- * @param {string} [request.predefinedDefaultObjectAcl]
- *   Optional. Apply a predefined set of default object access controls to this
- *   bucket. Valid values are `authenticatedRead`, `bucketOwnerFullControl`,
- *   `bucketOwnerRead`, `private`, `projectPrivate`, or `publicRead`.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Required. List of fields to be updated.
- *
- *   To specify ALL fields, equivalent to the JSON API's "update" function,
- *   specify a single field with the value `*`. Note: not recommended. If a new
- *   field is introduced at a later time, an older client updating with the `*`
- *   might accidentally reset the new field's value.
- *
- *   Not specifying any fields is an error.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.storage.v2.Bucket|Bucket}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2/storage.update_bucket.js</caption>
- * region_tag:storage_v2_generated_Storage_UpdateBucket_async
- */
+  /**
+   * Updates a bucket. Changes to the bucket are readable immediately after
+   * writing, but configuration changes might take time to propagate. This
+   * method supports `patch` semantics.
+   *
+   * **IAM Permissions**:
+   *
+   * Requires `storage.buckets.update` IAM permission on the bucket.
+   * Additionally, to enable specific bucket features, the authenticated user
+   * must have the following permissions:
+   *
+   * - To set bucket IP filtering rules: `storage.buckets.setIpFilter`
+   * - To update public access prevention policies or access control lists
+   * (ACLs): `storage.buckets.setIamPolicy`
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.storage.v2.Bucket} request.bucket
+   *   Required. The bucket to update.
+   *   The bucket's `name` field is used to identify the bucket.
+   * @param {number} request.ifMetagenerationMatch
+   *   If set, the request modifies the bucket if its metageneration matches this
+   *   value.
+   * @param {number} request.ifMetagenerationNotMatch
+   *   If set, the request modifies the bucket if its metageneration doesn't
+   *   match this value.
+   * @param {string} [request.predefinedAcl]
+   *   Optional. Apply a predefined set of access controls to this bucket.
+   *   Valid values are `authenticatedRead`, `private`, `projectPrivate`,
+   *   `publicRead`, or `publicReadWrite`.
+   * @param {string} [request.predefinedDefaultObjectAcl]
+   *   Optional. Apply a predefined set of default object access controls to this
+   *   bucket. Valid values are `authenticatedRead`, `bucketOwnerFullControl`,
+   *   `bucketOwnerRead`, `private`, `projectPrivate`, or `publicRead`.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. List of fields to be updated.
+   *
+   *   To specify ALL fields, equivalent to the JSON API's "update" function,
+   *   specify a single field with the value `*`. Note: not recommended. If a new
+   *   field is introduced at a later time, an older client updating with the `*`
+   *   might accidentally reset the new field's value.
+   *
+   *   Not specifying any fields is an error.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.storage.v2.Bucket|Bucket}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage.update_bucket.js</caption>
+   * region_tag:storage_v2_generated_Storage_UpdateBucket_async
+   */
   updateBucket(
-      request?: protos.google.storage.v2.IUpdateBucketRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.storage.v2.IBucket,
-        protos.google.storage.v2.IUpdateBucketRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.storage.v2.IUpdateBucketRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.storage.v2.IBucket,
+      protos.google.storage.v2.IUpdateBucketRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   updateBucket(
-      request: protos.google.storage.v2.IUpdateBucketRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.storage.v2.IBucket,
-          protos.google.storage.v2.IUpdateBucketRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.storage.v2.IUpdateBucketRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.storage.v2.IBucket,
+      protos.google.storage.v2.IUpdateBucketRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateBucket(
-      request: protos.google.storage.v2.IUpdateBucketRequest,
-      callback: Callback<
-          protos.google.storage.v2.IBucket,
-          protos.google.storage.v2.IUpdateBucketRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.storage.v2.IUpdateBucketRequest,
+    callback: Callback<
+      protos.google.storage.v2.IBucket,
+      protos.google.storage.v2.IUpdateBucketRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateBucket(
-      request?: protos.google.storage.v2.IUpdateBucketRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.storage.v2.IUpdateBucketRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.storage.v2.IBucket,
-          protos.google.storage.v2.IUpdateBucketRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.storage.v2.IBucket,
-          protos.google.storage.v2.IUpdateBucketRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.storage.v2.IBucket,
-        protos.google.storage.v2.IUpdateBucketRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.storage.v2.IUpdateBucketRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.storage.v2.IBucket,
+      protos.google.storage.v2.IUpdateBucketRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.storage.v2.IBucket,
+      protos.google.storage.v2.IUpdateBucketRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    let routingParameter = {};
+    const routingParameter = {};
     {
       const fieldValue = request.bucket?.name;
       if (fieldValue !== undefined && fieldValue !== null) {
         const match = fieldValue.toString().match(RegExp('(?<bucket>(?:.*)?)'));
         if (match) {
           const parameterValue = match.groups?.['bucket'] ?? fieldValue;
-          Object.assign(routingParameter, { bucket: parameterValue });
+          Object.assign(routingParameter, {bucket: parameterValue});
         }
       }
     }
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams(
-      routingParameter
-    );
-    this.initialize().catch(err => {throw err});
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams(routingParameter);
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateBucket request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.storage.v2.IBucket,
-        protos.google.storage.v2.IUpdateBucketRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.storage.v2.IBucket,
+          protos.google.storage.v2.IUpdateBucketRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateBucket response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateBucket(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.storage.v2.IBucket,
-        protos.google.storage.v2.IUpdateBucketRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateBucket response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateBucket(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.storage.v2.IBucket,
+          protos.google.storage.v2.IUpdateBucketRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateBucket response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
- /**
- * Retrieves a list of buckets for a given project, ordered
- * lexicographically by name.
- *
- * **IAM Permissions**:
- *
- * Requires `storage.buckets.list` IAM permission on the bucket.
- * Additionally, to enable specific bucket features, the authenticated
- * user must have the following permissions:
- *
- * - To list the IAM policies: `storage.buckets.getIamPolicy`
- * - To list the bucket IP filtering rules: `storage.buckets.getIpFilter`
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The project whose buckets we are listing.
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of buckets to return in a single response. The
- *   service uses this parameter or `1,000` items, whichever is smaller. If
- *   `acl` is present in the `read_mask`, the service uses this parameter of
- *   `200` items, whichever is smaller.
- * @param {string} [request.pageToken]
- *   Optional. A previously-returned page token representing part of the larger
- *   set of results to view.
- * @param {string} [request.prefix]
- *   Optional. Filter results to buckets whose names begin with this prefix.
- * @param {google.protobuf.FieldMask} request.readMask
- *   Mask specifying which fields to read from each result.
- *   If no mask is specified, it defaults to all fields except `items.
- *   owner`, `items.acl`, and `items.default_object_acl`.
- *   `*` might be used to mean "all fields".
- * @param {boolean} [request.returnPartialSuccess]
- *   Optional. Allows listing of buckets, even if there are buckets that are
- *   unreachable.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.storage.v2.Bucket|Bucket}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listBucketsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Retrieves a list of buckets for a given project, ordered
+   * lexicographically by name.
+   *
+   * **IAM Permissions**:
+   *
+   * Requires `storage.buckets.list` IAM permission on the bucket.
+   * Additionally, to enable specific bucket features, the authenticated
+   * user must have the following permissions:
+   *
+   * - To list the IAM policies: `storage.buckets.getIamPolicy`
+   * - To list the bucket IP filtering rules: `storage.buckets.getIpFilter`
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project whose buckets we are listing.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of buckets to return in a single response. The
+   *   service uses this parameter or `1,000` items, whichever is smaller. If
+   *   `acl` is present in the `read_mask`, the service uses this parameter of
+   *   `200` items, whichever is smaller.
+   * @param {string} [request.pageToken]
+   *   Optional. A previously-returned page token representing part of the larger
+   *   set of results to view.
+   * @param {string} [request.prefix]
+   *   Optional. Filter results to buckets whose names begin with this prefix.
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read from each result.
+   *   If no mask is specified, it defaults to all fields except `items.
+   *   owner`, `items.acl`, and `items.default_object_acl`.
+   *   `*` might be used to mean "all fields".
+   * @param {boolean} [request.returnPartialSuccess]
+   *   Optional. Allows listing of buckets, even if there are buckets that are
+   *   unreachable.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.storage.v2.Bucket|Bucket}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listBucketsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listBuckets(
-      request?: protos.google.storage.v2.IListBucketsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.storage.v2.IBucket[],
-        protos.google.storage.v2.IListBucketsRequest|null,
-        protos.google.storage.v2.IListBucketsResponse
-      ]>;
+    request?: protos.google.storage.v2.IListBucketsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.storage.v2.IBucket[],
+      protos.google.storage.v2.IListBucketsRequest | null,
+      protos.google.storage.v2.IListBucketsResponse,
+    ]
+  >;
   listBuckets(
-      request: protos.google.storage.v2.IListBucketsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.storage.v2.IListBucketsRequest,
-          protos.google.storage.v2.IListBucketsResponse|null|undefined,
-          protos.google.storage.v2.IBucket>): void;
+    request: protos.google.storage.v2.IListBucketsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.storage.v2.IListBucketsRequest,
+      protos.google.storage.v2.IListBucketsResponse | null | undefined,
+      protos.google.storage.v2.IBucket
+    >,
+  ): void;
   listBuckets(
-      request: protos.google.storage.v2.IListBucketsRequest,
-      callback: PaginationCallback<
-          protos.google.storage.v2.IListBucketsRequest,
-          protos.google.storage.v2.IListBucketsResponse|null|undefined,
-          protos.google.storage.v2.IBucket>): void;
+    request: protos.google.storage.v2.IListBucketsRequest,
+    callback: PaginationCallback<
+      protos.google.storage.v2.IListBucketsRequest,
+      protos.google.storage.v2.IListBucketsResponse | null | undefined,
+      protos.google.storage.v2.IBucket
+    >,
+  ): void;
   listBuckets(
-      request?: protos.google.storage.v2.IListBucketsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.storage.v2.IListBucketsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.storage.v2.IListBucketsRequest,
-          protos.google.storage.v2.IListBucketsResponse|null|undefined,
-          protos.google.storage.v2.IBucket>,
-      callback?: PaginationCallback<
-          protos.google.storage.v2.IListBucketsRequest,
-          protos.google.storage.v2.IListBucketsResponse|null|undefined,
-          protos.google.storage.v2.IBucket>):
-      Promise<[
-        protos.google.storage.v2.IBucket[],
-        protos.google.storage.v2.IListBucketsRequest|null,
-        protos.google.storage.v2.IListBucketsResponse
-      ]>|void {
+          protos.google.storage.v2.IListBucketsResponse | null | undefined,
+          protos.google.storage.v2.IBucket
+        >,
+    callback?: PaginationCallback<
+      protos.google.storage.v2.IListBucketsRequest,
+      protos.google.storage.v2.IListBucketsResponse | null | undefined,
+      protos.google.storage.v2.IBucket
+    >,
+  ): Promise<
+    [
+      protos.google.storage.v2.IBucket[],
+      protos.google.storage.v2.IListBucketsRequest | null,
+      protos.google.storage.v2.IListBucketsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    let routingParameter = {};
+    const routingParameter = {};
     {
       const fieldValue = request.parent;
       if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue.toString().match(RegExp('(?<project>(?:.*)?)'));
+        const match = fieldValue
+          .toString()
+          .match(RegExp('(?<project>(?:.*)?)'));
         if (match) {
           const parameterValue = match.groups?.['project'] ?? fieldValue;
-          Object.assign(routingParameter, { project: parameterValue });
+          Object.assign(routingParameter, {project: parameterValue});
         }
       }
     }
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams(
-      routingParameter
-    );
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.storage.v2.IListBucketsRequest,
-      protos.google.storage.v2.IListBucketsResponse|null|undefined,
-      protos.google.storage.v2.IBucket>|undefined = callback
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams(routingParameter);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.storage.v2.IListBucketsRequest,
+          protos.google.storage.v2.IListBucketsResponse | null | undefined,
+          protos.google.storage.v2.IBucket
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listBuckets values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1170,156 +1396,160 @@ export class StorageClient {
     this._log.info('listBuckets request %j', request);
     return this.innerApiCalls
       .listBuckets(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.storage.v2.IBucket[],
-        protos.google.storage.v2.IListBucketsRequest|null,
-        protos.google.storage.v2.IListBucketsResponse
-      ]) => {
-        this._log.info('listBuckets values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.storage.v2.IBucket[],
+          protos.google.storage.v2.IListBucketsRequest | null,
+          protos.google.storage.v2.IListBucketsResponse,
+        ]) => {
+          this._log.info('listBuckets values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listBuckets`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The project whose buckets we are listing.
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of buckets to return in a single response. The
- *   service uses this parameter or `1,000` items, whichever is smaller. If
- *   `acl` is present in the `read_mask`, the service uses this parameter of
- *   `200` items, whichever is smaller.
- * @param {string} [request.pageToken]
- *   Optional. A previously-returned page token representing part of the larger
- *   set of results to view.
- * @param {string} [request.prefix]
- *   Optional. Filter results to buckets whose names begin with this prefix.
- * @param {google.protobuf.FieldMask} request.readMask
- *   Mask specifying which fields to read from each result.
- *   If no mask is specified, it defaults to all fields except `items.
- *   owner`, `items.acl`, and `items.default_object_acl`.
- *   `*` might be used to mean "all fields".
- * @param {boolean} [request.returnPartialSuccess]
- *   Optional. Allows listing of buckets, even if there are buckets that are
- *   unreachable.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.storage.v2.Bucket|Bucket} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listBucketsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listBuckets`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project whose buckets we are listing.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of buckets to return in a single response. The
+   *   service uses this parameter or `1,000` items, whichever is smaller. If
+   *   `acl` is present in the `read_mask`, the service uses this parameter of
+   *   `200` items, whichever is smaller.
+   * @param {string} [request.pageToken]
+   *   Optional. A previously-returned page token representing part of the larger
+   *   set of results to view.
+   * @param {string} [request.prefix]
+   *   Optional. Filter results to buckets whose names begin with this prefix.
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read from each result.
+   *   If no mask is specified, it defaults to all fields except `items.
+   *   owner`, `items.acl`, and `items.default_object_acl`.
+   *   `*` might be used to mean "all fields".
+   * @param {boolean} [request.returnPartialSuccess]
+   *   Optional. Allows listing of buckets, even if there are buckets that are
+   *   unreachable.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.storage.v2.Bucket|Bucket} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listBucketsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listBucketsStream(
-      request?: protos.google.storage.v2.IListBucketsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.storage.v2.IListBucketsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    let routingParameter = {};
+    const routingParameter = {};
     {
       const fieldValue = request.parent;
       if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue.toString().match(RegExp('(?<project>(?:.*)?)'));
+        const match = fieldValue
+          .toString()
+          .match(RegExp('(?<project>(?:.*)?)'));
         if (match) {
           const parameterValue = match.groups?.['project'] ?? fieldValue;
-          Object.assign(routingParameter, { project: parameterValue });
+          Object.assign(routingParameter, {project: parameterValue});
         }
       }
     }
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams(
-      routingParameter
-    );
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listBuckets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listBuckets stream %j', request);
     return this.descriptors.page.listBuckets.createStream(
       this.innerApiCalls.listBuckets as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listBuckets`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The project whose buckets we are listing.
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of buckets to return in a single response. The
- *   service uses this parameter or `1,000` items, whichever is smaller. If
- *   `acl` is present in the `read_mask`, the service uses this parameter of
- *   `200` items, whichever is smaller.
- * @param {string} [request.pageToken]
- *   Optional. A previously-returned page token representing part of the larger
- *   set of results to view.
- * @param {string} [request.prefix]
- *   Optional. Filter results to buckets whose names begin with this prefix.
- * @param {google.protobuf.FieldMask} request.readMask
- *   Mask specifying which fields to read from each result.
- *   If no mask is specified, it defaults to all fields except `items.
- *   owner`, `items.acl`, and `items.default_object_acl`.
- *   `*` might be used to mean "all fields".
- * @param {boolean} [request.returnPartialSuccess]
- *   Optional. Allows listing of buckets, even if there are buckets that are
- *   unreachable.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.storage.v2.Bucket|Bucket}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2/storage.list_buckets.js</caption>
- * region_tag:storage_v2_generated_Storage_ListBuckets_async
- */
+  /**
+   * Equivalent to `listBuckets`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project whose buckets we are listing.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of buckets to return in a single response. The
+   *   service uses this parameter or `1,000` items, whichever is smaller. If
+   *   `acl` is present in the `read_mask`, the service uses this parameter of
+   *   `200` items, whichever is smaller.
+   * @param {string} [request.pageToken]
+   *   Optional. A previously-returned page token representing part of the larger
+   *   set of results to view.
+   * @param {string} [request.prefix]
+   *   Optional. Filter results to buckets whose names begin with this prefix.
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read from each result.
+   *   If no mask is specified, it defaults to all fields except `items.
+   *   owner`, `items.acl`, and `items.default_object_acl`.
+   *   `*` might be used to mean "all fields".
+   * @param {boolean} [request.returnPartialSuccess]
+   *   Optional. Allows listing of buckets, even if there are buckets that are
+   *   unreachable.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.storage.v2.Bucket|Bucket}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage.list_buckets.js</caption>
+   * region_tag:storage_v2_generated_Storage_ListBuckets_async
+   */
   listBucketsAsync(
-      request?: protos.google.storage.v2.IListBucketsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.storage.v2.IBucket>{
+    request?: protos.google.storage.v2.IListBucketsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.storage.v2.IBucket> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    let routingParameter = {};
+    const routingParameter = {};
     {
       const fieldValue = request.parent;
       if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue.toString().match(RegExp('(?<project>(?:.*)?)'));
+        const match = fieldValue
+          .toString()
+          .match(RegExp('(?<project>(?:.*)?)'));
         if (match) {
           const parameterValue = match.groups?.['project'] ?? fieldValue;
-          Object.assign(routingParameter, { project: parameterValue });
+          Object.assign(routingParameter, {project: parameterValue});
         }
       }
     }
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams(
-      routingParameter
-    );
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listBuckets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listBuckets iterate %j', request);
     return this.descriptors.page.listBuckets.asyncIterate(
       this.innerApiCalls['listBuckets'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.storage.v2.IBucket>;
   }
   // --------------------
@@ -1333,7 +1563,7 @@ export class StorageClient {
    * @param {string} bucket
    * @returns {string} Resource name string.
    */
-  bucketPath(project:string,bucket:string) {
+  bucketPath(project: string, bucket: string) {
     return this.pathTemplates.bucketPathTemplate.render({
       project: project,
       bucket: bucket,
@@ -1371,7 +1601,12 @@ export class StorageClient {
    * @param {string} crypto_key
    * @returns {string} Resource name string.
    */
-  cryptoKeyPath(project:string,location:string,keyRing:string,cryptoKey:string) {
+  cryptoKeyPath(
+    project: string,
+    location: string,
+    keyRing: string,
+    cryptoKey: string,
+  ) {
     return this.pathTemplates.cryptoKeyPathTemplate.render({
       project: project,
       location: location,
@@ -1388,7 +1623,8 @@ export class StorageClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCryptoKeyName(cryptoKeyName: string) {
-    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName).project;
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .project;
   }
 
   /**
@@ -1399,7 +1635,8 @@ export class StorageClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCryptoKeyName(cryptoKeyName: string) {
-    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName).location;
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .location;
   }
 
   /**
@@ -1410,7 +1647,8 @@ export class StorageClient {
    * @returns {string} A string representing the key_ring.
    */
   matchKeyRingFromCryptoKeyName(cryptoKeyName: string) {
-    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName).key_ring;
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .key_ring;
   }
 
   /**
@@ -1421,7 +1659,8 @@ export class StorageClient {
    * @returns {string} A string representing the crypto_key.
    */
   matchCryptoKeyFromCryptoKeyName(cryptoKeyName: string) {
-    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName).crypto_key;
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .crypto_key;
   }
 
   /**
@@ -1430,7 +1669,7 @@ export class StorageClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project:string) {
+  projectPath(project: string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
