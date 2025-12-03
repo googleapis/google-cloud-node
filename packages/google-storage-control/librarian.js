@@ -20,7 +20,7 @@ const packageRoot = __dirname;
 const utilDir = path.join(packageRoot, 'src', 'util');
 
 try {
-  execSync('npx tsc src/util/storage_control_utils.ts', { cwd: packageRoot, stdio: 'inherit' });
+  execSync('npx -p typescript tsc src/util/storage_control_utils.ts', { cwd: packageRoot, stdio: 'inherit' });
   execSync('node storage_control_utils.js', { cwd: utilDir, stdio: 'inherit' });
 
   const files = fs.readdirSync(utilDir);
