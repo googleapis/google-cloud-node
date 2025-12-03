@@ -18,10 +18,9 @@ const fs = require('fs');
 
 const packageRoot = __dirname;
 const utilDir = path.join(packageRoot, 'src', 'util');
-const tscPath = path.join(packageRoot, 'node_modules', '.bin', 'tsc');
 
 try {
-  execSync(`${tscPath} src/util/storage_control_utils.ts`, { cwd: packageRoot, stdio: 'inherit' });
+  execSync('npx tsc src/util/storage_control_utils.ts', { cwd: packageRoot, stdio: 'inherit' });
   execSync('node storage_control_utils.js', { cwd: utilDir, stdio: 'inherit' });
 
   const files = fs.readdirSync(utilDir);
