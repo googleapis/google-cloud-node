@@ -217,7 +217,8 @@
     "packages/google-cloud-locationfinder": {},
     "packages/google-ads-datamanager": {},
     "packages/google-cloud-geminidataanalytics": {},
-    "packages/google-cloud-vectorsearch": {}
+    "packages/google-cloud-vectorsearch": {},
+    "packages/google-cloud-hypercomputecluster": {}
   },
   "plugins": [
     {
