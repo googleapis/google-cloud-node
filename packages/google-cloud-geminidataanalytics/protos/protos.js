@@ -1311,6 +1311,625 @@
                         return ExampleQuery;
                     })();
     
+                    v1alpha.LookerQuery = (function() {
+    
+                        /**
+                         * Properties of a LookerQuery.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha
+                         * @interface ILookerQuery
+                         * @property {string|null} [model] LookerQuery model
+                         * @property {string|null} [explore] LookerQuery explore
+                         * @property {Array.<string>|null} [fields] LookerQuery fields
+                         * @property {Array.<google.cloud.geminidataanalytics.v1alpha.LookerQuery.IFilter>|null} [filters] LookerQuery filters
+                         * @property {Array.<string>|null} [sorts] LookerQuery sorts
+                         * @property {string|null} [limit] LookerQuery limit
+                         */
+    
+                        /**
+                         * Constructs a new LookerQuery.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha
+                         * @classdesc Represents a LookerQuery.
+                         * @implements ILookerQuery
+                         * @constructor
+                         * @param {google.cloud.geminidataanalytics.v1alpha.ILookerQuery=} [properties] Properties to set
+                         */
+                        function LookerQuery(properties) {
+                            this.fields = [];
+                            this.filters = [];
+                            this.sorts = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * LookerQuery model.
+                         * @member {string} model
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery
+                         * @instance
+                         */
+                        LookerQuery.prototype.model = "";
+    
+                        /**
+                         * LookerQuery explore.
+                         * @member {string} explore
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery
+                         * @instance
+                         */
+                        LookerQuery.prototype.explore = "";
+    
+                        /**
+                         * LookerQuery fields.
+                         * @member {Array.<string>} fields
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery
+                         * @instance
+                         */
+                        LookerQuery.prototype.fields = $util.emptyArray;
+    
+                        /**
+                         * LookerQuery filters.
+                         * @member {Array.<google.cloud.geminidataanalytics.v1alpha.LookerQuery.IFilter>} filters
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery
+                         * @instance
+                         */
+                        LookerQuery.prototype.filters = $util.emptyArray;
+    
+                        /**
+                         * LookerQuery sorts.
+                         * @member {Array.<string>} sorts
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery
+                         * @instance
+                         */
+                        LookerQuery.prototype.sorts = $util.emptyArray;
+    
+                        /**
+                         * LookerQuery limit.
+                         * @member {string|null|undefined} limit
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery
+                         * @instance
+                         */
+                        LookerQuery.prototype.limit = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(LookerQuery.prototype, "_limit", {
+                            get: $util.oneOfGetter($oneOfFields = ["limit"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new LookerQuery instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.ILookerQuery=} [properties] Properties to set
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.LookerQuery} LookerQuery instance
+                         */
+                        LookerQuery.create = function create(properties) {
+                            return new LookerQuery(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified LookerQuery message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.LookerQuery.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.ILookerQuery} message LookerQuery message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LookerQuery.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.model != null && Object.hasOwnProperty.call(message, "model"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.model);
+                            if (message.explore != null && Object.hasOwnProperty.call(message, "explore"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.explore);
+                            if (message.fields != null && message.fields.length)
+                                for (var i = 0; i < message.fields.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.fields[i]);
+                            if (message.filters != null && message.filters.length)
+                                for (var i = 0; i < message.filters.length; ++i)
+                                    $root.google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter.encode(message.filters[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.sorts != null && message.sorts.length)
+                                for (var i = 0; i < message.sorts.length; ++i)
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.sorts[i]);
+                            if (message.limit != null && Object.hasOwnProperty.call(message, "limit"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.limit);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified LookerQuery message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.LookerQuery.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.ILookerQuery} message LookerQuery message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LookerQuery.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a LookerQuery message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.LookerQuery} LookerQuery
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LookerQuery.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1alpha.LookerQuery();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.model = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.explore = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.fields && message.fields.length))
+                                            message.fields = [];
+                                        message.fields.push(reader.string());
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.filters && message.filters.length))
+                                            message.filters = [];
+                                        message.filters.push($root.google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 5: {
+                                        if (!(message.sorts && message.sorts.length))
+                                            message.sorts = [];
+                                        message.sorts.push(reader.string());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.limit = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a LookerQuery message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.LookerQuery} LookerQuery
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LookerQuery.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a LookerQuery message.
+                         * @function verify
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        LookerQuery.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.model != null && message.hasOwnProperty("model"))
+                                if (!$util.isString(message.model))
+                                    return "model: string expected";
+                            if (message.explore != null && message.hasOwnProperty("explore"))
+                                if (!$util.isString(message.explore))
+                                    return "explore: string expected";
+                            if (message.fields != null && message.hasOwnProperty("fields")) {
+                                if (!Array.isArray(message.fields))
+                                    return "fields: array expected";
+                                for (var i = 0; i < message.fields.length; ++i)
+                                    if (!$util.isString(message.fields[i]))
+                                        return "fields: string[] expected";
+                            }
+                            if (message.filters != null && message.hasOwnProperty("filters")) {
+                                if (!Array.isArray(message.filters))
+                                    return "filters: array expected";
+                                for (var i = 0; i < message.filters.length; ++i) {
+                                    var error = $root.google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter.verify(message.filters[i]);
+                                    if (error)
+                                        return "filters." + error;
+                                }
+                            }
+                            if (message.sorts != null && message.hasOwnProperty("sorts")) {
+                                if (!Array.isArray(message.sorts))
+                                    return "sorts: array expected";
+                                for (var i = 0; i < message.sorts.length; ++i)
+                                    if (!$util.isString(message.sorts[i]))
+                                        return "sorts: string[] expected";
+                            }
+                            if (message.limit != null && message.hasOwnProperty("limit")) {
+                                properties._limit = 1;
+                                if (!$util.isString(message.limit))
+                                    return "limit: string expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a LookerQuery message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.LookerQuery} LookerQuery
+                         */
+                        LookerQuery.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.geminidataanalytics.v1alpha.LookerQuery)
+                                return object;
+                            var message = new $root.google.cloud.geminidataanalytics.v1alpha.LookerQuery();
+                            if (object.model != null)
+                                message.model = String(object.model);
+                            if (object.explore != null)
+                                message.explore = String(object.explore);
+                            if (object.fields) {
+                                if (!Array.isArray(object.fields))
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1alpha.LookerQuery.fields: array expected");
+                                message.fields = [];
+                                for (var i = 0; i < object.fields.length; ++i)
+                                    message.fields[i] = String(object.fields[i]);
+                            }
+                            if (object.filters) {
+                                if (!Array.isArray(object.filters))
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1alpha.LookerQuery.filters: array expected");
+                                message.filters = [];
+                                for (var i = 0; i < object.filters.length; ++i) {
+                                    if (typeof object.filters[i] !== "object")
+                                        throw TypeError(".google.cloud.geminidataanalytics.v1alpha.LookerQuery.filters: object expected");
+                                    message.filters[i] = $root.google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter.fromObject(object.filters[i]);
+                                }
+                            }
+                            if (object.sorts) {
+                                if (!Array.isArray(object.sorts))
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1alpha.LookerQuery.sorts: array expected");
+                                message.sorts = [];
+                                for (var i = 0; i < object.sorts.length; ++i)
+                                    message.sorts[i] = String(object.sorts[i]);
+                            }
+                            if (object.limit != null)
+                                message.limit = String(object.limit);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a LookerQuery message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.LookerQuery} message LookerQuery
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        LookerQuery.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.fields = [];
+                                object.filters = [];
+                                object.sorts = [];
+                            }
+                            if (options.defaults) {
+                                object.model = "";
+                                object.explore = "";
+                            }
+                            if (message.model != null && message.hasOwnProperty("model"))
+                                object.model = message.model;
+                            if (message.explore != null && message.hasOwnProperty("explore"))
+                                object.explore = message.explore;
+                            if (message.fields && message.fields.length) {
+                                object.fields = [];
+                                for (var j = 0; j < message.fields.length; ++j)
+                                    object.fields[j] = message.fields[j];
+                            }
+                            if (message.filters && message.filters.length) {
+                                object.filters = [];
+                                for (var j = 0; j < message.filters.length; ++j)
+                                    object.filters[j] = $root.google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter.toObject(message.filters[j], options);
+                            }
+                            if (message.sorts && message.sorts.length) {
+                                object.sorts = [];
+                                for (var j = 0; j < message.sorts.length; ++j)
+                                    object.sorts[j] = message.sorts[j];
+                            }
+                            if (message.limit != null && message.hasOwnProperty("limit")) {
+                                object.limit = message.limit;
+                                if (options.oneofs)
+                                    object._limit = "limit";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this LookerQuery to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        LookerQuery.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for LookerQuery
+                         * @function getTypeUrl
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        LookerQuery.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1alpha.LookerQuery";
+                        };
+    
+                        LookerQuery.Filter = (function() {
+    
+                            /**
+                             * Properties of a Filter.
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery
+                             * @interface IFilter
+                             * @property {string|null} [field] Filter field
+                             * @property {string|null} [value] Filter value
+                             */
+    
+                            /**
+                             * Constructs a new Filter.
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery
+                             * @classdesc Represents a Filter.
+                             * @implements IFilter
+                             * @constructor
+                             * @param {google.cloud.geminidataanalytics.v1alpha.LookerQuery.IFilter=} [properties] Properties to set
+                             */
+                            function Filter(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Filter field.
+                             * @member {string} field
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter
+                             * @instance
+                             */
+                            Filter.prototype.field = "";
+    
+                            /**
+                             * Filter value.
+                             * @member {string} value
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter
+                             * @instance
+                             */
+                            Filter.prototype.value = "";
+    
+                            /**
+                             * Creates a new Filter instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter
+                             * @static
+                             * @param {google.cloud.geminidataanalytics.v1alpha.LookerQuery.IFilter=} [properties] Properties to set
+                             * @returns {google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter} Filter instance
+                             */
+                            Filter.create = function create(properties) {
+                                return new Filter(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Filter message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter
+                             * @static
+                             * @param {google.cloud.geminidataanalytics.v1alpha.LookerQuery.IFilter} message Filter message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Filter.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.field != null && Object.hasOwnProperty.call(message, "field"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.field);
+                                if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.value);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Filter message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter
+                             * @static
+                             * @param {google.cloud.geminidataanalytics.v1alpha.LookerQuery.IFilter} message Filter message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Filter.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Filter message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter} Filter
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Filter.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.field = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.value = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Filter message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter} Filter
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Filter.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Filter message.
+                             * @function verify
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Filter.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.field != null && message.hasOwnProperty("field"))
+                                    if (!$util.isString(message.field))
+                                        return "field: string expected";
+                                if (message.value != null && message.hasOwnProperty("value"))
+                                    if (!$util.isString(message.value))
+                                        return "value: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Filter message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter} Filter
+                             */
+                            Filter.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter)
+                                    return object;
+                                var message = new $root.google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter();
+                                if (object.field != null)
+                                    message.field = String(object.field);
+                                if (object.value != null)
+                                    message.value = String(object.value);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Filter message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter
+                             * @static
+                             * @param {google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter} message Filter
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Filter.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.field = "";
+                                    object.value = "";
+                                }
+                                if (message.field != null && message.hasOwnProperty("field"))
+                                    object.field = message.field;
+                                if (message.value != null && message.hasOwnProperty("value"))
+                                    object.value = message.value;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Filter to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Filter.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Filter
+                             * @function getTypeUrl
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Filter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter";
+                            };
+    
+                            return Filter;
+                        })();
+    
+                        return LookerQuery;
+                    })();
+    
                     v1alpha.GlossaryTerm = (function() {
     
                         /**
@@ -13247,7 +13866,2146 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.geminidataanalytics.v1alpha.DataChatService|queryData}.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.DataChatService
+                         * @typedef QueryDataCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.geminidataanalytics.v1alpha.QueryDataResponse} [response] QueryDataResponse
+                         */
+    
+                        /**
+                         * Calls QueryData.
+                         * @function queryData
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.DataChatService
+                         * @instance
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IQueryDataRequest} request QueryDataRequest message or plain object
+                         * @param {google.cloud.geminidataanalytics.v1alpha.DataChatService.QueryDataCallback} callback Node-style callback called with the error, if any, and QueryDataResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataChatService.prototype.queryData = function queryData(request, callback) {
+                            return this.rpcCall(queryData, $root.google.cloud.geminidataanalytics.v1alpha.QueryDataRequest, $root.google.cloud.geminidataanalytics.v1alpha.QueryDataResponse, request, callback);
+                        }, "name", { value: "QueryData" });
+    
+                        /**
+                         * Calls QueryData.
+                         * @function queryData
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.DataChatService
+                         * @instance
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IQueryDataRequest} request QueryDataRequest message or plain object
+                         * @returns {Promise<google.cloud.geminidataanalytics.v1alpha.QueryDataResponse>} Promise
+                         * @variation 2
+                         */
+    
                         return DataChatService;
+                    })();
+    
+                    v1alpha.QueryDataRequest = (function() {
+    
+                        /**
+                         * Properties of a QueryDataRequest.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha
+                         * @interface IQueryDataRequest
+                         * @property {string|null} [parent] QueryDataRequest parent
+                         * @property {string|null} [prompt] QueryDataRequest prompt
+                         * @property {google.cloud.geminidataanalytics.v1alpha.IQueryDataContext|null} [context] QueryDataRequest context
+                         * @property {google.cloud.geminidataanalytics.v1alpha.IGenerationOptions|null} [generationOptions] QueryDataRequest generationOptions
+                         */
+    
+                        /**
+                         * Constructs a new QueryDataRequest.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha
+                         * @classdesc Represents a QueryDataRequest.
+                         * @implements IQueryDataRequest
+                         * @constructor
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IQueryDataRequest=} [properties] Properties to set
+                         */
+                        function QueryDataRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * QueryDataRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.QueryDataRequest
+                         * @instance
+                         */
+                        QueryDataRequest.prototype.parent = "";
+    
+                        /**
+                         * QueryDataRequest prompt.
+                         * @member {string} prompt
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.QueryDataRequest
+                         * @instance
+                         */
+                        QueryDataRequest.prototype.prompt = "";
+    
+                        /**
+                         * QueryDataRequest context.
+                         * @member {google.cloud.geminidataanalytics.v1alpha.IQueryDataContext|null|undefined} context
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.QueryDataRequest
+                         * @instance
+                         */
+                        QueryDataRequest.prototype.context = null;
+    
+                        /**
+                         * QueryDataRequest generationOptions.
+                         * @member {google.cloud.geminidataanalytics.v1alpha.IGenerationOptions|null|undefined} generationOptions
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.QueryDataRequest
+                         * @instance
+                         */
+                        QueryDataRequest.prototype.generationOptions = null;
+    
+                        /**
+                         * Creates a new QueryDataRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.QueryDataRequest
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IQueryDataRequest=} [properties] Properties to set
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.QueryDataRequest} QueryDataRequest instance
+                         */
+                        QueryDataRequest.create = function create(properties) {
+                            return new QueryDataRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified QueryDataRequest message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.QueryDataRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.QueryDataRequest
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IQueryDataRequest} message QueryDataRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryDataRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.prompt != null && Object.hasOwnProperty.call(message, "prompt"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.prompt);
+                            if (message.context != null && Object.hasOwnProperty.call(message, "context"))
+                                $root.google.cloud.geminidataanalytics.v1alpha.QueryDataContext.encode(message.context, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.generationOptions != null && Object.hasOwnProperty.call(message, "generationOptions"))
+                                $root.google.cloud.geminidataanalytics.v1alpha.GenerationOptions.encode(message.generationOptions, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified QueryDataRequest message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.QueryDataRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.QueryDataRequest
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IQueryDataRequest} message QueryDataRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryDataRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a QueryDataRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.QueryDataRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.QueryDataRequest} QueryDataRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryDataRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1alpha.QueryDataRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.prompt = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.context = $root.google.cloud.geminidataanalytics.v1alpha.QueryDataContext.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.generationOptions = $root.google.cloud.geminidataanalytics.v1alpha.GenerationOptions.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a QueryDataRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.QueryDataRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.QueryDataRequest} QueryDataRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryDataRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a QueryDataRequest message.
+                         * @function verify
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.QueryDataRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        QueryDataRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.prompt != null && message.hasOwnProperty("prompt"))
+                                if (!$util.isString(message.prompt))
+                                    return "prompt: string expected";
+                            if (message.context != null && message.hasOwnProperty("context")) {
+                                var error = $root.google.cloud.geminidataanalytics.v1alpha.QueryDataContext.verify(message.context);
+                                if (error)
+                                    return "context." + error;
+                            }
+                            if (message.generationOptions != null && message.hasOwnProperty("generationOptions")) {
+                                var error = $root.google.cloud.geminidataanalytics.v1alpha.GenerationOptions.verify(message.generationOptions);
+                                if (error)
+                                    return "generationOptions." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a QueryDataRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.QueryDataRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.QueryDataRequest} QueryDataRequest
+                         */
+                        QueryDataRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.geminidataanalytics.v1alpha.QueryDataRequest)
+                                return object;
+                            var message = new $root.google.cloud.geminidataanalytics.v1alpha.QueryDataRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.prompt != null)
+                                message.prompt = String(object.prompt);
+                            if (object.context != null) {
+                                if (typeof object.context !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1alpha.QueryDataRequest.context: object expected");
+                                message.context = $root.google.cloud.geminidataanalytics.v1alpha.QueryDataContext.fromObject(object.context);
+                            }
+                            if (object.generationOptions != null) {
+                                if (typeof object.generationOptions !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1alpha.QueryDataRequest.generationOptions: object expected");
+                                message.generationOptions = $root.google.cloud.geminidataanalytics.v1alpha.GenerationOptions.fromObject(object.generationOptions);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a QueryDataRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.QueryDataRequest
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.QueryDataRequest} message QueryDataRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        QueryDataRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.prompt = "";
+                                object.context = null;
+                                object.generationOptions = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.prompt != null && message.hasOwnProperty("prompt"))
+                                object.prompt = message.prompt;
+                            if (message.context != null && message.hasOwnProperty("context"))
+                                object.context = $root.google.cloud.geminidataanalytics.v1alpha.QueryDataContext.toObject(message.context, options);
+                            if (message.generationOptions != null && message.hasOwnProperty("generationOptions"))
+                                object.generationOptions = $root.google.cloud.geminidataanalytics.v1alpha.GenerationOptions.toObject(message.generationOptions, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this QueryDataRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.QueryDataRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        QueryDataRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for QueryDataRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.QueryDataRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        QueryDataRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1alpha.QueryDataRequest";
+                        };
+    
+                        return QueryDataRequest;
+                    })();
+    
+                    v1alpha.GenerationOptions = (function() {
+    
+                        /**
+                         * Properties of a GenerationOptions.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha
+                         * @interface IGenerationOptions
+                         * @property {boolean|null} [generateQueryResult] GenerationOptions generateQueryResult
+                         * @property {boolean|null} [generateNaturalLanguageAnswer] GenerationOptions generateNaturalLanguageAnswer
+                         * @property {boolean|null} [generateExplanation] GenerationOptions generateExplanation
+                         * @property {boolean|null} [generateDisambiguationQuestion] GenerationOptions generateDisambiguationQuestion
+                         */
+    
+                        /**
+                         * Constructs a new GenerationOptions.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha
+                         * @classdesc Represents a GenerationOptions.
+                         * @implements IGenerationOptions
+                         * @constructor
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IGenerationOptions=} [properties] Properties to set
+                         */
+                        function GenerationOptions(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GenerationOptions generateQueryResult.
+                         * @member {boolean} generateQueryResult
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.GenerationOptions
+                         * @instance
+                         */
+                        GenerationOptions.prototype.generateQueryResult = false;
+    
+                        /**
+                         * GenerationOptions generateNaturalLanguageAnswer.
+                         * @member {boolean} generateNaturalLanguageAnswer
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.GenerationOptions
+                         * @instance
+                         */
+                        GenerationOptions.prototype.generateNaturalLanguageAnswer = false;
+    
+                        /**
+                         * GenerationOptions generateExplanation.
+                         * @member {boolean} generateExplanation
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.GenerationOptions
+                         * @instance
+                         */
+                        GenerationOptions.prototype.generateExplanation = false;
+    
+                        /**
+                         * GenerationOptions generateDisambiguationQuestion.
+                         * @member {boolean} generateDisambiguationQuestion
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.GenerationOptions
+                         * @instance
+                         */
+                        GenerationOptions.prototype.generateDisambiguationQuestion = false;
+    
+                        /**
+                         * Creates a new GenerationOptions instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.GenerationOptions
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IGenerationOptions=} [properties] Properties to set
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.GenerationOptions} GenerationOptions instance
+                         */
+                        GenerationOptions.create = function create(properties) {
+                            return new GenerationOptions(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GenerationOptions message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.GenerationOptions.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.GenerationOptions
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IGenerationOptions} message GenerationOptions message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GenerationOptions.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.generateQueryResult != null && Object.hasOwnProperty.call(message, "generateQueryResult"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.generateQueryResult);
+                            if (message.generateNaturalLanguageAnswer != null && Object.hasOwnProperty.call(message, "generateNaturalLanguageAnswer"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.generateNaturalLanguageAnswer);
+                            if (message.generateExplanation != null && Object.hasOwnProperty.call(message, "generateExplanation"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.generateExplanation);
+                            if (message.generateDisambiguationQuestion != null && Object.hasOwnProperty.call(message, "generateDisambiguationQuestion"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.generateDisambiguationQuestion);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GenerationOptions message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.GenerationOptions.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.GenerationOptions
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IGenerationOptions} message GenerationOptions message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GenerationOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GenerationOptions message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.GenerationOptions
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.GenerationOptions} GenerationOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GenerationOptions.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1alpha.GenerationOptions();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.generateQueryResult = reader.bool();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.generateNaturalLanguageAnswer = reader.bool();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.generateExplanation = reader.bool();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.generateDisambiguationQuestion = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GenerationOptions message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.GenerationOptions
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.GenerationOptions} GenerationOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GenerationOptions.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GenerationOptions message.
+                         * @function verify
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.GenerationOptions
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GenerationOptions.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.generateQueryResult != null && message.hasOwnProperty("generateQueryResult"))
+                                if (typeof message.generateQueryResult !== "boolean")
+                                    return "generateQueryResult: boolean expected";
+                            if (message.generateNaturalLanguageAnswer != null && message.hasOwnProperty("generateNaturalLanguageAnswer"))
+                                if (typeof message.generateNaturalLanguageAnswer !== "boolean")
+                                    return "generateNaturalLanguageAnswer: boolean expected";
+                            if (message.generateExplanation != null && message.hasOwnProperty("generateExplanation"))
+                                if (typeof message.generateExplanation !== "boolean")
+                                    return "generateExplanation: boolean expected";
+                            if (message.generateDisambiguationQuestion != null && message.hasOwnProperty("generateDisambiguationQuestion"))
+                                if (typeof message.generateDisambiguationQuestion !== "boolean")
+                                    return "generateDisambiguationQuestion: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GenerationOptions message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.GenerationOptions
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.GenerationOptions} GenerationOptions
+                         */
+                        GenerationOptions.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.geminidataanalytics.v1alpha.GenerationOptions)
+                                return object;
+                            var message = new $root.google.cloud.geminidataanalytics.v1alpha.GenerationOptions();
+                            if (object.generateQueryResult != null)
+                                message.generateQueryResult = Boolean(object.generateQueryResult);
+                            if (object.generateNaturalLanguageAnswer != null)
+                                message.generateNaturalLanguageAnswer = Boolean(object.generateNaturalLanguageAnswer);
+                            if (object.generateExplanation != null)
+                                message.generateExplanation = Boolean(object.generateExplanation);
+                            if (object.generateDisambiguationQuestion != null)
+                                message.generateDisambiguationQuestion = Boolean(object.generateDisambiguationQuestion);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GenerationOptions message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.GenerationOptions
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.GenerationOptions} message GenerationOptions
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GenerationOptions.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.generateQueryResult = false;
+                                object.generateNaturalLanguageAnswer = false;
+                                object.generateExplanation = false;
+                                object.generateDisambiguationQuestion = false;
+                            }
+                            if (message.generateQueryResult != null && message.hasOwnProperty("generateQueryResult"))
+                                object.generateQueryResult = message.generateQueryResult;
+                            if (message.generateNaturalLanguageAnswer != null && message.hasOwnProperty("generateNaturalLanguageAnswer"))
+                                object.generateNaturalLanguageAnswer = message.generateNaturalLanguageAnswer;
+                            if (message.generateExplanation != null && message.hasOwnProperty("generateExplanation"))
+                                object.generateExplanation = message.generateExplanation;
+                            if (message.generateDisambiguationQuestion != null && message.hasOwnProperty("generateDisambiguationQuestion"))
+                                object.generateDisambiguationQuestion = message.generateDisambiguationQuestion;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GenerationOptions to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.GenerationOptions
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GenerationOptions.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GenerationOptions
+                         * @function getTypeUrl
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.GenerationOptions
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GenerationOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1alpha.GenerationOptions";
+                        };
+    
+                        return GenerationOptions;
+                    })();
+    
+                    v1alpha.QueryDataContext = (function() {
+    
+                        /**
+                         * Properties of a QueryDataContext.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha
+                         * @interface IQueryDataContext
+                         * @property {google.cloud.geminidataanalytics.v1alpha.IDatasourceReferences|null} [datasourceReferences] QueryDataContext datasourceReferences
+                         */
+    
+                        /**
+                         * Constructs a new QueryDataContext.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha
+                         * @classdesc Represents a QueryDataContext.
+                         * @implements IQueryDataContext
+                         * @constructor
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IQueryDataContext=} [properties] Properties to set
+                         */
+                        function QueryDataContext(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * QueryDataContext datasourceReferences.
+                         * @member {google.cloud.geminidataanalytics.v1alpha.IDatasourceReferences|null|undefined} datasourceReferences
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.QueryDataContext
+                         * @instance
+                         */
+                        QueryDataContext.prototype.datasourceReferences = null;
+    
+                        /**
+                         * Creates a new QueryDataContext instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.QueryDataContext
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IQueryDataContext=} [properties] Properties to set
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.QueryDataContext} QueryDataContext instance
+                         */
+                        QueryDataContext.create = function create(properties) {
+                            return new QueryDataContext(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified QueryDataContext message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.QueryDataContext.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.QueryDataContext
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IQueryDataContext} message QueryDataContext message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryDataContext.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.datasourceReferences != null && Object.hasOwnProperty.call(message, "datasourceReferences"))
+                                $root.google.cloud.geminidataanalytics.v1alpha.DatasourceReferences.encode(message.datasourceReferences, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified QueryDataContext message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.QueryDataContext.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.QueryDataContext
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IQueryDataContext} message QueryDataContext message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryDataContext.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a QueryDataContext message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.QueryDataContext
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.QueryDataContext} QueryDataContext
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryDataContext.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1alpha.QueryDataContext();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.datasourceReferences = $root.google.cloud.geminidataanalytics.v1alpha.DatasourceReferences.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a QueryDataContext message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.QueryDataContext
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.QueryDataContext} QueryDataContext
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryDataContext.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a QueryDataContext message.
+                         * @function verify
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.QueryDataContext
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        QueryDataContext.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.datasourceReferences != null && message.hasOwnProperty("datasourceReferences")) {
+                                var error = $root.google.cloud.geminidataanalytics.v1alpha.DatasourceReferences.verify(message.datasourceReferences);
+                                if (error)
+                                    return "datasourceReferences." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a QueryDataContext message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.QueryDataContext
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.QueryDataContext} QueryDataContext
+                         */
+                        QueryDataContext.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.geminidataanalytics.v1alpha.QueryDataContext)
+                                return object;
+                            var message = new $root.google.cloud.geminidataanalytics.v1alpha.QueryDataContext();
+                            if (object.datasourceReferences != null) {
+                                if (typeof object.datasourceReferences !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1alpha.QueryDataContext.datasourceReferences: object expected");
+                                message.datasourceReferences = $root.google.cloud.geminidataanalytics.v1alpha.DatasourceReferences.fromObject(object.datasourceReferences);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a QueryDataContext message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.QueryDataContext
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.QueryDataContext} message QueryDataContext
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        QueryDataContext.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.datasourceReferences = null;
+                            if (message.datasourceReferences != null && message.hasOwnProperty("datasourceReferences"))
+                                object.datasourceReferences = $root.google.cloud.geminidataanalytics.v1alpha.DatasourceReferences.toObject(message.datasourceReferences, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this QueryDataContext to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.QueryDataContext
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        QueryDataContext.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for QueryDataContext
+                         * @function getTypeUrl
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.QueryDataContext
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        QueryDataContext.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1alpha.QueryDataContext";
+                        };
+    
+                        return QueryDataContext;
+                    })();
+    
+                    v1alpha.QueryDataResponse = (function() {
+    
+                        /**
+                         * Properties of a QueryDataResponse.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha
+                         * @interface IQueryDataResponse
+                         * @property {string|null} [generatedQuery] QueryDataResponse generatedQuery
+                         * @property {string|null} [intentExplanation] QueryDataResponse intentExplanation
+                         * @property {google.cloud.geminidataanalytics.v1alpha.IExecutedQueryResult|null} [queryResult] QueryDataResponse queryResult
+                         * @property {string|null} [naturalLanguageAnswer] QueryDataResponse naturalLanguageAnswer
+                         * @property {Array.<string>|null} [disambiguationQuestion] QueryDataResponse disambiguationQuestion
+                         */
+    
+                        /**
+                         * Constructs a new QueryDataResponse.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha
+                         * @classdesc Represents a QueryDataResponse.
+                         * @implements IQueryDataResponse
+                         * @constructor
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IQueryDataResponse=} [properties] Properties to set
+                         */
+                        function QueryDataResponse(properties) {
+                            this.disambiguationQuestion = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * QueryDataResponse generatedQuery.
+                         * @member {string} generatedQuery
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.QueryDataResponse
+                         * @instance
+                         */
+                        QueryDataResponse.prototype.generatedQuery = "";
+    
+                        /**
+                         * QueryDataResponse intentExplanation.
+                         * @member {string} intentExplanation
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.QueryDataResponse
+                         * @instance
+                         */
+                        QueryDataResponse.prototype.intentExplanation = "";
+    
+                        /**
+                         * QueryDataResponse queryResult.
+                         * @member {google.cloud.geminidataanalytics.v1alpha.IExecutedQueryResult|null|undefined} queryResult
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.QueryDataResponse
+                         * @instance
+                         */
+                        QueryDataResponse.prototype.queryResult = null;
+    
+                        /**
+                         * QueryDataResponse naturalLanguageAnswer.
+                         * @member {string} naturalLanguageAnswer
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.QueryDataResponse
+                         * @instance
+                         */
+                        QueryDataResponse.prototype.naturalLanguageAnswer = "";
+    
+                        /**
+                         * QueryDataResponse disambiguationQuestion.
+                         * @member {Array.<string>} disambiguationQuestion
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.QueryDataResponse
+                         * @instance
+                         */
+                        QueryDataResponse.prototype.disambiguationQuestion = $util.emptyArray;
+    
+                        /**
+                         * Creates a new QueryDataResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.QueryDataResponse
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IQueryDataResponse=} [properties] Properties to set
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.QueryDataResponse} QueryDataResponse instance
+                         */
+                        QueryDataResponse.create = function create(properties) {
+                            return new QueryDataResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified QueryDataResponse message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.QueryDataResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.QueryDataResponse
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IQueryDataResponse} message QueryDataResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryDataResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.generatedQuery != null && Object.hasOwnProperty.call(message, "generatedQuery"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.generatedQuery);
+                            if (message.intentExplanation != null && Object.hasOwnProperty.call(message, "intentExplanation"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.intentExplanation);
+                            if (message.queryResult != null && Object.hasOwnProperty.call(message, "queryResult"))
+                                $root.google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.encode(message.queryResult, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.naturalLanguageAnswer != null && Object.hasOwnProperty.call(message, "naturalLanguageAnswer"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.naturalLanguageAnswer);
+                            if (message.disambiguationQuestion != null && message.disambiguationQuestion.length)
+                                for (var i = 0; i < message.disambiguationQuestion.length; ++i)
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.disambiguationQuestion[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified QueryDataResponse message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.QueryDataResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.QueryDataResponse
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IQueryDataResponse} message QueryDataResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryDataResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a QueryDataResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.QueryDataResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.QueryDataResponse} QueryDataResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryDataResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1alpha.QueryDataResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.generatedQuery = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.intentExplanation = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.queryResult = $root.google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.naturalLanguageAnswer = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        if (!(message.disambiguationQuestion && message.disambiguationQuestion.length))
+                                            message.disambiguationQuestion = [];
+                                        message.disambiguationQuestion.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a QueryDataResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.QueryDataResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.QueryDataResponse} QueryDataResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryDataResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a QueryDataResponse message.
+                         * @function verify
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.QueryDataResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        QueryDataResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.generatedQuery != null && message.hasOwnProperty("generatedQuery"))
+                                if (!$util.isString(message.generatedQuery))
+                                    return "generatedQuery: string expected";
+                            if (message.intentExplanation != null && message.hasOwnProperty("intentExplanation"))
+                                if (!$util.isString(message.intentExplanation))
+                                    return "intentExplanation: string expected";
+                            if (message.queryResult != null && message.hasOwnProperty("queryResult")) {
+                                var error = $root.google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.verify(message.queryResult);
+                                if (error)
+                                    return "queryResult." + error;
+                            }
+                            if (message.naturalLanguageAnswer != null && message.hasOwnProperty("naturalLanguageAnswer"))
+                                if (!$util.isString(message.naturalLanguageAnswer))
+                                    return "naturalLanguageAnswer: string expected";
+                            if (message.disambiguationQuestion != null && message.hasOwnProperty("disambiguationQuestion")) {
+                                if (!Array.isArray(message.disambiguationQuestion))
+                                    return "disambiguationQuestion: array expected";
+                                for (var i = 0; i < message.disambiguationQuestion.length; ++i)
+                                    if (!$util.isString(message.disambiguationQuestion[i]))
+                                        return "disambiguationQuestion: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a QueryDataResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.QueryDataResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.QueryDataResponse} QueryDataResponse
+                         */
+                        QueryDataResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.geminidataanalytics.v1alpha.QueryDataResponse)
+                                return object;
+                            var message = new $root.google.cloud.geminidataanalytics.v1alpha.QueryDataResponse();
+                            if (object.generatedQuery != null)
+                                message.generatedQuery = String(object.generatedQuery);
+                            if (object.intentExplanation != null)
+                                message.intentExplanation = String(object.intentExplanation);
+                            if (object.queryResult != null) {
+                                if (typeof object.queryResult !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1alpha.QueryDataResponse.queryResult: object expected");
+                                message.queryResult = $root.google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.fromObject(object.queryResult);
+                            }
+                            if (object.naturalLanguageAnswer != null)
+                                message.naturalLanguageAnswer = String(object.naturalLanguageAnswer);
+                            if (object.disambiguationQuestion) {
+                                if (!Array.isArray(object.disambiguationQuestion))
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1alpha.QueryDataResponse.disambiguationQuestion: array expected");
+                                message.disambiguationQuestion = [];
+                                for (var i = 0; i < object.disambiguationQuestion.length; ++i)
+                                    message.disambiguationQuestion[i] = String(object.disambiguationQuestion[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a QueryDataResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.QueryDataResponse
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.QueryDataResponse} message QueryDataResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        QueryDataResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.disambiguationQuestion = [];
+                            if (options.defaults) {
+                                object.generatedQuery = "";
+                                object.intentExplanation = "";
+                                object.queryResult = null;
+                                object.naturalLanguageAnswer = "";
+                            }
+                            if (message.generatedQuery != null && message.hasOwnProperty("generatedQuery"))
+                                object.generatedQuery = message.generatedQuery;
+                            if (message.intentExplanation != null && message.hasOwnProperty("intentExplanation"))
+                                object.intentExplanation = message.intentExplanation;
+                            if (message.queryResult != null && message.hasOwnProperty("queryResult"))
+                                object.queryResult = $root.google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.toObject(message.queryResult, options);
+                            if (message.naturalLanguageAnswer != null && message.hasOwnProperty("naturalLanguageAnswer"))
+                                object.naturalLanguageAnswer = message.naturalLanguageAnswer;
+                            if (message.disambiguationQuestion && message.disambiguationQuestion.length) {
+                                object.disambiguationQuestion = [];
+                                for (var j = 0; j < message.disambiguationQuestion.length; ++j)
+                                    object.disambiguationQuestion[j] = message.disambiguationQuestion[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this QueryDataResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.QueryDataResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        QueryDataResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for QueryDataResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.QueryDataResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        QueryDataResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1alpha.QueryDataResponse";
+                        };
+    
+                        return QueryDataResponse;
+                    })();
+    
+                    v1alpha.ExecutedQueryResult = (function() {
+    
+                        /**
+                         * Properties of an ExecutedQueryResult.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha
+                         * @interface IExecutedQueryResult
+                         * @property {Array.<google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.IColumn>|null} [columns] ExecutedQueryResult columns
+                         * @property {Array.<google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.IRow>|null} [rows] ExecutedQueryResult rows
+                         * @property {number|Long|null} [totalRowCount] ExecutedQueryResult totalRowCount
+                         * @property {boolean|null} [partialResult] ExecutedQueryResult partialResult
+                         * @property {string|null} [queryExecutionError] ExecutedQueryResult queryExecutionError
+                         */
+    
+                        /**
+                         * Constructs a new ExecutedQueryResult.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha
+                         * @classdesc Represents an ExecutedQueryResult.
+                         * @implements IExecutedQueryResult
+                         * @constructor
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IExecutedQueryResult=} [properties] Properties to set
+                         */
+                        function ExecutedQueryResult(properties) {
+                            this.columns = [];
+                            this.rows = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ExecutedQueryResult columns.
+                         * @member {Array.<google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.IColumn>} columns
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult
+                         * @instance
+                         */
+                        ExecutedQueryResult.prototype.columns = $util.emptyArray;
+    
+                        /**
+                         * ExecutedQueryResult rows.
+                         * @member {Array.<google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.IRow>} rows
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult
+                         * @instance
+                         */
+                        ExecutedQueryResult.prototype.rows = $util.emptyArray;
+    
+                        /**
+                         * ExecutedQueryResult totalRowCount.
+                         * @member {number|Long} totalRowCount
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult
+                         * @instance
+                         */
+                        ExecutedQueryResult.prototype.totalRowCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * ExecutedQueryResult partialResult.
+                         * @member {boolean} partialResult
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult
+                         * @instance
+                         */
+                        ExecutedQueryResult.prototype.partialResult = false;
+    
+                        /**
+                         * ExecutedQueryResult queryExecutionError.
+                         * @member {string} queryExecutionError
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult
+                         * @instance
+                         */
+                        ExecutedQueryResult.prototype.queryExecutionError = "";
+    
+                        /**
+                         * Creates a new ExecutedQueryResult instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IExecutedQueryResult=} [properties] Properties to set
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult} ExecutedQueryResult instance
+                         */
+                        ExecutedQueryResult.create = function create(properties) {
+                            return new ExecutedQueryResult(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExecutedQueryResult message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IExecutedQueryResult} message ExecutedQueryResult message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExecutedQueryResult.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.columns != null && message.columns.length)
+                                for (var i = 0; i < message.columns.length; ++i)
+                                    $root.google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Column.encode(message.columns[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.rows != null && message.rows.length)
+                                for (var i = 0; i < message.rows.length; ++i)
+                                    $root.google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Row.encode(message.rows[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.totalRowCount != null && Object.hasOwnProperty.call(message, "totalRowCount"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.totalRowCount);
+                            if (message.partialResult != null && Object.hasOwnProperty.call(message, "partialResult"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.partialResult);
+                            if (message.queryExecutionError != null && Object.hasOwnProperty.call(message, "queryExecutionError"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.queryExecutionError);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExecutedQueryResult message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IExecutedQueryResult} message ExecutedQueryResult message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExecutedQueryResult.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExecutedQueryResult message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult} ExecutedQueryResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExecutedQueryResult.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.columns && message.columns.length))
+                                            message.columns = [];
+                                        message.columns.push($root.google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Column.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.rows && message.rows.length))
+                                            message.rows = [];
+                                        message.rows.push($root.google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Row.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 3: {
+                                        message.totalRowCount = reader.int64();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.partialResult = reader.bool();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.queryExecutionError = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExecutedQueryResult message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult} ExecutedQueryResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExecutedQueryResult.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExecutedQueryResult message.
+                         * @function verify
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExecutedQueryResult.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.columns != null && message.hasOwnProperty("columns")) {
+                                if (!Array.isArray(message.columns))
+                                    return "columns: array expected";
+                                for (var i = 0; i < message.columns.length; ++i) {
+                                    var error = $root.google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Column.verify(message.columns[i]);
+                                    if (error)
+                                        return "columns." + error;
+                                }
+                            }
+                            if (message.rows != null && message.hasOwnProperty("rows")) {
+                                if (!Array.isArray(message.rows))
+                                    return "rows: array expected";
+                                for (var i = 0; i < message.rows.length; ++i) {
+                                    var error = $root.google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Row.verify(message.rows[i]);
+                                    if (error)
+                                        return "rows." + error;
+                                }
+                            }
+                            if (message.totalRowCount != null && message.hasOwnProperty("totalRowCount"))
+                                if (!$util.isInteger(message.totalRowCount) && !(message.totalRowCount && $util.isInteger(message.totalRowCount.low) && $util.isInteger(message.totalRowCount.high)))
+                                    return "totalRowCount: integer|Long expected";
+                            if (message.partialResult != null && message.hasOwnProperty("partialResult"))
+                                if (typeof message.partialResult !== "boolean")
+                                    return "partialResult: boolean expected";
+                            if (message.queryExecutionError != null && message.hasOwnProperty("queryExecutionError"))
+                                if (!$util.isString(message.queryExecutionError))
+                                    return "queryExecutionError: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExecutedQueryResult message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult} ExecutedQueryResult
+                         */
+                        ExecutedQueryResult.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult)
+                                return object;
+                            var message = new $root.google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult();
+                            if (object.columns) {
+                                if (!Array.isArray(object.columns))
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.columns: array expected");
+                                message.columns = [];
+                                for (var i = 0; i < object.columns.length; ++i) {
+                                    if (typeof object.columns[i] !== "object")
+                                        throw TypeError(".google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.columns: object expected");
+                                    message.columns[i] = $root.google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Column.fromObject(object.columns[i]);
+                                }
+                            }
+                            if (object.rows) {
+                                if (!Array.isArray(object.rows))
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.rows: array expected");
+                                message.rows = [];
+                                for (var i = 0; i < object.rows.length; ++i) {
+                                    if (typeof object.rows[i] !== "object")
+                                        throw TypeError(".google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.rows: object expected");
+                                    message.rows[i] = $root.google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Row.fromObject(object.rows[i]);
+                                }
+                            }
+                            if (object.totalRowCount != null)
+                                if ($util.Long)
+                                    (message.totalRowCount = $util.Long.fromValue(object.totalRowCount)).unsigned = false;
+                                else if (typeof object.totalRowCount === "string")
+                                    message.totalRowCount = parseInt(object.totalRowCount, 10);
+                                else if (typeof object.totalRowCount === "number")
+                                    message.totalRowCount = object.totalRowCount;
+                                else if (typeof object.totalRowCount === "object")
+                                    message.totalRowCount = new $util.LongBits(object.totalRowCount.low >>> 0, object.totalRowCount.high >>> 0).toNumber();
+                            if (object.partialResult != null)
+                                message.partialResult = Boolean(object.partialResult);
+                            if (object.queryExecutionError != null)
+                                message.queryExecutionError = String(object.queryExecutionError);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExecutedQueryResult message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult} message ExecutedQueryResult
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExecutedQueryResult.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.columns = [];
+                                object.rows = [];
+                            }
+                            if (options.defaults) {
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.totalRowCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.totalRowCount = options.longs === String ? "0" : 0;
+                                object.partialResult = false;
+                                object.queryExecutionError = "";
+                            }
+                            if (message.columns && message.columns.length) {
+                                object.columns = [];
+                                for (var j = 0; j < message.columns.length; ++j)
+                                    object.columns[j] = $root.google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Column.toObject(message.columns[j], options);
+                            }
+                            if (message.rows && message.rows.length) {
+                                object.rows = [];
+                                for (var j = 0; j < message.rows.length; ++j)
+                                    object.rows[j] = $root.google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Row.toObject(message.rows[j], options);
+                            }
+                            if (message.totalRowCount != null && message.hasOwnProperty("totalRowCount"))
+                                if (typeof message.totalRowCount === "number")
+                                    object.totalRowCount = options.longs === String ? String(message.totalRowCount) : message.totalRowCount;
+                                else
+                                    object.totalRowCount = options.longs === String ? $util.Long.prototype.toString.call(message.totalRowCount) : options.longs === Number ? new $util.LongBits(message.totalRowCount.low >>> 0, message.totalRowCount.high >>> 0).toNumber() : message.totalRowCount;
+                            if (message.partialResult != null && message.hasOwnProperty("partialResult"))
+                                object.partialResult = message.partialResult;
+                            if (message.queryExecutionError != null && message.hasOwnProperty("queryExecutionError"))
+                                object.queryExecutionError = message.queryExecutionError;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ExecutedQueryResult to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExecutedQueryResult.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ExecutedQueryResult
+                         * @function getTypeUrl
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ExecutedQueryResult.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult";
+                        };
+    
+                        ExecutedQueryResult.Column = (function() {
+    
+                            /**
+                             * Properties of a Column.
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult
+                             * @interface IColumn
+                             * @property {string|null} [name] Column name
+                             * @property {string|null} [type] Column type
+                             */
+    
+                            /**
+                             * Constructs a new Column.
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult
+                             * @classdesc Represents a Column.
+                             * @implements IColumn
+                             * @constructor
+                             * @param {google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.IColumn=} [properties] Properties to set
+                             */
+                            function Column(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Column name.
+                             * @member {string} name
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Column
+                             * @instance
+                             */
+                            Column.prototype.name = "";
+    
+                            /**
+                             * Column type.
+                             * @member {string} type
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Column
+                             * @instance
+                             */
+                            Column.prototype.type = "";
+    
+                            /**
+                             * Creates a new Column instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Column
+                             * @static
+                             * @param {google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.IColumn=} [properties] Properties to set
+                             * @returns {google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Column} Column instance
+                             */
+                            Column.create = function create(properties) {
+                                return new Column(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Column message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Column.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Column
+                             * @static
+                             * @param {google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.IColumn} message Column message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Column.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.type);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Column message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Column.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Column
+                             * @static
+                             * @param {google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.IColumn} message Column message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Column.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Column message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Column
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Column} Column
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Column.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Column();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.type = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Column message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Column
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Column} Column
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Column.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Column message.
+                             * @function verify
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Column
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Column.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.type != null && message.hasOwnProperty("type"))
+                                    if (!$util.isString(message.type))
+                                        return "type: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Column message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Column
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Column} Column
+                             */
+                            Column.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Column)
+                                    return object;
+                                var message = new $root.google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Column();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.type != null)
+                                    message.type = String(object.type);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Column message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Column
+                             * @static
+                             * @param {google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Column} message Column
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Column.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.name = "";
+                                    object.type = "";
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.type != null && message.hasOwnProperty("type"))
+                                    object.type = message.type;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Column to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Column
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Column.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Column
+                             * @function getTypeUrl
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Column
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Column.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Column";
+                            };
+    
+                            return Column;
+                        })();
+    
+                        ExecutedQueryResult.Value = (function() {
+    
+                            /**
+                             * Properties of a Value.
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult
+                             * @interface IValue
+                             * @property {string|null} [value] Value value
+                             */
+    
+                            /**
+                             * Constructs a new Value.
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult
+                             * @classdesc Represents a Value.
+                             * @implements IValue
+                             * @constructor
+                             * @param {google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.IValue=} [properties] Properties to set
+                             */
+                            function Value(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Value value.
+                             * @member {string} value
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Value
+                             * @instance
+                             */
+                            Value.prototype.value = "";
+    
+                            /**
+                             * Creates a new Value instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Value
+                             * @static
+                             * @param {google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.IValue=} [properties] Properties to set
+                             * @returns {google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Value} Value instance
+                             */
+                            Value.create = function create(properties) {
+                                return new Value(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Value message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Value.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Value
+                             * @static
+                             * @param {google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.IValue} message Value message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Value.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.value);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Value message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Value.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Value
+                             * @static
+                             * @param {google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.IValue} message Value message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Value.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Value message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Value
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Value} Value
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Value.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Value();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.value = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Value message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Value
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Value} Value
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Value.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Value message.
+                             * @function verify
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Value
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Value.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.value != null && message.hasOwnProperty("value"))
+                                    if (!$util.isString(message.value))
+                                        return "value: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Value message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Value
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Value} Value
+                             */
+                            Value.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Value)
+                                    return object;
+                                var message = new $root.google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Value();
+                                if (object.value != null)
+                                    message.value = String(object.value);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Value message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Value
+                             * @static
+                             * @param {google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Value} message Value
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Value.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.value = "";
+                                if (message.value != null && message.hasOwnProperty("value"))
+                                    object.value = message.value;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Value to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Value
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Value.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Value
+                             * @function getTypeUrl
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Value
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Value.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Value";
+                            };
+    
+                            return Value;
+                        })();
+    
+                        ExecutedQueryResult.Row = (function() {
+    
+                            /**
+                             * Properties of a Row.
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult
+                             * @interface IRow
+                             * @property {Array.<google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.IValue>|null} [values] Row values
+                             */
+    
+                            /**
+                             * Constructs a new Row.
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult
+                             * @classdesc Represents a Row.
+                             * @implements IRow
+                             * @constructor
+                             * @param {google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.IRow=} [properties] Properties to set
+                             */
+                            function Row(properties) {
+                                this.values = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Row values.
+                             * @member {Array.<google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.IValue>} values
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Row
+                             * @instance
+                             */
+                            Row.prototype.values = $util.emptyArray;
+    
+                            /**
+                             * Creates a new Row instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Row
+                             * @static
+                             * @param {google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.IRow=} [properties] Properties to set
+                             * @returns {google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Row} Row instance
+                             */
+                            Row.create = function create(properties) {
+                                return new Row(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Row message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Row.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Row
+                             * @static
+                             * @param {google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.IRow} message Row message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Row.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.values != null && message.values.length)
+                                    for (var i = 0; i < message.values.length; ++i)
+                                        $root.google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Value.encode(message.values[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Row message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Row.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Row
+                             * @static
+                             * @param {google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.IRow} message Row message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Row.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Row message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Row
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Row} Row
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Row.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Row();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.values && message.values.length))
+                                                message.values = [];
+                                            message.values.push($root.google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Value.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Row message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Row
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Row} Row
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Row.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Row message.
+                             * @function verify
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Row
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Row.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.values != null && message.hasOwnProperty("values")) {
+                                    if (!Array.isArray(message.values))
+                                        return "values: array expected";
+                                    for (var i = 0; i < message.values.length; ++i) {
+                                        var error = $root.google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Value.verify(message.values[i]);
+                                        if (error)
+                                            return "values." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Row message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Row
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Row} Row
+                             */
+                            Row.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Row)
+                                    return object;
+                                var message = new $root.google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Row();
+                                if (object.values) {
+                                    if (!Array.isArray(object.values))
+                                        throw TypeError(".google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Row.values: array expected");
+                                    message.values = [];
+                                    for (var i = 0; i < object.values.length; ++i) {
+                                        if (typeof object.values[i] !== "object")
+                                            throw TypeError(".google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Row.values: object expected");
+                                        message.values[i] = $root.google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Value.fromObject(object.values[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Row message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Row
+                             * @static
+                             * @param {google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Row} message Row
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Row.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.values = [];
+                                if (message.values && message.values.length) {
+                                    object.values = [];
+                                    for (var j = 0; j < message.values.length; ++j)
+                                        object.values[j] = $root.google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Value.toObject(message.values[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Row to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Row
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Row.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Row
+                             * @function getTypeUrl
+                             * @memberof google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Row
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Row.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1alpha.ExecutedQueryResult.Row";
+                            };
+    
+                            return Row;
+                        })();
+    
+                        return ExecutedQueryResult;
                     })();
     
                     v1alpha.ListMessagesRequest = (function() {
@@ -17584,625 +20342,6 @@
                         };
     
                         return DataMessage;
-                    })();
-    
-                    v1alpha.LookerQuery = (function() {
-    
-                        /**
-                         * Properties of a LookerQuery.
-                         * @memberof google.cloud.geminidataanalytics.v1alpha
-                         * @interface ILookerQuery
-                         * @property {string|null} [model] LookerQuery model
-                         * @property {string|null} [explore] LookerQuery explore
-                         * @property {Array.<string>|null} [fields] LookerQuery fields
-                         * @property {Array.<google.cloud.geminidataanalytics.v1alpha.LookerQuery.IFilter>|null} [filters] LookerQuery filters
-                         * @property {Array.<string>|null} [sorts] LookerQuery sorts
-                         * @property {string|null} [limit] LookerQuery limit
-                         */
-    
-                        /**
-                         * Constructs a new LookerQuery.
-                         * @memberof google.cloud.geminidataanalytics.v1alpha
-                         * @classdesc Represents a LookerQuery.
-                         * @implements ILookerQuery
-                         * @constructor
-                         * @param {google.cloud.geminidataanalytics.v1alpha.ILookerQuery=} [properties] Properties to set
-                         */
-                        function LookerQuery(properties) {
-                            this.fields = [];
-                            this.filters = [];
-                            this.sorts = [];
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * LookerQuery model.
-                         * @member {string} model
-                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery
-                         * @instance
-                         */
-                        LookerQuery.prototype.model = "";
-    
-                        /**
-                         * LookerQuery explore.
-                         * @member {string} explore
-                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery
-                         * @instance
-                         */
-                        LookerQuery.prototype.explore = "";
-    
-                        /**
-                         * LookerQuery fields.
-                         * @member {Array.<string>} fields
-                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery
-                         * @instance
-                         */
-                        LookerQuery.prototype.fields = $util.emptyArray;
-    
-                        /**
-                         * LookerQuery filters.
-                         * @member {Array.<google.cloud.geminidataanalytics.v1alpha.LookerQuery.IFilter>} filters
-                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery
-                         * @instance
-                         */
-                        LookerQuery.prototype.filters = $util.emptyArray;
-    
-                        /**
-                         * LookerQuery sorts.
-                         * @member {Array.<string>} sorts
-                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery
-                         * @instance
-                         */
-                        LookerQuery.prototype.sorts = $util.emptyArray;
-    
-                        /**
-                         * LookerQuery limit.
-                         * @member {string|null|undefined} limit
-                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery
-                         * @instance
-                         */
-                        LookerQuery.prototype.limit = null;
-    
-                        // OneOf field names bound to virtual getters and setters
-                        var $oneOfFields;
-    
-                        // Virtual OneOf for proto3 optional field
-                        Object.defineProperty(LookerQuery.prototype, "_limit", {
-                            get: $util.oneOfGetter($oneOfFields = ["limit"]),
-                            set: $util.oneOfSetter($oneOfFields)
-                        });
-    
-                        /**
-                         * Creates a new LookerQuery instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery
-                         * @static
-                         * @param {google.cloud.geminidataanalytics.v1alpha.ILookerQuery=} [properties] Properties to set
-                         * @returns {google.cloud.geminidataanalytics.v1alpha.LookerQuery} LookerQuery instance
-                         */
-                        LookerQuery.create = function create(properties) {
-                            return new LookerQuery(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified LookerQuery message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.LookerQuery.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery
-                         * @static
-                         * @param {google.cloud.geminidataanalytics.v1alpha.ILookerQuery} message LookerQuery message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        LookerQuery.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.model != null && Object.hasOwnProperty.call(message, "model"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.model);
-                            if (message.explore != null && Object.hasOwnProperty.call(message, "explore"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.explore);
-                            if (message.fields != null && message.fields.length)
-                                for (var i = 0; i < message.fields.length; ++i)
-                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.fields[i]);
-                            if (message.filters != null && message.filters.length)
-                                for (var i = 0; i < message.filters.length; ++i)
-                                    $root.google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter.encode(message.filters[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-                            if (message.sorts != null && message.sorts.length)
-                                for (var i = 0; i < message.sorts.length; ++i)
-                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.sorts[i]);
-                            if (message.limit != null && Object.hasOwnProperty.call(message, "limit"))
-                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.limit);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified LookerQuery message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.LookerQuery.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery
-                         * @static
-                         * @param {google.cloud.geminidataanalytics.v1alpha.ILookerQuery} message LookerQuery message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        LookerQuery.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a LookerQuery message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.geminidataanalytics.v1alpha.LookerQuery} LookerQuery
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        LookerQuery.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1alpha.LookerQuery();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.model = reader.string();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.explore = reader.string();
-                                        break;
-                                    }
-                                case 3: {
-                                        if (!(message.fields && message.fields.length))
-                                            message.fields = [];
-                                        message.fields.push(reader.string());
-                                        break;
-                                    }
-                                case 4: {
-                                        if (!(message.filters && message.filters.length))
-                                            message.filters = [];
-                                        message.filters.push($root.google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter.decode(reader, reader.uint32()));
-                                        break;
-                                    }
-                                case 5: {
-                                        if (!(message.sorts && message.sorts.length))
-                                            message.sorts = [];
-                                        message.sorts.push(reader.string());
-                                        break;
-                                    }
-                                case 6: {
-                                        message.limit = reader.string();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a LookerQuery message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.geminidataanalytics.v1alpha.LookerQuery} LookerQuery
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        LookerQuery.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a LookerQuery message.
-                         * @function verify
-                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        LookerQuery.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            var properties = {};
-                            if (message.model != null && message.hasOwnProperty("model"))
-                                if (!$util.isString(message.model))
-                                    return "model: string expected";
-                            if (message.explore != null && message.hasOwnProperty("explore"))
-                                if (!$util.isString(message.explore))
-                                    return "explore: string expected";
-                            if (message.fields != null && message.hasOwnProperty("fields")) {
-                                if (!Array.isArray(message.fields))
-                                    return "fields: array expected";
-                                for (var i = 0; i < message.fields.length; ++i)
-                                    if (!$util.isString(message.fields[i]))
-                                        return "fields: string[] expected";
-                            }
-                            if (message.filters != null && message.hasOwnProperty("filters")) {
-                                if (!Array.isArray(message.filters))
-                                    return "filters: array expected";
-                                for (var i = 0; i < message.filters.length; ++i) {
-                                    var error = $root.google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter.verify(message.filters[i]);
-                                    if (error)
-                                        return "filters." + error;
-                                }
-                            }
-                            if (message.sorts != null && message.hasOwnProperty("sorts")) {
-                                if (!Array.isArray(message.sorts))
-                                    return "sorts: array expected";
-                                for (var i = 0; i < message.sorts.length; ++i)
-                                    if (!$util.isString(message.sorts[i]))
-                                        return "sorts: string[] expected";
-                            }
-                            if (message.limit != null && message.hasOwnProperty("limit")) {
-                                properties._limit = 1;
-                                if (!$util.isString(message.limit))
-                                    return "limit: string expected";
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a LookerQuery message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.geminidataanalytics.v1alpha.LookerQuery} LookerQuery
-                         */
-                        LookerQuery.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.geminidataanalytics.v1alpha.LookerQuery)
-                                return object;
-                            var message = new $root.google.cloud.geminidataanalytics.v1alpha.LookerQuery();
-                            if (object.model != null)
-                                message.model = String(object.model);
-                            if (object.explore != null)
-                                message.explore = String(object.explore);
-                            if (object.fields) {
-                                if (!Array.isArray(object.fields))
-                                    throw TypeError(".google.cloud.geminidataanalytics.v1alpha.LookerQuery.fields: array expected");
-                                message.fields = [];
-                                for (var i = 0; i < object.fields.length; ++i)
-                                    message.fields[i] = String(object.fields[i]);
-                            }
-                            if (object.filters) {
-                                if (!Array.isArray(object.filters))
-                                    throw TypeError(".google.cloud.geminidataanalytics.v1alpha.LookerQuery.filters: array expected");
-                                message.filters = [];
-                                for (var i = 0; i < object.filters.length; ++i) {
-                                    if (typeof object.filters[i] !== "object")
-                                        throw TypeError(".google.cloud.geminidataanalytics.v1alpha.LookerQuery.filters: object expected");
-                                    message.filters[i] = $root.google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter.fromObject(object.filters[i]);
-                                }
-                            }
-                            if (object.sorts) {
-                                if (!Array.isArray(object.sorts))
-                                    throw TypeError(".google.cloud.geminidataanalytics.v1alpha.LookerQuery.sorts: array expected");
-                                message.sorts = [];
-                                for (var i = 0; i < object.sorts.length; ++i)
-                                    message.sorts[i] = String(object.sorts[i]);
-                            }
-                            if (object.limit != null)
-                                message.limit = String(object.limit);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a LookerQuery message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery
-                         * @static
-                         * @param {google.cloud.geminidataanalytics.v1alpha.LookerQuery} message LookerQuery
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        LookerQuery.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.arrays || options.defaults) {
-                                object.fields = [];
-                                object.filters = [];
-                                object.sorts = [];
-                            }
-                            if (options.defaults) {
-                                object.model = "";
-                                object.explore = "";
-                            }
-                            if (message.model != null && message.hasOwnProperty("model"))
-                                object.model = message.model;
-                            if (message.explore != null && message.hasOwnProperty("explore"))
-                                object.explore = message.explore;
-                            if (message.fields && message.fields.length) {
-                                object.fields = [];
-                                for (var j = 0; j < message.fields.length; ++j)
-                                    object.fields[j] = message.fields[j];
-                            }
-                            if (message.filters && message.filters.length) {
-                                object.filters = [];
-                                for (var j = 0; j < message.filters.length; ++j)
-                                    object.filters[j] = $root.google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter.toObject(message.filters[j], options);
-                            }
-                            if (message.sorts && message.sorts.length) {
-                                object.sorts = [];
-                                for (var j = 0; j < message.sorts.length; ++j)
-                                    object.sorts[j] = message.sorts[j];
-                            }
-                            if (message.limit != null && message.hasOwnProperty("limit")) {
-                                object.limit = message.limit;
-                                if (options.oneofs)
-                                    object._limit = "limit";
-                            }
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this LookerQuery to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        LookerQuery.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for LookerQuery
-                         * @function getTypeUrl
-                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        LookerQuery.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1alpha.LookerQuery";
-                        };
-    
-                        LookerQuery.Filter = (function() {
-    
-                            /**
-                             * Properties of a Filter.
-                             * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery
-                             * @interface IFilter
-                             * @property {string|null} [field] Filter field
-                             * @property {string|null} [value] Filter value
-                             */
-    
-                            /**
-                             * Constructs a new Filter.
-                             * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery
-                             * @classdesc Represents a Filter.
-                             * @implements IFilter
-                             * @constructor
-                             * @param {google.cloud.geminidataanalytics.v1alpha.LookerQuery.IFilter=} [properties] Properties to set
-                             */
-                            function Filter(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * Filter field.
-                             * @member {string} field
-                             * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter
-                             * @instance
-                             */
-                            Filter.prototype.field = "";
-    
-                            /**
-                             * Filter value.
-                             * @member {string} value
-                             * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter
-                             * @instance
-                             */
-                            Filter.prototype.value = "";
-    
-                            /**
-                             * Creates a new Filter instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter
-                             * @static
-                             * @param {google.cloud.geminidataanalytics.v1alpha.LookerQuery.IFilter=} [properties] Properties to set
-                             * @returns {google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter} Filter instance
-                             */
-                            Filter.create = function create(properties) {
-                                return new Filter(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified Filter message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter
-                             * @static
-                             * @param {google.cloud.geminidataanalytics.v1alpha.LookerQuery.IFilter} message Filter message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            Filter.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.field != null && Object.hasOwnProperty.call(message, "field"))
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.field);
-                                if (message.value != null && Object.hasOwnProperty.call(message, "value"))
-                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.value);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified Filter message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter
-                             * @static
-                             * @param {google.cloud.geminidataanalytics.v1alpha.LookerQuery.IFilter} message Filter message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            Filter.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a Filter message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter} Filter
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            Filter.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.field = reader.string();
-                                            break;
-                                        }
-                                    case 2: {
-                                            message.value = reader.string();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a Filter message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter} Filter
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            Filter.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a Filter message.
-                             * @function verify
-                             * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            Filter.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.field != null && message.hasOwnProperty("field"))
-                                    if (!$util.isString(message.field))
-                                        return "field: string expected";
-                                if (message.value != null && message.hasOwnProperty("value"))
-                                    if (!$util.isString(message.value))
-                                        return "value: string expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a Filter message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter} Filter
-                             */
-                            Filter.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter)
-                                    return object;
-                                var message = new $root.google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter();
-                                if (object.field != null)
-                                    message.field = String(object.field);
-                                if (object.value != null)
-                                    message.value = String(object.value);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a Filter message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter
-                             * @static
-                             * @param {google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter} message Filter
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            Filter.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults) {
-                                    object.field = "";
-                                    object.value = "";
-                                }
-                                if (message.field != null && message.hasOwnProperty("field"))
-                                    object.field = message.field;
-                                if (message.value != null && message.hasOwnProperty("value"))
-                                    object.value = message.value;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this Filter to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            Filter.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for Filter
-                             * @function getTypeUrl
-                             * @memberof google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            Filter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1alpha.LookerQuery.Filter";
-                            };
-    
-                            return Filter;
-                        })();
-    
-                        return LookerQuery;
                     })();
     
                     v1alpha.DataQuery = (function() {
