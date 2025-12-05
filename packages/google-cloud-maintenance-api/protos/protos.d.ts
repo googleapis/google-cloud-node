@@ -26,6 +26,1576 @@ export namespace google {
             /** Namespace api. */
             namespace api {
 
+                /** Namespace v1. */
+                namespace v1 {
+
+                    /** Represents a Maintenance */
+                    class Maintenance extends $protobuf.rpc.Service {
+
+                        /**
+                         * Constructs a new Maintenance service.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                        /**
+                         * Creates new Maintenance service using the specified rpc implementation.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         * @returns RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): Maintenance;
+
+                        /**
+                         * Calls SummarizeMaintenances.
+                         * @param request SummarizeMaintenancesRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and SummarizeMaintenancesResponse
+                         */
+                        public summarizeMaintenances(request: google.cloud.maintenance.api.v1.ISummarizeMaintenancesRequest, callback: google.cloud.maintenance.api.v1.Maintenance.SummarizeMaintenancesCallback): void;
+
+                        /**
+                         * Calls SummarizeMaintenances.
+                         * @param request SummarizeMaintenancesRequest message or plain object
+                         * @returns Promise
+                         */
+                        public summarizeMaintenances(request: google.cloud.maintenance.api.v1.ISummarizeMaintenancesRequest): Promise<google.cloud.maintenance.api.v1.SummarizeMaintenancesResponse>;
+
+                        /**
+                         * Calls ListResourceMaintenances.
+                         * @param request ListResourceMaintenancesRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ListResourceMaintenancesResponse
+                         */
+                        public listResourceMaintenances(request: google.cloud.maintenance.api.v1.IListResourceMaintenancesRequest, callback: google.cloud.maintenance.api.v1.Maintenance.ListResourceMaintenancesCallback): void;
+
+                        /**
+                         * Calls ListResourceMaintenances.
+                         * @param request ListResourceMaintenancesRequest message or plain object
+                         * @returns Promise
+                         */
+                        public listResourceMaintenances(request: google.cloud.maintenance.api.v1.IListResourceMaintenancesRequest): Promise<google.cloud.maintenance.api.v1.ListResourceMaintenancesResponse>;
+
+                        /**
+                         * Calls GetResourceMaintenance.
+                         * @param request GetResourceMaintenanceRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ResourceMaintenance
+                         */
+                        public getResourceMaintenance(request: google.cloud.maintenance.api.v1.IGetResourceMaintenanceRequest, callback: google.cloud.maintenance.api.v1.Maintenance.GetResourceMaintenanceCallback): void;
+
+                        /**
+                         * Calls GetResourceMaintenance.
+                         * @param request GetResourceMaintenanceRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getResourceMaintenance(request: google.cloud.maintenance.api.v1.IGetResourceMaintenanceRequest): Promise<google.cloud.maintenance.api.v1.ResourceMaintenance>;
+                    }
+
+                    namespace Maintenance {
+
+                        /**
+                         * Callback as used by {@link google.cloud.maintenance.api.v1.Maintenance|summarizeMaintenances}.
+                         * @param error Error, if any
+                         * @param [response] SummarizeMaintenancesResponse
+                         */
+                        type SummarizeMaintenancesCallback = (error: (Error|null), response?: google.cloud.maintenance.api.v1.SummarizeMaintenancesResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.maintenance.api.v1.Maintenance|listResourceMaintenances}.
+                         * @param error Error, if any
+                         * @param [response] ListResourceMaintenancesResponse
+                         */
+                        type ListResourceMaintenancesCallback = (error: (Error|null), response?: google.cloud.maintenance.api.v1.ListResourceMaintenancesResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.maintenance.api.v1.Maintenance|getResourceMaintenance}.
+                         * @param error Error, if any
+                         * @param [response] ResourceMaintenance
+                         */
+                        type GetResourceMaintenanceCallback = (error: (Error|null), response?: google.cloud.maintenance.api.v1.ResourceMaintenance) => void;
+                    }
+
+                    /** MaintenanceCategory enum. */
+                    enum MaintenanceCategory {
+                        MAINTENANCE_CATEGORY_UNSPECIFIED = 0,
+                        INFRASTRUCTURE = 1,
+                        SERVICE_UPDATE = 3
+                    }
+
+                    /** Properties of a SummarizeMaintenancesRequest. */
+                    interface ISummarizeMaintenancesRequest {
+
+                        /** SummarizeMaintenancesRequest parent */
+                        parent?: (string|null);
+
+                        /** SummarizeMaintenancesRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** SummarizeMaintenancesRequest pageToken */
+                        pageToken?: (string|null);
+
+                        /** SummarizeMaintenancesRequest filter */
+                        filter?: (string|null);
+
+                        /** SummarizeMaintenancesRequest orderBy */
+                        orderBy?: (string|null);
+                    }
+
+                    /** Represents a SummarizeMaintenancesRequest. */
+                    class SummarizeMaintenancesRequest implements ISummarizeMaintenancesRequest {
+
+                        /**
+                         * Constructs a new SummarizeMaintenancesRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.maintenance.api.v1.ISummarizeMaintenancesRequest);
+
+                        /** SummarizeMaintenancesRequest parent. */
+                        public parent: string;
+
+                        /** SummarizeMaintenancesRequest pageSize. */
+                        public pageSize: number;
+
+                        /** SummarizeMaintenancesRequest pageToken. */
+                        public pageToken: string;
+
+                        /** SummarizeMaintenancesRequest filter. */
+                        public filter: string;
+
+                        /** SummarizeMaintenancesRequest orderBy. */
+                        public orderBy: string;
+
+                        /**
+                         * Creates a new SummarizeMaintenancesRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SummarizeMaintenancesRequest instance
+                         */
+                        public static create(properties?: google.cloud.maintenance.api.v1.ISummarizeMaintenancesRequest): google.cloud.maintenance.api.v1.SummarizeMaintenancesRequest;
+
+                        /**
+                         * Encodes the specified SummarizeMaintenancesRequest message. Does not implicitly {@link google.cloud.maintenance.api.v1.SummarizeMaintenancesRequest.verify|verify} messages.
+                         * @param message SummarizeMaintenancesRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.maintenance.api.v1.ISummarizeMaintenancesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SummarizeMaintenancesRequest message, length delimited. Does not implicitly {@link google.cloud.maintenance.api.v1.SummarizeMaintenancesRequest.verify|verify} messages.
+                         * @param message SummarizeMaintenancesRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.maintenance.api.v1.ISummarizeMaintenancesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SummarizeMaintenancesRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SummarizeMaintenancesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.maintenance.api.v1.SummarizeMaintenancesRequest;
+
+                        /**
+                         * Decodes a SummarizeMaintenancesRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SummarizeMaintenancesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.maintenance.api.v1.SummarizeMaintenancesRequest;
+
+                        /**
+                         * Verifies a SummarizeMaintenancesRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SummarizeMaintenancesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SummarizeMaintenancesRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.maintenance.api.v1.SummarizeMaintenancesRequest;
+
+                        /**
+                         * Creates a plain object from a SummarizeMaintenancesRequest message. Also converts values to other types if specified.
+                         * @param message SummarizeMaintenancesRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.maintenance.api.v1.SummarizeMaintenancesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SummarizeMaintenancesRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SummarizeMaintenancesRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a SummarizeMaintenancesResponse. */
+                    interface ISummarizeMaintenancesResponse {
+
+                        /** SummarizeMaintenancesResponse maintenances */
+                        maintenances?: (google.cloud.maintenance.api.v1.IMaintenanceSummary[]|null);
+
+                        /** SummarizeMaintenancesResponse nextPageToken */
+                        nextPageToken?: (string|null);
+
+                        /** SummarizeMaintenancesResponse unreachable */
+                        unreachable?: (string[]|null);
+                    }
+
+                    /** Represents a SummarizeMaintenancesResponse. */
+                    class SummarizeMaintenancesResponse implements ISummarizeMaintenancesResponse {
+
+                        /**
+                         * Constructs a new SummarizeMaintenancesResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.maintenance.api.v1.ISummarizeMaintenancesResponse);
+
+                        /** SummarizeMaintenancesResponse maintenances. */
+                        public maintenances: google.cloud.maintenance.api.v1.IMaintenanceSummary[];
+
+                        /** SummarizeMaintenancesResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /** SummarizeMaintenancesResponse unreachable. */
+                        public unreachable: string[];
+
+                        /**
+                         * Creates a new SummarizeMaintenancesResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SummarizeMaintenancesResponse instance
+                         */
+                        public static create(properties?: google.cloud.maintenance.api.v1.ISummarizeMaintenancesResponse): google.cloud.maintenance.api.v1.SummarizeMaintenancesResponse;
+
+                        /**
+                         * Encodes the specified SummarizeMaintenancesResponse message. Does not implicitly {@link google.cloud.maintenance.api.v1.SummarizeMaintenancesResponse.verify|verify} messages.
+                         * @param message SummarizeMaintenancesResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.maintenance.api.v1.ISummarizeMaintenancesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SummarizeMaintenancesResponse message, length delimited. Does not implicitly {@link google.cloud.maintenance.api.v1.SummarizeMaintenancesResponse.verify|verify} messages.
+                         * @param message SummarizeMaintenancesResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.maintenance.api.v1.ISummarizeMaintenancesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SummarizeMaintenancesResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SummarizeMaintenancesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.maintenance.api.v1.SummarizeMaintenancesResponse;
+
+                        /**
+                         * Decodes a SummarizeMaintenancesResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SummarizeMaintenancesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.maintenance.api.v1.SummarizeMaintenancesResponse;
+
+                        /**
+                         * Verifies a SummarizeMaintenancesResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SummarizeMaintenancesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SummarizeMaintenancesResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.maintenance.api.v1.SummarizeMaintenancesResponse;
+
+                        /**
+                         * Creates a plain object from a SummarizeMaintenancesResponse message. Also converts values to other types if specified.
+                         * @param message SummarizeMaintenancesResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.maintenance.api.v1.SummarizeMaintenancesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SummarizeMaintenancesResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SummarizeMaintenancesResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a MaintenanceSummary. */
+                    interface IMaintenanceSummary {
+
+                        /** MaintenanceSummary maintenanceName */
+                        maintenanceName?: (string|null);
+
+                        /** MaintenanceSummary title */
+                        title?: (string|null);
+
+                        /** MaintenanceSummary description */
+                        description?: (string|null);
+
+                        /** MaintenanceSummary category */
+                        category?: (google.cloud.maintenance.api.v1.MaintenanceCategory|keyof typeof google.cloud.maintenance.api.v1.MaintenanceCategory|null);
+
+                        /** MaintenanceSummary maintenanceScheduledStartTime */
+                        maintenanceScheduledStartTime?: (google.protobuf.ITimestamp|null);
+
+                        /** MaintenanceSummary maintenanceScheduledEndTime */
+                        maintenanceScheduledEndTime?: (google.protobuf.ITimestamp|null);
+
+                        /** MaintenanceSummary maintenanceStartTime */
+                        maintenanceStartTime?: (google.protobuf.ITimestamp|null);
+
+                        /** MaintenanceSummary maintenanceEndTime */
+                        maintenanceEndTime?: (google.protobuf.ITimestamp|null);
+
+                        /** MaintenanceSummary userControllable */
+                        userControllable?: (boolean|null);
+
+                        /** MaintenanceSummary controls */
+                        controls?: (google.cloud.maintenance.api.v1.IMaintenanceControl[]|null);
+
+                        /** MaintenanceSummary stats */
+                        stats?: (google.cloud.maintenance.api.v1.MaintenanceSummary.IStats[]|null);
+                    }
+
+                    /** Represents a MaintenanceSummary. */
+                    class MaintenanceSummary implements IMaintenanceSummary {
+
+                        /**
+                         * Constructs a new MaintenanceSummary.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.maintenance.api.v1.IMaintenanceSummary);
+
+                        /** MaintenanceSummary maintenanceName. */
+                        public maintenanceName: string;
+
+                        /** MaintenanceSummary title. */
+                        public title: string;
+
+                        /** MaintenanceSummary description. */
+                        public description: string;
+
+                        /** MaintenanceSummary category. */
+                        public category: (google.cloud.maintenance.api.v1.MaintenanceCategory|keyof typeof google.cloud.maintenance.api.v1.MaintenanceCategory);
+
+                        /** MaintenanceSummary maintenanceScheduledStartTime. */
+                        public maintenanceScheduledStartTime?: (google.protobuf.ITimestamp|null);
+
+                        /** MaintenanceSummary maintenanceScheduledEndTime. */
+                        public maintenanceScheduledEndTime?: (google.protobuf.ITimestamp|null);
+
+                        /** MaintenanceSummary maintenanceStartTime. */
+                        public maintenanceStartTime?: (google.protobuf.ITimestamp|null);
+
+                        /** MaintenanceSummary maintenanceEndTime. */
+                        public maintenanceEndTime?: (google.protobuf.ITimestamp|null);
+
+                        /** MaintenanceSummary userControllable. */
+                        public userControllable: boolean;
+
+                        /** MaintenanceSummary controls. */
+                        public controls: google.cloud.maintenance.api.v1.IMaintenanceControl[];
+
+                        /** MaintenanceSummary stats. */
+                        public stats: google.cloud.maintenance.api.v1.MaintenanceSummary.IStats[];
+
+                        /**
+                         * Creates a new MaintenanceSummary instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns MaintenanceSummary instance
+                         */
+                        public static create(properties?: google.cloud.maintenance.api.v1.IMaintenanceSummary): google.cloud.maintenance.api.v1.MaintenanceSummary;
+
+                        /**
+                         * Encodes the specified MaintenanceSummary message. Does not implicitly {@link google.cloud.maintenance.api.v1.MaintenanceSummary.verify|verify} messages.
+                         * @param message MaintenanceSummary message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.maintenance.api.v1.IMaintenanceSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified MaintenanceSummary message, length delimited. Does not implicitly {@link google.cloud.maintenance.api.v1.MaintenanceSummary.verify|verify} messages.
+                         * @param message MaintenanceSummary message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.maintenance.api.v1.IMaintenanceSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a MaintenanceSummary message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns MaintenanceSummary
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.maintenance.api.v1.MaintenanceSummary;
+
+                        /**
+                         * Decodes a MaintenanceSummary message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns MaintenanceSummary
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.maintenance.api.v1.MaintenanceSummary;
+
+                        /**
+                         * Verifies a MaintenanceSummary message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a MaintenanceSummary message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns MaintenanceSummary
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.maintenance.api.v1.MaintenanceSummary;
+
+                        /**
+                         * Creates a plain object from a MaintenanceSummary message. Also converts values to other types if specified.
+                         * @param message MaintenanceSummary
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.maintenance.api.v1.MaintenanceSummary, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this MaintenanceSummary to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for MaintenanceSummary
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace MaintenanceSummary {
+
+                        /** Properties of a Stats. */
+                        interface IStats {
+
+                            /** Stats groupBy */
+                            groupBy?: (string|null);
+
+                            /** Stats aggregates */
+                            aggregates?: (google.cloud.maintenance.api.v1.MaintenanceSummary.IAggregate[]|null);
+                        }
+
+                        /** Represents a Stats. */
+                        class Stats implements IStats {
+
+                            /**
+                             * Constructs a new Stats.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.maintenance.api.v1.MaintenanceSummary.IStats);
+
+                            /** Stats groupBy. */
+                            public groupBy: string;
+
+                            /** Stats aggregates. */
+                            public aggregates: google.cloud.maintenance.api.v1.MaintenanceSummary.IAggregate[];
+
+                            /**
+                             * Creates a new Stats instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Stats instance
+                             */
+                            public static create(properties?: google.cloud.maintenance.api.v1.MaintenanceSummary.IStats): google.cloud.maintenance.api.v1.MaintenanceSummary.Stats;
+
+                            /**
+                             * Encodes the specified Stats message. Does not implicitly {@link google.cloud.maintenance.api.v1.MaintenanceSummary.Stats.verify|verify} messages.
+                             * @param message Stats message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.maintenance.api.v1.MaintenanceSummary.IStats, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Stats message, length delimited. Does not implicitly {@link google.cloud.maintenance.api.v1.MaintenanceSummary.Stats.verify|verify} messages.
+                             * @param message Stats message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.maintenance.api.v1.MaintenanceSummary.IStats, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Stats message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Stats
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.maintenance.api.v1.MaintenanceSummary.Stats;
+
+                            /**
+                             * Decodes a Stats message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Stats
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.maintenance.api.v1.MaintenanceSummary.Stats;
+
+                            /**
+                             * Verifies a Stats message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Stats message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Stats
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.maintenance.api.v1.MaintenanceSummary.Stats;
+
+                            /**
+                             * Creates a plain object from a Stats message. Also converts values to other types if specified.
+                             * @param message Stats
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.maintenance.api.v1.MaintenanceSummary.Stats, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Stats to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Stats
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of an Aggregate. */
+                        interface IAggregate {
+
+                            /** Aggregate group */
+                            group?: (string|null);
+
+                            /** Aggregate count */
+                            count?: (number|Long|string|null);
+                        }
+
+                        /** Represents an Aggregate. */
+                        class Aggregate implements IAggregate {
+
+                            /**
+                             * Constructs a new Aggregate.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.maintenance.api.v1.MaintenanceSummary.IAggregate);
+
+                            /** Aggregate group. */
+                            public group: string;
+
+                            /** Aggregate count. */
+                            public count: (number|Long|string);
+
+                            /**
+                             * Creates a new Aggregate instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Aggregate instance
+                             */
+                            public static create(properties?: google.cloud.maintenance.api.v1.MaintenanceSummary.IAggregate): google.cloud.maintenance.api.v1.MaintenanceSummary.Aggregate;
+
+                            /**
+                             * Encodes the specified Aggregate message. Does not implicitly {@link google.cloud.maintenance.api.v1.MaintenanceSummary.Aggregate.verify|verify} messages.
+                             * @param message Aggregate message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.maintenance.api.v1.MaintenanceSummary.IAggregate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Aggregate message, length delimited. Does not implicitly {@link google.cloud.maintenance.api.v1.MaintenanceSummary.Aggregate.verify|verify} messages.
+                             * @param message Aggregate message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.maintenance.api.v1.MaintenanceSummary.IAggregate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an Aggregate message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Aggregate
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.maintenance.api.v1.MaintenanceSummary.Aggregate;
+
+                            /**
+                             * Decodes an Aggregate message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Aggregate
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.maintenance.api.v1.MaintenanceSummary.Aggregate;
+
+                            /**
+                             * Verifies an Aggregate message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an Aggregate message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Aggregate
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.maintenance.api.v1.MaintenanceSummary.Aggregate;
+
+                            /**
+                             * Creates a plain object from an Aggregate message. Also converts values to other types if specified.
+                             * @param message Aggregate
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.maintenance.api.v1.MaintenanceSummary.Aggregate, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Aggregate to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Aggregate
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of a ResourceMaintenance. */
+                    interface IResourceMaintenance {
+
+                        /** ResourceMaintenance name */
+                        name?: (string|null);
+
+                        /** ResourceMaintenance resource */
+                        resource?: (google.cloud.maintenance.api.v1.ResourceMaintenance.IResource|null);
+
+                        /** ResourceMaintenance maintenance */
+                        maintenance?: (google.cloud.maintenance.api.v1.ResourceMaintenance.IMaintenance|null);
+
+                        /** ResourceMaintenance state */
+                        state?: (google.cloud.maintenance.api.v1.ResourceMaintenance.State|keyof typeof google.cloud.maintenance.api.v1.ResourceMaintenance.State|null);
+
+                        /** ResourceMaintenance createTime */
+                        createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** ResourceMaintenance updateTime */
+                        updateTime?: (google.protobuf.ITimestamp|null);
+
+                        /** ResourceMaintenance maintenanceStartTime */
+                        maintenanceStartTime?: (google.protobuf.ITimestamp|null);
+
+                        /** ResourceMaintenance maintenanceEndTime */
+                        maintenanceEndTime?: (google.protobuf.ITimestamp|null);
+
+                        /** ResourceMaintenance maintenanceCancelTime */
+                        maintenanceCancelTime?: (google.protobuf.ITimestamp|null);
+
+                        /** ResourceMaintenance maintenanceScheduledStartTime */
+                        maintenanceScheduledStartTime?: (google.protobuf.ITimestamp|null);
+
+                        /** ResourceMaintenance maintenanceScheduledEndTime */
+                        maintenanceScheduledEndTime?: (google.protobuf.ITimestamp|null);
+
+                        /** ResourceMaintenance userControllable */
+                        userControllable?: (boolean|null);
+
+                        /** ResourceMaintenance controls */
+                        controls?: (google.cloud.maintenance.api.v1.IMaintenanceControl[]|null);
+
+                        /** ResourceMaintenance labels */
+                        labels?: ({ [k: string]: string }|null);
+
+                        /** ResourceMaintenance annotations */
+                        annotations?: ({ [k: string]: string }|null);
+
+                        /** ResourceMaintenance uid */
+                        uid?: (string|null);
+
+                        /** ResourceMaintenance etag */
+                        etag?: (string|null);
+                    }
+
+                    /** Represents a ResourceMaintenance. */
+                    class ResourceMaintenance implements IResourceMaintenance {
+
+                        /**
+                         * Constructs a new ResourceMaintenance.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.maintenance.api.v1.IResourceMaintenance);
+
+                        /** ResourceMaintenance name. */
+                        public name: string;
+
+                        /** ResourceMaintenance resource. */
+                        public resource?: (google.cloud.maintenance.api.v1.ResourceMaintenance.IResource|null);
+
+                        /** ResourceMaintenance maintenance. */
+                        public maintenance?: (google.cloud.maintenance.api.v1.ResourceMaintenance.IMaintenance|null);
+
+                        /** ResourceMaintenance state. */
+                        public state: (google.cloud.maintenance.api.v1.ResourceMaintenance.State|keyof typeof google.cloud.maintenance.api.v1.ResourceMaintenance.State);
+
+                        /** ResourceMaintenance createTime. */
+                        public createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** ResourceMaintenance updateTime. */
+                        public updateTime?: (google.protobuf.ITimestamp|null);
+
+                        /** ResourceMaintenance maintenanceStartTime. */
+                        public maintenanceStartTime?: (google.protobuf.ITimestamp|null);
+
+                        /** ResourceMaintenance maintenanceEndTime. */
+                        public maintenanceEndTime?: (google.protobuf.ITimestamp|null);
+
+                        /** ResourceMaintenance maintenanceCancelTime. */
+                        public maintenanceCancelTime?: (google.protobuf.ITimestamp|null);
+
+                        /** ResourceMaintenance maintenanceScheduledStartTime. */
+                        public maintenanceScheduledStartTime?: (google.protobuf.ITimestamp|null);
+
+                        /** ResourceMaintenance maintenanceScheduledEndTime. */
+                        public maintenanceScheduledEndTime?: (google.protobuf.ITimestamp|null);
+
+                        /** ResourceMaintenance userControllable. */
+                        public userControllable: boolean;
+
+                        /** ResourceMaintenance controls. */
+                        public controls: google.cloud.maintenance.api.v1.IMaintenanceControl[];
+
+                        /** ResourceMaintenance labels. */
+                        public labels: { [k: string]: string };
+
+                        /** ResourceMaintenance annotations. */
+                        public annotations: { [k: string]: string };
+
+                        /** ResourceMaintenance uid. */
+                        public uid: string;
+
+                        /** ResourceMaintenance etag. */
+                        public etag: string;
+
+                        /**
+                         * Creates a new ResourceMaintenance instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ResourceMaintenance instance
+                         */
+                        public static create(properties?: google.cloud.maintenance.api.v1.IResourceMaintenance): google.cloud.maintenance.api.v1.ResourceMaintenance;
+
+                        /**
+                         * Encodes the specified ResourceMaintenance message. Does not implicitly {@link google.cloud.maintenance.api.v1.ResourceMaintenance.verify|verify} messages.
+                         * @param message ResourceMaintenance message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.maintenance.api.v1.IResourceMaintenance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ResourceMaintenance message, length delimited. Does not implicitly {@link google.cloud.maintenance.api.v1.ResourceMaintenance.verify|verify} messages.
+                         * @param message ResourceMaintenance message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.maintenance.api.v1.IResourceMaintenance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ResourceMaintenance message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ResourceMaintenance
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.maintenance.api.v1.ResourceMaintenance;
+
+                        /**
+                         * Decodes a ResourceMaintenance message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ResourceMaintenance
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.maintenance.api.v1.ResourceMaintenance;
+
+                        /**
+                         * Verifies a ResourceMaintenance message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ResourceMaintenance message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ResourceMaintenance
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.maintenance.api.v1.ResourceMaintenance;
+
+                        /**
+                         * Creates a plain object from a ResourceMaintenance message. Also converts values to other types if specified.
+                         * @param message ResourceMaintenance
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.maintenance.api.v1.ResourceMaintenance, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ResourceMaintenance to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ResourceMaintenance
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ResourceMaintenance {
+
+                        /** Properties of a Resource. */
+                        interface IResource {
+
+                            /** Resource resourceName */
+                            resourceName?: (string|null);
+
+                            /** Resource location */
+                            location?: (string|null);
+
+                            /** Resource type */
+                            type?: (string|null);
+                        }
+
+                        /** Represents a Resource. */
+                        class Resource implements IResource {
+
+                            /**
+                             * Constructs a new Resource.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.maintenance.api.v1.ResourceMaintenance.IResource);
+
+                            /** Resource resourceName. */
+                            public resourceName: string;
+
+                            /** Resource location. */
+                            public location: string;
+
+                            /** Resource type. */
+                            public type: string;
+
+                            /**
+                             * Creates a new Resource instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Resource instance
+                             */
+                            public static create(properties?: google.cloud.maintenance.api.v1.ResourceMaintenance.IResource): google.cloud.maintenance.api.v1.ResourceMaintenance.Resource;
+
+                            /**
+                             * Encodes the specified Resource message. Does not implicitly {@link google.cloud.maintenance.api.v1.ResourceMaintenance.Resource.verify|verify} messages.
+                             * @param message Resource message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.maintenance.api.v1.ResourceMaintenance.IResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Resource message, length delimited. Does not implicitly {@link google.cloud.maintenance.api.v1.ResourceMaintenance.Resource.verify|verify} messages.
+                             * @param message Resource message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.maintenance.api.v1.ResourceMaintenance.IResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Resource message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Resource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.maintenance.api.v1.ResourceMaintenance.Resource;
+
+                            /**
+                             * Decodes a Resource message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Resource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.maintenance.api.v1.ResourceMaintenance.Resource;
+
+                            /**
+                             * Verifies a Resource message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Resource message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Resource
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.maintenance.api.v1.ResourceMaintenance.Resource;
+
+                            /**
+                             * Creates a plain object from a Resource message. Also converts values to other types if specified.
+                             * @param message Resource
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.maintenance.api.v1.ResourceMaintenance.Resource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Resource to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Resource
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a Maintenance. */
+                        interface IMaintenance {
+
+                            /** Maintenance maintenanceName */
+                            maintenanceName?: (string|null);
+
+                            /** Maintenance title */
+                            title?: (string|null);
+
+                            /** Maintenance description */
+                            description?: (string|null);
+
+                            /** Maintenance category */
+                            category?: (google.cloud.maintenance.api.v1.MaintenanceCategory|keyof typeof google.cloud.maintenance.api.v1.MaintenanceCategory|null);
+                        }
+
+                        /** Represents a Maintenance. */
+                        class Maintenance implements IMaintenance {
+
+                            /**
+                             * Constructs a new Maintenance.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.maintenance.api.v1.ResourceMaintenance.IMaintenance);
+
+                            /** Maintenance maintenanceName. */
+                            public maintenanceName: string;
+
+                            /** Maintenance title. */
+                            public title: string;
+
+                            /** Maintenance description. */
+                            public description: string;
+
+                            /** Maintenance category. */
+                            public category: (google.cloud.maintenance.api.v1.MaintenanceCategory|keyof typeof google.cloud.maintenance.api.v1.MaintenanceCategory);
+
+                            /**
+                             * Creates a new Maintenance instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Maintenance instance
+                             */
+                            public static create(properties?: google.cloud.maintenance.api.v1.ResourceMaintenance.IMaintenance): google.cloud.maintenance.api.v1.ResourceMaintenance.Maintenance;
+
+                            /**
+                             * Encodes the specified Maintenance message. Does not implicitly {@link google.cloud.maintenance.api.v1.ResourceMaintenance.Maintenance.verify|verify} messages.
+                             * @param message Maintenance message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.maintenance.api.v1.ResourceMaintenance.IMaintenance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Maintenance message, length delimited. Does not implicitly {@link google.cloud.maintenance.api.v1.ResourceMaintenance.Maintenance.verify|verify} messages.
+                             * @param message Maintenance message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.maintenance.api.v1.ResourceMaintenance.IMaintenance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Maintenance message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Maintenance
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.maintenance.api.v1.ResourceMaintenance.Maintenance;
+
+                            /**
+                             * Decodes a Maintenance message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Maintenance
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.maintenance.api.v1.ResourceMaintenance.Maintenance;
+
+                            /**
+                             * Verifies a Maintenance message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Maintenance message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Maintenance
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.maintenance.api.v1.ResourceMaintenance.Maintenance;
+
+                            /**
+                             * Creates a plain object from a Maintenance message. Also converts values to other types if specified.
+                             * @param message Maintenance
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.maintenance.api.v1.ResourceMaintenance.Maintenance, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Maintenance to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Maintenance
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** State enum. */
+                        enum State {
+                            STATE_UNSPECIFIED = 0,
+                            SCHEDULED = 1,
+                            RUNNING = 2,
+                            CANCELLED = 3,
+                            SUCCEEDED = 4
+                        }
+                    }
+
+                    /** Properties of a MaintenanceControl. */
+                    interface IMaintenanceControl {
+
+                        /** MaintenanceControl control */
+                        control?: (google.cloud.maintenance.api.v1.MaintenanceControl.Control|keyof typeof google.cloud.maintenance.api.v1.MaintenanceControl.Control|null);
+
+                        /** MaintenanceControl isCustom */
+                        isCustom?: (boolean|null);
+
+                        /** MaintenanceControl documentation */
+                        documentation?: (string|null);
+                    }
+
+                    /** Represents a MaintenanceControl. */
+                    class MaintenanceControl implements IMaintenanceControl {
+
+                        /**
+                         * Constructs a new MaintenanceControl.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.maintenance.api.v1.IMaintenanceControl);
+
+                        /** MaintenanceControl control. */
+                        public control: (google.cloud.maintenance.api.v1.MaintenanceControl.Control|keyof typeof google.cloud.maintenance.api.v1.MaintenanceControl.Control);
+
+                        /** MaintenanceControl isCustom. */
+                        public isCustom: boolean;
+
+                        /** MaintenanceControl documentation. */
+                        public documentation: string;
+
+                        /**
+                         * Creates a new MaintenanceControl instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns MaintenanceControl instance
+                         */
+                        public static create(properties?: google.cloud.maintenance.api.v1.IMaintenanceControl): google.cloud.maintenance.api.v1.MaintenanceControl;
+
+                        /**
+                         * Encodes the specified MaintenanceControl message. Does not implicitly {@link google.cloud.maintenance.api.v1.MaintenanceControl.verify|verify} messages.
+                         * @param message MaintenanceControl message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.maintenance.api.v1.IMaintenanceControl, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified MaintenanceControl message, length delimited. Does not implicitly {@link google.cloud.maintenance.api.v1.MaintenanceControl.verify|verify} messages.
+                         * @param message MaintenanceControl message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.maintenance.api.v1.IMaintenanceControl, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a MaintenanceControl message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns MaintenanceControl
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.maintenance.api.v1.MaintenanceControl;
+
+                        /**
+                         * Decodes a MaintenanceControl message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns MaintenanceControl
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.maintenance.api.v1.MaintenanceControl;
+
+                        /**
+                         * Verifies a MaintenanceControl message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a MaintenanceControl message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns MaintenanceControl
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.maintenance.api.v1.MaintenanceControl;
+
+                        /**
+                         * Creates a plain object from a MaintenanceControl message. Also converts values to other types if specified.
+                         * @param message MaintenanceControl
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.maintenance.api.v1.MaintenanceControl, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this MaintenanceControl to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for MaintenanceControl
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace MaintenanceControl {
+
+                        /** Control enum. */
+                        enum Control {
+                            CONTROL_UNSPECIFIED = 0,
+                            APPLY = 1,
+                            MANAGE_POLICY = 2,
+                            RESCHEDULE = 3
+                        }
+                    }
+
+                    /** Properties of a ListResourceMaintenancesRequest. */
+                    interface IListResourceMaintenancesRequest {
+
+                        /** ListResourceMaintenancesRequest parent */
+                        parent?: (string|null);
+
+                        /** ListResourceMaintenancesRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** ListResourceMaintenancesRequest pageToken */
+                        pageToken?: (string|null);
+
+                        /** ListResourceMaintenancesRequest filter */
+                        filter?: (string|null);
+
+                        /** ListResourceMaintenancesRequest orderBy */
+                        orderBy?: (string|null);
+                    }
+
+                    /** Represents a ListResourceMaintenancesRequest. */
+                    class ListResourceMaintenancesRequest implements IListResourceMaintenancesRequest {
+
+                        /**
+                         * Constructs a new ListResourceMaintenancesRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.maintenance.api.v1.IListResourceMaintenancesRequest);
+
+                        /** ListResourceMaintenancesRequest parent. */
+                        public parent: string;
+
+                        /** ListResourceMaintenancesRequest pageSize. */
+                        public pageSize: number;
+
+                        /** ListResourceMaintenancesRequest pageToken. */
+                        public pageToken: string;
+
+                        /** ListResourceMaintenancesRequest filter. */
+                        public filter: string;
+
+                        /** ListResourceMaintenancesRequest orderBy. */
+                        public orderBy: string;
+
+                        /**
+                         * Creates a new ListResourceMaintenancesRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListResourceMaintenancesRequest instance
+                         */
+                        public static create(properties?: google.cloud.maintenance.api.v1.IListResourceMaintenancesRequest): google.cloud.maintenance.api.v1.ListResourceMaintenancesRequest;
+
+                        /**
+                         * Encodes the specified ListResourceMaintenancesRequest message. Does not implicitly {@link google.cloud.maintenance.api.v1.ListResourceMaintenancesRequest.verify|verify} messages.
+                         * @param message ListResourceMaintenancesRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.maintenance.api.v1.IListResourceMaintenancesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListResourceMaintenancesRequest message, length delimited. Does not implicitly {@link google.cloud.maintenance.api.v1.ListResourceMaintenancesRequest.verify|verify} messages.
+                         * @param message ListResourceMaintenancesRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.maintenance.api.v1.IListResourceMaintenancesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListResourceMaintenancesRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListResourceMaintenancesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.maintenance.api.v1.ListResourceMaintenancesRequest;
+
+                        /**
+                         * Decodes a ListResourceMaintenancesRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListResourceMaintenancesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.maintenance.api.v1.ListResourceMaintenancesRequest;
+
+                        /**
+                         * Verifies a ListResourceMaintenancesRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListResourceMaintenancesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListResourceMaintenancesRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.maintenance.api.v1.ListResourceMaintenancesRequest;
+
+                        /**
+                         * Creates a plain object from a ListResourceMaintenancesRequest message. Also converts values to other types if specified.
+                         * @param message ListResourceMaintenancesRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.maintenance.api.v1.ListResourceMaintenancesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListResourceMaintenancesRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListResourceMaintenancesRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListResourceMaintenancesResponse. */
+                    interface IListResourceMaintenancesResponse {
+
+                        /** ListResourceMaintenancesResponse resourceMaintenances */
+                        resourceMaintenances?: (google.cloud.maintenance.api.v1.IResourceMaintenance[]|null);
+
+                        /** ListResourceMaintenancesResponse nextPageToken */
+                        nextPageToken?: (string|null);
+
+                        /** ListResourceMaintenancesResponse unreachable */
+                        unreachable?: (string[]|null);
+                    }
+
+                    /** Represents a ListResourceMaintenancesResponse. */
+                    class ListResourceMaintenancesResponse implements IListResourceMaintenancesResponse {
+
+                        /**
+                         * Constructs a new ListResourceMaintenancesResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.maintenance.api.v1.IListResourceMaintenancesResponse);
+
+                        /** ListResourceMaintenancesResponse resourceMaintenances. */
+                        public resourceMaintenances: google.cloud.maintenance.api.v1.IResourceMaintenance[];
+
+                        /** ListResourceMaintenancesResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /** ListResourceMaintenancesResponse unreachable. */
+                        public unreachable: string[];
+
+                        /**
+                         * Creates a new ListResourceMaintenancesResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListResourceMaintenancesResponse instance
+                         */
+                        public static create(properties?: google.cloud.maintenance.api.v1.IListResourceMaintenancesResponse): google.cloud.maintenance.api.v1.ListResourceMaintenancesResponse;
+
+                        /**
+                         * Encodes the specified ListResourceMaintenancesResponse message. Does not implicitly {@link google.cloud.maintenance.api.v1.ListResourceMaintenancesResponse.verify|verify} messages.
+                         * @param message ListResourceMaintenancesResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.maintenance.api.v1.IListResourceMaintenancesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListResourceMaintenancesResponse message, length delimited. Does not implicitly {@link google.cloud.maintenance.api.v1.ListResourceMaintenancesResponse.verify|verify} messages.
+                         * @param message ListResourceMaintenancesResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.maintenance.api.v1.IListResourceMaintenancesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListResourceMaintenancesResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListResourceMaintenancesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.maintenance.api.v1.ListResourceMaintenancesResponse;
+
+                        /**
+                         * Decodes a ListResourceMaintenancesResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListResourceMaintenancesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.maintenance.api.v1.ListResourceMaintenancesResponse;
+
+                        /**
+                         * Verifies a ListResourceMaintenancesResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListResourceMaintenancesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListResourceMaintenancesResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.maintenance.api.v1.ListResourceMaintenancesResponse;
+
+                        /**
+                         * Creates a plain object from a ListResourceMaintenancesResponse message. Also converts values to other types if specified.
+                         * @param message ListResourceMaintenancesResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.maintenance.api.v1.ListResourceMaintenancesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListResourceMaintenancesResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListResourceMaintenancesResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GetResourceMaintenanceRequest. */
+                    interface IGetResourceMaintenanceRequest {
+
+                        /** GetResourceMaintenanceRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetResourceMaintenanceRequest. */
+                    class GetResourceMaintenanceRequest implements IGetResourceMaintenanceRequest {
+
+                        /**
+                         * Constructs a new GetResourceMaintenanceRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.maintenance.api.v1.IGetResourceMaintenanceRequest);
+
+                        /** GetResourceMaintenanceRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetResourceMaintenanceRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetResourceMaintenanceRequest instance
+                         */
+                        public static create(properties?: google.cloud.maintenance.api.v1.IGetResourceMaintenanceRequest): google.cloud.maintenance.api.v1.GetResourceMaintenanceRequest;
+
+                        /**
+                         * Encodes the specified GetResourceMaintenanceRequest message. Does not implicitly {@link google.cloud.maintenance.api.v1.GetResourceMaintenanceRequest.verify|verify} messages.
+                         * @param message GetResourceMaintenanceRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.maintenance.api.v1.IGetResourceMaintenanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetResourceMaintenanceRequest message, length delimited. Does not implicitly {@link google.cloud.maintenance.api.v1.GetResourceMaintenanceRequest.verify|verify} messages.
+                         * @param message GetResourceMaintenanceRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.maintenance.api.v1.IGetResourceMaintenanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetResourceMaintenanceRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetResourceMaintenanceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.maintenance.api.v1.GetResourceMaintenanceRequest;
+
+                        /**
+                         * Decodes a GetResourceMaintenanceRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetResourceMaintenanceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.maintenance.api.v1.GetResourceMaintenanceRequest;
+
+                        /**
+                         * Verifies a GetResourceMaintenanceRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetResourceMaintenanceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetResourceMaintenanceRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.maintenance.api.v1.GetResourceMaintenanceRequest;
+
+                        /**
+                         * Creates a plain object from a GetResourceMaintenanceRequest message. Also converts values to other types if specified.
+                         * @param message GetResourceMaintenanceRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.maintenance.api.v1.GetResourceMaintenanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetResourceMaintenanceRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetResourceMaintenanceRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
                 /** Namespace v1beta. */
                 namespace v1beta {
 

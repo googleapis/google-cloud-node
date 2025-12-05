@@ -57,6 +57,10 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 
 | Sample                      | Source Code                       |
 | --------------------------- | --------------------------------- |
+| get resource maintenance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-maintenance-api/samples/generated/v1/maintenance.get_resource_maintenance.js) |
+| list resource maintenances | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-maintenance-api/samples/generated/v1/maintenance.list_resource_maintenances.js) |
+| summarize maintenances | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-maintenance-api/samples/generated/v1/maintenance.summarize_maintenances.js) |
+| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-maintenance-api/samples/generated/v1/snippet_metadata_google.cloud.maintenance.api.v1.json) |
 | get resource maintenance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-maintenance-api/samples/generated/v1beta/maintenance.get_resource_maintenance.js) |
 | list resource maintenances | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-maintenance-api/samples/generated/v1beta/maintenance.list_resource_maintenances.js) |
 | summarize maintenances | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-maintenance-api/samples/generated/v1beta/maintenance.summarize_maintenances.js) |
