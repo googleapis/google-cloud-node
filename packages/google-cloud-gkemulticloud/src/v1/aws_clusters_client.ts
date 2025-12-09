@@ -37,6 +37,7 @@ const version = require('../../../package.json').version;
  *  to create and manage Anthos clusters that run on AWS infrastructure.
  * @class
  * @memberof v1
+ * @deprecated AwsClusters is deprecated and may be removed in a future version.
  */
 export class AwsClustersClient {
   private _terminated = false;
@@ -322,6 +323,7 @@ export class AwsClustersClient {
   initialize() {
     // If the client stub promise is already initialized, return immediately.
     if (this.awsClustersStub) {
+      this.warn('DEP$AwsClusters', 'AwsClusters is deprecated and may be removed in a future version.', 'DeprecationWarning');
       return this.awsClustersStub;
     }
 
@@ -364,6 +366,7 @@ export class AwsClustersClient {
 
       this.innerApiCalls[methodName] = apiCall;
     }
+    this.warn('DEP$AwsClusters', 'AwsClusters is deprecated and may be removed in a future version.', 'DeprecationWarning');
 
     return this.awsClustersStub;
   }
@@ -465,6 +468,7 @@ export class AwsClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/aws_clusters.get_aws_cluster.js</caption>
  * region_tag:gkemulticloud_v1_generated_AwsClusters_GetAwsCluster_async
+ * @deprecated GetAwsCluster is deprecated and may be removed in a future version.
  */
   getAwsCluster(
       request?: protos.google.cloud.gkemulticloud.v1.IGetAwsClusterRequest,
@@ -518,6 +522,7 @@ export class AwsClustersClient {
       'name': request.name ?? '',
     });
     this.initialize().catch(err => {throw err});
+    this.warn('DEP$AwsClusters-$GetAwsCluster','GetAwsCluster is deprecated and may be removed in a future version.', 'DeprecationWarning');
     this._log.info('getAwsCluster request %j', request);
     const wrappedCallback: Callback<
         protos.google.cloud.gkemulticloud.v1.IAwsCluster,
@@ -577,6 +582,7 @@ export class AwsClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/aws_clusters.generate_aws_cluster_agent_token.js</caption>
  * region_tag:gkemulticloud_v1_generated_AwsClusters_GenerateAwsClusterAgentToken_async
+ * @deprecated GenerateAwsClusterAgentToken is deprecated and may be removed in a future version.
  */
   generateAwsClusterAgentToken(
       request?: protos.google.cloud.gkemulticloud.v1.IGenerateAwsClusterAgentTokenRequest,
@@ -630,6 +636,7 @@ export class AwsClustersClient {
       'aws_cluster': request.awsCluster ?? '',
     });
     this.initialize().catch(err => {throw err});
+    this.warn('DEP$AwsClusters-$GenerateAwsClusterAgentToken','GenerateAwsClusterAgentToken is deprecated and may be removed in a future version.', 'DeprecationWarning');
     this._log.info('generateAwsClusterAgentToken request %j', request);
     const wrappedCallback: Callback<
         protos.google.cloud.gkemulticloud.v1.IGenerateAwsClusterAgentTokenResponse,
@@ -680,6 +687,7 @@ export class AwsClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/aws_clusters.generate_aws_access_token.js</caption>
  * region_tag:gkemulticloud_v1_generated_AwsClusters_GenerateAwsAccessToken_async
+ * @deprecated GenerateAwsAccessToken is deprecated and may be removed in a future version.
  */
   generateAwsAccessToken(
       request?: protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenRequest,
@@ -733,6 +741,7 @@ export class AwsClustersClient {
       'aws_cluster': request.awsCluster ?? '',
     });
     this.initialize().catch(err => {throw err});
+    this.warn('DEP$AwsClusters-$GenerateAwsAccessToken','GenerateAwsAccessToken is deprecated and may be removed in a future version.', 'DeprecationWarning');
     this._log.info('generateAwsAccessToken request %j', request);
     const wrappedCallback: Callback<
         protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenResponse,
@@ -783,6 +792,7 @@ export class AwsClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/aws_clusters.get_aws_node_pool.js</caption>
  * region_tag:gkemulticloud_v1_generated_AwsClusters_GetAwsNodePool_async
+ * @deprecated GetAwsNodePool is deprecated and may be removed in a future version.
  */
   getAwsNodePool(
       request?: protos.google.cloud.gkemulticloud.v1.IGetAwsNodePoolRequest,
@@ -836,6 +846,7 @@ export class AwsClustersClient {
       'name': request.name ?? '',
     });
     this.initialize().catch(err => {throw err});
+    this.warn('DEP$AwsClusters-$GetAwsNodePool','GetAwsNodePool is deprecated and may be removed in a future version.', 'DeprecationWarning');
     this._log.info('getAwsNodePool request %j', request);
     const wrappedCallback: Callback<
         protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
@@ -883,6 +894,7 @@ export class AwsClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/aws_clusters.get_aws_open_id_config.js</caption>
  * region_tag:gkemulticloud_v1_generated_AwsClusters_GetAwsOpenIdConfig_async
+ * @deprecated GetAwsOpenIdConfig is deprecated and may be removed in a future version.
  */
   getAwsOpenIdConfig(
       request?: protos.google.cloud.gkemulticloud.v1.IGetAwsOpenIdConfigRequest,
@@ -936,6 +948,7 @@ export class AwsClustersClient {
       'aws_cluster': request.awsCluster ?? '',
     });
     this.initialize().catch(err => {throw err});
+    this.warn('DEP$AwsClusters-$GetAwsOpenIdConfig','GetAwsOpenIdConfig is deprecated and may be removed in a future version.', 'DeprecationWarning');
     this._log.info('getAwsOpenIdConfig request %j', request);
     const wrappedCallback: Callback<
         protos.google.cloud.gkemulticloud.v1.IAwsOpenIdConfig,
@@ -980,6 +993,7 @@ export class AwsClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/aws_clusters.get_aws_json_web_keys.js</caption>
  * region_tag:gkemulticloud_v1_generated_AwsClusters_GetAwsJsonWebKeys_async
+ * @deprecated GetAwsJsonWebKeys is deprecated and may be removed in a future version.
  */
   getAwsJsonWebKeys(
       request?: protos.google.cloud.gkemulticloud.v1.IGetAwsJsonWebKeysRequest,
@@ -1033,6 +1047,7 @@ export class AwsClustersClient {
       'aws_cluster': request.awsCluster ?? '',
     });
     this.initialize().catch(err => {throw err});
+    this.warn('DEP$AwsClusters-$GetAwsJsonWebKeys','GetAwsJsonWebKeys is deprecated and may be removed in a future version.', 'DeprecationWarning');
     this._log.info('getAwsJsonWebKeys request %j', request);
     const wrappedCallback: Callback<
         protos.google.cloud.gkemulticloud.v1.IAwsJsonWebKeys,
@@ -1083,6 +1098,7 @@ export class AwsClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/aws_clusters.get_aws_server_config.js</caption>
  * region_tag:gkemulticloud_v1_generated_AwsClusters_GetAwsServerConfig_async
+ * @deprecated GetAwsServerConfig is deprecated and may be removed in a future version.
  */
   getAwsServerConfig(
       request?: protos.google.cloud.gkemulticloud.v1.IGetAwsServerConfigRequest,
@@ -1136,6 +1152,7 @@ export class AwsClustersClient {
       'name': request.name ?? '',
     });
     this.initialize().catch(err => {throw err});
+    this.warn('DEP$AwsClusters-$GetAwsServerConfig','GetAwsServerConfig is deprecated and may be removed in a future version.', 'DeprecationWarning');
     this._log.info('getAwsServerConfig request %j', request);
     const wrappedCallback: Callback<
         protos.google.cloud.gkemulticloud.v1.IAwsServerConfig,
@@ -1207,6 +1224,7 @@ export class AwsClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/aws_clusters.create_aws_cluster.js</caption>
  * region_tag:gkemulticloud_v1_generated_AwsClusters_CreateAwsCluster_async
+ * @deprecated CreateAwsCluster is deprecated and may be removed in a future version.
  */
   createAwsCluster(
       request?: protos.google.cloud.gkemulticloud.v1.ICreateAwsClusterRequest,
@@ -1260,6 +1278,7 @@ export class AwsClustersClient {
       'parent': request.parent ?? '',
     });
     this.initialize().catch(err => {throw err});
+    this.warn('DEP$AwsClusters-$CreateAwsCluster','CreateAwsCluster is deprecated and may be removed in a future version.', 'DeprecationWarning');
     const wrappedCallback: Callback<
           LROperation<protos.google.cloud.gkemulticloud.v1.IAwsCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
           protos.google.longrunning.IOperation|null|undefined,
@@ -1289,8 +1308,10 @@ export class AwsClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/aws_clusters.create_aws_cluster.js</caption>
  * region_tag:gkemulticloud_v1_generated_AwsClusters_CreateAwsCluster_async
+ * @deprecated CreateAwsCluster is deprecated and may be removed in a future version.
  */
   async checkCreateAwsClusterProgress(name: string): Promise<LROperation<protos.google.cloud.gkemulticloud.v1.AwsCluster, protos.google.cloud.gkemulticloud.v1.OperationMetadata>>{
+    this.warn('DEP$AwsClusters-$checkCreateAwsClusterProgress','checkCreateAwsClusterProgress is deprecated and may be removed in a future version.', 'DeprecationWarning');
     this._log.info('createAwsCluster long-running');
     const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
@@ -1349,6 +1370,7 @@ export class AwsClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/aws_clusters.update_aws_cluster.js</caption>
  * region_tag:gkemulticloud_v1_generated_AwsClusters_UpdateAwsCluster_async
+ * @deprecated UpdateAwsCluster is deprecated and may be removed in a future version.
  */
   updateAwsCluster(
       request?: protos.google.cloud.gkemulticloud.v1.IUpdateAwsClusterRequest,
@@ -1402,6 +1424,7 @@ export class AwsClustersClient {
       'aws_cluster.name': request.awsCluster!.name ?? '',
     });
     this.initialize().catch(err => {throw err});
+    this.warn('DEP$AwsClusters-$UpdateAwsCluster','UpdateAwsCluster is deprecated and may be removed in a future version.', 'DeprecationWarning');
     const wrappedCallback: Callback<
           LROperation<protos.google.cloud.gkemulticloud.v1.IAwsCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
           protos.google.longrunning.IOperation|null|undefined,
@@ -1431,8 +1454,10 @@ export class AwsClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/aws_clusters.update_aws_cluster.js</caption>
  * region_tag:gkemulticloud_v1_generated_AwsClusters_UpdateAwsCluster_async
+ * @deprecated UpdateAwsCluster is deprecated and may be removed in a future version.
  */
   async checkUpdateAwsClusterProgress(name: string): Promise<LROperation<protos.google.cloud.gkemulticloud.v1.AwsCluster, protos.google.cloud.gkemulticloud.v1.OperationMetadata>>{
+    this.warn('DEP$AwsClusters-$checkUpdateAwsClusterProgress','checkUpdateAwsClusterProgress is deprecated and may be removed in a future version.', 'DeprecationWarning');
     this._log.info('updateAwsCluster long-running');
     const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
@@ -1493,6 +1518,7 @@ export class AwsClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/aws_clusters.delete_aws_cluster.js</caption>
  * region_tag:gkemulticloud_v1_generated_AwsClusters_DeleteAwsCluster_async
+ * @deprecated DeleteAwsCluster is deprecated and may be removed in a future version.
  */
   deleteAwsCluster(
       request?: protos.google.cloud.gkemulticloud.v1.IDeleteAwsClusterRequest,
@@ -1546,6 +1572,7 @@ export class AwsClustersClient {
       'name': request.name ?? '',
     });
     this.initialize().catch(err => {throw err});
+    this.warn('DEP$AwsClusters-$DeleteAwsCluster','DeleteAwsCluster is deprecated and may be removed in a future version.', 'DeprecationWarning');
     const wrappedCallback: Callback<
           LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
           protos.google.longrunning.IOperation|null|undefined,
@@ -1575,8 +1602,10 @@ export class AwsClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/aws_clusters.delete_aws_cluster.js</caption>
  * region_tag:gkemulticloud_v1_generated_AwsClusters_DeleteAwsCluster_async
+ * @deprecated DeleteAwsCluster is deprecated and may be removed in a future version.
  */
   async checkDeleteAwsClusterProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.gkemulticloud.v1.OperationMetadata>>{
+    this.warn('DEP$AwsClusters-$checkDeleteAwsClusterProgress','checkDeleteAwsClusterProgress is deprecated and may be removed in a future version.', 'DeprecationWarning');
     this._log.info('deleteAwsCluster long-running');
     const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
@@ -1628,6 +1657,7 @@ export class AwsClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/aws_clusters.create_aws_node_pool.js</caption>
  * region_tag:gkemulticloud_v1_generated_AwsClusters_CreateAwsNodePool_async
+ * @deprecated CreateAwsNodePool is deprecated and may be removed in a future version.
  */
   createAwsNodePool(
       request?: protos.google.cloud.gkemulticloud.v1.ICreateAwsNodePoolRequest,
@@ -1681,6 +1711,7 @@ export class AwsClustersClient {
       'parent': request.parent ?? '',
     });
     this.initialize().catch(err => {throw err});
+    this.warn('DEP$AwsClusters-$CreateAwsNodePool','CreateAwsNodePool is deprecated and may be removed in a future version.', 'DeprecationWarning');
     const wrappedCallback: Callback<
           LROperation<protos.google.cloud.gkemulticloud.v1.IAwsNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
           protos.google.longrunning.IOperation|null|undefined,
@@ -1710,8 +1741,10 @@ export class AwsClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/aws_clusters.create_aws_node_pool.js</caption>
  * region_tag:gkemulticloud_v1_generated_AwsClusters_CreateAwsNodePool_async
+ * @deprecated CreateAwsNodePool is deprecated and may be removed in a future version.
  */
   async checkCreateAwsNodePoolProgress(name: string): Promise<LROperation<protos.google.cloud.gkemulticloud.v1.AwsNodePool, protos.google.cloud.gkemulticloud.v1.OperationMetadata>>{
+    this.warn('DEP$AwsClusters-$checkCreateAwsNodePoolProgress','checkCreateAwsNodePoolProgress is deprecated and may be removed in a future version.', 'DeprecationWarning');
     this._log.info('createAwsNodePool long-running');
     const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
@@ -1773,6 +1806,7 @@ export class AwsClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/aws_clusters.update_aws_node_pool.js</caption>
  * region_tag:gkemulticloud_v1_generated_AwsClusters_UpdateAwsNodePool_async
+ * @deprecated UpdateAwsNodePool is deprecated and may be removed in a future version.
  */
   updateAwsNodePool(
       request?: protos.google.cloud.gkemulticloud.v1.IUpdateAwsNodePoolRequest,
@@ -1826,6 +1860,7 @@ export class AwsClustersClient {
       'aws_node_pool.name': request.awsNodePool!.name ?? '',
     });
     this.initialize().catch(err => {throw err});
+    this.warn('DEP$AwsClusters-$UpdateAwsNodePool','UpdateAwsNodePool is deprecated and may be removed in a future version.', 'DeprecationWarning');
     const wrappedCallback: Callback<
           LROperation<protos.google.cloud.gkemulticloud.v1.IAwsNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
           protos.google.longrunning.IOperation|null|undefined,
@@ -1855,8 +1890,10 @@ export class AwsClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/aws_clusters.update_aws_node_pool.js</caption>
  * region_tag:gkemulticloud_v1_generated_AwsClusters_UpdateAwsNodePool_async
+ * @deprecated UpdateAwsNodePool is deprecated and may be removed in a future version.
  */
   async checkUpdateAwsNodePoolProgress(name: string): Promise<LROperation<protos.google.cloud.gkemulticloud.v1.AwsNodePool, protos.google.cloud.gkemulticloud.v1.OperationMetadata>>{
+    this.warn('DEP$AwsClusters-$checkUpdateAwsNodePoolProgress','checkUpdateAwsNodePoolProgress is deprecated and may be removed in a future version.', 'DeprecationWarning');
     this._log.info('updateAwsNodePool long-running');
     const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
@@ -1896,6 +1933,7 @@ export class AwsClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/aws_clusters.rollback_aws_node_pool_update.js</caption>
  * region_tag:gkemulticloud_v1_generated_AwsClusters_RollbackAwsNodePoolUpdate_async
+ * @deprecated RollbackAwsNodePoolUpdate is deprecated and may be removed in a future version.
  */
   rollbackAwsNodePoolUpdate(
       request?: protos.google.cloud.gkemulticloud.v1.IRollbackAwsNodePoolUpdateRequest,
@@ -1949,6 +1987,7 @@ export class AwsClustersClient {
       'name': request.name ?? '',
     });
     this.initialize().catch(err => {throw err});
+    this.warn('DEP$AwsClusters-$RollbackAwsNodePoolUpdate','RollbackAwsNodePoolUpdate is deprecated and may be removed in a future version.', 'DeprecationWarning');
     const wrappedCallback: Callback<
           LROperation<protos.google.cloud.gkemulticloud.v1.IAwsNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
           protos.google.longrunning.IOperation|null|undefined,
@@ -1978,8 +2017,10 @@ export class AwsClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/aws_clusters.rollback_aws_node_pool_update.js</caption>
  * region_tag:gkemulticloud_v1_generated_AwsClusters_RollbackAwsNodePoolUpdate_async
+ * @deprecated RollbackAwsNodePoolUpdate is deprecated and may be removed in a future version.
  */
   async checkRollbackAwsNodePoolUpdateProgress(name: string): Promise<LROperation<protos.google.cloud.gkemulticloud.v1.AwsNodePool, protos.google.cloud.gkemulticloud.v1.OperationMetadata>>{
+    this.warn('DEP$AwsClusters-$checkRollbackAwsNodePoolUpdateProgress','checkRollbackAwsNodePoolUpdateProgress is deprecated and may be removed in a future version.', 'DeprecationWarning');
     this._log.info('rollbackAwsNodePoolUpdate long-running');
     const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
@@ -2038,6 +2079,7 @@ export class AwsClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/aws_clusters.delete_aws_node_pool.js</caption>
  * region_tag:gkemulticloud_v1_generated_AwsClusters_DeleteAwsNodePool_async
+ * @deprecated DeleteAwsNodePool is deprecated and may be removed in a future version.
  */
   deleteAwsNodePool(
       request?: protos.google.cloud.gkemulticloud.v1.IDeleteAwsNodePoolRequest,
@@ -2091,6 +2133,7 @@ export class AwsClustersClient {
       'name': request.name ?? '',
     });
     this.initialize().catch(err => {throw err});
+    this.warn('DEP$AwsClusters-$DeleteAwsNodePool','DeleteAwsNodePool is deprecated and may be removed in a future version.', 'DeprecationWarning');
     const wrappedCallback: Callback<
           LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
           protos.google.longrunning.IOperation|null|undefined,
@@ -2120,8 +2163,10 @@ export class AwsClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/aws_clusters.delete_aws_node_pool.js</caption>
  * region_tag:gkemulticloud_v1_generated_AwsClusters_DeleteAwsNodePool_async
+ * @deprecated DeleteAwsNodePool is deprecated and may be removed in a future version.
  */
   async checkDeleteAwsNodePoolProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.gkemulticloud.v1.OperationMetadata>>{
+    this.warn('DEP$AwsClusters-$checkDeleteAwsNodePoolProgress','checkDeleteAwsNodePoolProgress is deprecated and may be removed in a future version.', 'DeprecationWarning');
     this._log.info('deleteAwsNodePool long-running');
     const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
@@ -2165,6 +2210,7 @@ export class AwsClustersClient {
  *   method described below for async iteration which you can stop as needed.
  *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
+ * @deprecated ListAwsClusters is deprecated and may be removed in a future version.
  */
   listAwsClusters(
       request?: protos.google.cloud.gkemulticloud.v1.IListAwsClustersRequest,
@@ -2220,6 +2266,7 @@ export class AwsClustersClient {
       'parent': request.parent ?? '',
     });
     this.initialize().catch(err => {throw err});
+    this.warn('DEP$AwsClusters-$ListAwsClusters','ListAwsClusters is deprecated and may be removed in a future version.', 'DeprecationWarning');
     const wrappedCallback: PaginationCallback<
       protos.google.cloud.gkemulticloud.v1.IListAwsClustersRequest,
       protos.google.cloud.gkemulticloud.v1.IListAwsClustersResponse|null|undefined,
@@ -2276,6 +2323,7 @@ export class AwsClustersClient {
  *   method described below for async iteration which you can stop as needed.
  *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
+ * @deprecated ListAwsClusters is deprecated and may be removed in a future version.
  */
   listAwsClustersStream(
       request?: protos.google.cloud.gkemulticloud.v1.IListAwsClustersRequest,
@@ -2293,6 +2341,7 @@ export class AwsClustersClient {
     const defaultCallSettings = this._defaults['listAwsClusters'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize().catch(err => {throw err});
+    this.warn('DEP$AwsClusters-$ListAwsClusters','ListAwsClusters is deprecated and may be removed in a future version.', 'DeprecationWarning');
     this._log.info('listAwsClusters stream %j', request);
     return this.descriptors.page.listAwsClusters.createStream(
       this.innerApiCalls.listAwsClusters as GaxCall,
@@ -2338,6 +2387,7 @@ export class AwsClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/aws_clusters.list_aws_clusters.js</caption>
  * region_tag:gkemulticloud_v1_generated_AwsClusters_ListAwsClusters_async
+ * @deprecated ListAwsClusters is deprecated and may be removed in a future version.
  */
   listAwsClustersAsync(
       request?: protos.google.cloud.gkemulticloud.v1.IListAwsClustersRequest,
@@ -2355,6 +2405,7 @@ export class AwsClustersClient {
     const defaultCallSettings = this._defaults['listAwsClusters'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize().catch(err => {throw err});
+    this.warn('DEP$AwsClusters-$ListAwsClusters','ListAwsClusters is deprecated and may be removed in a future version.', 'DeprecationWarning');
     this._log.info('listAwsClusters iterate %j', request);
     return this.descriptors.page.listAwsClusters.asyncIterate(
       this.innerApiCalls['listAwsClusters'] as GaxCall,
@@ -2401,6 +2452,7 @@ export class AwsClustersClient {
  *   method described below for async iteration which you can stop as needed.
  *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
+ * @deprecated ListAwsNodePools is deprecated and may be removed in a future version.
  */
   listAwsNodePools(
       request?: protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsRequest,
@@ -2456,6 +2508,7 @@ export class AwsClustersClient {
       'parent': request.parent ?? '',
     });
     this.initialize().catch(err => {throw err});
+    this.warn('DEP$AwsClusters-$ListAwsNodePools','ListAwsNodePools is deprecated and may be removed in a future version.', 'DeprecationWarning');
     const wrappedCallback: PaginationCallback<
       protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsRequest,
       protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsResponse|null|undefined,
@@ -2513,6 +2566,7 @@ export class AwsClustersClient {
  *   method described below for async iteration which you can stop as needed.
  *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
+ * @deprecated ListAwsNodePools is deprecated and may be removed in a future version.
  */
   listAwsNodePoolsStream(
       request?: protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsRequest,
@@ -2530,6 +2584,7 @@ export class AwsClustersClient {
     const defaultCallSettings = this._defaults['listAwsNodePools'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize().catch(err => {throw err});
+    this.warn('DEP$AwsClusters-$ListAwsNodePools','ListAwsNodePools is deprecated and may be removed in a future version.', 'DeprecationWarning');
     this._log.info('listAwsNodePools stream %j', request);
     return this.descriptors.page.listAwsNodePools.createStream(
       this.innerApiCalls.listAwsNodePools as GaxCall,
@@ -2576,6 +2631,7 @@ export class AwsClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/aws_clusters.list_aws_node_pools.js</caption>
  * region_tag:gkemulticloud_v1_generated_AwsClusters_ListAwsNodePools_async
+ * @deprecated ListAwsNodePools is deprecated and may be removed in a future version.
  */
   listAwsNodePoolsAsync(
       request?: protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsRequest,
@@ -2593,6 +2649,7 @@ export class AwsClustersClient {
     const defaultCallSettings = this._defaults['listAwsNodePools'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize().catch(err => {throw err});
+    this.warn('DEP$AwsClusters-$ListAwsNodePools','ListAwsNodePools is deprecated and may be removed in a future version.', 'DeprecationWarning');
     this._log.info('listAwsNodePools iterate %j', request);
     return this.descriptors.page.listAwsNodePools.asyncIterate(
       this.innerApiCalls['listAwsNodePools'] as GaxCall,
