@@ -34,7 +34,7 @@ function main(name) {
   // const name = 'abc123'
 
   // Imports the Iam library
-  const {WorkloadIdentityPoolsClient} = require('iam').v1beta;
+  const {WorkloadIdentityPoolsClient} = require('@google-cloud/iam').v1beta;
 
   // Instantiates a client
   const iamClient = new WorkloadIdentityPoolsClient();
