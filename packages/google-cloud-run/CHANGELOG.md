@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/run-v3.0.1...run-v3.1.0) (2025-12-09)
+
+
+### Features
+
+* [run] add SourceCode proto to Run container config ([#6926](https://github.com/googleapis/google-cloud-node/issues/6926)) ([9c2a124](https://github.com/googleapis/google-cloud-node/commit/9c2a1242e88b9878532106dc301f7ec524632997))
+
 ## [3.0.1](https://github.com/googleapis/google-cloud-node/compare/run-v3.0.0...run-v3.0.1) (2025-10-13)
 
 

@@ -5,7 +5,7 @@
     "url": "https://github.com/googleapis/google-cloud-node.git"
   },
   "name": "@google-cloud/cloudbuild",
-  "version": "5.3.1",
+  "version": "5.4.0",
   "author": "Google LLC",
   "description": "Cloud Build API client for Node.js",
   "main": "build/src/index.js",

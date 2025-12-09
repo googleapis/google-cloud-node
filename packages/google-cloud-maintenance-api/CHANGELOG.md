@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/maintenance-api-v0.1.1...maintenance-api-v0.2.0) (2025-12-09)
+
+
+### Features
+
+* [maintenance] add support for v1 version of Maintenance API ([#6925](https://github.com/googleapis/google-cloud-node/issues/6925)) ([a0c0db8](https://github.com/googleapis/google-cloud-node/commit/a0c0db8be96f32f2f3e115987664a23a1f38ae57))
+
 ## [0.1.1](https://github.com/googleapis/google-cloud-node/compare/maintenance-api-v0.1.0...maintenance-api-v0.1.1) (2025-10-13)
 
 
