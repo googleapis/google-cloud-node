@@ -49,7 +49,7 @@ export class NetworkSecurityClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
-  private _log = logging.log('networksecurity');
+  private _log = logging.log('network-security');
 
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
@@ -189,8 +189,95 @@ export class NetworkSecurityClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      authorizationPolicyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/authorizationPolicies/{authorization_policy}'
+      ),
+      authzPolicyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/authzPolicies/{authz_policy}'
+      ),
+      backendAuthenticationConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/backendAuthenticationConfigs/{backend_authentication_config}'
+      ),
       clientTlsPolicyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/clientTlsPolicies/{client_tls_policy}'
+      ),
+      dnsThreatDetectorPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dnsThreatDetectors/{dns_threat_detector}'
+      ),
+      firewallEndpointAssociationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/firewallEndpointAssociations/{firewall_endpoint_association}'
+      ),
+      gatewaySecurityPolicyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/gatewaySecurityPolicies/{gateway_security_policy}'
+      ),
+      gatewaySecurityPolicyRulePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/gatewaySecurityPolicies/{gateway_security_policy}/rules/{rule}'
+      ),
+      interceptDeploymentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/interceptDeployments/{intercept_deployment}'
+      ),
+      interceptDeploymentGroupPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/interceptDeploymentGroups/{intercept_deployment_group}'
+      ),
+      interceptEndpointGroupPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/interceptEndpointGroups/{intercept_endpoint_group}'
+      ),
+      interceptEndpointGroupAssociationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/interceptEndpointGroupAssociations/{intercept_endpoint_group_association}'
+      ),
+      mirroringDeploymentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/mirroringDeployments/{mirroring_deployment}'
+      ),
+      mirroringDeploymentGroupPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/mirroringDeploymentGroups/{mirroring_deployment_group}'
+      ),
+      mirroringEndpointGroupPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/mirroringEndpointGroups/{mirroring_endpoint_group}'
+      ),
+      mirroringEndpointGroupAssociationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/mirroringEndpointGroupAssociations/{mirroring_endpoint_group_association}'
+      ),
+      organizationLocationFirewallEndpointsPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/firewallEndpoints/{firewall_endpoint}'
+      ),
+      organizationLocationSecurityProfilePathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/securityProfiles/{security_profile}'
+      ),
+      organizationLocationSecurityProfileGroupPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/securityProfileGroups/{security_profile_group}'
+      ),
+      partnerSSEGatewayPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/partnerSSEGateways/{partner_sse_gateway}'
+      ),
+      partnerSSERealmPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/partnerSSERealms/{partner_sse_realm}'
+      ),
+      projectLocationFirewallEndpointsPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/firewallEndpoints/{firewall_endpoint}'
+      ),
+      projectLocationSecurityProfilePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/securityProfiles/{security_profile}'
+      ),
+      projectLocationSecurityProfileGroupPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/securityProfileGroups/{security_profile_group}'
+      ),
+      sACAttachmentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/sacAttachments/{sac_attachment}'
+      ),
+      sACRealmPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/sacRealms/{sac_realm}'
+      ),
+      sSEGatewayReferencePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/sseGatewayReferences/{sse_gateway_reference}'
+      ),
+      serverTlsPolicyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/serverTlsPolicies/{server_tls_policy}'
+      ),
+      tlsInspectionPolicyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/tlsInspectionPolicies/{tls_inspection_policy}'
+      ),
+      urlListPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/urlLists/{url_list}'
       ),
     };
 
@@ -198,8 +285,24 @@ export class NetworkSecurityClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
+      listAuthorizationPolicies:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'authorizationPolicies'),
+      listBackendAuthenticationConfigs:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'backendAuthenticationConfigs'),
+      listServerTlsPolicies:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'serverTlsPolicies'),
       listClientTlsPolicies:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'clientTlsPolicies')
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'clientTlsPolicies'),
+      listGatewaySecurityPolicies:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'gatewaySecurityPolicies'),
+      listGatewaySecurityPolicyRules:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'gatewaySecurityPolicyRules'),
+      listUrlLists:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'urlLists'),
+      listTlsInspectionPolicies:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'tlsInspectionPolicies'),
+      listAuthzPolicies:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'authzPolicies')
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -222,6 +325,42 @@ export class NetworkSecurityClient {
       }];
     }
     this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
+    const createAuthorizationPolicyResponse = protoFilesRoot.lookup(
+      '.google.cloud.networksecurity.v1alpha1.AuthorizationPolicy') as gax.protobuf.Type;
+    const createAuthorizationPolicyMetadata = protoFilesRoot.lookup(
+      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
+    const updateAuthorizationPolicyResponse = protoFilesRoot.lookup(
+      '.google.cloud.networksecurity.v1alpha1.AuthorizationPolicy') as gax.protobuf.Type;
+    const updateAuthorizationPolicyMetadata = protoFilesRoot.lookup(
+      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
+    const deleteAuthorizationPolicyResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty') as gax.protobuf.Type;
+    const deleteAuthorizationPolicyMetadata = protoFilesRoot.lookup(
+      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
+    const createBackendAuthenticationConfigResponse = protoFilesRoot.lookup(
+      '.google.cloud.networksecurity.v1alpha1.BackendAuthenticationConfig') as gax.protobuf.Type;
+    const createBackendAuthenticationConfigMetadata = protoFilesRoot.lookup(
+      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
+    const updateBackendAuthenticationConfigResponse = protoFilesRoot.lookup(
+      '.google.cloud.networksecurity.v1alpha1.BackendAuthenticationConfig') as gax.protobuf.Type;
+    const updateBackendAuthenticationConfigMetadata = protoFilesRoot.lookup(
+      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
+    const deleteBackendAuthenticationConfigResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty') as gax.protobuf.Type;
+    const deleteBackendAuthenticationConfigMetadata = protoFilesRoot.lookup(
+      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
+    const createServerTlsPolicyResponse = protoFilesRoot.lookup(
+      '.google.cloud.networksecurity.v1alpha1.ServerTlsPolicy') as gax.protobuf.Type;
+    const createServerTlsPolicyMetadata = protoFilesRoot.lookup(
+      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
+    const updateServerTlsPolicyResponse = protoFilesRoot.lookup(
+      '.google.cloud.networksecurity.v1alpha1.ServerTlsPolicy') as gax.protobuf.Type;
+    const updateServerTlsPolicyMetadata = protoFilesRoot.lookup(
+      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
+    const deleteServerTlsPolicyResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty') as gax.protobuf.Type;
+    const deleteServerTlsPolicyMetadata = protoFilesRoot.lookup(
+      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
     const createClientTlsPolicyResponse = protoFilesRoot.lookup(
       '.google.cloud.networksecurity.v1alpha1.ClientTlsPolicy') as gax.protobuf.Type;
     const createClientTlsPolicyMetadata = protoFilesRoot.lookup(
@@ -234,8 +373,104 @@ export class NetworkSecurityClient {
       '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteClientTlsPolicyMetadata = protoFilesRoot.lookup(
       '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
+    const createGatewaySecurityPolicyResponse = protoFilesRoot.lookup(
+      '.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicy') as gax.protobuf.Type;
+    const createGatewaySecurityPolicyMetadata = protoFilesRoot.lookup(
+      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
+    const updateGatewaySecurityPolicyResponse = protoFilesRoot.lookup(
+      '.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicy') as gax.protobuf.Type;
+    const updateGatewaySecurityPolicyMetadata = protoFilesRoot.lookup(
+      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
+    const deleteGatewaySecurityPolicyResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty') as gax.protobuf.Type;
+    const deleteGatewaySecurityPolicyMetadata = protoFilesRoot.lookup(
+      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
+    const createGatewaySecurityPolicyRuleResponse = protoFilesRoot.lookup(
+      '.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicyRule') as gax.protobuf.Type;
+    const createGatewaySecurityPolicyRuleMetadata = protoFilesRoot.lookup(
+      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
+    const updateGatewaySecurityPolicyRuleResponse = protoFilesRoot.lookup(
+      '.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicyRule') as gax.protobuf.Type;
+    const updateGatewaySecurityPolicyRuleMetadata = protoFilesRoot.lookup(
+      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
+    const deleteGatewaySecurityPolicyRuleResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty') as gax.protobuf.Type;
+    const deleteGatewaySecurityPolicyRuleMetadata = protoFilesRoot.lookup(
+      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
+    const createUrlListResponse = protoFilesRoot.lookup(
+      '.google.cloud.networksecurity.v1alpha1.UrlList') as gax.protobuf.Type;
+    const createUrlListMetadata = protoFilesRoot.lookup(
+      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
+    const updateUrlListResponse = protoFilesRoot.lookup(
+      '.google.cloud.networksecurity.v1alpha1.UrlList') as gax.protobuf.Type;
+    const updateUrlListMetadata = protoFilesRoot.lookup(
+      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
+    const deleteUrlListResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty') as gax.protobuf.Type;
+    const deleteUrlListMetadata = protoFilesRoot.lookup(
+      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
+    const createTlsInspectionPolicyResponse = protoFilesRoot.lookup(
+      '.google.cloud.networksecurity.v1alpha1.TlsInspectionPolicy') as gax.protobuf.Type;
+    const createTlsInspectionPolicyMetadata = protoFilesRoot.lookup(
+      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
+    const updateTlsInspectionPolicyResponse = protoFilesRoot.lookup(
+      '.google.cloud.networksecurity.v1alpha1.TlsInspectionPolicy') as gax.protobuf.Type;
+    const updateTlsInspectionPolicyMetadata = protoFilesRoot.lookup(
+      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
+    const deleteTlsInspectionPolicyResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty') as gax.protobuf.Type;
+    const deleteTlsInspectionPolicyMetadata = protoFilesRoot.lookup(
+      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
+    const createAuthzPolicyResponse = protoFilesRoot.lookup(
+      '.google.cloud.networksecurity.v1alpha1.AuthzPolicy') as gax.protobuf.Type;
+    const createAuthzPolicyMetadata = protoFilesRoot.lookup(
+      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
+    const updateAuthzPolicyResponse = protoFilesRoot.lookup(
+      '.google.cloud.networksecurity.v1alpha1.AuthzPolicy') as gax.protobuf.Type;
+    const updateAuthzPolicyMetadata = protoFilesRoot.lookup(
+      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
+    const deleteAuthzPolicyResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty') as gax.protobuf.Type;
+    const deleteAuthzPolicyMetadata = protoFilesRoot.lookup(
+      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
+      createAuthorizationPolicy: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createAuthorizationPolicyResponse.decode.bind(createAuthorizationPolicyResponse),
+        createAuthorizationPolicyMetadata.decode.bind(createAuthorizationPolicyMetadata)),
+      updateAuthorizationPolicy: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateAuthorizationPolicyResponse.decode.bind(updateAuthorizationPolicyResponse),
+        updateAuthorizationPolicyMetadata.decode.bind(updateAuthorizationPolicyMetadata)),
+      deleteAuthorizationPolicy: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteAuthorizationPolicyResponse.decode.bind(deleteAuthorizationPolicyResponse),
+        deleteAuthorizationPolicyMetadata.decode.bind(deleteAuthorizationPolicyMetadata)),
+      createBackendAuthenticationConfig: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createBackendAuthenticationConfigResponse.decode.bind(createBackendAuthenticationConfigResponse),
+        createBackendAuthenticationConfigMetadata.decode.bind(createBackendAuthenticationConfigMetadata)),
+      updateBackendAuthenticationConfig: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateBackendAuthenticationConfigResponse.decode.bind(updateBackendAuthenticationConfigResponse),
+        updateBackendAuthenticationConfigMetadata.decode.bind(updateBackendAuthenticationConfigMetadata)),
+      deleteBackendAuthenticationConfig: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteBackendAuthenticationConfigResponse.decode.bind(deleteBackendAuthenticationConfigResponse),
+        deleteBackendAuthenticationConfigMetadata.decode.bind(deleteBackendAuthenticationConfigMetadata)),
+      createServerTlsPolicy: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createServerTlsPolicyResponse.decode.bind(createServerTlsPolicyResponse),
+        createServerTlsPolicyMetadata.decode.bind(createServerTlsPolicyMetadata)),
+      updateServerTlsPolicy: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateServerTlsPolicyResponse.decode.bind(updateServerTlsPolicyResponse),
+        updateServerTlsPolicyMetadata.decode.bind(updateServerTlsPolicyMetadata)),
+      deleteServerTlsPolicy: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteServerTlsPolicyResponse.decode.bind(deleteServerTlsPolicyResponse),
+        deleteServerTlsPolicyMetadata.decode.bind(deleteServerTlsPolicyMetadata)),
       createClientTlsPolicy: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createClientTlsPolicyResponse.decode.bind(createClientTlsPolicyResponse),
@@ -247,7 +482,67 @@ export class NetworkSecurityClient {
       deleteClientTlsPolicy: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteClientTlsPolicyResponse.decode.bind(deleteClientTlsPolicyResponse),
-        deleteClientTlsPolicyMetadata.decode.bind(deleteClientTlsPolicyMetadata))
+        deleteClientTlsPolicyMetadata.decode.bind(deleteClientTlsPolicyMetadata)),
+      createGatewaySecurityPolicy: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createGatewaySecurityPolicyResponse.decode.bind(createGatewaySecurityPolicyResponse),
+        createGatewaySecurityPolicyMetadata.decode.bind(createGatewaySecurityPolicyMetadata)),
+      updateGatewaySecurityPolicy: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateGatewaySecurityPolicyResponse.decode.bind(updateGatewaySecurityPolicyResponse),
+        updateGatewaySecurityPolicyMetadata.decode.bind(updateGatewaySecurityPolicyMetadata)),
+      deleteGatewaySecurityPolicy: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteGatewaySecurityPolicyResponse.decode.bind(deleteGatewaySecurityPolicyResponse),
+        deleteGatewaySecurityPolicyMetadata.decode.bind(deleteGatewaySecurityPolicyMetadata)),
+      createGatewaySecurityPolicyRule: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createGatewaySecurityPolicyRuleResponse.decode.bind(createGatewaySecurityPolicyRuleResponse),
+        createGatewaySecurityPolicyRuleMetadata.decode.bind(createGatewaySecurityPolicyRuleMetadata)),
+      updateGatewaySecurityPolicyRule: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateGatewaySecurityPolicyRuleResponse.decode.bind(updateGatewaySecurityPolicyRuleResponse),
+        updateGatewaySecurityPolicyRuleMetadata.decode.bind(updateGatewaySecurityPolicyRuleMetadata)),
+      deleteGatewaySecurityPolicyRule: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteGatewaySecurityPolicyRuleResponse.decode.bind(deleteGatewaySecurityPolicyRuleResponse),
+        deleteGatewaySecurityPolicyRuleMetadata.decode.bind(deleteGatewaySecurityPolicyRuleMetadata)),
+      createUrlList: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createUrlListResponse.decode.bind(createUrlListResponse),
+        createUrlListMetadata.decode.bind(createUrlListMetadata)),
+      updateUrlList: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateUrlListResponse.decode.bind(updateUrlListResponse),
+        updateUrlListMetadata.decode.bind(updateUrlListMetadata)),
+      deleteUrlList: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteUrlListResponse.decode.bind(deleteUrlListResponse),
+        deleteUrlListMetadata.decode.bind(deleteUrlListMetadata)),
+      createTlsInspectionPolicy: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createTlsInspectionPolicyResponse.decode.bind(createTlsInspectionPolicyResponse),
+        createTlsInspectionPolicyMetadata.decode.bind(createTlsInspectionPolicyMetadata)),
+      updateTlsInspectionPolicy: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateTlsInspectionPolicyResponse.decode.bind(updateTlsInspectionPolicyResponse),
+        updateTlsInspectionPolicyMetadata.decode.bind(updateTlsInspectionPolicyMetadata)),
+      deleteTlsInspectionPolicy: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteTlsInspectionPolicyResponse.decode.bind(deleteTlsInspectionPolicyResponse),
+        deleteTlsInspectionPolicyMetadata.decode.bind(deleteTlsInspectionPolicyMetadata)),
+      createAuthzPolicy: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createAuthzPolicyResponse.decode.bind(createAuthzPolicyResponse),
+        createAuthzPolicyMetadata.decode.bind(createAuthzPolicyMetadata)),
+      updateAuthzPolicy: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateAuthzPolicyResponse.decode.bind(updateAuthzPolicyResponse),
+        updateAuthzPolicyMetadata.decode.bind(updateAuthzPolicyMetadata)),
+      deleteAuthzPolicy: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteAuthzPolicyResponse.decode.bind(deleteAuthzPolicyResponse),
+        deleteAuthzPolicyMetadata.decode.bind(deleteAuthzPolicyMetadata))
     };
 
     // Put together the default options sent with requests.
@@ -293,7 +588,7 @@ export class NetworkSecurityClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const networkSecurityStubMethods =
-        ['listClientTlsPolicies', 'getClientTlsPolicy', 'createClientTlsPolicy', 'updateClientTlsPolicy', 'deleteClientTlsPolicy'];
+        ['listAuthorizationPolicies', 'getAuthorizationPolicy', 'createAuthorizationPolicy', 'updateAuthorizationPolicy', 'deleteAuthorizationPolicy', 'listBackendAuthenticationConfigs', 'getBackendAuthenticationConfig', 'createBackendAuthenticationConfig', 'updateBackendAuthenticationConfig', 'deleteBackendAuthenticationConfig', 'listServerTlsPolicies', 'getServerTlsPolicy', 'createServerTlsPolicy', 'updateServerTlsPolicy', 'deleteServerTlsPolicy', 'listClientTlsPolicies', 'getClientTlsPolicy', 'createClientTlsPolicy', 'updateClientTlsPolicy', 'deleteClientTlsPolicy', 'listGatewaySecurityPolicies', 'getGatewaySecurityPolicy', 'createGatewaySecurityPolicy', 'updateGatewaySecurityPolicy', 'deleteGatewaySecurityPolicy', 'listGatewaySecurityPolicyRules', 'getGatewaySecurityPolicyRule', 'createGatewaySecurityPolicyRule', 'updateGatewaySecurityPolicyRule', 'deleteGatewaySecurityPolicyRule', 'listUrlLists', 'getUrlList', 'createUrlList', 'updateUrlList', 'deleteUrlList', 'listTlsInspectionPolicies', 'getTlsInspectionPolicy', 'createTlsInspectionPolicy', 'updateTlsInspectionPolicy', 'deleteTlsInspectionPolicy', 'listAuthzPolicies', 'getAuthzPolicy', 'createAuthzPolicy', 'updateAuthzPolicy', 'deleteAuthzPolicy'];
     for (const methodName of networkSecurityStubMethods) {
       const callPromise = this.networkSecurityStub.then(
         stub => (...args: Array<{}>) => {
@@ -398,6 +693,292 @@ export class NetworkSecurityClient {
   // -- Service calls --
   // -------------------
 /**
+ * Gets details of a single AuthorizationPolicy.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. A name of the AuthorizationPolicy to get. Must be in the format
+ *   `projects/{project}/locations/{location}/authorizationPolicies/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.networksecurity.v1alpha1.AuthorizationPolicy|AuthorizationPolicy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.get_authorization_policy.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_GetAuthorizationPolicy_async
+ */
+  getAuthorizationPolicy(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IGetAuthorizationPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.networksecurity.v1alpha1.IAuthorizationPolicy,
+        protos.google.cloud.networksecurity.v1alpha1.IGetAuthorizationPolicyRequest|undefined, {}|undefined
+      ]>;
+  getAuthorizationPolicy(
+      request: protos.google.cloud.networksecurity.v1alpha1.IGetAuthorizationPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.networksecurity.v1alpha1.IAuthorizationPolicy,
+          protos.google.cloud.networksecurity.v1alpha1.IGetAuthorizationPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getAuthorizationPolicy(
+      request: protos.google.cloud.networksecurity.v1alpha1.IGetAuthorizationPolicyRequest,
+      callback: Callback<
+          protos.google.cloud.networksecurity.v1alpha1.IAuthorizationPolicy,
+          protos.google.cloud.networksecurity.v1alpha1.IGetAuthorizationPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getAuthorizationPolicy(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IGetAuthorizationPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.networksecurity.v1alpha1.IAuthorizationPolicy,
+          protos.google.cloud.networksecurity.v1alpha1.IGetAuthorizationPolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.networksecurity.v1alpha1.IAuthorizationPolicy,
+          protos.google.cloud.networksecurity.v1alpha1.IGetAuthorizationPolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.networksecurity.v1alpha1.IAuthorizationPolicy,
+        protos.google.cloud.networksecurity.v1alpha1.IGetAuthorizationPolicyRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('getAuthorizationPolicy request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.networksecurity.v1alpha1.IAuthorizationPolicy,
+        protos.google.cloud.networksecurity.v1alpha1.IGetAuthorizationPolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAuthorizationPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getAuthorizationPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.networksecurity.v1alpha1.IAuthorizationPolicy,
+        protos.google.cloud.networksecurity.v1alpha1.IGetAuthorizationPolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getAuthorizationPolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Gets details of a single BackendAuthenticationConfig to
+ * BackendAuthenticationConfig.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. A name of the BackendAuthenticationConfig to get. Must be in the
+ *   format `projects/* /locations/{location}/backendAuthenticationConfigs/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.networksecurity.v1alpha1.BackendAuthenticationConfig|BackendAuthenticationConfig}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.get_backend_authentication_config.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_GetBackendAuthenticationConfig_async
+ */
+  getBackendAuthenticationConfig(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IGetBackendAuthenticationConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.networksecurity.v1alpha1.IBackendAuthenticationConfig,
+        protos.google.cloud.networksecurity.v1alpha1.IGetBackendAuthenticationConfigRequest|undefined, {}|undefined
+      ]>;
+  getBackendAuthenticationConfig(
+      request: protos.google.cloud.networksecurity.v1alpha1.IGetBackendAuthenticationConfigRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.networksecurity.v1alpha1.IBackendAuthenticationConfig,
+          protos.google.cloud.networksecurity.v1alpha1.IGetBackendAuthenticationConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getBackendAuthenticationConfig(
+      request: protos.google.cloud.networksecurity.v1alpha1.IGetBackendAuthenticationConfigRequest,
+      callback: Callback<
+          protos.google.cloud.networksecurity.v1alpha1.IBackendAuthenticationConfig,
+          protos.google.cloud.networksecurity.v1alpha1.IGetBackendAuthenticationConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getBackendAuthenticationConfig(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IGetBackendAuthenticationConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.networksecurity.v1alpha1.IBackendAuthenticationConfig,
+          protos.google.cloud.networksecurity.v1alpha1.IGetBackendAuthenticationConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.networksecurity.v1alpha1.IBackendAuthenticationConfig,
+          protos.google.cloud.networksecurity.v1alpha1.IGetBackendAuthenticationConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.networksecurity.v1alpha1.IBackendAuthenticationConfig,
+        protos.google.cloud.networksecurity.v1alpha1.IGetBackendAuthenticationConfigRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('getBackendAuthenticationConfig request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.networksecurity.v1alpha1.IBackendAuthenticationConfig,
+        protos.google.cloud.networksecurity.v1alpha1.IGetBackendAuthenticationConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getBackendAuthenticationConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getBackendAuthenticationConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.networksecurity.v1alpha1.IBackendAuthenticationConfig,
+        protos.google.cloud.networksecurity.v1alpha1.IGetBackendAuthenticationConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getBackendAuthenticationConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Gets details of a single ServerTlsPolicy.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. A name of the ServerTlsPolicy to get. Must be in the format
+ *   `projects/* /locations/{location}/serverTlsPolicies/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.networksecurity.v1alpha1.ServerTlsPolicy|ServerTlsPolicy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.get_server_tls_policy.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_GetServerTlsPolicy_async
+ */
+  getServerTlsPolicy(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IGetServerTlsPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.networksecurity.v1alpha1.IServerTlsPolicy,
+        protos.google.cloud.networksecurity.v1alpha1.IGetServerTlsPolicyRequest|undefined, {}|undefined
+      ]>;
+  getServerTlsPolicy(
+      request: protos.google.cloud.networksecurity.v1alpha1.IGetServerTlsPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.networksecurity.v1alpha1.IServerTlsPolicy,
+          protos.google.cloud.networksecurity.v1alpha1.IGetServerTlsPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getServerTlsPolicy(
+      request: protos.google.cloud.networksecurity.v1alpha1.IGetServerTlsPolicyRequest,
+      callback: Callback<
+          protos.google.cloud.networksecurity.v1alpha1.IServerTlsPolicy,
+          protos.google.cloud.networksecurity.v1alpha1.IGetServerTlsPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getServerTlsPolicy(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IGetServerTlsPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.networksecurity.v1alpha1.IServerTlsPolicy,
+          protos.google.cloud.networksecurity.v1alpha1.IGetServerTlsPolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.networksecurity.v1alpha1.IServerTlsPolicy,
+          protos.google.cloud.networksecurity.v1alpha1.IGetServerTlsPolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.networksecurity.v1alpha1.IServerTlsPolicy,
+        protos.google.cloud.networksecurity.v1alpha1.IGetServerTlsPolicyRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('getServerTlsPolicy request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.networksecurity.v1alpha1.IServerTlsPolicy,
+        protos.google.cloud.networksecurity.v1alpha1.IGetServerTlsPolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getServerTlsPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getServerTlsPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.networksecurity.v1alpha1.IServerTlsPolicy,
+        protos.google.cloud.networksecurity.v1alpha1.IGetServerTlsPolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getServerTlsPolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
  * Gets details of a single ClientTlsPolicy.
  *
  * @param {Object} request
@@ -492,7 +1073,1500 @@ export class NetworkSecurityClient {
         throw error;
       });
   }
+/**
+ * Gets details of a single GatewaySecurityPolicy.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. A name of the GatewaySecurityPolicy to get. Must be in the format
+ *   `projects/{project}/locations/{location}/gatewaySecurityPolicies/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicy|GatewaySecurityPolicy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.get_gateway_security_policy.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_GetGatewaySecurityPolicy_async
+ */
+  getGatewaySecurityPolicy(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IGetGatewaySecurityPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicy,
+        protos.google.cloud.networksecurity.v1alpha1.IGetGatewaySecurityPolicyRequest|undefined, {}|undefined
+      ]>;
+  getGatewaySecurityPolicy(
+      request: protos.google.cloud.networksecurity.v1alpha1.IGetGatewaySecurityPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicy,
+          protos.google.cloud.networksecurity.v1alpha1.IGetGatewaySecurityPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getGatewaySecurityPolicy(
+      request: protos.google.cloud.networksecurity.v1alpha1.IGetGatewaySecurityPolicyRequest,
+      callback: Callback<
+          protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicy,
+          protos.google.cloud.networksecurity.v1alpha1.IGetGatewaySecurityPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getGatewaySecurityPolicy(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IGetGatewaySecurityPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicy,
+          protos.google.cloud.networksecurity.v1alpha1.IGetGatewaySecurityPolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicy,
+          protos.google.cloud.networksecurity.v1alpha1.IGetGatewaySecurityPolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicy,
+        protos.google.cloud.networksecurity.v1alpha1.IGetGatewaySecurityPolicyRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('getGatewaySecurityPolicy request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicy,
+        protos.google.cloud.networksecurity.v1alpha1.IGetGatewaySecurityPolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getGatewaySecurityPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getGatewaySecurityPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicy,
+        protos.google.cloud.networksecurity.v1alpha1.IGetGatewaySecurityPolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getGatewaySecurityPolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Gets details of a single GatewaySecurityPolicyRule.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the GatewaySecurityPolicyRule to retrieve.
+ *   Format:
+ *   projects/{project}/location/{location}/gatewaySecurityPolicies/* /rules/*
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicyRule|GatewaySecurityPolicyRule}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.get_gateway_security_policy_rule.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_GetGatewaySecurityPolicyRule_async
+ */
+  getGatewaySecurityPolicyRule(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IGetGatewaySecurityPolicyRuleRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicyRule,
+        protos.google.cloud.networksecurity.v1alpha1.IGetGatewaySecurityPolicyRuleRequest|undefined, {}|undefined
+      ]>;
+  getGatewaySecurityPolicyRule(
+      request: protos.google.cloud.networksecurity.v1alpha1.IGetGatewaySecurityPolicyRuleRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicyRule,
+          protos.google.cloud.networksecurity.v1alpha1.IGetGatewaySecurityPolicyRuleRequest|null|undefined,
+          {}|null|undefined>): void;
+  getGatewaySecurityPolicyRule(
+      request: protos.google.cloud.networksecurity.v1alpha1.IGetGatewaySecurityPolicyRuleRequest,
+      callback: Callback<
+          protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicyRule,
+          protos.google.cloud.networksecurity.v1alpha1.IGetGatewaySecurityPolicyRuleRequest|null|undefined,
+          {}|null|undefined>): void;
+  getGatewaySecurityPolicyRule(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IGetGatewaySecurityPolicyRuleRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicyRule,
+          protos.google.cloud.networksecurity.v1alpha1.IGetGatewaySecurityPolicyRuleRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicyRule,
+          protos.google.cloud.networksecurity.v1alpha1.IGetGatewaySecurityPolicyRuleRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicyRule,
+        protos.google.cloud.networksecurity.v1alpha1.IGetGatewaySecurityPolicyRuleRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('getGatewaySecurityPolicyRule request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicyRule,
+        protos.google.cloud.networksecurity.v1alpha1.IGetGatewaySecurityPolicyRuleRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getGatewaySecurityPolicyRule response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getGatewaySecurityPolicyRule(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicyRule,
+        protos.google.cloud.networksecurity.v1alpha1.IGetGatewaySecurityPolicyRuleRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getGatewaySecurityPolicyRule response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Gets details of a single UrlList.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. A name of the UrlList to get. Must be in the format
+ *   `projects/* /locations/{location}/urlLists/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.networksecurity.v1alpha1.UrlList|UrlList}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.get_url_list.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_GetUrlList_async
+ */
+  getUrlList(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IGetUrlListRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.networksecurity.v1alpha1.IUrlList,
+        protos.google.cloud.networksecurity.v1alpha1.IGetUrlListRequest|undefined, {}|undefined
+      ]>;
+  getUrlList(
+      request: protos.google.cloud.networksecurity.v1alpha1.IGetUrlListRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.networksecurity.v1alpha1.IUrlList,
+          protos.google.cloud.networksecurity.v1alpha1.IGetUrlListRequest|null|undefined,
+          {}|null|undefined>): void;
+  getUrlList(
+      request: protos.google.cloud.networksecurity.v1alpha1.IGetUrlListRequest,
+      callback: Callback<
+          protos.google.cloud.networksecurity.v1alpha1.IUrlList,
+          protos.google.cloud.networksecurity.v1alpha1.IGetUrlListRequest|null|undefined,
+          {}|null|undefined>): void;
+  getUrlList(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IGetUrlListRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.networksecurity.v1alpha1.IUrlList,
+          protos.google.cloud.networksecurity.v1alpha1.IGetUrlListRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.networksecurity.v1alpha1.IUrlList,
+          protos.google.cloud.networksecurity.v1alpha1.IGetUrlListRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.networksecurity.v1alpha1.IUrlList,
+        protos.google.cloud.networksecurity.v1alpha1.IGetUrlListRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('getUrlList request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.networksecurity.v1alpha1.IUrlList,
+        protos.google.cloud.networksecurity.v1alpha1.IGetUrlListRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getUrlList response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getUrlList(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.networksecurity.v1alpha1.IUrlList,
+        protos.google.cloud.networksecurity.v1alpha1.IGetUrlListRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getUrlList response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Gets details of a single TlsInspectionPolicy.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. A name of the TlsInspectionPolicy to get. Must be in the format
+ *   `projects/{project}/locations/{location}/tlsInspectionPolicies/{tls_inspection_policy}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.networksecurity.v1alpha1.TlsInspectionPolicy|TlsInspectionPolicy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.get_tls_inspection_policy.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_GetTlsInspectionPolicy_async
+ */
+  getTlsInspectionPolicy(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IGetTlsInspectionPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.networksecurity.v1alpha1.ITlsInspectionPolicy,
+        protos.google.cloud.networksecurity.v1alpha1.IGetTlsInspectionPolicyRequest|undefined, {}|undefined
+      ]>;
+  getTlsInspectionPolicy(
+      request: protos.google.cloud.networksecurity.v1alpha1.IGetTlsInspectionPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.networksecurity.v1alpha1.ITlsInspectionPolicy,
+          protos.google.cloud.networksecurity.v1alpha1.IGetTlsInspectionPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getTlsInspectionPolicy(
+      request: protos.google.cloud.networksecurity.v1alpha1.IGetTlsInspectionPolicyRequest,
+      callback: Callback<
+          protos.google.cloud.networksecurity.v1alpha1.ITlsInspectionPolicy,
+          protos.google.cloud.networksecurity.v1alpha1.IGetTlsInspectionPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getTlsInspectionPolicy(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IGetTlsInspectionPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.networksecurity.v1alpha1.ITlsInspectionPolicy,
+          protos.google.cloud.networksecurity.v1alpha1.IGetTlsInspectionPolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.networksecurity.v1alpha1.ITlsInspectionPolicy,
+          protos.google.cloud.networksecurity.v1alpha1.IGetTlsInspectionPolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.networksecurity.v1alpha1.ITlsInspectionPolicy,
+        protos.google.cloud.networksecurity.v1alpha1.IGetTlsInspectionPolicyRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('getTlsInspectionPolicy request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.networksecurity.v1alpha1.ITlsInspectionPolicy,
+        protos.google.cloud.networksecurity.v1alpha1.IGetTlsInspectionPolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getTlsInspectionPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getTlsInspectionPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.networksecurity.v1alpha1.ITlsInspectionPolicy,
+        protos.google.cloud.networksecurity.v1alpha1.IGetTlsInspectionPolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getTlsInspectionPolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Gets details of a single AuthzPolicy.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. A name of the `AuthzPolicy` resource to get. Must be in the
+ *   format
+ *   `projects/{project}/locations/{location}/authzPolicies/{authz_policy}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.networksecurity.v1alpha1.AuthzPolicy|AuthzPolicy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.get_authz_policy.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_GetAuthzPolicy_async
+ */
+  getAuthzPolicy(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IGetAuthzPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.networksecurity.v1alpha1.IAuthzPolicy,
+        protos.google.cloud.networksecurity.v1alpha1.IGetAuthzPolicyRequest|undefined, {}|undefined
+      ]>;
+  getAuthzPolicy(
+      request: protos.google.cloud.networksecurity.v1alpha1.IGetAuthzPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.networksecurity.v1alpha1.IAuthzPolicy,
+          protos.google.cloud.networksecurity.v1alpha1.IGetAuthzPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getAuthzPolicy(
+      request: protos.google.cloud.networksecurity.v1alpha1.IGetAuthzPolicyRequest,
+      callback: Callback<
+          protos.google.cloud.networksecurity.v1alpha1.IAuthzPolicy,
+          protos.google.cloud.networksecurity.v1alpha1.IGetAuthzPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getAuthzPolicy(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IGetAuthzPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.networksecurity.v1alpha1.IAuthzPolicy,
+          protos.google.cloud.networksecurity.v1alpha1.IGetAuthzPolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.networksecurity.v1alpha1.IAuthzPolicy,
+          protos.google.cloud.networksecurity.v1alpha1.IGetAuthzPolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.networksecurity.v1alpha1.IAuthzPolicy,
+        protos.google.cloud.networksecurity.v1alpha1.IGetAuthzPolicyRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('getAuthzPolicy request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.networksecurity.v1alpha1.IAuthzPolicy,
+        protos.google.cloud.networksecurity.v1alpha1.IGetAuthzPolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAuthzPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getAuthzPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.networksecurity.v1alpha1.IAuthzPolicy,
+        protos.google.cloud.networksecurity.v1alpha1.IGetAuthzPolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getAuthzPolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
 
+/**
+ * Creates a new AuthorizationPolicy in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource of the AuthorizationPolicy. Must be in the
+ *   format `projects/{project}/locations/{location}`.
+ * @param {string} request.authorizationPolicyId
+ *   Required. Short name of the AuthorizationPolicy resource to be created.
+ *   This value should be 1-63 characters long, containing only
+ *   letters, numbers, hyphens, and underscores, and should not start
+ *   with a number. E.g. "authz_policy".
+ * @param {google.cloud.networksecurity.v1alpha1.AuthorizationPolicy} request.authorizationPolicy
+ *   Required. AuthorizationPolicy resource to be created.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.create_authorization_policy.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_CreateAuthorizationPolicy_async
+ */
+  createAuthorizationPolicy(
+      request?: protos.google.cloud.networksecurity.v1alpha1.ICreateAuthorizationPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.networksecurity.v1alpha1.IAuthorizationPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  createAuthorizationPolicy(
+      request: protos.google.cloud.networksecurity.v1alpha1.ICreateAuthorizationPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IAuthorizationPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  createAuthorizationPolicy(
+      request: protos.google.cloud.networksecurity.v1alpha1.ICreateAuthorizationPolicyRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IAuthorizationPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  createAuthorizationPolicy(
+      request?: protos.google.cloud.networksecurity.v1alpha1.ICreateAuthorizationPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IAuthorizationPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IAuthorizationPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.networksecurity.v1alpha1.IAuthorizationPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IAuthorizationPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createAuthorizationPolicy response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createAuthorizationPolicy request %j', request);
+    return this.innerApiCalls.createAuthorizationPolicy(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.networksecurity.v1alpha1.IAuthorizationPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createAuthorizationPolicy response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `createAuthorizationPolicy()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.create_authorization_policy.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_CreateAuthorizationPolicy_async
+ */
+  async checkCreateAuthorizationPolicyProgress(name: string): Promise<LROperation<protos.google.cloud.networksecurity.v1alpha1.AuthorizationPolicy, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+    this._log.info('createAuthorizationPolicy long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createAuthorizationPolicy, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.networksecurity.v1alpha1.AuthorizationPolicy, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+  }
+/**
+ * Updates the parameters of a single AuthorizationPolicy.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. Field mask is used to specify the fields to be overwritten in the
+ *   AuthorizationPolicy resource by the update.
+ *   The fields specified in the update_mask are relative to the resource, not
+ *   the full request. A field will be overwritten if it is in the mask. If the
+ *   user does not provide a mask then all fields will be overwritten.
+ * @param {google.cloud.networksecurity.v1alpha1.AuthorizationPolicy} request.authorizationPolicy
+ *   Required. Updated AuthorizationPolicy resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.update_authorization_policy.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_UpdateAuthorizationPolicy_async
+ */
+  updateAuthorizationPolicy(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IUpdateAuthorizationPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.networksecurity.v1alpha1.IAuthorizationPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  updateAuthorizationPolicy(
+      request: protos.google.cloud.networksecurity.v1alpha1.IUpdateAuthorizationPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IAuthorizationPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  updateAuthorizationPolicy(
+      request: protos.google.cloud.networksecurity.v1alpha1.IUpdateAuthorizationPolicyRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IAuthorizationPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  updateAuthorizationPolicy(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IUpdateAuthorizationPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IAuthorizationPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IAuthorizationPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.networksecurity.v1alpha1.IAuthorizationPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'authorization_policy.name': request.authorizationPolicy!.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IAuthorizationPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateAuthorizationPolicy response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateAuthorizationPolicy request %j', request);
+    return this.innerApiCalls.updateAuthorizationPolicy(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.networksecurity.v1alpha1.IAuthorizationPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateAuthorizationPolicy response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `updateAuthorizationPolicy()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.update_authorization_policy.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_UpdateAuthorizationPolicy_async
+ */
+  async checkUpdateAuthorizationPolicyProgress(name: string): Promise<LROperation<protos.google.cloud.networksecurity.v1alpha1.AuthorizationPolicy, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+    this._log.info('updateAuthorizationPolicy long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateAuthorizationPolicy, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.networksecurity.v1alpha1.AuthorizationPolicy, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+  }
+/**
+ * Deletes a single AuthorizationPolicy.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. A name of the AuthorizationPolicy to delete. Must be in the
+ *   format `projects/{project}/locations/{location}/authorizationPolicies/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.delete_authorization_policy.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_DeleteAuthorizationPolicy_async
+ */
+  deleteAuthorizationPolicy(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteAuthorizationPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  deleteAuthorizationPolicy(
+      request: protos.google.cloud.networksecurity.v1alpha1.IDeleteAuthorizationPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deleteAuthorizationPolicy(
+      request: protos.google.cloud.networksecurity.v1alpha1.IDeleteAuthorizationPolicyRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deleteAuthorizationPolicy(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteAuthorizationPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteAuthorizationPolicy response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteAuthorizationPolicy request %j', request);
+    return this.innerApiCalls.deleteAuthorizationPolicy(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteAuthorizationPolicy response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `deleteAuthorizationPolicy()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.delete_authorization_policy.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_DeleteAuthorizationPolicy_async
+ */
+  async checkDeleteAuthorizationPolicyProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+    this._log.info('deleteAuthorizationPolicy long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteAuthorizationPolicy, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+  }
+/**
+ * Creates a new BackendAuthenticationConfig in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource of the BackendAuthenticationConfig. Must be
+ *   in the format `projects/* /locations/{location}`.
+ * @param {string} request.backendAuthenticationConfigId
+ *   Required. Short name of the BackendAuthenticationConfig resource to be
+ *   created. This value should be 1-63 characters long, containing only
+ *   letters, numbers, hyphens, and underscores, and should not start with a
+ *   number. E.g. "backend-auth-config".
+ * @param {google.cloud.networksecurity.v1alpha1.BackendAuthenticationConfig} request.backendAuthenticationConfig
+ *   Required. BackendAuthenticationConfig resource to be created.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.create_backend_authentication_config.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_CreateBackendAuthenticationConfig_async
+ */
+  createBackendAuthenticationConfig(
+      request?: protos.google.cloud.networksecurity.v1alpha1.ICreateBackendAuthenticationConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.networksecurity.v1alpha1.IBackendAuthenticationConfig, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  createBackendAuthenticationConfig(
+      request: protos.google.cloud.networksecurity.v1alpha1.ICreateBackendAuthenticationConfigRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IBackendAuthenticationConfig, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  createBackendAuthenticationConfig(
+      request: protos.google.cloud.networksecurity.v1alpha1.ICreateBackendAuthenticationConfigRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IBackendAuthenticationConfig, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  createBackendAuthenticationConfig(
+      request?: protos.google.cloud.networksecurity.v1alpha1.ICreateBackendAuthenticationConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IBackendAuthenticationConfig, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IBackendAuthenticationConfig, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.networksecurity.v1alpha1.IBackendAuthenticationConfig, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IBackendAuthenticationConfig, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createBackendAuthenticationConfig response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createBackendAuthenticationConfig request %j', request);
+    return this.innerApiCalls.createBackendAuthenticationConfig(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.networksecurity.v1alpha1.IBackendAuthenticationConfig, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createBackendAuthenticationConfig response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `createBackendAuthenticationConfig()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.create_backend_authentication_config.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_CreateBackendAuthenticationConfig_async
+ */
+  async checkCreateBackendAuthenticationConfigProgress(name: string): Promise<LROperation<protos.google.cloud.networksecurity.v1alpha1.BackendAuthenticationConfig, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+    this._log.info('createBackendAuthenticationConfig long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createBackendAuthenticationConfig, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.networksecurity.v1alpha1.BackendAuthenticationConfig, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+  }
+/**
+ * Updates the parameters of a single BackendAuthenticationConfig to
+ * BackendAuthenticationConfig.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. Field mask is used to specify the fields to be overwritten in the
+ *   BackendAuthenticationConfig resource by the update.  The fields
+ *   specified in the update_mask are relative to the resource, not
+ *   the full request. A field will be overwritten if it is in the
+ *   mask. If the user does not provide a mask then all fields will be
+ *   overwritten.
+ * @param {google.cloud.networksecurity.v1alpha1.BackendAuthenticationConfig} request.backendAuthenticationConfig
+ *   Required. Updated BackendAuthenticationConfig resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.update_backend_authentication_config.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_UpdateBackendAuthenticationConfig_async
+ */
+  updateBackendAuthenticationConfig(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IUpdateBackendAuthenticationConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.networksecurity.v1alpha1.IBackendAuthenticationConfig, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  updateBackendAuthenticationConfig(
+      request: protos.google.cloud.networksecurity.v1alpha1.IUpdateBackendAuthenticationConfigRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IBackendAuthenticationConfig, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  updateBackendAuthenticationConfig(
+      request: protos.google.cloud.networksecurity.v1alpha1.IUpdateBackendAuthenticationConfigRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IBackendAuthenticationConfig, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  updateBackendAuthenticationConfig(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IUpdateBackendAuthenticationConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IBackendAuthenticationConfig, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IBackendAuthenticationConfig, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.networksecurity.v1alpha1.IBackendAuthenticationConfig, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'backend_authentication_config.name': request.backendAuthenticationConfig!.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IBackendAuthenticationConfig, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateBackendAuthenticationConfig response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateBackendAuthenticationConfig request %j', request);
+    return this.innerApiCalls.updateBackendAuthenticationConfig(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.networksecurity.v1alpha1.IBackendAuthenticationConfig, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateBackendAuthenticationConfig response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `updateBackendAuthenticationConfig()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.update_backend_authentication_config.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_UpdateBackendAuthenticationConfig_async
+ */
+  async checkUpdateBackendAuthenticationConfigProgress(name: string): Promise<LROperation<protos.google.cloud.networksecurity.v1alpha1.BackendAuthenticationConfig, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+    this._log.info('updateBackendAuthenticationConfig long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateBackendAuthenticationConfig, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.networksecurity.v1alpha1.BackendAuthenticationConfig, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+  }
+/**
+ * Deletes a single BackendAuthenticationConfig to
+ * BackendAuthenticationConfig.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. A name of the BackendAuthenticationConfig to delete. Must be in
+ *   the format
+ *   `projects/* /locations/{location}/backendAuthenticationConfigs/*`.
+ * @param {string} [request.etag]
+ *   Optional. Etag of the resource.
+ *   If this is provided, it must match the server's etag.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.delete_backend_authentication_config.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_DeleteBackendAuthenticationConfig_async
+ */
+  deleteBackendAuthenticationConfig(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteBackendAuthenticationConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  deleteBackendAuthenticationConfig(
+      request: protos.google.cloud.networksecurity.v1alpha1.IDeleteBackendAuthenticationConfigRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deleteBackendAuthenticationConfig(
+      request: protos.google.cloud.networksecurity.v1alpha1.IDeleteBackendAuthenticationConfigRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deleteBackendAuthenticationConfig(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteBackendAuthenticationConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteBackendAuthenticationConfig response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteBackendAuthenticationConfig request %j', request);
+    return this.innerApiCalls.deleteBackendAuthenticationConfig(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteBackendAuthenticationConfig response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `deleteBackendAuthenticationConfig()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.delete_backend_authentication_config.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_DeleteBackendAuthenticationConfig_async
+ */
+  async checkDeleteBackendAuthenticationConfigProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+    this._log.info('deleteBackendAuthenticationConfig long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteBackendAuthenticationConfig, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+  }
+/**
+ * Creates a new ServerTlsPolicy in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource of the ServerTlsPolicy. Must be in
+ *   the format `projects/* /locations/{location}`.
+ * @param {string} request.serverTlsPolicyId
+ *   Required. Short name of the ServerTlsPolicy resource to be created. This
+ *   value should be 1-63 characters long, containing only letters, numbers,
+ *   hyphens, and underscores, and should not start with a number. E.g.
+ *   "server_mtls_policy".
+ * @param {google.cloud.networksecurity.v1alpha1.ServerTlsPolicy} request.serverTlsPolicy
+ *   Required. ServerTlsPolicy resource to be created.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.create_server_tls_policy.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_CreateServerTlsPolicy_async
+ */
+  createServerTlsPolicy(
+      request?: protos.google.cloud.networksecurity.v1alpha1.ICreateServerTlsPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.networksecurity.v1alpha1.IServerTlsPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  createServerTlsPolicy(
+      request: protos.google.cloud.networksecurity.v1alpha1.ICreateServerTlsPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IServerTlsPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  createServerTlsPolicy(
+      request: protos.google.cloud.networksecurity.v1alpha1.ICreateServerTlsPolicyRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IServerTlsPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  createServerTlsPolicy(
+      request?: protos.google.cloud.networksecurity.v1alpha1.ICreateServerTlsPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IServerTlsPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IServerTlsPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.networksecurity.v1alpha1.IServerTlsPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IServerTlsPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createServerTlsPolicy response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createServerTlsPolicy request %j', request);
+    return this.innerApiCalls.createServerTlsPolicy(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.networksecurity.v1alpha1.IServerTlsPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createServerTlsPolicy response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `createServerTlsPolicy()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.create_server_tls_policy.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_CreateServerTlsPolicy_async
+ */
+  async checkCreateServerTlsPolicyProgress(name: string): Promise<LROperation<protos.google.cloud.networksecurity.v1alpha1.ServerTlsPolicy, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+    this._log.info('createServerTlsPolicy long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createServerTlsPolicy, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.networksecurity.v1alpha1.ServerTlsPolicy, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+  }
+/**
+ * Updates the parameters of a single ServerTlsPolicy.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. Field mask is used to specify the fields to be overwritten in the
+ *   ServerTlsPolicy resource by the update.  The fields
+ *   specified in the update_mask are relative to the resource, not
+ *   the full request. A field will be overwritten if it is in the
+ *   mask. If the user does not provide a mask then all fields will be
+ *   overwritten.
+ * @param {google.cloud.networksecurity.v1alpha1.ServerTlsPolicy} request.serverTlsPolicy
+ *   Required. Updated ServerTlsPolicy resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.update_server_tls_policy.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_UpdateServerTlsPolicy_async
+ */
+  updateServerTlsPolicy(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IUpdateServerTlsPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.networksecurity.v1alpha1.IServerTlsPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  updateServerTlsPolicy(
+      request: protos.google.cloud.networksecurity.v1alpha1.IUpdateServerTlsPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IServerTlsPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  updateServerTlsPolicy(
+      request: protos.google.cloud.networksecurity.v1alpha1.IUpdateServerTlsPolicyRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IServerTlsPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  updateServerTlsPolicy(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IUpdateServerTlsPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IServerTlsPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IServerTlsPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.networksecurity.v1alpha1.IServerTlsPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'server_tls_policy.name': request.serverTlsPolicy!.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IServerTlsPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateServerTlsPolicy response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateServerTlsPolicy request %j', request);
+    return this.innerApiCalls.updateServerTlsPolicy(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.networksecurity.v1alpha1.IServerTlsPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateServerTlsPolicy response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `updateServerTlsPolicy()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.update_server_tls_policy.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_UpdateServerTlsPolicy_async
+ */
+  async checkUpdateServerTlsPolicyProgress(name: string): Promise<LROperation<protos.google.cloud.networksecurity.v1alpha1.ServerTlsPolicy, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+    this._log.info('updateServerTlsPolicy long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateServerTlsPolicy, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.networksecurity.v1alpha1.ServerTlsPolicy, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+  }
+/**
+ * Deletes a single ServerTlsPolicy.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. A name of the ServerTlsPolicy to delete. Must be in
+ *   the format `projects/* /locations/{location}/serverTlsPolicies/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.delete_server_tls_policy.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_DeleteServerTlsPolicy_async
+ */
+  deleteServerTlsPolicy(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteServerTlsPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  deleteServerTlsPolicy(
+      request: protos.google.cloud.networksecurity.v1alpha1.IDeleteServerTlsPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deleteServerTlsPolicy(
+      request: protos.google.cloud.networksecurity.v1alpha1.IDeleteServerTlsPolicyRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deleteServerTlsPolicy(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteServerTlsPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteServerTlsPolicy response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteServerTlsPolicy request %j', request);
+    return this.innerApiCalls.deleteServerTlsPolicy(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteServerTlsPolicy response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `deleteServerTlsPolicy()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.delete_server_tls_policy.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_DeleteServerTlsPolicy_async
+ */
+  async checkDeleteServerTlsPolicyProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+    this._log.info('deleteServerTlsPolicy long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteServerTlsPolicy, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+  }
 /**
  * Creates a new ClientTlsPolicy in a given project and location.
  *
@@ -830,6 +2904,2366 @@ export class NetworkSecurityClient {
     const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteClientTlsPolicy, this._gaxModule.createDefaultBackoffSettings());
     return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
   }
+/**
+ * Creates a new GatewaySecurityPolicy in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource of the GatewaySecurityPolicy. Must be in the
+ *   format `projects/{project}/locations/{location}`.
+ * @param {string} request.gatewaySecurityPolicyId
+ *   Required. Short name of the GatewaySecurityPolicy resource to be created.
+ *   This value should be 1-63 characters long, containing only
+ *   letters, numbers, hyphens, and underscores, and should not start
+ *   with a number. E.g. "gateway_security_policy1".
+ * @param {google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicy} request.gatewaySecurityPolicy
+ *   Required. GatewaySecurityPolicy resource to be created.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.create_gateway_security_policy.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_CreateGatewaySecurityPolicy_async
+ */
+  createGatewaySecurityPolicy(
+      request?: protos.google.cloud.networksecurity.v1alpha1.ICreateGatewaySecurityPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  createGatewaySecurityPolicy(
+      request: protos.google.cloud.networksecurity.v1alpha1.ICreateGatewaySecurityPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  createGatewaySecurityPolicy(
+      request: protos.google.cloud.networksecurity.v1alpha1.ICreateGatewaySecurityPolicyRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  createGatewaySecurityPolicy(
+      request?: protos.google.cloud.networksecurity.v1alpha1.ICreateGatewaySecurityPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createGatewaySecurityPolicy response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createGatewaySecurityPolicy request %j', request);
+    return this.innerApiCalls.createGatewaySecurityPolicy(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createGatewaySecurityPolicy response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `createGatewaySecurityPolicy()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.create_gateway_security_policy.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_CreateGatewaySecurityPolicy_async
+ */
+  async checkCreateGatewaySecurityPolicyProgress(name: string): Promise<LROperation<protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicy, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+    this._log.info('createGatewaySecurityPolicy long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createGatewaySecurityPolicy, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicy, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+  }
+/**
+ * Updates the parameters of a single GatewaySecurityPolicy.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. Field mask is used to specify the fields to be overwritten in the
+ *   GatewaySecurityPolicy resource by the update.
+ *   The fields specified in the update_mask are relative to the resource, not
+ *   the full request. A field will be overwritten if it is in the mask. If the
+ *   user does not provide a mask then all fields will be overwritten.
+ * @param {google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicy} request.gatewaySecurityPolicy
+ *   Required. Updated GatewaySecurityPolicy resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.update_gateway_security_policy.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_UpdateGatewaySecurityPolicy_async
+ */
+  updateGatewaySecurityPolicy(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IUpdateGatewaySecurityPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  updateGatewaySecurityPolicy(
+      request: protos.google.cloud.networksecurity.v1alpha1.IUpdateGatewaySecurityPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  updateGatewaySecurityPolicy(
+      request: protos.google.cloud.networksecurity.v1alpha1.IUpdateGatewaySecurityPolicyRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  updateGatewaySecurityPolicy(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IUpdateGatewaySecurityPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'gateway_security_policy.name': request.gatewaySecurityPolicy!.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateGatewaySecurityPolicy response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateGatewaySecurityPolicy request %j', request);
+    return this.innerApiCalls.updateGatewaySecurityPolicy(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateGatewaySecurityPolicy response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `updateGatewaySecurityPolicy()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.update_gateway_security_policy.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_UpdateGatewaySecurityPolicy_async
+ */
+  async checkUpdateGatewaySecurityPolicyProgress(name: string): Promise<LROperation<protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicy, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+    this._log.info('updateGatewaySecurityPolicy long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateGatewaySecurityPolicy, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicy, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+  }
+/**
+ * Deletes a single GatewaySecurityPolicy.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. A name of the GatewaySecurityPolicy to delete. Must be in the
+ *   format `projects/{project}/locations/{location}/gatewaySecurityPolicies/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.delete_gateway_security_policy.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_DeleteGatewaySecurityPolicy_async
+ */
+  deleteGatewaySecurityPolicy(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteGatewaySecurityPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  deleteGatewaySecurityPolicy(
+      request: protos.google.cloud.networksecurity.v1alpha1.IDeleteGatewaySecurityPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deleteGatewaySecurityPolicy(
+      request: protos.google.cloud.networksecurity.v1alpha1.IDeleteGatewaySecurityPolicyRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deleteGatewaySecurityPolicy(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteGatewaySecurityPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteGatewaySecurityPolicy response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteGatewaySecurityPolicy request %j', request);
+    return this.innerApiCalls.deleteGatewaySecurityPolicy(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteGatewaySecurityPolicy response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `deleteGatewaySecurityPolicy()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.delete_gateway_security_policy.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_DeleteGatewaySecurityPolicy_async
+ */
+  async checkDeleteGatewaySecurityPolicyProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+    this._log.info('deleteGatewaySecurityPolicy long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteGatewaySecurityPolicy, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+  }
+/**
+ * Creates a new GatewaySecurityPolicy in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent where this rule will be created.
+ *   Format :
+ *   projects/{project}/location/{location}/gatewaySecurityPolicies/*
+ * @param {google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicyRule} request.gatewaySecurityPolicyRule
+ *   Required. The rule to be created.
+ * @param {string} request.gatewaySecurityPolicyRuleId
+ *   The ID to use for the rule, which will become the final component of
+ *   the rule's resource name.
+ *   This value should be 4-63 characters, and valid characters
+ *   are /{@link protos.0-9|a-z}-/.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.create_gateway_security_policy_rule.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_CreateGatewaySecurityPolicyRule_async
+ */
+  createGatewaySecurityPolicyRule(
+      request?: protos.google.cloud.networksecurity.v1alpha1.ICreateGatewaySecurityPolicyRuleRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicyRule, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  createGatewaySecurityPolicyRule(
+      request: protos.google.cloud.networksecurity.v1alpha1.ICreateGatewaySecurityPolicyRuleRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicyRule, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  createGatewaySecurityPolicyRule(
+      request: protos.google.cloud.networksecurity.v1alpha1.ICreateGatewaySecurityPolicyRuleRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicyRule, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  createGatewaySecurityPolicyRule(
+      request?: protos.google.cloud.networksecurity.v1alpha1.ICreateGatewaySecurityPolicyRuleRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicyRule, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicyRule, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicyRule, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicyRule, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createGatewaySecurityPolicyRule response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createGatewaySecurityPolicyRule request %j', request);
+    return this.innerApiCalls.createGatewaySecurityPolicyRule(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicyRule, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createGatewaySecurityPolicyRule response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `createGatewaySecurityPolicyRule()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.create_gateway_security_policy_rule.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_CreateGatewaySecurityPolicyRule_async
+ */
+  async checkCreateGatewaySecurityPolicyRuleProgress(name: string): Promise<LROperation<protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicyRule, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+    this._log.info('createGatewaySecurityPolicyRule long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createGatewaySecurityPolicyRule, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicyRule, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+  }
+/**
+ * Updates the parameters of a single GatewaySecurityPolicyRule.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. Field mask is used to specify the fields to be overwritten in the
+ *   GatewaySecurityPolicy resource by the update.
+ *   The fields specified in the update_mask are relative to the resource, not
+ *   the full request. A field will be overwritten if it is in the mask. If the
+ *   user does not provide a mask then all fields will be overwritten.
+ * @param {google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicyRule} request.gatewaySecurityPolicyRule
+ *   Required. Updated GatewaySecurityPolicyRule resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.update_gateway_security_policy_rule.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_UpdateGatewaySecurityPolicyRule_async
+ */
+  updateGatewaySecurityPolicyRule(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IUpdateGatewaySecurityPolicyRuleRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicyRule, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  updateGatewaySecurityPolicyRule(
+      request: protos.google.cloud.networksecurity.v1alpha1.IUpdateGatewaySecurityPolicyRuleRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicyRule, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  updateGatewaySecurityPolicyRule(
+      request: protos.google.cloud.networksecurity.v1alpha1.IUpdateGatewaySecurityPolicyRuleRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicyRule, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  updateGatewaySecurityPolicyRule(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IUpdateGatewaySecurityPolicyRuleRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicyRule, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicyRule, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicyRule, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'gateway_security_policy_rule.name': request.gatewaySecurityPolicyRule!.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicyRule, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateGatewaySecurityPolicyRule response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateGatewaySecurityPolicyRule request %j', request);
+    return this.innerApiCalls.updateGatewaySecurityPolicyRule(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicyRule, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateGatewaySecurityPolicyRule response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `updateGatewaySecurityPolicyRule()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.update_gateway_security_policy_rule.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_UpdateGatewaySecurityPolicyRule_async
+ */
+  async checkUpdateGatewaySecurityPolicyRuleProgress(name: string): Promise<LROperation<protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicyRule, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+    this._log.info('updateGatewaySecurityPolicyRule long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateGatewaySecurityPolicyRule, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicyRule, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+  }
+/**
+ * Deletes a single GatewaySecurityPolicyRule.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. A name of the GatewaySecurityPolicyRule to delete. Must be in the
+ *   format
+ *   `projects/{project}/locations/{location}/gatewaySecurityPolicies/{gatewaySecurityPolicy}/rules/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.delete_gateway_security_policy_rule.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_DeleteGatewaySecurityPolicyRule_async
+ */
+  deleteGatewaySecurityPolicyRule(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteGatewaySecurityPolicyRuleRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  deleteGatewaySecurityPolicyRule(
+      request: protos.google.cloud.networksecurity.v1alpha1.IDeleteGatewaySecurityPolicyRuleRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deleteGatewaySecurityPolicyRule(
+      request: protos.google.cloud.networksecurity.v1alpha1.IDeleteGatewaySecurityPolicyRuleRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deleteGatewaySecurityPolicyRule(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteGatewaySecurityPolicyRuleRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteGatewaySecurityPolicyRule response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteGatewaySecurityPolicyRule request %j', request);
+    return this.innerApiCalls.deleteGatewaySecurityPolicyRule(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteGatewaySecurityPolicyRule response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `deleteGatewaySecurityPolicyRule()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.delete_gateway_security_policy_rule.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_DeleteGatewaySecurityPolicyRule_async
+ */
+  async checkDeleteGatewaySecurityPolicyRuleProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+    this._log.info('deleteGatewaySecurityPolicyRule long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteGatewaySecurityPolicyRule, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+  }
+/**
+ * Creates a new UrlList in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource of the UrlList. Must be in
+ *   the format `projects/* /locations/{location}`.
+ * @param {string} request.urlListId
+ *   Required. Short name of the UrlList resource to be created. This value
+ *   should be 1-63 characters long, containing only letters, numbers, hyphens,
+ *   and underscores, and should not start with a number. E.g. "url_list".
+ * @param {google.cloud.networksecurity.v1alpha1.UrlList} request.urlList
+ *   Required. UrlList resource to be created.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.create_url_list.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_CreateUrlList_async
+ */
+  createUrlList(
+      request?: protos.google.cloud.networksecurity.v1alpha1.ICreateUrlListRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.networksecurity.v1alpha1.IUrlList, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  createUrlList(
+      request: protos.google.cloud.networksecurity.v1alpha1.ICreateUrlListRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IUrlList, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  createUrlList(
+      request: protos.google.cloud.networksecurity.v1alpha1.ICreateUrlListRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IUrlList, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  createUrlList(
+      request?: protos.google.cloud.networksecurity.v1alpha1.ICreateUrlListRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IUrlList, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IUrlList, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.networksecurity.v1alpha1.IUrlList, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IUrlList, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createUrlList response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createUrlList request %j', request);
+    return this.innerApiCalls.createUrlList(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.networksecurity.v1alpha1.IUrlList, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createUrlList response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `createUrlList()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.create_url_list.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_CreateUrlList_async
+ */
+  async checkCreateUrlListProgress(name: string): Promise<LROperation<protos.google.cloud.networksecurity.v1alpha1.UrlList, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+    this._log.info('createUrlList long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createUrlList, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.networksecurity.v1alpha1.UrlList, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+  }
+/**
+ * Updates the parameters of a single UrlList.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. Field mask is used to specify the fields to be overwritten in the
+ *   UrlList resource by the update.  The fields
+ *   specified in the update_mask are relative to the resource, not
+ *   the full request. A field will be overwritten if it is in the
+ *   mask. If the user does not provide a mask then all fields will be
+ *   overwritten.
+ * @param {google.cloud.networksecurity.v1alpha1.UrlList} request.urlList
+ *   Required. Updated UrlList resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.update_url_list.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_UpdateUrlList_async
+ */
+  updateUrlList(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IUpdateUrlListRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.networksecurity.v1alpha1.IUrlList, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  updateUrlList(
+      request: protos.google.cloud.networksecurity.v1alpha1.IUpdateUrlListRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IUrlList, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  updateUrlList(
+      request: protos.google.cloud.networksecurity.v1alpha1.IUpdateUrlListRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IUrlList, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  updateUrlList(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IUpdateUrlListRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IUrlList, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IUrlList, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.networksecurity.v1alpha1.IUrlList, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'url_list.name': request.urlList!.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IUrlList, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateUrlList response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateUrlList request %j', request);
+    return this.innerApiCalls.updateUrlList(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.networksecurity.v1alpha1.IUrlList, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateUrlList response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `updateUrlList()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.update_url_list.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_UpdateUrlList_async
+ */
+  async checkUpdateUrlListProgress(name: string): Promise<LROperation<protos.google.cloud.networksecurity.v1alpha1.UrlList, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+    this._log.info('updateUrlList long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateUrlList, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.networksecurity.v1alpha1.UrlList, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+  }
+/**
+ * Deletes a single UrlList.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. A name of the UrlList to delete. Must be in
+ *   the format `projects/* /locations/{location}/urlLists/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.delete_url_list.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_DeleteUrlList_async
+ */
+  deleteUrlList(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteUrlListRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  deleteUrlList(
+      request: protos.google.cloud.networksecurity.v1alpha1.IDeleteUrlListRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deleteUrlList(
+      request: protos.google.cloud.networksecurity.v1alpha1.IDeleteUrlListRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deleteUrlList(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteUrlListRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteUrlList response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteUrlList request %j', request);
+    return this.innerApiCalls.deleteUrlList(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteUrlList response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `deleteUrlList()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.delete_url_list.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_DeleteUrlList_async
+ */
+  async checkDeleteUrlListProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+    this._log.info('deleteUrlList long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteUrlList, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+  }
+/**
+ * Creates a new TlsInspectionPolicy in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource of the TlsInspectionPolicy. Must be in the
+ *   format `projects/{project}/locations/{location}`.
+ * @param {string} request.tlsInspectionPolicyId
+ *   Required. Short name of the TlsInspectionPolicy resource to be created.
+ *   This value should be 1-63 characters long, containing only
+ *   letters, numbers, hyphens, and underscores, and should not start
+ *   with a number. E.g. "tls_inspection_policy1".
+ * @param {google.cloud.networksecurity.v1alpha1.TlsInspectionPolicy} request.tlsInspectionPolicy
+ *   Required. TlsInspectionPolicy resource to be created.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.create_tls_inspection_policy.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_CreateTlsInspectionPolicy_async
+ */
+  createTlsInspectionPolicy(
+      request?: protos.google.cloud.networksecurity.v1alpha1.ICreateTlsInspectionPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.networksecurity.v1alpha1.ITlsInspectionPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  createTlsInspectionPolicy(
+      request: protos.google.cloud.networksecurity.v1alpha1.ICreateTlsInspectionPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.ITlsInspectionPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  createTlsInspectionPolicy(
+      request: protos.google.cloud.networksecurity.v1alpha1.ICreateTlsInspectionPolicyRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.ITlsInspectionPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  createTlsInspectionPolicy(
+      request?: protos.google.cloud.networksecurity.v1alpha1.ICreateTlsInspectionPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.ITlsInspectionPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.ITlsInspectionPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.networksecurity.v1alpha1.ITlsInspectionPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.ITlsInspectionPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createTlsInspectionPolicy response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createTlsInspectionPolicy request %j', request);
+    return this.innerApiCalls.createTlsInspectionPolicy(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.networksecurity.v1alpha1.ITlsInspectionPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createTlsInspectionPolicy response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `createTlsInspectionPolicy()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.create_tls_inspection_policy.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_CreateTlsInspectionPolicy_async
+ */
+  async checkCreateTlsInspectionPolicyProgress(name: string): Promise<LROperation<protos.google.cloud.networksecurity.v1alpha1.TlsInspectionPolicy, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+    this._log.info('createTlsInspectionPolicy long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createTlsInspectionPolicy, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.networksecurity.v1alpha1.TlsInspectionPolicy, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+  }
+/**
+ * Updates the parameters of a single TlsInspectionPolicy.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. Field mask is used to specify the fields to be overwritten in the
+ *   TlsInspectionPolicy resource by the update.
+ *   The fields specified in the update_mask are relative to the resource, not
+ *   the full request. A field will be overwritten if it is in the mask. If the
+ *   user does not provide a mask then all fields will be overwritten.
+ * @param {google.cloud.networksecurity.v1alpha1.TlsInspectionPolicy} request.tlsInspectionPolicy
+ *   Required. Updated TlsInspectionPolicy resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.update_tls_inspection_policy.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_UpdateTlsInspectionPolicy_async
+ */
+  updateTlsInspectionPolicy(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IUpdateTlsInspectionPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.networksecurity.v1alpha1.ITlsInspectionPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  updateTlsInspectionPolicy(
+      request: protos.google.cloud.networksecurity.v1alpha1.IUpdateTlsInspectionPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.ITlsInspectionPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  updateTlsInspectionPolicy(
+      request: protos.google.cloud.networksecurity.v1alpha1.IUpdateTlsInspectionPolicyRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.ITlsInspectionPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  updateTlsInspectionPolicy(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IUpdateTlsInspectionPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.ITlsInspectionPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.ITlsInspectionPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.networksecurity.v1alpha1.ITlsInspectionPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'tls_inspection_policy.name': request.tlsInspectionPolicy!.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.ITlsInspectionPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateTlsInspectionPolicy response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateTlsInspectionPolicy request %j', request);
+    return this.innerApiCalls.updateTlsInspectionPolicy(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.networksecurity.v1alpha1.ITlsInspectionPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateTlsInspectionPolicy response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `updateTlsInspectionPolicy()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.update_tls_inspection_policy.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_UpdateTlsInspectionPolicy_async
+ */
+  async checkUpdateTlsInspectionPolicyProgress(name: string): Promise<LROperation<protos.google.cloud.networksecurity.v1alpha1.TlsInspectionPolicy, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+    this._log.info('updateTlsInspectionPolicy long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateTlsInspectionPolicy, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.networksecurity.v1alpha1.TlsInspectionPolicy, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+  }
+/**
+ * Deletes a single TlsInspectionPolicy.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. A name of the TlsInspectionPolicy to delete. Must be in the
+ *   format
+ *   `projects/{project}/locations/{location}/tlsInspectionPolicies/{tls_inspection_policy}`.
+ * @param {boolean} request.force
+ *   If set to true, any rules for this TlsInspectionPolicy will also be
+ *   deleted. (Otherwise, the request will only work if the TlsInspectionPolicy
+ *   has no rules.)
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.delete_tls_inspection_policy.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_DeleteTlsInspectionPolicy_async
+ */
+  deleteTlsInspectionPolicy(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteTlsInspectionPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  deleteTlsInspectionPolicy(
+      request: protos.google.cloud.networksecurity.v1alpha1.IDeleteTlsInspectionPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deleteTlsInspectionPolicy(
+      request: protos.google.cloud.networksecurity.v1alpha1.IDeleteTlsInspectionPolicyRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deleteTlsInspectionPolicy(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteTlsInspectionPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteTlsInspectionPolicy response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteTlsInspectionPolicy request %j', request);
+    return this.innerApiCalls.deleteTlsInspectionPolicy(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteTlsInspectionPolicy response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `deleteTlsInspectionPolicy()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.delete_tls_inspection_policy.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_DeleteTlsInspectionPolicy_async
+ */
+  async checkDeleteTlsInspectionPolicyProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+    this._log.info('deleteTlsInspectionPolicy long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteTlsInspectionPolicy, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+  }
+/**
+ * Creates a new AuthzPolicy in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource of the `AuthzPolicy` resource. Must be in
+ *   the format `projects/{project}/locations/{location}`.
+ * @param {string} request.authzPolicyId
+ *   Required. User-provided ID of the `AuthzPolicy` resource to be created.
+ * @param {google.cloud.networksecurity.v1alpha1.AuthzPolicy} request.authzPolicy
+ *   Required. `AuthzPolicy` resource to be created.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server can ignore
+ *   the request if it has already been completed. The server guarantees
+ *   that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, ignores the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.create_authz_policy.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_CreateAuthzPolicy_async
+ */
+  createAuthzPolicy(
+      request?: protos.google.cloud.networksecurity.v1alpha1.ICreateAuthzPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.networksecurity.v1alpha1.IAuthzPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  createAuthzPolicy(
+      request: protos.google.cloud.networksecurity.v1alpha1.ICreateAuthzPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IAuthzPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  createAuthzPolicy(
+      request: protos.google.cloud.networksecurity.v1alpha1.ICreateAuthzPolicyRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IAuthzPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  createAuthzPolicy(
+      request?: protos.google.cloud.networksecurity.v1alpha1.ICreateAuthzPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IAuthzPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IAuthzPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.networksecurity.v1alpha1.IAuthzPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IAuthzPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createAuthzPolicy response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createAuthzPolicy request %j', request);
+    return this.innerApiCalls.createAuthzPolicy(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.networksecurity.v1alpha1.IAuthzPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createAuthzPolicy response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `createAuthzPolicy()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.create_authz_policy.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_CreateAuthzPolicy_async
+ */
+  async checkCreateAuthzPolicyProgress(name: string): Promise<LROperation<protos.google.cloud.networksecurity.v1alpha1.AuthzPolicy, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+    this._log.info('createAuthzPolicy long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createAuthzPolicy, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.networksecurity.v1alpha1.AuthzPolicy, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+  }
+/**
+ * Updates the parameters of a single AuthzPolicy.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. Used to specify the fields to be overwritten in the
+ *   `AuthzPolicy` resource by the update.
+ *   The fields specified in the `update_mask` are relative to the resource, not
+ *   the full request. A field is overwritten if it is in the mask. If the
+ *   user does not specify a mask, then all fields are overwritten.
+ * @param {google.cloud.networksecurity.v1alpha1.AuthzPolicy} request.authzPolicy
+ *   Required. `AuthzPolicy` resource being updated.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server can ignore
+ *   the request if it has already been completed. The server guarantees
+ *   that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, ignores the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.update_authz_policy.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_UpdateAuthzPolicy_async
+ */
+  updateAuthzPolicy(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IUpdateAuthzPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.networksecurity.v1alpha1.IAuthzPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  updateAuthzPolicy(
+      request: protos.google.cloud.networksecurity.v1alpha1.IUpdateAuthzPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IAuthzPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  updateAuthzPolicy(
+      request: protos.google.cloud.networksecurity.v1alpha1.IUpdateAuthzPolicyRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IAuthzPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  updateAuthzPolicy(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IUpdateAuthzPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IAuthzPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IAuthzPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.networksecurity.v1alpha1.IAuthzPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'authz_policy.name': request.authzPolicy!.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.networksecurity.v1alpha1.IAuthzPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateAuthzPolicy response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateAuthzPolicy request %j', request);
+    return this.innerApiCalls.updateAuthzPolicy(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.networksecurity.v1alpha1.IAuthzPolicy, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateAuthzPolicy response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `updateAuthzPolicy()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.update_authz_policy.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_UpdateAuthzPolicy_async
+ */
+  async checkUpdateAuthzPolicyProgress(name: string): Promise<LROperation<protos.google.cloud.networksecurity.v1alpha1.AuthzPolicy, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+    this._log.info('updateAuthzPolicy long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateAuthzPolicy, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.networksecurity.v1alpha1.AuthzPolicy, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+  }
+/**
+ * Deletes a single AuthzPolicy.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the `AuthzPolicy` resource to delete. Must be in
+ *   the format
+ *   `projects/{project}/locations/{location}/authzPolicies/{authz_policy}`.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server can ignore
+ *   the request if it has already been completed. The server guarantees
+ *   that for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, ignores the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.delete_authz_policy.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_DeleteAuthzPolicy_async
+ */
+  deleteAuthzPolicy(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteAuthzPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  deleteAuthzPolicy(
+      request: protos.google.cloud.networksecurity.v1alpha1.IDeleteAuthzPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deleteAuthzPolicy(
+      request: protos.google.cloud.networksecurity.v1alpha1.IDeleteAuthzPolicyRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deleteAuthzPolicy(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteAuthzPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteAuthzPolicy response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteAuthzPolicy request %j', request);
+    return this.innerApiCalls.deleteAuthzPolicy(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteAuthzPolicy response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `deleteAuthzPolicy()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.delete_authz_policy.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_DeleteAuthzPolicy_async
+ */
+  async checkDeleteAuthzPolicyProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+    this._log.info('deleteAuthzPolicy long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteAuthzPolicy, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+  }
+ /**
+ * Lists AuthorizationPolicies in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the AuthorizationPolicies
+ *   should be listed, specified in the format
+ *   `projects/{project}/locations/{location}`.
+ * @param {number} request.pageSize
+ *   Maximum number of AuthorizationPolicies to return per call.
+ * @param {string} request.pageToken
+ *   The value returned by the last
+ *   `ListAuthorizationPoliciesResponse` Indicates that this is a
+ *   continuation of a prior `ListAuthorizationPolicies` call, and
+ *   that the system should return the next page of data.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.networksecurity.v1alpha1.AuthorizationPolicy|AuthorizationPolicy}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listAuthorizationPoliciesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listAuthorizationPolicies(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IListAuthorizationPoliciesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.networksecurity.v1alpha1.IAuthorizationPolicy[],
+        protos.google.cloud.networksecurity.v1alpha1.IListAuthorizationPoliciesRequest|null,
+        protos.google.cloud.networksecurity.v1alpha1.IListAuthorizationPoliciesResponse
+      ]>;
+  listAuthorizationPolicies(
+      request: protos.google.cloud.networksecurity.v1alpha1.IListAuthorizationPoliciesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
+          protos.google.cloud.networksecurity.v1alpha1.IListAuthorizationPoliciesRequest,
+          protos.google.cloud.networksecurity.v1alpha1.IListAuthorizationPoliciesResponse|null|undefined,
+          protos.google.cloud.networksecurity.v1alpha1.IAuthorizationPolicy>): void;
+  listAuthorizationPolicies(
+      request: protos.google.cloud.networksecurity.v1alpha1.IListAuthorizationPoliciesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.networksecurity.v1alpha1.IListAuthorizationPoliciesRequest,
+          protos.google.cloud.networksecurity.v1alpha1.IListAuthorizationPoliciesResponse|null|undefined,
+          protos.google.cloud.networksecurity.v1alpha1.IAuthorizationPolicy>): void;
+  listAuthorizationPolicies(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IListAuthorizationPoliciesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.networksecurity.v1alpha1.IListAuthorizationPoliciesRequest,
+          protos.google.cloud.networksecurity.v1alpha1.IListAuthorizationPoliciesResponse|null|undefined,
+          protos.google.cloud.networksecurity.v1alpha1.IAuthorizationPolicy>,
+      callback?: PaginationCallback<
+          protos.google.cloud.networksecurity.v1alpha1.IListAuthorizationPoliciesRequest,
+          protos.google.cloud.networksecurity.v1alpha1.IListAuthorizationPoliciesResponse|null|undefined,
+          protos.google.cloud.networksecurity.v1alpha1.IAuthorizationPolicy>):
+      Promise<[
+        protos.google.cloud.networksecurity.v1alpha1.IAuthorizationPolicy[],
+        protos.google.cloud.networksecurity.v1alpha1.IListAuthorizationPoliciesRequest|null,
+        protos.google.cloud.networksecurity.v1alpha1.IListAuthorizationPoliciesResponse
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.networksecurity.v1alpha1.IListAuthorizationPoliciesRequest,
+      protos.google.cloud.networksecurity.v1alpha1.IListAuthorizationPoliciesResponse|null|undefined,
+      protos.google.cloud.networksecurity.v1alpha1.IAuthorizationPolicy>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAuthorizationPolicies values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAuthorizationPolicies request %j', request);
+    return this.innerApiCalls
+      .listAuthorizationPolicies(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.cloud.networksecurity.v1alpha1.IAuthorizationPolicy[],
+        protos.google.cloud.networksecurity.v1alpha1.IListAuthorizationPoliciesRequest|null,
+        protos.google.cloud.networksecurity.v1alpha1.IListAuthorizationPoliciesResponse
+      ]) => {
+        this._log.info('listAuthorizationPolicies values %j', response);
+        return [response, input, output];
+      });
+  }
+
+/**
+ * Equivalent to `listAuthorizationPolicies`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the AuthorizationPolicies
+ *   should be listed, specified in the format
+ *   `projects/{project}/locations/{location}`.
+ * @param {number} request.pageSize
+ *   Maximum number of AuthorizationPolicies to return per call.
+ * @param {string} request.pageToken
+ *   The value returned by the last
+ *   `ListAuthorizationPoliciesResponse` Indicates that this is a
+ *   continuation of a prior `ListAuthorizationPolicies` call, and
+ *   that the system should return the next page of data.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.networksecurity.v1alpha1.AuthorizationPolicy|AuthorizationPolicy} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listAuthorizationPoliciesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listAuthorizationPoliciesStream(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IListAuthorizationPoliciesRequest,
+      options?: CallOptions):
+    Transform{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listAuthorizationPolicies'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listAuthorizationPolicies stream %j', request);
+    return this.descriptors.page.listAuthorizationPolicies.createStream(
+      this.innerApiCalls.listAuthorizationPolicies as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+/**
+ * Equivalent to `listAuthorizationPolicies`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the AuthorizationPolicies
+ *   should be listed, specified in the format
+ *   `projects/{project}/locations/{location}`.
+ * @param {number} request.pageSize
+ *   Maximum number of AuthorizationPolicies to return per call.
+ * @param {string} request.pageToken
+ *   The value returned by the last
+ *   `ListAuthorizationPoliciesResponse` Indicates that this is a
+ *   continuation of a prior `ListAuthorizationPolicies` call, and
+ *   that the system should return the next page of data.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.networksecurity.v1alpha1.AuthorizationPolicy|AuthorizationPolicy}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.list_authorization_policies.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_ListAuthorizationPolicies_async
+ */
+  listAuthorizationPoliciesAsync(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IListAuthorizationPoliciesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.IAuthorizationPolicy>{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listAuthorizationPolicies'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listAuthorizationPolicies iterate %j', request);
+    return this.descriptors.page.listAuthorizationPolicies.asyncIterate(
+      this.innerApiCalls['listAuthorizationPolicies'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.IAuthorizationPolicy>;
+  }
+ /**
+ * Lists BackendAuthenticationConfigs in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the
+ *   BackendAuthenticationConfigs should be listed, specified in the format
+ *   `projects/* /locations/{location}`.
+ * @param {number} request.pageSize
+ *   Maximum number of BackendAuthenticationConfigs to return per call.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListBackendAuthenticationConfigsResponse`
+ *   Indicates that this is a continuation of a prior
+ *   `ListBackendAuthenticationConfigs` call, and that the system
+ *   should return the next page of data.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.networksecurity.v1alpha1.BackendAuthenticationConfig|BackendAuthenticationConfig}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listBackendAuthenticationConfigsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listBackendAuthenticationConfigs(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IListBackendAuthenticationConfigsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.networksecurity.v1alpha1.IBackendAuthenticationConfig[],
+        protos.google.cloud.networksecurity.v1alpha1.IListBackendAuthenticationConfigsRequest|null,
+        protos.google.cloud.networksecurity.v1alpha1.IListBackendAuthenticationConfigsResponse
+      ]>;
+  listBackendAuthenticationConfigs(
+      request: protos.google.cloud.networksecurity.v1alpha1.IListBackendAuthenticationConfigsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
+          protos.google.cloud.networksecurity.v1alpha1.IListBackendAuthenticationConfigsRequest,
+          protos.google.cloud.networksecurity.v1alpha1.IListBackendAuthenticationConfigsResponse|null|undefined,
+          protos.google.cloud.networksecurity.v1alpha1.IBackendAuthenticationConfig>): void;
+  listBackendAuthenticationConfigs(
+      request: protos.google.cloud.networksecurity.v1alpha1.IListBackendAuthenticationConfigsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.networksecurity.v1alpha1.IListBackendAuthenticationConfigsRequest,
+          protos.google.cloud.networksecurity.v1alpha1.IListBackendAuthenticationConfigsResponse|null|undefined,
+          protos.google.cloud.networksecurity.v1alpha1.IBackendAuthenticationConfig>): void;
+  listBackendAuthenticationConfigs(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IListBackendAuthenticationConfigsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.networksecurity.v1alpha1.IListBackendAuthenticationConfigsRequest,
+          protos.google.cloud.networksecurity.v1alpha1.IListBackendAuthenticationConfigsResponse|null|undefined,
+          protos.google.cloud.networksecurity.v1alpha1.IBackendAuthenticationConfig>,
+      callback?: PaginationCallback<
+          protos.google.cloud.networksecurity.v1alpha1.IListBackendAuthenticationConfigsRequest,
+          protos.google.cloud.networksecurity.v1alpha1.IListBackendAuthenticationConfigsResponse|null|undefined,
+          protos.google.cloud.networksecurity.v1alpha1.IBackendAuthenticationConfig>):
+      Promise<[
+        protos.google.cloud.networksecurity.v1alpha1.IBackendAuthenticationConfig[],
+        protos.google.cloud.networksecurity.v1alpha1.IListBackendAuthenticationConfigsRequest|null,
+        protos.google.cloud.networksecurity.v1alpha1.IListBackendAuthenticationConfigsResponse
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.networksecurity.v1alpha1.IListBackendAuthenticationConfigsRequest,
+      protos.google.cloud.networksecurity.v1alpha1.IListBackendAuthenticationConfigsResponse|null|undefined,
+      protos.google.cloud.networksecurity.v1alpha1.IBackendAuthenticationConfig>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listBackendAuthenticationConfigs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listBackendAuthenticationConfigs request %j', request);
+    return this.innerApiCalls
+      .listBackendAuthenticationConfigs(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.cloud.networksecurity.v1alpha1.IBackendAuthenticationConfig[],
+        protos.google.cloud.networksecurity.v1alpha1.IListBackendAuthenticationConfigsRequest|null,
+        protos.google.cloud.networksecurity.v1alpha1.IListBackendAuthenticationConfigsResponse
+      ]) => {
+        this._log.info('listBackendAuthenticationConfigs values %j', response);
+        return [response, input, output];
+      });
+  }
+
+/**
+ * Equivalent to `listBackendAuthenticationConfigs`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the
+ *   BackendAuthenticationConfigs should be listed, specified in the format
+ *   `projects/* /locations/{location}`.
+ * @param {number} request.pageSize
+ *   Maximum number of BackendAuthenticationConfigs to return per call.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListBackendAuthenticationConfigsResponse`
+ *   Indicates that this is a continuation of a prior
+ *   `ListBackendAuthenticationConfigs` call, and that the system
+ *   should return the next page of data.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.networksecurity.v1alpha1.BackendAuthenticationConfig|BackendAuthenticationConfig} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listBackendAuthenticationConfigsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listBackendAuthenticationConfigsStream(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IListBackendAuthenticationConfigsRequest,
+      options?: CallOptions):
+    Transform{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listBackendAuthenticationConfigs'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listBackendAuthenticationConfigs stream %j', request);
+    return this.descriptors.page.listBackendAuthenticationConfigs.createStream(
+      this.innerApiCalls.listBackendAuthenticationConfigs as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+/**
+ * Equivalent to `listBackendAuthenticationConfigs`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the
+ *   BackendAuthenticationConfigs should be listed, specified in the format
+ *   `projects/* /locations/{location}`.
+ * @param {number} request.pageSize
+ *   Maximum number of BackendAuthenticationConfigs to return per call.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListBackendAuthenticationConfigsResponse`
+ *   Indicates that this is a continuation of a prior
+ *   `ListBackendAuthenticationConfigs` call, and that the system
+ *   should return the next page of data.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.networksecurity.v1alpha1.BackendAuthenticationConfig|BackendAuthenticationConfig}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.list_backend_authentication_configs.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_ListBackendAuthenticationConfigs_async
+ */
+  listBackendAuthenticationConfigsAsync(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IListBackendAuthenticationConfigsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.IBackendAuthenticationConfig>{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listBackendAuthenticationConfigs'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listBackendAuthenticationConfigs iterate %j', request);
+    return this.descriptors.page.listBackendAuthenticationConfigs.asyncIterate(
+      this.innerApiCalls['listBackendAuthenticationConfigs'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.IBackendAuthenticationConfig>;
+  }
+ /**
+ * Lists ServerTlsPolicies in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the ServerTlsPolicies should
+ *   be listed, specified in the format `projects/* /locations/{location}`.
+ * @param {number} request.pageSize
+ *   Maximum number of ServerTlsPolicies to return per call.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListServerTlsPoliciesResponse`
+ *   Indicates that this is a continuation of a prior
+ *   `ListServerTlsPolicies` call, and that the system
+ *   should return the next page of data.
+ * @param {boolean} [request.returnPartialSuccess]
+ *   Optional. Setting this field to `true` will opt the request into returning
+ *   the resources that are reachable, and into including the names of those
+ *   that were unreachable in the [ListServerTlsPoliciesResponse.unreachable]
+ *   field. This can only be `true` when reading across collections e.g. when
+ *   `parent` is set to `"projects/example/locations/-"`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.networksecurity.v1alpha1.ServerTlsPolicy|ServerTlsPolicy}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listServerTlsPoliciesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listServerTlsPolicies(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IListServerTlsPoliciesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.networksecurity.v1alpha1.IServerTlsPolicy[],
+        protos.google.cloud.networksecurity.v1alpha1.IListServerTlsPoliciesRequest|null,
+        protos.google.cloud.networksecurity.v1alpha1.IListServerTlsPoliciesResponse
+      ]>;
+  listServerTlsPolicies(
+      request: protos.google.cloud.networksecurity.v1alpha1.IListServerTlsPoliciesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
+          protos.google.cloud.networksecurity.v1alpha1.IListServerTlsPoliciesRequest,
+          protos.google.cloud.networksecurity.v1alpha1.IListServerTlsPoliciesResponse|null|undefined,
+          protos.google.cloud.networksecurity.v1alpha1.IServerTlsPolicy>): void;
+  listServerTlsPolicies(
+      request: protos.google.cloud.networksecurity.v1alpha1.IListServerTlsPoliciesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.networksecurity.v1alpha1.IListServerTlsPoliciesRequest,
+          protos.google.cloud.networksecurity.v1alpha1.IListServerTlsPoliciesResponse|null|undefined,
+          protos.google.cloud.networksecurity.v1alpha1.IServerTlsPolicy>): void;
+  listServerTlsPolicies(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IListServerTlsPoliciesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.networksecurity.v1alpha1.IListServerTlsPoliciesRequest,
+          protos.google.cloud.networksecurity.v1alpha1.IListServerTlsPoliciesResponse|null|undefined,
+          protos.google.cloud.networksecurity.v1alpha1.IServerTlsPolicy>,
+      callback?: PaginationCallback<
+          protos.google.cloud.networksecurity.v1alpha1.IListServerTlsPoliciesRequest,
+          protos.google.cloud.networksecurity.v1alpha1.IListServerTlsPoliciesResponse|null|undefined,
+          protos.google.cloud.networksecurity.v1alpha1.IServerTlsPolicy>):
+      Promise<[
+        protos.google.cloud.networksecurity.v1alpha1.IServerTlsPolicy[],
+        protos.google.cloud.networksecurity.v1alpha1.IListServerTlsPoliciesRequest|null,
+        protos.google.cloud.networksecurity.v1alpha1.IListServerTlsPoliciesResponse
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.networksecurity.v1alpha1.IListServerTlsPoliciesRequest,
+      protos.google.cloud.networksecurity.v1alpha1.IListServerTlsPoliciesResponse|null|undefined,
+      protos.google.cloud.networksecurity.v1alpha1.IServerTlsPolicy>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listServerTlsPolicies values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listServerTlsPolicies request %j', request);
+    return this.innerApiCalls
+      .listServerTlsPolicies(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.cloud.networksecurity.v1alpha1.IServerTlsPolicy[],
+        protos.google.cloud.networksecurity.v1alpha1.IListServerTlsPoliciesRequest|null,
+        protos.google.cloud.networksecurity.v1alpha1.IListServerTlsPoliciesResponse
+      ]) => {
+        this._log.info('listServerTlsPolicies values %j', response);
+        return [response, input, output];
+      });
+  }
+
+/**
+ * Equivalent to `listServerTlsPolicies`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the ServerTlsPolicies should
+ *   be listed, specified in the format `projects/* /locations/{location}`.
+ * @param {number} request.pageSize
+ *   Maximum number of ServerTlsPolicies to return per call.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListServerTlsPoliciesResponse`
+ *   Indicates that this is a continuation of a prior
+ *   `ListServerTlsPolicies` call, and that the system
+ *   should return the next page of data.
+ * @param {boolean} [request.returnPartialSuccess]
+ *   Optional. Setting this field to `true` will opt the request into returning
+ *   the resources that are reachable, and into including the names of those
+ *   that were unreachable in the [ListServerTlsPoliciesResponse.unreachable]
+ *   field. This can only be `true` when reading across collections e.g. when
+ *   `parent` is set to `"projects/example/locations/-"`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.networksecurity.v1alpha1.ServerTlsPolicy|ServerTlsPolicy} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listServerTlsPoliciesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listServerTlsPoliciesStream(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IListServerTlsPoliciesRequest,
+      options?: CallOptions):
+    Transform{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listServerTlsPolicies'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listServerTlsPolicies stream %j', request);
+    return this.descriptors.page.listServerTlsPolicies.createStream(
+      this.innerApiCalls.listServerTlsPolicies as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+/**
+ * Equivalent to `listServerTlsPolicies`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the ServerTlsPolicies should
+ *   be listed, specified in the format `projects/* /locations/{location}`.
+ * @param {number} request.pageSize
+ *   Maximum number of ServerTlsPolicies to return per call.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListServerTlsPoliciesResponse`
+ *   Indicates that this is a continuation of a prior
+ *   `ListServerTlsPolicies` call, and that the system
+ *   should return the next page of data.
+ * @param {boolean} [request.returnPartialSuccess]
+ *   Optional. Setting this field to `true` will opt the request into returning
+ *   the resources that are reachable, and into including the names of those
+ *   that were unreachable in the [ListServerTlsPoliciesResponse.unreachable]
+ *   field. This can only be `true` when reading across collections e.g. when
+ *   `parent` is set to `"projects/example/locations/-"`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.networksecurity.v1alpha1.ServerTlsPolicy|ServerTlsPolicy}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.list_server_tls_policies.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_ListServerTlsPolicies_async
+ */
+  listServerTlsPoliciesAsync(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IListServerTlsPoliciesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.IServerTlsPolicy>{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listServerTlsPolicies'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listServerTlsPolicies iterate %j', request);
+    return this.descriptors.page.listServerTlsPolicies.asyncIterate(
+      this.innerApiCalls['listServerTlsPolicies'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.IServerTlsPolicy>;
+  }
  /**
  * Lists ClientTlsPolicies in a given project and location.
  *
@@ -1032,6 +5466,1042 @@ export class NetworkSecurityClient {
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.IClientTlsPolicy>;
+  }
+ /**
+ * Lists GatewaySecurityPolicies in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the GatewaySecurityPolicies
+ *   should be listed, specified in the format
+ *   `projects/{project}/locations/{location}`.
+ * @param {number} request.pageSize
+ *   Maximum number of GatewaySecurityPolicies to return per call.
+ * @param {string} request.pageToken
+ *   The value returned by the last
+ *   'ListGatewaySecurityPoliciesResponse' Indicates that this is a
+ *   continuation of a prior 'ListGatewaySecurityPolicies' call, and
+ *   that the system should return the next page of data.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicy|GatewaySecurityPolicy}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listGatewaySecurityPoliciesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listGatewaySecurityPolicies(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IListGatewaySecurityPoliciesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicy[],
+        protos.google.cloud.networksecurity.v1alpha1.IListGatewaySecurityPoliciesRequest|null,
+        protos.google.cloud.networksecurity.v1alpha1.IListGatewaySecurityPoliciesResponse
+      ]>;
+  listGatewaySecurityPolicies(
+      request: protos.google.cloud.networksecurity.v1alpha1.IListGatewaySecurityPoliciesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
+          protos.google.cloud.networksecurity.v1alpha1.IListGatewaySecurityPoliciesRequest,
+          protos.google.cloud.networksecurity.v1alpha1.IListGatewaySecurityPoliciesResponse|null|undefined,
+          protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicy>): void;
+  listGatewaySecurityPolicies(
+      request: protos.google.cloud.networksecurity.v1alpha1.IListGatewaySecurityPoliciesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.networksecurity.v1alpha1.IListGatewaySecurityPoliciesRequest,
+          protos.google.cloud.networksecurity.v1alpha1.IListGatewaySecurityPoliciesResponse|null|undefined,
+          protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicy>): void;
+  listGatewaySecurityPolicies(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IListGatewaySecurityPoliciesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.networksecurity.v1alpha1.IListGatewaySecurityPoliciesRequest,
+          protos.google.cloud.networksecurity.v1alpha1.IListGatewaySecurityPoliciesResponse|null|undefined,
+          protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicy>,
+      callback?: PaginationCallback<
+          protos.google.cloud.networksecurity.v1alpha1.IListGatewaySecurityPoliciesRequest,
+          protos.google.cloud.networksecurity.v1alpha1.IListGatewaySecurityPoliciesResponse|null|undefined,
+          protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicy>):
+      Promise<[
+        protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicy[],
+        protos.google.cloud.networksecurity.v1alpha1.IListGatewaySecurityPoliciesRequest|null,
+        protos.google.cloud.networksecurity.v1alpha1.IListGatewaySecurityPoliciesResponse
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.networksecurity.v1alpha1.IListGatewaySecurityPoliciesRequest,
+      protos.google.cloud.networksecurity.v1alpha1.IListGatewaySecurityPoliciesResponse|null|undefined,
+      protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicy>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listGatewaySecurityPolicies values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listGatewaySecurityPolicies request %j', request);
+    return this.innerApiCalls
+      .listGatewaySecurityPolicies(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicy[],
+        protos.google.cloud.networksecurity.v1alpha1.IListGatewaySecurityPoliciesRequest|null,
+        protos.google.cloud.networksecurity.v1alpha1.IListGatewaySecurityPoliciesResponse
+      ]) => {
+        this._log.info('listGatewaySecurityPolicies values %j', response);
+        return [response, input, output];
+      });
+  }
+
+/**
+ * Equivalent to `listGatewaySecurityPolicies`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the GatewaySecurityPolicies
+ *   should be listed, specified in the format
+ *   `projects/{project}/locations/{location}`.
+ * @param {number} request.pageSize
+ *   Maximum number of GatewaySecurityPolicies to return per call.
+ * @param {string} request.pageToken
+ *   The value returned by the last
+ *   'ListGatewaySecurityPoliciesResponse' Indicates that this is a
+ *   continuation of a prior 'ListGatewaySecurityPolicies' call, and
+ *   that the system should return the next page of data.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicy|GatewaySecurityPolicy} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listGatewaySecurityPoliciesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listGatewaySecurityPoliciesStream(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IListGatewaySecurityPoliciesRequest,
+      options?: CallOptions):
+    Transform{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listGatewaySecurityPolicies'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listGatewaySecurityPolicies stream %j', request);
+    return this.descriptors.page.listGatewaySecurityPolicies.createStream(
+      this.innerApiCalls.listGatewaySecurityPolicies as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+/**
+ * Equivalent to `listGatewaySecurityPolicies`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the GatewaySecurityPolicies
+ *   should be listed, specified in the format
+ *   `projects/{project}/locations/{location}`.
+ * @param {number} request.pageSize
+ *   Maximum number of GatewaySecurityPolicies to return per call.
+ * @param {string} request.pageToken
+ *   The value returned by the last
+ *   'ListGatewaySecurityPoliciesResponse' Indicates that this is a
+ *   continuation of a prior 'ListGatewaySecurityPolicies' call, and
+ *   that the system should return the next page of data.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicy|GatewaySecurityPolicy}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.list_gateway_security_policies.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_ListGatewaySecurityPolicies_async
+ */
+  listGatewaySecurityPoliciesAsync(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IListGatewaySecurityPoliciesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicy>{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listGatewaySecurityPolicies'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listGatewaySecurityPolicies iterate %j', request);
+    return this.descriptors.page.listGatewaySecurityPolicies.asyncIterate(
+      this.innerApiCalls['listGatewaySecurityPolicies'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicy>;
+  }
+ /**
+ * Lists GatewaySecurityPolicyRules in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project, location and GatewaySecurityPolicy from which the
+ *   GatewaySecurityPolicyRules should be listed, specified in the format
+ *   `projects/{project}/locations/{location}/gatewaySecurityPolicies/{gatewaySecurityPolicy}`.
+ * @param {number} request.pageSize
+ *   Maximum number of GatewaySecurityPolicyRules to return per call.
+ * @param {string} request.pageToken
+ *   The value returned by the last
+ *   'ListGatewaySecurityPolicyRulesResponse' Indicates that this is a
+ *   continuation of a prior 'ListGatewaySecurityPolicyRules' call, and
+ *   that the system should return the next page of data.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicyRule|GatewaySecurityPolicyRule}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listGatewaySecurityPolicyRulesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listGatewaySecurityPolicyRules(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IListGatewaySecurityPolicyRulesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicyRule[],
+        protos.google.cloud.networksecurity.v1alpha1.IListGatewaySecurityPolicyRulesRequest|null,
+        protos.google.cloud.networksecurity.v1alpha1.IListGatewaySecurityPolicyRulesResponse
+      ]>;
+  listGatewaySecurityPolicyRules(
+      request: protos.google.cloud.networksecurity.v1alpha1.IListGatewaySecurityPolicyRulesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
+          protos.google.cloud.networksecurity.v1alpha1.IListGatewaySecurityPolicyRulesRequest,
+          protos.google.cloud.networksecurity.v1alpha1.IListGatewaySecurityPolicyRulesResponse|null|undefined,
+          protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicyRule>): void;
+  listGatewaySecurityPolicyRules(
+      request: protos.google.cloud.networksecurity.v1alpha1.IListGatewaySecurityPolicyRulesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.networksecurity.v1alpha1.IListGatewaySecurityPolicyRulesRequest,
+          protos.google.cloud.networksecurity.v1alpha1.IListGatewaySecurityPolicyRulesResponse|null|undefined,
+          protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicyRule>): void;
+  listGatewaySecurityPolicyRules(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IListGatewaySecurityPolicyRulesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.networksecurity.v1alpha1.IListGatewaySecurityPolicyRulesRequest,
+          protos.google.cloud.networksecurity.v1alpha1.IListGatewaySecurityPolicyRulesResponse|null|undefined,
+          protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicyRule>,
+      callback?: PaginationCallback<
+          protos.google.cloud.networksecurity.v1alpha1.IListGatewaySecurityPolicyRulesRequest,
+          protos.google.cloud.networksecurity.v1alpha1.IListGatewaySecurityPolicyRulesResponse|null|undefined,
+          protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicyRule>):
+      Promise<[
+        protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicyRule[],
+        protos.google.cloud.networksecurity.v1alpha1.IListGatewaySecurityPolicyRulesRequest|null,
+        protos.google.cloud.networksecurity.v1alpha1.IListGatewaySecurityPolicyRulesResponse
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.networksecurity.v1alpha1.IListGatewaySecurityPolicyRulesRequest,
+      protos.google.cloud.networksecurity.v1alpha1.IListGatewaySecurityPolicyRulesResponse|null|undefined,
+      protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicyRule>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listGatewaySecurityPolicyRules values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listGatewaySecurityPolicyRules request %j', request);
+    return this.innerApiCalls
+      .listGatewaySecurityPolicyRules(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicyRule[],
+        protos.google.cloud.networksecurity.v1alpha1.IListGatewaySecurityPolicyRulesRequest|null,
+        protos.google.cloud.networksecurity.v1alpha1.IListGatewaySecurityPolicyRulesResponse
+      ]) => {
+        this._log.info('listGatewaySecurityPolicyRules values %j', response);
+        return [response, input, output];
+      });
+  }
+
+/**
+ * Equivalent to `listGatewaySecurityPolicyRules`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project, location and GatewaySecurityPolicy from which the
+ *   GatewaySecurityPolicyRules should be listed, specified in the format
+ *   `projects/{project}/locations/{location}/gatewaySecurityPolicies/{gatewaySecurityPolicy}`.
+ * @param {number} request.pageSize
+ *   Maximum number of GatewaySecurityPolicyRules to return per call.
+ * @param {string} request.pageToken
+ *   The value returned by the last
+ *   'ListGatewaySecurityPolicyRulesResponse' Indicates that this is a
+ *   continuation of a prior 'ListGatewaySecurityPolicyRules' call, and
+ *   that the system should return the next page of data.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicyRule|GatewaySecurityPolicyRule} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listGatewaySecurityPolicyRulesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listGatewaySecurityPolicyRulesStream(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IListGatewaySecurityPolicyRulesRequest,
+      options?: CallOptions):
+    Transform{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listGatewaySecurityPolicyRules'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listGatewaySecurityPolicyRules stream %j', request);
+    return this.descriptors.page.listGatewaySecurityPolicyRules.createStream(
+      this.innerApiCalls.listGatewaySecurityPolicyRules as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+/**
+ * Equivalent to `listGatewaySecurityPolicyRules`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project, location and GatewaySecurityPolicy from which the
+ *   GatewaySecurityPolicyRules should be listed, specified in the format
+ *   `projects/{project}/locations/{location}/gatewaySecurityPolicies/{gatewaySecurityPolicy}`.
+ * @param {number} request.pageSize
+ *   Maximum number of GatewaySecurityPolicyRules to return per call.
+ * @param {string} request.pageToken
+ *   The value returned by the last
+ *   'ListGatewaySecurityPolicyRulesResponse' Indicates that this is a
+ *   continuation of a prior 'ListGatewaySecurityPolicyRules' call, and
+ *   that the system should return the next page of data.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.networksecurity.v1alpha1.GatewaySecurityPolicyRule|GatewaySecurityPolicyRule}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.list_gateway_security_policy_rules.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_ListGatewaySecurityPolicyRules_async
+ */
+  listGatewaySecurityPolicyRulesAsync(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IListGatewaySecurityPolicyRulesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicyRule>{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listGatewaySecurityPolicyRules'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listGatewaySecurityPolicyRules iterate %j', request);
+    return this.descriptors.page.listGatewaySecurityPolicyRules.asyncIterate(
+      this.innerApiCalls['listGatewaySecurityPolicyRules'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.IGatewaySecurityPolicyRule>;
+  }
+ /**
+ * Lists UrlLists in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the UrlLists should
+ *   be listed, specified in the format
+ *   `projects/{project}/locations/{location}`.
+ * @param {number} request.pageSize
+ *   Maximum number of UrlLists to return per call.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListUrlListsResponse`
+ *   Indicates that this is a continuation of a prior
+ *   `ListUrlLists` call, and that the system
+ *   should return the next page of data.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.networksecurity.v1alpha1.UrlList|UrlList}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listUrlListsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listUrlLists(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IListUrlListsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.networksecurity.v1alpha1.IUrlList[],
+        protos.google.cloud.networksecurity.v1alpha1.IListUrlListsRequest|null,
+        protos.google.cloud.networksecurity.v1alpha1.IListUrlListsResponse
+      ]>;
+  listUrlLists(
+      request: protos.google.cloud.networksecurity.v1alpha1.IListUrlListsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
+          protos.google.cloud.networksecurity.v1alpha1.IListUrlListsRequest,
+          protos.google.cloud.networksecurity.v1alpha1.IListUrlListsResponse|null|undefined,
+          protos.google.cloud.networksecurity.v1alpha1.IUrlList>): void;
+  listUrlLists(
+      request: protos.google.cloud.networksecurity.v1alpha1.IListUrlListsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.networksecurity.v1alpha1.IListUrlListsRequest,
+          protos.google.cloud.networksecurity.v1alpha1.IListUrlListsResponse|null|undefined,
+          protos.google.cloud.networksecurity.v1alpha1.IUrlList>): void;
+  listUrlLists(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IListUrlListsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.networksecurity.v1alpha1.IListUrlListsRequest,
+          protos.google.cloud.networksecurity.v1alpha1.IListUrlListsResponse|null|undefined,
+          protos.google.cloud.networksecurity.v1alpha1.IUrlList>,
+      callback?: PaginationCallback<
+          protos.google.cloud.networksecurity.v1alpha1.IListUrlListsRequest,
+          protos.google.cloud.networksecurity.v1alpha1.IListUrlListsResponse|null|undefined,
+          protos.google.cloud.networksecurity.v1alpha1.IUrlList>):
+      Promise<[
+        protos.google.cloud.networksecurity.v1alpha1.IUrlList[],
+        protos.google.cloud.networksecurity.v1alpha1.IListUrlListsRequest|null,
+        protos.google.cloud.networksecurity.v1alpha1.IListUrlListsResponse
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.networksecurity.v1alpha1.IListUrlListsRequest,
+      protos.google.cloud.networksecurity.v1alpha1.IListUrlListsResponse|null|undefined,
+      protos.google.cloud.networksecurity.v1alpha1.IUrlList>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listUrlLists values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listUrlLists request %j', request);
+    return this.innerApiCalls
+      .listUrlLists(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.cloud.networksecurity.v1alpha1.IUrlList[],
+        protos.google.cloud.networksecurity.v1alpha1.IListUrlListsRequest|null,
+        protos.google.cloud.networksecurity.v1alpha1.IListUrlListsResponse
+      ]) => {
+        this._log.info('listUrlLists values %j', response);
+        return [response, input, output];
+      });
+  }
+
+/**
+ * Equivalent to `listUrlLists`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the UrlLists should
+ *   be listed, specified in the format
+ *   `projects/{project}/locations/{location}`.
+ * @param {number} request.pageSize
+ *   Maximum number of UrlLists to return per call.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListUrlListsResponse`
+ *   Indicates that this is a continuation of a prior
+ *   `ListUrlLists` call, and that the system
+ *   should return the next page of data.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.networksecurity.v1alpha1.UrlList|UrlList} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listUrlListsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listUrlListsStream(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IListUrlListsRequest,
+      options?: CallOptions):
+    Transform{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listUrlLists'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listUrlLists stream %j', request);
+    return this.descriptors.page.listUrlLists.createStream(
+      this.innerApiCalls.listUrlLists as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+/**
+ * Equivalent to `listUrlLists`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the UrlLists should
+ *   be listed, specified in the format
+ *   `projects/{project}/locations/{location}`.
+ * @param {number} request.pageSize
+ *   Maximum number of UrlLists to return per call.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListUrlListsResponse`
+ *   Indicates that this is a continuation of a prior
+ *   `ListUrlLists` call, and that the system
+ *   should return the next page of data.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.networksecurity.v1alpha1.UrlList|UrlList}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.list_url_lists.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_ListUrlLists_async
+ */
+  listUrlListsAsync(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IListUrlListsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.IUrlList>{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listUrlLists'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listUrlLists iterate %j', request);
+    return this.descriptors.page.listUrlLists.asyncIterate(
+      this.innerApiCalls['listUrlLists'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.IUrlList>;
+  }
+ /**
+ * Lists TlsInspectionPolicies in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the TlsInspectionPolicies
+ *   should be listed, specified in the format
+ *   `projects/{project}/locations/{location}`.
+ * @param {number} request.pageSize
+ *   Maximum number of TlsInspectionPolicies to return per call.
+ * @param {string} request.pageToken
+ *   The value returned by the last
+ *   'ListTlsInspectionPoliciesResponse' Indicates that this is a
+ *   continuation of a prior 'ListTlsInspectionPolicies' call, and
+ *   that the system should return the next page of data.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.networksecurity.v1alpha1.TlsInspectionPolicy|TlsInspectionPolicy}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listTlsInspectionPoliciesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listTlsInspectionPolicies(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IListTlsInspectionPoliciesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.networksecurity.v1alpha1.ITlsInspectionPolicy[],
+        protos.google.cloud.networksecurity.v1alpha1.IListTlsInspectionPoliciesRequest|null,
+        protos.google.cloud.networksecurity.v1alpha1.IListTlsInspectionPoliciesResponse
+      ]>;
+  listTlsInspectionPolicies(
+      request: protos.google.cloud.networksecurity.v1alpha1.IListTlsInspectionPoliciesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
+          protos.google.cloud.networksecurity.v1alpha1.IListTlsInspectionPoliciesRequest,
+          protos.google.cloud.networksecurity.v1alpha1.IListTlsInspectionPoliciesResponse|null|undefined,
+          protos.google.cloud.networksecurity.v1alpha1.ITlsInspectionPolicy>): void;
+  listTlsInspectionPolicies(
+      request: protos.google.cloud.networksecurity.v1alpha1.IListTlsInspectionPoliciesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.networksecurity.v1alpha1.IListTlsInspectionPoliciesRequest,
+          protos.google.cloud.networksecurity.v1alpha1.IListTlsInspectionPoliciesResponse|null|undefined,
+          protos.google.cloud.networksecurity.v1alpha1.ITlsInspectionPolicy>): void;
+  listTlsInspectionPolicies(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IListTlsInspectionPoliciesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.networksecurity.v1alpha1.IListTlsInspectionPoliciesRequest,
+          protos.google.cloud.networksecurity.v1alpha1.IListTlsInspectionPoliciesResponse|null|undefined,
+          protos.google.cloud.networksecurity.v1alpha1.ITlsInspectionPolicy>,
+      callback?: PaginationCallback<
+          protos.google.cloud.networksecurity.v1alpha1.IListTlsInspectionPoliciesRequest,
+          protos.google.cloud.networksecurity.v1alpha1.IListTlsInspectionPoliciesResponse|null|undefined,
+          protos.google.cloud.networksecurity.v1alpha1.ITlsInspectionPolicy>):
+      Promise<[
+        protos.google.cloud.networksecurity.v1alpha1.ITlsInspectionPolicy[],
+        protos.google.cloud.networksecurity.v1alpha1.IListTlsInspectionPoliciesRequest|null,
+        protos.google.cloud.networksecurity.v1alpha1.IListTlsInspectionPoliciesResponse
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.networksecurity.v1alpha1.IListTlsInspectionPoliciesRequest,
+      protos.google.cloud.networksecurity.v1alpha1.IListTlsInspectionPoliciesResponse|null|undefined,
+      protos.google.cloud.networksecurity.v1alpha1.ITlsInspectionPolicy>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listTlsInspectionPolicies values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listTlsInspectionPolicies request %j', request);
+    return this.innerApiCalls
+      .listTlsInspectionPolicies(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.cloud.networksecurity.v1alpha1.ITlsInspectionPolicy[],
+        protos.google.cloud.networksecurity.v1alpha1.IListTlsInspectionPoliciesRequest|null,
+        protos.google.cloud.networksecurity.v1alpha1.IListTlsInspectionPoliciesResponse
+      ]) => {
+        this._log.info('listTlsInspectionPolicies values %j', response);
+        return [response, input, output];
+      });
+  }
+
+/**
+ * Equivalent to `listTlsInspectionPolicies`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the TlsInspectionPolicies
+ *   should be listed, specified in the format
+ *   `projects/{project}/locations/{location}`.
+ * @param {number} request.pageSize
+ *   Maximum number of TlsInspectionPolicies to return per call.
+ * @param {string} request.pageToken
+ *   The value returned by the last
+ *   'ListTlsInspectionPoliciesResponse' Indicates that this is a
+ *   continuation of a prior 'ListTlsInspectionPolicies' call, and
+ *   that the system should return the next page of data.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.networksecurity.v1alpha1.TlsInspectionPolicy|TlsInspectionPolicy} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listTlsInspectionPoliciesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listTlsInspectionPoliciesStream(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IListTlsInspectionPoliciesRequest,
+      options?: CallOptions):
+    Transform{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listTlsInspectionPolicies'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listTlsInspectionPolicies stream %j', request);
+    return this.descriptors.page.listTlsInspectionPolicies.createStream(
+      this.innerApiCalls.listTlsInspectionPolicies as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+/**
+ * Equivalent to `listTlsInspectionPolicies`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the TlsInspectionPolicies
+ *   should be listed, specified in the format
+ *   `projects/{project}/locations/{location}`.
+ * @param {number} request.pageSize
+ *   Maximum number of TlsInspectionPolicies to return per call.
+ * @param {string} request.pageToken
+ *   The value returned by the last
+ *   'ListTlsInspectionPoliciesResponse' Indicates that this is a
+ *   continuation of a prior 'ListTlsInspectionPolicies' call, and
+ *   that the system should return the next page of data.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.networksecurity.v1alpha1.TlsInspectionPolicy|TlsInspectionPolicy}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.list_tls_inspection_policies.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_ListTlsInspectionPolicies_async
+ */
+  listTlsInspectionPoliciesAsync(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IListTlsInspectionPoliciesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.ITlsInspectionPolicy>{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listTlsInspectionPolicies'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listTlsInspectionPolicies iterate %j', request);
+    return this.descriptors.page.listTlsInspectionPolicies.asyncIterate(
+      this.innerApiCalls['listTlsInspectionPolicies'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.ITlsInspectionPolicy>;
+  }
+ /**
+ * Lists AuthzPolicies in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the `AuthzPolicy` resources
+ *   are listed, specified in the following format:
+ *   `projects/{project}/locations/{location}`.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. The server might return fewer items than
+ *   requested. If unspecified, the server picks an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results that the server returns.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results.
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.networksecurity.v1alpha1.AuthzPolicy|AuthzPolicy}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listAuthzPoliciesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listAuthzPolicies(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IListAuthzPoliciesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.networksecurity.v1alpha1.IAuthzPolicy[],
+        protos.google.cloud.networksecurity.v1alpha1.IListAuthzPoliciesRequest|null,
+        protos.google.cloud.networksecurity.v1alpha1.IListAuthzPoliciesResponse
+      ]>;
+  listAuthzPolicies(
+      request: protos.google.cloud.networksecurity.v1alpha1.IListAuthzPoliciesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
+          protos.google.cloud.networksecurity.v1alpha1.IListAuthzPoliciesRequest,
+          protos.google.cloud.networksecurity.v1alpha1.IListAuthzPoliciesResponse|null|undefined,
+          protos.google.cloud.networksecurity.v1alpha1.IAuthzPolicy>): void;
+  listAuthzPolicies(
+      request: protos.google.cloud.networksecurity.v1alpha1.IListAuthzPoliciesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.networksecurity.v1alpha1.IListAuthzPoliciesRequest,
+          protos.google.cloud.networksecurity.v1alpha1.IListAuthzPoliciesResponse|null|undefined,
+          protos.google.cloud.networksecurity.v1alpha1.IAuthzPolicy>): void;
+  listAuthzPolicies(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IListAuthzPoliciesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.networksecurity.v1alpha1.IListAuthzPoliciesRequest,
+          protos.google.cloud.networksecurity.v1alpha1.IListAuthzPoliciesResponse|null|undefined,
+          protos.google.cloud.networksecurity.v1alpha1.IAuthzPolicy>,
+      callback?: PaginationCallback<
+          protos.google.cloud.networksecurity.v1alpha1.IListAuthzPoliciesRequest,
+          protos.google.cloud.networksecurity.v1alpha1.IListAuthzPoliciesResponse|null|undefined,
+          protos.google.cloud.networksecurity.v1alpha1.IAuthzPolicy>):
+      Promise<[
+        protos.google.cloud.networksecurity.v1alpha1.IAuthzPolicy[],
+        protos.google.cloud.networksecurity.v1alpha1.IListAuthzPoliciesRequest|null,
+        protos.google.cloud.networksecurity.v1alpha1.IListAuthzPoliciesResponse
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.networksecurity.v1alpha1.IListAuthzPoliciesRequest,
+      protos.google.cloud.networksecurity.v1alpha1.IListAuthzPoliciesResponse|null|undefined,
+      protos.google.cloud.networksecurity.v1alpha1.IAuthzPolicy>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAuthzPolicies values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAuthzPolicies request %j', request);
+    return this.innerApiCalls
+      .listAuthzPolicies(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.cloud.networksecurity.v1alpha1.IAuthzPolicy[],
+        protos.google.cloud.networksecurity.v1alpha1.IListAuthzPoliciesRequest|null,
+        protos.google.cloud.networksecurity.v1alpha1.IListAuthzPoliciesResponse
+      ]) => {
+        this._log.info('listAuthzPolicies values %j', response);
+        return [response, input, output];
+      });
+  }
+
+/**
+ * Equivalent to `listAuthzPolicies`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the `AuthzPolicy` resources
+ *   are listed, specified in the following format:
+ *   `projects/{project}/locations/{location}`.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. The server might return fewer items than
+ *   requested. If unspecified, the server picks an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results that the server returns.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results.
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.networksecurity.v1alpha1.AuthzPolicy|AuthzPolicy} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listAuthzPoliciesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listAuthzPoliciesStream(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IListAuthzPoliciesRequest,
+      options?: CallOptions):
+    Transform{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listAuthzPolicies'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listAuthzPolicies stream %j', request);
+    return this.descriptors.page.listAuthzPolicies.createStream(
+      this.innerApiCalls.listAuthzPolicies as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+/**
+ * Equivalent to `listAuthzPolicies`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the `AuthzPolicy` resources
+ *   are listed, specified in the following format:
+ *   `projects/{project}/locations/{location}`.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. The server might return fewer items than
+ *   requested. If unspecified, the server picks an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results that the server returns.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results.
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.networksecurity.v1alpha1.AuthzPolicy|AuthzPolicy}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/network_security.list_authz_policies.js</caption>
+ * region_tag:networksecurity_v1alpha1_generated_NetworkSecurity_ListAuthzPolicies_async
+ */
+  listAuthzPoliciesAsync(
+      request?: protos.google.cloud.networksecurity.v1alpha1.IListAuthzPoliciesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.IAuthzPolicy>{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listAuthzPolicies'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listAuthzPolicies iterate %j', request);
+    return this.descriptors.page.listAuthzPolicies.asyncIterate(
+      this.innerApiCalls['listAuthzPolicies'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.IAuthzPolicy>;
   }
 /**
  * Gets the access control policy for a resource. Returns an empty policy
@@ -1478,6 +6948,153 @@ export class NetworkSecurityClient {
   // --------------------
 
   /**
+   * Return a fully-qualified authorizationPolicy resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} authorization_policy
+   * @returns {string} Resource name string.
+   */
+  authorizationPolicyPath(project:string,location:string,authorizationPolicy:string) {
+    return this.pathTemplates.authorizationPolicyPathTemplate.render({
+      project: project,
+      location: location,
+      authorization_policy: authorizationPolicy,
+    });
+  }
+
+  /**
+   * Parse the project from AuthorizationPolicy resource.
+   *
+   * @param {string} authorizationPolicyName
+   *   A fully-qualified path representing AuthorizationPolicy resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAuthorizationPolicyName(authorizationPolicyName: string) {
+    return this.pathTemplates.authorizationPolicyPathTemplate.match(authorizationPolicyName).project;
+  }
+
+  /**
+   * Parse the location from AuthorizationPolicy resource.
+   *
+   * @param {string} authorizationPolicyName
+   *   A fully-qualified path representing AuthorizationPolicy resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAuthorizationPolicyName(authorizationPolicyName: string) {
+    return this.pathTemplates.authorizationPolicyPathTemplate.match(authorizationPolicyName).location;
+  }
+
+  /**
+   * Parse the authorization_policy from AuthorizationPolicy resource.
+   *
+   * @param {string} authorizationPolicyName
+   *   A fully-qualified path representing AuthorizationPolicy resource.
+   * @returns {string} A string representing the authorization_policy.
+   */
+  matchAuthorizationPolicyFromAuthorizationPolicyName(authorizationPolicyName: string) {
+    return this.pathTemplates.authorizationPolicyPathTemplate.match(authorizationPolicyName).authorization_policy;
+  }
+
+  /**
+   * Return a fully-qualified authzPolicy resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} authz_policy
+   * @returns {string} Resource name string.
+   */
+  authzPolicyPath(project:string,location:string,authzPolicy:string) {
+    return this.pathTemplates.authzPolicyPathTemplate.render({
+      project: project,
+      location: location,
+      authz_policy: authzPolicy,
+    });
+  }
+
+  /**
+   * Parse the project from AuthzPolicy resource.
+   *
+   * @param {string} authzPolicyName
+   *   A fully-qualified path representing AuthzPolicy resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAuthzPolicyName(authzPolicyName: string) {
+    return this.pathTemplates.authzPolicyPathTemplate.match(authzPolicyName).project;
+  }
+
+  /**
+   * Parse the location from AuthzPolicy resource.
+   *
+   * @param {string} authzPolicyName
+   *   A fully-qualified path representing AuthzPolicy resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAuthzPolicyName(authzPolicyName: string) {
+    return this.pathTemplates.authzPolicyPathTemplate.match(authzPolicyName).location;
+  }
+
+  /**
+   * Parse the authz_policy from AuthzPolicy resource.
+   *
+   * @param {string} authzPolicyName
+   *   A fully-qualified path representing AuthzPolicy resource.
+   * @returns {string} A string representing the authz_policy.
+   */
+  matchAuthzPolicyFromAuthzPolicyName(authzPolicyName: string) {
+    return this.pathTemplates.authzPolicyPathTemplate.match(authzPolicyName).authz_policy;
+  }
+
+  /**
+   * Return a fully-qualified backendAuthenticationConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} backend_authentication_config
+   * @returns {string} Resource name string.
+   */
+  backendAuthenticationConfigPath(project:string,location:string,backendAuthenticationConfig:string) {
+    return this.pathTemplates.backendAuthenticationConfigPathTemplate.render({
+      project: project,
+      location: location,
+      backend_authentication_config: backendAuthenticationConfig,
+    });
+  }
+
+  /**
+   * Parse the project from BackendAuthenticationConfig resource.
+   *
+   * @param {string} backendAuthenticationConfigName
+   *   A fully-qualified path representing BackendAuthenticationConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromBackendAuthenticationConfigName(backendAuthenticationConfigName: string) {
+    return this.pathTemplates.backendAuthenticationConfigPathTemplate.match(backendAuthenticationConfigName).project;
+  }
+
+  /**
+   * Parse the location from BackendAuthenticationConfig resource.
+   *
+   * @param {string} backendAuthenticationConfigName
+   *   A fully-qualified path representing BackendAuthenticationConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromBackendAuthenticationConfigName(backendAuthenticationConfigName: string) {
+    return this.pathTemplates.backendAuthenticationConfigPathTemplate.match(backendAuthenticationConfigName).location;
+  }
+
+  /**
+   * Parse the backend_authentication_config from BackendAuthenticationConfig resource.
+   *
+   * @param {string} backendAuthenticationConfigName
+   *   A fully-qualified path representing BackendAuthenticationConfig resource.
+   * @returns {string} A string representing the backend_authentication_config.
+   */
+  matchBackendAuthenticationConfigFromBackendAuthenticationConfigName(backendAuthenticationConfigName: string) {
+    return this.pathTemplates.backendAuthenticationConfigPathTemplate.match(backendAuthenticationConfigName).backend_authentication_config;
+  }
+
+  /**
    * Return a fully-qualified clientTlsPolicy resource name string.
    *
    * @param {string} project
@@ -1524,6 +7141,1293 @@ export class NetworkSecurityClient {
    */
   matchClientTlsPolicyFromClientTlsPolicyName(clientTlsPolicyName: string) {
     return this.pathTemplates.clientTlsPolicyPathTemplate.match(clientTlsPolicyName).client_tls_policy;
+  }
+
+  /**
+   * Return a fully-qualified dnsThreatDetector resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} dns_threat_detector
+   * @returns {string} Resource name string.
+   */
+  dnsThreatDetectorPath(project:string,location:string,dnsThreatDetector:string) {
+    return this.pathTemplates.dnsThreatDetectorPathTemplate.render({
+      project: project,
+      location: location,
+      dns_threat_detector: dnsThreatDetector,
+    });
+  }
+
+  /**
+   * Parse the project from DnsThreatDetector resource.
+   *
+   * @param {string} dnsThreatDetectorName
+   *   A fully-qualified path representing DnsThreatDetector resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDnsThreatDetectorName(dnsThreatDetectorName: string) {
+    return this.pathTemplates.dnsThreatDetectorPathTemplate.match(dnsThreatDetectorName).project;
+  }
+
+  /**
+   * Parse the location from DnsThreatDetector resource.
+   *
+   * @param {string} dnsThreatDetectorName
+   *   A fully-qualified path representing DnsThreatDetector resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDnsThreatDetectorName(dnsThreatDetectorName: string) {
+    return this.pathTemplates.dnsThreatDetectorPathTemplate.match(dnsThreatDetectorName).location;
+  }
+
+  /**
+   * Parse the dns_threat_detector from DnsThreatDetector resource.
+   *
+   * @param {string} dnsThreatDetectorName
+   *   A fully-qualified path representing DnsThreatDetector resource.
+   * @returns {string} A string representing the dns_threat_detector.
+   */
+  matchDnsThreatDetectorFromDnsThreatDetectorName(dnsThreatDetectorName: string) {
+    return this.pathTemplates.dnsThreatDetectorPathTemplate.match(dnsThreatDetectorName).dns_threat_detector;
+  }
+
+  /**
+   * Return a fully-qualified firewallEndpointAssociation resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} firewall_endpoint_association
+   * @returns {string} Resource name string.
+   */
+  firewallEndpointAssociationPath(project:string,location:string,firewallEndpointAssociation:string) {
+    return this.pathTemplates.firewallEndpointAssociationPathTemplate.render({
+      project: project,
+      location: location,
+      firewall_endpoint_association: firewallEndpointAssociation,
+    });
+  }
+
+  /**
+   * Parse the project from FirewallEndpointAssociation resource.
+   *
+   * @param {string} firewallEndpointAssociationName
+   *   A fully-qualified path representing FirewallEndpointAssociation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromFirewallEndpointAssociationName(firewallEndpointAssociationName: string) {
+    return this.pathTemplates.firewallEndpointAssociationPathTemplate.match(firewallEndpointAssociationName).project;
+  }
+
+  /**
+   * Parse the location from FirewallEndpointAssociation resource.
+   *
+   * @param {string} firewallEndpointAssociationName
+   *   A fully-qualified path representing FirewallEndpointAssociation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromFirewallEndpointAssociationName(firewallEndpointAssociationName: string) {
+    return this.pathTemplates.firewallEndpointAssociationPathTemplate.match(firewallEndpointAssociationName).location;
+  }
+
+  /**
+   * Parse the firewall_endpoint_association from FirewallEndpointAssociation resource.
+   *
+   * @param {string} firewallEndpointAssociationName
+   *   A fully-qualified path representing FirewallEndpointAssociation resource.
+   * @returns {string} A string representing the firewall_endpoint_association.
+   */
+  matchFirewallEndpointAssociationFromFirewallEndpointAssociationName(firewallEndpointAssociationName: string) {
+    return this.pathTemplates.firewallEndpointAssociationPathTemplate.match(firewallEndpointAssociationName).firewall_endpoint_association;
+  }
+
+  /**
+   * Return a fully-qualified gatewaySecurityPolicy resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} gateway_security_policy
+   * @returns {string} Resource name string.
+   */
+  gatewaySecurityPolicyPath(project:string,location:string,gatewaySecurityPolicy:string) {
+    return this.pathTemplates.gatewaySecurityPolicyPathTemplate.render({
+      project: project,
+      location: location,
+      gateway_security_policy: gatewaySecurityPolicy,
+    });
+  }
+
+  /**
+   * Parse the project from GatewaySecurityPolicy resource.
+   *
+   * @param {string} gatewaySecurityPolicyName
+   *   A fully-qualified path representing GatewaySecurityPolicy resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromGatewaySecurityPolicyName(gatewaySecurityPolicyName: string) {
+    return this.pathTemplates.gatewaySecurityPolicyPathTemplate.match(gatewaySecurityPolicyName).project;
+  }
+
+  /**
+   * Parse the location from GatewaySecurityPolicy resource.
+   *
+   * @param {string} gatewaySecurityPolicyName
+   *   A fully-qualified path representing GatewaySecurityPolicy resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromGatewaySecurityPolicyName(gatewaySecurityPolicyName: string) {
+    return this.pathTemplates.gatewaySecurityPolicyPathTemplate.match(gatewaySecurityPolicyName).location;
+  }
+
+  /**
+   * Parse the gateway_security_policy from GatewaySecurityPolicy resource.
+   *
+   * @param {string} gatewaySecurityPolicyName
+   *   A fully-qualified path representing GatewaySecurityPolicy resource.
+   * @returns {string} A string representing the gateway_security_policy.
+   */
+  matchGatewaySecurityPolicyFromGatewaySecurityPolicyName(gatewaySecurityPolicyName: string) {
+    return this.pathTemplates.gatewaySecurityPolicyPathTemplate.match(gatewaySecurityPolicyName).gateway_security_policy;
+  }
+
+  /**
+   * Return a fully-qualified gatewaySecurityPolicyRule resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} gateway_security_policy
+   * @param {string} rule
+   * @returns {string} Resource name string.
+   */
+  gatewaySecurityPolicyRulePath(project:string,location:string,gatewaySecurityPolicy:string,rule:string) {
+    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.render({
+      project: project,
+      location: location,
+      gateway_security_policy: gatewaySecurityPolicy,
+      rule: rule,
+    });
+  }
+
+  /**
+   * Parse the project from GatewaySecurityPolicyRule resource.
+   *
+   * @param {string} gatewaySecurityPolicyRuleName
+   *   A fully-qualified path representing GatewaySecurityPolicyRule resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromGatewaySecurityPolicyRuleName(gatewaySecurityPolicyRuleName: string) {
+    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match(gatewaySecurityPolicyRuleName).project;
+  }
+
+  /**
+   * Parse the location from GatewaySecurityPolicyRule resource.
+   *
+   * @param {string} gatewaySecurityPolicyRuleName
+   *   A fully-qualified path representing GatewaySecurityPolicyRule resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromGatewaySecurityPolicyRuleName(gatewaySecurityPolicyRuleName: string) {
+    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match(gatewaySecurityPolicyRuleName).location;
+  }
+
+  /**
+   * Parse the gateway_security_policy from GatewaySecurityPolicyRule resource.
+   *
+   * @param {string} gatewaySecurityPolicyRuleName
+   *   A fully-qualified path representing GatewaySecurityPolicyRule resource.
+   * @returns {string} A string representing the gateway_security_policy.
+   */
+  matchGatewaySecurityPolicyFromGatewaySecurityPolicyRuleName(gatewaySecurityPolicyRuleName: string) {
+    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match(gatewaySecurityPolicyRuleName).gateway_security_policy;
+  }
+
+  /**
+   * Parse the rule from GatewaySecurityPolicyRule resource.
+   *
+   * @param {string} gatewaySecurityPolicyRuleName
+   *   A fully-qualified path representing GatewaySecurityPolicyRule resource.
+   * @returns {string} A string representing the rule.
+   */
+  matchRuleFromGatewaySecurityPolicyRuleName(gatewaySecurityPolicyRuleName: string) {
+    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match(gatewaySecurityPolicyRuleName).rule;
+  }
+
+  /**
+   * Return a fully-qualified interceptDeployment resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} intercept_deployment
+   * @returns {string} Resource name string.
+   */
+  interceptDeploymentPath(project:string,location:string,interceptDeployment:string) {
+    return this.pathTemplates.interceptDeploymentPathTemplate.render({
+      project: project,
+      location: location,
+      intercept_deployment: interceptDeployment,
+    });
+  }
+
+  /**
+   * Parse the project from InterceptDeployment resource.
+   *
+   * @param {string} interceptDeploymentName
+   *   A fully-qualified path representing InterceptDeployment resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromInterceptDeploymentName(interceptDeploymentName: string) {
+    return this.pathTemplates.interceptDeploymentPathTemplate.match(interceptDeploymentName).project;
+  }
+
+  /**
+   * Parse the location from InterceptDeployment resource.
+   *
+   * @param {string} interceptDeploymentName
+   *   A fully-qualified path representing InterceptDeployment resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromInterceptDeploymentName(interceptDeploymentName: string) {
+    return this.pathTemplates.interceptDeploymentPathTemplate.match(interceptDeploymentName).location;
+  }
+
+  /**
+   * Parse the intercept_deployment from InterceptDeployment resource.
+   *
+   * @param {string} interceptDeploymentName
+   *   A fully-qualified path representing InterceptDeployment resource.
+   * @returns {string} A string representing the intercept_deployment.
+   */
+  matchInterceptDeploymentFromInterceptDeploymentName(interceptDeploymentName: string) {
+    return this.pathTemplates.interceptDeploymentPathTemplate.match(interceptDeploymentName).intercept_deployment;
+  }
+
+  /**
+   * Return a fully-qualified interceptDeploymentGroup resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} intercept_deployment_group
+   * @returns {string} Resource name string.
+   */
+  interceptDeploymentGroupPath(project:string,location:string,interceptDeploymentGroup:string) {
+    return this.pathTemplates.interceptDeploymentGroupPathTemplate.render({
+      project: project,
+      location: location,
+      intercept_deployment_group: interceptDeploymentGroup,
+    });
+  }
+
+  /**
+   * Parse the project from InterceptDeploymentGroup resource.
+   *
+   * @param {string} interceptDeploymentGroupName
+   *   A fully-qualified path representing InterceptDeploymentGroup resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromInterceptDeploymentGroupName(interceptDeploymentGroupName: string) {
+    return this.pathTemplates.interceptDeploymentGroupPathTemplate.match(interceptDeploymentGroupName).project;
+  }
+
+  /**
+   * Parse the location from InterceptDeploymentGroup resource.
+   *
+   * @param {string} interceptDeploymentGroupName
+   *   A fully-qualified path representing InterceptDeploymentGroup resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromInterceptDeploymentGroupName(interceptDeploymentGroupName: string) {
+    return this.pathTemplates.interceptDeploymentGroupPathTemplate.match(interceptDeploymentGroupName).location;
+  }
+
+  /**
+   * Parse the intercept_deployment_group from InterceptDeploymentGroup resource.
+   *
+   * @param {string} interceptDeploymentGroupName
+   *   A fully-qualified path representing InterceptDeploymentGroup resource.
+   * @returns {string} A string representing the intercept_deployment_group.
+   */
+  matchInterceptDeploymentGroupFromInterceptDeploymentGroupName(interceptDeploymentGroupName: string) {
+    return this.pathTemplates.interceptDeploymentGroupPathTemplate.match(interceptDeploymentGroupName).intercept_deployment_group;
+  }
+
+  /**
+   * Return a fully-qualified interceptEndpointGroup resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} intercept_endpoint_group
+   * @returns {string} Resource name string.
+   */
+  interceptEndpointGroupPath(project:string,location:string,interceptEndpointGroup:string) {
+    return this.pathTemplates.interceptEndpointGroupPathTemplate.render({
+      project: project,
+      location: location,
+      intercept_endpoint_group: interceptEndpointGroup,
+    });
+  }
+
+  /**
+   * Parse the project from InterceptEndpointGroup resource.
+   *
+   * @param {string} interceptEndpointGroupName
+   *   A fully-qualified path representing InterceptEndpointGroup resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromInterceptEndpointGroupName(interceptEndpointGroupName: string) {
+    return this.pathTemplates.interceptEndpointGroupPathTemplate.match(interceptEndpointGroupName).project;
+  }
+
+  /**
+   * Parse the location from InterceptEndpointGroup resource.
+   *
+   * @param {string} interceptEndpointGroupName
+   *   A fully-qualified path representing InterceptEndpointGroup resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromInterceptEndpointGroupName(interceptEndpointGroupName: string) {
+    return this.pathTemplates.interceptEndpointGroupPathTemplate.match(interceptEndpointGroupName).location;
+  }
+
+  /**
+   * Parse the intercept_endpoint_group from InterceptEndpointGroup resource.
+   *
+   * @param {string} interceptEndpointGroupName
+   *   A fully-qualified path representing InterceptEndpointGroup resource.
+   * @returns {string} A string representing the intercept_endpoint_group.
+   */
+  matchInterceptEndpointGroupFromInterceptEndpointGroupName(interceptEndpointGroupName: string) {
+    return this.pathTemplates.interceptEndpointGroupPathTemplate.match(interceptEndpointGroupName).intercept_endpoint_group;
+  }
+
+  /**
+   * Return a fully-qualified interceptEndpointGroupAssociation resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} intercept_endpoint_group_association
+   * @returns {string} Resource name string.
+   */
+  interceptEndpointGroupAssociationPath(project:string,location:string,interceptEndpointGroupAssociation:string) {
+    return this.pathTemplates.interceptEndpointGroupAssociationPathTemplate.render({
+      project: project,
+      location: location,
+      intercept_endpoint_group_association: interceptEndpointGroupAssociation,
+    });
+  }
+
+  /**
+   * Parse the project from InterceptEndpointGroupAssociation resource.
+   *
+   * @param {string} interceptEndpointGroupAssociationName
+   *   A fully-qualified path representing InterceptEndpointGroupAssociation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromInterceptEndpointGroupAssociationName(interceptEndpointGroupAssociationName: string) {
+    return this.pathTemplates.interceptEndpointGroupAssociationPathTemplate.match(interceptEndpointGroupAssociationName).project;
+  }
+
+  /**
+   * Parse the location from InterceptEndpointGroupAssociation resource.
+   *
+   * @param {string} interceptEndpointGroupAssociationName
+   *   A fully-qualified path representing InterceptEndpointGroupAssociation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromInterceptEndpointGroupAssociationName(interceptEndpointGroupAssociationName: string) {
+    return this.pathTemplates.interceptEndpointGroupAssociationPathTemplate.match(interceptEndpointGroupAssociationName).location;
+  }
+
+  /**
+   * Parse the intercept_endpoint_group_association from InterceptEndpointGroupAssociation resource.
+   *
+   * @param {string} interceptEndpointGroupAssociationName
+   *   A fully-qualified path representing InterceptEndpointGroupAssociation resource.
+   * @returns {string} A string representing the intercept_endpoint_group_association.
+   */
+  matchInterceptEndpointGroupAssociationFromInterceptEndpointGroupAssociationName(interceptEndpointGroupAssociationName: string) {
+    return this.pathTemplates.interceptEndpointGroupAssociationPathTemplate.match(interceptEndpointGroupAssociationName).intercept_endpoint_group_association;
+  }
+
+  /**
+   * Return a fully-qualified mirroringDeployment resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} mirroring_deployment
+   * @returns {string} Resource name string.
+   */
+  mirroringDeploymentPath(project:string,location:string,mirroringDeployment:string) {
+    return this.pathTemplates.mirroringDeploymentPathTemplate.render({
+      project: project,
+      location: location,
+      mirroring_deployment: mirroringDeployment,
+    });
+  }
+
+  /**
+   * Parse the project from MirroringDeployment resource.
+   *
+   * @param {string} mirroringDeploymentName
+   *   A fully-qualified path representing MirroringDeployment resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromMirroringDeploymentName(mirroringDeploymentName: string) {
+    return this.pathTemplates.mirroringDeploymentPathTemplate.match(mirroringDeploymentName).project;
+  }
+
+  /**
+   * Parse the location from MirroringDeployment resource.
+   *
+   * @param {string} mirroringDeploymentName
+   *   A fully-qualified path representing MirroringDeployment resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromMirroringDeploymentName(mirroringDeploymentName: string) {
+    return this.pathTemplates.mirroringDeploymentPathTemplate.match(mirroringDeploymentName).location;
+  }
+
+  /**
+   * Parse the mirroring_deployment from MirroringDeployment resource.
+   *
+   * @param {string} mirroringDeploymentName
+   *   A fully-qualified path representing MirroringDeployment resource.
+   * @returns {string} A string representing the mirroring_deployment.
+   */
+  matchMirroringDeploymentFromMirroringDeploymentName(mirroringDeploymentName: string) {
+    return this.pathTemplates.mirroringDeploymentPathTemplate.match(mirroringDeploymentName).mirroring_deployment;
+  }
+
+  /**
+   * Return a fully-qualified mirroringDeploymentGroup resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} mirroring_deployment_group
+   * @returns {string} Resource name string.
+   */
+  mirroringDeploymentGroupPath(project:string,location:string,mirroringDeploymentGroup:string) {
+    return this.pathTemplates.mirroringDeploymentGroupPathTemplate.render({
+      project: project,
+      location: location,
+      mirroring_deployment_group: mirroringDeploymentGroup,
+    });
+  }
+
+  /**
+   * Parse the project from MirroringDeploymentGroup resource.
+   *
+   * @param {string} mirroringDeploymentGroupName
+   *   A fully-qualified path representing MirroringDeploymentGroup resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromMirroringDeploymentGroupName(mirroringDeploymentGroupName: string) {
+    return this.pathTemplates.mirroringDeploymentGroupPathTemplate.match(mirroringDeploymentGroupName).project;
+  }
+
+  /**
+   * Parse the location from MirroringDeploymentGroup resource.
+   *
+   * @param {string} mirroringDeploymentGroupName
+   *   A fully-qualified path representing MirroringDeploymentGroup resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromMirroringDeploymentGroupName(mirroringDeploymentGroupName: string) {
+    return this.pathTemplates.mirroringDeploymentGroupPathTemplate.match(mirroringDeploymentGroupName).location;
+  }
+
+  /**
+   * Parse the mirroring_deployment_group from MirroringDeploymentGroup resource.
+   *
+   * @param {string} mirroringDeploymentGroupName
+   *   A fully-qualified path representing MirroringDeploymentGroup resource.
+   * @returns {string} A string representing the mirroring_deployment_group.
+   */
+  matchMirroringDeploymentGroupFromMirroringDeploymentGroupName(mirroringDeploymentGroupName: string) {
+    return this.pathTemplates.mirroringDeploymentGroupPathTemplate.match(mirroringDeploymentGroupName).mirroring_deployment_group;
+  }
+
+  /**
+   * Return a fully-qualified mirroringEndpointGroup resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} mirroring_endpoint_group
+   * @returns {string} Resource name string.
+   */
+  mirroringEndpointGroupPath(project:string,location:string,mirroringEndpointGroup:string) {
+    return this.pathTemplates.mirroringEndpointGroupPathTemplate.render({
+      project: project,
+      location: location,
+      mirroring_endpoint_group: mirroringEndpointGroup,
+    });
+  }
+
+  /**
+   * Parse the project from MirroringEndpointGroup resource.
+   *
+   * @param {string} mirroringEndpointGroupName
+   *   A fully-qualified path representing MirroringEndpointGroup resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromMirroringEndpointGroupName(mirroringEndpointGroupName: string) {
+    return this.pathTemplates.mirroringEndpointGroupPathTemplate.match(mirroringEndpointGroupName).project;
+  }
+
+  /**
+   * Parse the location from MirroringEndpointGroup resource.
+   *
+   * @param {string} mirroringEndpointGroupName
+   *   A fully-qualified path representing MirroringEndpointGroup resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromMirroringEndpointGroupName(mirroringEndpointGroupName: string) {
+    return this.pathTemplates.mirroringEndpointGroupPathTemplate.match(mirroringEndpointGroupName).location;
+  }
+
+  /**
+   * Parse the mirroring_endpoint_group from MirroringEndpointGroup resource.
+   *
+   * @param {string} mirroringEndpointGroupName
+   *   A fully-qualified path representing MirroringEndpointGroup resource.
+   * @returns {string} A string representing the mirroring_endpoint_group.
+   */
+  matchMirroringEndpointGroupFromMirroringEndpointGroupName(mirroringEndpointGroupName: string) {
+    return this.pathTemplates.mirroringEndpointGroupPathTemplate.match(mirroringEndpointGroupName).mirroring_endpoint_group;
+  }
+
+  /**
+   * Return a fully-qualified mirroringEndpointGroupAssociation resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} mirroring_endpoint_group_association
+   * @returns {string} Resource name string.
+   */
+  mirroringEndpointGroupAssociationPath(project:string,location:string,mirroringEndpointGroupAssociation:string) {
+    return this.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.render({
+      project: project,
+      location: location,
+      mirroring_endpoint_group_association: mirroringEndpointGroupAssociation,
+    });
+  }
+
+  /**
+   * Parse the project from MirroringEndpointGroupAssociation resource.
+   *
+   * @param {string} mirroringEndpointGroupAssociationName
+   *   A fully-qualified path representing MirroringEndpointGroupAssociation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromMirroringEndpointGroupAssociationName(mirroringEndpointGroupAssociationName: string) {
+    return this.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.match(mirroringEndpointGroupAssociationName).project;
+  }
+
+  /**
+   * Parse the location from MirroringEndpointGroupAssociation resource.
+   *
+   * @param {string} mirroringEndpointGroupAssociationName
+   *   A fully-qualified path representing MirroringEndpointGroupAssociation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromMirroringEndpointGroupAssociationName(mirroringEndpointGroupAssociationName: string) {
+    return this.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.match(mirroringEndpointGroupAssociationName).location;
+  }
+
+  /**
+   * Parse the mirroring_endpoint_group_association from MirroringEndpointGroupAssociation resource.
+   *
+   * @param {string} mirroringEndpointGroupAssociationName
+   *   A fully-qualified path representing MirroringEndpointGroupAssociation resource.
+   * @returns {string} A string representing the mirroring_endpoint_group_association.
+   */
+  matchMirroringEndpointGroupAssociationFromMirroringEndpointGroupAssociationName(mirroringEndpointGroupAssociationName: string) {
+    return this.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.match(mirroringEndpointGroupAssociationName).mirroring_endpoint_group_association;
+  }
+
+  /**
+   * Return a fully-qualified organizationLocationFirewallEndpoints resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} firewall_endpoint
+   * @returns {string} Resource name string.
+   */
+  organizationLocationFirewallEndpointsPath(organization:string,location:string,firewallEndpoint:string) {
+    return this.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.render({
+      organization: organization,
+      location: location,
+      firewall_endpoint: firewallEndpoint,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationFirewallEndpoints resource.
+   *
+   * @param {string} organizationLocationFirewallEndpointsName
+   *   A fully-qualified path representing organization_location_firewallEndpoints resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationFirewallEndpointsName(organizationLocationFirewallEndpointsName: string) {
+    return this.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.match(organizationLocationFirewallEndpointsName).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationFirewallEndpoints resource.
+   *
+   * @param {string} organizationLocationFirewallEndpointsName
+   *   A fully-qualified path representing organization_location_firewallEndpoints resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationFirewallEndpointsName(organizationLocationFirewallEndpointsName: string) {
+    return this.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.match(organizationLocationFirewallEndpointsName).location;
+  }
+
+  /**
+   * Parse the firewall_endpoint from OrganizationLocationFirewallEndpoints resource.
+   *
+   * @param {string} organizationLocationFirewallEndpointsName
+   *   A fully-qualified path representing organization_location_firewallEndpoints resource.
+   * @returns {string} A string representing the firewall_endpoint.
+   */
+  matchFirewallEndpointFromOrganizationLocationFirewallEndpointsName(organizationLocationFirewallEndpointsName: string) {
+    return this.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.match(organizationLocationFirewallEndpointsName).firewall_endpoint;
+  }
+
+  /**
+   * Return a fully-qualified organizationLocationSecurityProfile resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} security_profile
+   * @returns {string} Resource name string.
+   */
+  organizationLocationSecurityProfilePath(organization:string,location:string,securityProfile:string) {
+    return this.pathTemplates.organizationLocationSecurityProfilePathTemplate.render({
+      organization: organization,
+      location: location,
+      security_profile: securityProfile,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationSecurityProfile resource.
+   *
+   * @param {string} organizationLocationSecurityProfileName
+   *   A fully-qualified path representing organization_location_security_profile resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationSecurityProfileName(organizationLocationSecurityProfileName: string) {
+    return this.pathTemplates.organizationLocationSecurityProfilePathTemplate.match(organizationLocationSecurityProfileName).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationSecurityProfile resource.
+   *
+   * @param {string} organizationLocationSecurityProfileName
+   *   A fully-qualified path representing organization_location_security_profile resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationSecurityProfileName(organizationLocationSecurityProfileName: string) {
+    return this.pathTemplates.organizationLocationSecurityProfilePathTemplate.match(organizationLocationSecurityProfileName).location;
+  }
+
+  /**
+   * Parse the security_profile from OrganizationLocationSecurityProfile resource.
+   *
+   * @param {string} organizationLocationSecurityProfileName
+   *   A fully-qualified path representing organization_location_security_profile resource.
+   * @returns {string} A string representing the security_profile.
+   */
+  matchSecurityProfileFromOrganizationLocationSecurityProfileName(organizationLocationSecurityProfileName: string) {
+    return this.pathTemplates.organizationLocationSecurityProfilePathTemplate.match(organizationLocationSecurityProfileName).security_profile;
+  }
+
+  /**
+   * Return a fully-qualified organizationLocationSecurityProfileGroup resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} security_profile_group
+   * @returns {string} Resource name string.
+   */
+  organizationLocationSecurityProfileGroupPath(organization:string,location:string,securityProfileGroup:string) {
+    return this.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.render({
+      organization: organization,
+      location: location,
+      security_profile_group: securityProfileGroup,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationSecurityProfileGroup resource.
+   *
+   * @param {string} organizationLocationSecurityProfileGroupName
+   *   A fully-qualified path representing organization_location_security_profile_group resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationSecurityProfileGroupName(organizationLocationSecurityProfileGroupName: string) {
+    return this.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.match(organizationLocationSecurityProfileGroupName).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationSecurityProfileGroup resource.
+   *
+   * @param {string} organizationLocationSecurityProfileGroupName
+   *   A fully-qualified path representing organization_location_security_profile_group resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationSecurityProfileGroupName(organizationLocationSecurityProfileGroupName: string) {
+    return this.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.match(organizationLocationSecurityProfileGroupName).location;
+  }
+
+  /**
+   * Parse the security_profile_group from OrganizationLocationSecurityProfileGroup resource.
+   *
+   * @param {string} organizationLocationSecurityProfileGroupName
+   *   A fully-qualified path representing organization_location_security_profile_group resource.
+   * @returns {string} A string representing the security_profile_group.
+   */
+  matchSecurityProfileGroupFromOrganizationLocationSecurityProfileGroupName(organizationLocationSecurityProfileGroupName: string) {
+    return this.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.match(organizationLocationSecurityProfileGroupName).security_profile_group;
+  }
+
+  /**
+   * Return a fully-qualified partnerSSEGateway resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} partner_sse_gateway
+   * @returns {string} Resource name string.
+   */
+  partnerSSEGatewayPath(project:string,location:string,partnerSseGateway:string) {
+    return this.pathTemplates.partnerSSEGatewayPathTemplate.render({
+      project: project,
+      location: location,
+      partner_sse_gateway: partnerSseGateway,
+    });
+  }
+
+  /**
+   * Parse the project from PartnerSSEGateway resource.
+   *
+   * @param {string} partnerSSEGatewayName
+   *   A fully-qualified path representing PartnerSSEGateway resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromPartnerSSEGatewayName(partnerSSEGatewayName: string) {
+    return this.pathTemplates.partnerSSEGatewayPathTemplate.match(partnerSSEGatewayName).project;
+  }
+
+  /**
+   * Parse the location from PartnerSSEGateway resource.
+   *
+   * @param {string} partnerSSEGatewayName
+   *   A fully-qualified path representing PartnerSSEGateway resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromPartnerSSEGatewayName(partnerSSEGatewayName: string) {
+    return this.pathTemplates.partnerSSEGatewayPathTemplate.match(partnerSSEGatewayName).location;
+  }
+
+  /**
+   * Parse the partner_sse_gateway from PartnerSSEGateway resource.
+   *
+   * @param {string} partnerSSEGatewayName
+   *   A fully-qualified path representing PartnerSSEGateway resource.
+   * @returns {string} A string representing the partner_sse_gateway.
+   */
+  matchPartnerSseGatewayFromPartnerSSEGatewayName(partnerSSEGatewayName: string) {
+    return this.pathTemplates.partnerSSEGatewayPathTemplate.match(partnerSSEGatewayName).partner_sse_gateway;
+  }
+
+  /**
+   * Return a fully-qualified partnerSSERealm resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} partner_sse_realm
+   * @returns {string} Resource name string.
+   */
+  partnerSSERealmPath(project:string,location:string,partnerSseRealm:string) {
+    return this.pathTemplates.partnerSSERealmPathTemplate.render({
+      project: project,
+      location: location,
+      partner_sse_realm: partnerSseRealm,
+    });
+  }
+
+  /**
+   * Parse the project from PartnerSSERealm resource.
+   *
+   * @param {string} partnerSSERealmName
+   *   A fully-qualified path representing PartnerSSERealm resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromPartnerSSERealmName(partnerSSERealmName: string) {
+    return this.pathTemplates.partnerSSERealmPathTemplate.match(partnerSSERealmName).project;
+  }
+
+  /**
+   * Parse the location from PartnerSSERealm resource.
+   *
+   * @param {string} partnerSSERealmName
+   *   A fully-qualified path representing PartnerSSERealm resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromPartnerSSERealmName(partnerSSERealmName: string) {
+    return this.pathTemplates.partnerSSERealmPathTemplate.match(partnerSSERealmName).location;
+  }
+
+  /**
+   * Parse the partner_sse_realm from PartnerSSERealm resource.
+   *
+   * @param {string} partnerSSERealmName
+   *   A fully-qualified path representing PartnerSSERealm resource.
+   * @returns {string} A string representing the partner_sse_realm.
+   */
+  matchPartnerSseRealmFromPartnerSSERealmName(partnerSSERealmName: string) {
+    return this.pathTemplates.partnerSSERealmPathTemplate.match(partnerSSERealmName).partner_sse_realm;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationFirewallEndpoints resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} firewall_endpoint
+   * @returns {string} Resource name string.
+   */
+  projectLocationFirewallEndpointsPath(project:string,location:string,firewallEndpoint:string) {
+    return this.pathTemplates.projectLocationFirewallEndpointsPathTemplate.render({
+      project: project,
+      location: location,
+      firewall_endpoint: firewallEndpoint,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationFirewallEndpoints resource.
+   *
+   * @param {string} projectLocationFirewallEndpointsName
+   *   A fully-qualified path representing project_location_firewallEndpoints resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationFirewallEndpointsName(projectLocationFirewallEndpointsName: string) {
+    return this.pathTemplates.projectLocationFirewallEndpointsPathTemplate.match(projectLocationFirewallEndpointsName).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationFirewallEndpoints resource.
+   *
+   * @param {string} projectLocationFirewallEndpointsName
+   *   A fully-qualified path representing project_location_firewallEndpoints resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationFirewallEndpointsName(projectLocationFirewallEndpointsName: string) {
+    return this.pathTemplates.projectLocationFirewallEndpointsPathTemplate.match(projectLocationFirewallEndpointsName).location;
+  }
+
+  /**
+   * Parse the firewall_endpoint from ProjectLocationFirewallEndpoints resource.
+   *
+   * @param {string} projectLocationFirewallEndpointsName
+   *   A fully-qualified path representing project_location_firewallEndpoints resource.
+   * @returns {string} A string representing the firewall_endpoint.
+   */
+  matchFirewallEndpointFromProjectLocationFirewallEndpointsName(projectLocationFirewallEndpointsName: string) {
+    return this.pathTemplates.projectLocationFirewallEndpointsPathTemplate.match(projectLocationFirewallEndpointsName).firewall_endpoint;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationSecurityProfile resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} security_profile
+   * @returns {string} Resource name string.
+   */
+  projectLocationSecurityProfilePath(project:string,location:string,securityProfile:string) {
+    return this.pathTemplates.projectLocationSecurityProfilePathTemplate.render({
+      project: project,
+      location: location,
+      security_profile: securityProfile,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationSecurityProfile resource.
+   *
+   * @param {string} projectLocationSecurityProfileName
+   *   A fully-qualified path representing project_location_security_profile resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationSecurityProfileName(projectLocationSecurityProfileName: string) {
+    return this.pathTemplates.projectLocationSecurityProfilePathTemplate.match(projectLocationSecurityProfileName).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationSecurityProfile resource.
+   *
+   * @param {string} projectLocationSecurityProfileName
+   *   A fully-qualified path representing project_location_security_profile resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationSecurityProfileName(projectLocationSecurityProfileName: string) {
+    return this.pathTemplates.projectLocationSecurityProfilePathTemplate.match(projectLocationSecurityProfileName).location;
+  }
+
+  /**
+   * Parse the security_profile from ProjectLocationSecurityProfile resource.
+   *
+   * @param {string} projectLocationSecurityProfileName
+   *   A fully-qualified path representing project_location_security_profile resource.
+   * @returns {string} A string representing the security_profile.
+   */
+  matchSecurityProfileFromProjectLocationSecurityProfileName(projectLocationSecurityProfileName: string) {
+    return this.pathTemplates.projectLocationSecurityProfilePathTemplate.match(projectLocationSecurityProfileName).security_profile;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationSecurityProfileGroup resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} security_profile_group
+   * @returns {string} Resource name string.
+   */
+  projectLocationSecurityProfileGroupPath(project:string,location:string,securityProfileGroup:string) {
+    return this.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.render({
+      project: project,
+      location: location,
+      security_profile_group: securityProfileGroup,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationSecurityProfileGroup resource.
+   *
+   * @param {string} projectLocationSecurityProfileGroupName
+   *   A fully-qualified path representing project_location_security_profile_group resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationSecurityProfileGroupName(projectLocationSecurityProfileGroupName: string) {
+    return this.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.match(projectLocationSecurityProfileGroupName).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationSecurityProfileGroup resource.
+   *
+   * @param {string} projectLocationSecurityProfileGroupName
+   *   A fully-qualified path representing project_location_security_profile_group resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationSecurityProfileGroupName(projectLocationSecurityProfileGroupName: string) {
+    return this.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.match(projectLocationSecurityProfileGroupName).location;
+  }
+
+  /**
+   * Parse the security_profile_group from ProjectLocationSecurityProfileGroup resource.
+   *
+   * @param {string} projectLocationSecurityProfileGroupName
+   *   A fully-qualified path representing project_location_security_profile_group resource.
+   * @returns {string} A string representing the security_profile_group.
+   */
+  matchSecurityProfileGroupFromProjectLocationSecurityProfileGroupName(projectLocationSecurityProfileGroupName: string) {
+    return this.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.match(projectLocationSecurityProfileGroupName).security_profile_group;
+  }
+
+  /**
+   * Return a fully-qualified sACAttachment resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} sac_attachment
+   * @returns {string} Resource name string.
+   */
+  sACAttachmentPath(project:string,location:string,sacAttachment:string) {
+    return this.pathTemplates.sACAttachmentPathTemplate.render({
+      project: project,
+      location: location,
+      sac_attachment: sacAttachment,
+    });
+  }
+
+  /**
+   * Parse the project from SACAttachment resource.
+   *
+   * @param {string} sACAttachmentName
+   *   A fully-qualified path representing SACAttachment resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSACAttachmentName(sACAttachmentName: string) {
+    return this.pathTemplates.sACAttachmentPathTemplate.match(sACAttachmentName).project;
+  }
+
+  /**
+   * Parse the location from SACAttachment resource.
+   *
+   * @param {string} sACAttachmentName
+   *   A fully-qualified path representing SACAttachment resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromSACAttachmentName(sACAttachmentName: string) {
+    return this.pathTemplates.sACAttachmentPathTemplate.match(sACAttachmentName).location;
+  }
+
+  /**
+   * Parse the sac_attachment from SACAttachment resource.
+   *
+   * @param {string} sACAttachmentName
+   *   A fully-qualified path representing SACAttachment resource.
+   * @returns {string} A string representing the sac_attachment.
+   */
+  matchSacAttachmentFromSACAttachmentName(sACAttachmentName: string) {
+    return this.pathTemplates.sACAttachmentPathTemplate.match(sACAttachmentName).sac_attachment;
+  }
+
+  /**
+   * Return a fully-qualified sACRealm resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} sac_realm
+   * @returns {string} Resource name string.
+   */
+  sACRealmPath(project:string,location:string,sacRealm:string) {
+    return this.pathTemplates.sACRealmPathTemplate.render({
+      project: project,
+      location: location,
+      sac_realm: sacRealm,
+    });
+  }
+
+  /**
+   * Parse the project from SACRealm resource.
+   *
+   * @param {string} sACRealmName
+   *   A fully-qualified path representing SACRealm resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSACRealmName(sACRealmName: string) {
+    return this.pathTemplates.sACRealmPathTemplate.match(sACRealmName).project;
+  }
+
+  /**
+   * Parse the location from SACRealm resource.
+   *
+   * @param {string} sACRealmName
+   *   A fully-qualified path representing SACRealm resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromSACRealmName(sACRealmName: string) {
+    return this.pathTemplates.sACRealmPathTemplate.match(sACRealmName).location;
+  }
+
+  /**
+   * Parse the sac_realm from SACRealm resource.
+   *
+   * @param {string} sACRealmName
+   *   A fully-qualified path representing SACRealm resource.
+   * @returns {string} A string representing the sac_realm.
+   */
+  matchSacRealmFromSACRealmName(sACRealmName: string) {
+    return this.pathTemplates.sACRealmPathTemplate.match(sACRealmName).sac_realm;
+  }
+
+  /**
+   * Return a fully-qualified sSEGatewayReference resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} sse_gateway_reference
+   * @returns {string} Resource name string.
+   */
+  sSEGatewayReferencePath(project:string,location:string,sseGatewayReference:string) {
+    return this.pathTemplates.sSEGatewayReferencePathTemplate.render({
+      project: project,
+      location: location,
+      sse_gateway_reference: sseGatewayReference,
+    });
+  }
+
+  /**
+   * Parse the project from SSEGatewayReference resource.
+   *
+   * @param {string} sSEGatewayReferenceName
+   *   A fully-qualified path representing SSEGatewayReference resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSSEGatewayReferenceName(sSEGatewayReferenceName: string) {
+    return this.pathTemplates.sSEGatewayReferencePathTemplate.match(sSEGatewayReferenceName).project;
+  }
+
+  /**
+   * Parse the location from SSEGatewayReference resource.
+   *
+   * @param {string} sSEGatewayReferenceName
+   *   A fully-qualified path representing SSEGatewayReference resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromSSEGatewayReferenceName(sSEGatewayReferenceName: string) {
+    return this.pathTemplates.sSEGatewayReferencePathTemplate.match(sSEGatewayReferenceName).location;
+  }
+
+  /**
+   * Parse the sse_gateway_reference from SSEGatewayReference resource.
+   *
+   * @param {string} sSEGatewayReferenceName
+   *   A fully-qualified path representing SSEGatewayReference resource.
+   * @returns {string} A string representing the sse_gateway_reference.
+   */
+  matchSseGatewayReferenceFromSSEGatewayReferenceName(sSEGatewayReferenceName: string) {
+    return this.pathTemplates.sSEGatewayReferencePathTemplate.match(sSEGatewayReferenceName).sse_gateway_reference;
+  }
+
+  /**
+   * Return a fully-qualified serverTlsPolicy resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} server_tls_policy
+   * @returns {string} Resource name string.
+   */
+  serverTlsPolicyPath(project:string,location:string,serverTlsPolicy:string) {
+    return this.pathTemplates.serverTlsPolicyPathTemplate.render({
+      project: project,
+      location: location,
+      server_tls_policy: serverTlsPolicy,
+    });
+  }
+
+  /**
+   * Parse the project from ServerTlsPolicy resource.
+   *
+   * @param {string} serverTlsPolicyName
+   *   A fully-qualified path representing ServerTlsPolicy resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromServerTlsPolicyName(serverTlsPolicyName: string) {
+    return this.pathTemplates.serverTlsPolicyPathTemplate.match(serverTlsPolicyName).project;
+  }
+
+  /**
+   * Parse the location from ServerTlsPolicy resource.
+   *
+   * @param {string} serverTlsPolicyName
+   *   A fully-qualified path representing ServerTlsPolicy resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromServerTlsPolicyName(serverTlsPolicyName: string) {
+    return this.pathTemplates.serverTlsPolicyPathTemplate.match(serverTlsPolicyName).location;
+  }
+
+  /**
+   * Parse the server_tls_policy from ServerTlsPolicy resource.
+   *
+   * @param {string} serverTlsPolicyName
+   *   A fully-qualified path representing ServerTlsPolicy resource.
+   * @returns {string} A string representing the server_tls_policy.
+   */
+  matchServerTlsPolicyFromServerTlsPolicyName(serverTlsPolicyName: string) {
+    return this.pathTemplates.serverTlsPolicyPathTemplate.match(serverTlsPolicyName).server_tls_policy;
+  }
+
+  /**
+   * Return a fully-qualified tlsInspectionPolicy resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} tls_inspection_policy
+   * @returns {string} Resource name string.
+   */
+  tlsInspectionPolicyPath(project:string,location:string,tlsInspectionPolicy:string) {
+    return this.pathTemplates.tlsInspectionPolicyPathTemplate.render({
+      project: project,
+      location: location,
+      tls_inspection_policy: tlsInspectionPolicy,
+    });
+  }
+
+  /**
+   * Parse the project from TlsInspectionPolicy resource.
+   *
+   * @param {string} tlsInspectionPolicyName
+   *   A fully-qualified path representing TlsInspectionPolicy resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromTlsInspectionPolicyName(tlsInspectionPolicyName: string) {
+    return this.pathTemplates.tlsInspectionPolicyPathTemplate.match(tlsInspectionPolicyName).project;
+  }
+
+  /**
+   * Parse the location from TlsInspectionPolicy resource.
+   *
+   * @param {string} tlsInspectionPolicyName
+   *   A fully-qualified path representing TlsInspectionPolicy resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromTlsInspectionPolicyName(tlsInspectionPolicyName: string) {
+    return this.pathTemplates.tlsInspectionPolicyPathTemplate.match(tlsInspectionPolicyName).location;
+  }
+
+  /**
+   * Parse the tls_inspection_policy from TlsInspectionPolicy resource.
+   *
+   * @param {string} tlsInspectionPolicyName
+   *   A fully-qualified path representing TlsInspectionPolicy resource.
+   * @returns {string} A string representing the tls_inspection_policy.
+   */
+  matchTlsInspectionPolicyFromTlsInspectionPolicyName(tlsInspectionPolicyName: string) {
+    return this.pathTemplates.tlsInspectionPolicyPathTemplate.match(tlsInspectionPolicyName).tls_inspection_policy;
+  }
+
+  /**
+   * Return a fully-qualified urlList resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} url_list
+   * @returns {string} Resource name string.
+   */
+  urlListPath(project:string,location:string,urlList:string) {
+    return this.pathTemplates.urlListPathTemplate.render({
+      project: project,
+      location: location,
+      url_list: urlList,
+    });
+  }
+
+  /**
+   * Parse the project from UrlList resource.
+   *
+   * @param {string} urlListName
+   *   A fully-qualified path representing UrlList resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromUrlListName(urlListName: string) {
+    return this.pathTemplates.urlListPathTemplate.match(urlListName).project;
+  }
+
+  /**
+   * Parse the location from UrlList resource.
+   *
+   * @param {string} urlListName
+   *   A fully-qualified path representing UrlList resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromUrlListName(urlListName: string) {
+    return this.pathTemplates.urlListPathTemplate.match(urlListName).location;
+  }
+
+  /**
+   * Parse the url_list from UrlList resource.
+   *
+   * @param {string} urlListName
+   *   A fully-qualified path representing UrlList resource.
+   * @returns {string} A string representing the url_list.
+   */
+  matchUrlListFromUrlListName(urlListName: string) {
+    return this.pathTemplates.urlListPathTemplate.match(urlListName).url_list;
   }
 
   /**

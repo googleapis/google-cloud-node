@@ -21,6 +21,7 @@
 const networksecurity = require('@google-cloud/network-security');
 
 function main() {
+  const dnsThreatDetectorServiceClient = new networksecurity.DnsThreatDetectorServiceClient();
   const networkSecurityClient = new networksecurity.NetworkSecurityClient();
 }
 

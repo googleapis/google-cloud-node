@@ -5,6 +5,74 @@
   "protoPackage": "google.cloud.networksecurity.v1beta1",
   "libraryPackage": "@google-cloud/network-security",
   "services": {
+    "DnsThreatDetectorService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DnsThreatDetectorServiceClient",
+          "rpcs": {
+            "GetDnsThreatDetector": {
+              "methods": [
+                "getDnsThreatDetector"
+              ]
+            },
+            "CreateDnsThreatDetector": {
+              "methods": [
+                "createDnsThreatDetector"
+              ]
+            },
+            "UpdateDnsThreatDetector": {
+              "methods": [
+                "updateDnsThreatDetector"
+              ]
+            },
+            "DeleteDnsThreatDetector": {
+              "methods": [
+                "deleteDnsThreatDetector"
+              ]
+            },
+            "ListDnsThreatDetectors": {
+              "methods": [
+                "listDnsThreatDetectors",
+                "listDnsThreatDetectorsStream",
+                "listDnsThreatDetectorsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DnsThreatDetectorServiceClient",
+          "rpcs": {
+            "GetDnsThreatDetector": {
+              "methods": [
+                "getDnsThreatDetector"
+              ]
+            },
+            "CreateDnsThreatDetector": {
+              "methods": [
+                "createDnsThreatDetector"
+              ]
+            },
+            "UpdateDnsThreatDetector": {
+              "methods": [
+                "updateDnsThreatDetector"
+              ]
+            },
+            "DeleteDnsThreatDetector": {
+              "methods": [
+                "deleteDnsThreatDetector"
+              ]
+            },
+            "ListDnsThreatDetectors": {
+              "methods": [
+                "listDnsThreatDetectors",
+                "listDnsThreatDetectorsStream",
+                "listDnsThreatDetectorsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "NetworkSecurity": {
       "clients": {
         "grpc": {

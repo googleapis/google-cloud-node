@@ -49,7 +49,7 @@ export class NetworkSecurityClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
-  private _log = logging.log('networksecurity');
+  private _log = logging.log('network-security');
 
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {

@@ -195,6 +195,9 @@ export class NetworkSecurityClient {
       clientTlsPolicyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/clientTlsPolicies/{client_tls_policy}'
       ),
+      dnsThreatDetectorPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dnsThreatDetectors/{dns_threat_detector}'
+      ),
       serverTlsPolicyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/serverTlsPolicies/{server_tls_policy}'
       ),
@@ -2899,6 +2902,55 @@ export class NetworkSecurityClient {
    */
   matchClientTlsPolicyFromClientTlsPolicyName(clientTlsPolicyName: string) {
     return this.pathTemplates.clientTlsPolicyPathTemplate.match(clientTlsPolicyName).client_tls_policy;
+  }
+
+  /**
+   * Return a fully-qualified dnsThreatDetector resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} dns_threat_detector
+   * @returns {string} Resource name string.
+   */
+  dnsThreatDetectorPath(project:string,location:string,dnsThreatDetector:string) {
+    return this.pathTemplates.dnsThreatDetectorPathTemplate.render({
+      project: project,
+      location: location,
+      dns_threat_detector: dnsThreatDetector,
+    });
+  }
+
+  /**
+   * Parse the project from DnsThreatDetector resource.
+   *
+   * @param {string} dnsThreatDetectorName
+   *   A fully-qualified path representing DnsThreatDetector resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDnsThreatDetectorName(dnsThreatDetectorName: string) {
+    return this.pathTemplates.dnsThreatDetectorPathTemplate.match(dnsThreatDetectorName).project;
+  }
+
+  /**
+   * Parse the location from DnsThreatDetector resource.
+   *
+   * @param {string} dnsThreatDetectorName
+   *   A fully-qualified path representing DnsThreatDetector resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDnsThreatDetectorName(dnsThreatDetectorName: string) {
+    return this.pathTemplates.dnsThreatDetectorPathTemplate.match(dnsThreatDetectorName).location;
+  }
+
+  /**
+   * Parse the dns_threat_detector from DnsThreatDetector resource.
+   *
+   * @param {string} dnsThreatDetectorName
+   *   A fully-qualified path representing DnsThreatDetector resource.
+   * @returns {string} A string representing the dns_threat_detector.
+   */
+  matchDnsThreatDetectorFromDnsThreatDetectorName(dnsThreatDetectorName: string) {
+    return this.pathTemplates.dnsThreatDetectorPathTemplate.match(dnsThreatDetectorName).dns_threat_detector;
   }
 
   /**
