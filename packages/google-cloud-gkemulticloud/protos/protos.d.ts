@@ -100,6 +100,9 @@ export namespace google {
 
                     /** AttachedCluster tags */
                     tags?: ({ [k: string]: string }|null);
+
+                    /** AttachedCluster systemComponentsConfig */
+                    systemComponentsConfig?: (google.cloud.gkemulticloud.v1.ISystemComponentsConfig|null);
                 }
 
                 /** Represents an AttachedCluster. */
@@ -182,6 +185,9 @@ export namespace google {
 
                     /** AttachedCluster tags. */
                     public tags: { [k: string]: string };
+
+                    /** AttachedCluster systemComponentsConfig. */
+                    public systemComponentsConfig?: (google.cloud.gkemulticloud.v1.ISystemComponentsConfig|null);
 
                     /**
                      * Creates a new AttachedCluster instance using the specified properties.
@@ -783,6 +789,18 @@ export namespace google {
 
                     /** AttachedPlatformVersionInfo version */
                     version?: (string|null);
+
+                    /** AttachedPlatformVersionInfo enabled */
+                    enabled?: (boolean|null);
+
+                    /** AttachedPlatformVersionInfo endOfLife */
+                    endOfLife?: (boolean|null);
+
+                    /** AttachedPlatformVersionInfo endOfLifeDate */
+                    endOfLifeDate?: (google.type.IDate|null);
+
+                    /** AttachedPlatformVersionInfo releaseDate */
+                    releaseDate?: (google.type.IDate|null);
                 }
 
                 /** Represents an AttachedPlatformVersionInfo. */
@@ -796,6 +814,18 @@ export namespace google {
 
                     /** AttachedPlatformVersionInfo version. */
                     public version: string;
+
+                    /** AttachedPlatformVersionInfo enabled. */
+                    public enabled: boolean;
+
+                    /** AttachedPlatformVersionInfo endOfLife. */
+                    public endOfLife: boolean;
+
+                    /** AttachedPlatformVersionInfo endOfLifeDate. */
+                    public endOfLifeDate?: (google.type.IDate|null);
+
+                    /** AttachedPlatformVersionInfo releaseDate. */
+                    public releaseDate?: (google.type.IDate|null);
 
                     /**
                      * Creates a new AttachedPlatformVersionInfo instance using the specified properties.
@@ -1166,6 +1196,345 @@ export namespace google {
 
                     /**
                      * Gets the default type url for KubernetesSecret
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SystemComponentsConfig. */
+                interface ISystemComponentsConfig {
+
+                    /** SystemComponentsConfig tolerations */
+                    tolerations?: (google.cloud.gkemulticloud.v1.IToleration[]|null);
+
+                    /** SystemComponentsConfig labels */
+                    labels?: (google.cloud.gkemulticloud.v1.ILabel[]|null);
+                }
+
+                /** Represents a SystemComponentsConfig. */
+                class SystemComponentsConfig implements ISystemComponentsConfig {
+
+                    /**
+                     * Constructs a new SystemComponentsConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkemulticloud.v1.ISystemComponentsConfig);
+
+                    /** SystemComponentsConfig tolerations. */
+                    public tolerations: google.cloud.gkemulticloud.v1.IToleration[];
+
+                    /** SystemComponentsConfig labels. */
+                    public labels: google.cloud.gkemulticloud.v1.ILabel[];
+
+                    /**
+                     * Creates a new SystemComponentsConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SystemComponentsConfig instance
+                     */
+                    public static create(properties?: google.cloud.gkemulticloud.v1.ISystemComponentsConfig): google.cloud.gkemulticloud.v1.SystemComponentsConfig;
+
+                    /**
+                     * Encodes the specified SystemComponentsConfig message. Does not implicitly {@link google.cloud.gkemulticloud.v1.SystemComponentsConfig.verify|verify} messages.
+                     * @param message SystemComponentsConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkemulticloud.v1.ISystemComponentsConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SystemComponentsConfig message, length delimited. Does not implicitly {@link google.cloud.gkemulticloud.v1.SystemComponentsConfig.verify|verify} messages.
+                     * @param message SystemComponentsConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkemulticloud.v1.ISystemComponentsConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SystemComponentsConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SystemComponentsConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkemulticloud.v1.SystemComponentsConfig;
+
+                    /**
+                     * Decodes a SystemComponentsConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SystemComponentsConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkemulticloud.v1.SystemComponentsConfig;
+
+                    /**
+                     * Verifies a SystemComponentsConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SystemComponentsConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SystemComponentsConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkemulticloud.v1.SystemComponentsConfig;
+
+                    /**
+                     * Creates a plain object from a SystemComponentsConfig message. Also converts values to other types if specified.
+                     * @param message SystemComponentsConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkemulticloud.v1.SystemComponentsConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SystemComponentsConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SystemComponentsConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Toleration. */
+                interface IToleration {
+
+                    /** Toleration key */
+                    key?: (string|null);
+
+                    /** Toleration value */
+                    value?: (string|null);
+
+                    /** Toleration keyOperator */
+                    keyOperator?: (google.cloud.gkemulticloud.v1.Toleration.KeyOperator|keyof typeof google.cloud.gkemulticloud.v1.Toleration.KeyOperator|null);
+
+                    /** Toleration effect */
+                    effect?: (google.cloud.gkemulticloud.v1.Toleration.Effect|keyof typeof google.cloud.gkemulticloud.v1.Toleration.Effect|null);
+                }
+
+                /** Represents a Toleration. */
+                class Toleration implements IToleration {
+
+                    /**
+                     * Constructs a new Toleration.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkemulticloud.v1.IToleration);
+
+                    /** Toleration key. */
+                    public key: string;
+
+                    /** Toleration value. */
+                    public value: string;
+
+                    /** Toleration keyOperator. */
+                    public keyOperator: (google.cloud.gkemulticloud.v1.Toleration.KeyOperator|keyof typeof google.cloud.gkemulticloud.v1.Toleration.KeyOperator);
+
+                    /** Toleration effect. */
+                    public effect: (google.cloud.gkemulticloud.v1.Toleration.Effect|keyof typeof google.cloud.gkemulticloud.v1.Toleration.Effect);
+
+                    /**
+                     * Creates a new Toleration instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Toleration instance
+                     */
+                    public static create(properties?: google.cloud.gkemulticloud.v1.IToleration): google.cloud.gkemulticloud.v1.Toleration;
+
+                    /**
+                     * Encodes the specified Toleration message. Does not implicitly {@link google.cloud.gkemulticloud.v1.Toleration.verify|verify} messages.
+                     * @param message Toleration message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkemulticloud.v1.IToleration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Toleration message, length delimited. Does not implicitly {@link google.cloud.gkemulticloud.v1.Toleration.verify|verify} messages.
+                     * @param message Toleration message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkemulticloud.v1.IToleration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Toleration message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Toleration
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkemulticloud.v1.Toleration;
+
+                    /**
+                     * Decodes a Toleration message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Toleration
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkemulticloud.v1.Toleration;
+
+                    /**
+                     * Verifies a Toleration message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Toleration message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Toleration
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkemulticloud.v1.Toleration;
+
+                    /**
+                     * Creates a plain object from a Toleration message. Also converts values to other types if specified.
+                     * @param message Toleration
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkemulticloud.v1.Toleration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Toleration to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Toleration
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Toleration {
+
+                    /** KeyOperator enum. */
+                    enum KeyOperator {
+                        KEY_OPERATOR_UNSPECIFIED = 0,
+                        KEY_OPERATOR_EQUAL = 1,
+                        KEY_OPERATOR_EXISTS = 2
+                    }
+
+                    /** Effect enum. */
+                    enum Effect {
+                        EFFECT_UNSPECIFIED = 0,
+                        EFFECT_NO_SCHEDULE = 1,
+                        EFFECT_PREFER_NO_SCHEDULE = 2,
+                        EFFECT_NO_EXECUTE = 3
+                    }
+                }
+
+                /** Properties of a Label. */
+                interface ILabel {
+
+                    /** Label key */
+                    key?: (string|null);
+
+                    /** Label value */
+                    value?: (string|null);
+                }
+
+                /** Represents a Label. */
+                class Label implements ILabel {
+
+                    /**
+                     * Constructs a new Label.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkemulticloud.v1.ILabel);
+
+                    /** Label key. */
+                    public key: string;
+
+                    /** Label value. */
+                    public value: string;
+
+                    /**
+                     * Creates a new Label instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Label instance
+                     */
+                    public static create(properties?: google.cloud.gkemulticloud.v1.ILabel): google.cloud.gkemulticloud.v1.Label;
+
+                    /**
+                     * Encodes the specified Label message. Does not implicitly {@link google.cloud.gkemulticloud.v1.Label.verify|verify} messages.
+                     * @param message Label message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkemulticloud.v1.ILabel, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Label message, length delimited. Does not implicitly {@link google.cloud.gkemulticloud.v1.Label.verify|verify} messages.
+                     * @param message Label message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkemulticloud.v1.ILabel, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Label message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Label
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkemulticloud.v1.Label;
+
+                    /**
+                     * Decodes a Label message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Label
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkemulticloud.v1.Label;
+
+                    /**
+                     * Verifies a Label message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Label message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Label
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkemulticloud.v1.Label;
+
+                    /**
+                     * Creates a plain object from a Label message. Also converts values to other types if specified.
+                     * @param message Label
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkemulticloud.v1.Label, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Label to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Label
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -22708,6 +23077,119 @@ export namespace google {
         }
     }
 
+    /** Namespace type. */
+    namespace type {
+
+        /** Properties of a Date. */
+        interface IDate {
+
+            /** Date year */
+            year?: (number|null);
+
+            /** Date month */
+            month?: (number|null);
+
+            /** Date day */
+            day?: (number|null);
+        }
+
+        /** Represents a Date. */
+        class Date implements IDate {
+
+            /**
+             * Constructs a new Date.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.type.IDate);
+
+            /** Date year. */
+            public year: number;
+
+            /** Date month. */
+            public month: number;
+
+            /** Date day. */
+            public day: number;
+
+            /**
+             * Creates a new Date instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Date instance
+             */
+            public static create(properties?: google.type.IDate): google.type.Date;
+
+            /**
+             * Encodes the specified Date message. Does not implicitly {@link google.type.Date.verify|verify} messages.
+             * @param message Date message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.type.IDate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Date message, length delimited. Does not implicitly {@link google.type.Date.verify|verify} messages.
+             * @param message Date message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.type.IDate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Date message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Date
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.Date;
+
+            /**
+             * Decodes a Date message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Date
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.Date;
+
+            /**
+             * Verifies a Date message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Date message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Date
+             */
+            public static fromObject(object: { [k: string]: any }): google.type.Date;
+
+            /**
+             * Creates a plain object from a Date message. Also converts values to other types if specified.
+             * @param message Date
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.type.Date, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Date to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Date
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+    }
+
     /** Namespace longrunning. */
     namespace longrunning {
 
@@ -23786,119 +24268,6 @@ export namespace google {
 
             /**
              * Gets the default type url for Status
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-    }
-
-    /** Namespace type. */
-    namespace type {
-
-        /** Properties of a Date. */
-        interface IDate {
-
-            /** Date year */
-            year?: (number|null);
-
-            /** Date month */
-            month?: (number|null);
-
-            /** Date day */
-            day?: (number|null);
-        }
-
-        /** Represents a Date. */
-        class Date implements IDate {
-
-            /**
-             * Constructs a new Date.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.type.IDate);
-
-            /** Date year. */
-            public year: number;
-
-            /** Date month. */
-            public month: number;
-
-            /** Date day. */
-            public day: number;
-
-            /**
-             * Creates a new Date instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Date instance
-             */
-            public static create(properties?: google.type.IDate): google.type.Date;
-
-            /**
-             * Encodes the specified Date message. Does not implicitly {@link google.type.Date.verify|verify} messages.
-             * @param message Date message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.type.IDate, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Date message, length delimited. Does not implicitly {@link google.type.Date.verify|verify} messages.
-             * @param message Date message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.type.IDate, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a Date message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Date
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.Date;
-
-            /**
-             * Decodes a Date message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Date
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.Date;
-
-            /**
-             * Verifies a Date message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Date message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Date
-             */
-            public static fromObject(object: { [k: string]: any }): google.type.Date;
-
-            /**
-             * Creates a plain object from a Date message. Also converts values to other types if specified.
-             * @param message Date
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.type.Date, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Date to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for Date
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

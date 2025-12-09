@@ -37,6 +37,7 @@ const version = require('../../../package.json').version;
  *  to create and manage Anthos clusters that run on Azure infrastructure.
  * @class
  * @memberof v1
+ * @deprecated AzureClusters is deprecated and may be removed in a future version.
  */
 export class AzureClustersClient {
   private _terminated = false;
@@ -332,6 +333,7 @@ export class AzureClustersClient {
   initialize() {
     // If the client stub promise is already initialized, return immediately.
     if (this.azureClustersStub) {
+      this.warn('DEP$AzureClusters', 'AzureClusters is deprecated and may be removed in a future version.', 'DeprecationWarning');
       return this.azureClustersStub;
     }
 
@@ -374,6 +376,7 @@ export class AzureClustersClient {
 
       this.innerApiCalls[methodName] = apiCall;
     }
+    this.warn('DEP$AzureClusters', 'AzureClusters is deprecated and may be removed in a future version.', 'DeprecationWarning');
 
     return this.azureClustersStub;
   }
@@ -476,6 +479,7 @@ export class AzureClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/azure_clusters.get_azure_client.js</caption>
  * region_tag:gkemulticloud_v1_generated_AzureClusters_GetAzureClient_async
+ * @deprecated GetAzureClient is deprecated and may be removed in a future version.
  */
   getAzureClient(
       request?: protos.google.cloud.gkemulticloud.v1.IGetAzureClientRequest,
@@ -529,6 +533,7 @@ export class AzureClustersClient {
       'name': request.name ?? '',
     });
     this.initialize().catch(err => {throw err});
+    this.warn('DEP$AzureClusters-$GetAzureClient','GetAzureClient is deprecated and may be removed in a future version.', 'DeprecationWarning');
     this._log.info('getAzureClient request %j', request);
     const wrappedCallback: Callback<
         protos.google.cloud.gkemulticloud.v1.IAzureClient,
@@ -579,6 +584,7 @@ export class AzureClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/azure_clusters.get_azure_cluster.js</caption>
  * region_tag:gkemulticloud_v1_generated_AzureClusters_GetAzureCluster_async
+ * @deprecated GetAzureCluster is deprecated and may be removed in a future version.
  */
   getAzureCluster(
       request?: protos.google.cloud.gkemulticloud.v1.IGetAzureClusterRequest,
@@ -632,6 +638,7 @@ export class AzureClustersClient {
       'name': request.name ?? '',
     });
     this.initialize().catch(err => {throw err});
+    this.warn('DEP$AzureClusters-$GetAzureCluster','GetAzureCluster is deprecated and may be removed in a future version.', 'DeprecationWarning');
     this._log.info('getAzureCluster request %j', request);
     const wrappedCallback: Callback<
         protos.google.cloud.gkemulticloud.v1.IAzureCluster,
@@ -691,6 +698,7 @@ export class AzureClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/azure_clusters.generate_azure_cluster_agent_token.js</caption>
  * region_tag:gkemulticloud_v1_generated_AzureClusters_GenerateAzureClusterAgentToken_async
+ * @deprecated GenerateAzureClusterAgentToken is deprecated and may be removed in a future version.
  */
   generateAzureClusterAgentToken(
       request?: protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenRequest,
@@ -744,6 +752,7 @@ export class AzureClustersClient {
       'azure_cluster': request.azureCluster ?? '',
     });
     this.initialize().catch(err => {throw err});
+    this.warn('DEP$AzureClusters-$GenerateAzureClusterAgentToken','GenerateAzureClusterAgentToken is deprecated and may be removed in a future version.', 'DeprecationWarning');
     this._log.info('generateAzureClusterAgentToken request %j', request);
     const wrappedCallback: Callback<
         protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenResponse,
@@ -794,6 +803,7 @@ export class AzureClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/azure_clusters.generate_azure_access_token.js</caption>
  * region_tag:gkemulticloud_v1_generated_AzureClusters_GenerateAzureAccessToken_async
+ * @deprecated GenerateAzureAccessToken is deprecated and may be removed in a future version.
  */
   generateAzureAccessToken(
       request?: protos.google.cloud.gkemulticloud.v1.IGenerateAzureAccessTokenRequest,
@@ -847,6 +857,7 @@ export class AzureClustersClient {
       'azure_cluster': request.azureCluster ?? '',
     });
     this.initialize().catch(err => {throw err});
+    this.warn('DEP$AzureClusters-$GenerateAzureAccessToken','GenerateAzureAccessToken is deprecated and may be removed in a future version.', 'DeprecationWarning');
     this._log.info('generateAzureAccessToken request %j', request);
     const wrappedCallback: Callback<
         protos.google.cloud.gkemulticloud.v1.IGenerateAzureAccessTokenResponse,
@@ -897,6 +908,7 @@ export class AzureClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/azure_clusters.get_azure_node_pool.js</caption>
  * region_tag:gkemulticloud_v1_generated_AzureClusters_GetAzureNodePool_async
+ * @deprecated GetAzureNodePool is deprecated and may be removed in a future version.
  */
   getAzureNodePool(
       request?: protos.google.cloud.gkemulticloud.v1.IGetAzureNodePoolRequest,
@@ -950,6 +962,7 @@ export class AzureClustersClient {
       'name': request.name ?? '',
     });
     this.initialize().catch(err => {throw err});
+    this.warn('DEP$AzureClusters-$GetAzureNodePool','GetAzureNodePool is deprecated and may be removed in a future version.', 'DeprecationWarning');
     this._log.info('getAzureNodePool request %j', request);
     const wrappedCallback: Callback<
         protos.google.cloud.gkemulticloud.v1.IAzureNodePool,
@@ -997,6 +1010,7 @@ export class AzureClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/azure_clusters.get_azure_open_id_config.js</caption>
  * region_tag:gkemulticloud_v1_generated_AzureClusters_GetAzureOpenIdConfig_async
+ * @deprecated GetAzureOpenIdConfig is deprecated and may be removed in a future version.
  */
   getAzureOpenIdConfig(
       request?: protos.google.cloud.gkemulticloud.v1.IGetAzureOpenIdConfigRequest,
@@ -1050,6 +1064,7 @@ export class AzureClustersClient {
       'azure_cluster': request.azureCluster ?? '',
     });
     this.initialize().catch(err => {throw err});
+    this.warn('DEP$AzureClusters-$GetAzureOpenIdConfig','GetAzureOpenIdConfig is deprecated and may be removed in a future version.', 'DeprecationWarning');
     this._log.info('getAzureOpenIdConfig request %j', request);
     const wrappedCallback: Callback<
         protos.google.cloud.gkemulticloud.v1.IAzureOpenIdConfig,
@@ -1094,6 +1109,7 @@ export class AzureClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/azure_clusters.get_azure_json_web_keys.js</caption>
  * region_tag:gkemulticloud_v1_generated_AzureClusters_GetAzureJsonWebKeys_async
+ * @deprecated GetAzureJsonWebKeys is deprecated and may be removed in a future version.
  */
   getAzureJsonWebKeys(
       request?: protos.google.cloud.gkemulticloud.v1.IGetAzureJsonWebKeysRequest,
@@ -1147,6 +1163,7 @@ export class AzureClustersClient {
       'azure_cluster': request.azureCluster ?? '',
     });
     this.initialize().catch(err => {throw err});
+    this.warn('DEP$AzureClusters-$GetAzureJsonWebKeys','GetAzureJsonWebKeys is deprecated and may be removed in a future version.', 'DeprecationWarning');
     this._log.info('getAzureJsonWebKeys request %j', request);
     const wrappedCallback: Callback<
         protos.google.cloud.gkemulticloud.v1.IAzureJsonWebKeys,
@@ -1197,6 +1214,7 @@ export class AzureClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/azure_clusters.get_azure_server_config.js</caption>
  * region_tag:gkemulticloud_v1_generated_AzureClusters_GetAzureServerConfig_async
+ * @deprecated GetAzureServerConfig is deprecated and may be removed in a future version.
  */
   getAzureServerConfig(
       request?: protos.google.cloud.gkemulticloud.v1.IGetAzureServerConfigRequest,
@@ -1250,6 +1268,7 @@ export class AzureClustersClient {
       'name': request.name ?? '',
     });
     this.initialize().catch(err => {throw err});
+    this.warn('DEP$AzureClusters-$GetAzureServerConfig','GetAzureServerConfig is deprecated and may be removed in a future version.', 'DeprecationWarning');
     this._log.info('getAzureServerConfig request %j', request);
     const wrappedCallback: Callback<
         protos.google.cloud.gkemulticloud.v1.IAzureServerConfig,
@@ -1325,6 +1344,7 @@ export class AzureClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/azure_clusters.create_azure_client.js</caption>
  * region_tag:gkemulticloud_v1_generated_AzureClusters_CreateAzureClient_async
+ * @deprecated CreateAzureClient is deprecated and may be removed in a future version.
  */
   createAzureClient(
       request?: protos.google.cloud.gkemulticloud.v1.ICreateAzureClientRequest,
@@ -1378,6 +1398,7 @@ export class AzureClustersClient {
       'parent': request.parent ?? '',
     });
     this.initialize().catch(err => {throw err});
+    this.warn('DEP$AzureClusters-$CreateAzureClient','CreateAzureClient is deprecated and may be removed in a future version.', 'DeprecationWarning');
     const wrappedCallback: Callback<
           LROperation<protos.google.cloud.gkemulticloud.v1.IAzureClient, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
           protos.google.longrunning.IOperation|null|undefined,
@@ -1407,8 +1428,10 @@ export class AzureClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/azure_clusters.create_azure_client.js</caption>
  * region_tag:gkemulticloud_v1_generated_AzureClusters_CreateAzureClient_async
+ * @deprecated CreateAzureClient is deprecated and may be removed in a future version.
  */
   async checkCreateAzureClientProgress(name: string): Promise<LROperation<protos.google.cloud.gkemulticloud.v1.AzureClient, protos.google.cloud.gkemulticloud.v1.OperationMetadata>>{
+    this.warn('DEP$AzureClusters-$checkCreateAzureClientProgress','checkCreateAzureClientProgress is deprecated and may be removed in a future version.', 'DeprecationWarning');
     this._log.info('createAzureClient long-running');
     const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
@@ -1457,6 +1480,7 @@ export class AzureClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/azure_clusters.delete_azure_client.js</caption>
  * region_tag:gkemulticloud_v1_generated_AzureClusters_DeleteAzureClient_async
+ * @deprecated DeleteAzureClient is deprecated and may be removed in a future version.
  */
   deleteAzureClient(
       request?: protos.google.cloud.gkemulticloud.v1.IDeleteAzureClientRequest,
@@ -1510,6 +1534,7 @@ export class AzureClustersClient {
       'name': request.name ?? '',
     });
     this.initialize().catch(err => {throw err});
+    this.warn('DEP$AzureClusters-$DeleteAzureClient','DeleteAzureClient is deprecated and may be removed in a future version.', 'DeprecationWarning');
     const wrappedCallback: Callback<
           LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
           protos.google.longrunning.IOperation|null|undefined,
@@ -1539,8 +1564,10 @@ export class AzureClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/azure_clusters.delete_azure_client.js</caption>
  * region_tag:gkemulticloud_v1_generated_AzureClusters_DeleteAzureClient_async
+ * @deprecated DeleteAzureClient is deprecated and may be removed in a future version.
  */
   async checkDeleteAzureClientProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.gkemulticloud.v1.OperationMetadata>>{
+    this.warn('DEP$AzureClusters-$checkDeleteAzureClientProgress','checkDeleteAzureClientProgress is deprecated and may be removed in a future version.', 'DeprecationWarning');
     this._log.info('deleteAzureClient long-running');
     const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
@@ -1591,6 +1618,7 @@ export class AzureClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/azure_clusters.create_azure_cluster.js</caption>
  * region_tag:gkemulticloud_v1_generated_AzureClusters_CreateAzureCluster_async
+ * @deprecated CreateAzureCluster is deprecated and may be removed in a future version.
  */
   createAzureCluster(
       request?: protos.google.cloud.gkemulticloud.v1.ICreateAzureClusterRequest,
@@ -1644,6 +1672,7 @@ export class AzureClustersClient {
       'parent': request.parent ?? '',
     });
     this.initialize().catch(err => {throw err});
+    this.warn('DEP$AzureClusters-$CreateAzureCluster','CreateAzureCluster is deprecated and may be removed in a future version.', 'DeprecationWarning');
     const wrappedCallback: Callback<
           LROperation<protos.google.cloud.gkemulticloud.v1.IAzureCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
           protos.google.longrunning.IOperation|null|undefined,
@@ -1673,8 +1702,10 @@ export class AzureClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/azure_clusters.create_azure_cluster.js</caption>
  * region_tag:gkemulticloud_v1_generated_AzureClusters_CreateAzureCluster_async
+ * @deprecated CreateAzureCluster is deprecated and may be removed in a future version.
  */
   async checkCreateAzureClusterProgress(name: string): Promise<LROperation<protos.google.cloud.gkemulticloud.v1.AzureCluster, protos.google.cloud.gkemulticloud.v1.OperationMetadata>>{
+    this.warn('DEP$AzureClusters-$checkCreateAzureClusterProgress','checkCreateAzureClusterProgress is deprecated and may be removed in a future version.', 'DeprecationWarning');
     this._log.info('createAzureCluster long-running');
     const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
@@ -1723,6 +1754,7 @@ export class AzureClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/azure_clusters.update_azure_cluster.js</caption>
  * region_tag:gkemulticloud_v1_generated_AzureClusters_UpdateAzureCluster_async
+ * @deprecated UpdateAzureCluster is deprecated and may be removed in a future version.
  */
   updateAzureCluster(
       request?: protos.google.cloud.gkemulticloud.v1.IUpdateAzureClusterRequest,
@@ -1776,6 +1808,7 @@ export class AzureClustersClient {
       'azure_cluster.name': request.azureCluster!.name ?? '',
     });
     this.initialize().catch(err => {throw err});
+    this.warn('DEP$AzureClusters-$UpdateAzureCluster','UpdateAzureCluster is deprecated and may be removed in a future version.', 'DeprecationWarning');
     const wrappedCallback: Callback<
           LROperation<protos.google.cloud.gkemulticloud.v1.IAzureCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
           protos.google.longrunning.IOperation|null|undefined,
@@ -1805,8 +1838,10 @@ export class AzureClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/azure_clusters.update_azure_cluster.js</caption>
  * region_tag:gkemulticloud_v1_generated_AzureClusters_UpdateAzureCluster_async
+ * @deprecated UpdateAzureCluster is deprecated and may be removed in a future version.
  */
   async checkUpdateAzureClusterProgress(name: string): Promise<LROperation<protos.google.cloud.gkemulticloud.v1.AzureCluster, protos.google.cloud.gkemulticloud.v1.OperationMetadata>>{
+    this.warn('DEP$AzureClusters-$checkUpdateAzureClusterProgress','checkUpdateAzureClusterProgress is deprecated and may be removed in a future version.', 'DeprecationWarning');
     this._log.info('updateAzureCluster long-running');
     const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
@@ -1867,6 +1902,7 @@ export class AzureClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/azure_clusters.delete_azure_cluster.js</caption>
  * region_tag:gkemulticloud_v1_generated_AzureClusters_DeleteAzureCluster_async
+ * @deprecated DeleteAzureCluster is deprecated and may be removed in a future version.
  */
   deleteAzureCluster(
       request?: protos.google.cloud.gkemulticloud.v1.IDeleteAzureClusterRequest,
@@ -1920,6 +1956,7 @@ export class AzureClustersClient {
       'name': request.name ?? '',
     });
     this.initialize().catch(err => {throw err});
+    this.warn('DEP$AzureClusters-$DeleteAzureCluster','DeleteAzureCluster is deprecated and may be removed in a future version.', 'DeprecationWarning');
     const wrappedCallback: Callback<
           LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
           protos.google.longrunning.IOperation|null|undefined,
@@ -1949,8 +1986,10 @@ export class AzureClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/azure_clusters.delete_azure_cluster.js</caption>
  * region_tag:gkemulticloud_v1_generated_AzureClusters_DeleteAzureCluster_async
+ * @deprecated DeleteAzureCluster is deprecated and may be removed in a future version.
  */
   async checkDeleteAzureClusterProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.gkemulticloud.v1.OperationMetadata>>{
+    this.warn('DEP$AzureClusters-$checkDeleteAzureClusterProgress','checkDeleteAzureClusterProgress is deprecated and may be removed in a future version.', 'DeprecationWarning');
     this._log.info('deleteAzureCluster long-running');
     const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
@@ -2003,6 +2042,7 @@ export class AzureClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/azure_clusters.create_azure_node_pool.js</caption>
  * region_tag:gkemulticloud_v1_generated_AzureClusters_CreateAzureNodePool_async
+ * @deprecated CreateAzureNodePool is deprecated and may be removed in a future version.
  */
   createAzureNodePool(
       request?: protos.google.cloud.gkemulticloud.v1.ICreateAzureNodePoolRequest,
@@ -2056,6 +2096,7 @@ export class AzureClustersClient {
       'parent': request.parent ?? '',
     });
     this.initialize().catch(err => {throw err});
+    this.warn('DEP$AzureClusters-$CreateAzureNodePool','CreateAzureNodePool is deprecated and may be removed in a future version.', 'DeprecationWarning');
     const wrappedCallback: Callback<
           LROperation<protos.google.cloud.gkemulticloud.v1.IAzureNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
           protos.google.longrunning.IOperation|null|undefined,
@@ -2085,8 +2126,10 @@ export class AzureClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/azure_clusters.create_azure_node_pool.js</caption>
  * region_tag:gkemulticloud_v1_generated_AzureClusters_CreateAzureNodePool_async
+ * @deprecated CreateAzureNodePool is deprecated and may be removed in a future version.
  */
   async checkCreateAzureNodePoolProgress(name: string): Promise<LROperation<protos.google.cloud.gkemulticloud.v1.AzureNodePool, protos.google.cloud.gkemulticloud.v1.OperationMetadata>>{
+    this.warn('DEP$AzureClusters-$checkCreateAzureNodePoolProgress','checkCreateAzureNodePoolProgress is deprecated and may be removed in a future version.', 'DeprecationWarning');
     this._log.info('createAzureNodePool long-running');
     const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
@@ -2125,6 +2168,7 @@ export class AzureClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/azure_clusters.update_azure_node_pool.js</caption>
  * region_tag:gkemulticloud_v1_generated_AzureClusters_UpdateAzureNodePool_async
+ * @deprecated UpdateAzureNodePool is deprecated and may be removed in a future version.
  */
   updateAzureNodePool(
       request?: protos.google.cloud.gkemulticloud.v1.IUpdateAzureNodePoolRequest,
@@ -2178,6 +2222,7 @@ export class AzureClustersClient {
       'azure_node_pool.name': request.azureNodePool!.name ?? '',
     });
     this.initialize().catch(err => {throw err});
+    this.warn('DEP$AzureClusters-$UpdateAzureNodePool','UpdateAzureNodePool is deprecated and may be removed in a future version.', 'DeprecationWarning');
     const wrappedCallback: Callback<
           LROperation<protos.google.cloud.gkemulticloud.v1.IAzureNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
           protos.google.longrunning.IOperation|null|undefined,
@@ -2207,8 +2252,10 @@ export class AzureClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/azure_clusters.update_azure_node_pool.js</caption>
  * region_tag:gkemulticloud_v1_generated_AzureClusters_UpdateAzureNodePool_async
+ * @deprecated UpdateAzureNodePool is deprecated and may be removed in a future version.
  */
   async checkUpdateAzureNodePoolProgress(name: string): Promise<LROperation<protos.google.cloud.gkemulticloud.v1.AzureNodePool, protos.google.cloud.gkemulticloud.v1.OperationMetadata>>{
+    this.warn('DEP$AzureClusters-$checkUpdateAzureNodePoolProgress','checkUpdateAzureNodePoolProgress is deprecated and may be removed in a future version.', 'DeprecationWarning');
     this._log.info('updateAzureNodePool long-running');
     const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
@@ -2268,6 +2315,7 @@ export class AzureClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/azure_clusters.delete_azure_node_pool.js</caption>
  * region_tag:gkemulticloud_v1_generated_AzureClusters_DeleteAzureNodePool_async
+ * @deprecated DeleteAzureNodePool is deprecated and may be removed in a future version.
  */
   deleteAzureNodePool(
       request?: protos.google.cloud.gkemulticloud.v1.IDeleteAzureNodePoolRequest,
@@ -2321,6 +2369,7 @@ export class AzureClustersClient {
       'name': request.name ?? '',
     });
     this.initialize().catch(err => {throw err});
+    this.warn('DEP$AzureClusters-$DeleteAzureNodePool','DeleteAzureNodePool is deprecated and may be removed in a future version.', 'DeprecationWarning');
     const wrappedCallback: Callback<
           LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
           protos.google.longrunning.IOperation|null|undefined,
@@ -2350,8 +2399,10 @@ export class AzureClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/azure_clusters.delete_azure_node_pool.js</caption>
  * region_tag:gkemulticloud_v1_generated_AzureClusters_DeleteAzureNodePool_async
+ * @deprecated DeleteAzureNodePool is deprecated and may be removed in a future version.
  */
   async checkDeleteAzureNodePoolProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.gkemulticloud.v1.OperationMetadata>>{
+    this.warn('DEP$AzureClusters-$checkDeleteAzureNodePoolProgress','checkDeleteAzureNodePoolProgress is deprecated and may be removed in a future version.', 'DeprecationWarning');
     this._log.info('deleteAzureNodePool long-running');
     const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
@@ -2395,6 +2446,7 @@ export class AzureClustersClient {
  *   method described below for async iteration which you can stop as needed.
  *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
+ * @deprecated ListAzureClients is deprecated and may be removed in a future version.
  */
   listAzureClients(
       request?: protos.google.cloud.gkemulticloud.v1.IListAzureClientsRequest,
@@ -2450,6 +2502,7 @@ export class AzureClustersClient {
       'parent': request.parent ?? '',
     });
     this.initialize().catch(err => {throw err});
+    this.warn('DEP$AzureClusters-$ListAzureClients','ListAzureClients is deprecated and may be removed in a future version.', 'DeprecationWarning');
     const wrappedCallback: PaginationCallback<
       protos.google.cloud.gkemulticloud.v1.IListAzureClientsRequest,
       protos.google.cloud.gkemulticloud.v1.IListAzureClientsResponse|null|undefined,
@@ -2506,6 +2559,7 @@ export class AzureClustersClient {
  *   method described below for async iteration which you can stop as needed.
  *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
+ * @deprecated ListAzureClients is deprecated and may be removed in a future version.
  */
   listAzureClientsStream(
       request?: protos.google.cloud.gkemulticloud.v1.IListAzureClientsRequest,
@@ -2523,6 +2577,7 @@ export class AzureClustersClient {
     const defaultCallSettings = this._defaults['listAzureClients'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize().catch(err => {throw err});
+    this.warn('DEP$AzureClusters-$ListAzureClients','ListAzureClients is deprecated and may be removed in a future version.', 'DeprecationWarning');
     this._log.info('listAzureClients stream %j', request);
     return this.descriptors.page.listAzureClients.createStream(
       this.innerApiCalls.listAzureClients as GaxCall,
@@ -2568,6 +2623,7 @@ export class AzureClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/azure_clusters.list_azure_clients.js</caption>
  * region_tag:gkemulticloud_v1_generated_AzureClusters_ListAzureClients_async
+ * @deprecated ListAzureClients is deprecated and may be removed in a future version.
  */
   listAzureClientsAsync(
       request?: protos.google.cloud.gkemulticloud.v1.IListAzureClientsRequest,
@@ -2585,6 +2641,7 @@ export class AzureClustersClient {
     const defaultCallSettings = this._defaults['listAzureClients'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize().catch(err => {throw err});
+    this.warn('DEP$AzureClusters-$ListAzureClients','ListAzureClients is deprecated and may be removed in a future version.', 'DeprecationWarning');
     this._log.info('listAzureClients iterate %j', request);
     return this.descriptors.page.listAzureClients.asyncIterate(
       this.innerApiCalls['listAzureClients'] as GaxCall,
@@ -2629,6 +2686,7 @@ export class AzureClustersClient {
  *   method described below for async iteration which you can stop as needed.
  *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
+ * @deprecated ListAzureClusters is deprecated and may be removed in a future version.
  */
   listAzureClusters(
       request?: protos.google.cloud.gkemulticloud.v1.IListAzureClustersRequest,
@@ -2684,6 +2742,7 @@ export class AzureClustersClient {
       'parent': request.parent ?? '',
     });
     this.initialize().catch(err => {throw err});
+    this.warn('DEP$AzureClusters-$ListAzureClusters','ListAzureClusters is deprecated and may be removed in a future version.', 'DeprecationWarning');
     const wrappedCallback: PaginationCallback<
       protos.google.cloud.gkemulticloud.v1.IListAzureClustersRequest,
       protos.google.cloud.gkemulticloud.v1.IListAzureClustersResponse|null|undefined,
@@ -2740,6 +2799,7 @@ export class AzureClustersClient {
  *   method described below for async iteration which you can stop as needed.
  *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
+ * @deprecated ListAzureClusters is deprecated and may be removed in a future version.
  */
   listAzureClustersStream(
       request?: protos.google.cloud.gkemulticloud.v1.IListAzureClustersRequest,
@@ -2757,6 +2817,7 @@ export class AzureClustersClient {
     const defaultCallSettings = this._defaults['listAzureClusters'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize().catch(err => {throw err});
+    this.warn('DEP$AzureClusters-$ListAzureClusters','ListAzureClusters is deprecated and may be removed in a future version.', 'DeprecationWarning');
     this._log.info('listAzureClusters stream %j', request);
     return this.descriptors.page.listAzureClusters.createStream(
       this.innerApiCalls.listAzureClusters as GaxCall,
@@ -2802,6 +2863,7 @@ export class AzureClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/azure_clusters.list_azure_clusters.js</caption>
  * region_tag:gkemulticloud_v1_generated_AzureClusters_ListAzureClusters_async
+ * @deprecated ListAzureClusters is deprecated and may be removed in a future version.
  */
   listAzureClustersAsync(
       request?: protos.google.cloud.gkemulticloud.v1.IListAzureClustersRequest,
@@ -2819,6 +2881,7 @@ export class AzureClustersClient {
     const defaultCallSettings = this._defaults['listAzureClusters'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize().catch(err => {throw err});
+    this.warn('DEP$AzureClusters-$ListAzureClusters','ListAzureClusters is deprecated and may be removed in a future version.', 'DeprecationWarning');
     this._log.info('listAzureClusters iterate %j', request);
     return this.descriptors.page.listAzureClusters.asyncIterate(
       this.innerApiCalls['listAzureClusters'] as GaxCall,
@@ -2865,6 +2928,7 @@ export class AzureClustersClient {
  *   method described below for async iteration which you can stop as needed.
  *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
+ * @deprecated ListAzureNodePools is deprecated and may be removed in a future version.
  */
   listAzureNodePools(
       request?: protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsRequest,
@@ -2920,6 +2984,7 @@ export class AzureClustersClient {
       'parent': request.parent ?? '',
     });
     this.initialize().catch(err => {throw err});
+    this.warn('DEP$AzureClusters-$ListAzureNodePools','ListAzureNodePools is deprecated and may be removed in a future version.', 'DeprecationWarning');
     const wrappedCallback: PaginationCallback<
       protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsRequest,
       protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsResponse|null|undefined,
@@ -2977,6 +3042,7 @@ export class AzureClustersClient {
  *   method described below for async iteration which you can stop as needed.
  *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
+ * @deprecated ListAzureNodePools is deprecated and may be removed in a future version.
  */
   listAzureNodePoolsStream(
       request?: protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsRequest,
@@ -2994,6 +3060,7 @@ export class AzureClustersClient {
     const defaultCallSettings = this._defaults['listAzureNodePools'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize().catch(err => {throw err});
+    this.warn('DEP$AzureClusters-$ListAzureNodePools','ListAzureNodePools is deprecated and may be removed in a future version.', 'DeprecationWarning');
     this._log.info('listAzureNodePools stream %j', request);
     return this.descriptors.page.listAzureNodePools.createStream(
       this.innerApiCalls.listAzureNodePools as GaxCall,
@@ -3040,6 +3107,7 @@ export class AzureClustersClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/azure_clusters.list_azure_node_pools.js</caption>
  * region_tag:gkemulticloud_v1_generated_AzureClusters_ListAzureNodePools_async
+ * @deprecated ListAzureNodePools is deprecated and may be removed in a future version.
  */
   listAzureNodePoolsAsync(
       request?: protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsRequest,
@@ -3057,6 +3125,7 @@ export class AzureClustersClient {
     const defaultCallSettings = this._defaults['listAzureNodePools'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize().catch(err => {throw err});
+    this.warn('DEP$AzureClusters-$ListAzureNodePools','ListAzureNodePools is deprecated and may be removed in a future version.', 'DeprecationWarning');
     this._log.info('listAzureNodePools iterate %j', request);
     return this.descriptors.page.listAzureNodePools.asyncIterate(
       this.innerApiCalls['listAzureNodePools'] as GaxCall,
