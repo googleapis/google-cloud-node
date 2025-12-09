@@ -14,7 +14,7 @@
     "publish": "echo 'sample test; do not publish'"
   },
   "dependencies": {
-    "@google-shopping/accounts": "^3.0.1"
+    "@google-shopping/accounts": "^3.1.0"
   },
   "devDependencies": {
     "c8": "^10.0.0",

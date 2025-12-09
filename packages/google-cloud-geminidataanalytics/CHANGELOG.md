@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/geminidataanalytics-v0.2.0...geminidataanalytics-v0.3.0) (2025-12-09)
+
+
+### Features
+
+* [geminidataanalytics] add QueryData method ([#6923](https://github.com/googleapis/google-cloud-node/issues/6923)) ([014486d](https://github.com/googleapis/google-cloud-node/commit/014486d7cd802ac3058931edb3c783843db2ce28))
+
 ## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/geminidataanalytics-v0.1.0...geminidataanalytics-v0.2.0) (2025-11-11)
 
 

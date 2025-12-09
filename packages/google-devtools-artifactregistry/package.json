@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/artifact-registry",
-  "version": "4.4.0",
+  "version": "4.5.0",
   "description": "Artifactregistry client for Node.js",
   "repository": {
     "type": "git",
