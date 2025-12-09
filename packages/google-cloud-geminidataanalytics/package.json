@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/geminidataanalytics",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Data Analytics API with Gemini client for Node.js",
   "repository": {
     "type": "git",

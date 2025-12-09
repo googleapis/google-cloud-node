@@ -1,5 +1,16 @@
 # Changelog
 
+## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.14.0...aiplatform-v6.0.0) (2025-12-09)
+
+
+### ⚠ BREAKING CHANGES
+
+* fix issue when using UrlContext tool ([#6911](https://github.com/googleapis/google-cloud-node/issues/6911))
+
+### Bug Fixes
+
+* Fix issue when using UrlContext tool ([#6911](https://github.com/googleapis/google-cloud-node/issues/6911)) ([6fb8d09](https://github.com/googleapis/google-cloud-node/commit/6fb8d09786816740eb2c5128ce833d5bc649a915))
+
 ## [5.14.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.13.0...aiplatform-v5.14.0) (2025-11-21)
 
 
