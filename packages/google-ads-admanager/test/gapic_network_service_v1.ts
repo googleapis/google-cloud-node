@@ -23,6 +23,8 @@ import {SinonStub} from 'sinon';
 import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as networkserviceModule from '../src';
 
+import {PassThrough} from 'stream';
+
 import {GoogleAuth, protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
@@ -50,6 +52,51 @@ function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
 
 function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
     return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
+}
+
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
+    }
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
+    }
+    return sinon.stub().returns(mockStream);
+}
+
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1.NetworkServiceClient', () => {
@@ -334,16 +381,17 @@ describe('v1.NetworkServiceClient', () => {
     describe('listNetworks', () => {
         it('invokes listNetworks without error', async () => {
             const client = new networkserviceModule.v1.NetworkServiceClient({
-              auth: googleAuth,
-              projectId: 'bogus',
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
               new protos.google.ads.admanager.v1.ListNetworksRequest()
-            );
-            const expectedResponse = generateSampleMessage(
-              new protos.google.ads.admanager.v1.ListNetworksResponse()
-            );
+            );const expectedResponse = [
+              generateSampleMessage(new protos.google.ads.admanager.v1.Network()),
+              generateSampleMessage(new protos.google.ads.admanager.v1.Network()),
+              generateSampleMessage(new protos.google.ads.admanager.v1.Network()),
+            ];
             client.innerApiCalls.listNetworks = stubSimpleCall(expectedResponse);
             const [response] = await client.listNetworks(request);
             assert.deepStrictEqual(response, expectedResponse);
@@ -351,21 +399,22 @@ describe('v1.NetworkServiceClient', () => {
 
         it('invokes listNetworks without error using callback', async () => {
             const client = new networkserviceModule.v1.NetworkServiceClient({
-              auth: googleAuth,
-              projectId: 'bogus',
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
               new protos.google.ads.admanager.v1.ListNetworksRequest()
-            );
-            const expectedResponse = generateSampleMessage(
-              new protos.google.ads.admanager.v1.ListNetworksResponse()
-            );
+            );const expectedResponse = [
+              generateSampleMessage(new protos.google.ads.admanager.v1.Network()),
+              generateSampleMessage(new protos.google.ads.admanager.v1.Network()),
+              generateSampleMessage(new protos.google.ads.admanager.v1.Network()),
+            ];
             client.innerApiCalls.listNetworks = stubSimpleCallWithCallback(expectedResponse);
             const promise = new Promise((resolve, reject) => {
                  client.listNetworks(
                     request,
-                    (err?: Error|null, result?: protos.google.ads.admanager.v1.IListNetworksResponse|null) => {
+                    (err?: Error|null, result?: protos.google.ads.admanager.v1.INetwork[]|null) => {
                         if (err) {
                             reject(err);
                         } else {
@@ -379,8 +428,8 @@ describe('v1.NetworkServiceClient', () => {
 
         it('invokes listNetworks with error', async () => {
             const client = new networkserviceModule.v1.NetworkServiceClient({
-              auth: googleAuth,
-              projectId: 'bogus',
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
@@ -391,7 +440,70 @@ describe('v1.NetworkServiceClient', () => {
             await assert.rejects(client.listNetworks(request), expectedError);
         });
 
-        it('invokes listNetworks with closed client', async () => {
+        it('invokes listNetworksStream without error', async () => {
+            const client = new networkserviceModule.v1.NetworkServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.ListNetworksRequest()
+            );
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.ads.admanager.v1.Network()),
+              generateSampleMessage(new protos.google.ads.admanager.v1.Network()),
+              generateSampleMessage(new protos.google.ads.admanager.v1.Network()),
+            ];
+            client.descriptors.page.listNetworks.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listNetworksStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.ads.admanager.v1.Network[] = [];
+                stream.on('data', (response: protos.google.ads.admanager.v1.Network) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listNetworks.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listNetworks, request));
+        });
+
+        it('invokes listNetworksStream with error', async () => {
+            const client = new networkserviceModule.v1.NetworkServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.ListNetworksRequest()
+            );
+            const expectedError = new Error('expected');
+            client.descriptors.page.listNetworks.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listNetworksStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.ads.admanager.v1.Network[] = [];
+                stream.on('data', (response: protos.google.ads.admanager.v1.Network) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listNetworks.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listNetworks, request));
+        });
+
+        it('uses async iteration with listNetworks without error', async () => {
             const client = new networkserviceModule.v1.NetworkServiceClient({
               auth: googleAuth,
               projectId: 'bogus',
@@ -400,9 +512,44 @@ describe('v1.NetworkServiceClient', () => {
             const request = generateSampleMessage(
               new protos.google.ads.admanager.v1.ListNetworksRequest()
             );
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.listNetworks(request), expectedError);
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.ads.admanager.v1.Network()),
+              generateSampleMessage(new protos.google.ads.admanager.v1.Network()),
+              generateSampleMessage(new protos.google.ads.admanager.v1.Network()),
+            ];
+            client.descriptors.page.listNetworks.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.ads.admanager.v1.INetwork[] = [];
+            const iterable = client.listNetworksAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listNetworks.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
+
+        it('uses async iteration with listNetworks with error', async () => {
+            const client = new networkserviceModule.v1.NetworkServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.ListNetworksRequest()
+            );
+            const expectedError = new Error('expected');
+            client.descriptors.page.listNetworks.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listNetworksAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.ads.admanager.v1.INetwork[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listNetworks.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
         });
     });
 
@@ -1370,6 +1517,44 @@ describe('v1.NetworkServiceClient', () => {
                 const result = client.matchLabelFromLabelName(fakePath);
                 assert.strictEqual(result, "labelValue");
                 assert((client.pathTemplates.labelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('lineItem', async () => {
+            const fakePath = "/rendered/path/lineItem";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                line_item: "lineItemValue",
+            };
+            const client = new networkserviceModule.v1.NetworkServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.lineItemPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.lineItemPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('lineItemPath', () => {
+                const result = client.lineItemPath("networkCodeValue", "lineItemValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.lineItemPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromLineItemName', () => {
+                const result = client.matchNetworkCodeFromLineItemName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.lineItemPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLineItemFromLineItemName', () => {
+                const result = client.matchLineItemFromLineItemName(fakePath);
+                assert.strictEqual(result, "lineItemValue");
+                assert((client.pathTemplates.lineItemPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

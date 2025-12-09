@@ -28,6 +28,24 @@ function main() {
    * It may require correct/in-range values for request initialization.
    * TODO(developer): Uncomment these variables before running the sample.
    */
+  /**
+   *  Optional. The maximum number of `Network`s to return. The service may
+   *  return fewer than this value. If unspecified, at most 50 `Network`s will be
+   *  returned. The maximum value is 1000; values greater than 1000 will be
+   *  coerced to 1000.
+   */
+  // const pageSize = 1234
+  /**
+   *  Optional. A page token, received from a previous `ListNetworks` call.
+   *  Provide this to retrieve the subsequent page.
+   *  When paginating, all other parameters provided to `ListNetworks` must match
+   *  the call that provided the page token.
+   */
+  // const pageToken = 'abc123'
+  /**
+   *  Optional. Number of individual resources to skip while paginating.
+   */
+  // const skip = 1234
 
   // Imports the Admanager library
   const {NetworkServiceClient} = require('@google-ads/admanager').v1;
@@ -41,8 +59,10 @@ function main() {
     };
 
     // Run request
-    const response = await admanagerClient.listNetworks(request);
-    console.log(response);
+    const iterable = admanagerClient.listNetworksAsync(request);
+    for await (const response of iterable) {
+        console.log(response);
+    }
   }
 
   callListNetworks();

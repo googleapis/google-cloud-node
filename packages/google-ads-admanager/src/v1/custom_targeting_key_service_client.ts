@@ -258,6 +258,9 @@ export class CustomTargetingKeyServiceClient {
       labelPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/labels/{label}'
       ),
+      lineItemPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/lineItems/{line_item}'
+      ),
       liveStreamEventPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/liveStreamEvents/{live_stream_event}'
       ),
@@ -368,7 +371,7 @@ export class CustomTargetingKeyServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const customTargetingKeyServiceStubMethods =
-        ['getCustomTargetingKey', 'listCustomTargetingKeys'];
+        ['getCustomTargetingKey', 'listCustomTargetingKeys', 'createCustomTargetingKey', 'batchCreateCustomTargetingKeys', 'updateCustomTargetingKey', 'batchUpdateCustomTargetingKeys', 'batchActivateCustomTargetingKeys', 'batchDeactivateCustomTargetingKeys'];
     for (const methodName of customTargetingKeyServiceStubMethods) {
       const callPromise = this.customTargetingKeyServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -558,6 +561,598 @@ export class CustomTargetingKeyServiceClient {
         {}|undefined
       ]) => {
         this._log.info('getCustomTargetingKey response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * API to create a `CustomTargetingKey` object.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource where this `CustomTargetingKey` will be
+ *   created. Format: `networks/{network_code}`
+ * @param {google.ads.admanager.v1.CustomTargetingKey} request.customTargetingKey
+ *   Required. The `CustomTargetingKey` to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.CustomTargetingKey|CustomTargetingKey}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/custom_targeting_key_service.create_custom_targeting_key.js</caption>
+ * region_tag:admanager_v1_generated_CustomTargetingKeyService_CreateCustomTargetingKey_async
+ */
+  createCustomTargetingKey(
+      request?: protos.google.ads.admanager.v1.ICreateCustomTargetingKeyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ads.admanager.v1.ICustomTargetingKey,
+        protos.google.ads.admanager.v1.ICreateCustomTargetingKeyRequest|undefined, {}|undefined
+      ]>;
+  createCustomTargetingKey(
+      request: protos.google.ads.admanager.v1.ICreateCustomTargetingKeyRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.ads.admanager.v1.ICustomTargetingKey,
+          protos.google.ads.admanager.v1.ICreateCustomTargetingKeyRequest|null|undefined,
+          {}|null|undefined>): void;
+  createCustomTargetingKey(
+      request: protos.google.ads.admanager.v1.ICreateCustomTargetingKeyRequest,
+      callback: Callback<
+          protos.google.ads.admanager.v1.ICustomTargetingKey,
+          protos.google.ads.admanager.v1.ICreateCustomTargetingKeyRequest|null|undefined,
+          {}|null|undefined>): void;
+  createCustomTargetingKey(
+      request?: protos.google.ads.admanager.v1.ICreateCustomTargetingKeyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ads.admanager.v1.ICustomTargetingKey,
+          protos.google.ads.admanager.v1.ICreateCustomTargetingKeyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ads.admanager.v1.ICustomTargetingKey,
+          protos.google.ads.admanager.v1.ICreateCustomTargetingKeyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ads.admanager.v1.ICustomTargetingKey,
+        protos.google.ads.admanager.v1.ICreateCustomTargetingKeyRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('createCustomTargetingKey request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.ads.admanager.v1.ICustomTargetingKey,
+        protos.google.ads.admanager.v1.ICreateCustomTargetingKeyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createCustomTargetingKey response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.createCustomTargetingKey(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ads.admanager.v1.ICustomTargetingKey,
+        protos.google.ads.admanager.v1.ICreateCustomTargetingKeyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createCustomTargetingKey response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * API to batch create `CustomTargetingKey` objects.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource where `CustomTargetingKeys` will be created.
+ *   Format: `networks/{network_code}`
+ *   The parent field in the CreateCustomTargetingKeyRequest must match this
+ *   field.
+ * @param {number[]} request.requests
+ *   Required. The `CustomTargetingKey` objects to create.
+ *   A maximum of 100 objects can be created in a batch.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchCreateCustomTargetingKeysResponse|BatchCreateCustomTargetingKeysResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/custom_targeting_key_service.batch_create_custom_targeting_keys.js</caption>
+ * region_tag:admanager_v1_generated_CustomTargetingKeyService_BatchCreateCustomTargetingKeys_async
+ */
+  batchCreateCustomTargetingKeys(
+      request?: protos.google.ads.admanager.v1.IBatchCreateCustomTargetingKeysRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ads.admanager.v1.IBatchCreateCustomTargetingKeysResponse,
+        protos.google.ads.admanager.v1.IBatchCreateCustomTargetingKeysRequest|undefined, {}|undefined
+      ]>;
+  batchCreateCustomTargetingKeys(
+      request: protos.google.ads.admanager.v1.IBatchCreateCustomTargetingKeysRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.ads.admanager.v1.IBatchCreateCustomTargetingKeysResponse,
+          protos.google.ads.admanager.v1.IBatchCreateCustomTargetingKeysRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchCreateCustomTargetingKeys(
+      request: protos.google.ads.admanager.v1.IBatchCreateCustomTargetingKeysRequest,
+      callback: Callback<
+          protos.google.ads.admanager.v1.IBatchCreateCustomTargetingKeysResponse,
+          protos.google.ads.admanager.v1.IBatchCreateCustomTargetingKeysRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchCreateCustomTargetingKeys(
+      request?: protos.google.ads.admanager.v1.IBatchCreateCustomTargetingKeysRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ads.admanager.v1.IBatchCreateCustomTargetingKeysResponse,
+          protos.google.ads.admanager.v1.IBatchCreateCustomTargetingKeysRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ads.admanager.v1.IBatchCreateCustomTargetingKeysResponse,
+          protos.google.ads.admanager.v1.IBatchCreateCustomTargetingKeysRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ads.admanager.v1.IBatchCreateCustomTargetingKeysResponse,
+        protos.google.ads.admanager.v1.IBatchCreateCustomTargetingKeysRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('batchCreateCustomTargetingKeys request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.ads.admanager.v1.IBatchCreateCustomTargetingKeysResponse,
+        protos.google.ads.admanager.v1.IBatchCreateCustomTargetingKeysRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchCreateCustomTargetingKeys response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.batchCreateCustomTargetingKeys(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ads.admanager.v1.IBatchCreateCustomTargetingKeysResponse,
+        protos.google.ads.admanager.v1.IBatchCreateCustomTargetingKeysRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('batchCreateCustomTargetingKeys response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * API to update a `CustomTargetingKey` object.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.ads.admanager.v1.CustomTargetingKey} request.customTargetingKey
+ *   Required. The `CustomTargetingKey` to update.
+ *
+ *   The `CustomTargetingKey`'s `name` is used to identify the
+ *   `CustomTargetingKey` to update.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. The list of fields to update.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.CustomTargetingKey|CustomTargetingKey}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/custom_targeting_key_service.update_custom_targeting_key.js</caption>
+ * region_tag:admanager_v1_generated_CustomTargetingKeyService_UpdateCustomTargetingKey_async
+ */
+  updateCustomTargetingKey(
+      request?: protos.google.ads.admanager.v1.IUpdateCustomTargetingKeyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ads.admanager.v1.ICustomTargetingKey,
+        protos.google.ads.admanager.v1.IUpdateCustomTargetingKeyRequest|undefined, {}|undefined
+      ]>;
+  updateCustomTargetingKey(
+      request: protos.google.ads.admanager.v1.IUpdateCustomTargetingKeyRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.ads.admanager.v1.ICustomTargetingKey,
+          protos.google.ads.admanager.v1.IUpdateCustomTargetingKeyRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateCustomTargetingKey(
+      request: protos.google.ads.admanager.v1.IUpdateCustomTargetingKeyRequest,
+      callback: Callback<
+          protos.google.ads.admanager.v1.ICustomTargetingKey,
+          protos.google.ads.admanager.v1.IUpdateCustomTargetingKeyRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateCustomTargetingKey(
+      request?: protos.google.ads.admanager.v1.IUpdateCustomTargetingKeyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ads.admanager.v1.ICustomTargetingKey,
+          protos.google.ads.admanager.v1.IUpdateCustomTargetingKeyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ads.admanager.v1.ICustomTargetingKey,
+          protos.google.ads.admanager.v1.IUpdateCustomTargetingKeyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ads.admanager.v1.ICustomTargetingKey,
+        protos.google.ads.admanager.v1.IUpdateCustomTargetingKeyRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'custom_targeting_key.name': request.customTargetingKey!.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('updateCustomTargetingKey request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.ads.admanager.v1.ICustomTargetingKey,
+        protos.google.ads.admanager.v1.IUpdateCustomTargetingKeyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateCustomTargetingKey response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.updateCustomTargetingKey(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ads.admanager.v1.ICustomTargetingKey,
+        protos.google.ads.admanager.v1.IUpdateCustomTargetingKeyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateCustomTargetingKey response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * API to batch update `CustomTargetingKey` objects.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource where `CustomTargetingKeys` will be updated.
+ *   Format: `networks/{network_code}`
+ *   The parent field in the UpdateCustomTargetingKeyRequest must match this
+ *   field.
+ * @param {number[]} request.requests
+ *   Required. The `CustomTargetingKey` objects to update.
+ *   A maximum of 100 objects can be updated in a batch.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchUpdateCustomTargetingKeysResponse|BatchUpdateCustomTargetingKeysResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/custom_targeting_key_service.batch_update_custom_targeting_keys.js</caption>
+ * region_tag:admanager_v1_generated_CustomTargetingKeyService_BatchUpdateCustomTargetingKeys_async
+ */
+  batchUpdateCustomTargetingKeys(
+      request?: protos.google.ads.admanager.v1.IBatchUpdateCustomTargetingKeysRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ads.admanager.v1.IBatchUpdateCustomTargetingKeysResponse,
+        protos.google.ads.admanager.v1.IBatchUpdateCustomTargetingKeysRequest|undefined, {}|undefined
+      ]>;
+  batchUpdateCustomTargetingKeys(
+      request: protos.google.ads.admanager.v1.IBatchUpdateCustomTargetingKeysRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.ads.admanager.v1.IBatchUpdateCustomTargetingKeysResponse,
+          protos.google.ads.admanager.v1.IBatchUpdateCustomTargetingKeysRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchUpdateCustomTargetingKeys(
+      request: protos.google.ads.admanager.v1.IBatchUpdateCustomTargetingKeysRequest,
+      callback: Callback<
+          protos.google.ads.admanager.v1.IBatchUpdateCustomTargetingKeysResponse,
+          protos.google.ads.admanager.v1.IBatchUpdateCustomTargetingKeysRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchUpdateCustomTargetingKeys(
+      request?: protos.google.ads.admanager.v1.IBatchUpdateCustomTargetingKeysRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ads.admanager.v1.IBatchUpdateCustomTargetingKeysResponse,
+          protos.google.ads.admanager.v1.IBatchUpdateCustomTargetingKeysRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ads.admanager.v1.IBatchUpdateCustomTargetingKeysResponse,
+          protos.google.ads.admanager.v1.IBatchUpdateCustomTargetingKeysRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ads.admanager.v1.IBatchUpdateCustomTargetingKeysResponse,
+        protos.google.ads.admanager.v1.IBatchUpdateCustomTargetingKeysRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('batchUpdateCustomTargetingKeys request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.ads.admanager.v1.IBatchUpdateCustomTargetingKeysResponse,
+        protos.google.ads.admanager.v1.IBatchUpdateCustomTargetingKeysRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchUpdateCustomTargetingKeys response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.batchUpdateCustomTargetingKeys(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ads.admanager.v1.IBatchUpdateCustomTargetingKeysResponse,
+        protos.google.ads.admanager.v1.IBatchUpdateCustomTargetingKeysRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('batchUpdateCustomTargetingKeys response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * API to batch activate `CustomTargetingKey` objects.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Format: `networks/{network_code}`
+ * @param {string[]} request.names
+ *   Required. The resource names of the `CustomTargetingKey`s to activate.
+ *   Format:
+ *   `networks/{network_code}/customTargetingKeys/{custom_targeting_key_id}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchActivateCustomTargetingKeysResponse|BatchActivateCustomTargetingKeysResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/custom_targeting_key_service.batch_activate_custom_targeting_keys.js</caption>
+ * region_tag:admanager_v1_generated_CustomTargetingKeyService_BatchActivateCustomTargetingKeys_async
+ */
+  batchActivateCustomTargetingKeys(
+      request?: protos.google.ads.admanager.v1.IBatchActivateCustomTargetingKeysRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ads.admanager.v1.IBatchActivateCustomTargetingKeysResponse,
+        protos.google.ads.admanager.v1.IBatchActivateCustomTargetingKeysRequest|undefined, {}|undefined
+      ]>;
+  batchActivateCustomTargetingKeys(
+      request: protos.google.ads.admanager.v1.IBatchActivateCustomTargetingKeysRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.ads.admanager.v1.IBatchActivateCustomTargetingKeysResponse,
+          protos.google.ads.admanager.v1.IBatchActivateCustomTargetingKeysRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchActivateCustomTargetingKeys(
+      request: protos.google.ads.admanager.v1.IBatchActivateCustomTargetingKeysRequest,
+      callback: Callback<
+          protos.google.ads.admanager.v1.IBatchActivateCustomTargetingKeysResponse,
+          protos.google.ads.admanager.v1.IBatchActivateCustomTargetingKeysRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchActivateCustomTargetingKeys(
+      request?: protos.google.ads.admanager.v1.IBatchActivateCustomTargetingKeysRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ads.admanager.v1.IBatchActivateCustomTargetingKeysResponse,
+          protos.google.ads.admanager.v1.IBatchActivateCustomTargetingKeysRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ads.admanager.v1.IBatchActivateCustomTargetingKeysResponse,
+          protos.google.ads.admanager.v1.IBatchActivateCustomTargetingKeysRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ads.admanager.v1.IBatchActivateCustomTargetingKeysResponse,
+        protos.google.ads.admanager.v1.IBatchActivateCustomTargetingKeysRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('batchActivateCustomTargetingKeys request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.ads.admanager.v1.IBatchActivateCustomTargetingKeysResponse,
+        protos.google.ads.admanager.v1.IBatchActivateCustomTargetingKeysRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchActivateCustomTargetingKeys response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.batchActivateCustomTargetingKeys(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ads.admanager.v1.IBatchActivateCustomTargetingKeysResponse,
+        protos.google.ads.admanager.v1.IBatchActivateCustomTargetingKeysRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('batchActivateCustomTargetingKeys response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Deactivates a list of `CustomTargetingKey` objects.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Format: `networks/{network_code}`
+ * @param {string[]} request.names
+ *   Required. The resource names of the `CustomTargetingKey`s to deactivate.
+ *   Format:
+ *   `networks/{network_code}/customTargetingKeys/{custom_targeting_key_id}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysResponse|BatchDeactivateCustomTargetingKeysResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/custom_targeting_key_service.batch_deactivate_custom_targeting_keys.js</caption>
+ * region_tag:admanager_v1_generated_CustomTargetingKeyService_BatchDeactivateCustomTargetingKeys_async
+ */
+  batchDeactivateCustomTargetingKeys(
+      request?: protos.google.ads.admanager.v1.IBatchDeactivateCustomTargetingKeysRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ads.admanager.v1.IBatchDeactivateCustomTargetingKeysResponse,
+        protos.google.ads.admanager.v1.IBatchDeactivateCustomTargetingKeysRequest|undefined, {}|undefined
+      ]>;
+  batchDeactivateCustomTargetingKeys(
+      request: protos.google.ads.admanager.v1.IBatchDeactivateCustomTargetingKeysRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.ads.admanager.v1.IBatchDeactivateCustomTargetingKeysResponse,
+          protos.google.ads.admanager.v1.IBatchDeactivateCustomTargetingKeysRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchDeactivateCustomTargetingKeys(
+      request: protos.google.ads.admanager.v1.IBatchDeactivateCustomTargetingKeysRequest,
+      callback: Callback<
+          protos.google.ads.admanager.v1.IBatchDeactivateCustomTargetingKeysResponse,
+          protos.google.ads.admanager.v1.IBatchDeactivateCustomTargetingKeysRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchDeactivateCustomTargetingKeys(
+      request?: protos.google.ads.admanager.v1.IBatchDeactivateCustomTargetingKeysRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ads.admanager.v1.IBatchDeactivateCustomTargetingKeysResponse,
+          protos.google.ads.admanager.v1.IBatchDeactivateCustomTargetingKeysRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ads.admanager.v1.IBatchDeactivateCustomTargetingKeysResponse,
+          protos.google.ads.admanager.v1.IBatchDeactivateCustomTargetingKeysRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ads.admanager.v1.IBatchDeactivateCustomTargetingKeysResponse,
+        protos.google.ads.admanager.v1.IBatchDeactivateCustomTargetingKeysRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('batchDeactivateCustomTargetingKeys request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.ads.admanager.v1.IBatchDeactivateCustomTargetingKeysResponse,
+        protos.google.ads.admanager.v1.IBatchDeactivateCustomTargetingKeysRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchDeactivateCustomTargetingKeys response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.batchDeactivateCustomTargetingKeys(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ads.admanager.v1.IBatchDeactivateCustomTargetingKeysResponse,
+        protos.google.ads.admanager.v1.IBatchDeactivateCustomTargetingKeysRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('batchDeactivateCustomTargetingKeys response %j', response);
         return [response, options, rawResponse];
       }).catch((error: any) => {
         if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
@@ -1741,6 +2336,42 @@ export class CustomTargetingKeyServiceClient {
    */
   matchLabelFromLabelName(labelName: string) {
     return this.pathTemplates.labelPathTemplate.match(labelName).label;
+  }
+
+  /**
+   * Return a fully-qualified lineItem resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} line_item
+   * @returns {string} Resource name string.
+   */
+  lineItemPath(networkCode:string,lineItem:string) {
+    return this.pathTemplates.lineItemPathTemplate.render({
+      network_code: networkCode,
+      line_item: lineItem,
+    });
+  }
+
+  /**
+   * Parse the network_code from LineItem resource.
+   *
+   * @param {string} lineItemName
+   *   A fully-qualified path representing LineItem resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromLineItemName(lineItemName: string) {
+    return this.pathTemplates.lineItemPathTemplate.match(lineItemName).network_code;
+  }
+
+  /**
+   * Parse the line_item from LineItem resource.
+   *
+   * @param {string} lineItemName
+   *   A fully-qualified path representing LineItem resource.
+   * @returns {string} A string representing the line_item.
+   */
+  matchLineItemFromLineItemName(lineItemName: string) {
+    return this.pathTemplates.lineItemPathTemplate.match(lineItemName).line_item;
   }
 
   /**

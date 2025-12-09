@@ -9518,6 +9518,237 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.ads.admanager.v1.AdUnitService|createAdUnit}.
+                         * @memberof google.ads.admanager.v1.AdUnitService
+                         * @typedef CreateAdUnitCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.ads.admanager.v1.AdUnit} [response] AdUnit
+                         */
+    
+                        /**
+                         * Calls CreateAdUnit.
+                         * @function createAdUnit
+                         * @memberof google.ads.admanager.v1.AdUnitService
+                         * @instance
+                         * @param {google.ads.admanager.v1.ICreateAdUnitRequest} request CreateAdUnitRequest message or plain object
+                         * @param {google.ads.admanager.v1.AdUnitService.CreateAdUnitCallback} callback Node-style callback called with the error, if any, and AdUnit
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AdUnitService.prototype.createAdUnit = function createAdUnit(request, callback) {
+                            return this.rpcCall(createAdUnit, $root.google.ads.admanager.v1.CreateAdUnitRequest, $root.google.ads.admanager.v1.AdUnit, request, callback);
+                        }, "name", { value: "CreateAdUnit" });
+    
+                        /**
+                         * Calls CreateAdUnit.
+                         * @function createAdUnit
+                         * @memberof google.ads.admanager.v1.AdUnitService
+                         * @instance
+                         * @param {google.ads.admanager.v1.ICreateAdUnitRequest} request CreateAdUnitRequest message or plain object
+                         * @returns {Promise<google.ads.admanager.v1.AdUnit>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.ads.admanager.v1.AdUnitService|updateAdUnit}.
+                         * @memberof google.ads.admanager.v1.AdUnitService
+                         * @typedef UpdateAdUnitCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.ads.admanager.v1.AdUnit} [response] AdUnit
+                         */
+    
+                        /**
+                         * Calls UpdateAdUnit.
+                         * @function updateAdUnit
+                         * @memberof google.ads.admanager.v1.AdUnitService
+                         * @instance
+                         * @param {google.ads.admanager.v1.IUpdateAdUnitRequest} request UpdateAdUnitRequest message or plain object
+                         * @param {google.ads.admanager.v1.AdUnitService.UpdateAdUnitCallback} callback Node-style callback called with the error, if any, and AdUnit
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AdUnitService.prototype.updateAdUnit = function updateAdUnit(request, callback) {
+                            return this.rpcCall(updateAdUnit, $root.google.ads.admanager.v1.UpdateAdUnitRequest, $root.google.ads.admanager.v1.AdUnit, request, callback);
+                        }, "name", { value: "UpdateAdUnit" });
+    
+                        /**
+                         * Calls UpdateAdUnit.
+                         * @function updateAdUnit
+                         * @memberof google.ads.admanager.v1.AdUnitService
+                         * @instance
+                         * @param {google.ads.admanager.v1.IUpdateAdUnitRequest} request UpdateAdUnitRequest message or plain object
+                         * @returns {Promise<google.ads.admanager.v1.AdUnit>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.ads.admanager.v1.AdUnitService|batchCreateAdUnits}.
+                         * @memberof google.ads.admanager.v1.AdUnitService
+                         * @typedef BatchCreateAdUnitsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.ads.admanager.v1.BatchCreateAdUnitsResponse} [response] BatchCreateAdUnitsResponse
+                         */
+    
+                        /**
+                         * Calls BatchCreateAdUnits.
+                         * @function batchCreateAdUnits
+                         * @memberof google.ads.admanager.v1.AdUnitService
+                         * @instance
+                         * @param {google.ads.admanager.v1.IBatchCreateAdUnitsRequest} request BatchCreateAdUnitsRequest message or plain object
+                         * @param {google.ads.admanager.v1.AdUnitService.BatchCreateAdUnitsCallback} callback Node-style callback called with the error, if any, and BatchCreateAdUnitsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AdUnitService.prototype.batchCreateAdUnits = function batchCreateAdUnits(request, callback) {
+                            return this.rpcCall(batchCreateAdUnits, $root.google.ads.admanager.v1.BatchCreateAdUnitsRequest, $root.google.ads.admanager.v1.BatchCreateAdUnitsResponse, request, callback);
+                        }, "name", { value: "BatchCreateAdUnits" });
+    
+                        /**
+                         * Calls BatchCreateAdUnits.
+                         * @function batchCreateAdUnits
+                         * @memberof google.ads.admanager.v1.AdUnitService
+                         * @instance
+                         * @param {google.ads.admanager.v1.IBatchCreateAdUnitsRequest} request BatchCreateAdUnitsRequest message or plain object
+                         * @returns {Promise<google.ads.admanager.v1.BatchCreateAdUnitsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.ads.admanager.v1.AdUnitService|batchUpdateAdUnits}.
+                         * @memberof google.ads.admanager.v1.AdUnitService
+                         * @typedef BatchUpdateAdUnitsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.ads.admanager.v1.BatchUpdateAdUnitsResponse} [response] BatchUpdateAdUnitsResponse
+                         */
+    
+                        /**
+                         * Calls BatchUpdateAdUnits.
+                         * @function batchUpdateAdUnits
+                         * @memberof google.ads.admanager.v1.AdUnitService
+                         * @instance
+                         * @param {google.ads.admanager.v1.IBatchUpdateAdUnitsRequest} request BatchUpdateAdUnitsRequest message or plain object
+                         * @param {google.ads.admanager.v1.AdUnitService.BatchUpdateAdUnitsCallback} callback Node-style callback called with the error, if any, and BatchUpdateAdUnitsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AdUnitService.prototype.batchUpdateAdUnits = function batchUpdateAdUnits(request, callback) {
+                            return this.rpcCall(batchUpdateAdUnits, $root.google.ads.admanager.v1.BatchUpdateAdUnitsRequest, $root.google.ads.admanager.v1.BatchUpdateAdUnitsResponse, request, callback);
+                        }, "name", { value: "BatchUpdateAdUnits" });
+    
+                        /**
+                         * Calls BatchUpdateAdUnits.
+                         * @function batchUpdateAdUnits
+                         * @memberof google.ads.admanager.v1.AdUnitService
+                         * @instance
+                         * @param {google.ads.admanager.v1.IBatchUpdateAdUnitsRequest} request BatchUpdateAdUnitsRequest message or plain object
+                         * @returns {Promise<google.ads.admanager.v1.BatchUpdateAdUnitsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.ads.admanager.v1.AdUnitService|batchActivateAdUnits}.
+                         * @memberof google.ads.admanager.v1.AdUnitService
+                         * @typedef BatchActivateAdUnitsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.ads.admanager.v1.BatchActivateAdUnitsResponse} [response] BatchActivateAdUnitsResponse
+                         */
+    
+                        /**
+                         * Calls BatchActivateAdUnits.
+                         * @function batchActivateAdUnits
+                         * @memberof google.ads.admanager.v1.AdUnitService
+                         * @instance
+                         * @param {google.ads.admanager.v1.IBatchActivateAdUnitsRequest} request BatchActivateAdUnitsRequest message or plain object
+                         * @param {google.ads.admanager.v1.AdUnitService.BatchActivateAdUnitsCallback} callback Node-style callback called with the error, if any, and BatchActivateAdUnitsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AdUnitService.prototype.batchActivateAdUnits = function batchActivateAdUnits(request, callback) {
+                            return this.rpcCall(batchActivateAdUnits, $root.google.ads.admanager.v1.BatchActivateAdUnitsRequest, $root.google.ads.admanager.v1.BatchActivateAdUnitsResponse, request, callback);
+                        }, "name", { value: "BatchActivateAdUnits" });
+    
+                        /**
+                         * Calls BatchActivateAdUnits.
+                         * @function batchActivateAdUnits
+                         * @memberof google.ads.admanager.v1.AdUnitService
+                         * @instance
+                         * @param {google.ads.admanager.v1.IBatchActivateAdUnitsRequest} request BatchActivateAdUnitsRequest message or plain object
+                         * @returns {Promise<google.ads.admanager.v1.BatchActivateAdUnitsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.ads.admanager.v1.AdUnitService|batchDeactivateAdUnits}.
+                         * @memberof google.ads.admanager.v1.AdUnitService
+                         * @typedef BatchDeactivateAdUnitsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.ads.admanager.v1.BatchDeactivateAdUnitsResponse} [response] BatchDeactivateAdUnitsResponse
+                         */
+    
+                        /**
+                         * Calls BatchDeactivateAdUnits.
+                         * @function batchDeactivateAdUnits
+                         * @memberof google.ads.admanager.v1.AdUnitService
+                         * @instance
+                         * @param {google.ads.admanager.v1.IBatchDeactivateAdUnitsRequest} request BatchDeactivateAdUnitsRequest message or plain object
+                         * @param {google.ads.admanager.v1.AdUnitService.BatchDeactivateAdUnitsCallback} callback Node-style callback called with the error, if any, and BatchDeactivateAdUnitsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AdUnitService.prototype.batchDeactivateAdUnits = function batchDeactivateAdUnits(request, callback) {
+                            return this.rpcCall(batchDeactivateAdUnits, $root.google.ads.admanager.v1.BatchDeactivateAdUnitsRequest, $root.google.ads.admanager.v1.BatchDeactivateAdUnitsResponse, request, callback);
+                        }, "name", { value: "BatchDeactivateAdUnits" });
+    
+                        /**
+                         * Calls BatchDeactivateAdUnits.
+                         * @function batchDeactivateAdUnits
+                         * @memberof google.ads.admanager.v1.AdUnitService
+                         * @instance
+                         * @param {google.ads.admanager.v1.IBatchDeactivateAdUnitsRequest} request BatchDeactivateAdUnitsRequest message or plain object
+                         * @returns {Promise<google.ads.admanager.v1.BatchDeactivateAdUnitsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.ads.admanager.v1.AdUnitService|batchArchiveAdUnits}.
+                         * @memberof google.ads.admanager.v1.AdUnitService
+                         * @typedef BatchArchiveAdUnitsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.ads.admanager.v1.BatchArchiveAdUnitsResponse} [response] BatchArchiveAdUnitsResponse
+                         */
+    
+                        /**
+                         * Calls BatchArchiveAdUnits.
+                         * @function batchArchiveAdUnits
+                         * @memberof google.ads.admanager.v1.AdUnitService
+                         * @instance
+                         * @param {google.ads.admanager.v1.IBatchArchiveAdUnitsRequest} request BatchArchiveAdUnitsRequest message or plain object
+                         * @param {google.ads.admanager.v1.AdUnitService.BatchArchiveAdUnitsCallback} callback Node-style callback called with the error, if any, and BatchArchiveAdUnitsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AdUnitService.prototype.batchArchiveAdUnits = function batchArchiveAdUnits(request, callback) {
+                            return this.rpcCall(batchArchiveAdUnits, $root.google.ads.admanager.v1.BatchArchiveAdUnitsRequest, $root.google.ads.admanager.v1.BatchArchiveAdUnitsResponse, request, callback);
+                        }, "name", { value: "BatchArchiveAdUnits" });
+    
+                        /**
+                         * Calls BatchArchiveAdUnits.
+                         * @function batchArchiveAdUnits
+                         * @memberof google.ads.admanager.v1.AdUnitService
+                         * @instance
+                         * @param {google.ads.admanager.v1.IBatchArchiveAdUnitsRequest} request BatchArchiveAdUnitsRequest message or plain object
+                         * @returns {Promise<google.ads.admanager.v1.BatchArchiveAdUnitsResponse>} Promise
+                         * @variation 2
+                         */
+    
                         return AdUnitService;
                     })();
     
@@ -10321,6 +10552,1431 @@
                         return ListAdUnitsResponse;
                     })();
     
+                    v1.CreateAdUnitRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateAdUnitRequest.
+                         * @memberof google.ads.admanager.v1
+                         * @interface ICreateAdUnitRequest
+                         * @property {string|null} [parent] CreateAdUnitRequest parent
+                         * @property {google.ads.admanager.v1.IAdUnit|null} [adUnit] CreateAdUnitRequest adUnit
+                         */
+    
+                        /**
+                         * Constructs a new CreateAdUnitRequest.
+                         * @memberof google.ads.admanager.v1
+                         * @classdesc Represents a CreateAdUnitRequest.
+                         * @implements ICreateAdUnitRequest
+                         * @constructor
+                         * @param {google.ads.admanager.v1.ICreateAdUnitRequest=} [properties] Properties to set
+                         */
+                        function CreateAdUnitRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateAdUnitRequest parent.
+                         * @member {string} parent
+                         * @memberof google.ads.admanager.v1.CreateAdUnitRequest
+                         * @instance
+                         */
+                        CreateAdUnitRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateAdUnitRequest adUnit.
+                         * @member {google.ads.admanager.v1.IAdUnit|null|undefined} adUnit
+                         * @memberof google.ads.admanager.v1.CreateAdUnitRequest
+                         * @instance
+                         */
+                        CreateAdUnitRequest.prototype.adUnit = null;
+    
+                        /**
+                         * Creates a new CreateAdUnitRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.ads.admanager.v1.CreateAdUnitRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.ICreateAdUnitRequest=} [properties] Properties to set
+                         * @returns {google.ads.admanager.v1.CreateAdUnitRequest} CreateAdUnitRequest instance
+                         */
+                        CreateAdUnitRequest.create = function create(properties) {
+                            return new CreateAdUnitRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateAdUnitRequest message. Does not implicitly {@link google.ads.admanager.v1.CreateAdUnitRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ads.admanager.v1.CreateAdUnitRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.ICreateAdUnitRequest} message CreateAdUnitRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateAdUnitRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.adUnit != null && Object.hasOwnProperty.call(message, "adUnit"))
+                                $root.google.ads.admanager.v1.AdUnit.encode(message.adUnit, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateAdUnitRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.CreateAdUnitRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ads.admanager.v1.CreateAdUnitRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.ICreateAdUnitRequest} message CreateAdUnitRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateAdUnitRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateAdUnitRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ads.admanager.v1.CreateAdUnitRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ads.admanager.v1.CreateAdUnitRequest} CreateAdUnitRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateAdUnitRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ads.admanager.v1.CreateAdUnitRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.adUnit = $root.google.ads.admanager.v1.AdUnit.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateAdUnitRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ads.admanager.v1.CreateAdUnitRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ads.admanager.v1.CreateAdUnitRequest} CreateAdUnitRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateAdUnitRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateAdUnitRequest message.
+                         * @function verify
+                         * @memberof google.ads.admanager.v1.CreateAdUnitRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateAdUnitRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.adUnit != null && message.hasOwnProperty("adUnit")) {
+                                var error = $root.google.ads.admanager.v1.AdUnit.verify(message.adUnit);
+                                if (error)
+                                    return "adUnit." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateAdUnitRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ads.admanager.v1.CreateAdUnitRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ads.admanager.v1.CreateAdUnitRequest} CreateAdUnitRequest
+                         */
+                        CreateAdUnitRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ads.admanager.v1.CreateAdUnitRequest)
+                                return object;
+                            var message = new $root.google.ads.admanager.v1.CreateAdUnitRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.adUnit != null) {
+                                if (typeof object.adUnit !== "object")
+                                    throw TypeError(".google.ads.admanager.v1.CreateAdUnitRequest.adUnit: object expected");
+                                message.adUnit = $root.google.ads.admanager.v1.AdUnit.fromObject(object.adUnit);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateAdUnitRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ads.admanager.v1.CreateAdUnitRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.CreateAdUnitRequest} message CreateAdUnitRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateAdUnitRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.adUnit = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.adUnit != null && message.hasOwnProperty("adUnit"))
+                                object.adUnit = $root.google.ads.admanager.v1.AdUnit.toObject(message.adUnit, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateAdUnitRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.ads.admanager.v1.CreateAdUnitRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateAdUnitRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateAdUnitRequest
+                         * @function getTypeUrl
+                         * @memberof google.ads.admanager.v1.CreateAdUnitRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateAdUnitRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ads.admanager.v1.CreateAdUnitRequest";
+                        };
+    
+                        return CreateAdUnitRequest;
+                    })();
+    
+                    v1.UpdateAdUnitRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateAdUnitRequest.
+                         * @memberof google.ads.admanager.v1
+                         * @interface IUpdateAdUnitRequest
+                         * @property {google.ads.admanager.v1.IAdUnit|null} [adUnit] UpdateAdUnitRequest adUnit
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateAdUnitRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateAdUnitRequest.
+                         * @memberof google.ads.admanager.v1
+                         * @classdesc Represents an UpdateAdUnitRequest.
+                         * @implements IUpdateAdUnitRequest
+                         * @constructor
+                         * @param {google.ads.admanager.v1.IUpdateAdUnitRequest=} [properties] Properties to set
+                         */
+                        function UpdateAdUnitRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateAdUnitRequest adUnit.
+                         * @member {google.ads.admanager.v1.IAdUnit|null|undefined} adUnit
+                         * @memberof google.ads.admanager.v1.UpdateAdUnitRequest
+                         * @instance
+                         */
+                        UpdateAdUnitRequest.prototype.adUnit = null;
+    
+                        /**
+                         * UpdateAdUnitRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.ads.admanager.v1.UpdateAdUnitRequest
+                         * @instance
+                         */
+                        UpdateAdUnitRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateAdUnitRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.ads.admanager.v1.UpdateAdUnitRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.IUpdateAdUnitRequest=} [properties] Properties to set
+                         * @returns {google.ads.admanager.v1.UpdateAdUnitRequest} UpdateAdUnitRequest instance
+                         */
+                        UpdateAdUnitRequest.create = function create(properties) {
+                            return new UpdateAdUnitRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateAdUnitRequest message. Does not implicitly {@link google.ads.admanager.v1.UpdateAdUnitRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ads.admanager.v1.UpdateAdUnitRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.IUpdateAdUnitRequest} message UpdateAdUnitRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateAdUnitRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.adUnit != null && Object.hasOwnProperty.call(message, "adUnit"))
+                                $root.google.ads.admanager.v1.AdUnit.encode(message.adUnit, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateAdUnitRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.UpdateAdUnitRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ads.admanager.v1.UpdateAdUnitRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.IUpdateAdUnitRequest} message UpdateAdUnitRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateAdUnitRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateAdUnitRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ads.admanager.v1.UpdateAdUnitRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ads.admanager.v1.UpdateAdUnitRequest} UpdateAdUnitRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateAdUnitRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ads.admanager.v1.UpdateAdUnitRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.adUnit = $root.google.ads.admanager.v1.AdUnit.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateAdUnitRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ads.admanager.v1.UpdateAdUnitRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ads.admanager.v1.UpdateAdUnitRequest} UpdateAdUnitRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateAdUnitRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateAdUnitRequest message.
+                         * @function verify
+                         * @memberof google.ads.admanager.v1.UpdateAdUnitRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateAdUnitRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.adUnit != null && message.hasOwnProperty("adUnit")) {
+                                var error = $root.google.ads.admanager.v1.AdUnit.verify(message.adUnit);
+                                if (error)
+                                    return "adUnit." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateAdUnitRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ads.admanager.v1.UpdateAdUnitRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ads.admanager.v1.UpdateAdUnitRequest} UpdateAdUnitRequest
+                         */
+                        UpdateAdUnitRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ads.admanager.v1.UpdateAdUnitRequest)
+                                return object;
+                            var message = new $root.google.ads.admanager.v1.UpdateAdUnitRequest();
+                            if (object.adUnit != null) {
+                                if (typeof object.adUnit !== "object")
+                                    throw TypeError(".google.ads.admanager.v1.UpdateAdUnitRequest.adUnit: object expected");
+                                message.adUnit = $root.google.ads.admanager.v1.AdUnit.fromObject(object.adUnit);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.ads.admanager.v1.UpdateAdUnitRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateAdUnitRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ads.admanager.v1.UpdateAdUnitRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.UpdateAdUnitRequest} message UpdateAdUnitRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateAdUnitRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.adUnit = null;
+                                object.updateMask = null;
+                            }
+                            if (message.adUnit != null && message.hasOwnProperty("adUnit"))
+                                object.adUnit = $root.google.ads.admanager.v1.AdUnit.toObject(message.adUnit, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateAdUnitRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.ads.admanager.v1.UpdateAdUnitRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateAdUnitRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateAdUnitRequest
+                         * @function getTypeUrl
+                         * @memberof google.ads.admanager.v1.UpdateAdUnitRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateAdUnitRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ads.admanager.v1.UpdateAdUnitRequest";
+                        };
+    
+                        return UpdateAdUnitRequest;
+                    })();
+    
+                    v1.BatchCreateAdUnitsRequest = (function() {
+    
+                        /**
+                         * Properties of a BatchCreateAdUnitsRequest.
+                         * @memberof google.ads.admanager.v1
+                         * @interface IBatchCreateAdUnitsRequest
+                         * @property {string|null} [parent] BatchCreateAdUnitsRequest parent
+                         * @property {Array.<google.ads.admanager.v1.ICreateAdUnitRequest>|null} [requests] BatchCreateAdUnitsRequest requests
+                         */
+    
+                        /**
+                         * Constructs a new BatchCreateAdUnitsRequest.
+                         * @memberof google.ads.admanager.v1
+                         * @classdesc Represents a BatchCreateAdUnitsRequest.
+                         * @implements IBatchCreateAdUnitsRequest
+                         * @constructor
+                         * @param {google.ads.admanager.v1.IBatchCreateAdUnitsRequest=} [properties] Properties to set
+                         */
+                        function BatchCreateAdUnitsRequest(properties) {
+                            this.requests = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BatchCreateAdUnitsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.ads.admanager.v1.BatchCreateAdUnitsRequest
+                         * @instance
+                         */
+                        BatchCreateAdUnitsRequest.prototype.parent = "";
+    
+                        /**
+                         * BatchCreateAdUnitsRequest requests.
+                         * @member {Array.<google.ads.admanager.v1.ICreateAdUnitRequest>} requests
+                         * @memberof google.ads.admanager.v1.BatchCreateAdUnitsRequest
+                         * @instance
+                         */
+                        BatchCreateAdUnitsRequest.prototype.requests = $util.emptyArray;
+    
+                        /**
+                         * Creates a new BatchCreateAdUnitsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.ads.admanager.v1.BatchCreateAdUnitsRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchCreateAdUnitsRequest=} [properties] Properties to set
+                         * @returns {google.ads.admanager.v1.BatchCreateAdUnitsRequest} BatchCreateAdUnitsRequest instance
+                         */
+                        BatchCreateAdUnitsRequest.create = function create(properties) {
+                            return new BatchCreateAdUnitsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BatchCreateAdUnitsRequest message. Does not implicitly {@link google.ads.admanager.v1.BatchCreateAdUnitsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ads.admanager.v1.BatchCreateAdUnitsRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchCreateAdUnitsRequest} message BatchCreateAdUnitsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchCreateAdUnitsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.requests != null && message.requests.length)
+                                for (var i = 0; i < message.requests.length; ++i)
+                                    $root.google.ads.admanager.v1.CreateAdUnitRequest.encode(message.requests[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BatchCreateAdUnitsRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchCreateAdUnitsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ads.admanager.v1.BatchCreateAdUnitsRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchCreateAdUnitsRequest} message BatchCreateAdUnitsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchCreateAdUnitsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BatchCreateAdUnitsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ads.admanager.v1.BatchCreateAdUnitsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ads.admanager.v1.BatchCreateAdUnitsRequest} BatchCreateAdUnitsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchCreateAdUnitsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ads.admanager.v1.BatchCreateAdUnitsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.requests && message.requests.length))
+                                            message.requests = [];
+                                        message.requests.push($root.google.ads.admanager.v1.CreateAdUnitRequest.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BatchCreateAdUnitsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ads.admanager.v1.BatchCreateAdUnitsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ads.admanager.v1.BatchCreateAdUnitsRequest} BatchCreateAdUnitsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchCreateAdUnitsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BatchCreateAdUnitsRequest message.
+                         * @function verify
+                         * @memberof google.ads.admanager.v1.BatchCreateAdUnitsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BatchCreateAdUnitsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.requests != null && message.hasOwnProperty("requests")) {
+                                if (!Array.isArray(message.requests))
+                                    return "requests: array expected";
+                                for (var i = 0; i < message.requests.length; ++i) {
+                                    var error = $root.google.ads.admanager.v1.CreateAdUnitRequest.verify(message.requests[i]);
+                                    if (error)
+                                        return "requests." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BatchCreateAdUnitsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ads.admanager.v1.BatchCreateAdUnitsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ads.admanager.v1.BatchCreateAdUnitsRequest} BatchCreateAdUnitsRequest
+                         */
+                        BatchCreateAdUnitsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ads.admanager.v1.BatchCreateAdUnitsRequest)
+                                return object;
+                            var message = new $root.google.ads.admanager.v1.BatchCreateAdUnitsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.requests) {
+                                if (!Array.isArray(object.requests))
+                                    throw TypeError(".google.ads.admanager.v1.BatchCreateAdUnitsRequest.requests: array expected");
+                                message.requests = [];
+                                for (var i = 0; i < object.requests.length; ++i) {
+                                    if (typeof object.requests[i] !== "object")
+                                        throw TypeError(".google.ads.admanager.v1.BatchCreateAdUnitsRequest.requests: object expected");
+                                    message.requests[i] = $root.google.ads.admanager.v1.CreateAdUnitRequest.fromObject(object.requests[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BatchCreateAdUnitsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ads.admanager.v1.BatchCreateAdUnitsRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.BatchCreateAdUnitsRequest} message BatchCreateAdUnitsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BatchCreateAdUnitsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.requests = [];
+                            if (options.defaults)
+                                object.parent = "";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.requests && message.requests.length) {
+                                object.requests = [];
+                                for (var j = 0; j < message.requests.length; ++j)
+                                    object.requests[j] = $root.google.ads.admanager.v1.CreateAdUnitRequest.toObject(message.requests[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BatchCreateAdUnitsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.ads.admanager.v1.BatchCreateAdUnitsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BatchCreateAdUnitsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BatchCreateAdUnitsRequest
+                         * @function getTypeUrl
+                         * @memberof google.ads.admanager.v1.BatchCreateAdUnitsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BatchCreateAdUnitsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ads.admanager.v1.BatchCreateAdUnitsRequest";
+                        };
+    
+                        return BatchCreateAdUnitsRequest;
+                    })();
+    
+                    v1.BatchCreateAdUnitsResponse = (function() {
+    
+                        /**
+                         * Properties of a BatchCreateAdUnitsResponse.
+                         * @memberof google.ads.admanager.v1
+                         * @interface IBatchCreateAdUnitsResponse
+                         * @property {Array.<google.ads.admanager.v1.IAdUnit>|null} [adUnits] BatchCreateAdUnitsResponse adUnits
+                         */
+    
+                        /**
+                         * Constructs a new BatchCreateAdUnitsResponse.
+                         * @memberof google.ads.admanager.v1
+                         * @classdesc Represents a BatchCreateAdUnitsResponse.
+                         * @implements IBatchCreateAdUnitsResponse
+                         * @constructor
+                         * @param {google.ads.admanager.v1.IBatchCreateAdUnitsResponse=} [properties] Properties to set
+                         */
+                        function BatchCreateAdUnitsResponse(properties) {
+                            this.adUnits = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BatchCreateAdUnitsResponse adUnits.
+                         * @member {Array.<google.ads.admanager.v1.IAdUnit>} adUnits
+                         * @memberof google.ads.admanager.v1.BatchCreateAdUnitsResponse
+                         * @instance
+                         */
+                        BatchCreateAdUnitsResponse.prototype.adUnits = $util.emptyArray;
+    
+                        /**
+                         * Creates a new BatchCreateAdUnitsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.ads.admanager.v1.BatchCreateAdUnitsResponse
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchCreateAdUnitsResponse=} [properties] Properties to set
+                         * @returns {google.ads.admanager.v1.BatchCreateAdUnitsResponse} BatchCreateAdUnitsResponse instance
+                         */
+                        BatchCreateAdUnitsResponse.create = function create(properties) {
+                            return new BatchCreateAdUnitsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BatchCreateAdUnitsResponse message. Does not implicitly {@link google.ads.admanager.v1.BatchCreateAdUnitsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ads.admanager.v1.BatchCreateAdUnitsResponse
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchCreateAdUnitsResponse} message BatchCreateAdUnitsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchCreateAdUnitsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.adUnits != null && message.adUnits.length)
+                                for (var i = 0; i < message.adUnits.length; ++i)
+                                    $root.google.ads.admanager.v1.AdUnit.encode(message.adUnits[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BatchCreateAdUnitsResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchCreateAdUnitsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ads.admanager.v1.BatchCreateAdUnitsResponse
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchCreateAdUnitsResponse} message BatchCreateAdUnitsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchCreateAdUnitsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BatchCreateAdUnitsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ads.admanager.v1.BatchCreateAdUnitsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ads.admanager.v1.BatchCreateAdUnitsResponse} BatchCreateAdUnitsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchCreateAdUnitsResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ads.admanager.v1.BatchCreateAdUnitsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.adUnits && message.adUnits.length))
+                                            message.adUnits = [];
+                                        message.adUnits.push($root.google.ads.admanager.v1.AdUnit.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BatchCreateAdUnitsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ads.admanager.v1.BatchCreateAdUnitsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ads.admanager.v1.BatchCreateAdUnitsResponse} BatchCreateAdUnitsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchCreateAdUnitsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BatchCreateAdUnitsResponse message.
+                         * @function verify
+                         * @memberof google.ads.admanager.v1.BatchCreateAdUnitsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BatchCreateAdUnitsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.adUnits != null && message.hasOwnProperty("adUnits")) {
+                                if (!Array.isArray(message.adUnits))
+                                    return "adUnits: array expected";
+                                for (var i = 0; i < message.adUnits.length; ++i) {
+                                    var error = $root.google.ads.admanager.v1.AdUnit.verify(message.adUnits[i]);
+                                    if (error)
+                                        return "adUnits." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BatchCreateAdUnitsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ads.admanager.v1.BatchCreateAdUnitsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ads.admanager.v1.BatchCreateAdUnitsResponse} BatchCreateAdUnitsResponse
+                         */
+                        BatchCreateAdUnitsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ads.admanager.v1.BatchCreateAdUnitsResponse)
+                                return object;
+                            var message = new $root.google.ads.admanager.v1.BatchCreateAdUnitsResponse();
+                            if (object.adUnits) {
+                                if (!Array.isArray(object.adUnits))
+                                    throw TypeError(".google.ads.admanager.v1.BatchCreateAdUnitsResponse.adUnits: array expected");
+                                message.adUnits = [];
+                                for (var i = 0; i < object.adUnits.length; ++i) {
+                                    if (typeof object.adUnits[i] !== "object")
+                                        throw TypeError(".google.ads.admanager.v1.BatchCreateAdUnitsResponse.adUnits: object expected");
+                                    message.adUnits[i] = $root.google.ads.admanager.v1.AdUnit.fromObject(object.adUnits[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BatchCreateAdUnitsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ads.admanager.v1.BatchCreateAdUnitsResponse
+                         * @static
+                         * @param {google.ads.admanager.v1.BatchCreateAdUnitsResponse} message BatchCreateAdUnitsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BatchCreateAdUnitsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.adUnits = [];
+                            if (message.adUnits && message.adUnits.length) {
+                                object.adUnits = [];
+                                for (var j = 0; j < message.adUnits.length; ++j)
+                                    object.adUnits[j] = $root.google.ads.admanager.v1.AdUnit.toObject(message.adUnits[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BatchCreateAdUnitsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.ads.admanager.v1.BatchCreateAdUnitsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BatchCreateAdUnitsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BatchCreateAdUnitsResponse
+                         * @function getTypeUrl
+                         * @memberof google.ads.admanager.v1.BatchCreateAdUnitsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BatchCreateAdUnitsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ads.admanager.v1.BatchCreateAdUnitsResponse";
+                        };
+    
+                        return BatchCreateAdUnitsResponse;
+                    })();
+    
+                    v1.BatchUpdateAdUnitsRequest = (function() {
+    
+                        /**
+                         * Properties of a BatchUpdateAdUnitsRequest.
+                         * @memberof google.ads.admanager.v1
+                         * @interface IBatchUpdateAdUnitsRequest
+                         * @property {string|null} [parent] BatchUpdateAdUnitsRequest parent
+                         * @property {Array.<google.ads.admanager.v1.IUpdateAdUnitRequest>|null} [requests] BatchUpdateAdUnitsRequest requests
+                         */
+    
+                        /**
+                         * Constructs a new BatchUpdateAdUnitsRequest.
+                         * @memberof google.ads.admanager.v1
+                         * @classdesc Represents a BatchUpdateAdUnitsRequest.
+                         * @implements IBatchUpdateAdUnitsRequest
+                         * @constructor
+                         * @param {google.ads.admanager.v1.IBatchUpdateAdUnitsRequest=} [properties] Properties to set
+                         */
+                        function BatchUpdateAdUnitsRequest(properties) {
+                            this.requests = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BatchUpdateAdUnitsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.ads.admanager.v1.BatchUpdateAdUnitsRequest
+                         * @instance
+                         */
+                        BatchUpdateAdUnitsRequest.prototype.parent = "";
+    
+                        /**
+                         * BatchUpdateAdUnitsRequest requests.
+                         * @member {Array.<google.ads.admanager.v1.IUpdateAdUnitRequest>} requests
+                         * @memberof google.ads.admanager.v1.BatchUpdateAdUnitsRequest
+                         * @instance
+                         */
+                        BatchUpdateAdUnitsRequest.prototype.requests = $util.emptyArray;
+    
+                        /**
+                         * Creates a new BatchUpdateAdUnitsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.ads.admanager.v1.BatchUpdateAdUnitsRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchUpdateAdUnitsRequest=} [properties] Properties to set
+                         * @returns {google.ads.admanager.v1.BatchUpdateAdUnitsRequest} BatchUpdateAdUnitsRequest instance
+                         */
+                        BatchUpdateAdUnitsRequest.create = function create(properties) {
+                            return new BatchUpdateAdUnitsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BatchUpdateAdUnitsRequest message. Does not implicitly {@link google.ads.admanager.v1.BatchUpdateAdUnitsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ads.admanager.v1.BatchUpdateAdUnitsRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchUpdateAdUnitsRequest} message BatchUpdateAdUnitsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchUpdateAdUnitsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.requests != null && message.requests.length)
+                                for (var i = 0; i < message.requests.length; ++i)
+                                    $root.google.ads.admanager.v1.UpdateAdUnitRequest.encode(message.requests[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BatchUpdateAdUnitsRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchUpdateAdUnitsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ads.admanager.v1.BatchUpdateAdUnitsRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchUpdateAdUnitsRequest} message BatchUpdateAdUnitsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchUpdateAdUnitsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BatchUpdateAdUnitsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ads.admanager.v1.BatchUpdateAdUnitsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ads.admanager.v1.BatchUpdateAdUnitsRequest} BatchUpdateAdUnitsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchUpdateAdUnitsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ads.admanager.v1.BatchUpdateAdUnitsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.requests && message.requests.length))
+                                            message.requests = [];
+                                        message.requests.push($root.google.ads.admanager.v1.UpdateAdUnitRequest.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BatchUpdateAdUnitsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ads.admanager.v1.BatchUpdateAdUnitsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ads.admanager.v1.BatchUpdateAdUnitsRequest} BatchUpdateAdUnitsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchUpdateAdUnitsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BatchUpdateAdUnitsRequest message.
+                         * @function verify
+                         * @memberof google.ads.admanager.v1.BatchUpdateAdUnitsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BatchUpdateAdUnitsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.requests != null && message.hasOwnProperty("requests")) {
+                                if (!Array.isArray(message.requests))
+                                    return "requests: array expected";
+                                for (var i = 0; i < message.requests.length; ++i) {
+                                    var error = $root.google.ads.admanager.v1.UpdateAdUnitRequest.verify(message.requests[i]);
+                                    if (error)
+                                        return "requests." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BatchUpdateAdUnitsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ads.admanager.v1.BatchUpdateAdUnitsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ads.admanager.v1.BatchUpdateAdUnitsRequest} BatchUpdateAdUnitsRequest
+                         */
+                        BatchUpdateAdUnitsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ads.admanager.v1.BatchUpdateAdUnitsRequest)
+                                return object;
+                            var message = new $root.google.ads.admanager.v1.BatchUpdateAdUnitsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.requests) {
+                                if (!Array.isArray(object.requests))
+                                    throw TypeError(".google.ads.admanager.v1.BatchUpdateAdUnitsRequest.requests: array expected");
+                                message.requests = [];
+                                for (var i = 0; i < object.requests.length; ++i) {
+                                    if (typeof object.requests[i] !== "object")
+                                        throw TypeError(".google.ads.admanager.v1.BatchUpdateAdUnitsRequest.requests: object expected");
+                                    message.requests[i] = $root.google.ads.admanager.v1.UpdateAdUnitRequest.fromObject(object.requests[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BatchUpdateAdUnitsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ads.admanager.v1.BatchUpdateAdUnitsRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.BatchUpdateAdUnitsRequest} message BatchUpdateAdUnitsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BatchUpdateAdUnitsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.requests = [];
+                            if (options.defaults)
+                                object.parent = "";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.requests && message.requests.length) {
+                                object.requests = [];
+                                for (var j = 0; j < message.requests.length; ++j)
+                                    object.requests[j] = $root.google.ads.admanager.v1.UpdateAdUnitRequest.toObject(message.requests[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BatchUpdateAdUnitsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.ads.admanager.v1.BatchUpdateAdUnitsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BatchUpdateAdUnitsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BatchUpdateAdUnitsRequest
+                         * @function getTypeUrl
+                         * @memberof google.ads.admanager.v1.BatchUpdateAdUnitsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BatchUpdateAdUnitsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ads.admanager.v1.BatchUpdateAdUnitsRequest";
+                        };
+    
+                        return BatchUpdateAdUnitsRequest;
+                    })();
+    
+                    v1.BatchUpdateAdUnitsResponse = (function() {
+    
+                        /**
+                         * Properties of a BatchUpdateAdUnitsResponse.
+                         * @memberof google.ads.admanager.v1
+                         * @interface IBatchUpdateAdUnitsResponse
+                         * @property {Array.<google.ads.admanager.v1.IAdUnit>|null} [adUnits] BatchUpdateAdUnitsResponse adUnits
+                         */
+    
+                        /**
+                         * Constructs a new BatchUpdateAdUnitsResponse.
+                         * @memberof google.ads.admanager.v1
+                         * @classdesc Represents a BatchUpdateAdUnitsResponse.
+                         * @implements IBatchUpdateAdUnitsResponse
+                         * @constructor
+                         * @param {google.ads.admanager.v1.IBatchUpdateAdUnitsResponse=} [properties] Properties to set
+                         */
+                        function BatchUpdateAdUnitsResponse(properties) {
+                            this.adUnits = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BatchUpdateAdUnitsResponse adUnits.
+                         * @member {Array.<google.ads.admanager.v1.IAdUnit>} adUnits
+                         * @memberof google.ads.admanager.v1.BatchUpdateAdUnitsResponse
+                         * @instance
+                         */
+                        BatchUpdateAdUnitsResponse.prototype.adUnits = $util.emptyArray;
+    
+                        /**
+                         * Creates a new BatchUpdateAdUnitsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.ads.admanager.v1.BatchUpdateAdUnitsResponse
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchUpdateAdUnitsResponse=} [properties] Properties to set
+                         * @returns {google.ads.admanager.v1.BatchUpdateAdUnitsResponse} BatchUpdateAdUnitsResponse instance
+                         */
+                        BatchUpdateAdUnitsResponse.create = function create(properties) {
+                            return new BatchUpdateAdUnitsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BatchUpdateAdUnitsResponse message. Does not implicitly {@link google.ads.admanager.v1.BatchUpdateAdUnitsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ads.admanager.v1.BatchUpdateAdUnitsResponse
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchUpdateAdUnitsResponse} message BatchUpdateAdUnitsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchUpdateAdUnitsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.adUnits != null && message.adUnits.length)
+                                for (var i = 0; i < message.adUnits.length; ++i)
+                                    $root.google.ads.admanager.v1.AdUnit.encode(message.adUnits[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BatchUpdateAdUnitsResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchUpdateAdUnitsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ads.admanager.v1.BatchUpdateAdUnitsResponse
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchUpdateAdUnitsResponse} message BatchUpdateAdUnitsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchUpdateAdUnitsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BatchUpdateAdUnitsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ads.admanager.v1.BatchUpdateAdUnitsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ads.admanager.v1.BatchUpdateAdUnitsResponse} BatchUpdateAdUnitsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchUpdateAdUnitsResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ads.admanager.v1.BatchUpdateAdUnitsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.adUnits && message.adUnits.length))
+                                            message.adUnits = [];
+                                        message.adUnits.push($root.google.ads.admanager.v1.AdUnit.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BatchUpdateAdUnitsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ads.admanager.v1.BatchUpdateAdUnitsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ads.admanager.v1.BatchUpdateAdUnitsResponse} BatchUpdateAdUnitsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchUpdateAdUnitsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BatchUpdateAdUnitsResponse message.
+                         * @function verify
+                         * @memberof google.ads.admanager.v1.BatchUpdateAdUnitsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BatchUpdateAdUnitsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.adUnits != null && message.hasOwnProperty("adUnits")) {
+                                if (!Array.isArray(message.adUnits))
+                                    return "adUnits: array expected";
+                                for (var i = 0; i < message.adUnits.length; ++i) {
+                                    var error = $root.google.ads.admanager.v1.AdUnit.verify(message.adUnits[i]);
+                                    if (error)
+                                        return "adUnits." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BatchUpdateAdUnitsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ads.admanager.v1.BatchUpdateAdUnitsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ads.admanager.v1.BatchUpdateAdUnitsResponse} BatchUpdateAdUnitsResponse
+                         */
+                        BatchUpdateAdUnitsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ads.admanager.v1.BatchUpdateAdUnitsResponse)
+                                return object;
+                            var message = new $root.google.ads.admanager.v1.BatchUpdateAdUnitsResponse();
+                            if (object.adUnits) {
+                                if (!Array.isArray(object.adUnits))
+                                    throw TypeError(".google.ads.admanager.v1.BatchUpdateAdUnitsResponse.adUnits: array expected");
+                                message.adUnits = [];
+                                for (var i = 0; i < object.adUnits.length; ++i) {
+                                    if (typeof object.adUnits[i] !== "object")
+                                        throw TypeError(".google.ads.admanager.v1.BatchUpdateAdUnitsResponse.adUnits: object expected");
+                                    message.adUnits[i] = $root.google.ads.admanager.v1.AdUnit.fromObject(object.adUnits[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BatchUpdateAdUnitsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ads.admanager.v1.BatchUpdateAdUnitsResponse
+                         * @static
+                         * @param {google.ads.admanager.v1.BatchUpdateAdUnitsResponse} message BatchUpdateAdUnitsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BatchUpdateAdUnitsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.adUnits = [];
+                            if (message.adUnits && message.adUnits.length) {
+                                object.adUnits = [];
+                                for (var j = 0; j < message.adUnits.length; ++j)
+                                    object.adUnits[j] = $root.google.ads.admanager.v1.AdUnit.toObject(message.adUnits[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BatchUpdateAdUnitsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.ads.admanager.v1.BatchUpdateAdUnitsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BatchUpdateAdUnitsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BatchUpdateAdUnitsResponse
+                         * @function getTypeUrl
+                         * @memberof google.ads.admanager.v1.BatchUpdateAdUnitsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BatchUpdateAdUnitsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ads.admanager.v1.BatchUpdateAdUnitsResponse";
+                        };
+    
+                        return BatchUpdateAdUnitsResponse;
+                    })();
+    
                     v1.ListAdUnitSizesRequest = (function() {
     
                         /**
@@ -10914,6 +12570,1272 @@
                         };
     
                         return ListAdUnitSizesResponse;
+                    })();
+    
+                    v1.BatchActivateAdUnitsRequest = (function() {
+    
+                        /**
+                         * Properties of a BatchActivateAdUnitsRequest.
+                         * @memberof google.ads.admanager.v1
+                         * @interface IBatchActivateAdUnitsRequest
+                         * @property {string|null} [parent] BatchActivateAdUnitsRequest parent
+                         * @property {Array.<string>|null} [names] BatchActivateAdUnitsRequest names
+                         */
+    
+                        /**
+                         * Constructs a new BatchActivateAdUnitsRequest.
+                         * @memberof google.ads.admanager.v1
+                         * @classdesc Represents a BatchActivateAdUnitsRequest.
+                         * @implements IBatchActivateAdUnitsRequest
+                         * @constructor
+                         * @param {google.ads.admanager.v1.IBatchActivateAdUnitsRequest=} [properties] Properties to set
+                         */
+                        function BatchActivateAdUnitsRequest(properties) {
+                            this.names = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BatchActivateAdUnitsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.ads.admanager.v1.BatchActivateAdUnitsRequest
+                         * @instance
+                         */
+                        BatchActivateAdUnitsRequest.prototype.parent = "";
+    
+                        /**
+                         * BatchActivateAdUnitsRequest names.
+                         * @member {Array.<string>} names
+                         * @memberof google.ads.admanager.v1.BatchActivateAdUnitsRequest
+                         * @instance
+                         */
+                        BatchActivateAdUnitsRequest.prototype.names = $util.emptyArray;
+    
+                        /**
+                         * Creates a new BatchActivateAdUnitsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.ads.admanager.v1.BatchActivateAdUnitsRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchActivateAdUnitsRequest=} [properties] Properties to set
+                         * @returns {google.ads.admanager.v1.BatchActivateAdUnitsRequest} BatchActivateAdUnitsRequest instance
+                         */
+                        BatchActivateAdUnitsRequest.create = function create(properties) {
+                            return new BatchActivateAdUnitsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BatchActivateAdUnitsRequest message. Does not implicitly {@link google.ads.admanager.v1.BatchActivateAdUnitsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ads.admanager.v1.BatchActivateAdUnitsRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchActivateAdUnitsRequest} message BatchActivateAdUnitsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchActivateAdUnitsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.names != null && message.names.length)
+                                for (var i = 0; i < message.names.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.names[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BatchActivateAdUnitsRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchActivateAdUnitsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ads.admanager.v1.BatchActivateAdUnitsRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchActivateAdUnitsRequest} message BatchActivateAdUnitsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchActivateAdUnitsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BatchActivateAdUnitsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ads.admanager.v1.BatchActivateAdUnitsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ads.admanager.v1.BatchActivateAdUnitsRequest} BatchActivateAdUnitsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchActivateAdUnitsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ads.admanager.v1.BatchActivateAdUnitsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.names && message.names.length))
+                                            message.names = [];
+                                        message.names.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BatchActivateAdUnitsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ads.admanager.v1.BatchActivateAdUnitsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ads.admanager.v1.BatchActivateAdUnitsRequest} BatchActivateAdUnitsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchActivateAdUnitsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BatchActivateAdUnitsRequest message.
+                         * @function verify
+                         * @memberof google.ads.admanager.v1.BatchActivateAdUnitsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BatchActivateAdUnitsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.names != null && message.hasOwnProperty("names")) {
+                                if (!Array.isArray(message.names))
+                                    return "names: array expected";
+                                for (var i = 0; i < message.names.length; ++i)
+                                    if (!$util.isString(message.names[i]))
+                                        return "names: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BatchActivateAdUnitsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ads.admanager.v1.BatchActivateAdUnitsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ads.admanager.v1.BatchActivateAdUnitsRequest} BatchActivateAdUnitsRequest
+                         */
+                        BatchActivateAdUnitsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ads.admanager.v1.BatchActivateAdUnitsRequest)
+                                return object;
+                            var message = new $root.google.ads.admanager.v1.BatchActivateAdUnitsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.names) {
+                                if (!Array.isArray(object.names))
+                                    throw TypeError(".google.ads.admanager.v1.BatchActivateAdUnitsRequest.names: array expected");
+                                message.names = [];
+                                for (var i = 0; i < object.names.length; ++i)
+                                    message.names[i] = String(object.names[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BatchActivateAdUnitsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ads.admanager.v1.BatchActivateAdUnitsRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.BatchActivateAdUnitsRequest} message BatchActivateAdUnitsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BatchActivateAdUnitsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.names = [];
+                            if (options.defaults)
+                                object.parent = "";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.names && message.names.length) {
+                                object.names = [];
+                                for (var j = 0; j < message.names.length; ++j)
+                                    object.names[j] = message.names[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BatchActivateAdUnitsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.ads.admanager.v1.BatchActivateAdUnitsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BatchActivateAdUnitsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BatchActivateAdUnitsRequest
+                         * @function getTypeUrl
+                         * @memberof google.ads.admanager.v1.BatchActivateAdUnitsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BatchActivateAdUnitsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ads.admanager.v1.BatchActivateAdUnitsRequest";
+                        };
+    
+                        return BatchActivateAdUnitsRequest;
+                    })();
+    
+                    v1.BatchActivateAdUnitsResponse = (function() {
+    
+                        /**
+                         * Properties of a BatchActivateAdUnitsResponse.
+                         * @memberof google.ads.admanager.v1
+                         * @interface IBatchActivateAdUnitsResponse
+                         */
+    
+                        /**
+                         * Constructs a new BatchActivateAdUnitsResponse.
+                         * @memberof google.ads.admanager.v1
+                         * @classdesc Represents a BatchActivateAdUnitsResponse.
+                         * @implements IBatchActivateAdUnitsResponse
+                         * @constructor
+                         * @param {google.ads.admanager.v1.IBatchActivateAdUnitsResponse=} [properties] Properties to set
+                         */
+                        function BatchActivateAdUnitsResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new BatchActivateAdUnitsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.ads.admanager.v1.BatchActivateAdUnitsResponse
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchActivateAdUnitsResponse=} [properties] Properties to set
+                         * @returns {google.ads.admanager.v1.BatchActivateAdUnitsResponse} BatchActivateAdUnitsResponse instance
+                         */
+                        BatchActivateAdUnitsResponse.create = function create(properties) {
+                            return new BatchActivateAdUnitsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BatchActivateAdUnitsResponse message. Does not implicitly {@link google.ads.admanager.v1.BatchActivateAdUnitsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ads.admanager.v1.BatchActivateAdUnitsResponse
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchActivateAdUnitsResponse} message BatchActivateAdUnitsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchActivateAdUnitsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BatchActivateAdUnitsResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchActivateAdUnitsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ads.admanager.v1.BatchActivateAdUnitsResponse
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchActivateAdUnitsResponse} message BatchActivateAdUnitsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchActivateAdUnitsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BatchActivateAdUnitsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ads.admanager.v1.BatchActivateAdUnitsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ads.admanager.v1.BatchActivateAdUnitsResponse} BatchActivateAdUnitsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchActivateAdUnitsResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ads.admanager.v1.BatchActivateAdUnitsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BatchActivateAdUnitsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ads.admanager.v1.BatchActivateAdUnitsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ads.admanager.v1.BatchActivateAdUnitsResponse} BatchActivateAdUnitsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchActivateAdUnitsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BatchActivateAdUnitsResponse message.
+                         * @function verify
+                         * @memberof google.ads.admanager.v1.BatchActivateAdUnitsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BatchActivateAdUnitsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BatchActivateAdUnitsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ads.admanager.v1.BatchActivateAdUnitsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ads.admanager.v1.BatchActivateAdUnitsResponse} BatchActivateAdUnitsResponse
+                         */
+                        BatchActivateAdUnitsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ads.admanager.v1.BatchActivateAdUnitsResponse)
+                                return object;
+                            return new $root.google.ads.admanager.v1.BatchActivateAdUnitsResponse();
+                        };
+    
+                        /**
+                         * Creates a plain object from a BatchActivateAdUnitsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ads.admanager.v1.BatchActivateAdUnitsResponse
+                         * @static
+                         * @param {google.ads.admanager.v1.BatchActivateAdUnitsResponse} message BatchActivateAdUnitsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BatchActivateAdUnitsResponse.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this BatchActivateAdUnitsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.ads.admanager.v1.BatchActivateAdUnitsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BatchActivateAdUnitsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BatchActivateAdUnitsResponse
+                         * @function getTypeUrl
+                         * @memberof google.ads.admanager.v1.BatchActivateAdUnitsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BatchActivateAdUnitsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ads.admanager.v1.BatchActivateAdUnitsResponse";
+                        };
+    
+                        return BatchActivateAdUnitsResponse;
+                    })();
+    
+                    v1.BatchDeactivateAdUnitsRequest = (function() {
+    
+                        /**
+                         * Properties of a BatchDeactivateAdUnitsRequest.
+                         * @memberof google.ads.admanager.v1
+                         * @interface IBatchDeactivateAdUnitsRequest
+                         * @property {string|null} [parent] BatchDeactivateAdUnitsRequest parent
+                         * @property {Array.<string>|null} [names] BatchDeactivateAdUnitsRequest names
+                         */
+    
+                        /**
+                         * Constructs a new BatchDeactivateAdUnitsRequest.
+                         * @memberof google.ads.admanager.v1
+                         * @classdesc Represents a BatchDeactivateAdUnitsRequest.
+                         * @implements IBatchDeactivateAdUnitsRequest
+                         * @constructor
+                         * @param {google.ads.admanager.v1.IBatchDeactivateAdUnitsRequest=} [properties] Properties to set
+                         */
+                        function BatchDeactivateAdUnitsRequest(properties) {
+                            this.names = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BatchDeactivateAdUnitsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.ads.admanager.v1.BatchDeactivateAdUnitsRequest
+                         * @instance
+                         */
+                        BatchDeactivateAdUnitsRequest.prototype.parent = "";
+    
+                        /**
+                         * BatchDeactivateAdUnitsRequest names.
+                         * @member {Array.<string>} names
+                         * @memberof google.ads.admanager.v1.BatchDeactivateAdUnitsRequest
+                         * @instance
+                         */
+                        BatchDeactivateAdUnitsRequest.prototype.names = $util.emptyArray;
+    
+                        /**
+                         * Creates a new BatchDeactivateAdUnitsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.ads.admanager.v1.BatchDeactivateAdUnitsRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchDeactivateAdUnitsRequest=} [properties] Properties to set
+                         * @returns {google.ads.admanager.v1.BatchDeactivateAdUnitsRequest} BatchDeactivateAdUnitsRequest instance
+                         */
+                        BatchDeactivateAdUnitsRequest.create = function create(properties) {
+                            return new BatchDeactivateAdUnitsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BatchDeactivateAdUnitsRequest message. Does not implicitly {@link google.ads.admanager.v1.BatchDeactivateAdUnitsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ads.admanager.v1.BatchDeactivateAdUnitsRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchDeactivateAdUnitsRequest} message BatchDeactivateAdUnitsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchDeactivateAdUnitsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.names != null && message.names.length)
+                                for (var i = 0; i < message.names.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.names[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BatchDeactivateAdUnitsRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchDeactivateAdUnitsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ads.admanager.v1.BatchDeactivateAdUnitsRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchDeactivateAdUnitsRequest} message BatchDeactivateAdUnitsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchDeactivateAdUnitsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BatchDeactivateAdUnitsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ads.admanager.v1.BatchDeactivateAdUnitsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ads.admanager.v1.BatchDeactivateAdUnitsRequest} BatchDeactivateAdUnitsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchDeactivateAdUnitsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ads.admanager.v1.BatchDeactivateAdUnitsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.names && message.names.length))
+                                            message.names = [];
+                                        message.names.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BatchDeactivateAdUnitsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ads.admanager.v1.BatchDeactivateAdUnitsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ads.admanager.v1.BatchDeactivateAdUnitsRequest} BatchDeactivateAdUnitsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchDeactivateAdUnitsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BatchDeactivateAdUnitsRequest message.
+                         * @function verify
+                         * @memberof google.ads.admanager.v1.BatchDeactivateAdUnitsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BatchDeactivateAdUnitsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.names != null && message.hasOwnProperty("names")) {
+                                if (!Array.isArray(message.names))
+                                    return "names: array expected";
+                                for (var i = 0; i < message.names.length; ++i)
+                                    if (!$util.isString(message.names[i]))
+                                        return "names: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BatchDeactivateAdUnitsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ads.admanager.v1.BatchDeactivateAdUnitsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ads.admanager.v1.BatchDeactivateAdUnitsRequest} BatchDeactivateAdUnitsRequest
+                         */
+                        BatchDeactivateAdUnitsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ads.admanager.v1.BatchDeactivateAdUnitsRequest)
+                                return object;
+                            var message = new $root.google.ads.admanager.v1.BatchDeactivateAdUnitsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.names) {
+                                if (!Array.isArray(object.names))
+                                    throw TypeError(".google.ads.admanager.v1.BatchDeactivateAdUnitsRequest.names: array expected");
+                                message.names = [];
+                                for (var i = 0; i < object.names.length; ++i)
+                                    message.names[i] = String(object.names[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BatchDeactivateAdUnitsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ads.admanager.v1.BatchDeactivateAdUnitsRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.BatchDeactivateAdUnitsRequest} message BatchDeactivateAdUnitsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BatchDeactivateAdUnitsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.names = [];
+                            if (options.defaults)
+                                object.parent = "";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.names && message.names.length) {
+                                object.names = [];
+                                for (var j = 0; j < message.names.length; ++j)
+                                    object.names[j] = message.names[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BatchDeactivateAdUnitsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.ads.admanager.v1.BatchDeactivateAdUnitsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BatchDeactivateAdUnitsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BatchDeactivateAdUnitsRequest
+                         * @function getTypeUrl
+                         * @memberof google.ads.admanager.v1.BatchDeactivateAdUnitsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BatchDeactivateAdUnitsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ads.admanager.v1.BatchDeactivateAdUnitsRequest";
+                        };
+    
+                        return BatchDeactivateAdUnitsRequest;
+                    })();
+    
+                    v1.BatchDeactivateAdUnitsResponse = (function() {
+    
+                        /**
+                         * Properties of a BatchDeactivateAdUnitsResponse.
+                         * @memberof google.ads.admanager.v1
+                         * @interface IBatchDeactivateAdUnitsResponse
+                         */
+    
+                        /**
+                         * Constructs a new BatchDeactivateAdUnitsResponse.
+                         * @memberof google.ads.admanager.v1
+                         * @classdesc Represents a BatchDeactivateAdUnitsResponse.
+                         * @implements IBatchDeactivateAdUnitsResponse
+                         * @constructor
+                         * @param {google.ads.admanager.v1.IBatchDeactivateAdUnitsResponse=} [properties] Properties to set
+                         */
+                        function BatchDeactivateAdUnitsResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new BatchDeactivateAdUnitsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.ads.admanager.v1.BatchDeactivateAdUnitsResponse
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchDeactivateAdUnitsResponse=} [properties] Properties to set
+                         * @returns {google.ads.admanager.v1.BatchDeactivateAdUnitsResponse} BatchDeactivateAdUnitsResponse instance
+                         */
+                        BatchDeactivateAdUnitsResponse.create = function create(properties) {
+                            return new BatchDeactivateAdUnitsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BatchDeactivateAdUnitsResponse message. Does not implicitly {@link google.ads.admanager.v1.BatchDeactivateAdUnitsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ads.admanager.v1.BatchDeactivateAdUnitsResponse
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchDeactivateAdUnitsResponse} message BatchDeactivateAdUnitsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchDeactivateAdUnitsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BatchDeactivateAdUnitsResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchDeactivateAdUnitsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ads.admanager.v1.BatchDeactivateAdUnitsResponse
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchDeactivateAdUnitsResponse} message BatchDeactivateAdUnitsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchDeactivateAdUnitsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BatchDeactivateAdUnitsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ads.admanager.v1.BatchDeactivateAdUnitsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ads.admanager.v1.BatchDeactivateAdUnitsResponse} BatchDeactivateAdUnitsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchDeactivateAdUnitsResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ads.admanager.v1.BatchDeactivateAdUnitsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BatchDeactivateAdUnitsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ads.admanager.v1.BatchDeactivateAdUnitsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ads.admanager.v1.BatchDeactivateAdUnitsResponse} BatchDeactivateAdUnitsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchDeactivateAdUnitsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BatchDeactivateAdUnitsResponse message.
+                         * @function verify
+                         * @memberof google.ads.admanager.v1.BatchDeactivateAdUnitsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BatchDeactivateAdUnitsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BatchDeactivateAdUnitsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ads.admanager.v1.BatchDeactivateAdUnitsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ads.admanager.v1.BatchDeactivateAdUnitsResponse} BatchDeactivateAdUnitsResponse
+                         */
+                        BatchDeactivateAdUnitsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ads.admanager.v1.BatchDeactivateAdUnitsResponse)
+                                return object;
+                            return new $root.google.ads.admanager.v1.BatchDeactivateAdUnitsResponse();
+                        };
+    
+                        /**
+                         * Creates a plain object from a BatchDeactivateAdUnitsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ads.admanager.v1.BatchDeactivateAdUnitsResponse
+                         * @static
+                         * @param {google.ads.admanager.v1.BatchDeactivateAdUnitsResponse} message BatchDeactivateAdUnitsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BatchDeactivateAdUnitsResponse.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this BatchDeactivateAdUnitsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.ads.admanager.v1.BatchDeactivateAdUnitsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BatchDeactivateAdUnitsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BatchDeactivateAdUnitsResponse
+                         * @function getTypeUrl
+                         * @memberof google.ads.admanager.v1.BatchDeactivateAdUnitsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BatchDeactivateAdUnitsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ads.admanager.v1.BatchDeactivateAdUnitsResponse";
+                        };
+    
+                        return BatchDeactivateAdUnitsResponse;
+                    })();
+    
+                    v1.BatchArchiveAdUnitsRequest = (function() {
+    
+                        /**
+                         * Properties of a BatchArchiveAdUnitsRequest.
+                         * @memberof google.ads.admanager.v1
+                         * @interface IBatchArchiveAdUnitsRequest
+                         * @property {string|null} [parent] BatchArchiveAdUnitsRequest parent
+                         * @property {Array.<string>|null} [names] BatchArchiveAdUnitsRequest names
+                         */
+    
+                        /**
+                         * Constructs a new BatchArchiveAdUnitsRequest.
+                         * @memberof google.ads.admanager.v1
+                         * @classdesc Represents a BatchArchiveAdUnitsRequest.
+                         * @implements IBatchArchiveAdUnitsRequest
+                         * @constructor
+                         * @param {google.ads.admanager.v1.IBatchArchiveAdUnitsRequest=} [properties] Properties to set
+                         */
+                        function BatchArchiveAdUnitsRequest(properties) {
+                            this.names = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BatchArchiveAdUnitsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.ads.admanager.v1.BatchArchiveAdUnitsRequest
+                         * @instance
+                         */
+                        BatchArchiveAdUnitsRequest.prototype.parent = "";
+    
+                        /**
+                         * BatchArchiveAdUnitsRequest names.
+                         * @member {Array.<string>} names
+                         * @memberof google.ads.admanager.v1.BatchArchiveAdUnitsRequest
+                         * @instance
+                         */
+                        BatchArchiveAdUnitsRequest.prototype.names = $util.emptyArray;
+    
+                        /**
+                         * Creates a new BatchArchiveAdUnitsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.ads.admanager.v1.BatchArchiveAdUnitsRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchArchiveAdUnitsRequest=} [properties] Properties to set
+                         * @returns {google.ads.admanager.v1.BatchArchiveAdUnitsRequest} BatchArchiveAdUnitsRequest instance
+                         */
+                        BatchArchiveAdUnitsRequest.create = function create(properties) {
+                            return new BatchArchiveAdUnitsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BatchArchiveAdUnitsRequest message. Does not implicitly {@link google.ads.admanager.v1.BatchArchiveAdUnitsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ads.admanager.v1.BatchArchiveAdUnitsRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchArchiveAdUnitsRequest} message BatchArchiveAdUnitsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchArchiveAdUnitsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.names != null && message.names.length)
+                                for (var i = 0; i < message.names.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.names[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BatchArchiveAdUnitsRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchArchiveAdUnitsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ads.admanager.v1.BatchArchiveAdUnitsRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchArchiveAdUnitsRequest} message BatchArchiveAdUnitsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchArchiveAdUnitsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BatchArchiveAdUnitsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ads.admanager.v1.BatchArchiveAdUnitsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ads.admanager.v1.BatchArchiveAdUnitsRequest} BatchArchiveAdUnitsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchArchiveAdUnitsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ads.admanager.v1.BatchArchiveAdUnitsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.names && message.names.length))
+                                            message.names = [];
+                                        message.names.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BatchArchiveAdUnitsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ads.admanager.v1.BatchArchiveAdUnitsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ads.admanager.v1.BatchArchiveAdUnitsRequest} BatchArchiveAdUnitsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchArchiveAdUnitsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BatchArchiveAdUnitsRequest message.
+                         * @function verify
+                         * @memberof google.ads.admanager.v1.BatchArchiveAdUnitsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BatchArchiveAdUnitsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.names != null && message.hasOwnProperty("names")) {
+                                if (!Array.isArray(message.names))
+                                    return "names: array expected";
+                                for (var i = 0; i < message.names.length; ++i)
+                                    if (!$util.isString(message.names[i]))
+                                        return "names: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BatchArchiveAdUnitsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ads.admanager.v1.BatchArchiveAdUnitsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ads.admanager.v1.BatchArchiveAdUnitsRequest} BatchArchiveAdUnitsRequest
+                         */
+                        BatchArchiveAdUnitsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ads.admanager.v1.BatchArchiveAdUnitsRequest)
+                                return object;
+                            var message = new $root.google.ads.admanager.v1.BatchArchiveAdUnitsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.names) {
+                                if (!Array.isArray(object.names))
+                                    throw TypeError(".google.ads.admanager.v1.BatchArchiveAdUnitsRequest.names: array expected");
+                                message.names = [];
+                                for (var i = 0; i < object.names.length; ++i)
+                                    message.names[i] = String(object.names[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BatchArchiveAdUnitsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ads.admanager.v1.BatchArchiveAdUnitsRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.BatchArchiveAdUnitsRequest} message BatchArchiveAdUnitsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BatchArchiveAdUnitsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.names = [];
+                            if (options.defaults)
+                                object.parent = "";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.names && message.names.length) {
+                                object.names = [];
+                                for (var j = 0; j < message.names.length; ++j)
+                                    object.names[j] = message.names[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BatchArchiveAdUnitsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.ads.admanager.v1.BatchArchiveAdUnitsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BatchArchiveAdUnitsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BatchArchiveAdUnitsRequest
+                         * @function getTypeUrl
+                         * @memberof google.ads.admanager.v1.BatchArchiveAdUnitsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BatchArchiveAdUnitsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ads.admanager.v1.BatchArchiveAdUnitsRequest";
+                        };
+    
+                        return BatchArchiveAdUnitsRequest;
+                    })();
+    
+                    v1.BatchArchiveAdUnitsResponse = (function() {
+    
+                        /**
+                         * Properties of a BatchArchiveAdUnitsResponse.
+                         * @memberof google.ads.admanager.v1
+                         * @interface IBatchArchiveAdUnitsResponse
+                         */
+    
+                        /**
+                         * Constructs a new BatchArchiveAdUnitsResponse.
+                         * @memberof google.ads.admanager.v1
+                         * @classdesc Represents a BatchArchiveAdUnitsResponse.
+                         * @implements IBatchArchiveAdUnitsResponse
+                         * @constructor
+                         * @param {google.ads.admanager.v1.IBatchArchiveAdUnitsResponse=} [properties] Properties to set
+                         */
+                        function BatchArchiveAdUnitsResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new BatchArchiveAdUnitsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.ads.admanager.v1.BatchArchiveAdUnitsResponse
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchArchiveAdUnitsResponse=} [properties] Properties to set
+                         * @returns {google.ads.admanager.v1.BatchArchiveAdUnitsResponse} BatchArchiveAdUnitsResponse instance
+                         */
+                        BatchArchiveAdUnitsResponse.create = function create(properties) {
+                            return new BatchArchiveAdUnitsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BatchArchiveAdUnitsResponse message. Does not implicitly {@link google.ads.admanager.v1.BatchArchiveAdUnitsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ads.admanager.v1.BatchArchiveAdUnitsResponse
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchArchiveAdUnitsResponse} message BatchArchiveAdUnitsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchArchiveAdUnitsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BatchArchiveAdUnitsResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchArchiveAdUnitsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ads.admanager.v1.BatchArchiveAdUnitsResponse
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchArchiveAdUnitsResponse} message BatchArchiveAdUnitsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchArchiveAdUnitsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BatchArchiveAdUnitsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ads.admanager.v1.BatchArchiveAdUnitsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ads.admanager.v1.BatchArchiveAdUnitsResponse} BatchArchiveAdUnitsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchArchiveAdUnitsResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ads.admanager.v1.BatchArchiveAdUnitsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BatchArchiveAdUnitsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ads.admanager.v1.BatchArchiveAdUnitsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ads.admanager.v1.BatchArchiveAdUnitsResponse} BatchArchiveAdUnitsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchArchiveAdUnitsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BatchArchiveAdUnitsResponse message.
+                         * @function verify
+                         * @memberof google.ads.admanager.v1.BatchArchiveAdUnitsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BatchArchiveAdUnitsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BatchArchiveAdUnitsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ads.admanager.v1.BatchArchiveAdUnitsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ads.admanager.v1.BatchArchiveAdUnitsResponse} BatchArchiveAdUnitsResponse
+                         */
+                        BatchArchiveAdUnitsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ads.admanager.v1.BatchArchiveAdUnitsResponse)
+                                return object;
+                            return new $root.google.ads.admanager.v1.BatchArchiveAdUnitsResponse();
+                        };
+    
+                        /**
+                         * Creates a plain object from a BatchArchiveAdUnitsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ads.admanager.v1.BatchArchiveAdUnitsResponse
+                         * @static
+                         * @param {google.ads.admanager.v1.BatchArchiveAdUnitsResponse} message BatchArchiveAdUnitsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BatchArchiveAdUnitsResponse.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this BatchArchiveAdUnitsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.ads.admanager.v1.BatchArchiveAdUnitsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BatchArchiveAdUnitsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BatchArchiveAdUnitsResponse
+                         * @function getTypeUrl
+                         * @memberof google.ads.admanager.v1.BatchArchiveAdUnitsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BatchArchiveAdUnitsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ads.admanager.v1.BatchArchiveAdUnitsResponse";
+                        };
+    
+                        return BatchArchiveAdUnitsResponse;
                     })();
     
                     v1.AdManagerError = (function() {
@@ -39634,6 +42556,204 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.ads.admanager.v1.CustomTargetingKeyService|createCustomTargetingKey}.
+                         * @memberof google.ads.admanager.v1.CustomTargetingKeyService
+                         * @typedef CreateCustomTargetingKeyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.ads.admanager.v1.CustomTargetingKey} [response] CustomTargetingKey
+                         */
+    
+                        /**
+                         * Calls CreateCustomTargetingKey.
+                         * @function createCustomTargetingKey
+                         * @memberof google.ads.admanager.v1.CustomTargetingKeyService
+                         * @instance
+                         * @param {google.ads.admanager.v1.ICreateCustomTargetingKeyRequest} request CreateCustomTargetingKeyRequest message or plain object
+                         * @param {google.ads.admanager.v1.CustomTargetingKeyService.CreateCustomTargetingKeyCallback} callback Node-style callback called with the error, if any, and CustomTargetingKey
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CustomTargetingKeyService.prototype.createCustomTargetingKey = function createCustomTargetingKey(request, callback) {
+                            return this.rpcCall(createCustomTargetingKey, $root.google.ads.admanager.v1.CreateCustomTargetingKeyRequest, $root.google.ads.admanager.v1.CustomTargetingKey, request, callback);
+                        }, "name", { value: "CreateCustomTargetingKey" });
+    
+                        /**
+                         * Calls CreateCustomTargetingKey.
+                         * @function createCustomTargetingKey
+                         * @memberof google.ads.admanager.v1.CustomTargetingKeyService
+                         * @instance
+                         * @param {google.ads.admanager.v1.ICreateCustomTargetingKeyRequest} request CreateCustomTargetingKeyRequest message or plain object
+                         * @returns {Promise<google.ads.admanager.v1.CustomTargetingKey>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.ads.admanager.v1.CustomTargetingKeyService|batchCreateCustomTargetingKeys}.
+                         * @memberof google.ads.admanager.v1.CustomTargetingKeyService
+                         * @typedef BatchCreateCustomTargetingKeysCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.ads.admanager.v1.BatchCreateCustomTargetingKeysResponse} [response] BatchCreateCustomTargetingKeysResponse
+                         */
+    
+                        /**
+                         * Calls BatchCreateCustomTargetingKeys.
+                         * @function batchCreateCustomTargetingKeys
+                         * @memberof google.ads.admanager.v1.CustomTargetingKeyService
+                         * @instance
+                         * @param {google.ads.admanager.v1.IBatchCreateCustomTargetingKeysRequest} request BatchCreateCustomTargetingKeysRequest message or plain object
+                         * @param {google.ads.admanager.v1.CustomTargetingKeyService.BatchCreateCustomTargetingKeysCallback} callback Node-style callback called with the error, if any, and BatchCreateCustomTargetingKeysResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CustomTargetingKeyService.prototype.batchCreateCustomTargetingKeys = function batchCreateCustomTargetingKeys(request, callback) {
+                            return this.rpcCall(batchCreateCustomTargetingKeys, $root.google.ads.admanager.v1.BatchCreateCustomTargetingKeysRequest, $root.google.ads.admanager.v1.BatchCreateCustomTargetingKeysResponse, request, callback);
+                        }, "name", { value: "BatchCreateCustomTargetingKeys" });
+    
+                        /**
+                         * Calls BatchCreateCustomTargetingKeys.
+                         * @function batchCreateCustomTargetingKeys
+                         * @memberof google.ads.admanager.v1.CustomTargetingKeyService
+                         * @instance
+                         * @param {google.ads.admanager.v1.IBatchCreateCustomTargetingKeysRequest} request BatchCreateCustomTargetingKeysRequest message or plain object
+                         * @returns {Promise<google.ads.admanager.v1.BatchCreateCustomTargetingKeysResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.ads.admanager.v1.CustomTargetingKeyService|updateCustomTargetingKey}.
+                         * @memberof google.ads.admanager.v1.CustomTargetingKeyService
+                         * @typedef UpdateCustomTargetingKeyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.ads.admanager.v1.CustomTargetingKey} [response] CustomTargetingKey
+                         */
+    
+                        /**
+                         * Calls UpdateCustomTargetingKey.
+                         * @function updateCustomTargetingKey
+                         * @memberof google.ads.admanager.v1.CustomTargetingKeyService
+                         * @instance
+                         * @param {google.ads.admanager.v1.IUpdateCustomTargetingKeyRequest} request UpdateCustomTargetingKeyRequest message or plain object
+                         * @param {google.ads.admanager.v1.CustomTargetingKeyService.UpdateCustomTargetingKeyCallback} callback Node-style callback called with the error, if any, and CustomTargetingKey
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CustomTargetingKeyService.prototype.updateCustomTargetingKey = function updateCustomTargetingKey(request, callback) {
+                            return this.rpcCall(updateCustomTargetingKey, $root.google.ads.admanager.v1.UpdateCustomTargetingKeyRequest, $root.google.ads.admanager.v1.CustomTargetingKey, request, callback);
+                        }, "name", { value: "UpdateCustomTargetingKey" });
+    
+                        /**
+                         * Calls UpdateCustomTargetingKey.
+                         * @function updateCustomTargetingKey
+                         * @memberof google.ads.admanager.v1.CustomTargetingKeyService
+                         * @instance
+                         * @param {google.ads.admanager.v1.IUpdateCustomTargetingKeyRequest} request UpdateCustomTargetingKeyRequest message or plain object
+                         * @returns {Promise<google.ads.admanager.v1.CustomTargetingKey>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.ads.admanager.v1.CustomTargetingKeyService|batchUpdateCustomTargetingKeys}.
+                         * @memberof google.ads.admanager.v1.CustomTargetingKeyService
+                         * @typedef BatchUpdateCustomTargetingKeysCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.ads.admanager.v1.BatchUpdateCustomTargetingKeysResponse} [response] BatchUpdateCustomTargetingKeysResponse
+                         */
+    
+                        /**
+                         * Calls BatchUpdateCustomTargetingKeys.
+                         * @function batchUpdateCustomTargetingKeys
+                         * @memberof google.ads.admanager.v1.CustomTargetingKeyService
+                         * @instance
+                         * @param {google.ads.admanager.v1.IBatchUpdateCustomTargetingKeysRequest} request BatchUpdateCustomTargetingKeysRequest message or plain object
+                         * @param {google.ads.admanager.v1.CustomTargetingKeyService.BatchUpdateCustomTargetingKeysCallback} callback Node-style callback called with the error, if any, and BatchUpdateCustomTargetingKeysResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CustomTargetingKeyService.prototype.batchUpdateCustomTargetingKeys = function batchUpdateCustomTargetingKeys(request, callback) {
+                            return this.rpcCall(batchUpdateCustomTargetingKeys, $root.google.ads.admanager.v1.BatchUpdateCustomTargetingKeysRequest, $root.google.ads.admanager.v1.BatchUpdateCustomTargetingKeysResponse, request, callback);
+                        }, "name", { value: "BatchUpdateCustomTargetingKeys" });
+    
+                        /**
+                         * Calls BatchUpdateCustomTargetingKeys.
+                         * @function batchUpdateCustomTargetingKeys
+                         * @memberof google.ads.admanager.v1.CustomTargetingKeyService
+                         * @instance
+                         * @param {google.ads.admanager.v1.IBatchUpdateCustomTargetingKeysRequest} request BatchUpdateCustomTargetingKeysRequest message or plain object
+                         * @returns {Promise<google.ads.admanager.v1.BatchUpdateCustomTargetingKeysResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.ads.admanager.v1.CustomTargetingKeyService|batchActivateCustomTargetingKeys}.
+                         * @memberof google.ads.admanager.v1.CustomTargetingKeyService
+                         * @typedef BatchActivateCustomTargetingKeysCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.ads.admanager.v1.BatchActivateCustomTargetingKeysResponse} [response] BatchActivateCustomTargetingKeysResponse
+                         */
+    
+                        /**
+                         * Calls BatchActivateCustomTargetingKeys.
+                         * @function batchActivateCustomTargetingKeys
+                         * @memberof google.ads.admanager.v1.CustomTargetingKeyService
+                         * @instance
+                         * @param {google.ads.admanager.v1.IBatchActivateCustomTargetingKeysRequest} request BatchActivateCustomTargetingKeysRequest message or plain object
+                         * @param {google.ads.admanager.v1.CustomTargetingKeyService.BatchActivateCustomTargetingKeysCallback} callback Node-style callback called with the error, if any, and BatchActivateCustomTargetingKeysResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CustomTargetingKeyService.prototype.batchActivateCustomTargetingKeys = function batchActivateCustomTargetingKeys(request, callback) {
+                            return this.rpcCall(batchActivateCustomTargetingKeys, $root.google.ads.admanager.v1.BatchActivateCustomTargetingKeysRequest, $root.google.ads.admanager.v1.BatchActivateCustomTargetingKeysResponse, request, callback);
+                        }, "name", { value: "BatchActivateCustomTargetingKeys" });
+    
+                        /**
+                         * Calls BatchActivateCustomTargetingKeys.
+                         * @function batchActivateCustomTargetingKeys
+                         * @memberof google.ads.admanager.v1.CustomTargetingKeyService
+                         * @instance
+                         * @param {google.ads.admanager.v1.IBatchActivateCustomTargetingKeysRequest} request BatchActivateCustomTargetingKeysRequest message or plain object
+                         * @returns {Promise<google.ads.admanager.v1.BatchActivateCustomTargetingKeysResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.ads.admanager.v1.CustomTargetingKeyService|batchDeactivateCustomTargetingKeys}.
+                         * @memberof google.ads.admanager.v1.CustomTargetingKeyService
+                         * @typedef BatchDeactivateCustomTargetingKeysCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysResponse} [response] BatchDeactivateCustomTargetingKeysResponse
+                         */
+    
+                        /**
+                         * Calls BatchDeactivateCustomTargetingKeys.
+                         * @function batchDeactivateCustomTargetingKeys
+                         * @memberof google.ads.admanager.v1.CustomTargetingKeyService
+                         * @instance
+                         * @param {google.ads.admanager.v1.IBatchDeactivateCustomTargetingKeysRequest} request BatchDeactivateCustomTargetingKeysRequest message or plain object
+                         * @param {google.ads.admanager.v1.CustomTargetingKeyService.BatchDeactivateCustomTargetingKeysCallback} callback Node-style callback called with the error, if any, and BatchDeactivateCustomTargetingKeysResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CustomTargetingKeyService.prototype.batchDeactivateCustomTargetingKeys = function batchDeactivateCustomTargetingKeys(request, callback) {
+                            return this.rpcCall(batchDeactivateCustomTargetingKeys, $root.google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysRequest, $root.google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysResponse, request, callback);
+                        }, "name", { value: "BatchDeactivateCustomTargetingKeys" });
+    
+                        /**
+                         * Calls BatchDeactivateCustomTargetingKeys.
+                         * @function batchDeactivateCustomTargetingKeys
+                         * @memberof google.ads.admanager.v1.CustomTargetingKeyService
+                         * @instance
+                         * @param {google.ads.admanager.v1.IBatchDeactivateCustomTargetingKeysRequest} request BatchDeactivateCustomTargetingKeysRequest message or plain object
+                         * @returns {Promise<google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysResponse>} Promise
+                         * @variation 2
+                         */
+    
                         return CustomTargetingKeyService;
                     })();
     
@@ -40435,6 +43555,2275 @@
                         };
     
                         return ListCustomTargetingKeysResponse;
+                    })();
+    
+                    v1.CreateCustomTargetingKeyRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateCustomTargetingKeyRequest.
+                         * @memberof google.ads.admanager.v1
+                         * @interface ICreateCustomTargetingKeyRequest
+                         * @property {string|null} [parent] CreateCustomTargetingKeyRequest parent
+                         * @property {google.ads.admanager.v1.ICustomTargetingKey|null} [customTargetingKey] CreateCustomTargetingKeyRequest customTargetingKey
+                         */
+    
+                        /**
+                         * Constructs a new CreateCustomTargetingKeyRequest.
+                         * @memberof google.ads.admanager.v1
+                         * @classdesc Represents a CreateCustomTargetingKeyRequest.
+                         * @implements ICreateCustomTargetingKeyRequest
+                         * @constructor
+                         * @param {google.ads.admanager.v1.ICreateCustomTargetingKeyRequest=} [properties] Properties to set
+                         */
+                        function CreateCustomTargetingKeyRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateCustomTargetingKeyRequest parent.
+                         * @member {string} parent
+                         * @memberof google.ads.admanager.v1.CreateCustomTargetingKeyRequest
+                         * @instance
+                         */
+                        CreateCustomTargetingKeyRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateCustomTargetingKeyRequest customTargetingKey.
+                         * @member {google.ads.admanager.v1.ICustomTargetingKey|null|undefined} customTargetingKey
+                         * @memberof google.ads.admanager.v1.CreateCustomTargetingKeyRequest
+                         * @instance
+                         */
+                        CreateCustomTargetingKeyRequest.prototype.customTargetingKey = null;
+    
+                        /**
+                         * Creates a new CreateCustomTargetingKeyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.ads.admanager.v1.CreateCustomTargetingKeyRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.ICreateCustomTargetingKeyRequest=} [properties] Properties to set
+                         * @returns {google.ads.admanager.v1.CreateCustomTargetingKeyRequest} CreateCustomTargetingKeyRequest instance
+                         */
+                        CreateCustomTargetingKeyRequest.create = function create(properties) {
+                            return new CreateCustomTargetingKeyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateCustomTargetingKeyRequest message. Does not implicitly {@link google.ads.admanager.v1.CreateCustomTargetingKeyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ads.admanager.v1.CreateCustomTargetingKeyRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.ICreateCustomTargetingKeyRequest} message CreateCustomTargetingKeyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateCustomTargetingKeyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.customTargetingKey != null && Object.hasOwnProperty.call(message, "customTargetingKey"))
+                                $root.google.ads.admanager.v1.CustomTargetingKey.encode(message.customTargetingKey, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateCustomTargetingKeyRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.CreateCustomTargetingKeyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ads.admanager.v1.CreateCustomTargetingKeyRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.ICreateCustomTargetingKeyRequest} message CreateCustomTargetingKeyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateCustomTargetingKeyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateCustomTargetingKeyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ads.admanager.v1.CreateCustomTargetingKeyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ads.admanager.v1.CreateCustomTargetingKeyRequest} CreateCustomTargetingKeyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateCustomTargetingKeyRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ads.admanager.v1.CreateCustomTargetingKeyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.customTargetingKey = $root.google.ads.admanager.v1.CustomTargetingKey.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateCustomTargetingKeyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ads.admanager.v1.CreateCustomTargetingKeyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ads.admanager.v1.CreateCustomTargetingKeyRequest} CreateCustomTargetingKeyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateCustomTargetingKeyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateCustomTargetingKeyRequest message.
+                         * @function verify
+                         * @memberof google.ads.admanager.v1.CreateCustomTargetingKeyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateCustomTargetingKeyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.customTargetingKey != null && message.hasOwnProperty("customTargetingKey")) {
+                                var error = $root.google.ads.admanager.v1.CustomTargetingKey.verify(message.customTargetingKey);
+                                if (error)
+                                    return "customTargetingKey." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateCustomTargetingKeyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ads.admanager.v1.CreateCustomTargetingKeyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ads.admanager.v1.CreateCustomTargetingKeyRequest} CreateCustomTargetingKeyRequest
+                         */
+                        CreateCustomTargetingKeyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ads.admanager.v1.CreateCustomTargetingKeyRequest)
+                                return object;
+                            var message = new $root.google.ads.admanager.v1.CreateCustomTargetingKeyRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.customTargetingKey != null) {
+                                if (typeof object.customTargetingKey !== "object")
+                                    throw TypeError(".google.ads.admanager.v1.CreateCustomTargetingKeyRequest.customTargetingKey: object expected");
+                                message.customTargetingKey = $root.google.ads.admanager.v1.CustomTargetingKey.fromObject(object.customTargetingKey);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateCustomTargetingKeyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ads.admanager.v1.CreateCustomTargetingKeyRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.CreateCustomTargetingKeyRequest} message CreateCustomTargetingKeyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateCustomTargetingKeyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.customTargetingKey = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.customTargetingKey != null && message.hasOwnProperty("customTargetingKey"))
+                                object.customTargetingKey = $root.google.ads.admanager.v1.CustomTargetingKey.toObject(message.customTargetingKey, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateCustomTargetingKeyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.ads.admanager.v1.CreateCustomTargetingKeyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateCustomTargetingKeyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateCustomTargetingKeyRequest
+                         * @function getTypeUrl
+                         * @memberof google.ads.admanager.v1.CreateCustomTargetingKeyRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateCustomTargetingKeyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ads.admanager.v1.CreateCustomTargetingKeyRequest";
+                        };
+    
+                        return CreateCustomTargetingKeyRequest;
+                    })();
+    
+                    v1.BatchCreateCustomTargetingKeysRequest = (function() {
+    
+                        /**
+                         * Properties of a BatchCreateCustomTargetingKeysRequest.
+                         * @memberof google.ads.admanager.v1
+                         * @interface IBatchCreateCustomTargetingKeysRequest
+                         * @property {string|null} [parent] BatchCreateCustomTargetingKeysRequest parent
+                         * @property {Array.<google.ads.admanager.v1.ICreateCustomTargetingKeyRequest>|null} [requests] BatchCreateCustomTargetingKeysRequest requests
+                         */
+    
+                        /**
+                         * Constructs a new BatchCreateCustomTargetingKeysRequest.
+                         * @memberof google.ads.admanager.v1
+                         * @classdesc Represents a BatchCreateCustomTargetingKeysRequest.
+                         * @implements IBatchCreateCustomTargetingKeysRequest
+                         * @constructor
+                         * @param {google.ads.admanager.v1.IBatchCreateCustomTargetingKeysRequest=} [properties] Properties to set
+                         */
+                        function BatchCreateCustomTargetingKeysRequest(properties) {
+                            this.requests = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BatchCreateCustomTargetingKeysRequest parent.
+                         * @member {string} parent
+                         * @memberof google.ads.admanager.v1.BatchCreateCustomTargetingKeysRequest
+                         * @instance
+                         */
+                        BatchCreateCustomTargetingKeysRequest.prototype.parent = "";
+    
+                        /**
+                         * BatchCreateCustomTargetingKeysRequest requests.
+                         * @member {Array.<google.ads.admanager.v1.ICreateCustomTargetingKeyRequest>} requests
+                         * @memberof google.ads.admanager.v1.BatchCreateCustomTargetingKeysRequest
+                         * @instance
+                         */
+                        BatchCreateCustomTargetingKeysRequest.prototype.requests = $util.emptyArray;
+    
+                        /**
+                         * Creates a new BatchCreateCustomTargetingKeysRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.ads.admanager.v1.BatchCreateCustomTargetingKeysRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchCreateCustomTargetingKeysRequest=} [properties] Properties to set
+                         * @returns {google.ads.admanager.v1.BatchCreateCustomTargetingKeysRequest} BatchCreateCustomTargetingKeysRequest instance
+                         */
+                        BatchCreateCustomTargetingKeysRequest.create = function create(properties) {
+                            return new BatchCreateCustomTargetingKeysRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BatchCreateCustomTargetingKeysRequest message. Does not implicitly {@link google.ads.admanager.v1.BatchCreateCustomTargetingKeysRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ads.admanager.v1.BatchCreateCustomTargetingKeysRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchCreateCustomTargetingKeysRequest} message BatchCreateCustomTargetingKeysRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchCreateCustomTargetingKeysRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.requests != null && message.requests.length)
+                                for (var i = 0; i < message.requests.length; ++i)
+                                    $root.google.ads.admanager.v1.CreateCustomTargetingKeyRequest.encode(message.requests[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BatchCreateCustomTargetingKeysRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchCreateCustomTargetingKeysRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ads.admanager.v1.BatchCreateCustomTargetingKeysRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchCreateCustomTargetingKeysRequest} message BatchCreateCustomTargetingKeysRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchCreateCustomTargetingKeysRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BatchCreateCustomTargetingKeysRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ads.admanager.v1.BatchCreateCustomTargetingKeysRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ads.admanager.v1.BatchCreateCustomTargetingKeysRequest} BatchCreateCustomTargetingKeysRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchCreateCustomTargetingKeysRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ads.admanager.v1.BatchCreateCustomTargetingKeysRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.requests && message.requests.length))
+                                            message.requests = [];
+                                        message.requests.push($root.google.ads.admanager.v1.CreateCustomTargetingKeyRequest.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BatchCreateCustomTargetingKeysRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ads.admanager.v1.BatchCreateCustomTargetingKeysRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ads.admanager.v1.BatchCreateCustomTargetingKeysRequest} BatchCreateCustomTargetingKeysRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchCreateCustomTargetingKeysRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BatchCreateCustomTargetingKeysRequest message.
+                         * @function verify
+                         * @memberof google.ads.admanager.v1.BatchCreateCustomTargetingKeysRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BatchCreateCustomTargetingKeysRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.requests != null && message.hasOwnProperty("requests")) {
+                                if (!Array.isArray(message.requests))
+                                    return "requests: array expected";
+                                for (var i = 0; i < message.requests.length; ++i) {
+                                    var error = $root.google.ads.admanager.v1.CreateCustomTargetingKeyRequest.verify(message.requests[i]);
+                                    if (error)
+                                        return "requests." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BatchCreateCustomTargetingKeysRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ads.admanager.v1.BatchCreateCustomTargetingKeysRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ads.admanager.v1.BatchCreateCustomTargetingKeysRequest} BatchCreateCustomTargetingKeysRequest
+                         */
+                        BatchCreateCustomTargetingKeysRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ads.admanager.v1.BatchCreateCustomTargetingKeysRequest)
+                                return object;
+                            var message = new $root.google.ads.admanager.v1.BatchCreateCustomTargetingKeysRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.requests) {
+                                if (!Array.isArray(object.requests))
+                                    throw TypeError(".google.ads.admanager.v1.BatchCreateCustomTargetingKeysRequest.requests: array expected");
+                                message.requests = [];
+                                for (var i = 0; i < object.requests.length; ++i) {
+                                    if (typeof object.requests[i] !== "object")
+                                        throw TypeError(".google.ads.admanager.v1.BatchCreateCustomTargetingKeysRequest.requests: object expected");
+                                    message.requests[i] = $root.google.ads.admanager.v1.CreateCustomTargetingKeyRequest.fromObject(object.requests[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BatchCreateCustomTargetingKeysRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ads.admanager.v1.BatchCreateCustomTargetingKeysRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.BatchCreateCustomTargetingKeysRequest} message BatchCreateCustomTargetingKeysRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BatchCreateCustomTargetingKeysRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.requests = [];
+                            if (options.defaults)
+                                object.parent = "";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.requests && message.requests.length) {
+                                object.requests = [];
+                                for (var j = 0; j < message.requests.length; ++j)
+                                    object.requests[j] = $root.google.ads.admanager.v1.CreateCustomTargetingKeyRequest.toObject(message.requests[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BatchCreateCustomTargetingKeysRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.ads.admanager.v1.BatchCreateCustomTargetingKeysRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BatchCreateCustomTargetingKeysRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BatchCreateCustomTargetingKeysRequest
+                         * @function getTypeUrl
+                         * @memberof google.ads.admanager.v1.BatchCreateCustomTargetingKeysRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BatchCreateCustomTargetingKeysRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ads.admanager.v1.BatchCreateCustomTargetingKeysRequest";
+                        };
+    
+                        return BatchCreateCustomTargetingKeysRequest;
+                    })();
+    
+                    v1.BatchCreateCustomTargetingKeysResponse = (function() {
+    
+                        /**
+                         * Properties of a BatchCreateCustomTargetingKeysResponse.
+                         * @memberof google.ads.admanager.v1
+                         * @interface IBatchCreateCustomTargetingKeysResponse
+                         * @property {Array.<google.ads.admanager.v1.ICustomTargetingKey>|null} [customTargetingKeys] BatchCreateCustomTargetingKeysResponse customTargetingKeys
+                         */
+    
+                        /**
+                         * Constructs a new BatchCreateCustomTargetingKeysResponse.
+                         * @memberof google.ads.admanager.v1
+                         * @classdesc Represents a BatchCreateCustomTargetingKeysResponse.
+                         * @implements IBatchCreateCustomTargetingKeysResponse
+                         * @constructor
+                         * @param {google.ads.admanager.v1.IBatchCreateCustomTargetingKeysResponse=} [properties] Properties to set
+                         */
+                        function BatchCreateCustomTargetingKeysResponse(properties) {
+                            this.customTargetingKeys = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BatchCreateCustomTargetingKeysResponse customTargetingKeys.
+                         * @member {Array.<google.ads.admanager.v1.ICustomTargetingKey>} customTargetingKeys
+                         * @memberof google.ads.admanager.v1.BatchCreateCustomTargetingKeysResponse
+                         * @instance
+                         */
+                        BatchCreateCustomTargetingKeysResponse.prototype.customTargetingKeys = $util.emptyArray;
+    
+                        /**
+                         * Creates a new BatchCreateCustomTargetingKeysResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.ads.admanager.v1.BatchCreateCustomTargetingKeysResponse
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchCreateCustomTargetingKeysResponse=} [properties] Properties to set
+                         * @returns {google.ads.admanager.v1.BatchCreateCustomTargetingKeysResponse} BatchCreateCustomTargetingKeysResponse instance
+                         */
+                        BatchCreateCustomTargetingKeysResponse.create = function create(properties) {
+                            return new BatchCreateCustomTargetingKeysResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BatchCreateCustomTargetingKeysResponse message. Does not implicitly {@link google.ads.admanager.v1.BatchCreateCustomTargetingKeysResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ads.admanager.v1.BatchCreateCustomTargetingKeysResponse
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchCreateCustomTargetingKeysResponse} message BatchCreateCustomTargetingKeysResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchCreateCustomTargetingKeysResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.customTargetingKeys != null && message.customTargetingKeys.length)
+                                for (var i = 0; i < message.customTargetingKeys.length; ++i)
+                                    $root.google.ads.admanager.v1.CustomTargetingKey.encode(message.customTargetingKeys[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BatchCreateCustomTargetingKeysResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchCreateCustomTargetingKeysResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ads.admanager.v1.BatchCreateCustomTargetingKeysResponse
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchCreateCustomTargetingKeysResponse} message BatchCreateCustomTargetingKeysResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchCreateCustomTargetingKeysResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BatchCreateCustomTargetingKeysResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ads.admanager.v1.BatchCreateCustomTargetingKeysResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ads.admanager.v1.BatchCreateCustomTargetingKeysResponse} BatchCreateCustomTargetingKeysResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchCreateCustomTargetingKeysResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ads.admanager.v1.BatchCreateCustomTargetingKeysResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.customTargetingKeys && message.customTargetingKeys.length))
+                                            message.customTargetingKeys = [];
+                                        message.customTargetingKeys.push($root.google.ads.admanager.v1.CustomTargetingKey.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BatchCreateCustomTargetingKeysResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ads.admanager.v1.BatchCreateCustomTargetingKeysResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ads.admanager.v1.BatchCreateCustomTargetingKeysResponse} BatchCreateCustomTargetingKeysResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchCreateCustomTargetingKeysResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BatchCreateCustomTargetingKeysResponse message.
+                         * @function verify
+                         * @memberof google.ads.admanager.v1.BatchCreateCustomTargetingKeysResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BatchCreateCustomTargetingKeysResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.customTargetingKeys != null && message.hasOwnProperty("customTargetingKeys")) {
+                                if (!Array.isArray(message.customTargetingKeys))
+                                    return "customTargetingKeys: array expected";
+                                for (var i = 0; i < message.customTargetingKeys.length; ++i) {
+                                    var error = $root.google.ads.admanager.v1.CustomTargetingKey.verify(message.customTargetingKeys[i]);
+                                    if (error)
+                                        return "customTargetingKeys." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BatchCreateCustomTargetingKeysResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ads.admanager.v1.BatchCreateCustomTargetingKeysResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ads.admanager.v1.BatchCreateCustomTargetingKeysResponse} BatchCreateCustomTargetingKeysResponse
+                         */
+                        BatchCreateCustomTargetingKeysResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ads.admanager.v1.BatchCreateCustomTargetingKeysResponse)
+                                return object;
+                            var message = new $root.google.ads.admanager.v1.BatchCreateCustomTargetingKeysResponse();
+                            if (object.customTargetingKeys) {
+                                if (!Array.isArray(object.customTargetingKeys))
+                                    throw TypeError(".google.ads.admanager.v1.BatchCreateCustomTargetingKeysResponse.customTargetingKeys: array expected");
+                                message.customTargetingKeys = [];
+                                for (var i = 0; i < object.customTargetingKeys.length; ++i) {
+                                    if (typeof object.customTargetingKeys[i] !== "object")
+                                        throw TypeError(".google.ads.admanager.v1.BatchCreateCustomTargetingKeysResponse.customTargetingKeys: object expected");
+                                    message.customTargetingKeys[i] = $root.google.ads.admanager.v1.CustomTargetingKey.fromObject(object.customTargetingKeys[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BatchCreateCustomTargetingKeysResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ads.admanager.v1.BatchCreateCustomTargetingKeysResponse
+                         * @static
+                         * @param {google.ads.admanager.v1.BatchCreateCustomTargetingKeysResponse} message BatchCreateCustomTargetingKeysResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BatchCreateCustomTargetingKeysResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.customTargetingKeys = [];
+                            if (message.customTargetingKeys && message.customTargetingKeys.length) {
+                                object.customTargetingKeys = [];
+                                for (var j = 0; j < message.customTargetingKeys.length; ++j)
+                                    object.customTargetingKeys[j] = $root.google.ads.admanager.v1.CustomTargetingKey.toObject(message.customTargetingKeys[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BatchCreateCustomTargetingKeysResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.ads.admanager.v1.BatchCreateCustomTargetingKeysResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BatchCreateCustomTargetingKeysResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BatchCreateCustomTargetingKeysResponse
+                         * @function getTypeUrl
+                         * @memberof google.ads.admanager.v1.BatchCreateCustomTargetingKeysResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BatchCreateCustomTargetingKeysResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ads.admanager.v1.BatchCreateCustomTargetingKeysResponse";
+                        };
+    
+                        return BatchCreateCustomTargetingKeysResponse;
+                    })();
+    
+                    v1.UpdateCustomTargetingKeyRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateCustomTargetingKeyRequest.
+                         * @memberof google.ads.admanager.v1
+                         * @interface IUpdateCustomTargetingKeyRequest
+                         * @property {google.ads.admanager.v1.ICustomTargetingKey|null} [customTargetingKey] UpdateCustomTargetingKeyRequest customTargetingKey
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateCustomTargetingKeyRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateCustomTargetingKeyRequest.
+                         * @memberof google.ads.admanager.v1
+                         * @classdesc Represents an UpdateCustomTargetingKeyRequest.
+                         * @implements IUpdateCustomTargetingKeyRequest
+                         * @constructor
+                         * @param {google.ads.admanager.v1.IUpdateCustomTargetingKeyRequest=} [properties] Properties to set
+                         */
+                        function UpdateCustomTargetingKeyRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateCustomTargetingKeyRequest customTargetingKey.
+                         * @member {google.ads.admanager.v1.ICustomTargetingKey|null|undefined} customTargetingKey
+                         * @memberof google.ads.admanager.v1.UpdateCustomTargetingKeyRequest
+                         * @instance
+                         */
+                        UpdateCustomTargetingKeyRequest.prototype.customTargetingKey = null;
+    
+                        /**
+                         * UpdateCustomTargetingKeyRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.ads.admanager.v1.UpdateCustomTargetingKeyRequest
+                         * @instance
+                         */
+                        UpdateCustomTargetingKeyRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateCustomTargetingKeyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.ads.admanager.v1.UpdateCustomTargetingKeyRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.IUpdateCustomTargetingKeyRequest=} [properties] Properties to set
+                         * @returns {google.ads.admanager.v1.UpdateCustomTargetingKeyRequest} UpdateCustomTargetingKeyRequest instance
+                         */
+                        UpdateCustomTargetingKeyRequest.create = function create(properties) {
+                            return new UpdateCustomTargetingKeyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateCustomTargetingKeyRequest message. Does not implicitly {@link google.ads.admanager.v1.UpdateCustomTargetingKeyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ads.admanager.v1.UpdateCustomTargetingKeyRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.IUpdateCustomTargetingKeyRequest} message UpdateCustomTargetingKeyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateCustomTargetingKeyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.customTargetingKey != null && Object.hasOwnProperty.call(message, "customTargetingKey"))
+                                $root.google.ads.admanager.v1.CustomTargetingKey.encode(message.customTargetingKey, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateCustomTargetingKeyRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.UpdateCustomTargetingKeyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ads.admanager.v1.UpdateCustomTargetingKeyRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.IUpdateCustomTargetingKeyRequest} message UpdateCustomTargetingKeyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateCustomTargetingKeyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateCustomTargetingKeyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ads.admanager.v1.UpdateCustomTargetingKeyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ads.admanager.v1.UpdateCustomTargetingKeyRequest} UpdateCustomTargetingKeyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateCustomTargetingKeyRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ads.admanager.v1.UpdateCustomTargetingKeyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.customTargetingKey = $root.google.ads.admanager.v1.CustomTargetingKey.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateCustomTargetingKeyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ads.admanager.v1.UpdateCustomTargetingKeyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ads.admanager.v1.UpdateCustomTargetingKeyRequest} UpdateCustomTargetingKeyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateCustomTargetingKeyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateCustomTargetingKeyRequest message.
+                         * @function verify
+                         * @memberof google.ads.admanager.v1.UpdateCustomTargetingKeyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateCustomTargetingKeyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.customTargetingKey != null && message.hasOwnProperty("customTargetingKey")) {
+                                var error = $root.google.ads.admanager.v1.CustomTargetingKey.verify(message.customTargetingKey);
+                                if (error)
+                                    return "customTargetingKey." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateCustomTargetingKeyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ads.admanager.v1.UpdateCustomTargetingKeyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ads.admanager.v1.UpdateCustomTargetingKeyRequest} UpdateCustomTargetingKeyRequest
+                         */
+                        UpdateCustomTargetingKeyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ads.admanager.v1.UpdateCustomTargetingKeyRequest)
+                                return object;
+                            var message = new $root.google.ads.admanager.v1.UpdateCustomTargetingKeyRequest();
+                            if (object.customTargetingKey != null) {
+                                if (typeof object.customTargetingKey !== "object")
+                                    throw TypeError(".google.ads.admanager.v1.UpdateCustomTargetingKeyRequest.customTargetingKey: object expected");
+                                message.customTargetingKey = $root.google.ads.admanager.v1.CustomTargetingKey.fromObject(object.customTargetingKey);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.ads.admanager.v1.UpdateCustomTargetingKeyRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateCustomTargetingKeyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ads.admanager.v1.UpdateCustomTargetingKeyRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.UpdateCustomTargetingKeyRequest} message UpdateCustomTargetingKeyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateCustomTargetingKeyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.customTargetingKey = null;
+                                object.updateMask = null;
+                            }
+                            if (message.customTargetingKey != null && message.hasOwnProperty("customTargetingKey"))
+                                object.customTargetingKey = $root.google.ads.admanager.v1.CustomTargetingKey.toObject(message.customTargetingKey, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateCustomTargetingKeyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.ads.admanager.v1.UpdateCustomTargetingKeyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateCustomTargetingKeyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateCustomTargetingKeyRequest
+                         * @function getTypeUrl
+                         * @memberof google.ads.admanager.v1.UpdateCustomTargetingKeyRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateCustomTargetingKeyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ads.admanager.v1.UpdateCustomTargetingKeyRequest";
+                        };
+    
+                        return UpdateCustomTargetingKeyRequest;
+                    })();
+    
+                    v1.BatchUpdateCustomTargetingKeysRequest = (function() {
+    
+                        /**
+                         * Properties of a BatchUpdateCustomTargetingKeysRequest.
+                         * @memberof google.ads.admanager.v1
+                         * @interface IBatchUpdateCustomTargetingKeysRequest
+                         * @property {string|null} [parent] BatchUpdateCustomTargetingKeysRequest parent
+                         * @property {Array.<google.ads.admanager.v1.IUpdateCustomTargetingKeyRequest>|null} [requests] BatchUpdateCustomTargetingKeysRequest requests
+                         */
+    
+                        /**
+                         * Constructs a new BatchUpdateCustomTargetingKeysRequest.
+                         * @memberof google.ads.admanager.v1
+                         * @classdesc Represents a BatchUpdateCustomTargetingKeysRequest.
+                         * @implements IBatchUpdateCustomTargetingKeysRequest
+                         * @constructor
+                         * @param {google.ads.admanager.v1.IBatchUpdateCustomTargetingKeysRequest=} [properties] Properties to set
+                         */
+                        function BatchUpdateCustomTargetingKeysRequest(properties) {
+                            this.requests = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BatchUpdateCustomTargetingKeysRequest parent.
+                         * @member {string} parent
+                         * @memberof google.ads.admanager.v1.BatchUpdateCustomTargetingKeysRequest
+                         * @instance
+                         */
+                        BatchUpdateCustomTargetingKeysRequest.prototype.parent = "";
+    
+                        /**
+                         * BatchUpdateCustomTargetingKeysRequest requests.
+                         * @member {Array.<google.ads.admanager.v1.IUpdateCustomTargetingKeyRequest>} requests
+                         * @memberof google.ads.admanager.v1.BatchUpdateCustomTargetingKeysRequest
+                         * @instance
+                         */
+                        BatchUpdateCustomTargetingKeysRequest.prototype.requests = $util.emptyArray;
+    
+                        /**
+                         * Creates a new BatchUpdateCustomTargetingKeysRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.ads.admanager.v1.BatchUpdateCustomTargetingKeysRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchUpdateCustomTargetingKeysRequest=} [properties] Properties to set
+                         * @returns {google.ads.admanager.v1.BatchUpdateCustomTargetingKeysRequest} BatchUpdateCustomTargetingKeysRequest instance
+                         */
+                        BatchUpdateCustomTargetingKeysRequest.create = function create(properties) {
+                            return new BatchUpdateCustomTargetingKeysRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BatchUpdateCustomTargetingKeysRequest message. Does not implicitly {@link google.ads.admanager.v1.BatchUpdateCustomTargetingKeysRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ads.admanager.v1.BatchUpdateCustomTargetingKeysRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchUpdateCustomTargetingKeysRequest} message BatchUpdateCustomTargetingKeysRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchUpdateCustomTargetingKeysRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.requests != null && message.requests.length)
+                                for (var i = 0; i < message.requests.length; ++i)
+                                    $root.google.ads.admanager.v1.UpdateCustomTargetingKeyRequest.encode(message.requests[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BatchUpdateCustomTargetingKeysRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchUpdateCustomTargetingKeysRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ads.admanager.v1.BatchUpdateCustomTargetingKeysRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchUpdateCustomTargetingKeysRequest} message BatchUpdateCustomTargetingKeysRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchUpdateCustomTargetingKeysRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BatchUpdateCustomTargetingKeysRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ads.admanager.v1.BatchUpdateCustomTargetingKeysRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ads.admanager.v1.BatchUpdateCustomTargetingKeysRequest} BatchUpdateCustomTargetingKeysRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchUpdateCustomTargetingKeysRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ads.admanager.v1.BatchUpdateCustomTargetingKeysRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.requests && message.requests.length))
+                                            message.requests = [];
+                                        message.requests.push($root.google.ads.admanager.v1.UpdateCustomTargetingKeyRequest.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BatchUpdateCustomTargetingKeysRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ads.admanager.v1.BatchUpdateCustomTargetingKeysRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ads.admanager.v1.BatchUpdateCustomTargetingKeysRequest} BatchUpdateCustomTargetingKeysRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchUpdateCustomTargetingKeysRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BatchUpdateCustomTargetingKeysRequest message.
+                         * @function verify
+                         * @memberof google.ads.admanager.v1.BatchUpdateCustomTargetingKeysRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BatchUpdateCustomTargetingKeysRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.requests != null && message.hasOwnProperty("requests")) {
+                                if (!Array.isArray(message.requests))
+                                    return "requests: array expected";
+                                for (var i = 0; i < message.requests.length; ++i) {
+                                    var error = $root.google.ads.admanager.v1.UpdateCustomTargetingKeyRequest.verify(message.requests[i]);
+                                    if (error)
+                                        return "requests." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BatchUpdateCustomTargetingKeysRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ads.admanager.v1.BatchUpdateCustomTargetingKeysRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ads.admanager.v1.BatchUpdateCustomTargetingKeysRequest} BatchUpdateCustomTargetingKeysRequest
+                         */
+                        BatchUpdateCustomTargetingKeysRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ads.admanager.v1.BatchUpdateCustomTargetingKeysRequest)
+                                return object;
+                            var message = new $root.google.ads.admanager.v1.BatchUpdateCustomTargetingKeysRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.requests) {
+                                if (!Array.isArray(object.requests))
+                                    throw TypeError(".google.ads.admanager.v1.BatchUpdateCustomTargetingKeysRequest.requests: array expected");
+                                message.requests = [];
+                                for (var i = 0; i < object.requests.length; ++i) {
+                                    if (typeof object.requests[i] !== "object")
+                                        throw TypeError(".google.ads.admanager.v1.BatchUpdateCustomTargetingKeysRequest.requests: object expected");
+                                    message.requests[i] = $root.google.ads.admanager.v1.UpdateCustomTargetingKeyRequest.fromObject(object.requests[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BatchUpdateCustomTargetingKeysRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ads.admanager.v1.BatchUpdateCustomTargetingKeysRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.BatchUpdateCustomTargetingKeysRequest} message BatchUpdateCustomTargetingKeysRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BatchUpdateCustomTargetingKeysRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.requests = [];
+                            if (options.defaults)
+                                object.parent = "";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.requests && message.requests.length) {
+                                object.requests = [];
+                                for (var j = 0; j < message.requests.length; ++j)
+                                    object.requests[j] = $root.google.ads.admanager.v1.UpdateCustomTargetingKeyRequest.toObject(message.requests[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BatchUpdateCustomTargetingKeysRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.ads.admanager.v1.BatchUpdateCustomTargetingKeysRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BatchUpdateCustomTargetingKeysRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BatchUpdateCustomTargetingKeysRequest
+                         * @function getTypeUrl
+                         * @memberof google.ads.admanager.v1.BatchUpdateCustomTargetingKeysRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BatchUpdateCustomTargetingKeysRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ads.admanager.v1.BatchUpdateCustomTargetingKeysRequest";
+                        };
+    
+                        return BatchUpdateCustomTargetingKeysRequest;
+                    })();
+    
+                    v1.BatchUpdateCustomTargetingKeysResponse = (function() {
+    
+                        /**
+                         * Properties of a BatchUpdateCustomTargetingKeysResponse.
+                         * @memberof google.ads.admanager.v1
+                         * @interface IBatchUpdateCustomTargetingKeysResponse
+                         * @property {Array.<google.ads.admanager.v1.ICustomTargetingKey>|null} [customTargetingKeys] BatchUpdateCustomTargetingKeysResponse customTargetingKeys
+                         */
+    
+                        /**
+                         * Constructs a new BatchUpdateCustomTargetingKeysResponse.
+                         * @memberof google.ads.admanager.v1
+                         * @classdesc Represents a BatchUpdateCustomTargetingKeysResponse.
+                         * @implements IBatchUpdateCustomTargetingKeysResponse
+                         * @constructor
+                         * @param {google.ads.admanager.v1.IBatchUpdateCustomTargetingKeysResponse=} [properties] Properties to set
+                         */
+                        function BatchUpdateCustomTargetingKeysResponse(properties) {
+                            this.customTargetingKeys = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BatchUpdateCustomTargetingKeysResponse customTargetingKeys.
+                         * @member {Array.<google.ads.admanager.v1.ICustomTargetingKey>} customTargetingKeys
+                         * @memberof google.ads.admanager.v1.BatchUpdateCustomTargetingKeysResponse
+                         * @instance
+                         */
+                        BatchUpdateCustomTargetingKeysResponse.prototype.customTargetingKeys = $util.emptyArray;
+    
+                        /**
+                         * Creates a new BatchUpdateCustomTargetingKeysResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.ads.admanager.v1.BatchUpdateCustomTargetingKeysResponse
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchUpdateCustomTargetingKeysResponse=} [properties] Properties to set
+                         * @returns {google.ads.admanager.v1.BatchUpdateCustomTargetingKeysResponse} BatchUpdateCustomTargetingKeysResponse instance
+                         */
+                        BatchUpdateCustomTargetingKeysResponse.create = function create(properties) {
+                            return new BatchUpdateCustomTargetingKeysResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BatchUpdateCustomTargetingKeysResponse message. Does not implicitly {@link google.ads.admanager.v1.BatchUpdateCustomTargetingKeysResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ads.admanager.v1.BatchUpdateCustomTargetingKeysResponse
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchUpdateCustomTargetingKeysResponse} message BatchUpdateCustomTargetingKeysResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchUpdateCustomTargetingKeysResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.customTargetingKeys != null && message.customTargetingKeys.length)
+                                for (var i = 0; i < message.customTargetingKeys.length; ++i)
+                                    $root.google.ads.admanager.v1.CustomTargetingKey.encode(message.customTargetingKeys[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BatchUpdateCustomTargetingKeysResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchUpdateCustomTargetingKeysResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ads.admanager.v1.BatchUpdateCustomTargetingKeysResponse
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchUpdateCustomTargetingKeysResponse} message BatchUpdateCustomTargetingKeysResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchUpdateCustomTargetingKeysResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BatchUpdateCustomTargetingKeysResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ads.admanager.v1.BatchUpdateCustomTargetingKeysResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ads.admanager.v1.BatchUpdateCustomTargetingKeysResponse} BatchUpdateCustomTargetingKeysResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchUpdateCustomTargetingKeysResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ads.admanager.v1.BatchUpdateCustomTargetingKeysResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.customTargetingKeys && message.customTargetingKeys.length))
+                                            message.customTargetingKeys = [];
+                                        message.customTargetingKeys.push($root.google.ads.admanager.v1.CustomTargetingKey.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BatchUpdateCustomTargetingKeysResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ads.admanager.v1.BatchUpdateCustomTargetingKeysResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ads.admanager.v1.BatchUpdateCustomTargetingKeysResponse} BatchUpdateCustomTargetingKeysResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchUpdateCustomTargetingKeysResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BatchUpdateCustomTargetingKeysResponse message.
+                         * @function verify
+                         * @memberof google.ads.admanager.v1.BatchUpdateCustomTargetingKeysResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BatchUpdateCustomTargetingKeysResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.customTargetingKeys != null && message.hasOwnProperty("customTargetingKeys")) {
+                                if (!Array.isArray(message.customTargetingKeys))
+                                    return "customTargetingKeys: array expected";
+                                for (var i = 0; i < message.customTargetingKeys.length; ++i) {
+                                    var error = $root.google.ads.admanager.v1.CustomTargetingKey.verify(message.customTargetingKeys[i]);
+                                    if (error)
+                                        return "customTargetingKeys." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BatchUpdateCustomTargetingKeysResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ads.admanager.v1.BatchUpdateCustomTargetingKeysResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ads.admanager.v1.BatchUpdateCustomTargetingKeysResponse} BatchUpdateCustomTargetingKeysResponse
+                         */
+                        BatchUpdateCustomTargetingKeysResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ads.admanager.v1.BatchUpdateCustomTargetingKeysResponse)
+                                return object;
+                            var message = new $root.google.ads.admanager.v1.BatchUpdateCustomTargetingKeysResponse();
+                            if (object.customTargetingKeys) {
+                                if (!Array.isArray(object.customTargetingKeys))
+                                    throw TypeError(".google.ads.admanager.v1.BatchUpdateCustomTargetingKeysResponse.customTargetingKeys: array expected");
+                                message.customTargetingKeys = [];
+                                for (var i = 0; i < object.customTargetingKeys.length; ++i) {
+                                    if (typeof object.customTargetingKeys[i] !== "object")
+                                        throw TypeError(".google.ads.admanager.v1.BatchUpdateCustomTargetingKeysResponse.customTargetingKeys: object expected");
+                                    message.customTargetingKeys[i] = $root.google.ads.admanager.v1.CustomTargetingKey.fromObject(object.customTargetingKeys[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BatchUpdateCustomTargetingKeysResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ads.admanager.v1.BatchUpdateCustomTargetingKeysResponse
+                         * @static
+                         * @param {google.ads.admanager.v1.BatchUpdateCustomTargetingKeysResponse} message BatchUpdateCustomTargetingKeysResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BatchUpdateCustomTargetingKeysResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.customTargetingKeys = [];
+                            if (message.customTargetingKeys && message.customTargetingKeys.length) {
+                                object.customTargetingKeys = [];
+                                for (var j = 0; j < message.customTargetingKeys.length; ++j)
+                                    object.customTargetingKeys[j] = $root.google.ads.admanager.v1.CustomTargetingKey.toObject(message.customTargetingKeys[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BatchUpdateCustomTargetingKeysResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.ads.admanager.v1.BatchUpdateCustomTargetingKeysResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BatchUpdateCustomTargetingKeysResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BatchUpdateCustomTargetingKeysResponse
+                         * @function getTypeUrl
+                         * @memberof google.ads.admanager.v1.BatchUpdateCustomTargetingKeysResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BatchUpdateCustomTargetingKeysResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ads.admanager.v1.BatchUpdateCustomTargetingKeysResponse";
+                        };
+    
+                        return BatchUpdateCustomTargetingKeysResponse;
+                    })();
+    
+                    v1.BatchActivateCustomTargetingKeysRequest = (function() {
+    
+                        /**
+                         * Properties of a BatchActivateCustomTargetingKeysRequest.
+                         * @memberof google.ads.admanager.v1
+                         * @interface IBatchActivateCustomTargetingKeysRequest
+                         * @property {string|null} [parent] BatchActivateCustomTargetingKeysRequest parent
+                         * @property {Array.<string>|null} [names] BatchActivateCustomTargetingKeysRequest names
+                         */
+    
+                        /**
+                         * Constructs a new BatchActivateCustomTargetingKeysRequest.
+                         * @memberof google.ads.admanager.v1
+                         * @classdesc Represents a BatchActivateCustomTargetingKeysRequest.
+                         * @implements IBatchActivateCustomTargetingKeysRequest
+                         * @constructor
+                         * @param {google.ads.admanager.v1.IBatchActivateCustomTargetingKeysRequest=} [properties] Properties to set
+                         */
+                        function BatchActivateCustomTargetingKeysRequest(properties) {
+                            this.names = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BatchActivateCustomTargetingKeysRequest parent.
+                         * @member {string} parent
+                         * @memberof google.ads.admanager.v1.BatchActivateCustomTargetingKeysRequest
+                         * @instance
+                         */
+                        BatchActivateCustomTargetingKeysRequest.prototype.parent = "";
+    
+                        /**
+                         * BatchActivateCustomTargetingKeysRequest names.
+                         * @member {Array.<string>} names
+                         * @memberof google.ads.admanager.v1.BatchActivateCustomTargetingKeysRequest
+                         * @instance
+                         */
+                        BatchActivateCustomTargetingKeysRequest.prototype.names = $util.emptyArray;
+    
+                        /**
+                         * Creates a new BatchActivateCustomTargetingKeysRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.ads.admanager.v1.BatchActivateCustomTargetingKeysRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchActivateCustomTargetingKeysRequest=} [properties] Properties to set
+                         * @returns {google.ads.admanager.v1.BatchActivateCustomTargetingKeysRequest} BatchActivateCustomTargetingKeysRequest instance
+                         */
+                        BatchActivateCustomTargetingKeysRequest.create = function create(properties) {
+                            return new BatchActivateCustomTargetingKeysRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BatchActivateCustomTargetingKeysRequest message. Does not implicitly {@link google.ads.admanager.v1.BatchActivateCustomTargetingKeysRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ads.admanager.v1.BatchActivateCustomTargetingKeysRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchActivateCustomTargetingKeysRequest} message BatchActivateCustomTargetingKeysRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchActivateCustomTargetingKeysRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.names != null && message.names.length)
+                                for (var i = 0; i < message.names.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.names[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BatchActivateCustomTargetingKeysRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchActivateCustomTargetingKeysRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ads.admanager.v1.BatchActivateCustomTargetingKeysRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchActivateCustomTargetingKeysRequest} message BatchActivateCustomTargetingKeysRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchActivateCustomTargetingKeysRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BatchActivateCustomTargetingKeysRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ads.admanager.v1.BatchActivateCustomTargetingKeysRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ads.admanager.v1.BatchActivateCustomTargetingKeysRequest} BatchActivateCustomTargetingKeysRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchActivateCustomTargetingKeysRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ads.admanager.v1.BatchActivateCustomTargetingKeysRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.names && message.names.length))
+                                            message.names = [];
+                                        message.names.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BatchActivateCustomTargetingKeysRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ads.admanager.v1.BatchActivateCustomTargetingKeysRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ads.admanager.v1.BatchActivateCustomTargetingKeysRequest} BatchActivateCustomTargetingKeysRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchActivateCustomTargetingKeysRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BatchActivateCustomTargetingKeysRequest message.
+                         * @function verify
+                         * @memberof google.ads.admanager.v1.BatchActivateCustomTargetingKeysRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BatchActivateCustomTargetingKeysRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.names != null && message.hasOwnProperty("names")) {
+                                if (!Array.isArray(message.names))
+                                    return "names: array expected";
+                                for (var i = 0; i < message.names.length; ++i)
+                                    if (!$util.isString(message.names[i]))
+                                        return "names: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BatchActivateCustomTargetingKeysRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ads.admanager.v1.BatchActivateCustomTargetingKeysRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ads.admanager.v1.BatchActivateCustomTargetingKeysRequest} BatchActivateCustomTargetingKeysRequest
+                         */
+                        BatchActivateCustomTargetingKeysRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ads.admanager.v1.BatchActivateCustomTargetingKeysRequest)
+                                return object;
+                            var message = new $root.google.ads.admanager.v1.BatchActivateCustomTargetingKeysRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.names) {
+                                if (!Array.isArray(object.names))
+                                    throw TypeError(".google.ads.admanager.v1.BatchActivateCustomTargetingKeysRequest.names: array expected");
+                                message.names = [];
+                                for (var i = 0; i < object.names.length; ++i)
+                                    message.names[i] = String(object.names[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BatchActivateCustomTargetingKeysRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ads.admanager.v1.BatchActivateCustomTargetingKeysRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.BatchActivateCustomTargetingKeysRequest} message BatchActivateCustomTargetingKeysRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BatchActivateCustomTargetingKeysRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.names = [];
+                            if (options.defaults)
+                                object.parent = "";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.names && message.names.length) {
+                                object.names = [];
+                                for (var j = 0; j < message.names.length; ++j)
+                                    object.names[j] = message.names[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BatchActivateCustomTargetingKeysRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.ads.admanager.v1.BatchActivateCustomTargetingKeysRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BatchActivateCustomTargetingKeysRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BatchActivateCustomTargetingKeysRequest
+                         * @function getTypeUrl
+                         * @memberof google.ads.admanager.v1.BatchActivateCustomTargetingKeysRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BatchActivateCustomTargetingKeysRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ads.admanager.v1.BatchActivateCustomTargetingKeysRequest";
+                        };
+    
+                        return BatchActivateCustomTargetingKeysRequest;
+                    })();
+    
+                    v1.BatchActivateCustomTargetingKeysResponse = (function() {
+    
+                        /**
+                         * Properties of a BatchActivateCustomTargetingKeysResponse.
+                         * @memberof google.ads.admanager.v1
+                         * @interface IBatchActivateCustomTargetingKeysResponse
+                         */
+    
+                        /**
+                         * Constructs a new BatchActivateCustomTargetingKeysResponse.
+                         * @memberof google.ads.admanager.v1
+                         * @classdesc Represents a BatchActivateCustomTargetingKeysResponse.
+                         * @implements IBatchActivateCustomTargetingKeysResponse
+                         * @constructor
+                         * @param {google.ads.admanager.v1.IBatchActivateCustomTargetingKeysResponse=} [properties] Properties to set
+                         */
+                        function BatchActivateCustomTargetingKeysResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new BatchActivateCustomTargetingKeysResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.ads.admanager.v1.BatchActivateCustomTargetingKeysResponse
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchActivateCustomTargetingKeysResponse=} [properties] Properties to set
+                         * @returns {google.ads.admanager.v1.BatchActivateCustomTargetingKeysResponse} BatchActivateCustomTargetingKeysResponse instance
+                         */
+                        BatchActivateCustomTargetingKeysResponse.create = function create(properties) {
+                            return new BatchActivateCustomTargetingKeysResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BatchActivateCustomTargetingKeysResponse message. Does not implicitly {@link google.ads.admanager.v1.BatchActivateCustomTargetingKeysResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ads.admanager.v1.BatchActivateCustomTargetingKeysResponse
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchActivateCustomTargetingKeysResponse} message BatchActivateCustomTargetingKeysResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchActivateCustomTargetingKeysResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BatchActivateCustomTargetingKeysResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchActivateCustomTargetingKeysResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ads.admanager.v1.BatchActivateCustomTargetingKeysResponse
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchActivateCustomTargetingKeysResponse} message BatchActivateCustomTargetingKeysResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchActivateCustomTargetingKeysResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BatchActivateCustomTargetingKeysResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ads.admanager.v1.BatchActivateCustomTargetingKeysResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ads.admanager.v1.BatchActivateCustomTargetingKeysResponse} BatchActivateCustomTargetingKeysResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchActivateCustomTargetingKeysResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ads.admanager.v1.BatchActivateCustomTargetingKeysResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BatchActivateCustomTargetingKeysResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ads.admanager.v1.BatchActivateCustomTargetingKeysResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ads.admanager.v1.BatchActivateCustomTargetingKeysResponse} BatchActivateCustomTargetingKeysResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchActivateCustomTargetingKeysResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BatchActivateCustomTargetingKeysResponse message.
+                         * @function verify
+                         * @memberof google.ads.admanager.v1.BatchActivateCustomTargetingKeysResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BatchActivateCustomTargetingKeysResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BatchActivateCustomTargetingKeysResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ads.admanager.v1.BatchActivateCustomTargetingKeysResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ads.admanager.v1.BatchActivateCustomTargetingKeysResponse} BatchActivateCustomTargetingKeysResponse
+                         */
+                        BatchActivateCustomTargetingKeysResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ads.admanager.v1.BatchActivateCustomTargetingKeysResponse)
+                                return object;
+                            return new $root.google.ads.admanager.v1.BatchActivateCustomTargetingKeysResponse();
+                        };
+    
+                        /**
+                         * Creates a plain object from a BatchActivateCustomTargetingKeysResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ads.admanager.v1.BatchActivateCustomTargetingKeysResponse
+                         * @static
+                         * @param {google.ads.admanager.v1.BatchActivateCustomTargetingKeysResponse} message BatchActivateCustomTargetingKeysResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BatchActivateCustomTargetingKeysResponse.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this BatchActivateCustomTargetingKeysResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.ads.admanager.v1.BatchActivateCustomTargetingKeysResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BatchActivateCustomTargetingKeysResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BatchActivateCustomTargetingKeysResponse
+                         * @function getTypeUrl
+                         * @memberof google.ads.admanager.v1.BatchActivateCustomTargetingKeysResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BatchActivateCustomTargetingKeysResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ads.admanager.v1.BatchActivateCustomTargetingKeysResponse";
+                        };
+    
+                        return BatchActivateCustomTargetingKeysResponse;
+                    })();
+    
+                    v1.BatchDeactivateCustomTargetingKeysRequest = (function() {
+    
+                        /**
+                         * Properties of a BatchDeactivateCustomTargetingKeysRequest.
+                         * @memberof google.ads.admanager.v1
+                         * @interface IBatchDeactivateCustomTargetingKeysRequest
+                         * @property {string|null} [parent] BatchDeactivateCustomTargetingKeysRequest parent
+                         * @property {Array.<string>|null} [names] BatchDeactivateCustomTargetingKeysRequest names
+                         */
+    
+                        /**
+                         * Constructs a new BatchDeactivateCustomTargetingKeysRequest.
+                         * @memberof google.ads.admanager.v1
+                         * @classdesc Represents a BatchDeactivateCustomTargetingKeysRequest.
+                         * @implements IBatchDeactivateCustomTargetingKeysRequest
+                         * @constructor
+                         * @param {google.ads.admanager.v1.IBatchDeactivateCustomTargetingKeysRequest=} [properties] Properties to set
+                         */
+                        function BatchDeactivateCustomTargetingKeysRequest(properties) {
+                            this.names = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BatchDeactivateCustomTargetingKeysRequest parent.
+                         * @member {string} parent
+                         * @memberof google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysRequest
+                         * @instance
+                         */
+                        BatchDeactivateCustomTargetingKeysRequest.prototype.parent = "";
+    
+                        /**
+                         * BatchDeactivateCustomTargetingKeysRequest names.
+                         * @member {Array.<string>} names
+                         * @memberof google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysRequest
+                         * @instance
+                         */
+                        BatchDeactivateCustomTargetingKeysRequest.prototype.names = $util.emptyArray;
+    
+                        /**
+                         * Creates a new BatchDeactivateCustomTargetingKeysRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchDeactivateCustomTargetingKeysRequest=} [properties] Properties to set
+                         * @returns {google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysRequest} BatchDeactivateCustomTargetingKeysRequest instance
+                         */
+                        BatchDeactivateCustomTargetingKeysRequest.create = function create(properties) {
+                            return new BatchDeactivateCustomTargetingKeysRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BatchDeactivateCustomTargetingKeysRequest message. Does not implicitly {@link google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchDeactivateCustomTargetingKeysRequest} message BatchDeactivateCustomTargetingKeysRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchDeactivateCustomTargetingKeysRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.names != null && message.names.length)
+                                for (var i = 0; i < message.names.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.names[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BatchDeactivateCustomTargetingKeysRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchDeactivateCustomTargetingKeysRequest} message BatchDeactivateCustomTargetingKeysRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchDeactivateCustomTargetingKeysRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BatchDeactivateCustomTargetingKeysRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysRequest} BatchDeactivateCustomTargetingKeysRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchDeactivateCustomTargetingKeysRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.names && message.names.length))
+                                            message.names = [];
+                                        message.names.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BatchDeactivateCustomTargetingKeysRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysRequest} BatchDeactivateCustomTargetingKeysRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchDeactivateCustomTargetingKeysRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BatchDeactivateCustomTargetingKeysRequest message.
+                         * @function verify
+                         * @memberof google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BatchDeactivateCustomTargetingKeysRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.names != null && message.hasOwnProperty("names")) {
+                                if (!Array.isArray(message.names))
+                                    return "names: array expected";
+                                for (var i = 0; i < message.names.length; ++i)
+                                    if (!$util.isString(message.names[i]))
+                                        return "names: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BatchDeactivateCustomTargetingKeysRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysRequest} BatchDeactivateCustomTargetingKeysRequest
+                         */
+                        BatchDeactivateCustomTargetingKeysRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysRequest)
+                                return object;
+                            var message = new $root.google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.names) {
+                                if (!Array.isArray(object.names))
+                                    throw TypeError(".google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysRequest.names: array expected");
+                                message.names = [];
+                                for (var i = 0; i < object.names.length; ++i)
+                                    message.names[i] = String(object.names[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BatchDeactivateCustomTargetingKeysRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysRequest} message BatchDeactivateCustomTargetingKeysRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BatchDeactivateCustomTargetingKeysRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.names = [];
+                            if (options.defaults)
+                                object.parent = "";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.names && message.names.length) {
+                                object.names = [];
+                                for (var j = 0; j < message.names.length; ++j)
+                                    object.names[j] = message.names[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BatchDeactivateCustomTargetingKeysRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BatchDeactivateCustomTargetingKeysRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BatchDeactivateCustomTargetingKeysRequest
+                         * @function getTypeUrl
+                         * @memberof google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BatchDeactivateCustomTargetingKeysRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysRequest";
+                        };
+    
+                        return BatchDeactivateCustomTargetingKeysRequest;
+                    })();
+    
+                    v1.BatchDeactivateCustomTargetingKeysResponse = (function() {
+    
+                        /**
+                         * Properties of a BatchDeactivateCustomTargetingKeysResponse.
+                         * @memberof google.ads.admanager.v1
+                         * @interface IBatchDeactivateCustomTargetingKeysResponse
+                         */
+    
+                        /**
+                         * Constructs a new BatchDeactivateCustomTargetingKeysResponse.
+                         * @memberof google.ads.admanager.v1
+                         * @classdesc Represents a BatchDeactivateCustomTargetingKeysResponse.
+                         * @implements IBatchDeactivateCustomTargetingKeysResponse
+                         * @constructor
+                         * @param {google.ads.admanager.v1.IBatchDeactivateCustomTargetingKeysResponse=} [properties] Properties to set
+                         */
+                        function BatchDeactivateCustomTargetingKeysResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new BatchDeactivateCustomTargetingKeysResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysResponse
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchDeactivateCustomTargetingKeysResponse=} [properties] Properties to set
+                         * @returns {google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysResponse} BatchDeactivateCustomTargetingKeysResponse instance
+                         */
+                        BatchDeactivateCustomTargetingKeysResponse.create = function create(properties) {
+                            return new BatchDeactivateCustomTargetingKeysResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BatchDeactivateCustomTargetingKeysResponse message. Does not implicitly {@link google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysResponse
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchDeactivateCustomTargetingKeysResponse} message BatchDeactivateCustomTargetingKeysResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchDeactivateCustomTargetingKeysResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BatchDeactivateCustomTargetingKeysResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysResponse
+                         * @static
+                         * @param {google.ads.admanager.v1.IBatchDeactivateCustomTargetingKeysResponse} message BatchDeactivateCustomTargetingKeysResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchDeactivateCustomTargetingKeysResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BatchDeactivateCustomTargetingKeysResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysResponse} BatchDeactivateCustomTargetingKeysResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchDeactivateCustomTargetingKeysResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BatchDeactivateCustomTargetingKeysResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysResponse} BatchDeactivateCustomTargetingKeysResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchDeactivateCustomTargetingKeysResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BatchDeactivateCustomTargetingKeysResponse message.
+                         * @function verify
+                         * @memberof google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BatchDeactivateCustomTargetingKeysResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BatchDeactivateCustomTargetingKeysResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysResponse} BatchDeactivateCustomTargetingKeysResponse
+                         */
+                        BatchDeactivateCustomTargetingKeysResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysResponse)
+                                return object;
+                            return new $root.google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysResponse();
+                        };
+    
+                        /**
+                         * Creates a plain object from a BatchDeactivateCustomTargetingKeysResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysResponse
+                         * @static
+                         * @param {google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysResponse} message BatchDeactivateCustomTargetingKeysResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BatchDeactivateCustomTargetingKeysResponse.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this BatchDeactivateCustomTargetingKeysResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BatchDeactivateCustomTargetingKeysResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BatchDeactivateCustomTargetingKeysResponse
+                         * @function getTypeUrl
+                         * @memberof google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BatchDeactivateCustomTargetingKeysResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysResponse";
+                        };
+    
+                        return BatchDeactivateCustomTargetingKeysResponse;
                     })();
     
                     v1.CustomTargetingValueStatusEnum = (function() {
@@ -50005,6 +55394,776 @@
                         return ListGeoTargetsResponse;
                     })();
     
+                    v1.Goal = (function() {
+    
+                        /**
+                         * Properties of a Goal.
+                         * @memberof google.ads.admanager.v1
+                         * @interface IGoal
+                         * @property {google.ads.admanager.v1.GoalTypeEnum.GoalType|null} [goalType] Goal goalType
+                         * @property {google.ads.admanager.v1.UnitTypeEnum.UnitType|null} [unitType] Goal unitType
+                         * @property {number|Long|null} [units] Goal units
+                         */
+    
+                        /**
+                         * Constructs a new Goal.
+                         * @memberof google.ads.admanager.v1
+                         * @classdesc Represents a Goal.
+                         * @implements IGoal
+                         * @constructor
+                         * @param {google.ads.admanager.v1.IGoal=} [properties] Properties to set
+                         */
+                        function Goal(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Goal goalType.
+                         * @member {google.ads.admanager.v1.GoalTypeEnum.GoalType|null|undefined} goalType
+                         * @memberof google.ads.admanager.v1.Goal
+                         * @instance
+                         */
+                        Goal.prototype.goalType = null;
+    
+                        /**
+                         * Goal unitType.
+                         * @member {google.ads.admanager.v1.UnitTypeEnum.UnitType|null|undefined} unitType
+                         * @memberof google.ads.admanager.v1.Goal
+                         * @instance
+                         */
+                        Goal.prototype.unitType = null;
+    
+                        /**
+                         * Goal units.
+                         * @member {number|Long|null|undefined} units
+                         * @memberof google.ads.admanager.v1.Goal
+                         * @instance
+                         */
+                        Goal.prototype.units = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Goal.prototype, "_goalType", {
+                            get: $util.oneOfGetter($oneOfFields = ["goalType"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Goal.prototype, "_unitType", {
+                            get: $util.oneOfGetter($oneOfFields = ["unitType"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Goal.prototype, "_units", {
+                            get: $util.oneOfGetter($oneOfFields = ["units"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new Goal instance using the specified properties.
+                         * @function create
+                         * @memberof google.ads.admanager.v1.Goal
+                         * @static
+                         * @param {google.ads.admanager.v1.IGoal=} [properties] Properties to set
+                         * @returns {google.ads.admanager.v1.Goal} Goal instance
+                         */
+                        Goal.create = function create(properties) {
+                            return new Goal(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Goal message. Does not implicitly {@link google.ads.admanager.v1.Goal.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ads.admanager.v1.Goal
+                         * @static
+                         * @param {google.ads.admanager.v1.IGoal} message Goal message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Goal.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.goalType != null && Object.hasOwnProperty.call(message, "goalType"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.goalType);
+                            if (message.unitType != null && Object.hasOwnProperty.call(message, "unitType"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.unitType);
+                            if (message.units != null && Object.hasOwnProperty.call(message, "units"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.units);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Goal message, length delimited. Does not implicitly {@link google.ads.admanager.v1.Goal.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ads.admanager.v1.Goal
+                         * @static
+                         * @param {google.ads.admanager.v1.IGoal} message Goal message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Goal.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Goal message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ads.admanager.v1.Goal
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ads.admanager.v1.Goal} Goal
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Goal.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ads.admanager.v1.Goal();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.goalType = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.unitType = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.units = reader.int64();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Goal message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ads.admanager.v1.Goal
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ads.admanager.v1.Goal} Goal
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Goal.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Goal message.
+                         * @function verify
+                         * @memberof google.ads.admanager.v1.Goal
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Goal.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.goalType != null && message.hasOwnProperty("goalType")) {
+                                properties._goalType = 1;
+                                switch (message.goalType) {
+                                default:
+                                    return "goalType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            }
+                            if (message.unitType != null && message.hasOwnProperty("unitType")) {
+                                properties._unitType = 1;
+                                switch (message.unitType) {
+                                default:
+                                    return "unitType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                    break;
+                                }
+                            }
+                            if (message.units != null && message.hasOwnProperty("units")) {
+                                properties._units = 1;
+                                if (!$util.isInteger(message.units) && !(message.units && $util.isInteger(message.units.low) && $util.isInteger(message.units.high)))
+                                    return "units: integer|Long expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Goal message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ads.admanager.v1.Goal
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ads.admanager.v1.Goal} Goal
+                         */
+                        Goal.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ads.admanager.v1.Goal)
+                                return object;
+                            var message = new $root.google.ads.admanager.v1.Goal();
+                            switch (object.goalType) {
+                            default:
+                                if (typeof object.goalType === "number") {
+                                    message.goalType = object.goalType;
+                                    break;
+                                }
+                                break;
+                            case "GOAL_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.goalType = 0;
+                                break;
+                            case "NONE":
+                            case 1:
+                                message.goalType = 1;
+                                break;
+                            case "LIFETIME":
+                            case 2:
+                                message.goalType = 2;
+                                break;
+                            case "DAILY":
+                            case 3:
+                                message.goalType = 3;
+                                break;
+                            }
+                            switch (object.unitType) {
+                            default:
+                                if (typeof object.unitType === "number") {
+                                    message.unitType = object.unitType;
+                                    break;
+                                }
+                                break;
+                            case "UNIT_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.unitType = 0;
+                                break;
+                            case "IMPRESSIONS":
+                            case 1:
+                                message.unitType = 1;
+                                break;
+                            case "CLICKS":
+                            case 2:
+                                message.unitType = 2;
+                                break;
+                            case "CLICK_THROUGH_CPA_CONVERSIONS":
+                            case 3:
+                                message.unitType = 3;
+                                break;
+                            case "VIEW_THROUGH_CPA_CONVERSIONS":
+                            case 4:
+                                message.unitType = 4;
+                                break;
+                            case "TOTAL_CPA_CONVERSIONS":
+                            case 5:
+                                message.unitType = 5;
+                                break;
+                            case "VIEWABLE_IMPRESSIONS":
+                            case 6:
+                                message.unitType = 6;
+                                break;
+                            case "IN_TARGET_IMPRESSIONS":
+                            case 7:
+                                message.unitType = 7;
+                                break;
+                            }
+                            if (object.units != null)
+                                if ($util.Long)
+                                    (message.units = $util.Long.fromValue(object.units)).unsigned = false;
+                                else if (typeof object.units === "string")
+                                    message.units = parseInt(object.units, 10);
+                                else if (typeof object.units === "number")
+                                    message.units = object.units;
+                                else if (typeof object.units === "object")
+                                    message.units = new $util.LongBits(object.units.low >>> 0, object.units.high >>> 0).toNumber();
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Goal message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ads.admanager.v1.Goal
+                         * @static
+                         * @param {google.ads.admanager.v1.Goal} message Goal
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Goal.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.goalType != null && message.hasOwnProperty("goalType")) {
+                                object.goalType = options.enums === String ? $root.google.ads.admanager.v1.GoalTypeEnum.GoalType[message.goalType] === undefined ? message.goalType : $root.google.ads.admanager.v1.GoalTypeEnum.GoalType[message.goalType] : message.goalType;
+                                if (options.oneofs)
+                                    object._goalType = "goalType";
+                            }
+                            if (message.unitType != null && message.hasOwnProperty("unitType")) {
+                                object.unitType = options.enums === String ? $root.google.ads.admanager.v1.UnitTypeEnum.UnitType[message.unitType] === undefined ? message.unitType : $root.google.ads.admanager.v1.UnitTypeEnum.UnitType[message.unitType] : message.unitType;
+                                if (options.oneofs)
+                                    object._unitType = "unitType";
+                            }
+                            if (message.units != null && message.hasOwnProperty("units")) {
+                                if (typeof message.units === "number")
+                                    object.units = options.longs === String ? String(message.units) : message.units;
+                                else
+                                    object.units = options.longs === String ? $util.Long.prototype.toString.call(message.units) : options.longs === Number ? new $util.LongBits(message.units.low >>> 0, message.units.high >>> 0).toNumber() : message.units;
+                                if (options.oneofs)
+                                    object._units = "units";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Goal to JSON.
+                         * @function toJSON
+                         * @memberof google.ads.admanager.v1.Goal
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Goal.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Goal
+                         * @function getTypeUrl
+                         * @memberof google.ads.admanager.v1.Goal
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Goal.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ads.admanager.v1.Goal";
+                        };
+    
+                        return Goal;
+                    })();
+    
+                    v1.GoalTypeEnum = (function() {
+    
+                        /**
+                         * Properties of a GoalTypeEnum.
+                         * @memberof google.ads.admanager.v1
+                         * @interface IGoalTypeEnum
+                         */
+    
+                        /**
+                         * Constructs a new GoalTypeEnum.
+                         * @memberof google.ads.admanager.v1
+                         * @classdesc Represents a GoalTypeEnum.
+                         * @implements IGoalTypeEnum
+                         * @constructor
+                         * @param {google.ads.admanager.v1.IGoalTypeEnum=} [properties] Properties to set
+                         */
+                        function GoalTypeEnum(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new GoalTypeEnum instance using the specified properties.
+                         * @function create
+                         * @memberof google.ads.admanager.v1.GoalTypeEnum
+                         * @static
+                         * @param {google.ads.admanager.v1.IGoalTypeEnum=} [properties] Properties to set
+                         * @returns {google.ads.admanager.v1.GoalTypeEnum} GoalTypeEnum instance
+                         */
+                        GoalTypeEnum.create = function create(properties) {
+                            return new GoalTypeEnum(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GoalTypeEnum message. Does not implicitly {@link google.ads.admanager.v1.GoalTypeEnum.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ads.admanager.v1.GoalTypeEnum
+                         * @static
+                         * @param {google.ads.admanager.v1.IGoalTypeEnum} message GoalTypeEnum message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GoalTypeEnum.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GoalTypeEnum message, length delimited. Does not implicitly {@link google.ads.admanager.v1.GoalTypeEnum.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ads.admanager.v1.GoalTypeEnum
+                         * @static
+                         * @param {google.ads.admanager.v1.IGoalTypeEnum} message GoalTypeEnum message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GoalTypeEnum.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GoalTypeEnum message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ads.admanager.v1.GoalTypeEnum
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ads.admanager.v1.GoalTypeEnum} GoalTypeEnum
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GoalTypeEnum.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ads.admanager.v1.GoalTypeEnum();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GoalTypeEnum message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ads.admanager.v1.GoalTypeEnum
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ads.admanager.v1.GoalTypeEnum} GoalTypeEnum
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GoalTypeEnum.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GoalTypeEnum message.
+                         * @function verify
+                         * @memberof google.ads.admanager.v1.GoalTypeEnum
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GoalTypeEnum.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GoalTypeEnum message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ads.admanager.v1.GoalTypeEnum
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ads.admanager.v1.GoalTypeEnum} GoalTypeEnum
+                         */
+                        GoalTypeEnum.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ads.admanager.v1.GoalTypeEnum)
+                                return object;
+                            return new $root.google.ads.admanager.v1.GoalTypeEnum();
+                        };
+    
+                        /**
+                         * Creates a plain object from a GoalTypeEnum message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ads.admanager.v1.GoalTypeEnum
+                         * @static
+                         * @param {google.ads.admanager.v1.GoalTypeEnum} message GoalTypeEnum
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GoalTypeEnum.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this GoalTypeEnum to JSON.
+                         * @function toJSON
+                         * @memberof google.ads.admanager.v1.GoalTypeEnum
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GoalTypeEnum.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GoalTypeEnum
+                         * @function getTypeUrl
+                         * @memberof google.ads.admanager.v1.GoalTypeEnum
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GoalTypeEnum.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ads.admanager.v1.GoalTypeEnum";
+                        };
+    
+                        /**
+                         * GoalType enum.
+                         * @name google.ads.admanager.v1.GoalTypeEnum.GoalType
+                         * @enum {number}
+                         * @property {number} GOAL_TYPE_UNSPECIFIED=0 GOAL_TYPE_UNSPECIFIED value
+                         * @property {number} NONE=1 NONE value
+                         * @property {number} LIFETIME=2 LIFETIME value
+                         * @property {number} DAILY=3 DAILY value
+                         */
+                        GoalTypeEnum.GoalType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "GOAL_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "NONE"] = 1;
+                            values[valuesById[2] = "LIFETIME"] = 2;
+                            values[valuesById[3] = "DAILY"] = 3;
+                            return values;
+                        })();
+    
+                        return GoalTypeEnum;
+                    })();
+    
+                    v1.UnitTypeEnum = (function() {
+    
+                        /**
+                         * Properties of an UnitTypeEnum.
+                         * @memberof google.ads.admanager.v1
+                         * @interface IUnitTypeEnum
+                         */
+    
+                        /**
+                         * Constructs a new UnitTypeEnum.
+                         * @memberof google.ads.admanager.v1
+                         * @classdesc Represents an UnitTypeEnum.
+                         * @implements IUnitTypeEnum
+                         * @constructor
+                         * @param {google.ads.admanager.v1.IUnitTypeEnum=} [properties] Properties to set
+                         */
+                        function UnitTypeEnum(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new UnitTypeEnum instance using the specified properties.
+                         * @function create
+                         * @memberof google.ads.admanager.v1.UnitTypeEnum
+                         * @static
+                         * @param {google.ads.admanager.v1.IUnitTypeEnum=} [properties] Properties to set
+                         * @returns {google.ads.admanager.v1.UnitTypeEnum} UnitTypeEnum instance
+                         */
+                        UnitTypeEnum.create = function create(properties) {
+                            return new UnitTypeEnum(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UnitTypeEnum message. Does not implicitly {@link google.ads.admanager.v1.UnitTypeEnum.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ads.admanager.v1.UnitTypeEnum
+                         * @static
+                         * @param {google.ads.admanager.v1.IUnitTypeEnum} message UnitTypeEnum message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UnitTypeEnum.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UnitTypeEnum message, length delimited. Does not implicitly {@link google.ads.admanager.v1.UnitTypeEnum.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ads.admanager.v1.UnitTypeEnum
+                         * @static
+                         * @param {google.ads.admanager.v1.IUnitTypeEnum} message UnitTypeEnum message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UnitTypeEnum.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UnitTypeEnum message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ads.admanager.v1.UnitTypeEnum
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ads.admanager.v1.UnitTypeEnum} UnitTypeEnum
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UnitTypeEnum.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ads.admanager.v1.UnitTypeEnum();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UnitTypeEnum message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ads.admanager.v1.UnitTypeEnum
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ads.admanager.v1.UnitTypeEnum} UnitTypeEnum
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UnitTypeEnum.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UnitTypeEnum message.
+                         * @function verify
+                         * @memberof google.ads.admanager.v1.UnitTypeEnum
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UnitTypeEnum.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UnitTypeEnum message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ads.admanager.v1.UnitTypeEnum
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ads.admanager.v1.UnitTypeEnum} UnitTypeEnum
+                         */
+                        UnitTypeEnum.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ads.admanager.v1.UnitTypeEnum)
+                                return object;
+                            return new $root.google.ads.admanager.v1.UnitTypeEnum();
+                        };
+    
+                        /**
+                         * Creates a plain object from an UnitTypeEnum message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ads.admanager.v1.UnitTypeEnum
+                         * @static
+                         * @param {google.ads.admanager.v1.UnitTypeEnum} message UnitTypeEnum
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UnitTypeEnum.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this UnitTypeEnum to JSON.
+                         * @function toJSON
+                         * @memberof google.ads.admanager.v1.UnitTypeEnum
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UnitTypeEnum.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UnitTypeEnum
+                         * @function getTypeUrl
+                         * @memberof google.ads.admanager.v1.UnitTypeEnum
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UnitTypeEnum.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ads.admanager.v1.UnitTypeEnum";
+                        };
+    
+                        /**
+                         * UnitType enum.
+                         * @name google.ads.admanager.v1.UnitTypeEnum.UnitType
+                         * @enum {number}
+                         * @property {number} UNIT_TYPE_UNSPECIFIED=0 UNIT_TYPE_UNSPECIFIED value
+                         * @property {number} IMPRESSIONS=1 IMPRESSIONS value
+                         * @property {number} CLICKS=2 CLICKS value
+                         * @property {number} CLICK_THROUGH_CPA_CONVERSIONS=3 CLICK_THROUGH_CPA_CONVERSIONS value
+                         * @property {number} VIEW_THROUGH_CPA_CONVERSIONS=4 VIEW_THROUGH_CPA_CONVERSIONS value
+                         * @property {number} TOTAL_CPA_CONVERSIONS=5 TOTAL_CPA_CONVERSIONS value
+                         * @property {number} VIEWABLE_IMPRESSIONS=6 VIEWABLE_IMPRESSIONS value
+                         * @property {number} IN_TARGET_IMPRESSIONS=7 IN_TARGET_IMPRESSIONS value
+                         */
+                        UnitTypeEnum.UnitType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "UNIT_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "IMPRESSIONS"] = 1;
+                            values[valuesById[2] = "CLICKS"] = 2;
+                            values[valuesById[3] = "CLICK_THROUGH_CPA_CONVERSIONS"] = 3;
+                            values[valuesById[4] = "VIEW_THROUGH_CPA_CONVERSIONS"] = 4;
+                            values[valuesById[5] = "TOTAL_CPA_CONVERSIONS"] = 5;
+                            values[valuesById[6] = "VIEWABLE_IMPRESSIONS"] = 6;
+                            values[valuesById[7] = "IN_TARGET_IMPRESSIONS"] = 7;
+                            return values;
+                        })();
+    
+                        return UnitTypeEnum;
+                    })();
+    
                     v1.Label = (function() {
     
                         /**
@@ -50208,6 +56367,1742 @@
                         };
     
                         return Label;
+                    })();
+    
+                    v1.LineItemTypeEnum = (function() {
+    
+                        /**
+                         * Properties of a LineItemTypeEnum.
+                         * @memberof google.ads.admanager.v1
+                         * @interface ILineItemTypeEnum
+                         */
+    
+                        /**
+                         * Constructs a new LineItemTypeEnum.
+                         * @memberof google.ads.admanager.v1
+                         * @classdesc Represents a LineItemTypeEnum.
+                         * @implements ILineItemTypeEnum
+                         * @constructor
+                         * @param {google.ads.admanager.v1.ILineItemTypeEnum=} [properties] Properties to set
+                         */
+                        function LineItemTypeEnum(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new LineItemTypeEnum instance using the specified properties.
+                         * @function create
+                         * @memberof google.ads.admanager.v1.LineItemTypeEnum
+                         * @static
+                         * @param {google.ads.admanager.v1.ILineItemTypeEnum=} [properties] Properties to set
+                         * @returns {google.ads.admanager.v1.LineItemTypeEnum} LineItemTypeEnum instance
+                         */
+                        LineItemTypeEnum.create = function create(properties) {
+                            return new LineItemTypeEnum(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified LineItemTypeEnum message. Does not implicitly {@link google.ads.admanager.v1.LineItemTypeEnum.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ads.admanager.v1.LineItemTypeEnum
+                         * @static
+                         * @param {google.ads.admanager.v1.ILineItemTypeEnum} message LineItemTypeEnum message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LineItemTypeEnum.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified LineItemTypeEnum message, length delimited. Does not implicitly {@link google.ads.admanager.v1.LineItemTypeEnum.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ads.admanager.v1.LineItemTypeEnum
+                         * @static
+                         * @param {google.ads.admanager.v1.ILineItemTypeEnum} message LineItemTypeEnum message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LineItemTypeEnum.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a LineItemTypeEnum message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ads.admanager.v1.LineItemTypeEnum
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ads.admanager.v1.LineItemTypeEnum} LineItemTypeEnum
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LineItemTypeEnum.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ads.admanager.v1.LineItemTypeEnum();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a LineItemTypeEnum message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ads.admanager.v1.LineItemTypeEnum
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ads.admanager.v1.LineItemTypeEnum} LineItemTypeEnum
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LineItemTypeEnum.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a LineItemTypeEnum message.
+                         * @function verify
+                         * @memberof google.ads.admanager.v1.LineItemTypeEnum
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        LineItemTypeEnum.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a LineItemTypeEnum message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ads.admanager.v1.LineItemTypeEnum
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ads.admanager.v1.LineItemTypeEnum} LineItemTypeEnum
+                         */
+                        LineItemTypeEnum.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ads.admanager.v1.LineItemTypeEnum)
+                                return object;
+                            return new $root.google.ads.admanager.v1.LineItemTypeEnum();
+                        };
+    
+                        /**
+                         * Creates a plain object from a LineItemTypeEnum message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ads.admanager.v1.LineItemTypeEnum
+                         * @static
+                         * @param {google.ads.admanager.v1.LineItemTypeEnum} message LineItemTypeEnum
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        LineItemTypeEnum.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this LineItemTypeEnum to JSON.
+                         * @function toJSON
+                         * @memberof google.ads.admanager.v1.LineItemTypeEnum
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        LineItemTypeEnum.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for LineItemTypeEnum
+                         * @function getTypeUrl
+                         * @memberof google.ads.admanager.v1.LineItemTypeEnum
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        LineItemTypeEnum.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ads.admanager.v1.LineItemTypeEnum";
+                        };
+    
+                        /**
+                         * LineItemType enum.
+                         * @name google.ads.admanager.v1.LineItemTypeEnum.LineItemType
+                         * @enum {number}
+                         * @property {number} LINE_ITEM_TYPE_UNSPECIFIED=0 LINE_ITEM_TYPE_UNSPECIFIED value
+                         * @property {number} SPONSORSHIP=12 SPONSORSHIP value
+                         * @property {number} STANDARD=13 STANDARD value
+                         * @property {number} NETWORK=9 NETWORK value
+                         * @property {number} BULK=4 BULK value
+                         * @property {number} PRICE_PRIORITY=11 PRICE_PRIORITY value
+                         * @property {number} HOUSE=7 HOUSE value
+                         * @property {number} CLICK_TRACKING=6 CLICK_TRACKING value
+                         * @property {number} ADSENSE=2 ADSENSE value
+                         * @property {number} AD_EXCHANGE=3 AD_EXCHANGE value
+                         * @property {number} BUMPER=5 BUMPER value
+                         * @property {number} PREFERRED_DEAL=10 PREFERRED_DEAL value
+                         * @property {number} AUDIENCE_EXTENSION=14 AUDIENCE_EXTENSION value
+                         */
+                        LineItemTypeEnum.LineItemType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "LINE_ITEM_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[12] = "SPONSORSHIP"] = 12;
+                            values[valuesById[13] = "STANDARD"] = 13;
+                            values[valuesById[9] = "NETWORK"] = 9;
+                            values[valuesById[4] = "BULK"] = 4;
+                            values[valuesById[11] = "PRICE_PRIORITY"] = 11;
+                            values[valuesById[7] = "HOUSE"] = 7;
+                            values[valuesById[6] = "CLICK_TRACKING"] = 6;
+                            values[valuesById[2] = "ADSENSE"] = 2;
+                            values[valuesById[3] = "AD_EXCHANGE"] = 3;
+                            values[valuesById[5] = "BUMPER"] = 5;
+                            values[valuesById[10] = "PREFERRED_DEAL"] = 10;
+                            values[valuesById[14] = "AUDIENCE_EXTENSION"] = 14;
+                            return values;
+                        })();
+    
+                        return LineItemTypeEnum;
+                    })();
+    
+                    v1.LineItem = (function() {
+    
+                        /**
+                         * Properties of a LineItem.
+                         * @memberof google.ads.admanager.v1
+                         * @interface ILineItem
+                         * @property {string|null} [name] LineItem name
+                         * @property {string|null} [order] LineItem order
+                         * @property {string|null} [displayName] LineItem displayName
+                         * @property {google.protobuf.ITimestamp|null} [startTime] LineItem startTime
+                         * @property {google.protobuf.ITimestamp|null} [endTime] LineItem endTime
+                         * @property {google.ads.admanager.v1.LineItemTypeEnum.LineItemType|null} [lineItemType] LineItem lineItemType
+                         * @property {google.type.IMoney|null} [rate] LineItem rate
+                         * @property {google.type.IMoney|null} [budget] LineItem budget
+                         * @property {Array.<google.ads.admanager.v1.ICustomFieldValue>|null} [customFieldValues] LineItem customFieldValues
+                         * @property {google.ads.admanager.v1.IGoal|null} [goal] LineItem goal
+                         */
+    
+                        /**
+                         * Constructs a new LineItem.
+                         * @memberof google.ads.admanager.v1
+                         * @classdesc Represents a LineItem.
+                         * @implements ILineItem
+                         * @constructor
+                         * @param {google.ads.admanager.v1.ILineItem=} [properties] Properties to set
+                         */
+                        function LineItem(properties) {
+                            this.customFieldValues = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * LineItem name.
+                         * @member {string} name
+                         * @memberof google.ads.admanager.v1.LineItem
+                         * @instance
+                         */
+                        LineItem.prototype.name = "";
+    
+                        /**
+                         * LineItem order.
+                         * @member {string|null|undefined} order
+                         * @memberof google.ads.admanager.v1.LineItem
+                         * @instance
+                         */
+                        LineItem.prototype.order = null;
+    
+                        /**
+                         * LineItem displayName.
+                         * @member {string|null|undefined} displayName
+                         * @memberof google.ads.admanager.v1.LineItem
+                         * @instance
+                         */
+                        LineItem.prototype.displayName = null;
+    
+                        /**
+                         * LineItem startTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} startTime
+                         * @memberof google.ads.admanager.v1.LineItem
+                         * @instance
+                         */
+                        LineItem.prototype.startTime = null;
+    
+                        /**
+                         * LineItem endTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                         * @memberof google.ads.admanager.v1.LineItem
+                         * @instance
+                         */
+                        LineItem.prototype.endTime = null;
+    
+                        /**
+                         * LineItem lineItemType.
+                         * @member {google.ads.admanager.v1.LineItemTypeEnum.LineItemType|null|undefined} lineItemType
+                         * @memberof google.ads.admanager.v1.LineItem
+                         * @instance
+                         */
+                        LineItem.prototype.lineItemType = null;
+    
+                        /**
+                         * LineItem rate.
+                         * @member {google.type.IMoney|null|undefined} rate
+                         * @memberof google.ads.admanager.v1.LineItem
+                         * @instance
+                         */
+                        LineItem.prototype.rate = null;
+    
+                        /**
+                         * LineItem budget.
+                         * @member {google.type.IMoney|null|undefined} budget
+                         * @memberof google.ads.admanager.v1.LineItem
+                         * @instance
+                         */
+                        LineItem.prototype.budget = null;
+    
+                        /**
+                         * LineItem customFieldValues.
+                         * @member {Array.<google.ads.admanager.v1.ICustomFieldValue>} customFieldValues
+                         * @memberof google.ads.admanager.v1.LineItem
+                         * @instance
+                         */
+                        LineItem.prototype.customFieldValues = $util.emptyArray;
+    
+                        /**
+                         * LineItem goal.
+                         * @member {google.ads.admanager.v1.IGoal|null|undefined} goal
+                         * @memberof google.ads.admanager.v1.LineItem
+                         * @instance
+                         */
+                        LineItem.prototype.goal = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(LineItem.prototype, "_order", {
+                            get: $util.oneOfGetter($oneOfFields = ["order"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(LineItem.prototype, "_displayName", {
+                            get: $util.oneOfGetter($oneOfFields = ["displayName"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(LineItem.prototype, "_startTime", {
+                            get: $util.oneOfGetter($oneOfFields = ["startTime"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(LineItem.prototype, "_endTime", {
+                            get: $util.oneOfGetter($oneOfFields = ["endTime"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(LineItem.prototype, "_lineItemType", {
+                            get: $util.oneOfGetter($oneOfFields = ["lineItemType"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(LineItem.prototype, "_rate", {
+                            get: $util.oneOfGetter($oneOfFields = ["rate"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(LineItem.prototype, "_budget", {
+                            get: $util.oneOfGetter($oneOfFields = ["budget"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(LineItem.prototype, "_goal", {
+                            get: $util.oneOfGetter($oneOfFields = ["goal"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new LineItem instance using the specified properties.
+                         * @function create
+                         * @memberof google.ads.admanager.v1.LineItem
+                         * @static
+                         * @param {google.ads.admanager.v1.ILineItem=} [properties] Properties to set
+                         * @returns {google.ads.admanager.v1.LineItem} LineItem instance
+                         */
+                        LineItem.create = function create(properties) {
+                            return new LineItem(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified LineItem message. Does not implicitly {@link google.ads.admanager.v1.LineItem.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ads.admanager.v1.LineItem
+                         * @static
+                         * @param {google.ads.admanager.v1.ILineItem} message LineItem message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LineItem.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.order != null && Object.hasOwnProperty.call(message, "order"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.order);
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.displayName);
+                            if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime"))
+                                $root.google.protobuf.Timestamp.encode(message.startTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                                $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.lineItemType != null && Object.hasOwnProperty.call(message, "lineItemType"))
+                                writer.uint32(/* id 17, wireType 0 =*/136).int32(message.lineItemType);
+                            if (message.rate != null && Object.hasOwnProperty.call(message, "rate"))
+                                $root.google.type.Money.encode(message.rate, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
+                            if (message.budget != null && Object.hasOwnProperty.call(message, "budget"))
+                                $root.google.type.Money.encode(message.budget, writer.uint32(/* id 35, wireType 2 =*/282).fork()).ldelim();
+                            if (message.customFieldValues != null && message.customFieldValues.length)
+                                for (var i = 0; i < message.customFieldValues.length; ++i)
+                                    $root.google.ads.admanager.v1.CustomFieldValue.encode(message.customFieldValues[i], writer.uint32(/* id 59, wireType 2 =*/474).fork()).ldelim();
+                            if (message.goal != null && Object.hasOwnProperty.call(message, "goal"))
+                                $root.google.ads.admanager.v1.Goal.encode(message.goal, writer.uint32(/* id 76, wireType 2 =*/610).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified LineItem message, length delimited. Does not implicitly {@link google.ads.admanager.v1.LineItem.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ads.admanager.v1.LineItem
+                         * @static
+                         * @param {google.ads.admanager.v1.ILineItem} message LineItem message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LineItem.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a LineItem message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ads.admanager.v1.LineItem
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ads.admanager.v1.LineItem} LineItem
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LineItem.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ads.admanager.v1.LineItem();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.order = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 17: {
+                                        message.lineItemType = reader.int32();
+                                        break;
+                                    }
+                                case 20: {
+                                        message.rate = $root.google.type.Money.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 35: {
+                                        message.budget = $root.google.type.Money.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 59: {
+                                        if (!(message.customFieldValues && message.customFieldValues.length))
+                                            message.customFieldValues = [];
+                                        message.customFieldValues.push($root.google.ads.admanager.v1.CustomFieldValue.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 76: {
+                                        message.goal = $root.google.ads.admanager.v1.Goal.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a LineItem message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ads.admanager.v1.LineItem
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ads.admanager.v1.LineItem} LineItem
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LineItem.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a LineItem message.
+                         * @function verify
+                         * @memberof google.ads.admanager.v1.LineItem
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        LineItem.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.order != null && message.hasOwnProperty("order")) {
+                                properties._order = 1;
+                                if (!$util.isString(message.order))
+                                    return "order: string expected";
+                            }
+                            if (message.displayName != null && message.hasOwnProperty("displayName")) {
+                                properties._displayName = 1;
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            }
+                            if (message.startTime != null && message.hasOwnProperty("startTime")) {
+                                properties._startTime = 1;
+                                {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.startTime);
+                                    if (error)
+                                        return "startTime." + error;
+                                }
+                            }
+                            if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                                properties._endTime = 1;
+                                {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                    if (error)
+                                        return "endTime." + error;
+                                }
+                            }
+                            if (message.lineItemType != null && message.hasOwnProperty("lineItemType")) {
+                                properties._lineItemType = 1;
+                                switch (message.lineItemType) {
+                                default:
+                                    return "lineItemType: enum value expected";
+                                case 0:
+                                case 12:
+                                case 13:
+                                case 9:
+                                case 4:
+                                case 11:
+                                case 7:
+                                case 6:
+                                case 2:
+                                case 3:
+                                case 5:
+                                case 10:
+                                case 14:
+                                    break;
+                                }
+                            }
+                            if (message.rate != null && message.hasOwnProperty("rate")) {
+                                properties._rate = 1;
+                                {
+                                    var error = $root.google.type.Money.verify(message.rate);
+                                    if (error)
+                                        return "rate." + error;
+                                }
+                            }
+                            if (message.budget != null && message.hasOwnProperty("budget")) {
+                                properties._budget = 1;
+                                {
+                                    var error = $root.google.type.Money.verify(message.budget);
+                                    if (error)
+                                        return "budget." + error;
+                                }
+                            }
+                            if (message.customFieldValues != null && message.hasOwnProperty("customFieldValues")) {
+                                if (!Array.isArray(message.customFieldValues))
+                                    return "customFieldValues: array expected";
+                                for (var i = 0; i < message.customFieldValues.length; ++i) {
+                                    var error = $root.google.ads.admanager.v1.CustomFieldValue.verify(message.customFieldValues[i]);
+                                    if (error)
+                                        return "customFieldValues." + error;
+                                }
+                            }
+                            if (message.goal != null && message.hasOwnProperty("goal")) {
+                                properties._goal = 1;
+                                {
+                                    var error = $root.google.ads.admanager.v1.Goal.verify(message.goal);
+                                    if (error)
+                                        return "goal." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a LineItem message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ads.admanager.v1.LineItem
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ads.admanager.v1.LineItem} LineItem
+                         */
+                        LineItem.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ads.admanager.v1.LineItem)
+                                return object;
+                            var message = new $root.google.ads.admanager.v1.LineItem();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.order != null)
+                                message.order = String(object.order);
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.startTime != null) {
+                                if (typeof object.startTime !== "object")
+                                    throw TypeError(".google.ads.admanager.v1.LineItem.startTime: object expected");
+                                message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime);
+                            }
+                            if (object.endTime != null) {
+                                if (typeof object.endTime !== "object")
+                                    throw TypeError(".google.ads.admanager.v1.LineItem.endTime: object expected");
+                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                            }
+                            switch (object.lineItemType) {
+                            default:
+                                if (typeof object.lineItemType === "number") {
+                                    message.lineItemType = object.lineItemType;
+                                    break;
+                                }
+                                break;
+                            case "LINE_ITEM_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.lineItemType = 0;
+                                break;
+                            case "SPONSORSHIP":
+                            case 12:
+                                message.lineItemType = 12;
+                                break;
+                            case "STANDARD":
+                            case 13:
+                                message.lineItemType = 13;
+                                break;
+                            case "NETWORK":
+                            case 9:
+                                message.lineItemType = 9;
+                                break;
+                            case "BULK":
+                            case 4:
+                                message.lineItemType = 4;
+                                break;
+                            case "PRICE_PRIORITY":
+                            case 11:
+                                message.lineItemType = 11;
+                                break;
+                            case "HOUSE":
+                            case 7:
+                                message.lineItemType = 7;
+                                break;
+                            case "CLICK_TRACKING":
+                            case 6:
+                                message.lineItemType = 6;
+                                break;
+                            case "ADSENSE":
+                            case 2:
+                                message.lineItemType = 2;
+                                break;
+                            case "AD_EXCHANGE":
+                            case 3:
+                                message.lineItemType = 3;
+                                break;
+                            case "BUMPER":
+                            case 5:
+                                message.lineItemType = 5;
+                                break;
+                            case "PREFERRED_DEAL":
+                            case 10:
+                                message.lineItemType = 10;
+                                break;
+                            case "AUDIENCE_EXTENSION":
+                            case 14:
+                                message.lineItemType = 14;
+                                break;
+                            }
+                            if (object.rate != null) {
+                                if (typeof object.rate !== "object")
+                                    throw TypeError(".google.ads.admanager.v1.LineItem.rate: object expected");
+                                message.rate = $root.google.type.Money.fromObject(object.rate);
+                            }
+                            if (object.budget != null) {
+                                if (typeof object.budget !== "object")
+                                    throw TypeError(".google.ads.admanager.v1.LineItem.budget: object expected");
+                                message.budget = $root.google.type.Money.fromObject(object.budget);
+                            }
+                            if (object.customFieldValues) {
+                                if (!Array.isArray(object.customFieldValues))
+                                    throw TypeError(".google.ads.admanager.v1.LineItem.customFieldValues: array expected");
+                                message.customFieldValues = [];
+                                for (var i = 0; i < object.customFieldValues.length; ++i) {
+                                    if (typeof object.customFieldValues[i] !== "object")
+                                        throw TypeError(".google.ads.admanager.v1.LineItem.customFieldValues: object expected");
+                                    message.customFieldValues[i] = $root.google.ads.admanager.v1.CustomFieldValue.fromObject(object.customFieldValues[i]);
+                                }
+                            }
+                            if (object.goal != null) {
+                                if (typeof object.goal !== "object")
+                                    throw TypeError(".google.ads.admanager.v1.LineItem.goal: object expected");
+                                message.goal = $root.google.ads.admanager.v1.Goal.fromObject(object.goal);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a LineItem message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ads.admanager.v1.LineItem
+                         * @static
+                         * @param {google.ads.admanager.v1.LineItem} message LineItem
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        LineItem.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.customFieldValues = [];
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.order != null && message.hasOwnProperty("order")) {
+                                object.order = message.order;
+                                if (options.oneofs)
+                                    object._order = "order";
+                            }
+                            if (message.displayName != null && message.hasOwnProperty("displayName")) {
+                                object.displayName = message.displayName;
+                                if (options.oneofs)
+                                    object._displayName = "displayName";
+                            }
+                            if (message.startTime != null && message.hasOwnProperty("startTime")) {
+                                object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
+                                if (options.oneofs)
+                                    object._startTime = "startTime";
+                            }
+                            if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                                object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                                if (options.oneofs)
+                                    object._endTime = "endTime";
+                            }
+                            if (message.lineItemType != null && message.hasOwnProperty("lineItemType")) {
+                                object.lineItemType = options.enums === String ? $root.google.ads.admanager.v1.LineItemTypeEnum.LineItemType[message.lineItemType] === undefined ? message.lineItemType : $root.google.ads.admanager.v1.LineItemTypeEnum.LineItemType[message.lineItemType] : message.lineItemType;
+                                if (options.oneofs)
+                                    object._lineItemType = "lineItemType";
+                            }
+                            if (message.rate != null && message.hasOwnProperty("rate")) {
+                                object.rate = $root.google.type.Money.toObject(message.rate, options);
+                                if (options.oneofs)
+                                    object._rate = "rate";
+                            }
+                            if (message.budget != null && message.hasOwnProperty("budget")) {
+                                object.budget = $root.google.type.Money.toObject(message.budget, options);
+                                if (options.oneofs)
+                                    object._budget = "budget";
+                            }
+                            if (message.customFieldValues && message.customFieldValues.length) {
+                                object.customFieldValues = [];
+                                for (var j = 0; j < message.customFieldValues.length; ++j)
+                                    object.customFieldValues[j] = $root.google.ads.admanager.v1.CustomFieldValue.toObject(message.customFieldValues[j], options);
+                            }
+                            if (message.goal != null && message.hasOwnProperty("goal")) {
+                                object.goal = $root.google.ads.admanager.v1.Goal.toObject(message.goal, options);
+                                if (options.oneofs)
+                                    object._goal = "goal";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this LineItem to JSON.
+                         * @function toJSON
+                         * @memberof google.ads.admanager.v1.LineItem
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        LineItem.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for LineItem
+                         * @function getTypeUrl
+                         * @memberof google.ads.admanager.v1.LineItem
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        LineItem.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ads.admanager.v1.LineItem";
+                        };
+    
+                        return LineItem;
+                    })();
+    
+                    v1.LineItemService = (function() {
+    
+                        /**
+                         * Constructs a new LineItemService service.
+                         * @memberof google.ads.admanager.v1
+                         * @classdesc Represents a LineItemService
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function LineItemService(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (LineItemService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = LineItemService;
+    
+                        /**
+                         * Creates new LineItemService service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.ads.admanager.v1.LineItemService
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {LineItemService} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        LineItemService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.ads.admanager.v1.LineItemService|getLineItem}.
+                         * @memberof google.ads.admanager.v1.LineItemService
+                         * @typedef GetLineItemCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.ads.admanager.v1.LineItem} [response] LineItem
+                         */
+    
+                        /**
+                         * Calls GetLineItem.
+                         * @function getLineItem
+                         * @memberof google.ads.admanager.v1.LineItemService
+                         * @instance
+                         * @param {google.ads.admanager.v1.IGetLineItemRequest} request GetLineItemRequest message or plain object
+                         * @param {google.ads.admanager.v1.LineItemService.GetLineItemCallback} callback Node-style callback called with the error, if any, and LineItem
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(LineItemService.prototype.getLineItem = function getLineItem(request, callback) {
+                            return this.rpcCall(getLineItem, $root.google.ads.admanager.v1.GetLineItemRequest, $root.google.ads.admanager.v1.LineItem, request, callback);
+                        }, "name", { value: "GetLineItem" });
+    
+                        /**
+                         * Calls GetLineItem.
+                         * @function getLineItem
+                         * @memberof google.ads.admanager.v1.LineItemService
+                         * @instance
+                         * @param {google.ads.admanager.v1.IGetLineItemRequest} request GetLineItemRequest message or plain object
+                         * @returns {Promise<google.ads.admanager.v1.LineItem>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.ads.admanager.v1.LineItemService|listLineItems}.
+                         * @memberof google.ads.admanager.v1.LineItemService
+                         * @typedef ListLineItemsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.ads.admanager.v1.ListLineItemsResponse} [response] ListLineItemsResponse
+                         */
+    
+                        /**
+                         * Calls ListLineItems.
+                         * @function listLineItems
+                         * @memberof google.ads.admanager.v1.LineItemService
+                         * @instance
+                         * @param {google.ads.admanager.v1.IListLineItemsRequest} request ListLineItemsRequest message or plain object
+                         * @param {google.ads.admanager.v1.LineItemService.ListLineItemsCallback} callback Node-style callback called with the error, if any, and ListLineItemsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(LineItemService.prototype.listLineItems = function listLineItems(request, callback) {
+                            return this.rpcCall(listLineItems, $root.google.ads.admanager.v1.ListLineItemsRequest, $root.google.ads.admanager.v1.ListLineItemsResponse, request, callback);
+                        }, "name", { value: "ListLineItems" });
+    
+                        /**
+                         * Calls ListLineItems.
+                         * @function listLineItems
+                         * @memberof google.ads.admanager.v1.LineItemService
+                         * @instance
+                         * @param {google.ads.admanager.v1.IListLineItemsRequest} request ListLineItemsRequest message or plain object
+                         * @returns {Promise<google.ads.admanager.v1.ListLineItemsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        return LineItemService;
+                    })();
+    
+                    v1.GetLineItemRequest = (function() {
+    
+                        /**
+                         * Properties of a GetLineItemRequest.
+                         * @memberof google.ads.admanager.v1
+                         * @interface IGetLineItemRequest
+                         * @property {string|null} [name] GetLineItemRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetLineItemRequest.
+                         * @memberof google.ads.admanager.v1
+                         * @classdesc Represents a GetLineItemRequest.
+                         * @implements IGetLineItemRequest
+                         * @constructor
+                         * @param {google.ads.admanager.v1.IGetLineItemRequest=} [properties] Properties to set
+                         */
+                        function GetLineItemRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetLineItemRequest name.
+                         * @member {string} name
+                         * @memberof google.ads.admanager.v1.GetLineItemRequest
+                         * @instance
+                         */
+                        GetLineItemRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetLineItemRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.ads.admanager.v1.GetLineItemRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.IGetLineItemRequest=} [properties] Properties to set
+                         * @returns {google.ads.admanager.v1.GetLineItemRequest} GetLineItemRequest instance
+                         */
+                        GetLineItemRequest.create = function create(properties) {
+                            return new GetLineItemRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetLineItemRequest message. Does not implicitly {@link google.ads.admanager.v1.GetLineItemRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ads.admanager.v1.GetLineItemRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.IGetLineItemRequest} message GetLineItemRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetLineItemRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetLineItemRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.GetLineItemRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ads.admanager.v1.GetLineItemRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.IGetLineItemRequest} message GetLineItemRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetLineItemRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetLineItemRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ads.admanager.v1.GetLineItemRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ads.admanager.v1.GetLineItemRequest} GetLineItemRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetLineItemRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ads.admanager.v1.GetLineItemRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetLineItemRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ads.admanager.v1.GetLineItemRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ads.admanager.v1.GetLineItemRequest} GetLineItemRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetLineItemRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetLineItemRequest message.
+                         * @function verify
+                         * @memberof google.ads.admanager.v1.GetLineItemRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetLineItemRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetLineItemRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ads.admanager.v1.GetLineItemRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ads.admanager.v1.GetLineItemRequest} GetLineItemRequest
+                         */
+                        GetLineItemRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ads.admanager.v1.GetLineItemRequest)
+                                return object;
+                            var message = new $root.google.ads.admanager.v1.GetLineItemRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetLineItemRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ads.admanager.v1.GetLineItemRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.GetLineItemRequest} message GetLineItemRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetLineItemRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetLineItemRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.ads.admanager.v1.GetLineItemRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetLineItemRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetLineItemRequest
+                         * @function getTypeUrl
+                         * @memberof google.ads.admanager.v1.GetLineItemRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetLineItemRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ads.admanager.v1.GetLineItemRequest";
+                        };
+    
+                        return GetLineItemRequest;
+                    })();
+    
+                    v1.ListLineItemsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListLineItemsRequest.
+                         * @memberof google.ads.admanager.v1
+                         * @interface IListLineItemsRequest
+                         * @property {string|null} [parent] ListLineItemsRequest parent
+                         * @property {number|null} [pageSize] ListLineItemsRequest pageSize
+                         * @property {string|null} [pageToken] ListLineItemsRequest pageToken
+                         * @property {string|null} [filter] ListLineItemsRequest filter
+                         * @property {string|null} [orderBy] ListLineItemsRequest orderBy
+                         * @property {number|null} [skip] ListLineItemsRequest skip
+                         */
+    
+                        /**
+                         * Constructs a new ListLineItemsRequest.
+                         * @memberof google.ads.admanager.v1
+                         * @classdesc Represents a ListLineItemsRequest.
+                         * @implements IListLineItemsRequest
+                         * @constructor
+                         * @param {google.ads.admanager.v1.IListLineItemsRequest=} [properties] Properties to set
+                         */
+                        function ListLineItemsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListLineItemsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.ads.admanager.v1.ListLineItemsRequest
+                         * @instance
+                         */
+                        ListLineItemsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListLineItemsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.ads.admanager.v1.ListLineItemsRequest
+                         * @instance
+                         */
+                        ListLineItemsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListLineItemsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.ads.admanager.v1.ListLineItemsRequest
+                         * @instance
+                         */
+                        ListLineItemsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListLineItemsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.ads.admanager.v1.ListLineItemsRequest
+                         * @instance
+                         */
+                        ListLineItemsRequest.prototype.filter = "";
+    
+                        /**
+                         * ListLineItemsRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.ads.admanager.v1.ListLineItemsRequest
+                         * @instance
+                         */
+                        ListLineItemsRequest.prototype.orderBy = "";
+    
+                        /**
+                         * ListLineItemsRequest skip.
+                         * @member {number} skip
+                         * @memberof google.ads.admanager.v1.ListLineItemsRequest
+                         * @instance
+                         */
+                        ListLineItemsRequest.prototype.skip = 0;
+    
+                        /**
+                         * Creates a new ListLineItemsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.ads.admanager.v1.ListLineItemsRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.IListLineItemsRequest=} [properties] Properties to set
+                         * @returns {google.ads.admanager.v1.ListLineItemsRequest} ListLineItemsRequest instance
+                         */
+                        ListLineItemsRequest.create = function create(properties) {
+                            return new ListLineItemsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListLineItemsRequest message. Does not implicitly {@link google.ads.admanager.v1.ListLineItemsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ads.admanager.v1.ListLineItemsRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.IListLineItemsRequest} message ListLineItemsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListLineItemsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            if (message.skip != null && Object.hasOwnProperty.call(message, "skip"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.skip);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListLineItemsRequest message, length delimited. Does not implicitly {@link google.ads.admanager.v1.ListLineItemsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ads.admanager.v1.ListLineItemsRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.IListLineItemsRequest} message ListLineItemsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListLineItemsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListLineItemsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ads.admanager.v1.ListLineItemsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ads.admanager.v1.ListLineItemsRequest} ListLineItemsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListLineItemsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ads.admanager.v1.ListLineItemsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.skip = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListLineItemsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ads.admanager.v1.ListLineItemsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ads.admanager.v1.ListLineItemsRequest} ListLineItemsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListLineItemsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListLineItemsRequest message.
+                         * @function verify
+                         * @memberof google.ads.admanager.v1.ListLineItemsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListLineItemsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            if (message.skip != null && message.hasOwnProperty("skip"))
+                                if (!$util.isInteger(message.skip))
+                                    return "skip: integer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListLineItemsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ads.admanager.v1.ListLineItemsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ads.admanager.v1.ListLineItemsRequest} ListLineItemsRequest
+                         */
+                        ListLineItemsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ads.admanager.v1.ListLineItemsRequest)
+                                return object;
+                            var message = new $root.google.ads.admanager.v1.ListLineItemsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            if (object.skip != null)
+                                message.skip = object.skip | 0;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListLineItemsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ads.admanager.v1.ListLineItemsRequest
+                         * @static
+                         * @param {google.ads.admanager.v1.ListLineItemsRequest} message ListLineItemsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListLineItemsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                                object.skip = 0;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            if (message.skip != null && message.hasOwnProperty("skip"))
+                                object.skip = message.skip;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListLineItemsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.ads.admanager.v1.ListLineItemsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListLineItemsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListLineItemsRequest
+                         * @function getTypeUrl
+                         * @memberof google.ads.admanager.v1.ListLineItemsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListLineItemsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ads.admanager.v1.ListLineItemsRequest";
+                        };
+    
+                        return ListLineItemsRequest;
+                    })();
+    
+                    v1.ListLineItemsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListLineItemsResponse.
+                         * @memberof google.ads.admanager.v1
+                         * @interface IListLineItemsResponse
+                         * @property {Array.<google.ads.admanager.v1.ILineItem>|null} [lineItems] ListLineItemsResponse lineItems
+                         * @property {string|null} [nextPageToken] ListLineItemsResponse nextPageToken
+                         * @property {number|null} [totalSize] ListLineItemsResponse totalSize
+                         */
+    
+                        /**
+                         * Constructs a new ListLineItemsResponse.
+                         * @memberof google.ads.admanager.v1
+                         * @classdesc Represents a ListLineItemsResponse.
+                         * @implements IListLineItemsResponse
+                         * @constructor
+                         * @param {google.ads.admanager.v1.IListLineItemsResponse=} [properties] Properties to set
+                         */
+                        function ListLineItemsResponse(properties) {
+                            this.lineItems = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListLineItemsResponse lineItems.
+                         * @member {Array.<google.ads.admanager.v1.ILineItem>} lineItems
+                         * @memberof google.ads.admanager.v1.ListLineItemsResponse
+                         * @instance
+                         */
+                        ListLineItemsResponse.prototype.lineItems = $util.emptyArray;
+    
+                        /**
+                         * ListLineItemsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.ads.admanager.v1.ListLineItemsResponse
+                         * @instance
+                         */
+                        ListLineItemsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListLineItemsResponse totalSize.
+                         * @member {number} totalSize
+                         * @memberof google.ads.admanager.v1.ListLineItemsResponse
+                         * @instance
+                         */
+                        ListLineItemsResponse.prototype.totalSize = 0;
+    
+                        /**
+                         * Creates a new ListLineItemsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.ads.admanager.v1.ListLineItemsResponse
+                         * @static
+                         * @param {google.ads.admanager.v1.IListLineItemsResponse=} [properties] Properties to set
+                         * @returns {google.ads.admanager.v1.ListLineItemsResponse} ListLineItemsResponse instance
+                         */
+                        ListLineItemsResponse.create = function create(properties) {
+                            return new ListLineItemsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListLineItemsResponse message. Does not implicitly {@link google.ads.admanager.v1.ListLineItemsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ads.admanager.v1.ListLineItemsResponse
+                         * @static
+                         * @param {google.ads.admanager.v1.IListLineItemsResponse} message ListLineItemsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListLineItemsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.lineItems != null && message.lineItems.length)
+                                for (var i = 0; i < message.lineItems.length; ++i)
+                                    $root.google.ads.admanager.v1.LineItem.encode(message.lineItems[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.totalSize != null && Object.hasOwnProperty.call(message, "totalSize"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.totalSize);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListLineItemsResponse message, length delimited. Does not implicitly {@link google.ads.admanager.v1.ListLineItemsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ads.admanager.v1.ListLineItemsResponse
+                         * @static
+                         * @param {google.ads.admanager.v1.IListLineItemsResponse} message ListLineItemsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListLineItemsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListLineItemsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ads.admanager.v1.ListLineItemsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ads.admanager.v1.ListLineItemsResponse} ListLineItemsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListLineItemsResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ads.admanager.v1.ListLineItemsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.lineItems && message.lineItems.length))
+                                            message.lineItems = [];
+                                        message.lineItems.push($root.google.ads.admanager.v1.LineItem.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.totalSize = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListLineItemsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ads.admanager.v1.ListLineItemsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ads.admanager.v1.ListLineItemsResponse} ListLineItemsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListLineItemsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListLineItemsResponse message.
+                         * @function verify
+                         * @memberof google.ads.admanager.v1.ListLineItemsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListLineItemsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.lineItems != null && message.hasOwnProperty("lineItems")) {
+                                if (!Array.isArray(message.lineItems))
+                                    return "lineItems: array expected";
+                                for (var i = 0; i < message.lineItems.length; ++i) {
+                                    var error = $root.google.ads.admanager.v1.LineItem.verify(message.lineItems[i]);
+                                    if (error)
+                                        return "lineItems." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.totalSize != null && message.hasOwnProperty("totalSize"))
+                                if (!$util.isInteger(message.totalSize))
+                                    return "totalSize: integer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListLineItemsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ads.admanager.v1.ListLineItemsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ads.admanager.v1.ListLineItemsResponse} ListLineItemsResponse
+                         */
+                        ListLineItemsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ads.admanager.v1.ListLineItemsResponse)
+                                return object;
+                            var message = new $root.google.ads.admanager.v1.ListLineItemsResponse();
+                            if (object.lineItems) {
+                                if (!Array.isArray(object.lineItems))
+                                    throw TypeError(".google.ads.admanager.v1.ListLineItemsResponse.lineItems: array expected");
+                                message.lineItems = [];
+                                for (var i = 0; i < object.lineItems.length; ++i) {
+                                    if (typeof object.lineItems[i] !== "object")
+                                        throw TypeError(".google.ads.admanager.v1.ListLineItemsResponse.lineItems: object expected");
+                                    message.lineItems[i] = $root.google.ads.admanager.v1.LineItem.fromObject(object.lineItems[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.totalSize != null)
+                                message.totalSize = object.totalSize | 0;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListLineItemsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ads.admanager.v1.ListLineItemsResponse
+                         * @static
+                         * @param {google.ads.admanager.v1.ListLineItemsResponse} message ListLineItemsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListLineItemsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.lineItems = [];
+                            if (options.defaults) {
+                                object.nextPageToken = "";
+                                object.totalSize = 0;
+                            }
+                            if (message.lineItems && message.lineItems.length) {
+                                object.lineItems = [];
+                                for (var j = 0; j < message.lineItems.length; ++j)
+                                    object.lineItems[j] = $root.google.ads.admanager.v1.LineItem.toObject(message.lineItems[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.totalSize != null && message.hasOwnProperty("totalSize"))
+                                object.totalSize = message.totalSize;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListLineItemsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.ads.admanager.v1.ListLineItemsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListLineItemsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListLineItemsResponse
+                         * @function getTypeUrl
+                         * @memberof google.ads.admanager.v1.ListLineItemsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListLineItemsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ads.admanager.v1.ListLineItemsResponse";
+                        };
+    
+                        return ListLineItemsResponse;
                     })();
     
                     v1.LiveStreamEvent = (function() {
@@ -53987,43 +61882,43 @@
     
                         /**
                          * Network displayName.
-                         * @member {string} displayName
+                         * @member {string|null|undefined} displayName
                          * @memberof google.ads.admanager.v1.Network
                          * @instance
                          */
-                        Network.prototype.displayName = "";
+                        Network.prototype.displayName = null;
     
                         /**
                          * Network networkCode.
-                         * @member {string} networkCode
+                         * @member {string|null|undefined} networkCode
                          * @memberof google.ads.admanager.v1.Network
                          * @instance
                          */
-                        Network.prototype.networkCode = "";
+                        Network.prototype.networkCode = null;
     
                         /**
                          * Network propertyCode.
-                         * @member {string} propertyCode
+                         * @member {string|null|undefined} propertyCode
                          * @memberof google.ads.admanager.v1.Network
                          * @instance
                          */
-                        Network.prototype.propertyCode = "";
+                        Network.prototype.propertyCode = null;
     
                         /**
                          * Network timeZone.
-                         * @member {string} timeZone
+                         * @member {string|null|undefined} timeZone
                          * @memberof google.ads.admanager.v1.Network
                          * @instance
                          */
-                        Network.prototype.timeZone = "";
+                        Network.prototype.timeZone = null;
     
                         /**
                          * Network currencyCode.
-                         * @member {string} currencyCode
+                         * @member {string|null|undefined} currencyCode
                          * @memberof google.ads.admanager.v1.Network
                          * @instance
                          */
-                        Network.prototype.currencyCode = "";
+                        Network.prototype.currencyCode = null;
     
                         /**
                          * Network secondaryCurrencyCodes.
@@ -54035,27 +61930,78 @@
     
                         /**
                          * Network effectiveRootAdUnit.
-                         * @member {string} effectiveRootAdUnit
+                         * @member {string|null|undefined} effectiveRootAdUnit
                          * @memberof google.ads.admanager.v1.Network
                          * @instance
                          */
-                        Network.prototype.effectiveRootAdUnit = "";
+                        Network.prototype.effectiveRootAdUnit = null;
     
                         /**
                          * Network testNetwork.
-                         * @member {boolean} testNetwork
+                         * @member {boolean|null|undefined} testNetwork
                          * @memberof google.ads.admanager.v1.Network
                          * @instance
                          */
-                        Network.prototype.testNetwork = false;
+                        Network.prototype.testNetwork = null;
     
                         /**
                          * Network networkId.
-                         * @member {number|Long} networkId
+                         * @member {number|Long|null|undefined} networkId
                          * @memberof google.ads.admanager.v1.Network
                          * @instance
                          */
-                        Network.prototype.networkId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+                        Network.prototype.networkId = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Network.prototype, "_displayName", {
+                            get: $util.oneOfGetter($oneOfFields = ["displayName"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Network.prototype, "_networkCode", {
+                            get: $util.oneOfGetter($oneOfFields = ["networkCode"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Network.prototype, "_propertyCode", {
+                            get: $util.oneOfGetter($oneOfFields = ["propertyCode"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Network.prototype, "_timeZone", {
+                            get: $util.oneOfGetter($oneOfFields = ["timeZone"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Network.prototype, "_currencyCode", {
+                            get: $util.oneOfGetter($oneOfFields = ["currencyCode"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Network.prototype, "_effectiveRootAdUnit", {
+                            get: $util.oneOfGetter($oneOfFields = ["effectiveRootAdUnit"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Network.prototype, "_testNetwork", {
+                            get: $util.oneOfGetter($oneOfFields = ["testNetwork"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Network.prototype, "_networkId", {
+                            get: $util.oneOfGetter($oneOfFields = ["networkId"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new Network instance using the specified properties.
@@ -54215,24 +62161,35 @@
                         Network.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
-                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                            if (message.displayName != null && message.hasOwnProperty("displayName")) {
+                                properties._displayName = 1;
                                 if (!$util.isString(message.displayName))
                                     return "displayName: string expected";
-                            if (message.networkCode != null && message.hasOwnProperty("networkCode"))
+                            }
+                            if (message.networkCode != null && message.hasOwnProperty("networkCode")) {
+                                properties._networkCode = 1;
                                 if (!$util.isString(message.networkCode))
                                     return "networkCode: string expected";
-                            if (message.propertyCode != null && message.hasOwnProperty("propertyCode"))
+                            }
+                            if (message.propertyCode != null && message.hasOwnProperty("propertyCode")) {
+                                properties._propertyCode = 1;
                                 if (!$util.isString(message.propertyCode))
                                     return "propertyCode: string expected";
-                            if (message.timeZone != null && message.hasOwnProperty("timeZone"))
+                            }
+                            if (message.timeZone != null && message.hasOwnProperty("timeZone")) {
+                                properties._timeZone = 1;
                                 if (!$util.isString(message.timeZone))
                                     return "timeZone: string expected";
-                            if (message.currencyCode != null && message.hasOwnProperty("currencyCode"))
+                            }
+                            if (message.currencyCode != null && message.hasOwnProperty("currencyCode")) {
+                                properties._currencyCode = 1;
                                 if (!$util.isString(message.currencyCode))
                                     return "currencyCode: string expected";
+                            }
                             if (message.secondaryCurrencyCodes != null && message.hasOwnProperty("secondaryCurrencyCodes")) {
                                 if (!Array.isArray(message.secondaryCurrencyCodes))
                                     return "secondaryCurrencyCodes: array expected";
@@ -54240,15 +62197,21 @@
                                     if (!$util.isString(message.secondaryCurrencyCodes[i]))
                                         return "secondaryCurrencyCodes: string[] expected";
                             }
-                            if (message.effectiveRootAdUnit != null && message.hasOwnProperty("effectiveRootAdUnit"))
+                            if (message.effectiveRootAdUnit != null && message.hasOwnProperty("effectiveRootAdUnit")) {
+                                properties._effectiveRootAdUnit = 1;
                                 if (!$util.isString(message.effectiveRootAdUnit))
                                     return "effectiveRootAdUnit: string expected";
-                            if (message.testNetwork != null && message.hasOwnProperty("testNetwork"))
+                            }
+                            if (message.testNetwork != null && message.hasOwnProperty("testNetwork")) {
+                                properties._testNetwork = 1;
                                 if (typeof message.testNetwork !== "boolean")
                                     return "testNetwork: boolean expected";
-                            if (message.networkId != null && message.hasOwnProperty("networkId"))
+                            }
+                            if (message.networkId != null && message.hasOwnProperty("networkId")) {
+                                properties._networkId = 1;
                                 if (!$util.isInteger(message.networkId) && !(message.networkId && $util.isInteger(message.networkId.low) && $util.isInteger(message.networkId.high)))
                                     return "networkId: integer|Long expected";
+                            }
                             return null;
                         };
     
@@ -54314,47 +62277,58 @@
                             var object = {};
                             if (options.arrays || options.defaults)
                                 object.secondaryCurrencyCodes = [];
-                            if (options.defaults) {
+                            if (options.defaults)
                                 object.name = "";
-                                object.displayName = "";
-                                object.networkCode = "";
-                                object.propertyCode = "";
-                                object.timeZone = "";
-                                object.currencyCode = "";
-                                object.effectiveRootAdUnit = "";
-                                object.testNetwork = false;
-                                if ($util.Long) {
-                                    var long = new $util.Long(0, 0, false);
-                                    object.networkId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                                } else
-                                    object.networkId = options.longs === String ? "0" : 0;
-                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
-                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                            if (message.displayName != null && message.hasOwnProperty("displayName")) {
                                 object.displayName = message.displayName;
-                            if (message.networkCode != null && message.hasOwnProperty("networkCode"))
+                                if (options.oneofs)
+                                    object._displayName = "displayName";
+                            }
+                            if (message.networkCode != null && message.hasOwnProperty("networkCode")) {
                                 object.networkCode = message.networkCode;
-                            if (message.propertyCode != null && message.hasOwnProperty("propertyCode"))
+                                if (options.oneofs)
+                                    object._networkCode = "networkCode";
+                            }
+                            if (message.propertyCode != null && message.hasOwnProperty("propertyCode")) {
                                 object.propertyCode = message.propertyCode;
-                            if (message.timeZone != null && message.hasOwnProperty("timeZone"))
+                                if (options.oneofs)
+                                    object._propertyCode = "propertyCode";
+                            }
+                            if (message.timeZone != null && message.hasOwnProperty("timeZone")) {
                                 object.timeZone = message.timeZone;
-                            if (message.currencyCode != null && message.hasOwnProperty("currencyCode"))
+                                if (options.oneofs)
+                                    object._timeZone = "timeZone";
+                            }
+                            if (message.currencyCode != null && message.hasOwnProperty("currencyCode")) {
                                 object.currencyCode = message.currencyCode;
+                                if (options.oneofs)
+                                    object._currencyCode = "currencyCode";
+                            }
                             if (message.secondaryCurrencyCodes && message.secondaryCurrencyCodes.length) {
                                 object.secondaryCurrencyCodes = [];
                                 for (var j = 0; j < message.secondaryCurrencyCodes.length; ++j)
                                     object.secondaryCurrencyCodes[j] = message.secondaryCurrencyCodes[j];
                             }
-                            if (message.effectiveRootAdUnit != null && message.hasOwnProperty("effectiveRootAdUnit"))
+                            if (message.effectiveRootAdUnit != null && message.hasOwnProperty("effectiveRootAdUnit")) {
                                 object.effectiveRootAdUnit = message.effectiveRootAdUnit;
-                            if (message.testNetwork != null && message.hasOwnProperty("testNetwork"))
+                                if (options.oneofs)
+                                    object._effectiveRootAdUnit = "effectiveRootAdUnit";
+                            }
+                            if (message.testNetwork != null && message.hasOwnProperty("testNetwork")) {
                                 object.testNetwork = message.testNetwork;
-                            if (message.networkId != null && message.hasOwnProperty("networkId"))
+                                if (options.oneofs)
+                                    object._testNetwork = "testNetwork";
+                            }
+                            if (message.networkId != null && message.hasOwnProperty("networkId")) {
                                 if (typeof message.networkId === "number")
                                     object.networkId = options.longs === String ? String(message.networkId) : message.networkId;
                                 else
                                     object.networkId = options.longs === String ? $util.Long.prototype.toString.call(message.networkId) : options.longs === Number ? new $util.LongBits(message.networkId.low >>> 0, message.networkId.high >>> 0).toNumber() : message.networkId;
+                                if (options.oneofs)
+                                    object._networkId = "networkId";
+                            }
                             return object;
                         };
     
@@ -54699,6 +62673,9 @@
                          * Properties of a ListNetworksRequest.
                          * @memberof google.ads.admanager.v1
                          * @interface IListNetworksRequest
+                         * @property {number|null} [pageSize] ListNetworksRequest pageSize
+                         * @property {string|null} [pageToken] ListNetworksRequest pageToken
+                         * @property {number|null} [skip] ListNetworksRequest skip
                          */
     
                         /**
@@ -54715,6 +62692,30 @@
                                     if (properties[keys[i]] != null)
                                         this[keys[i]] = properties[keys[i]];
                         }
+    
+                        /**
+                         * ListNetworksRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.ads.admanager.v1.ListNetworksRequest
+                         * @instance
+                         */
+                        ListNetworksRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListNetworksRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.ads.admanager.v1.ListNetworksRequest
+                         * @instance
+                         */
+                        ListNetworksRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListNetworksRequest skip.
+                         * @member {number} skip
+                         * @memberof google.ads.admanager.v1.ListNetworksRequest
+                         * @instance
+                         */
+                        ListNetworksRequest.prototype.skip = 0;
     
                         /**
                          * Creates a new ListNetworksRequest instance using the specified properties.
@@ -54740,6 +62741,12 @@
                         ListNetworksRequest.encode = function encode(message, writer) {
                             if (!writer)
                                 writer = $Writer.create();
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.pageToken);
+                            if (message.skip != null && Object.hasOwnProperty.call(message, "skip"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.skip);
                             return writer;
                         };
     
@@ -54776,6 +62783,18 @@
                                 if (tag === error)
                                     break;
                                 switch (tag >>> 3) {
+                                case 3: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.skip = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -54811,6 +62830,15 @@
                         ListNetworksRequest.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.skip != null && message.hasOwnProperty("skip"))
+                                if (!$util.isInteger(message.skip))
+                                    return "skip: integer expected";
                             return null;
                         };
     
@@ -54825,7 +62853,14 @@
                         ListNetworksRequest.fromObject = function fromObject(object) {
                             if (object instanceof $root.google.ads.admanager.v1.ListNetworksRequest)
                                 return object;
-                            return new $root.google.ads.admanager.v1.ListNetworksRequest();
+                            var message = new $root.google.ads.admanager.v1.ListNetworksRequest();
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.skip != null)
+                                message.skip = object.skip | 0;
+                            return message;
                         };
     
                         /**
@@ -54837,8 +62872,22 @@
                          * @param {$protobuf.IConversionOptions} [options] Conversion options
                          * @returns {Object.<string,*>} Plain object
                          */
-                        ListNetworksRequest.toObject = function toObject() {
-                            return {};
+                        ListNetworksRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.skip = 0;
+                            }
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.skip != null && message.hasOwnProperty("skip"))
+                                object.skip = message.skip;
+                            return object;
                         };
     
                         /**
@@ -54877,6 +62926,8 @@
                          * @memberof google.ads.admanager.v1
                          * @interface IListNetworksResponse
                          * @property {Array.<google.ads.admanager.v1.INetwork>|null} [networks] ListNetworksResponse networks
+                         * @property {string|null} [nextPageToken] ListNetworksResponse nextPageToken
+                         * @property {number|null} [totalSize] ListNetworksResponse totalSize
                          */
     
                         /**
@@ -54902,6 +62953,22 @@
                          * @instance
                          */
                         ListNetworksResponse.prototype.networks = $util.emptyArray;
+    
+                        /**
+                         * ListNetworksResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.ads.admanager.v1.ListNetworksResponse
+                         * @instance
+                         */
+                        ListNetworksResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListNetworksResponse totalSize.
+                         * @member {number} totalSize
+                         * @memberof google.ads.admanager.v1.ListNetworksResponse
+                         * @instance
+                         */
+                        ListNetworksResponse.prototype.totalSize = 0;
     
                         /**
                          * Creates a new ListNetworksResponse instance using the specified properties.
@@ -54930,6 +62997,10 @@
                             if (message.networks != null && message.networks.length)
                                 for (var i = 0; i < message.networks.length; ++i)
                                     $root.google.ads.admanager.v1.Network.encode(message.networks[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.totalSize != null && Object.hasOwnProperty.call(message, "totalSize"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.totalSize);
                             return writer;
                         };
     
@@ -54970,6 +63041,14 @@
                                         if (!(message.networks && message.networks.length))
                                             message.networks = [];
                                         message.networks.push($root.google.ads.admanager.v1.Network.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.totalSize = reader.int32();
                                         break;
                                     }
                                 default:
@@ -55016,6 +63095,12 @@
                                         return "networks." + error;
                                 }
                             }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.totalSize != null && message.hasOwnProperty("totalSize"))
+                                if (!$util.isInteger(message.totalSize))
+                                    return "totalSize: integer expected";
                             return null;
                         };
     
@@ -55041,6 +63126,10 @@
                                     message.networks[i] = $root.google.ads.admanager.v1.Network.fromObject(object.networks[i]);
                                 }
                             }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.totalSize != null)
+                                message.totalSize = object.totalSize | 0;
                             return message;
                         };
     
@@ -55059,11 +63148,19 @@
                             var object = {};
                             if (options.arrays || options.defaults)
                                 object.networks = [];
+                            if (options.defaults) {
+                                object.nextPageToken = "";
+                                object.totalSize = 0;
+                            }
                             if (message.networks && message.networks.length) {
                                 object.networks = [];
                                 for (var j = 0; j < message.networks.length; ++j)
                                     object.networks[j] = $root.google.ads.admanager.v1.Network.toObject(message.networks[j], options);
                             }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.totalSize != null && message.hasOwnProperty("totalSize"))
+                                object.totalSize = message.totalSize;
                             return object;
                         };
     
@@ -79002,6 +87099,7 @@
                                     case 642:
                                     case 390:
                                     case 391:
+                                    case 541:
                                     case 620:
                                     case 621:
                                     case 622:
@@ -79074,13 +87172,33 @@
                                     case 570:
                                     case 508:
                                     case 582:
+                                    case 733:
+                                    case 767:
                                     case 442:
                                     case 443:
                                     case 392:
                                     case 579:
                                     case 571:
+                                    case 594:
+                                    case 613:
+                                    case 614:
+                                    case 595:
                                     case 584:
                                     case 585:
+                                    case 605:
+                                    case 606:
+                                    case 607:
+                                    case 608:
+                                    case 609:
+                                    case 610:
+                                    case 611:
+                                    case 612:
+                                    case 615:
+                                    case 616:
+                                    case 618:
+                                    case 628:
+                                    case 617:
+                                    case 619:
                                     case 421:
                                     case 422:
                                     case 493:
@@ -79110,6 +87228,10 @@
                                     case 134:
                                     case 243:
                                     case 244:
+                                    case 460:
+                                    case 461:
+                                    case 462:
+                                    case 463:
                                     case 643:
                                     case 644:
                                     case 246:
@@ -79219,6 +87341,7 @@
                                     case 401:
                                     case 214:
                                     case 215:
+                                    case 713:
                                     case 663:
                                     case 188:
                                     case 204:
@@ -79345,6 +87468,10 @@
                                     case 511:
                                     case 512:
                                     case 513:
+                                    case 657:
+                                    case 658:
+                                    case 655:
+                                    case 656:
                                     case 113:
                                     case 144:
                                     case 114:
@@ -79391,6 +87518,7 @@
                                     case 352:
                                     case 146:
                                     case 147:
+                                    case 645:
                                     case 597:
                                     case 631:
                                     case 632:
@@ -79410,6 +87538,8 @@
                                     case 394:
                                     case 506:
                                     case 507:
+                                    case 702:
+                                    case 703:
                                     case 635:
                                     case 636:
                                     case 637:
@@ -79431,6 +87561,12 @@
                                     case 721:
                                     case 722:
                                     case 530:
+                                    case 547:
+                                    case 548:
+                                    case 549:
+                                    case 550:
+                                    case 551:
+                                    case 552:
                                     case 601:
                                     case 602:
                                     case 172:
@@ -79441,6 +87577,7 @@
                                     case 441:
                                     case 752:
                                     case 753:
+                                    case 730:
                                     case 5:
                                     case 184:
                                     case 627:
@@ -79775,6 +87912,8 @@
                                     case 6:
                                     case 222:
                                     case 338:
+                                    case 461:
+                                    case 462:
                                     case 12:
                                     case 11:
                                     case 35:
@@ -79848,6 +87987,7 @@
                                     case 387:
                                     case 389:
                                     case 390:
+                                    case 558:
                                     case 37:
                                     case 5:
                                     case 224:
@@ -79920,6 +88060,21 @@
                                     case 409:
                                     case 463:
                                     case 432:
+                                    case 648:
+                                    case 649:
+                                    case 650:
+                                    case 651:
+                                    case 652:
+                                    case 653:
+                                    case 533:
+                                    case 534:
+                                    case 535:
+                                    case 536:
+                                    case 537:
+                                    case 538:
+                                    case 539:
+                                    case 540:
+                                    case 541:
                                     case 135:
                                     case 136:
                                     case 137:
@@ -79937,6 +88092,11 @@
                                     case 238:
                                     case 36:
                                     case 214:
+                                    case 560:
+                                    case 559:
+                                    case 561:
+                                    case 564:
+                                    case 567:
                                     case 4:
                                     case 413:
                                     case 587:
@@ -79999,7 +88159,6 @@
                                     case 487:
                                     case 488:
                                     case 489:
-                                    case 490:
                                     case 491:
                                     case 492:
                                     case 493:
@@ -80014,6 +88173,8 @@
                                     case 500:
                                     case 501:
                                     case 502:
+                                    case 490:
+                                    case 586:
                                     case 180:
                                     case 181:
                                     case 182:
@@ -80095,6 +88256,16 @@
                                     case 175:
                                     case 142:
                                     case 141:
+                                    case 279:
+                                    case 280:
+                                    case 281:
+                                    case 283:
+                                    case 285:
+                                    case 287:
+                                    case 289:
+                                    case 392:
+                                    case 393:
+                                    case 394:
                                     case 103:
                                     case 104:
                                     case 105:
@@ -80202,6 +88373,8 @@
                                 case 1:
                                 case 5:
                                 case 6:
+                                case 7:
+                                case 8:
                                 case 13:
                                     break;
                                 }
@@ -80351,6 +88524,10 @@
                                     case "AD_LOCATION_NAME":
                                     case 391:
                                         message.dimensions[i] = 391;
+                                        break;
+                                    case "AD_REQUEST_SIZES":
+                                    case 541:
+                                        message.dimensions[i] = 541;
                                         break;
                                     case "AD_TECHNOLOGY_PROVIDER_DOMAIN":
                                     case 620:
@@ -80640,6 +88817,14 @@
                                     case 582:
                                         message.dimensions[i] = 582;
                                         break;
+                                    case "ANALYTICS_PROPERTY_ID":
+                                    case 733:
+                                        message.dimensions[i] = 733;
+                                        break;
+                                    case "ANALYTICS_PROPERTY_NAME":
+                                    case 767:
+                                        message.dimensions[i] = 767;
+                                        break;
                                     case "APP_TRACKING_TRANSPARENCY_CONSENT_STATUS":
                                     case 442:
                                         message.dimensions[i] = 442;
@@ -80660,6 +88845,22 @@
                                     case 571:
                                         message.dimensions[i] = 571;
                                         break;
+                                    case "AUDIENCE_SEGMENT_BILLABLE":
+                                    case 594:
+                                        message.dimensions[i] = 594;
+                                        break;
+                                    case "AUDIENCE_SEGMENT_DATA_PROVIDER_ID":
+                                    case 613:
+                                        message.dimensions[i] = 613;
+                                        break;
+                                    case "AUDIENCE_SEGMENT_DATA_PROVIDER_NAME":
+                                    case 614:
+                                        message.dimensions[i] = 614;
+                                        break;
+                                    case "AUDIENCE_SEGMENT_ID_BILLABLE":
+                                    case 595:
+                                        message.dimensions[i] = 595;
+                                        break;
                                     case "AUDIENCE_SEGMENT_ID_TARGETED":
                                     case 584:
                                         message.dimensions[i] = 584;
@@ -80667,6 +88868,62 @@
                                     case "AUDIENCE_SEGMENT_TARGETED":
                                     case 585:
                                         message.dimensions[i] = 585;
+                                        break;
+                                    case "AUDIENCE_SEGMENT_TARGETED_AD_ID_USER_SIZE":
+                                    case 605:
+                                        message.dimensions[i] = 605;
+                                        break;
+                                    case "AUDIENCE_SEGMENT_TARGETED_AMAZON_FIRE_USER_SIZE":
+                                    case 606:
+                                        message.dimensions[i] = 606;
+                                        break;
+                                    case "AUDIENCE_SEGMENT_TARGETED_ANDROID_TV_USER_SIZE":
+                                    case 607:
+                                        message.dimensions[i] = 607;
+                                        break;
+                                    case "AUDIENCE_SEGMENT_TARGETED_APPLE_TV_USER_SIZE":
+                                    case 608:
+                                        message.dimensions[i] = 608;
+                                        break;
+                                    case "AUDIENCE_SEGMENT_TARGETED_IDFA_USER_SIZE":
+                                    case 609:
+                                        message.dimensions[i] = 609;
+                                        break;
+                                    case "AUDIENCE_SEGMENT_TARGETED_MOBILE_WEB_USER_SIZE":
+                                    case 610:
+                                        message.dimensions[i] = 610;
+                                        break;
+                                    case "AUDIENCE_SEGMENT_TARGETED_PLAYSTATION_USER_SIZE":
+                                    case 611:
+                                        message.dimensions[i] = 611;
+                                        break;
+                                    case "AUDIENCE_SEGMENT_TARGETED_PPID_USER_SIZE":
+                                    case 612:
+                                        message.dimensions[i] = 612;
+                                        break;
+                                    case "AUDIENCE_SEGMENT_TARGETED_ROKU_USER_SIZE":
+                                    case 615:
+                                        message.dimensions[i] = 615;
+                                        break;
+                                    case "AUDIENCE_SEGMENT_TARGETED_SAMSUNG_TV_USER_SIZE":
+                                    case 616:
+                                        message.dimensions[i] = 616;
+                                        break;
+                                    case "AUDIENCE_SEGMENT_TARGETED_SIZE":
+                                    case 618:
+                                        message.dimensions[i] = 618;
+                                        break;
+                                    case "AUDIENCE_SEGMENT_TARGETED_STATUS":
+                                    case 628:
+                                        message.dimensions[i] = 628;
+                                        break;
+                                    case "AUDIENCE_SEGMENT_TARGETED_STATUS_NAME":
+                                    case 617:
+                                        message.dimensions[i] = 617;
+                                        break;
+                                    case "AUDIENCE_SEGMENT_TARGETED_XBOX_USER_SIZE":
+                                    case 619:
+                                        message.dimensions[i] = 619;
                                         break;
                                     case "AUTO_REFRESHED_TRAFFIC":
                                     case 421:
@@ -80783,6 +89040,22 @@
                                     case "CLASSIFIED_BRAND_NAME":
                                     case 244:
                                         message.dimensions[i] = 244;
+                                        break;
+                                    case "CONTENT_BUNDLE_ID":
+                                    case 460:
+                                        message.dimensions[i] = 460;
+                                        break;
+                                    case "CONTENT_BUNDLE_NAME":
+                                    case 461:
+                                        message.dimensions[i] = 461;
+                                        break;
+                                    case "CONTENT_CMS_METADATA_KV_NAMESPACE_ID":
+                                    case 462:
+                                        message.dimensions[i] = 462;
+                                        break;
+                                    case "CONTENT_CMS_METADATA_KV_NAMESPACE_NAME":
+                                    case 463:
+                                        message.dimensions[i] = 463;
                                         break;
                                     case "CONTENT_CMS_NAME":
                                     case 643:
@@ -81219,6 +89492,10 @@
                                     case "KEY_VALUES_NAME":
                                     case 215:
                                         message.dimensions[i] = 215;
+                                        break;
+                                    case "KEY_VALUES_SET":
+                                    case 713:
+                                        message.dimensions[i] = 713;
                                         break;
                                     case "LINE_ITEM_AGENCY":
                                     case 663:
@@ -81724,6 +90001,22 @@
                                     case 513:
                                         message.dimensions[i] = 513;
                                         break;
+                                    case "PARTNER_MANAGEMENT_ASSIGNMENT_ID":
+                                    case 657:
+                                        message.dimensions[i] = 657;
+                                        break;
+                                    case "PARTNER_MANAGEMENT_ASSIGNMENT_NAME":
+                                    case 658:
+                                        message.dimensions[i] = 658;
+                                        break;
+                                    case "PARTNER_MANAGEMENT_PARTNER_ID":
+                                    case 655:
+                                        message.dimensions[i] = 655;
+                                        break;
+                                    case "PARTNER_MANAGEMENT_PARTNER_NAME":
+                                    case 656:
+                                        message.dimensions[i] = 656;
+                                        break;
                                     case "PLACEMENT_ID":
                                     case 113:
                                         message.dimensions[i] = 113;
@@ -81908,6 +90201,10 @@
                                     case 147:
                                         message.dimensions[i] = 147;
                                         break;
+                                    case "REVENUE_VERIFICATION_ID":
+                                    case 645:
+                                        message.dimensions[i] = 645;
+                                        break;
                                     case "SERVER_SIDE_UNWRAPPING_ELIGIBLE":
                                     case 597:
                                         message.dimensions[i] = 597;
@@ -81983,6 +90280,14 @@
                                     case "URL_ID":
                                     case 507:
                                         message.dimensions[i] = 507;
+                                        break;
+                                    case "USER_MESSAGES_CHOICE":
+                                    case 702:
+                                        message.dimensions[i] = 702;
+                                        break;
+                                    case "USER_MESSAGES_CHOICE_NAME":
+                                    case 703:
+                                        message.dimensions[i] = 703;
                                         break;
                                     case "USER_MESSAGES_ENTITLEMENT_SOURCE":
                                     case 635:
@@ -82068,6 +90373,30 @@
                                     case 530:
                                         message.dimensions[i] = 530;
                                         break;
+                                    case "VIDEO_LIVE_STREAM_EVENT_AD_BREAK_DURATION":
+                                    case 547:
+                                        message.dimensions[i] = 547;
+                                        break;
+                                    case "VIDEO_LIVE_STREAM_EVENT_AD_BREAK_ID":
+                                    case 548:
+                                        message.dimensions[i] = 548;
+                                        break;
+                                    case "VIDEO_LIVE_STREAM_EVENT_AD_BREAK_NAME":
+                                    case 549:
+                                        message.dimensions[i] = 549;
+                                        break;
+                                    case "VIDEO_LIVE_STREAM_EVENT_AD_BREAK_TIME":
+                                    case 550:
+                                        message.dimensions[i] = 550;
+                                        break;
+                                    case "VIDEO_LIVE_STREAM_EVENT_ID":
+                                    case 551:
+                                        message.dimensions[i] = 551;
+                                        break;
+                                    case "VIDEO_LIVE_STREAM_EVENT_NAME":
+                                    case 552:
+                                        message.dimensions[i] = 552;
+                                        break;
                                     case "VIDEO_MEASUREMENT_SOURCE":
                                     case 601:
                                         message.dimensions[i] = 601;
@@ -82107,6 +90436,10 @@
                                     case "VIDEO_STITCHER_TYPE_NAME":
                                     case 753:
                                         message.dimensions[i] = 753;
+                                        break;
+                                    case "WEB_PROPERTY_CODE":
+                                    case 730:
+                                        message.dimensions[i] = 730;
                                         break;
                                     case "WEEK":
                                     case 5:
@@ -83417,6 +91750,14 @@
                                     case 338:
                                         message.metrics[i] = 338;
                                         break;
+                                    case "AD_SERVER_OPPORTUNITIES_FROM_ERRORS":
+                                    case 461:
+                                        message.metrics[i] = 461;
+                                        break;
+                                    case "AD_SERVER_OPPORTUNITIES_FROM_IMPRESSIONS":
+                                    case 462:
+                                        message.metrics[i] = 462;
+                                        break;
                                     case "AD_SERVER_PERCENT_CLICKS":
                                     case 12:
                                         message.metrics[i] = 12;
@@ -83709,6 +92050,10 @@
                                     case 390:
                                         message.metrics[i] = 390;
                                         break;
+                                    case "AUDIENCE_SEGMENT_COST":
+                                    case 558:
+                                        message.metrics[i] = 558;
+                                        break;
                                     case "AVERAGE_ECPM":
                                     case 37:
                                         message.metrics[i] = 37;
@@ -83997,6 +92342,66 @@
                                     case 432:
                                         message.metrics[i] = 432;
                                         break;
+                                    case "PARTNER_FINANCE_GROSS_REVENUE":
+                                    case 648:
+                                        message.metrics[i] = 648;
+                                        break;
+                                    case "PARTNER_FINANCE_HOST_ECPM":
+                                    case 649:
+                                        message.metrics[i] = 649;
+                                        break;
+                                    case "PARTNER_FINANCE_HOST_IMPRESSIONS":
+                                    case 650:
+                                        message.metrics[i] = 650;
+                                        break;
+                                    case "PARTNER_FINANCE_HOST_REVENUE":
+                                    case 651:
+                                        message.metrics[i] = 651;
+                                        break;
+                                    case "PARTNER_FINANCE_PARTNER_ECPM":
+                                    case 652:
+                                        message.metrics[i] = 652;
+                                        break;
+                                    case "PARTNER_FINANCE_PARTNER_REVENUE":
+                                    case 653:
+                                        message.metrics[i] = 653;
+                                        break;
+                                    case "PARTNER_MANAGEMENT_GROSS_REVENUE":
+                                    case 533:
+                                        message.metrics[i] = 533;
+                                        break;
+                                    case "PARTNER_MANAGEMENT_HOST_CLICKS":
+                                    case 534:
+                                        message.metrics[i] = 534;
+                                        break;
+                                    case "PARTNER_MANAGEMENT_HOST_CTR":
+                                    case 535:
+                                        message.metrics[i] = 535;
+                                        break;
+                                    case "PARTNER_MANAGEMENT_HOST_IMPRESSIONS":
+                                    case 536:
+                                        message.metrics[i] = 536;
+                                        break;
+                                    case "PARTNER_MANAGEMENT_PARTNER_CLICKS":
+                                    case 537:
+                                        message.metrics[i] = 537;
+                                        break;
+                                    case "PARTNER_MANAGEMENT_PARTNER_CTR":
+                                    case 538:
+                                        message.metrics[i] = 538;
+                                        break;
+                                    case "PARTNER_MANAGEMENT_PARTNER_IMPRESSIONS":
+                                    case 539:
+                                        message.metrics[i] = 539;
+                                        break;
+                                    case "PARTNER_MANAGEMENT_TOTAL_CONTENT_VIEWS":
+                                    case 540:
+                                        message.metrics[i] = 540;
+                                        break;
+                                    case "PARTNER_MANAGEMENT_UNFILLED_IMPRESSIONS":
+                                    case 541:
+                                        message.metrics[i] = 541;
+                                        break;
                                     case "PARTNER_SALES_FILLED_POD_REQUESTS":
                                     case 135:
                                         message.metrics[i] = 135;
@@ -84064,6 +92469,26 @@
                                     case "REVENUE_PAID_THROUGH_MCM_AUTOPAYMENT":
                                     case 214:
                                         message.metrics[i] = 214;
+                                        break;
+                                    case "REVENUE_VERIFICATION_CPD_REVENUE":
+                                    case 560:
+                                        message.metrics[i] = 560;
+                                        break;
+                                    case "REVENUE_VERIFICATION_GROSS_CPD_REVENUE":
+                                    case 559:
+                                        message.metrics[i] = 559;
+                                        break;
+                                    case "REVENUE_VERIFICATION_GROSS_REVENUE_WITHOUT_CPD":
+                                    case 561:
+                                        message.metrics[i] = 561;
+                                        break;
+                                    case "REVENUE_VERIFICATION_IMPRESSIONS":
+                                    case 564:
+                                        message.metrics[i] = 564;
+                                        break;
+                                    case "REVENUE_VERIFICATION_REVENUE_WITHOUT_CPD":
+                                    case 567:
+                                        message.metrics[i] = 567;
                                         break;
                                     case "REVENUE_WITHOUT_CPD":
                                     case 4:
@@ -84313,10 +92738,6 @@
                                     case 489:
                                         message.metrics[i] = 489;
                                         break;
-                                    case "USER_MESSAGES_CCPA_MESSAGES_SHOWN":
-                                    case 490:
-                                        message.metrics[i] = 490;
-                                        break;
                                     case "USER_MESSAGES_IDFA_ATT_ALERTS_SHOWN":
                                     case 491:
                                         message.metrics[i] = 491;
@@ -84372,6 +92793,14 @@
                                     case "USER_MESSAGES_UPTC_PERSONALIZATION_OPT_OUT_RATIO":
                                     case 502:
                                         message.metrics[i] = 502;
+                                        break;
+                                    case "USER_MESSAGES_US_STATES_MESSAGES_SHOWN":
+                                    case 490:
+                                        message.metrics[i] = 490;
+                                        break;
+                                    case "USER_MESSAGES_US_STATES_OPT_OUT_SELECTIONS":
+                                    case 586:
+                                        message.metrics[i] = 586;
                                         break;
                                     case "VIDEO_ERROR_100_COUNT":
                                     case 180:
@@ -84697,6 +93126,46 @@
                                     case 141:
                                         message.metrics[i] = 141;
                                         break;
+                                    case "VIDEO_TRUE_OPPORTUNITIES_TOTAL_BREAK_END":
+                                    case 279:
+                                        message.metrics[i] = 279;
+                                        break;
+                                    case "VIDEO_TRUE_OPPORTUNITIES_TOTAL_BREAK_START":
+                                    case 280:
+                                        message.metrics[i] = 280;
+                                        break;
+                                    case "VIDEO_TRUE_OPPORTUNITIES_TOTAL_CAPPED_OPPORTUNITIES_ADBREAK":
+                                    case 281:
+                                        message.metrics[i] = 281;
+                                        break;
+                                    case "VIDEO_TRUE_OPPORTUNITIES_TOTAL_DURATION_ADBREAK":
+                                    case 283:
+                                        message.metrics[i] = 283;
+                                        break;
+                                    case "VIDEO_TRUE_OPPORTUNITIES_TOTAL_MATCHED_DURATION_ADBREAK":
+                                    case 285:
+                                        message.metrics[i] = 285;
+                                        break;
+                                    case "VIDEO_TRUE_OPPORTUNITIES_TOTAL_MATCHED_OPPORTUNITIES_ADBREAK":
+                                    case 287:
+                                        message.metrics[i] = 287;
+                                        break;
+                                    case "VIDEO_TRUE_OPPORTUNITIES_TOTAL_VIEWED_OPPORTUNITIES_ADBREAK":
+                                    case 289:
+                                        message.metrics[i] = 289;
+                                        break;
+                                    case "VIDEO_TRUE_VIEWS":
+                                    case 392:
+                                        message.metrics[i] = 392;
+                                        break;
+                                    case "VIDEO_TRUE_VIEW_SKIP_RATE":
+                                    case 393:
+                                        message.metrics[i] = 393;
+                                        break;
+                                    case "VIDEO_TRUE_VIEW_VIEW_THROUGH_RATE":
+                                    case 394:
+                                        message.metrics[i] = 394;
+                                        break;
                                     case "VIDEO_VIEWERSHIP_AUTO_PLAYS":
                                     case 103:
                                         message.metrics[i] = 103;
@@ -84945,6 +93414,14 @@
                             case "PRIVACY_AND_MESSAGING":
                             case 6:
                                 message.reportType = 6;
+                                break;
+                            case "REVENUE_VERIFICATION":
+                            case 7:
+                                message.reportType = 7;
+                                break;
+                            case "PARTNER_FINANCE":
+                            case 8:
+                                message.reportType = 8;
                                 break;
                             case "AD_SPEED":
                             case 13:
@@ -85328,6 +93805,7 @@
                                     case 642:
                                     case 390:
                                     case 391:
+                                    case 541:
                                     case 620:
                                     case 621:
                                     case 622:
@@ -85400,13 +93878,33 @@
                                     case 570:
                                     case 508:
                                     case 582:
+                                    case 733:
+                                    case 767:
                                     case 442:
                                     case 443:
                                     case 392:
                                     case 579:
                                     case 571:
+                                    case 594:
+                                    case 613:
+                                    case 614:
+                                    case 595:
                                     case 584:
                                     case 585:
+                                    case 605:
+                                    case 606:
+                                    case 607:
+                                    case 608:
+                                    case 609:
+                                    case 610:
+                                    case 611:
+                                    case 612:
+                                    case 615:
+                                    case 616:
+                                    case 618:
+                                    case 628:
+                                    case 617:
+                                    case 619:
                                     case 421:
                                     case 422:
                                     case 493:
@@ -85436,6 +93934,10 @@
                                     case 134:
                                     case 243:
                                     case 244:
+                                    case 460:
+                                    case 461:
+                                    case 462:
+                                    case 463:
                                     case 643:
                                     case 644:
                                     case 246:
@@ -85545,6 +94047,7 @@
                                     case 401:
                                     case 214:
                                     case 215:
+                                    case 713:
                                     case 663:
                                     case 188:
                                     case 204:
@@ -85671,6 +94174,10 @@
                                     case 511:
                                     case 512:
                                     case 513:
+                                    case 657:
+                                    case 658:
+                                    case 655:
+                                    case 656:
                                     case 113:
                                     case 144:
                                     case 114:
@@ -85717,6 +94224,7 @@
                                     case 352:
                                     case 146:
                                     case 147:
+                                    case 645:
                                     case 597:
                                     case 631:
                                     case 632:
@@ -85736,6 +94244,8 @@
                                     case 394:
                                     case 506:
                                     case 507:
+                                    case 702:
+                                    case 703:
                                     case 635:
                                     case 636:
                                     case 637:
@@ -85757,6 +94267,12 @@
                                     case 721:
                                     case 722:
                                     case 530:
+                                    case 547:
+                                    case 548:
+                                    case 549:
+                                    case 550:
+                                    case 551:
+                                    case 552:
                                     case 601:
                                     case 602:
                                     case 172:
@@ -85767,6 +94283,7 @@
                                     case 441:
                                     case 752:
                                     case 753:
+                                    case 730:
                                     case 5:
                                     case 184:
                                     case 627:
@@ -86101,6 +94618,8 @@
                                     case 6:
                                     case 222:
                                     case 338:
+                                    case 461:
+                                    case 462:
                                     case 12:
                                     case 11:
                                     case 35:
@@ -86174,6 +94693,7 @@
                                     case 387:
                                     case 389:
                                     case 390:
+                                    case 558:
                                     case 37:
                                     case 5:
                                     case 224:
@@ -86246,6 +94766,21 @@
                                     case 409:
                                     case 463:
                                     case 432:
+                                    case 648:
+                                    case 649:
+                                    case 650:
+                                    case 651:
+                                    case 652:
+                                    case 653:
+                                    case 533:
+                                    case 534:
+                                    case 535:
+                                    case 536:
+                                    case 537:
+                                    case 538:
+                                    case 539:
+                                    case 540:
+                                    case 541:
                                     case 135:
                                     case 136:
                                     case 137:
@@ -86263,6 +94798,11 @@
                                     case 238:
                                     case 36:
                                     case 214:
+                                    case 560:
+                                    case 559:
+                                    case 561:
+                                    case 564:
+                                    case 567:
                                     case 4:
                                     case 413:
                                     case 587:
@@ -86325,7 +94865,6 @@
                                     case 487:
                                     case 488:
                                     case 489:
-                                    case 490:
                                     case 491:
                                     case 492:
                                     case 493:
@@ -86340,6 +94879,8 @@
                                     case 500:
                                     case 501:
                                     case 502:
+                                    case 490:
+                                    case 586:
                                     case 180:
                                     case 181:
                                     case 182:
@@ -86421,6 +94962,16 @@
                                     case 175:
                                     case 142:
                                     case 141:
+                                    case 279:
+                                    case 280:
+                                    case 281:
+                                    case 283:
+                                    case 285:
+                                    case 287:
+                                    case 289:
+                                    case 392:
+                                    case 393:
+                                    case 394:
                                     case 103:
                                     case 104:
                                     case 105:
@@ -86566,6 +95117,10 @@
                                 case "AD_LOCATION_NAME":
                                 case 391:
                                     message.dimension = 391;
+                                    break;
+                                case "AD_REQUEST_SIZES":
+                                case 541:
+                                    message.dimension = 541;
                                     break;
                                 case "AD_TECHNOLOGY_PROVIDER_DOMAIN":
                                 case 620:
@@ -86855,6 +95410,14 @@
                                 case 582:
                                     message.dimension = 582;
                                     break;
+                                case "ANALYTICS_PROPERTY_ID":
+                                case 733:
+                                    message.dimension = 733;
+                                    break;
+                                case "ANALYTICS_PROPERTY_NAME":
+                                case 767:
+                                    message.dimension = 767;
+                                    break;
                                 case "APP_TRACKING_TRANSPARENCY_CONSENT_STATUS":
                                 case 442:
                                     message.dimension = 442;
@@ -86875,6 +95438,22 @@
                                 case 571:
                                     message.dimension = 571;
                                     break;
+                                case "AUDIENCE_SEGMENT_BILLABLE":
+                                case 594:
+                                    message.dimension = 594;
+                                    break;
+                                case "AUDIENCE_SEGMENT_DATA_PROVIDER_ID":
+                                case 613:
+                                    message.dimension = 613;
+                                    break;
+                                case "AUDIENCE_SEGMENT_DATA_PROVIDER_NAME":
+                                case 614:
+                                    message.dimension = 614;
+                                    break;
+                                case "AUDIENCE_SEGMENT_ID_BILLABLE":
+                                case 595:
+                                    message.dimension = 595;
+                                    break;
                                 case "AUDIENCE_SEGMENT_ID_TARGETED":
                                 case 584:
                                     message.dimension = 584;
@@ -86882,6 +95461,62 @@
                                 case "AUDIENCE_SEGMENT_TARGETED":
                                 case 585:
                                     message.dimension = 585;
+                                    break;
+                                case "AUDIENCE_SEGMENT_TARGETED_AD_ID_USER_SIZE":
+                                case 605:
+                                    message.dimension = 605;
+                                    break;
+                                case "AUDIENCE_SEGMENT_TARGETED_AMAZON_FIRE_USER_SIZE":
+                                case 606:
+                                    message.dimension = 606;
+                                    break;
+                                case "AUDIENCE_SEGMENT_TARGETED_ANDROID_TV_USER_SIZE":
+                                case 607:
+                                    message.dimension = 607;
+                                    break;
+                                case "AUDIENCE_SEGMENT_TARGETED_APPLE_TV_USER_SIZE":
+                                case 608:
+                                    message.dimension = 608;
+                                    break;
+                                case "AUDIENCE_SEGMENT_TARGETED_IDFA_USER_SIZE":
+                                case 609:
+                                    message.dimension = 609;
+                                    break;
+                                case "AUDIENCE_SEGMENT_TARGETED_MOBILE_WEB_USER_SIZE":
+                                case 610:
+                                    message.dimension = 610;
+                                    break;
+                                case "AUDIENCE_SEGMENT_TARGETED_PLAYSTATION_USER_SIZE":
+                                case 611:
+                                    message.dimension = 611;
+                                    break;
+                                case "AUDIENCE_SEGMENT_TARGETED_PPID_USER_SIZE":
+                                case 612:
+                                    message.dimension = 612;
+                                    break;
+                                case "AUDIENCE_SEGMENT_TARGETED_ROKU_USER_SIZE":
+                                case 615:
+                                    message.dimension = 615;
+                                    break;
+                                case "AUDIENCE_SEGMENT_TARGETED_SAMSUNG_TV_USER_SIZE":
+                                case 616:
+                                    message.dimension = 616;
+                                    break;
+                                case "AUDIENCE_SEGMENT_TARGETED_SIZE":
+                                case 618:
+                                    message.dimension = 618;
+                                    break;
+                                case "AUDIENCE_SEGMENT_TARGETED_STATUS":
+                                case 628:
+                                    message.dimension = 628;
+                                    break;
+                                case "AUDIENCE_SEGMENT_TARGETED_STATUS_NAME":
+                                case 617:
+                                    message.dimension = 617;
+                                    break;
+                                case "AUDIENCE_SEGMENT_TARGETED_XBOX_USER_SIZE":
+                                case 619:
+                                    message.dimension = 619;
                                     break;
                                 case "AUTO_REFRESHED_TRAFFIC":
                                 case 421:
@@ -86998,6 +95633,22 @@
                                 case "CLASSIFIED_BRAND_NAME":
                                 case 244:
                                     message.dimension = 244;
+                                    break;
+                                case "CONTENT_BUNDLE_ID":
+                                case 460:
+                                    message.dimension = 460;
+                                    break;
+                                case "CONTENT_BUNDLE_NAME":
+                                case 461:
+                                    message.dimension = 461;
+                                    break;
+                                case "CONTENT_CMS_METADATA_KV_NAMESPACE_ID":
+                                case 462:
+                                    message.dimension = 462;
+                                    break;
+                                case "CONTENT_CMS_METADATA_KV_NAMESPACE_NAME":
+                                case 463:
+                                    message.dimension = 463;
                                     break;
                                 case "CONTENT_CMS_NAME":
                                 case 643:
@@ -87434,6 +96085,10 @@
                                 case "KEY_VALUES_NAME":
                                 case 215:
                                     message.dimension = 215;
+                                    break;
+                                case "KEY_VALUES_SET":
+                                case 713:
+                                    message.dimension = 713;
                                     break;
                                 case "LINE_ITEM_AGENCY":
                                 case 663:
@@ -87939,6 +96594,22 @@
                                 case 513:
                                     message.dimension = 513;
                                     break;
+                                case "PARTNER_MANAGEMENT_ASSIGNMENT_ID":
+                                case 657:
+                                    message.dimension = 657;
+                                    break;
+                                case "PARTNER_MANAGEMENT_ASSIGNMENT_NAME":
+                                case 658:
+                                    message.dimension = 658;
+                                    break;
+                                case "PARTNER_MANAGEMENT_PARTNER_ID":
+                                case 655:
+                                    message.dimension = 655;
+                                    break;
+                                case "PARTNER_MANAGEMENT_PARTNER_NAME":
+                                case 656:
+                                    message.dimension = 656;
+                                    break;
                                 case "PLACEMENT_ID":
                                 case 113:
                                     message.dimension = 113;
@@ -88123,6 +96794,10 @@
                                 case 147:
                                     message.dimension = 147;
                                     break;
+                                case "REVENUE_VERIFICATION_ID":
+                                case 645:
+                                    message.dimension = 645;
+                                    break;
                                 case "SERVER_SIDE_UNWRAPPING_ELIGIBLE":
                                 case 597:
                                     message.dimension = 597;
@@ -88198,6 +96873,14 @@
                                 case "URL_ID":
                                 case 507:
                                     message.dimension = 507;
+                                    break;
+                                case "USER_MESSAGES_CHOICE":
+                                case 702:
+                                    message.dimension = 702;
+                                    break;
+                                case "USER_MESSAGES_CHOICE_NAME":
+                                case 703:
+                                    message.dimension = 703;
                                     break;
                                 case "USER_MESSAGES_ENTITLEMENT_SOURCE":
                                 case 635:
@@ -88283,6 +96966,30 @@
                                 case 530:
                                     message.dimension = 530;
                                     break;
+                                case "VIDEO_LIVE_STREAM_EVENT_AD_BREAK_DURATION":
+                                case 547:
+                                    message.dimension = 547;
+                                    break;
+                                case "VIDEO_LIVE_STREAM_EVENT_AD_BREAK_ID":
+                                case 548:
+                                    message.dimension = 548;
+                                    break;
+                                case "VIDEO_LIVE_STREAM_EVENT_AD_BREAK_NAME":
+                                case 549:
+                                    message.dimension = 549;
+                                    break;
+                                case "VIDEO_LIVE_STREAM_EVENT_AD_BREAK_TIME":
+                                case 550:
+                                    message.dimension = 550;
+                                    break;
+                                case "VIDEO_LIVE_STREAM_EVENT_ID":
+                                case 551:
+                                    message.dimension = 551;
+                                    break;
+                                case "VIDEO_LIVE_STREAM_EVENT_NAME":
+                                case 552:
+                                    message.dimension = 552;
+                                    break;
                                 case "VIDEO_MEASUREMENT_SOURCE":
                                 case 601:
                                     message.dimension = 601;
@@ -88322,6 +97029,10 @@
                                 case "VIDEO_STITCHER_TYPE_NAME":
                                 case 753:
                                     message.dimension = 753;
+                                    break;
+                                case "WEB_PROPERTY_CODE":
+                                case 730:
+                                    message.dimension = 730;
                                     break;
                                 case "WEEK":
                                 case 5:
@@ -89627,6 +98338,14 @@
                                 case 338:
                                     message.metric = 338;
                                     break;
+                                case "AD_SERVER_OPPORTUNITIES_FROM_ERRORS":
+                                case 461:
+                                    message.metric = 461;
+                                    break;
+                                case "AD_SERVER_OPPORTUNITIES_FROM_IMPRESSIONS":
+                                case 462:
+                                    message.metric = 462;
+                                    break;
                                 case "AD_SERVER_PERCENT_CLICKS":
                                 case 12:
                                     message.metric = 12;
@@ -89919,6 +98638,10 @@
                                 case 390:
                                     message.metric = 390;
                                     break;
+                                case "AUDIENCE_SEGMENT_COST":
+                                case 558:
+                                    message.metric = 558;
+                                    break;
                                 case "AVERAGE_ECPM":
                                 case 37:
                                     message.metric = 37;
@@ -90207,6 +98930,66 @@
                                 case 432:
                                     message.metric = 432;
                                     break;
+                                case "PARTNER_FINANCE_GROSS_REVENUE":
+                                case 648:
+                                    message.metric = 648;
+                                    break;
+                                case "PARTNER_FINANCE_HOST_ECPM":
+                                case 649:
+                                    message.metric = 649;
+                                    break;
+                                case "PARTNER_FINANCE_HOST_IMPRESSIONS":
+                                case 650:
+                                    message.metric = 650;
+                                    break;
+                                case "PARTNER_FINANCE_HOST_REVENUE":
+                                case 651:
+                                    message.metric = 651;
+                                    break;
+                                case "PARTNER_FINANCE_PARTNER_ECPM":
+                                case 652:
+                                    message.metric = 652;
+                                    break;
+                                case "PARTNER_FINANCE_PARTNER_REVENUE":
+                                case 653:
+                                    message.metric = 653;
+                                    break;
+                                case "PARTNER_MANAGEMENT_GROSS_REVENUE":
+                                case 533:
+                                    message.metric = 533;
+                                    break;
+                                case "PARTNER_MANAGEMENT_HOST_CLICKS":
+                                case 534:
+                                    message.metric = 534;
+                                    break;
+                                case "PARTNER_MANAGEMENT_HOST_CTR":
+                                case 535:
+                                    message.metric = 535;
+                                    break;
+                                case "PARTNER_MANAGEMENT_HOST_IMPRESSIONS":
+                                case 536:
+                                    message.metric = 536;
+                                    break;
+                                case "PARTNER_MANAGEMENT_PARTNER_CLICKS":
+                                case 537:
+                                    message.metric = 537;
+                                    break;
+                                case "PARTNER_MANAGEMENT_PARTNER_CTR":
+                                case 538:
+                                    message.metric = 538;
+                                    break;
+                                case "PARTNER_MANAGEMENT_PARTNER_IMPRESSIONS":
+                                case 539:
+                                    message.metric = 539;
+                                    break;
+                                case "PARTNER_MANAGEMENT_TOTAL_CONTENT_VIEWS":
+                                case 540:
+                                    message.metric = 540;
+                                    break;
+                                case "PARTNER_MANAGEMENT_UNFILLED_IMPRESSIONS":
+                                case 541:
+                                    message.metric = 541;
+                                    break;
                                 case "PARTNER_SALES_FILLED_POD_REQUESTS":
                                 case 135:
                                     message.metric = 135;
@@ -90274,6 +99057,26 @@
                                 case "REVENUE_PAID_THROUGH_MCM_AUTOPAYMENT":
                                 case 214:
                                     message.metric = 214;
+                                    break;
+                                case "REVENUE_VERIFICATION_CPD_REVENUE":
+                                case 560:
+                                    message.metric = 560;
+                                    break;
+                                case "REVENUE_VERIFICATION_GROSS_CPD_REVENUE":
+                                case 559:
+                                    message.metric = 559;
+                                    break;
+                                case "REVENUE_VERIFICATION_GROSS_REVENUE_WITHOUT_CPD":
+                                case 561:
+                                    message.metric = 561;
+                                    break;
+                                case "REVENUE_VERIFICATION_IMPRESSIONS":
+                                case 564:
+                                    message.metric = 564;
+                                    break;
+                                case "REVENUE_VERIFICATION_REVENUE_WITHOUT_CPD":
+                                case 567:
+                                    message.metric = 567;
                                     break;
                                 case "REVENUE_WITHOUT_CPD":
                                 case 4:
@@ -90523,10 +99326,6 @@
                                 case 489:
                                     message.metric = 489;
                                     break;
-                                case "USER_MESSAGES_CCPA_MESSAGES_SHOWN":
-                                case 490:
-                                    message.metric = 490;
-                                    break;
                                 case "USER_MESSAGES_IDFA_ATT_ALERTS_SHOWN":
                                 case 491:
                                     message.metric = 491;
@@ -90582,6 +99381,14 @@
                                 case "USER_MESSAGES_UPTC_PERSONALIZATION_OPT_OUT_RATIO":
                                 case 502:
                                     message.metric = 502;
+                                    break;
+                                case "USER_MESSAGES_US_STATES_MESSAGES_SHOWN":
+                                case 490:
+                                    message.metric = 490;
+                                    break;
+                                case "USER_MESSAGES_US_STATES_OPT_OUT_SELECTIONS":
+                                case 586:
+                                    message.metric = 586;
                                     break;
                                 case "VIDEO_ERROR_100_COUNT":
                                 case 180:
@@ -90906,6 +99713,46 @@
                                 case "VIDEO_REAL_TIME_UNMATCHED_QUERIES":
                                 case 141:
                                     message.metric = 141;
+                                    break;
+                                case "VIDEO_TRUE_OPPORTUNITIES_TOTAL_BREAK_END":
+                                case 279:
+                                    message.metric = 279;
+                                    break;
+                                case "VIDEO_TRUE_OPPORTUNITIES_TOTAL_BREAK_START":
+                                case 280:
+                                    message.metric = 280;
+                                    break;
+                                case "VIDEO_TRUE_OPPORTUNITIES_TOTAL_CAPPED_OPPORTUNITIES_ADBREAK":
+                                case 281:
+                                    message.metric = 281;
+                                    break;
+                                case "VIDEO_TRUE_OPPORTUNITIES_TOTAL_DURATION_ADBREAK":
+                                case 283:
+                                    message.metric = 283;
+                                    break;
+                                case "VIDEO_TRUE_OPPORTUNITIES_TOTAL_MATCHED_DURATION_ADBREAK":
+                                case 285:
+                                    message.metric = 285;
+                                    break;
+                                case "VIDEO_TRUE_OPPORTUNITIES_TOTAL_MATCHED_OPPORTUNITIES_ADBREAK":
+                                case 287:
+                                    message.metric = 287;
+                                    break;
+                                case "VIDEO_TRUE_OPPORTUNITIES_TOTAL_VIEWED_OPPORTUNITIES_ADBREAK":
+                                case 289:
+                                    message.metric = 289;
+                                    break;
+                                case "VIDEO_TRUE_VIEWS":
+                                case 392:
+                                    message.metric = 392;
+                                    break;
+                                case "VIDEO_TRUE_VIEW_SKIP_RATE":
+                                case 393:
+                                    message.metric = 393;
+                                    break;
+                                case "VIDEO_TRUE_VIEW_VIEW_THROUGH_RATE":
+                                case 394:
+                                    message.metric = 394;
                                     break;
                                 case "VIDEO_VIEWERSHIP_AUTO_PLAYS":
                                 case 103:
@@ -91272,6 +100119,7 @@
                                     case 6:
                                     case 28:
                                     case 7:
+                                    case 39:
                                     case 8:
                                     case 9:
                                     case 10:
@@ -91279,6 +100127,7 @@
                                     case 12:
                                     case 13:
                                     case 14:
+                                    case 38:
                                     case 15:
                                     case 16:
                                     case 17:
@@ -91374,6 +100223,10 @@
                                 case 7:
                                     message.relative = 7;
                                     break;
+                                case "LAST_WEEK_STARTING_SUNDAY":
+                                case 39:
+                                    message.relative = 39;
+                                    break;
                                 case "LAST_MONTH":
                                 case 8:
                                     message.relative = 8;
@@ -91401,6 +100254,10 @@
                                 case "LAST_90_DAYS":
                                 case 14:
                                     message.relative = 14;
+                                    break;
+                                case "LAST_93_DAYS":
+                                case 38:
+                                    message.relative = 38;
                                     break;
                                 case "LAST_180_DAYS":
                                 case 15:
@@ -91781,6 +100638,7 @@
                              * @property {number} THIS_YEAR=6 THIS_YEAR value
                              * @property {number} THIS_YEAR_TO_DATE=28 THIS_YEAR_TO_DATE value
                              * @property {number} LAST_WEEK=7 LAST_WEEK value
+                             * @property {number} LAST_WEEK_STARTING_SUNDAY=39 LAST_WEEK_STARTING_SUNDAY value
                              * @property {number} LAST_MONTH=8 LAST_MONTH value
                              * @property {number} LAST_QUARTER=9 LAST_QUARTER value
                              * @property {number} LAST_YEAR=10 LAST_YEAR value
@@ -91788,6 +100646,7 @@
                              * @property {number} LAST_30_DAYS=12 LAST_30_DAYS value
                              * @property {number} LAST_60_DAYS=13 LAST_60_DAYS value
                              * @property {number} LAST_90_DAYS=14 LAST_90_DAYS value
+                             * @property {number} LAST_93_DAYS=38 LAST_93_DAYS value
                              * @property {number} LAST_180_DAYS=15 LAST_180_DAYS value
                              * @property {number} LAST_360_DAYS=16 LAST_360_DAYS value
                              * @property {number} LAST_365_DAYS=17 LAST_365_DAYS value
@@ -91820,6 +100679,7 @@
                                 values[valuesById[6] = "THIS_YEAR"] = 6;
                                 values[valuesById[28] = "THIS_YEAR_TO_DATE"] = 28;
                                 values[valuesById[7] = "LAST_WEEK"] = 7;
+                                values[valuesById[39] = "LAST_WEEK_STARTING_SUNDAY"] = 39;
                                 values[valuesById[8] = "LAST_MONTH"] = 8;
                                 values[valuesById[9] = "LAST_QUARTER"] = 9;
                                 values[valuesById[10] = "LAST_YEAR"] = 10;
@@ -91827,6 +100687,7 @@
                                 values[valuesById[12] = "LAST_30_DAYS"] = 12;
                                 values[valuesById[13] = "LAST_60_DAYS"] = 13;
                                 values[valuesById[14] = "LAST_90_DAYS"] = 14;
+                                values[valuesById[38] = "LAST_93_DAYS"] = 38;
                                 values[valuesById[15] = "LAST_180_DAYS"] = 15;
                                 values[valuesById[16] = "LAST_360_DAYS"] = 16;
                                 values[valuesById[17] = "LAST_365_DAYS"] = 17;
@@ -93490,6 +102351,7 @@
                                     case 642:
                                     case 390:
                                     case 391:
+                                    case 541:
                                     case 620:
                                     case 621:
                                     case 622:
@@ -93562,13 +102424,33 @@
                                     case 570:
                                     case 508:
                                     case 582:
+                                    case 733:
+                                    case 767:
                                     case 442:
                                     case 443:
                                     case 392:
                                     case 579:
                                     case 571:
+                                    case 594:
+                                    case 613:
+                                    case 614:
+                                    case 595:
                                     case 584:
                                     case 585:
+                                    case 605:
+                                    case 606:
+                                    case 607:
+                                    case 608:
+                                    case 609:
+                                    case 610:
+                                    case 611:
+                                    case 612:
+                                    case 615:
+                                    case 616:
+                                    case 618:
+                                    case 628:
+                                    case 617:
+                                    case 619:
                                     case 421:
                                     case 422:
                                     case 493:
@@ -93598,6 +102480,10 @@
                                     case 134:
                                     case 243:
                                     case 244:
+                                    case 460:
+                                    case 461:
+                                    case 462:
+                                    case 463:
                                     case 643:
                                     case 644:
                                     case 246:
@@ -93707,6 +102593,7 @@
                                     case 401:
                                     case 214:
                                     case 215:
+                                    case 713:
                                     case 663:
                                     case 188:
                                     case 204:
@@ -93833,6 +102720,10 @@
                                     case 511:
                                     case 512:
                                     case 513:
+                                    case 657:
+                                    case 658:
+                                    case 655:
+                                    case 656:
                                     case 113:
                                     case 144:
                                     case 114:
@@ -93879,6 +102770,7 @@
                                     case 352:
                                     case 146:
                                     case 147:
+                                    case 645:
                                     case 597:
                                     case 631:
                                     case 632:
@@ -93898,6 +102790,8 @@
                                     case 394:
                                     case 506:
                                     case 507:
+                                    case 702:
+                                    case 703:
                                     case 635:
                                     case 636:
                                     case 637:
@@ -93919,6 +102813,12 @@
                                     case 721:
                                     case 722:
                                     case 530:
+                                    case 547:
+                                    case 548:
+                                    case 549:
+                                    case 550:
+                                    case 551:
+                                    case 552:
                                     case 601:
                                     case 602:
                                     case 172:
@@ -93929,6 +102829,7 @@
                                     case 441:
                                     case 752:
                                     case 753:
+                                    case 730:
                                     case 5:
                                     case 184:
                                     case 627:
@@ -94259,6 +103160,10 @@
                                 case 391:
                                     message.dimension = 391;
                                     break;
+                                case "AD_REQUEST_SIZES":
+                                case 541:
+                                    message.dimension = 541;
+                                    break;
                                 case "AD_TECHNOLOGY_PROVIDER_DOMAIN":
                                 case 620:
                                     message.dimension = 620;
@@ -94547,6 +103452,14 @@
                                 case 582:
                                     message.dimension = 582;
                                     break;
+                                case "ANALYTICS_PROPERTY_ID":
+                                case 733:
+                                    message.dimension = 733;
+                                    break;
+                                case "ANALYTICS_PROPERTY_NAME":
+                                case 767:
+                                    message.dimension = 767;
+                                    break;
                                 case "APP_TRACKING_TRANSPARENCY_CONSENT_STATUS":
                                 case 442:
                                     message.dimension = 442;
@@ -94567,6 +103480,22 @@
                                 case 571:
                                     message.dimension = 571;
                                     break;
+                                case "AUDIENCE_SEGMENT_BILLABLE":
+                                case 594:
+                                    message.dimension = 594;
+                                    break;
+                                case "AUDIENCE_SEGMENT_DATA_PROVIDER_ID":
+                                case 613:
+                                    message.dimension = 613;
+                                    break;
+                                case "AUDIENCE_SEGMENT_DATA_PROVIDER_NAME":
+                                case 614:
+                                    message.dimension = 614;
+                                    break;
+                                case "AUDIENCE_SEGMENT_ID_BILLABLE":
+                                case 595:
+                                    message.dimension = 595;
+                                    break;
                                 case "AUDIENCE_SEGMENT_ID_TARGETED":
                                 case 584:
                                     message.dimension = 584;
@@ -94574,6 +103503,62 @@
                                 case "AUDIENCE_SEGMENT_TARGETED":
                                 case 585:
                                     message.dimension = 585;
+                                    break;
+                                case "AUDIENCE_SEGMENT_TARGETED_AD_ID_USER_SIZE":
+                                case 605:
+                                    message.dimension = 605;
+                                    break;
+                                case "AUDIENCE_SEGMENT_TARGETED_AMAZON_FIRE_USER_SIZE":
+                                case 606:
+                                    message.dimension = 606;
+                                    break;
+                                case "AUDIENCE_SEGMENT_TARGETED_ANDROID_TV_USER_SIZE":
+                                case 607:
+                                    message.dimension = 607;
+                                    break;
+                                case "AUDIENCE_SEGMENT_TARGETED_APPLE_TV_USER_SIZE":
+                                case 608:
+                                    message.dimension = 608;
+                                    break;
+                                case "AUDIENCE_SEGMENT_TARGETED_IDFA_USER_SIZE":
+                                case 609:
+                                    message.dimension = 609;
+                                    break;
+                                case "AUDIENCE_SEGMENT_TARGETED_MOBILE_WEB_USER_SIZE":
+                                case 610:
+                                    message.dimension = 610;
+                                    break;
+                                case "AUDIENCE_SEGMENT_TARGETED_PLAYSTATION_USER_SIZE":
+                                case 611:
+                                    message.dimension = 611;
+                                    break;
+                                case "AUDIENCE_SEGMENT_TARGETED_PPID_USER_SIZE":
+                                case 612:
+                                    message.dimension = 612;
+                                    break;
+                                case "AUDIENCE_SEGMENT_TARGETED_ROKU_USER_SIZE":
+                                case 615:
+                                    message.dimension = 615;
+                                    break;
+                                case "AUDIENCE_SEGMENT_TARGETED_SAMSUNG_TV_USER_SIZE":
+                                case 616:
+                                    message.dimension = 616;
+                                    break;
+                                case "AUDIENCE_SEGMENT_TARGETED_SIZE":
+                                case 618:
+                                    message.dimension = 618;
+                                    break;
+                                case "AUDIENCE_SEGMENT_TARGETED_STATUS":
+                                case 628:
+                                    message.dimension = 628;
+                                    break;
+                                case "AUDIENCE_SEGMENT_TARGETED_STATUS_NAME":
+                                case 617:
+                                    message.dimension = 617;
+                                    break;
+                                case "AUDIENCE_SEGMENT_TARGETED_XBOX_USER_SIZE":
+                                case 619:
+                                    message.dimension = 619;
                                     break;
                                 case "AUTO_REFRESHED_TRAFFIC":
                                 case 421:
@@ -94690,6 +103675,22 @@
                                 case "CLASSIFIED_BRAND_NAME":
                                 case 244:
                                     message.dimension = 244;
+                                    break;
+                                case "CONTENT_BUNDLE_ID":
+                                case 460:
+                                    message.dimension = 460;
+                                    break;
+                                case "CONTENT_BUNDLE_NAME":
+                                case 461:
+                                    message.dimension = 461;
+                                    break;
+                                case "CONTENT_CMS_METADATA_KV_NAMESPACE_ID":
+                                case 462:
+                                    message.dimension = 462;
+                                    break;
+                                case "CONTENT_CMS_METADATA_KV_NAMESPACE_NAME":
+                                case 463:
+                                    message.dimension = 463;
                                     break;
                                 case "CONTENT_CMS_NAME":
                                 case 643:
@@ -95126,6 +104127,10 @@
                                 case "KEY_VALUES_NAME":
                                 case 215:
                                     message.dimension = 215;
+                                    break;
+                                case "KEY_VALUES_SET":
+                                case 713:
+                                    message.dimension = 713;
                                     break;
                                 case "LINE_ITEM_AGENCY":
                                 case 663:
@@ -95631,6 +104636,22 @@
                                 case 513:
                                     message.dimension = 513;
                                     break;
+                                case "PARTNER_MANAGEMENT_ASSIGNMENT_ID":
+                                case 657:
+                                    message.dimension = 657;
+                                    break;
+                                case "PARTNER_MANAGEMENT_ASSIGNMENT_NAME":
+                                case 658:
+                                    message.dimension = 658;
+                                    break;
+                                case "PARTNER_MANAGEMENT_PARTNER_ID":
+                                case 655:
+                                    message.dimension = 655;
+                                    break;
+                                case "PARTNER_MANAGEMENT_PARTNER_NAME":
+                                case 656:
+                                    message.dimension = 656;
+                                    break;
                                 case "PLACEMENT_ID":
                                 case 113:
                                     message.dimension = 113;
@@ -95815,6 +104836,10 @@
                                 case 147:
                                     message.dimension = 147;
                                     break;
+                                case "REVENUE_VERIFICATION_ID":
+                                case 645:
+                                    message.dimension = 645;
+                                    break;
                                 case "SERVER_SIDE_UNWRAPPING_ELIGIBLE":
                                 case 597:
                                     message.dimension = 597;
@@ -95890,6 +104915,14 @@
                                 case "URL_ID":
                                 case 507:
                                     message.dimension = 507;
+                                    break;
+                                case "USER_MESSAGES_CHOICE":
+                                case 702:
+                                    message.dimension = 702;
+                                    break;
+                                case "USER_MESSAGES_CHOICE_NAME":
+                                case 703:
+                                    message.dimension = 703;
                                     break;
                                 case "USER_MESSAGES_ENTITLEMENT_SOURCE":
                                 case 635:
@@ -95975,6 +105008,30 @@
                                 case 530:
                                     message.dimension = 530;
                                     break;
+                                case "VIDEO_LIVE_STREAM_EVENT_AD_BREAK_DURATION":
+                                case 547:
+                                    message.dimension = 547;
+                                    break;
+                                case "VIDEO_LIVE_STREAM_EVENT_AD_BREAK_ID":
+                                case 548:
+                                    message.dimension = 548;
+                                    break;
+                                case "VIDEO_LIVE_STREAM_EVENT_AD_BREAK_NAME":
+                                case 549:
+                                    message.dimension = 549;
+                                    break;
+                                case "VIDEO_LIVE_STREAM_EVENT_AD_BREAK_TIME":
+                                case 550:
+                                    message.dimension = 550;
+                                    break;
+                                case "VIDEO_LIVE_STREAM_EVENT_ID":
+                                case 551:
+                                    message.dimension = 551;
+                                    break;
+                                case "VIDEO_LIVE_STREAM_EVENT_NAME":
+                                case 552:
+                                    message.dimension = 552;
+                                    break;
                                 case "VIDEO_MEASUREMENT_SOURCE":
                                 case 601:
                                     message.dimension = 601;
@@ -96014,6 +105071,10 @@
                                 case "VIDEO_STITCHER_TYPE_NAME":
                                 case 753:
                                     message.dimension = 753;
+                                    break;
+                                case "WEB_PROPERTY_CODE":
+                                case 730:
+                                    message.dimension = 730;
                                     break;
                                 case "WEEK":
                                 case 5:
@@ -97171,6 +106232,8 @@
                          * @property {number} HISTORICAL=1 HISTORICAL value
                          * @property {number} REACH=5 REACH value
                          * @property {number} PRIVACY_AND_MESSAGING=6 PRIVACY_AND_MESSAGING value
+                         * @property {number} REVENUE_VERIFICATION=7 REVENUE_VERIFICATION value
+                         * @property {number} PARTNER_FINANCE=8 PARTNER_FINANCE value
                          * @property {number} AD_SPEED=13 AD_SPEED value
                          */
                         ReportDefinition.ReportType = (function() {
@@ -97179,6 +106242,8 @@
                             values[valuesById[1] = "HISTORICAL"] = 1;
                             values[valuesById[5] = "REACH"] = 5;
                             values[valuesById[6] = "PRIVACY_AND_MESSAGING"] = 6;
+                            values[valuesById[7] = "REVENUE_VERIFICATION"] = 7;
+                            values[valuesById[8] = "PARTNER_FINANCE"] = 8;
                             values[valuesById[13] = "AD_SPEED"] = 13;
                             return values;
                         })();
@@ -97210,6 +106275,7 @@
                          * @property {number} AD_EXPERIENCES_TYPE_NAME=642 AD_EXPERIENCES_TYPE_NAME value
                          * @property {number} AD_LOCATION=390 AD_LOCATION value
                          * @property {number} AD_LOCATION_NAME=391 AD_LOCATION_NAME value
+                         * @property {number} AD_REQUEST_SIZES=541 AD_REQUEST_SIZES value
                          * @property {number} AD_TECHNOLOGY_PROVIDER_DOMAIN=620 AD_TECHNOLOGY_PROVIDER_DOMAIN value
                          * @property {number} AD_TECHNOLOGY_PROVIDER_ID=621 AD_TECHNOLOGY_PROVIDER_ID value
                          * @property {number} AD_TECHNOLOGY_PROVIDER_NAME=622 AD_TECHNOLOGY_PROVIDER_NAME value
@@ -97282,13 +106348,33 @@
                          * @property {number} AGENCY_LEVEL_3_NAME=570 AGENCY_LEVEL_3_NAME value
                          * @property {number} AGE_BRACKET=508 AGE_BRACKET value
                          * @property {number} AGE_BRACKET_NAME=582 AGE_BRACKET_NAME value
+                         * @property {number} ANALYTICS_PROPERTY_ID=733 ANALYTICS_PROPERTY_ID value
+                         * @property {number} ANALYTICS_PROPERTY_NAME=767 ANALYTICS_PROPERTY_NAME value
                          * @property {number} APP_TRACKING_TRANSPARENCY_CONSENT_STATUS=442 APP_TRACKING_TRANSPARENCY_CONSENT_STATUS value
                          * @property {number} APP_TRACKING_TRANSPARENCY_CONSENT_STATUS_NAME=443 APP_TRACKING_TRANSPARENCY_CONSENT_STATUS_NAME value
                          * @property {number} APP_VERSION=392 APP_VERSION value
                          * @property {number} AUCTION_PACKAGE_DEAL=579 AUCTION_PACKAGE_DEAL value
                          * @property {number} AUCTION_PACKAGE_DEAL_ID=571 AUCTION_PACKAGE_DEAL_ID value
+                         * @property {number} AUDIENCE_SEGMENT_BILLABLE=594 AUDIENCE_SEGMENT_BILLABLE value
+                         * @property {number} AUDIENCE_SEGMENT_DATA_PROVIDER_ID=613 AUDIENCE_SEGMENT_DATA_PROVIDER_ID value
+                         * @property {number} AUDIENCE_SEGMENT_DATA_PROVIDER_NAME=614 AUDIENCE_SEGMENT_DATA_PROVIDER_NAME value
+                         * @property {number} AUDIENCE_SEGMENT_ID_BILLABLE=595 AUDIENCE_SEGMENT_ID_BILLABLE value
                          * @property {number} AUDIENCE_SEGMENT_ID_TARGETED=584 AUDIENCE_SEGMENT_ID_TARGETED value
                          * @property {number} AUDIENCE_SEGMENT_TARGETED=585 AUDIENCE_SEGMENT_TARGETED value
+                         * @property {number} AUDIENCE_SEGMENT_TARGETED_AD_ID_USER_SIZE=605 AUDIENCE_SEGMENT_TARGETED_AD_ID_USER_SIZE value
+                         * @property {number} AUDIENCE_SEGMENT_TARGETED_AMAZON_FIRE_USER_SIZE=606 AUDIENCE_SEGMENT_TARGETED_AMAZON_FIRE_USER_SIZE value
+                         * @property {number} AUDIENCE_SEGMENT_TARGETED_ANDROID_TV_USER_SIZE=607 AUDIENCE_SEGMENT_TARGETED_ANDROID_TV_USER_SIZE value
+                         * @property {number} AUDIENCE_SEGMENT_TARGETED_APPLE_TV_USER_SIZE=608 AUDIENCE_SEGMENT_TARGETED_APPLE_TV_USER_SIZE value
+                         * @property {number} AUDIENCE_SEGMENT_TARGETED_IDFA_USER_SIZE=609 AUDIENCE_SEGMENT_TARGETED_IDFA_USER_SIZE value
+                         * @property {number} AUDIENCE_SEGMENT_TARGETED_MOBILE_WEB_USER_SIZE=610 AUDIENCE_SEGMENT_TARGETED_MOBILE_WEB_USER_SIZE value
+                         * @property {number} AUDIENCE_SEGMENT_TARGETED_PLAYSTATION_USER_SIZE=611 AUDIENCE_SEGMENT_TARGETED_PLAYSTATION_USER_SIZE value
+                         * @property {number} AUDIENCE_SEGMENT_TARGETED_PPID_USER_SIZE=612 AUDIENCE_SEGMENT_TARGETED_PPID_USER_SIZE value
+                         * @property {number} AUDIENCE_SEGMENT_TARGETED_ROKU_USER_SIZE=615 AUDIENCE_SEGMENT_TARGETED_ROKU_USER_SIZE value
+                         * @property {number} AUDIENCE_SEGMENT_TARGETED_SAMSUNG_TV_USER_SIZE=616 AUDIENCE_SEGMENT_TARGETED_SAMSUNG_TV_USER_SIZE value
+                         * @property {number} AUDIENCE_SEGMENT_TARGETED_SIZE=618 AUDIENCE_SEGMENT_TARGETED_SIZE value
+                         * @property {number} AUDIENCE_SEGMENT_TARGETED_STATUS=628 AUDIENCE_SEGMENT_TARGETED_STATUS value
+                         * @property {number} AUDIENCE_SEGMENT_TARGETED_STATUS_NAME=617 AUDIENCE_SEGMENT_TARGETED_STATUS_NAME value
+                         * @property {number} AUDIENCE_SEGMENT_TARGETED_XBOX_USER_SIZE=619 AUDIENCE_SEGMENT_TARGETED_XBOX_USER_SIZE value
                          * @property {number} AUTO_REFRESHED_TRAFFIC=421 AUTO_REFRESHED_TRAFFIC value
                          * @property {number} AUTO_REFRESHED_TRAFFIC_NAME=422 AUTO_REFRESHED_TRAFFIC_NAME value
                          * @property {number} BIDDER_ENCRYPTED_ID=493 BIDDER_ENCRYPTED_ID value
@@ -97318,6 +106404,10 @@
                          * @property {number} CLASSIFIED_ADVERTISER_NAME=134 CLASSIFIED_ADVERTISER_NAME value
                          * @property {number} CLASSIFIED_BRAND_ID=243 CLASSIFIED_BRAND_ID value
                          * @property {number} CLASSIFIED_BRAND_NAME=244 CLASSIFIED_BRAND_NAME value
+                         * @property {number} CONTENT_BUNDLE_ID=460 CONTENT_BUNDLE_ID value
+                         * @property {number} CONTENT_BUNDLE_NAME=461 CONTENT_BUNDLE_NAME value
+                         * @property {number} CONTENT_CMS_METADATA_KV_NAMESPACE_ID=462 CONTENT_CMS_METADATA_KV_NAMESPACE_ID value
+                         * @property {number} CONTENT_CMS_METADATA_KV_NAMESPACE_NAME=463 CONTENT_CMS_METADATA_KV_NAMESPACE_NAME value
                          * @property {number} CONTENT_CMS_NAME=643 CONTENT_CMS_NAME value
                          * @property {number} CONTENT_CMS_VIDEO_ID=644 CONTENT_CMS_VIDEO_ID value
                          * @property {number} CONTENT_ID=246 CONTENT_ID value
@@ -97427,6 +106517,7 @@
                          * @property {number} IS_FIRST_LOOK_DEAL=401 IS_FIRST_LOOK_DEAL value
                          * @property {number} KEY_VALUES_ID=214 KEY_VALUES_ID value
                          * @property {number} KEY_VALUES_NAME=215 KEY_VALUES_NAME value
+                         * @property {number} KEY_VALUES_SET=713 KEY_VALUES_SET value
                          * @property {number} LINE_ITEM_AGENCY=663 LINE_ITEM_AGENCY value
                          * @property {number} LINE_ITEM_ARCHIVED=188 LINE_ITEM_ARCHIVED value
                          * @property {number} LINE_ITEM_COMPANION_DELIVERY_OPTION=204 LINE_ITEM_COMPANION_DELIVERY_OPTION value
@@ -97553,6 +106644,10 @@
                          * @property {number} PAGE_PATH=511 PAGE_PATH value
                          * @property {number} PAGE_TITLE_AND_SCREEN_CLASS=512 PAGE_TITLE_AND_SCREEN_CLASS value
                          * @property {number} PAGE_TITLE_AND_SCREEN_NAME=513 PAGE_TITLE_AND_SCREEN_NAME value
+                         * @property {number} PARTNER_MANAGEMENT_ASSIGNMENT_ID=657 PARTNER_MANAGEMENT_ASSIGNMENT_ID value
+                         * @property {number} PARTNER_MANAGEMENT_ASSIGNMENT_NAME=658 PARTNER_MANAGEMENT_ASSIGNMENT_NAME value
+                         * @property {number} PARTNER_MANAGEMENT_PARTNER_ID=655 PARTNER_MANAGEMENT_PARTNER_ID value
+                         * @property {number} PARTNER_MANAGEMENT_PARTNER_NAME=656 PARTNER_MANAGEMENT_PARTNER_NAME value
                          * @property {number} PLACEMENT_ID=113 PLACEMENT_ID value
                          * @property {number} PLACEMENT_ID_ALL=144 PLACEMENT_ID_ALL value
                          * @property {number} PLACEMENT_NAME=114 PLACEMENT_NAME value
@@ -97599,6 +106694,7 @@
                          * @property {number} REQUESTED_AD_SIZES=352 REQUESTED_AD_SIZES value
                          * @property {number} REQUEST_TYPE=146 REQUEST_TYPE value
                          * @property {number} REQUEST_TYPE_NAME=147 REQUEST_TYPE_NAME value
+                         * @property {number} REVENUE_VERIFICATION_ID=645 REVENUE_VERIFICATION_ID value
                          * @property {number} SERVER_SIDE_UNWRAPPING_ELIGIBLE=597 SERVER_SIDE_UNWRAPPING_ELIGIBLE value
                          * @property {number} SERVING_RESTRICTION=631 SERVING_RESTRICTION value
                          * @property {number} SERVING_RESTRICTION_NAME=632 SERVING_RESTRICTION_NAME value
@@ -97618,6 +106714,8 @@
                          * @property {number} UNIFIED_PRICING_RULE_NAME=394 UNIFIED_PRICING_RULE_NAME value
                          * @property {number} URL=506 URL value
                          * @property {number} URL_ID=507 URL_ID value
+                         * @property {number} USER_MESSAGES_CHOICE=702 USER_MESSAGES_CHOICE value
+                         * @property {number} USER_MESSAGES_CHOICE_NAME=703 USER_MESSAGES_CHOICE_NAME value
                          * @property {number} USER_MESSAGES_ENTITLEMENT_SOURCE=635 USER_MESSAGES_ENTITLEMENT_SOURCE value
                          * @property {number} USER_MESSAGES_ENTITLEMENT_SOURCE_NAME=636 USER_MESSAGES_ENTITLEMENT_SOURCE_NAME value
                          * @property {number} USER_MESSAGES_OPERATING_SYSTEM_CRITERIA_ID=637 USER_MESSAGES_OPERATING_SYSTEM_CRITERIA_ID value
@@ -97639,6 +106737,12 @@
                          * @property {number} VIDEO_CONTINUOUS_PLAY_TYPE=721 VIDEO_CONTINUOUS_PLAY_TYPE value
                          * @property {number} VIDEO_CONTINUOUS_PLAY_TYPE_NAME=722 VIDEO_CONTINUOUS_PLAY_TYPE_NAME value
                          * @property {number} VIDEO_FALLBACK_POSITION=530 VIDEO_FALLBACK_POSITION value
+                         * @property {number} VIDEO_LIVE_STREAM_EVENT_AD_BREAK_DURATION=547 VIDEO_LIVE_STREAM_EVENT_AD_BREAK_DURATION value
+                         * @property {number} VIDEO_LIVE_STREAM_EVENT_AD_BREAK_ID=548 VIDEO_LIVE_STREAM_EVENT_AD_BREAK_ID value
+                         * @property {number} VIDEO_LIVE_STREAM_EVENT_AD_BREAK_NAME=549 VIDEO_LIVE_STREAM_EVENT_AD_BREAK_NAME value
+                         * @property {number} VIDEO_LIVE_STREAM_EVENT_AD_BREAK_TIME=550 VIDEO_LIVE_STREAM_EVENT_AD_BREAK_TIME value
+                         * @property {number} VIDEO_LIVE_STREAM_EVENT_ID=551 VIDEO_LIVE_STREAM_EVENT_ID value
+                         * @property {number} VIDEO_LIVE_STREAM_EVENT_NAME=552 VIDEO_LIVE_STREAM_EVENT_NAME value
                          * @property {number} VIDEO_MEASUREMENT_SOURCE=601 VIDEO_MEASUREMENT_SOURCE value
                          * @property {number} VIDEO_MEASUREMENT_SOURCE_NAME=602 VIDEO_MEASUREMENT_SOURCE_NAME value
                          * @property {number} VIDEO_PLCMT=172 VIDEO_PLCMT value
@@ -97649,6 +106753,7 @@
                          * @property {number} VIDEO_SDK_VERSION_NAME=441 VIDEO_SDK_VERSION_NAME value
                          * @property {number} VIDEO_STITCHER_TYPE=752 VIDEO_STITCHER_TYPE value
                          * @property {number} VIDEO_STITCHER_TYPE_NAME=753 VIDEO_STITCHER_TYPE_NAME value
+                         * @property {number} WEB_PROPERTY_CODE=730 WEB_PROPERTY_CODE value
                          * @property {number} WEEK=5 WEEK value
                          * @property {number} YIELD_GROUP_BUYER_NAME=184 YIELD_GROUP_BUYER_NAME value
                          * @property {number} YIELD_GROUP_BUYER_TAG_NAME=627 YIELD_GROUP_BUYER_TAG_NAME value
@@ -97884,6 +106989,7 @@
                             values[valuesById[642] = "AD_EXPERIENCES_TYPE_NAME"] = 642;
                             values[valuesById[390] = "AD_LOCATION"] = 390;
                             values[valuesById[391] = "AD_LOCATION_NAME"] = 391;
+                            values[valuesById[541] = "AD_REQUEST_SIZES"] = 541;
                             values[valuesById[620] = "AD_TECHNOLOGY_PROVIDER_DOMAIN"] = 620;
                             values[valuesById[621] = "AD_TECHNOLOGY_PROVIDER_ID"] = 621;
                             values[valuesById[622] = "AD_TECHNOLOGY_PROVIDER_NAME"] = 622;
@@ -97956,13 +107062,33 @@
                             values[valuesById[570] = "AGENCY_LEVEL_3_NAME"] = 570;
                             values[valuesById[508] = "AGE_BRACKET"] = 508;
                             values[valuesById[582] = "AGE_BRACKET_NAME"] = 582;
+                            values[valuesById[733] = "ANALYTICS_PROPERTY_ID"] = 733;
+                            values[valuesById[767] = "ANALYTICS_PROPERTY_NAME"] = 767;
                             values[valuesById[442] = "APP_TRACKING_TRANSPARENCY_CONSENT_STATUS"] = 442;
                             values[valuesById[443] = "APP_TRACKING_TRANSPARENCY_CONSENT_STATUS_NAME"] = 443;
                             values[valuesById[392] = "APP_VERSION"] = 392;
                             values[valuesById[579] = "AUCTION_PACKAGE_DEAL"] = 579;
                             values[valuesById[571] = "AUCTION_PACKAGE_DEAL_ID"] = 571;
+                            values[valuesById[594] = "AUDIENCE_SEGMENT_BILLABLE"] = 594;
+                            values[valuesById[613] = "AUDIENCE_SEGMENT_DATA_PROVIDER_ID"] = 613;
+                            values[valuesById[614] = "AUDIENCE_SEGMENT_DATA_PROVIDER_NAME"] = 614;
+                            values[valuesById[595] = "AUDIENCE_SEGMENT_ID_BILLABLE"] = 595;
                             values[valuesById[584] = "AUDIENCE_SEGMENT_ID_TARGETED"] = 584;
                             values[valuesById[585] = "AUDIENCE_SEGMENT_TARGETED"] = 585;
+                            values[valuesById[605] = "AUDIENCE_SEGMENT_TARGETED_AD_ID_USER_SIZE"] = 605;
+                            values[valuesById[606] = "AUDIENCE_SEGMENT_TARGETED_AMAZON_FIRE_USER_SIZE"] = 606;
+                            values[valuesById[607] = "AUDIENCE_SEGMENT_TARGETED_ANDROID_TV_USER_SIZE"] = 607;
+                            values[valuesById[608] = "AUDIENCE_SEGMENT_TARGETED_APPLE_TV_USER_SIZE"] = 608;
+                            values[valuesById[609] = "AUDIENCE_SEGMENT_TARGETED_IDFA_USER_SIZE"] = 609;
+                            values[valuesById[610] = "AUDIENCE_SEGMENT_TARGETED_MOBILE_WEB_USER_SIZE"] = 610;
+                            values[valuesById[611] = "AUDIENCE_SEGMENT_TARGETED_PLAYSTATION_USER_SIZE"] = 611;
+                            values[valuesById[612] = "AUDIENCE_SEGMENT_TARGETED_PPID_USER_SIZE"] = 612;
+                            values[valuesById[615] = "AUDIENCE_SEGMENT_TARGETED_ROKU_USER_SIZE"] = 615;
+                            values[valuesById[616] = "AUDIENCE_SEGMENT_TARGETED_SAMSUNG_TV_USER_SIZE"] = 616;
+                            values[valuesById[618] = "AUDIENCE_SEGMENT_TARGETED_SIZE"] = 618;
+                            values[valuesById[628] = "AUDIENCE_SEGMENT_TARGETED_STATUS"] = 628;
+                            values[valuesById[617] = "AUDIENCE_SEGMENT_TARGETED_STATUS_NAME"] = 617;
+                            values[valuesById[619] = "AUDIENCE_SEGMENT_TARGETED_XBOX_USER_SIZE"] = 619;
                             values[valuesById[421] = "AUTO_REFRESHED_TRAFFIC"] = 421;
                             values[valuesById[422] = "AUTO_REFRESHED_TRAFFIC_NAME"] = 422;
                             values[valuesById[493] = "BIDDER_ENCRYPTED_ID"] = 493;
@@ -97992,6 +107118,10 @@
                             values[valuesById[134] = "CLASSIFIED_ADVERTISER_NAME"] = 134;
                             values[valuesById[243] = "CLASSIFIED_BRAND_ID"] = 243;
                             values[valuesById[244] = "CLASSIFIED_BRAND_NAME"] = 244;
+                            values[valuesById[460] = "CONTENT_BUNDLE_ID"] = 460;
+                            values[valuesById[461] = "CONTENT_BUNDLE_NAME"] = 461;
+                            values[valuesById[462] = "CONTENT_CMS_METADATA_KV_NAMESPACE_ID"] = 462;
+                            values[valuesById[463] = "CONTENT_CMS_METADATA_KV_NAMESPACE_NAME"] = 463;
                             values[valuesById[643] = "CONTENT_CMS_NAME"] = 643;
                             values[valuesById[644] = "CONTENT_CMS_VIDEO_ID"] = 644;
                             values[valuesById[246] = "CONTENT_ID"] = 246;
@@ -98101,6 +107231,7 @@
                             values[valuesById[401] = "IS_FIRST_LOOK_DEAL"] = 401;
                             values[valuesById[214] = "KEY_VALUES_ID"] = 214;
                             values[valuesById[215] = "KEY_VALUES_NAME"] = 215;
+                            values[valuesById[713] = "KEY_VALUES_SET"] = 713;
                             values[valuesById[663] = "LINE_ITEM_AGENCY"] = 663;
                             values[valuesById[188] = "LINE_ITEM_ARCHIVED"] = 188;
                             values[valuesById[204] = "LINE_ITEM_COMPANION_DELIVERY_OPTION"] = 204;
@@ -98227,6 +107358,10 @@
                             values[valuesById[511] = "PAGE_PATH"] = 511;
                             values[valuesById[512] = "PAGE_TITLE_AND_SCREEN_CLASS"] = 512;
                             values[valuesById[513] = "PAGE_TITLE_AND_SCREEN_NAME"] = 513;
+                            values[valuesById[657] = "PARTNER_MANAGEMENT_ASSIGNMENT_ID"] = 657;
+                            values[valuesById[658] = "PARTNER_MANAGEMENT_ASSIGNMENT_NAME"] = 658;
+                            values[valuesById[655] = "PARTNER_MANAGEMENT_PARTNER_ID"] = 655;
+                            values[valuesById[656] = "PARTNER_MANAGEMENT_PARTNER_NAME"] = 656;
                             values[valuesById[113] = "PLACEMENT_ID"] = 113;
                             values[valuesById[144] = "PLACEMENT_ID_ALL"] = 144;
                             values[valuesById[114] = "PLACEMENT_NAME"] = 114;
@@ -98273,6 +107408,7 @@
                             values[valuesById[352] = "REQUESTED_AD_SIZES"] = 352;
                             values[valuesById[146] = "REQUEST_TYPE"] = 146;
                             values[valuesById[147] = "REQUEST_TYPE_NAME"] = 147;
+                            values[valuesById[645] = "REVENUE_VERIFICATION_ID"] = 645;
                             values[valuesById[597] = "SERVER_SIDE_UNWRAPPING_ELIGIBLE"] = 597;
                             values[valuesById[631] = "SERVING_RESTRICTION"] = 631;
                             values[valuesById[632] = "SERVING_RESTRICTION_NAME"] = 632;
@@ -98292,6 +107428,8 @@
                             values[valuesById[394] = "UNIFIED_PRICING_RULE_NAME"] = 394;
                             values[valuesById[506] = "URL"] = 506;
                             values[valuesById[507] = "URL_ID"] = 507;
+                            values[valuesById[702] = "USER_MESSAGES_CHOICE"] = 702;
+                            values[valuesById[703] = "USER_MESSAGES_CHOICE_NAME"] = 703;
                             values[valuesById[635] = "USER_MESSAGES_ENTITLEMENT_SOURCE"] = 635;
                             values[valuesById[636] = "USER_MESSAGES_ENTITLEMENT_SOURCE_NAME"] = 636;
                             values[valuesById[637] = "USER_MESSAGES_OPERATING_SYSTEM_CRITERIA_ID"] = 637;
@@ -98313,6 +107451,12 @@
                             values[valuesById[721] = "VIDEO_CONTINUOUS_PLAY_TYPE"] = 721;
                             values[valuesById[722] = "VIDEO_CONTINUOUS_PLAY_TYPE_NAME"] = 722;
                             values[valuesById[530] = "VIDEO_FALLBACK_POSITION"] = 530;
+                            values[valuesById[547] = "VIDEO_LIVE_STREAM_EVENT_AD_BREAK_DURATION"] = 547;
+                            values[valuesById[548] = "VIDEO_LIVE_STREAM_EVENT_AD_BREAK_ID"] = 548;
+                            values[valuesById[549] = "VIDEO_LIVE_STREAM_EVENT_AD_BREAK_NAME"] = 549;
+                            values[valuesById[550] = "VIDEO_LIVE_STREAM_EVENT_AD_BREAK_TIME"] = 550;
+                            values[valuesById[551] = "VIDEO_LIVE_STREAM_EVENT_ID"] = 551;
+                            values[valuesById[552] = "VIDEO_LIVE_STREAM_EVENT_NAME"] = 552;
                             values[valuesById[601] = "VIDEO_MEASUREMENT_SOURCE"] = 601;
                             values[valuesById[602] = "VIDEO_MEASUREMENT_SOURCE_NAME"] = 602;
                             values[valuesById[172] = "VIDEO_PLCMT"] = 172;
@@ -98323,6 +107467,7 @@
                             values[valuesById[441] = "VIDEO_SDK_VERSION_NAME"] = 441;
                             values[valuesById[752] = "VIDEO_STITCHER_TYPE"] = 752;
                             values[valuesById[753] = "VIDEO_STITCHER_TYPE_NAME"] = 753;
+                            values[valuesById[730] = "WEB_PROPERTY_CODE"] = 730;
                             values[valuesById[5] = "WEEK"] = 5;
                             values[valuesById[184] = "YIELD_GROUP_BUYER_NAME"] = 184;
                             values[valuesById[627] = "YIELD_GROUP_BUYER_TAG_NAME"] = 627;
@@ -98654,6 +107799,8 @@
                          * @property {number} AD_SERVER_IMPRESSIONS=6 AD_SERVER_IMPRESSIONS value
                          * @property {number} AD_SERVER_IMPRESSIONS_WITH_COMPANION=222 AD_SERVER_IMPRESSIONS_WITH_COMPANION value
                          * @property {number} AD_SERVER_INACTIVE_BEGIN_TO_RENDER_IMPRESSIONS=338 AD_SERVER_INACTIVE_BEGIN_TO_RENDER_IMPRESSIONS value
+                         * @property {number} AD_SERVER_OPPORTUNITIES_FROM_ERRORS=461 AD_SERVER_OPPORTUNITIES_FROM_ERRORS value
+                         * @property {number} AD_SERVER_OPPORTUNITIES_FROM_IMPRESSIONS=462 AD_SERVER_OPPORTUNITIES_FROM_IMPRESSIONS value
                          * @property {number} AD_SERVER_PERCENT_CLICKS=12 AD_SERVER_PERCENT_CLICKS value
                          * @property {number} AD_SERVER_PERCENT_IMPRESSIONS=11 AD_SERVER_PERCENT_IMPRESSIONS value
                          * @property {number} AD_SERVER_PERCENT_REVENUE=35 AD_SERVER_PERCENT_REVENUE value
@@ -98727,6 +107874,7 @@
                          * @property {number} ATN_TOTAL_LOADED_ADS=387 ATN_TOTAL_LOADED_ADS value
                          * @property {number} ATN_VALID_AD_REQUESTS=389 ATN_VALID_AD_REQUESTS value
                          * @property {number} ATN_YIELD_GROUP_MEDIATION_PASSBACKS=390 ATN_YIELD_GROUP_MEDIATION_PASSBACKS value
+                         * @property {number} AUDIENCE_SEGMENT_COST=558 AUDIENCE_SEGMENT_COST value
                          * @property {number} AVERAGE_ECPM=37 AVERAGE_ECPM value
                          * @property {number} AVERAGE_ECPM_WITHOUT_CPD=5 AVERAGE_ECPM_WITHOUT_CPD value
                          * @property {number} AVERAGE_ENGAGEMENT_SECONDS_PER_SESSION=224 AVERAGE_ENGAGEMENT_SECONDS_PER_SESSION value
@@ -98799,6 +107947,21 @@
                          * @property {number} MUTE_ELIGIBLE_IMPRESSIONS=409 MUTE_ELIGIBLE_IMPRESSIONS value
                          * @property {number} OPPORTUNITIES=463 OPPORTUNITIES value
                          * @property {number} OVERDELIVERED_IMPRESSIONS=432 OVERDELIVERED_IMPRESSIONS value
+                         * @property {number} PARTNER_FINANCE_GROSS_REVENUE=648 PARTNER_FINANCE_GROSS_REVENUE value
+                         * @property {number} PARTNER_FINANCE_HOST_ECPM=649 PARTNER_FINANCE_HOST_ECPM value
+                         * @property {number} PARTNER_FINANCE_HOST_IMPRESSIONS=650 PARTNER_FINANCE_HOST_IMPRESSIONS value
+                         * @property {number} PARTNER_FINANCE_HOST_REVENUE=651 PARTNER_FINANCE_HOST_REVENUE value
+                         * @property {number} PARTNER_FINANCE_PARTNER_ECPM=652 PARTNER_FINANCE_PARTNER_ECPM value
+                         * @property {number} PARTNER_FINANCE_PARTNER_REVENUE=653 PARTNER_FINANCE_PARTNER_REVENUE value
+                         * @property {number} PARTNER_MANAGEMENT_GROSS_REVENUE=533 PARTNER_MANAGEMENT_GROSS_REVENUE value
+                         * @property {number} PARTNER_MANAGEMENT_HOST_CLICKS=534 PARTNER_MANAGEMENT_HOST_CLICKS value
+                         * @property {number} PARTNER_MANAGEMENT_HOST_CTR=535 PARTNER_MANAGEMENT_HOST_CTR value
+                         * @property {number} PARTNER_MANAGEMENT_HOST_IMPRESSIONS=536 PARTNER_MANAGEMENT_HOST_IMPRESSIONS value
+                         * @property {number} PARTNER_MANAGEMENT_PARTNER_CLICKS=537 PARTNER_MANAGEMENT_PARTNER_CLICKS value
+                         * @property {number} PARTNER_MANAGEMENT_PARTNER_CTR=538 PARTNER_MANAGEMENT_PARTNER_CTR value
+                         * @property {number} PARTNER_MANAGEMENT_PARTNER_IMPRESSIONS=539 PARTNER_MANAGEMENT_PARTNER_IMPRESSIONS value
+                         * @property {number} PARTNER_MANAGEMENT_TOTAL_CONTENT_VIEWS=540 PARTNER_MANAGEMENT_TOTAL_CONTENT_VIEWS value
+                         * @property {number} PARTNER_MANAGEMENT_UNFILLED_IMPRESSIONS=541 PARTNER_MANAGEMENT_UNFILLED_IMPRESSIONS value
                          * @property {number} PARTNER_SALES_FILLED_POD_REQUESTS=135 PARTNER_SALES_FILLED_POD_REQUESTS value
                          * @property {number} PARTNER_SALES_FILL_RATE=136 PARTNER_SALES_FILL_RATE value
                          * @property {number} PARTNER_SALES_PARTNER_MATCH_RATE=137 PARTNER_SALES_PARTNER_MATCH_RATE value
@@ -98816,6 +107979,11 @@
                          * @property {number} RETENTION=238 RETENTION value
                          * @property {number} REVENUE=36 REVENUE value
                          * @property {number} REVENUE_PAID_THROUGH_MCM_AUTOPAYMENT=214 REVENUE_PAID_THROUGH_MCM_AUTOPAYMENT value
+                         * @property {number} REVENUE_VERIFICATION_CPD_REVENUE=560 REVENUE_VERIFICATION_CPD_REVENUE value
+                         * @property {number} REVENUE_VERIFICATION_GROSS_CPD_REVENUE=559 REVENUE_VERIFICATION_GROSS_CPD_REVENUE value
+                         * @property {number} REVENUE_VERIFICATION_GROSS_REVENUE_WITHOUT_CPD=561 REVENUE_VERIFICATION_GROSS_REVENUE_WITHOUT_CPD value
+                         * @property {number} REVENUE_VERIFICATION_IMPRESSIONS=564 REVENUE_VERIFICATION_IMPRESSIONS value
+                         * @property {number} REVENUE_VERIFICATION_REVENUE_WITHOUT_CPD=567 REVENUE_VERIFICATION_REVENUE_WITHOUT_CPD value
                          * @property {number} REVENUE_WITHOUT_CPD=4 REVENUE_WITHOUT_CPD value
                          * @property {number} REWARDS_GRANTED=413 REWARDS_GRANTED value
                          * @property {number} RICH_MEDIA_AVERAGE_DISPLAY_TIME=587 RICH_MEDIA_AVERAGE_DISPLAY_TIME value
@@ -98878,7 +108046,6 @@
                          * @property {number} USER_MESSAGES_AD_BLOCKING_RECOVERY_ALLOWLISTED_COUNT=487 USER_MESSAGES_AD_BLOCKING_RECOVERY_ALLOWLISTED_COUNT value
                          * @property {number} USER_MESSAGES_AD_BLOCKING_RECOVERY_MESSAGES_SHOWN=488 USER_MESSAGES_AD_BLOCKING_RECOVERY_MESSAGES_SHOWN value
                          * @property {number} USER_MESSAGES_ALLOW_ADS_PAGEVIEWS=489 USER_MESSAGES_ALLOW_ADS_PAGEVIEWS value
-                         * @property {number} USER_MESSAGES_CCPA_MESSAGES_SHOWN=490 USER_MESSAGES_CCPA_MESSAGES_SHOWN value
                          * @property {number} USER_MESSAGES_IDFA_ATT_ALERTS_SHOWN=491 USER_MESSAGES_IDFA_ATT_ALERTS_SHOWN value
                          * @property {number} USER_MESSAGES_IDFA_ATT_CONSENT=492 USER_MESSAGES_IDFA_ATT_CONSENT value
                          * @property {number} USER_MESSAGES_IDFA_ATT_CONSENT_RATE=493 USER_MESSAGES_IDFA_ATT_CONSENT_RATE value
@@ -98893,6 +108060,8 @@
                          * @property {number} USER_MESSAGES_TOTAL_ESTIMATED_REVENUE=500 USER_MESSAGES_TOTAL_ESTIMATED_REVENUE value
                          * @property {number} USER_MESSAGES_UPTC_MESSAGES_SHOWN=501 USER_MESSAGES_UPTC_MESSAGES_SHOWN value
                          * @property {number} USER_MESSAGES_UPTC_PERSONALIZATION_OPT_OUT_RATIO=502 USER_MESSAGES_UPTC_PERSONALIZATION_OPT_OUT_RATIO value
+                         * @property {number} USER_MESSAGES_US_STATES_MESSAGES_SHOWN=490 USER_MESSAGES_US_STATES_MESSAGES_SHOWN value
+                         * @property {number} USER_MESSAGES_US_STATES_OPT_OUT_SELECTIONS=586 USER_MESSAGES_US_STATES_OPT_OUT_SELECTIONS value
                          * @property {number} VIDEO_ERROR_100_COUNT=180 VIDEO_ERROR_100_COUNT value
                          * @property {number} VIDEO_ERROR_101_COUNT=181 VIDEO_ERROR_101_COUNT value
                          * @property {number} VIDEO_ERROR_102_COUNT=182 VIDEO_ERROR_102_COUNT value
@@ -98974,6 +108143,16 @@
                          * @property {number} VIDEO_REAL_TIME_TOTAL_ERROR_COUNT=175 VIDEO_REAL_TIME_TOTAL_ERROR_COUNT value
                          * @property {number} VIDEO_REAL_TIME_TOTAL_QUERIES=142 VIDEO_REAL_TIME_TOTAL_QUERIES value
                          * @property {number} VIDEO_REAL_TIME_UNMATCHED_QUERIES=141 VIDEO_REAL_TIME_UNMATCHED_QUERIES value
+                         * @property {number} VIDEO_TRUE_OPPORTUNITIES_TOTAL_BREAK_END=279 VIDEO_TRUE_OPPORTUNITIES_TOTAL_BREAK_END value
+                         * @property {number} VIDEO_TRUE_OPPORTUNITIES_TOTAL_BREAK_START=280 VIDEO_TRUE_OPPORTUNITIES_TOTAL_BREAK_START value
+                         * @property {number} VIDEO_TRUE_OPPORTUNITIES_TOTAL_CAPPED_OPPORTUNITIES_ADBREAK=281 VIDEO_TRUE_OPPORTUNITIES_TOTAL_CAPPED_OPPORTUNITIES_ADBREAK value
+                         * @property {number} VIDEO_TRUE_OPPORTUNITIES_TOTAL_DURATION_ADBREAK=283 VIDEO_TRUE_OPPORTUNITIES_TOTAL_DURATION_ADBREAK value
+                         * @property {number} VIDEO_TRUE_OPPORTUNITIES_TOTAL_MATCHED_DURATION_ADBREAK=285 VIDEO_TRUE_OPPORTUNITIES_TOTAL_MATCHED_DURATION_ADBREAK value
+                         * @property {number} VIDEO_TRUE_OPPORTUNITIES_TOTAL_MATCHED_OPPORTUNITIES_ADBREAK=287 VIDEO_TRUE_OPPORTUNITIES_TOTAL_MATCHED_OPPORTUNITIES_ADBREAK value
+                         * @property {number} VIDEO_TRUE_OPPORTUNITIES_TOTAL_VIEWED_OPPORTUNITIES_ADBREAK=289 VIDEO_TRUE_OPPORTUNITIES_TOTAL_VIEWED_OPPORTUNITIES_ADBREAK value
+                         * @property {number} VIDEO_TRUE_VIEWS=392 VIDEO_TRUE_VIEWS value
+                         * @property {number} VIDEO_TRUE_VIEW_SKIP_RATE=393 VIDEO_TRUE_VIEW_SKIP_RATE value
+                         * @property {number} VIDEO_TRUE_VIEW_VIEW_THROUGH_RATE=394 VIDEO_TRUE_VIEW_VIEW_THROUGH_RATE value
                          * @property {number} VIDEO_VIEWERSHIP_AUTO_PLAYS=103 VIDEO_VIEWERSHIP_AUTO_PLAYS value
                          * @property {number} VIDEO_VIEWERSHIP_AVERAGE_VIEW_RATE=104 VIDEO_VIEWERSHIP_AVERAGE_VIEW_RATE value
                          * @property {number} VIDEO_VIEWERSHIP_AVERAGE_VIEW_TIME=105 VIDEO_VIEWERSHIP_AVERAGE_VIEW_TIME value
@@ -99121,6 +108300,8 @@
                             values[valuesById[6] = "AD_SERVER_IMPRESSIONS"] = 6;
                             values[valuesById[222] = "AD_SERVER_IMPRESSIONS_WITH_COMPANION"] = 222;
                             values[valuesById[338] = "AD_SERVER_INACTIVE_BEGIN_TO_RENDER_IMPRESSIONS"] = 338;
+                            values[valuesById[461] = "AD_SERVER_OPPORTUNITIES_FROM_ERRORS"] = 461;
+                            values[valuesById[462] = "AD_SERVER_OPPORTUNITIES_FROM_IMPRESSIONS"] = 462;
                             values[valuesById[12] = "AD_SERVER_PERCENT_CLICKS"] = 12;
                             values[valuesById[11] = "AD_SERVER_PERCENT_IMPRESSIONS"] = 11;
                             values[valuesById[35] = "AD_SERVER_PERCENT_REVENUE"] = 35;
@@ -99194,6 +108375,7 @@
                             values[valuesById[387] = "ATN_TOTAL_LOADED_ADS"] = 387;
                             values[valuesById[389] = "ATN_VALID_AD_REQUESTS"] = 389;
                             values[valuesById[390] = "ATN_YIELD_GROUP_MEDIATION_PASSBACKS"] = 390;
+                            values[valuesById[558] = "AUDIENCE_SEGMENT_COST"] = 558;
                             values[valuesById[37] = "AVERAGE_ECPM"] = 37;
                             values[valuesById[5] = "AVERAGE_ECPM_WITHOUT_CPD"] = 5;
                             values[valuesById[224] = "AVERAGE_ENGAGEMENT_SECONDS_PER_SESSION"] = 224;
@@ -99266,6 +108448,21 @@
                             values[valuesById[409] = "MUTE_ELIGIBLE_IMPRESSIONS"] = 409;
                             values[valuesById[463] = "OPPORTUNITIES"] = 463;
                             values[valuesById[432] = "OVERDELIVERED_IMPRESSIONS"] = 432;
+                            values[valuesById[648] = "PARTNER_FINANCE_GROSS_REVENUE"] = 648;
+                            values[valuesById[649] = "PARTNER_FINANCE_HOST_ECPM"] = 649;
+                            values[valuesById[650] = "PARTNER_FINANCE_HOST_IMPRESSIONS"] = 650;
+                            values[valuesById[651] = "PARTNER_FINANCE_HOST_REVENUE"] = 651;
+                            values[valuesById[652] = "PARTNER_FINANCE_PARTNER_ECPM"] = 652;
+                            values[valuesById[653] = "PARTNER_FINANCE_PARTNER_REVENUE"] = 653;
+                            values[valuesById[533] = "PARTNER_MANAGEMENT_GROSS_REVENUE"] = 533;
+                            values[valuesById[534] = "PARTNER_MANAGEMENT_HOST_CLICKS"] = 534;
+                            values[valuesById[535] = "PARTNER_MANAGEMENT_HOST_CTR"] = 535;
+                            values[valuesById[536] = "PARTNER_MANAGEMENT_HOST_IMPRESSIONS"] = 536;
+                            values[valuesById[537] = "PARTNER_MANAGEMENT_PARTNER_CLICKS"] = 537;
+                            values[valuesById[538] = "PARTNER_MANAGEMENT_PARTNER_CTR"] = 538;
+                            values[valuesById[539] = "PARTNER_MANAGEMENT_PARTNER_IMPRESSIONS"] = 539;
+                            values[valuesById[540] = "PARTNER_MANAGEMENT_TOTAL_CONTENT_VIEWS"] = 540;
+                            values[valuesById[541] = "PARTNER_MANAGEMENT_UNFILLED_IMPRESSIONS"] = 541;
                             values[valuesById[135] = "PARTNER_SALES_FILLED_POD_REQUESTS"] = 135;
                             values[valuesById[136] = "PARTNER_SALES_FILL_RATE"] = 136;
                             values[valuesById[137] = "PARTNER_SALES_PARTNER_MATCH_RATE"] = 137;
@@ -99283,6 +108480,11 @@
                             values[valuesById[238] = "RETENTION"] = 238;
                             values[valuesById[36] = "REVENUE"] = 36;
                             values[valuesById[214] = "REVENUE_PAID_THROUGH_MCM_AUTOPAYMENT"] = 214;
+                            values[valuesById[560] = "REVENUE_VERIFICATION_CPD_REVENUE"] = 560;
+                            values[valuesById[559] = "REVENUE_VERIFICATION_GROSS_CPD_REVENUE"] = 559;
+                            values[valuesById[561] = "REVENUE_VERIFICATION_GROSS_REVENUE_WITHOUT_CPD"] = 561;
+                            values[valuesById[564] = "REVENUE_VERIFICATION_IMPRESSIONS"] = 564;
+                            values[valuesById[567] = "REVENUE_VERIFICATION_REVENUE_WITHOUT_CPD"] = 567;
                             values[valuesById[4] = "REVENUE_WITHOUT_CPD"] = 4;
                             values[valuesById[413] = "REWARDS_GRANTED"] = 413;
                             values[valuesById[587] = "RICH_MEDIA_AVERAGE_DISPLAY_TIME"] = 587;
@@ -99345,7 +108547,6 @@
                             values[valuesById[487] = "USER_MESSAGES_AD_BLOCKING_RECOVERY_ALLOWLISTED_COUNT"] = 487;
                             values[valuesById[488] = "USER_MESSAGES_AD_BLOCKING_RECOVERY_MESSAGES_SHOWN"] = 488;
                             values[valuesById[489] = "USER_MESSAGES_ALLOW_ADS_PAGEVIEWS"] = 489;
-                            values[valuesById[490] = "USER_MESSAGES_CCPA_MESSAGES_SHOWN"] = 490;
                             values[valuesById[491] = "USER_MESSAGES_IDFA_ATT_ALERTS_SHOWN"] = 491;
                             values[valuesById[492] = "USER_MESSAGES_IDFA_ATT_CONSENT"] = 492;
                             values[valuesById[493] = "USER_MESSAGES_IDFA_ATT_CONSENT_RATE"] = 493;
@@ -99360,6 +108561,8 @@
                             values[valuesById[500] = "USER_MESSAGES_TOTAL_ESTIMATED_REVENUE"] = 500;
                             values[valuesById[501] = "USER_MESSAGES_UPTC_MESSAGES_SHOWN"] = 501;
                             values[valuesById[502] = "USER_MESSAGES_UPTC_PERSONALIZATION_OPT_OUT_RATIO"] = 502;
+                            values[valuesById[490] = "USER_MESSAGES_US_STATES_MESSAGES_SHOWN"] = 490;
+                            values[valuesById[586] = "USER_MESSAGES_US_STATES_OPT_OUT_SELECTIONS"] = 586;
                             values[valuesById[180] = "VIDEO_ERROR_100_COUNT"] = 180;
                             values[valuesById[181] = "VIDEO_ERROR_101_COUNT"] = 181;
                             values[valuesById[182] = "VIDEO_ERROR_102_COUNT"] = 182;
@@ -99441,6 +108644,16 @@
                             values[valuesById[175] = "VIDEO_REAL_TIME_TOTAL_ERROR_COUNT"] = 175;
                             values[valuesById[142] = "VIDEO_REAL_TIME_TOTAL_QUERIES"] = 142;
                             values[valuesById[141] = "VIDEO_REAL_TIME_UNMATCHED_QUERIES"] = 141;
+                            values[valuesById[279] = "VIDEO_TRUE_OPPORTUNITIES_TOTAL_BREAK_END"] = 279;
+                            values[valuesById[280] = "VIDEO_TRUE_OPPORTUNITIES_TOTAL_BREAK_START"] = 280;
+                            values[valuesById[281] = "VIDEO_TRUE_OPPORTUNITIES_TOTAL_CAPPED_OPPORTUNITIES_ADBREAK"] = 281;
+                            values[valuesById[283] = "VIDEO_TRUE_OPPORTUNITIES_TOTAL_DURATION_ADBREAK"] = 283;
+                            values[valuesById[285] = "VIDEO_TRUE_OPPORTUNITIES_TOTAL_MATCHED_DURATION_ADBREAK"] = 285;
+                            values[valuesById[287] = "VIDEO_TRUE_OPPORTUNITIES_TOTAL_MATCHED_OPPORTUNITIES_ADBREAK"] = 287;
+                            values[valuesById[289] = "VIDEO_TRUE_OPPORTUNITIES_TOTAL_VIEWED_OPPORTUNITIES_ADBREAK"] = 289;
+                            values[valuesById[392] = "VIDEO_TRUE_VIEWS"] = 392;
+                            values[valuesById[393] = "VIDEO_TRUE_VIEW_SKIP_RATE"] = 393;
+                            values[valuesById[394] = "VIDEO_TRUE_VIEW_VIEW_THROUGH_RATE"] = 394;
                             values[valuesById[103] = "VIDEO_VIEWERSHIP_AUTO_PLAYS"] = 103;
                             values[valuesById[104] = "VIDEO_VIEWERSHIP_AVERAGE_VIEW_RATE"] = 104;
                             values[valuesById[105] = "VIDEO_VIEWERSHIP_AVERAGE_VIEW_TIME"] = 105;
@@ -100950,6 +110163,7 @@
                                 case 0:
                                 case 1:
                                 case 2:
+                                case 2:
                                     break;
                                 }
                             if (message.reportDefinition != null && message.hasOwnProperty("reportDefinition")) {
@@ -101020,6 +110234,10 @@
                                 message.visibility = 1;
                                 break;
                             case "SAVED":
+                            case 2:
+                                message.visibility = 2;
+                                break;
+                            case "VISIBLE":
                             case 2:
                                 message.visibility = 2;
                                 break;
@@ -101136,12 +110354,14 @@
                          * @property {number} HIDDEN=0 HIDDEN value
                          * @property {number} DRAFT=1 DRAFT value
                          * @property {number} SAVED=2 SAVED value
+                         * @property {number} VISIBLE=2 VISIBLE value
                          */
                         Report.Visibility = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "HIDDEN"] = 0;
                             values[valuesById[1] = "DRAFT"] = 1;
                             values[valuesById[2] = "SAVED"] = 2;
+                            values["VISIBLE"] = 2;
                             return values;
                         })();
     

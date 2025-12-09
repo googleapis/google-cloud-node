@@ -29,7 +29,7 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the CmsMetadataKey.
+   *  Required. The resource name of the CmsMetadataValue.
    *  Format: `networks/{network_code}/cmsMetadataValues/{cms_metadata_value_id}`
    */
   // const name = 'abc123'

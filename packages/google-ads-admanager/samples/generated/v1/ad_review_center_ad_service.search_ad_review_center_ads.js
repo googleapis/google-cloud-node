@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(parent, status) {
+function main(parent) {
   // [START admanager_v1_generated_AdReviewCenterAdService_SearchAdReviewCenterAds_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -53,11 +53,12 @@ function main(parent, status) {
    */
   // const pageToken = 'abc123'
   /**
-   *  Required. Only return ads with the given status.
+   *  Optional. Only return ads with the given status.
    */
   // const status = {}
   /**
-   *  Optional. If provided, only return ads with the given AdReviewCenterAd IDs.
+   *  Optional. Only return ads with the given AdReviewCenterAd IDs. If provided,
+   *  no other filter can be set (other than page size and page token).
    */
   // const adReviewCenterAdId = ['abc','def']
   /**
@@ -91,7 +92,6 @@ function main(parent, status) {
     // Construct request
     const request = {
       parent,
-      status,
     };
 
     // Run request

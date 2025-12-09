@@ -378,6 +378,658 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
         });
     });
 
+    describe('createCustomTargetingKey', () => {
+        it('invokes createCustomTargetingKey without error', async () => {
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.CreateCustomTargetingKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.CreateCustomTargetingKeyRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.CustomTargetingKey()
+            );
+            client.innerApiCalls.createCustomTargetingKey = stubSimpleCall(expectedResponse);
+            const [response] = await client.createCustomTargetingKey(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createCustomTargetingKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createCustomTargetingKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createCustomTargetingKey without error using callback', async () => {
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.CreateCustomTargetingKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.CreateCustomTargetingKeyRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.CustomTargetingKey()
+            );
+            client.innerApiCalls.createCustomTargetingKey = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createCustomTargetingKey(
+                    request,
+                    (err?: Error|null, result?: protos.google.ads.admanager.v1.ICustomTargetingKey|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createCustomTargetingKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createCustomTargetingKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createCustomTargetingKey with error', async () => {
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.CreateCustomTargetingKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.CreateCustomTargetingKeyRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createCustomTargetingKey = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createCustomTargetingKey(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createCustomTargetingKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createCustomTargetingKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createCustomTargetingKey with closed client', async () => {
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.CreateCustomTargetingKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.CreateCustomTargetingKeyRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createCustomTargetingKey(request), expectedError);
+        });
+    });
+
+    describe('batchCreateCustomTargetingKeys', () => {
+        it('invokes batchCreateCustomTargetingKeys without error', async () => {
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchCreateCustomTargetingKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchCreateCustomTargetingKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchCreateCustomTargetingKeysResponse()
+            );
+            client.innerApiCalls.batchCreateCustomTargetingKeys = stubSimpleCall(expectedResponse);
+            const [response] = await client.batchCreateCustomTargetingKeys(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchCreateCustomTargetingKeys as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchCreateCustomTargetingKeys as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchCreateCustomTargetingKeys without error using callback', async () => {
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchCreateCustomTargetingKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchCreateCustomTargetingKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchCreateCustomTargetingKeysResponse()
+            );
+            client.innerApiCalls.batchCreateCustomTargetingKeys = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.batchCreateCustomTargetingKeys(
+                    request,
+                    (err?: Error|null, result?: protos.google.ads.admanager.v1.IBatchCreateCustomTargetingKeysResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchCreateCustomTargetingKeys as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchCreateCustomTargetingKeys as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchCreateCustomTargetingKeys with error', async () => {
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchCreateCustomTargetingKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchCreateCustomTargetingKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.batchCreateCustomTargetingKeys = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.batchCreateCustomTargetingKeys(request), expectedError);
+            const actualRequest = (client.innerApiCalls.batchCreateCustomTargetingKeys as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchCreateCustomTargetingKeys as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchCreateCustomTargetingKeys with closed client', async () => {
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchCreateCustomTargetingKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchCreateCustomTargetingKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.batchCreateCustomTargetingKeys(request), expectedError);
+        });
+    });
+
+    describe('updateCustomTargetingKey', () => {
+        it('invokes updateCustomTargetingKey without error', async () => {
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.UpdateCustomTargetingKeyRequest()
+            );
+            request.customTargetingKey ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.UpdateCustomTargetingKeyRequest', ['customTargetingKey', 'name']);
+            request.customTargetingKey.name = defaultValue1;
+            const expectedHeaderRequestParams = `custom_targeting_key.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.CustomTargetingKey()
+            );
+            client.innerApiCalls.updateCustomTargetingKey = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateCustomTargetingKey(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateCustomTargetingKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateCustomTargetingKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateCustomTargetingKey without error using callback', async () => {
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.UpdateCustomTargetingKeyRequest()
+            );
+            request.customTargetingKey ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.UpdateCustomTargetingKeyRequest', ['customTargetingKey', 'name']);
+            request.customTargetingKey.name = defaultValue1;
+            const expectedHeaderRequestParams = `custom_targeting_key.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.CustomTargetingKey()
+            );
+            client.innerApiCalls.updateCustomTargetingKey = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateCustomTargetingKey(
+                    request,
+                    (err?: Error|null, result?: protos.google.ads.admanager.v1.ICustomTargetingKey|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateCustomTargetingKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateCustomTargetingKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateCustomTargetingKey with error', async () => {
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.UpdateCustomTargetingKeyRequest()
+            );
+            request.customTargetingKey ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.UpdateCustomTargetingKeyRequest', ['customTargetingKey', 'name']);
+            request.customTargetingKey.name = defaultValue1;
+            const expectedHeaderRequestParams = `custom_targeting_key.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateCustomTargetingKey = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateCustomTargetingKey(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateCustomTargetingKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateCustomTargetingKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateCustomTargetingKey with closed client', async () => {
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.UpdateCustomTargetingKeyRequest()
+            );
+            request.customTargetingKey ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.UpdateCustomTargetingKeyRequest', ['customTargetingKey', 'name']);
+            request.customTargetingKey.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateCustomTargetingKey(request), expectedError);
+        });
+    });
+
+    describe('batchUpdateCustomTargetingKeys', () => {
+        it('invokes batchUpdateCustomTargetingKeys without error', async () => {
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchUpdateCustomTargetingKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchUpdateCustomTargetingKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchUpdateCustomTargetingKeysResponse()
+            );
+            client.innerApiCalls.batchUpdateCustomTargetingKeys = stubSimpleCall(expectedResponse);
+            const [response] = await client.batchUpdateCustomTargetingKeys(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchUpdateCustomTargetingKeys as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchUpdateCustomTargetingKeys as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchUpdateCustomTargetingKeys without error using callback', async () => {
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchUpdateCustomTargetingKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchUpdateCustomTargetingKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchUpdateCustomTargetingKeysResponse()
+            );
+            client.innerApiCalls.batchUpdateCustomTargetingKeys = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.batchUpdateCustomTargetingKeys(
+                    request,
+                    (err?: Error|null, result?: protos.google.ads.admanager.v1.IBatchUpdateCustomTargetingKeysResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchUpdateCustomTargetingKeys as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchUpdateCustomTargetingKeys as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchUpdateCustomTargetingKeys with error', async () => {
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchUpdateCustomTargetingKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchUpdateCustomTargetingKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.batchUpdateCustomTargetingKeys = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.batchUpdateCustomTargetingKeys(request), expectedError);
+            const actualRequest = (client.innerApiCalls.batchUpdateCustomTargetingKeys as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchUpdateCustomTargetingKeys as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchUpdateCustomTargetingKeys with closed client', async () => {
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchUpdateCustomTargetingKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchUpdateCustomTargetingKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.batchUpdateCustomTargetingKeys(request), expectedError);
+        });
+    });
+
+    describe('batchActivateCustomTargetingKeys', () => {
+        it('invokes batchActivateCustomTargetingKeys without error', async () => {
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchActivateCustomTargetingKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchActivateCustomTargetingKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchActivateCustomTargetingKeysResponse()
+            );
+            client.innerApiCalls.batchActivateCustomTargetingKeys = stubSimpleCall(expectedResponse);
+            const [response] = await client.batchActivateCustomTargetingKeys(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchActivateCustomTargetingKeys as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchActivateCustomTargetingKeys as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchActivateCustomTargetingKeys without error using callback', async () => {
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchActivateCustomTargetingKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchActivateCustomTargetingKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchActivateCustomTargetingKeysResponse()
+            );
+            client.innerApiCalls.batchActivateCustomTargetingKeys = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.batchActivateCustomTargetingKeys(
+                    request,
+                    (err?: Error|null, result?: protos.google.ads.admanager.v1.IBatchActivateCustomTargetingKeysResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchActivateCustomTargetingKeys as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchActivateCustomTargetingKeys as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchActivateCustomTargetingKeys with error', async () => {
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchActivateCustomTargetingKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchActivateCustomTargetingKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.batchActivateCustomTargetingKeys = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.batchActivateCustomTargetingKeys(request), expectedError);
+            const actualRequest = (client.innerApiCalls.batchActivateCustomTargetingKeys as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchActivateCustomTargetingKeys as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchActivateCustomTargetingKeys with closed client', async () => {
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchActivateCustomTargetingKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchActivateCustomTargetingKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.batchActivateCustomTargetingKeys(request), expectedError);
+        });
+    });
+
+    describe('batchDeactivateCustomTargetingKeys', () => {
+        it('invokes batchDeactivateCustomTargetingKeys without error', async () => {
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysResponse()
+            );
+            client.innerApiCalls.batchDeactivateCustomTargetingKeys = stubSimpleCall(expectedResponse);
+            const [response] = await client.batchDeactivateCustomTargetingKeys(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchDeactivateCustomTargetingKeys as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchDeactivateCustomTargetingKeys as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchDeactivateCustomTargetingKeys without error using callback', async () => {
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysResponse()
+            );
+            client.innerApiCalls.batchDeactivateCustomTargetingKeys = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.batchDeactivateCustomTargetingKeys(
+                    request,
+                    (err?: Error|null, result?: protos.google.ads.admanager.v1.IBatchDeactivateCustomTargetingKeysResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchDeactivateCustomTargetingKeys as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchDeactivateCustomTargetingKeys as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchDeactivateCustomTargetingKeys with error', async () => {
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.batchDeactivateCustomTargetingKeys = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.batchDeactivateCustomTargetingKeys(request), expectedError);
+            const actualRequest = (client.innerApiCalls.batchDeactivateCustomTargetingKeys as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchDeactivateCustomTargetingKeys as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchDeactivateCustomTargetingKeys with closed client', async () => {
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.batchDeactivateCustomTargetingKeys(request), expectedError);
+        });
+    });
+
     describe('listCustomTargetingKeys', () => {
         it('invokes listCustomTargetingKeys without error', async () => {
             const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
@@ -1587,6 +2239,44 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
                 const result = client.matchLabelFromLabelName(fakePath);
                 assert.strictEqual(result, "labelValue");
                 assert((client.pathTemplates.labelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('lineItem', async () => {
+            const fakePath = "/rendered/path/lineItem";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                line_item: "lineItemValue",
+            };
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.lineItemPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.lineItemPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('lineItemPath', () => {
+                const result = client.lineItemPath("networkCodeValue", "lineItemValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.lineItemPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromLineItemName', () => {
+                const result = client.matchNetworkCodeFromLineItemName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.lineItemPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLineItemFromLineItemName', () => {
+                const result = client.matchLineItemFromLineItemName(fakePath);
+                assert.strictEqual(result, "lineItemValue");
+                assert((client.pathTemplates.lineItemPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

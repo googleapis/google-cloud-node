@@ -45,6 +45,7 @@ function main() {
   const deviceManufacturerServiceClient = new admanager.DeviceManufacturerServiceClient();
   const entitySignalsMappingServiceClient = new admanager.EntitySignalsMappingServiceClient();
   const geoTargetServiceClient = new admanager.GeoTargetServiceClient();
+  const lineItemServiceClient = new admanager.LineItemServiceClient();
   const mobileCarrierServiceClient = new admanager.MobileCarrierServiceClient();
   const mobileDeviceServiceClient = new admanager.MobileDeviceServiceClient();
   const mobileDeviceSubmodelServiceClient = new admanager.MobileDeviceSubmodelServiceClient();

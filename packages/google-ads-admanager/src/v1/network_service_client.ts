@@ -18,8 +18,8 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
-
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
@@ -258,6 +258,9 @@ export class NetworkServiceClient {
       labelPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/labels/{label}'
       ),
+      lineItemPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/lineItems/{line_item}'
+      ),
       liveStreamEventPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/liveStreamEvents/{live_stream_event}'
       ),
@@ -315,6 +318,14 @@ export class NetworkServiceClient {
       webPropertyPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/webProperties/{web_property}'
       ),
+    };
+
+    // Some of the methods on this service return "paged" results,
+    // (e.g. 50 results at a time, with tokens to get subsequent
+    // pages). Denote the keys used for pagination and results.
+    this.descriptors.page = {
+      listNetworks:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'networks')
     };
 
     // Put together the default options sent with requests.
@@ -375,6 +386,7 @@ export class NetworkServiceClient {
         });
 
       const descriptor =
+        this.descriptors.page[methodName] ||
         undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
@@ -557,53 +569,72 @@ export class NetworkServiceClient {
         throw error;
       });
   }
-/**
+
+ /**
  * API to retrieve all the networks the current user has access to.
  *
  * @param {Object} request
  *   The request object that will be sent.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of `Network`s to return. The service may
+ *   return fewer than this value. If unspecified, at most 50 `Network`s will be
+ *   returned. The maximum value is 1000; values greater than 1000 will be
+ *   coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListNetworks` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListNetworks` must match
+ *   the call that provided the page token.
+ * @param {number} [request.skip]
+ *   Optional. Number of individual resources to skip while paginating.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.ListNetworksResponse|ListNetworksResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   The first element of the array is Array of {@link protos.google.ads.admanager.v1.Network|Network}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listNetworksAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
- * @example <caption>include:samples/generated/v1/network_service.list_networks.js</caption>
- * region_tag:admanager_v1_generated_NetworkService_ListNetworks_async
  */
   listNetworks(
       request?: protos.google.ads.admanager.v1.IListNetworksRequest,
       options?: CallOptions):
       Promise<[
-        protos.google.ads.admanager.v1.IListNetworksResponse,
-        protos.google.ads.admanager.v1.IListNetworksRequest|undefined, {}|undefined
+        protos.google.ads.admanager.v1.INetwork[],
+        protos.google.ads.admanager.v1.IListNetworksRequest|null,
+        protos.google.ads.admanager.v1.IListNetworksResponse
       ]>;
   listNetworks(
       request: protos.google.ads.admanager.v1.IListNetworksRequest,
       options: CallOptions,
-      callback: Callback<
-          protos.google.ads.admanager.v1.IListNetworksResponse,
-          protos.google.ads.admanager.v1.IListNetworksRequest|null|undefined,
-          {}|null|undefined>): void;
+      callback: PaginationCallback<
+          protos.google.ads.admanager.v1.IListNetworksRequest,
+          protos.google.ads.admanager.v1.IListNetworksResponse|null|undefined,
+          protos.google.ads.admanager.v1.INetwork>): void;
   listNetworks(
       request: protos.google.ads.admanager.v1.IListNetworksRequest,
-      callback: Callback<
-          protos.google.ads.admanager.v1.IListNetworksResponse,
-          protos.google.ads.admanager.v1.IListNetworksRequest|null|undefined,
-          {}|null|undefined>): void;
+      callback: PaginationCallback<
+          protos.google.ads.admanager.v1.IListNetworksRequest,
+          protos.google.ads.admanager.v1.IListNetworksResponse|null|undefined,
+          protos.google.ads.admanager.v1.INetwork>): void;
   listNetworks(
       request?: protos.google.ads.admanager.v1.IListNetworksRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          protos.google.ads.admanager.v1.IListNetworksResponse,
-          protos.google.ads.admanager.v1.IListNetworksRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.ads.admanager.v1.IListNetworksResponse,
-          protos.google.ads.admanager.v1.IListNetworksRequest|null|undefined,
-          {}|null|undefined>):
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.ads.admanager.v1.IListNetworksRequest,
+          protos.google.ads.admanager.v1.IListNetworksResponse|null|undefined,
+          protos.google.ads.admanager.v1.INetwork>,
+      callback?: PaginationCallback<
+          protos.google.ads.admanager.v1.IListNetworksRequest,
+          protos.google.ads.admanager.v1.IListNetworksResponse|null|undefined,
+          protos.google.ads.admanager.v1.INetwork>):
       Promise<[
-        protos.google.ads.admanager.v1.IListNetworksResponse,
-        protos.google.ads.admanager.v1.IListNetworksRequest|undefined, {}|undefined
+        protos.google.ads.admanager.v1.INetwork[],
+        protos.google.ads.admanager.v1.IListNetworksRequest|null,
+        protos.google.ads.admanager.v1.IListNetworksResponse
       ]>|void {
     request = request || {};
     let options: CallOptions;
@@ -618,33 +649,124 @@ export class NetworkServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize().catch(err => {throw err});
-    this._log.info('listNetworks request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.ads.admanager.v1.IListNetworksResponse,
-        protos.google.ads.admanager.v1.IListNetworksRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
-      ? (error, response, options, rawResponse) => {
-          this._log.info('listNetworks response %j', response);
-          callback!(error, response, options, rawResponse); // We verified callback above.
+    const wrappedCallback: PaginationCallback<
+      protos.google.ads.admanager.v1.IListNetworksRequest,
+      protos.google.ads.admanager.v1.IListNetworksResponse|null|undefined,
+      protos.google.ads.admanager.v1.INetwork>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listNetworks values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.listNetworks(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.ads.admanager.v1.IListNetworksResponse,
-        protos.google.ads.admanager.v1.IListNetworksRequest|undefined,
-        {}|undefined
+    this._log.info('listNetworks request %j', request);
+    return this.innerApiCalls
+      .listNetworks(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.ads.admanager.v1.INetwork[],
+        protos.google.ads.admanager.v1.IListNetworksRequest|null,
+        protos.google.ads.admanager.v1.IListNetworksResponse
       ]) => {
-        this._log.info('listNetworks response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
-        }
-        throw error;
+        this._log.info('listNetworks values %j', response);
+        return [response, input, output];
       });
   }
 
+/**
+ * Equivalent to `listNetworks`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of `Network`s to return. The service may
+ *   return fewer than this value. If unspecified, at most 50 `Network`s will be
+ *   returned. The maximum value is 1000; values greater than 1000 will be
+ *   coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListNetworks` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListNetworks` must match
+ *   the call that provided the page token.
+ * @param {number} [request.skip]
+ *   Optional. Number of individual resources to skip while paginating.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.ads.admanager.v1.Network|Network} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listNetworksAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listNetworksStream(
+      request?: protos.google.ads.admanager.v1.IListNetworksRequest,
+      options?: CallOptions):
+    Transform{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    const defaultCallSettings = this._defaults['listNetworks'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listNetworks stream %j', request);
+    return this.descriptors.page.listNetworks.createStream(
+      this.innerApiCalls.listNetworks as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+/**
+ * Equivalent to `listNetworks`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of `Network`s to return. The service may
+ *   return fewer than this value. If unspecified, at most 50 `Network`s will be
+ *   returned. The maximum value is 1000; values greater than 1000 will be
+ *   coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListNetworks` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListNetworks` must match
+ *   the call that provided the page token.
+ * @param {number} [request.skip]
+ *   Optional. Number of individual resources to skip while paginating.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.ads.admanager.v1.Network|Network}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/network_service.list_networks.js</caption>
+ * region_tag:admanager_v1_generated_NetworkService_ListNetworks_async
+ */
+  listNetworksAsync(
+      request?: protos.google.ads.admanager.v1.IListNetworksRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.ads.admanager.v1.INetwork>{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    const defaultCallSettings = this._defaults['listNetworks'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listNetworks iterate %j', request);
+    return this.descriptors.page.listNetworks.asyncIterate(
+      this.innerApiCalls['listNetworks'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.ads.admanager.v1.INetwork>;
+  }
   // --------------------
   // -- Path templates --
   // --------------------
@@ -1573,6 +1695,42 @@ export class NetworkServiceClient {
    */
   matchLabelFromLabelName(labelName: string) {
     return this.pathTemplates.labelPathTemplate.match(labelName).label;
+  }
+
+  /**
+   * Return a fully-qualified lineItem resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} line_item
+   * @returns {string} Resource name string.
+   */
+  lineItemPath(networkCode:string,lineItem:string) {
+    return this.pathTemplates.lineItemPathTemplate.render({
+      network_code: networkCode,
+      line_item: lineItem,
+    });
+  }
+
+  /**
+   * Parse the network_code from LineItem resource.
+   *
+   * @param {string} lineItemName
+   *   A fully-qualified path representing LineItem resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromLineItemName(lineItemName: string) {
+    return this.pathTemplates.lineItemPathTemplate.match(lineItemName).network_code;
+  }
+
+  /**
+   * Parse the line_item from LineItem resource.
+   *
+   * @param {string} lineItemName
+   *   A fully-qualified path representing LineItem resource.
+   * @returns {string} A string representing the line_item.
+   */
+  matchLineItemFromLineItemName(lineItemName: string) {
+    return this.pathTemplates.lineItemPathTemplate.match(lineItemName).line_item;
   }
 
   /**
