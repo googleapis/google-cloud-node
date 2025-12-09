@@ -37,7 +37,8 @@ function main(instanceGroupManager, project, zone) {
    */
   // const project = 'my-project'
   /**
-   *  The name of the zone where the managed instance group is located.
+   *  The name of thezone where the managed
+   *  instance group is located.
    */
   // const zone = 'abc123'
 

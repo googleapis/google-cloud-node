@@ -3,7 +3,7 @@
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
   "protoPackage": "google.iam.v1beta",
-  "libraryPackage": "iam",
+  "libraryPackage": "@google-cloud/iam",
   "services": {
     "WorkloadIdentityPools": {
       "clients": {

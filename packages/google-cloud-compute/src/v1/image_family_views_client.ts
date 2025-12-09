@@ -320,7 +320,8 @@ export class ImageFamilyViewsClient {
   // -- Service calls --
   // -------------------
 /**
- * Returns the latest image that is part of an image family, is not deprecated and is rolled out in the specified zone.
+ * Returns the latest image that is part of an image family, is not
+ * deprecated and is rolled out in the specified zone.
  *
  * @param {Object} request
  *   The request object that will be sent.

@@ -227,6 +227,7 @@ applications that interact with individual Google Cloud services:
 | [Security Compliance API](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-cloudsecuritycompliance) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/cloudsecuritycompliance)](https://npm.im/@google-cloud/cloudsecuritycompliance) |
 | [Solar API](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-maps-solar) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@googlemaps/solar)](https://npm.im/@googlemaps/solar) |
 | [Storage Batch Operations API](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-storagebatchoperations) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/storagebatchoperations)](https://npm.im/@google-cloud/storagebatchoperations) |
+| [Vector Search API](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-vectorsearch) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/vectorsearch)](https://npm.im/@google-cloud/vectorsearch) |
 
 
 If the service is not listed above, [google-api-nodejs-client](https://github.com/googleapis/google-api-nodejs-client) interfaces

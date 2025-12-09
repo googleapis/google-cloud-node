@@ -22,7 +22,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 92,
+          "end": 106,
           "type": "FULL"
         }
       ],
@@ -62,6 +62,18 @@
           {
             "name": "tags",
             "type": "TYPE_STRING[]"
+          },
+          {
+            "name": "machine_type",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "release_track",
+            "type": ".google.api.LaunchStage"
+          },
+          {
+            "name": "client",
+            "type": "TYPE_STRING"
           }
         ],
         "resultType": ".google.cloud.run.v2.SubmitBuildResponse",

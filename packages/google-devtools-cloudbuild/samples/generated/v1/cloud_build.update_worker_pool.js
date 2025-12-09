@@ -35,7 +35,7 @@ function main(workerPool) {
    */
   // const workerPool = {}
   /**
-   *  A mask specifying which fields in `worker_pool` to update.
+   *  Optional. A mask specifying which fields in `worker_pool` to update.
    */
   // const updateMask = {}
   /**

@@ -378,6 +378,14 @@ export class BuildsClient {
  *   worker pool.
  * @param {string[]} [request.tags]
  *   Optional. Additional tags to annotate the build.
+ * @param {string} [request.machineType]
+ *   Optional. The machine type from default pool to use for the build. If left
+ *   blank, cloudbuild will use a sensible default. Currently only E2_HIGHCPU_8
+ *   is supported. If worker_pool is set, this field will be ignored.
+ * @param {google.api.LaunchStage} [request.releaseTrack]
+ *   Optional. The release track of the client that initiated the build request.
+ * @param {string} [request.client]
+ *   Optional. The client that initiated the build request.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.

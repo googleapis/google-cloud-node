@@ -4460,7 +4460,7 @@
                         },
                         "urlContext": {
                           "type": "UrlContext",
-                          "id": 8,
+                          "id": 10,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -4473,6 +4473,16 @@
                           }
                         }
                       },
+                      "reserved": [
+                        [
+                          8,
+                          8
+                        ],
+                        [
+                          9,
+                          9
+                        ]
+                      ],
                       "nested": {
                         "PhishBlockThreshold": {
                           "values": {
@@ -13501,6 +13511,13 @@
                               "id": 4,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "zone": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           },
@@ -40295,6 +40312,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "minGpuDriverVersion": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
                         }
                       }
                     },
@@ -40439,6 +40463,33 @@
                           "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "FullFineTunedResources": {
+                      "fields": {
+                        "deploymentType": {
+                          "type": "DeploymentType",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "modelInferenceUnitCount": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "DeploymentType": {
+                          "values": {
+                            "DEPLOYMENT_TYPE_UNSPECIFIED": 0,
+                            "DEPLOYMENT_TYPE_EVAL": 1,
+                            "DEPLOYMENT_TYPE_PROD": 2
                           }
                         }
                       }
@@ -43783,7 +43834,7 @@
                         },
                         "urlContext": {
                           "type": "UrlContext",
-                          "id": 8,
+                          "id": 10,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -43796,6 +43847,16 @@
                           }
                         }
                       },
+                      "reserved": [
+                        [
+                          8,
+                          8
+                        ],
+                        [
+                          9,
+                          9
+                        ]
+                      ],
                       "nested": {
                         "PhishBlockThreshold": {
                           "values": {
@@ -44778,7 +44839,8 @@
                             "weaviate",
                             "pinecone",
                             "vertexFeatureStore",
-                            "vertexVectorSearch"
+                            "vertexVectorSearch",
+                            "ragManagedVertexVectorSearch"
                           ]
                         }
                       },
@@ -44802,6 +44864,10 @@
                         "vertexVectorSearch": {
                           "type": "VertexVectorSearch",
                           "id": 6
+                        },
+                        "ragManagedVertexVectorSearch": {
+                          "type": "RagManagedVertexVectorSearch",
+                          "id": 8
                         },
                         "apiAuth": {
                           "type": "ApiAuth",
@@ -44890,6 +44956,17 @@
                             "index": {
                               "type": "string",
                               "id": 2
+                            }
+                          }
+                        },
+                        "RagManagedVertexVectorSearch": {
+                          "fields": {
+                            "collectionName": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           }
                         }
@@ -45065,6 +45142,20 @@
                           "id": 13,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "satisfiesPzs": {
+                          "type": "bool",
+                          "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "satisfiesPzi": {
+                          "type": "bool",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       },
@@ -48919,7 +49010,8 @@
                           "oneof": [
                             "dedicatedResources",
                             "automaticResources",
-                            "sharedResources"
+                            "sharedResources",
+                            "fullFineTunedResources"
                           ]
                         }
                       },
@@ -48937,6 +49029,13 @@
                           "id": 17,
                           "options": {
                             "(google.api.resource_reference).type": "aiplatform.googleapis.com/DeploymentResourcePool"
+                          }
+                        },
+                        "fullFineTunedResources": {
+                          "type": "FullFineTunedResources",
+                          "id": 36,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "id": {
@@ -56693,6 +56792,13 @@
                               "id": 4,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "zone": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           },

@@ -69,6 +69,20 @@ function main(parent, storageSource, imageUri) {
    *  Optional. Additional tags to annotate the build.
    */
   // const tags = ['abc','def']
+  /**
+   *  Optional. The machine type from default pool to use for the build. If left
+   *  blank, cloudbuild will use a sensible default. Currently only E2_HIGHCPU_8
+   *  is supported. If worker_pool is set, this field will be ignored.
+   */
+  // const machineType = 'abc123'
+  /**
+   *  Optional. The release track of the client that initiated the build request.
+   */
+  // const releaseTrack = {}
+  /**
+   *  Optional. The client that initiated the build request.
+   */
+  // const client = 'abc123'
 
   // Imports the Run library
   const {BuildsClient} = require('@google-cloud/run').v2;

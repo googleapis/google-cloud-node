@@ -70,6 +70,12 @@ function main(name, offer) {
    *  left empty for single currency accounts.
    */
   // const billingAccount = 'abc123'
+  /**
+   *  Optional. Price reference ID for the offer. Only for offers that require
+   *  additional price information. Used to guarantee that the pricing is
+   *  consistent between quoting the offer and placing the order.
+   */
+  // const priceReferenceId = 'abc123'
 
   // Imports the Channel library
   const {CloudChannelServiceClient} = require('@google-cloud/channel').v1;

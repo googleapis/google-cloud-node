@@ -197,6 +197,9 @@ export class CloudChannelServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      accountPathTemplate: new this._gaxModule.PathTemplate(
+        'accounts/{account}'
+      ),
       billingAccountPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/billingAccounts/{billing_account}'
       ),
@@ -2870,8 +2873,8 @@ export class CloudChannelServiceClient {
       });
   }
 /**
- * Registers a service account with subscriber privileges on the Cloud Pub/Sub
- * topic for this Channel Services account. After you create a
+ * Registers a service account with subscriber privileges on the Pub/Sub
+ * topic for this Channel Services account or integrator. After you create a
  * subscriber, you get the events through
  * {@link protos.google.cloud.channel.v1.SubscriberEvent|SubscriberEvent}
  *
@@ -2891,11 +2894,15 @@ export class CloudChannelServiceClient {
  *
  * @param {Object} request
  *   The request object that will be sent.
- * @param {string} request.account
- *   Required. Resource name of the account.
+ * @param {string} [request.account]
+ *   Optional. Resource name of the account. Required if integrator is not
+ *   provided. Otherwise, leave this field empty/unset.
  * @param {string} request.serviceAccount
  *   Required. Service account that provides subscriber access to the registered
  *   topic.
+ * @param {string} [request.integrator]
+ *   Optional. Resource name of the integrator. Required if account is not
+ *   provided. Otherwise, leave this field empty/unset.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -2955,6 +2962,7 @@ export class CloudChannelServiceClient {
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
       'account': request.account ?? '',
+      'integrator': request.integrator ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('registerSubscriber request %j', request);
@@ -2984,10 +2992,10 @@ export class CloudChannelServiceClient {
       });
   }
 /**
- * Unregisters a service account with subscriber privileges on the Cloud
- * Pub/Sub topic created for this Channel Services account. If there are no
- * service accounts left with subscriber privileges, this deletes the topic.
- * You can call ListSubscribers to check for these accounts.
+ * Unregisters a service account with subscriber privileges on the Pub/Sub
+ * topic created for this Channel Services account or integrator. If there are
+ * no service accounts left with subscriber privileges, this deletes the
+ * topic. You can call ListSubscribers to check for these accounts.
  *
  * Possible error codes:
  *
@@ -3008,11 +3016,15 @@ export class CloudChannelServiceClient {
  *
  * @param {Object} request
  *   The request object that will be sent.
- * @param {string} request.account
- *   Required. Resource name of the account.
+ * @param {string} [request.account]
+ *   Optional. Resource name of the account. Required if integrator is not
+ *   provided. Otherwise, leave this field empty/unset.
  * @param {string} request.serviceAccount
  *   Required. Service account to unregister from subscriber access to the
  *   topic.
+ * @param {string} [request.integrator]
+ *   Optional. Resource name of the integrator. Required if account is not
+ *   provided. Otherwise, leave this field empty/unset.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -3072,6 +3084,7 @@ export class CloudChannelServiceClient {
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
       'account': request.account ?? '',
+      'integrator': request.integrator ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('unregisterSubscriber request %j', request);
@@ -3757,6 +3770,10 @@ export class CloudChannelServiceClient {
  *
  *   This field is only relevant for multi-currency accounts. It should be
  *   left empty for single currency accounts.
+ * @param {string} [request.priceReferenceId]
+ *   Optional. Price reference ID for the offer. Only for offers that require
+ *   additional price information. Used to guarantee that the pricing is
+ *   consistent between quoting the offer and placing the order.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -6605,7 +6622,8 @@ export class CloudChannelServiceClient {
  * @param {string} [request.pageToken]
  *   Optional. A token identifying a page of results beyond the first page.
  *   Obtained through
- *   {@link protos.|ListSkuGroups.next_page_token} of the previous
+ *   {@link protos.google.cloud.channel.v1.ListSkuGroupsResponse.next_page_token|ListSkuGroupsResponse.next_page_token}
+ *   of the previous
  *   {@link protos.google.cloud.channel.v1.CloudChannelService.ListSkuGroups|CloudChannelService.ListSkuGroups}
  *   call.
  * @param {object} [options]
@@ -6711,7 +6729,8 @@ export class CloudChannelServiceClient {
  * @param {string} [request.pageToken]
  *   Optional. A token identifying a page of results beyond the first page.
  *   Obtained through
- *   {@link protos.|ListSkuGroups.next_page_token} of the previous
+ *   {@link protos.google.cloud.channel.v1.ListSkuGroupsResponse.next_page_token|ListSkuGroupsResponse.next_page_token}
+ *   of the previous
  *   {@link protos.google.cloud.channel.v1.CloudChannelService.ListSkuGroups|CloudChannelService.ListSkuGroups}
  *   call.
  * @param {object} [options]
@@ -6766,7 +6785,8 @@ export class CloudChannelServiceClient {
  * @param {string} [request.pageToken]
  *   Optional. A token identifying a page of results beyond the first page.
  *   Obtained through
- *   {@link protos.|ListSkuGroups.next_page_token} of the previous
+ *   {@link protos.google.cloud.channel.v1.ListSkuGroupsResponse.next_page_token|ListSkuGroupsResponse.next_page_token}
+ *   of the previous
  *   {@link protos.google.cloud.channel.v1.CloudChannelService.ListSkuGroups|CloudChannelService.ListSkuGroups}
  *   call.
  * @param {object} [options]
@@ -6837,7 +6857,8 @@ export class CloudChannelServiceClient {
  * @param {string} [request.pageToken]
  *   Optional. A token identifying a page of results beyond the first page.
  *   Obtained through
- *   {@link protos.|ListSkuGroupBillableSkus.next_page_token} of the previous
+ *   {@link protos.google.cloud.channel.v1.ListSkuGroupBillableSkusResponse.next_page_token|ListSkuGroupBillableSkusResponse.next_page_token}
+ *   of the previous
  *   {@link protos.google.cloud.channel.v1.CloudChannelService.ListSkuGroupBillableSkus|CloudChannelService.ListSkuGroupBillableSkus}
  *   call.
  * @param {object} [options]
@@ -6942,7 +6963,8 @@ export class CloudChannelServiceClient {
  * @param {string} [request.pageToken]
  *   Optional. A token identifying a page of results beyond the first page.
  *   Obtained through
- *   {@link protos.|ListSkuGroupBillableSkus.next_page_token} of the previous
+ *   {@link protos.google.cloud.channel.v1.ListSkuGroupBillableSkusResponse.next_page_token|ListSkuGroupBillableSkusResponse.next_page_token}
+ *   of the previous
  *   {@link protos.google.cloud.channel.v1.CloudChannelService.ListSkuGroupBillableSkus|CloudChannelService.ListSkuGroupBillableSkus}
  *   call.
  * @param {object} [options]
@@ -6996,7 +7018,8 @@ export class CloudChannelServiceClient {
  * @param {string} [request.pageToken]
  *   Optional. A token identifying a page of results beyond the first page.
  *   Obtained through
- *   {@link protos.|ListSkuGroupBillableSkus.next_page_token} of the previous
+ *   {@link protos.google.cloud.channel.v1.ListSkuGroupBillableSkusResponse.next_page_token|ListSkuGroupBillableSkusResponse.next_page_token}
+ *   of the previous
  *   {@link protos.google.cloud.channel.v1.CloudChannelService.ListSkuGroupBillableSkus|CloudChannelService.ListSkuGroupBillableSkus}
  *   call.
  * @param {object} [options]
@@ -8183,8 +8206,8 @@ export class CloudChannelServiceClient {
     ) as AsyncIterable<protos.google.cloud.channel.v1.IPurchasableOffer>;
   }
  /**
- * Lists service accounts with subscriber privileges on the Cloud Pub/Sub
- * topic created for this Channel Services account.
+ * Lists service accounts with subscriber privileges on the Pub/Sub topic
+ * created for this Channel Services account or integrator.
  *
  * Possible error codes:
  *
@@ -8203,8 +8226,9 @@ export class CloudChannelServiceClient {
  *
  * @param {Object} request
  *   The request object that will be sent.
- * @param {string} request.account
- *   Required. Resource name of the account.
+ * @param {string} [request.account]
+ *   Optional. Resource name of the account. Required if integrator is not
+ *   provided. Otherwise, leave this field empty/unset.
  * @param {number} [request.pageSize]
  *   Optional. The maximum number of service accounts to return. The service may
  *   return fewer than this value. If unspecified, returns at most 100 service
@@ -8216,6 +8240,9 @@ export class CloudChannelServiceClient {
  *
  *   When paginating, all other parameters provided to `ListSubscribers` must
  *   match the call that provided the page token.
+ * @param {string} [request.integrator]
+ *   Optional. Resource name of the integrator. Required if account is not
+ *   provided. Otherwise, leave this field empty/unset.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -8280,6 +8307,7 @@ export class CloudChannelServiceClient {
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
       'account': request.account ?? '',
+      'integrator': request.integrator ?? '',
     });
     this.initialize().catch(err => {throw err});
     const wrappedCallback: PaginationCallback<
@@ -8308,8 +8336,9 @@ export class CloudChannelServiceClient {
  * Equivalent to `listSubscribers`, but returns a NodeJS Stream object.
  * @param {Object} request
  *   The request object that will be sent.
- * @param {string} request.account
- *   Required. Resource name of the account.
+ * @param {string} [request.account]
+ *   Optional. Resource name of the account. Required if integrator is not
+ *   provided. Otherwise, leave this field empty/unset.
  * @param {number} [request.pageSize]
  *   Optional. The maximum number of service accounts to return. The service may
  *   return fewer than this value. If unspecified, returns at most 100 service
@@ -8321,6 +8350,9 @@ export class CloudChannelServiceClient {
  *
  *   When paginating, all other parameters provided to `ListSubscribers` must
  *   match the call that provided the page token.
+ * @param {string} [request.integrator]
+ *   Optional. Resource name of the integrator. Required if account is not
+ *   provided. Otherwise, leave this field empty/unset.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
@@ -8344,6 +8376,7 @@ export class CloudChannelServiceClient {
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
       'account': request.account ?? '',
+      'integrator': request.integrator ?? '',
     });
     const defaultCallSettings = this._defaults['listSubscribers'];
     const callSettings = defaultCallSettings.merge(options);
@@ -8362,8 +8395,9 @@ export class CloudChannelServiceClient {
  * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
  * @param {Object} request
  *   The request object that will be sent.
- * @param {string} request.account
- *   Required. Resource name of the account.
+ * @param {string} [request.account]
+ *   Optional. Resource name of the account. Required if integrator is not
+ *   provided. Otherwise, leave this field empty/unset.
  * @param {number} [request.pageSize]
  *   Optional. The maximum number of service accounts to return. The service may
  *   return fewer than this value. If unspecified, returns at most 100 service
@@ -8375,6 +8409,9 @@ export class CloudChannelServiceClient {
  *
  *   When paginating, all other parameters provided to `ListSubscribers` must
  *   match the call that provided the page token.
+ * @param {string} [request.integrator]
+ *   Optional. Resource name of the integrator. Required if account is not
+ *   provided. Otherwise, leave this field empty/unset.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}
@@ -8399,6 +8436,7 @@ export class CloudChannelServiceClient {
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
       'account': request.account ?? '',
+      'integrator': request.integrator ?? '',
     });
     const defaultCallSettings = this._defaults['listSubscribers'];
     const callSettings = defaultCallSettings.merge(options);
@@ -8891,6 +8929,29 @@ export class CloudChannelServiceClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified account resource name string.
+   *
+   * @param {string} account
+   * @returns {string} Resource name string.
+   */
+  accountPath(account:string) {
+    return this.pathTemplates.accountPathTemplate.render({
+      account: account,
+    });
+  }
+
+  /**
+   * Parse the account from Account resource.
+   *
+   * @param {string} accountName
+   *   A fully-qualified path representing Account resource.
+   * @returns {string} A string representing the account.
+   */
+  matchAccountFromAccountName(accountName: string) {
+    return this.pathTemplates.accountPathTemplate.match(accountName).account;
+  }
 
   /**
    * Return a fully-qualified billingAccount resource name string.

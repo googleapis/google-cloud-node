@@ -66,6 +66,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | delete worker pool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.delete_worker_pool.js) |
 | get build | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.get_build.js) |
 | get build trigger | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.get_build_trigger.js) |
+| get default service account | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.get_default_service_account.js) |
 | get worker pool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.get_worker_pool.js) |
 | list build triggers | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.list_build_triggers.js) |
 | list builds | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.list_builds.js) |

@@ -16,4 +16,11 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+export {DnsThreatDetectorServiceClient} from './dns_threat_detector_service_client';
+export {FirewallActivationClient} from './firewall_activation_client';
+export {InterceptClient} from './intercept_client';
+export {MirroringClient} from './mirroring_client';
 export {NetworkSecurityClient} from './network_security_client';
+export {OrganizationSecurityProfileGroupServiceClient} from './organization_security_profile_group_service_client';
+export {SSEGatewayServiceClient} from './s_s_e_gateway_service_client';
+export {SSERealmServiceClient} from './s_s_e_realm_service_client';

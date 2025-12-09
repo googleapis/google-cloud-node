@@ -333,6 +333,10 @@ export class ArtifactRegistryClient {
       '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteAttachmentMetadata = protoFilesRoot.lookup(
       '.google.devtools.artifactregistry.v1.OperationMetadata') as gax.protobuf.Type;
+    const exportArtifactResponse = protoFilesRoot.lookup(
+      '.google.devtools.artifactregistry.v1.ExportArtifactResponse') as gax.protobuf.Type;
+    const exportArtifactMetadata = protoFilesRoot.lookup(
+      '.google.devtools.artifactregistry.v1.ExportArtifactMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       importAptArtifacts: new this._gaxModule.LongrunningDescriptor(
@@ -374,7 +378,11 @@ export class ArtifactRegistryClient {
       deleteAttachment: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteAttachmentResponse.decode.bind(deleteAttachmentResponse),
-        deleteAttachmentMetadata.decode.bind(deleteAttachmentMetadata))
+        deleteAttachmentMetadata.decode.bind(deleteAttachmentMetadata)),
+      exportArtifact: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        exportArtifactResponse.decode.bind(exportArtifactResponse),
+        exportArtifactMetadata.decode.bind(exportArtifactMetadata))
     };
 
     // Put together the default options sent with requests.
@@ -420,7 +428,7 @@ export class ArtifactRegistryClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const artifactRegistryStubMethods =
-        ['listDockerImages', 'getDockerImage', 'listMavenArtifacts', 'getMavenArtifact', 'listNpmPackages', 'getNpmPackage', 'listPythonPackages', 'getPythonPackage', 'importAptArtifacts', 'importYumArtifacts', 'listRepositories', 'getRepository', 'createRepository', 'updateRepository', 'deleteRepository', 'listPackages', 'getPackage', 'deletePackage', 'listVersions', 'getVersion', 'deleteVersion', 'batchDeleteVersions', 'updateVersion', 'listFiles', 'getFile', 'deleteFile', 'updateFile', 'listTags', 'getTag', 'createTag', 'updateTag', 'deleteTag', 'createRule', 'listRules', 'getRule', 'updateRule', 'deleteRule', 'setIamPolicy', 'getIamPolicy', 'testIamPermissions', 'getProjectSettings', 'updateProjectSettings', 'getVpcscConfig', 'updateVpcscConfig', 'updatePackage', 'listAttachments', 'getAttachment', 'createAttachment', 'deleteAttachment'];
+        ['listDockerImages', 'getDockerImage', 'listMavenArtifacts', 'getMavenArtifact', 'listNpmPackages', 'getNpmPackage', 'listPythonPackages', 'getPythonPackage', 'importAptArtifacts', 'importYumArtifacts', 'listRepositories', 'getRepository', 'createRepository', 'updateRepository', 'deleteRepository', 'listPackages', 'getPackage', 'deletePackage', 'listVersions', 'getVersion', 'deleteVersion', 'batchDeleteVersions', 'updateVersion', 'listFiles', 'getFile', 'deleteFile', 'updateFile', 'listTags', 'getTag', 'createTag', 'updateTag', 'deleteTag', 'createRule', 'listRules', 'getRule', 'updateRule', 'deleteRule', 'setIamPolicy', 'getIamPolicy', 'testIamPermissions', 'getProjectSettings', 'updateProjectSettings', 'getVpcscConfig', 'updateVpcscConfig', 'updatePackage', 'listAttachments', 'getAttachment', 'createAttachment', 'deleteAttachment', 'exportArtifact'];
     for (const methodName of artifactRegistryStubMethods) {
       const callPromise = this.artifactRegistryStub.then(
         stub => (...args: Array<{}>) => {
@@ -4327,6 +4335,126 @@ export class ArtifactRegistryClient {
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteAttachment, this._gaxModule.createDefaultBackoffSettings());
     return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.devtools.artifactregistry.v1.OperationMetadata>;
+  }
+/**
+ * Exports an artifact.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.sourceVersion
+ *   The artifact version to export.
+ *   Format:
+ *   projects/{project}/locations/{location}/repositories/{repository}/packages/{package}/versions/{version}
+ * @param {string} request.sourceTag
+ *   The artifact tag to export.
+ *   Format:projects/{project}/locations/{location}/repositories/{repository}/packages/{package}/tags/{tag}
+ * @param {string} request.gcsPath
+ *   The Cloud Storage path to export the artifact to. Should start with the
+ *   bucket name, and optionally have a directory path. Examples:
+ *   `dst_bucket`, `dst_bucket/sub_dir`.
+ *   Existing objects with the same path will be overwritten.
+ * @param {string} request.repository
+ *   Required. The repository of the artifact to export.
+ *   Format: projects/{project}/locations/{location}/repositories/{repository}
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.export_artifact.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_ExportArtifact_async
+ */
+  exportArtifact(
+      request?: protos.google.devtools.artifactregistry.v1.IExportArtifactRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.devtools.artifactregistry.v1.IExportArtifactResponse, protos.google.devtools.artifactregistry.v1.IExportArtifactMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  exportArtifact(
+      request: protos.google.devtools.artifactregistry.v1.IExportArtifactRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.devtools.artifactregistry.v1.IExportArtifactResponse, protos.google.devtools.artifactregistry.v1.IExportArtifactMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  exportArtifact(
+      request: protos.google.devtools.artifactregistry.v1.IExportArtifactRequest,
+      callback: Callback<
+          LROperation<protos.google.devtools.artifactregistry.v1.IExportArtifactResponse, protos.google.devtools.artifactregistry.v1.IExportArtifactMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  exportArtifact(
+      request?: protos.google.devtools.artifactregistry.v1.IExportArtifactRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.devtools.artifactregistry.v1.IExportArtifactResponse, protos.google.devtools.artifactregistry.v1.IExportArtifactMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.devtools.artifactregistry.v1.IExportArtifactResponse, protos.google.devtools.artifactregistry.v1.IExportArtifactMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.devtools.artifactregistry.v1.IExportArtifactResponse, protos.google.devtools.artifactregistry.v1.IExportArtifactMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'repository': request.repository ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.devtools.artifactregistry.v1.IExportArtifactResponse, protos.google.devtools.artifactregistry.v1.IExportArtifactMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('exportArtifact response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('exportArtifact request %j', request);
+    return this.innerApiCalls.exportArtifact(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.devtools.artifactregistry.v1.IExportArtifactResponse, protos.google.devtools.artifactregistry.v1.IExportArtifactMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('exportArtifact response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `exportArtifact()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.export_artifact.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_ExportArtifact_async
+ */
+  async checkExportArtifactProgress(name: string): Promise<LROperation<protos.google.devtools.artifactregistry.v1.ExportArtifactResponse, protos.google.devtools.artifactregistry.v1.ExportArtifactMetadata>>{
+    this._log.info('exportArtifact long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.exportArtifact, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.devtools.artifactregistry.v1.ExportArtifactResponse, protos.google.devtools.artifactregistry.v1.ExportArtifactMetadata>;
   }
  /**
  * Lists docker images.

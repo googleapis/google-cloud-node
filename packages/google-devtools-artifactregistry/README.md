@@ -70,6 +70,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | delete rule | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.delete_rule.js) |
 | delete tag | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.delete_tag.js) |
 | delete version | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.delete_version.js) |
+| export artifact | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.export_artifact.js) |
 | get attachment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.get_attachment.js) |
 | get docker image | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.get_docker_image.js) |
 | get file | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.get_file.js) |

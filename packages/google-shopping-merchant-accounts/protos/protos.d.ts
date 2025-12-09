@@ -16522,6 +16522,9 @@ export namespace google {
 
                         /** Region shippingEligible */
                         shippingEligible?: (google.protobuf.IBoolValue|null);
+
+                        /** Region radiusArea */
+                        radiusArea?: (google.shopping.merchant.accounts.v1.Region.IRadiusArea|null);
                     }
 
                     /** Represents a Region. */
@@ -16550,6 +16553,9 @@ export namespace google {
 
                         /** Region shippingEligible. */
                         public shippingEligible?: (google.protobuf.IBoolValue|null);
+
+                        /** Region radiusArea. */
+                        public radiusArea?: (google.shopping.merchant.accounts.v1.Region.IRadiusArea|null);
 
                         /**
                          * Creates a new Region instance using the specified properties.
@@ -16935,6 +16941,131 @@ export namespace google {
                              * @returns The default type url
                              */
                             public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a RadiusArea. */
+                        interface IRadiusArea {
+
+                            /** RadiusArea regionCode */
+                            regionCode?: (string|null);
+
+                            /** RadiusArea latLng */
+                            latLng?: (google.type.ILatLng|null);
+
+                            /** RadiusArea radius */
+                            radius?: (number|null);
+
+                            /** RadiusArea radiusUnits */
+                            radiusUnits?: (google.shopping.merchant.accounts.v1.Region.RadiusArea.RadiusUnits|keyof typeof google.shopping.merchant.accounts.v1.Region.RadiusArea.RadiusUnits|null);
+                        }
+
+                        /** Represents a RadiusArea. */
+                        class RadiusArea implements IRadiusArea {
+
+                            /**
+                             * Constructs a new RadiusArea.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.accounts.v1.Region.IRadiusArea);
+
+                            /** RadiusArea regionCode. */
+                            public regionCode: string;
+
+                            /** RadiusArea latLng. */
+                            public latLng?: (google.type.ILatLng|null);
+
+                            /** RadiusArea radius. */
+                            public radius: number;
+
+                            /** RadiusArea radiusUnits. */
+                            public radiusUnits: (google.shopping.merchant.accounts.v1.Region.RadiusArea.RadiusUnits|keyof typeof google.shopping.merchant.accounts.v1.Region.RadiusArea.RadiusUnits);
+
+                            /**
+                             * Creates a new RadiusArea instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns RadiusArea instance
+                             */
+                            public static create(properties?: google.shopping.merchant.accounts.v1.Region.IRadiusArea): google.shopping.merchant.accounts.v1.Region.RadiusArea;
+
+                            /**
+                             * Encodes the specified RadiusArea message. Does not implicitly {@link google.shopping.merchant.accounts.v1.Region.RadiusArea.verify|verify} messages.
+                             * @param message RadiusArea message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.accounts.v1.Region.IRadiusArea, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified RadiusArea message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1.Region.RadiusArea.verify|verify} messages.
+                             * @param message RadiusArea message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.accounts.v1.Region.IRadiusArea, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a RadiusArea message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns RadiusArea
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1.Region.RadiusArea;
+
+                            /**
+                             * Decodes a RadiusArea message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns RadiusArea
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1.Region.RadiusArea;
+
+                            /**
+                             * Verifies a RadiusArea message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a RadiusArea message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns RadiusArea
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1.Region.RadiusArea;
+
+                            /**
+                             * Creates a plain object from a RadiusArea message. Also converts values to other types if specified.
+                             * @param message RadiusArea
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.accounts.v1.Region.RadiusArea, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this RadiusArea to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for RadiusArea
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace RadiusArea {
+
+                            /** RadiusUnits enum. */
+                            enum RadiusUnits {
+                                RADIUS_UNITS_UNSPECIFIED = 0,
+                                MILES = 1,
+                                KILOMETERS = 2
+                            }
                         }
                     }
 
@@ -49192,6 +49323,109 @@ export namespace google {
 
             /**
              * Gets the default type url for Date
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a LatLng. */
+        interface ILatLng {
+
+            /** LatLng latitude */
+            latitude?: (number|null);
+
+            /** LatLng longitude */
+            longitude?: (number|null);
+        }
+
+        /** Represents a LatLng. */
+        class LatLng implements ILatLng {
+
+            /**
+             * Constructs a new LatLng.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.type.ILatLng);
+
+            /** LatLng latitude. */
+            public latitude: number;
+
+            /** LatLng longitude. */
+            public longitude: number;
+
+            /**
+             * Creates a new LatLng instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns LatLng instance
+             */
+            public static create(properties?: google.type.ILatLng): google.type.LatLng;
+
+            /**
+             * Encodes the specified LatLng message. Does not implicitly {@link google.type.LatLng.verify|verify} messages.
+             * @param message LatLng message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.type.ILatLng, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified LatLng message, length delimited. Does not implicitly {@link google.type.LatLng.verify|verify} messages.
+             * @param message LatLng message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.type.ILatLng, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a LatLng message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns LatLng
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.LatLng;
+
+            /**
+             * Decodes a LatLng message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns LatLng
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.LatLng;
+
+            /**
+             * Verifies a LatLng message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a LatLng message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns LatLng
+             */
+            public static fromObject(object: { [k: string]: any }): google.type.LatLng;
+
+            /**
+             * Creates a plain object from a LatLng message. Also converts values to other types if specified.
+             * @param message LatLng
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.type.LatLng, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this LatLng to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for LatLng
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

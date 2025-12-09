@@ -8780,6 +8780,58 @@
       }
     },
     {
+      "regionTag": "compute_v1beta_generated_GlobalVmExtensionPolicies_Delete_async",
+      "title": "AcceleratorTypes delete Sample",
+      "origin": "API_DEFINITION",
+      "description": " Purge scoped resources (zonal policies) from a global VM extension policy, and then delete the global VM extension policy. Purge of the scoped resources is a pre-condition of the global VM extension policy deletion. The deletion of the global VM extension policy happens after the purge rollout is done, so it's not a part of the LRO. It's an automatic process that triggers in the backend.",
+      "canonical": true,
+      "file": "global_vm_extension_policies.delete.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Delete",
+        "fullName": "google.cloud.compute.v1beta.GlobalVmExtensionPolicies.Delete",
+        "async": true,
+        "parameters": [
+          {
+            "name": "global_vm_extension_policy",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "global_vm_extension_policy_rollout_operation_rollout_input_resource",
+            "type": ".google.cloud.compute.v1beta.GlobalVmExtensionPolicyRolloutOperationRolloutInput"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Operation",
+        "client": {
+          "shortName": "GlobalVmExtensionPoliciesClient",
+          "fullName": "google.cloud.compute.v1beta.GlobalVmExtensionPoliciesClient"
+        },
+        "method": {
+          "shortName": "Delete",
+          "fullName": "google.cloud.compute.v1beta.GlobalVmExtensionPolicies.Delete",
+          "service": {
+            "shortName": "GlobalVmExtensionPolicies",
+            "fullName": "google.cloud.compute.v1beta.GlobalVmExtensionPolicies"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "compute_v1beta_generated_GlobalVmExtensionPolicies_Get_async",
       "title": "AcceleratorTypes get Sample",
       "origin": "API_DEFINITION",
@@ -8816,6 +8868,166 @@
         "method": {
           "shortName": "Get",
           "fullName": "google.cloud.compute.v1beta.GlobalVmExtensionPolicies.Get",
+          "service": {
+            "shortName": "GlobalVmExtensionPolicies",
+            "fullName": "google.cloud.compute.v1beta.GlobalVmExtensionPolicies"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_GlobalVmExtensionPolicies_Insert_async",
+      "title": "AcceleratorTypes insert Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new project level GlobalVmExtensionPolicy.",
+      "canonical": true,
+      "file": "global_vm_extension_policies.insert.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Insert",
+        "fullName": "google.cloud.compute.v1beta.GlobalVmExtensionPolicies.Insert",
+        "async": true,
+        "parameters": [
+          {
+            "name": "global_vm_extension_policy_resource",
+            "type": ".google.cloud.compute.v1beta.GlobalVmExtensionPolicy"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Operation",
+        "client": {
+          "shortName": "GlobalVmExtensionPoliciesClient",
+          "fullName": "google.cloud.compute.v1beta.GlobalVmExtensionPoliciesClient"
+        },
+        "method": {
+          "shortName": "Insert",
+          "fullName": "google.cloud.compute.v1beta.GlobalVmExtensionPolicies.Insert",
+          "service": {
+            "shortName": "GlobalVmExtensionPolicies",
+            "fullName": "google.cloud.compute.v1beta.GlobalVmExtensionPolicies"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_GlobalVmExtensionPolicies_List_async",
+      "title": "AcceleratorTypes list Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists global VM extension policies.",
+      "canonical": true,
+      "file": "global_vm_extension_policies.list.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 140,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "List",
+        "fullName": "google.cloud.compute.v1beta.GlobalVmExtensionPolicies.List",
+        "async": true,
+        "parameters": [
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "max_results",
+            "type": "TYPE_UINT32"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "return_partial_success",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.GlobalVmExtensionPolicyList",
+        "client": {
+          "shortName": "GlobalVmExtensionPoliciesClient",
+          "fullName": "google.cloud.compute.v1beta.GlobalVmExtensionPoliciesClient"
+        },
+        "method": {
+          "shortName": "List",
+          "fullName": "google.cloud.compute.v1beta.GlobalVmExtensionPolicies.List",
+          "service": {
+            "shortName": "GlobalVmExtensionPolicies",
+            "fullName": "google.cloud.compute.v1beta.GlobalVmExtensionPolicies"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_GlobalVmExtensionPolicies_Update_async",
+      "title": "AcceleratorTypes update Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a global VM extension policy.",
+      "canonical": true,
+      "file": "global_vm_extension_policies.update.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Update",
+        "fullName": "google.cloud.compute.v1beta.GlobalVmExtensionPolicies.Update",
+        "async": true,
+        "parameters": [
+          {
+            "name": "global_vm_extension_policy",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "global_vm_extension_policy_resource",
+            "type": ".google.cloud.compute.v1beta.GlobalVmExtensionPolicy"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Operation",
+        "client": {
+          "shortName": "GlobalVmExtensionPoliciesClient",
+          "fullName": "google.cloud.compute.v1beta.GlobalVmExtensionPoliciesClient"
+        },
+        "method": {
+          "shortName": "Update",
+          "fullName": "google.cloud.compute.v1beta.GlobalVmExtensionPolicies.Update",
           "service": {
             "shortName": "GlobalVmExtensionPolicies",
             "fullName": "google.cloud.compute.v1beta.GlobalVmExtensionPolicies"
@@ -24263,7 +24475,7 @@
       "regionTag": "compute_v1beta_generated_OrganizationSecurityPolicies_AddAssociation_async",
       "title": "AcceleratorTypes addAssociation Sample",
       "origin": "API_DEFINITION",
-      "description": " Inserts an association for the specified security policy. This has billing implications.  Projects in the hierarchy with effective hierarchical security policies will be automatically enrolled into Cloud Armor Enterprise if not already enrolled. Use of this API to modify firewall policies is deprecated. Use firewallPolicies.addAssociation instead if possible.",
+      "description": " Inserts an association for the specified security policy. This has billing implications.  Projects in the hierarchy with effective hierarchical security policies will be automatically enrolled into Cloud Armor Enterprise if not already enrolled. Use this API to modify Cloud Armor policies. Previously, alpha and beta versions of this API were used to modify firewall policies. This usage is now disabled for most organizations. Use firewallPolicies.addAssociation instead.",
       "canonical": true,
       "file": "organization_security_policies.add_association.js",
       "language": "JAVASCRIPT",
@@ -24315,7 +24527,7 @@
       "regionTag": "compute_v1beta_generated_OrganizationSecurityPolicies_AddRule_async",
       "title": "AcceleratorTypes addRule Sample",
       "origin": "API_DEFINITION",
-      "description": " Inserts a rule into a security policy.",
+      "description": " Inserts a rule into a security policy. Use this API to modify Cloud Armor policies. Previously, alpha and beta versions of this API were used to modify firewall policies. This usage is now disabled for most organizations. Use firewallPolicies.addRule instead.",
       "canonical": true,
       "file": "organization_security_policies.add_rule.js",
       "language": "JAVASCRIPT",
@@ -24363,7 +24575,7 @@
       "regionTag": "compute_v1beta_generated_OrganizationSecurityPolicies_CopyRules_async",
       "title": "AcceleratorTypes copyRules Sample",
       "origin": "API_DEFINITION",
-      "description": " Copies rules to the specified security policy. Use of this API to modify firewall policies is deprecated. Use firewallPolicies.copyRules instead.",
+      "description": " Copies rules to the specified security policy. Use this API to modify Cloud Armor policies. Previously, alpha and beta versions of this API were used to modify firewall policies. This usage is now disabled for most organizations. Use firewallPolicies.cloneRules instead.",
       "canonical": true,
       "file": "organization_security_policies.copy_rules.js",
       "language": "JAVASCRIPT",
@@ -24411,7 +24623,7 @@
       "regionTag": "compute_v1beta_generated_OrganizationSecurityPolicies_Delete_async",
       "title": "AcceleratorTypes delete Sample",
       "origin": "API_DEFINITION",
-      "description": " Deletes the specified policy. Use of this API to remove firewall policies is deprecated. Use firewallPolicies.delete instead.",
+      "description": " Deletes the specified policy. Use this API to remove Cloud Armor policies. Previously, alpha and beta versions of this API were used to remove firewall policies. This usage is now disabled for most organizations. Use firewallPolicies.delete instead.",
       "canonical": true,
       "file": "organization_security_policies.delete.js",
       "language": "JAVASCRIPT",
@@ -24455,7 +24667,7 @@
       "regionTag": "compute_v1beta_generated_OrganizationSecurityPolicies_Get_async",
       "title": "AcceleratorTypes get Sample",
       "origin": "API_DEFINITION",
-      "description": " List all of the ordered rules present in a single specified policy. Use of this API to read firewall policies is deprecated. Use firewallPolicies.get instead.",
+      "description": " List all of the ordered rules present in a single specified policy. Use this API to read Cloud Armor policies. Previously, alpha and beta versions of this API were used to read firewall policies. This usage is now disabled for most organizations. Use firewallPolicies.get instead.",
       "canonical": true,
       "file": "organization_security_policies.get.js",
       "language": "JAVASCRIPT",
@@ -24495,7 +24707,7 @@
       "regionTag": "compute_v1beta_generated_OrganizationSecurityPolicies_GetAssociation_async",
       "title": "AcceleratorTypes getAssociation Sample",
       "origin": "API_DEFINITION",
-      "description": " Gets an association with the specified name. Use of this API to read firewall policies is deprecated. Use firewallPolicies.getAssociation instead if possible.",
+      "description": " Gets an association with the specified name. Use this API to read Cloud Armor policies. Previously, alpha and beta versions of this API were used to read firewall policies. This usage is now disabled for most organizations. Use firewallPolicies.getAssociation instead.",
       "canonical": true,
       "file": "organization_security_policies.get_association.js",
       "language": "JAVASCRIPT",
@@ -24539,7 +24751,7 @@
       "regionTag": "compute_v1beta_generated_OrganizationSecurityPolicies_GetRule_async",
       "title": "AcceleratorTypes getRule Sample",
       "origin": "API_DEFINITION",
-      "description": " Gets a rule at the specified priority. Use of this API to read firewall policies is deprecated. Use firewallPolicies.getRule instead.",
+      "description": " Gets a rule at the specified priority. Use this API to read Cloud Armor policies. Previously, alpha and beta versions of this API were used to read firewall policies. This usage is now disabled for most organizations. Use firewallPolicies.getRule instead.",
       "canonical": true,
       "file": "organization_security_policies.get_rule.js",
       "language": "JAVASCRIPT",
@@ -24583,7 +24795,7 @@
       "regionTag": "compute_v1beta_generated_OrganizationSecurityPolicies_Insert_async",
       "title": "AcceleratorTypes insert Sample",
       "origin": "API_DEFINITION",
-      "description": " Creates a new policy in the specified organization using the data included in the request. Use of this API to insert firewall policies is deprecated. Use firewallPolicies.insert instead.",
+      "description": " Creates a new policy in the specified organization using the data included in the request. Use this API to add Cloud Armor policies. Previously, alpha and beta versions of this API were used to add firewall policies. This usage is now disabled for most organizations. Use firewallPolicies.insert instead.",
       "canonical": true,
       "file": "organization_security_policies.insert.js",
       "language": "JAVASCRIPT",
@@ -24631,7 +24843,7 @@
       "regionTag": "compute_v1beta_generated_OrganizationSecurityPolicies_List_async",
       "title": "AcceleratorTypes list Sample",
       "origin": "API_DEFINITION",
-      "description": " List all the policies that have been configured for the specified organization. Use of this API to read firewall policies is deprecated. Use firewallPolicies.list instead.",
+      "description": " List all the policies that have been configured for the specified organization. Use this API to read Cloud Armor policies. Previously, alpha and beta versions of this API were used to read firewall policies. This usage is now disabled for most organizations. Use firewallPolicies.list instead.",
       "canonical": true,
       "file": "organization_security_policies.list.js",
       "language": "JAVASCRIPT",
@@ -24691,7 +24903,7 @@
       "regionTag": "compute_v1beta_generated_OrganizationSecurityPolicies_ListAssociations_async",
       "title": "AcceleratorTypes listAssociations Sample",
       "origin": "API_DEFINITION",
-      "description": " Lists associations of a specified target, i.e., organization or folder. Use of this API to read firewall policies is deprecated. Use firewallPolicies.listAssociations instead if possible.",
+      "description": " Lists associations of a specified target, i.e., organization or folder. Use this API to read Cloud Armor policies. Previously, alpha and beta versions of this API were used to read firewall policies. This usage is now disabled for most organizations. Use firewallPolicies.listAssociations instead.",
       "canonical": true,
       "file": "organization_security_policies.list_associations.js",
       "language": "JAVASCRIPT",
@@ -24791,7 +25003,7 @@
       "regionTag": "compute_v1beta_generated_OrganizationSecurityPolicies_Move_async",
       "title": "AcceleratorTypes move Sample",
       "origin": "API_DEFINITION",
-      "description": " Moves the specified security policy. Use of this API to modify firewall policies is deprecated. Use firewallPolicies.move instead.",
+      "description": " Moves the specified security policy. Use this API to modify Cloud Armor policies. Previously, alpha and beta versions of this API were used to modify firewall policies. This usage is now disabled for most organizations. Use firewallPolicies.move instead.",
       "canonical": true,
       "file": "organization_security_policies.move.js",
       "language": "JAVASCRIPT",
@@ -24839,7 +25051,7 @@
       "regionTag": "compute_v1beta_generated_OrganizationSecurityPolicies_Patch_async",
       "title": "AcceleratorTypes patch Sample",
       "origin": "API_DEFINITION",
-      "description": " Patches the specified policy with the data included in the request. Use of this API to modify firewall policies is deprecated. Use firewallPolicies.patch instead.",
+      "description": " Patches the specified policy with the data included in the request. Use this API to modify Cloud Armor policies. Previously, alpha and beta versions of this API were used to modify firewall policies. This usage is now disabled for most organizations. Use firewallPolicies.patch instead.",
       "canonical": true,
       "file": "organization_security_policies.patch.js",
       "language": "JAVASCRIPT",
@@ -24891,7 +25103,7 @@
       "regionTag": "compute_v1beta_generated_OrganizationSecurityPolicies_PatchRule_async",
       "title": "AcceleratorTypes patchRule Sample",
       "origin": "API_DEFINITION",
-      "description": " Patches a rule at the specified priority. Use of this API to modify firewall policies is deprecated. Use firewallPolicies.patchRule instead.",
+      "description": " Patches a rule at the specified priority. Use this API to modify Cloud Armor policies. Previously, alpha and beta versions of this API were used to modify firewall policies. This usage is now disabled for most organizations. Use firewallPolicies.patchRule instead.",
       "canonical": true,
       "file": "organization_security_policies.patch_rule.js",
       "language": "JAVASCRIPT",
@@ -24947,7 +25159,7 @@
       "regionTag": "compute_v1beta_generated_OrganizationSecurityPolicies_RemoveAssociation_async",
       "title": "AcceleratorTypes removeAssociation Sample",
       "origin": "API_DEFINITION",
-      "description": " Removes an association for the specified security policy. Use of this API to modify firewall policies is deprecated. Use firewallPolicies.removeAssociation instead if possible.",
+      "description": " Removes an association for the specified security policy. Use this API to modify Cloud Armor policies. Previously, alpha and beta versions of this API were used to modify firewall policies. This usage is now disabled for most organizations. Use firewallPolicies.removeAssociation instead.",
       "canonical": true,
       "file": "organization_security_policies.remove_association.js",
       "language": "JAVASCRIPT",
@@ -24995,7 +25207,7 @@
       "regionTag": "compute_v1beta_generated_OrganizationSecurityPolicies_RemoveRule_async",
       "title": "AcceleratorTypes removeRule Sample",
       "origin": "API_DEFINITION",
-      "description": " Deletes a rule at the specified priority.",
+      "description": " Deletes a rule at the specified priority. Use this API to modify Cloud Armor policies. Previously, alpha and beta versions of this API were used to modify firewall policies. This usage is now disabled for most organizations. Use firewallPolicies.removeRule instead.",
       "canonical": true,
       "file": "organization_security_policies.remove_rule.js",
       "language": "JAVASCRIPT",
@@ -42983,6 +43195,410 @@
           "service": {
             "shortName": "ResourcePolicies",
             "fullName": "google.cloud.compute.v1beta.ResourcePolicies"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_RolloutPlans_Delete_async",
+      "title": "AcceleratorTypes delete Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a RolloutPlan.",
+      "canonical": true,
+      "file": "rollout_plans.delete.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Delete",
+        "fullName": "google.cloud.compute.v1beta.RolloutPlans.Delete",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "rollout_plan",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Operation",
+        "client": {
+          "shortName": "RolloutPlansClient",
+          "fullName": "google.cloud.compute.v1beta.RolloutPlansClient"
+        },
+        "method": {
+          "shortName": "Delete",
+          "fullName": "google.cloud.compute.v1beta.RolloutPlans.Delete",
+          "service": {
+            "shortName": "RolloutPlans",
+            "fullName": "google.cloud.compute.v1beta.RolloutPlans"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_RolloutPlans_Get_async",
+      "title": "AcceleratorTypes get Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single project-scoped RolloutPlan.",
+      "canonical": true,
+      "file": "rollout_plans.get.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Get",
+        "fullName": "google.cloud.compute.v1beta.RolloutPlans.Get",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "rollout_plan",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.RolloutPlan",
+        "client": {
+          "shortName": "RolloutPlansClient",
+          "fullName": "google.cloud.compute.v1beta.RolloutPlansClient"
+        },
+        "method": {
+          "shortName": "Get",
+          "fullName": "google.cloud.compute.v1beta.RolloutPlans.Get",
+          "service": {
+            "shortName": "RolloutPlans",
+            "fullName": "google.cloud.compute.v1beta.RolloutPlans"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_RolloutPlans_Insert_async",
+      "title": "AcceleratorTypes insert Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new RolloutPlan in a given project and location.",
+      "canonical": true,
+      "file": "rollout_plans.insert.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Insert",
+        "fullName": "google.cloud.compute.v1beta.RolloutPlans.Insert",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "rollout_plan_resource",
+            "type": ".google.cloud.compute.v1beta.RolloutPlan"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Operation",
+        "client": {
+          "shortName": "RolloutPlansClient",
+          "fullName": "google.cloud.compute.v1beta.RolloutPlansClient"
+        },
+        "method": {
+          "shortName": "Insert",
+          "fullName": "google.cloud.compute.v1beta.RolloutPlans.Insert",
+          "service": {
+            "shortName": "RolloutPlans",
+            "fullName": "google.cloud.compute.v1beta.RolloutPlans"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_RolloutPlans_List_async",
+      "title": "AcceleratorTypes list Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists RolloutPlans in a given project and location.",
+      "canonical": true,
+      "file": "rollout_plans.list.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 140,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "List",
+        "fullName": "google.cloud.compute.v1beta.RolloutPlans.List",
+        "async": true,
+        "parameters": [
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "max_results",
+            "type": "TYPE_UINT32"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "return_partial_success",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.RolloutPlansListResponse",
+        "client": {
+          "shortName": "RolloutPlansClient",
+          "fullName": "google.cloud.compute.v1beta.RolloutPlansClient"
+        },
+        "method": {
+          "shortName": "List",
+          "fullName": "google.cloud.compute.v1beta.RolloutPlans.List",
+          "service": {
+            "shortName": "RolloutPlans",
+            "fullName": "google.cloud.compute.v1beta.RolloutPlans"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_Rollouts_Cancel_async",
+      "title": "AcceleratorTypes cancel Sample",
+      "origin": "API_DEFINITION",
+      "description": " Cancels a Rollout.",
+      "canonical": true,
+      "file": "rollouts.cancel.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 79,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Cancel",
+        "fullName": "google.cloud.compute.v1beta.Rollouts.Cancel",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "rollback",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "rollout",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Operation",
+        "client": {
+          "shortName": "RolloutsClient",
+          "fullName": "google.cloud.compute.v1beta.RolloutsClient"
+        },
+        "method": {
+          "shortName": "Cancel",
+          "fullName": "google.cloud.compute.v1beta.Rollouts.Cancel",
+          "service": {
+            "shortName": "Rollouts",
+            "fullName": "google.cloud.compute.v1beta.Rollouts"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_Rollouts_Delete_async",
+      "title": "AcceleratorTypes delete Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a Rollout.",
+      "canonical": true,
+      "file": "rollouts.delete.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Delete",
+        "fullName": "google.cloud.compute.v1beta.Rollouts.Delete",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "rollout",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Operation",
+        "client": {
+          "shortName": "RolloutsClient",
+          "fullName": "google.cloud.compute.v1beta.RolloutsClient"
+        },
+        "method": {
+          "shortName": "Delete",
+          "fullName": "google.cloud.compute.v1beta.Rollouts.Delete",
+          "service": {
+            "shortName": "Rollouts",
+            "fullName": "google.cloud.compute.v1beta.Rollouts"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_Rollouts_Get_async",
+      "title": "AcceleratorTypes get Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single project-scoped Rollout.",
+      "canonical": true,
+      "file": "rollouts.get.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Get",
+        "fullName": "google.cloud.compute.v1beta.Rollouts.Get",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "rollout",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Rollout",
+        "client": {
+          "shortName": "RolloutsClient",
+          "fullName": "google.cloud.compute.v1beta.RolloutsClient"
+        },
+        "method": {
+          "shortName": "Get",
+          "fullName": "google.cloud.compute.v1beta.Rollouts.Get",
+          "service": {
+            "shortName": "Rollouts",
+            "fullName": "google.cloud.compute.v1beta.Rollouts"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_Rollouts_List_async",
+      "title": "AcceleratorTypes list Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists Rollouts in a given project and location.",
+      "canonical": true,
+      "file": "rollouts.list.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 140,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "List",
+        "fullName": "google.cloud.compute.v1beta.Rollouts.List",
+        "async": true,
+        "parameters": [
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "max_results",
+            "type": "TYPE_UINT32"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "return_partial_success",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.RolloutsListResponse",
+        "client": {
+          "shortName": "RolloutsClient",
+          "fullName": "google.cloud.compute.v1beta.RolloutsClient"
+        },
+        "method": {
+          "shortName": "List",
+          "fullName": "google.cloud.compute.v1beta.Rollouts.List",
+          "service": {
+            "shortName": "Rollouts",
+            "fullName": "google.cloud.compute.v1beta.Rollouts"
           }
         }
       }

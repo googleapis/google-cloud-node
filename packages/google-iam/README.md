@@ -9,7 +9,7 @@ unless absolutely necessary (e.g. because of critical security issues) or with
 an extensive deprecation period. Issues and requests against **stable** libraries
 are addressed with the highest priority
 
-[![npm version](https://img.shields.io/npm/v/iam.svg)](https://www.npmjs.org/package/iam)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/iam.svg)](https://www.npmjs.org/package/@google-cloud/iam)
 
 Identity and Access Management (IAM) API client for Node.js
 
@@ -47,7 +47,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 ### Installing the client library
 
 ```bash
-npm install iam
+npm install @google-cloud/iam
 ```
 
 [//]: # "partials.body"
@@ -129,7 +129,7 @@ best-efforts basis with the following warnings:
 Client libraries targeting some end-of-life versions of Node.js are available, and
 can be installed through npm [dist-tags](https://docs.npmjs.com/cli/dist-tag).
 The dist-tags follow the naming convention `legacy-(version)`.
-For example, `npm install iam@legacy-8` installs client libraries
+For example, `npm install @google-cloud/iam@legacy-8` installs client libraries
 for versions compatible with Node.js 8.
 
 ## Versioning

@@ -97,6 +97,15 @@ export namespace google {
 
                     /** SubmitBuildRequest tags */
                     tags?: (string[]|null);
+
+                    /** SubmitBuildRequest machineType */
+                    machineType?: (string|null);
+
+                    /** SubmitBuildRequest releaseTrack */
+                    releaseTrack?: (google.api.LaunchStage|keyof typeof google.api.LaunchStage|null);
+
+                    /** SubmitBuildRequest client */
+                    client?: (string|null);
                 }
 
                 /** Represents a SubmitBuildRequest. */
@@ -131,6 +140,15 @@ export namespace google {
 
                     /** SubmitBuildRequest tags. */
                     public tags: string[];
+
+                    /** SubmitBuildRequest machineType. */
+                    public machineType: string;
+
+                    /** SubmitBuildRequest releaseTrack. */
+                    public releaseTrack: (google.api.LaunchStage|keyof typeof google.api.LaunchStage);
+
+                    /** SubmitBuildRequest client. */
+                    public client: string;
 
                     /** SubmitBuildRequest source. */
                     public source?: "storageSource";
@@ -866,7 +884,8 @@ export namespace google {
                         NON_ZERO_EXIT_CODE = 2,
                         CANCELLED = 3,
                         CANCELLING = 4,
-                        DELETED = 5
+                        DELETED = 5,
+                        DELAYED_START_PENDING = 6
                     }
                 }
 
@@ -1933,6 +1952,9 @@ export namespace google {
                     /** Container image */
                     image?: (string|null);
 
+                    /** Container sourceCode */
+                    sourceCode?: (google.cloud.run.v2.ISourceCode|null);
+
                     /** Container command */
                     command?: (string[]|null);
 
@@ -1984,6 +2006,9 @@ export namespace google {
 
                     /** Container image. */
                     public image: string;
+
+                    /** Container sourceCode. */
+                    public sourceCode?: (google.cloud.run.v2.ISourceCode|null);
 
                     /** Container command. */
                     public command: string[];
@@ -2631,6 +2656,9 @@ export namespace google {
 
                     /** VolumeMount mountPath */
                     mountPath?: (string|null);
+
+                    /** VolumeMount subPath */
+                    subPath?: (string|null);
                 }
 
                 /** Represents a VolumeMount. */
@@ -2647,6 +2675,9 @@ export namespace google {
 
                     /** VolumeMount mountPath. */
                     public mountPath: string;
+
+                    /** VolumeMount subPath. */
+                    public subPath: string;
 
                     /**
                      * Creates a new VolumeMount instance using the specified properties.
@@ -4152,6 +4183,218 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a SourceCode. */
+                interface ISourceCode {
+
+                    /** SourceCode cloudStorageSource */
+                    cloudStorageSource?: (google.cloud.run.v2.SourceCode.ICloudStorageSource|null);
+                }
+
+                /** Represents a SourceCode. */
+                class SourceCode implements ISourceCode {
+
+                    /**
+                     * Constructs a new SourceCode.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.run.v2.ISourceCode);
+
+                    /** SourceCode cloudStorageSource. */
+                    public cloudStorageSource?: (google.cloud.run.v2.SourceCode.ICloudStorageSource|null);
+
+                    /** SourceCode sourceType. */
+                    public sourceType?: "cloudStorageSource";
+
+                    /**
+                     * Creates a new SourceCode instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SourceCode instance
+                     */
+                    public static create(properties?: google.cloud.run.v2.ISourceCode): google.cloud.run.v2.SourceCode;
+
+                    /**
+                     * Encodes the specified SourceCode message. Does not implicitly {@link google.cloud.run.v2.SourceCode.verify|verify} messages.
+                     * @param message SourceCode message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.run.v2.ISourceCode, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SourceCode message, length delimited. Does not implicitly {@link google.cloud.run.v2.SourceCode.verify|verify} messages.
+                     * @param message SourceCode message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.run.v2.ISourceCode, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SourceCode message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SourceCode
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.run.v2.SourceCode;
+
+                    /**
+                     * Decodes a SourceCode message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SourceCode
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.run.v2.SourceCode;
+
+                    /**
+                     * Verifies a SourceCode message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SourceCode message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SourceCode
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.run.v2.SourceCode;
+
+                    /**
+                     * Creates a plain object from a SourceCode message. Also converts values to other types if specified.
+                     * @param message SourceCode
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.run.v2.SourceCode, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SourceCode to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SourceCode
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SourceCode {
+
+                    /** Properties of a CloudStorageSource. */
+                    interface ICloudStorageSource {
+
+                        /** CloudStorageSource bucket */
+                        bucket?: (string|null);
+
+                        /** CloudStorageSource object */
+                        object?: (string|null);
+
+                        /** CloudStorageSource generation */
+                        generation?: (number|Long|string|null);
+                    }
+
+                    /** Represents a CloudStorageSource. */
+                    class CloudStorageSource implements ICloudStorageSource {
+
+                        /**
+                         * Constructs a new CloudStorageSource.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.run.v2.SourceCode.ICloudStorageSource);
+
+                        /** CloudStorageSource bucket. */
+                        public bucket: string;
+
+                        /** CloudStorageSource object. */
+                        public object: string;
+
+                        /** CloudStorageSource generation. */
+                        public generation: (number|Long|string);
+
+                        /**
+                         * Creates a new CloudStorageSource instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CloudStorageSource instance
+                         */
+                        public static create(properties?: google.cloud.run.v2.SourceCode.ICloudStorageSource): google.cloud.run.v2.SourceCode.CloudStorageSource;
+
+                        /**
+                         * Encodes the specified CloudStorageSource message. Does not implicitly {@link google.cloud.run.v2.SourceCode.CloudStorageSource.verify|verify} messages.
+                         * @param message CloudStorageSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.run.v2.SourceCode.ICloudStorageSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CloudStorageSource message, length delimited. Does not implicitly {@link google.cloud.run.v2.SourceCode.CloudStorageSource.verify|verify} messages.
+                         * @param message CloudStorageSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.run.v2.SourceCode.ICloudStorageSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CloudStorageSource message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CloudStorageSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.run.v2.SourceCode.CloudStorageSource;
+
+                        /**
+                         * Decodes a CloudStorageSource message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CloudStorageSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.run.v2.SourceCode.CloudStorageSource;
+
+                        /**
+                         * Verifies a CloudStorageSource message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CloudStorageSource message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CloudStorageSource
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.run.v2.SourceCode.CloudStorageSource;
+
+                        /**
+                         * Creates a plain object from a CloudStorageSource message. Also converts values to other types if specified.
+                         * @param message CloudStorageSource
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.run.v2.SourceCode.CloudStorageSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CloudStorageSource to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CloudStorageSource
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
                 /** Properties of a VpcAccess. */
                 interface IVpcAccess {
 
@@ -4701,6 +4944,9 @@ export namespace google {
                     /** ServiceScaling scalingMode */
                     scalingMode?: (google.cloud.run.v2.ServiceScaling.ScalingMode|keyof typeof google.cloud.run.v2.ServiceScaling.ScalingMode|null);
 
+                    /** ServiceScaling maxInstanceCount */
+                    maxInstanceCount?: (number|null);
+
                     /** ServiceScaling manualInstanceCount */
                     manualInstanceCount?: (number|null);
                 }
@@ -4719,6 +4965,9 @@ export namespace google {
 
                     /** ServiceScaling scalingMode. */
                     public scalingMode: (google.cloud.run.v2.ServiceScaling.ScalingMode|keyof typeof google.cloud.run.v2.ServiceScaling.ScalingMode);
+
+                    /** ServiceScaling maxInstanceCount. */
+                    public maxInstanceCount: number;
 
                     /** ServiceScaling manualInstanceCount. */
                     public manualInstanceCount?: (number|null);
@@ -8762,6 +9011,9 @@ export namespace google {
 
                     /** ListServicesResponse nextPageToken */
                     nextPageToken?: (string|null);
+
+                    /** ListServicesResponse unreachable */
+                    unreachable?: (string[]|null);
                 }
 
                 /** Represents a ListServicesResponse. */
@@ -8778,6 +9030,9 @@ export namespace google {
 
                     /** ListServicesResponse nextPageToken. */
                     public nextPageToken: string;
+
+                    /** ListServicesResponse unreachable. */
+                    public unreachable: string[];
 
                     /**
                      * Creates a new ListServicesResponse instance using the specified properties.
@@ -9135,6 +9390,12 @@ export namespace google {
                     /** Service urls */
                     urls?: (string[]|null);
 
+                    /** Service iapEnabled */
+                    iapEnabled?: (boolean|null);
+
+                    /** Service multiRegionSettings */
+                    multiRegionSettings?: (google.cloud.run.v2.Service.IMultiRegionSettings|null);
+
                     /** Service customAudiences */
                     customAudiences?: (string[]|null);
 
@@ -9161,6 +9422,9 @@ export namespace google {
 
                     /** Service satisfiesPzs */
                     satisfiesPzs?: (boolean|null);
+
+                    /** Service threatDetectionEnabled */
+                    threatDetectionEnabled?: (boolean|null);
 
                     /** Service buildConfig */
                     buildConfig?: (google.cloud.run.v2.IBuildConfig|null);
@@ -9250,6 +9514,12 @@ export namespace google {
                     /** Service urls. */
                     public urls: string[];
 
+                    /** Service iapEnabled. */
+                    public iapEnabled: boolean;
+
+                    /** Service multiRegionSettings. */
+                    public multiRegionSettings?: (google.cloud.run.v2.Service.IMultiRegionSettings|null);
+
                     /** Service customAudiences. */
                     public customAudiences: string[];
 
@@ -9276,6 +9546,9 @@ export namespace google {
 
                     /** Service satisfiesPzs. */
                     public satisfiesPzs: boolean;
+
+                    /** Service threatDetectionEnabled. */
+                    public threatDetectionEnabled: boolean;
 
                     /** Service buildConfig. */
                     public buildConfig?: (google.cloud.run.v2.IBuildConfig|null);
@@ -9362,6 +9635,112 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Service {
+
+                    /** Properties of a MultiRegionSettings. */
+                    interface IMultiRegionSettings {
+
+                        /** MultiRegionSettings regions */
+                        regions?: (string[]|null);
+
+                        /** MultiRegionSettings multiRegionId */
+                        multiRegionId?: (string|null);
+                    }
+
+                    /** Represents a MultiRegionSettings. */
+                    class MultiRegionSettings implements IMultiRegionSettings {
+
+                        /**
+                         * Constructs a new MultiRegionSettings.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.run.v2.Service.IMultiRegionSettings);
+
+                        /** MultiRegionSettings regions. */
+                        public regions: string[];
+
+                        /** MultiRegionSettings multiRegionId. */
+                        public multiRegionId: string;
+
+                        /**
+                         * Creates a new MultiRegionSettings instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns MultiRegionSettings instance
+                         */
+                        public static create(properties?: google.cloud.run.v2.Service.IMultiRegionSettings): google.cloud.run.v2.Service.MultiRegionSettings;
+
+                        /**
+                         * Encodes the specified MultiRegionSettings message. Does not implicitly {@link google.cloud.run.v2.Service.MultiRegionSettings.verify|verify} messages.
+                         * @param message MultiRegionSettings message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.run.v2.Service.IMultiRegionSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified MultiRegionSettings message, length delimited. Does not implicitly {@link google.cloud.run.v2.Service.MultiRegionSettings.verify|verify} messages.
+                         * @param message MultiRegionSettings message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.run.v2.Service.IMultiRegionSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a MultiRegionSettings message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns MultiRegionSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.run.v2.Service.MultiRegionSettings;
+
+                        /**
+                         * Decodes a MultiRegionSettings message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns MultiRegionSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.run.v2.Service.MultiRegionSettings;
+
+                        /**
+                         * Verifies a MultiRegionSettings message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a MultiRegionSettings message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns MultiRegionSettings
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.run.v2.Service.MultiRegionSettings;
+
+                        /**
+                         * Creates a plain object from a MultiRegionSettings message. Also converts values to other types if specified.
+                         * @param message MultiRegionSettings
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.run.v2.Service.MultiRegionSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this MultiRegionSettings to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for MultiRegionSettings
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a TrafficTarget. */
@@ -11316,6 +11695,9 @@ export namespace google {
                     /** WorkerPool instanceSplitStatuses */
                     instanceSplitStatuses?: (google.cloud.run.v2.IInstanceSplitStatus[]|null);
 
+                    /** WorkerPool threatDetectionEnabled */
+                    threatDetectionEnabled?: (boolean|null);
+
                     /** WorkerPool customAudiences */
                     customAudiences?: (string[]|null);
 
@@ -11412,6 +11794,9 @@ export namespace google {
 
                     /** WorkerPool instanceSplitStatuses. */
                     public instanceSplitStatuses: google.cloud.run.v2.IInstanceSplitStatus[];
+
+                    /** WorkerPool threatDetectionEnabled. */
+                    public threatDetectionEnabled: boolean;
 
                     /** WorkerPool customAudiences. */
                     public customAudiences: string[];
@@ -11541,6 +11926,9 @@ export namespace google {
 
                     /** WorkerPoolRevisionTemplate nodeSelector */
                     nodeSelector?: (google.cloud.run.v2.INodeSelector|null);
+
+                    /** WorkerPoolRevisionTemplate gpuZonalRedundancyDisabled */
+                    gpuZonalRedundancyDisabled?: (boolean|null);
                 }
 
                 /** Represents a WorkerPoolRevisionTemplate. */
@@ -11587,6 +11975,9 @@ export namespace google {
 
                     /** WorkerPoolRevisionTemplate nodeSelector. */
                     public nodeSelector?: (google.cloud.run.v2.INodeSelector|null);
+
+                    /** WorkerPoolRevisionTemplate gpuZonalRedundancyDisabled. */
+                    public gpuZonalRedundancyDisabled?: (boolean|null);
 
                     /**
                      * Creates a new WorkerPoolRevisionTemplate instance using the specified properties.

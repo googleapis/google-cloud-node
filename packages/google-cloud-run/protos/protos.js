@@ -148,6 +148,9 @@
                          * @property {string|null} [serviceAccount] SubmitBuildRequest serviceAccount
                          * @property {string|null} [workerPool] SubmitBuildRequest workerPool
                          * @property {Array.<string>|null} [tags] SubmitBuildRequest tags
+                         * @property {string|null} [machineType] SubmitBuildRequest machineType
+                         * @property {google.api.LaunchStage|null} [releaseTrack] SubmitBuildRequest releaseTrack
+                         * @property {string|null} [client] SubmitBuildRequest client
                          */
     
                         /**
@@ -230,6 +233,30 @@
                          */
                         SubmitBuildRequest.prototype.tags = $util.emptyArray;
     
+                        /**
+                         * SubmitBuildRequest machineType.
+                         * @member {string} machineType
+                         * @memberof google.cloud.run.v2.SubmitBuildRequest
+                         * @instance
+                         */
+                        SubmitBuildRequest.prototype.machineType = "";
+    
+                        /**
+                         * SubmitBuildRequest releaseTrack.
+                         * @member {google.api.LaunchStage} releaseTrack
+                         * @memberof google.cloud.run.v2.SubmitBuildRequest
+                         * @instance
+                         */
+                        SubmitBuildRequest.prototype.releaseTrack = 0;
+    
+                        /**
+                         * SubmitBuildRequest client.
+                         * @member {string} client
+                         * @memberof google.cloud.run.v2.SubmitBuildRequest
+                         * @instance
+                         */
+                        SubmitBuildRequest.prototype.client = "";
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -296,6 +323,12 @@
                             if (message.tags != null && message.tags.length)
                                 for (var i = 0; i < message.tags.length; ++i)
                                     writer.uint32(/* id 8, wireType 2 =*/66).string(message.tags[i]);
+                            if (message.machineType != null && Object.hasOwnProperty.call(message, "machineType"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.machineType);
+                            if (message.releaseTrack != null && Object.hasOwnProperty.call(message, "releaseTrack"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).int32(message.releaseTrack);
+                            if (message.client != null && Object.hasOwnProperty.call(message, "client"))
+                                writer.uint32(/* id 11, wireType 2 =*/90).string(message.client);
                             return writer;
                         };
     
@@ -364,6 +397,18 @@
                                         if (!(message.tags && message.tags.length))
                                             message.tags = [];
                                         message.tags.push(reader.string());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.machineType = reader.string();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.releaseTrack = reader.int32();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.client = reader.string();
                                         break;
                                     }
                                 default:
@@ -447,6 +492,26 @@
                                     if (!$util.isString(message.tags[i]))
                                         return "tags: string[] expected";
                             }
+                            if (message.machineType != null && message.hasOwnProperty("machineType"))
+                                if (!$util.isString(message.machineType))
+                                    return "machineType: string expected";
+                            if (message.releaseTrack != null && message.hasOwnProperty("releaseTrack"))
+                                switch (message.releaseTrack) {
+                                default:
+                                    return "releaseTrack: enum value expected";
+                                case 0:
+                                case 6:
+                                case 7:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
+                            if (message.client != null && message.hasOwnProperty("client"))
+                                if (!$util.isString(message.client))
+                                    return "client: string expected";
                             return null;
                         };
     
@@ -492,6 +557,50 @@
                                 for (var i = 0; i < object.tags.length; ++i)
                                     message.tags[i] = String(object.tags[i]);
                             }
+                            if (object.machineType != null)
+                                message.machineType = String(object.machineType);
+                            switch (object.releaseTrack) {
+                            default:
+                                if (typeof object.releaseTrack === "number") {
+                                    message.releaseTrack = object.releaseTrack;
+                                    break;
+                                }
+                                break;
+                            case "LAUNCH_STAGE_UNSPECIFIED":
+                            case 0:
+                                message.releaseTrack = 0;
+                                break;
+                            case "UNIMPLEMENTED":
+                            case 6:
+                                message.releaseTrack = 6;
+                                break;
+                            case "PRELAUNCH":
+                            case 7:
+                                message.releaseTrack = 7;
+                                break;
+                            case "EARLY_ACCESS":
+                            case 1:
+                                message.releaseTrack = 1;
+                                break;
+                            case "ALPHA":
+                            case 2:
+                                message.releaseTrack = 2;
+                                break;
+                            case "BETA":
+                            case 3:
+                                message.releaseTrack = 3;
+                                break;
+                            case "GA":
+                            case 4:
+                                message.releaseTrack = 4;
+                                break;
+                            case "DEPRECATED":
+                            case 5:
+                                message.releaseTrack = 5;
+                                break;
+                            }
+                            if (object.client != null)
+                                message.client = String(object.client);
                             return message;
                         };
     
@@ -515,6 +624,9 @@
                                 object.imageUri = "";
                                 object.serviceAccount = "";
                                 object.workerPool = "";
+                                object.machineType = "";
+                                object.releaseTrack = options.enums === String ? "LAUNCH_STAGE_UNSPECIFIED" : 0;
+                                object.client = "";
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -544,6 +656,12 @@
                                 for (var j = 0; j < message.tags.length; ++j)
                                     object.tags[j] = message.tags[j];
                             }
+                            if (message.machineType != null && message.hasOwnProperty("machineType"))
+                                object.machineType = message.machineType;
+                            if (message.releaseTrack != null && message.hasOwnProperty("releaseTrack"))
+                                object.releaseTrack = options.enums === String ? $root.google.api.LaunchStage[message.releaseTrack] === undefined ? message.releaseTrack : $root.google.api.LaunchStage[message.releaseTrack] : message.releaseTrack;
+                            if (message.client != null && message.hasOwnProperty("client"))
+                                object.client = message.client;
                             return object;
                         };
     
@@ -2001,6 +2119,7 @@
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
                                     break;
                                 }
                             }
@@ -2243,6 +2362,10 @@
                             case 5:
                                 message.executionReason = 5;
                                 break;
+                            case "DELAYED_START_PENDING":
+                            case 6:
+                                message.executionReason = 6;
+                                break;
                             }
                             return message;
                         };
@@ -2447,6 +2570,7 @@
                          * @property {number} CANCELLED=3 CANCELLED value
                          * @property {number} CANCELLING=4 CANCELLING value
                          * @property {number} DELETED=5 DELETED value
+                         * @property {number} DELAYED_START_PENDING=6 DELAYED_START_PENDING value
                          */
                         Condition.ExecutionReason = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -2456,6 +2580,7 @@
                             values[valuesById[3] = "CANCELLED"] = 3;
                             values[valuesById[4] = "CANCELLING"] = 4;
                             values[valuesById[5] = "DELETED"] = 5;
+                            values[valuesById[6] = "DELAYED_START_PENDING"] = 6;
                             return values;
                         })();
     
@@ -5428,6 +5553,7 @@
                          * @interface IContainer
                          * @property {string|null} [name] Container name
                          * @property {string|null} [image] Container image
+                         * @property {google.cloud.run.v2.ISourceCode|null} [sourceCode] Container sourceCode
                          * @property {Array.<string>|null} [command] Container command
                          * @property {Array.<string>|null} [args] Container args
                          * @property {Array.<google.cloud.run.v2.IEnvVar>|null} [env] Container env
@@ -5478,6 +5604,14 @@
                          * @instance
                          */
                         Container.prototype.image = "";
+    
+                        /**
+                         * Container sourceCode.
+                         * @member {google.cloud.run.v2.ISourceCode|null|undefined} sourceCode
+                         * @memberof google.cloud.run.v2.Container
+                         * @instance
+                         */
+                        Container.prototype.sourceCode = null;
     
                         /**
                          * Container command.
@@ -5633,6 +5767,8 @@
                                 writer.uint32(/* id 13, wireType 2 =*/106).string(message.baseImageUri);
                             if (message.buildInfo != null && Object.hasOwnProperty.call(message, "buildInfo"))
                                 $root.google.cloud.run.v2.BuildInfo.encode(message.buildInfo, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
+                            if (message.sourceCode != null && Object.hasOwnProperty.call(message, "sourceCode"))
+                                $root.google.cloud.run.v2.SourceCode.encode(message.sourceCode, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
                             return writer;
                         };
     
@@ -5675,6 +5811,10 @@
                                     }
                                 case 2: {
                                         message.image = reader.string();
+                                        break;
+                                    }
+                                case 17: {
+                                        message.sourceCode = $root.google.cloud.run.v2.SourceCode.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 3: {
@@ -5778,6 +5918,11 @@
                             if (message.image != null && message.hasOwnProperty("image"))
                                 if (!$util.isString(message.image))
                                     return "image: string expected";
+                            if (message.sourceCode != null && message.hasOwnProperty("sourceCode")) {
+                                var error = $root.google.cloud.run.v2.SourceCode.verify(message.sourceCode);
+                                if (error)
+                                    return "sourceCode." + error;
+                            }
                             if (message.command != null && message.hasOwnProperty("command")) {
                                 if (!Array.isArray(message.command))
                                     return "command: array expected";
@@ -5871,6 +6016,11 @@
                                 message.name = String(object.name);
                             if (object.image != null)
                                 message.image = String(object.image);
+                            if (object.sourceCode != null) {
+                                if (typeof object.sourceCode !== "object")
+                                    throw TypeError(".google.cloud.run.v2.Container.sourceCode: object expected");
+                                message.sourceCode = $root.google.cloud.run.v2.SourceCode.fromObject(object.sourceCode);
+                            }
                             if (object.command) {
                                 if (!Array.isArray(object.command))
                                     throw TypeError(".google.cloud.run.v2.Container.command: array expected");
@@ -5979,6 +6129,7 @@
                                 object.startupProbe = null;
                                 object.baseImageUri = "";
                                 object.buildInfo = null;
+                                object.sourceCode = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -6026,6 +6177,8 @@
                                 object.baseImageUri = message.baseImageUri;
                             if (message.buildInfo != null && message.hasOwnProperty("buildInfo"))
                                 object.buildInfo = $root.google.cloud.run.v2.BuildInfo.toObject(message.buildInfo, options);
+                            if (message.sourceCode != null && message.hasOwnProperty("sourceCode"))
+                                object.sourceCode = $root.google.cloud.run.v2.SourceCode.toObject(message.sourceCode, options);
                             return object;
                         };
     
@@ -7304,6 +7457,7 @@
                          * @interface IVolumeMount
                          * @property {string|null} [name] VolumeMount name
                          * @property {string|null} [mountPath] VolumeMount mountPath
+                         * @property {string|null} [subPath] VolumeMount subPath
                          */
     
                         /**
@@ -7338,6 +7492,14 @@
                         VolumeMount.prototype.mountPath = "";
     
                         /**
+                         * VolumeMount subPath.
+                         * @member {string} subPath
+                         * @memberof google.cloud.run.v2.VolumeMount
+                         * @instance
+                         */
+                        VolumeMount.prototype.subPath = "";
+    
+                        /**
                          * Creates a new VolumeMount instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.run.v2.VolumeMount
@@ -7365,6 +7527,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                             if (message.mountPath != null && Object.hasOwnProperty.call(message, "mountPath"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.mountPath);
+                            if (message.subPath != null && Object.hasOwnProperty.call(message, "subPath"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.subPath);
                             return writer;
                         };
     
@@ -7409,6 +7573,10 @@
                                         message.mountPath = reader.string();
                                         break;
                                     }
+                                case 4: {
+                                        message.subPath = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -7450,6 +7618,9 @@
                             if (message.mountPath != null && message.hasOwnProperty("mountPath"))
                                 if (!$util.isString(message.mountPath))
                                     return "mountPath: string expected";
+                            if (message.subPath != null && message.hasOwnProperty("subPath"))
+                                if (!$util.isString(message.subPath))
+                                    return "subPath: string expected";
                             return null;
                         };
     
@@ -7469,6 +7640,8 @@
                                 message.name = String(object.name);
                             if (object.mountPath != null)
                                 message.mountPath = String(object.mountPath);
+                            if (object.subPath != null)
+                                message.subPath = String(object.subPath);
                             return message;
                         };
     
@@ -7488,11 +7661,14 @@
                             if (options.defaults) {
                                 object.name = "";
                                 object.mountPath = "";
+                                object.subPath = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.mountPath != null && message.hasOwnProperty("mountPath"))
                                 object.mountPath = message.mountPath;
+                            if (message.subPath != null && message.hasOwnProperty("subPath"))
+                                object.subPath = message.subPath;
                             return object;
                         };
     
@@ -11007,6 +11183,501 @@
                         return BuildInfo;
                     })();
     
+                    v2.SourceCode = (function() {
+    
+                        /**
+                         * Properties of a SourceCode.
+                         * @memberof google.cloud.run.v2
+                         * @interface ISourceCode
+                         * @property {google.cloud.run.v2.SourceCode.ICloudStorageSource|null} [cloudStorageSource] SourceCode cloudStorageSource
+                         */
+    
+                        /**
+                         * Constructs a new SourceCode.
+                         * @memberof google.cloud.run.v2
+                         * @classdesc Represents a SourceCode.
+                         * @implements ISourceCode
+                         * @constructor
+                         * @param {google.cloud.run.v2.ISourceCode=} [properties] Properties to set
+                         */
+                        function SourceCode(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SourceCode cloudStorageSource.
+                         * @member {google.cloud.run.v2.SourceCode.ICloudStorageSource|null|undefined} cloudStorageSource
+                         * @memberof google.cloud.run.v2.SourceCode
+                         * @instance
+                         */
+                        SourceCode.prototype.cloudStorageSource = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * SourceCode sourceType.
+                         * @member {"cloudStorageSource"|undefined} sourceType
+                         * @memberof google.cloud.run.v2.SourceCode
+                         * @instance
+                         */
+                        Object.defineProperty(SourceCode.prototype, "sourceType", {
+                            get: $util.oneOfGetter($oneOfFields = ["cloudStorageSource"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new SourceCode instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.run.v2.SourceCode
+                         * @static
+                         * @param {google.cloud.run.v2.ISourceCode=} [properties] Properties to set
+                         * @returns {google.cloud.run.v2.SourceCode} SourceCode instance
+                         */
+                        SourceCode.create = function create(properties) {
+                            return new SourceCode(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SourceCode message. Does not implicitly {@link google.cloud.run.v2.SourceCode.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.run.v2.SourceCode
+                         * @static
+                         * @param {google.cloud.run.v2.ISourceCode} message SourceCode message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SourceCode.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.cloudStorageSource != null && Object.hasOwnProperty.call(message, "cloudStorageSource"))
+                                $root.google.cloud.run.v2.SourceCode.CloudStorageSource.encode(message.cloudStorageSource, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SourceCode message, length delimited. Does not implicitly {@link google.cloud.run.v2.SourceCode.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.run.v2.SourceCode
+                         * @static
+                         * @param {google.cloud.run.v2.ISourceCode} message SourceCode message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SourceCode.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SourceCode message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.run.v2.SourceCode
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.run.v2.SourceCode} SourceCode
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SourceCode.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.run.v2.SourceCode();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.cloudStorageSource = $root.google.cloud.run.v2.SourceCode.CloudStorageSource.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SourceCode message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.run.v2.SourceCode
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.run.v2.SourceCode} SourceCode
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SourceCode.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SourceCode message.
+                         * @function verify
+                         * @memberof google.cloud.run.v2.SourceCode
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SourceCode.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.cloudStorageSource != null && message.hasOwnProperty("cloudStorageSource")) {
+                                properties.sourceType = 1;
+                                {
+                                    var error = $root.google.cloud.run.v2.SourceCode.CloudStorageSource.verify(message.cloudStorageSource);
+                                    if (error)
+                                        return "cloudStorageSource." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SourceCode message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.run.v2.SourceCode
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.run.v2.SourceCode} SourceCode
+                         */
+                        SourceCode.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.run.v2.SourceCode)
+                                return object;
+                            var message = new $root.google.cloud.run.v2.SourceCode();
+                            if (object.cloudStorageSource != null) {
+                                if (typeof object.cloudStorageSource !== "object")
+                                    throw TypeError(".google.cloud.run.v2.SourceCode.cloudStorageSource: object expected");
+                                message.cloudStorageSource = $root.google.cloud.run.v2.SourceCode.CloudStorageSource.fromObject(object.cloudStorageSource);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SourceCode message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.run.v2.SourceCode
+                         * @static
+                         * @param {google.cloud.run.v2.SourceCode} message SourceCode
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SourceCode.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.cloudStorageSource != null && message.hasOwnProperty("cloudStorageSource")) {
+                                object.cloudStorageSource = $root.google.cloud.run.v2.SourceCode.CloudStorageSource.toObject(message.cloudStorageSource, options);
+                                if (options.oneofs)
+                                    object.sourceType = "cloudStorageSource";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SourceCode to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.run.v2.SourceCode
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SourceCode.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SourceCode
+                         * @function getTypeUrl
+                         * @memberof google.cloud.run.v2.SourceCode
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SourceCode.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.run.v2.SourceCode";
+                        };
+    
+                        SourceCode.CloudStorageSource = (function() {
+    
+                            /**
+                             * Properties of a CloudStorageSource.
+                             * @memberof google.cloud.run.v2.SourceCode
+                             * @interface ICloudStorageSource
+                             * @property {string|null} [bucket] CloudStorageSource bucket
+                             * @property {string|null} [object] CloudStorageSource object
+                             * @property {number|Long|null} [generation] CloudStorageSource generation
+                             */
+    
+                            /**
+                             * Constructs a new CloudStorageSource.
+                             * @memberof google.cloud.run.v2.SourceCode
+                             * @classdesc Represents a CloudStorageSource.
+                             * @implements ICloudStorageSource
+                             * @constructor
+                             * @param {google.cloud.run.v2.SourceCode.ICloudStorageSource=} [properties] Properties to set
+                             */
+                            function CloudStorageSource(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CloudStorageSource bucket.
+                             * @member {string} bucket
+                             * @memberof google.cloud.run.v2.SourceCode.CloudStorageSource
+                             * @instance
+                             */
+                            CloudStorageSource.prototype.bucket = "";
+    
+                            /**
+                             * CloudStorageSource object.
+                             * @member {string} object
+                             * @memberof google.cloud.run.v2.SourceCode.CloudStorageSource
+                             * @instance
+                             */
+                            CloudStorageSource.prototype.object = "";
+    
+                            /**
+                             * CloudStorageSource generation.
+                             * @member {number|Long} generation
+                             * @memberof google.cloud.run.v2.SourceCode.CloudStorageSource
+                             * @instance
+                             */
+                            CloudStorageSource.prototype.generation = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * Creates a new CloudStorageSource instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.run.v2.SourceCode.CloudStorageSource
+                             * @static
+                             * @param {google.cloud.run.v2.SourceCode.ICloudStorageSource=} [properties] Properties to set
+                             * @returns {google.cloud.run.v2.SourceCode.CloudStorageSource} CloudStorageSource instance
+                             */
+                            CloudStorageSource.create = function create(properties) {
+                                return new CloudStorageSource(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CloudStorageSource message. Does not implicitly {@link google.cloud.run.v2.SourceCode.CloudStorageSource.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.run.v2.SourceCode.CloudStorageSource
+                             * @static
+                             * @param {google.cloud.run.v2.SourceCode.ICloudStorageSource} message CloudStorageSource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CloudStorageSource.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.bucket != null && Object.hasOwnProperty.call(message, "bucket"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.bucket);
+                                if (message.object != null && Object.hasOwnProperty.call(message, "object"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.object);
+                                if (message.generation != null && Object.hasOwnProperty.call(message, "generation"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int64(message.generation);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CloudStorageSource message, length delimited. Does not implicitly {@link google.cloud.run.v2.SourceCode.CloudStorageSource.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.run.v2.SourceCode.CloudStorageSource
+                             * @static
+                             * @param {google.cloud.run.v2.SourceCode.ICloudStorageSource} message CloudStorageSource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CloudStorageSource.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CloudStorageSource message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.run.v2.SourceCode.CloudStorageSource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.run.v2.SourceCode.CloudStorageSource} CloudStorageSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CloudStorageSource.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.run.v2.SourceCode.CloudStorageSource();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.bucket = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.object = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.generation = reader.int64();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CloudStorageSource message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.run.v2.SourceCode.CloudStorageSource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.run.v2.SourceCode.CloudStorageSource} CloudStorageSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CloudStorageSource.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CloudStorageSource message.
+                             * @function verify
+                             * @memberof google.cloud.run.v2.SourceCode.CloudStorageSource
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CloudStorageSource.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.bucket != null && message.hasOwnProperty("bucket"))
+                                    if (!$util.isString(message.bucket))
+                                        return "bucket: string expected";
+                                if (message.object != null && message.hasOwnProperty("object"))
+                                    if (!$util.isString(message.object))
+                                        return "object: string expected";
+                                if (message.generation != null && message.hasOwnProperty("generation"))
+                                    if (!$util.isInteger(message.generation) && !(message.generation && $util.isInteger(message.generation.low) && $util.isInteger(message.generation.high)))
+                                        return "generation: integer|Long expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CloudStorageSource message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.run.v2.SourceCode.CloudStorageSource
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.run.v2.SourceCode.CloudStorageSource} CloudStorageSource
+                             */
+                            CloudStorageSource.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.run.v2.SourceCode.CloudStorageSource)
+                                    return object;
+                                var message = new $root.google.cloud.run.v2.SourceCode.CloudStorageSource();
+                                if (object.bucket != null)
+                                    message.bucket = String(object.bucket);
+                                if (object.object != null)
+                                    message.object = String(object.object);
+                                if (object.generation != null)
+                                    if ($util.Long)
+                                        (message.generation = $util.Long.fromValue(object.generation)).unsigned = false;
+                                    else if (typeof object.generation === "string")
+                                        message.generation = parseInt(object.generation, 10);
+                                    else if (typeof object.generation === "number")
+                                        message.generation = object.generation;
+                                    else if (typeof object.generation === "object")
+                                        message.generation = new $util.LongBits(object.generation.low >>> 0, object.generation.high >>> 0).toNumber();
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CloudStorageSource message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.run.v2.SourceCode.CloudStorageSource
+                             * @static
+                             * @param {google.cloud.run.v2.SourceCode.CloudStorageSource} message CloudStorageSource
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CloudStorageSource.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.bucket = "";
+                                    object.object = "";
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.generation = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.generation = options.longs === String ? "0" : 0;
+                                }
+                                if (message.bucket != null && message.hasOwnProperty("bucket"))
+                                    object.bucket = message.bucket;
+                                if (message.object != null && message.hasOwnProperty("object"))
+                                    object.object = message.object;
+                                if (message.generation != null && message.hasOwnProperty("generation"))
+                                    if (typeof message.generation === "number")
+                                        object.generation = options.longs === String ? String(message.generation) : message.generation;
+                                    else
+                                        object.generation = options.longs === String ? $util.Long.prototype.toString.call(message.generation) : options.longs === Number ? new $util.LongBits(message.generation.low >>> 0, message.generation.high >>> 0).toNumber() : message.generation;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CloudStorageSource to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.run.v2.SourceCode.CloudStorageSource
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CloudStorageSource.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for CloudStorageSource
+                             * @function getTypeUrl
+                             * @memberof google.cloud.run.v2.SourceCode.CloudStorageSource
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CloudStorageSource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.run.v2.SourceCode.CloudStorageSource";
+                            };
+    
+                            return CloudStorageSource;
+                        })();
+    
+                        return SourceCode;
+                    })();
+    
                     v2.VpcAccess = (function() {
     
                         /**
@@ -12308,6 +12979,7 @@
                          * @interface IServiceScaling
                          * @property {number|null} [minInstanceCount] ServiceScaling minInstanceCount
                          * @property {google.cloud.run.v2.ServiceScaling.ScalingMode|null} [scalingMode] ServiceScaling scalingMode
+                         * @property {number|null} [maxInstanceCount] ServiceScaling maxInstanceCount
                          * @property {number|null} [manualInstanceCount] ServiceScaling manualInstanceCount
                          */
     
@@ -12341,6 +13013,14 @@
                          * @instance
                          */
                         ServiceScaling.prototype.scalingMode = 0;
+    
+                        /**
+                         * ServiceScaling maxInstanceCount.
+                         * @member {number} maxInstanceCount
+                         * @memberof google.cloud.run.v2.ServiceScaling
+                         * @instance
+                         */
+                        ServiceScaling.prototype.maxInstanceCount = 0;
     
                         /**
                          * ServiceScaling manualInstanceCount.
@@ -12387,6 +13067,8 @@
                                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.minInstanceCount);
                             if (message.scalingMode != null && Object.hasOwnProperty.call(message, "scalingMode"))
                                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.scalingMode);
+                            if (message.maxInstanceCount != null && Object.hasOwnProperty.call(message, "maxInstanceCount"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.maxInstanceCount);
                             if (message.manualInstanceCount != null && Object.hasOwnProperty.call(message, "manualInstanceCount"))
                                 writer.uint32(/* id 6, wireType 0 =*/48).int32(message.manualInstanceCount);
                             return writer;
@@ -12431,6 +13113,10 @@
                                     }
                                 case 3: {
                                         message.scalingMode = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.maxInstanceCount = reader.int32();
                                         break;
                                     }
                                 case 6: {
@@ -12485,6 +13171,9 @@
                                 case 2:
                                     break;
                                 }
+                            if (message.maxInstanceCount != null && message.hasOwnProperty("maxInstanceCount"))
+                                if (!$util.isInteger(message.maxInstanceCount))
+                                    return "maxInstanceCount: integer expected";
                             if (message.manualInstanceCount != null && message.hasOwnProperty("manualInstanceCount")) {
                                 properties._manualInstanceCount = 1;
                                 if (!$util.isInteger(message.manualInstanceCount))
@@ -12527,6 +13216,8 @@
                                 message.scalingMode = 2;
                                 break;
                             }
+                            if (object.maxInstanceCount != null)
+                                message.maxInstanceCount = object.maxInstanceCount | 0;
                             if (object.manualInstanceCount != null)
                                 message.manualInstanceCount = object.manualInstanceCount | 0;
                             return message;
@@ -12548,11 +13239,14 @@
                             if (options.defaults) {
                                 object.minInstanceCount = 0;
                                 object.scalingMode = options.enums === String ? "SCALING_MODE_UNSPECIFIED" : 0;
+                                object.maxInstanceCount = 0;
                             }
                             if (message.minInstanceCount != null && message.hasOwnProperty("minInstanceCount"))
                                 object.minInstanceCount = message.minInstanceCount;
                             if (message.scalingMode != null && message.hasOwnProperty("scalingMode"))
                                 object.scalingMode = options.enums === String ? $root.google.cloud.run.v2.ServiceScaling.ScalingMode[message.scalingMode] === undefined ? message.scalingMode : $root.google.cloud.run.v2.ServiceScaling.ScalingMode[message.scalingMode] : message.scalingMode;
+                            if (message.maxInstanceCount != null && message.hasOwnProperty("maxInstanceCount"))
+                                object.maxInstanceCount = message.maxInstanceCount;
                             if (message.manualInstanceCount != null && message.hasOwnProperty("manualInstanceCount")) {
                                 object.manualInstanceCount = message.manualInstanceCount;
                                 if (options.oneofs)
@@ -23153,6 +23847,7 @@
                          * @interface IListServicesResponse
                          * @property {Array.<google.cloud.run.v2.IService>|null} [services] ListServicesResponse services
                          * @property {string|null} [nextPageToken] ListServicesResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListServicesResponse unreachable
                          */
     
                         /**
@@ -23165,6 +23860,7 @@
                          */
                         function ListServicesResponse(properties) {
                             this.services = [];
+                            this.unreachable = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -23186,6 +23882,14 @@
                          * @instance
                          */
                         ListServicesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListServicesResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.run.v2.ListServicesResponse
+                         * @instance
+                         */
+                        ListServicesResponse.prototype.unreachable = $util.emptyArray;
     
                         /**
                          * Creates a new ListServicesResponse instance using the specified properties.
@@ -23216,6 +23920,9 @@
                                     $root.google.cloud.run.v2.Service.encode(message.services[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
                             return writer;
                         };
     
@@ -23260,6 +23967,12 @@
                                     }
                                 case 2: {
                                         message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
                                         break;
                                     }
                                 default:
@@ -23309,6 +24022,13 @@
                             if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
                                 if (!$util.isString(message.nextPageToken))
                                     return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
                             return null;
                         };
     
@@ -23336,6 +24056,13 @@
                             }
                             if (object.nextPageToken != null)
                                 message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.run.v2.ListServicesResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
                             return message;
                         };
     
@@ -23352,8 +24079,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.services = [];
+                                object.unreachable = [];
+                            }
                             if (options.defaults)
                                 object.nextPageToken = "";
                             if (message.services && message.services.length) {
@@ -23363,6 +24092,11 @@
                             }
                             if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
                                 object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
                             return object;
                         };
     
@@ -23881,6 +24615,8 @@
                          * @property {boolean|null} [invokerIamDisabled] Service invokerIamDisabled
                          * @property {boolean|null} [defaultUriDisabled] Service defaultUriDisabled
                          * @property {Array.<string>|null} [urls] Service urls
+                         * @property {boolean|null} [iapEnabled] Service iapEnabled
+                         * @property {google.cloud.run.v2.Service.IMultiRegionSettings|null} [multiRegionSettings] Service multiRegionSettings
                          * @property {Array.<string>|null} [customAudiences] Service customAudiences
                          * @property {number|Long|null} [observedGeneration] Service observedGeneration
                          * @property {google.cloud.run.v2.ICondition|null} [terminalCondition] Service terminalCondition
@@ -23890,6 +24626,7 @@
                          * @property {Array.<google.cloud.run.v2.ITrafficTargetStatus>|null} [trafficStatuses] Service trafficStatuses
                          * @property {string|null} [uri] Service uri
                          * @property {boolean|null} [satisfiesPzs] Service satisfiesPzs
+                         * @property {boolean|null} [threatDetectionEnabled] Service threatDetectionEnabled
                          * @property {google.cloud.run.v2.IBuildConfig|null} [buildConfig] Service buildConfig
                          * @property {boolean|null} [reconciling] Service reconciling
                          * @property {string|null} [etag] Service etag
@@ -24102,6 +24839,22 @@
                         Service.prototype.urls = $util.emptyArray;
     
                         /**
+                         * Service iapEnabled.
+                         * @member {boolean} iapEnabled
+                         * @memberof google.cloud.run.v2.Service
+                         * @instance
+                         */
+                        Service.prototype.iapEnabled = false;
+    
+                        /**
+                         * Service multiRegionSettings.
+                         * @member {google.cloud.run.v2.Service.IMultiRegionSettings|null|undefined} multiRegionSettings
+                         * @memberof google.cloud.run.v2.Service
+                         * @instance
+                         */
+                        Service.prototype.multiRegionSettings = null;
+    
+                        /**
                          * Service customAudiences.
                          * @member {Array.<string>} customAudiences
                          * @memberof google.cloud.run.v2.Service
@@ -24172,6 +24925,14 @@
                          * @instance
                          */
                         Service.prototype.satisfiesPzs = false;
+    
+                        /**
+                         * Service threatDetectionEnabled.
+                         * @member {boolean} threatDetectionEnabled
+                         * @memberof google.cloud.run.v2.Service
+                         * @instance
+                         */
+                        Service.prototype.threatDetectionEnabled = false;
     
                         /**
                          * Service buildConfig.
@@ -24271,6 +25032,10 @@
                             if (message.urls != null && message.urls.length)
                                 for (var i = 0; i < message.urls.length; ++i)
                                     writer.uint32(/* id 24, wireType 2 =*/194).string(message.urls[i]);
+                            if (message.iapEnabled != null && Object.hasOwnProperty.call(message, "iapEnabled"))
+                                writer.uint32(/* id 25, wireType 0 =*/200).bool(message.iapEnabled);
+                            if (message.multiRegionSettings != null && Object.hasOwnProperty.call(message, "multiRegionSettings"))
+                                $root.google.cloud.run.v2.Service.MultiRegionSettings.encode(message.multiRegionSettings, writer.uint32(/* id 26, wireType 2 =*/210).fork()).ldelim();
                             if (message.observedGeneration != null && Object.hasOwnProperty.call(message, "observedGeneration"))
                                 writer.uint32(/* id 30, wireType 0 =*/240).int64(message.observedGeneration);
                             if (message.terminalCondition != null && Object.hasOwnProperty.call(message, "terminalCondition"))
@@ -24292,6 +25057,8 @@
                                     writer.uint32(/* id 37, wireType 2 =*/298).string(message.customAudiences[i]);
                             if (message.satisfiesPzs != null && Object.hasOwnProperty.call(message, "satisfiesPzs"))
                                 writer.uint32(/* id 38, wireType 0 =*/304).bool(message.satisfiesPzs);
+                            if (message.threatDetectionEnabled != null && Object.hasOwnProperty.call(message, "threatDetectionEnabled"))
+                                writer.uint32(/* id 40, wireType 0 =*/320).bool(message.threatDetectionEnabled);
                             if (message.buildConfig != null && Object.hasOwnProperty.call(message, "buildConfig"))
                                 $root.google.cloud.run.v2.BuildConfig.encode(message.buildConfig, writer.uint32(/* id 41, wireType 2 =*/330).fork()).ldelim();
                             if (message.reconciling != null && Object.hasOwnProperty.call(message, "reconciling"))
@@ -24468,6 +25235,14 @@
                                         message.urls.push(reader.string());
                                         break;
                                     }
+                                case 25: {
+                                        message.iapEnabled = reader.bool();
+                                        break;
+                                    }
+                                case 26: {
+                                        message.multiRegionSettings = $root.google.cloud.run.v2.Service.MultiRegionSettings.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 37: {
                                         if (!(message.customAudiences && message.customAudiences.length))
                                             message.customAudiences = [];
@@ -24508,6 +25283,10 @@
                                     }
                                 case 38: {
                                         message.satisfiesPzs = reader.bool();
+                                        break;
+                                    }
+                                case 40: {
+                                        message.threatDetectionEnabled = reader.bool();
                                         break;
                                     }
                                 case 41: {
@@ -24679,6 +25458,14 @@
                                     if (!$util.isString(message.urls[i]))
                                         return "urls: string[] expected";
                             }
+                            if (message.iapEnabled != null && message.hasOwnProperty("iapEnabled"))
+                                if (typeof message.iapEnabled !== "boolean")
+                                    return "iapEnabled: boolean expected";
+                            if (message.multiRegionSettings != null && message.hasOwnProperty("multiRegionSettings")) {
+                                var error = $root.google.cloud.run.v2.Service.MultiRegionSettings.verify(message.multiRegionSettings);
+                                if (error)
+                                    return "multiRegionSettings." + error;
+                            }
                             if (message.customAudiences != null && message.hasOwnProperty("customAudiences")) {
                                 if (!Array.isArray(message.customAudiences))
                                     return "customAudiences: array expected";
@@ -24724,6 +25511,9 @@
                             if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs"))
                                 if (typeof message.satisfiesPzs !== "boolean")
                                     return "satisfiesPzs: boolean expected";
+                            if (message.threatDetectionEnabled != null && message.hasOwnProperty("threatDetectionEnabled"))
+                                if (typeof message.threatDetectionEnabled !== "boolean")
+                                    return "threatDetectionEnabled: boolean expected";
                             if (message.buildConfig != null && message.hasOwnProperty("buildConfig")) {
                                 var error = $root.google.cloud.run.v2.BuildConfig.verify(message.buildConfig);
                                 if (error)
@@ -24911,6 +25701,13 @@
                                 for (var i = 0; i < object.urls.length; ++i)
                                     message.urls[i] = String(object.urls[i]);
                             }
+                            if (object.iapEnabled != null)
+                                message.iapEnabled = Boolean(object.iapEnabled);
+                            if (object.multiRegionSettings != null) {
+                                if (typeof object.multiRegionSettings !== "object")
+                                    throw TypeError(".google.cloud.run.v2.Service.multiRegionSettings: object expected");
+                                message.multiRegionSettings = $root.google.cloud.run.v2.Service.MultiRegionSettings.fromObject(object.multiRegionSettings);
+                            }
                             if (object.customAudiences) {
                                 if (!Array.isArray(object.customAudiences))
                                     throw TypeError(".google.cloud.run.v2.Service.customAudiences: array expected");
@@ -24960,6 +25757,8 @@
                                 message.uri = String(object.uri);
                             if (object.satisfiesPzs != null)
                                 message.satisfiesPzs = Boolean(object.satisfiesPzs);
+                            if (object.threatDetectionEnabled != null)
+                                message.threatDetectionEnabled = Boolean(object.threatDetectionEnabled);
                             if (object.buildConfig != null) {
                                 if (typeof object.buildConfig !== "object")
                                     throw TypeError(".google.cloud.run.v2.Service.buildConfig: object expected");
@@ -25020,6 +25819,8 @@
                                 object.scaling = null;
                                 object.invokerIamDisabled = false;
                                 object.defaultUriDisabled = false;
+                                object.iapEnabled = false;
+                                object.multiRegionSettings = null;
                                 if ($util.Long) {
                                     var long = new $util.Long(0, 0, false);
                                     object.observedGeneration = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
@@ -25030,6 +25831,7 @@
                                 object.latestCreatedRevision = "";
                                 object.uri = "";
                                 object.satisfiesPzs = false;
+                                object.threatDetectionEnabled = false;
                                 object.buildConfig = null;
                                 object.reconciling = false;
                                 object.etag = "";
@@ -25096,6 +25898,10 @@
                                 for (var j = 0; j < message.urls.length; ++j)
                                     object.urls[j] = message.urls[j];
                             }
+                            if (message.iapEnabled != null && message.hasOwnProperty("iapEnabled"))
+                                object.iapEnabled = message.iapEnabled;
+                            if (message.multiRegionSettings != null && message.hasOwnProperty("multiRegionSettings"))
+                                object.multiRegionSettings = $root.google.cloud.run.v2.Service.MultiRegionSettings.toObject(message.multiRegionSettings, options);
                             if (message.observedGeneration != null && message.hasOwnProperty("observedGeneration"))
                                 if (typeof message.observedGeneration === "number")
                                     object.observedGeneration = options.longs === String ? String(message.observedGeneration) : message.observedGeneration;
@@ -25126,6 +25932,8 @@
                             }
                             if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs"))
                                 object.satisfiesPzs = message.satisfiesPzs;
+                            if (message.threatDetectionEnabled != null && message.hasOwnProperty("threatDetectionEnabled"))
+                                object.threatDetectionEnabled = message.threatDetectionEnabled;
                             if (message.buildConfig != null && message.hasOwnProperty("buildConfig"))
                                 object.buildConfig = $root.google.cloud.run.v2.BuildConfig.toObject(message.buildConfig, options);
                             if (message.reconciling != null && message.hasOwnProperty("reconciling"))
@@ -25160,6 +25968,251 @@
                             }
                             return typeUrlPrefix + "/google.cloud.run.v2.Service";
                         };
+    
+                        Service.MultiRegionSettings = (function() {
+    
+                            /**
+                             * Properties of a MultiRegionSettings.
+                             * @memberof google.cloud.run.v2.Service
+                             * @interface IMultiRegionSettings
+                             * @property {Array.<string>|null} [regions] MultiRegionSettings regions
+                             * @property {string|null} [multiRegionId] MultiRegionSettings multiRegionId
+                             */
+    
+                            /**
+                             * Constructs a new MultiRegionSettings.
+                             * @memberof google.cloud.run.v2.Service
+                             * @classdesc Represents a MultiRegionSettings.
+                             * @implements IMultiRegionSettings
+                             * @constructor
+                             * @param {google.cloud.run.v2.Service.IMultiRegionSettings=} [properties] Properties to set
+                             */
+                            function MultiRegionSettings(properties) {
+                                this.regions = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * MultiRegionSettings regions.
+                             * @member {Array.<string>} regions
+                             * @memberof google.cloud.run.v2.Service.MultiRegionSettings
+                             * @instance
+                             */
+                            MultiRegionSettings.prototype.regions = $util.emptyArray;
+    
+                            /**
+                             * MultiRegionSettings multiRegionId.
+                             * @member {string} multiRegionId
+                             * @memberof google.cloud.run.v2.Service.MultiRegionSettings
+                             * @instance
+                             */
+                            MultiRegionSettings.prototype.multiRegionId = "";
+    
+                            /**
+                             * Creates a new MultiRegionSettings instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.run.v2.Service.MultiRegionSettings
+                             * @static
+                             * @param {google.cloud.run.v2.Service.IMultiRegionSettings=} [properties] Properties to set
+                             * @returns {google.cloud.run.v2.Service.MultiRegionSettings} MultiRegionSettings instance
+                             */
+                            MultiRegionSettings.create = function create(properties) {
+                                return new MultiRegionSettings(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified MultiRegionSettings message. Does not implicitly {@link google.cloud.run.v2.Service.MultiRegionSettings.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.run.v2.Service.MultiRegionSettings
+                             * @static
+                             * @param {google.cloud.run.v2.Service.IMultiRegionSettings} message MultiRegionSettings message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MultiRegionSettings.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.regions != null && message.regions.length)
+                                    for (var i = 0; i < message.regions.length; ++i)
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.regions[i]);
+                                if (message.multiRegionId != null && Object.hasOwnProperty.call(message, "multiRegionId"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.multiRegionId);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified MultiRegionSettings message, length delimited. Does not implicitly {@link google.cloud.run.v2.Service.MultiRegionSettings.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.run.v2.Service.MultiRegionSettings
+                             * @static
+                             * @param {google.cloud.run.v2.Service.IMultiRegionSettings} message MultiRegionSettings message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MultiRegionSettings.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a MultiRegionSettings message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.run.v2.Service.MultiRegionSettings
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.run.v2.Service.MultiRegionSettings} MultiRegionSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MultiRegionSettings.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.run.v2.Service.MultiRegionSettings();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.regions && message.regions.length))
+                                                message.regions = [];
+                                            message.regions.push(reader.string());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.multiRegionId = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a MultiRegionSettings message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.run.v2.Service.MultiRegionSettings
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.run.v2.Service.MultiRegionSettings} MultiRegionSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MultiRegionSettings.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a MultiRegionSettings message.
+                             * @function verify
+                             * @memberof google.cloud.run.v2.Service.MultiRegionSettings
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            MultiRegionSettings.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.regions != null && message.hasOwnProperty("regions")) {
+                                    if (!Array.isArray(message.regions))
+                                        return "regions: array expected";
+                                    for (var i = 0; i < message.regions.length; ++i)
+                                        if (!$util.isString(message.regions[i]))
+                                            return "regions: string[] expected";
+                                }
+                                if (message.multiRegionId != null && message.hasOwnProperty("multiRegionId"))
+                                    if (!$util.isString(message.multiRegionId))
+                                        return "multiRegionId: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a MultiRegionSettings message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.run.v2.Service.MultiRegionSettings
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.run.v2.Service.MultiRegionSettings} MultiRegionSettings
+                             */
+                            MultiRegionSettings.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.run.v2.Service.MultiRegionSettings)
+                                    return object;
+                                var message = new $root.google.cloud.run.v2.Service.MultiRegionSettings();
+                                if (object.regions) {
+                                    if (!Array.isArray(object.regions))
+                                        throw TypeError(".google.cloud.run.v2.Service.MultiRegionSettings.regions: array expected");
+                                    message.regions = [];
+                                    for (var i = 0; i < object.regions.length; ++i)
+                                        message.regions[i] = String(object.regions[i]);
+                                }
+                                if (object.multiRegionId != null)
+                                    message.multiRegionId = String(object.multiRegionId);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a MultiRegionSettings message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.run.v2.Service.MultiRegionSettings
+                             * @static
+                             * @param {google.cloud.run.v2.Service.MultiRegionSettings} message MultiRegionSettings
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            MultiRegionSettings.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.regions = [];
+                                if (options.defaults)
+                                    object.multiRegionId = "";
+                                if (message.regions && message.regions.length) {
+                                    object.regions = [];
+                                    for (var j = 0; j < message.regions.length; ++j)
+                                        object.regions[j] = message.regions[j];
+                                }
+                                if (message.multiRegionId != null && message.hasOwnProperty("multiRegionId"))
+                                    object.multiRegionId = message.multiRegionId;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this MultiRegionSettings to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.run.v2.Service.MultiRegionSettings
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            MultiRegionSettings.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for MultiRegionSettings
+                             * @function getTypeUrl
+                             * @memberof google.cloud.run.v2.Service.MultiRegionSettings
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            MultiRegionSettings.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.run.v2.Service.MultiRegionSettings";
+                            };
+    
+                            return MultiRegionSettings;
+                        })();
     
                         return Service;
                     })();
@@ -29988,6 +31041,7 @@
                          * @property {string|null} [latestReadyRevision] WorkerPool latestReadyRevision
                          * @property {string|null} [latestCreatedRevision] WorkerPool latestCreatedRevision
                          * @property {Array.<google.cloud.run.v2.IInstanceSplitStatus>|null} [instanceSplitStatuses] WorkerPool instanceSplitStatuses
+                         * @property {boolean|null} [threatDetectionEnabled] WorkerPool threatDetectionEnabled
                          * @property {Array.<string>|null} [customAudiences] WorkerPool customAudiences
                          * @property {boolean|null} [satisfiesPzs] WorkerPool satisfiesPzs
                          * @property {boolean|null} [reconciling] WorkerPool reconciling
@@ -30216,6 +31270,14 @@
                         WorkerPool.prototype.instanceSplitStatuses = $util.emptyArray;
     
                         /**
+                         * WorkerPool threatDetectionEnabled.
+                         * @member {boolean} threatDetectionEnabled
+                         * @memberof google.cloud.run.v2.WorkerPool
+                         * @instance
+                         */
+                        WorkerPool.prototype.threatDetectionEnabled = false;
+    
+                        /**
                          * WorkerPool customAudiences.
                          * @member {Array.<string>} customAudiences
                          * @memberof google.cloud.run.v2.WorkerPool
@@ -30315,6 +31377,8 @@
                             if (message.instanceSplitStatuses != null && message.instanceSplitStatuses.length)
                                 for (var i = 0; i < message.instanceSplitStatuses.length; ++i)
                                     $root.google.cloud.run.v2.InstanceSplitStatus.encode(message.instanceSplitStatuses[i], writer.uint32(/* id 27, wireType 2 =*/218).fork()).ldelim();
+                            if (message.threatDetectionEnabled != null && Object.hasOwnProperty.call(message, "threatDetectionEnabled"))
+                                writer.uint32(/* id 28, wireType 0 =*/224).bool(message.threatDetectionEnabled);
                             if (message.observedGeneration != null && Object.hasOwnProperty.call(message, "observedGeneration"))
                                 writer.uint32(/* id 30, wireType 0 =*/240).int64(message.observedGeneration);
                             if (message.terminalCondition != null && Object.hasOwnProperty.call(message, "terminalCondition"))
@@ -30515,6 +31579,10 @@
                                         message.instanceSplitStatuses.push($root.google.cloud.run.v2.InstanceSplitStatus.decode(reader, reader.uint32()));
                                         break;
                                     }
+                                case 28: {
+                                        message.threatDetectionEnabled = reader.bool();
+                                        break;
+                                    }
                                 case 37: {
                                         if (!(message.customAudiences && message.customAudiences.length))
                                             message.customAudiences = [];
@@ -30698,6 +31766,9 @@
                                         return "instanceSplitStatuses." + error;
                                 }
                             }
+                            if (message.threatDetectionEnabled != null && message.hasOwnProperty("threatDetectionEnabled"))
+                                if (typeof message.threatDetectionEnabled !== "boolean")
+                                    return "threatDetectionEnabled: boolean expected";
                             if (message.customAudiences != null && message.hasOwnProperty("customAudiences")) {
                                 if (!Array.isArray(message.customAudiences))
                                     return "customAudiences: array expected";
@@ -30889,6 +31960,8 @@
                                     message.instanceSplitStatuses[i] = $root.google.cloud.run.v2.InstanceSplitStatus.fromObject(object.instanceSplitStatuses[i]);
                                 }
                             }
+                            if (object.threatDetectionEnabled != null)
+                                message.threatDetectionEnabled = Boolean(object.threatDetectionEnabled);
                             if (object.customAudiences) {
                                 if (!Array.isArray(object.customAudiences))
                                     throw TypeError(".google.cloud.run.v2.WorkerPool.customAudiences: array expected");
@@ -30949,6 +32022,7 @@
                                 object.binaryAuthorization = null;
                                 object.template = null;
                                 object.scaling = null;
+                                object.threatDetectionEnabled = false;
                                 if ($util.Long) {
                                     var long = new $util.Long(0, 0, false);
                                     object.observedGeneration = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
@@ -31017,6 +32091,8 @@
                                 for (var j = 0; j < message.instanceSplitStatuses.length; ++j)
                                     object.instanceSplitStatuses[j] = $root.google.cloud.run.v2.InstanceSplitStatus.toObject(message.instanceSplitStatuses[j], options);
                             }
+                            if (message.threatDetectionEnabled != null && message.hasOwnProperty("threatDetectionEnabled"))
+                                object.threatDetectionEnabled = message.threatDetectionEnabled;
                             if (message.observedGeneration != null && message.hasOwnProperty("observedGeneration"))
                                 if (typeof message.observedGeneration === "number")
                                     object.observedGeneration = options.longs === String ? String(message.observedGeneration) : message.observedGeneration;
@@ -31094,6 +32170,7 @@
                          * @property {google.cloud.run.v2.EncryptionKeyRevocationAction|null} [encryptionKeyRevocationAction] WorkerPoolRevisionTemplate encryptionKeyRevocationAction
                          * @property {google.protobuf.IDuration|null} [encryptionKeyShutdownDuration] WorkerPoolRevisionTemplate encryptionKeyShutdownDuration
                          * @property {google.cloud.run.v2.INodeSelector|null} [nodeSelector] WorkerPoolRevisionTemplate nodeSelector
+                         * @property {boolean|null} [gpuZonalRedundancyDisabled] WorkerPoolRevisionTemplate gpuZonalRedundancyDisabled
                          */
     
                         /**
@@ -31212,6 +32289,23 @@
                         WorkerPoolRevisionTemplate.prototype.nodeSelector = null;
     
                         /**
+                         * WorkerPoolRevisionTemplate gpuZonalRedundancyDisabled.
+                         * @member {boolean|null|undefined} gpuZonalRedundancyDisabled
+                         * @memberof google.cloud.run.v2.WorkerPoolRevisionTemplate
+                         * @instance
+                         */
+                        WorkerPoolRevisionTemplate.prototype.gpuZonalRedundancyDisabled = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(WorkerPoolRevisionTemplate.prototype, "_gpuZonalRedundancyDisabled", {
+                            get: $util.oneOfGetter($oneOfFields = ["gpuZonalRedundancyDisabled"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new WorkerPoolRevisionTemplate instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.run.v2.WorkerPoolRevisionTemplate
@@ -31263,6 +32357,8 @@
                                 $root.google.protobuf.Duration.encode(message.encryptionKeyShutdownDuration, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                             if (message.nodeSelector != null && Object.hasOwnProperty.call(message, "nodeSelector"))
                                 $root.google.cloud.run.v2.NodeSelector.encode(message.nodeSelector, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                            if (message.gpuZonalRedundancyDisabled != null && Object.hasOwnProperty.call(message, "gpuZonalRedundancyDisabled"))
+                                writer.uint32(/* id 16, wireType 0 =*/128).bool(message.gpuZonalRedundancyDisabled);
                             return writer;
                         };
     
@@ -31389,6 +32485,10 @@
                                         message.nodeSelector = $root.google.cloud.run.v2.NodeSelector.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 16: {
+                                        message.gpuZonalRedundancyDisabled = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -31424,6 +32524,7 @@
                         WorkerPoolRevisionTemplate.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.revision != null && message.hasOwnProperty("revision"))
                                 if (!$util.isString(message.revision))
                                     return "revision: string expected";
@@ -31495,6 +32596,11 @@
                                 var error = $root.google.cloud.run.v2.NodeSelector.verify(message.nodeSelector);
                                 if (error)
                                     return "nodeSelector." + error;
+                            }
+                            if (message.gpuZonalRedundancyDisabled != null && message.hasOwnProperty("gpuZonalRedundancyDisabled")) {
+                                properties._gpuZonalRedundancyDisabled = 1;
+                                if (typeof message.gpuZonalRedundancyDisabled !== "boolean")
+                                    return "gpuZonalRedundancyDisabled: boolean expected";
                             }
                             return null;
                         };
@@ -31591,6 +32697,8 @@
                                     throw TypeError(".google.cloud.run.v2.WorkerPoolRevisionTemplate.nodeSelector: object expected");
                                 message.nodeSelector = $root.google.cloud.run.v2.NodeSelector.fromObject(object.nodeSelector);
                             }
+                            if (object.gpuZonalRedundancyDisabled != null)
+                                message.gpuZonalRedundancyDisabled = Boolean(object.gpuZonalRedundancyDisabled);
                             return message;
                         };
     
@@ -31662,6 +32770,11 @@
                                 object.encryptionKeyShutdownDuration = $root.google.protobuf.Duration.toObject(message.encryptionKeyShutdownDuration, options);
                             if (message.nodeSelector != null && message.hasOwnProperty("nodeSelector"))
                                 object.nodeSelector = $root.google.cloud.run.v2.NodeSelector.toObject(message.nodeSelector, options);
+                            if (message.gpuZonalRedundancyDisabled != null && message.hasOwnProperty("gpuZonalRedundancyDisabled")) {
+                                object.gpuZonalRedundancyDisabled = message.gpuZonalRedundancyDisabled;
+                                if (options.oneofs)
+                                    object._gpuZonalRedundancyDisabled = "gpuZonalRedundancyDisabled";
+                            }
                             return object;
                         };
     
