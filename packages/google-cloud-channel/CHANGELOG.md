@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.2](https://github.com/googleapis/google-cloud-node/compare/channel-v4.1.1...channel-v4.1.2) (2025-12-09)
+
+
+### Bug Fixes
+
+* [channel] Changed field behavior for an existing field `entitlement_granularity` in message `.google.cloud.channel.v1.RepricingConfig` ([#6915](https://github.com/googleapis/google-cloud-node/issues/6915)) ([8352678](https://github.com/googleapis/google-cloud-node/commit/8352678de4dfdf7cfe8d2a6eb284395983bd9fa3))
+
 ## [4.1.1](https://github.com/googleapis/google-cloud-node/compare/channel-v4.1.0...channel-v4.1.1) (2025-10-13)
 
 

@@ -5,6 +5,177 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "014486d7cd802ac3058931edb3c783843db2ce28",
+          "message": "[geminidataanalytics] add QueryData method",
+          "issues": [
+            "6923"
+          ]
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/geminidataanalytics",
+      "id": "356f0ab3-2df9-4046-b397-8c84c75575f0",
+      "createTime": "2025-12-09T16:50:16.936Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a0c0db8be96f32f2f3e115987664a23a1f38ae57",
+          "message": "[maintenance] add support for v1 version of Maintenance API",
+          "issues": [
+            "6925"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/maintenance-api",
+      "id": "800ef513-32eb-4f8d-b16f-a8c7521bfeb2",
+      "createTime": "2025-12-09T16:50:16.913Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b9e87cd0803304763d1df797c884e849f07f25fb",
+          "message": "[merchantapi] A new field `radius_area` is added to message `.google.shopping.merchant.accounts.v1.Region`",
+          "issues": [
+            "6914"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/accounts",
+      "id": "93680a5d-0d77-4ea4-828a-677d09bd457c",
+      "createTime": "2025-12-09T16:50:16.894Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c33709f5aed86bdb4f02e2d17d5bfa00ccae88fd",
+          "message": "[parallelstore] add transfer metadata options proto definition",
+          "issues": [
+            "6916"
+          ]
+        }
+      ],
+      "version": "0.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/parallelstore",
+      "id": "5bb16540-9954-49c4-a603-1d90d7df0e26",
+      "createTime": "2025-12-09T16:50:16.870Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "ba483b8ddc806b80123007ba164e1981c18bd532",
+          "message": "[cloudbuild] Update GCB with latest proto changes",
+          "issues": [
+            "6910"
+          ]
+        }
+      ],
+      "version": "5.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudbuild",
+      "id": "f52e8394-3d3a-4ec8-8c27-a121bebf6de3",
+      "createTime": "2025-12-09T16:50:16.851Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "984f5acd15ef79c3cdb63f89e2deee5cc5c65387",
+          "message": "[artifactregistry] add ExportArtifact API",
+          "issues": [
+            "6919"
+          ]
+        }
+      ],
+      "version": "4.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/artifact-registry",
+      "id": "6686e7eb-3c7f-4d0a-88a2-cfe6524f8f5b",
+      "createTime": "2025-12-09T16:50:16.829Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9c2a1242e88b9878532106dc301f7ec524632997",
+          "message": "[run] add SourceCode proto to Run container config",
+          "issues": [
+            "6926"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/run",
+      "id": "c097c9e6-9b74-4a27-b1f1-e9db17f18635",
+      "createTime": "2025-12-09T16:50:16.788Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95f3adb6308c65eb000f841cc05460a8979a9d4f",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251031",
+          "issues": [
+            "6920"
+          ]
+        }
+      ],
+      "version": "6.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "b73fe2a0-1f48-44e1-82e7-c52862532da7",
+      "createTime": "2025-12-09T16:50:16.718Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "8352678de4dfdf7cfe8d2a6eb284395983bd9fa3",
+          "message": "[channel] Changed field behavior for an existing field `entitlement_granularity` in message `.google.cloud.channel.v1.RepricingConfig`",
+          "issues": [
+            "6915"
+          ]
+        }
+      ],
+      "version": "4.1.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/channel",
+      "id": "7f8db709-f8f9-483a-8d74-0b8ddeb763ab",
+      "createTime": "2025-12-09T16:50:16.638Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "6fb8d09786816740eb2c5128ce833d5bc649a915",
+          "message": "Fix issue when using UrlContext tool",
+          "issues": [
+            "6911"
+          ],
+          "breakingChangeNote": "fix issue when using UrlContext tool ([#6911](https://github.com/googleapis/google-cloud-node/issues/6911))"
+        }
+      ],
+      "version": "6.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "392b6163-bac6-4dea-81ab-b63ec07888a5",
+      "createTime": "2025-12-09T16:50:16.537Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "cad552ea0441d9f636bbbb7d0298326a14baad8e",
           "message": "Add initial files for google.cloud.vectorsearch.v1beta",
           "issues": [
@@ -67147,5 +67318,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-12-03T02:42:21.544Z"
+  "updateTime": "2025-12-09T16:50:16.936Z"
 }

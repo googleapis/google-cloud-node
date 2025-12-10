@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v5.3.1...cloudbuild-v5.4.0) (2025-12-09)
+
+
+### Features
+
+* [cloudbuild] Update GCB with latest proto changes ([#6910](https://github.com/googleapis/google-cloud-node/issues/6910)) ([ba483b8](https://github.com/googleapis/google-cloud-node/commit/ba483b8ddc806b80123007ba164e1981c18bd532))
+
 ## [5.3.1](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v5.3.0...cloudbuild-v5.3.1) (2025-10-13)
 
 

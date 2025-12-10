@@ -14,7 +14,7 @@
     "publish": "echo 'sample test; do not publish'"
   },
   "dependencies": {
-    "@google-cloud/maintenance-api": "^0.1.1"
+    "@google-cloud/maintenance-api": "^0.2.0"
   },
   "devDependencies": {
     "c8": "^10.0.0",
