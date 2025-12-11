@@ -87,6 +87,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | get conversation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-geminidataanalytics/samples/generated/v1beta/data_chat_service.get_conversation.js) |
 | list conversations | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-geminidataanalytics/samples/generated/v1beta/data_chat_service.list_conversations.js) |
 | list messages | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-geminidataanalytics/samples/generated/v1beta/data_chat_service.list_messages.js) |
+| query data | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-geminidataanalytics/samples/generated/v1beta/data_chat_service.query_data.js) |
 | cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-geminidataanalytics/samples/generated/v1beta/snippet_metadata_google.cloud.geminidataanalytics.v1beta.json) |
 
 

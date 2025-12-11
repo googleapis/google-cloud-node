@@ -2528,6 +2528,17 @@
                     "ruby_package": "Google::Cloud::GeminiDataAnalytics::V1beta"
                   },
                   "nested": {
+                    "AgentContextReference": {
+                      "fields": {
+                        "contextSetId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "Context": {
                       "fields": {
                         "systemInstruction": {
@@ -2787,7 +2798,10 @@
                           "oneof": [
                             "bq",
                             "studio",
-                            "looker"
+                            "looker",
+                            "alloydb",
+                            "spannerReference",
+                            "cloudSqlReference"
                           ]
                         }
                       },
@@ -2803,6 +2817,18 @@
                         "looker": {
                           "type": "LookerExploreReferences",
                           "id": 3
+                        },
+                        "alloydb": {
+                          "type": "AlloyDbReference",
+                          "id": 8
+                        },
+                        "spannerReference": {
+                          "type": "SpannerReference",
+                          "id": 9
+                        },
+                        "cloudSqlReference": {
+                          "type": "CloudSqlReference",
+                          "id": 10
                         }
                       }
                     },
@@ -2866,6 +2892,219 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "AlloyDbReference": {
+                      "fields": {
+                        "databaseReference": {
+                          "type": "AlloyDbDatabaseReference",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "agentContextReference": {
+                          "type": "AgentContextReference",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "AlloyDbDatabaseReference": {
+                      "fields": {
+                        "projectId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "clusterId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "instanceId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "databaseId": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "tableIds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "SpannerReference": {
+                      "fields": {
+                        "databaseReference": {
+                          "type": "SpannerDatabaseReference",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "agentContextReference": {
+                          "type": "AgentContextReference",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "SpannerDatabaseReference": {
+                      "fields": {
+                        "engine": {
+                          "type": "Engine",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "projectId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "instanceId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "databaseId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "tableIds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Engine": {
+                          "values": {
+                            "ENGINE_UNSPECIFIED": 0,
+                            "GOOGLE_SQL": 1,
+                            "POSTGRESQL": 2
+                          }
+                        }
+                      }
+                    },
+                    "CloudSqlReference": {
+                      "fields": {
+                        "databaseReference": {
+                          "type": "CloudSqlDatabaseReference",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "agentContextReference": {
+                          "type": "AgentContextReference",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "CloudSqlDatabaseReference": {
+                      "fields": {
+                        "engine": {
+                          "type": "Engine",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "projectId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "instanceId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "databaseId": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "tableIds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Engine": {
+                          "values": {
+                            "ENGINE_UNSPECIFIED": 0,
+                            "POSTGRESQL": 1,
+                            "MYSQL": 2
                           }
                         }
                       }
@@ -2948,7 +3187,10 @@
                           "oneof": [
                             "bigqueryTableReference",
                             "studioDatasourceId",
-                            "lookerExploreReference"
+                            "lookerExploreReference",
+                            "alloyDbReference",
+                            "spannerReference",
+                            "cloudSqlReference"
                           ]
                         }
                       },
@@ -2964,6 +3206,18 @@
                         "lookerExploreReference": {
                           "type": "LookerExploreReference",
                           "id": 4
+                        },
+                        "alloyDbReference": {
+                          "type": "AlloyDbReference",
+                          "id": 12
+                        },
+                        "spannerReference": {
+                          "type": "SpannerReference",
+                          "id": 13
+                        },
+                        "cloudSqlReference": {
+                          "type": "CloudSqlReference",
+                          "id": 14
                         },
                         "schema": {
                           "type": "Schema",
@@ -4049,6 +4303,180 @@
                               "(google.api.method_signature)": "parent"
                             }
                           ]
+                        },
+                        "QueryData": {
+                          "requestType": "QueryDataRequest",
+                          "responseType": "QueryDataResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta/{parent=projects/*/locations/*}:queryData",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{parent=projects/*/locations/*}:queryData",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "QueryDataRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "prompt": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "context": {
+                          "type": "QueryDataContext",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "generationOptions": {
+                          "type": "GenerationOptions",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GenerationOptions": {
+                      "fields": {
+                        "generateQueryResult": {
+                          "type": "bool",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "generateNaturalLanguageAnswer": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "generateExplanation": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "generateDisambiguationQuestion": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "QueryDataContext": {
+                      "fields": {
+                        "datasourceReferences": {
+                          "type": "DatasourceReferences",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "QueryDataResponse": {
+                      "fields": {
+                        "generatedQuery": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "intentExplanation": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "queryResult": {
+                          "type": "ExecutedQueryResult",
+                          "id": 3
+                        },
+                        "naturalLanguageAnswer": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "disambiguationQuestion": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "ExecutedQueryResult": {
+                      "fields": {
+                        "columns": {
+                          "rule": "repeated",
+                          "type": "Column",
+                          "id": 1
+                        },
+                        "rows": {
+                          "rule": "repeated",
+                          "type": "Row",
+                          "id": 2
+                        },
+                        "totalRowCount": {
+                          "type": "int64",
+                          "id": 3
+                        },
+                        "partialResult": {
+                          "type": "bool",
+                          "id": 4
+                        },
+                        "queryExecutionError": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "Column": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "type": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "Value": {
+                          "fields": {
+                            "value": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "Row": {
+                          "fields": {
+                            "values": {
+                              "rule": "repeated",
+                              "type": "Value",
+                              "id": 1
+                            }
+                          }
                         }
                       }
                     },

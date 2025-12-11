@@ -710,6 +710,58 @@
           }
         }
       }
+    },
+    {
+      "regionTag": "geminidataanalytics_v1beta_generated_DataChatService_QueryData_async",
+      "title": "DataAgentService queryData Sample",
+      "origin": "API_DEFINITION",
+      "description": " Queries data from a natural language user query.",
+      "canonical": true,
+      "file": "data_chat_service.query_data.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "QueryData",
+        "fullName": "google.cloud.geminidataanalytics.v1beta.DataChatService.QueryData",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "prompt",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "context",
+            "type": ".google.cloud.geminidataanalytics.v1beta.QueryDataContext"
+          },
+          {
+            "name": "generation_options",
+            "type": ".google.cloud.geminidataanalytics.v1beta.GenerationOptions"
+          }
+        ],
+        "resultType": ".google.cloud.geminidataanalytics.v1beta.QueryDataResponse",
+        "client": {
+          "shortName": "DataChatServiceClient",
+          "fullName": "google.cloud.geminidataanalytics.v1beta.DataChatServiceClient"
+        },
+        "method": {
+          "shortName": "QueryData",
+          "fullName": "google.cloud.geminidataanalytics.v1beta.DataChatService.QueryData",
+          "service": {
+            "shortName": "DataChatService",
+            "fullName": "google.cloud.geminidataanalytics.v1beta.DataChatService"
+          }
+        }
+      }
     }
   ]
 }
