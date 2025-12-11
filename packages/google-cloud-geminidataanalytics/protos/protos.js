@@ -66,6 +66,211 @@
                      */
                     var v1alpha = {};
     
+                    v1alpha.AgentContextReference = (function() {
+    
+                        /**
+                         * Properties of an AgentContextReference.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha
+                         * @interface IAgentContextReference
+                         * @property {string|null} [contextSetId] AgentContextReference contextSetId
+                         */
+    
+                        /**
+                         * Constructs a new AgentContextReference.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha
+                         * @classdesc Represents an AgentContextReference.
+                         * @implements IAgentContextReference
+                         * @constructor
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IAgentContextReference=} [properties] Properties to set
+                         */
+                        function AgentContextReference(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AgentContextReference contextSetId.
+                         * @member {string} contextSetId
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.AgentContextReference
+                         * @instance
+                         */
+                        AgentContextReference.prototype.contextSetId = "";
+    
+                        /**
+                         * Creates a new AgentContextReference instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.AgentContextReference
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IAgentContextReference=} [properties] Properties to set
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.AgentContextReference} AgentContextReference instance
+                         */
+                        AgentContextReference.create = function create(properties) {
+                            return new AgentContextReference(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AgentContextReference message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.AgentContextReference.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.AgentContextReference
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IAgentContextReference} message AgentContextReference message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AgentContextReference.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.contextSetId != null && Object.hasOwnProperty.call(message, "contextSetId"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.contextSetId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AgentContextReference message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.AgentContextReference.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.AgentContextReference
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IAgentContextReference} message AgentContextReference message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AgentContextReference.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AgentContextReference message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.AgentContextReference
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.AgentContextReference} AgentContextReference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AgentContextReference.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1alpha.AgentContextReference();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.contextSetId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AgentContextReference message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.AgentContextReference
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.AgentContextReference} AgentContextReference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AgentContextReference.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AgentContextReference message.
+                         * @function verify
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.AgentContextReference
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AgentContextReference.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.contextSetId != null && message.hasOwnProperty("contextSetId"))
+                                if (!$util.isString(message.contextSetId))
+                                    return "contextSetId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AgentContextReference message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.AgentContextReference
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.AgentContextReference} AgentContextReference
+                         */
+                        AgentContextReference.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.geminidataanalytics.v1alpha.AgentContextReference)
+                                return object;
+                            var message = new $root.google.cloud.geminidataanalytics.v1alpha.AgentContextReference();
+                            if (object.contextSetId != null)
+                                message.contextSetId = String(object.contextSetId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AgentContextReference message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.AgentContextReference
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.AgentContextReference} message AgentContextReference
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AgentContextReference.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.contextSetId = "";
+                            if (message.contextSetId != null && message.hasOwnProperty("contextSetId"))
+                                object.contextSetId = message.contextSetId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AgentContextReference to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.AgentContextReference
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AgentContextReference.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AgentContextReference
+                         * @function getTypeUrl
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.AgentContextReference
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AgentContextReference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1alpha.AgentContextReference";
+                        };
+    
+                        return AgentContextReference;
+                    })();
+    
                     v1alpha.Context = (function() {
     
                         /**
@@ -3942,6 +4147,9 @@
                          * @property {google.cloud.geminidataanalytics.v1alpha.IBigQueryTableReferences|null} [bq] DatasourceReferences bq
                          * @property {google.cloud.geminidataanalytics.v1alpha.IStudioDatasourceReferences|null} [studio] DatasourceReferences studio
                          * @property {google.cloud.geminidataanalytics.v1alpha.ILookerExploreReferences|null} [looker] DatasourceReferences looker
+                         * @property {google.cloud.geminidataanalytics.v1alpha.IAlloyDbReference|null} [alloydb] DatasourceReferences alloydb
+                         * @property {google.cloud.geminidataanalytics.v1alpha.ISpannerReference|null} [spannerReference] DatasourceReferences spannerReference
+                         * @property {google.cloud.geminidataanalytics.v1alpha.ICloudSqlReference|null} [cloudSqlReference] DatasourceReferences cloudSqlReference
                          */
     
                         /**
@@ -3983,17 +4191,41 @@
                          */
                         DatasourceReferences.prototype.looker = null;
     
+                        /**
+                         * DatasourceReferences alloydb.
+                         * @member {google.cloud.geminidataanalytics.v1alpha.IAlloyDbReference|null|undefined} alloydb
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.DatasourceReferences
+                         * @instance
+                         */
+                        DatasourceReferences.prototype.alloydb = null;
+    
+                        /**
+                         * DatasourceReferences spannerReference.
+                         * @member {google.cloud.geminidataanalytics.v1alpha.ISpannerReference|null|undefined} spannerReference
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.DatasourceReferences
+                         * @instance
+                         */
+                        DatasourceReferences.prototype.spannerReference = null;
+    
+                        /**
+                         * DatasourceReferences cloudSqlReference.
+                         * @member {google.cloud.geminidataanalytics.v1alpha.ICloudSqlReference|null|undefined} cloudSqlReference
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.DatasourceReferences
+                         * @instance
+                         */
+                        DatasourceReferences.prototype.cloudSqlReference = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * DatasourceReferences references.
-                         * @member {"bq"|"studio"|"looker"|undefined} references
+                         * @member {"bq"|"studio"|"looker"|"alloydb"|"spannerReference"|"cloudSqlReference"|undefined} references
                          * @memberof google.cloud.geminidataanalytics.v1alpha.DatasourceReferences
                          * @instance
                          */
                         Object.defineProperty(DatasourceReferences.prototype, "references", {
-                            get: $util.oneOfGetter($oneOfFields = ["bq", "studio", "looker"]),
+                            get: $util.oneOfGetter($oneOfFields = ["bq", "studio", "looker", "alloydb", "spannerReference", "cloudSqlReference"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -4027,6 +4259,12 @@
                                 $root.google.cloud.geminidataanalytics.v1alpha.StudioDatasourceReferences.encode(message.studio, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.looker != null && Object.hasOwnProperty.call(message, "looker"))
                                 $root.google.cloud.geminidataanalytics.v1alpha.LookerExploreReferences.encode(message.looker, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.alloydb != null && Object.hasOwnProperty.call(message, "alloydb"))
+                                $root.google.cloud.geminidataanalytics.v1alpha.AlloyDbReference.encode(message.alloydb, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.spannerReference != null && Object.hasOwnProperty.call(message, "spannerReference"))
+                                $root.google.cloud.geminidataanalytics.v1alpha.SpannerReference.encode(message.spannerReference, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.cloudSqlReference != null && Object.hasOwnProperty.call(message, "cloudSqlReference"))
+                                $root.google.cloud.geminidataanalytics.v1alpha.CloudSqlReference.encode(message.cloudSqlReference, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                             return writer;
                         };
     
@@ -4073,6 +4311,18 @@
                                     }
                                 case 3: {
                                         message.looker = $root.google.cloud.geminidataanalytics.v1alpha.LookerExploreReferences.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.alloydb = $root.google.cloud.geminidataanalytics.v1alpha.AlloyDbReference.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.spannerReference = $root.google.cloud.geminidataanalytics.v1alpha.SpannerReference.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 10: {
+                                        message.cloudSqlReference = $root.google.cloud.geminidataanalytics.v1alpha.CloudSqlReference.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -4139,6 +4389,36 @@
                                         return "looker." + error;
                                 }
                             }
+                            if (message.alloydb != null && message.hasOwnProperty("alloydb")) {
+                                if (properties.references === 1)
+                                    return "references: multiple values";
+                                properties.references = 1;
+                                {
+                                    var error = $root.google.cloud.geminidataanalytics.v1alpha.AlloyDbReference.verify(message.alloydb);
+                                    if (error)
+                                        return "alloydb." + error;
+                                }
+                            }
+                            if (message.spannerReference != null && message.hasOwnProperty("spannerReference")) {
+                                if (properties.references === 1)
+                                    return "references: multiple values";
+                                properties.references = 1;
+                                {
+                                    var error = $root.google.cloud.geminidataanalytics.v1alpha.SpannerReference.verify(message.spannerReference);
+                                    if (error)
+                                        return "spannerReference." + error;
+                                }
+                            }
+                            if (message.cloudSqlReference != null && message.hasOwnProperty("cloudSqlReference")) {
+                                if (properties.references === 1)
+                                    return "references: multiple values";
+                                properties.references = 1;
+                                {
+                                    var error = $root.google.cloud.geminidataanalytics.v1alpha.CloudSqlReference.verify(message.cloudSqlReference);
+                                    if (error)
+                                        return "cloudSqlReference." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -4168,6 +4448,21 @@
                                 if (typeof object.looker !== "object")
                                     throw TypeError(".google.cloud.geminidataanalytics.v1alpha.DatasourceReferences.looker: object expected");
                                 message.looker = $root.google.cloud.geminidataanalytics.v1alpha.LookerExploreReferences.fromObject(object.looker);
+                            }
+                            if (object.alloydb != null) {
+                                if (typeof object.alloydb !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1alpha.DatasourceReferences.alloydb: object expected");
+                                message.alloydb = $root.google.cloud.geminidataanalytics.v1alpha.AlloyDbReference.fromObject(object.alloydb);
+                            }
+                            if (object.spannerReference != null) {
+                                if (typeof object.spannerReference !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1alpha.DatasourceReferences.spannerReference: object expected");
+                                message.spannerReference = $root.google.cloud.geminidataanalytics.v1alpha.SpannerReference.fromObject(object.spannerReference);
+                            }
+                            if (object.cloudSqlReference != null) {
+                                if (typeof object.cloudSqlReference !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1alpha.DatasourceReferences.cloudSqlReference: object expected");
+                                message.cloudSqlReference = $root.google.cloud.geminidataanalytics.v1alpha.CloudSqlReference.fromObject(object.cloudSqlReference);
                             }
                             return message;
                         };
@@ -4199,6 +4494,21 @@
                                 object.looker = $root.google.cloud.geminidataanalytics.v1alpha.LookerExploreReferences.toObject(message.looker, options);
                                 if (options.oneofs)
                                     object.references = "looker";
+                            }
+                            if (message.alloydb != null && message.hasOwnProperty("alloydb")) {
+                                object.alloydb = $root.google.cloud.geminidataanalytics.v1alpha.AlloyDbReference.toObject(message.alloydb, options);
+                                if (options.oneofs)
+                                    object.references = "alloydb";
+                            }
+                            if (message.spannerReference != null && message.hasOwnProperty("spannerReference")) {
+                                object.spannerReference = $root.google.cloud.geminidataanalytics.v1alpha.SpannerReference.toObject(message.spannerReference, options);
+                                if (options.oneofs)
+                                    object.references = "spannerReference";
+                            }
+                            if (message.cloudSqlReference != null && message.hasOwnProperty("cloudSqlReference")) {
+                                object.cloudSqlReference = $root.google.cloud.geminidataanalytics.v1alpha.CloudSqlReference.toObject(message.cloudSqlReference, options);
+                                if (options.oneofs)
+                                    object.references = "cloudSqlReference";
                             }
                             return object;
                         };
@@ -5169,6 +5479,1817 @@
                         return StudioDatasourceReference;
                     })();
     
+                    v1alpha.AlloyDbReference = (function() {
+    
+                        /**
+                         * Properties of an AlloyDbReference.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha
+                         * @interface IAlloyDbReference
+                         * @property {google.cloud.geminidataanalytics.v1alpha.IAlloyDbDatabaseReference|null} [databaseReference] AlloyDbReference databaseReference
+                         * @property {google.cloud.geminidataanalytics.v1alpha.IAgentContextReference|null} [agentContextReference] AlloyDbReference agentContextReference
+                         */
+    
+                        /**
+                         * Constructs a new AlloyDbReference.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha
+                         * @classdesc Represents an AlloyDbReference.
+                         * @implements IAlloyDbReference
+                         * @constructor
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IAlloyDbReference=} [properties] Properties to set
+                         */
+                        function AlloyDbReference(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AlloyDbReference databaseReference.
+                         * @member {google.cloud.geminidataanalytics.v1alpha.IAlloyDbDatabaseReference|null|undefined} databaseReference
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.AlloyDbReference
+                         * @instance
+                         */
+                        AlloyDbReference.prototype.databaseReference = null;
+    
+                        /**
+                         * AlloyDbReference agentContextReference.
+                         * @member {google.cloud.geminidataanalytics.v1alpha.IAgentContextReference|null|undefined} agentContextReference
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.AlloyDbReference
+                         * @instance
+                         */
+                        AlloyDbReference.prototype.agentContextReference = null;
+    
+                        /**
+                         * Creates a new AlloyDbReference instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.AlloyDbReference
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IAlloyDbReference=} [properties] Properties to set
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.AlloyDbReference} AlloyDbReference instance
+                         */
+                        AlloyDbReference.create = function create(properties) {
+                            return new AlloyDbReference(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AlloyDbReference message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.AlloyDbReference.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.AlloyDbReference
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IAlloyDbReference} message AlloyDbReference message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AlloyDbReference.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.databaseReference != null && Object.hasOwnProperty.call(message, "databaseReference"))
+                                $root.google.cloud.geminidataanalytics.v1alpha.AlloyDbDatabaseReference.encode(message.databaseReference, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.agentContextReference != null && Object.hasOwnProperty.call(message, "agentContextReference"))
+                                $root.google.cloud.geminidataanalytics.v1alpha.AgentContextReference.encode(message.agentContextReference, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AlloyDbReference message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.AlloyDbReference.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.AlloyDbReference
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IAlloyDbReference} message AlloyDbReference message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AlloyDbReference.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AlloyDbReference message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.AlloyDbReference
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.AlloyDbReference} AlloyDbReference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AlloyDbReference.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1alpha.AlloyDbReference();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.databaseReference = $root.google.cloud.geminidataanalytics.v1alpha.AlloyDbDatabaseReference.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.agentContextReference = $root.google.cloud.geminidataanalytics.v1alpha.AgentContextReference.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AlloyDbReference message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.AlloyDbReference
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.AlloyDbReference} AlloyDbReference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AlloyDbReference.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AlloyDbReference message.
+                         * @function verify
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.AlloyDbReference
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AlloyDbReference.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.databaseReference != null && message.hasOwnProperty("databaseReference")) {
+                                var error = $root.google.cloud.geminidataanalytics.v1alpha.AlloyDbDatabaseReference.verify(message.databaseReference);
+                                if (error)
+                                    return "databaseReference." + error;
+                            }
+                            if (message.agentContextReference != null && message.hasOwnProperty("agentContextReference")) {
+                                var error = $root.google.cloud.geminidataanalytics.v1alpha.AgentContextReference.verify(message.agentContextReference);
+                                if (error)
+                                    return "agentContextReference." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AlloyDbReference message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.AlloyDbReference
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.AlloyDbReference} AlloyDbReference
+                         */
+                        AlloyDbReference.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.geminidataanalytics.v1alpha.AlloyDbReference)
+                                return object;
+                            var message = new $root.google.cloud.geminidataanalytics.v1alpha.AlloyDbReference();
+                            if (object.databaseReference != null) {
+                                if (typeof object.databaseReference !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1alpha.AlloyDbReference.databaseReference: object expected");
+                                message.databaseReference = $root.google.cloud.geminidataanalytics.v1alpha.AlloyDbDatabaseReference.fromObject(object.databaseReference);
+                            }
+                            if (object.agentContextReference != null) {
+                                if (typeof object.agentContextReference !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1alpha.AlloyDbReference.agentContextReference: object expected");
+                                message.agentContextReference = $root.google.cloud.geminidataanalytics.v1alpha.AgentContextReference.fromObject(object.agentContextReference);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AlloyDbReference message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.AlloyDbReference
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.AlloyDbReference} message AlloyDbReference
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AlloyDbReference.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.databaseReference = null;
+                                object.agentContextReference = null;
+                            }
+                            if (message.databaseReference != null && message.hasOwnProperty("databaseReference"))
+                                object.databaseReference = $root.google.cloud.geminidataanalytics.v1alpha.AlloyDbDatabaseReference.toObject(message.databaseReference, options);
+                            if (message.agentContextReference != null && message.hasOwnProperty("agentContextReference"))
+                                object.agentContextReference = $root.google.cloud.geminidataanalytics.v1alpha.AgentContextReference.toObject(message.agentContextReference, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AlloyDbReference to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.AlloyDbReference
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AlloyDbReference.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AlloyDbReference
+                         * @function getTypeUrl
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.AlloyDbReference
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AlloyDbReference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1alpha.AlloyDbReference";
+                        };
+    
+                        return AlloyDbReference;
+                    })();
+    
+                    v1alpha.AlloyDbDatabaseReference = (function() {
+    
+                        /**
+                         * Properties of an AlloyDbDatabaseReference.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha
+                         * @interface IAlloyDbDatabaseReference
+                         * @property {string|null} [projectId] AlloyDbDatabaseReference projectId
+                         * @property {string|null} [region] AlloyDbDatabaseReference region
+                         * @property {string|null} [clusterId] AlloyDbDatabaseReference clusterId
+                         * @property {string|null} [instanceId] AlloyDbDatabaseReference instanceId
+                         * @property {string|null} [databaseId] AlloyDbDatabaseReference databaseId
+                         * @property {Array.<string>|null} [tableIds] AlloyDbDatabaseReference tableIds
+                         */
+    
+                        /**
+                         * Constructs a new AlloyDbDatabaseReference.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha
+                         * @classdesc Represents an AlloyDbDatabaseReference.
+                         * @implements IAlloyDbDatabaseReference
+                         * @constructor
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IAlloyDbDatabaseReference=} [properties] Properties to set
+                         */
+                        function AlloyDbDatabaseReference(properties) {
+                            this.tableIds = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AlloyDbDatabaseReference projectId.
+                         * @member {string} projectId
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.AlloyDbDatabaseReference
+                         * @instance
+                         */
+                        AlloyDbDatabaseReference.prototype.projectId = "";
+    
+                        /**
+                         * AlloyDbDatabaseReference region.
+                         * @member {string} region
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.AlloyDbDatabaseReference
+                         * @instance
+                         */
+                        AlloyDbDatabaseReference.prototype.region = "";
+    
+                        /**
+                         * AlloyDbDatabaseReference clusterId.
+                         * @member {string} clusterId
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.AlloyDbDatabaseReference
+                         * @instance
+                         */
+                        AlloyDbDatabaseReference.prototype.clusterId = "";
+    
+                        /**
+                         * AlloyDbDatabaseReference instanceId.
+                         * @member {string} instanceId
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.AlloyDbDatabaseReference
+                         * @instance
+                         */
+                        AlloyDbDatabaseReference.prototype.instanceId = "";
+    
+                        /**
+                         * AlloyDbDatabaseReference databaseId.
+                         * @member {string} databaseId
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.AlloyDbDatabaseReference
+                         * @instance
+                         */
+                        AlloyDbDatabaseReference.prototype.databaseId = "";
+    
+                        /**
+                         * AlloyDbDatabaseReference tableIds.
+                         * @member {Array.<string>} tableIds
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.AlloyDbDatabaseReference
+                         * @instance
+                         */
+                        AlloyDbDatabaseReference.prototype.tableIds = $util.emptyArray;
+    
+                        /**
+                         * Creates a new AlloyDbDatabaseReference instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.AlloyDbDatabaseReference
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IAlloyDbDatabaseReference=} [properties] Properties to set
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.AlloyDbDatabaseReference} AlloyDbDatabaseReference instance
+                         */
+                        AlloyDbDatabaseReference.create = function create(properties) {
+                            return new AlloyDbDatabaseReference(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AlloyDbDatabaseReference message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.AlloyDbDatabaseReference.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.AlloyDbDatabaseReference
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IAlloyDbDatabaseReference} message AlloyDbDatabaseReference message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AlloyDbDatabaseReference.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.projectId != null && Object.hasOwnProperty.call(message, "projectId"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.projectId);
+                            if (message.region != null && Object.hasOwnProperty.call(message, "region"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.region);
+                            if (message.clusterId != null && Object.hasOwnProperty.call(message, "clusterId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.clusterId);
+                            if (message.instanceId != null && Object.hasOwnProperty.call(message, "instanceId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.instanceId);
+                            if (message.databaseId != null && Object.hasOwnProperty.call(message, "databaseId"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.databaseId);
+                            if (message.tableIds != null && message.tableIds.length)
+                                for (var i = 0; i < message.tableIds.length; ++i)
+                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.tableIds[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AlloyDbDatabaseReference message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.AlloyDbDatabaseReference.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.AlloyDbDatabaseReference
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IAlloyDbDatabaseReference} message AlloyDbDatabaseReference message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AlloyDbDatabaseReference.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AlloyDbDatabaseReference message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.AlloyDbDatabaseReference
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.AlloyDbDatabaseReference} AlloyDbDatabaseReference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AlloyDbDatabaseReference.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1alpha.AlloyDbDatabaseReference();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.projectId = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.region = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.clusterId = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.instanceId = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.databaseId = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        if (!(message.tableIds && message.tableIds.length))
+                                            message.tableIds = [];
+                                        message.tableIds.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AlloyDbDatabaseReference message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.AlloyDbDatabaseReference
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.AlloyDbDatabaseReference} AlloyDbDatabaseReference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AlloyDbDatabaseReference.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AlloyDbDatabaseReference message.
+                         * @function verify
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.AlloyDbDatabaseReference
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AlloyDbDatabaseReference.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                if (!$util.isString(message.projectId))
+                                    return "projectId: string expected";
+                            if (message.region != null && message.hasOwnProperty("region"))
+                                if (!$util.isString(message.region))
+                                    return "region: string expected";
+                            if (message.clusterId != null && message.hasOwnProperty("clusterId"))
+                                if (!$util.isString(message.clusterId))
+                                    return "clusterId: string expected";
+                            if (message.instanceId != null && message.hasOwnProperty("instanceId"))
+                                if (!$util.isString(message.instanceId))
+                                    return "instanceId: string expected";
+                            if (message.databaseId != null && message.hasOwnProperty("databaseId"))
+                                if (!$util.isString(message.databaseId))
+                                    return "databaseId: string expected";
+                            if (message.tableIds != null && message.hasOwnProperty("tableIds")) {
+                                if (!Array.isArray(message.tableIds))
+                                    return "tableIds: array expected";
+                                for (var i = 0; i < message.tableIds.length; ++i)
+                                    if (!$util.isString(message.tableIds[i]))
+                                        return "tableIds: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AlloyDbDatabaseReference message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.AlloyDbDatabaseReference
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.AlloyDbDatabaseReference} AlloyDbDatabaseReference
+                         */
+                        AlloyDbDatabaseReference.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.geminidataanalytics.v1alpha.AlloyDbDatabaseReference)
+                                return object;
+                            var message = new $root.google.cloud.geminidataanalytics.v1alpha.AlloyDbDatabaseReference();
+                            if (object.projectId != null)
+                                message.projectId = String(object.projectId);
+                            if (object.region != null)
+                                message.region = String(object.region);
+                            if (object.clusterId != null)
+                                message.clusterId = String(object.clusterId);
+                            if (object.instanceId != null)
+                                message.instanceId = String(object.instanceId);
+                            if (object.databaseId != null)
+                                message.databaseId = String(object.databaseId);
+                            if (object.tableIds) {
+                                if (!Array.isArray(object.tableIds))
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1alpha.AlloyDbDatabaseReference.tableIds: array expected");
+                                message.tableIds = [];
+                                for (var i = 0; i < object.tableIds.length; ++i)
+                                    message.tableIds[i] = String(object.tableIds[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AlloyDbDatabaseReference message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.AlloyDbDatabaseReference
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.AlloyDbDatabaseReference} message AlloyDbDatabaseReference
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AlloyDbDatabaseReference.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.tableIds = [];
+                            if (options.defaults) {
+                                object.projectId = "";
+                                object.region = "";
+                                object.clusterId = "";
+                                object.instanceId = "";
+                                object.databaseId = "";
+                            }
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                object.projectId = message.projectId;
+                            if (message.region != null && message.hasOwnProperty("region"))
+                                object.region = message.region;
+                            if (message.clusterId != null && message.hasOwnProperty("clusterId"))
+                                object.clusterId = message.clusterId;
+                            if (message.instanceId != null && message.hasOwnProperty("instanceId"))
+                                object.instanceId = message.instanceId;
+                            if (message.databaseId != null && message.hasOwnProperty("databaseId"))
+                                object.databaseId = message.databaseId;
+                            if (message.tableIds && message.tableIds.length) {
+                                object.tableIds = [];
+                                for (var j = 0; j < message.tableIds.length; ++j)
+                                    object.tableIds[j] = message.tableIds[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AlloyDbDatabaseReference to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.AlloyDbDatabaseReference
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AlloyDbDatabaseReference.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AlloyDbDatabaseReference
+                         * @function getTypeUrl
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.AlloyDbDatabaseReference
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AlloyDbDatabaseReference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1alpha.AlloyDbDatabaseReference";
+                        };
+    
+                        return AlloyDbDatabaseReference;
+                    })();
+    
+                    v1alpha.SpannerReference = (function() {
+    
+                        /**
+                         * Properties of a SpannerReference.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha
+                         * @interface ISpannerReference
+                         * @property {google.cloud.geminidataanalytics.v1alpha.ISpannerDatabaseReference|null} [databaseReference] SpannerReference databaseReference
+                         * @property {google.cloud.geminidataanalytics.v1alpha.IAgentContextReference|null} [agentContextReference] SpannerReference agentContextReference
+                         */
+    
+                        /**
+                         * Constructs a new SpannerReference.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha
+                         * @classdesc Represents a SpannerReference.
+                         * @implements ISpannerReference
+                         * @constructor
+                         * @param {google.cloud.geminidataanalytics.v1alpha.ISpannerReference=} [properties] Properties to set
+                         */
+                        function SpannerReference(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SpannerReference databaseReference.
+                         * @member {google.cloud.geminidataanalytics.v1alpha.ISpannerDatabaseReference|null|undefined} databaseReference
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.SpannerReference
+                         * @instance
+                         */
+                        SpannerReference.prototype.databaseReference = null;
+    
+                        /**
+                         * SpannerReference agentContextReference.
+                         * @member {google.cloud.geminidataanalytics.v1alpha.IAgentContextReference|null|undefined} agentContextReference
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.SpannerReference
+                         * @instance
+                         */
+                        SpannerReference.prototype.agentContextReference = null;
+    
+                        /**
+                         * Creates a new SpannerReference instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.SpannerReference
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.ISpannerReference=} [properties] Properties to set
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.SpannerReference} SpannerReference instance
+                         */
+                        SpannerReference.create = function create(properties) {
+                            return new SpannerReference(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SpannerReference message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.SpannerReference.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.SpannerReference
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.ISpannerReference} message SpannerReference message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SpannerReference.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.databaseReference != null && Object.hasOwnProperty.call(message, "databaseReference"))
+                                $root.google.cloud.geminidataanalytics.v1alpha.SpannerDatabaseReference.encode(message.databaseReference, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.agentContextReference != null && Object.hasOwnProperty.call(message, "agentContextReference"))
+                                $root.google.cloud.geminidataanalytics.v1alpha.AgentContextReference.encode(message.agentContextReference, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SpannerReference message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.SpannerReference.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.SpannerReference
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.ISpannerReference} message SpannerReference message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SpannerReference.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SpannerReference message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.SpannerReference
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.SpannerReference} SpannerReference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SpannerReference.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1alpha.SpannerReference();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.databaseReference = $root.google.cloud.geminidataanalytics.v1alpha.SpannerDatabaseReference.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.agentContextReference = $root.google.cloud.geminidataanalytics.v1alpha.AgentContextReference.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SpannerReference message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.SpannerReference
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.SpannerReference} SpannerReference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SpannerReference.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SpannerReference message.
+                         * @function verify
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.SpannerReference
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SpannerReference.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.databaseReference != null && message.hasOwnProperty("databaseReference")) {
+                                var error = $root.google.cloud.geminidataanalytics.v1alpha.SpannerDatabaseReference.verify(message.databaseReference);
+                                if (error)
+                                    return "databaseReference." + error;
+                            }
+                            if (message.agentContextReference != null && message.hasOwnProperty("agentContextReference")) {
+                                var error = $root.google.cloud.geminidataanalytics.v1alpha.AgentContextReference.verify(message.agentContextReference);
+                                if (error)
+                                    return "agentContextReference." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SpannerReference message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.SpannerReference
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.SpannerReference} SpannerReference
+                         */
+                        SpannerReference.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.geminidataanalytics.v1alpha.SpannerReference)
+                                return object;
+                            var message = new $root.google.cloud.geminidataanalytics.v1alpha.SpannerReference();
+                            if (object.databaseReference != null) {
+                                if (typeof object.databaseReference !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1alpha.SpannerReference.databaseReference: object expected");
+                                message.databaseReference = $root.google.cloud.geminidataanalytics.v1alpha.SpannerDatabaseReference.fromObject(object.databaseReference);
+                            }
+                            if (object.agentContextReference != null) {
+                                if (typeof object.agentContextReference !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1alpha.SpannerReference.agentContextReference: object expected");
+                                message.agentContextReference = $root.google.cloud.geminidataanalytics.v1alpha.AgentContextReference.fromObject(object.agentContextReference);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SpannerReference message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.SpannerReference
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.SpannerReference} message SpannerReference
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SpannerReference.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.databaseReference = null;
+                                object.agentContextReference = null;
+                            }
+                            if (message.databaseReference != null && message.hasOwnProperty("databaseReference"))
+                                object.databaseReference = $root.google.cloud.geminidataanalytics.v1alpha.SpannerDatabaseReference.toObject(message.databaseReference, options);
+                            if (message.agentContextReference != null && message.hasOwnProperty("agentContextReference"))
+                                object.agentContextReference = $root.google.cloud.geminidataanalytics.v1alpha.AgentContextReference.toObject(message.agentContextReference, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SpannerReference to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.SpannerReference
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SpannerReference.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SpannerReference
+                         * @function getTypeUrl
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.SpannerReference
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SpannerReference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1alpha.SpannerReference";
+                        };
+    
+                        return SpannerReference;
+                    })();
+    
+                    v1alpha.SpannerDatabaseReference = (function() {
+    
+                        /**
+                         * Properties of a SpannerDatabaseReference.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha
+                         * @interface ISpannerDatabaseReference
+                         * @property {google.cloud.geminidataanalytics.v1alpha.SpannerDatabaseReference.Engine|null} [engine] SpannerDatabaseReference engine
+                         * @property {string|null} [projectId] SpannerDatabaseReference projectId
+                         * @property {string|null} [region] SpannerDatabaseReference region
+                         * @property {string|null} [instanceId] SpannerDatabaseReference instanceId
+                         * @property {string|null} [databaseId] SpannerDatabaseReference databaseId
+                         * @property {Array.<string>|null} [tableIds] SpannerDatabaseReference tableIds
+                         */
+    
+                        /**
+                         * Constructs a new SpannerDatabaseReference.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha
+                         * @classdesc Represents a SpannerDatabaseReference.
+                         * @implements ISpannerDatabaseReference
+                         * @constructor
+                         * @param {google.cloud.geminidataanalytics.v1alpha.ISpannerDatabaseReference=} [properties] Properties to set
+                         */
+                        function SpannerDatabaseReference(properties) {
+                            this.tableIds = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SpannerDatabaseReference engine.
+                         * @member {google.cloud.geminidataanalytics.v1alpha.SpannerDatabaseReference.Engine} engine
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.SpannerDatabaseReference
+                         * @instance
+                         */
+                        SpannerDatabaseReference.prototype.engine = 0;
+    
+                        /**
+                         * SpannerDatabaseReference projectId.
+                         * @member {string} projectId
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.SpannerDatabaseReference
+                         * @instance
+                         */
+                        SpannerDatabaseReference.prototype.projectId = "";
+    
+                        /**
+                         * SpannerDatabaseReference region.
+                         * @member {string} region
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.SpannerDatabaseReference
+                         * @instance
+                         */
+                        SpannerDatabaseReference.prototype.region = "";
+    
+                        /**
+                         * SpannerDatabaseReference instanceId.
+                         * @member {string} instanceId
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.SpannerDatabaseReference
+                         * @instance
+                         */
+                        SpannerDatabaseReference.prototype.instanceId = "";
+    
+                        /**
+                         * SpannerDatabaseReference databaseId.
+                         * @member {string} databaseId
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.SpannerDatabaseReference
+                         * @instance
+                         */
+                        SpannerDatabaseReference.prototype.databaseId = "";
+    
+                        /**
+                         * SpannerDatabaseReference tableIds.
+                         * @member {Array.<string>} tableIds
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.SpannerDatabaseReference
+                         * @instance
+                         */
+                        SpannerDatabaseReference.prototype.tableIds = $util.emptyArray;
+    
+                        /**
+                         * Creates a new SpannerDatabaseReference instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.SpannerDatabaseReference
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.ISpannerDatabaseReference=} [properties] Properties to set
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.SpannerDatabaseReference} SpannerDatabaseReference instance
+                         */
+                        SpannerDatabaseReference.create = function create(properties) {
+                            return new SpannerDatabaseReference(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SpannerDatabaseReference message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.SpannerDatabaseReference.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.SpannerDatabaseReference
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.ISpannerDatabaseReference} message SpannerDatabaseReference message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SpannerDatabaseReference.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.projectId != null && Object.hasOwnProperty.call(message, "projectId"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.projectId);
+                            if (message.region != null && Object.hasOwnProperty.call(message, "region"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.region);
+                            if (message.instanceId != null && Object.hasOwnProperty.call(message, "instanceId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.instanceId);
+                            if (message.databaseId != null && Object.hasOwnProperty.call(message, "databaseId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.databaseId);
+                            if (message.tableIds != null && message.tableIds.length)
+                                for (var i = 0; i < message.tableIds.length; ++i)
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.tableIds[i]);
+                            if (message.engine != null && Object.hasOwnProperty.call(message, "engine"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.engine);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SpannerDatabaseReference message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.SpannerDatabaseReference.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.SpannerDatabaseReference
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.ISpannerDatabaseReference} message SpannerDatabaseReference message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SpannerDatabaseReference.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SpannerDatabaseReference message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.SpannerDatabaseReference
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.SpannerDatabaseReference} SpannerDatabaseReference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SpannerDatabaseReference.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1alpha.SpannerDatabaseReference();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 6: {
+                                        message.engine = reader.int32();
+                                        break;
+                                    }
+                                case 1: {
+                                        message.projectId = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.region = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.instanceId = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.databaseId = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        if (!(message.tableIds && message.tableIds.length))
+                                            message.tableIds = [];
+                                        message.tableIds.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SpannerDatabaseReference message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.SpannerDatabaseReference
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.SpannerDatabaseReference} SpannerDatabaseReference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SpannerDatabaseReference.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SpannerDatabaseReference message.
+                         * @function verify
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.SpannerDatabaseReference
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SpannerDatabaseReference.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.engine != null && message.hasOwnProperty("engine"))
+                                switch (message.engine) {
+                                default:
+                                    return "engine: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                if (!$util.isString(message.projectId))
+                                    return "projectId: string expected";
+                            if (message.region != null && message.hasOwnProperty("region"))
+                                if (!$util.isString(message.region))
+                                    return "region: string expected";
+                            if (message.instanceId != null && message.hasOwnProperty("instanceId"))
+                                if (!$util.isString(message.instanceId))
+                                    return "instanceId: string expected";
+                            if (message.databaseId != null && message.hasOwnProperty("databaseId"))
+                                if (!$util.isString(message.databaseId))
+                                    return "databaseId: string expected";
+                            if (message.tableIds != null && message.hasOwnProperty("tableIds")) {
+                                if (!Array.isArray(message.tableIds))
+                                    return "tableIds: array expected";
+                                for (var i = 0; i < message.tableIds.length; ++i)
+                                    if (!$util.isString(message.tableIds[i]))
+                                        return "tableIds: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SpannerDatabaseReference message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.SpannerDatabaseReference
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.SpannerDatabaseReference} SpannerDatabaseReference
+                         */
+                        SpannerDatabaseReference.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.geminidataanalytics.v1alpha.SpannerDatabaseReference)
+                                return object;
+                            var message = new $root.google.cloud.geminidataanalytics.v1alpha.SpannerDatabaseReference();
+                            switch (object.engine) {
+                            default:
+                                if (typeof object.engine === "number") {
+                                    message.engine = object.engine;
+                                    break;
+                                }
+                                break;
+                            case "ENGINE_UNSPECIFIED":
+                            case 0:
+                                message.engine = 0;
+                                break;
+                            case "GOOGLE_SQL":
+                            case 1:
+                                message.engine = 1;
+                                break;
+                            case "POSTGRESQL":
+                            case 2:
+                                message.engine = 2;
+                                break;
+                            }
+                            if (object.projectId != null)
+                                message.projectId = String(object.projectId);
+                            if (object.region != null)
+                                message.region = String(object.region);
+                            if (object.instanceId != null)
+                                message.instanceId = String(object.instanceId);
+                            if (object.databaseId != null)
+                                message.databaseId = String(object.databaseId);
+                            if (object.tableIds) {
+                                if (!Array.isArray(object.tableIds))
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1alpha.SpannerDatabaseReference.tableIds: array expected");
+                                message.tableIds = [];
+                                for (var i = 0; i < object.tableIds.length; ++i)
+                                    message.tableIds[i] = String(object.tableIds[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SpannerDatabaseReference message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.SpannerDatabaseReference
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.SpannerDatabaseReference} message SpannerDatabaseReference
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SpannerDatabaseReference.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.tableIds = [];
+                            if (options.defaults) {
+                                object.projectId = "";
+                                object.region = "";
+                                object.instanceId = "";
+                                object.databaseId = "";
+                                object.engine = options.enums === String ? "ENGINE_UNSPECIFIED" : 0;
+                            }
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                object.projectId = message.projectId;
+                            if (message.region != null && message.hasOwnProperty("region"))
+                                object.region = message.region;
+                            if (message.instanceId != null && message.hasOwnProperty("instanceId"))
+                                object.instanceId = message.instanceId;
+                            if (message.databaseId != null && message.hasOwnProperty("databaseId"))
+                                object.databaseId = message.databaseId;
+                            if (message.tableIds && message.tableIds.length) {
+                                object.tableIds = [];
+                                for (var j = 0; j < message.tableIds.length; ++j)
+                                    object.tableIds[j] = message.tableIds[j];
+                            }
+                            if (message.engine != null && message.hasOwnProperty("engine"))
+                                object.engine = options.enums === String ? $root.google.cloud.geminidataanalytics.v1alpha.SpannerDatabaseReference.Engine[message.engine] === undefined ? message.engine : $root.google.cloud.geminidataanalytics.v1alpha.SpannerDatabaseReference.Engine[message.engine] : message.engine;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SpannerDatabaseReference to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.SpannerDatabaseReference
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SpannerDatabaseReference.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SpannerDatabaseReference
+                         * @function getTypeUrl
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.SpannerDatabaseReference
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SpannerDatabaseReference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1alpha.SpannerDatabaseReference";
+                        };
+    
+                        /**
+                         * Engine enum.
+                         * @name google.cloud.geminidataanalytics.v1alpha.SpannerDatabaseReference.Engine
+                         * @enum {number}
+                         * @property {number} ENGINE_UNSPECIFIED=0 ENGINE_UNSPECIFIED value
+                         * @property {number} GOOGLE_SQL=1 GOOGLE_SQL value
+                         * @property {number} POSTGRESQL=2 POSTGRESQL value
+                         */
+                        SpannerDatabaseReference.Engine = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ENGINE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "GOOGLE_SQL"] = 1;
+                            values[valuesById[2] = "POSTGRESQL"] = 2;
+                            return values;
+                        })();
+    
+                        return SpannerDatabaseReference;
+                    })();
+    
+                    v1alpha.CloudSqlReference = (function() {
+    
+                        /**
+                         * Properties of a CloudSqlReference.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha
+                         * @interface ICloudSqlReference
+                         * @property {google.cloud.geminidataanalytics.v1alpha.ICloudSqlDatabaseReference|null} [databaseReference] CloudSqlReference databaseReference
+                         * @property {google.cloud.geminidataanalytics.v1alpha.IAgentContextReference|null} [agentContextReference] CloudSqlReference agentContextReference
+                         */
+    
+                        /**
+                         * Constructs a new CloudSqlReference.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha
+                         * @classdesc Represents a CloudSqlReference.
+                         * @implements ICloudSqlReference
+                         * @constructor
+                         * @param {google.cloud.geminidataanalytics.v1alpha.ICloudSqlReference=} [properties] Properties to set
+                         */
+                        function CloudSqlReference(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CloudSqlReference databaseReference.
+                         * @member {google.cloud.geminidataanalytics.v1alpha.ICloudSqlDatabaseReference|null|undefined} databaseReference
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.CloudSqlReference
+                         * @instance
+                         */
+                        CloudSqlReference.prototype.databaseReference = null;
+    
+                        /**
+                         * CloudSqlReference agentContextReference.
+                         * @member {google.cloud.geminidataanalytics.v1alpha.IAgentContextReference|null|undefined} agentContextReference
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.CloudSqlReference
+                         * @instance
+                         */
+                        CloudSqlReference.prototype.agentContextReference = null;
+    
+                        /**
+                         * Creates a new CloudSqlReference instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.CloudSqlReference
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.ICloudSqlReference=} [properties] Properties to set
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.CloudSqlReference} CloudSqlReference instance
+                         */
+                        CloudSqlReference.create = function create(properties) {
+                            return new CloudSqlReference(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CloudSqlReference message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.CloudSqlReference.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.CloudSqlReference
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.ICloudSqlReference} message CloudSqlReference message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CloudSqlReference.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.databaseReference != null && Object.hasOwnProperty.call(message, "databaseReference"))
+                                $root.google.cloud.geminidataanalytics.v1alpha.CloudSqlDatabaseReference.encode(message.databaseReference, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.agentContextReference != null && Object.hasOwnProperty.call(message, "agentContextReference"))
+                                $root.google.cloud.geminidataanalytics.v1alpha.AgentContextReference.encode(message.agentContextReference, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CloudSqlReference message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.CloudSqlReference.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.CloudSqlReference
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.ICloudSqlReference} message CloudSqlReference message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CloudSqlReference.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CloudSqlReference message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.CloudSqlReference
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.CloudSqlReference} CloudSqlReference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CloudSqlReference.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1alpha.CloudSqlReference();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.databaseReference = $root.google.cloud.geminidataanalytics.v1alpha.CloudSqlDatabaseReference.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.agentContextReference = $root.google.cloud.geminidataanalytics.v1alpha.AgentContextReference.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CloudSqlReference message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.CloudSqlReference
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.CloudSqlReference} CloudSqlReference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CloudSqlReference.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CloudSqlReference message.
+                         * @function verify
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.CloudSqlReference
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CloudSqlReference.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.databaseReference != null && message.hasOwnProperty("databaseReference")) {
+                                var error = $root.google.cloud.geminidataanalytics.v1alpha.CloudSqlDatabaseReference.verify(message.databaseReference);
+                                if (error)
+                                    return "databaseReference." + error;
+                            }
+                            if (message.agentContextReference != null && message.hasOwnProperty("agentContextReference")) {
+                                var error = $root.google.cloud.geminidataanalytics.v1alpha.AgentContextReference.verify(message.agentContextReference);
+                                if (error)
+                                    return "agentContextReference." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CloudSqlReference message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.CloudSqlReference
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.CloudSqlReference} CloudSqlReference
+                         */
+                        CloudSqlReference.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.geminidataanalytics.v1alpha.CloudSqlReference)
+                                return object;
+                            var message = new $root.google.cloud.geminidataanalytics.v1alpha.CloudSqlReference();
+                            if (object.databaseReference != null) {
+                                if (typeof object.databaseReference !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1alpha.CloudSqlReference.databaseReference: object expected");
+                                message.databaseReference = $root.google.cloud.geminidataanalytics.v1alpha.CloudSqlDatabaseReference.fromObject(object.databaseReference);
+                            }
+                            if (object.agentContextReference != null) {
+                                if (typeof object.agentContextReference !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1alpha.CloudSqlReference.agentContextReference: object expected");
+                                message.agentContextReference = $root.google.cloud.geminidataanalytics.v1alpha.AgentContextReference.fromObject(object.agentContextReference);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CloudSqlReference message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.CloudSqlReference
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.CloudSqlReference} message CloudSqlReference
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CloudSqlReference.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.databaseReference = null;
+                                object.agentContextReference = null;
+                            }
+                            if (message.databaseReference != null && message.hasOwnProperty("databaseReference"))
+                                object.databaseReference = $root.google.cloud.geminidataanalytics.v1alpha.CloudSqlDatabaseReference.toObject(message.databaseReference, options);
+                            if (message.agentContextReference != null && message.hasOwnProperty("agentContextReference"))
+                                object.agentContextReference = $root.google.cloud.geminidataanalytics.v1alpha.AgentContextReference.toObject(message.agentContextReference, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CloudSqlReference to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.CloudSqlReference
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CloudSqlReference.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CloudSqlReference
+                         * @function getTypeUrl
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.CloudSqlReference
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CloudSqlReference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1alpha.CloudSqlReference";
+                        };
+    
+                        return CloudSqlReference;
+                    })();
+    
+                    v1alpha.CloudSqlDatabaseReference = (function() {
+    
+                        /**
+                         * Properties of a CloudSqlDatabaseReference.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha
+                         * @interface ICloudSqlDatabaseReference
+                         * @property {google.cloud.geminidataanalytics.v1alpha.CloudSqlDatabaseReference.Engine|null} [engine] CloudSqlDatabaseReference engine
+                         * @property {string|null} [projectId] CloudSqlDatabaseReference projectId
+                         * @property {string|null} [region] CloudSqlDatabaseReference region
+                         * @property {string|null} [instanceId] CloudSqlDatabaseReference instanceId
+                         * @property {string|null} [databaseId] CloudSqlDatabaseReference databaseId
+                         * @property {Array.<string>|null} [tableIds] CloudSqlDatabaseReference tableIds
+                         */
+    
+                        /**
+                         * Constructs a new CloudSqlDatabaseReference.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha
+                         * @classdesc Represents a CloudSqlDatabaseReference.
+                         * @implements ICloudSqlDatabaseReference
+                         * @constructor
+                         * @param {google.cloud.geminidataanalytics.v1alpha.ICloudSqlDatabaseReference=} [properties] Properties to set
+                         */
+                        function CloudSqlDatabaseReference(properties) {
+                            this.tableIds = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CloudSqlDatabaseReference engine.
+                         * @member {google.cloud.geminidataanalytics.v1alpha.CloudSqlDatabaseReference.Engine} engine
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.CloudSqlDatabaseReference
+                         * @instance
+                         */
+                        CloudSqlDatabaseReference.prototype.engine = 0;
+    
+                        /**
+                         * CloudSqlDatabaseReference projectId.
+                         * @member {string} projectId
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.CloudSqlDatabaseReference
+                         * @instance
+                         */
+                        CloudSqlDatabaseReference.prototype.projectId = "";
+    
+                        /**
+                         * CloudSqlDatabaseReference region.
+                         * @member {string} region
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.CloudSqlDatabaseReference
+                         * @instance
+                         */
+                        CloudSqlDatabaseReference.prototype.region = "";
+    
+                        /**
+                         * CloudSqlDatabaseReference instanceId.
+                         * @member {string} instanceId
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.CloudSqlDatabaseReference
+                         * @instance
+                         */
+                        CloudSqlDatabaseReference.prototype.instanceId = "";
+    
+                        /**
+                         * CloudSqlDatabaseReference databaseId.
+                         * @member {string} databaseId
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.CloudSqlDatabaseReference
+                         * @instance
+                         */
+                        CloudSqlDatabaseReference.prototype.databaseId = "";
+    
+                        /**
+                         * CloudSqlDatabaseReference tableIds.
+                         * @member {Array.<string>} tableIds
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.CloudSqlDatabaseReference
+                         * @instance
+                         */
+                        CloudSqlDatabaseReference.prototype.tableIds = $util.emptyArray;
+    
+                        /**
+                         * Creates a new CloudSqlDatabaseReference instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.CloudSqlDatabaseReference
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.ICloudSqlDatabaseReference=} [properties] Properties to set
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.CloudSqlDatabaseReference} CloudSqlDatabaseReference instance
+                         */
+                        CloudSqlDatabaseReference.create = function create(properties) {
+                            return new CloudSqlDatabaseReference(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CloudSqlDatabaseReference message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.CloudSqlDatabaseReference.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.CloudSqlDatabaseReference
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.ICloudSqlDatabaseReference} message CloudSqlDatabaseReference message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CloudSqlDatabaseReference.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.engine != null && Object.hasOwnProperty.call(message, "engine"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.engine);
+                            if (message.projectId != null && Object.hasOwnProperty.call(message, "projectId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.projectId);
+                            if (message.region != null && Object.hasOwnProperty.call(message, "region"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.region);
+                            if (message.instanceId != null && Object.hasOwnProperty.call(message, "instanceId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.instanceId);
+                            if (message.databaseId != null && Object.hasOwnProperty.call(message, "databaseId"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.databaseId);
+                            if (message.tableIds != null && message.tableIds.length)
+                                for (var i = 0; i < message.tableIds.length; ++i)
+                                    writer.uint32(/* id 7, wireType 2 =*/58).string(message.tableIds[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CloudSqlDatabaseReference message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.CloudSqlDatabaseReference.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.CloudSqlDatabaseReference
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.ICloudSqlDatabaseReference} message CloudSqlDatabaseReference message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CloudSqlDatabaseReference.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CloudSqlDatabaseReference message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.CloudSqlDatabaseReference
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.CloudSqlDatabaseReference} CloudSqlDatabaseReference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CloudSqlDatabaseReference.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1alpha.CloudSqlDatabaseReference();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.engine = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.projectId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.region = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.instanceId = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.databaseId = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        if (!(message.tableIds && message.tableIds.length))
+                                            message.tableIds = [];
+                                        message.tableIds.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CloudSqlDatabaseReference message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.CloudSqlDatabaseReference
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.CloudSqlDatabaseReference} CloudSqlDatabaseReference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CloudSqlDatabaseReference.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CloudSqlDatabaseReference message.
+                         * @function verify
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.CloudSqlDatabaseReference
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CloudSqlDatabaseReference.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.engine != null && message.hasOwnProperty("engine"))
+                                switch (message.engine) {
+                                default:
+                                    return "engine: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                if (!$util.isString(message.projectId))
+                                    return "projectId: string expected";
+                            if (message.region != null && message.hasOwnProperty("region"))
+                                if (!$util.isString(message.region))
+                                    return "region: string expected";
+                            if (message.instanceId != null && message.hasOwnProperty("instanceId"))
+                                if (!$util.isString(message.instanceId))
+                                    return "instanceId: string expected";
+                            if (message.databaseId != null && message.hasOwnProperty("databaseId"))
+                                if (!$util.isString(message.databaseId))
+                                    return "databaseId: string expected";
+                            if (message.tableIds != null && message.hasOwnProperty("tableIds")) {
+                                if (!Array.isArray(message.tableIds))
+                                    return "tableIds: array expected";
+                                for (var i = 0; i < message.tableIds.length; ++i)
+                                    if (!$util.isString(message.tableIds[i]))
+                                        return "tableIds: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CloudSqlDatabaseReference message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.CloudSqlDatabaseReference
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.CloudSqlDatabaseReference} CloudSqlDatabaseReference
+                         */
+                        CloudSqlDatabaseReference.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.geminidataanalytics.v1alpha.CloudSqlDatabaseReference)
+                                return object;
+                            var message = new $root.google.cloud.geminidataanalytics.v1alpha.CloudSqlDatabaseReference();
+                            switch (object.engine) {
+                            default:
+                                if (typeof object.engine === "number") {
+                                    message.engine = object.engine;
+                                    break;
+                                }
+                                break;
+                            case "ENGINE_UNSPECIFIED":
+                            case 0:
+                                message.engine = 0;
+                                break;
+                            case "POSTGRESQL":
+                            case 1:
+                                message.engine = 1;
+                                break;
+                            case "MYSQL":
+                            case 2:
+                                message.engine = 2;
+                                break;
+                            }
+                            if (object.projectId != null)
+                                message.projectId = String(object.projectId);
+                            if (object.region != null)
+                                message.region = String(object.region);
+                            if (object.instanceId != null)
+                                message.instanceId = String(object.instanceId);
+                            if (object.databaseId != null)
+                                message.databaseId = String(object.databaseId);
+                            if (object.tableIds) {
+                                if (!Array.isArray(object.tableIds))
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1alpha.CloudSqlDatabaseReference.tableIds: array expected");
+                                message.tableIds = [];
+                                for (var i = 0; i < object.tableIds.length; ++i)
+                                    message.tableIds[i] = String(object.tableIds[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CloudSqlDatabaseReference message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.CloudSqlDatabaseReference
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.CloudSqlDatabaseReference} message CloudSqlDatabaseReference
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CloudSqlDatabaseReference.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.tableIds = [];
+                            if (options.defaults) {
+                                object.engine = options.enums === String ? "ENGINE_UNSPECIFIED" : 0;
+                                object.projectId = "";
+                                object.region = "";
+                                object.instanceId = "";
+                                object.databaseId = "";
+                            }
+                            if (message.engine != null && message.hasOwnProperty("engine"))
+                                object.engine = options.enums === String ? $root.google.cloud.geminidataanalytics.v1alpha.CloudSqlDatabaseReference.Engine[message.engine] === undefined ? message.engine : $root.google.cloud.geminidataanalytics.v1alpha.CloudSqlDatabaseReference.Engine[message.engine] : message.engine;
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                object.projectId = message.projectId;
+                            if (message.region != null && message.hasOwnProperty("region"))
+                                object.region = message.region;
+                            if (message.instanceId != null && message.hasOwnProperty("instanceId"))
+                                object.instanceId = message.instanceId;
+                            if (message.databaseId != null && message.hasOwnProperty("databaseId"))
+                                object.databaseId = message.databaseId;
+                            if (message.tableIds && message.tableIds.length) {
+                                object.tableIds = [];
+                                for (var j = 0; j < message.tableIds.length; ++j)
+                                    object.tableIds[j] = message.tableIds[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CloudSqlDatabaseReference to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.CloudSqlDatabaseReference
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CloudSqlDatabaseReference.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CloudSqlDatabaseReference
+                         * @function getTypeUrl
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.CloudSqlDatabaseReference
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CloudSqlDatabaseReference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1alpha.CloudSqlDatabaseReference";
+                        };
+    
+                        /**
+                         * Engine enum.
+                         * @name google.cloud.geminidataanalytics.v1alpha.CloudSqlDatabaseReference.Engine
+                         * @enum {number}
+                         * @property {number} ENGINE_UNSPECIFIED=0 ENGINE_UNSPECIFIED value
+                         * @property {number} POSTGRESQL=1 POSTGRESQL value
+                         * @property {number} MYSQL=2 MYSQL value
+                         */
+                        CloudSqlDatabaseReference.Engine = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ENGINE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "POSTGRESQL"] = 1;
+                            values[valuesById[2] = "MYSQL"] = 2;
+                            return values;
+                        })();
+    
+                        return CloudSqlDatabaseReference;
+                    })();
+    
                     v1alpha.LookerExploreReferences = (function() {
     
                         /**
@@ -5996,6 +8117,9 @@
                          * @property {google.cloud.geminidataanalytics.v1alpha.IBigQueryTableReference|null} [bigqueryTableReference] Datasource bigqueryTableReference
                          * @property {string|null} [studioDatasourceId] Datasource studioDatasourceId
                          * @property {google.cloud.geminidataanalytics.v1alpha.ILookerExploreReference|null} [lookerExploreReference] Datasource lookerExploreReference
+                         * @property {google.cloud.geminidataanalytics.v1alpha.IAlloyDbReference|null} [alloyDbReference] Datasource alloyDbReference
+                         * @property {google.cloud.geminidataanalytics.v1alpha.ISpannerReference|null} [spannerReference] Datasource spannerReference
+                         * @property {google.cloud.geminidataanalytics.v1alpha.ICloudSqlReference|null} [cloudSqlReference] Datasource cloudSqlReference
                          * @property {google.cloud.geminidataanalytics.v1alpha.ISchema|null} [schema] Datasource schema
                          * @property {google.protobuf.IStruct|null} [structSchema] Datasource structSchema
                          */
@@ -6040,6 +8164,30 @@
                         Datasource.prototype.lookerExploreReference = null;
     
                         /**
+                         * Datasource alloyDbReference.
+                         * @member {google.cloud.geminidataanalytics.v1alpha.IAlloyDbReference|null|undefined} alloyDbReference
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.Datasource
+                         * @instance
+                         */
+                        Datasource.prototype.alloyDbReference = null;
+    
+                        /**
+                         * Datasource spannerReference.
+                         * @member {google.cloud.geminidataanalytics.v1alpha.ISpannerReference|null|undefined} spannerReference
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.Datasource
+                         * @instance
+                         */
+                        Datasource.prototype.spannerReference = null;
+    
+                        /**
+                         * Datasource cloudSqlReference.
+                         * @member {google.cloud.geminidataanalytics.v1alpha.ICloudSqlReference|null|undefined} cloudSqlReference
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.Datasource
+                         * @instance
+                         */
+                        Datasource.prototype.cloudSqlReference = null;
+    
+                        /**
                          * Datasource schema.
                          * @member {google.cloud.geminidataanalytics.v1alpha.ISchema|null|undefined} schema
                          * @memberof google.cloud.geminidataanalytics.v1alpha.Datasource
@@ -6060,12 +8208,12 @@
     
                         /**
                          * Datasource reference.
-                         * @member {"bigqueryTableReference"|"studioDatasourceId"|"lookerExploreReference"|undefined} reference
+                         * @member {"bigqueryTableReference"|"studioDatasourceId"|"lookerExploreReference"|"alloyDbReference"|"spannerReference"|"cloudSqlReference"|undefined} reference
                          * @memberof google.cloud.geminidataanalytics.v1alpha.Datasource
                          * @instance
                          */
                         Object.defineProperty(Datasource.prototype, "reference", {
-                            get: $util.oneOfGetter($oneOfFields = ["bigqueryTableReference", "studioDatasourceId", "lookerExploreReference"]),
+                            get: $util.oneOfGetter($oneOfFields = ["bigqueryTableReference", "studioDatasourceId", "lookerExploreReference", "alloyDbReference", "spannerReference", "cloudSqlReference"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -6103,6 +8251,12 @@
                                 $root.google.cloud.geminidataanalytics.v1alpha.Schema.encode(message.schema, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             if (message.structSchema != null && Object.hasOwnProperty.call(message, "structSchema"))
                                 $root.google.protobuf.Struct.encode(message.structSchema, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.alloyDbReference != null && Object.hasOwnProperty.call(message, "alloyDbReference"))
+                                $root.google.cloud.geminidataanalytics.v1alpha.AlloyDbReference.encode(message.alloyDbReference, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                            if (message.spannerReference != null && Object.hasOwnProperty.call(message, "spannerReference"))
+                                $root.google.cloud.geminidataanalytics.v1alpha.SpannerReference.encode(message.spannerReference, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                            if (message.cloudSqlReference != null && Object.hasOwnProperty.call(message, "cloudSqlReference"))
+                                $root.google.cloud.geminidataanalytics.v1alpha.CloudSqlReference.encode(message.cloudSqlReference, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
                             return writer;
                         };
     
@@ -6149,6 +8303,18 @@
                                     }
                                 case 4: {
                                         message.lookerExploreReference = $root.google.cloud.geminidataanalytics.v1alpha.LookerExploreReference.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 12: {
+                                        message.alloyDbReference = $root.google.cloud.geminidataanalytics.v1alpha.AlloyDbReference.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 13: {
+                                        message.spannerReference = $root.google.cloud.geminidataanalytics.v1alpha.SpannerReference.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 14: {
+                                        message.cloudSqlReference = $root.google.cloud.geminidataanalytics.v1alpha.CloudSqlReference.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 7: {
@@ -6220,6 +8386,36 @@
                                         return "lookerExploreReference." + error;
                                 }
                             }
+                            if (message.alloyDbReference != null && message.hasOwnProperty("alloyDbReference")) {
+                                if (properties.reference === 1)
+                                    return "reference: multiple values";
+                                properties.reference = 1;
+                                {
+                                    var error = $root.google.cloud.geminidataanalytics.v1alpha.AlloyDbReference.verify(message.alloyDbReference);
+                                    if (error)
+                                        return "alloyDbReference." + error;
+                                }
+                            }
+                            if (message.spannerReference != null && message.hasOwnProperty("spannerReference")) {
+                                if (properties.reference === 1)
+                                    return "reference: multiple values";
+                                properties.reference = 1;
+                                {
+                                    var error = $root.google.cloud.geminidataanalytics.v1alpha.SpannerReference.verify(message.spannerReference);
+                                    if (error)
+                                        return "spannerReference." + error;
+                                }
+                            }
+                            if (message.cloudSqlReference != null && message.hasOwnProperty("cloudSqlReference")) {
+                                if (properties.reference === 1)
+                                    return "reference: multiple values";
+                                properties.reference = 1;
+                                {
+                                    var error = $root.google.cloud.geminidataanalytics.v1alpha.CloudSqlReference.verify(message.cloudSqlReference);
+                                    if (error)
+                                        return "cloudSqlReference." + error;
+                                }
+                            }
                             if (message.schema != null && message.hasOwnProperty("schema")) {
                                 var error = $root.google.cloud.geminidataanalytics.v1alpha.Schema.verify(message.schema);
                                 if (error)
@@ -6256,6 +8452,21 @@
                                 if (typeof object.lookerExploreReference !== "object")
                                     throw TypeError(".google.cloud.geminidataanalytics.v1alpha.Datasource.lookerExploreReference: object expected");
                                 message.lookerExploreReference = $root.google.cloud.geminidataanalytics.v1alpha.LookerExploreReference.fromObject(object.lookerExploreReference);
+                            }
+                            if (object.alloyDbReference != null) {
+                                if (typeof object.alloyDbReference !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1alpha.Datasource.alloyDbReference: object expected");
+                                message.alloyDbReference = $root.google.cloud.geminidataanalytics.v1alpha.AlloyDbReference.fromObject(object.alloyDbReference);
+                            }
+                            if (object.spannerReference != null) {
+                                if (typeof object.spannerReference !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1alpha.Datasource.spannerReference: object expected");
+                                message.spannerReference = $root.google.cloud.geminidataanalytics.v1alpha.SpannerReference.fromObject(object.spannerReference);
+                            }
+                            if (object.cloudSqlReference != null) {
+                                if (typeof object.cloudSqlReference !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1alpha.Datasource.cloudSqlReference: object expected");
+                                message.cloudSqlReference = $root.google.cloud.geminidataanalytics.v1alpha.CloudSqlReference.fromObject(object.cloudSqlReference);
                             }
                             if (object.schema != null) {
                                 if (typeof object.schema !== "object")
@@ -6306,6 +8517,21 @@
                                 object.schema = $root.google.cloud.geminidataanalytics.v1alpha.Schema.toObject(message.schema, options);
                             if (message.structSchema != null && message.hasOwnProperty("structSchema"))
                                 object.structSchema = $root.google.protobuf.Struct.toObject(message.structSchema, options);
+                            if (message.alloyDbReference != null && message.hasOwnProperty("alloyDbReference")) {
+                                object.alloyDbReference = $root.google.cloud.geminidataanalytics.v1alpha.AlloyDbReference.toObject(message.alloyDbReference, options);
+                                if (options.oneofs)
+                                    object.reference = "alloyDbReference";
+                            }
+                            if (message.spannerReference != null && message.hasOwnProperty("spannerReference")) {
+                                object.spannerReference = $root.google.cloud.geminidataanalytics.v1alpha.SpannerReference.toObject(message.spannerReference, options);
+                                if (options.oneofs)
+                                    object.reference = "spannerReference";
+                            }
+                            if (message.cloudSqlReference != null && message.hasOwnProperty("cloudSqlReference")) {
+                                object.cloudSqlReference = $root.google.cloud.geminidataanalytics.v1alpha.CloudSqlReference.toObject(message.cloudSqlReference, options);
+                                if (options.oneofs)
+                                    object.reference = "cloudSqlReference";
+                            }
                             return object;
                         };
     

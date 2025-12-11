@@ -26,6 +26,103 @@ export namespace google {
             /** Namespace v1alpha. */
             namespace v1alpha {
 
+                /** Properties of an AgentContextReference. */
+                interface IAgentContextReference {
+
+                    /** AgentContextReference contextSetId */
+                    contextSetId?: (string|null);
+                }
+
+                /** Represents an AgentContextReference. */
+                class AgentContextReference implements IAgentContextReference {
+
+                    /**
+                     * Constructs a new AgentContextReference.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1alpha.IAgentContextReference);
+
+                    /** AgentContextReference contextSetId. */
+                    public contextSetId: string;
+
+                    /**
+                     * Creates a new AgentContextReference instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AgentContextReference instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1alpha.IAgentContextReference): google.cloud.geminidataanalytics.v1alpha.AgentContextReference;
+
+                    /**
+                     * Encodes the specified AgentContextReference message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.AgentContextReference.verify|verify} messages.
+                     * @param message AgentContextReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1alpha.IAgentContextReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AgentContextReference message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.AgentContextReference.verify|verify} messages.
+                     * @param message AgentContextReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1alpha.IAgentContextReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AgentContextReference message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AgentContextReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1alpha.AgentContextReference;
+
+                    /**
+                     * Decodes an AgentContextReference message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AgentContextReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1alpha.AgentContextReference;
+
+                    /**
+                     * Verifies an AgentContextReference message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AgentContextReference message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AgentContextReference
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1alpha.AgentContextReference;
+
+                    /**
+                     * Creates a plain object from an AgentContextReference message. Also converts values to other types if specified.
+                     * @param message AgentContextReference
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1alpha.AgentContextReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AgentContextReference to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AgentContextReference
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a Context. */
                 interface IContext {
 
@@ -1644,6 +1741,15 @@ export namespace google {
 
                     /** DatasourceReferences looker */
                     looker?: (google.cloud.geminidataanalytics.v1alpha.ILookerExploreReferences|null);
+
+                    /** DatasourceReferences alloydb */
+                    alloydb?: (google.cloud.geminidataanalytics.v1alpha.IAlloyDbReference|null);
+
+                    /** DatasourceReferences spannerReference */
+                    spannerReference?: (google.cloud.geminidataanalytics.v1alpha.ISpannerReference|null);
+
+                    /** DatasourceReferences cloudSqlReference */
+                    cloudSqlReference?: (google.cloud.geminidataanalytics.v1alpha.ICloudSqlReference|null);
                 }
 
                 /** Represents a DatasourceReferences. */
@@ -1664,8 +1770,17 @@ export namespace google {
                     /** DatasourceReferences looker. */
                     public looker?: (google.cloud.geminidataanalytics.v1alpha.ILookerExploreReferences|null);
 
+                    /** DatasourceReferences alloydb. */
+                    public alloydb?: (google.cloud.geminidataanalytics.v1alpha.IAlloyDbReference|null);
+
+                    /** DatasourceReferences spannerReference. */
+                    public spannerReference?: (google.cloud.geminidataanalytics.v1alpha.ISpannerReference|null);
+
+                    /** DatasourceReferences cloudSqlReference. */
+                    public cloudSqlReference?: (google.cloud.geminidataanalytics.v1alpha.ICloudSqlReference|null);
+
                     /** DatasourceReferences references. */
-                    public references?: ("bq"|"studio"|"looker");
+                    public references?: ("bq"|"studio"|"looker"|"alloydb"|"spannerReference"|"cloudSqlReference");
 
                     /**
                      * Creates a new DatasourceReferences instance using the specified properties.
@@ -2151,6 +2266,716 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an AlloyDbReference. */
+                interface IAlloyDbReference {
+
+                    /** AlloyDbReference databaseReference */
+                    databaseReference?: (google.cloud.geminidataanalytics.v1alpha.IAlloyDbDatabaseReference|null);
+
+                    /** AlloyDbReference agentContextReference */
+                    agentContextReference?: (google.cloud.geminidataanalytics.v1alpha.IAgentContextReference|null);
+                }
+
+                /** Represents an AlloyDbReference. */
+                class AlloyDbReference implements IAlloyDbReference {
+
+                    /**
+                     * Constructs a new AlloyDbReference.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1alpha.IAlloyDbReference);
+
+                    /** AlloyDbReference databaseReference. */
+                    public databaseReference?: (google.cloud.geminidataanalytics.v1alpha.IAlloyDbDatabaseReference|null);
+
+                    /** AlloyDbReference agentContextReference. */
+                    public agentContextReference?: (google.cloud.geminidataanalytics.v1alpha.IAgentContextReference|null);
+
+                    /**
+                     * Creates a new AlloyDbReference instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AlloyDbReference instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1alpha.IAlloyDbReference): google.cloud.geminidataanalytics.v1alpha.AlloyDbReference;
+
+                    /**
+                     * Encodes the specified AlloyDbReference message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.AlloyDbReference.verify|verify} messages.
+                     * @param message AlloyDbReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1alpha.IAlloyDbReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AlloyDbReference message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.AlloyDbReference.verify|verify} messages.
+                     * @param message AlloyDbReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1alpha.IAlloyDbReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AlloyDbReference message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AlloyDbReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1alpha.AlloyDbReference;
+
+                    /**
+                     * Decodes an AlloyDbReference message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AlloyDbReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1alpha.AlloyDbReference;
+
+                    /**
+                     * Verifies an AlloyDbReference message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AlloyDbReference message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AlloyDbReference
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1alpha.AlloyDbReference;
+
+                    /**
+                     * Creates a plain object from an AlloyDbReference message. Also converts values to other types if specified.
+                     * @param message AlloyDbReference
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1alpha.AlloyDbReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AlloyDbReference to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AlloyDbReference
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AlloyDbDatabaseReference. */
+                interface IAlloyDbDatabaseReference {
+
+                    /** AlloyDbDatabaseReference projectId */
+                    projectId?: (string|null);
+
+                    /** AlloyDbDatabaseReference region */
+                    region?: (string|null);
+
+                    /** AlloyDbDatabaseReference clusterId */
+                    clusterId?: (string|null);
+
+                    /** AlloyDbDatabaseReference instanceId */
+                    instanceId?: (string|null);
+
+                    /** AlloyDbDatabaseReference databaseId */
+                    databaseId?: (string|null);
+
+                    /** AlloyDbDatabaseReference tableIds */
+                    tableIds?: (string[]|null);
+                }
+
+                /** Represents an AlloyDbDatabaseReference. */
+                class AlloyDbDatabaseReference implements IAlloyDbDatabaseReference {
+
+                    /**
+                     * Constructs a new AlloyDbDatabaseReference.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1alpha.IAlloyDbDatabaseReference);
+
+                    /** AlloyDbDatabaseReference projectId. */
+                    public projectId: string;
+
+                    /** AlloyDbDatabaseReference region. */
+                    public region: string;
+
+                    /** AlloyDbDatabaseReference clusterId. */
+                    public clusterId: string;
+
+                    /** AlloyDbDatabaseReference instanceId. */
+                    public instanceId: string;
+
+                    /** AlloyDbDatabaseReference databaseId. */
+                    public databaseId: string;
+
+                    /** AlloyDbDatabaseReference tableIds. */
+                    public tableIds: string[];
+
+                    /**
+                     * Creates a new AlloyDbDatabaseReference instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AlloyDbDatabaseReference instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1alpha.IAlloyDbDatabaseReference): google.cloud.geminidataanalytics.v1alpha.AlloyDbDatabaseReference;
+
+                    /**
+                     * Encodes the specified AlloyDbDatabaseReference message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.AlloyDbDatabaseReference.verify|verify} messages.
+                     * @param message AlloyDbDatabaseReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1alpha.IAlloyDbDatabaseReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AlloyDbDatabaseReference message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.AlloyDbDatabaseReference.verify|verify} messages.
+                     * @param message AlloyDbDatabaseReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1alpha.IAlloyDbDatabaseReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AlloyDbDatabaseReference message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AlloyDbDatabaseReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1alpha.AlloyDbDatabaseReference;
+
+                    /**
+                     * Decodes an AlloyDbDatabaseReference message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AlloyDbDatabaseReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1alpha.AlloyDbDatabaseReference;
+
+                    /**
+                     * Verifies an AlloyDbDatabaseReference message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AlloyDbDatabaseReference message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AlloyDbDatabaseReference
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1alpha.AlloyDbDatabaseReference;
+
+                    /**
+                     * Creates a plain object from an AlloyDbDatabaseReference message. Also converts values to other types if specified.
+                     * @param message AlloyDbDatabaseReference
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1alpha.AlloyDbDatabaseReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AlloyDbDatabaseReference to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AlloyDbDatabaseReference
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SpannerReference. */
+                interface ISpannerReference {
+
+                    /** SpannerReference databaseReference */
+                    databaseReference?: (google.cloud.geminidataanalytics.v1alpha.ISpannerDatabaseReference|null);
+
+                    /** SpannerReference agentContextReference */
+                    agentContextReference?: (google.cloud.geminidataanalytics.v1alpha.IAgentContextReference|null);
+                }
+
+                /** Represents a SpannerReference. */
+                class SpannerReference implements ISpannerReference {
+
+                    /**
+                     * Constructs a new SpannerReference.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1alpha.ISpannerReference);
+
+                    /** SpannerReference databaseReference. */
+                    public databaseReference?: (google.cloud.geminidataanalytics.v1alpha.ISpannerDatabaseReference|null);
+
+                    /** SpannerReference agentContextReference. */
+                    public agentContextReference?: (google.cloud.geminidataanalytics.v1alpha.IAgentContextReference|null);
+
+                    /**
+                     * Creates a new SpannerReference instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SpannerReference instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1alpha.ISpannerReference): google.cloud.geminidataanalytics.v1alpha.SpannerReference;
+
+                    /**
+                     * Encodes the specified SpannerReference message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.SpannerReference.verify|verify} messages.
+                     * @param message SpannerReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1alpha.ISpannerReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SpannerReference message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.SpannerReference.verify|verify} messages.
+                     * @param message SpannerReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1alpha.ISpannerReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SpannerReference message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SpannerReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1alpha.SpannerReference;
+
+                    /**
+                     * Decodes a SpannerReference message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SpannerReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1alpha.SpannerReference;
+
+                    /**
+                     * Verifies a SpannerReference message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SpannerReference message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SpannerReference
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1alpha.SpannerReference;
+
+                    /**
+                     * Creates a plain object from a SpannerReference message. Also converts values to other types if specified.
+                     * @param message SpannerReference
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1alpha.SpannerReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SpannerReference to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SpannerReference
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SpannerDatabaseReference. */
+                interface ISpannerDatabaseReference {
+
+                    /** SpannerDatabaseReference engine */
+                    engine?: (google.cloud.geminidataanalytics.v1alpha.SpannerDatabaseReference.Engine|keyof typeof google.cloud.geminidataanalytics.v1alpha.SpannerDatabaseReference.Engine|null);
+
+                    /** SpannerDatabaseReference projectId */
+                    projectId?: (string|null);
+
+                    /** SpannerDatabaseReference region */
+                    region?: (string|null);
+
+                    /** SpannerDatabaseReference instanceId */
+                    instanceId?: (string|null);
+
+                    /** SpannerDatabaseReference databaseId */
+                    databaseId?: (string|null);
+
+                    /** SpannerDatabaseReference tableIds */
+                    tableIds?: (string[]|null);
+                }
+
+                /** Represents a SpannerDatabaseReference. */
+                class SpannerDatabaseReference implements ISpannerDatabaseReference {
+
+                    /**
+                     * Constructs a new SpannerDatabaseReference.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1alpha.ISpannerDatabaseReference);
+
+                    /** SpannerDatabaseReference engine. */
+                    public engine: (google.cloud.geminidataanalytics.v1alpha.SpannerDatabaseReference.Engine|keyof typeof google.cloud.geminidataanalytics.v1alpha.SpannerDatabaseReference.Engine);
+
+                    /** SpannerDatabaseReference projectId. */
+                    public projectId: string;
+
+                    /** SpannerDatabaseReference region. */
+                    public region: string;
+
+                    /** SpannerDatabaseReference instanceId. */
+                    public instanceId: string;
+
+                    /** SpannerDatabaseReference databaseId. */
+                    public databaseId: string;
+
+                    /** SpannerDatabaseReference tableIds. */
+                    public tableIds: string[];
+
+                    /**
+                     * Creates a new SpannerDatabaseReference instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SpannerDatabaseReference instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1alpha.ISpannerDatabaseReference): google.cloud.geminidataanalytics.v1alpha.SpannerDatabaseReference;
+
+                    /**
+                     * Encodes the specified SpannerDatabaseReference message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.SpannerDatabaseReference.verify|verify} messages.
+                     * @param message SpannerDatabaseReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1alpha.ISpannerDatabaseReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SpannerDatabaseReference message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.SpannerDatabaseReference.verify|verify} messages.
+                     * @param message SpannerDatabaseReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1alpha.ISpannerDatabaseReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SpannerDatabaseReference message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SpannerDatabaseReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1alpha.SpannerDatabaseReference;
+
+                    /**
+                     * Decodes a SpannerDatabaseReference message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SpannerDatabaseReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1alpha.SpannerDatabaseReference;
+
+                    /**
+                     * Verifies a SpannerDatabaseReference message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SpannerDatabaseReference message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SpannerDatabaseReference
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1alpha.SpannerDatabaseReference;
+
+                    /**
+                     * Creates a plain object from a SpannerDatabaseReference message. Also converts values to other types if specified.
+                     * @param message SpannerDatabaseReference
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1alpha.SpannerDatabaseReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SpannerDatabaseReference to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SpannerDatabaseReference
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SpannerDatabaseReference {
+
+                    /** Engine enum. */
+                    enum Engine {
+                        ENGINE_UNSPECIFIED = 0,
+                        GOOGLE_SQL = 1,
+                        POSTGRESQL = 2
+                    }
+                }
+
+                /** Properties of a CloudSqlReference. */
+                interface ICloudSqlReference {
+
+                    /** CloudSqlReference databaseReference */
+                    databaseReference?: (google.cloud.geminidataanalytics.v1alpha.ICloudSqlDatabaseReference|null);
+
+                    /** CloudSqlReference agentContextReference */
+                    agentContextReference?: (google.cloud.geminidataanalytics.v1alpha.IAgentContextReference|null);
+                }
+
+                /** Represents a CloudSqlReference. */
+                class CloudSqlReference implements ICloudSqlReference {
+
+                    /**
+                     * Constructs a new CloudSqlReference.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1alpha.ICloudSqlReference);
+
+                    /** CloudSqlReference databaseReference. */
+                    public databaseReference?: (google.cloud.geminidataanalytics.v1alpha.ICloudSqlDatabaseReference|null);
+
+                    /** CloudSqlReference agentContextReference. */
+                    public agentContextReference?: (google.cloud.geminidataanalytics.v1alpha.IAgentContextReference|null);
+
+                    /**
+                     * Creates a new CloudSqlReference instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CloudSqlReference instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1alpha.ICloudSqlReference): google.cloud.geminidataanalytics.v1alpha.CloudSqlReference;
+
+                    /**
+                     * Encodes the specified CloudSqlReference message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.CloudSqlReference.verify|verify} messages.
+                     * @param message CloudSqlReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1alpha.ICloudSqlReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CloudSqlReference message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.CloudSqlReference.verify|verify} messages.
+                     * @param message CloudSqlReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1alpha.ICloudSqlReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CloudSqlReference message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CloudSqlReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1alpha.CloudSqlReference;
+
+                    /**
+                     * Decodes a CloudSqlReference message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CloudSqlReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1alpha.CloudSqlReference;
+
+                    /**
+                     * Verifies a CloudSqlReference message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CloudSqlReference message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CloudSqlReference
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1alpha.CloudSqlReference;
+
+                    /**
+                     * Creates a plain object from a CloudSqlReference message. Also converts values to other types if specified.
+                     * @param message CloudSqlReference
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1alpha.CloudSqlReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CloudSqlReference to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CloudSqlReference
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CloudSqlDatabaseReference. */
+                interface ICloudSqlDatabaseReference {
+
+                    /** CloudSqlDatabaseReference engine */
+                    engine?: (google.cloud.geminidataanalytics.v1alpha.CloudSqlDatabaseReference.Engine|keyof typeof google.cloud.geminidataanalytics.v1alpha.CloudSqlDatabaseReference.Engine|null);
+
+                    /** CloudSqlDatabaseReference projectId */
+                    projectId?: (string|null);
+
+                    /** CloudSqlDatabaseReference region */
+                    region?: (string|null);
+
+                    /** CloudSqlDatabaseReference instanceId */
+                    instanceId?: (string|null);
+
+                    /** CloudSqlDatabaseReference databaseId */
+                    databaseId?: (string|null);
+
+                    /** CloudSqlDatabaseReference tableIds */
+                    tableIds?: (string[]|null);
+                }
+
+                /** Represents a CloudSqlDatabaseReference. */
+                class CloudSqlDatabaseReference implements ICloudSqlDatabaseReference {
+
+                    /**
+                     * Constructs a new CloudSqlDatabaseReference.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1alpha.ICloudSqlDatabaseReference);
+
+                    /** CloudSqlDatabaseReference engine. */
+                    public engine: (google.cloud.geminidataanalytics.v1alpha.CloudSqlDatabaseReference.Engine|keyof typeof google.cloud.geminidataanalytics.v1alpha.CloudSqlDatabaseReference.Engine);
+
+                    /** CloudSqlDatabaseReference projectId. */
+                    public projectId: string;
+
+                    /** CloudSqlDatabaseReference region. */
+                    public region: string;
+
+                    /** CloudSqlDatabaseReference instanceId. */
+                    public instanceId: string;
+
+                    /** CloudSqlDatabaseReference databaseId. */
+                    public databaseId: string;
+
+                    /** CloudSqlDatabaseReference tableIds. */
+                    public tableIds: string[];
+
+                    /**
+                     * Creates a new CloudSqlDatabaseReference instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CloudSqlDatabaseReference instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1alpha.ICloudSqlDatabaseReference): google.cloud.geminidataanalytics.v1alpha.CloudSqlDatabaseReference;
+
+                    /**
+                     * Encodes the specified CloudSqlDatabaseReference message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.CloudSqlDatabaseReference.verify|verify} messages.
+                     * @param message CloudSqlDatabaseReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1alpha.ICloudSqlDatabaseReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CloudSqlDatabaseReference message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.CloudSqlDatabaseReference.verify|verify} messages.
+                     * @param message CloudSqlDatabaseReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1alpha.ICloudSqlDatabaseReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CloudSqlDatabaseReference message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CloudSqlDatabaseReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1alpha.CloudSqlDatabaseReference;
+
+                    /**
+                     * Decodes a CloudSqlDatabaseReference message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CloudSqlDatabaseReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1alpha.CloudSqlDatabaseReference;
+
+                    /**
+                     * Verifies a CloudSqlDatabaseReference message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CloudSqlDatabaseReference message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CloudSqlDatabaseReference
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1alpha.CloudSqlDatabaseReference;
+
+                    /**
+                     * Creates a plain object from a CloudSqlDatabaseReference message. Also converts values to other types if specified.
+                     * @param message CloudSqlDatabaseReference
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1alpha.CloudSqlDatabaseReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CloudSqlDatabaseReference to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CloudSqlDatabaseReference
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace CloudSqlDatabaseReference {
+
+                    /** Engine enum. */
+                    enum Engine {
+                        ENGINE_UNSPECIFIED = 0,
+                        POSTGRESQL = 1,
+                        MYSQL = 2
+                    }
+                }
+
                 /** Properties of a LookerExploreReferences. */
                 interface ILookerExploreReferences {
 
@@ -2493,6 +3318,15 @@ export namespace google {
                     /** Datasource lookerExploreReference */
                     lookerExploreReference?: (google.cloud.geminidataanalytics.v1alpha.ILookerExploreReference|null);
 
+                    /** Datasource alloyDbReference */
+                    alloyDbReference?: (google.cloud.geminidataanalytics.v1alpha.IAlloyDbReference|null);
+
+                    /** Datasource spannerReference */
+                    spannerReference?: (google.cloud.geminidataanalytics.v1alpha.ISpannerReference|null);
+
+                    /** Datasource cloudSqlReference */
+                    cloudSqlReference?: (google.cloud.geminidataanalytics.v1alpha.ICloudSqlReference|null);
+
                     /** Datasource schema */
                     schema?: (google.cloud.geminidataanalytics.v1alpha.ISchema|null);
 
@@ -2518,6 +3352,15 @@ export namespace google {
                     /** Datasource lookerExploreReference. */
                     public lookerExploreReference?: (google.cloud.geminidataanalytics.v1alpha.ILookerExploreReference|null);
 
+                    /** Datasource alloyDbReference. */
+                    public alloyDbReference?: (google.cloud.geminidataanalytics.v1alpha.IAlloyDbReference|null);
+
+                    /** Datasource spannerReference. */
+                    public spannerReference?: (google.cloud.geminidataanalytics.v1alpha.ISpannerReference|null);
+
+                    /** Datasource cloudSqlReference. */
+                    public cloudSqlReference?: (google.cloud.geminidataanalytics.v1alpha.ICloudSqlReference|null);
+
                     /** Datasource schema. */
                     public schema?: (google.cloud.geminidataanalytics.v1alpha.ISchema|null);
 
@@ -2525,7 +3368,7 @@ export namespace google {
                     public structSchema?: (google.protobuf.IStruct|null);
 
                     /** Datasource reference. */
-                    public reference?: ("bigqueryTableReference"|"studioDatasourceId"|"lookerExploreReference");
+                    public reference?: ("bigqueryTableReference"|"studioDatasourceId"|"lookerExploreReference"|"alloyDbReference"|"spannerReference"|"cloudSqlReference");
 
                     /**
                      * Creates a new Datasource instance using the specified properties.
