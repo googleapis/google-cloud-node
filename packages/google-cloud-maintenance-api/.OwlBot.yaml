@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-  - source: /google/cloud/maintenance/api/google-cloud-maintenance-api-nodejs
-    dest: /owl-bot-staging/google-cloud-maintenance-api
+    - source: /google/cloud/maintenance/api/google-cloud-maintenance-api-nodejs
+      dest: /owl-bot-staging/google-cloud-maintenance-api
 
 api-name: maintenance
