@@ -484,6 +484,10 @@ export class SessionsClient {
  *   Required. The input specification.
  * @param {google.cloud.dialogflow.cx.v3beta1.OutputAudioConfig} request.outputAudioConfig
  *   Instructs the speech synthesizer how to generate the output audio.
+ * @param {google.cloud.dialogflow.cx.v3beta1.DetectIntentResponseView} [request.responseView]
+ *   Optional. Specifies which fields in the
+ *   {@link protos.google.cloud.dialogflow.cx.v3beta1.QueryResult|QueryResult} to return. If
+ *   not set, the default is DETECT_INTENT_RESPONSE_VIEW_FULL.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -926,6 +930,10 @@ export class SessionsClient {
  *   Required. The input specification.
  * @param {google.cloud.dialogflow.cx.v3beta1.OutputAudioConfig} request.outputAudioConfig
  *   Instructs the speech synthesizer how to generate the output audio.
+ * @param {google.cloud.dialogflow.cx.v3beta1.DetectIntentResponseView} [request.responseView]
+ *   Optional. Specifies which fields in the
+ *   {@link protos.google.cloud.dialogflow.cx.v3beta1.QueryResult|QueryResult} to return. If
+ *   not set, the default is DETECT_INTENT_RESPONSE_VIEW_FULL.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}

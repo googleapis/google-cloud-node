@@ -4350,7 +4350,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 80,
+          "end": 86,
           "type": "FULL"
         }
       ],
@@ -4374,6 +4374,10 @@
           {
             "name": "output_audio_config",
             "type": ".google.cloud.dialogflow.cx.v3beta1.OutputAudioConfig"
+          },
+          {
+            "name": "response_view",
+            "type": ".google.cloud.dialogflow.cx.v3beta1.DetectIntentResponseView"
           }
         ],
         "resultType": ".google.cloud.dialogflow.cx.v3beta1.DetectIntentResponse",
@@ -4402,7 +4406,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 82,
+          "end": 88,
           "type": "FULL"
         }
       ],
@@ -4426,6 +4430,10 @@
           {
             "name": "output_audio_config",
             "type": ".google.cloud.dialogflow.cx.v3beta1.OutputAudioConfig"
+          },
+          {
+            "name": "response_view",
+            "type": ".google.cloud.dialogflow.cx.v3beta1.DetectIntentResponseView"
           }
         ],
         "resultType": ".google.cloud.dialogflow.cx.v3beta1.DetectIntentResponse",
@@ -4454,7 +4462,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 95,
+          "end": 101,
           "type": "FULL"
         }
       ],
@@ -4486,6 +4494,10 @@
           {
             "name": "enable_debugging_info",
             "type": "TYPE_BOOL"
+          },
+          {
+            "name": "response_view",
+            "type": ".google.cloud.dialogflow.cx.v3beta1.DetectIntentResponseView"
           }
         ],
         "resultType": ".google.cloud.dialogflow.cx.v3beta1.StreamingDetectIntentResponse",
