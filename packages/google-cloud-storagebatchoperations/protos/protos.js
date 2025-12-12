@@ -2330,6 +2330,7 @@
                          * @property {google.cloud.storagebatchoperations.v1.ICounters|null} [counters] Job counters
                          * @property {Array.<google.cloud.storagebatchoperations.v1.IErrorSummary>|null} [errorSummaries] Job errorSummaries
                          * @property {google.cloud.storagebatchoperations.v1.Job.State|null} [state] Job state
+                         * @property {boolean|null} [dryRun] Job dryRun
                          */
     
                         /**
@@ -2460,6 +2461,14 @@
                          */
                         Job.prototype.state = 0;
     
+                        /**
+                         * Job dryRun.
+                         * @member {boolean} dryRun
+                         * @memberof google.cloud.storagebatchoperations.v1.Job
+                         * @instance
+                         */
+                        Job.prototype.dryRun = false;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -2538,6 +2547,8 @@
                                 $root.google.cloud.storagebatchoperations.v1.BucketList.encode(message.bucketList, writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
                             if (message.rewriteObject != null && Object.hasOwnProperty.call(message, "rewriteObject"))
                                 $root.google.cloud.storagebatchoperations.v1.RewriteObject.encode(message.rewriteObject, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
+                            if (message.dryRun != null && Object.hasOwnProperty.call(message, "dryRun"))
+                                writer.uint32(/* id 22, wireType 0 =*/176).bool(message.dryRun);
                             return writer;
                         };
     
@@ -2630,6 +2641,10 @@
                                     }
                                 case 15: {
                                         message.state = reader.int32();
+                                        break;
+                                    }
+                                case 22: {
+                                        message.dryRun = reader.bool();
                                         break;
                                     }
                                 default:
@@ -2765,6 +2780,9 @@
                                 case 4:
                                     break;
                                 }
+                            if (message.dryRun != null && message.hasOwnProperty("dryRun"))
+                                if (typeof message.dryRun !== "boolean")
+                                    return "dryRun: boolean expected";
                             return null;
                         };
     
@@ -2872,6 +2890,8 @@
                                 message.state = 4;
                                 break;
                             }
+                            if (object.dryRun != null)
+                                message.dryRun = Boolean(object.dryRun);
                             return message;
                         };
     
@@ -2899,6 +2919,7 @@
                                 object.completeTime = null;
                                 object.counters = null;
                                 object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.dryRun = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -2946,6 +2967,8 @@
                                 if (options.oneofs)
                                     object.transformation = "rewriteObject";
                             }
+                            if (message.dryRun != null && message.hasOwnProperty("dryRun"))
+                                object.dryRun = message.dryRun;
                             return object;
                         };
     
@@ -4654,6 +4677,297 @@
                         return RewriteObject;
                     })();
     
+                    v1.ObjectRetention = (function() {
+    
+                        /**
+                         * Properties of an ObjectRetention.
+                         * @memberof google.cloud.storagebatchoperations.v1
+                         * @interface IObjectRetention
+                         * @property {string|null} [retainUntilTime] ObjectRetention retainUntilTime
+                         * @property {google.cloud.storagebatchoperations.v1.ObjectRetention.RetentionMode|null} [retentionMode] ObjectRetention retentionMode
+                         */
+    
+                        /**
+                         * Constructs a new ObjectRetention.
+                         * @memberof google.cloud.storagebatchoperations.v1
+                         * @classdesc Represents an ObjectRetention.
+                         * @implements IObjectRetention
+                         * @constructor
+                         * @param {google.cloud.storagebatchoperations.v1.IObjectRetention=} [properties] Properties to set
+                         */
+                        function ObjectRetention(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ObjectRetention retainUntilTime.
+                         * @member {string|null|undefined} retainUntilTime
+                         * @memberof google.cloud.storagebatchoperations.v1.ObjectRetention
+                         * @instance
+                         */
+                        ObjectRetention.prototype.retainUntilTime = null;
+    
+                        /**
+                         * ObjectRetention retentionMode.
+                         * @member {google.cloud.storagebatchoperations.v1.ObjectRetention.RetentionMode|null|undefined} retentionMode
+                         * @memberof google.cloud.storagebatchoperations.v1.ObjectRetention
+                         * @instance
+                         */
+                        ObjectRetention.prototype.retentionMode = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(ObjectRetention.prototype, "_retainUntilTime", {
+                            get: $util.oneOfGetter($oneOfFields = ["retainUntilTime"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(ObjectRetention.prototype, "_retentionMode", {
+                            get: $util.oneOfGetter($oneOfFields = ["retentionMode"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ObjectRetention instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.storagebatchoperations.v1.ObjectRetention
+                         * @static
+                         * @param {google.cloud.storagebatchoperations.v1.IObjectRetention=} [properties] Properties to set
+                         * @returns {google.cloud.storagebatchoperations.v1.ObjectRetention} ObjectRetention instance
+                         */
+                        ObjectRetention.create = function create(properties) {
+                            return new ObjectRetention(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ObjectRetention message. Does not implicitly {@link google.cloud.storagebatchoperations.v1.ObjectRetention.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.storagebatchoperations.v1.ObjectRetention
+                         * @static
+                         * @param {google.cloud.storagebatchoperations.v1.IObjectRetention} message ObjectRetention message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ObjectRetention.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.retainUntilTime != null && Object.hasOwnProperty.call(message, "retainUntilTime"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.retainUntilTime);
+                            if (message.retentionMode != null && Object.hasOwnProperty.call(message, "retentionMode"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.retentionMode);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ObjectRetention message, length delimited. Does not implicitly {@link google.cloud.storagebatchoperations.v1.ObjectRetention.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.storagebatchoperations.v1.ObjectRetention
+                         * @static
+                         * @param {google.cloud.storagebatchoperations.v1.IObjectRetention} message ObjectRetention message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ObjectRetention.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ObjectRetention message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.storagebatchoperations.v1.ObjectRetention
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.storagebatchoperations.v1.ObjectRetention} ObjectRetention
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ObjectRetention.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.storagebatchoperations.v1.ObjectRetention();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.retainUntilTime = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.retentionMode = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ObjectRetention message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.storagebatchoperations.v1.ObjectRetention
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.storagebatchoperations.v1.ObjectRetention} ObjectRetention
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ObjectRetention.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ObjectRetention message.
+                         * @function verify
+                         * @memberof google.cloud.storagebatchoperations.v1.ObjectRetention
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ObjectRetention.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.retainUntilTime != null && message.hasOwnProperty("retainUntilTime")) {
+                                properties._retainUntilTime = 1;
+                                if (!$util.isString(message.retainUntilTime))
+                                    return "retainUntilTime: string expected";
+                            }
+                            if (message.retentionMode != null && message.hasOwnProperty("retentionMode")) {
+                                properties._retentionMode = 1;
+                                switch (message.retentionMode) {
+                                default:
+                                    return "retentionMode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ObjectRetention message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.storagebatchoperations.v1.ObjectRetention
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.storagebatchoperations.v1.ObjectRetention} ObjectRetention
+                         */
+                        ObjectRetention.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.storagebatchoperations.v1.ObjectRetention)
+                                return object;
+                            var message = new $root.google.cloud.storagebatchoperations.v1.ObjectRetention();
+                            if (object.retainUntilTime != null)
+                                message.retainUntilTime = String(object.retainUntilTime);
+                            switch (object.retentionMode) {
+                            default:
+                                if (typeof object.retentionMode === "number") {
+                                    message.retentionMode = object.retentionMode;
+                                    break;
+                                }
+                                break;
+                            case "RETENTION_MODE_UNSPECIFIED":
+                            case 0:
+                                message.retentionMode = 0;
+                                break;
+                            case "LOCKED":
+                            case 1:
+                                message.retentionMode = 1;
+                                break;
+                            case "UNLOCKED":
+                            case 2:
+                                message.retentionMode = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ObjectRetention message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.storagebatchoperations.v1.ObjectRetention
+                         * @static
+                         * @param {google.cloud.storagebatchoperations.v1.ObjectRetention} message ObjectRetention
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ObjectRetention.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.retainUntilTime != null && message.hasOwnProperty("retainUntilTime")) {
+                                object.retainUntilTime = message.retainUntilTime;
+                                if (options.oneofs)
+                                    object._retainUntilTime = "retainUntilTime";
+                            }
+                            if (message.retentionMode != null && message.hasOwnProperty("retentionMode")) {
+                                object.retentionMode = options.enums === String ? $root.google.cloud.storagebatchoperations.v1.ObjectRetention.RetentionMode[message.retentionMode] === undefined ? message.retentionMode : $root.google.cloud.storagebatchoperations.v1.ObjectRetention.RetentionMode[message.retentionMode] : message.retentionMode;
+                                if (options.oneofs)
+                                    object._retentionMode = "retentionMode";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ObjectRetention to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.storagebatchoperations.v1.ObjectRetention
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ObjectRetention.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ObjectRetention
+                         * @function getTypeUrl
+                         * @memberof google.cloud.storagebatchoperations.v1.ObjectRetention
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ObjectRetention.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.storagebatchoperations.v1.ObjectRetention";
+                        };
+    
+                        /**
+                         * RetentionMode enum.
+                         * @name google.cloud.storagebatchoperations.v1.ObjectRetention.RetentionMode
+                         * @enum {number}
+                         * @property {number} RETENTION_MODE_UNSPECIFIED=0 RETENTION_MODE_UNSPECIFIED value
+                         * @property {number} LOCKED=1 LOCKED value
+                         * @property {number} UNLOCKED=2 UNLOCKED value
+                         */
+                        ObjectRetention.RetentionMode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "RETENTION_MODE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "LOCKED"] = 1;
+                            values[valuesById[2] = "UNLOCKED"] = 2;
+                            return values;
+                        })();
+    
+                        return ObjectRetention;
+                    })();
+    
                     v1.PutMetadata = (function() {
     
                         /**
@@ -4667,6 +4981,7 @@
                          * @property {string|null} [cacheControl] PutMetadata cacheControl
                          * @property {string|null} [customTime] PutMetadata customTime
                          * @property {Object.<string,string>|null} [customMetadata] PutMetadata customMetadata
+                         * @property {google.cloud.storagebatchoperations.v1.IObjectRetention|null} [objectRetention] PutMetadata objectRetention
                          */
     
                         /**
@@ -4741,6 +5056,14 @@
                          */
                         PutMetadata.prototype.customMetadata = $util.emptyObject;
     
+                        /**
+                         * PutMetadata objectRetention.
+                         * @member {google.cloud.storagebatchoperations.v1.IObjectRetention|null|undefined} objectRetention
+                         * @memberof google.cloud.storagebatchoperations.v1.PutMetadata
+                         * @instance
+                         */
+                        PutMetadata.prototype.objectRetention = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -4777,6 +5100,12 @@
                         // Virtual OneOf for proto3 optional field
                         Object.defineProperty(PutMetadata.prototype, "_customTime", {
                             get: $util.oneOfGetter($oneOfFields = ["customTime"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(PutMetadata.prototype, "_objectRetention", {
+                            get: $util.oneOfGetter($oneOfFields = ["objectRetention"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -4819,6 +5148,8 @@
                             if (message.customMetadata != null && Object.hasOwnProperty.call(message, "customMetadata"))
                                 for (var keys = Object.keys(message.customMetadata), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 7, wireType 2 =*/58).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.customMetadata[keys[i]]).ldelim();
+                            if (message.objectRetention != null && Object.hasOwnProperty.call(message, "objectRetention"))
+                                $root.google.cloud.storagebatchoperations.v1.ObjectRetention.encode(message.objectRetention, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             return writer;
                         };
     
@@ -4902,6 +5233,10 @@
                                         message.customMetadata[key] = value;
                                         break;
                                     }
+                                case 8: {
+                                        message.objectRetention = $root.google.cloud.storagebatchoperations.v1.ObjectRetention.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -4976,6 +5311,14 @@
                                     if (!$util.isString(message.customMetadata[key[i]]))
                                         return "customMetadata: string{k:string} expected";
                             }
+                            if (message.objectRetention != null && message.hasOwnProperty("objectRetention")) {
+                                properties._objectRetention = 1;
+                                {
+                                    var error = $root.google.cloud.storagebatchoperations.v1.ObjectRetention.verify(message.objectRetention);
+                                    if (error)
+                                        return "objectRetention." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -5009,6 +5352,11 @@
                                 message.customMetadata = {};
                                 for (var keys = Object.keys(object.customMetadata), i = 0; i < keys.length; ++i)
                                     message.customMetadata[keys[i]] = String(object.customMetadata[keys[i]]);
+                            }
+                            if (object.objectRetention != null) {
+                                if (typeof object.objectRetention !== "object")
+                                    throw TypeError(".google.cloud.storagebatchoperations.v1.PutMetadata.objectRetention: object expected");
+                                message.objectRetention = $root.google.cloud.storagebatchoperations.v1.ObjectRetention.fromObject(object.objectRetention);
                             }
                             return message;
                         };
@@ -5063,6 +5411,11 @@
                                 object.customMetadata = {};
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.customMetadata[keys2[j]] = message.customMetadata[keys2[j]];
+                            }
+                            if (message.objectRetention != null && message.hasOwnProperty("objectRetention")) {
+                                object.objectRetention = $root.google.cloud.storagebatchoperations.v1.ObjectRetention.toObject(message.objectRetention, options);
+                                if (options.oneofs)
+                                    object._objectRetention = "objectRetention";
                             }
                             return object;
                         };
@@ -5732,6 +6085,7 @@
                          * @property {number|Long|null} [totalObjectCount] Counters totalObjectCount
                          * @property {number|Long|null} [succeededObjectCount] Counters succeededObjectCount
                          * @property {number|Long|null} [failedObjectCount] Counters failedObjectCount
+                         * @property {number|Long|null} [totalBytesFound] Counters totalBytesFound
                          */
     
                         /**
@@ -5774,6 +6128,23 @@
                         Counters.prototype.failedObjectCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
                         /**
+                         * Counters totalBytesFound.
+                         * @member {number|Long|null|undefined} totalBytesFound
+                         * @memberof google.cloud.storagebatchoperations.v1.Counters
+                         * @instance
+                         */
+                        Counters.prototype.totalBytesFound = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Counters.prototype, "_totalBytesFound", {
+                            get: $util.oneOfGetter($oneOfFields = ["totalBytesFound"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new Counters instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.storagebatchoperations.v1.Counters
@@ -5803,6 +6174,8 @@
                                 writer.uint32(/* id 2, wireType 0 =*/16).int64(message.succeededObjectCount);
                             if (message.failedObjectCount != null && Object.hasOwnProperty.call(message, "failedObjectCount"))
                                 writer.uint32(/* id 3, wireType 0 =*/24).int64(message.failedObjectCount);
+                            if (message.totalBytesFound != null && Object.hasOwnProperty.call(message, "totalBytesFound"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int64(message.totalBytesFound);
                             return writer;
                         };
     
@@ -5851,6 +6224,10 @@
                                         message.failedObjectCount = reader.int64();
                                         break;
                                     }
+                                case 4: {
+                                        message.totalBytesFound = reader.int64();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -5886,6 +6263,7 @@
                         Counters.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.totalObjectCount != null && message.hasOwnProperty("totalObjectCount"))
                                 if (!$util.isInteger(message.totalObjectCount) && !(message.totalObjectCount && $util.isInteger(message.totalObjectCount.low) && $util.isInteger(message.totalObjectCount.high)))
                                     return "totalObjectCount: integer|Long expected";
@@ -5895,6 +6273,11 @@
                             if (message.failedObjectCount != null && message.hasOwnProperty("failedObjectCount"))
                                 if (!$util.isInteger(message.failedObjectCount) && !(message.failedObjectCount && $util.isInteger(message.failedObjectCount.low) && $util.isInteger(message.failedObjectCount.high)))
                                     return "failedObjectCount: integer|Long expected";
+                            if (message.totalBytesFound != null && message.hasOwnProperty("totalBytesFound")) {
+                                properties._totalBytesFound = 1;
+                                if (!$util.isInteger(message.totalBytesFound) && !(message.totalBytesFound && $util.isInteger(message.totalBytesFound.low) && $util.isInteger(message.totalBytesFound.high)))
+                                    return "totalBytesFound: integer|Long expected";
+                            }
                             return null;
                         };
     
@@ -5937,6 +6320,15 @@
                                     message.failedObjectCount = object.failedObjectCount;
                                 else if (typeof object.failedObjectCount === "object")
                                     message.failedObjectCount = new $util.LongBits(object.failedObjectCount.low >>> 0, object.failedObjectCount.high >>> 0).toNumber();
+                            if (object.totalBytesFound != null)
+                                if ($util.Long)
+                                    (message.totalBytesFound = $util.Long.fromValue(object.totalBytesFound)).unsigned = false;
+                                else if (typeof object.totalBytesFound === "string")
+                                    message.totalBytesFound = parseInt(object.totalBytesFound, 10);
+                                else if (typeof object.totalBytesFound === "number")
+                                    message.totalBytesFound = object.totalBytesFound;
+                                else if (typeof object.totalBytesFound === "object")
+                                    message.totalBytesFound = new $util.LongBits(object.totalBytesFound.low >>> 0, object.totalBytesFound.high >>> 0).toNumber();
                             return message;
                         };
     
@@ -5985,6 +6377,14 @@
                                     object.failedObjectCount = options.longs === String ? String(message.failedObjectCount) : message.failedObjectCount;
                                 else
                                     object.failedObjectCount = options.longs === String ? $util.Long.prototype.toString.call(message.failedObjectCount) : options.longs === Number ? new $util.LongBits(message.failedObjectCount.low >>> 0, message.failedObjectCount.high >>> 0).toNumber() : message.failedObjectCount;
+                            if (message.totalBytesFound != null && message.hasOwnProperty("totalBytesFound")) {
+                                if (typeof message.totalBytesFound === "number")
+                                    object.totalBytesFound = options.longs === String ? String(message.totalBytesFound) : message.totalBytesFound;
+                                else
+                                    object.totalBytesFound = options.longs === String ? $util.Long.prototype.toString.call(message.totalBytesFound) : options.longs === Number ? new $util.LongBits(message.totalBytesFound.low >>> 0, message.totalBytesFound.high >>> 0).toNumber() : message.totalBytesFound;
+                                if (options.oneofs)
+                                    object._totalBytesFound = "totalBytesFound";
+                            }
                             return object;
                         };
     
@@ -11358,6 +11758,265 @@
                 values[valuesById[7] = "NON_EMPTY_DEFAULT"] = 7;
                 values[valuesById[8] = "IDENTIFIER"] = 8;
                 return values;
+            })();
+    
+            api.FieldInfo = (function() {
+    
+                /**
+                 * Properties of a FieldInfo.
+                 * @memberof google.api
+                 * @interface IFieldInfo
+                 * @property {google.api.FieldInfo.Format|null} [format] FieldInfo format
+                 */
+    
+                /**
+                 * Constructs a new FieldInfo.
+                 * @memberof google.api
+                 * @classdesc Represents a FieldInfo.
+                 * @implements IFieldInfo
+                 * @constructor
+                 * @param {google.api.IFieldInfo=} [properties] Properties to set
+                 */
+                function FieldInfo(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * FieldInfo format.
+                 * @member {google.api.FieldInfo.Format} format
+                 * @memberof google.api.FieldInfo
+                 * @instance
+                 */
+                FieldInfo.prototype.format = 0;
+    
+                /**
+                 * Creates a new FieldInfo instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {google.api.IFieldInfo=} [properties] Properties to set
+                 * @returns {google.api.FieldInfo} FieldInfo instance
+                 */
+                FieldInfo.create = function create(properties) {
+                    return new FieldInfo(properties);
+                };
+    
+                /**
+                 * Encodes the specified FieldInfo message. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {google.api.IFieldInfo} message FieldInfo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldInfo.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.format != null && Object.hasOwnProperty.call(message, "format"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.format);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified FieldInfo message, length delimited. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {google.api.IFieldInfo} message FieldInfo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a FieldInfo message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.FieldInfo} FieldInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldInfo.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.FieldInfo();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.format = reader.int32();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a FieldInfo message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.FieldInfo} FieldInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldInfo.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a FieldInfo message.
+                 * @function verify
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                FieldInfo.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.format != null && message.hasOwnProperty("format"))
+                        switch (message.format) {
+                        default:
+                            return "format: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
+                            break;
+                        }
+                    return null;
+                };
+    
+                /**
+                 * Creates a FieldInfo message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.FieldInfo} FieldInfo
+                 */
+                FieldInfo.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.FieldInfo)
+                        return object;
+                    var message = new $root.google.api.FieldInfo();
+                    switch (object.format) {
+                    default:
+                        if (typeof object.format === "number") {
+                            message.format = object.format;
+                            break;
+                        }
+                        break;
+                    case "FORMAT_UNSPECIFIED":
+                    case 0:
+                        message.format = 0;
+                        break;
+                    case "UUID4":
+                    case 1:
+                        message.format = 1;
+                        break;
+                    case "IPV4":
+                    case 2:
+                        message.format = 2;
+                        break;
+                    case "IPV6":
+                    case 3:
+                        message.format = 3;
+                        break;
+                    case "IPV4_OR_IPV6":
+                    case 4:
+                        message.format = 4;
+                        break;
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a FieldInfo message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {google.api.FieldInfo} message FieldInfo
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                FieldInfo.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.format = options.enums === String ? "FORMAT_UNSPECIFIED" : 0;
+                    if (message.format != null && message.hasOwnProperty("format"))
+                        object.format = options.enums === String ? $root.google.api.FieldInfo.Format[message.format] === undefined ? message.format : $root.google.api.FieldInfo.Format[message.format] : message.format;
+                    return object;
+                };
+    
+                /**
+                 * Converts this FieldInfo to JSON.
+                 * @function toJSON
+                 * @memberof google.api.FieldInfo
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                FieldInfo.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FieldInfo
+                 * @function getTypeUrl
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FieldInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.FieldInfo";
+                };
+    
+                /**
+                 * Format enum.
+                 * @name google.api.FieldInfo.Format
+                 * @enum {number}
+                 * @property {number} FORMAT_UNSPECIFIED=0 FORMAT_UNSPECIFIED value
+                 * @property {number} UUID4=1 UUID4 value
+                 * @property {number} IPV4=2 IPV4 value
+                 * @property {number} IPV6=3 IPV6 value
+                 * @property {number} IPV4_OR_IPV6=4 IPV4_OR_IPV6 value
+                 */
+                FieldInfo.Format = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "FORMAT_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "UUID4"] = 1;
+                    values[valuesById[2] = "IPV4"] = 2;
+                    values[valuesById[3] = "IPV6"] = 3;
+                    values[valuesById[4] = "IPV4_OR_IPV6"] = 4;
+                    return values;
+                })();
+    
+                return FieldInfo;
             })();
     
             api.ResourceDescriptor = (function() {
@@ -18253,6 +18912,7 @@
                  * @property {google.protobuf.IFeatureSet|null} [features] FieldOptions features
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
+                 * @property {google.api.IFieldInfo|null} [".google.api.fieldInfo"] FieldOptions .google.api.fieldInfo
                  * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
                  */
     
@@ -18388,6 +19048,14 @@
                 FieldOptions.prototype[".google.api.fieldBehavior"] = $util.emptyArray;
     
                 /**
+                 * FieldOptions .google.api.fieldInfo.
+                 * @member {google.api.IFieldInfo|null|undefined} .google.api.fieldInfo
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype[".google.api.fieldInfo"] = null;
+    
+                /**
                  * FieldOptions .google.api.resourceReference.
                  * @member {google.api.IResourceReference|null|undefined} .google.api.resourceReference
                  * @memberof google.protobuf.FieldOptions
@@ -18453,6 +19121,8 @@
                             writer.uint32(/* id 1052, wireType 0 =*/8416).int32(message[".google.api.fieldBehavior"][i]);
                     if (message[".google.api.resourceReference"] != null && Object.hasOwnProperty.call(message, ".google.api.resourceReference"))
                         $root.google.api.ResourceReference.encode(message[".google.api.resourceReference"], writer.uint32(/* id 1055, wireType 2 =*/8442).fork()).ldelim();
+                    if (message[".google.api.fieldInfo"] != null && Object.hasOwnProperty.call(message, ".google.api.fieldInfo"))
+                        $root.google.api.FieldInfo.encode(message[".google.api.fieldInfo"], writer.uint32(/* id 291403980, wireType 2 =*/2331231842).fork()).ldelim();
                     return writer;
                 };
     
@@ -18561,6 +19231,10 @@
                                         message[".google.api.fieldBehavior"].push(reader.int32());
                                 } else
                                     message[".google.api.fieldBehavior"].push(reader.int32());
+                                break;
+                            }
+                        case 291403980: {
+                                message[".google.api.fieldInfo"] = $root.google.api.FieldInfo.decode(reader, reader.uint32());
                                 break;
                             }
                         case 1055: {
@@ -18708,6 +19382,11 @@
                             case 8:
                                 break;
                             }
+                    }
+                    if (message[".google.api.fieldInfo"] != null && message.hasOwnProperty(".google.api.fieldInfo")) {
+                        var error = $root.google.api.FieldInfo.verify(message[".google.api.fieldInfo"]);
+                        if (error)
+                            return ".google.api.fieldInfo." + error;
                     }
                     if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference")) {
                         var error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"]);
@@ -18928,6 +19607,11 @@
                                 break;
                             }
                     }
+                    if (object[".google.api.fieldInfo"] != null) {
+                        if (typeof object[".google.api.fieldInfo"] !== "object")
+                            throw TypeError(".google.protobuf.FieldOptions..google.api.fieldInfo: object expected");
+                        message[".google.api.fieldInfo"] = $root.google.api.FieldInfo.fromObject(object[".google.api.fieldInfo"]);
+                    }
                     if (object[".google.api.resourceReference"] != null) {
                         if (typeof object[".google.api.resourceReference"] !== "object")
                             throw TypeError(".google.protobuf.FieldOptions..google.api.resourceReference: object expected");
@@ -18967,6 +19651,7 @@
                         object.retention = options.enums === String ? "RETENTION_UNKNOWN" : 0;
                         object.features = null;
                         object[".google.api.resourceReference"] = null;
+                        object[".google.api.fieldInfo"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
                         object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] === undefined ? message.ctype : $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
@@ -19010,6 +19695,8 @@
                     }
                     if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
                         object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
+                    if (message[".google.api.fieldInfo"] != null && message.hasOwnProperty(".google.api.fieldInfo"))
+                        object[".google.api.fieldInfo"] = $root.google.api.FieldInfo.toObject(message[".google.api.fieldInfo"], options);
                     return object;
                 };
     

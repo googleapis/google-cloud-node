@@ -227,6 +227,7 @@
                           "type": "string",
                           "id": 4,
                           "options": {
+                            "(google.api.field_info).format": "UUID4",
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
@@ -246,6 +247,7 @@
                           "type": "string",
                           "id": 3,
                           "options": {
+                            "(google.api.field_info).format": "UUID4",
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
@@ -265,6 +267,7 @@
                           "type": "string",
                           "id": 2,
                           "options": {
+                            "(google.api.field_info).format": "UUID4",
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
@@ -425,6 +428,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "dryRun": {
+                          "type": "bool",
+                          "id": 22,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -561,6 +571,47 @@
                         }
                       }
                     },
+                    "ObjectRetention": {
+                      "oneofs": {
+                        "_retainUntilTime": {
+                          "oneof": [
+                            "retainUntilTime"
+                          ]
+                        },
+                        "_retentionMode": {
+                          "oneof": [
+                            "retentionMode"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "retainUntilTime": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
+                          }
+                        },
+                        "retentionMode": {
+                          "type": "RetentionMode",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "RetentionMode": {
+                          "values": {
+                            "RETENTION_MODE_UNSPECIFIED": 0,
+                            "LOCKED": 1,
+                            "UNLOCKED": 2
+                          }
+                        }
+                      }
+                    },
                     "PutMetadata": {
                       "oneofs": {
                         "_contentDisposition": {
@@ -591,6 +642,11 @@
                         "_customTime": {
                           "oneof": [
                             "customTime"
+                          ]
+                        },
+                        "_objectRetention": {
+                          "oneof": [
+                            "objectRetention"
                           ]
                         }
                       },
@@ -650,6 +706,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "objectRetention": {
+                          "type": "ObjectRetention",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },
@@ -699,6 +763,13 @@
                       }
                     },
                     "Counters": {
+                      "oneofs": {
+                        "_totalBytesFound": {
+                          "oneof": [
+                            "totalBytesFound"
+                          ]
+                        }
+                      },
                       "fields": {
                         "totalObjectCount": {
                           "type": "int64",
@@ -719,6 +790,14 @@
                           "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "totalBytesFound": {
+                          "type": "int64",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -1185,6 +1264,30 @@
                 "UNORDERED_LIST": 6,
                 "NON_EMPTY_DEFAULT": 7,
                 "IDENTIFIER": 8
+              }
+            },
+            "fieldInfo": {
+              "type": "google.api.FieldInfo",
+              "id": 291403980,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldInfo": {
+              "fields": {
+                "format": {
+                  "type": "Format",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Format": {
+                  "values": {
+                    "FORMAT_UNSPECIFIED": 0,
+                    "UUID4": 1,
+                    "IPV4": 2,
+                    "IPV6": 3,
+                    "IPV4_OR_IPV6": 4
+                  }
+                }
               }
             },
             "resourceReference": {
