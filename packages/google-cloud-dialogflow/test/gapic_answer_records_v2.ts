@@ -914,6 +914,60 @@ describe('v2.AnswerRecordsClient', () => {
             });
         });
 
+        describe('generatorEvaluation', async () => {
+            const fakePath = "/rendered/path/generatorEvaluation";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                generator: "generatorValue",
+                evaluation: "evaluationValue",
+            };
+            const client = new answerrecordsModule.v2.AnswerRecordsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.generatorEvaluationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.generatorEvaluationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('generatorEvaluationPath', () => {
+                const result = client.generatorEvaluationPath("projectValue", "locationValue", "generatorValue", "evaluationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.generatorEvaluationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromGeneratorEvaluationName', () => {
+                const result = client.matchProjectFromGeneratorEvaluationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.generatorEvaluationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromGeneratorEvaluationName', () => {
+                const result = client.matchLocationFromGeneratorEvaluationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.generatorEvaluationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchGeneratorFromGeneratorEvaluationName', () => {
+                const result = client.matchGeneratorFromGeneratorEvaluationName(fakePath);
+                assert.strictEqual(result, "generatorValue");
+                assert((client.pathTemplates.generatorEvaluationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEvaluationFromGeneratorEvaluationName', () => {
+                const result = client.matchEvaluationFromGeneratorEvaluationName(fakePath);
+                assert.strictEqual(result, "evaluationValue");
+                assert((client.pathTemplates.generatorEvaluationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('project', async () => {
             const fakePath = "/rendered/path/project";
             const expectedParameters = {
@@ -2696,6 +2750,98 @@ describe('v2.AnswerRecordsClient', () => {
                 const result = client.matchDocumentFromProjectLocationKnowledgeBaseDocumentName(fakePath);
                 assert.strictEqual(result, "documentValue");
                 assert((client.pathTemplates.projectLocationKnowledgeBaseDocumentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('sipTrunk', async () => {
+            const fakePath = "/rendered/path/sipTrunk";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                siptrunk: "siptrunkValue",
+            };
+            const client = new answerrecordsModule.v2.AnswerRecordsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.sipTrunkPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.sipTrunkPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('sipTrunkPath', () => {
+                const result = client.sipTrunkPath("projectValue", "locationValue", "siptrunkValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.sipTrunkPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromSipTrunkName', () => {
+                const result = client.matchProjectFromSipTrunkName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.sipTrunkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromSipTrunkName', () => {
+                const result = client.matchLocationFromSipTrunkName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.sipTrunkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSiptrunkFromSipTrunkName', () => {
+                const result = client.matchSiptrunkFromSipTrunkName(fakePath);
+                assert.strictEqual(result, "siptrunkValue");
+                assert((client.pathTemplates.sipTrunkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('tool', async () => {
+            const fakePath = "/rendered/path/tool";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                tool: "toolValue",
+            };
+            const client = new answerrecordsModule.v2.AnswerRecordsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.toolPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.toolPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('toolPath', () => {
+                const result = client.toolPath("projectValue", "locationValue", "toolValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.toolPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromToolName', () => {
+                const result = client.matchProjectFromToolName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.toolPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromToolName', () => {
+                const result = client.matchLocationFromToolName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.toolPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchToolFromToolName', () => {
+                const result = client.matchToolFromToolName(fakePath);
+                assert.strictEqual(result, "toolValue");
+                assert((client.pathTemplates.toolPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
