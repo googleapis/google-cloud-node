@@ -14,7 +14,6 @@
   },
   "dependencies": {
     "@google-cloud/channel": "^4.1.2",
-    "@google-cloud/local-auth": "^3.0.0",
     "google-auth-library": "^10.0.0",
     "google-gax": "^5.0.0",
     "open": "^8.0.0",
