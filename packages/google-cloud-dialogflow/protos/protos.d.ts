@@ -52226,6 +52226,9 @@ export namespace google {
 
                     /** AgentCoachingInstruction duplicateCheckResult */
                     duplicateCheckResult?: (google.cloud.dialogflow.v2beta1.AgentCoachingInstruction.IDuplicateCheckResult|null);
+
+                    /** AgentCoachingInstruction triggeringEvent */
+                    triggeringEvent?: (google.cloud.dialogflow.v2beta1.AgentCoachingInstruction.TriggerEvent|keyof typeof google.cloud.dialogflow.v2beta1.AgentCoachingInstruction.TriggerEvent|null);
                 }
 
                 /** Represents an AgentCoachingInstruction. */
@@ -52254,6 +52257,9 @@ export namespace google {
 
                     /** AgentCoachingInstruction duplicateCheckResult. */
                     public duplicateCheckResult?: (google.cloud.dialogflow.v2beta1.AgentCoachingInstruction.IDuplicateCheckResult|null);
+
+                    /** AgentCoachingInstruction triggeringEvent. */
+                    public triggeringEvent: (google.cloud.dialogflow.v2beta1.AgentCoachingInstruction.TriggerEvent|keyof typeof google.cloud.dialogflow.v2beta1.AgentCoachingInstruction.TriggerEvent);
 
                     /**
                      * Creates a new AgentCoachingInstruction instance using the specified properties.
@@ -52542,6 +52548,16 @@ export namespace google {
                              */
                             public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
+                    }
+
+                    /** TriggerEvent enum. */
+                    enum TriggerEvent {
+                        TRIGGER_EVENT_UNSPECIFIED = 0,
+                        END_OF_UTTERANCE = 1,
+                        MANUAL_CALL = 2,
+                        CUSTOMER_MESSAGE = 3,
+                        AGENT_MESSAGE = 4,
+                        TOOL_CALL_COMPLETION = 5
                     }
                 }
 

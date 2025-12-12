@@ -128089,6 +128089,7 @@
                          * @property {string|null} [agentAction] AgentCoachingInstruction agentAction
                          * @property {string|null} [systemAction] AgentCoachingInstruction systemAction
                          * @property {google.cloud.dialogflow.v2beta1.AgentCoachingInstruction.IDuplicateCheckResult|null} [duplicateCheckResult] AgentCoachingInstruction duplicateCheckResult
+                         * @property {google.cloud.dialogflow.v2beta1.AgentCoachingInstruction.TriggerEvent|null} [triggeringEvent] AgentCoachingInstruction triggeringEvent
                          */
     
                         /**
@@ -128155,6 +128156,14 @@
                         AgentCoachingInstruction.prototype.duplicateCheckResult = null;
     
                         /**
+                         * AgentCoachingInstruction triggeringEvent.
+                         * @member {google.cloud.dialogflow.v2beta1.AgentCoachingInstruction.TriggerEvent} triggeringEvent
+                         * @memberof google.cloud.dialogflow.v2beta1.AgentCoachingInstruction
+                         * @instance
+                         */
+                        AgentCoachingInstruction.prototype.triggeringEvent = 0;
+    
+                        /**
                          * Creates a new AgentCoachingInstruction instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.dialogflow.v2beta1.AgentCoachingInstruction
@@ -128190,6 +128199,8 @@
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.systemAction);
                             if (message.duplicateCheckResult != null && Object.hasOwnProperty.call(message, "duplicateCheckResult"))
                                 $root.google.cloud.dialogflow.v2beta1.AgentCoachingInstruction.DuplicateCheckResult.encode(message.duplicateCheckResult, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.triggeringEvent != null && Object.hasOwnProperty.call(message, "triggeringEvent"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).int32(message.triggeringEvent);
                             return writer;
                         };
     
@@ -128250,6 +128261,10 @@
                                         message.duplicateCheckResult = $root.google.cloud.dialogflow.v2beta1.AgentCoachingInstruction.DuplicateCheckResult.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 10: {
+                                        message.triggeringEvent = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -128305,6 +128320,18 @@
                                 if (error)
                                     return "duplicateCheckResult." + error;
                             }
+                            if (message.triggeringEvent != null && message.hasOwnProperty("triggeringEvent"))
+                                switch (message.triggeringEvent) {
+                                default:
+                                    return "triggeringEvent: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -128335,6 +128362,38 @@
                                     throw TypeError(".google.cloud.dialogflow.v2beta1.AgentCoachingInstruction.duplicateCheckResult: object expected");
                                 message.duplicateCheckResult = $root.google.cloud.dialogflow.v2beta1.AgentCoachingInstruction.DuplicateCheckResult.fromObject(object.duplicateCheckResult);
                             }
+                            switch (object.triggeringEvent) {
+                            default:
+                                if (typeof object.triggeringEvent === "number") {
+                                    message.triggeringEvent = object.triggeringEvent;
+                                    break;
+                                }
+                                break;
+                            case "TRIGGER_EVENT_UNSPECIFIED":
+                            case 0:
+                                message.triggeringEvent = 0;
+                                break;
+                            case "END_OF_UTTERANCE":
+                            case 1:
+                                message.triggeringEvent = 1;
+                                break;
+                            case "MANUAL_CALL":
+                            case 2:
+                                message.triggeringEvent = 2;
+                                break;
+                            case "CUSTOMER_MESSAGE":
+                            case 3:
+                                message.triggeringEvent = 3;
+                                break;
+                            case "AGENT_MESSAGE":
+                            case 4:
+                                message.triggeringEvent = 4;
+                                break;
+                            case "TOOL_CALL_COMPLETION":
+                            case 5:
+                                message.triggeringEvent = 5;
+                                break;
+                            }
                             return message;
                         };
     
@@ -128358,6 +128417,7 @@
                                 object.agentAction = "";
                                 object.systemAction = "";
                                 object.duplicateCheckResult = null;
+                                object.triggeringEvent = options.enums === String ? "TRIGGER_EVENT_UNSPECIFIED" : 0;
                             }
                             if (message.displayName != null && message.hasOwnProperty("displayName"))
                                 object.displayName = message.displayName;
@@ -128371,6 +128431,8 @@
                                 object.systemAction = message.systemAction;
                             if (message.duplicateCheckResult != null && message.hasOwnProperty("duplicateCheckResult"))
                                 object.duplicateCheckResult = $root.google.cloud.dialogflow.v2beta1.AgentCoachingInstruction.DuplicateCheckResult.toObject(message.duplicateCheckResult, options);
+                            if (message.triggeringEvent != null && message.hasOwnProperty("triggeringEvent"))
+                                object.triggeringEvent = options.enums === String ? $root.google.cloud.dialogflow.v2beta1.AgentCoachingInstruction.TriggerEvent[message.triggeringEvent] === undefined ? message.triggeringEvent : $root.google.cloud.dialogflow.v2beta1.AgentCoachingInstruction.TriggerEvent[message.triggeringEvent] : message.triggeringEvent;
                             return object;
                         };
     
@@ -128876,6 +128938,28 @@
                             })();
     
                             return DuplicateCheckResult;
+                        })();
+    
+                        /**
+                         * TriggerEvent enum.
+                         * @name google.cloud.dialogflow.v2beta1.AgentCoachingInstruction.TriggerEvent
+                         * @enum {number}
+                         * @property {number} TRIGGER_EVENT_UNSPECIFIED=0 TRIGGER_EVENT_UNSPECIFIED value
+                         * @property {number} END_OF_UTTERANCE=1 END_OF_UTTERANCE value
+                         * @property {number} MANUAL_CALL=2 MANUAL_CALL value
+                         * @property {number} CUSTOMER_MESSAGE=3 CUSTOMER_MESSAGE value
+                         * @property {number} AGENT_MESSAGE=4 AGENT_MESSAGE value
+                         * @property {number} TOOL_CALL_COMPLETION=5 TOOL_CALL_COMPLETION value
+                         */
+                        AgentCoachingInstruction.TriggerEvent = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "TRIGGER_EVENT_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "END_OF_UTTERANCE"] = 1;
+                            values[valuesById[2] = "MANUAL_CALL"] = 2;
+                            values[valuesById[3] = "CUSTOMER_MESSAGE"] = 3;
+                            values[valuesById[4] = "AGENT_MESSAGE"] = 4;
+                            values[valuesById[5] = "TOOL_CALL_COMPLETION"] = 5;
+                            return values;
                         })();
     
                         return AgentCoachingInstruction;

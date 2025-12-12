@@ -15385,6 +15385,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "triggeringEvent": {
+                          "type": "TriggerEvent",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -15425,6 +15432,16 @@
                                 }
                               }
                             }
+                          }
+                        },
+                        "TriggerEvent": {
+                          "values": {
+                            "TRIGGER_EVENT_UNSPECIFIED": 0,
+                            "END_OF_UTTERANCE": 1,
+                            "MANUAL_CALL": 2,
+                            "CUSTOMER_MESSAGE": 3,
+                            "AGENT_MESSAGE": 4,
+                            "TOOL_CALL_COMPLETION": 5
                           }
                         }
                       }
