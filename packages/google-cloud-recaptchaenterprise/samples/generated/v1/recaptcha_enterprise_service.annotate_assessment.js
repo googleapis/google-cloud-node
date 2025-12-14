@@ -61,6 +61,11 @@ function main(name) {
    *  details on payment lifecycle events that occur in the transaction.
    */
   // const transactionEvent = {}
+  /**
+   *  Optional. If using an external multi-factor authentication provider,
+   *  provide phone authentication details for fraud detection purposes.
+   */
+  // const phoneAuthenticationEvent = {}
 
   // Imports the Recaptchaenterprise library
   const {RecaptchaEnterpriseServiceClient} = require('@google-cloud/recaptcha-enterprise').v1;

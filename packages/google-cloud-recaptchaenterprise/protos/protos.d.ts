@@ -756,6 +756,109 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a PhoneAuthenticationEvent. */
+                interface IPhoneAuthenticationEvent {
+
+                    /** PhoneAuthenticationEvent phoneNumber */
+                    phoneNumber?: (string|null);
+
+                    /** PhoneAuthenticationEvent eventTime */
+                    eventTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a PhoneAuthenticationEvent. */
+                class PhoneAuthenticationEvent implements IPhoneAuthenticationEvent {
+
+                    /**
+                     * Constructs a new PhoneAuthenticationEvent.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recaptchaenterprise.v1.IPhoneAuthenticationEvent);
+
+                    /** PhoneAuthenticationEvent phoneNumber. */
+                    public phoneNumber: string;
+
+                    /** PhoneAuthenticationEvent eventTime. */
+                    public eventTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new PhoneAuthenticationEvent instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PhoneAuthenticationEvent instance
+                     */
+                    public static create(properties?: google.cloud.recaptchaenterprise.v1.IPhoneAuthenticationEvent): google.cloud.recaptchaenterprise.v1.PhoneAuthenticationEvent;
+
+                    /**
+                     * Encodes the specified PhoneAuthenticationEvent message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.PhoneAuthenticationEvent.verify|verify} messages.
+                     * @param message PhoneAuthenticationEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recaptchaenterprise.v1.IPhoneAuthenticationEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PhoneAuthenticationEvent message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.PhoneAuthenticationEvent.verify|verify} messages.
+                     * @param message PhoneAuthenticationEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.IPhoneAuthenticationEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PhoneAuthenticationEvent message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PhoneAuthenticationEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.PhoneAuthenticationEvent;
+
+                    /**
+                     * Decodes a PhoneAuthenticationEvent message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PhoneAuthenticationEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.PhoneAuthenticationEvent;
+
+                    /**
+                     * Verifies a PhoneAuthenticationEvent message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PhoneAuthenticationEvent message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PhoneAuthenticationEvent
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.PhoneAuthenticationEvent;
+
+                    /**
+                     * Creates a plain object from a PhoneAuthenticationEvent message. Also converts values to other types if specified.
+                     * @param message PhoneAuthenticationEvent
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recaptchaenterprise.v1.PhoneAuthenticationEvent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PhoneAuthenticationEvent to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PhoneAuthenticationEvent
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an AnnotateAssessmentRequest. */
                 interface IAnnotateAssessmentRequest {
 
@@ -776,6 +879,9 @@ export namespace google {
 
                     /** AnnotateAssessmentRequest transactionEvent */
                     transactionEvent?: (google.cloud.recaptchaenterprise.v1.ITransactionEvent|null);
+
+                    /** AnnotateAssessmentRequest phoneAuthenticationEvent */
+                    phoneAuthenticationEvent?: (google.cloud.recaptchaenterprise.v1.IPhoneAuthenticationEvent|null);
                 }
 
                 /** Represents an AnnotateAssessmentRequest. */
@@ -804,6 +910,9 @@ export namespace google {
 
                     /** AnnotateAssessmentRequest transactionEvent. */
                     public transactionEvent?: (google.cloud.recaptchaenterprise.v1.ITransactionEvent|null);
+
+                    /** AnnotateAssessmentRequest phoneAuthenticationEvent. */
+                    public phoneAuthenticationEvent?: (google.cloud.recaptchaenterprise.v1.IPhoneAuthenticationEvent|null);
 
                     /**
                      * Creates a new AnnotateAssessmentRequest instance using the specified properties.
@@ -2621,6 +2730,9 @@ export namespace google {
 
                     /** RiskAnalysis challenge */
                     challenge?: (google.cloud.recaptchaenterprise.v1.RiskAnalysis.Challenge|keyof typeof google.cloud.recaptchaenterprise.v1.RiskAnalysis.Challenge|null);
+
+                    /** RiskAnalysis verifiedBots */
+                    verifiedBots?: (google.cloud.recaptchaenterprise.v1.IBot[]|null);
                 }
 
                 /** Represents a RiskAnalysis. */
@@ -2643,6 +2755,9 @@ export namespace google {
 
                     /** RiskAnalysis challenge. */
                     public challenge: (google.cloud.recaptchaenterprise.v1.RiskAnalysis.Challenge|keyof typeof google.cloud.recaptchaenterprise.v1.RiskAnalysis.Challenge);
+
+                    /** RiskAnalysis verifiedBots. */
+                    public verifiedBots: google.cloud.recaptchaenterprise.v1.IBot[];
 
                     /**
                      * Creates a new RiskAnalysis instance using the specified properties.
@@ -2742,6 +2857,120 @@ export namespace google {
                         NOCAPTCHA = 1,
                         PASSED = 2,
                         FAILED = 3
+                    }
+                }
+
+                /** Properties of a Bot. */
+                interface IBot {
+
+                    /** Bot name */
+                    name?: (string|null);
+
+                    /** Bot botType */
+                    botType?: (google.cloud.recaptchaenterprise.v1.Bot.BotType|keyof typeof google.cloud.recaptchaenterprise.v1.Bot.BotType|null);
+                }
+
+                /** Represents a Bot. */
+                class Bot implements IBot {
+
+                    /**
+                     * Constructs a new Bot.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recaptchaenterprise.v1.IBot);
+
+                    /** Bot name. */
+                    public name: string;
+
+                    /** Bot botType. */
+                    public botType: (google.cloud.recaptchaenterprise.v1.Bot.BotType|keyof typeof google.cloud.recaptchaenterprise.v1.Bot.BotType);
+
+                    /**
+                     * Creates a new Bot instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Bot instance
+                     */
+                    public static create(properties?: google.cloud.recaptchaenterprise.v1.IBot): google.cloud.recaptchaenterprise.v1.Bot;
+
+                    /**
+                     * Encodes the specified Bot message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.Bot.verify|verify} messages.
+                     * @param message Bot message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recaptchaenterprise.v1.IBot, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Bot message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.Bot.verify|verify} messages.
+                     * @param message Bot message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.IBot, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Bot message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Bot
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.Bot;
+
+                    /**
+                     * Decodes a Bot message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Bot
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.Bot;
+
+                    /**
+                     * Verifies a Bot message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Bot message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Bot
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.Bot;
+
+                    /**
+                     * Creates a plain object from a Bot message. Also converts values to other types if specified.
+                     * @param message Bot
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recaptchaenterprise.v1.Bot, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Bot to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Bot
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Bot {
+
+                    /** BotType enum. */
+                    enum BotType {
+                        BOT_TYPE_UNSPECIFIED = 0,
+                        AI_AGENT = 1,
+                        CONTENT_SCRAPER = 2,
+                        SEARCH_INDEXER = 3
                     }
                 }
 
@@ -2888,7 +3117,8 @@ export namespace google {
                         EXPIRED = 3,
                         DUPE = 4,
                         MISSING = 5,
-                        BROWSER_ERROR = 6
+                        BROWSER_ERROR = 6,
+                        UNEXPECTED_ACTION = 7
                     }
                 }
 
@@ -2897,6 +3127,9 @@ export namespace google {
 
                     /** FraudPreventionAssessment transactionRisk */
                     transactionRisk?: (number|null);
+
+                    /** FraudPreventionAssessment riskReasons */
+                    riskReasons?: (google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.IRiskReason[]|null);
 
                     /** FraudPreventionAssessment stolenInstrumentVerdict */
                     stolenInstrumentVerdict?: (google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.IStolenInstrumentVerdict|null);
@@ -2919,6 +3152,9 @@ export namespace google {
 
                     /** FraudPreventionAssessment transactionRisk. */
                     public transactionRisk: number;
+
+                    /** FraudPreventionAssessment riskReasons. */
+                    public riskReasons: google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.IRiskReason[];
 
                     /** FraudPreventionAssessment stolenInstrumentVerdict. */
                     public stolenInstrumentVerdict?: (google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.IStolenInstrumentVerdict|null);
@@ -3008,6 +3244,116 @@ export namespace google {
                 }
 
                 namespace FraudPreventionAssessment {
+
+                    /** Properties of a RiskReason. */
+                    interface IRiskReason {
+
+                        /** RiskReason reason */
+                        reason?: (google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.RiskReason.Reason|keyof typeof google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.RiskReason.Reason|null);
+                    }
+
+                    /** Represents a RiskReason. */
+                    class RiskReason implements IRiskReason {
+
+                        /**
+                         * Constructs a new RiskReason.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.IRiskReason);
+
+                        /** RiskReason reason. */
+                        public reason: (google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.RiskReason.Reason|keyof typeof google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.RiskReason.Reason);
+
+                        /**
+                         * Creates a new RiskReason instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RiskReason instance
+                         */
+                        public static create(properties?: google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.IRiskReason): google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.RiskReason;
+
+                        /**
+                         * Encodes the specified RiskReason message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.RiskReason.verify|verify} messages.
+                         * @param message RiskReason message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.IRiskReason, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RiskReason message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.RiskReason.verify|verify} messages.
+                         * @param message RiskReason message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.IRiskReason, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RiskReason message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RiskReason
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.RiskReason;
+
+                        /**
+                         * Decodes a RiskReason message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RiskReason
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.RiskReason;
+
+                        /**
+                         * Verifies a RiskReason message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RiskReason message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RiskReason
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.RiskReason;
+
+                        /**
+                         * Creates a plain object from a RiskReason message. Also converts values to other types if specified.
+                         * @param message RiskReason
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.RiskReason, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RiskReason to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RiskReason
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace RiskReason {
+
+                        /** Reason enum. */
+                        enum Reason {
+                            REASON_UNSPECIFIED = 0,
+                            HIGH_TRANSACTION_VELOCITY = 1,
+                            EXCESSIVE_ENUMERATION_PATTERN = 2,
+                            SHORT_IDENTITY_HISTORY = 3,
+                            GEOLOCATION_DISCREPANCY = 4,
+                            ASSOCIATED_WITH_FRAUD_CLUSTER = 5
+                        }
+                    }
 
                     /** Properties of a StolenInstrumentVerdict. */
                     interface IStolenInstrumentVerdict {
@@ -6147,6 +6493,9 @@ export namespace google {
 
                     /** WebKeySettings challengeSecurityPreference */
                     challengeSecurityPreference?: (google.cloud.recaptchaenterprise.v1.WebKeySettings.ChallengeSecurityPreference|keyof typeof google.cloud.recaptchaenterprise.v1.WebKeySettings.ChallengeSecurityPreference|null);
+
+                    /** WebKeySettings challengeSettings */
+                    challengeSettings?: (google.cloud.recaptchaenterprise.v1.WebKeySettings.IChallengeSettings|null);
                 }
 
                 /** Represents a WebKeySettings. */
@@ -6172,6 +6521,9 @@ export namespace google {
 
                     /** WebKeySettings challengeSecurityPreference. */
                     public challengeSecurityPreference: (google.cloud.recaptchaenterprise.v1.WebKeySettings.ChallengeSecurityPreference|keyof typeof google.cloud.recaptchaenterprise.v1.WebKeySettings.ChallengeSecurityPreference);
+
+                    /** WebKeySettings challengeSettings. */
+                    public challengeSettings?: (google.cloud.recaptchaenterprise.v1.WebKeySettings.IChallengeSettings|null);
 
                     /**
                      * Creates a new WebKeySettings instance using the specified properties.
@@ -6258,7 +6610,8 @@ export namespace google {
                         INTEGRATION_TYPE_UNSPECIFIED = 0,
                         SCORE = 1,
                         CHECKBOX = 2,
-                        INVISIBLE = 3
+                        INVISIBLE = 3,
+                        POLICY_BASED_CHALLENGE = 5
                     }
 
                     /** ChallengeSecurityPreference enum. */
@@ -6267,6 +6620,206 @@ export namespace google {
                         USABILITY = 1,
                         BALANCE = 2,
                         SECURITY = 3
+                    }
+
+                    /** Properties of an ActionSettings. */
+                    interface IActionSettings {
+
+                        /** ActionSettings scoreThreshold */
+                        scoreThreshold?: (number|null);
+                    }
+
+                    /** Represents an ActionSettings. */
+                    class ActionSettings implements IActionSettings {
+
+                        /**
+                         * Constructs a new ActionSettings.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.recaptchaenterprise.v1.WebKeySettings.IActionSettings);
+
+                        /** ActionSettings scoreThreshold. */
+                        public scoreThreshold: number;
+
+                        /**
+                         * Creates a new ActionSettings instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ActionSettings instance
+                         */
+                        public static create(properties?: google.cloud.recaptchaenterprise.v1.WebKeySettings.IActionSettings): google.cloud.recaptchaenterprise.v1.WebKeySettings.ActionSettings;
+
+                        /**
+                         * Encodes the specified ActionSettings message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.WebKeySettings.ActionSettings.verify|verify} messages.
+                         * @param message ActionSettings message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.recaptchaenterprise.v1.WebKeySettings.IActionSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ActionSettings message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.WebKeySettings.ActionSettings.verify|verify} messages.
+                         * @param message ActionSettings message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.WebKeySettings.IActionSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ActionSettings message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ActionSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.WebKeySettings.ActionSettings;
+
+                        /**
+                         * Decodes an ActionSettings message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ActionSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.WebKeySettings.ActionSettings;
+
+                        /**
+                         * Verifies an ActionSettings message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ActionSettings message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ActionSettings
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.WebKeySettings.ActionSettings;
+
+                        /**
+                         * Creates a plain object from an ActionSettings message. Also converts values to other types if specified.
+                         * @param message ActionSettings
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.recaptchaenterprise.v1.WebKeySettings.ActionSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ActionSettings to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ActionSettings
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ChallengeSettings. */
+                    interface IChallengeSettings {
+
+                        /** ChallengeSettings defaultSettings */
+                        defaultSettings?: (google.cloud.recaptchaenterprise.v1.WebKeySettings.IActionSettings|null);
+
+                        /** ChallengeSettings actionSettings */
+                        actionSettings?: ({ [k: string]: google.cloud.recaptchaenterprise.v1.WebKeySettings.IActionSettings }|null);
+                    }
+
+                    /** Represents a ChallengeSettings. */
+                    class ChallengeSettings implements IChallengeSettings {
+
+                        /**
+                         * Constructs a new ChallengeSettings.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.recaptchaenterprise.v1.WebKeySettings.IChallengeSettings);
+
+                        /** ChallengeSettings defaultSettings. */
+                        public defaultSettings?: (google.cloud.recaptchaenterprise.v1.WebKeySettings.IActionSettings|null);
+
+                        /** ChallengeSettings actionSettings. */
+                        public actionSettings: { [k: string]: google.cloud.recaptchaenterprise.v1.WebKeySettings.IActionSettings };
+
+                        /**
+                         * Creates a new ChallengeSettings instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ChallengeSettings instance
+                         */
+                        public static create(properties?: google.cloud.recaptchaenterprise.v1.WebKeySettings.IChallengeSettings): google.cloud.recaptchaenterprise.v1.WebKeySettings.ChallengeSettings;
+
+                        /**
+                         * Encodes the specified ChallengeSettings message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.WebKeySettings.ChallengeSettings.verify|verify} messages.
+                         * @param message ChallengeSettings message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.recaptchaenterprise.v1.WebKeySettings.IChallengeSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ChallengeSettings message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.WebKeySettings.ChallengeSettings.verify|verify} messages.
+                         * @param message ChallengeSettings message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.WebKeySettings.IChallengeSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ChallengeSettings message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ChallengeSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.WebKeySettings.ChallengeSettings;
+
+                        /**
+                         * Decodes a ChallengeSettings message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ChallengeSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.WebKeySettings.ChallengeSettings;
+
+                        /**
+                         * Verifies a ChallengeSettings message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ChallengeSettings message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ChallengeSettings
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.WebKeySettings.ChallengeSettings;
+
+                        /**
+                         * Creates a plain object from a ChallengeSettings message. Also converts values to other types if specified.
+                         * @param message ChallengeSettings
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.recaptchaenterprise.v1.WebKeySettings.ChallengeSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ChallengeSettings to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ChallengeSettings
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
 

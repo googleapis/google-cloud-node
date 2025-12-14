@@ -66,7 +66,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 82,
+          "end": 87,
           "type": "FULL"
         }
       ],
@@ -98,6 +98,10 @@
           {
             "name": "transaction_event",
             "type": ".google.cloud.recaptchaenterprise.v1.TransactionEvent"
+          },
+          {
+            "name": "phone_authentication_event",
+            "type": ".google.cloud.recaptchaenterprise.v1.PhoneAuthenticationEvent"
           }
         ],
         "resultType": ".google.cloud.recaptchaenterprise.v1.AnnotateAssessmentResponse",
@@ -419,7 +423,7 @@
       "regionTag": "recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_AddIpOverride_async",
       "title": "RecaptchaEnterpriseService addIpOverride Sample",
       "origin": "API_DEFINITION",
-      "description": " Adds an IP override to a key. The following restrictions hold: * The maximum number of IP overrides per key is 100. * For any conflict (such as IP already exists or IP part of an existing   IP range), an error is returned.",
+      "description": " Adds an IP override to a key. The following restrictions hold: * The maximum number of IP overrides per key is 1000. * For any conflict (such as IP already exists or IP part of an existing   IP range), an error is returned.",
       "canonical": true,
       "file": "recaptcha_enterprise_service.add_ip_override.js",
       "language": "JAVASCRIPT",
