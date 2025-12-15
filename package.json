@@ -40,7 +40,6 @@
     "parse-link-header": "^2.0.0"
   },
   "devDependencies": {
-    "prettier": "^3.6.2",
     "semistandard": "^17.0.0"
   },
   "engines": {
