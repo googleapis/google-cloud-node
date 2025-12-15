@@ -59,6 +59,14 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "lookerGoldenQueries": {
+                          "rule": "repeated",
+                          "type": "LookerGoldenQuery",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "glossaryTerms": {
                           "rule": "repeated",
                           "type": "GlossaryTerm",
@@ -142,6 +150,25 @@
                         "naturalLanguageQuestion": {
                           "type": "string",
                           "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "LookerGoldenQuery": {
+                      "fields": {
+                        "naturalLanguageQuestions": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "lookerQuery": {
+                          "type": "LookerQuery",
+                          "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }

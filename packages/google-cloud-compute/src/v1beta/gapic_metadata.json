@@ -5145,6 +5145,11 @@
                 "addPeering"
               ]
             },
+            "CancelRequestRemovePeering": {
+              "methods": [
+                "cancelRequestRemovePeering"
+              ]
+            },
             "Delete": {
               "methods": [
                 "delete"
@@ -5217,6 +5222,11 @@
             "AddPeering": {
               "methods": [
                 "addPeering"
+              ]
+            },
+            "CancelRequestRemovePeering": {
+              "methods": [
+                "cancelRequestRemovePeering"
               ]
             },
             "Delete": {
@@ -7511,6 +7521,11 @@
                 "abandonInstances"
               ]
             },
+            "AdoptInstances": {
+              "methods": [
+                "adoptInstances"
+              ]
+            },
             "ApplyUpdatesToInstances": {
               "methods": [
                 "applyUpdatesToInstances"
@@ -7657,6 +7672,11 @@
             "AbandonInstances": {
               "methods": [
                 "abandonInstances"
+              ]
+            },
+            "AdoptInstances": {
+              "methods": [
+                "adoptInstances"
               ]
             },
             "ApplyUpdatesToInstances": {

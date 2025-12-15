@@ -225,7 +225,7 @@ export class NetworksClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const networksStubMethods =
-        ['addPeering', 'delete', 'get', 'getEffectiveFirewalls', 'insert', 'list', 'listPeeringRoutes', 'patch', 'removePeering', 'requestRemovePeering', 'switchToCustomMode', 'testIamPermissions', 'updatePeering'];
+        ['addPeering', 'cancelRequestRemovePeering', 'delete', 'get', 'getEffectiveFirewalls', 'insert', 'list', 'listPeeringRoutes', 'patch', 'removePeering', 'requestRemovePeering', 'switchToCustomMode', 'testIamPermissions', 'updatePeering'];
     for (const methodName of networksStubMethods) {
       const callPromise = this.networksStub.then(
         stub => (...args: Array<{}>) => {
@@ -432,6 +432,125 @@ export class NetworksClient {
         }
       : undefined;
     return this.innerApiCalls.addPeering(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Cancel requests to remove a peering from the specified network. Applicable
+ * only for PeeringConnection with update_strategy=CONSENSUS.  Cancels a
+ * request to remove a peering from the specified network.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.network
+ *   Name of the network resource to remove peering from.
+ * @param {google.cloud.compute.v1beta.NetworksCancelRequestRemovePeeringRequest} request.networksCancelRequestRemovePeeringRequestResource
+ *   The body resource for this request
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so
+ *   that if you must retry your request, the server will know to ignore the
+ *   request if it has already been completed.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same
+ *   request ID, the server can check if original operation with the same
+ *   request ID was received, and if so, will ignore the second request. This
+ *   prevents clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be
+ *   a valid UUID with the exception that zero UUID is not supported
+ *   (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1beta/networks.cancel_request_remove_peering.js</caption>
+ * region_tag:compute_v1beta_generated_Networks_CancelRequestRemovePeering_async
+ */
+  cancelRequestRemovePeering(
+      request?: protos.google.cloud.compute.v1beta.ICancelRequestRemovePeeringNetworkRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
+        protos.google.cloud.compute.v1beta.IOperation|undefined, {}|undefined
+      ]>;
+  cancelRequestRemovePeering(
+      request: protos.google.cloud.compute.v1beta.ICancelRequestRemovePeeringNetworkRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.compute.v1beta.IOperation,
+          protos.google.cloud.compute.v1beta.ICancelRequestRemovePeeringNetworkRequest|null|undefined,
+          {}|null|undefined>): void;
+  cancelRequestRemovePeering(
+      request: protos.google.cloud.compute.v1beta.ICancelRequestRemovePeeringNetworkRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1beta.IOperation,
+          protos.google.cloud.compute.v1beta.ICancelRequestRemovePeeringNetworkRequest|null|undefined,
+          {}|null|undefined>): void;
+  cancelRequestRemovePeering(
+      request?: protos.google.cloud.compute.v1beta.ICancelRequestRemovePeeringNetworkRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1beta.IOperation,
+          protos.google.cloud.compute.v1beta.ICancelRequestRemovePeeringNetworkRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1beta.IOperation,
+          protos.google.cloud.compute.v1beta.ICancelRequestRemovePeeringNetworkRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
+        protos.google.cloud.compute.v1beta.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'network': request.network ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('cancelRequestRemovePeering request %j', request);
+    const wrappedCallback: Callback<
+          protos.google.cloud.compute.v1beta.IOperation,
+          protos.google.cloud.compute.v1beta.ICancelRequestRemovePeeringNetworkRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('cancelRequestRemovePeering response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
+    return this.innerApiCalls.cancelRequestRemovePeering(request, options, wrappedCallback)
       ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
         return [
           { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},

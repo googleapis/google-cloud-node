@@ -159,6 +159,30 @@
         }
       }
     },
+    "Advice": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "AdviceClient",
+          "rpcs": {
+            "CalendarMode": {
+              "methods": [
+                "calendarMode"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "AdviceClient",
+          "rpcs": {
+            "CalendarMode": {
+              "methods": [
+                "calendarMode"
+              ]
+            }
+          }
+        }
+      }
+    },
     "Autoscalers": {
       "clients": {
         "grpc": {

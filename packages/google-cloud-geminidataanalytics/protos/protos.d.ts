@@ -138,6 +138,9 @@ export namespace google {
                     /** Context exampleQueries */
                     exampleQueries?: (google.cloud.geminidataanalytics.v1alpha.IExampleQuery[]|null);
 
+                    /** Context lookerGoldenQueries */
+                    lookerGoldenQueries?: (google.cloud.geminidataanalytics.v1alpha.ILookerGoldenQuery[]|null);
+
                     /** Context glossaryTerms */
                     glossaryTerms?: (google.cloud.geminidataanalytics.v1alpha.IGlossaryTerm[]|null);
 
@@ -165,6 +168,9 @@ export namespace google {
 
                     /** Context exampleQueries. */
                     public exampleQueries: google.cloud.geminidataanalytics.v1alpha.IExampleQuery[];
+
+                    /** Context lookerGoldenQueries. */
+                    public lookerGoldenQueries: google.cloud.geminidataanalytics.v1alpha.ILookerGoldenQuery[];
 
                     /** Context glossaryTerms. */
                     public glossaryTerms: google.cloud.geminidataanalytics.v1alpha.IGlossaryTerm[];
@@ -582,6 +588,109 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ExampleQuery
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a LookerGoldenQuery. */
+                interface ILookerGoldenQuery {
+
+                    /** LookerGoldenQuery naturalLanguageQuestions */
+                    naturalLanguageQuestions?: (string[]|null);
+
+                    /** LookerGoldenQuery lookerQuery */
+                    lookerQuery?: (google.cloud.geminidataanalytics.v1alpha.ILookerQuery|null);
+                }
+
+                /** Represents a LookerGoldenQuery. */
+                class LookerGoldenQuery implements ILookerGoldenQuery {
+
+                    /**
+                     * Constructs a new LookerGoldenQuery.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1alpha.ILookerGoldenQuery);
+
+                    /** LookerGoldenQuery naturalLanguageQuestions. */
+                    public naturalLanguageQuestions: string[];
+
+                    /** LookerGoldenQuery lookerQuery. */
+                    public lookerQuery?: (google.cloud.geminidataanalytics.v1alpha.ILookerQuery|null);
+
+                    /**
+                     * Creates a new LookerGoldenQuery instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns LookerGoldenQuery instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1alpha.ILookerGoldenQuery): google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery;
+
+                    /**
+                     * Encodes the specified LookerGoldenQuery message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery.verify|verify} messages.
+                     * @param message LookerGoldenQuery message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1alpha.ILookerGoldenQuery, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified LookerGoldenQuery message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery.verify|verify} messages.
+                     * @param message LookerGoldenQuery message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1alpha.ILookerGoldenQuery, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a LookerGoldenQuery message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns LookerGoldenQuery
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery;
+
+                    /**
+                     * Decodes a LookerGoldenQuery message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns LookerGoldenQuery
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery;
+
+                    /**
+                     * Verifies a LookerGoldenQuery message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a LookerGoldenQuery message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns LookerGoldenQuery
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery;
+
+                    /**
+                     * Creates a plain object from a LookerGoldenQuery message. Also converts values to other types if specified.
+                     * @param message LookerGoldenQuery
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this LookerGoldenQuery to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for LookerGoldenQuery
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

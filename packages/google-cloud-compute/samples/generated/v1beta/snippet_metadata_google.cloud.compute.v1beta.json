@@ -22380,6 +22380,58 @@
       }
     },
     {
+      "regionTag": "compute_v1beta_generated_Networks_CancelRequestRemovePeering_async",
+      "title": "AcceleratorTypes cancelRequestRemovePeering Sample",
+      "origin": "API_DEFINITION",
+      "description": " Cancel requests to remove a peering from the specified network. Applicable only for PeeringConnection with update_strategy=CONSENSUS.  Cancels a request to remove a peering from the specified network.",
+      "canonical": true,
+      "file": "networks.cancel_request_remove_peering.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CancelRequestRemovePeering",
+        "fullName": "google.cloud.compute.v1beta.Networks.CancelRequestRemovePeering",
+        "async": true,
+        "parameters": [
+          {
+            "name": "network",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "networks_cancel_request_remove_peering_request_resource",
+            "type": ".google.cloud.compute.v1beta.NetworksCancelRequestRemovePeeringRequest"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Operation",
+        "client": {
+          "shortName": "NetworksClient",
+          "fullName": "google.cloud.compute.v1beta.NetworksClient"
+        },
+        "method": {
+          "shortName": "CancelRequestRemovePeering",
+          "fullName": "google.cloud.compute.v1beta.Networks.CancelRequestRemovePeering",
+          "service": {
+            "shortName": "Networks",
+            "fullName": "google.cloud.compute.v1beta.Networks"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "compute_v1beta_generated_Networks_Delete_async",
       "title": "AcceleratorTypes delete Sample",
       "origin": "API_DEFINITION",
@@ -32612,6 +32664,62 @@
         "method": {
           "shortName": "AbandonInstances",
           "fullName": "google.cloud.compute.v1beta.RegionInstanceGroupManagers.AbandonInstances",
+          "service": {
+            "shortName": "RegionInstanceGroupManagers",
+            "fullName": "google.cloud.compute.v1beta.RegionInstanceGroupManagers"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_RegionInstanceGroupManagers_AdoptInstances_async",
+      "title": "AcceleratorTypes adoptInstances Sample",
+      "origin": "API_DEFINITION",
+      "description": " Flags the specified instances to be adopted to the managed instance group. Adopting an instance does not change the instance status, but it adds the instance to any target pools that are applied by the managed instance group. This method increases the targetSize of the managed instance group by the number of instances that you adopt. This operation is marked as DONE when the action is scheduled even if the instances have not been adopted to the group yet. You must separately verify the status of the adopting action with the listManagedInstances method.",
+      "canonical": true,
+      "file": "region_instance_group_managers.adopt_instances.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 83,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "AdoptInstances",
+        "fullName": "google.cloud.compute.v1beta.RegionInstanceGroupManagers.AdoptInstances",
+        "async": true,
+        "parameters": [
+          {
+            "name": "instance_group_manager",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region_instance_group_managers_adopt_instances_request_resource",
+            "type": ".google.cloud.compute.v1beta.RegionInstanceGroupManagersAdoptInstancesRequest"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Operation",
+        "client": {
+          "shortName": "RegionInstanceGroupManagersClient",
+          "fullName": "google.cloud.compute.v1beta.RegionInstanceGroupManagersClient"
+        },
+        "method": {
+          "shortName": "AdoptInstances",
+          "fullName": "google.cloud.compute.v1beta.RegionInstanceGroupManagers.AdoptInstances",
           "service": {
             "shortName": "RegionInstanceGroupManagers",
             "fullName": "google.cloud.compute.v1beta.RegionInstanceGroupManagers"
