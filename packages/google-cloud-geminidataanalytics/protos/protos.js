@@ -281,6 +281,7 @@
                          * @property {google.cloud.geminidataanalytics.v1alpha.IDatasourceReferences|null} [datasourceReferences] Context datasourceReferences
                          * @property {google.cloud.geminidataanalytics.v1alpha.IConversationOptions|null} [options] Context options
                          * @property {Array.<google.cloud.geminidataanalytics.v1alpha.IExampleQuery>|null} [exampleQueries] Context exampleQueries
+                         * @property {Array.<google.cloud.geminidataanalytics.v1alpha.ILookerGoldenQuery>|null} [lookerGoldenQueries] Context lookerGoldenQueries
                          * @property {Array.<google.cloud.geminidataanalytics.v1alpha.IGlossaryTerm>|null} [glossaryTerms] Context glossaryTerms
                          * @property {Array.<google.cloud.geminidataanalytics.v1alpha.Context.ISchemaRelationship>|null} [schemaRelationships] Context schemaRelationships
                          */
@@ -295,6 +296,7 @@
                          */
                         function Context(properties) {
                             this.exampleQueries = [];
+                            this.lookerGoldenQueries = [];
                             this.glossaryTerms = [];
                             this.schemaRelationships = [];
                             if (properties)
@@ -334,6 +336,14 @@
                          * @instance
                          */
                         Context.prototype.exampleQueries = $util.emptyArray;
+    
+                        /**
+                         * Context lookerGoldenQueries.
+                         * @member {Array.<google.cloud.geminidataanalytics.v1alpha.ILookerGoldenQuery>} lookerGoldenQueries
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.Context
+                         * @instance
+                         */
+                        Context.prototype.lookerGoldenQueries = $util.emptyArray;
     
                         /**
                          * Context glossaryTerms.
@@ -390,6 +400,9 @@
                             if (message.schemaRelationships != null && message.schemaRelationships.length)
                                 for (var i = 0; i < message.schemaRelationships.length; ++i)
                                     $root.google.cloud.geminidataanalytics.v1alpha.Context.SchemaRelationship.encode(message.schemaRelationships[i], writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.lookerGoldenQueries != null && message.lookerGoldenQueries.length)
+                                for (var i = 0; i < message.lookerGoldenQueries.length; ++i)
+                                    $root.google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery.encode(message.lookerGoldenQueries[i], writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                             return writer;
                         };
     
@@ -442,6 +455,12 @@
                                         if (!(message.exampleQueries && message.exampleQueries.length))
                                             message.exampleQueries = [];
                                         message.exampleQueries.push($root.google.cloud.geminidataanalytics.v1alpha.ExampleQuery.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 11: {
+                                        if (!(message.lookerGoldenQueries && message.lookerGoldenQueries.length))
+                                            message.lookerGoldenQueries = [];
+                                        message.lookerGoldenQueries.push($root.google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 case 8: {
@@ -513,6 +532,15 @@
                                         return "exampleQueries." + error;
                                 }
                             }
+                            if (message.lookerGoldenQueries != null && message.hasOwnProperty("lookerGoldenQueries")) {
+                                if (!Array.isArray(message.lookerGoldenQueries))
+                                    return "lookerGoldenQueries: array expected";
+                                for (var i = 0; i < message.lookerGoldenQueries.length; ++i) {
+                                    var error = $root.google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery.verify(message.lookerGoldenQueries[i]);
+                                    if (error)
+                                        return "lookerGoldenQueries." + error;
+                                }
+                            }
                             if (message.glossaryTerms != null && message.hasOwnProperty("glossaryTerms")) {
                                 if (!Array.isArray(message.glossaryTerms))
                                     return "glossaryTerms: array expected";
@@ -568,6 +596,16 @@
                                     message.exampleQueries[i] = $root.google.cloud.geminidataanalytics.v1alpha.ExampleQuery.fromObject(object.exampleQueries[i]);
                                 }
                             }
+                            if (object.lookerGoldenQueries) {
+                                if (!Array.isArray(object.lookerGoldenQueries))
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1alpha.Context.lookerGoldenQueries: array expected");
+                                message.lookerGoldenQueries = [];
+                                for (var i = 0; i < object.lookerGoldenQueries.length; ++i) {
+                                    if (typeof object.lookerGoldenQueries[i] !== "object")
+                                        throw TypeError(".google.cloud.geminidataanalytics.v1alpha.Context.lookerGoldenQueries: object expected");
+                                    message.lookerGoldenQueries[i] = $root.google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery.fromObject(object.lookerGoldenQueries[i]);
+                                }
+                            }
                             if (object.glossaryTerms) {
                                 if (!Array.isArray(object.glossaryTerms))
                                     throw TypeError(".google.cloud.geminidataanalytics.v1alpha.Context.glossaryTerms: array expected");
@@ -608,6 +646,7 @@
                                 object.exampleQueries = [];
                                 object.glossaryTerms = [];
                                 object.schemaRelationships = [];
+                                object.lookerGoldenQueries = [];
                             }
                             if (options.defaults) {
                                 object.systemInstruction = "";
@@ -634,6 +673,11 @@
                                 object.schemaRelationships = [];
                                 for (var j = 0; j < message.schemaRelationships.length; ++j)
                                     object.schemaRelationships[j] = $root.google.cloud.geminidataanalytics.v1alpha.Context.SchemaRelationship.toObject(message.schemaRelationships[j], options);
+                            }
+                            if (message.lookerGoldenQueries && message.lookerGoldenQueries.length) {
+                                object.lookerGoldenQueries = [];
+                                for (var j = 0; j < message.lookerGoldenQueries.length; ++j)
+                                    object.lookerGoldenQueries[j] = $root.google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery.toObject(message.lookerGoldenQueries[j], options);
                             }
                             return object;
                         };
@@ -1514,6 +1558,256 @@
                         };
     
                         return ExampleQuery;
+                    })();
+    
+                    v1alpha.LookerGoldenQuery = (function() {
+    
+                        /**
+                         * Properties of a LookerGoldenQuery.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha
+                         * @interface ILookerGoldenQuery
+                         * @property {Array.<string>|null} [naturalLanguageQuestions] LookerGoldenQuery naturalLanguageQuestions
+                         * @property {google.cloud.geminidataanalytics.v1alpha.ILookerQuery|null} [lookerQuery] LookerGoldenQuery lookerQuery
+                         */
+    
+                        /**
+                         * Constructs a new LookerGoldenQuery.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha
+                         * @classdesc Represents a LookerGoldenQuery.
+                         * @implements ILookerGoldenQuery
+                         * @constructor
+                         * @param {google.cloud.geminidataanalytics.v1alpha.ILookerGoldenQuery=} [properties] Properties to set
+                         */
+                        function LookerGoldenQuery(properties) {
+                            this.naturalLanguageQuestions = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * LookerGoldenQuery naturalLanguageQuestions.
+                         * @member {Array.<string>} naturalLanguageQuestions
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery
+                         * @instance
+                         */
+                        LookerGoldenQuery.prototype.naturalLanguageQuestions = $util.emptyArray;
+    
+                        /**
+                         * LookerGoldenQuery lookerQuery.
+                         * @member {google.cloud.geminidataanalytics.v1alpha.ILookerQuery|null|undefined} lookerQuery
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery
+                         * @instance
+                         */
+                        LookerGoldenQuery.prototype.lookerQuery = null;
+    
+                        /**
+                         * Creates a new LookerGoldenQuery instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.ILookerGoldenQuery=} [properties] Properties to set
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery} LookerGoldenQuery instance
+                         */
+                        LookerGoldenQuery.create = function create(properties) {
+                            return new LookerGoldenQuery(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified LookerGoldenQuery message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.ILookerGoldenQuery} message LookerGoldenQuery message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LookerGoldenQuery.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.naturalLanguageQuestions != null && message.naturalLanguageQuestions.length)
+                                for (var i = 0; i < message.naturalLanguageQuestions.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.naturalLanguageQuestions[i]);
+                            if (message.lookerQuery != null && Object.hasOwnProperty.call(message, "lookerQuery"))
+                                $root.google.cloud.geminidataanalytics.v1alpha.LookerQuery.encode(message.lookerQuery, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified LookerGoldenQuery message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.ILookerGoldenQuery} message LookerGoldenQuery message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LookerGoldenQuery.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a LookerGoldenQuery message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery} LookerGoldenQuery
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LookerGoldenQuery.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 4: {
+                                        if (!(message.naturalLanguageQuestions && message.naturalLanguageQuestions.length))
+                                            message.naturalLanguageQuestions = [];
+                                        message.naturalLanguageQuestions.push(reader.string());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.lookerQuery = $root.google.cloud.geminidataanalytics.v1alpha.LookerQuery.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a LookerGoldenQuery message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery} LookerGoldenQuery
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LookerGoldenQuery.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a LookerGoldenQuery message.
+                         * @function verify
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        LookerGoldenQuery.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.naturalLanguageQuestions != null && message.hasOwnProperty("naturalLanguageQuestions")) {
+                                if (!Array.isArray(message.naturalLanguageQuestions))
+                                    return "naturalLanguageQuestions: array expected";
+                                for (var i = 0; i < message.naturalLanguageQuestions.length; ++i)
+                                    if (!$util.isString(message.naturalLanguageQuestions[i]))
+                                        return "naturalLanguageQuestions: string[] expected";
+                            }
+                            if (message.lookerQuery != null && message.hasOwnProperty("lookerQuery")) {
+                                var error = $root.google.cloud.geminidataanalytics.v1alpha.LookerQuery.verify(message.lookerQuery);
+                                if (error)
+                                    return "lookerQuery." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a LookerGoldenQuery message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery} LookerGoldenQuery
+                         */
+                        LookerGoldenQuery.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery)
+                                return object;
+                            var message = new $root.google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery();
+                            if (object.naturalLanguageQuestions) {
+                                if (!Array.isArray(object.naturalLanguageQuestions))
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery.naturalLanguageQuestions: array expected");
+                                message.naturalLanguageQuestions = [];
+                                for (var i = 0; i < object.naturalLanguageQuestions.length; ++i)
+                                    message.naturalLanguageQuestions[i] = String(object.naturalLanguageQuestions[i]);
+                            }
+                            if (object.lookerQuery != null) {
+                                if (typeof object.lookerQuery !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery.lookerQuery: object expected");
+                                message.lookerQuery = $root.google.cloud.geminidataanalytics.v1alpha.LookerQuery.fromObject(object.lookerQuery);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a LookerGoldenQuery message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery} message LookerGoldenQuery
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        LookerGoldenQuery.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.naturalLanguageQuestions = [];
+                            if (options.defaults)
+                                object.lookerQuery = null;
+                            if (message.naturalLanguageQuestions && message.naturalLanguageQuestions.length) {
+                                object.naturalLanguageQuestions = [];
+                                for (var j = 0; j < message.naturalLanguageQuestions.length; ++j)
+                                    object.naturalLanguageQuestions[j] = message.naturalLanguageQuestions[j];
+                            }
+                            if (message.lookerQuery != null && message.hasOwnProperty("lookerQuery"))
+                                object.lookerQuery = $root.google.cloud.geminidataanalytics.v1alpha.LookerQuery.toObject(message.lookerQuery, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this LookerGoldenQuery to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        LookerGoldenQuery.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for LookerGoldenQuery
+                         * @function getTypeUrl
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        LookerGoldenQuery.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1alpha.LookerGoldenQuery";
+                        };
+    
+                        return LookerGoldenQuery;
                     })();
     
                     v1alpha.LookerQuery = (function() {
