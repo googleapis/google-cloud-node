@@ -4510,7 +4510,10 @@
                         },
                         "publishFindingsToCloudDataCatalog": {
                           "type": "PublishFindingsToCloudDataCatalog",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "publishFindingsToDataplexCatalog": {
                           "type": "PublishFindingsToDataplexCatalog",
@@ -8536,10 +8539,7 @@
                       "fields": {
                         "dataSource": {
                           "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
+                          "id": 1
                         }
                       }
                     },
