@@ -11429,6 +11429,7 @@ export namespace google {
                     RICH_LINK_TYPE_UNSPECIFIED = 0,
                     DRIVE_FILE = 1,
                     CHAT_SPACE = 2,
+                    GMAIL_MESSAGE = 3,
                     MEET_SPACE = 4,
                     CALENDAR_EVENT = 5
                 }

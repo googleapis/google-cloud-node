@@ -31108,6 +31108,7 @@
                             case 0:
                             case 1:
                             case 2:
+                            case 3:
                             case 4:
                             case 5:
                                 break;
@@ -31185,6 +31186,10 @@
                         case "CHAT_SPACE":
                         case 2:
                             message.richLinkType = 2;
+                            break;
+                        case "GMAIL_MESSAGE":
+                        case 3:
+                            message.richLinkType = 3;
                             break;
                         case "MEET_SPACE":
                         case 4:
@@ -31295,6 +31300,7 @@
                      * @property {number} RICH_LINK_TYPE_UNSPECIFIED=0 RICH_LINK_TYPE_UNSPECIFIED value
                      * @property {number} DRIVE_FILE=1 DRIVE_FILE value
                      * @property {number} CHAT_SPACE=2 CHAT_SPACE value
+                     * @property {number} GMAIL_MESSAGE=3 GMAIL_MESSAGE value
                      * @property {number} MEET_SPACE=4 MEET_SPACE value
                      * @property {number} CALENDAR_EVENT=5 CALENDAR_EVENT value
                      */
@@ -31303,6 +31309,7 @@
                         values[valuesById[0] = "RICH_LINK_TYPE_UNSPECIFIED"] = 0;
                         values[valuesById[1] = "DRIVE_FILE"] = 1;
                         values[valuesById[2] = "CHAT_SPACE"] = 2;
+                        values[valuesById[3] = "GMAIL_MESSAGE"] = 3;
                         values[valuesById[4] = "MEET_SPACE"] = 4;
                         values[valuesById[5] = "CALENDAR_EVENT"] = 5;
                         return values;
