@@ -258,6 +258,9 @@ export class ContactServiceClient {
       labelPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/labels/{label}'
       ),
+      lineItemPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/lineItems/{line_item}'
+      ),
       liveStreamEventPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/liveStreamEvents/{live_stream_event}'
       ),
@@ -2135,6 +2138,42 @@ export class ContactServiceClient {
    */
   matchLabelFromLabelName(labelName: string) {
     return this.pathTemplates.labelPathTemplate.match(labelName).label;
+  }
+
+  /**
+   * Return a fully-qualified lineItem resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} line_item
+   * @returns {string} Resource name string.
+   */
+  lineItemPath(networkCode:string,lineItem:string) {
+    return this.pathTemplates.lineItemPathTemplate.render({
+      network_code: networkCode,
+      line_item: lineItem,
+    });
+  }
+
+  /**
+   * Parse the network_code from LineItem resource.
+   *
+   * @param {string} lineItemName
+   *   A fully-qualified path representing LineItem resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromLineItemName(lineItemName: string) {
+    return this.pathTemplates.lineItemPathTemplate.match(lineItemName).network_code;
+  }
+
+  /**
+   * Parse the line_item from LineItem resource.
+   *
+   * @param {string} lineItemName
+   *   A fully-qualified path representing LineItem resource.
+   * @returns {string} A string representing the line_item.
+   */
+  matchLineItemFromLineItemName(lineItemName: string) {
+    return this.pathTemplates.lineItemPathTemplate.match(lineItemName).line_item;
   }
 
   /**

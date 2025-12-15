@@ -263,7 +263,7 @@
       "regionTag": "cloudbuild_v1_generated_CloudBuild_ApproveBuild_async",
       "title": "CloudBuild approveBuild Sample",
       "origin": "API_DEFINITION",
-      "description": " Approves or rejects a pending build. If approved, the returned LRO will be analogous to the LRO returned from a CreateBuild call. If rejected, the returned LRO will be immediately done.",
+      "description": " Approves or rejects a pending build. If approved, the returned long-running operation (LRO) will be analogous to the LRO returned from a CreateBuild call. If rejected, the returned LRO will be immediately done.",
       "canonical": true,
       "file": "cloud_build.approve_build.js",
       "language": "JAVASCRIPT",
@@ -307,7 +307,7 @@
       "regionTag": "cloudbuild_v1_generated_CloudBuild_CreateBuildTrigger_async",
       "title": "CloudBuild createBuildTrigger Sample",
       "origin": "API_DEFINITION",
-      "description": " Creates a new `BuildTrigger`. This API is experimental.",
+      "description": " Creates a new `BuildTrigger`.",
       "canonical": true,
       "file": "cloud_build.create_build_trigger.js",
       "language": "JAVASCRIPT",
@@ -355,7 +355,7 @@
       "regionTag": "cloudbuild_v1_generated_CloudBuild_GetBuildTrigger_async",
       "title": "CloudBuild getBuildTrigger Sample",
       "origin": "API_DEFINITION",
-      "description": " Returns information about a `BuildTrigger`. This API is experimental.",
+      "description": " Returns information about a `BuildTrigger`.",
       "canonical": true,
       "file": "cloud_build.get_build_trigger.js",
       "language": "JAVASCRIPT",
@@ -403,7 +403,7 @@
       "regionTag": "cloudbuild_v1_generated_CloudBuild_ListBuildTriggers_async",
       "title": "CloudBuild listBuildTriggers Sample",
       "origin": "API_DEFINITION",
-      "description": " Lists existing `BuildTrigger`s. This API is experimental.",
+      "description": " Lists existing `BuildTrigger`s.",
       "canonical": true,
       "file": "cloud_build.list_build_triggers.js",
       "language": "JAVASCRIPT",
@@ -455,7 +455,7 @@
       "regionTag": "cloudbuild_v1_generated_CloudBuild_DeleteBuildTrigger_async",
       "title": "CloudBuild deleteBuildTrigger Sample",
       "origin": "API_DEFINITION",
-      "description": " Deletes a `BuildTrigger` by its project ID and trigger ID. This API is experimental.",
+      "description": " Deletes a `BuildTrigger` by its project ID and trigger ID.",
       "canonical": true,
       "file": "cloud_build.delete_build_trigger.js",
       "language": "JAVASCRIPT",
@@ -503,7 +503,7 @@
       "regionTag": "cloudbuild_v1_generated_CloudBuild_UpdateBuildTrigger_async",
       "title": "CloudBuild updateBuildTrigger Sample",
       "origin": "API_DEFINITION",
-      "description": " Updates a `BuildTrigger` by its project ID and trigger ID. This API is experimental.",
+      "description": " Updates a `BuildTrigger` by its project ID and trigger ID.",
       "canonical": true,
       "file": "cloud_build.update_build_trigger.js",
       "language": "JAVASCRIPT",
@@ -892,6 +892,46 @@
         "method": {
           "shortName": "ListWorkerPools",
           "fullName": "google.devtools.cloudbuild.v1.CloudBuild.ListWorkerPools",
+          "service": {
+            "shortName": "CloudBuild",
+            "fullName": "google.devtools.cloudbuild.v1.CloudBuild"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudbuild_v1_generated_CloudBuild_GetDefaultServiceAccount_async",
+      "title": "CloudBuild getDefaultServiceAccount Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the `DefaultServiceAccount` used by the project.",
+      "canonical": true,
+      "file": "cloud_build.get_default_service_account.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetDefaultServiceAccount",
+        "fullName": "google.devtools.cloudbuild.v1.CloudBuild.GetDefaultServiceAccount",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.devtools.cloudbuild.v1.DefaultServiceAccount",
+        "client": {
+          "shortName": "CloudBuildClient",
+          "fullName": "google.devtools.cloudbuild.v1.CloudBuildClient"
+        },
+        "method": {
+          "shortName": "GetDefaultServiceAccount",
+          "fullName": "google.devtools.cloudbuild.v1.CloudBuild.GetDefaultServiceAccount",
           "service": {
             "shortName": "CloudBuild",
             "fullName": "google.devtools.cloudbuild.v1.CloudBuild"

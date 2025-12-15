@@ -3963,6 +3963,7 @@
                          * @property {google.cloud.channel.v1.IAssociationInfo|null} [associationInfo] Entitlement associationInfo
                          * @property {Array.<google.cloud.channel.v1.IParameter>|null} [parameters] Entitlement parameters
                          * @property {string|null} [billingAccount] Entitlement billingAccount
+                         * @property {string|null} [priceReferenceId] Entitlement priceReferenceId
                          */
     
                         /**
@@ -4087,6 +4088,14 @@
                         Entitlement.prototype.billingAccount = "";
     
                         /**
+                         * Entitlement priceReferenceId.
+                         * @member {string} priceReferenceId
+                         * @memberof google.cloud.channel.v1.Entitlement
+                         * @instance
+                         */
+                        Entitlement.prototype.priceReferenceId = "";
+    
+                        /**
                          * Creates a new Entitlement instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.channel.v1.Entitlement
@@ -4141,6 +4150,8 @@
                                     $root.google.cloud.channel.v1.Parameter.encode(message.parameters[i], writer.uint32(/* id 26, wireType 2 =*/210).fork()).ldelim();
                             if (message.billingAccount != null && Object.hasOwnProperty.call(message, "billingAccount"))
                                 writer.uint32(/* id 28, wireType 2 =*/226).string(message.billingAccount);
+                            if (message.priceReferenceId != null && Object.hasOwnProperty.call(message, "priceReferenceId"))
+                                writer.uint32(/* id 29, wireType 2 =*/234).string(message.priceReferenceId);
                             return writer;
                         };
     
@@ -4236,6 +4247,10 @@
                                     }
                                 case 28: {
                                         message.billingAccount = reader.string();
+                                        break;
+                                    }
+                                case 29: {
+                                        message.priceReferenceId = reader.string();
                                         break;
                                     }
                                 default:
@@ -4349,6 +4364,9 @@
                             if (message.billingAccount != null && message.hasOwnProperty("billingAccount"))
                                 if (!$util.isString(message.billingAccount))
                                     return "billingAccount: string expected";
+                            if (message.priceReferenceId != null && message.hasOwnProperty("priceReferenceId"))
+                                if (!$util.isString(message.priceReferenceId))
+                                    return "priceReferenceId: string expected";
                             return null;
                         };
     
@@ -4469,6 +4487,8 @@
                             }
                             if (object.billingAccount != null)
                                 message.billingAccount = String(object.billingAccount);
+                            if (object.priceReferenceId != null)
+                                message.priceReferenceId = String(object.priceReferenceId);
                             return message;
                         };
     
@@ -4501,6 +4521,7 @@
                                 object.trialSettings = null;
                                 object.associationInfo = null;
                                 object.billingAccount = "";
+                                object.priceReferenceId = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -4534,6 +4555,8 @@
                             }
                             if (message.billingAccount != null && message.hasOwnProperty("billingAccount"))
                                 object.billingAccount = message.billingAccount;
+                            if (message.priceReferenceId != null && message.hasOwnProperty("priceReferenceId"))
+                                object.priceReferenceId = message.priceReferenceId;
                             return object;
                         };
     
@@ -6811,6 +6834,28 @@
                         return values;
                     })();
     
+                    /**
+                     * DiscountType enum.
+                     * @name google.cloud.channel.v1.DiscountType
+                     * @enum {number}
+                     * @property {number} DISCOUNT_TYPE_UNSPECIFIED=0 DISCOUNT_TYPE_UNSPECIFIED value
+                     * @property {number} REGIONAL_DISCOUNT=1 REGIONAL_DISCOUNT value
+                     * @property {number} PROMOTIONAL_DISCOUNT=2 PROMOTIONAL_DISCOUNT value
+                     * @property {number} SALES_DISCOUNT=3 SALES_DISCOUNT value
+                     * @property {number} RESELLER_MARGIN=4 RESELLER_MARGIN value
+                     * @property {number} DEAL_CODE=5 DEAL_CODE value
+                     */
+                    v1.DiscountType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "DISCOUNT_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "REGIONAL_DISCOUNT"] = 1;
+                        values[valuesById[2] = "PROMOTIONAL_DISCOUNT"] = 2;
+                        values[valuesById[3] = "SALES_DISCOUNT"] = 3;
+                        values[valuesById[4] = "RESELLER_MARGIN"] = 4;
+                        values[valuesById[5] = "DEAL_CODE"] = 5;
+                        return values;
+                    })();
+    
                     v1.Offer = (function() {
     
                         /**
@@ -8992,7 +9037,9 @@
                          * @property {google.type.IMoney|null} [basePrice] Price basePrice
                          * @property {number|null} [discount] Price discount
                          * @property {google.type.IMoney|null} [effectivePrice] Price effectivePrice
+                         * @property {google.cloud.channel.v1.IPeriod|null} [pricePeriod] Price pricePeriod
                          * @property {string|null} [externalPriceUri] Price externalPriceUri
+                         * @property {Array.<google.cloud.channel.v1.IDiscountComponent>|null} [discountComponents] Price discountComponents
                          */
     
                         /**
@@ -9004,6 +9051,7 @@
                          * @param {google.cloud.channel.v1.IPrice=} [properties] Properties to set
                          */
                         function Price(properties) {
+                            this.discountComponents = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -9035,12 +9083,28 @@
                         Price.prototype.effectivePrice = null;
     
                         /**
+                         * Price pricePeriod.
+                         * @member {google.cloud.channel.v1.IPeriod|null|undefined} pricePeriod
+                         * @memberof google.cloud.channel.v1.Price
+                         * @instance
+                         */
+                        Price.prototype.pricePeriod = null;
+    
+                        /**
                          * Price externalPriceUri.
                          * @member {string} externalPriceUri
                          * @memberof google.cloud.channel.v1.Price
                          * @instance
                          */
                         Price.prototype.externalPriceUri = "";
+    
+                        /**
+                         * Price discountComponents.
+                         * @member {Array.<google.cloud.channel.v1.IDiscountComponent>} discountComponents
+                         * @memberof google.cloud.channel.v1.Price
+                         * @instance
+                         */
+                        Price.prototype.discountComponents = $util.emptyArray;
     
                         /**
                          * Creates a new Price instance using the specified properties.
@@ -9074,6 +9138,11 @@
                                 $root.google.type.Money.encode(message.effectivePrice, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.externalPriceUri != null && Object.hasOwnProperty.call(message, "externalPriceUri"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.externalPriceUri);
+                            if (message.discountComponents != null && message.discountComponents.length)
+                                for (var i = 0; i < message.discountComponents.length; ++i)
+                                    $root.google.cloud.channel.v1.DiscountComponent.encode(message.discountComponents[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.pricePeriod != null && Object.hasOwnProperty.call(message, "pricePeriod"))
+                                $root.google.cloud.channel.v1.Period.encode(message.pricePeriod, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             return writer;
                         };
     
@@ -9122,8 +9191,18 @@
                                         message.effectivePrice = $root.google.type.Money.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 6: {
+                                        message.pricePeriod = $root.google.cloud.channel.v1.Period.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 4: {
                                         message.externalPriceUri = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        if (!(message.discountComponents && message.discountComponents.length))
+                                            message.discountComponents = [];
+                                        message.discountComponents.push($root.google.cloud.channel.v1.DiscountComponent.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -9174,9 +9253,23 @@
                                 if (error)
                                     return "effectivePrice." + error;
                             }
+                            if (message.pricePeriod != null && message.hasOwnProperty("pricePeriod")) {
+                                var error = $root.google.cloud.channel.v1.Period.verify(message.pricePeriod);
+                                if (error)
+                                    return "pricePeriod." + error;
+                            }
                             if (message.externalPriceUri != null && message.hasOwnProperty("externalPriceUri"))
                                 if (!$util.isString(message.externalPriceUri))
                                     return "externalPriceUri: string expected";
+                            if (message.discountComponents != null && message.hasOwnProperty("discountComponents")) {
+                                if (!Array.isArray(message.discountComponents))
+                                    return "discountComponents: array expected";
+                                for (var i = 0; i < message.discountComponents.length; ++i) {
+                                    var error = $root.google.cloud.channel.v1.DiscountComponent.verify(message.discountComponents[i]);
+                                    if (error)
+                                        return "discountComponents." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -9204,8 +9297,23 @@
                                     throw TypeError(".google.cloud.channel.v1.Price.effectivePrice: object expected");
                                 message.effectivePrice = $root.google.type.Money.fromObject(object.effectivePrice);
                             }
+                            if (object.pricePeriod != null) {
+                                if (typeof object.pricePeriod !== "object")
+                                    throw TypeError(".google.cloud.channel.v1.Price.pricePeriod: object expected");
+                                message.pricePeriod = $root.google.cloud.channel.v1.Period.fromObject(object.pricePeriod);
+                            }
                             if (object.externalPriceUri != null)
                                 message.externalPriceUri = String(object.externalPriceUri);
+                            if (object.discountComponents) {
+                                if (!Array.isArray(object.discountComponents))
+                                    throw TypeError(".google.cloud.channel.v1.Price.discountComponents: array expected");
+                                message.discountComponents = [];
+                                for (var i = 0; i < object.discountComponents.length; ++i) {
+                                    if (typeof object.discountComponents[i] !== "object")
+                                        throw TypeError(".google.cloud.channel.v1.Price.discountComponents: object expected");
+                                    message.discountComponents[i] = $root.google.cloud.channel.v1.DiscountComponent.fromObject(object.discountComponents[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -9222,11 +9330,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.discountComponents = [];
                             if (options.defaults) {
                                 object.basePrice = null;
                                 object.discount = 0;
                                 object.effectivePrice = null;
                                 object.externalPriceUri = "";
+                                object.pricePeriod = null;
                             }
                             if (message.basePrice != null && message.hasOwnProperty("basePrice"))
                                 object.basePrice = $root.google.type.Money.toObject(message.basePrice, options);
@@ -9236,6 +9347,13 @@
                                 object.effectivePrice = $root.google.type.Money.toObject(message.effectivePrice, options);
                             if (message.externalPriceUri != null && message.hasOwnProperty("externalPriceUri"))
                                 object.externalPriceUri = message.externalPriceUri;
+                            if (message.discountComponents && message.discountComponents.length) {
+                                object.discountComponents = [];
+                                for (var j = 0; j < message.discountComponents.length; ++j)
+                                    object.discountComponents[j] = $root.google.cloud.channel.v1.DiscountComponent.toObject(message.discountComponents[j], options);
+                            }
+                            if (message.pricePeriod != null && message.hasOwnProperty("pricePeriod"))
+                                object.pricePeriod = $root.google.cloud.channel.v1.Period.toObject(message.pricePeriod, options);
                             return object;
                         };
     
@@ -10135,6 +10253,327 @@
                         };
     
                         return Period;
+                    })();
+    
+                    v1.DiscountComponent = (function() {
+    
+                        /**
+                         * Properties of a DiscountComponent.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IDiscountComponent
+                         * @property {number|null} [discountPercentage] DiscountComponent discountPercentage
+                         * @property {google.type.IMoney|null} [discountAbsolute] DiscountComponent discountAbsolute
+                         * @property {google.cloud.channel.v1.DiscountType|null} [discountType] DiscountComponent discountType
+                         */
+    
+                        /**
+                         * Constructs a new DiscountComponent.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a DiscountComponent.
+                         * @implements IDiscountComponent
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IDiscountComponent=} [properties] Properties to set
+                         */
+                        function DiscountComponent(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DiscountComponent discountPercentage.
+                         * @member {number|null|undefined} discountPercentage
+                         * @memberof google.cloud.channel.v1.DiscountComponent
+                         * @instance
+                         */
+                        DiscountComponent.prototype.discountPercentage = null;
+    
+                        /**
+                         * DiscountComponent discountAbsolute.
+                         * @member {google.type.IMoney|null|undefined} discountAbsolute
+                         * @memberof google.cloud.channel.v1.DiscountComponent
+                         * @instance
+                         */
+                        DiscountComponent.prototype.discountAbsolute = null;
+    
+                        /**
+                         * DiscountComponent discountType.
+                         * @member {google.cloud.channel.v1.DiscountType} discountType
+                         * @memberof google.cloud.channel.v1.DiscountComponent
+                         * @instance
+                         */
+                        DiscountComponent.prototype.discountType = 0;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * DiscountComponent discountValue.
+                         * @member {"discountPercentage"|"discountAbsolute"|undefined} discountValue
+                         * @memberof google.cloud.channel.v1.DiscountComponent
+                         * @instance
+                         */
+                        Object.defineProperty(DiscountComponent.prototype, "discountValue", {
+                            get: $util.oneOfGetter($oneOfFields = ["discountPercentage", "discountAbsolute"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new DiscountComponent instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.DiscountComponent
+                         * @static
+                         * @param {google.cloud.channel.v1.IDiscountComponent=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.DiscountComponent} DiscountComponent instance
+                         */
+                        DiscountComponent.create = function create(properties) {
+                            return new DiscountComponent(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DiscountComponent message. Does not implicitly {@link google.cloud.channel.v1.DiscountComponent.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.DiscountComponent
+                         * @static
+                         * @param {google.cloud.channel.v1.IDiscountComponent} message DiscountComponent message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DiscountComponent.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.discountType != null && Object.hasOwnProperty.call(message, "discountType"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.discountType);
+                            if (message.discountPercentage != null && Object.hasOwnProperty.call(message, "discountPercentage"))
+                                writer.uint32(/* id 3, wireType 1 =*/25).double(message.discountPercentage);
+                            if (message.discountAbsolute != null && Object.hasOwnProperty.call(message, "discountAbsolute"))
+                                $root.google.type.Money.encode(message.discountAbsolute, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DiscountComponent message, length delimited. Does not implicitly {@link google.cloud.channel.v1.DiscountComponent.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.DiscountComponent
+                         * @static
+                         * @param {google.cloud.channel.v1.IDiscountComponent} message DiscountComponent message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DiscountComponent.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DiscountComponent message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.DiscountComponent
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.DiscountComponent} DiscountComponent
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DiscountComponent.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.DiscountComponent();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 3: {
+                                        message.discountPercentage = reader.double();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.discountAbsolute = $root.google.type.Money.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.discountType = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DiscountComponent message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.DiscountComponent
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.DiscountComponent} DiscountComponent
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DiscountComponent.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DiscountComponent message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.DiscountComponent
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DiscountComponent.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.discountPercentage != null && message.hasOwnProperty("discountPercentage")) {
+                                properties.discountValue = 1;
+                                if (typeof message.discountPercentage !== "number")
+                                    return "discountPercentage: number expected";
+                            }
+                            if (message.discountAbsolute != null && message.hasOwnProperty("discountAbsolute")) {
+                                if (properties.discountValue === 1)
+                                    return "discountValue: multiple values";
+                                properties.discountValue = 1;
+                                {
+                                    var error = $root.google.type.Money.verify(message.discountAbsolute);
+                                    if (error)
+                                        return "discountAbsolute." + error;
+                                }
+                            }
+                            if (message.discountType != null && message.hasOwnProperty("discountType"))
+                                switch (message.discountType) {
+                                default:
+                                    return "discountType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DiscountComponent message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.DiscountComponent
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.DiscountComponent} DiscountComponent
+                         */
+                        DiscountComponent.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.DiscountComponent)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.DiscountComponent();
+                            if (object.discountPercentage != null)
+                                message.discountPercentage = Number(object.discountPercentage);
+                            if (object.discountAbsolute != null) {
+                                if (typeof object.discountAbsolute !== "object")
+                                    throw TypeError(".google.cloud.channel.v1.DiscountComponent.discountAbsolute: object expected");
+                                message.discountAbsolute = $root.google.type.Money.fromObject(object.discountAbsolute);
+                            }
+                            switch (object.discountType) {
+                            default:
+                                if (typeof object.discountType === "number") {
+                                    message.discountType = object.discountType;
+                                    break;
+                                }
+                                break;
+                            case "DISCOUNT_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.discountType = 0;
+                                break;
+                            case "REGIONAL_DISCOUNT":
+                            case 1:
+                                message.discountType = 1;
+                                break;
+                            case "PROMOTIONAL_DISCOUNT":
+                            case 2:
+                                message.discountType = 2;
+                                break;
+                            case "SALES_DISCOUNT":
+                            case 3:
+                                message.discountType = 3;
+                                break;
+                            case "RESELLER_MARGIN":
+                            case 4:
+                                message.discountType = 4;
+                                break;
+                            case "DEAL_CODE":
+                            case 5:
+                                message.discountType = 5;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DiscountComponent message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.DiscountComponent
+                         * @static
+                         * @param {google.cloud.channel.v1.DiscountComponent} message DiscountComponent
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DiscountComponent.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.discountType = options.enums === String ? "DISCOUNT_TYPE_UNSPECIFIED" : 0;
+                            if (message.discountType != null && message.hasOwnProperty("discountType"))
+                                object.discountType = options.enums === String ? $root.google.cloud.channel.v1.DiscountType[message.discountType] === undefined ? message.discountType : $root.google.cloud.channel.v1.DiscountType[message.discountType] : message.discountType;
+                            if (message.discountPercentage != null && message.hasOwnProperty("discountPercentage")) {
+                                object.discountPercentage = options.json && !isFinite(message.discountPercentage) ? String(message.discountPercentage) : message.discountPercentage;
+                                if (options.oneofs)
+                                    object.discountValue = "discountPercentage";
+                            }
+                            if (message.discountAbsolute != null && message.hasOwnProperty("discountAbsolute")) {
+                                object.discountAbsolute = $root.google.type.Money.toObject(message.discountAbsolute, options);
+                                if (options.oneofs)
+                                    object.discountValue = "discountAbsolute";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DiscountComponent to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.DiscountComponent
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DiscountComponent.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DiscountComponent
+                         * @function getTypeUrl
+                         * @memberof google.cloud.channel.v1.DiscountComponent
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DiscountComponent.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.channel.v1.DiscountComponent";
+                        };
+    
+                        return DiscountComponent;
                     })();
     
                     /**
@@ -24481,6 +24920,7 @@
                          * @memberof google.cloud.channel.v1
                          * @interface ITransferableOffer
                          * @property {google.cloud.channel.v1.IOffer|null} [offer] TransferableOffer offer
+                         * @property {string|null} [priceReferenceId] TransferableOffer priceReferenceId
                          */
     
                         /**
@@ -24505,6 +24945,14 @@
                          * @instance
                          */
                         TransferableOffer.prototype.offer = null;
+    
+                        /**
+                         * TransferableOffer priceReferenceId.
+                         * @member {string} priceReferenceId
+                         * @memberof google.cloud.channel.v1.TransferableOffer
+                         * @instance
+                         */
+                        TransferableOffer.prototype.priceReferenceId = "";
     
                         /**
                          * Creates a new TransferableOffer instance using the specified properties.
@@ -24532,6 +24980,8 @@
                                 writer = $Writer.create();
                             if (message.offer != null && Object.hasOwnProperty.call(message, "offer"))
                                 $root.google.cloud.channel.v1.Offer.encode(message.offer, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.priceReferenceId != null && Object.hasOwnProperty.call(message, "priceReferenceId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.priceReferenceId);
                             return writer;
                         };
     
@@ -24570,6 +25020,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.offer = $root.google.cloud.channel.v1.Offer.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.priceReferenceId = reader.string();
                                         break;
                                     }
                                 default:
@@ -24612,6 +25066,9 @@
                                 if (error)
                                     return "offer." + error;
                             }
+                            if (message.priceReferenceId != null && message.hasOwnProperty("priceReferenceId"))
+                                if (!$util.isString(message.priceReferenceId))
+                                    return "priceReferenceId: string expected";
                             return null;
                         };
     
@@ -24632,6 +25089,8 @@
                                     throw TypeError(".google.cloud.channel.v1.TransferableOffer.offer: object expected");
                                 message.offer = $root.google.cloud.channel.v1.Offer.fromObject(object.offer);
                             }
+                            if (object.priceReferenceId != null)
+                                message.priceReferenceId = String(object.priceReferenceId);
                             return message;
                         };
     
@@ -24648,10 +25107,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.offer = null;
+                                object.priceReferenceId = "";
+                            }
                             if (message.offer != null && message.hasOwnProperty("offer"))
                                 object.offer = $root.google.cloud.channel.v1.Offer.toObject(message.offer, options);
+                            if (message.priceReferenceId != null && message.hasOwnProperty("priceReferenceId"))
+                                object.priceReferenceId = message.priceReferenceId;
                             return object;
                         };
     
@@ -32073,6 +32536,7 @@
                          * @property {string|null} [purchaseOrderId] ChangeOfferRequest purchaseOrderId
                          * @property {string|null} [requestId] ChangeOfferRequest requestId
                          * @property {string|null} [billingAccount] ChangeOfferRequest billingAccount
+                         * @property {string|null} [priceReferenceId] ChangeOfferRequest priceReferenceId
                          */
     
                         /**
@@ -32140,6 +32604,14 @@
                         ChangeOfferRequest.prototype.billingAccount = "";
     
                         /**
+                         * ChangeOfferRequest priceReferenceId.
+                         * @member {string} priceReferenceId
+                         * @memberof google.cloud.channel.v1.ChangeOfferRequest
+                         * @instance
+                         */
+                        ChangeOfferRequest.prototype.priceReferenceId = "";
+    
+                        /**
                          * Creates a new ChangeOfferRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.channel.v1.ChangeOfferRequest
@@ -32176,6 +32648,8 @@
                                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.requestId);
                             if (message.billingAccount != null && Object.hasOwnProperty.call(message, "billingAccount"))
                                 writer.uint32(/* id 7, wireType 2 =*/58).string(message.billingAccount);
+                            if (message.priceReferenceId != null && Object.hasOwnProperty.call(message, "priceReferenceId"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.priceReferenceId);
                             return writer;
                         };
     
@@ -32238,6 +32712,10 @@
                                         message.billingAccount = reader.string();
                                         break;
                                     }
+                                case 8: {
+                                        message.priceReferenceId = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -32297,6 +32775,9 @@
                             if (message.billingAccount != null && message.hasOwnProperty("billingAccount"))
                                 if (!$util.isString(message.billingAccount))
                                     return "billingAccount: string expected";
+                            if (message.priceReferenceId != null && message.hasOwnProperty("priceReferenceId"))
+                                if (!$util.isString(message.priceReferenceId))
+                                    return "priceReferenceId: string expected";
                             return null;
                         };
     
@@ -32332,6 +32813,8 @@
                                 message.requestId = String(object.requestId);
                             if (object.billingAccount != null)
                                 message.billingAccount = String(object.billingAccount);
+                            if (object.priceReferenceId != null)
+                                message.priceReferenceId = String(object.priceReferenceId);
                             return message;
                         };
     
@@ -32356,6 +32839,7 @@
                                 object.purchaseOrderId = "";
                                 object.requestId = "";
                                 object.billingAccount = "";
+                                object.priceReferenceId = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -32372,6 +32856,8 @@
                                 object.requestId = message.requestId;
                             if (message.billingAccount != null && message.hasOwnProperty("billingAccount"))
                                 object.billingAccount = message.billingAccount;
+                            if (message.priceReferenceId != null && message.hasOwnProperty("priceReferenceId"))
+                                object.priceReferenceId = message.priceReferenceId;
                             return object;
                         };
     
@@ -37557,6 +38043,7 @@
                          * @memberof google.cloud.channel.v1
                          * @interface IPurchasableOffer
                          * @property {google.cloud.channel.v1.IOffer|null} [offer] PurchasableOffer offer
+                         * @property {string|null} [priceReferenceId] PurchasableOffer priceReferenceId
                          */
     
                         /**
@@ -37581,6 +38068,14 @@
                          * @instance
                          */
                         PurchasableOffer.prototype.offer = null;
+    
+                        /**
+                         * PurchasableOffer priceReferenceId.
+                         * @member {string} priceReferenceId
+                         * @memberof google.cloud.channel.v1.PurchasableOffer
+                         * @instance
+                         */
+                        PurchasableOffer.prototype.priceReferenceId = "";
     
                         /**
                          * Creates a new PurchasableOffer instance using the specified properties.
@@ -37608,6 +38103,8 @@
                                 writer = $Writer.create();
                             if (message.offer != null && Object.hasOwnProperty.call(message, "offer"))
                                 $root.google.cloud.channel.v1.Offer.encode(message.offer, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.priceReferenceId != null && Object.hasOwnProperty.call(message, "priceReferenceId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.priceReferenceId);
                             return writer;
                         };
     
@@ -37646,6 +38143,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.offer = $root.google.cloud.channel.v1.Offer.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.priceReferenceId = reader.string();
                                         break;
                                     }
                                 default:
@@ -37688,6 +38189,9 @@
                                 if (error)
                                     return "offer." + error;
                             }
+                            if (message.priceReferenceId != null && message.hasOwnProperty("priceReferenceId"))
+                                if (!$util.isString(message.priceReferenceId))
+                                    return "priceReferenceId: string expected";
                             return null;
                         };
     
@@ -37708,6 +38212,8 @@
                                     throw TypeError(".google.cloud.channel.v1.PurchasableOffer.offer: object expected");
                                 message.offer = $root.google.cloud.channel.v1.Offer.fromObject(object.offer);
                             }
+                            if (object.priceReferenceId != null)
+                                message.priceReferenceId = String(object.priceReferenceId);
                             return message;
                         };
     
@@ -37724,10 +38230,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.offer = null;
+                                object.priceReferenceId = "";
+                            }
                             if (message.offer != null && message.hasOwnProperty("offer"))
                                 object.offer = $root.google.cloud.channel.v1.Offer.toObject(message.offer, options);
+                            if (message.priceReferenceId != null && message.hasOwnProperty("priceReferenceId"))
+                                object.priceReferenceId = message.priceReferenceId;
                             return object;
                         };
     
@@ -38715,6 +39225,7 @@
                          * @interface IRegisterSubscriberRequest
                          * @property {string|null} [account] RegisterSubscriberRequest account
                          * @property {string|null} [serviceAccount] RegisterSubscriberRequest serviceAccount
+                         * @property {string|null} [integrator] RegisterSubscriberRequest integrator
                          */
     
                         /**
@@ -38749,6 +39260,23 @@
                         RegisterSubscriberRequest.prototype.serviceAccount = "";
     
                         /**
+                         * RegisterSubscriberRequest integrator.
+                         * @member {string|null|undefined} integrator
+                         * @memberof google.cloud.channel.v1.RegisterSubscriberRequest
+                         * @instance
+                         */
+                        RegisterSubscriberRequest.prototype.integrator = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(RegisterSubscriberRequest.prototype, "_integrator", {
+                            get: $util.oneOfGetter($oneOfFields = ["integrator"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new RegisterSubscriberRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.channel.v1.RegisterSubscriberRequest
@@ -38776,6 +39304,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.account);
                             if (message.serviceAccount != null && Object.hasOwnProperty.call(message, "serviceAccount"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.serviceAccount);
+                            if (message.integrator != null && Object.hasOwnProperty.call(message, "integrator"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.integrator);
                             return writer;
                         };
     
@@ -38820,6 +39350,10 @@
                                         message.serviceAccount = reader.string();
                                         break;
                                     }
+                                case 3: {
+                                        message.integrator = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -38855,12 +39389,18 @@
                         RegisterSubscriberRequest.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.account != null && message.hasOwnProperty("account"))
                                 if (!$util.isString(message.account))
                                     return "account: string expected";
                             if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
                                 if (!$util.isString(message.serviceAccount))
                                     return "serviceAccount: string expected";
+                            if (message.integrator != null && message.hasOwnProperty("integrator")) {
+                                properties._integrator = 1;
+                                if (!$util.isString(message.integrator))
+                                    return "integrator: string expected";
+                            }
                             return null;
                         };
     
@@ -38880,6 +39420,8 @@
                                 message.account = String(object.account);
                             if (object.serviceAccount != null)
                                 message.serviceAccount = String(object.serviceAccount);
+                            if (object.integrator != null)
+                                message.integrator = String(object.integrator);
                             return message;
                         };
     
@@ -38904,6 +39446,11 @@
                                 object.account = message.account;
                             if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
                                 object.serviceAccount = message.serviceAccount;
+                            if (message.integrator != null && message.hasOwnProperty("integrator")) {
+                                object.integrator = message.integrator;
+                                if (options.oneofs)
+                                    object._integrator = "integrator";
+                            }
                             return object;
                         };
     
@@ -39149,6 +39696,7 @@
                          * @interface IUnregisterSubscriberRequest
                          * @property {string|null} [account] UnregisterSubscriberRequest account
                          * @property {string|null} [serviceAccount] UnregisterSubscriberRequest serviceAccount
+                         * @property {string|null} [integrator] UnregisterSubscriberRequest integrator
                          */
     
                         /**
@@ -39183,6 +39731,23 @@
                         UnregisterSubscriberRequest.prototype.serviceAccount = "";
     
                         /**
+                         * UnregisterSubscriberRequest integrator.
+                         * @member {string|null|undefined} integrator
+                         * @memberof google.cloud.channel.v1.UnregisterSubscriberRequest
+                         * @instance
+                         */
+                        UnregisterSubscriberRequest.prototype.integrator = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(UnregisterSubscriberRequest.prototype, "_integrator", {
+                            get: $util.oneOfGetter($oneOfFields = ["integrator"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new UnregisterSubscriberRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.channel.v1.UnregisterSubscriberRequest
@@ -39210,6 +39775,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.account);
                             if (message.serviceAccount != null && Object.hasOwnProperty.call(message, "serviceAccount"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.serviceAccount);
+                            if (message.integrator != null && Object.hasOwnProperty.call(message, "integrator"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.integrator);
                             return writer;
                         };
     
@@ -39254,6 +39821,10 @@
                                         message.serviceAccount = reader.string();
                                         break;
                                     }
+                                case 3: {
+                                        message.integrator = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -39289,12 +39860,18 @@
                         UnregisterSubscriberRequest.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.account != null && message.hasOwnProperty("account"))
                                 if (!$util.isString(message.account))
                                     return "account: string expected";
                             if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
                                 if (!$util.isString(message.serviceAccount))
                                     return "serviceAccount: string expected";
+                            if (message.integrator != null && message.hasOwnProperty("integrator")) {
+                                properties._integrator = 1;
+                                if (!$util.isString(message.integrator))
+                                    return "integrator: string expected";
+                            }
                             return null;
                         };
     
@@ -39314,6 +39891,8 @@
                                 message.account = String(object.account);
                             if (object.serviceAccount != null)
                                 message.serviceAccount = String(object.serviceAccount);
+                            if (object.integrator != null)
+                                message.integrator = String(object.integrator);
                             return message;
                         };
     
@@ -39338,6 +39917,11 @@
                                 object.account = message.account;
                             if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
                                 object.serviceAccount = message.serviceAccount;
+                            if (message.integrator != null && message.hasOwnProperty("integrator")) {
+                                object.integrator = message.integrator;
+                                if (options.oneofs)
+                                    object._integrator = "integrator";
+                            }
                             return object;
                         };
     
@@ -39584,6 +40168,7 @@
                          * @property {string|null} [account] ListSubscribersRequest account
                          * @property {number|null} [pageSize] ListSubscribersRequest pageSize
                          * @property {string|null} [pageToken] ListSubscribersRequest pageToken
+                         * @property {string|null} [integrator] ListSubscribersRequest integrator
                          */
     
                         /**
@@ -39626,6 +40211,23 @@
                         ListSubscribersRequest.prototype.pageToken = "";
     
                         /**
+                         * ListSubscribersRequest integrator.
+                         * @member {string|null|undefined} integrator
+                         * @memberof google.cloud.channel.v1.ListSubscribersRequest
+                         * @instance
+                         */
+                        ListSubscribersRequest.prototype.integrator = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(ListSubscribersRequest.prototype, "_integrator", {
+                            get: $util.oneOfGetter($oneOfFields = ["integrator"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new ListSubscribersRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.channel.v1.ListSubscribersRequest
@@ -39655,6 +40257,8 @@
                                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
                             if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.integrator != null && Object.hasOwnProperty.call(message, "integrator"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.integrator);
                             return writer;
                         };
     
@@ -39703,6 +40307,10 @@
                                         message.pageToken = reader.string();
                                         break;
                                     }
+                                case 4: {
+                                        message.integrator = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -39738,6 +40346,7 @@
                         ListSubscribersRequest.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.account != null && message.hasOwnProperty("account"))
                                 if (!$util.isString(message.account))
                                     return "account: string expected";
@@ -39747,6 +40356,11 @@
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 if (!$util.isString(message.pageToken))
                                     return "pageToken: string expected";
+                            if (message.integrator != null && message.hasOwnProperty("integrator")) {
+                                properties._integrator = 1;
+                                if (!$util.isString(message.integrator))
+                                    return "integrator: string expected";
+                            }
                             return null;
                         };
     
@@ -39768,6 +40382,8 @@
                                 message.pageSize = object.pageSize | 0;
                             if (object.pageToken != null)
                                 message.pageToken = String(object.pageToken);
+                            if (object.integrator != null)
+                                message.integrator = String(object.integrator);
                             return message;
                         };
     
@@ -39795,6 +40411,11 @@
                                 object.pageSize = message.pageSize;
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 object.pageToken = message.pageToken;
+                            if (message.integrator != null && message.hasOwnProperty("integrator")) {
+                                object.integrator = message.integrator;
+                                if (options.oneofs)
+                                    object._integrator = "integrator";
+                            }
                             return object;
                         };
     

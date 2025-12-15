@@ -50,6 +50,11 @@
                 "getWorkerPool"
               ]
             },
+            "GetDefaultServiceAccount": {
+              "methods": [
+                "getDefaultServiceAccount"
+              ]
+            },
             "CreateBuild": {
               "methods": [
                 "createBuild"
@@ -149,6 +154,11 @@
             "GetWorkerPool": {
               "methods": [
                 "getWorkerPool"
+              ]
+            },
+            "GetDefaultServiceAccount": {
+              "methods": [
+                "getDefaultServiceAccount"
               ]
             },
             "CreateBuild": {

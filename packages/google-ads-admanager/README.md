@@ -65,9 +65,16 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | batch allow ad review center ads | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/ad_review_center_ad_service.batch_allow_ad_review_center_ads.js) |
 | batch block ad review center ads | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/ad_review_center_ad_service.batch_block_ad_review_center_ads.js) |
 | search ad review center ads | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/ad_review_center_ad_service.search_ad_review_center_ads.js) |
+| batch activate ad units | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/ad_unit_service.batch_activate_ad_units.js) |
+| batch archive ad units | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/ad_unit_service.batch_archive_ad_units.js) |
+| batch create ad units | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/ad_unit_service.batch_create_ad_units.js) |
+| batch deactivate ad units | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/ad_unit_service.batch_deactivate_ad_units.js) |
+| batch update ad units | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/ad_unit_service.batch_update_ad_units.js) |
+| create ad unit | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/ad_unit_service.create_ad_unit.js) |
 | get ad unit | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/ad_unit_service.get_ad_unit.js) |
 | list ad unit sizes | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/ad_unit_service.list_ad_unit_sizes.js) |
 | list ad units | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/ad_unit_service.list_ad_units.js) |
+| update ad unit | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/ad_unit_service.update_ad_unit.js) |
 | get application | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/application_service.get_application.js) |
 | list applications | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/application_service.list_applications.js) |
 | get audience segment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/audience_segment_service.get_audience_segment.js) |
@@ -106,8 +113,14 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | get custom field | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/custom_field_service.get_custom_field.js) |
 | list custom fields | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/custom_field_service.list_custom_fields.js) |
 | update custom field | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/custom_field_service.update_custom_field.js) |
+| batch activate custom targeting keys | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/custom_targeting_key_service.batch_activate_custom_targeting_keys.js) |
+| batch create custom targeting keys | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/custom_targeting_key_service.batch_create_custom_targeting_keys.js) |
+| batch deactivate custom targeting keys | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/custom_targeting_key_service.batch_deactivate_custom_targeting_keys.js) |
+| batch update custom targeting keys | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/custom_targeting_key_service.batch_update_custom_targeting_keys.js) |
+| create custom targeting key | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/custom_targeting_key_service.create_custom_targeting_key.js) |
 | get custom targeting key | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/custom_targeting_key_service.get_custom_targeting_key.js) |
 | list custom targeting keys | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/custom_targeting_key_service.list_custom_targeting_keys.js) |
+| update custom targeting key | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/custom_targeting_key_service.update_custom_targeting_key.js) |
 | get custom targeting value | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/custom_targeting_value_service.get_custom_targeting_value.js) |
 | list custom targeting values | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/custom_targeting_value_service.list_custom_targeting_values.js) |
 | get device capability | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/device_capability_service.get_device_capability.js) |
@@ -124,6 +137,8 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update entity signals mapping | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/entity_signals_mapping_service.update_entity_signals_mapping.js) |
 | get geo target | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/geo_target_service.get_geo_target.js) |
 | list geo targets | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/geo_target_service.list_geo_targets.js) |
+| get line item | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/line_item_service.get_line_item.js) |
+| list line items | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/line_item_service.list_line_items.js) |
 | get mobile carrier | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/mobile_carrier_service.get_mobile_carrier.js) |
 | list mobile carriers | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/mobile_carrier_service.list_mobile_carriers.js) |
 | get mobile device | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/mobile_device_service.get_mobile_device.js) |

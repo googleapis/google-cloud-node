@@ -29,7 +29,8 @@ function main() {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The target resource to list associations. It is an organization, or a folder.
+   *  The target resource to list associations. It is an organization, or a
+   *  folder.
    */
   // const targetResource = 'abc123'
 

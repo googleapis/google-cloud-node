@@ -29,7 +29,8 @@ function main(instanceGroupManager, instanceGroupManagersDeletePerInstanceConfig
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The name of the managed instance group. It should conform to RFC1035.
+   *  The name of the managed instance group.
+   *  It should conform to RFC1035.
    */
   // const instanceGroupManager = 'abc123'
   /**
@@ -41,7 +42,10 @@ function main(instanceGroupManager, instanceGroupManagersDeletePerInstanceConfig
    */
   // const project = 'my-project'
   /**
-   *  The name of the zone where the managed instance group is located. It should conform to RFC1035.
+   *  The name of thezone
+   *  where the managed instance
+   *  group is located.
+   *  It should conform to RFC1035.
    */
   // const zone = 'abc123'
 

@@ -39,7 +39,7 @@ function main(parent, recurringAudienceList) {
   // const recurringAudienceList = {}
 
   // Imports the Data library
-  const {AlphaAnalyticsDataClient} = require('@google-cloud/data').v1alpha;
+  const {AlphaAnalyticsDataClient} = require('@google-analytics/data').v1alpha;
 
   // Instantiates a client
   const dataClient = new AlphaAnalyticsDataClient();

@@ -258,6 +258,9 @@ export class CmsMetadataValueServiceClient {
       labelPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/labels/{label}'
       ),
+      lineItemPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/lineItems/{line_item}'
+      ),
       liveStreamEventPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/liveStreamEvents/{live_stream_event}'
       ),
@@ -472,12 +475,12 @@ export class CmsMetadataValueServiceClient {
   // -- Service calls --
   // -------------------
 /**
- * API to retrieve a `CmsMetadataKey` object.
+ * API to retrieve a `CmsMetadataValue` object.
  *
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.name
- *   Required. The resource name of the CmsMetadataKey.
+ *   Required. The resource name of the CmsMetadataValue.
  *   Format: `networks/{network_code}/cmsMetadataValues/{cms_metadata_value_id}`
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1740,6 +1743,42 @@ export class CmsMetadataValueServiceClient {
    */
   matchLabelFromLabelName(labelName: string) {
     return this.pathTemplates.labelPathTemplate.match(labelName).label;
+  }
+
+  /**
+   * Return a fully-qualified lineItem resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} line_item
+   * @returns {string} Resource name string.
+   */
+  lineItemPath(networkCode:string,lineItem:string) {
+    return this.pathTemplates.lineItemPathTemplate.render({
+      network_code: networkCode,
+      line_item: lineItem,
+    });
+  }
+
+  /**
+   * Parse the network_code from LineItem resource.
+   *
+   * @param {string} lineItemName
+   *   A fully-qualified path representing LineItem resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromLineItemName(lineItemName: string) {
+    return this.pathTemplates.lineItemPathTemplate.match(lineItemName).network_code;
+  }
+
+  /**
+   * Parse the line_item from LineItem resource.
+   *
+   * @param {string} lineItemName
+   *   A fully-qualified path representing LineItem resource.
+   * @returns {string} A string representing the line_item.
+   */
+  matchLineItemFromLineItemName(lineItemName: string) {
+    return this.pathTemplates.lineItemPathTemplate.match(lineItemName).line_item;
   }
 
   /**

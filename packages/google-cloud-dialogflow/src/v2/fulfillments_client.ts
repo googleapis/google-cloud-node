@@ -192,6 +192,9 @@ export class FulfillmentsClient {
       generatorPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/generators/{generator}'
       ),
+      generatorEvaluationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/generators/{generator}/evaluations/{evaluation}'
+      ),
       projectAgentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent'
       ),
@@ -305,6 +308,12 @@ export class FulfillmentsClient {
       ),
       projectLocationKnowledgeBaseDocumentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/knowledgeBases/{knowledge_base}/documents/{document}'
+      ),
+      sipTrunkPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/sipTrunks/{siptrunk}'
+      ),
+      toolPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/tools/{tool}'
       ),
     };
 
@@ -861,6 +870,68 @@ export class FulfillmentsClient {
    */
   matchGeneratorFromGeneratorName(generatorName: string) {
     return this.pathTemplates.generatorPathTemplate.match(generatorName).generator;
+  }
+
+  /**
+   * Return a fully-qualified generatorEvaluation resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} generator
+   * @param {string} evaluation
+   * @returns {string} Resource name string.
+   */
+  generatorEvaluationPath(project:string,location:string,generator:string,evaluation:string) {
+    return this.pathTemplates.generatorEvaluationPathTemplate.render({
+      project: project,
+      location: location,
+      generator: generator,
+      evaluation: evaluation,
+    });
+  }
+
+  /**
+   * Parse the project from GeneratorEvaluation resource.
+   *
+   * @param {string} generatorEvaluationName
+   *   A fully-qualified path representing GeneratorEvaluation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromGeneratorEvaluationName(generatorEvaluationName: string) {
+    return this.pathTemplates.generatorEvaluationPathTemplate.match(generatorEvaluationName).project;
+  }
+
+  /**
+   * Parse the location from GeneratorEvaluation resource.
+   *
+   * @param {string} generatorEvaluationName
+   *   A fully-qualified path representing GeneratorEvaluation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromGeneratorEvaluationName(generatorEvaluationName: string) {
+    return this.pathTemplates.generatorEvaluationPathTemplate.match(generatorEvaluationName).location;
+  }
+
+  /**
+   * Parse the generator from GeneratorEvaluation resource.
+   *
+   * @param {string} generatorEvaluationName
+   *   A fully-qualified path representing GeneratorEvaluation resource.
+   * @returns {string} A string representing the generator.
+   */
+  matchGeneratorFromGeneratorEvaluationName(generatorEvaluationName: string) {
+    return this.pathTemplates.generatorEvaluationPathTemplate.match(generatorEvaluationName).generator;
+  }
+
+  /**
+   * Parse the evaluation from GeneratorEvaluation resource.
+   *
+   * @param {string} generatorEvaluationName
+   *   A fully-qualified path representing GeneratorEvaluation resource.
+   * @returns {string} A string representing the evaluation.
+   */
+  matchEvaluationFromGeneratorEvaluationName(generatorEvaluationName: string) {
+    return this.pathTemplates.generatorEvaluationPathTemplate.match(generatorEvaluationName).evaluation;
   }
 
   /**
@@ -2736,6 +2807,104 @@ export class FulfillmentsClient {
    */
   matchDocumentFromProjectLocationKnowledgeBaseDocumentName(projectLocationKnowledgeBaseDocumentName: string) {
     return this.pathTemplates.projectLocationKnowledgeBaseDocumentPathTemplate.match(projectLocationKnowledgeBaseDocumentName).document;
+  }
+
+  /**
+   * Return a fully-qualified sipTrunk resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} siptrunk
+   * @returns {string} Resource name string.
+   */
+  sipTrunkPath(project:string,location:string,siptrunk:string) {
+    return this.pathTemplates.sipTrunkPathTemplate.render({
+      project: project,
+      location: location,
+      siptrunk: siptrunk,
+    });
+  }
+
+  /**
+   * Parse the project from SipTrunk resource.
+   *
+   * @param {string} sipTrunkName
+   *   A fully-qualified path representing SipTrunk resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSipTrunkName(sipTrunkName: string) {
+    return this.pathTemplates.sipTrunkPathTemplate.match(sipTrunkName).project;
+  }
+
+  /**
+   * Parse the location from SipTrunk resource.
+   *
+   * @param {string} sipTrunkName
+   *   A fully-qualified path representing SipTrunk resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromSipTrunkName(sipTrunkName: string) {
+    return this.pathTemplates.sipTrunkPathTemplate.match(sipTrunkName).location;
+  }
+
+  /**
+   * Parse the siptrunk from SipTrunk resource.
+   *
+   * @param {string} sipTrunkName
+   *   A fully-qualified path representing SipTrunk resource.
+   * @returns {string} A string representing the siptrunk.
+   */
+  matchSiptrunkFromSipTrunkName(sipTrunkName: string) {
+    return this.pathTemplates.sipTrunkPathTemplate.match(sipTrunkName).siptrunk;
+  }
+
+  /**
+   * Return a fully-qualified tool resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} tool
+   * @returns {string} Resource name string.
+   */
+  toolPath(project:string,location:string,tool:string) {
+    return this.pathTemplates.toolPathTemplate.render({
+      project: project,
+      location: location,
+      tool: tool,
+    });
+  }
+
+  /**
+   * Parse the project from Tool resource.
+   *
+   * @param {string} toolName
+   *   A fully-qualified path representing Tool resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromToolName(toolName: string) {
+    return this.pathTemplates.toolPathTemplate.match(toolName).project;
+  }
+
+  /**
+   * Parse the location from Tool resource.
+   *
+   * @param {string} toolName
+   *   A fully-qualified path representing Tool resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromToolName(toolName: string) {
+    return this.pathTemplates.toolPathTemplate.match(toolName).location;
+  }
+
+  /**
+   * Parse the tool from Tool resource.
+   *
+   * @param {string} toolName
+   *   A fully-qualified path representing Tool resource.
+   * @returns {string} A string representing the tool.
+   */
+  matchToolFromToolName(toolName: string) {
+    return this.pathTemplates.toolPathTemplate.match(toolName).tool;
   }
 
   /**

@@ -70,6 +70,12 @@ function main(queryInput) {
    *  If true, `StreamingDetectIntentResponse.debugging_info` will get populated.
    */
   // const enableDebuggingInfo = true
+  /**
+   *  Optional. Specifies which fields in the
+   *  QueryResult google.cloud.dialogflow.cx.v3beta1.QueryResult  to return. If
+   *  not set, the default is DETECT_INTENT_RESPONSE_VIEW_FULL.
+   */
+  // const responseView = {}
 
   // Imports the Cx library
   const {SessionsClient} = require('@google-cloud/dialogflow-cx').v3beta1;

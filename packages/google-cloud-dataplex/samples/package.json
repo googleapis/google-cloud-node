@@ -16,7 +16,7 @@
     "@google-cloud/dataplex": "^5.3.0"
   },
   "devDependencies": {
-    "c8": "^9.0.0",
+    "c8": "^10.0.0",
     "chai": "^4.2.0",
     "mocha": "^8.0.0"
   }

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.0](https://github.com/googleapis/google-cloud-node/compare/parallelstore-v0.11.1...parallelstore-v0.12.0) (2025-12-09)
+
+
+### Features
+
+* [parallelstore] add transfer metadata options proto definition ([#6916](https://github.com/googleapis/google-cloud-node/issues/6916)) ([c33709f](https://github.com/googleapis/google-cloud-node/commit/c33709f5aed86bdb4f02e2d17d5bfa00ccae88fd))
+
 ## [0.11.1](https://github.com/googleapis/google-cloud-node/compare/parallelstore-v0.11.0...parallelstore-v0.11.1) (2025-10-13)
 
 

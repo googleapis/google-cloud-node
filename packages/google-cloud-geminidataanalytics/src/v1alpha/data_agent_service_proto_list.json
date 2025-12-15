@@ -1,4 +1,5 @@
 [
+  "../../protos/google/cloud/geminidataanalytics/v1alpha/agent_context.proto",
   "../../protos/google/cloud/geminidataanalytics/v1alpha/context.proto",
   "../../protos/google/cloud/geminidataanalytics/v1alpha/conversation.proto",
   "../../protos/google/cloud/geminidataanalytics/v1alpha/credentials.proto",

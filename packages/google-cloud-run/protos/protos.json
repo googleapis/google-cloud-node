@@ -106,6 +106,27 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "machineType": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "releaseTrack": {
+                          "type": "google.api.LaunchStage",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "client": {
+                          "type": "string",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -324,7 +345,8 @@
                             "NON_ZERO_EXIT_CODE": 2,
                             "CANCELLED": 3,
                             "CANCELLING": 4,
-                            "DELETED": 5
+                            "DELETED": 5,
+                            "DELAYED_START_PENDING": 6
                           }
                         }
                       }
@@ -818,6 +840,13 @@
                             "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
+                        "sourceCode": {
+                          "type": "SourceCode",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "command": {
                           "rule": "repeated",
                           "type": "string",
@@ -974,6 +1003,13 @@
                           "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "subPath": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -1274,6 +1310,48 @@
                         }
                       }
                     },
+                    "SourceCode": {
+                      "oneofs": {
+                        "sourceType": {
+                          "oneof": [
+                            "cloudStorageSource"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "cloudStorageSource": {
+                          "type": "CloudStorageSource",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "CloudStorageSource": {
+                          "fields": {
+                            "bucket": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "object": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "generation": {
+                              "type": "int64",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
                     "VpcAccess": {
                       "fields": {
                         "connector": {
@@ -1417,6 +1495,13 @@
                         "scalingMode": {
                           "type": "ScalingMode",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "maxInstanceCount": {
+                          "type": "int32",
+                          "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -2264,7 +2349,7 @@
                           "type": "string",
                           "id": 99,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -3181,6 +3266,14 @@
                         "nextPageToken": {
                           "type": "string",
                           "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -3225,7 +3318,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
                         },
                         "description": {
                           "type": "string",
@@ -3376,6 +3472,20 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "iapEnabled": {
+                          "type": "bool",
+                          "id": 25,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "multiRegionSettings": {
+                          "type": "MultiRegionSettings",
+                          "id": 26,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "customAudiences": {
                           "rule": "repeated",
                           "type": "string",
@@ -3441,6 +3551,13 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "threatDetectionEnabled": {
+                          "type": "bool",
+                          "id": 40,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "buildConfig": {
                           "type": "BuildConfig",
                           "id": 41,
@@ -3459,7 +3576,28 @@
                           "type": "string",
                           "id": 99,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "MultiRegionSettings": {
+                          "fields": {
+                            "regions": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "multiRegionId": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
                           }
                         }
                       }
@@ -4425,6 +4563,13 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "threatDetectionEnabled": {
+                          "type": "bool",
+                          "id": 28,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "customAudiences": {
                           "rule": "repeated",
                           "type": "string",
@@ -4448,12 +4593,19 @@
                           "type": "string",
                           "id": 99,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
                     },
                     "WorkerPoolRevisionTemplate": {
+                      "oneofs": {
+                        "_gpuZonalRedundancyDisabled": {
+                          "oneof": [
+                            "gpuZonalRedundancyDisabled"
+                          ]
+                        }
+                      },
                       "fields": {
                         "revision": {
                           "type": "string",
@@ -4539,6 +4691,14 @@
                           "id": 13,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "gpuZonalRedundancyDisabled": {
+                          "type": "bool",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         }
                       }

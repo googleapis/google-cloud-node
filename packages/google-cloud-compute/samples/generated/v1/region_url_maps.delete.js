@@ -37,7 +37,8 @@ function main(project, region, urlMap) {
    */
   // const region = 'us-central1'
   /**
-   *  begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.
+   *  begin_interface: MixerMutationRequestBuilder
+   *  Request ID to support idempotency.
    */
   // const requestId = 'abc123'
   /**

@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.5.0](https://github.com/googleapis/google-cloud-node/compare/artifact-registry-v4.4.0...artifact-registry-v4.5.0) (2025-12-09)
+
+
+### Features
+
+* [artifactregistry] add ExportArtifact API ([#6919](https://github.com/googleapis/google-cloud-node/issues/6919)) ([984f5ac](https://github.com/googleapis/google-cloud-node/commit/984f5acd15ef79c3cdb63f89e2deee5cc5c65387))
+
 ## [4.4.0](https://github.com/googleapis/google-cloud-node/compare/artifact-registry-v4.3.1...artifact-registry-v4.4.0) (2025-11-21)
 
 

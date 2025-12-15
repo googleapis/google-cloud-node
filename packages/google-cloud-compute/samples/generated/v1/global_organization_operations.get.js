@@ -29,7 +29,8 @@ function main(operation) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Name of the Operations resource to return. Parent is derived from this field.
+   *  Name of the Operations resource to return. Parent is derived from this
+   *  field.
    */
   // const operation = 'abc123'
   /**

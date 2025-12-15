@@ -13293,6 +13293,20 @@
                               "type": "Phrase",
                               "id": 1
                             },
+                            "raiSettings": {
+                              "type": "RaiSettings",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "defaultRaiSettings": {
+                              "type": "RaiSettings",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE"
+                              }
+                            },
                             "promptSecuritySettings": {
                               "type": "PromptSecuritySettings",
                               "id": 8,
@@ -13325,6 +13339,50 @@
                                 "PHRASE_MATCH_STRATEGY_UNSPECIFIED": 0,
                                 "PARTIAL_MATCH": 1,
                                 "WORD_MATCH": 2
+                              }
+                            },
+                            "RaiSettings": {
+                              "fields": {
+                                "categoryFilters": {
+                                  "rule": "repeated",
+                                  "type": "CategoryFilter",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "SafetyFilterLevel": {
+                                  "values": {
+                                    "SAFETY_FILTER_LEVEL_UNSPECIFIED": 0,
+                                    "BLOCK_NONE": 1,
+                                    "BLOCK_FEW": 2,
+                                    "BLOCK_SOME": 3,
+                                    "BLOCK_MOST": 4
+                                  }
+                                },
+                                "SafetyCategory": {
+                                  "values": {
+                                    "SAFETY_CATEGORY_UNSPECIFIED": 0,
+                                    "DANGEROUS_CONTENT": 1,
+                                    "HATE_SPEECH": 2,
+                                    "HARASSMENT": 3,
+                                    "SEXUALLY_EXPLICIT_CONTENT": 4
+                                  }
+                                },
+                                "CategoryFilter": {
+                                  "fields": {
+                                    "category": {
+                                      "type": "SafetyCategory",
+                                      "id": 1
+                                    },
+                                    "filterLevel": {
+                                      "type": "SafetyFilterLevel",
+                                      "id": 2
+                                    }
+                                  }
+                                }
                               }
                             },
                             "PromptSecuritySettings": {
@@ -16263,6 +16321,13 @@
                             "outputAudioConfig": {
                               "type": "OutputAudioConfig",
                               "id": 4
+                            },
+                            "responseView": {
+                              "type": "DetectIntentResponseView",
+                              "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -16334,6 +16399,13 @@
                             "enableDebuggingInfo": {
                               "type": "bool",
                               "id": 8
+                            },
+                            "responseView": {
+                              "type": "DetectIntentResponseView",
+                              "id": 16,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -17170,6 +17242,13 @@
                               "type": "float",
                               "id": 2
                             }
+                          }
+                        },
+                        "DetectIntentResponseView": {
+                          "values": {
+                            "DETECT_INTENT_RESPONSE_VIEW_UNSPECIFIED": 0,
+                            "DETECT_INTENT_RESPONSE_VIEW_FULL": 1,
+                            "DETECT_INTENT_RESPONSE_VIEW_BASIC": 2
                           }
                         },
                         "Examples": {

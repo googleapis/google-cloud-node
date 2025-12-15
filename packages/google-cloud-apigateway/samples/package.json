@@ -16,7 +16,7 @@
     "@google-cloud/api-gateway": "^4.2.1"
   },
   "devDependencies": {
-    "c8": "^9.0.0",
+    "c8": "^10.0.0",
     "mocha": "^8.1.1"
   }
 }

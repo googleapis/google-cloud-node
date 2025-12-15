@@ -38399,6 +38399,7 @@
                              * @property {google.shopping.merchant.accounts.v1.Region.IGeoTargetArea|null} [geotargetArea] Region geotargetArea
                              * @property {google.protobuf.IBoolValue|null} [regionalInventoryEligible] Region regionalInventoryEligible
                              * @property {google.protobuf.IBoolValue|null} [shippingEligible] Region shippingEligible
+                             * @property {google.shopping.merchant.accounts.v1.Region.IRadiusArea|null} [radiusArea] Region radiusArea
                              */
     
                             /**
@@ -38464,6 +38465,14 @@
                              */
                             Region.prototype.shippingEligible = null;
     
+                            /**
+                             * Region radiusArea.
+                             * @member {google.shopping.merchant.accounts.v1.Region.IRadiusArea|null|undefined} radiusArea
+                             * @memberof google.shopping.merchant.accounts.v1.Region
+                             * @instance
+                             */
+                            Region.prototype.radiusArea = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
@@ -38509,6 +38518,8 @@
                                     $root.google.protobuf.BoolValue.encode(message.regionalInventoryEligible, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                                 if (message.shippingEligible != null && Object.hasOwnProperty.call(message, "shippingEligible"))
                                     $root.google.protobuf.BoolValue.encode(message.shippingEligible, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                if (message.radiusArea != null && Object.hasOwnProperty.call(message, "radiusArea"))
+                                    $root.google.shopping.merchant.accounts.v1.Region.RadiusArea.encode(message.radiusArea, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                                 return writer;
                             };
     
@@ -38567,6 +38578,10 @@
                                         }
                                     case 6: {
                                             message.shippingEligible = $root.google.protobuf.BoolValue.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.radiusArea = $root.google.shopping.merchant.accounts.v1.Region.RadiusArea.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -38633,6 +38648,11 @@
                                     if (error)
                                         return "shippingEligible." + error;
                                 }
+                                if (message.radiusArea != null && message.hasOwnProperty("radiusArea")) {
+                                    var error = $root.google.shopping.merchant.accounts.v1.Region.RadiusArea.verify(message.radiusArea);
+                                    if (error)
+                                        return "radiusArea." + error;
+                                }
                                 return null;
                             };
     
@@ -38672,6 +38692,11 @@
                                         throw TypeError(".google.shopping.merchant.accounts.v1.Region.shippingEligible: object expected");
                                     message.shippingEligible = $root.google.protobuf.BoolValue.fromObject(object.shippingEligible);
                                 }
+                                if (object.radiusArea != null) {
+                                    if (typeof object.radiusArea !== "object")
+                                        throw TypeError(".google.shopping.merchant.accounts.v1.Region.radiusArea: object expected");
+                                    message.radiusArea = $root.google.shopping.merchant.accounts.v1.Region.RadiusArea.fromObject(object.radiusArea);
+                                }
                                 return message;
                             };
     
@@ -38694,6 +38719,7 @@
                                     object.geotargetArea = null;
                                     object.regionalInventoryEligible = null;
                                     object.shippingEligible = null;
+                                    object.radiusArea = null;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -38710,6 +38736,8 @@
                                     object.regionalInventoryEligible = $root.google.protobuf.BoolValue.toObject(message.regionalInventoryEligible, options);
                                 if (message.shippingEligible != null && message.hasOwnProperty("shippingEligible"))
                                     object.shippingEligible = $root.google.protobuf.BoolValue.toObject(message.shippingEligible, options);
+                                if (message.radiusArea != null && message.hasOwnProperty("radiusArea"))
+                                    object.radiusArea = $root.google.shopping.merchant.accounts.v1.Region.RadiusArea.toObject(message.radiusArea, options);
                                 return object;
                             };
     
@@ -39455,6 +39483,326 @@
                                 };
     
                                 return GeoTargetArea;
+                            })();
+    
+                            Region.RadiusArea = (function() {
+    
+                                /**
+                                 * Properties of a RadiusArea.
+                                 * @memberof google.shopping.merchant.accounts.v1.Region
+                                 * @interface IRadiusArea
+                                 * @property {string|null} [regionCode] RadiusArea regionCode
+                                 * @property {google.type.ILatLng|null} [latLng] RadiusArea latLng
+                                 * @property {number|null} [radius] RadiusArea radius
+                                 * @property {google.shopping.merchant.accounts.v1.Region.RadiusArea.RadiusUnits|null} [radiusUnits] RadiusArea radiusUnits
+                                 */
+    
+                                /**
+                                 * Constructs a new RadiusArea.
+                                 * @memberof google.shopping.merchant.accounts.v1.Region
+                                 * @classdesc Represents a RadiusArea.
+                                 * @implements IRadiusArea
+                                 * @constructor
+                                 * @param {google.shopping.merchant.accounts.v1.Region.IRadiusArea=} [properties] Properties to set
+                                 */
+                                function RadiusArea(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * RadiusArea regionCode.
+                                 * @member {string} regionCode
+                                 * @memberof google.shopping.merchant.accounts.v1.Region.RadiusArea
+                                 * @instance
+                                 */
+                                RadiusArea.prototype.regionCode = "";
+    
+                                /**
+                                 * RadiusArea latLng.
+                                 * @member {google.type.ILatLng|null|undefined} latLng
+                                 * @memberof google.shopping.merchant.accounts.v1.Region.RadiusArea
+                                 * @instance
+                                 */
+                                RadiusArea.prototype.latLng = null;
+    
+                                /**
+                                 * RadiusArea radius.
+                                 * @member {number} radius
+                                 * @memberof google.shopping.merchant.accounts.v1.Region.RadiusArea
+                                 * @instance
+                                 */
+                                RadiusArea.prototype.radius = 0;
+    
+                                /**
+                                 * RadiusArea radiusUnits.
+                                 * @member {google.shopping.merchant.accounts.v1.Region.RadiusArea.RadiusUnits} radiusUnits
+                                 * @memberof google.shopping.merchant.accounts.v1.Region.RadiusArea
+                                 * @instance
+                                 */
+                                RadiusArea.prototype.radiusUnits = 0;
+    
+                                /**
+                                 * Creates a new RadiusArea instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.shopping.merchant.accounts.v1.Region.RadiusArea
+                                 * @static
+                                 * @param {google.shopping.merchant.accounts.v1.Region.IRadiusArea=} [properties] Properties to set
+                                 * @returns {google.shopping.merchant.accounts.v1.Region.RadiusArea} RadiusArea instance
+                                 */
+                                RadiusArea.create = function create(properties) {
+                                    return new RadiusArea(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified RadiusArea message. Does not implicitly {@link google.shopping.merchant.accounts.v1.Region.RadiusArea.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.shopping.merchant.accounts.v1.Region.RadiusArea
+                                 * @static
+                                 * @param {google.shopping.merchant.accounts.v1.Region.IRadiusArea} message RadiusArea message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                RadiusArea.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.regionCode != null && Object.hasOwnProperty.call(message, "regionCode"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.regionCode);
+                                    if (message.latLng != null && Object.hasOwnProperty.call(message, "latLng"))
+                                        $root.google.type.LatLng.encode(message.latLng, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    if (message.radius != null && Object.hasOwnProperty.call(message, "radius"))
+                                        writer.uint32(/* id 3, wireType 1 =*/25).double(message.radius);
+                                    if (message.radiusUnits != null && Object.hasOwnProperty.call(message, "radiusUnits"))
+                                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.radiusUnits);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified RadiusArea message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1.Region.RadiusArea.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.shopping.merchant.accounts.v1.Region.RadiusArea
+                                 * @static
+                                 * @param {google.shopping.merchant.accounts.v1.Region.IRadiusArea} message RadiusArea message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                RadiusArea.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a RadiusArea message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.shopping.merchant.accounts.v1.Region.RadiusArea
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.shopping.merchant.accounts.v1.Region.RadiusArea} RadiusArea
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                RadiusArea.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1.Region.RadiusArea();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.regionCode = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.latLng = $root.google.type.LatLng.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.radius = reader.double();
+                                                break;
+                                            }
+                                        case 4: {
+                                                message.radiusUnits = reader.int32();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a RadiusArea message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.shopping.merchant.accounts.v1.Region.RadiusArea
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.shopping.merchant.accounts.v1.Region.RadiusArea} RadiusArea
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                RadiusArea.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a RadiusArea message.
+                                 * @function verify
+                                 * @memberof google.shopping.merchant.accounts.v1.Region.RadiusArea
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                RadiusArea.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.regionCode != null && message.hasOwnProperty("regionCode"))
+                                        if (!$util.isString(message.regionCode))
+                                            return "regionCode: string expected";
+                                    if (message.latLng != null && message.hasOwnProperty("latLng")) {
+                                        var error = $root.google.type.LatLng.verify(message.latLng);
+                                        if (error)
+                                            return "latLng." + error;
+                                    }
+                                    if (message.radius != null && message.hasOwnProperty("radius"))
+                                        if (typeof message.radius !== "number")
+                                            return "radius: number expected";
+                                    if (message.radiusUnits != null && message.hasOwnProperty("radiusUnits"))
+                                        switch (message.radiusUnits) {
+                                        default:
+                                            return "radiusUnits: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                            break;
+                                        }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a RadiusArea message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.shopping.merchant.accounts.v1.Region.RadiusArea
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.shopping.merchant.accounts.v1.Region.RadiusArea} RadiusArea
+                                 */
+                                RadiusArea.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.shopping.merchant.accounts.v1.Region.RadiusArea)
+                                        return object;
+                                    var message = new $root.google.shopping.merchant.accounts.v1.Region.RadiusArea();
+                                    if (object.regionCode != null)
+                                        message.regionCode = String(object.regionCode);
+                                    if (object.latLng != null) {
+                                        if (typeof object.latLng !== "object")
+                                            throw TypeError(".google.shopping.merchant.accounts.v1.Region.RadiusArea.latLng: object expected");
+                                        message.latLng = $root.google.type.LatLng.fromObject(object.latLng);
+                                    }
+                                    if (object.radius != null)
+                                        message.radius = Number(object.radius);
+                                    switch (object.radiusUnits) {
+                                    default:
+                                        if (typeof object.radiusUnits === "number") {
+                                            message.radiusUnits = object.radiusUnits;
+                                            break;
+                                        }
+                                        break;
+                                    case "RADIUS_UNITS_UNSPECIFIED":
+                                    case 0:
+                                        message.radiusUnits = 0;
+                                        break;
+                                    case "MILES":
+                                    case 1:
+                                        message.radiusUnits = 1;
+                                        break;
+                                    case "KILOMETERS":
+                                    case 2:
+                                        message.radiusUnits = 2;
+                                        break;
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a RadiusArea message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.shopping.merchant.accounts.v1.Region.RadiusArea
+                                 * @static
+                                 * @param {google.shopping.merchant.accounts.v1.Region.RadiusArea} message RadiusArea
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                RadiusArea.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.regionCode = "";
+                                        object.latLng = null;
+                                        object.radius = 0;
+                                        object.radiusUnits = options.enums === String ? "RADIUS_UNITS_UNSPECIFIED" : 0;
+                                    }
+                                    if (message.regionCode != null && message.hasOwnProperty("regionCode"))
+                                        object.regionCode = message.regionCode;
+                                    if (message.latLng != null && message.hasOwnProperty("latLng"))
+                                        object.latLng = $root.google.type.LatLng.toObject(message.latLng, options);
+                                    if (message.radius != null && message.hasOwnProperty("radius"))
+                                        object.radius = options.json && !isFinite(message.radius) ? String(message.radius) : message.radius;
+                                    if (message.radiusUnits != null && message.hasOwnProperty("radiusUnits"))
+                                        object.radiusUnits = options.enums === String ? $root.google.shopping.merchant.accounts.v1.Region.RadiusArea.RadiusUnits[message.radiusUnits] === undefined ? message.radiusUnits : $root.google.shopping.merchant.accounts.v1.Region.RadiusArea.RadiusUnits[message.radiusUnits] : message.radiusUnits;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this RadiusArea to JSON.
+                                 * @function toJSON
+                                 * @memberof google.shopping.merchant.accounts.v1.Region.RadiusArea
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                RadiusArea.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for RadiusArea
+                                 * @function getTypeUrl
+                                 * @memberof google.shopping.merchant.accounts.v1.Region.RadiusArea
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                RadiusArea.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.shopping.merchant.accounts.v1.Region.RadiusArea";
+                                };
+    
+                                /**
+                                 * RadiusUnits enum.
+                                 * @name google.shopping.merchant.accounts.v1.Region.RadiusArea.RadiusUnits
+                                 * @enum {number}
+                                 * @property {number} RADIUS_UNITS_UNSPECIFIED=0 RADIUS_UNITS_UNSPECIFIED value
+                                 * @property {number} MILES=1 MILES value
+                                 * @property {number} KILOMETERS=2 KILOMETERS value
+                                 */
+                                RadiusArea.RadiusUnits = (function() {
+                                    var valuesById = {}, values = Object.create(valuesById);
+                                    values[valuesById[0] = "RADIUS_UNITS_UNSPECIFIED"] = 0;
+                                    values[valuesById[1] = "MILES"] = 1;
+                                    values[valuesById[2] = "KILOMETERS"] = 2;
+                                    return values;
+                                })();
+    
+                                return RadiusArea;
                             })();
     
                             return Region;
@@ -120801,6 +121149,235 @@
                 };
     
                 return Date;
+            })();
+    
+            type.LatLng = (function() {
+    
+                /**
+                 * Properties of a LatLng.
+                 * @memberof google.type
+                 * @interface ILatLng
+                 * @property {number|null} [latitude] LatLng latitude
+                 * @property {number|null} [longitude] LatLng longitude
+                 */
+    
+                /**
+                 * Constructs a new LatLng.
+                 * @memberof google.type
+                 * @classdesc Represents a LatLng.
+                 * @implements ILatLng
+                 * @constructor
+                 * @param {google.type.ILatLng=} [properties] Properties to set
+                 */
+                function LatLng(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * LatLng latitude.
+                 * @member {number} latitude
+                 * @memberof google.type.LatLng
+                 * @instance
+                 */
+                LatLng.prototype.latitude = 0;
+    
+                /**
+                 * LatLng longitude.
+                 * @member {number} longitude
+                 * @memberof google.type.LatLng
+                 * @instance
+                 */
+                LatLng.prototype.longitude = 0;
+    
+                /**
+                 * Creates a new LatLng instance using the specified properties.
+                 * @function create
+                 * @memberof google.type.LatLng
+                 * @static
+                 * @param {google.type.ILatLng=} [properties] Properties to set
+                 * @returns {google.type.LatLng} LatLng instance
+                 */
+                LatLng.create = function create(properties) {
+                    return new LatLng(properties);
+                };
+    
+                /**
+                 * Encodes the specified LatLng message. Does not implicitly {@link google.type.LatLng.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.type.LatLng
+                 * @static
+                 * @param {google.type.ILatLng} message LatLng message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                LatLng.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.latitude != null && Object.hasOwnProperty.call(message, "latitude"))
+                        writer.uint32(/* id 1, wireType 1 =*/9).double(message.latitude);
+                    if (message.longitude != null && Object.hasOwnProperty.call(message, "longitude"))
+                        writer.uint32(/* id 2, wireType 1 =*/17).double(message.longitude);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified LatLng message, length delimited. Does not implicitly {@link google.type.LatLng.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.type.LatLng
+                 * @static
+                 * @param {google.type.ILatLng} message LatLng message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                LatLng.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a LatLng message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.type.LatLng
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.type.LatLng} LatLng
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                LatLng.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.LatLng();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.latitude = reader.double();
+                                break;
+                            }
+                        case 2: {
+                                message.longitude = reader.double();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a LatLng message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.type.LatLng
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.type.LatLng} LatLng
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                LatLng.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a LatLng message.
+                 * @function verify
+                 * @memberof google.type.LatLng
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                LatLng.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.latitude != null && message.hasOwnProperty("latitude"))
+                        if (typeof message.latitude !== "number")
+                            return "latitude: number expected";
+                    if (message.longitude != null && message.hasOwnProperty("longitude"))
+                        if (typeof message.longitude !== "number")
+                            return "longitude: number expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a LatLng message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.type.LatLng
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.type.LatLng} LatLng
+                 */
+                LatLng.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.type.LatLng)
+                        return object;
+                    var message = new $root.google.type.LatLng();
+                    if (object.latitude != null)
+                        message.latitude = Number(object.latitude);
+                    if (object.longitude != null)
+                        message.longitude = Number(object.longitude);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a LatLng message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.type.LatLng
+                 * @static
+                 * @param {google.type.LatLng} message LatLng
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                LatLng.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.latitude = 0;
+                        object.longitude = 0;
+                    }
+                    if (message.latitude != null && message.hasOwnProperty("latitude"))
+                        object.latitude = options.json && !isFinite(message.latitude) ? String(message.latitude) : message.latitude;
+                    if (message.longitude != null && message.hasOwnProperty("longitude"))
+                        object.longitude = options.json && !isFinite(message.longitude) ? String(message.longitude) : message.longitude;
+                    return object;
+                };
+    
+                /**
+                 * Converts this LatLng to JSON.
+                 * @function toJSON
+                 * @memberof google.type.LatLng
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                LatLng.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for LatLng
+                 * @function getTypeUrl
+                 * @memberof google.type.LatLng
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                LatLng.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.type.LatLng";
+                };
+    
+                return LatLng;
             })();
     
             type.Interval = (function() {

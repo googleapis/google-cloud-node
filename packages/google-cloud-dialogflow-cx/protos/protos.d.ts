@@ -51903,6 +51903,12 @@ export namespace google {
                         /** SafetySettings bannedPhrases */
                         bannedPhrases?: (google.cloud.dialogflow.cx.v3beta1.SafetySettings.IPhrase[]|null);
 
+                        /** SafetySettings raiSettings */
+                        raiSettings?: (google.cloud.dialogflow.cx.v3beta1.SafetySettings.IRaiSettings|null);
+
+                        /** SafetySettings defaultRaiSettings */
+                        defaultRaiSettings?: (google.cloud.dialogflow.cx.v3beta1.SafetySettings.IRaiSettings|null);
+
                         /** SafetySettings promptSecuritySettings */
                         promptSecuritySettings?: (google.cloud.dialogflow.cx.v3beta1.SafetySettings.IPromptSecuritySettings|null);
                     }
@@ -51921,6 +51927,12 @@ export namespace google {
 
                         /** SafetySettings bannedPhrases. */
                         public bannedPhrases: google.cloud.dialogflow.cx.v3beta1.SafetySettings.IPhrase[];
+
+                        /** SafetySettings raiSettings. */
+                        public raiSettings?: (google.cloud.dialogflow.cx.v3beta1.SafetySettings.IRaiSettings|null);
+
+                        /** SafetySettings defaultRaiSettings. */
+                        public defaultRaiSettings?: (google.cloud.dialogflow.cx.v3beta1.SafetySettings.IRaiSettings|null);
 
                         /** SafetySettings promptSecuritySettings. */
                         public promptSecuritySettings?: (google.cloud.dialogflow.cx.v3beta1.SafetySettings.IPromptSecuritySettings|null);
@@ -52113,6 +52125,227 @@ export namespace google {
                             PHRASE_MATCH_STRATEGY_UNSPECIFIED = 0,
                             PARTIAL_MATCH = 1,
                             WORD_MATCH = 2
+                        }
+
+                        /** Properties of a RaiSettings. */
+                        interface IRaiSettings {
+
+                            /** RaiSettings categoryFilters */
+                            categoryFilters?: (google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings.ICategoryFilter[]|null);
+                        }
+
+                        /** Represents a RaiSettings. */
+                        class RaiSettings implements IRaiSettings {
+
+                            /**
+                             * Constructs a new RaiSettings.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3beta1.SafetySettings.IRaiSettings);
+
+                            /** RaiSettings categoryFilters. */
+                            public categoryFilters: google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings.ICategoryFilter[];
+
+                            /**
+                             * Creates a new RaiSettings instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns RaiSettings instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3beta1.SafetySettings.IRaiSettings): google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings;
+
+                            /**
+                             * Encodes the specified RaiSettings message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings.verify|verify} messages.
+                             * @param message RaiSettings message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3beta1.SafetySettings.IRaiSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified RaiSettings message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings.verify|verify} messages.
+                             * @param message RaiSettings message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.SafetySettings.IRaiSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a RaiSettings message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns RaiSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings;
+
+                            /**
+                             * Decodes a RaiSettings message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns RaiSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings;
+
+                            /**
+                             * Verifies a RaiSettings message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a RaiSettings message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns RaiSettings
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings;
+
+                            /**
+                             * Creates a plain object from a RaiSettings message. Also converts values to other types if specified.
+                             * @param message RaiSettings
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this RaiSettings to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for RaiSettings
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace RaiSettings {
+
+                            /** SafetyFilterLevel enum. */
+                            enum SafetyFilterLevel {
+                                SAFETY_FILTER_LEVEL_UNSPECIFIED = 0,
+                                BLOCK_NONE = 1,
+                                BLOCK_FEW = 2,
+                                BLOCK_SOME = 3,
+                                BLOCK_MOST = 4
+                            }
+
+                            /** SafetyCategory enum. */
+                            enum SafetyCategory {
+                                SAFETY_CATEGORY_UNSPECIFIED = 0,
+                                DANGEROUS_CONTENT = 1,
+                                HATE_SPEECH = 2,
+                                HARASSMENT = 3,
+                                SEXUALLY_EXPLICIT_CONTENT = 4
+                            }
+
+                            /** Properties of a CategoryFilter. */
+                            interface ICategoryFilter {
+
+                                /** CategoryFilter category */
+                                category?: (google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings.SafetyCategory|keyof typeof google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings.SafetyCategory|null);
+
+                                /** CategoryFilter filterLevel */
+                                filterLevel?: (google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings.SafetyFilterLevel|keyof typeof google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings.SafetyFilterLevel|null);
+                            }
+
+                            /** Represents a CategoryFilter. */
+                            class CategoryFilter implements ICategoryFilter {
+
+                                /**
+                                 * Constructs a new CategoryFilter.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings.ICategoryFilter);
+
+                                /** CategoryFilter category. */
+                                public category: (google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings.SafetyCategory|keyof typeof google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings.SafetyCategory);
+
+                                /** CategoryFilter filterLevel. */
+                                public filterLevel: (google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings.SafetyFilterLevel|keyof typeof google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings.SafetyFilterLevel);
+
+                                /**
+                                 * Creates a new CategoryFilter instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns CategoryFilter instance
+                                 */
+                                public static create(properties?: google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings.ICategoryFilter): google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings.CategoryFilter;
+
+                                /**
+                                 * Encodes the specified CategoryFilter message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings.CategoryFilter.verify|verify} messages.
+                                 * @param message CategoryFilter message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings.ICategoryFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified CategoryFilter message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings.CategoryFilter.verify|verify} messages.
+                                 * @param message CategoryFilter message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings.ICategoryFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a CategoryFilter message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns CategoryFilter
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings.CategoryFilter;
+
+                                /**
+                                 * Decodes a CategoryFilter message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns CategoryFilter
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings.CategoryFilter;
+
+                                /**
+                                 * Verifies a CategoryFilter message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a CategoryFilter message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns CategoryFilter
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings.CategoryFilter;
+
+                                /**
+                                 * Creates a plain object from a CategoryFilter message. Also converts values to other types if specified.
+                                 * @param message CategoryFilter
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings.CategoryFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this CategoryFilter to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for CategoryFilter
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
                         }
 
                         /** Properties of a PromptSecuritySettings. */
@@ -64029,6 +64262,9 @@ export namespace google {
 
                         /** DetectIntentRequest outputAudioConfig */
                         outputAudioConfig?: (google.cloud.dialogflow.cx.v3beta1.IOutputAudioConfig|null);
+
+                        /** DetectIntentRequest responseView */
+                        responseView?: (google.cloud.dialogflow.cx.v3beta1.DetectIntentResponseView|keyof typeof google.cloud.dialogflow.cx.v3beta1.DetectIntentResponseView|null);
                     }
 
                     /** Represents a DetectIntentRequest. */
@@ -64051,6 +64287,9 @@ export namespace google {
 
                         /** DetectIntentRequest outputAudioConfig. */
                         public outputAudioConfig?: (google.cloud.dialogflow.cx.v3beta1.IOutputAudioConfig|null);
+
+                        /** DetectIntentRequest responseView. */
+                        public responseView: (google.cloud.dialogflow.cx.v3beta1.DetectIntentResponseView|keyof typeof google.cloud.dialogflow.cx.v3beta1.DetectIntentResponseView);
 
                         /**
                          * Creates a new DetectIntentRequest instance using the specified properties.
@@ -64287,6 +64526,9 @@ export namespace google {
 
                         /** StreamingDetectIntentRequest enableDebuggingInfo */
                         enableDebuggingInfo?: (boolean|null);
+
+                        /** StreamingDetectIntentRequest responseView */
+                        responseView?: (google.cloud.dialogflow.cx.v3beta1.DetectIntentResponseView|keyof typeof google.cloud.dialogflow.cx.v3beta1.DetectIntentResponseView|null);
                     }
 
                     /** Represents a StreamingDetectIntentRequest. */
@@ -64315,6 +64557,9 @@ export namespace google {
 
                         /** StreamingDetectIntentRequest enableDebuggingInfo. */
                         public enableDebuggingInfo: boolean;
+
+                        /** StreamingDetectIntentRequest responseView. */
+                        public responseView: (google.cloud.dialogflow.cx.v3beta1.DetectIntentResponseView|keyof typeof google.cloud.dialogflow.cx.v3beta1.DetectIntentResponseView);
 
                         /**
                          * Creates a new StreamingDetectIntentRequest instance using the specified properties.
@@ -67501,6 +67746,13 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** DetectIntentResponseView enum. */
+                    enum DetectIntentResponseView {
+                        DETECT_INTENT_RESPONSE_VIEW_UNSPECIFIED = 0,
+                        DETECT_INTENT_RESPONSE_VIEW_FULL = 1,
+                        DETECT_INTENT_RESPONSE_VIEW_BASIC = 2
                     }
 
                     /** Represents an Examples */

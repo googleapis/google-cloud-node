@@ -297,6 +297,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public listWorkerPools(request: google.devtools.cloudbuild.v1.IListWorkerPoolsRequest): Promise<google.devtools.cloudbuild.v1.ListWorkerPoolsResponse>;
+
+                    /**
+                     * Calls GetDefaultServiceAccount.
+                     * @param request GetDefaultServiceAccountRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DefaultServiceAccount
+                     */
+                    public getDefaultServiceAccount(request: google.devtools.cloudbuild.v1.IGetDefaultServiceAccountRequest, callback: google.devtools.cloudbuild.v1.CloudBuild.GetDefaultServiceAccountCallback): void;
+
+                    /**
+                     * Calls GetDefaultServiceAccount.
+                     * @param request GetDefaultServiceAccountRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getDefaultServiceAccount(request: google.devtools.cloudbuild.v1.IGetDefaultServiceAccountRequest): Promise<google.devtools.cloudbuild.v1.DefaultServiceAccount>;
                 }
 
                 namespace CloudBuild {
@@ -426,6 +440,213 @@ export namespace google {
                      * @param [response] ListWorkerPoolsResponse
                      */
                     type ListWorkerPoolsCallback = (error: (Error|null), response?: google.devtools.cloudbuild.v1.ListWorkerPoolsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.devtools.cloudbuild.v1.CloudBuild|getDefaultServiceAccount}.
+                     * @param error Error, if any
+                     * @param [response] DefaultServiceAccount
+                     */
+                    type GetDefaultServiceAccountCallback = (error: (Error|null), response?: google.devtools.cloudbuild.v1.DefaultServiceAccount) => void;
+                }
+
+                /** Properties of a GetDefaultServiceAccountRequest. */
+                interface IGetDefaultServiceAccountRequest {
+
+                    /** GetDefaultServiceAccountRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetDefaultServiceAccountRequest. */
+                class GetDefaultServiceAccountRequest implements IGetDefaultServiceAccountRequest {
+
+                    /**
+                     * Constructs a new GetDefaultServiceAccountRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.cloudbuild.v1.IGetDefaultServiceAccountRequest);
+
+                    /** GetDefaultServiceAccountRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetDefaultServiceAccountRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetDefaultServiceAccountRequest instance
+                     */
+                    public static create(properties?: google.devtools.cloudbuild.v1.IGetDefaultServiceAccountRequest): google.devtools.cloudbuild.v1.GetDefaultServiceAccountRequest;
+
+                    /**
+                     * Encodes the specified GetDefaultServiceAccountRequest message. Does not implicitly {@link google.devtools.cloudbuild.v1.GetDefaultServiceAccountRequest.verify|verify} messages.
+                     * @param message GetDefaultServiceAccountRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.cloudbuild.v1.IGetDefaultServiceAccountRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetDefaultServiceAccountRequest message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.GetDefaultServiceAccountRequest.verify|verify} messages.
+                     * @param message GetDefaultServiceAccountRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.cloudbuild.v1.IGetDefaultServiceAccountRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetDefaultServiceAccountRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetDefaultServiceAccountRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudbuild.v1.GetDefaultServiceAccountRequest;
+
+                    /**
+                     * Decodes a GetDefaultServiceAccountRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetDefaultServiceAccountRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudbuild.v1.GetDefaultServiceAccountRequest;
+
+                    /**
+                     * Verifies a GetDefaultServiceAccountRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetDefaultServiceAccountRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetDefaultServiceAccountRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.cloudbuild.v1.GetDefaultServiceAccountRequest;
+
+                    /**
+                     * Creates a plain object from a GetDefaultServiceAccountRequest message. Also converts values to other types if specified.
+                     * @param message GetDefaultServiceAccountRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.cloudbuild.v1.GetDefaultServiceAccountRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetDefaultServiceAccountRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetDefaultServiceAccountRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DefaultServiceAccount. */
+                interface IDefaultServiceAccount {
+
+                    /** DefaultServiceAccount name */
+                    name?: (string|null);
+
+                    /** DefaultServiceAccount serviceAccountEmail */
+                    serviceAccountEmail?: (string|null);
+                }
+
+                /** Represents a DefaultServiceAccount. */
+                class DefaultServiceAccount implements IDefaultServiceAccount {
+
+                    /**
+                     * Constructs a new DefaultServiceAccount.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.cloudbuild.v1.IDefaultServiceAccount);
+
+                    /** DefaultServiceAccount name. */
+                    public name: string;
+
+                    /** DefaultServiceAccount serviceAccountEmail. */
+                    public serviceAccountEmail: string;
+
+                    /**
+                     * Creates a new DefaultServiceAccount instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DefaultServiceAccount instance
+                     */
+                    public static create(properties?: google.devtools.cloudbuild.v1.IDefaultServiceAccount): google.devtools.cloudbuild.v1.DefaultServiceAccount;
+
+                    /**
+                     * Encodes the specified DefaultServiceAccount message. Does not implicitly {@link google.devtools.cloudbuild.v1.DefaultServiceAccount.verify|verify} messages.
+                     * @param message DefaultServiceAccount message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.cloudbuild.v1.IDefaultServiceAccount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DefaultServiceAccount message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.DefaultServiceAccount.verify|verify} messages.
+                     * @param message DefaultServiceAccount message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.cloudbuild.v1.IDefaultServiceAccount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DefaultServiceAccount message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DefaultServiceAccount
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudbuild.v1.DefaultServiceAccount;
+
+                    /**
+                     * Decodes a DefaultServiceAccount message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DefaultServiceAccount
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudbuild.v1.DefaultServiceAccount;
+
+                    /**
+                     * Verifies a DefaultServiceAccount message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DefaultServiceAccount message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DefaultServiceAccount
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.cloudbuild.v1.DefaultServiceAccount;
+
+                    /**
+                     * Creates a plain object from a DefaultServiceAccount message. Also converts values to other types if specified.
+                     * @param message DefaultServiceAccount
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.cloudbuild.v1.DefaultServiceAccount, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DefaultServiceAccount to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DefaultServiceAccount
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a RetryBuildRequest. */
@@ -1137,6 +1358,115 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a ConnectedRepository. */
+                interface IConnectedRepository {
+
+                    /** ConnectedRepository repository */
+                    repository?: (string|null);
+
+                    /** ConnectedRepository dir */
+                    dir?: (string|null);
+
+                    /** ConnectedRepository revision */
+                    revision?: (string|null);
+                }
+
+                /** Represents a ConnectedRepository. */
+                class ConnectedRepository implements IConnectedRepository {
+
+                    /**
+                     * Constructs a new ConnectedRepository.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.cloudbuild.v1.IConnectedRepository);
+
+                    /** ConnectedRepository repository. */
+                    public repository: string;
+
+                    /** ConnectedRepository dir. */
+                    public dir: string;
+
+                    /** ConnectedRepository revision. */
+                    public revision: string;
+
+                    /**
+                     * Creates a new ConnectedRepository instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ConnectedRepository instance
+                     */
+                    public static create(properties?: google.devtools.cloudbuild.v1.IConnectedRepository): google.devtools.cloudbuild.v1.ConnectedRepository;
+
+                    /**
+                     * Encodes the specified ConnectedRepository message. Does not implicitly {@link google.devtools.cloudbuild.v1.ConnectedRepository.verify|verify} messages.
+                     * @param message ConnectedRepository message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.cloudbuild.v1.IConnectedRepository, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ConnectedRepository message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.ConnectedRepository.verify|verify} messages.
+                     * @param message ConnectedRepository message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.cloudbuild.v1.IConnectedRepository, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ConnectedRepository message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ConnectedRepository
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudbuild.v1.ConnectedRepository;
+
+                    /**
+                     * Decodes a ConnectedRepository message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ConnectedRepository
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudbuild.v1.ConnectedRepository;
+
+                    /**
+                     * Verifies a ConnectedRepository message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ConnectedRepository message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ConnectedRepository
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.cloudbuild.v1.ConnectedRepository;
+
+                    /**
+                     * Creates a plain object from a ConnectedRepository message. Also converts values to other types if specified.
+                     * @param message ConnectedRepository
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.cloudbuild.v1.ConnectedRepository, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ConnectedRepository to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ConnectedRepository
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a Source. */
                 interface ISource {
 
@@ -1151,6 +1481,9 @@ export namespace google {
 
                     /** Source storageSourceManifest */
                     storageSourceManifest?: (google.devtools.cloudbuild.v1.IStorageSourceManifest|null);
+
+                    /** Source connectedRepository */
+                    connectedRepository?: (google.devtools.cloudbuild.v1.IConnectedRepository|null);
                 }
 
                 /** Represents a Source. */
@@ -1174,8 +1507,11 @@ export namespace google {
                     /** Source storageSourceManifest. */
                     public storageSourceManifest?: (google.devtools.cloudbuild.v1.IStorageSourceManifest|null);
 
+                    /** Source connectedRepository. */
+                    public connectedRepository?: (google.devtools.cloudbuild.v1.IConnectedRepository|null);
+
                     /** Source source. */
-                    public source?: ("storageSource"|"repoSource"|"gitSource"|"storageSourceManifest");
+                    public source?: ("storageSource"|"repoSource"|"gitSource"|"storageSourceManifest"|"connectedRepository");
 
                     /**
                      * Creates a new Source instance using the specified properties.
@@ -1266,6 +1602,9 @@ export namespace google {
 
                     /** BuiltImage pushTiming */
                     pushTiming?: (google.devtools.cloudbuild.v1.ITimeSpan|null);
+
+                    /** BuiltImage artifactRegistryPackage */
+                    artifactRegistryPackage?: (string|null);
                 }
 
                 /** Represents a BuiltImage. */
@@ -1285,6 +1624,9 @@ export namespace google {
 
                     /** BuiltImage pushTiming. */
                     public pushTiming?: (google.devtools.cloudbuild.v1.ITimeSpan|null);
+
+                    /** BuiltImage artifactRegistryPackage. */
+                    public artifactRegistryPackage: string;
 
                     /**
                      * Creates a new BuiltImage instance using the specified properties.
@@ -1375,6 +1717,9 @@ export namespace google {
 
                     /** UploadedPythonPackage pushTiming */
                     pushTiming?: (google.devtools.cloudbuild.v1.ITimeSpan|null);
+
+                    /** UploadedPythonPackage artifactRegistryPackage */
+                    artifactRegistryPackage?: (string|null);
                 }
 
                 /** Represents an UploadedPythonPackage. */
@@ -1394,6 +1739,9 @@ export namespace google {
 
                     /** UploadedPythonPackage pushTiming. */
                     public pushTiming?: (google.devtools.cloudbuild.v1.ITimeSpan|null);
+
+                    /** UploadedPythonPackage artifactRegistryPackage. */
+                    public artifactRegistryPackage: string;
 
                     /**
                      * Creates a new UploadedPythonPackage instance using the specified properties.
@@ -1484,6 +1832,9 @@ export namespace google {
 
                     /** UploadedMavenArtifact pushTiming */
                     pushTiming?: (google.devtools.cloudbuild.v1.ITimeSpan|null);
+
+                    /** UploadedMavenArtifact artifactRegistryPackage */
+                    artifactRegistryPackage?: (string|null);
                 }
 
                 /** Represents an UploadedMavenArtifact. */
@@ -1503,6 +1854,9 @@ export namespace google {
 
                     /** UploadedMavenArtifact pushTiming. */
                     public pushTiming?: (google.devtools.cloudbuild.v1.ITimeSpan|null);
+
+                    /** UploadedMavenArtifact artifactRegistryPackage. */
+                    public artifactRegistryPackage: string;
 
                     /**
                      * Creates a new UploadedMavenArtifact instance using the specified properties.
@@ -1593,6 +1947,9 @@ export namespace google {
 
                     /** UploadedGoModule pushTiming */
                     pushTiming?: (google.devtools.cloudbuild.v1.ITimeSpan|null);
+
+                    /** UploadedGoModule artifactRegistryPackage */
+                    artifactRegistryPackage?: (string|null);
                 }
 
                 /** Represents an UploadedGoModule. */
@@ -1612,6 +1969,9 @@ export namespace google {
 
                     /** UploadedGoModule pushTiming. */
                     public pushTiming?: (google.devtools.cloudbuild.v1.ITimeSpan|null);
+
+                    /** UploadedGoModule artifactRegistryPackage. */
+                    public artifactRegistryPackage: string;
 
                     /**
                      * Creates a new UploadedGoModule instance using the specified properties.
@@ -1702,6 +2062,9 @@ export namespace google {
 
                     /** UploadedNpmPackage pushTiming */
                     pushTiming?: (google.devtools.cloudbuild.v1.ITimeSpan|null);
+
+                    /** UploadedNpmPackage artifactRegistryPackage */
+                    artifactRegistryPackage?: (string|null);
                 }
 
                 /** Represents an UploadedNpmPackage. */
@@ -1721,6 +2084,9 @@ export namespace google {
 
                     /** UploadedNpmPackage pushTiming. */
                     public pushTiming?: (google.devtools.cloudbuild.v1.ITimeSpan|null);
+
+                    /** UploadedNpmPackage artifactRegistryPackage. */
+                    public artifactRegistryPackage: string;
 
                     /**
                      * Creates a new UploadedNpmPackage instance using the specified properties.
@@ -4319,6 +4685,12 @@ export namespace google {
                     /** SourceProvenance resolvedStorageSourceManifest */
                     resolvedStorageSourceManifest?: (google.devtools.cloudbuild.v1.IStorageSourceManifest|null);
 
+                    /** SourceProvenance resolvedConnectedRepository */
+                    resolvedConnectedRepository?: (google.devtools.cloudbuild.v1.IConnectedRepository|null);
+
+                    /** SourceProvenance resolvedGitSource */
+                    resolvedGitSource?: (google.devtools.cloudbuild.v1.IGitSource|null);
+
                     /** SourceProvenance fileHashes */
                     fileHashes?: ({ [k: string]: google.devtools.cloudbuild.v1.IFileHashes }|null);
                 }
@@ -4340,6 +4712,12 @@ export namespace google {
 
                     /** SourceProvenance resolvedStorageSourceManifest. */
                     public resolvedStorageSourceManifest?: (google.devtools.cloudbuild.v1.IStorageSourceManifest|null);
+
+                    /** SourceProvenance resolvedConnectedRepository. */
+                    public resolvedConnectedRepository?: (google.devtools.cloudbuild.v1.IConnectedRepository|null);
+
+                    /** SourceProvenance resolvedGitSource. */
+                    public resolvedGitSource?: (google.devtools.cloudbuild.v1.IGitSource|null);
 
                     /** SourceProvenance fileHashes. */
                     public fileHashes: { [k: string]: google.devtools.cloudbuild.v1.IFileHashes };

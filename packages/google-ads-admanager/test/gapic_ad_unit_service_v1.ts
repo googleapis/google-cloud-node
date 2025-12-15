@@ -378,6 +378,766 @@ describe('v1.AdUnitServiceClient', () => {
         });
     });
 
+    describe('createAdUnit', () => {
+        it('invokes createAdUnit without error', async () => {
+            const client = new adunitserviceModule.v1.AdUnitServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.CreateAdUnitRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.CreateAdUnitRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.AdUnit()
+            );
+            client.innerApiCalls.createAdUnit = stubSimpleCall(expectedResponse);
+            const [response] = await client.createAdUnit(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createAdUnit as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createAdUnit as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createAdUnit without error using callback', async () => {
+            const client = new adunitserviceModule.v1.AdUnitServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.CreateAdUnitRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.CreateAdUnitRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.AdUnit()
+            );
+            client.innerApiCalls.createAdUnit = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createAdUnit(
+                    request,
+                    (err?: Error|null, result?: protos.google.ads.admanager.v1.IAdUnit|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createAdUnit as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createAdUnit as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createAdUnit with error', async () => {
+            const client = new adunitserviceModule.v1.AdUnitServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.CreateAdUnitRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.CreateAdUnitRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createAdUnit = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createAdUnit(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createAdUnit as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createAdUnit as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createAdUnit with closed client', async () => {
+            const client = new adunitserviceModule.v1.AdUnitServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.CreateAdUnitRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.CreateAdUnitRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createAdUnit(request), expectedError);
+        });
+    });
+
+    describe('updateAdUnit', () => {
+        it('invokes updateAdUnit without error', async () => {
+            const client = new adunitserviceModule.v1.AdUnitServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.UpdateAdUnitRequest()
+            );
+            request.adUnit ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.UpdateAdUnitRequest', ['adUnit', 'name']);
+            request.adUnit.name = defaultValue1;
+            const expectedHeaderRequestParams = `ad_unit.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.AdUnit()
+            );
+            client.innerApiCalls.updateAdUnit = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateAdUnit(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateAdUnit as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAdUnit as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAdUnit without error using callback', async () => {
+            const client = new adunitserviceModule.v1.AdUnitServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.UpdateAdUnitRequest()
+            );
+            request.adUnit ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.UpdateAdUnitRequest', ['adUnit', 'name']);
+            request.adUnit.name = defaultValue1;
+            const expectedHeaderRequestParams = `ad_unit.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.AdUnit()
+            );
+            client.innerApiCalls.updateAdUnit = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateAdUnit(
+                    request,
+                    (err?: Error|null, result?: protos.google.ads.admanager.v1.IAdUnit|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateAdUnit as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAdUnit as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAdUnit with error', async () => {
+            const client = new adunitserviceModule.v1.AdUnitServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.UpdateAdUnitRequest()
+            );
+            request.adUnit ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.UpdateAdUnitRequest', ['adUnit', 'name']);
+            request.adUnit.name = defaultValue1;
+            const expectedHeaderRequestParams = `ad_unit.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateAdUnit = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateAdUnit(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateAdUnit as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAdUnit as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAdUnit with closed client', async () => {
+            const client = new adunitserviceModule.v1.AdUnitServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.UpdateAdUnitRequest()
+            );
+            request.adUnit ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.UpdateAdUnitRequest', ['adUnit', 'name']);
+            request.adUnit.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateAdUnit(request), expectedError);
+        });
+    });
+
+    describe('batchCreateAdUnits', () => {
+        it('invokes batchCreateAdUnits without error', async () => {
+            const client = new adunitserviceModule.v1.AdUnitServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchCreateAdUnitsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchCreateAdUnitsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchCreateAdUnitsResponse()
+            );
+            client.innerApiCalls.batchCreateAdUnits = stubSimpleCall(expectedResponse);
+            const [response] = await client.batchCreateAdUnits(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchCreateAdUnits as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchCreateAdUnits as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchCreateAdUnits without error using callback', async () => {
+            const client = new adunitserviceModule.v1.AdUnitServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchCreateAdUnitsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchCreateAdUnitsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchCreateAdUnitsResponse()
+            );
+            client.innerApiCalls.batchCreateAdUnits = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.batchCreateAdUnits(
+                    request,
+                    (err?: Error|null, result?: protos.google.ads.admanager.v1.IBatchCreateAdUnitsResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchCreateAdUnits as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchCreateAdUnits as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchCreateAdUnits with error', async () => {
+            const client = new adunitserviceModule.v1.AdUnitServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchCreateAdUnitsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchCreateAdUnitsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.batchCreateAdUnits = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.batchCreateAdUnits(request), expectedError);
+            const actualRequest = (client.innerApiCalls.batchCreateAdUnits as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchCreateAdUnits as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchCreateAdUnits with closed client', async () => {
+            const client = new adunitserviceModule.v1.AdUnitServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchCreateAdUnitsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchCreateAdUnitsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.batchCreateAdUnits(request), expectedError);
+        });
+    });
+
+    describe('batchUpdateAdUnits', () => {
+        it('invokes batchUpdateAdUnits without error', async () => {
+            const client = new adunitserviceModule.v1.AdUnitServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchUpdateAdUnitsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchUpdateAdUnitsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchUpdateAdUnitsResponse()
+            );
+            client.innerApiCalls.batchUpdateAdUnits = stubSimpleCall(expectedResponse);
+            const [response] = await client.batchUpdateAdUnits(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchUpdateAdUnits as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchUpdateAdUnits as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchUpdateAdUnits without error using callback', async () => {
+            const client = new adunitserviceModule.v1.AdUnitServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchUpdateAdUnitsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchUpdateAdUnitsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchUpdateAdUnitsResponse()
+            );
+            client.innerApiCalls.batchUpdateAdUnits = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.batchUpdateAdUnits(
+                    request,
+                    (err?: Error|null, result?: protos.google.ads.admanager.v1.IBatchUpdateAdUnitsResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchUpdateAdUnits as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchUpdateAdUnits as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchUpdateAdUnits with error', async () => {
+            const client = new adunitserviceModule.v1.AdUnitServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchUpdateAdUnitsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchUpdateAdUnitsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.batchUpdateAdUnits = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.batchUpdateAdUnits(request), expectedError);
+            const actualRequest = (client.innerApiCalls.batchUpdateAdUnits as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchUpdateAdUnits as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchUpdateAdUnits with closed client', async () => {
+            const client = new adunitserviceModule.v1.AdUnitServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchUpdateAdUnitsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchUpdateAdUnitsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.batchUpdateAdUnits(request), expectedError);
+        });
+    });
+
+    describe('batchActivateAdUnits', () => {
+        it('invokes batchActivateAdUnits without error', async () => {
+            const client = new adunitserviceModule.v1.AdUnitServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchActivateAdUnitsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchActivateAdUnitsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchActivateAdUnitsResponse()
+            );
+            client.innerApiCalls.batchActivateAdUnits = stubSimpleCall(expectedResponse);
+            const [response] = await client.batchActivateAdUnits(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchActivateAdUnits as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchActivateAdUnits as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchActivateAdUnits without error using callback', async () => {
+            const client = new adunitserviceModule.v1.AdUnitServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchActivateAdUnitsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchActivateAdUnitsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchActivateAdUnitsResponse()
+            );
+            client.innerApiCalls.batchActivateAdUnits = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.batchActivateAdUnits(
+                    request,
+                    (err?: Error|null, result?: protos.google.ads.admanager.v1.IBatchActivateAdUnitsResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchActivateAdUnits as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchActivateAdUnits as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchActivateAdUnits with error', async () => {
+            const client = new adunitserviceModule.v1.AdUnitServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchActivateAdUnitsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchActivateAdUnitsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.batchActivateAdUnits = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.batchActivateAdUnits(request), expectedError);
+            const actualRequest = (client.innerApiCalls.batchActivateAdUnits as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchActivateAdUnits as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchActivateAdUnits with closed client', async () => {
+            const client = new adunitserviceModule.v1.AdUnitServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchActivateAdUnitsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchActivateAdUnitsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.batchActivateAdUnits(request), expectedError);
+        });
+    });
+
+    describe('batchDeactivateAdUnits', () => {
+        it('invokes batchDeactivateAdUnits without error', async () => {
+            const client = new adunitserviceModule.v1.AdUnitServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchDeactivateAdUnitsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchDeactivateAdUnitsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchDeactivateAdUnitsResponse()
+            );
+            client.innerApiCalls.batchDeactivateAdUnits = stubSimpleCall(expectedResponse);
+            const [response] = await client.batchDeactivateAdUnits(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchDeactivateAdUnits as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchDeactivateAdUnits as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchDeactivateAdUnits without error using callback', async () => {
+            const client = new adunitserviceModule.v1.AdUnitServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchDeactivateAdUnitsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchDeactivateAdUnitsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchDeactivateAdUnitsResponse()
+            );
+            client.innerApiCalls.batchDeactivateAdUnits = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.batchDeactivateAdUnits(
+                    request,
+                    (err?: Error|null, result?: protos.google.ads.admanager.v1.IBatchDeactivateAdUnitsResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchDeactivateAdUnits as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchDeactivateAdUnits as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchDeactivateAdUnits with error', async () => {
+            const client = new adunitserviceModule.v1.AdUnitServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchDeactivateAdUnitsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchDeactivateAdUnitsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.batchDeactivateAdUnits = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.batchDeactivateAdUnits(request), expectedError);
+            const actualRequest = (client.innerApiCalls.batchDeactivateAdUnits as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchDeactivateAdUnits as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchDeactivateAdUnits with closed client', async () => {
+            const client = new adunitserviceModule.v1.AdUnitServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchDeactivateAdUnitsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchDeactivateAdUnitsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.batchDeactivateAdUnits(request), expectedError);
+        });
+    });
+
+    describe('batchArchiveAdUnits', () => {
+        it('invokes batchArchiveAdUnits without error', async () => {
+            const client = new adunitserviceModule.v1.AdUnitServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchArchiveAdUnitsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchArchiveAdUnitsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchArchiveAdUnitsResponse()
+            );
+            client.innerApiCalls.batchArchiveAdUnits = stubSimpleCall(expectedResponse);
+            const [response] = await client.batchArchiveAdUnits(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchArchiveAdUnits as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchArchiveAdUnits as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchArchiveAdUnits without error using callback', async () => {
+            const client = new adunitserviceModule.v1.AdUnitServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchArchiveAdUnitsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchArchiveAdUnitsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchArchiveAdUnitsResponse()
+            );
+            client.innerApiCalls.batchArchiveAdUnits = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.batchArchiveAdUnits(
+                    request,
+                    (err?: Error|null, result?: protos.google.ads.admanager.v1.IBatchArchiveAdUnitsResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchArchiveAdUnits as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchArchiveAdUnits as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchArchiveAdUnits with error', async () => {
+            const client = new adunitserviceModule.v1.AdUnitServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchArchiveAdUnitsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchArchiveAdUnitsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.batchArchiveAdUnits = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.batchArchiveAdUnits(request), expectedError);
+            const actualRequest = (client.innerApiCalls.batchArchiveAdUnits as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchArchiveAdUnits as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchArchiveAdUnits with closed client', async () => {
+            const client = new adunitserviceModule.v1.AdUnitServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchArchiveAdUnitsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchArchiveAdUnitsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.batchArchiveAdUnits(request), expectedError);
+        });
+    });
+
     describe('listAdUnits', () => {
         it('invokes listAdUnits without error', async () => {
             const client = new adunitserviceModule.v1.AdUnitServiceClient({
@@ -1832,6 +2592,44 @@ describe('v1.AdUnitServiceClient', () => {
                 const result = client.matchLabelFromLabelName(fakePath);
                 assert.strictEqual(result, "labelValue");
                 assert((client.pathTemplates.labelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('lineItem', async () => {
+            const fakePath = "/rendered/path/lineItem";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                line_item: "lineItemValue",
+            };
+            const client = new adunitserviceModule.v1.AdUnitServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.lineItemPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.lineItemPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('lineItemPath', () => {
+                const result = client.lineItemPath("networkCodeValue", "lineItemValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.lineItemPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromLineItemName', () => {
+                const result = client.matchNetworkCodeFromLineItemName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.lineItemPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLineItemFromLineItemName', () => {
+                const result = client.matchLineItemFromLineItemName(fakePath);
+                assert.strictEqual(result, "lineItemValue");
+                assert((client.pathTemplates.lineItemPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

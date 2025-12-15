@@ -1139,6 +1139,110 @@ describe('v1.CloudBuildClient', () => {
         });
     });
 
+    describe('getDefaultServiceAccount', () => {
+        it('invokes getDefaultServiceAccount without error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.GetDefaultServiceAccountRequest()
+            );
+            // path template: projects/*/locations/{location=*}/defaultServiceAccount
+            request.name = 'projects/value/locations/value/defaultServiceAccount';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedResponse = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.DefaultServiceAccount()
+            );
+            client.innerApiCalls.getDefaultServiceAccount = stubSimpleCall(expectedResponse);
+            const [response] = await client.getDefaultServiceAccount(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getDefaultServiceAccount as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getDefaultServiceAccount as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getDefaultServiceAccount without error using callback', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.GetDefaultServiceAccountRequest()
+            );
+            // path template: projects/*/locations/{location=*}/defaultServiceAccount
+            request.name = 'projects/value/locations/value/defaultServiceAccount';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedResponse = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.DefaultServiceAccount()
+            );
+            client.innerApiCalls.getDefaultServiceAccount = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getDefaultServiceAccount(
+                    request,
+                    (err?: Error|null, result?: protos.google.devtools.cloudbuild.v1.IDefaultServiceAccount|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getDefaultServiceAccount as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getDefaultServiceAccount as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getDefaultServiceAccount with error', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.GetDefaultServiceAccountRequest()
+            );
+            // path template: projects/*/locations/{location=*}/defaultServiceAccount
+            request.name = 'projects/value/locations/value/defaultServiceAccount';
+            const expectedHeaderRequestParams = 'location=value';
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getDefaultServiceAccount = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getDefaultServiceAccount(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getDefaultServiceAccount as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getDefaultServiceAccount as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getDefaultServiceAccount with closed client', async () => {
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudbuild.v1.GetDefaultServiceAccountRequest()
+            );
+            // path template: projects/*/locations/{location=*}/defaultServiceAccount
+            request.name = 'projects/value/locations/value/defaultServiceAccount';
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getDefaultServiceAccount(request), expectedError);
+        });
+    });
+
     describe('createBuild', () => {
         it('invokes createBuild without error', async () => {
             const client = new cloudbuildModule.v1.CloudBuildClient({
@@ -2959,6 +3063,44 @@ describe('v1.CloudBuildClient', () => {
                 const result = client.matchKeyFromCryptoKeyName(fakePath);
                 assert.strictEqual(result, "keyValue");
                 assert((client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('defaultServiceAccount', async () => {
+            const fakePath = "/rendered/path/defaultServiceAccount";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new cloudbuildModule.v1.CloudBuildClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.defaultServiceAccountPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.defaultServiceAccountPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('defaultServiceAccountPath', () => {
+                const result = client.defaultServiceAccountPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.defaultServiceAccountPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromDefaultServiceAccountName', () => {
+                const result = client.matchProjectFromDefaultServiceAccountName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.defaultServiceAccountPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromDefaultServiceAccountName', () => {
+                const result = client.matchLocationFromDefaultServiceAccountName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.defaultServiceAccountPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

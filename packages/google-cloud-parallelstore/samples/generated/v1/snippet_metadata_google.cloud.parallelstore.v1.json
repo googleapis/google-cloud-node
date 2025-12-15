@@ -262,7 +262,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 87,
+          "end": 91,
           "type": "FULL"
         }
       ],
@@ -290,6 +290,10 @@
           {
             "name": "service_account",
             "type": "TYPE_STRING"
+          },
+          {
+            "name": "metadata_options",
+            "type": ".google.cloud.parallelstore.v1.TransferMetadataOptions"
           }
         ],
         "resultType": ".google.longrunning.Operation",
@@ -318,7 +322,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 87,
+          "end": 91,
           "type": "FULL"
         }
       ],
@@ -346,6 +350,10 @@
           {
             "name": "service_account",
             "type": "TYPE_STRING"
+          },
+          {
+            "name": "metadata_options",
+            "type": ".google.cloud.parallelstore.v1.TransferMetadataOptions"
           }
         ],
         "resultType": ".google.longrunning.Operation",

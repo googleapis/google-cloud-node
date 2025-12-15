@@ -16,4 +16,5 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+export {DnsThreatDetectorServiceClient} from './dns_threat_detector_service_client';
 export {NetworkSecurityClient} from './network_security_client';

@@ -16,12 +16,13 @@
 // ** https://github.com/googleapis/synthtool **
 // ** All changes to this file may be overwritten. **
 
+import * as v1 from './v1';
 import * as v1beta from './v1beta';
 
-const MaintenanceClient = v1beta.MaintenanceClient;
-type MaintenanceClient = v1beta.MaintenanceClient;
+const MaintenanceClient = v1.MaintenanceClient;
+type MaintenanceClient = v1.MaintenanceClient;
 
-export {v1beta, MaintenanceClient};
-export default {v1beta, MaintenanceClient};
+export {v1, v1beta, MaintenanceClient};
+export default {v1, v1beta, MaintenanceClient};
 import * as protos from '../protos/protos';
 export {protos};

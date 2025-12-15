@@ -17,7 +17,7 @@
     "@google-apps/meet": "^0.7.1"
   },
   "devDependencies": {
-    "c8": "^8.0.0",
+    "c8": "^10.0.0",
     "chai": "^4.2.0",
     "mocha": "^8.0.0"
   }

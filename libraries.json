@@ -3944,5 +3944,23 @@
     "api_shortname": "storagebatchoperations",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-storagebatchoperations",
     "support_documentation": "https://cloud.google.com/storage/docs/getting-support"
+  },
+  {
+    "name": "vectorsearch",
+    "name_pretty": "Vector Search API",
+    "product_documentation": "https://docs.cloud.google.com/vertex-ai/docs/vector-search-2/overview",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/vectorsearch/latest",
+    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "release_level": "preview",
+    "language": "nodejs",
+    "repo": "googleapis/google-cloud-node",
+    "distribution_name": "@google-cloud/vectorsearch",
+    "api_id": "vectorsearch.googleapis.com",
+    "default_version": "v1beta",
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO",
+    "api_shortname": "vectorsearch",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-vectorsearch",
+    "support_documentation": "https://docs.cloud.google.com/vertex-ai/docs/getting-support"
   }
 ]

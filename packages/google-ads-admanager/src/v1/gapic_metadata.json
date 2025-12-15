@@ -131,6 +131,41 @@
                 "getAdUnit"
               ]
             },
+            "CreateAdUnit": {
+              "methods": [
+                "createAdUnit"
+              ]
+            },
+            "UpdateAdUnit": {
+              "methods": [
+                "updateAdUnit"
+              ]
+            },
+            "BatchCreateAdUnits": {
+              "methods": [
+                "batchCreateAdUnits"
+              ]
+            },
+            "BatchUpdateAdUnits": {
+              "methods": [
+                "batchUpdateAdUnits"
+              ]
+            },
+            "BatchActivateAdUnits": {
+              "methods": [
+                "batchActivateAdUnits"
+              ]
+            },
+            "BatchDeactivateAdUnits": {
+              "methods": [
+                "batchDeactivateAdUnits"
+              ]
+            },
+            "BatchArchiveAdUnits": {
+              "methods": [
+                "batchArchiveAdUnits"
+              ]
+            },
             "ListAdUnits": {
               "methods": [
                 "listAdUnits",
@@ -153,6 +188,41 @@
             "GetAdUnit": {
               "methods": [
                 "getAdUnit"
+              ]
+            },
+            "CreateAdUnit": {
+              "methods": [
+                "createAdUnit"
+              ]
+            },
+            "UpdateAdUnit": {
+              "methods": [
+                "updateAdUnit"
+              ]
+            },
+            "BatchCreateAdUnits": {
+              "methods": [
+                "batchCreateAdUnits"
+              ]
+            },
+            "BatchUpdateAdUnits": {
+              "methods": [
+                "batchUpdateAdUnits"
+              ]
+            },
+            "BatchActivateAdUnits": {
+              "methods": [
+                "batchActivateAdUnits"
+              ]
+            },
+            "BatchDeactivateAdUnits": {
+              "methods": [
+                "batchDeactivateAdUnits"
+              ]
+            },
+            "BatchArchiveAdUnits": {
+              "methods": [
+                "batchArchiveAdUnits"
               ]
             },
             "ListAdUnits": {
@@ -815,6 +885,36 @@
                 "getCustomTargetingKey"
               ]
             },
+            "CreateCustomTargetingKey": {
+              "methods": [
+                "createCustomTargetingKey"
+              ]
+            },
+            "BatchCreateCustomTargetingKeys": {
+              "methods": [
+                "batchCreateCustomTargetingKeys"
+              ]
+            },
+            "UpdateCustomTargetingKey": {
+              "methods": [
+                "updateCustomTargetingKey"
+              ]
+            },
+            "BatchUpdateCustomTargetingKeys": {
+              "methods": [
+                "batchUpdateCustomTargetingKeys"
+              ]
+            },
+            "BatchActivateCustomTargetingKeys": {
+              "methods": [
+                "batchActivateCustomTargetingKeys"
+              ]
+            },
+            "BatchDeactivateCustomTargetingKeys": {
+              "methods": [
+                "batchDeactivateCustomTargetingKeys"
+              ]
+            },
             "ListCustomTargetingKeys": {
               "methods": [
                 "listCustomTargetingKeys",
@@ -830,6 +930,36 @@
             "GetCustomTargetingKey": {
               "methods": [
                 "getCustomTargetingKey"
+              ]
+            },
+            "CreateCustomTargetingKey": {
+              "methods": [
+                "createCustomTargetingKey"
+              ]
+            },
+            "BatchCreateCustomTargetingKeys": {
+              "methods": [
+                "batchCreateCustomTargetingKeys"
+              ]
+            },
+            "UpdateCustomTargetingKey": {
+              "methods": [
+                "updateCustomTargetingKey"
+              ]
+            },
+            "BatchUpdateCustomTargetingKeys": {
+              "methods": [
+                "batchUpdateCustomTargetingKeys"
+              ]
+            },
+            "BatchActivateCustomTargetingKeys": {
+              "methods": [
+                "batchActivateCustomTargetingKeys"
+              ]
+            },
+            "BatchDeactivateCustomTargetingKeys": {
+              "methods": [
+                "batchDeactivateCustomTargetingKeys"
               ]
             },
             "ListCustomTargetingKeys": {
@@ -1111,6 +1241,44 @@
         }
       }
     },
+    "LineItemService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "LineItemServiceClient",
+          "rpcs": {
+            "GetLineItem": {
+              "methods": [
+                "getLineItem"
+              ]
+            },
+            "ListLineItems": {
+              "methods": [
+                "listLineItems",
+                "listLineItemsStream",
+                "listLineItemsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "LineItemServiceClient",
+          "rpcs": {
+            "GetLineItem": {
+              "methods": [
+                "getLineItem"
+              ]
+            },
+            "ListLineItems": {
+              "methods": [
+                "listLineItems",
+                "listLineItemsStream",
+                "listLineItemsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "MobileCarrierService": {
       "clients": {
         "grpc": {
@@ -1237,7 +1405,9 @@
             },
             "ListNetworks": {
               "methods": [
-                "listNetworks"
+                "listNetworks",
+                "listNetworksStream",
+                "listNetworksAsync"
               ]
             }
           }
@@ -1252,7 +1422,9 @@
             },
             "ListNetworks": {
               "methods": [
-                "listNetworks"
+                "listNetworks",
+                "listNetworksStream",
+                "listNetworksAsync"
               ]
             }
           }

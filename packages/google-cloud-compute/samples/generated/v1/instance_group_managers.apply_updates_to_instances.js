@@ -41,7 +41,8 @@ function main(instanceGroupManager, instanceGroupManagersApplyUpdatesRequestReso
    */
   // const project = 'my-project'
   /**
-   *  The name of the zone where the managed instance group is located. Should conform to RFC1035.
+   *  The name of thezone
+   *  where the managed instance group is located. Should conform to RFC1035.
    */
   // const zone = 'abc123'
 

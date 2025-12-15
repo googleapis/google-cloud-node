@@ -66,6 +66,4182 @@
                      */
                     var api = {};
     
+                    api.v1 = (function() {
+    
+                        /**
+                         * Namespace v1.
+                         * @memberof google.cloud.maintenance.api
+                         * @namespace
+                         */
+                        var v1 = {};
+    
+                        v1.Maintenance = (function() {
+    
+                            /**
+                             * Constructs a new Maintenance service.
+                             * @memberof google.cloud.maintenance.api.v1
+                             * @classdesc Represents a Maintenance
+                             * @extends $protobuf.rpc.Service
+                             * @constructor
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             */
+                            function Maintenance(rpcImpl, requestDelimited, responseDelimited) {
+                                $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                            }
+    
+                            (Maintenance.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = Maintenance;
+    
+                            /**
+                             * Creates new Maintenance service using the specified rpc implementation.
+                             * @function create
+                             * @memberof google.cloud.maintenance.api.v1.Maintenance
+                             * @static
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             * @returns {Maintenance} RPC service. Useful where requests and/or responses are streamed.
+                             */
+                            Maintenance.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                                return new this(rpcImpl, requestDelimited, responseDelimited);
+                            };
+    
+                            /**
+                             * Callback as used by {@link google.cloud.maintenance.api.v1.Maintenance|summarizeMaintenances}.
+                             * @memberof google.cloud.maintenance.api.v1.Maintenance
+                             * @typedef SummarizeMaintenancesCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.maintenance.api.v1.SummarizeMaintenancesResponse} [response] SummarizeMaintenancesResponse
+                             */
+    
+                            /**
+                             * Calls SummarizeMaintenances.
+                             * @function summarizeMaintenances
+                             * @memberof google.cloud.maintenance.api.v1.Maintenance
+                             * @instance
+                             * @param {google.cloud.maintenance.api.v1.ISummarizeMaintenancesRequest} request SummarizeMaintenancesRequest message or plain object
+                             * @param {google.cloud.maintenance.api.v1.Maintenance.SummarizeMaintenancesCallback} callback Node-style callback called with the error, if any, and SummarizeMaintenancesResponse
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(Maintenance.prototype.summarizeMaintenances = function summarizeMaintenances(request, callback) {
+                                return this.rpcCall(summarizeMaintenances, $root.google.cloud.maintenance.api.v1.SummarizeMaintenancesRequest, $root.google.cloud.maintenance.api.v1.SummarizeMaintenancesResponse, request, callback);
+                            }, "name", { value: "SummarizeMaintenances" });
+    
+                            /**
+                             * Calls SummarizeMaintenances.
+                             * @function summarizeMaintenances
+                             * @memberof google.cloud.maintenance.api.v1.Maintenance
+                             * @instance
+                             * @param {google.cloud.maintenance.api.v1.ISummarizeMaintenancesRequest} request SummarizeMaintenancesRequest message or plain object
+                             * @returns {Promise<google.cloud.maintenance.api.v1.SummarizeMaintenancesResponse>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.maintenance.api.v1.Maintenance|listResourceMaintenances}.
+                             * @memberof google.cloud.maintenance.api.v1.Maintenance
+                             * @typedef ListResourceMaintenancesCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.maintenance.api.v1.ListResourceMaintenancesResponse} [response] ListResourceMaintenancesResponse
+                             */
+    
+                            /**
+                             * Calls ListResourceMaintenances.
+                             * @function listResourceMaintenances
+                             * @memberof google.cloud.maintenance.api.v1.Maintenance
+                             * @instance
+                             * @param {google.cloud.maintenance.api.v1.IListResourceMaintenancesRequest} request ListResourceMaintenancesRequest message or plain object
+                             * @param {google.cloud.maintenance.api.v1.Maintenance.ListResourceMaintenancesCallback} callback Node-style callback called with the error, if any, and ListResourceMaintenancesResponse
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(Maintenance.prototype.listResourceMaintenances = function listResourceMaintenances(request, callback) {
+                                return this.rpcCall(listResourceMaintenances, $root.google.cloud.maintenance.api.v1.ListResourceMaintenancesRequest, $root.google.cloud.maintenance.api.v1.ListResourceMaintenancesResponse, request, callback);
+                            }, "name", { value: "ListResourceMaintenances" });
+    
+                            /**
+                             * Calls ListResourceMaintenances.
+                             * @function listResourceMaintenances
+                             * @memberof google.cloud.maintenance.api.v1.Maintenance
+                             * @instance
+                             * @param {google.cloud.maintenance.api.v1.IListResourceMaintenancesRequest} request ListResourceMaintenancesRequest message or plain object
+                             * @returns {Promise<google.cloud.maintenance.api.v1.ListResourceMaintenancesResponse>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.maintenance.api.v1.Maintenance|getResourceMaintenance}.
+                             * @memberof google.cloud.maintenance.api.v1.Maintenance
+                             * @typedef GetResourceMaintenanceCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.maintenance.api.v1.ResourceMaintenance} [response] ResourceMaintenance
+                             */
+    
+                            /**
+                             * Calls GetResourceMaintenance.
+                             * @function getResourceMaintenance
+                             * @memberof google.cloud.maintenance.api.v1.Maintenance
+                             * @instance
+                             * @param {google.cloud.maintenance.api.v1.IGetResourceMaintenanceRequest} request GetResourceMaintenanceRequest message or plain object
+                             * @param {google.cloud.maintenance.api.v1.Maintenance.GetResourceMaintenanceCallback} callback Node-style callback called with the error, if any, and ResourceMaintenance
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(Maintenance.prototype.getResourceMaintenance = function getResourceMaintenance(request, callback) {
+                                return this.rpcCall(getResourceMaintenance, $root.google.cloud.maintenance.api.v1.GetResourceMaintenanceRequest, $root.google.cloud.maintenance.api.v1.ResourceMaintenance, request, callback);
+                            }, "name", { value: "GetResourceMaintenance" });
+    
+                            /**
+                             * Calls GetResourceMaintenance.
+                             * @function getResourceMaintenance
+                             * @memberof google.cloud.maintenance.api.v1.Maintenance
+                             * @instance
+                             * @param {google.cloud.maintenance.api.v1.IGetResourceMaintenanceRequest} request GetResourceMaintenanceRequest message or plain object
+                             * @returns {Promise<google.cloud.maintenance.api.v1.ResourceMaintenance>} Promise
+                             * @variation 2
+                             */
+    
+                            return Maintenance;
+                        })();
+    
+                        /**
+                         * MaintenanceCategory enum.
+                         * @name google.cloud.maintenance.api.v1.MaintenanceCategory
+                         * @enum {number}
+                         * @property {number} MAINTENANCE_CATEGORY_UNSPECIFIED=0 MAINTENANCE_CATEGORY_UNSPECIFIED value
+                         * @property {number} INFRASTRUCTURE=1 INFRASTRUCTURE value
+                         * @property {number} SERVICE_UPDATE=3 SERVICE_UPDATE value
+                         */
+                        v1.MaintenanceCategory = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "MAINTENANCE_CATEGORY_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "INFRASTRUCTURE"] = 1;
+                            values[valuesById[3] = "SERVICE_UPDATE"] = 3;
+                            return values;
+                        })();
+    
+                        v1.SummarizeMaintenancesRequest = (function() {
+    
+                            /**
+                             * Properties of a SummarizeMaintenancesRequest.
+                             * @memberof google.cloud.maintenance.api.v1
+                             * @interface ISummarizeMaintenancesRequest
+                             * @property {string|null} [parent] SummarizeMaintenancesRequest parent
+                             * @property {number|null} [pageSize] SummarizeMaintenancesRequest pageSize
+                             * @property {string|null} [pageToken] SummarizeMaintenancesRequest pageToken
+                             * @property {string|null} [filter] SummarizeMaintenancesRequest filter
+                             * @property {string|null} [orderBy] SummarizeMaintenancesRequest orderBy
+                             */
+    
+                            /**
+                             * Constructs a new SummarizeMaintenancesRequest.
+                             * @memberof google.cloud.maintenance.api.v1
+                             * @classdesc Represents a SummarizeMaintenancesRequest.
+                             * @implements ISummarizeMaintenancesRequest
+                             * @constructor
+                             * @param {google.cloud.maintenance.api.v1.ISummarizeMaintenancesRequest=} [properties] Properties to set
+                             */
+                            function SummarizeMaintenancesRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SummarizeMaintenancesRequest parent.
+                             * @member {string} parent
+                             * @memberof google.cloud.maintenance.api.v1.SummarizeMaintenancesRequest
+                             * @instance
+                             */
+                            SummarizeMaintenancesRequest.prototype.parent = "";
+    
+                            /**
+                             * SummarizeMaintenancesRequest pageSize.
+                             * @member {number} pageSize
+                             * @memberof google.cloud.maintenance.api.v1.SummarizeMaintenancesRequest
+                             * @instance
+                             */
+                            SummarizeMaintenancesRequest.prototype.pageSize = 0;
+    
+                            /**
+                             * SummarizeMaintenancesRequest pageToken.
+                             * @member {string} pageToken
+                             * @memberof google.cloud.maintenance.api.v1.SummarizeMaintenancesRequest
+                             * @instance
+                             */
+                            SummarizeMaintenancesRequest.prototype.pageToken = "";
+    
+                            /**
+                             * SummarizeMaintenancesRequest filter.
+                             * @member {string} filter
+                             * @memberof google.cloud.maintenance.api.v1.SummarizeMaintenancesRequest
+                             * @instance
+                             */
+                            SummarizeMaintenancesRequest.prototype.filter = "";
+    
+                            /**
+                             * SummarizeMaintenancesRequest orderBy.
+                             * @member {string} orderBy
+                             * @memberof google.cloud.maintenance.api.v1.SummarizeMaintenancesRequest
+                             * @instance
+                             */
+                            SummarizeMaintenancesRequest.prototype.orderBy = "";
+    
+                            /**
+                             * Creates a new SummarizeMaintenancesRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.maintenance.api.v1.SummarizeMaintenancesRequest
+                             * @static
+                             * @param {google.cloud.maintenance.api.v1.ISummarizeMaintenancesRequest=} [properties] Properties to set
+                             * @returns {google.cloud.maintenance.api.v1.SummarizeMaintenancesRequest} SummarizeMaintenancesRequest instance
+                             */
+                            SummarizeMaintenancesRequest.create = function create(properties) {
+                                return new SummarizeMaintenancesRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SummarizeMaintenancesRequest message. Does not implicitly {@link google.cloud.maintenance.api.v1.SummarizeMaintenancesRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.maintenance.api.v1.SummarizeMaintenancesRequest
+                             * @static
+                             * @param {google.cloud.maintenance.api.v1.ISummarizeMaintenancesRequest} message SummarizeMaintenancesRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SummarizeMaintenancesRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 10006, wireType 2 =*/80050).string(message.parent);
+                                if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                    writer.uint32(/* id 10505, wireType 0 =*/84040).int32(message.pageSize);
+                                if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                    writer.uint32(/* id 10506, wireType 2 =*/84050).string(message.pageToken);
+                                if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                    writer.uint32(/* id 10507, wireType 2 =*/84058).string(message.filter);
+                                if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                    writer.uint32(/* id 10508, wireType 2 =*/84066).string(message.orderBy);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SummarizeMaintenancesRequest message, length delimited. Does not implicitly {@link google.cloud.maintenance.api.v1.SummarizeMaintenancesRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.maintenance.api.v1.SummarizeMaintenancesRequest
+                             * @static
+                             * @param {google.cloud.maintenance.api.v1.ISummarizeMaintenancesRequest} message SummarizeMaintenancesRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SummarizeMaintenancesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SummarizeMaintenancesRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.maintenance.api.v1.SummarizeMaintenancesRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.maintenance.api.v1.SummarizeMaintenancesRequest} SummarizeMaintenancesRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SummarizeMaintenancesRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.maintenance.api.v1.SummarizeMaintenancesRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 10006: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 10505: {
+                                            message.pageSize = reader.int32();
+                                            break;
+                                        }
+                                    case 10506: {
+                                            message.pageToken = reader.string();
+                                            break;
+                                        }
+                                    case 10507: {
+                                            message.filter = reader.string();
+                                            break;
+                                        }
+                                    case 10508: {
+                                            message.orderBy = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SummarizeMaintenancesRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.maintenance.api.v1.SummarizeMaintenancesRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.maintenance.api.v1.SummarizeMaintenancesRequest} SummarizeMaintenancesRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SummarizeMaintenancesRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SummarizeMaintenancesRequest message.
+                             * @function verify
+                             * @memberof google.cloud.maintenance.api.v1.SummarizeMaintenancesRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SummarizeMaintenancesRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    if (!$util.isInteger(message.pageSize))
+                                        return "pageSize: integer expected";
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    if (!$util.isString(message.pageToken))
+                                        return "pageToken: string expected";
+                                if (message.filter != null && message.hasOwnProperty("filter"))
+                                    if (!$util.isString(message.filter))
+                                        return "filter: string expected";
+                                if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                    if (!$util.isString(message.orderBy))
+                                        return "orderBy: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SummarizeMaintenancesRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.maintenance.api.v1.SummarizeMaintenancesRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.maintenance.api.v1.SummarizeMaintenancesRequest} SummarizeMaintenancesRequest
+                             */
+                            SummarizeMaintenancesRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.maintenance.api.v1.SummarizeMaintenancesRequest)
+                                    return object;
+                                var message = new $root.google.cloud.maintenance.api.v1.SummarizeMaintenancesRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.pageSize != null)
+                                    message.pageSize = object.pageSize | 0;
+                                if (object.pageToken != null)
+                                    message.pageToken = String(object.pageToken);
+                                if (object.filter != null)
+                                    message.filter = String(object.filter);
+                                if (object.orderBy != null)
+                                    message.orderBy = String(object.orderBy);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SummarizeMaintenancesRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.maintenance.api.v1.SummarizeMaintenancesRequest
+                             * @static
+                             * @param {google.cloud.maintenance.api.v1.SummarizeMaintenancesRequest} message SummarizeMaintenancesRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SummarizeMaintenancesRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.pageSize = 0;
+                                    object.pageToken = "";
+                                    object.filter = "";
+                                    object.orderBy = "";
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    object.pageSize = message.pageSize;
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    object.pageToken = message.pageToken;
+                                if (message.filter != null && message.hasOwnProperty("filter"))
+                                    object.filter = message.filter;
+                                if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                    object.orderBy = message.orderBy;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SummarizeMaintenancesRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.maintenance.api.v1.SummarizeMaintenancesRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SummarizeMaintenancesRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SummarizeMaintenancesRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.maintenance.api.v1.SummarizeMaintenancesRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SummarizeMaintenancesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.maintenance.api.v1.SummarizeMaintenancesRequest";
+                            };
+    
+                            return SummarizeMaintenancesRequest;
+                        })();
+    
+                        v1.SummarizeMaintenancesResponse = (function() {
+    
+                            /**
+                             * Properties of a SummarizeMaintenancesResponse.
+                             * @memberof google.cloud.maintenance.api.v1
+                             * @interface ISummarizeMaintenancesResponse
+                             * @property {Array.<google.cloud.maintenance.api.v1.IMaintenanceSummary>|null} [maintenances] SummarizeMaintenancesResponse maintenances
+                             * @property {string|null} [nextPageToken] SummarizeMaintenancesResponse nextPageToken
+                             * @property {Array.<string>|null} [unreachable] SummarizeMaintenancesResponse unreachable
+                             */
+    
+                            /**
+                             * Constructs a new SummarizeMaintenancesResponse.
+                             * @memberof google.cloud.maintenance.api.v1
+                             * @classdesc Represents a SummarizeMaintenancesResponse.
+                             * @implements ISummarizeMaintenancesResponse
+                             * @constructor
+                             * @param {google.cloud.maintenance.api.v1.ISummarizeMaintenancesResponse=} [properties] Properties to set
+                             */
+                            function SummarizeMaintenancesResponse(properties) {
+                                this.maintenances = [];
+                                this.unreachable = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SummarizeMaintenancesResponse maintenances.
+                             * @member {Array.<google.cloud.maintenance.api.v1.IMaintenanceSummary>} maintenances
+                             * @memberof google.cloud.maintenance.api.v1.SummarizeMaintenancesResponse
+                             * @instance
+                             */
+                            SummarizeMaintenancesResponse.prototype.maintenances = $util.emptyArray;
+    
+                            /**
+                             * SummarizeMaintenancesResponse nextPageToken.
+                             * @member {string} nextPageToken
+                             * @memberof google.cloud.maintenance.api.v1.SummarizeMaintenancesResponse
+                             * @instance
+                             */
+                            SummarizeMaintenancesResponse.prototype.nextPageToken = "";
+    
+                            /**
+                             * SummarizeMaintenancesResponse unreachable.
+                             * @member {Array.<string>} unreachable
+                             * @memberof google.cloud.maintenance.api.v1.SummarizeMaintenancesResponse
+                             * @instance
+                             */
+                            SummarizeMaintenancesResponse.prototype.unreachable = $util.emptyArray;
+    
+                            /**
+                             * Creates a new SummarizeMaintenancesResponse instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.maintenance.api.v1.SummarizeMaintenancesResponse
+                             * @static
+                             * @param {google.cloud.maintenance.api.v1.ISummarizeMaintenancesResponse=} [properties] Properties to set
+                             * @returns {google.cloud.maintenance.api.v1.SummarizeMaintenancesResponse} SummarizeMaintenancesResponse instance
+                             */
+                            SummarizeMaintenancesResponse.create = function create(properties) {
+                                return new SummarizeMaintenancesResponse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SummarizeMaintenancesResponse message. Does not implicitly {@link google.cloud.maintenance.api.v1.SummarizeMaintenancesResponse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.maintenance.api.v1.SummarizeMaintenancesResponse
+                             * @static
+                             * @param {google.cloud.maintenance.api.v1.ISummarizeMaintenancesResponse} message SummarizeMaintenancesResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SummarizeMaintenancesResponse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.maintenances != null && message.maintenances.length)
+                                    for (var i = 0; i < message.maintenances.length; ++i)
+                                        $root.google.cloud.maintenance.api.v1.MaintenanceSummary.encode(message.maintenances[i], writer.uint32(/* id 10509, wireType 2 =*/84074).fork()).ldelim();
+                                if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                    writer.uint32(/* id 10510, wireType 2 =*/84082).string(message.nextPageToken);
+                                if (message.unreachable != null && message.unreachable.length)
+                                    for (var i = 0; i < message.unreachable.length; ++i)
+                                        writer.uint32(/* id 10511, wireType 2 =*/84090).string(message.unreachable[i]);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SummarizeMaintenancesResponse message, length delimited. Does not implicitly {@link google.cloud.maintenance.api.v1.SummarizeMaintenancesResponse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.maintenance.api.v1.SummarizeMaintenancesResponse
+                             * @static
+                             * @param {google.cloud.maintenance.api.v1.ISummarizeMaintenancesResponse} message SummarizeMaintenancesResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SummarizeMaintenancesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SummarizeMaintenancesResponse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.maintenance.api.v1.SummarizeMaintenancesResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.maintenance.api.v1.SummarizeMaintenancesResponse} SummarizeMaintenancesResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SummarizeMaintenancesResponse.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.maintenance.api.v1.SummarizeMaintenancesResponse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 10509: {
+                                            if (!(message.maintenances && message.maintenances.length))
+                                                message.maintenances = [];
+                                            message.maintenances.push($root.google.cloud.maintenance.api.v1.MaintenanceSummary.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 10510: {
+                                            message.nextPageToken = reader.string();
+                                            break;
+                                        }
+                                    case 10511: {
+                                            if (!(message.unreachable && message.unreachable.length))
+                                                message.unreachable = [];
+                                            message.unreachable.push(reader.string());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SummarizeMaintenancesResponse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.maintenance.api.v1.SummarizeMaintenancesResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.maintenance.api.v1.SummarizeMaintenancesResponse} SummarizeMaintenancesResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SummarizeMaintenancesResponse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SummarizeMaintenancesResponse message.
+                             * @function verify
+                             * @memberof google.cloud.maintenance.api.v1.SummarizeMaintenancesResponse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SummarizeMaintenancesResponse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.maintenances != null && message.hasOwnProperty("maintenances")) {
+                                    if (!Array.isArray(message.maintenances))
+                                        return "maintenances: array expected";
+                                    for (var i = 0; i < message.maintenances.length; ++i) {
+                                        var error = $root.google.cloud.maintenance.api.v1.MaintenanceSummary.verify(message.maintenances[i]);
+                                        if (error)
+                                            return "maintenances." + error;
+                                    }
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    if (!$util.isString(message.nextPageToken))
+                                        return "nextPageToken: string expected";
+                                if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                    if (!Array.isArray(message.unreachable))
+                                        return "unreachable: array expected";
+                                    for (var i = 0; i < message.unreachable.length; ++i)
+                                        if (!$util.isString(message.unreachable[i]))
+                                            return "unreachable: string[] expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SummarizeMaintenancesResponse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.maintenance.api.v1.SummarizeMaintenancesResponse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.maintenance.api.v1.SummarizeMaintenancesResponse} SummarizeMaintenancesResponse
+                             */
+                            SummarizeMaintenancesResponse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.maintenance.api.v1.SummarizeMaintenancesResponse)
+                                    return object;
+                                var message = new $root.google.cloud.maintenance.api.v1.SummarizeMaintenancesResponse();
+                                if (object.maintenances) {
+                                    if (!Array.isArray(object.maintenances))
+                                        throw TypeError(".google.cloud.maintenance.api.v1.SummarizeMaintenancesResponse.maintenances: array expected");
+                                    message.maintenances = [];
+                                    for (var i = 0; i < object.maintenances.length; ++i) {
+                                        if (typeof object.maintenances[i] !== "object")
+                                            throw TypeError(".google.cloud.maintenance.api.v1.SummarizeMaintenancesResponse.maintenances: object expected");
+                                        message.maintenances[i] = $root.google.cloud.maintenance.api.v1.MaintenanceSummary.fromObject(object.maintenances[i]);
+                                    }
+                                }
+                                if (object.nextPageToken != null)
+                                    message.nextPageToken = String(object.nextPageToken);
+                                if (object.unreachable) {
+                                    if (!Array.isArray(object.unreachable))
+                                        throw TypeError(".google.cloud.maintenance.api.v1.SummarizeMaintenancesResponse.unreachable: array expected");
+                                    message.unreachable = [];
+                                    for (var i = 0; i < object.unreachable.length; ++i)
+                                        message.unreachable[i] = String(object.unreachable[i]);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SummarizeMaintenancesResponse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.maintenance.api.v1.SummarizeMaintenancesResponse
+                             * @static
+                             * @param {google.cloud.maintenance.api.v1.SummarizeMaintenancesResponse} message SummarizeMaintenancesResponse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SummarizeMaintenancesResponse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.maintenances = [];
+                                    object.unreachable = [];
+                                }
+                                if (options.defaults)
+                                    object.nextPageToken = "";
+                                if (message.maintenances && message.maintenances.length) {
+                                    object.maintenances = [];
+                                    for (var j = 0; j < message.maintenances.length; ++j)
+                                        object.maintenances[j] = $root.google.cloud.maintenance.api.v1.MaintenanceSummary.toObject(message.maintenances[j], options);
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    object.nextPageToken = message.nextPageToken;
+                                if (message.unreachable && message.unreachable.length) {
+                                    object.unreachable = [];
+                                    for (var j = 0; j < message.unreachable.length; ++j)
+                                        object.unreachable[j] = message.unreachable[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SummarizeMaintenancesResponse to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.maintenance.api.v1.SummarizeMaintenancesResponse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SummarizeMaintenancesResponse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SummarizeMaintenancesResponse
+                             * @function getTypeUrl
+                             * @memberof google.cloud.maintenance.api.v1.SummarizeMaintenancesResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SummarizeMaintenancesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.maintenance.api.v1.SummarizeMaintenancesResponse";
+                            };
+    
+                            return SummarizeMaintenancesResponse;
+                        })();
+    
+                        v1.MaintenanceSummary = (function() {
+    
+                            /**
+                             * Properties of a MaintenanceSummary.
+                             * @memberof google.cloud.maintenance.api.v1
+                             * @interface IMaintenanceSummary
+                             * @property {string|null} [maintenanceName] MaintenanceSummary maintenanceName
+                             * @property {string|null} [title] MaintenanceSummary title
+                             * @property {string|null} [description] MaintenanceSummary description
+                             * @property {google.cloud.maintenance.api.v1.MaintenanceCategory|null} [category] MaintenanceSummary category
+                             * @property {google.protobuf.ITimestamp|null} [maintenanceScheduledStartTime] MaintenanceSummary maintenanceScheduledStartTime
+                             * @property {google.protobuf.ITimestamp|null} [maintenanceScheduledEndTime] MaintenanceSummary maintenanceScheduledEndTime
+                             * @property {google.protobuf.ITimestamp|null} [maintenanceStartTime] MaintenanceSummary maintenanceStartTime
+                             * @property {google.protobuf.ITimestamp|null} [maintenanceEndTime] MaintenanceSummary maintenanceEndTime
+                             * @property {boolean|null} [userControllable] MaintenanceSummary userControllable
+                             * @property {Array.<google.cloud.maintenance.api.v1.IMaintenanceControl>|null} [controls] MaintenanceSummary controls
+                             * @property {Array.<google.cloud.maintenance.api.v1.MaintenanceSummary.IStats>|null} [stats] MaintenanceSummary stats
+                             */
+    
+                            /**
+                             * Constructs a new MaintenanceSummary.
+                             * @memberof google.cloud.maintenance.api.v1
+                             * @classdesc Represents a MaintenanceSummary.
+                             * @implements IMaintenanceSummary
+                             * @constructor
+                             * @param {google.cloud.maintenance.api.v1.IMaintenanceSummary=} [properties] Properties to set
+                             */
+                            function MaintenanceSummary(properties) {
+                                this.controls = [];
+                                this.stats = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * MaintenanceSummary maintenanceName.
+                             * @member {string} maintenanceName
+                             * @memberof google.cloud.maintenance.api.v1.MaintenanceSummary
+                             * @instance
+                             */
+                            MaintenanceSummary.prototype.maintenanceName = "";
+    
+                            /**
+                             * MaintenanceSummary title.
+                             * @member {string} title
+                             * @memberof google.cloud.maintenance.api.v1.MaintenanceSummary
+                             * @instance
+                             */
+                            MaintenanceSummary.prototype.title = "";
+    
+                            /**
+                             * MaintenanceSummary description.
+                             * @member {string} description
+                             * @memberof google.cloud.maintenance.api.v1.MaintenanceSummary
+                             * @instance
+                             */
+                            MaintenanceSummary.prototype.description = "";
+    
+                            /**
+                             * MaintenanceSummary category.
+                             * @member {google.cloud.maintenance.api.v1.MaintenanceCategory} category
+                             * @memberof google.cloud.maintenance.api.v1.MaintenanceSummary
+                             * @instance
+                             */
+                            MaintenanceSummary.prototype.category = 0;
+    
+                            /**
+                             * MaintenanceSummary maintenanceScheduledStartTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} maintenanceScheduledStartTime
+                             * @memberof google.cloud.maintenance.api.v1.MaintenanceSummary
+                             * @instance
+                             */
+                            MaintenanceSummary.prototype.maintenanceScheduledStartTime = null;
+    
+                            /**
+                             * MaintenanceSummary maintenanceScheduledEndTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} maintenanceScheduledEndTime
+                             * @memberof google.cloud.maintenance.api.v1.MaintenanceSummary
+                             * @instance
+                             */
+                            MaintenanceSummary.prototype.maintenanceScheduledEndTime = null;
+    
+                            /**
+                             * MaintenanceSummary maintenanceStartTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} maintenanceStartTime
+                             * @memberof google.cloud.maintenance.api.v1.MaintenanceSummary
+                             * @instance
+                             */
+                            MaintenanceSummary.prototype.maintenanceStartTime = null;
+    
+                            /**
+                             * MaintenanceSummary maintenanceEndTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} maintenanceEndTime
+                             * @memberof google.cloud.maintenance.api.v1.MaintenanceSummary
+                             * @instance
+                             */
+                            MaintenanceSummary.prototype.maintenanceEndTime = null;
+    
+                            /**
+                             * MaintenanceSummary userControllable.
+                             * @member {boolean} userControllable
+                             * @memberof google.cloud.maintenance.api.v1.MaintenanceSummary
+                             * @instance
+                             */
+                            MaintenanceSummary.prototype.userControllable = false;
+    
+                            /**
+                             * MaintenanceSummary controls.
+                             * @member {Array.<google.cloud.maintenance.api.v1.IMaintenanceControl>} controls
+                             * @memberof google.cloud.maintenance.api.v1.MaintenanceSummary
+                             * @instance
+                             */
+                            MaintenanceSummary.prototype.controls = $util.emptyArray;
+    
+                            /**
+                             * MaintenanceSummary stats.
+                             * @member {Array.<google.cloud.maintenance.api.v1.MaintenanceSummary.IStats>} stats
+                             * @memberof google.cloud.maintenance.api.v1.MaintenanceSummary
+                             * @instance
+                             */
+                            MaintenanceSummary.prototype.stats = $util.emptyArray;
+    
+                            /**
+                             * Creates a new MaintenanceSummary instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.maintenance.api.v1.MaintenanceSummary
+                             * @static
+                             * @param {google.cloud.maintenance.api.v1.IMaintenanceSummary=} [properties] Properties to set
+                             * @returns {google.cloud.maintenance.api.v1.MaintenanceSummary} MaintenanceSummary instance
+                             */
+                            MaintenanceSummary.create = function create(properties) {
+                                return new MaintenanceSummary(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified MaintenanceSummary message. Does not implicitly {@link google.cloud.maintenance.api.v1.MaintenanceSummary.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.maintenance.api.v1.MaintenanceSummary
+                             * @static
+                             * @param {google.cloud.maintenance.api.v1.IMaintenanceSummary} message MaintenanceSummary message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MaintenanceSummary.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.maintenanceName != null && Object.hasOwnProperty.call(message, "maintenanceName"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.maintenanceName);
+                                if (message.title != null && Object.hasOwnProperty.call(message, "title"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.title);
+                                if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
+                                if (message.maintenanceScheduledStartTime != null && Object.hasOwnProperty.call(message, "maintenanceScheduledStartTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.maintenanceScheduledStartTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                if (message.maintenanceScheduledEndTime != null && Object.hasOwnProperty.call(message, "maintenanceScheduledEndTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.maintenanceScheduledEndTime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                if (message.maintenanceStartTime != null && Object.hasOwnProperty.call(message, "maintenanceStartTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.maintenanceStartTime, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                                if (message.maintenanceEndTime != null && Object.hasOwnProperty.call(message, "maintenanceEndTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.maintenanceEndTime, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                                if (message.userControllable != null && Object.hasOwnProperty.call(message, "userControllable"))
+                                    writer.uint32(/* id 10, wireType 0 =*/80).bool(message.userControllable);
+                                if (message.stats != null && message.stats.length)
+                                    for (var i = 0; i < message.stats.length; ++i)
+                                        $root.google.cloud.maintenance.api.v1.MaintenanceSummary.Stats.encode(message.stats[i], writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                                if (message.category != null && Object.hasOwnProperty.call(message, "category"))
+                                    writer.uint32(/* id 13, wireType 0 =*/104).int32(message.category);
+                                if (message.controls != null && message.controls.length)
+                                    for (var i = 0; i < message.controls.length; ++i)
+                                        $root.google.cloud.maintenance.api.v1.MaintenanceControl.encode(message.controls[i], writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified MaintenanceSummary message, length delimited. Does not implicitly {@link google.cloud.maintenance.api.v1.MaintenanceSummary.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.maintenance.api.v1.MaintenanceSummary
+                             * @static
+                             * @param {google.cloud.maintenance.api.v1.IMaintenanceSummary} message MaintenanceSummary message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MaintenanceSummary.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a MaintenanceSummary message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.maintenance.api.v1.MaintenanceSummary
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.maintenance.api.v1.MaintenanceSummary} MaintenanceSummary
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MaintenanceSummary.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.maintenance.api.v1.MaintenanceSummary();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.maintenanceName = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.title = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.description = reader.string();
+                                            break;
+                                        }
+                                    case 13: {
+                                            message.category = reader.int32();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.maintenanceScheduledStartTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.maintenanceScheduledEndTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.maintenanceStartTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 9: {
+                                            message.maintenanceEndTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 10: {
+                                            message.userControllable = reader.bool();
+                                            break;
+                                        }
+                                    case 14: {
+                                            if (!(message.controls && message.controls.length))
+                                                message.controls = [];
+                                            message.controls.push($root.google.cloud.maintenance.api.v1.MaintenanceControl.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 12: {
+                                            if (!(message.stats && message.stats.length))
+                                                message.stats = [];
+                                            message.stats.push($root.google.cloud.maintenance.api.v1.MaintenanceSummary.Stats.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a MaintenanceSummary message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.maintenance.api.v1.MaintenanceSummary
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.maintenance.api.v1.MaintenanceSummary} MaintenanceSummary
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MaintenanceSummary.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a MaintenanceSummary message.
+                             * @function verify
+                             * @memberof google.cloud.maintenance.api.v1.MaintenanceSummary
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            MaintenanceSummary.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.maintenanceName != null && message.hasOwnProperty("maintenanceName"))
+                                    if (!$util.isString(message.maintenanceName))
+                                        return "maintenanceName: string expected";
+                                if (message.title != null && message.hasOwnProperty("title"))
+                                    if (!$util.isString(message.title))
+                                        return "title: string expected";
+                                if (message.description != null && message.hasOwnProperty("description"))
+                                    if (!$util.isString(message.description))
+                                        return "description: string expected";
+                                if (message.category != null && message.hasOwnProperty("category"))
+                                    switch (message.category) {
+                                    default:
+                                        return "category: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 3:
+                                        break;
+                                    }
+                                if (message.maintenanceScheduledStartTime != null && message.hasOwnProperty("maintenanceScheduledStartTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.maintenanceScheduledStartTime);
+                                    if (error)
+                                        return "maintenanceScheduledStartTime." + error;
+                                }
+                                if (message.maintenanceScheduledEndTime != null && message.hasOwnProperty("maintenanceScheduledEndTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.maintenanceScheduledEndTime);
+                                    if (error)
+                                        return "maintenanceScheduledEndTime." + error;
+                                }
+                                if (message.maintenanceStartTime != null && message.hasOwnProperty("maintenanceStartTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.maintenanceStartTime);
+                                    if (error)
+                                        return "maintenanceStartTime." + error;
+                                }
+                                if (message.maintenanceEndTime != null && message.hasOwnProperty("maintenanceEndTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.maintenanceEndTime);
+                                    if (error)
+                                        return "maintenanceEndTime." + error;
+                                }
+                                if (message.userControllable != null && message.hasOwnProperty("userControllable"))
+                                    if (typeof message.userControllable !== "boolean")
+                                        return "userControllable: boolean expected";
+                                if (message.controls != null && message.hasOwnProperty("controls")) {
+                                    if (!Array.isArray(message.controls))
+                                        return "controls: array expected";
+                                    for (var i = 0; i < message.controls.length; ++i) {
+                                        var error = $root.google.cloud.maintenance.api.v1.MaintenanceControl.verify(message.controls[i]);
+                                        if (error)
+                                            return "controls." + error;
+                                    }
+                                }
+                                if (message.stats != null && message.hasOwnProperty("stats")) {
+                                    if (!Array.isArray(message.stats))
+                                        return "stats: array expected";
+                                    for (var i = 0; i < message.stats.length; ++i) {
+                                        var error = $root.google.cloud.maintenance.api.v1.MaintenanceSummary.Stats.verify(message.stats[i]);
+                                        if (error)
+                                            return "stats." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a MaintenanceSummary message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.maintenance.api.v1.MaintenanceSummary
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.maintenance.api.v1.MaintenanceSummary} MaintenanceSummary
+                             */
+                            MaintenanceSummary.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.maintenance.api.v1.MaintenanceSummary)
+                                    return object;
+                                var message = new $root.google.cloud.maintenance.api.v1.MaintenanceSummary();
+                                if (object.maintenanceName != null)
+                                    message.maintenanceName = String(object.maintenanceName);
+                                if (object.title != null)
+                                    message.title = String(object.title);
+                                if (object.description != null)
+                                    message.description = String(object.description);
+                                switch (object.category) {
+                                default:
+                                    if (typeof object.category === "number") {
+                                        message.category = object.category;
+                                        break;
+                                    }
+                                    break;
+                                case "MAINTENANCE_CATEGORY_UNSPECIFIED":
+                                case 0:
+                                    message.category = 0;
+                                    break;
+                                case "INFRASTRUCTURE":
+                                case 1:
+                                    message.category = 1;
+                                    break;
+                                case "SERVICE_UPDATE":
+                                case 3:
+                                    message.category = 3;
+                                    break;
+                                }
+                                if (object.maintenanceScheduledStartTime != null) {
+                                    if (typeof object.maintenanceScheduledStartTime !== "object")
+                                        throw TypeError(".google.cloud.maintenance.api.v1.MaintenanceSummary.maintenanceScheduledStartTime: object expected");
+                                    message.maintenanceScheduledStartTime = $root.google.protobuf.Timestamp.fromObject(object.maintenanceScheduledStartTime);
+                                }
+                                if (object.maintenanceScheduledEndTime != null) {
+                                    if (typeof object.maintenanceScheduledEndTime !== "object")
+                                        throw TypeError(".google.cloud.maintenance.api.v1.MaintenanceSummary.maintenanceScheduledEndTime: object expected");
+                                    message.maintenanceScheduledEndTime = $root.google.protobuf.Timestamp.fromObject(object.maintenanceScheduledEndTime);
+                                }
+                                if (object.maintenanceStartTime != null) {
+                                    if (typeof object.maintenanceStartTime !== "object")
+                                        throw TypeError(".google.cloud.maintenance.api.v1.MaintenanceSummary.maintenanceStartTime: object expected");
+                                    message.maintenanceStartTime = $root.google.protobuf.Timestamp.fromObject(object.maintenanceStartTime);
+                                }
+                                if (object.maintenanceEndTime != null) {
+                                    if (typeof object.maintenanceEndTime !== "object")
+                                        throw TypeError(".google.cloud.maintenance.api.v1.MaintenanceSummary.maintenanceEndTime: object expected");
+                                    message.maintenanceEndTime = $root.google.protobuf.Timestamp.fromObject(object.maintenanceEndTime);
+                                }
+                                if (object.userControllable != null)
+                                    message.userControllable = Boolean(object.userControllable);
+                                if (object.controls) {
+                                    if (!Array.isArray(object.controls))
+                                        throw TypeError(".google.cloud.maintenance.api.v1.MaintenanceSummary.controls: array expected");
+                                    message.controls = [];
+                                    for (var i = 0; i < object.controls.length; ++i) {
+                                        if (typeof object.controls[i] !== "object")
+                                            throw TypeError(".google.cloud.maintenance.api.v1.MaintenanceSummary.controls: object expected");
+                                        message.controls[i] = $root.google.cloud.maintenance.api.v1.MaintenanceControl.fromObject(object.controls[i]);
+                                    }
+                                }
+                                if (object.stats) {
+                                    if (!Array.isArray(object.stats))
+                                        throw TypeError(".google.cloud.maintenance.api.v1.MaintenanceSummary.stats: array expected");
+                                    message.stats = [];
+                                    for (var i = 0; i < object.stats.length; ++i) {
+                                        if (typeof object.stats[i] !== "object")
+                                            throw TypeError(".google.cloud.maintenance.api.v1.MaintenanceSummary.stats: object expected");
+                                        message.stats[i] = $root.google.cloud.maintenance.api.v1.MaintenanceSummary.Stats.fromObject(object.stats[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a MaintenanceSummary message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.maintenance.api.v1.MaintenanceSummary
+                             * @static
+                             * @param {google.cloud.maintenance.api.v1.MaintenanceSummary} message MaintenanceSummary
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            MaintenanceSummary.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.stats = [];
+                                    object.controls = [];
+                                }
+                                if (options.defaults) {
+                                    object.maintenanceName = "";
+                                    object.title = "";
+                                    object.description = "";
+                                    object.maintenanceScheduledStartTime = null;
+                                    object.maintenanceScheduledEndTime = null;
+                                    object.maintenanceStartTime = null;
+                                    object.maintenanceEndTime = null;
+                                    object.userControllable = false;
+                                    object.category = options.enums === String ? "MAINTENANCE_CATEGORY_UNSPECIFIED" : 0;
+                                }
+                                if (message.maintenanceName != null && message.hasOwnProperty("maintenanceName"))
+                                    object.maintenanceName = message.maintenanceName;
+                                if (message.title != null && message.hasOwnProperty("title"))
+                                    object.title = message.title;
+                                if (message.description != null && message.hasOwnProperty("description"))
+                                    object.description = message.description;
+                                if (message.maintenanceScheduledStartTime != null && message.hasOwnProperty("maintenanceScheduledStartTime"))
+                                    object.maintenanceScheduledStartTime = $root.google.protobuf.Timestamp.toObject(message.maintenanceScheduledStartTime, options);
+                                if (message.maintenanceScheduledEndTime != null && message.hasOwnProperty("maintenanceScheduledEndTime"))
+                                    object.maintenanceScheduledEndTime = $root.google.protobuf.Timestamp.toObject(message.maintenanceScheduledEndTime, options);
+                                if (message.maintenanceStartTime != null && message.hasOwnProperty("maintenanceStartTime"))
+                                    object.maintenanceStartTime = $root.google.protobuf.Timestamp.toObject(message.maintenanceStartTime, options);
+                                if (message.maintenanceEndTime != null && message.hasOwnProperty("maintenanceEndTime"))
+                                    object.maintenanceEndTime = $root.google.protobuf.Timestamp.toObject(message.maintenanceEndTime, options);
+                                if (message.userControllable != null && message.hasOwnProperty("userControllable"))
+                                    object.userControllable = message.userControllable;
+                                if (message.stats && message.stats.length) {
+                                    object.stats = [];
+                                    for (var j = 0; j < message.stats.length; ++j)
+                                        object.stats[j] = $root.google.cloud.maintenance.api.v1.MaintenanceSummary.Stats.toObject(message.stats[j], options);
+                                }
+                                if (message.category != null && message.hasOwnProperty("category"))
+                                    object.category = options.enums === String ? $root.google.cloud.maintenance.api.v1.MaintenanceCategory[message.category] === undefined ? message.category : $root.google.cloud.maintenance.api.v1.MaintenanceCategory[message.category] : message.category;
+                                if (message.controls && message.controls.length) {
+                                    object.controls = [];
+                                    for (var j = 0; j < message.controls.length; ++j)
+                                        object.controls[j] = $root.google.cloud.maintenance.api.v1.MaintenanceControl.toObject(message.controls[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this MaintenanceSummary to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.maintenance.api.v1.MaintenanceSummary
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            MaintenanceSummary.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for MaintenanceSummary
+                             * @function getTypeUrl
+                             * @memberof google.cloud.maintenance.api.v1.MaintenanceSummary
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            MaintenanceSummary.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.maintenance.api.v1.MaintenanceSummary";
+                            };
+    
+                            MaintenanceSummary.Stats = (function() {
+    
+                                /**
+                                 * Properties of a Stats.
+                                 * @memberof google.cloud.maintenance.api.v1.MaintenanceSummary
+                                 * @interface IStats
+                                 * @property {string|null} [groupBy] Stats groupBy
+                                 * @property {Array.<google.cloud.maintenance.api.v1.MaintenanceSummary.IAggregate>|null} [aggregates] Stats aggregates
+                                 */
+    
+                                /**
+                                 * Constructs a new Stats.
+                                 * @memberof google.cloud.maintenance.api.v1.MaintenanceSummary
+                                 * @classdesc Represents a Stats.
+                                 * @implements IStats
+                                 * @constructor
+                                 * @param {google.cloud.maintenance.api.v1.MaintenanceSummary.IStats=} [properties] Properties to set
+                                 */
+                                function Stats(properties) {
+                                    this.aggregates = [];
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Stats groupBy.
+                                 * @member {string} groupBy
+                                 * @memberof google.cloud.maintenance.api.v1.MaintenanceSummary.Stats
+                                 * @instance
+                                 */
+                                Stats.prototype.groupBy = "";
+    
+                                /**
+                                 * Stats aggregates.
+                                 * @member {Array.<google.cloud.maintenance.api.v1.MaintenanceSummary.IAggregate>} aggregates
+                                 * @memberof google.cloud.maintenance.api.v1.MaintenanceSummary.Stats
+                                 * @instance
+                                 */
+                                Stats.prototype.aggregates = $util.emptyArray;
+    
+                                /**
+                                 * Creates a new Stats instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.maintenance.api.v1.MaintenanceSummary.Stats
+                                 * @static
+                                 * @param {google.cloud.maintenance.api.v1.MaintenanceSummary.IStats=} [properties] Properties to set
+                                 * @returns {google.cloud.maintenance.api.v1.MaintenanceSummary.Stats} Stats instance
+                                 */
+                                Stats.create = function create(properties) {
+                                    return new Stats(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified Stats message. Does not implicitly {@link google.cloud.maintenance.api.v1.MaintenanceSummary.Stats.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.maintenance.api.v1.MaintenanceSummary.Stats
+                                 * @static
+                                 * @param {google.cloud.maintenance.api.v1.MaintenanceSummary.IStats} message Stats message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Stats.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.groupBy != null && Object.hasOwnProperty.call(message, "groupBy"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.groupBy);
+                                    if (message.aggregates != null && message.aggregates.length)
+                                        for (var i = 0; i < message.aggregates.length; ++i)
+                                            $root.google.cloud.maintenance.api.v1.MaintenanceSummary.Aggregate.encode(message.aggregates[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified Stats message, length delimited. Does not implicitly {@link google.cloud.maintenance.api.v1.MaintenanceSummary.Stats.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.maintenance.api.v1.MaintenanceSummary.Stats
+                                 * @static
+                                 * @param {google.cloud.maintenance.api.v1.MaintenanceSummary.IStats} message Stats message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Stats.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a Stats message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.maintenance.api.v1.MaintenanceSummary.Stats
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.maintenance.api.v1.MaintenanceSummary.Stats} Stats
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Stats.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.maintenance.api.v1.MaintenanceSummary.Stats();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.groupBy = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                if (!(message.aggregates && message.aggregates.length))
+                                                    message.aggregates = [];
+                                                message.aggregates.push($root.google.cloud.maintenance.api.v1.MaintenanceSummary.Aggregate.decode(reader, reader.uint32()));
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a Stats message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.maintenance.api.v1.MaintenanceSummary.Stats
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.maintenance.api.v1.MaintenanceSummary.Stats} Stats
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Stats.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a Stats message.
+                                 * @function verify
+                                 * @memberof google.cloud.maintenance.api.v1.MaintenanceSummary.Stats
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                Stats.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.groupBy != null && message.hasOwnProperty("groupBy"))
+                                        if (!$util.isString(message.groupBy))
+                                            return "groupBy: string expected";
+                                    if (message.aggregates != null && message.hasOwnProperty("aggregates")) {
+                                        if (!Array.isArray(message.aggregates))
+                                            return "aggregates: array expected";
+                                        for (var i = 0; i < message.aggregates.length; ++i) {
+                                            var error = $root.google.cloud.maintenance.api.v1.MaintenanceSummary.Aggregate.verify(message.aggregates[i]);
+                                            if (error)
+                                                return "aggregates." + error;
+                                        }
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a Stats message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.maintenance.api.v1.MaintenanceSummary.Stats
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.maintenance.api.v1.MaintenanceSummary.Stats} Stats
+                                 */
+                                Stats.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.maintenance.api.v1.MaintenanceSummary.Stats)
+                                        return object;
+                                    var message = new $root.google.cloud.maintenance.api.v1.MaintenanceSummary.Stats();
+                                    if (object.groupBy != null)
+                                        message.groupBy = String(object.groupBy);
+                                    if (object.aggregates) {
+                                        if (!Array.isArray(object.aggregates))
+                                            throw TypeError(".google.cloud.maintenance.api.v1.MaintenanceSummary.Stats.aggregates: array expected");
+                                        message.aggregates = [];
+                                        for (var i = 0; i < object.aggregates.length; ++i) {
+                                            if (typeof object.aggregates[i] !== "object")
+                                                throw TypeError(".google.cloud.maintenance.api.v1.MaintenanceSummary.Stats.aggregates: object expected");
+                                            message.aggregates[i] = $root.google.cloud.maintenance.api.v1.MaintenanceSummary.Aggregate.fromObject(object.aggregates[i]);
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a Stats message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.maintenance.api.v1.MaintenanceSummary.Stats
+                                 * @static
+                                 * @param {google.cloud.maintenance.api.v1.MaintenanceSummary.Stats} message Stats
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                Stats.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.arrays || options.defaults)
+                                        object.aggregates = [];
+                                    if (options.defaults)
+                                        object.groupBy = "";
+                                    if (message.groupBy != null && message.hasOwnProperty("groupBy"))
+                                        object.groupBy = message.groupBy;
+                                    if (message.aggregates && message.aggregates.length) {
+                                        object.aggregates = [];
+                                        for (var j = 0; j < message.aggregates.length; ++j)
+                                            object.aggregates[j] = $root.google.cloud.maintenance.api.v1.MaintenanceSummary.Aggregate.toObject(message.aggregates[j], options);
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this Stats to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.maintenance.api.v1.MaintenanceSummary.Stats
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                Stats.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for Stats
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.maintenance.api.v1.MaintenanceSummary.Stats
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                Stats.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.maintenance.api.v1.MaintenanceSummary.Stats";
+                                };
+    
+                                return Stats;
+                            })();
+    
+                            MaintenanceSummary.Aggregate = (function() {
+    
+                                /**
+                                 * Properties of an Aggregate.
+                                 * @memberof google.cloud.maintenance.api.v1.MaintenanceSummary
+                                 * @interface IAggregate
+                                 * @property {string|null} [group] Aggregate group
+                                 * @property {number|Long|null} [count] Aggregate count
+                                 */
+    
+                                /**
+                                 * Constructs a new Aggregate.
+                                 * @memberof google.cloud.maintenance.api.v1.MaintenanceSummary
+                                 * @classdesc Represents an Aggregate.
+                                 * @implements IAggregate
+                                 * @constructor
+                                 * @param {google.cloud.maintenance.api.v1.MaintenanceSummary.IAggregate=} [properties] Properties to set
+                                 */
+                                function Aggregate(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Aggregate group.
+                                 * @member {string} group
+                                 * @memberof google.cloud.maintenance.api.v1.MaintenanceSummary.Aggregate
+                                 * @instance
+                                 */
+                                Aggregate.prototype.group = "";
+    
+                                /**
+                                 * Aggregate count.
+                                 * @member {number|Long} count
+                                 * @memberof google.cloud.maintenance.api.v1.MaintenanceSummary.Aggregate
+                                 * @instance
+                                 */
+                                Aggregate.prototype.count = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                                /**
+                                 * Creates a new Aggregate instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.maintenance.api.v1.MaintenanceSummary.Aggregate
+                                 * @static
+                                 * @param {google.cloud.maintenance.api.v1.MaintenanceSummary.IAggregate=} [properties] Properties to set
+                                 * @returns {google.cloud.maintenance.api.v1.MaintenanceSummary.Aggregate} Aggregate instance
+                                 */
+                                Aggregate.create = function create(properties) {
+                                    return new Aggregate(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified Aggregate message. Does not implicitly {@link google.cloud.maintenance.api.v1.MaintenanceSummary.Aggregate.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.maintenance.api.v1.MaintenanceSummary.Aggregate
+                                 * @static
+                                 * @param {google.cloud.maintenance.api.v1.MaintenanceSummary.IAggregate} message Aggregate message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Aggregate.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.group != null && Object.hasOwnProperty.call(message, "group"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.group);
+                                    if (message.count != null && Object.hasOwnProperty.call(message, "count"))
+                                        writer.uint32(/* id 2, wireType 0 =*/16).int64(message.count);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified Aggregate message, length delimited. Does not implicitly {@link google.cloud.maintenance.api.v1.MaintenanceSummary.Aggregate.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.maintenance.api.v1.MaintenanceSummary.Aggregate
+                                 * @static
+                                 * @param {google.cloud.maintenance.api.v1.MaintenanceSummary.IAggregate} message Aggregate message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Aggregate.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an Aggregate message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.maintenance.api.v1.MaintenanceSummary.Aggregate
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.maintenance.api.v1.MaintenanceSummary.Aggregate} Aggregate
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Aggregate.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.maintenance.api.v1.MaintenanceSummary.Aggregate();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.group = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.count = reader.int64();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an Aggregate message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.maintenance.api.v1.MaintenanceSummary.Aggregate
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.maintenance.api.v1.MaintenanceSummary.Aggregate} Aggregate
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Aggregate.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an Aggregate message.
+                                 * @function verify
+                                 * @memberof google.cloud.maintenance.api.v1.MaintenanceSummary.Aggregate
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                Aggregate.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.group != null && message.hasOwnProperty("group"))
+                                        if (!$util.isString(message.group))
+                                            return "group: string expected";
+                                    if (message.count != null && message.hasOwnProperty("count"))
+                                        if (!$util.isInteger(message.count) && !(message.count && $util.isInteger(message.count.low) && $util.isInteger(message.count.high)))
+                                            return "count: integer|Long expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an Aggregate message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.maintenance.api.v1.MaintenanceSummary.Aggregate
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.maintenance.api.v1.MaintenanceSummary.Aggregate} Aggregate
+                                 */
+                                Aggregate.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.maintenance.api.v1.MaintenanceSummary.Aggregate)
+                                        return object;
+                                    var message = new $root.google.cloud.maintenance.api.v1.MaintenanceSummary.Aggregate();
+                                    if (object.group != null)
+                                        message.group = String(object.group);
+                                    if (object.count != null)
+                                        if ($util.Long)
+                                            (message.count = $util.Long.fromValue(object.count)).unsigned = false;
+                                        else if (typeof object.count === "string")
+                                            message.count = parseInt(object.count, 10);
+                                        else if (typeof object.count === "number")
+                                            message.count = object.count;
+                                        else if (typeof object.count === "object")
+                                            message.count = new $util.LongBits(object.count.low >>> 0, object.count.high >>> 0).toNumber();
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from an Aggregate message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.maintenance.api.v1.MaintenanceSummary.Aggregate
+                                 * @static
+                                 * @param {google.cloud.maintenance.api.v1.MaintenanceSummary.Aggregate} message Aggregate
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                Aggregate.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.group = "";
+                                        if ($util.Long) {
+                                            var long = new $util.Long(0, 0, false);
+                                            object.count = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                        } else
+                                            object.count = options.longs === String ? "0" : 0;
+                                    }
+                                    if (message.group != null && message.hasOwnProperty("group"))
+                                        object.group = message.group;
+                                    if (message.count != null && message.hasOwnProperty("count"))
+                                        if (typeof message.count === "number")
+                                            object.count = options.longs === String ? String(message.count) : message.count;
+                                        else
+                                            object.count = options.longs === String ? $util.Long.prototype.toString.call(message.count) : options.longs === Number ? new $util.LongBits(message.count.low >>> 0, message.count.high >>> 0).toNumber() : message.count;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this Aggregate to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.maintenance.api.v1.MaintenanceSummary.Aggregate
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                Aggregate.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for Aggregate
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.maintenance.api.v1.MaintenanceSummary.Aggregate
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                Aggregate.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.maintenance.api.v1.MaintenanceSummary.Aggregate";
+                                };
+    
+                                return Aggregate;
+                            })();
+    
+                            return MaintenanceSummary;
+                        })();
+    
+                        v1.ResourceMaintenance = (function() {
+    
+                            /**
+                             * Properties of a ResourceMaintenance.
+                             * @memberof google.cloud.maintenance.api.v1
+                             * @interface IResourceMaintenance
+                             * @property {string|null} [name] ResourceMaintenance name
+                             * @property {google.cloud.maintenance.api.v1.ResourceMaintenance.IResource|null} [resource] ResourceMaintenance resource
+                             * @property {google.cloud.maintenance.api.v1.ResourceMaintenance.IMaintenance|null} [maintenance] ResourceMaintenance maintenance
+                             * @property {google.cloud.maintenance.api.v1.ResourceMaintenance.State|null} [state] ResourceMaintenance state
+                             * @property {google.protobuf.ITimestamp|null} [createTime] ResourceMaintenance createTime
+                             * @property {google.protobuf.ITimestamp|null} [updateTime] ResourceMaintenance updateTime
+                             * @property {google.protobuf.ITimestamp|null} [maintenanceStartTime] ResourceMaintenance maintenanceStartTime
+                             * @property {google.protobuf.ITimestamp|null} [maintenanceEndTime] ResourceMaintenance maintenanceEndTime
+                             * @property {google.protobuf.ITimestamp|null} [maintenanceCancelTime] ResourceMaintenance maintenanceCancelTime
+                             * @property {google.protobuf.ITimestamp|null} [maintenanceScheduledStartTime] ResourceMaintenance maintenanceScheduledStartTime
+                             * @property {google.protobuf.ITimestamp|null} [maintenanceScheduledEndTime] ResourceMaintenance maintenanceScheduledEndTime
+                             * @property {boolean|null} [userControllable] ResourceMaintenance userControllable
+                             * @property {Array.<google.cloud.maintenance.api.v1.IMaintenanceControl>|null} [controls] ResourceMaintenance controls
+                             * @property {Object.<string,string>|null} [labels] ResourceMaintenance labels
+                             * @property {Object.<string,string>|null} [annotations] ResourceMaintenance annotations
+                             * @property {string|null} [uid] ResourceMaintenance uid
+                             * @property {string|null} [etag] ResourceMaintenance etag
+                             */
+    
+                            /**
+                             * Constructs a new ResourceMaintenance.
+                             * @memberof google.cloud.maintenance.api.v1
+                             * @classdesc Represents a ResourceMaintenance.
+                             * @implements IResourceMaintenance
+                             * @constructor
+                             * @param {google.cloud.maintenance.api.v1.IResourceMaintenance=} [properties] Properties to set
+                             */
+                            function ResourceMaintenance(properties) {
+                                this.controls = [];
+                                this.labels = {};
+                                this.annotations = {};
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ResourceMaintenance name.
+                             * @member {string} name
+                             * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance
+                             * @instance
+                             */
+                            ResourceMaintenance.prototype.name = "";
+    
+                            /**
+                             * ResourceMaintenance resource.
+                             * @member {google.cloud.maintenance.api.v1.ResourceMaintenance.IResource|null|undefined} resource
+                             * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance
+                             * @instance
+                             */
+                            ResourceMaintenance.prototype.resource = null;
+    
+                            /**
+                             * ResourceMaintenance maintenance.
+                             * @member {google.cloud.maintenance.api.v1.ResourceMaintenance.IMaintenance|null|undefined} maintenance
+                             * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance
+                             * @instance
+                             */
+                            ResourceMaintenance.prototype.maintenance = null;
+    
+                            /**
+                             * ResourceMaintenance state.
+                             * @member {google.cloud.maintenance.api.v1.ResourceMaintenance.State} state
+                             * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance
+                             * @instance
+                             */
+                            ResourceMaintenance.prototype.state = 0;
+    
+                            /**
+                             * ResourceMaintenance createTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                             * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance
+                             * @instance
+                             */
+                            ResourceMaintenance.prototype.createTime = null;
+    
+                            /**
+                             * ResourceMaintenance updateTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                             * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance
+                             * @instance
+                             */
+                            ResourceMaintenance.prototype.updateTime = null;
+    
+                            /**
+                             * ResourceMaintenance maintenanceStartTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} maintenanceStartTime
+                             * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance
+                             * @instance
+                             */
+                            ResourceMaintenance.prototype.maintenanceStartTime = null;
+    
+                            /**
+                             * ResourceMaintenance maintenanceEndTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} maintenanceEndTime
+                             * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance
+                             * @instance
+                             */
+                            ResourceMaintenance.prototype.maintenanceEndTime = null;
+    
+                            /**
+                             * ResourceMaintenance maintenanceCancelTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} maintenanceCancelTime
+                             * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance
+                             * @instance
+                             */
+                            ResourceMaintenance.prototype.maintenanceCancelTime = null;
+    
+                            /**
+                             * ResourceMaintenance maintenanceScheduledStartTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} maintenanceScheduledStartTime
+                             * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance
+                             * @instance
+                             */
+                            ResourceMaintenance.prototype.maintenanceScheduledStartTime = null;
+    
+                            /**
+                             * ResourceMaintenance maintenanceScheduledEndTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} maintenanceScheduledEndTime
+                             * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance
+                             * @instance
+                             */
+                            ResourceMaintenance.prototype.maintenanceScheduledEndTime = null;
+    
+                            /**
+                             * ResourceMaintenance userControllable.
+                             * @member {boolean} userControllable
+                             * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance
+                             * @instance
+                             */
+                            ResourceMaintenance.prototype.userControllable = false;
+    
+                            /**
+                             * ResourceMaintenance controls.
+                             * @member {Array.<google.cloud.maintenance.api.v1.IMaintenanceControl>} controls
+                             * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance
+                             * @instance
+                             */
+                            ResourceMaintenance.prototype.controls = $util.emptyArray;
+    
+                            /**
+                             * ResourceMaintenance labels.
+                             * @member {Object.<string,string>} labels
+                             * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance
+                             * @instance
+                             */
+                            ResourceMaintenance.prototype.labels = $util.emptyObject;
+    
+                            /**
+                             * ResourceMaintenance annotations.
+                             * @member {Object.<string,string>} annotations
+                             * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance
+                             * @instance
+                             */
+                            ResourceMaintenance.prototype.annotations = $util.emptyObject;
+    
+                            /**
+                             * ResourceMaintenance uid.
+                             * @member {string} uid
+                             * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance
+                             * @instance
+                             */
+                            ResourceMaintenance.prototype.uid = "";
+    
+                            /**
+                             * ResourceMaintenance etag.
+                             * @member {string} etag
+                             * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance
+                             * @instance
+                             */
+                            ResourceMaintenance.prototype.etag = "";
+    
+                            /**
+                             * Creates a new ResourceMaintenance instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance
+                             * @static
+                             * @param {google.cloud.maintenance.api.v1.IResourceMaintenance=} [properties] Properties to set
+                             * @returns {google.cloud.maintenance.api.v1.ResourceMaintenance} ResourceMaintenance instance
+                             */
+                            ResourceMaintenance.create = function create(properties) {
+                                return new ResourceMaintenance(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ResourceMaintenance message. Does not implicitly {@link google.cloud.maintenance.api.v1.ResourceMaintenance.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance
+                             * @static
+                             * @param {google.cloud.maintenance.api.v1.IResourceMaintenance} message ResourceMaintenance message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ResourceMaintenance.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.resource != null && Object.hasOwnProperty.call(message, "resource"))
+                                    $root.google.cloud.maintenance.api.v1.ResourceMaintenance.Resource.encode(message.resource, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.maintenance != null && Object.hasOwnProperty.call(message, "maintenance"))
+                                    $root.google.cloud.maintenance.api.v1.ResourceMaintenance.Maintenance.encode(message.maintenance, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.state);
+                                if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                if (message.maintenanceStartTime != null && Object.hasOwnProperty.call(message, "maintenanceStartTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.maintenanceStartTime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                if (message.maintenanceEndTime != null && Object.hasOwnProperty.call(message, "maintenanceEndTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.maintenanceEndTime, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                                if (message.maintenanceCancelTime != null && Object.hasOwnProperty.call(message, "maintenanceCancelTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.maintenanceCancelTime, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                                if (message.maintenanceScheduledStartTime != null && Object.hasOwnProperty.call(message, "maintenanceScheduledStartTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.maintenanceScheduledStartTime, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                                if (message.maintenanceScheduledEndTime != null && Object.hasOwnProperty.call(message, "maintenanceScheduledEndTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.maintenanceScheduledEndTime, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                                if (message.userControllable != null && Object.hasOwnProperty.call(message, "userControllable"))
+                                    writer.uint32(/* id 12, wireType 0 =*/96).bool(message.userControllable);
+                                if (message.controls != null && message.controls.length)
+                                    for (var i = 0; i < message.controls.length; ++i)
+                                        $root.google.cloud.maintenance.api.v1.MaintenanceControl.encode(message.controls[i], writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                                if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                                    writer.uint32(/* id 10201, wireType 2 =*/81610).string(message.uid);
+                                if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                    writer.uint32(/* id 10202, wireType 2 =*/81618).string(message.etag);
+                                if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                    for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                        writer.uint32(/* id 10401, wireType 2 =*/83210).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                                if (message.annotations != null && Object.hasOwnProperty.call(message, "annotations"))
+                                    for (var keys = Object.keys(message.annotations), i = 0; i < keys.length; ++i)
+                                        writer.uint32(/* id 10402, wireType 2 =*/83218).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.annotations[keys[i]]).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ResourceMaintenance message, length delimited. Does not implicitly {@link google.cloud.maintenance.api.v1.ResourceMaintenance.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance
+                             * @static
+                             * @param {google.cloud.maintenance.api.v1.IResourceMaintenance} message ResourceMaintenance message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ResourceMaintenance.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ResourceMaintenance message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.maintenance.api.v1.ResourceMaintenance} ResourceMaintenance
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ResourceMaintenance.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.maintenance.api.v1.ResourceMaintenance(), key, value;
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.resource = $root.google.cloud.maintenance.api.v1.ResourceMaintenance.Resource.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.maintenance = $root.google.cloud.maintenance.api.v1.ResourceMaintenance.Maintenance.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.state = reader.int32();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.maintenanceStartTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.maintenanceEndTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 9: {
+                                            message.maintenanceCancelTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 10: {
+                                            message.maintenanceScheduledStartTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 11: {
+                                            message.maintenanceScheduledEndTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 12: {
+                                            message.userControllable = reader.bool();
+                                            break;
+                                        }
+                                    case 13: {
+                                            if (!(message.controls && message.controls.length))
+                                                message.controls = [];
+                                            message.controls.push($root.google.cloud.maintenance.api.v1.MaintenanceControl.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 10401: {
+                                            if (message.labels === $util.emptyObject)
+                                                message.labels = {};
+                                            var end2 = reader.uint32() + reader.pos;
+                                            key = "";
+                                            value = "";
+                                            while (reader.pos < end2) {
+                                                var tag2 = reader.uint32();
+                                                switch (tag2 >>> 3) {
+                                                case 1:
+                                                    key = reader.string();
+                                                    break;
+                                                case 2:
+                                                    value = reader.string();
+                                                    break;
+                                                default:
+                                                    reader.skipType(tag2 & 7);
+                                                    break;
+                                                }
+                                            }
+                                            message.labels[key] = value;
+                                            break;
+                                        }
+                                    case 10402: {
+                                            if (message.annotations === $util.emptyObject)
+                                                message.annotations = {};
+                                            var end2 = reader.uint32() + reader.pos;
+                                            key = "";
+                                            value = "";
+                                            while (reader.pos < end2) {
+                                                var tag2 = reader.uint32();
+                                                switch (tag2 >>> 3) {
+                                                case 1:
+                                                    key = reader.string();
+                                                    break;
+                                                case 2:
+                                                    value = reader.string();
+                                                    break;
+                                                default:
+                                                    reader.skipType(tag2 & 7);
+                                                    break;
+                                                }
+                                            }
+                                            message.annotations[key] = value;
+                                            break;
+                                        }
+                                    case 10201: {
+                                            message.uid = reader.string();
+                                            break;
+                                        }
+                                    case 10202: {
+                                            message.etag = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ResourceMaintenance message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.maintenance.api.v1.ResourceMaintenance} ResourceMaintenance
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ResourceMaintenance.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ResourceMaintenance message.
+                             * @function verify
+                             * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ResourceMaintenance.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.resource != null && message.hasOwnProperty("resource")) {
+                                    var error = $root.google.cloud.maintenance.api.v1.ResourceMaintenance.Resource.verify(message.resource);
+                                    if (error)
+                                        return "resource." + error;
+                                }
+                                if (message.maintenance != null && message.hasOwnProperty("maintenance")) {
+                                    var error = $root.google.cloud.maintenance.api.v1.ResourceMaintenance.Maintenance.verify(message.maintenance);
+                                    if (error)
+                                        return "maintenance." + error;
+                                }
+                                if (message.state != null && message.hasOwnProperty("state"))
+                                    switch (message.state) {
+                                    default:
+                                        return "state: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        break;
+                                    }
+                                if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                    if (error)
+                                        return "createTime." + error;
+                                }
+                                if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                    if (error)
+                                        return "updateTime." + error;
+                                }
+                                if (message.maintenanceStartTime != null && message.hasOwnProperty("maintenanceStartTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.maintenanceStartTime);
+                                    if (error)
+                                        return "maintenanceStartTime." + error;
+                                }
+                                if (message.maintenanceEndTime != null && message.hasOwnProperty("maintenanceEndTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.maintenanceEndTime);
+                                    if (error)
+                                        return "maintenanceEndTime." + error;
+                                }
+                                if (message.maintenanceCancelTime != null && message.hasOwnProperty("maintenanceCancelTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.maintenanceCancelTime);
+                                    if (error)
+                                        return "maintenanceCancelTime." + error;
+                                }
+                                if (message.maintenanceScheduledStartTime != null && message.hasOwnProperty("maintenanceScheduledStartTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.maintenanceScheduledStartTime);
+                                    if (error)
+                                        return "maintenanceScheduledStartTime." + error;
+                                }
+                                if (message.maintenanceScheduledEndTime != null && message.hasOwnProperty("maintenanceScheduledEndTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.maintenanceScheduledEndTime);
+                                    if (error)
+                                        return "maintenanceScheduledEndTime." + error;
+                                }
+                                if (message.userControllable != null && message.hasOwnProperty("userControllable"))
+                                    if (typeof message.userControllable !== "boolean")
+                                        return "userControllable: boolean expected";
+                                if (message.controls != null && message.hasOwnProperty("controls")) {
+                                    if (!Array.isArray(message.controls))
+                                        return "controls: array expected";
+                                    for (var i = 0; i < message.controls.length; ++i) {
+                                        var error = $root.google.cloud.maintenance.api.v1.MaintenanceControl.verify(message.controls[i]);
+                                        if (error)
+                                            return "controls." + error;
+                                    }
+                                }
+                                if (message.labels != null && message.hasOwnProperty("labels")) {
+                                    if (!$util.isObject(message.labels))
+                                        return "labels: object expected";
+                                    var key = Object.keys(message.labels);
+                                    for (var i = 0; i < key.length; ++i)
+                                        if (!$util.isString(message.labels[key[i]]))
+                                            return "labels: string{k:string} expected";
+                                }
+                                if (message.annotations != null && message.hasOwnProperty("annotations")) {
+                                    if (!$util.isObject(message.annotations))
+                                        return "annotations: object expected";
+                                    var key = Object.keys(message.annotations);
+                                    for (var i = 0; i < key.length; ++i)
+                                        if (!$util.isString(message.annotations[key[i]]))
+                                            return "annotations: string{k:string} expected";
+                                }
+                                if (message.uid != null && message.hasOwnProperty("uid"))
+                                    if (!$util.isString(message.uid))
+                                        return "uid: string expected";
+                                if (message.etag != null && message.hasOwnProperty("etag"))
+                                    if (!$util.isString(message.etag))
+                                        return "etag: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ResourceMaintenance message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.maintenance.api.v1.ResourceMaintenance} ResourceMaintenance
+                             */
+                            ResourceMaintenance.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.maintenance.api.v1.ResourceMaintenance)
+                                    return object;
+                                var message = new $root.google.cloud.maintenance.api.v1.ResourceMaintenance();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.resource != null) {
+                                    if (typeof object.resource !== "object")
+                                        throw TypeError(".google.cloud.maintenance.api.v1.ResourceMaintenance.resource: object expected");
+                                    message.resource = $root.google.cloud.maintenance.api.v1.ResourceMaintenance.Resource.fromObject(object.resource);
+                                }
+                                if (object.maintenance != null) {
+                                    if (typeof object.maintenance !== "object")
+                                        throw TypeError(".google.cloud.maintenance.api.v1.ResourceMaintenance.maintenance: object expected");
+                                    message.maintenance = $root.google.cloud.maintenance.api.v1.ResourceMaintenance.Maintenance.fromObject(object.maintenance);
+                                }
+                                switch (object.state) {
+                                default:
+                                    if (typeof object.state === "number") {
+                                        message.state = object.state;
+                                        break;
+                                    }
+                                    break;
+                                case "STATE_UNSPECIFIED":
+                                case 0:
+                                    message.state = 0;
+                                    break;
+                                case "SCHEDULED":
+                                case 1:
+                                    message.state = 1;
+                                    break;
+                                case "RUNNING":
+                                case 2:
+                                    message.state = 2;
+                                    break;
+                                case "CANCELLED":
+                                case 3:
+                                    message.state = 3;
+                                    break;
+                                case "SUCCEEDED":
+                                case 4:
+                                    message.state = 4;
+                                    break;
+                                }
+                                if (object.createTime != null) {
+                                    if (typeof object.createTime !== "object")
+                                        throw TypeError(".google.cloud.maintenance.api.v1.ResourceMaintenance.createTime: object expected");
+                                    message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                                }
+                                if (object.updateTime != null) {
+                                    if (typeof object.updateTime !== "object")
+                                        throw TypeError(".google.cloud.maintenance.api.v1.ResourceMaintenance.updateTime: object expected");
+                                    message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                                }
+                                if (object.maintenanceStartTime != null) {
+                                    if (typeof object.maintenanceStartTime !== "object")
+                                        throw TypeError(".google.cloud.maintenance.api.v1.ResourceMaintenance.maintenanceStartTime: object expected");
+                                    message.maintenanceStartTime = $root.google.protobuf.Timestamp.fromObject(object.maintenanceStartTime);
+                                }
+                                if (object.maintenanceEndTime != null) {
+                                    if (typeof object.maintenanceEndTime !== "object")
+                                        throw TypeError(".google.cloud.maintenance.api.v1.ResourceMaintenance.maintenanceEndTime: object expected");
+                                    message.maintenanceEndTime = $root.google.protobuf.Timestamp.fromObject(object.maintenanceEndTime);
+                                }
+                                if (object.maintenanceCancelTime != null) {
+                                    if (typeof object.maintenanceCancelTime !== "object")
+                                        throw TypeError(".google.cloud.maintenance.api.v1.ResourceMaintenance.maintenanceCancelTime: object expected");
+                                    message.maintenanceCancelTime = $root.google.protobuf.Timestamp.fromObject(object.maintenanceCancelTime);
+                                }
+                                if (object.maintenanceScheduledStartTime != null) {
+                                    if (typeof object.maintenanceScheduledStartTime !== "object")
+                                        throw TypeError(".google.cloud.maintenance.api.v1.ResourceMaintenance.maintenanceScheduledStartTime: object expected");
+                                    message.maintenanceScheduledStartTime = $root.google.protobuf.Timestamp.fromObject(object.maintenanceScheduledStartTime);
+                                }
+                                if (object.maintenanceScheduledEndTime != null) {
+                                    if (typeof object.maintenanceScheduledEndTime !== "object")
+                                        throw TypeError(".google.cloud.maintenance.api.v1.ResourceMaintenance.maintenanceScheduledEndTime: object expected");
+                                    message.maintenanceScheduledEndTime = $root.google.protobuf.Timestamp.fromObject(object.maintenanceScheduledEndTime);
+                                }
+                                if (object.userControllable != null)
+                                    message.userControllable = Boolean(object.userControllable);
+                                if (object.controls) {
+                                    if (!Array.isArray(object.controls))
+                                        throw TypeError(".google.cloud.maintenance.api.v1.ResourceMaintenance.controls: array expected");
+                                    message.controls = [];
+                                    for (var i = 0; i < object.controls.length; ++i) {
+                                        if (typeof object.controls[i] !== "object")
+                                            throw TypeError(".google.cloud.maintenance.api.v1.ResourceMaintenance.controls: object expected");
+                                        message.controls[i] = $root.google.cloud.maintenance.api.v1.MaintenanceControl.fromObject(object.controls[i]);
+                                    }
+                                }
+                                if (object.labels) {
+                                    if (typeof object.labels !== "object")
+                                        throw TypeError(".google.cloud.maintenance.api.v1.ResourceMaintenance.labels: object expected");
+                                    message.labels = {};
+                                    for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                        message.labels[keys[i]] = String(object.labels[keys[i]]);
+                                }
+                                if (object.annotations) {
+                                    if (typeof object.annotations !== "object")
+                                        throw TypeError(".google.cloud.maintenance.api.v1.ResourceMaintenance.annotations: object expected");
+                                    message.annotations = {};
+                                    for (var keys = Object.keys(object.annotations), i = 0; i < keys.length; ++i)
+                                        message.annotations[keys[i]] = String(object.annotations[keys[i]]);
+                                }
+                                if (object.uid != null)
+                                    message.uid = String(object.uid);
+                                if (object.etag != null)
+                                    message.etag = String(object.etag);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ResourceMaintenance message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance
+                             * @static
+                             * @param {google.cloud.maintenance.api.v1.ResourceMaintenance} message ResourceMaintenance
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ResourceMaintenance.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.controls = [];
+                                if (options.objects || options.defaults) {
+                                    object.labels = {};
+                                    object.annotations = {};
+                                }
+                                if (options.defaults) {
+                                    object.name = "";
+                                    object.resource = null;
+                                    object.maintenance = null;
+                                    object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                    object.createTime = null;
+                                    object.updateTime = null;
+                                    object.maintenanceStartTime = null;
+                                    object.maintenanceEndTime = null;
+                                    object.maintenanceCancelTime = null;
+                                    object.maintenanceScheduledStartTime = null;
+                                    object.maintenanceScheduledEndTime = null;
+                                    object.userControllable = false;
+                                    object.uid = "";
+                                    object.etag = "";
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.resource != null && message.hasOwnProperty("resource"))
+                                    object.resource = $root.google.cloud.maintenance.api.v1.ResourceMaintenance.Resource.toObject(message.resource, options);
+                                if (message.maintenance != null && message.hasOwnProperty("maintenance"))
+                                    object.maintenance = $root.google.cloud.maintenance.api.v1.ResourceMaintenance.Maintenance.toObject(message.maintenance, options);
+                                if (message.state != null && message.hasOwnProperty("state"))
+                                    object.state = options.enums === String ? $root.google.cloud.maintenance.api.v1.ResourceMaintenance.State[message.state] === undefined ? message.state : $root.google.cloud.maintenance.api.v1.ResourceMaintenance.State[message.state] : message.state;
+                                if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                    object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                                if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                    object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                                if (message.maintenanceStartTime != null && message.hasOwnProperty("maintenanceStartTime"))
+                                    object.maintenanceStartTime = $root.google.protobuf.Timestamp.toObject(message.maintenanceStartTime, options);
+                                if (message.maintenanceEndTime != null && message.hasOwnProperty("maintenanceEndTime"))
+                                    object.maintenanceEndTime = $root.google.protobuf.Timestamp.toObject(message.maintenanceEndTime, options);
+                                if (message.maintenanceCancelTime != null && message.hasOwnProperty("maintenanceCancelTime"))
+                                    object.maintenanceCancelTime = $root.google.protobuf.Timestamp.toObject(message.maintenanceCancelTime, options);
+                                if (message.maintenanceScheduledStartTime != null && message.hasOwnProperty("maintenanceScheduledStartTime"))
+                                    object.maintenanceScheduledStartTime = $root.google.protobuf.Timestamp.toObject(message.maintenanceScheduledStartTime, options);
+                                if (message.maintenanceScheduledEndTime != null && message.hasOwnProperty("maintenanceScheduledEndTime"))
+                                    object.maintenanceScheduledEndTime = $root.google.protobuf.Timestamp.toObject(message.maintenanceScheduledEndTime, options);
+                                if (message.userControllable != null && message.hasOwnProperty("userControllable"))
+                                    object.userControllable = message.userControllable;
+                                if (message.controls && message.controls.length) {
+                                    object.controls = [];
+                                    for (var j = 0; j < message.controls.length; ++j)
+                                        object.controls[j] = $root.google.cloud.maintenance.api.v1.MaintenanceControl.toObject(message.controls[j], options);
+                                }
+                                if (message.uid != null && message.hasOwnProperty("uid"))
+                                    object.uid = message.uid;
+                                if (message.etag != null && message.hasOwnProperty("etag"))
+                                    object.etag = message.etag;
+                                var keys2;
+                                if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                    object.labels = {};
+                                    for (var j = 0; j < keys2.length; ++j)
+                                        object.labels[keys2[j]] = message.labels[keys2[j]];
+                                }
+                                if (message.annotations && (keys2 = Object.keys(message.annotations)).length) {
+                                    object.annotations = {};
+                                    for (var j = 0; j < keys2.length; ++j)
+                                        object.annotations[keys2[j]] = message.annotations[keys2[j]];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ResourceMaintenance to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ResourceMaintenance.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ResourceMaintenance
+                             * @function getTypeUrl
+                             * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ResourceMaintenance.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.maintenance.api.v1.ResourceMaintenance";
+                            };
+    
+                            ResourceMaintenance.Resource = (function() {
+    
+                                /**
+                                 * Properties of a Resource.
+                                 * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance
+                                 * @interface IResource
+                                 * @property {string|null} [resourceName] Resource resourceName
+                                 * @property {string|null} [location] Resource location
+                                 * @property {string|null} [type] Resource type
+                                 */
+    
+                                /**
+                                 * Constructs a new Resource.
+                                 * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance
+                                 * @classdesc Represents a Resource.
+                                 * @implements IResource
+                                 * @constructor
+                                 * @param {google.cloud.maintenance.api.v1.ResourceMaintenance.IResource=} [properties] Properties to set
+                                 */
+                                function Resource(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Resource resourceName.
+                                 * @member {string} resourceName
+                                 * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance.Resource
+                                 * @instance
+                                 */
+                                Resource.prototype.resourceName = "";
+    
+                                /**
+                                 * Resource location.
+                                 * @member {string} location
+                                 * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance.Resource
+                                 * @instance
+                                 */
+                                Resource.prototype.location = "";
+    
+                                /**
+                                 * Resource type.
+                                 * @member {string} type
+                                 * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance.Resource
+                                 * @instance
+                                 */
+                                Resource.prototype.type = "";
+    
+                                /**
+                                 * Creates a new Resource instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance.Resource
+                                 * @static
+                                 * @param {google.cloud.maintenance.api.v1.ResourceMaintenance.IResource=} [properties] Properties to set
+                                 * @returns {google.cloud.maintenance.api.v1.ResourceMaintenance.Resource} Resource instance
+                                 */
+                                Resource.create = function create(properties) {
+                                    return new Resource(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified Resource message. Does not implicitly {@link google.cloud.maintenance.api.v1.ResourceMaintenance.Resource.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance.Resource
+                                 * @static
+                                 * @param {google.cloud.maintenance.api.v1.ResourceMaintenance.IResource} message Resource message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Resource.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.resourceName != null && Object.hasOwnProperty.call(message, "resourceName"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.resourceName);
+                                    if (message.location != null && Object.hasOwnProperty.call(message, "location"))
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.location);
+                                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.type);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified Resource message, length delimited. Does not implicitly {@link google.cloud.maintenance.api.v1.ResourceMaintenance.Resource.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance.Resource
+                                 * @static
+                                 * @param {google.cloud.maintenance.api.v1.ResourceMaintenance.IResource} message Resource message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Resource.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a Resource message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance.Resource
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.maintenance.api.v1.ResourceMaintenance.Resource} Resource
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Resource.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.maintenance.api.v1.ResourceMaintenance.Resource();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.resourceName = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.location = reader.string();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.type = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a Resource message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance.Resource
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.maintenance.api.v1.ResourceMaintenance.Resource} Resource
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Resource.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a Resource message.
+                                 * @function verify
+                                 * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance.Resource
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                Resource.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.resourceName != null && message.hasOwnProperty("resourceName"))
+                                        if (!$util.isString(message.resourceName))
+                                            return "resourceName: string expected";
+                                    if (message.location != null && message.hasOwnProperty("location"))
+                                        if (!$util.isString(message.location))
+                                            return "location: string expected";
+                                    if (message.type != null && message.hasOwnProperty("type"))
+                                        if (!$util.isString(message.type))
+                                            return "type: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a Resource message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance.Resource
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.maintenance.api.v1.ResourceMaintenance.Resource} Resource
+                                 */
+                                Resource.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.maintenance.api.v1.ResourceMaintenance.Resource)
+                                        return object;
+                                    var message = new $root.google.cloud.maintenance.api.v1.ResourceMaintenance.Resource();
+                                    if (object.resourceName != null)
+                                        message.resourceName = String(object.resourceName);
+                                    if (object.location != null)
+                                        message.location = String(object.location);
+                                    if (object.type != null)
+                                        message.type = String(object.type);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a Resource message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance.Resource
+                                 * @static
+                                 * @param {google.cloud.maintenance.api.v1.ResourceMaintenance.Resource} message Resource
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                Resource.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.resourceName = "";
+                                        object.location = "";
+                                        object.type = "";
+                                    }
+                                    if (message.resourceName != null && message.hasOwnProperty("resourceName"))
+                                        object.resourceName = message.resourceName;
+                                    if (message.location != null && message.hasOwnProperty("location"))
+                                        object.location = message.location;
+                                    if (message.type != null && message.hasOwnProperty("type"))
+                                        object.type = message.type;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this Resource to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance.Resource
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                Resource.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for Resource
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance.Resource
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                Resource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.maintenance.api.v1.ResourceMaintenance.Resource";
+                                };
+    
+                                return Resource;
+                            })();
+    
+                            ResourceMaintenance.Maintenance = (function() {
+    
+                                /**
+                                 * Properties of a Maintenance.
+                                 * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance
+                                 * @interface IMaintenance
+                                 * @property {string|null} [maintenanceName] Maintenance maintenanceName
+                                 * @property {string|null} [title] Maintenance title
+                                 * @property {string|null} [description] Maintenance description
+                                 * @property {google.cloud.maintenance.api.v1.MaintenanceCategory|null} [category] Maintenance category
+                                 */
+    
+                                /**
+                                 * Constructs a new Maintenance.
+                                 * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance
+                                 * @classdesc Represents a Maintenance.
+                                 * @implements IMaintenance
+                                 * @constructor
+                                 * @param {google.cloud.maintenance.api.v1.ResourceMaintenance.IMaintenance=} [properties] Properties to set
+                                 */
+                                function Maintenance(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Maintenance maintenanceName.
+                                 * @member {string} maintenanceName
+                                 * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance.Maintenance
+                                 * @instance
+                                 */
+                                Maintenance.prototype.maintenanceName = "";
+    
+                                /**
+                                 * Maintenance title.
+                                 * @member {string} title
+                                 * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance.Maintenance
+                                 * @instance
+                                 */
+                                Maintenance.prototype.title = "";
+    
+                                /**
+                                 * Maintenance description.
+                                 * @member {string} description
+                                 * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance.Maintenance
+                                 * @instance
+                                 */
+                                Maintenance.prototype.description = "";
+    
+                                /**
+                                 * Maintenance category.
+                                 * @member {google.cloud.maintenance.api.v1.MaintenanceCategory} category
+                                 * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance.Maintenance
+                                 * @instance
+                                 */
+                                Maintenance.prototype.category = 0;
+    
+                                /**
+                                 * Creates a new Maintenance instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance.Maintenance
+                                 * @static
+                                 * @param {google.cloud.maintenance.api.v1.ResourceMaintenance.IMaintenance=} [properties] Properties to set
+                                 * @returns {google.cloud.maintenance.api.v1.ResourceMaintenance.Maintenance} Maintenance instance
+                                 */
+                                Maintenance.create = function create(properties) {
+                                    return new Maintenance(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified Maintenance message. Does not implicitly {@link google.cloud.maintenance.api.v1.ResourceMaintenance.Maintenance.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance.Maintenance
+                                 * @static
+                                 * @param {google.cloud.maintenance.api.v1.ResourceMaintenance.IMaintenance} message Maintenance message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Maintenance.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.maintenanceName != null && Object.hasOwnProperty.call(message, "maintenanceName"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.maintenanceName);
+                                    if (message.title != null && Object.hasOwnProperty.call(message, "title"))
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.title);
+                                    if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
+                                    if (message.category != null && Object.hasOwnProperty.call(message, "category"))
+                                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.category);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified Maintenance message, length delimited. Does not implicitly {@link google.cloud.maintenance.api.v1.ResourceMaintenance.Maintenance.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance.Maintenance
+                                 * @static
+                                 * @param {google.cloud.maintenance.api.v1.ResourceMaintenance.IMaintenance} message Maintenance message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Maintenance.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a Maintenance message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance.Maintenance
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.maintenance.api.v1.ResourceMaintenance.Maintenance} Maintenance
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Maintenance.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.maintenance.api.v1.ResourceMaintenance.Maintenance();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.maintenanceName = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.title = reader.string();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.description = reader.string();
+                                                break;
+                                            }
+                                        case 4: {
+                                                message.category = reader.int32();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a Maintenance message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance.Maintenance
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.maintenance.api.v1.ResourceMaintenance.Maintenance} Maintenance
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Maintenance.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a Maintenance message.
+                                 * @function verify
+                                 * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance.Maintenance
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                Maintenance.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.maintenanceName != null && message.hasOwnProperty("maintenanceName"))
+                                        if (!$util.isString(message.maintenanceName))
+                                            return "maintenanceName: string expected";
+                                    if (message.title != null && message.hasOwnProperty("title"))
+                                        if (!$util.isString(message.title))
+                                            return "title: string expected";
+                                    if (message.description != null && message.hasOwnProperty("description"))
+                                        if (!$util.isString(message.description))
+                                            return "description: string expected";
+                                    if (message.category != null && message.hasOwnProperty("category"))
+                                        switch (message.category) {
+                                        default:
+                                            return "category: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 3:
+                                            break;
+                                        }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a Maintenance message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance.Maintenance
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.maintenance.api.v1.ResourceMaintenance.Maintenance} Maintenance
+                                 */
+                                Maintenance.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.maintenance.api.v1.ResourceMaintenance.Maintenance)
+                                        return object;
+                                    var message = new $root.google.cloud.maintenance.api.v1.ResourceMaintenance.Maintenance();
+                                    if (object.maintenanceName != null)
+                                        message.maintenanceName = String(object.maintenanceName);
+                                    if (object.title != null)
+                                        message.title = String(object.title);
+                                    if (object.description != null)
+                                        message.description = String(object.description);
+                                    switch (object.category) {
+                                    default:
+                                        if (typeof object.category === "number") {
+                                            message.category = object.category;
+                                            break;
+                                        }
+                                        break;
+                                    case "MAINTENANCE_CATEGORY_UNSPECIFIED":
+                                    case 0:
+                                        message.category = 0;
+                                        break;
+                                    case "INFRASTRUCTURE":
+                                    case 1:
+                                        message.category = 1;
+                                        break;
+                                    case "SERVICE_UPDATE":
+                                    case 3:
+                                        message.category = 3;
+                                        break;
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a Maintenance message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance.Maintenance
+                                 * @static
+                                 * @param {google.cloud.maintenance.api.v1.ResourceMaintenance.Maintenance} message Maintenance
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                Maintenance.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.maintenanceName = "";
+                                        object.title = "";
+                                        object.description = "";
+                                        object.category = options.enums === String ? "MAINTENANCE_CATEGORY_UNSPECIFIED" : 0;
+                                    }
+                                    if (message.maintenanceName != null && message.hasOwnProperty("maintenanceName"))
+                                        object.maintenanceName = message.maintenanceName;
+                                    if (message.title != null && message.hasOwnProperty("title"))
+                                        object.title = message.title;
+                                    if (message.description != null && message.hasOwnProperty("description"))
+                                        object.description = message.description;
+                                    if (message.category != null && message.hasOwnProperty("category"))
+                                        object.category = options.enums === String ? $root.google.cloud.maintenance.api.v1.MaintenanceCategory[message.category] === undefined ? message.category : $root.google.cloud.maintenance.api.v1.MaintenanceCategory[message.category] : message.category;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this Maintenance to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance.Maintenance
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                Maintenance.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for Maintenance
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.maintenance.api.v1.ResourceMaintenance.Maintenance
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                Maintenance.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.maintenance.api.v1.ResourceMaintenance.Maintenance";
+                                };
+    
+                                return Maintenance;
+                            })();
+    
+                            /**
+                             * State enum.
+                             * @name google.cloud.maintenance.api.v1.ResourceMaintenance.State
+                             * @enum {number}
+                             * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                             * @property {number} SCHEDULED=1 SCHEDULED value
+                             * @property {number} RUNNING=2 RUNNING value
+                             * @property {number} CANCELLED=3 CANCELLED value
+                             * @property {number} SUCCEEDED=4 SUCCEEDED value
+                             */
+                            ResourceMaintenance.State = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "SCHEDULED"] = 1;
+                                values[valuesById[2] = "RUNNING"] = 2;
+                                values[valuesById[3] = "CANCELLED"] = 3;
+                                values[valuesById[4] = "SUCCEEDED"] = 4;
+                                return values;
+                            })();
+    
+                            return ResourceMaintenance;
+                        })();
+    
+                        v1.MaintenanceControl = (function() {
+    
+                            /**
+                             * Properties of a MaintenanceControl.
+                             * @memberof google.cloud.maintenance.api.v1
+                             * @interface IMaintenanceControl
+                             * @property {google.cloud.maintenance.api.v1.MaintenanceControl.Control|null} [control] MaintenanceControl control
+                             * @property {boolean|null} [isCustom] MaintenanceControl isCustom
+                             * @property {string|null} [documentation] MaintenanceControl documentation
+                             */
+    
+                            /**
+                             * Constructs a new MaintenanceControl.
+                             * @memberof google.cloud.maintenance.api.v1
+                             * @classdesc Represents a MaintenanceControl.
+                             * @implements IMaintenanceControl
+                             * @constructor
+                             * @param {google.cloud.maintenance.api.v1.IMaintenanceControl=} [properties] Properties to set
+                             */
+                            function MaintenanceControl(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * MaintenanceControl control.
+                             * @member {google.cloud.maintenance.api.v1.MaintenanceControl.Control} control
+                             * @memberof google.cloud.maintenance.api.v1.MaintenanceControl
+                             * @instance
+                             */
+                            MaintenanceControl.prototype.control = 0;
+    
+                            /**
+                             * MaintenanceControl isCustom.
+                             * @member {boolean} isCustom
+                             * @memberof google.cloud.maintenance.api.v1.MaintenanceControl
+                             * @instance
+                             */
+                            MaintenanceControl.prototype.isCustom = false;
+    
+                            /**
+                             * MaintenanceControl documentation.
+                             * @member {string} documentation
+                             * @memberof google.cloud.maintenance.api.v1.MaintenanceControl
+                             * @instance
+                             */
+                            MaintenanceControl.prototype.documentation = "";
+    
+                            /**
+                             * Creates a new MaintenanceControl instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.maintenance.api.v1.MaintenanceControl
+                             * @static
+                             * @param {google.cloud.maintenance.api.v1.IMaintenanceControl=} [properties] Properties to set
+                             * @returns {google.cloud.maintenance.api.v1.MaintenanceControl} MaintenanceControl instance
+                             */
+                            MaintenanceControl.create = function create(properties) {
+                                return new MaintenanceControl(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified MaintenanceControl message. Does not implicitly {@link google.cloud.maintenance.api.v1.MaintenanceControl.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.maintenance.api.v1.MaintenanceControl
+                             * @static
+                             * @param {google.cloud.maintenance.api.v1.IMaintenanceControl} message MaintenanceControl message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MaintenanceControl.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.control != null && Object.hasOwnProperty.call(message, "control"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.control);
+                                if (message.isCustom != null && Object.hasOwnProperty.call(message, "isCustom"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).bool(message.isCustom);
+                                if (message.documentation != null && Object.hasOwnProperty.call(message, "documentation"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.documentation);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified MaintenanceControl message, length delimited. Does not implicitly {@link google.cloud.maintenance.api.v1.MaintenanceControl.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.maintenance.api.v1.MaintenanceControl
+                             * @static
+                             * @param {google.cloud.maintenance.api.v1.IMaintenanceControl} message MaintenanceControl message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MaintenanceControl.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a MaintenanceControl message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.maintenance.api.v1.MaintenanceControl
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.maintenance.api.v1.MaintenanceControl} MaintenanceControl
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MaintenanceControl.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.maintenance.api.v1.MaintenanceControl();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.control = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.isCustom = reader.bool();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.documentation = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a MaintenanceControl message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.maintenance.api.v1.MaintenanceControl
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.maintenance.api.v1.MaintenanceControl} MaintenanceControl
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MaintenanceControl.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a MaintenanceControl message.
+                             * @function verify
+                             * @memberof google.cloud.maintenance.api.v1.MaintenanceControl
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            MaintenanceControl.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.control != null && message.hasOwnProperty("control"))
+                                    switch (message.control) {
+                                    default:
+                                        return "control: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                if (message.isCustom != null && message.hasOwnProperty("isCustom"))
+                                    if (typeof message.isCustom !== "boolean")
+                                        return "isCustom: boolean expected";
+                                if (message.documentation != null && message.hasOwnProperty("documentation"))
+                                    if (!$util.isString(message.documentation))
+                                        return "documentation: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a MaintenanceControl message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.maintenance.api.v1.MaintenanceControl
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.maintenance.api.v1.MaintenanceControl} MaintenanceControl
+                             */
+                            MaintenanceControl.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.maintenance.api.v1.MaintenanceControl)
+                                    return object;
+                                var message = new $root.google.cloud.maintenance.api.v1.MaintenanceControl();
+                                switch (object.control) {
+                                default:
+                                    if (typeof object.control === "number") {
+                                        message.control = object.control;
+                                        break;
+                                    }
+                                    break;
+                                case "CONTROL_UNSPECIFIED":
+                                case 0:
+                                    message.control = 0;
+                                    break;
+                                case "APPLY":
+                                case 1:
+                                    message.control = 1;
+                                    break;
+                                case "MANAGE_POLICY":
+                                case 2:
+                                    message.control = 2;
+                                    break;
+                                case "RESCHEDULE":
+                                case 3:
+                                    message.control = 3;
+                                    break;
+                                }
+                                if (object.isCustom != null)
+                                    message.isCustom = Boolean(object.isCustom);
+                                if (object.documentation != null)
+                                    message.documentation = String(object.documentation);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a MaintenanceControl message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.maintenance.api.v1.MaintenanceControl
+                             * @static
+                             * @param {google.cloud.maintenance.api.v1.MaintenanceControl} message MaintenanceControl
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            MaintenanceControl.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.control = options.enums === String ? "CONTROL_UNSPECIFIED" : 0;
+                                    object.isCustom = false;
+                                    object.documentation = "";
+                                }
+                                if (message.control != null && message.hasOwnProperty("control"))
+                                    object.control = options.enums === String ? $root.google.cloud.maintenance.api.v1.MaintenanceControl.Control[message.control] === undefined ? message.control : $root.google.cloud.maintenance.api.v1.MaintenanceControl.Control[message.control] : message.control;
+                                if (message.isCustom != null && message.hasOwnProperty("isCustom"))
+                                    object.isCustom = message.isCustom;
+                                if (message.documentation != null && message.hasOwnProperty("documentation"))
+                                    object.documentation = message.documentation;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this MaintenanceControl to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.maintenance.api.v1.MaintenanceControl
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            MaintenanceControl.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for MaintenanceControl
+                             * @function getTypeUrl
+                             * @memberof google.cloud.maintenance.api.v1.MaintenanceControl
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            MaintenanceControl.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.maintenance.api.v1.MaintenanceControl";
+                            };
+    
+                            /**
+                             * Control enum.
+                             * @name google.cloud.maintenance.api.v1.MaintenanceControl.Control
+                             * @enum {number}
+                             * @property {number} CONTROL_UNSPECIFIED=0 CONTROL_UNSPECIFIED value
+                             * @property {number} APPLY=1 APPLY value
+                             * @property {number} MANAGE_POLICY=2 MANAGE_POLICY value
+                             * @property {number} RESCHEDULE=3 RESCHEDULE value
+                             */
+                            MaintenanceControl.Control = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "CONTROL_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "APPLY"] = 1;
+                                values[valuesById[2] = "MANAGE_POLICY"] = 2;
+                                values[valuesById[3] = "RESCHEDULE"] = 3;
+                                return values;
+                            })();
+    
+                            return MaintenanceControl;
+                        })();
+    
+                        v1.ListResourceMaintenancesRequest = (function() {
+    
+                            /**
+                             * Properties of a ListResourceMaintenancesRequest.
+                             * @memberof google.cloud.maintenance.api.v1
+                             * @interface IListResourceMaintenancesRequest
+                             * @property {string|null} [parent] ListResourceMaintenancesRequest parent
+                             * @property {number|null} [pageSize] ListResourceMaintenancesRequest pageSize
+                             * @property {string|null} [pageToken] ListResourceMaintenancesRequest pageToken
+                             * @property {string|null} [filter] ListResourceMaintenancesRequest filter
+                             * @property {string|null} [orderBy] ListResourceMaintenancesRequest orderBy
+                             */
+    
+                            /**
+                             * Constructs a new ListResourceMaintenancesRequest.
+                             * @memberof google.cloud.maintenance.api.v1
+                             * @classdesc Represents a ListResourceMaintenancesRequest.
+                             * @implements IListResourceMaintenancesRequest
+                             * @constructor
+                             * @param {google.cloud.maintenance.api.v1.IListResourceMaintenancesRequest=} [properties] Properties to set
+                             */
+                            function ListResourceMaintenancesRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ListResourceMaintenancesRequest parent.
+                             * @member {string} parent
+                             * @memberof google.cloud.maintenance.api.v1.ListResourceMaintenancesRequest
+                             * @instance
+                             */
+                            ListResourceMaintenancesRequest.prototype.parent = "";
+    
+                            /**
+                             * ListResourceMaintenancesRequest pageSize.
+                             * @member {number} pageSize
+                             * @memberof google.cloud.maintenance.api.v1.ListResourceMaintenancesRequest
+                             * @instance
+                             */
+                            ListResourceMaintenancesRequest.prototype.pageSize = 0;
+    
+                            /**
+                             * ListResourceMaintenancesRequest pageToken.
+                             * @member {string} pageToken
+                             * @memberof google.cloud.maintenance.api.v1.ListResourceMaintenancesRequest
+                             * @instance
+                             */
+                            ListResourceMaintenancesRequest.prototype.pageToken = "";
+    
+                            /**
+                             * ListResourceMaintenancesRequest filter.
+                             * @member {string} filter
+                             * @memberof google.cloud.maintenance.api.v1.ListResourceMaintenancesRequest
+                             * @instance
+                             */
+                            ListResourceMaintenancesRequest.prototype.filter = "";
+    
+                            /**
+                             * ListResourceMaintenancesRequest orderBy.
+                             * @member {string} orderBy
+                             * @memberof google.cloud.maintenance.api.v1.ListResourceMaintenancesRequest
+                             * @instance
+                             */
+                            ListResourceMaintenancesRequest.prototype.orderBy = "";
+    
+                            /**
+                             * Creates a new ListResourceMaintenancesRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.maintenance.api.v1.ListResourceMaintenancesRequest
+                             * @static
+                             * @param {google.cloud.maintenance.api.v1.IListResourceMaintenancesRequest=} [properties] Properties to set
+                             * @returns {google.cloud.maintenance.api.v1.ListResourceMaintenancesRequest} ListResourceMaintenancesRequest instance
+                             */
+                            ListResourceMaintenancesRequest.create = function create(properties) {
+                                return new ListResourceMaintenancesRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ListResourceMaintenancesRequest message. Does not implicitly {@link google.cloud.maintenance.api.v1.ListResourceMaintenancesRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.maintenance.api.v1.ListResourceMaintenancesRequest
+                             * @static
+                             * @param {google.cloud.maintenance.api.v1.IListResourceMaintenancesRequest} message ListResourceMaintenancesRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListResourceMaintenancesRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 10006, wireType 2 =*/80050).string(message.parent);
+                                if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                    writer.uint32(/* id 10505, wireType 0 =*/84040).int32(message.pageSize);
+                                if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                    writer.uint32(/* id 10506, wireType 2 =*/84050).string(message.pageToken);
+                                if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                    writer.uint32(/* id 10507, wireType 2 =*/84058).string(message.filter);
+                                if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                    writer.uint32(/* id 10508, wireType 2 =*/84066).string(message.orderBy);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ListResourceMaintenancesRequest message, length delimited. Does not implicitly {@link google.cloud.maintenance.api.v1.ListResourceMaintenancesRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.maintenance.api.v1.ListResourceMaintenancesRequest
+                             * @static
+                             * @param {google.cloud.maintenance.api.v1.IListResourceMaintenancesRequest} message ListResourceMaintenancesRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListResourceMaintenancesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ListResourceMaintenancesRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.maintenance.api.v1.ListResourceMaintenancesRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.maintenance.api.v1.ListResourceMaintenancesRequest} ListResourceMaintenancesRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListResourceMaintenancesRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.maintenance.api.v1.ListResourceMaintenancesRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 10006: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 10505: {
+                                            message.pageSize = reader.int32();
+                                            break;
+                                        }
+                                    case 10506: {
+                                            message.pageToken = reader.string();
+                                            break;
+                                        }
+                                    case 10507: {
+                                            message.filter = reader.string();
+                                            break;
+                                        }
+                                    case 10508: {
+                                            message.orderBy = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ListResourceMaintenancesRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.maintenance.api.v1.ListResourceMaintenancesRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.maintenance.api.v1.ListResourceMaintenancesRequest} ListResourceMaintenancesRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListResourceMaintenancesRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ListResourceMaintenancesRequest message.
+                             * @function verify
+                             * @memberof google.cloud.maintenance.api.v1.ListResourceMaintenancesRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ListResourceMaintenancesRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    if (!$util.isInteger(message.pageSize))
+                                        return "pageSize: integer expected";
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    if (!$util.isString(message.pageToken))
+                                        return "pageToken: string expected";
+                                if (message.filter != null && message.hasOwnProperty("filter"))
+                                    if (!$util.isString(message.filter))
+                                        return "filter: string expected";
+                                if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                    if (!$util.isString(message.orderBy))
+                                        return "orderBy: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ListResourceMaintenancesRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.maintenance.api.v1.ListResourceMaintenancesRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.maintenance.api.v1.ListResourceMaintenancesRequest} ListResourceMaintenancesRequest
+                             */
+                            ListResourceMaintenancesRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.maintenance.api.v1.ListResourceMaintenancesRequest)
+                                    return object;
+                                var message = new $root.google.cloud.maintenance.api.v1.ListResourceMaintenancesRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.pageSize != null)
+                                    message.pageSize = object.pageSize | 0;
+                                if (object.pageToken != null)
+                                    message.pageToken = String(object.pageToken);
+                                if (object.filter != null)
+                                    message.filter = String(object.filter);
+                                if (object.orderBy != null)
+                                    message.orderBy = String(object.orderBy);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ListResourceMaintenancesRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.maintenance.api.v1.ListResourceMaintenancesRequest
+                             * @static
+                             * @param {google.cloud.maintenance.api.v1.ListResourceMaintenancesRequest} message ListResourceMaintenancesRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ListResourceMaintenancesRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.pageSize = 0;
+                                    object.pageToken = "";
+                                    object.filter = "";
+                                    object.orderBy = "";
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    object.pageSize = message.pageSize;
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    object.pageToken = message.pageToken;
+                                if (message.filter != null && message.hasOwnProperty("filter"))
+                                    object.filter = message.filter;
+                                if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                    object.orderBy = message.orderBy;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ListResourceMaintenancesRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.maintenance.api.v1.ListResourceMaintenancesRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ListResourceMaintenancesRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ListResourceMaintenancesRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.maintenance.api.v1.ListResourceMaintenancesRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ListResourceMaintenancesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.maintenance.api.v1.ListResourceMaintenancesRequest";
+                            };
+    
+                            return ListResourceMaintenancesRequest;
+                        })();
+    
+                        v1.ListResourceMaintenancesResponse = (function() {
+    
+                            /**
+                             * Properties of a ListResourceMaintenancesResponse.
+                             * @memberof google.cloud.maintenance.api.v1
+                             * @interface IListResourceMaintenancesResponse
+                             * @property {Array.<google.cloud.maintenance.api.v1.IResourceMaintenance>|null} [resourceMaintenances] ListResourceMaintenancesResponse resourceMaintenances
+                             * @property {string|null} [nextPageToken] ListResourceMaintenancesResponse nextPageToken
+                             * @property {Array.<string>|null} [unreachable] ListResourceMaintenancesResponse unreachable
+                             */
+    
+                            /**
+                             * Constructs a new ListResourceMaintenancesResponse.
+                             * @memberof google.cloud.maintenance.api.v1
+                             * @classdesc Represents a ListResourceMaintenancesResponse.
+                             * @implements IListResourceMaintenancesResponse
+                             * @constructor
+                             * @param {google.cloud.maintenance.api.v1.IListResourceMaintenancesResponse=} [properties] Properties to set
+                             */
+                            function ListResourceMaintenancesResponse(properties) {
+                                this.resourceMaintenances = [];
+                                this.unreachable = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ListResourceMaintenancesResponse resourceMaintenances.
+                             * @member {Array.<google.cloud.maintenance.api.v1.IResourceMaintenance>} resourceMaintenances
+                             * @memberof google.cloud.maintenance.api.v1.ListResourceMaintenancesResponse
+                             * @instance
+                             */
+                            ListResourceMaintenancesResponse.prototype.resourceMaintenances = $util.emptyArray;
+    
+                            /**
+                             * ListResourceMaintenancesResponse nextPageToken.
+                             * @member {string} nextPageToken
+                             * @memberof google.cloud.maintenance.api.v1.ListResourceMaintenancesResponse
+                             * @instance
+                             */
+                            ListResourceMaintenancesResponse.prototype.nextPageToken = "";
+    
+                            /**
+                             * ListResourceMaintenancesResponse unreachable.
+                             * @member {Array.<string>} unreachable
+                             * @memberof google.cloud.maintenance.api.v1.ListResourceMaintenancesResponse
+                             * @instance
+                             */
+                            ListResourceMaintenancesResponse.prototype.unreachable = $util.emptyArray;
+    
+                            /**
+                             * Creates a new ListResourceMaintenancesResponse instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.maintenance.api.v1.ListResourceMaintenancesResponse
+                             * @static
+                             * @param {google.cloud.maintenance.api.v1.IListResourceMaintenancesResponse=} [properties] Properties to set
+                             * @returns {google.cloud.maintenance.api.v1.ListResourceMaintenancesResponse} ListResourceMaintenancesResponse instance
+                             */
+                            ListResourceMaintenancesResponse.create = function create(properties) {
+                                return new ListResourceMaintenancesResponse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ListResourceMaintenancesResponse message. Does not implicitly {@link google.cloud.maintenance.api.v1.ListResourceMaintenancesResponse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.maintenance.api.v1.ListResourceMaintenancesResponse
+                             * @static
+                             * @param {google.cloud.maintenance.api.v1.IListResourceMaintenancesResponse} message ListResourceMaintenancesResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListResourceMaintenancesResponse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.resourceMaintenances != null && message.resourceMaintenances.length)
+                                    for (var i = 0; i < message.resourceMaintenances.length; ++i)
+                                        $root.google.cloud.maintenance.api.v1.ResourceMaintenance.encode(message.resourceMaintenances[i], writer.uint32(/* id 10509, wireType 2 =*/84074).fork()).ldelim();
+                                if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                    writer.uint32(/* id 10510, wireType 2 =*/84082).string(message.nextPageToken);
+                                if (message.unreachable != null && message.unreachable.length)
+                                    for (var i = 0; i < message.unreachable.length; ++i)
+                                        writer.uint32(/* id 10511, wireType 2 =*/84090).string(message.unreachable[i]);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ListResourceMaintenancesResponse message, length delimited. Does not implicitly {@link google.cloud.maintenance.api.v1.ListResourceMaintenancesResponse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.maintenance.api.v1.ListResourceMaintenancesResponse
+                             * @static
+                             * @param {google.cloud.maintenance.api.v1.IListResourceMaintenancesResponse} message ListResourceMaintenancesResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListResourceMaintenancesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ListResourceMaintenancesResponse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.maintenance.api.v1.ListResourceMaintenancesResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.maintenance.api.v1.ListResourceMaintenancesResponse} ListResourceMaintenancesResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListResourceMaintenancesResponse.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.maintenance.api.v1.ListResourceMaintenancesResponse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 10509: {
+                                            if (!(message.resourceMaintenances && message.resourceMaintenances.length))
+                                                message.resourceMaintenances = [];
+                                            message.resourceMaintenances.push($root.google.cloud.maintenance.api.v1.ResourceMaintenance.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 10510: {
+                                            message.nextPageToken = reader.string();
+                                            break;
+                                        }
+                                    case 10511: {
+                                            if (!(message.unreachable && message.unreachable.length))
+                                                message.unreachable = [];
+                                            message.unreachable.push(reader.string());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ListResourceMaintenancesResponse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.maintenance.api.v1.ListResourceMaintenancesResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.maintenance.api.v1.ListResourceMaintenancesResponse} ListResourceMaintenancesResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListResourceMaintenancesResponse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ListResourceMaintenancesResponse message.
+                             * @function verify
+                             * @memberof google.cloud.maintenance.api.v1.ListResourceMaintenancesResponse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ListResourceMaintenancesResponse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.resourceMaintenances != null && message.hasOwnProperty("resourceMaintenances")) {
+                                    if (!Array.isArray(message.resourceMaintenances))
+                                        return "resourceMaintenances: array expected";
+                                    for (var i = 0; i < message.resourceMaintenances.length; ++i) {
+                                        var error = $root.google.cloud.maintenance.api.v1.ResourceMaintenance.verify(message.resourceMaintenances[i]);
+                                        if (error)
+                                            return "resourceMaintenances." + error;
+                                    }
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    if (!$util.isString(message.nextPageToken))
+                                        return "nextPageToken: string expected";
+                                if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                    if (!Array.isArray(message.unreachable))
+                                        return "unreachable: array expected";
+                                    for (var i = 0; i < message.unreachable.length; ++i)
+                                        if (!$util.isString(message.unreachable[i]))
+                                            return "unreachable: string[] expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ListResourceMaintenancesResponse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.maintenance.api.v1.ListResourceMaintenancesResponse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.maintenance.api.v1.ListResourceMaintenancesResponse} ListResourceMaintenancesResponse
+                             */
+                            ListResourceMaintenancesResponse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.maintenance.api.v1.ListResourceMaintenancesResponse)
+                                    return object;
+                                var message = new $root.google.cloud.maintenance.api.v1.ListResourceMaintenancesResponse();
+                                if (object.resourceMaintenances) {
+                                    if (!Array.isArray(object.resourceMaintenances))
+                                        throw TypeError(".google.cloud.maintenance.api.v1.ListResourceMaintenancesResponse.resourceMaintenances: array expected");
+                                    message.resourceMaintenances = [];
+                                    for (var i = 0; i < object.resourceMaintenances.length; ++i) {
+                                        if (typeof object.resourceMaintenances[i] !== "object")
+                                            throw TypeError(".google.cloud.maintenance.api.v1.ListResourceMaintenancesResponse.resourceMaintenances: object expected");
+                                        message.resourceMaintenances[i] = $root.google.cloud.maintenance.api.v1.ResourceMaintenance.fromObject(object.resourceMaintenances[i]);
+                                    }
+                                }
+                                if (object.nextPageToken != null)
+                                    message.nextPageToken = String(object.nextPageToken);
+                                if (object.unreachable) {
+                                    if (!Array.isArray(object.unreachable))
+                                        throw TypeError(".google.cloud.maintenance.api.v1.ListResourceMaintenancesResponse.unreachable: array expected");
+                                    message.unreachable = [];
+                                    for (var i = 0; i < object.unreachable.length; ++i)
+                                        message.unreachable[i] = String(object.unreachable[i]);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ListResourceMaintenancesResponse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.maintenance.api.v1.ListResourceMaintenancesResponse
+                             * @static
+                             * @param {google.cloud.maintenance.api.v1.ListResourceMaintenancesResponse} message ListResourceMaintenancesResponse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ListResourceMaintenancesResponse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.resourceMaintenances = [];
+                                    object.unreachable = [];
+                                }
+                                if (options.defaults)
+                                    object.nextPageToken = "";
+                                if (message.resourceMaintenances && message.resourceMaintenances.length) {
+                                    object.resourceMaintenances = [];
+                                    for (var j = 0; j < message.resourceMaintenances.length; ++j)
+                                        object.resourceMaintenances[j] = $root.google.cloud.maintenance.api.v1.ResourceMaintenance.toObject(message.resourceMaintenances[j], options);
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    object.nextPageToken = message.nextPageToken;
+                                if (message.unreachable && message.unreachable.length) {
+                                    object.unreachable = [];
+                                    for (var j = 0; j < message.unreachable.length; ++j)
+                                        object.unreachable[j] = message.unreachable[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ListResourceMaintenancesResponse to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.maintenance.api.v1.ListResourceMaintenancesResponse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ListResourceMaintenancesResponse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ListResourceMaintenancesResponse
+                             * @function getTypeUrl
+                             * @memberof google.cloud.maintenance.api.v1.ListResourceMaintenancesResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ListResourceMaintenancesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.maintenance.api.v1.ListResourceMaintenancesResponse";
+                            };
+    
+                            return ListResourceMaintenancesResponse;
+                        })();
+    
+                        v1.GetResourceMaintenanceRequest = (function() {
+    
+                            /**
+                             * Properties of a GetResourceMaintenanceRequest.
+                             * @memberof google.cloud.maintenance.api.v1
+                             * @interface IGetResourceMaintenanceRequest
+                             * @property {string|null} [name] GetResourceMaintenanceRequest name
+                             */
+    
+                            /**
+                             * Constructs a new GetResourceMaintenanceRequest.
+                             * @memberof google.cloud.maintenance.api.v1
+                             * @classdesc Represents a GetResourceMaintenanceRequest.
+                             * @implements IGetResourceMaintenanceRequest
+                             * @constructor
+                             * @param {google.cloud.maintenance.api.v1.IGetResourceMaintenanceRequest=} [properties] Properties to set
+                             */
+                            function GetResourceMaintenanceRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GetResourceMaintenanceRequest name.
+                             * @member {string} name
+                             * @memberof google.cloud.maintenance.api.v1.GetResourceMaintenanceRequest
+                             * @instance
+                             */
+                            GetResourceMaintenanceRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new GetResourceMaintenanceRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.maintenance.api.v1.GetResourceMaintenanceRequest
+                             * @static
+                             * @param {google.cloud.maintenance.api.v1.IGetResourceMaintenanceRequest=} [properties] Properties to set
+                             * @returns {google.cloud.maintenance.api.v1.GetResourceMaintenanceRequest} GetResourceMaintenanceRequest instance
+                             */
+                            GetResourceMaintenanceRequest.create = function create(properties) {
+                                return new GetResourceMaintenanceRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GetResourceMaintenanceRequest message. Does not implicitly {@link google.cloud.maintenance.api.v1.GetResourceMaintenanceRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.maintenance.api.v1.GetResourceMaintenanceRequest
+                             * @static
+                             * @param {google.cloud.maintenance.api.v1.IGetResourceMaintenanceRequest} message GetResourceMaintenanceRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetResourceMaintenanceRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 10001, wireType 2 =*/80010).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GetResourceMaintenanceRequest message, length delimited. Does not implicitly {@link google.cloud.maintenance.api.v1.GetResourceMaintenanceRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.maintenance.api.v1.GetResourceMaintenanceRequest
+                             * @static
+                             * @param {google.cloud.maintenance.api.v1.IGetResourceMaintenanceRequest} message GetResourceMaintenanceRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetResourceMaintenanceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GetResourceMaintenanceRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.maintenance.api.v1.GetResourceMaintenanceRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.maintenance.api.v1.GetResourceMaintenanceRequest} GetResourceMaintenanceRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetResourceMaintenanceRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.maintenance.api.v1.GetResourceMaintenanceRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 10001: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GetResourceMaintenanceRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.maintenance.api.v1.GetResourceMaintenanceRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.maintenance.api.v1.GetResourceMaintenanceRequest} GetResourceMaintenanceRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetResourceMaintenanceRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GetResourceMaintenanceRequest message.
+                             * @function verify
+                             * @memberof google.cloud.maintenance.api.v1.GetResourceMaintenanceRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GetResourceMaintenanceRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GetResourceMaintenanceRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.maintenance.api.v1.GetResourceMaintenanceRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.maintenance.api.v1.GetResourceMaintenanceRequest} GetResourceMaintenanceRequest
+                             */
+                            GetResourceMaintenanceRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.maintenance.api.v1.GetResourceMaintenanceRequest)
+                                    return object;
+                                var message = new $root.google.cloud.maintenance.api.v1.GetResourceMaintenanceRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GetResourceMaintenanceRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.maintenance.api.v1.GetResourceMaintenanceRequest
+                             * @static
+                             * @param {google.cloud.maintenance.api.v1.GetResourceMaintenanceRequest} message GetResourceMaintenanceRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GetResourceMaintenanceRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GetResourceMaintenanceRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.maintenance.api.v1.GetResourceMaintenanceRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GetResourceMaintenanceRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GetResourceMaintenanceRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.maintenance.api.v1.GetResourceMaintenanceRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GetResourceMaintenanceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.maintenance.api.v1.GetResourceMaintenanceRequest";
+                            };
+    
+                            return GetResourceMaintenanceRequest;
+                        })();
+    
+                        return v1;
+                    })();
+    
                     api.v1beta = (function() {
     
                         /**
