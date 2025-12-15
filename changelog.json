@@ -5,6 +5,61 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "681d7af64253a12c62e81789d8dc7d48150f0f76",
+          "message": "Initial generation of library",
+          "issues": []
+        },
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/hypercomputecluster",
+      "id": "13227060-b9c8-4d75-ac2e-1f6aa254e01f",
+      "createTime": "2025-12-15T21:30:17.451Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "46ac6d10178ff78a4771e2519b3540b322687115",
+          "message": "Initial generation of library",
+          "issues": []
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/maintenance-api",
+      "id": "fb66abdd-a1ff-4fd2-98f5-130dfd0ba087",
+      "createTime": "2025-12-15T21:30:17.428Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9dd2f04b5926733923b9c46c45a4209099d30759",
+          "message": "[control] generate bucket ops into storage control lib for nodejs",
+          "issues": [
+            "6874"
+          ]
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage-control",
+      "id": "93dfff1c-7006-47bf-84e6-a4d7b14082bd",
+      "createTime": "2025-12-15T21:30:17.406Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "014486d7cd802ac3058931edb3c783843db2ce28",
           "message": "[geminidataanalytics] add QueryData method",
           "issues": [
@@ -67318,5 +67373,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-12-09T16:50:16.936Z"
+  "updateTime": "2025-12-15T21:30:17.451Z"
 }

@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/storage-control",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "description": "Cloud Storage API client for Node.js",
   "repository": {
     "type": "git",
