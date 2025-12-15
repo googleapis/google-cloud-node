@@ -24,6 +24,10 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "AdoptInstances": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "ApplyUpdatesToInstances": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"

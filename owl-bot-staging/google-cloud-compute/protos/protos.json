@@ -117643,6 +117643,7 @@
                           "values": {
                             "UNDEFINED_STATE": 0,
                             "AVAILABLE": 442079913,
+                            "DEGRADED": 396890926,
                             "RUNNING": 121282975,
                             "TOPOLOGY_STATE_UNSPECIFIED": 188327545,
                             "UNHEALTHY": 462118084
@@ -119822,6 +119823,54 @@
                         "warning": {
                           "type": "Warning",
                           "id": 50704284,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "AdoptInstancesRegionInstanceGroupManagerRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "instanceGroupManager": {
+                          "type": "string",
+                          "id": 249363395,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "region"
+                          }
+                        },
+                        "regionInstanceGroupManagersAdoptInstancesRequestResource": {
+                          "type": "RegionInstanceGroupManagersAdoptInstancesRequest",
+                          "id": 310404488,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
                           "options": {
                             "proto3_optional": true
                           }
@@ -131481,6 +131530,46 @@
                         }
                       }
                     },
+                    "CancelRequestRemovePeeringNetworkRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "network": {
+                          "type": "string",
+                          "id": 232872494,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "networksCancelRequestRemovePeeringRequestResource": {
+                          "type": "NetworksCancelRequestRemovePeeringRequest",
+                          "id": 177326909,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "CancelRolloutRequest": {
                       "oneofs": {
                         "_requestId": {
@@ -132044,6 +132133,7 @@
                             "GENERAL_PURPOSE_N4D": 232471462,
                             "GENERAL_PURPOSE_T2D": 232477166,
                             "GRAPHICS_OPTIMIZED": 68500563,
+                            "GRAPHICS_OPTIMIZED_G4": 54029369,
                             "MEMORY_OPTIMIZED": 281753417,
                             "MEMORY_OPTIMIZED_M3": 276301372,
                             "MEMORY_OPTIMIZED_M4": 276301373,
@@ -141197,6 +141287,11 @@
                     },
                     "FirewallPolicyRuleMatcher": {
                       "oneofs": {
+                        "_destNetworkContext": {
+                          "oneof": [
+                            "destNetworkContext"
+                          ]
+                        },
                         "_destNetworkScope": {
                           "oneof": [
                             "destNetworkScope"
@@ -141205,6 +141300,11 @@
                         "_destNetworkType": {
                           "oneof": [
                             "destNetworkType"
+                          ]
+                        },
+                        "_srcNetworkContext": {
+                          "oneof": [
+                            "srcNetworkContext"
                           ]
                         },
                         "_srcNetworkScope": {
@@ -141233,6 +141333,13 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 337357713
+                        },
+                        "destNetworkContext": {
+                          "type": "string",
+                          "id": 76347649,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         },
                         "destNetworkScope": {
                           "type": "string",
@@ -141278,6 +141385,13 @@
                           "type": "string",
                           "id": 432128083
                         },
+                        "srcNetworkContext": {
+                          "type": "string",
+                          "id": 147649603,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "srcNetworkScope": {
                           "type": "string",
                           "id": 476025320,
@@ -141314,6 +141428,11 @@
                         }
                       },
                       "nested": {
+                        "DestNetworkContext": {
+                          "values": {
+                            "UNDEFINED_DEST_NETWORK_CONTEXT": 0
+                          }
+                        },
                         "DestNetworkScope": {
                           "values": {
                             "UNDEFINED_DEST_NETWORK_SCOPE": 0
@@ -141322,6 +141441,11 @@
                         "DestNetworkType": {
                           "values": {
                             "UNDEFINED_DEST_NETWORK_TYPE": 0
+                          }
+                        },
+                        "SrcNetworkContext": {
+                          "values": {
+                            "UNDEFINED_SRC_NETWORK_CONTEXT": 0
                           }
                         },
                         "SrcNetworkScope": {
@@ -158441,6 +158565,11 @@
                             "abandoning"
                           ]
                         },
+                        "_adopting": {
+                          "oneof": [
+                            "adopting"
+                          ]
+                        },
                         "_creating": {
                           "oneof": [
                             "creating"
@@ -158506,6 +158635,13 @@
                         "abandoning": {
                           "type": "int32",
                           "id": 440023373,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "adopting": {
+                          "type": "int32",
+                          "id": 168537650,
                           "options": {
                             "proto3_optional": true
                           }
@@ -160639,6 +160775,7 @@
                           "values": {
                             "UNDEFINED_ACTION": 0,
                             "ABANDONING": 388244813,
+                            "ADOPTING": 414293554,
                             "CREATING": 455564985,
                             "CREATING_WITHOUT_RETRIES": 428843785,
                             "DELETING": 528602024,
@@ -180044,6 +180181,7 @@
                           "values": {
                             "UNDEFINED_CURRENT_ACTION": 0,
                             "ABANDONING": 388244813,
+                            "ADOPTING": 414293554,
                             "CREATING": 455564985,
                             "CREATING_WITHOUT_RETRIES": 428843785,
                             "DELETING": 528602024,
@@ -183588,7 +183726,9 @@
                             "UNDEFINED_DELETE_STATUS": 0,
                             "DELETE_ACKNOWLEDGED": 325293916,
                             "DELETE_STATUS_UNSPECIFIED": 395396446,
+                            "LOCAL_CANCEL_REQUESTED": 169545277,
                             "LOCAL_DELETE_REQUESTED": 227335214,
+                            "PEER_CANCEL_REQUESTED": 140057862,
                             "PEER_DELETE_REQUESTED": 197847799
                           }
                         },
@@ -185372,6 +185512,24 @@
                         "peerNetwork": {
                           "type": "string",
                           "id": 500625489,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "NetworksCancelRequestRemovePeeringRequest": {
+                      "oneofs": {
+                        "_name": {
+                          "oneof": [
+                            "name"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 3373707,
                           "options": {
                             "proto3_optional": true
                           }
@@ -195684,6 +195842,15 @@
                         "instances": {
                           "rule": "repeated",
                           "type": "string",
+                          "id": 29097598
+                        }
+                      }
+                    },
+                    "RegionInstanceGroupManagersAdoptInstancesRequest": {
+                      "fields": {
+                        "instances": {
+                          "rule": "repeated",
+                          "type": "PerInstanceConfig",
                           "id": 29097598
                         }
                       }
@@ -206388,6 +206555,16 @@
                     },
                     "SecurityPolicyDdosProtectionConfig": {
                       "oneofs": {
+                        "_ddosAdaptiveProtection": {
+                          "oneof": [
+                            "ddosAdaptiveProtection"
+                          ]
+                        },
+                        "_ddosImpactedBaselineThreshold": {
+                          "oneof": [
+                            "ddosImpactedBaselineThreshold"
+                          ]
+                        },
                         "_ddosProtection": {
                           "oneof": [
                             "ddosProtection"
@@ -206395,6 +206572,20 @@
                         }
                       },
                       "fields": {
+                        "ddosAdaptiveProtection": {
+                          "type": "string",
+                          "id": 96895463,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "ddosImpactedBaselineThreshold": {
+                          "type": "float",
+                          "id": 192689584,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "ddosProtection": {
                           "type": "string",
                           "id": 275173268,
@@ -206404,6 +206595,14 @@
                         }
                       },
                       "nested": {
+                        "DdosAdaptiveProtection": {
+                          "values": {
+                            "UNDEFINED_DDOS_ADAPTIVE_PROTECTION": 0,
+                            "DISABLED": 516696700,
+                            "ENABLED": 182130465,
+                            "PREVIEW": 399798184
+                          }
+                        },
                         "DdosProtection": {
                           "values": {
                             "UNDEFINED_DDOS_PROTECTION": 0,
@@ -206975,6 +207174,11 @@
                         }
                       },
                       "fields": {
+                        "requestBodiesToExclude": {
+                          "rule": "repeated",
+                          "type": "SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams",
+                          "id": 60453445
+                        },
                         "requestCookiesToExclude": {
                           "rule": "repeated",
                           "type": "SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams",
@@ -219880,6 +220084,11 @@
                             "kind"
                           ]
                         },
+                        "_loadBalancingScheme": {
+                          "oneof": [
+                            "loadBalancingScheme"
+                          ]
+                        },
                         "_name": {
                           "oneof": [
                             "name"
@@ -219940,6 +220149,13 @@
                             "proto3_optional": true
                           }
                         },
+                        "loadBalancingScheme": {
+                          "type": "string",
+                          "id": 363890244,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "name": {
                           "type": "string",
                           "id": 3373707,
@@ -219984,6 +220200,14 @@
                         }
                       },
                       "nested": {
+                        "LoadBalancingScheme": {
+                          "values": {
+                            "UNDEFINED_LOAD_BALANCING_SCHEME": 0,
+                            "EXTERNAL": 35607499,
+                            "EXTERNAL_MANAGED": 512006923,
+                            "INTERNAL_MANAGED": 37350397
+                          }
+                        },
                         "ProxyHeader": {
                           "values": {
                             "UNDEFINED_PROXY_HEADER": 0,
@@ -237985,6 +238209,30 @@
                             }
                           ]
                         },
+                        "CancelRequestRemovePeering": {
+                          "requestType": "CancelRequestRemovePeeringNetworkRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "networks_cancel_request_remove_peering_request_resource",
+                            "(google.api.http).post": "/compute/beta/projects/{project}/global/networks/{network}/cancelRequestRemovePeering",
+                            "(google.api.method_signature)": "project,network,networks_cancel_request_remove_peering_request_resource",
+                            "(google.cloud.operation_service)": "GlobalOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "networks_cancel_request_remove_peering_request_resource",
+                                "post": "/compute/beta/projects/{project}/global/networks/{network}/cancelRequestRemovePeering"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,network,networks_cancel_request_remove_peering_request_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "GlobalOperations"
+                            }
+                          ]
+                        },
                         "Delete": {
                           "requestType": "DeleteNetworkRequest",
                           "responseType": "Operation",
@@ -242165,6 +242413,30 @@
                             },
                             {
                               "(google.api.method_signature)": "project,region,instance_group_manager,region_instance_group_managers_abandon_instances_request_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "RegionOperations"
+                            }
+                          ]
+                        },
+                        "AdoptInstances": {
+                          "requestType": "AdoptInstancesRegionInstanceGroupManagerRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "region_instance_group_managers_adopt_instances_request_resource",
+                            "(google.api.http).post": "/compute/beta/projects/{project}/regions/{region}/instanceGroupManagers/{instance_group_manager}/adoptInstances",
+                            "(google.api.method_signature)": "project,region,instance_group_manager,region_instance_group_managers_adopt_instances_request_resource",
+                            "(google.cloud.operation_service)": "RegionOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "region_instance_group_managers_adopt_instances_request_resource",
+                                "post": "/compute/beta/projects/{project}/regions/{region}/instanceGroupManagers/{instance_group_manager}/adoptInstances"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,instance_group_manager,region_instance_group_managers_adopt_instances_request_resource"
                             },
                             {
                               "(google.cloud.operation_service)": "RegionOperations"
