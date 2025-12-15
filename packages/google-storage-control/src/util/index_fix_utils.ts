@@ -15,6 +15,13 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
+/**
+ * Fixes the content of an index file by overwriting it with a predefined correct content.
+ * This function is specifically designed to correct `synthtool`-generated index files
+ * to ensure the proper export of `v2`, `StorageControlClient`, and `protos`.
+ *
+ * @param filePath The path to the index file to fix, relative to the project root.
+ */
 export function fixIndexFile(filePath: string): void {
   const fullPath = path.join(__dirname, '..', '..', filePath);
   const correctContent = `// Copyright 2025 Google LLC
@@ -52,7 +59,14 @@ export {protos};
   }
 }
 
+/**
+ * Fixes the v2 index file by ensuring the `StorageClient` is exported.
+ * If the export statement is missing, it appends it to the file.
+ *
+ * @param filePath The path to the v2 index file to fix, relative to the current directory.
+ */
 export function fixV2Index(filePath: string): void {
+  // TODO: this function can be removed when the nodejs_gapic_combined_pkg correctly exports from both libraries.
   const fullPath = path.join(__dirname, '..', filePath);
   if (fs.existsSync(fullPath)) {
     try {

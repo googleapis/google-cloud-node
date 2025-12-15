@@ -33,6 +33,7 @@ export const replacements: Replacement[] = [
 
 /**
  * Cleans up references to Object in storage protos by replacing the reference with the replacement.
+ * This is functionally equivalent to sed -i -E 's,\bObject\b,StorageObject,g' ${filePaths}
  * @param {string[]} filePaths - An array of file paths to update.
  * @param {Replacement[]} replacements - An array of replacement objects.
  */
