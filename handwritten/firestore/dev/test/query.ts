@@ -1958,9 +1958,6 @@ describe('limit() interface', () => {
     await query.get();
   });
 
-  // Regression test: This test currently fails because limit(0) is not
-  // serialized in the query proto (limit(0) is falsy in JavaScript).
-  // This test is expected to fail until the fix is applied.
   it('handles limit(0) correctly', async () => {
     const overrides: ApiOverride = {
       runQuery: request => {
