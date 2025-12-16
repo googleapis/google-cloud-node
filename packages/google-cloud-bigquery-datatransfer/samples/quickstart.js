@@ -14,7 +14,6 @@
 
 'use strict';
 
-// [START bigquerydatatransfer_quickstart]
 const bigqueryDataTransfer = require('@google-cloud/bigquery-data-transfer');
 const client = new bigqueryDataTransfer.v1.DataTransferServiceClient();
 
@@ -50,4 +49,3 @@ async function quickstart() {
     });
 }
 quickstart();
-// [END bigquerydatatransfer_quickstart]
