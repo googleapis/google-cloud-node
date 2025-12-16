@@ -437,8 +437,17 @@ export namespace google {
                     /** Instance mode */
                     mode?: (google.cloud.memorystore.v1.Instance.Mode|keyof typeof google.cloud.memorystore.v1.Instance.Mode|null);
 
+                    /** Instance simulateMaintenanceEvent */
+                    simulateMaintenanceEvent?: (boolean|null);
+
                     /** Instance ondemandMaintenance */
                     ondemandMaintenance?: (boolean|null);
+
+                    /** Instance satisfiesPzs */
+                    satisfiesPzs?: (boolean|null);
+
+                    /** Instance satisfiesPzi */
+                    satisfiesPzi?: (boolean|null);
 
                     /** Instance maintenancePolicy */
                     maintenancePolicy?: (google.cloud.memorystore.v1.IMaintenancePolicy|null);
@@ -452,11 +461,29 @@ export namespace google {
                     /** Instance asyncInstanceEndpointsDeletionEnabled */
                     asyncInstanceEndpointsDeletionEnabled?: (boolean|null);
 
+                    /** Instance kmsKey */
+                    kmsKey?: (string|null);
+
+                    /** Instance encryptionInfo */
+                    encryptionInfo?: (google.cloud.memorystore.v1.IEncryptionInfo|null);
+
                     /** Instance backupCollection */
                     backupCollection?: (string|null);
 
                     /** Instance automatedBackupConfig */
                     automatedBackupConfig?: (google.cloud.memorystore.v1.IAutomatedBackupConfig|null);
+
+                    /** Instance maintenanceVersion */
+                    maintenanceVersion?: (string|null);
+
+                    /** Instance effectiveMaintenanceVersion */
+                    effectiveMaintenanceVersion?: (string|null);
+
+                    /** Instance availableMaintenanceVersions */
+                    availableMaintenanceVersions?: (string[]|null);
+
+                    /** Instance allowFewerZonesDeployment */
+                    allowFewerZonesDeployment?: (boolean|null);
                 }
 
                 /** Represents an Instance. */
@@ -543,8 +570,17 @@ export namespace google {
                     /** Instance mode. */
                     public mode: (google.cloud.memorystore.v1.Instance.Mode|keyof typeof google.cloud.memorystore.v1.Instance.Mode);
 
+                    /** Instance simulateMaintenanceEvent. */
+                    public simulateMaintenanceEvent?: (boolean|null);
+
                     /** Instance ondemandMaintenance. */
                     public ondemandMaintenance?: (boolean|null);
+
+                    /** Instance satisfiesPzs. */
+                    public satisfiesPzs?: (boolean|null);
+
+                    /** Instance satisfiesPzi. */
+                    public satisfiesPzi?: (boolean|null);
 
                     /** Instance maintenancePolicy. */
                     public maintenancePolicy?: (google.cloud.memorystore.v1.IMaintenancePolicy|null);
@@ -558,11 +594,29 @@ export namespace google {
                     /** Instance asyncInstanceEndpointsDeletionEnabled. */
                     public asyncInstanceEndpointsDeletionEnabled?: (boolean|null);
 
+                    /** Instance kmsKey. */
+                    public kmsKey?: (string|null);
+
+                    /** Instance encryptionInfo. */
+                    public encryptionInfo?: (google.cloud.memorystore.v1.IEncryptionInfo|null);
+
                     /** Instance backupCollection. */
                     public backupCollection?: (string|null);
 
                     /** Instance automatedBackupConfig. */
                     public automatedBackupConfig?: (google.cloud.memorystore.v1.IAutomatedBackupConfig|null);
+
+                    /** Instance maintenanceVersion. */
+                    public maintenanceVersion?: (string|null);
+
+                    /** Instance effectiveMaintenanceVersion. */
+                    public effectiveMaintenanceVersion?: (string|null);
+
+                    /** Instance availableMaintenanceVersions. */
+                    public availableMaintenanceVersions: string[];
+
+                    /** Instance allowFewerZonesDeployment. */
+                    public allowFewerZonesDeployment: boolean;
 
                     /** Instance importSources. */
                     public importSources?: ("gcsSource"|"managedBackupSource");
@@ -1542,6 +1596,15 @@ export namespace google {
 
                     /** BackupCollection createTime */
                     createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BackupCollection totalBackupSizeBytes */
+                    totalBackupSizeBytes?: (number|Long|string|null);
+
+                    /** BackupCollection totalBackupCount */
+                    totalBackupCount?: (number|Long|string|null);
+
+                    /** BackupCollection lastBackupTime */
+                    lastBackupTime?: (google.protobuf.ITimestamp|null);
                 }
 
                 /** Represents a BackupCollection. */
@@ -1570,6 +1633,15 @@ export namespace google {
 
                     /** BackupCollection createTime. */
                     public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BackupCollection totalBackupSizeBytes. */
+                    public totalBackupSizeBytes: (number|Long|string);
+
+                    /** BackupCollection totalBackupCount. */
+                    public totalBackupCount: (number|Long|string);
+
+                    /** BackupCollection lastBackupTime. */
+                    public lastBackupTime?: (google.protobuf.ITimestamp|null);
 
                     /**
                      * Creates a new BackupCollection instance using the specified properties.
@@ -1691,6 +1763,9 @@ export namespace google {
                     /** Backup state */
                     state?: (google.cloud.memorystore.v1.Backup.State|keyof typeof google.cloud.memorystore.v1.Backup.State|null);
 
+                    /** Backup encryptionInfo */
+                    encryptionInfo?: (google.cloud.memorystore.v1.IEncryptionInfo|null);
+
                     /** Backup uid */
                     uid?: (string|null);
                 }
@@ -1742,6 +1817,9 @@ export namespace google {
 
                     /** Backup state. */
                     public state: (google.cloud.memorystore.v1.Backup.State|keyof typeof google.cloud.memorystore.v1.Backup.State);
+
+                    /** Backup encryptionInfo. */
+                    public encryptionInfo?: (google.cloud.memorystore.v1.IEncryptionInfo|null);
 
                     /** Backup uid. */
                     public uid: string;
@@ -5921,6 +5999,144 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an EncryptionInfo. */
+                interface IEncryptionInfo {
+
+                    /** EncryptionInfo encryptionType */
+                    encryptionType?: (google.cloud.memorystore.v1.EncryptionInfo.Type|keyof typeof google.cloud.memorystore.v1.EncryptionInfo.Type|null);
+
+                    /** EncryptionInfo kmsKeyVersions */
+                    kmsKeyVersions?: (string[]|null);
+
+                    /** EncryptionInfo kmsKeyPrimaryState */
+                    kmsKeyPrimaryState?: (google.cloud.memorystore.v1.EncryptionInfo.KmsKeyState|keyof typeof google.cloud.memorystore.v1.EncryptionInfo.KmsKeyState|null);
+
+                    /** EncryptionInfo lastUpdateTime */
+                    lastUpdateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents an EncryptionInfo. */
+                class EncryptionInfo implements IEncryptionInfo {
+
+                    /**
+                     * Constructs a new EncryptionInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memorystore.v1.IEncryptionInfo);
+
+                    /** EncryptionInfo encryptionType. */
+                    public encryptionType: (google.cloud.memorystore.v1.EncryptionInfo.Type|keyof typeof google.cloud.memorystore.v1.EncryptionInfo.Type);
+
+                    /** EncryptionInfo kmsKeyVersions. */
+                    public kmsKeyVersions: string[];
+
+                    /** EncryptionInfo kmsKeyPrimaryState. */
+                    public kmsKeyPrimaryState: (google.cloud.memorystore.v1.EncryptionInfo.KmsKeyState|keyof typeof google.cloud.memorystore.v1.EncryptionInfo.KmsKeyState);
+
+                    /** EncryptionInfo lastUpdateTime. */
+                    public lastUpdateTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new EncryptionInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EncryptionInfo instance
+                     */
+                    public static create(properties?: google.cloud.memorystore.v1.IEncryptionInfo): google.cloud.memorystore.v1.EncryptionInfo;
+
+                    /**
+                     * Encodes the specified EncryptionInfo message. Does not implicitly {@link google.cloud.memorystore.v1.EncryptionInfo.verify|verify} messages.
+                     * @param message EncryptionInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memorystore.v1.IEncryptionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EncryptionInfo message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.EncryptionInfo.verify|verify} messages.
+                     * @param message EncryptionInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memorystore.v1.IEncryptionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EncryptionInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EncryptionInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memorystore.v1.EncryptionInfo;
+
+                    /**
+                     * Decodes an EncryptionInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EncryptionInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memorystore.v1.EncryptionInfo;
+
+                    /**
+                     * Verifies an EncryptionInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EncryptionInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EncryptionInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memorystore.v1.EncryptionInfo;
+
+                    /**
+                     * Creates a plain object from an EncryptionInfo message. Also converts values to other types if specified.
+                     * @param message EncryptionInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memorystore.v1.EncryptionInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EncryptionInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EncryptionInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace EncryptionInfo {
+
+                    /** Type enum. */
+                    enum Type {
+                        TYPE_UNSPECIFIED = 0,
+                        GOOGLE_DEFAULT_ENCRYPTION = 1,
+                        CUSTOMER_MANAGED_ENCRYPTION = 2
+                    }
+
+                    /** KmsKeyState enum. */
+                    enum KmsKeyState {
+                        KMS_KEY_STATE_UNSPECIFIED = 0,
+                        ENABLED = 1,
+                        PERMISSION_DENIED = 2,
+                        DISABLED = 3,
+                        DESTROYED = 4,
+                        DESTROY_SCHEDULED = 5,
+                        EKM_KEY_UNREACHABLE_DETECTED = 6,
+                        BILLING_DISABLED = 7,
+                        UNKNOWN_FAILURE = 8
+                    }
                 }
             }
 

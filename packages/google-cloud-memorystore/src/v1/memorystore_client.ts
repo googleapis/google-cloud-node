@@ -202,6 +202,9 @@ export class MemorystoreClient {
       cryptoKeyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}'
       ),
+      cryptoKeyVersionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{crypto_key_version}'
+      ),
       forwardingRulePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/regions/{region}/forwardingRules/{forwarding_rule}'
       ),
@@ -2856,6 +2859,81 @@ export class MemorystoreClient {
    */
   matchCryptoKeyFromCryptoKeyName(cryptoKeyName: string) {
     return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName).crypto_key;
+  }
+
+  /**
+   * Return a fully-qualified cryptoKeyVersion resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} key_ring
+   * @param {string} crypto_key
+   * @param {string} crypto_key_version
+   * @returns {string} Resource name string.
+   */
+  cryptoKeyVersionPath(project:string,location:string,keyRing:string,cryptoKey:string,cryptoKeyVersion:string) {
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.render({
+      project: project,
+      location: location,
+      key_ring: keyRing,
+      crypto_key: cryptoKey,
+      crypto_key_version: cryptoKeyVersion,
+    });
+  }
+
+  /**
+   * Parse the project from CryptoKeyVersion resource.
+   *
+   * @param {string} cryptoKeyVersionName
+   *   A fully-qualified path representing CryptoKeyVersion resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(cryptoKeyVersionName).project;
+  }
+
+  /**
+   * Parse the location from CryptoKeyVersion resource.
+   *
+   * @param {string} cryptoKeyVersionName
+   *   A fully-qualified path representing CryptoKeyVersion resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(cryptoKeyVersionName).location;
+  }
+
+  /**
+   * Parse the key_ring from CryptoKeyVersion resource.
+   *
+   * @param {string} cryptoKeyVersionName
+   *   A fully-qualified path representing CryptoKeyVersion resource.
+   * @returns {string} A string representing the key_ring.
+   */
+  matchKeyRingFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(cryptoKeyVersionName).key_ring;
+  }
+
+  /**
+   * Parse the crypto_key from CryptoKeyVersion resource.
+   *
+   * @param {string} cryptoKeyVersionName
+   *   A fully-qualified path representing CryptoKeyVersion resource.
+   * @returns {string} A string representing the crypto_key.
+   */
+  matchCryptoKeyFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(cryptoKeyVersionName).crypto_key;
+  }
+
+  /**
+   * Parse the crypto_key_version from CryptoKeyVersion resource.
+   *
+   * @param {string} cryptoKeyVersionName
+   *   A fully-qualified path representing CryptoKeyVersion resource.
+   * @returns {string} A string representing the crypto_key_version.
+   */
+  matchCryptoKeyVersionFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(cryptoKeyVersionName).crypto_key_version;
   }
 
   /**

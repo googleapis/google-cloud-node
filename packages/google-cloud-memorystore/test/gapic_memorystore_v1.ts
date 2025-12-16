@@ -3158,6 +3158,68 @@ describe('v1.MemorystoreClient', () => {
             });
         });
 
+        describe('cryptoKeyVersion', async () => {
+            const fakePath = "/rendered/path/cryptoKeyVersion";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                key_ring: "keyRingValue",
+                crypto_key: "cryptoKeyValue",
+                crypto_key_version: "cryptoKeyVersionValue",
+            };
+            const client = new memorystoreModule.v1.MemorystoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.cryptoKeyVersionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.cryptoKeyVersionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('cryptoKeyVersionPath', () => {
+                const result = client.cryptoKeyVersionPath("projectValue", "locationValue", "keyRingValue", "cryptoKeyValue", "cryptoKeyVersionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.cryptoKeyVersionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromCryptoKeyVersionName', () => {
+                const result = client.matchProjectFromCryptoKeyVersionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromCryptoKeyVersionName', () => {
+                const result = client.matchLocationFromCryptoKeyVersionName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchKeyRingFromCryptoKeyVersionName', () => {
+                const result = client.matchKeyRingFromCryptoKeyVersionName(fakePath);
+                assert.strictEqual(result, "keyRingValue");
+                assert((client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCryptoKeyFromCryptoKeyVersionName', () => {
+                const result = client.matchCryptoKeyFromCryptoKeyVersionName(fakePath);
+                assert.strictEqual(result, "cryptoKeyValue");
+                assert((client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCryptoKeyVersionFromCryptoKeyVersionName', () => {
+                const result = client.matchCryptoKeyVersionFromCryptoKeyVersionName(fakePath);
+                assert.strictEqual(result, "cryptoKeyVersionValue");
+                assert((client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('forwardingRule', async () => {
             const fakePath = "/rendered/path/forwardingRule";
             const expectedParameters = {

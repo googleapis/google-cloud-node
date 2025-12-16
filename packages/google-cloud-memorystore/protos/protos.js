@@ -628,13 +628,22 @@
                          * @property {Array.<google.cloud.memorystore.v1.IPscAttachmentDetail>|null} [pscAttachmentDetails] Instance pscAttachmentDetails
                          * @property {Array.<google.cloud.memorystore.v1.Instance.IInstanceEndpoint>|null} [endpoints] Instance endpoints
                          * @property {google.cloud.memorystore.v1.Instance.Mode|null} [mode] Instance mode
+                         * @property {boolean|null} [simulateMaintenanceEvent] Instance simulateMaintenanceEvent
                          * @property {boolean|null} [ondemandMaintenance] Instance ondemandMaintenance
+                         * @property {boolean|null} [satisfiesPzs] Instance satisfiesPzs
+                         * @property {boolean|null} [satisfiesPzi] Instance satisfiesPzi
                          * @property {google.cloud.memorystore.v1.IMaintenancePolicy|null} [maintenancePolicy] Instance maintenancePolicy
                          * @property {google.cloud.memorystore.v1.IMaintenanceSchedule|null} [maintenanceSchedule] Instance maintenanceSchedule
                          * @property {google.cloud.memorystore.v1.ICrossInstanceReplicationConfig|null} [crossInstanceReplicationConfig] Instance crossInstanceReplicationConfig
                          * @property {boolean|null} [asyncInstanceEndpointsDeletionEnabled] Instance asyncInstanceEndpointsDeletionEnabled
+                         * @property {string|null} [kmsKey] Instance kmsKey
+                         * @property {google.cloud.memorystore.v1.IEncryptionInfo|null} [encryptionInfo] Instance encryptionInfo
                          * @property {string|null} [backupCollection] Instance backupCollection
                          * @property {google.cloud.memorystore.v1.IAutomatedBackupConfig|null} [automatedBackupConfig] Instance automatedBackupConfig
+                         * @property {string|null} [maintenanceVersion] Instance maintenanceVersion
+                         * @property {string|null} [effectiveMaintenanceVersion] Instance effectiveMaintenanceVersion
+                         * @property {Array.<string>|null} [availableMaintenanceVersions] Instance availableMaintenanceVersions
+                         * @property {boolean|null} [allowFewerZonesDeployment] Instance allowFewerZonesDeployment
                          */
     
                         /**
@@ -652,6 +661,7 @@
                             this.pscAutoConnections = [];
                             this.pscAttachmentDetails = [];
                             this.endpoints = [];
+                            this.availableMaintenanceVersions = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -859,12 +869,36 @@
                         Instance.prototype.mode = 0;
     
                         /**
+                         * Instance simulateMaintenanceEvent.
+                         * @member {boolean|null|undefined} simulateMaintenanceEvent
+                         * @memberof google.cloud.memorystore.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.simulateMaintenanceEvent = null;
+    
+                        /**
                          * Instance ondemandMaintenance.
                          * @member {boolean|null|undefined} ondemandMaintenance
                          * @memberof google.cloud.memorystore.v1.Instance
                          * @instance
                          */
                         Instance.prototype.ondemandMaintenance = null;
+    
+                        /**
+                         * Instance satisfiesPzs.
+                         * @member {boolean|null|undefined} satisfiesPzs
+                         * @memberof google.cloud.memorystore.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.satisfiesPzs = null;
+    
+                        /**
+                         * Instance satisfiesPzi.
+                         * @member {boolean|null|undefined} satisfiesPzi
+                         * @memberof google.cloud.memorystore.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.satisfiesPzi = null;
     
                         /**
                          * Instance maintenancePolicy.
@@ -899,6 +933,22 @@
                         Instance.prototype.asyncInstanceEndpointsDeletionEnabled = null;
     
                         /**
+                         * Instance kmsKey.
+                         * @member {string|null|undefined} kmsKey
+                         * @memberof google.cloud.memorystore.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.kmsKey = null;
+    
+                        /**
+                         * Instance encryptionInfo.
+                         * @member {google.cloud.memorystore.v1.IEncryptionInfo|null|undefined} encryptionInfo
+                         * @memberof google.cloud.memorystore.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.encryptionInfo = null;
+    
+                        /**
                          * Instance backupCollection.
                          * @member {string|null|undefined} backupCollection
                          * @memberof google.cloud.memorystore.v1.Instance
@@ -913,6 +963,38 @@
                          * @instance
                          */
                         Instance.prototype.automatedBackupConfig = null;
+    
+                        /**
+                         * Instance maintenanceVersion.
+                         * @member {string|null|undefined} maintenanceVersion
+                         * @memberof google.cloud.memorystore.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.maintenanceVersion = null;
+    
+                        /**
+                         * Instance effectiveMaintenanceVersion.
+                         * @member {string|null|undefined} effectiveMaintenanceVersion
+                         * @memberof google.cloud.memorystore.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.effectiveMaintenanceVersion = null;
+    
+                        /**
+                         * Instance availableMaintenanceVersions.
+                         * @member {Array.<string>} availableMaintenanceVersions
+                         * @memberof google.cloud.memorystore.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.availableMaintenanceVersions = $util.emptyArray;
+    
+                        /**
+                         * Instance allowFewerZonesDeployment.
+                         * @member {boolean} allowFewerZonesDeployment
+                         * @memberof google.cloud.memorystore.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.allowFewerZonesDeployment = false;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -941,8 +1023,26 @@
                         });
     
                         // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Instance.prototype, "_simulateMaintenanceEvent", {
+                            get: $util.oneOfGetter($oneOfFields = ["simulateMaintenanceEvent"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Instance.prototype, "_ondemandMaintenance", {
                             get: $util.oneOfGetter($oneOfFields = ["ondemandMaintenance"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Instance.prototype, "_satisfiesPzs", {
+                            get: $util.oneOfGetter($oneOfFields = ["satisfiesPzs"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Instance.prototype, "_satisfiesPzi", {
+                            get: $util.oneOfGetter($oneOfFields = ["satisfiesPzi"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -953,8 +1053,26 @@
                         });
     
                         // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Instance.prototype, "_kmsKey", {
+                            get: $util.oneOfGetter($oneOfFields = ["kmsKey"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Instance.prototype, "_backupCollection", {
                             get: $util.oneOfGetter($oneOfFields = ["backupCollection"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Instance.prototype, "_maintenanceVersion", {
+                            get: $util.oneOfGetter($oneOfFields = ["maintenanceVersion"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Instance.prototype, "_effectiveMaintenanceVersion", {
+                            get: $util.oneOfGetter($oneOfFields = ["effectiveMaintenanceVersion"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -1038,8 +1156,14 @@
                                     $root.google.cloud.memorystore.v1.Instance.InstanceEndpoint.encode(message.endpoints[i], writer.uint32(/* id 25, wireType 2 =*/202).fork()).ldelim();
                             if (message.mode != null && Object.hasOwnProperty.call(message, "mode"))
                                 writer.uint32(/* id 26, wireType 0 =*/208).int32(message.mode);
+                            if (message.simulateMaintenanceEvent != null && Object.hasOwnProperty.call(message, "simulateMaintenanceEvent"))
+                                writer.uint32(/* id 27, wireType 0 =*/216).bool(message.simulateMaintenanceEvent);
                             if (message.ondemandMaintenance != null && Object.hasOwnProperty.call(message, "ondemandMaintenance"))
                                 writer.uint32(/* id 28, wireType 0 =*/224).bool(message.ondemandMaintenance);
+                            if (message.satisfiesPzs != null && Object.hasOwnProperty.call(message, "satisfiesPzs"))
+                                writer.uint32(/* id 29, wireType 0 =*/232).bool(message.satisfiesPzs);
+                            if (message.satisfiesPzi != null && Object.hasOwnProperty.call(message, "satisfiesPzi"))
+                                writer.uint32(/* id 30, wireType 0 =*/240).bool(message.satisfiesPzi);
                             if (message.maintenancePolicy != null && Object.hasOwnProperty.call(message, "maintenancePolicy"))
                                 $root.google.cloud.memorystore.v1.MaintenancePolicy.encode(message.maintenancePolicy, writer.uint32(/* id 31, wireType 2 =*/250).fork()).ldelim();
                             if (message.maintenanceSchedule != null && Object.hasOwnProperty.call(message, "maintenanceSchedule"))
@@ -1048,10 +1172,23 @@
                                 $root.google.cloud.memorystore.v1.CrossInstanceReplicationConfig.encode(message.crossInstanceReplicationConfig, writer.uint32(/* id 33, wireType 2 =*/266).fork()).ldelim();
                             if (message.asyncInstanceEndpointsDeletionEnabled != null && Object.hasOwnProperty.call(message, "asyncInstanceEndpointsDeletionEnabled"))
                                 writer.uint32(/* id 44, wireType 0 =*/352).bool(message.asyncInstanceEndpointsDeletionEnabled);
+                            if (message.kmsKey != null && Object.hasOwnProperty.call(message, "kmsKey"))
+                                writer.uint32(/* id 45, wireType 2 =*/362).string(message.kmsKey);
+                            if (message.encryptionInfo != null && Object.hasOwnProperty.call(message, "encryptionInfo"))
+                                $root.google.cloud.memorystore.v1.EncryptionInfo.encode(message.encryptionInfo, writer.uint32(/* id 46, wireType 2 =*/370).fork()).ldelim();
                             if (message.backupCollection != null && Object.hasOwnProperty.call(message, "backupCollection"))
                                 writer.uint32(/* id 47, wireType 2 =*/378).string(message.backupCollection);
                             if (message.automatedBackupConfig != null && Object.hasOwnProperty.call(message, "automatedBackupConfig"))
                                 $root.google.cloud.memorystore.v1.AutomatedBackupConfig.encode(message.automatedBackupConfig, writer.uint32(/* id 48, wireType 2 =*/386).fork()).ldelim();
+                            if (message.maintenanceVersion != null && Object.hasOwnProperty.call(message, "maintenanceVersion"))
+                                writer.uint32(/* id 49, wireType 2 =*/394).string(message.maintenanceVersion);
+                            if (message.effectiveMaintenanceVersion != null && Object.hasOwnProperty.call(message, "effectiveMaintenanceVersion"))
+                                writer.uint32(/* id 50, wireType 2 =*/402).string(message.effectiveMaintenanceVersion);
+                            if (message.availableMaintenanceVersions != null && message.availableMaintenanceVersions.length)
+                                for (var i = 0; i < message.availableMaintenanceVersions.length; ++i)
+                                    writer.uint32(/* id 51, wireType 2 =*/410).string(message.availableMaintenanceVersions[i]);
+                            if (message.allowFewerZonesDeployment != null && Object.hasOwnProperty.call(message, "allowFewerZonesDeployment"))
+                                writer.uint32(/* id 54, wireType 0 =*/432).bool(message.allowFewerZonesDeployment);
                             return writer;
                         };
     
@@ -1234,8 +1371,20 @@
                                         message.mode = reader.int32();
                                         break;
                                     }
+                                case 27: {
+                                        message.simulateMaintenanceEvent = reader.bool();
+                                        break;
+                                    }
                                 case 28: {
                                         message.ondemandMaintenance = reader.bool();
+                                        break;
+                                    }
+                                case 29: {
+                                        message.satisfiesPzs = reader.bool();
+                                        break;
+                                    }
+                                case 30: {
+                                        message.satisfiesPzi = reader.bool();
                                         break;
                                     }
                                 case 31: {
@@ -1254,12 +1403,38 @@
                                         message.asyncInstanceEndpointsDeletionEnabled = reader.bool();
                                         break;
                                     }
+                                case 45: {
+                                        message.kmsKey = reader.string();
+                                        break;
+                                    }
+                                case 46: {
+                                        message.encryptionInfo = $root.google.cloud.memorystore.v1.EncryptionInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 47: {
                                         message.backupCollection = reader.string();
                                         break;
                                     }
                                 case 48: {
                                         message.automatedBackupConfig = $root.google.cloud.memorystore.v1.AutomatedBackupConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 49: {
+                                        message.maintenanceVersion = reader.string();
+                                        break;
+                                    }
+                                case 50: {
+                                        message.effectiveMaintenanceVersion = reader.string();
+                                        break;
+                                    }
+                                case 51: {
+                                        if (!(message.availableMaintenanceVersions && message.availableMaintenanceVersions.length))
+                                            message.availableMaintenanceVersions = [];
+                                        message.availableMaintenanceVersions.push(reader.string());
+                                        break;
+                                    }
+                                case 54: {
+                                        message.allowFewerZonesDeployment = reader.bool();
                                         break;
                                     }
                                 default:
@@ -1470,10 +1645,25 @@
                                 case 4:
                                     break;
                                 }
+                            if (message.simulateMaintenanceEvent != null && message.hasOwnProperty("simulateMaintenanceEvent")) {
+                                properties._simulateMaintenanceEvent = 1;
+                                if (typeof message.simulateMaintenanceEvent !== "boolean")
+                                    return "simulateMaintenanceEvent: boolean expected";
+                            }
                             if (message.ondemandMaintenance != null && message.hasOwnProperty("ondemandMaintenance")) {
                                 properties._ondemandMaintenance = 1;
                                 if (typeof message.ondemandMaintenance !== "boolean")
                                     return "ondemandMaintenance: boolean expected";
+                            }
+                            if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs")) {
+                                properties._satisfiesPzs = 1;
+                                if (typeof message.satisfiesPzs !== "boolean")
+                                    return "satisfiesPzs: boolean expected";
+                            }
+                            if (message.satisfiesPzi != null && message.hasOwnProperty("satisfiesPzi")) {
+                                properties._satisfiesPzi = 1;
+                                if (typeof message.satisfiesPzi !== "boolean")
+                                    return "satisfiesPzi: boolean expected";
                             }
                             if (message.maintenancePolicy != null && message.hasOwnProperty("maintenancePolicy")) {
                                 var error = $root.google.cloud.memorystore.v1.MaintenancePolicy.verify(message.maintenancePolicy);
@@ -1495,6 +1685,16 @@
                                 if (typeof message.asyncInstanceEndpointsDeletionEnabled !== "boolean")
                                     return "asyncInstanceEndpointsDeletionEnabled: boolean expected";
                             }
+                            if (message.kmsKey != null && message.hasOwnProperty("kmsKey")) {
+                                properties._kmsKey = 1;
+                                if (!$util.isString(message.kmsKey))
+                                    return "kmsKey: string expected";
+                            }
+                            if (message.encryptionInfo != null && message.hasOwnProperty("encryptionInfo")) {
+                                var error = $root.google.cloud.memorystore.v1.EncryptionInfo.verify(message.encryptionInfo);
+                                if (error)
+                                    return "encryptionInfo." + error;
+                            }
                             if (message.backupCollection != null && message.hasOwnProperty("backupCollection")) {
                                 properties._backupCollection = 1;
                                 if (!$util.isString(message.backupCollection))
@@ -1505,6 +1705,26 @@
                                 if (error)
                                     return "automatedBackupConfig." + error;
                             }
+                            if (message.maintenanceVersion != null && message.hasOwnProperty("maintenanceVersion")) {
+                                properties._maintenanceVersion = 1;
+                                if (!$util.isString(message.maintenanceVersion))
+                                    return "maintenanceVersion: string expected";
+                            }
+                            if (message.effectiveMaintenanceVersion != null && message.hasOwnProperty("effectiveMaintenanceVersion")) {
+                                properties._effectiveMaintenanceVersion = 1;
+                                if (!$util.isString(message.effectiveMaintenanceVersion))
+                                    return "effectiveMaintenanceVersion: string expected";
+                            }
+                            if (message.availableMaintenanceVersions != null && message.hasOwnProperty("availableMaintenanceVersions")) {
+                                if (!Array.isArray(message.availableMaintenanceVersions))
+                                    return "availableMaintenanceVersions: array expected";
+                                for (var i = 0; i < message.availableMaintenanceVersions.length; ++i)
+                                    if (!$util.isString(message.availableMaintenanceVersions[i]))
+                                        return "availableMaintenanceVersions: string[] expected";
+                            }
+                            if (message.allowFewerZonesDeployment != null && message.hasOwnProperty("allowFewerZonesDeployment"))
+                                if (typeof message.allowFewerZonesDeployment !== "boolean")
+                                    return "allowFewerZonesDeployment: boolean expected";
                             return null;
                         };
     
@@ -1746,8 +1966,14 @@
                                 message.mode = 4;
                                 break;
                             }
+                            if (object.simulateMaintenanceEvent != null)
+                                message.simulateMaintenanceEvent = Boolean(object.simulateMaintenanceEvent);
                             if (object.ondemandMaintenance != null)
                                 message.ondemandMaintenance = Boolean(object.ondemandMaintenance);
+                            if (object.satisfiesPzs != null)
+                                message.satisfiesPzs = Boolean(object.satisfiesPzs);
+                            if (object.satisfiesPzi != null)
+                                message.satisfiesPzi = Boolean(object.satisfiesPzi);
                             if (object.maintenancePolicy != null) {
                                 if (typeof object.maintenancePolicy !== "object")
                                     throw TypeError(".google.cloud.memorystore.v1.Instance.maintenancePolicy: object expected");
@@ -1765,6 +1991,13 @@
                             }
                             if (object.asyncInstanceEndpointsDeletionEnabled != null)
                                 message.asyncInstanceEndpointsDeletionEnabled = Boolean(object.asyncInstanceEndpointsDeletionEnabled);
+                            if (object.kmsKey != null)
+                                message.kmsKey = String(object.kmsKey);
+                            if (object.encryptionInfo != null) {
+                                if (typeof object.encryptionInfo !== "object")
+                                    throw TypeError(".google.cloud.memorystore.v1.Instance.encryptionInfo: object expected");
+                                message.encryptionInfo = $root.google.cloud.memorystore.v1.EncryptionInfo.fromObject(object.encryptionInfo);
+                            }
                             if (object.backupCollection != null)
                                 message.backupCollection = String(object.backupCollection);
                             if (object.automatedBackupConfig != null) {
@@ -1772,6 +2005,19 @@
                                     throw TypeError(".google.cloud.memorystore.v1.Instance.automatedBackupConfig: object expected");
                                 message.automatedBackupConfig = $root.google.cloud.memorystore.v1.AutomatedBackupConfig.fromObject(object.automatedBackupConfig);
                             }
+                            if (object.maintenanceVersion != null)
+                                message.maintenanceVersion = String(object.maintenanceVersion);
+                            if (object.effectiveMaintenanceVersion != null)
+                                message.effectiveMaintenanceVersion = String(object.effectiveMaintenanceVersion);
+                            if (object.availableMaintenanceVersions) {
+                                if (!Array.isArray(object.availableMaintenanceVersions))
+                                    throw TypeError(".google.cloud.memorystore.v1.Instance.availableMaintenanceVersions: array expected");
+                                message.availableMaintenanceVersions = [];
+                                for (var i = 0; i < object.availableMaintenanceVersions.length; ++i)
+                                    message.availableMaintenanceVersions[i] = String(object.availableMaintenanceVersions[i]);
+                            }
+                            if (object.allowFewerZonesDeployment != null)
+                                message.allowFewerZonesDeployment = Boolean(object.allowFewerZonesDeployment);
                             return message;
                         };
     
@@ -1793,6 +2039,7 @@
                                 object.pscAutoConnections = [];
                                 object.pscAttachmentDetails = [];
                                 object.endpoints = [];
+                                object.availableMaintenanceVersions = [];
                             }
                             if (options.objects || options.defaults) {
                                 object.labels = {};
@@ -1817,7 +2064,9 @@
                                 object.maintenancePolicy = null;
                                 object.maintenanceSchedule = null;
                                 object.crossInstanceReplicationConfig = null;
+                                object.encryptionInfo = null;
                                 object.automatedBackupConfig = null;
+                                object.allowFewerZonesDeployment = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -1900,10 +2149,25 @@
                             }
                             if (message.mode != null && message.hasOwnProperty("mode"))
                                 object.mode = options.enums === String ? $root.google.cloud.memorystore.v1.Instance.Mode[message.mode] === undefined ? message.mode : $root.google.cloud.memorystore.v1.Instance.Mode[message.mode] : message.mode;
+                            if (message.simulateMaintenanceEvent != null && message.hasOwnProperty("simulateMaintenanceEvent")) {
+                                object.simulateMaintenanceEvent = message.simulateMaintenanceEvent;
+                                if (options.oneofs)
+                                    object._simulateMaintenanceEvent = "simulateMaintenanceEvent";
+                            }
                             if (message.ondemandMaintenance != null && message.hasOwnProperty("ondemandMaintenance")) {
                                 object.ondemandMaintenance = message.ondemandMaintenance;
                                 if (options.oneofs)
                                     object._ondemandMaintenance = "ondemandMaintenance";
+                            }
+                            if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs")) {
+                                object.satisfiesPzs = message.satisfiesPzs;
+                                if (options.oneofs)
+                                    object._satisfiesPzs = "satisfiesPzs";
+                            }
+                            if (message.satisfiesPzi != null && message.hasOwnProperty("satisfiesPzi")) {
+                                object.satisfiesPzi = message.satisfiesPzi;
+                                if (options.oneofs)
+                                    object._satisfiesPzi = "satisfiesPzi";
                             }
                             if (message.maintenancePolicy != null && message.hasOwnProperty("maintenancePolicy"))
                                 object.maintenancePolicy = $root.google.cloud.memorystore.v1.MaintenancePolicy.toObject(message.maintenancePolicy, options);
@@ -1916,6 +2180,13 @@
                                 if (options.oneofs)
                                     object._asyncInstanceEndpointsDeletionEnabled = "asyncInstanceEndpointsDeletionEnabled";
                             }
+                            if (message.kmsKey != null && message.hasOwnProperty("kmsKey")) {
+                                object.kmsKey = message.kmsKey;
+                                if (options.oneofs)
+                                    object._kmsKey = "kmsKey";
+                            }
+                            if (message.encryptionInfo != null && message.hasOwnProperty("encryptionInfo"))
+                                object.encryptionInfo = $root.google.cloud.memorystore.v1.EncryptionInfo.toObject(message.encryptionInfo, options);
                             if (message.backupCollection != null && message.hasOwnProperty("backupCollection")) {
                                 object.backupCollection = message.backupCollection;
                                 if (options.oneofs)
@@ -1923,6 +2194,23 @@
                             }
                             if (message.automatedBackupConfig != null && message.hasOwnProperty("automatedBackupConfig"))
                                 object.automatedBackupConfig = $root.google.cloud.memorystore.v1.AutomatedBackupConfig.toObject(message.automatedBackupConfig, options);
+                            if (message.maintenanceVersion != null && message.hasOwnProperty("maintenanceVersion")) {
+                                object.maintenanceVersion = message.maintenanceVersion;
+                                if (options.oneofs)
+                                    object._maintenanceVersion = "maintenanceVersion";
+                            }
+                            if (message.effectiveMaintenanceVersion != null && message.hasOwnProperty("effectiveMaintenanceVersion")) {
+                                object.effectiveMaintenanceVersion = message.effectiveMaintenanceVersion;
+                                if (options.oneofs)
+                                    object._effectiveMaintenanceVersion = "effectiveMaintenanceVersion";
+                            }
+                            if (message.availableMaintenanceVersions && message.availableMaintenanceVersions.length) {
+                                object.availableMaintenanceVersions = [];
+                                for (var j = 0; j < message.availableMaintenanceVersions.length; ++j)
+                                    object.availableMaintenanceVersions[j] = message.availableMaintenanceVersions[j];
+                            }
+                            if (message.allowFewerZonesDeployment != null && message.hasOwnProperty("allowFewerZonesDeployment"))
+                                object.allowFewerZonesDeployment = message.allowFewerZonesDeployment;
                             return object;
                         };
     
@@ -4085,6 +4373,9 @@
                          * @property {string|null} [kmsKey] BackupCollection kmsKey
                          * @property {string|null} [uid] BackupCollection uid
                          * @property {google.protobuf.ITimestamp|null} [createTime] BackupCollection createTime
+                         * @property {number|Long|null} [totalBackupSizeBytes] BackupCollection totalBackupSizeBytes
+                         * @property {number|Long|null} [totalBackupCount] BackupCollection totalBackupCount
+                         * @property {google.protobuf.ITimestamp|null} [lastBackupTime] BackupCollection lastBackupTime
                          */
     
                         /**
@@ -4151,6 +4442,30 @@
                         BackupCollection.prototype.createTime = null;
     
                         /**
+                         * BackupCollection totalBackupSizeBytes.
+                         * @member {number|Long} totalBackupSizeBytes
+                         * @memberof google.cloud.memorystore.v1.BackupCollection
+                         * @instance
+                         */
+                        BackupCollection.prototype.totalBackupSizeBytes = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * BackupCollection totalBackupCount.
+                         * @member {number|Long} totalBackupCount
+                         * @memberof google.cloud.memorystore.v1.BackupCollection
+                         * @instance
+                         */
+                        BackupCollection.prototype.totalBackupCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * BackupCollection lastBackupTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} lastBackupTime
+                         * @memberof google.cloud.memorystore.v1.BackupCollection
+                         * @instance
+                         */
+                        BackupCollection.prototype.lastBackupTime = null;
+    
+                        /**
                          * Creates a new BackupCollection instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.memorystore.v1.BackupCollection
@@ -4186,6 +4501,12 @@
                                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.uid);
                             if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
                                 $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.totalBackupSizeBytes != null && Object.hasOwnProperty.call(message, "totalBackupSizeBytes"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).int64(message.totalBackupSizeBytes);
+                            if (message.totalBackupCount != null && Object.hasOwnProperty.call(message, "totalBackupCount"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).int64(message.totalBackupCount);
+                            if (message.lastBackupTime != null && Object.hasOwnProperty.call(message, "lastBackupTime"))
+                                $root.google.protobuf.Timestamp.encode(message.lastBackupTime, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                             return writer;
                         };
     
@@ -4246,6 +4567,18 @@
                                         message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 8: {
+                                        message.totalBackupSizeBytes = reader.int64();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.totalBackupCount = reader.int64();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.lastBackupTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -4301,6 +4634,17 @@
                                 if (error)
                                     return "createTime." + error;
                             }
+                            if (message.totalBackupSizeBytes != null && message.hasOwnProperty("totalBackupSizeBytes"))
+                                if (!$util.isInteger(message.totalBackupSizeBytes) && !(message.totalBackupSizeBytes && $util.isInteger(message.totalBackupSizeBytes.low) && $util.isInteger(message.totalBackupSizeBytes.high)))
+                                    return "totalBackupSizeBytes: integer|Long expected";
+                            if (message.totalBackupCount != null && message.hasOwnProperty("totalBackupCount"))
+                                if (!$util.isInteger(message.totalBackupCount) && !(message.totalBackupCount && $util.isInteger(message.totalBackupCount.low) && $util.isInteger(message.totalBackupCount.high)))
+                                    return "totalBackupCount: integer|Long expected";
+                            if (message.lastBackupTime != null && message.hasOwnProperty("lastBackupTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.lastBackupTime);
+                                if (error)
+                                    return "lastBackupTime." + error;
+                            }
                             return null;
                         };
     
@@ -4331,6 +4675,29 @@
                                     throw TypeError(".google.cloud.memorystore.v1.BackupCollection.createTime: object expected");
                                 message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
                             }
+                            if (object.totalBackupSizeBytes != null)
+                                if ($util.Long)
+                                    (message.totalBackupSizeBytes = $util.Long.fromValue(object.totalBackupSizeBytes)).unsigned = false;
+                                else if (typeof object.totalBackupSizeBytes === "string")
+                                    message.totalBackupSizeBytes = parseInt(object.totalBackupSizeBytes, 10);
+                                else if (typeof object.totalBackupSizeBytes === "number")
+                                    message.totalBackupSizeBytes = object.totalBackupSizeBytes;
+                                else if (typeof object.totalBackupSizeBytes === "object")
+                                    message.totalBackupSizeBytes = new $util.LongBits(object.totalBackupSizeBytes.low >>> 0, object.totalBackupSizeBytes.high >>> 0).toNumber();
+                            if (object.totalBackupCount != null)
+                                if ($util.Long)
+                                    (message.totalBackupCount = $util.Long.fromValue(object.totalBackupCount)).unsigned = false;
+                                else if (typeof object.totalBackupCount === "string")
+                                    message.totalBackupCount = parseInt(object.totalBackupCount, 10);
+                                else if (typeof object.totalBackupCount === "number")
+                                    message.totalBackupCount = object.totalBackupCount;
+                                else if (typeof object.totalBackupCount === "object")
+                                    message.totalBackupCount = new $util.LongBits(object.totalBackupCount.low >>> 0, object.totalBackupCount.high >>> 0).toNumber();
+                            if (object.lastBackupTime != null) {
+                                if (typeof object.lastBackupTime !== "object")
+                                    throw TypeError(".google.cloud.memorystore.v1.BackupCollection.lastBackupTime: object expected");
+                                message.lastBackupTime = $root.google.protobuf.Timestamp.fromObject(object.lastBackupTime);
+                            }
                             return message;
                         };
     
@@ -4354,6 +4721,17 @@
                                 object.kmsKey = "";
                                 object.uid = "";
                                 object.createTime = null;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.totalBackupSizeBytes = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.totalBackupSizeBytes = options.longs === String ? "0" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.totalBackupCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.totalBackupCount = options.longs === String ? "0" : 0;
+                                object.lastBackupTime = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -4367,6 +4745,18 @@
                                 object.uid = message.uid;
                             if (message.createTime != null && message.hasOwnProperty("createTime"))
                                 object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.totalBackupSizeBytes != null && message.hasOwnProperty("totalBackupSizeBytes"))
+                                if (typeof message.totalBackupSizeBytes === "number")
+                                    object.totalBackupSizeBytes = options.longs === String ? String(message.totalBackupSizeBytes) : message.totalBackupSizeBytes;
+                                else
+                                    object.totalBackupSizeBytes = options.longs === String ? $util.Long.prototype.toString.call(message.totalBackupSizeBytes) : options.longs === Number ? new $util.LongBits(message.totalBackupSizeBytes.low >>> 0, message.totalBackupSizeBytes.high >>> 0).toNumber() : message.totalBackupSizeBytes;
+                            if (message.totalBackupCount != null && message.hasOwnProperty("totalBackupCount"))
+                                if (typeof message.totalBackupCount === "number")
+                                    object.totalBackupCount = options.longs === String ? String(message.totalBackupCount) : message.totalBackupCount;
+                                else
+                                    object.totalBackupCount = options.longs === String ? $util.Long.prototype.toString.call(message.totalBackupCount) : options.longs === Number ? new $util.LongBits(message.totalBackupCount.low >>> 0, message.totalBackupCount.high >>> 0).toNumber() : message.totalBackupCount;
+                            if (message.lastBackupTime != null && message.hasOwnProperty("lastBackupTime"))
+                                object.lastBackupTime = $root.google.protobuf.Timestamp.toObject(message.lastBackupTime, options);
                             return object;
                         };
     
@@ -4418,6 +4808,7 @@
                          * @property {number|null} [shardCount] Backup shardCount
                          * @property {google.cloud.memorystore.v1.Backup.BackupType|null} [backupType] Backup backupType
                          * @property {google.cloud.memorystore.v1.Backup.State|null} [state] Backup state
+                         * @property {google.cloud.memorystore.v1.IEncryptionInfo|null} [encryptionInfo] Backup encryptionInfo
                          * @property {string|null} [uid] Backup uid
                          */
     
@@ -4542,6 +4933,14 @@
                         Backup.prototype.state = 0;
     
                         /**
+                         * Backup encryptionInfo.
+                         * @member {google.cloud.memorystore.v1.IEncryptionInfo|null|undefined} encryptionInfo
+                         * @memberof google.cloud.memorystore.v1.Backup
+                         * @instance
+                         */
+                        Backup.prototype.encryptionInfo = null;
+    
+                        /**
                          * Backup uid.
                          * @member {string} uid
                          * @memberof google.cloud.memorystore.v1.Backup
@@ -4600,6 +4999,8 @@
                                 writer.uint32(/* id 12, wireType 0 =*/96).int32(message.backupType);
                             if (message.state != null && Object.hasOwnProperty.call(message, "state"))
                                 writer.uint32(/* id 13, wireType 0 =*/104).int32(message.state);
+                            if (message.encryptionInfo != null && Object.hasOwnProperty.call(message, "encryptionInfo"))
+                                $root.google.cloud.memorystore.v1.EncryptionInfo.encode(message.encryptionInfo, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
                             if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
                                 writer.uint32(/* id 15, wireType 2 =*/122).string(message.uid);
                             return writer;
@@ -4690,6 +5091,10 @@
                                     }
                                 case 13: {
                                         message.state = reader.int32();
+                                        break;
+                                    }
+                                case 14: {
+                                        message.encryptionInfo = $root.google.cloud.memorystore.v1.EncryptionInfo.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 15: {
@@ -4802,6 +5207,11 @@
                                 case 4:
                                     break;
                                 }
+                            if (message.encryptionInfo != null && message.hasOwnProperty("encryptionInfo")) {
+                                var error = $root.google.cloud.memorystore.v1.EncryptionInfo.verify(message.encryptionInfo);
+                                if (error)
+                                    return "encryptionInfo." + error;
+                            }
                             if (message.uid != null && message.hasOwnProperty("uid"))
                                 if (!$util.isString(message.uid))
                                     return "uid: string expected";
@@ -4937,6 +5347,11 @@
                                 message.state = 4;
                                 break;
                             }
+                            if (object.encryptionInfo != null) {
+                                if (typeof object.encryptionInfo !== "object")
+                                    throw TypeError(".google.cloud.memorystore.v1.Backup.encryptionInfo: object expected");
+                                message.encryptionInfo = $root.google.cloud.memorystore.v1.EncryptionInfo.fromObject(object.encryptionInfo);
+                            }
                             if (object.uid != null)
                                 message.uid = String(object.uid);
                             return message;
@@ -4974,6 +5389,7 @@
                                 object.shardCount = 0;
                                 object.backupType = options.enums === String ? "BACKUP_TYPE_UNSPECIFIED" : 0;
                                 object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.encryptionInfo = null;
                                 object.uid = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
@@ -5008,6 +5424,8 @@
                                 object.backupType = options.enums === String ? $root.google.cloud.memorystore.v1.Backup.BackupType[message.backupType] === undefined ? message.backupType : $root.google.cloud.memorystore.v1.Backup.BackupType[message.backupType] : message.backupType;
                             if (message.state != null && message.hasOwnProperty("state"))
                                 object.state = options.enums === String ? $root.google.cloud.memorystore.v1.Backup.State[message.state] === undefined ? message.state : $root.google.cloud.memorystore.v1.Backup.State[message.state] : message.state;
+                            if (message.encryptionInfo != null && message.hasOwnProperty("encryptionInfo"))
+                                object.encryptionInfo = $root.google.cloud.memorystore.v1.EncryptionInfo.toObject(message.encryptionInfo, options);
                             if (message.uid != null && message.hasOwnProperty("uid"))
                                 object.uid = message.uid;
                             return object;
@@ -15137,6 +15555,425 @@
                         };
     
                         return OperationMetadata;
+                    })();
+    
+                    v1.EncryptionInfo = (function() {
+    
+                        /**
+                         * Properties of an EncryptionInfo.
+                         * @memberof google.cloud.memorystore.v1
+                         * @interface IEncryptionInfo
+                         * @property {google.cloud.memorystore.v1.EncryptionInfo.Type|null} [encryptionType] EncryptionInfo encryptionType
+                         * @property {Array.<string>|null} [kmsKeyVersions] EncryptionInfo kmsKeyVersions
+                         * @property {google.cloud.memorystore.v1.EncryptionInfo.KmsKeyState|null} [kmsKeyPrimaryState] EncryptionInfo kmsKeyPrimaryState
+                         * @property {google.protobuf.ITimestamp|null} [lastUpdateTime] EncryptionInfo lastUpdateTime
+                         */
+    
+                        /**
+                         * Constructs a new EncryptionInfo.
+                         * @memberof google.cloud.memorystore.v1
+                         * @classdesc Represents an EncryptionInfo.
+                         * @implements IEncryptionInfo
+                         * @constructor
+                         * @param {google.cloud.memorystore.v1.IEncryptionInfo=} [properties] Properties to set
+                         */
+                        function EncryptionInfo(properties) {
+                            this.kmsKeyVersions = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * EncryptionInfo encryptionType.
+                         * @member {google.cloud.memorystore.v1.EncryptionInfo.Type} encryptionType
+                         * @memberof google.cloud.memorystore.v1.EncryptionInfo
+                         * @instance
+                         */
+                        EncryptionInfo.prototype.encryptionType = 0;
+    
+                        /**
+                         * EncryptionInfo kmsKeyVersions.
+                         * @member {Array.<string>} kmsKeyVersions
+                         * @memberof google.cloud.memorystore.v1.EncryptionInfo
+                         * @instance
+                         */
+                        EncryptionInfo.prototype.kmsKeyVersions = $util.emptyArray;
+    
+                        /**
+                         * EncryptionInfo kmsKeyPrimaryState.
+                         * @member {google.cloud.memorystore.v1.EncryptionInfo.KmsKeyState} kmsKeyPrimaryState
+                         * @memberof google.cloud.memorystore.v1.EncryptionInfo
+                         * @instance
+                         */
+                        EncryptionInfo.prototype.kmsKeyPrimaryState = 0;
+    
+                        /**
+                         * EncryptionInfo lastUpdateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} lastUpdateTime
+                         * @memberof google.cloud.memorystore.v1.EncryptionInfo
+                         * @instance
+                         */
+                        EncryptionInfo.prototype.lastUpdateTime = null;
+    
+                        /**
+                         * Creates a new EncryptionInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.memorystore.v1.EncryptionInfo
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IEncryptionInfo=} [properties] Properties to set
+                         * @returns {google.cloud.memorystore.v1.EncryptionInfo} EncryptionInfo instance
+                         */
+                        EncryptionInfo.create = function create(properties) {
+                            return new EncryptionInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified EncryptionInfo message. Does not implicitly {@link google.cloud.memorystore.v1.EncryptionInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.memorystore.v1.EncryptionInfo
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IEncryptionInfo} message EncryptionInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EncryptionInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.encryptionType != null && Object.hasOwnProperty.call(message, "encryptionType"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.encryptionType);
+                            if (message.kmsKeyVersions != null && message.kmsKeyVersions.length)
+                                for (var i = 0; i < message.kmsKeyVersions.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.kmsKeyVersions[i]);
+                            if (message.kmsKeyPrimaryState != null && Object.hasOwnProperty.call(message, "kmsKeyPrimaryState"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.kmsKeyPrimaryState);
+                            if (message.lastUpdateTime != null && Object.hasOwnProperty.call(message, "lastUpdateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.lastUpdateTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified EncryptionInfo message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.EncryptionInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.memorystore.v1.EncryptionInfo
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IEncryptionInfo} message EncryptionInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EncryptionInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an EncryptionInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.memorystore.v1.EncryptionInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.memorystore.v1.EncryptionInfo} EncryptionInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EncryptionInfo.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memorystore.v1.EncryptionInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.encryptionType = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.kmsKeyVersions && message.kmsKeyVersions.length))
+                                            message.kmsKeyVersions = [];
+                                        message.kmsKeyVersions.push(reader.string());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.kmsKeyPrimaryState = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.lastUpdateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an EncryptionInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.memorystore.v1.EncryptionInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.memorystore.v1.EncryptionInfo} EncryptionInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EncryptionInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an EncryptionInfo message.
+                         * @function verify
+                         * @memberof google.cloud.memorystore.v1.EncryptionInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        EncryptionInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.encryptionType != null && message.hasOwnProperty("encryptionType"))
+                                switch (message.encryptionType) {
+                                default:
+                                    return "encryptionType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.kmsKeyVersions != null && message.hasOwnProperty("kmsKeyVersions")) {
+                                if (!Array.isArray(message.kmsKeyVersions))
+                                    return "kmsKeyVersions: array expected";
+                                for (var i = 0; i < message.kmsKeyVersions.length; ++i)
+                                    if (!$util.isString(message.kmsKeyVersions[i]))
+                                        return "kmsKeyVersions: string[] expected";
+                            }
+                            if (message.kmsKeyPrimaryState != null && message.hasOwnProperty("kmsKeyPrimaryState"))
+                                switch (message.kmsKeyPrimaryState) {
+                                default:
+                                    return "kmsKeyPrimaryState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                    break;
+                                }
+                            if (message.lastUpdateTime != null && message.hasOwnProperty("lastUpdateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.lastUpdateTime);
+                                if (error)
+                                    return "lastUpdateTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an EncryptionInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.memorystore.v1.EncryptionInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.memorystore.v1.EncryptionInfo} EncryptionInfo
+                         */
+                        EncryptionInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.memorystore.v1.EncryptionInfo)
+                                return object;
+                            var message = new $root.google.cloud.memorystore.v1.EncryptionInfo();
+                            switch (object.encryptionType) {
+                            default:
+                                if (typeof object.encryptionType === "number") {
+                                    message.encryptionType = object.encryptionType;
+                                    break;
+                                }
+                                break;
+                            case "TYPE_UNSPECIFIED":
+                            case 0:
+                                message.encryptionType = 0;
+                                break;
+                            case "GOOGLE_DEFAULT_ENCRYPTION":
+                            case 1:
+                                message.encryptionType = 1;
+                                break;
+                            case "CUSTOMER_MANAGED_ENCRYPTION":
+                            case 2:
+                                message.encryptionType = 2;
+                                break;
+                            }
+                            if (object.kmsKeyVersions) {
+                                if (!Array.isArray(object.kmsKeyVersions))
+                                    throw TypeError(".google.cloud.memorystore.v1.EncryptionInfo.kmsKeyVersions: array expected");
+                                message.kmsKeyVersions = [];
+                                for (var i = 0; i < object.kmsKeyVersions.length; ++i)
+                                    message.kmsKeyVersions[i] = String(object.kmsKeyVersions[i]);
+                            }
+                            switch (object.kmsKeyPrimaryState) {
+                            default:
+                                if (typeof object.kmsKeyPrimaryState === "number") {
+                                    message.kmsKeyPrimaryState = object.kmsKeyPrimaryState;
+                                    break;
+                                }
+                                break;
+                            case "KMS_KEY_STATE_UNSPECIFIED":
+                            case 0:
+                                message.kmsKeyPrimaryState = 0;
+                                break;
+                            case "ENABLED":
+                            case 1:
+                                message.kmsKeyPrimaryState = 1;
+                                break;
+                            case "PERMISSION_DENIED":
+                            case 2:
+                                message.kmsKeyPrimaryState = 2;
+                                break;
+                            case "DISABLED":
+                            case 3:
+                                message.kmsKeyPrimaryState = 3;
+                                break;
+                            case "DESTROYED":
+                            case 4:
+                                message.kmsKeyPrimaryState = 4;
+                                break;
+                            case "DESTROY_SCHEDULED":
+                            case 5:
+                                message.kmsKeyPrimaryState = 5;
+                                break;
+                            case "EKM_KEY_UNREACHABLE_DETECTED":
+                            case 6:
+                                message.kmsKeyPrimaryState = 6;
+                                break;
+                            case "BILLING_DISABLED":
+                            case 7:
+                                message.kmsKeyPrimaryState = 7;
+                                break;
+                            case "UNKNOWN_FAILURE":
+                            case 8:
+                                message.kmsKeyPrimaryState = 8;
+                                break;
+                            }
+                            if (object.lastUpdateTime != null) {
+                                if (typeof object.lastUpdateTime !== "object")
+                                    throw TypeError(".google.cloud.memorystore.v1.EncryptionInfo.lastUpdateTime: object expected");
+                                message.lastUpdateTime = $root.google.protobuf.Timestamp.fromObject(object.lastUpdateTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an EncryptionInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.memorystore.v1.EncryptionInfo
+                         * @static
+                         * @param {google.cloud.memorystore.v1.EncryptionInfo} message EncryptionInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        EncryptionInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.kmsKeyVersions = [];
+                            if (options.defaults) {
+                                object.encryptionType = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
+                                object.kmsKeyPrimaryState = options.enums === String ? "KMS_KEY_STATE_UNSPECIFIED" : 0;
+                                object.lastUpdateTime = null;
+                            }
+                            if (message.encryptionType != null && message.hasOwnProperty("encryptionType"))
+                                object.encryptionType = options.enums === String ? $root.google.cloud.memorystore.v1.EncryptionInfo.Type[message.encryptionType] === undefined ? message.encryptionType : $root.google.cloud.memorystore.v1.EncryptionInfo.Type[message.encryptionType] : message.encryptionType;
+                            if (message.kmsKeyVersions && message.kmsKeyVersions.length) {
+                                object.kmsKeyVersions = [];
+                                for (var j = 0; j < message.kmsKeyVersions.length; ++j)
+                                    object.kmsKeyVersions[j] = message.kmsKeyVersions[j];
+                            }
+                            if (message.kmsKeyPrimaryState != null && message.hasOwnProperty("kmsKeyPrimaryState"))
+                                object.kmsKeyPrimaryState = options.enums === String ? $root.google.cloud.memorystore.v1.EncryptionInfo.KmsKeyState[message.kmsKeyPrimaryState] === undefined ? message.kmsKeyPrimaryState : $root.google.cloud.memorystore.v1.EncryptionInfo.KmsKeyState[message.kmsKeyPrimaryState] : message.kmsKeyPrimaryState;
+                            if (message.lastUpdateTime != null && message.hasOwnProperty("lastUpdateTime"))
+                                object.lastUpdateTime = $root.google.protobuf.Timestamp.toObject(message.lastUpdateTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this EncryptionInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.memorystore.v1.EncryptionInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        EncryptionInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for EncryptionInfo
+                         * @function getTypeUrl
+                         * @memberof google.cloud.memorystore.v1.EncryptionInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        EncryptionInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.memorystore.v1.EncryptionInfo";
+                        };
+    
+                        /**
+                         * Type enum.
+                         * @name google.cloud.memorystore.v1.EncryptionInfo.Type
+                         * @enum {number}
+                         * @property {number} TYPE_UNSPECIFIED=0 TYPE_UNSPECIFIED value
+                         * @property {number} GOOGLE_DEFAULT_ENCRYPTION=1 GOOGLE_DEFAULT_ENCRYPTION value
+                         * @property {number} CUSTOMER_MANAGED_ENCRYPTION=2 CUSTOMER_MANAGED_ENCRYPTION value
+                         */
+                        EncryptionInfo.Type = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "GOOGLE_DEFAULT_ENCRYPTION"] = 1;
+                            values[valuesById[2] = "CUSTOMER_MANAGED_ENCRYPTION"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * KmsKeyState enum.
+                         * @name google.cloud.memorystore.v1.EncryptionInfo.KmsKeyState
+                         * @enum {number}
+                         * @property {number} KMS_KEY_STATE_UNSPECIFIED=0 KMS_KEY_STATE_UNSPECIFIED value
+                         * @property {number} ENABLED=1 ENABLED value
+                         * @property {number} PERMISSION_DENIED=2 PERMISSION_DENIED value
+                         * @property {number} DISABLED=3 DISABLED value
+                         * @property {number} DESTROYED=4 DESTROYED value
+                         * @property {number} DESTROY_SCHEDULED=5 DESTROY_SCHEDULED value
+                         * @property {number} EKM_KEY_UNREACHABLE_DETECTED=6 EKM_KEY_UNREACHABLE_DETECTED value
+                         * @property {number} BILLING_DISABLED=7 BILLING_DISABLED value
+                         * @property {number} UNKNOWN_FAILURE=8 UNKNOWN_FAILURE value
+                         */
+                        EncryptionInfo.KmsKeyState = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "KMS_KEY_STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ENABLED"] = 1;
+                            values[valuesById[2] = "PERMISSION_DENIED"] = 2;
+                            values[valuesById[3] = "DISABLED"] = 3;
+                            values[valuesById[4] = "DESTROYED"] = 4;
+                            values[valuesById[5] = "DESTROY_SCHEDULED"] = 5;
+                            values[valuesById[6] = "EKM_KEY_UNREACHABLE_DETECTED"] = 6;
+                            values[valuesById[7] = "BILLING_DISABLED"] = 7;
+                            values[valuesById[8] = "UNKNOWN_FAILURE"] = 8;
+                            return values;
+                        })();
+    
+                        return EncryptionInfo;
                     })();
     
                     return v1;
