@@ -40632,6 +40632,38 @@
                         }
                       }
                     },
+                    "LustreMount": {
+                      "fields": {
+                        "instanceIp": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "volumeHandle": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "filesystem": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "mountPoint": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "AutoscalingMetricSpec": {
                       "fields": {
                         "metricName": {
@@ -46132,6 +46164,14 @@
                           "rule": "repeated",
                           "type": "NfsMount",
                           "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "lustreMounts": {
+                          "rule": "repeated",
+                          "type": "LustreMount",
+                          "id": 9,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
