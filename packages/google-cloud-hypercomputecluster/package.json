@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/hypercomputecluster",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Cluster Director API client for Node.js",
   "repository": {
     "type": "git",

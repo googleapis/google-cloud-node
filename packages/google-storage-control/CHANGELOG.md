@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/storage-control-v0.6.1...storage-control-v0.7.0) (2025-12-15)
+
+
+### Features
+
+* [control] generate bucket ops into storage control lib for nodejs ([#6874](https://github.com/googleapis/google-cloud-node/issues/6874)) ([9dd2f04](https://github.com/googleapis/google-cloud-node/commit/9dd2f04b5926733923b9c46c45a4209099d30759))
+
 ## [0.6.1](https://github.com/googleapis/google-cloud-node/compare/storage-control-v0.6.0...storage-control-v0.6.1) (2025-10-13)
 
 
