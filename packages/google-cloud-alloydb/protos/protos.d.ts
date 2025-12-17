@@ -30329,7 +30329,8 @@ export namespace google {
                     POSTGRES_14 = 2,
                     POSTGRES_15 = 3,
                     POSTGRES_16 = 4,
-                    POSTGRES_17 = 5
+                    POSTGRES_17 = 5,
+                    POSTGRES_18 = 6
                 }
 
                 /** SubscriptionType enum. */
