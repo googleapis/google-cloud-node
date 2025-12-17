@@ -26394,6 +26394,7 @@
                          * @property {google.cloud.geminidataanalytics.v1beta.IDatasourceReferences|null} [datasourceReferences] Context datasourceReferences
                          * @property {google.cloud.geminidataanalytics.v1beta.IConversationOptions|null} [options] Context options
                          * @property {Array.<google.cloud.geminidataanalytics.v1beta.IExampleQuery>|null} [exampleQueries] Context exampleQueries
+                         * @property {Array.<google.cloud.geminidataanalytics.v1beta.ILookerGoldenQuery>|null} [lookerGoldenQueries] Context lookerGoldenQueries
                          * @property {Array.<google.cloud.geminidataanalytics.v1beta.IGlossaryTerm>|null} [glossaryTerms] Context glossaryTerms
                          * @property {Array.<google.cloud.geminidataanalytics.v1beta.Context.ISchemaRelationship>|null} [schemaRelationships] Context schemaRelationships
                          */
@@ -26408,6 +26409,7 @@
                          */
                         function Context(properties) {
                             this.exampleQueries = [];
+                            this.lookerGoldenQueries = [];
                             this.glossaryTerms = [];
                             this.schemaRelationships = [];
                             if (properties)
@@ -26447,6 +26449,14 @@
                          * @instance
                          */
                         Context.prototype.exampleQueries = $util.emptyArray;
+    
+                        /**
+                         * Context lookerGoldenQueries.
+                         * @member {Array.<google.cloud.geminidataanalytics.v1beta.ILookerGoldenQuery>} lookerGoldenQueries
+                         * @memberof google.cloud.geminidataanalytics.v1beta.Context
+                         * @instance
+                         */
+                        Context.prototype.lookerGoldenQueries = $util.emptyArray;
     
                         /**
                          * Context glossaryTerms.
@@ -26503,6 +26513,9 @@
                             if (message.schemaRelationships != null && message.schemaRelationships.length)
                                 for (var i = 0; i < message.schemaRelationships.length; ++i)
                                     $root.google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.encode(message.schemaRelationships[i], writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.lookerGoldenQueries != null && message.lookerGoldenQueries.length)
+                                for (var i = 0; i < message.lookerGoldenQueries.length; ++i)
+                                    $root.google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery.encode(message.lookerGoldenQueries[i], writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                             return writer;
                         };
     
@@ -26555,6 +26568,12 @@
                                         if (!(message.exampleQueries && message.exampleQueries.length))
                                             message.exampleQueries = [];
                                         message.exampleQueries.push($root.google.cloud.geminidataanalytics.v1beta.ExampleQuery.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 11: {
+                                        if (!(message.lookerGoldenQueries && message.lookerGoldenQueries.length))
+                                            message.lookerGoldenQueries = [];
+                                        message.lookerGoldenQueries.push($root.google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 case 8: {
@@ -26626,6 +26645,15 @@
                                         return "exampleQueries." + error;
                                 }
                             }
+                            if (message.lookerGoldenQueries != null && message.hasOwnProperty("lookerGoldenQueries")) {
+                                if (!Array.isArray(message.lookerGoldenQueries))
+                                    return "lookerGoldenQueries: array expected";
+                                for (var i = 0; i < message.lookerGoldenQueries.length; ++i) {
+                                    var error = $root.google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery.verify(message.lookerGoldenQueries[i]);
+                                    if (error)
+                                        return "lookerGoldenQueries." + error;
+                                }
+                            }
                             if (message.glossaryTerms != null && message.hasOwnProperty("glossaryTerms")) {
                                 if (!Array.isArray(message.glossaryTerms))
                                     return "glossaryTerms: array expected";
@@ -26681,6 +26709,16 @@
                                     message.exampleQueries[i] = $root.google.cloud.geminidataanalytics.v1beta.ExampleQuery.fromObject(object.exampleQueries[i]);
                                 }
                             }
+                            if (object.lookerGoldenQueries) {
+                                if (!Array.isArray(object.lookerGoldenQueries))
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.Context.lookerGoldenQueries: array expected");
+                                message.lookerGoldenQueries = [];
+                                for (var i = 0; i < object.lookerGoldenQueries.length; ++i) {
+                                    if (typeof object.lookerGoldenQueries[i] !== "object")
+                                        throw TypeError(".google.cloud.geminidataanalytics.v1beta.Context.lookerGoldenQueries: object expected");
+                                    message.lookerGoldenQueries[i] = $root.google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery.fromObject(object.lookerGoldenQueries[i]);
+                                }
+                            }
                             if (object.glossaryTerms) {
                                 if (!Array.isArray(object.glossaryTerms))
                                     throw TypeError(".google.cloud.geminidataanalytics.v1beta.Context.glossaryTerms: array expected");
@@ -26721,6 +26759,7 @@
                                 object.exampleQueries = [];
                                 object.glossaryTerms = [];
                                 object.schemaRelationships = [];
+                                object.lookerGoldenQueries = [];
                             }
                             if (options.defaults) {
                                 object.systemInstruction = "";
@@ -26747,6 +26786,11 @@
                                 object.schemaRelationships = [];
                                 for (var j = 0; j < message.schemaRelationships.length; ++j)
                                     object.schemaRelationships[j] = $root.google.cloud.geminidataanalytics.v1beta.Context.SchemaRelationship.toObject(message.schemaRelationships[j], options);
+                            }
+                            if (message.lookerGoldenQueries && message.lookerGoldenQueries.length) {
+                                object.lookerGoldenQueries = [];
+                                for (var j = 0; j < message.lookerGoldenQueries.length; ++j)
+                                    object.lookerGoldenQueries[j] = $root.google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery.toObject(message.lookerGoldenQueries[j], options);
                             }
                             return object;
                         };
@@ -27627,6 +27671,875 @@
                         };
     
                         return ExampleQuery;
+                    })();
+    
+                    v1beta.LookerGoldenQuery = (function() {
+    
+                        /**
+                         * Properties of a LookerGoldenQuery.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @interface ILookerGoldenQuery
+                         * @property {Array.<string>|null} [naturalLanguageQuestions] LookerGoldenQuery naturalLanguageQuestions
+                         * @property {google.cloud.geminidataanalytics.v1beta.ILookerQuery|null} [lookerQuery] LookerGoldenQuery lookerQuery
+                         */
+    
+                        /**
+                         * Constructs a new LookerGoldenQuery.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @classdesc Represents a LookerGoldenQuery.
+                         * @implements ILookerGoldenQuery
+                         * @constructor
+                         * @param {google.cloud.geminidataanalytics.v1beta.ILookerGoldenQuery=} [properties] Properties to set
+                         */
+                        function LookerGoldenQuery(properties) {
+                            this.naturalLanguageQuestions = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * LookerGoldenQuery naturalLanguageQuestions.
+                         * @member {Array.<string>} naturalLanguageQuestions
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery
+                         * @instance
+                         */
+                        LookerGoldenQuery.prototype.naturalLanguageQuestions = $util.emptyArray;
+    
+                        /**
+                         * LookerGoldenQuery lookerQuery.
+                         * @member {google.cloud.geminidataanalytics.v1beta.ILookerQuery|null|undefined} lookerQuery
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery
+                         * @instance
+                         */
+                        LookerGoldenQuery.prototype.lookerQuery = null;
+    
+                        /**
+                         * Creates a new LookerGoldenQuery instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.ILookerGoldenQuery=} [properties] Properties to set
+                         * @returns {google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery} LookerGoldenQuery instance
+                         */
+                        LookerGoldenQuery.create = function create(properties) {
+                            return new LookerGoldenQuery(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified LookerGoldenQuery message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.ILookerGoldenQuery} message LookerGoldenQuery message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LookerGoldenQuery.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.naturalLanguageQuestions != null && message.naturalLanguageQuestions.length)
+                                for (var i = 0; i < message.naturalLanguageQuestions.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.naturalLanguageQuestions[i]);
+                            if (message.lookerQuery != null && Object.hasOwnProperty.call(message, "lookerQuery"))
+                                $root.google.cloud.geminidataanalytics.v1beta.LookerQuery.encode(message.lookerQuery, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified LookerGoldenQuery message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.ILookerGoldenQuery} message LookerGoldenQuery message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LookerGoldenQuery.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a LookerGoldenQuery message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery} LookerGoldenQuery
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LookerGoldenQuery.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 4: {
+                                        if (!(message.naturalLanguageQuestions && message.naturalLanguageQuestions.length))
+                                            message.naturalLanguageQuestions = [];
+                                        message.naturalLanguageQuestions.push(reader.string());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.lookerQuery = $root.google.cloud.geminidataanalytics.v1beta.LookerQuery.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a LookerGoldenQuery message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery} LookerGoldenQuery
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LookerGoldenQuery.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a LookerGoldenQuery message.
+                         * @function verify
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        LookerGoldenQuery.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.naturalLanguageQuestions != null && message.hasOwnProperty("naturalLanguageQuestions")) {
+                                if (!Array.isArray(message.naturalLanguageQuestions))
+                                    return "naturalLanguageQuestions: array expected";
+                                for (var i = 0; i < message.naturalLanguageQuestions.length; ++i)
+                                    if (!$util.isString(message.naturalLanguageQuestions[i]))
+                                        return "naturalLanguageQuestions: string[] expected";
+                            }
+                            if (message.lookerQuery != null && message.hasOwnProperty("lookerQuery")) {
+                                var error = $root.google.cloud.geminidataanalytics.v1beta.LookerQuery.verify(message.lookerQuery);
+                                if (error)
+                                    return "lookerQuery." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a LookerGoldenQuery message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery} LookerGoldenQuery
+                         */
+                        LookerGoldenQuery.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery)
+                                return object;
+                            var message = new $root.google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery();
+                            if (object.naturalLanguageQuestions) {
+                                if (!Array.isArray(object.naturalLanguageQuestions))
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery.naturalLanguageQuestions: array expected");
+                                message.naturalLanguageQuestions = [];
+                                for (var i = 0; i < object.naturalLanguageQuestions.length; ++i)
+                                    message.naturalLanguageQuestions[i] = String(object.naturalLanguageQuestions[i]);
+                            }
+                            if (object.lookerQuery != null) {
+                                if (typeof object.lookerQuery !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery.lookerQuery: object expected");
+                                message.lookerQuery = $root.google.cloud.geminidataanalytics.v1beta.LookerQuery.fromObject(object.lookerQuery);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a LookerGoldenQuery message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery} message LookerGoldenQuery
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        LookerGoldenQuery.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.naturalLanguageQuestions = [];
+                            if (options.defaults)
+                                object.lookerQuery = null;
+                            if (message.naturalLanguageQuestions && message.naturalLanguageQuestions.length) {
+                                object.naturalLanguageQuestions = [];
+                                for (var j = 0; j < message.naturalLanguageQuestions.length; ++j)
+                                    object.naturalLanguageQuestions[j] = message.naturalLanguageQuestions[j];
+                            }
+                            if (message.lookerQuery != null && message.hasOwnProperty("lookerQuery"))
+                                object.lookerQuery = $root.google.cloud.geminidataanalytics.v1beta.LookerQuery.toObject(message.lookerQuery, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this LookerGoldenQuery to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        LookerGoldenQuery.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for LookerGoldenQuery
+                         * @function getTypeUrl
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        LookerGoldenQuery.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1beta.LookerGoldenQuery";
+                        };
+    
+                        return LookerGoldenQuery;
+                    })();
+    
+                    v1beta.LookerQuery = (function() {
+    
+                        /**
+                         * Properties of a LookerQuery.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @interface ILookerQuery
+                         * @property {string|null} [model] LookerQuery model
+                         * @property {string|null} [explore] LookerQuery explore
+                         * @property {Array.<string>|null} [fields] LookerQuery fields
+                         * @property {Array.<google.cloud.geminidataanalytics.v1beta.LookerQuery.IFilter>|null} [filters] LookerQuery filters
+                         * @property {Array.<string>|null} [sorts] LookerQuery sorts
+                         * @property {string|null} [limit] LookerQuery limit
+                         */
+    
+                        /**
+                         * Constructs a new LookerQuery.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @classdesc Represents a LookerQuery.
+                         * @implements ILookerQuery
+                         * @constructor
+                         * @param {google.cloud.geminidataanalytics.v1beta.ILookerQuery=} [properties] Properties to set
+                         */
+                        function LookerQuery(properties) {
+                            this.fields = [];
+                            this.filters = [];
+                            this.sorts = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * LookerQuery model.
+                         * @member {string} model
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
+                         * @instance
+                         */
+                        LookerQuery.prototype.model = "";
+    
+                        /**
+                         * LookerQuery explore.
+                         * @member {string} explore
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
+                         * @instance
+                         */
+                        LookerQuery.prototype.explore = "";
+    
+                        /**
+                         * LookerQuery fields.
+                         * @member {Array.<string>} fields
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
+                         * @instance
+                         */
+                        LookerQuery.prototype.fields = $util.emptyArray;
+    
+                        /**
+                         * LookerQuery filters.
+                         * @member {Array.<google.cloud.geminidataanalytics.v1beta.LookerQuery.IFilter>} filters
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
+                         * @instance
+                         */
+                        LookerQuery.prototype.filters = $util.emptyArray;
+    
+                        /**
+                         * LookerQuery sorts.
+                         * @member {Array.<string>} sorts
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
+                         * @instance
+                         */
+                        LookerQuery.prototype.sorts = $util.emptyArray;
+    
+                        /**
+                         * LookerQuery limit.
+                         * @member {string|null|undefined} limit
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
+                         * @instance
+                         */
+                        LookerQuery.prototype.limit = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(LookerQuery.prototype, "_limit", {
+                            get: $util.oneOfGetter($oneOfFields = ["limit"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new LookerQuery instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.ILookerQuery=} [properties] Properties to set
+                         * @returns {google.cloud.geminidataanalytics.v1beta.LookerQuery} LookerQuery instance
+                         */
+                        LookerQuery.create = function create(properties) {
+                            return new LookerQuery(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified LookerQuery message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.LookerQuery.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.ILookerQuery} message LookerQuery message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LookerQuery.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.model != null && Object.hasOwnProperty.call(message, "model"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.model);
+                            if (message.explore != null && Object.hasOwnProperty.call(message, "explore"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.explore);
+                            if (message.fields != null && message.fields.length)
+                                for (var i = 0; i < message.fields.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.fields[i]);
+                            if (message.filters != null && message.filters.length)
+                                for (var i = 0; i < message.filters.length; ++i)
+                                    $root.google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter.encode(message.filters[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.sorts != null && message.sorts.length)
+                                for (var i = 0; i < message.sorts.length; ++i)
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.sorts[i]);
+                            if (message.limit != null && Object.hasOwnProperty.call(message, "limit"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.limit);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified LookerQuery message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.LookerQuery.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.ILookerQuery} message LookerQuery message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LookerQuery.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a LookerQuery message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.geminidataanalytics.v1beta.LookerQuery} LookerQuery
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LookerQuery.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1beta.LookerQuery();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.model = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.explore = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.fields && message.fields.length))
+                                            message.fields = [];
+                                        message.fields.push(reader.string());
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.filters && message.filters.length))
+                                            message.filters = [];
+                                        message.filters.push($root.google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 5: {
+                                        if (!(message.sorts && message.sorts.length))
+                                            message.sorts = [];
+                                        message.sorts.push(reader.string());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.limit = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a LookerQuery message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.geminidataanalytics.v1beta.LookerQuery} LookerQuery
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LookerQuery.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a LookerQuery message.
+                         * @function verify
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        LookerQuery.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.model != null && message.hasOwnProperty("model"))
+                                if (!$util.isString(message.model))
+                                    return "model: string expected";
+                            if (message.explore != null && message.hasOwnProperty("explore"))
+                                if (!$util.isString(message.explore))
+                                    return "explore: string expected";
+                            if (message.fields != null && message.hasOwnProperty("fields")) {
+                                if (!Array.isArray(message.fields))
+                                    return "fields: array expected";
+                                for (var i = 0; i < message.fields.length; ++i)
+                                    if (!$util.isString(message.fields[i]))
+                                        return "fields: string[] expected";
+                            }
+                            if (message.filters != null && message.hasOwnProperty("filters")) {
+                                if (!Array.isArray(message.filters))
+                                    return "filters: array expected";
+                                for (var i = 0; i < message.filters.length; ++i) {
+                                    var error = $root.google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter.verify(message.filters[i]);
+                                    if (error)
+                                        return "filters." + error;
+                                }
+                            }
+                            if (message.sorts != null && message.hasOwnProperty("sorts")) {
+                                if (!Array.isArray(message.sorts))
+                                    return "sorts: array expected";
+                                for (var i = 0; i < message.sorts.length; ++i)
+                                    if (!$util.isString(message.sorts[i]))
+                                        return "sorts: string[] expected";
+                            }
+                            if (message.limit != null && message.hasOwnProperty("limit")) {
+                                properties._limit = 1;
+                                if (!$util.isString(message.limit))
+                                    return "limit: string expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a LookerQuery message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.geminidataanalytics.v1beta.LookerQuery} LookerQuery
+                         */
+                        LookerQuery.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.geminidataanalytics.v1beta.LookerQuery)
+                                return object;
+                            var message = new $root.google.cloud.geminidataanalytics.v1beta.LookerQuery();
+                            if (object.model != null)
+                                message.model = String(object.model);
+                            if (object.explore != null)
+                                message.explore = String(object.explore);
+                            if (object.fields) {
+                                if (!Array.isArray(object.fields))
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.LookerQuery.fields: array expected");
+                                message.fields = [];
+                                for (var i = 0; i < object.fields.length; ++i)
+                                    message.fields[i] = String(object.fields[i]);
+                            }
+                            if (object.filters) {
+                                if (!Array.isArray(object.filters))
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.LookerQuery.filters: array expected");
+                                message.filters = [];
+                                for (var i = 0; i < object.filters.length; ++i) {
+                                    if (typeof object.filters[i] !== "object")
+                                        throw TypeError(".google.cloud.geminidataanalytics.v1beta.LookerQuery.filters: object expected");
+                                    message.filters[i] = $root.google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter.fromObject(object.filters[i]);
+                                }
+                            }
+                            if (object.sorts) {
+                                if (!Array.isArray(object.sorts))
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.LookerQuery.sorts: array expected");
+                                message.sorts = [];
+                                for (var i = 0; i < object.sorts.length; ++i)
+                                    message.sorts[i] = String(object.sorts[i]);
+                            }
+                            if (object.limit != null)
+                                message.limit = String(object.limit);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a LookerQuery message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.LookerQuery} message LookerQuery
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        LookerQuery.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.fields = [];
+                                object.filters = [];
+                                object.sorts = [];
+                            }
+                            if (options.defaults) {
+                                object.model = "";
+                                object.explore = "";
+                            }
+                            if (message.model != null && message.hasOwnProperty("model"))
+                                object.model = message.model;
+                            if (message.explore != null && message.hasOwnProperty("explore"))
+                                object.explore = message.explore;
+                            if (message.fields && message.fields.length) {
+                                object.fields = [];
+                                for (var j = 0; j < message.fields.length; ++j)
+                                    object.fields[j] = message.fields[j];
+                            }
+                            if (message.filters && message.filters.length) {
+                                object.filters = [];
+                                for (var j = 0; j < message.filters.length; ++j)
+                                    object.filters[j] = $root.google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter.toObject(message.filters[j], options);
+                            }
+                            if (message.sorts && message.sorts.length) {
+                                object.sorts = [];
+                                for (var j = 0; j < message.sorts.length; ++j)
+                                    object.sorts[j] = message.sorts[j];
+                            }
+                            if (message.limit != null && message.hasOwnProperty("limit")) {
+                                object.limit = message.limit;
+                                if (options.oneofs)
+                                    object._limit = "limit";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this LookerQuery to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        LookerQuery.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for LookerQuery
+                         * @function getTypeUrl
+                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        LookerQuery.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1beta.LookerQuery";
+                        };
+    
+                        LookerQuery.Filter = (function() {
+    
+                            /**
+                             * Properties of a Filter.
+                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
+                             * @interface IFilter
+                             * @property {string|null} [field] Filter field
+                             * @property {string|null} [value] Filter value
+                             */
+    
+                            /**
+                             * Constructs a new Filter.
+                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
+                             * @classdesc Represents a Filter.
+                             * @implements IFilter
+                             * @constructor
+                             * @param {google.cloud.geminidataanalytics.v1beta.LookerQuery.IFilter=} [properties] Properties to set
+                             */
+                            function Filter(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Filter field.
+                             * @member {string} field
+                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter
+                             * @instance
+                             */
+                            Filter.prototype.field = "";
+    
+                            /**
+                             * Filter value.
+                             * @member {string} value
+                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter
+                             * @instance
+                             */
+                            Filter.prototype.value = "";
+    
+                            /**
+                             * Creates a new Filter instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter
+                             * @static
+                             * @param {google.cloud.geminidataanalytics.v1beta.LookerQuery.IFilter=} [properties] Properties to set
+                             * @returns {google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter} Filter instance
+                             */
+                            Filter.create = function create(properties) {
+                                return new Filter(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Filter message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter
+                             * @static
+                             * @param {google.cloud.geminidataanalytics.v1beta.LookerQuery.IFilter} message Filter message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Filter.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.field != null && Object.hasOwnProperty.call(message, "field"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.field);
+                                if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.value);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Filter message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter
+                             * @static
+                             * @param {google.cloud.geminidataanalytics.v1beta.LookerQuery.IFilter} message Filter message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Filter.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Filter message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter} Filter
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Filter.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.field = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.value = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Filter message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter} Filter
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Filter.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Filter message.
+                             * @function verify
+                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Filter.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.field != null && message.hasOwnProperty("field"))
+                                    if (!$util.isString(message.field))
+                                        return "field: string expected";
+                                if (message.value != null && message.hasOwnProperty("value"))
+                                    if (!$util.isString(message.value))
+                                        return "value: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Filter message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter} Filter
+                             */
+                            Filter.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter)
+                                    return object;
+                                var message = new $root.google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter();
+                                if (object.field != null)
+                                    message.field = String(object.field);
+                                if (object.value != null)
+                                    message.value = String(object.value);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Filter message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter
+                             * @static
+                             * @param {google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter} message Filter
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Filter.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.field = "";
+                                    object.value = "";
+                                }
+                                if (message.field != null && message.hasOwnProperty("field"))
+                                    object.field = message.field;
+                                if (message.value != null && message.hasOwnProperty("value"))
+                                    object.value = message.value;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Filter to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Filter.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Filter
+                             * @function getTypeUrl
+                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Filter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter";
+                            };
+    
+                            return Filter;
+                        })();
+    
+                        return LookerQuery;
                     })();
     
                     v1beta.GlossaryTerm = (function() {
@@ -48062,625 +48975,6 @@
                         };
     
                         return DataMessage;
-                    })();
-    
-                    v1beta.LookerQuery = (function() {
-    
-                        /**
-                         * Properties of a LookerQuery.
-                         * @memberof google.cloud.geminidataanalytics.v1beta
-                         * @interface ILookerQuery
-                         * @property {string|null} [model] LookerQuery model
-                         * @property {string|null} [explore] LookerQuery explore
-                         * @property {Array.<string>|null} [fields] LookerQuery fields
-                         * @property {Array.<google.cloud.geminidataanalytics.v1beta.LookerQuery.IFilter>|null} [filters] LookerQuery filters
-                         * @property {Array.<string>|null} [sorts] LookerQuery sorts
-                         * @property {string|null} [limit] LookerQuery limit
-                         */
-    
-                        /**
-                         * Constructs a new LookerQuery.
-                         * @memberof google.cloud.geminidataanalytics.v1beta
-                         * @classdesc Represents a LookerQuery.
-                         * @implements ILookerQuery
-                         * @constructor
-                         * @param {google.cloud.geminidataanalytics.v1beta.ILookerQuery=} [properties] Properties to set
-                         */
-                        function LookerQuery(properties) {
-                            this.fields = [];
-                            this.filters = [];
-                            this.sorts = [];
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * LookerQuery model.
-                         * @member {string} model
-                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
-                         * @instance
-                         */
-                        LookerQuery.prototype.model = "";
-    
-                        /**
-                         * LookerQuery explore.
-                         * @member {string} explore
-                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
-                         * @instance
-                         */
-                        LookerQuery.prototype.explore = "";
-    
-                        /**
-                         * LookerQuery fields.
-                         * @member {Array.<string>} fields
-                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
-                         * @instance
-                         */
-                        LookerQuery.prototype.fields = $util.emptyArray;
-    
-                        /**
-                         * LookerQuery filters.
-                         * @member {Array.<google.cloud.geminidataanalytics.v1beta.LookerQuery.IFilter>} filters
-                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
-                         * @instance
-                         */
-                        LookerQuery.prototype.filters = $util.emptyArray;
-    
-                        /**
-                         * LookerQuery sorts.
-                         * @member {Array.<string>} sorts
-                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
-                         * @instance
-                         */
-                        LookerQuery.prototype.sorts = $util.emptyArray;
-    
-                        /**
-                         * LookerQuery limit.
-                         * @member {string|null|undefined} limit
-                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
-                         * @instance
-                         */
-                        LookerQuery.prototype.limit = null;
-    
-                        // OneOf field names bound to virtual getters and setters
-                        var $oneOfFields;
-    
-                        // Virtual OneOf for proto3 optional field
-                        Object.defineProperty(LookerQuery.prototype, "_limit", {
-                            get: $util.oneOfGetter($oneOfFields = ["limit"]),
-                            set: $util.oneOfSetter($oneOfFields)
-                        });
-    
-                        /**
-                         * Creates a new LookerQuery instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
-                         * @static
-                         * @param {google.cloud.geminidataanalytics.v1beta.ILookerQuery=} [properties] Properties to set
-                         * @returns {google.cloud.geminidataanalytics.v1beta.LookerQuery} LookerQuery instance
-                         */
-                        LookerQuery.create = function create(properties) {
-                            return new LookerQuery(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified LookerQuery message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.LookerQuery.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
-                         * @static
-                         * @param {google.cloud.geminidataanalytics.v1beta.ILookerQuery} message LookerQuery message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        LookerQuery.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.model != null && Object.hasOwnProperty.call(message, "model"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.model);
-                            if (message.explore != null && Object.hasOwnProperty.call(message, "explore"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.explore);
-                            if (message.fields != null && message.fields.length)
-                                for (var i = 0; i < message.fields.length; ++i)
-                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.fields[i]);
-                            if (message.filters != null && message.filters.length)
-                                for (var i = 0; i < message.filters.length; ++i)
-                                    $root.google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter.encode(message.filters[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-                            if (message.sorts != null && message.sorts.length)
-                                for (var i = 0; i < message.sorts.length; ++i)
-                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.sorts[i]);
-                            if (message.limit != null && Object.hasOwnProperty.call(message, "limit"))
-                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.limit);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified LookerQuery message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.LookerQuery.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
-                         * @static
-                         * @param {google.cloud.geminidataanalytics.v1beta.ILookerQuery} message LookerQuery message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        LookerQuery.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a LookerQuery message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.geminidataanalytics.v1beta.LookerQuery} LookerQuery
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        LookerQuery.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1beta.LookerQuery();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.model = reader.string();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.explore = reader.string();
-                                        break;
-                                    }
-                                case 3: {
-                                        if (!(message.fields && message.fields.length))
-                                            message.fields = [];
-                                        message.fields.push(reader.string());
-                                        break;
-                                    }
-                                case 4: {
-                                        if (!(message.filters && message.filters.length))
-                                            message.filters = [];
-                                        message.filters.push($root.google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter.decode(reader, reader.uint32()));
-                                        break;
-                                    }
-                                case 5: {
-                                        if (!(message.sorts && message.sorts.length))
-                                            message.sorts = [];
-                                        message.sorts.push(reader.string());
-                                        break;
-                                    }
-                                case 6: {
-                                        message.limit = reader.string();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a LookerQuery message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.geminidataanalytics.v1beta.LookerQuery} LookerQuery
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        LookerQuery.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a LookerQuery message.
-                         * @function verify
-                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        LookerQuery.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            var properties = {};
-                            if (message.model != null && message.hasOwnProperty("model"))
-                                if (!$util.isString(message.model))
-                                    return "model: string expected";
-                            if (message.explore != null && message.hasOwnProperty("explore"))
-                                if (!$util.isString(message.explore))
-                                    return "explore: string expected";
-                            if (message.fields != null && message.hasOwnProperty("fields")) {
-                                if (!Array.isArray(message.fields))
-                                    return "fields: array expected";
-                                for (var i = 0; i < message.fields.length; ++i)
-                                    if (!$util.isString(message.fields[i]))
-                                        return "fields: string[] expected";
-                            }
-                            if (message.filters != null && message.hasOwnProperty("filters")) {
-                                if (!Array.isArray(message.filters))
-                                    return "filters: array expected";
-                                for (var i = 0; i < message.filters.length; ++i) {
-                                    var error = $root.google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter.verify(message.filters[i]);
-                                    if (error)
-                                        return "filters." + error;
-                                }
-                            }
-                            if (message.sorts != null && message.hasOwnProperty("sorts")) {
-                                if (!Array.isArray(message.sorts))
-                                    return "sorts: array expected";
-                                for (var i = 0; i < message.sorts.length; ++i)
-                                    if (!$util.isString(message.sorts[i]))
-                                        return "sorts: string[] expected";
-                            }
-                            if (message.limit != null && message.hasOwnProperty("limit")) {
-                                properties._limit = 1;
-                                if (!$util.isString(message.limit))
-                                    return "limit: string expected";
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a LookerQuery message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.geminidataanalytics.v1beta.LookerQuery} LookerQuery
-                         */
-                        LookerQuery.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.geminidataanalytics.v1beta.LookerQuery)
-                                return object;
-                            var message = new $root.google.cloud.geminidataanalytics.v1beta.LookerQuery();
-                            if (object.model != null)
-                                message.model = String(object.model);
-                            if (object.explore != null)
-                                message.explore = String(object.explore);
-                            if (object.fields) {
-                                if (!Array.isArray(object.fields))
-                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.LookerQuery.fields: array expected");
-                                message.fields = [];
-                                for (var i = 0; i < object.fields.length; ++i)
-                                    message.fields[i] = String(object.fields[i]);
-                            }
-                            if (object.filters) {
-                                if (!Array.isArray(object.filters))
-                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.LookerQuery.filters: array expected");
-                                message.filters = [];
-                                for (var i = 0; i < object.filters.length; ++i) {
-                                    if (typeof object.filters[i] !== "object")
-                                        throw TypeError(".google.cloud.geminidataanalytics.v1beta.LookerQuery.filters: object expected");
-                                    message.filters[i] = $root.google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter.fromObject(object.filters[i]);
-                                }
-                            }
-                            if (object.sorts) {
-                                if (!Array.isArray(object.sorts))
-                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.LookerQuery.sorts: array expected");
-                                message.sorts = [];
-                                for (var i = 0; i < object.sorts.length; ++i)
-                                    message.sorts[i] = String(object.sorts[i]);
-                            }
-                            if (object.limit != null)
-                                message.limit = String(object.limit);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a LookerQuery message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
-                         * @static
-                         * @param {google.cloud.geminidataanalytics.v1beta.LookerQuery} message LookerQuery
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        LookerQuery.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.arrays || options.defaults) {
-                                object.fields = [];
-                                object.filters = [];
-                                object.sorts = [];
-                            }
-                            if (options.defaults) {
-                                object.model = "";
-                                object.explore = "";
-                            }
-                            if (message.model != null && message.hasOwnProperty("model"))
-                                object.model = message.model;
-                            if (message.explore != null && message.hasOwnProperty("explore"))
-                                object.explore = message.explore;
-                            if (message.fields && message.fields.length) {
-                                object.fields = [];
-                                for (var j = 0; j < message.fields.length; ++j)
-                                    object.fields[j] = message.fields[j];
-                            }
-                            if (message.filters && message.filters.length) {
-                                object.filters = [];
-                                for (var j = 0; j < message.filters.length; ++j)
-                                    object.filters[j] = $root.google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter.toObject(message.filters[j], options);
-                            }
-                            if (message.sorts && message.sorts.length) {
-                                object.sorts = [];
-                                for (var j = 0; j < message.sorts.length; ++j)
-                                    object.sorts[j] = message.sorts[j];
-                            }
-                            if (message.limit != null && message.hasOwnProperty("limit")) {
-                                object.limit = message.limit;
-                                if (options.oneofs)
-                                    object._limit = "limit";
-                            }
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this LookerQuery to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        LookerQuery.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for LookerQuery
-                         * @function getTypeUrl
-                         * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        LookerQuery.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1beta.LookerQuery";
-                        };
-    
-                        LookerQuery.Filter = (function() {
-    
-                            /**
-                             * Properties of a Filter.
-                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
-                             * @interface IFilter
-                             * @property {string|null} [field] Filter field
-                             * @property {string|null} [value] Filter value
-                             */
-    
-                            /**
-                             * Constructs a new Filter.
-                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery
-                             * @classdesc Represents a Filter.
-                             * @implements IFilter
-                             * @constructor
-                             * @param {google.cloud.geminidataanalytics.v1beta.LookerQuery.IFilter=} [properties] Properties to set
-                             */
-                            function Filter(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * Filter field.
-                             * @member {string} field
-                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter
-                             * @instance
-                             */
-                            Filter.prototype.field = "";
-    
-                            /**
-                             * Filter value.
-                             * @member {string} value
-                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter
-                             * @instance
-                             */
-                            Filter.prototype.value = "";
-    
-                            /**
-                             * Creates a new Filter instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter
-                             * @static
-                             * @param {google.cloud.geminidataanalytics.v1beta.LookerQuery.IFilter=} [properties] Properties to set
-                             * @returns {google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter} Filter instance
-                             */
-                            Filter.create = function create(properties) {
-                                return new Filter(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified Filter message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter
-                             * @static
-                             * @param {google.cloud.geminidataanalytics.v1beta.LookerQuery.IFilter} message Filter message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            Filter.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.field != null && Object.hasOwnProperty.call(message, "field"))
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.field);
-                                if (message.value != null && Object.hasOwnProperty.call(message, "value"))
-                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.value);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified Filter message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter
-                             * @static
-                             * @param {google.cloud.geminidataanalytics.v1beta.LookerQuery.IFilter} message Filter message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            Filter.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a Filter message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter} Filter
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            Filter.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.field = reader.string();
-                                            break;
-                                        }
-                                    case 2: {
-                                            message.value = reader.string();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a Filter message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter} Filter
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            Filter.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a Filter message.
-                             * @function verify
-                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            Filter.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.field != null && message.hasOwnProperty("field"))
-                                    if (!$util.isString(message.field))
-                                        return "field: string expected";
-                                if (message.value != null && message.hasOwnProperty("value"))
-                                    if (!$util.isString(message.value))
-                                        return "value: string expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a Filter message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter} Filter
-                             */
-                            Filter.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter)
-                                    return object;
-                                var message = new $root.google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter();
-                                if (object.field != null)
-                                    message.field = String(object.field);
-                                if (object.value != null)
-                                    message.value = String(object.value);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a Filter message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter
-                             * @static
-                             * @param {google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter} message Filter
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            Filter.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults) {
-                                    object.field = "";
-                                    object.value = "";
-                                }
-                                if (message.field != null && message.hasOwnProperty("field"))
-                                    object.field = message.field;
-                                if (message.value != null && message.hasOwnProperty("value"))
-                                    object.value = message.value;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this Filter to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            Filter.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for Filter
-                             * @function getTypeUrl
-                             * @memberof google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            Filter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1beta.LookerQuery.Filter";
-                            };
-    
-                            return Filter;
-                        })();
-    
-                        return LookerQuery;
                     })();
     
                     v1beta.DataQuery = (function() {
