@@ -1065,6 +1065,9 @@ export namespace google {
 
                     /** Job state */
                     state?: (google.cloud.storagebatchoperations.v1.Job.State|keyof typeof google.cloud.storagebatchoperations.v1.Job.State|null);
+
+                    /** Job dryRun */
+                    dryRun?: (boolean|null);
                 }
 
                 /** Represents a Job. */
@@ -1117,6 +1120,9 @@ export namespace google {
 
                     /** Job state. */
                     public state: (google.cloud.storagebatchoperations.v1.Job.State|keyof typeof google.cloud.storagebatchoperations.v1.Job.State);
+
+                    /** Job dryRun. */
+                    public dryRun: boolean;
 
                     /** Job source. */
                     public source?: "bucketList";
@@ -1927,6 +1933,119 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an ObjectRetention. */
+                interface IObjectRetention {
+
+                    /** ObjectRetention retainUntilTime */
+                    retainUntilTime?: (string|null);
+
+                    /** ObjectRetention retentionMode */
+                    retentionMode?: (google.cloud.storagebatchoperations.v1.ObjectRetention.RetentionMode|keyof typeof google.cloud.storagebatchoperations.v1.ObjectRetention.RetentionMode|null);
+                }
+
+                /** Represents an ObjectRetention. */
+                class ObjectRetention implements IObjectRetention {
+
+                    /**
+                     * Constructs a new ObjectRetention.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.storagebatchoperations.v1.IObjectRetention);
+
+                    /** ObjectRetention retainUntilTime. */
+                    public retainUntilTime?: (string|null);
+
+                    /** ObjectRetention retentionMode. */
+                    public retentionMode?: (google.cloud.storagebatchoperations.v1.ObjectRetention.RetentionMode|keyof typeof google.cloud.storagebatchoperations.v1.ObjectRetention.RetentionMode|null);
+
+                    /**
+                     * Creates a new ObjectRetention instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ObjectRetention instance
+                     */
+                    public static create(properties?: google.cloud.storagebatchoperations.v1.IObjectRetention): google.cloud.storagebatchoperations.v1.ObjectRetention;
+
+                    /**
+                     * Encodes the specified ObjectRetention message. Does not implicitly {@link google.cloud.storagebatchoperations.v1.ObjectRetention.verify|verify} messages.
+                     * @param message ObjectRetention message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.storagebatchoperations.v1.IObjectRetention, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ObjectRetention message, length delimited. Does not implicitly {@link google.cloud.storagebatchoperations.v1.ObjectRetention.verify|verify} messages.
+                     * @param message ObjectRetention message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.storagebatchoperations.v1.IObjectRetention, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ObjectRetention message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ObjectRetention
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.storagebatchoperations.v1.ObjectRetention;
+
+                    /**
+                     * Decodes an ObjectRetention message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ObjectRetention
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.storagebatchoperations.v1.ObjectRetention;
+
+                    /**
+                     * Verifies an ObjectRetention message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ObjectRetention message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ObjectRetention
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.storagebatchoperations.v1.ObjectRetention;
+
+                    /**
+                     * Creates a plain object from an ObjectRetention message. Also converts values to other types if specified.
+                     * @param message ObjectRetention
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.storagebatchoperations.v1.ObjectRetention, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ObjectRetention to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ObjectRetention
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ObjectRetention {
+
+                    /** RetentionMode enum. */
+                    enum RetentionMode {
+                        RETENTION_MODE_UNSPECIFIED = 0,
+                        LOCKED = 1,
+                        UNLOCKED = 2
+                    }
+                }
+
                 /** Properties of a PutMetadata. */
                 interface IPutMetadata {
 
@@ -1950,6 +2069,9 @@ export namespace google {
 
                     /** PutMetadata customMetadata */
                     customMetadata?: ({ [k: string]: string }|null);
+
+                    /** PutMetadata objectRetention */
+                    objectRetention?: (google.cloud.storagebatchoperations.v1.IObjectRetention|null);
                 }
 
                 /** Represents a PutMetadata. */
@@ -1981,6 +2103,9 @@ export namespace google {
 
                     /** PutMetadata customMetadata. */
                     public customMetadata: { [k: string]: string };
+
+                    /** PutMetadata objectRetention. */
+                    public objectRetention?: (google.cloud.storagebatchoperations.v1.IObjectRetention|null);
 
                     /**
                      * Creates a new PutMetadata instance using the specified properties.
@@ -2283,6 +2408,9 @@ export namespace google {
 
                     /** Counters failedObjectCount */
                     failedObjectCount?: (number|Long|string|null);
+
+                    /** Counters totalBytesFound */
+                    totalBytesFound?: (number|Long|string|null);
                 }
 
                 /** Represents a Counters. */
@@ -2302,6 +2430,9 @@ export namespace google {
 
                     /** Counters failedObjectCount. */
                     public failedObjectCount: (number|Long|string);
+
+                    /** Counters totalBytesFound. */
+                    public totalBytesFound?: (number|Long|string|null);
 
                     /**
                      * Creates a new Counters instance using the specified properties.
@@ -4370,6 +4501,115 @@ export namespace google {
             UNORDERED_LIST = 6,
             NON_EMPTY_DEFAULT = 7,
             IDENTIFIER = 8
+        }
+
+        /** Properties of a FieldInfo. */
+        interface IFieldInfo {
+
+            /** FieldInfo format */
+            format?: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format|null);
+        }
+
+        /** Represents a FieldInfo. */
+        class FieldInfo implements IFieldInfo {
+
+            /**
+             * Constructs a new FieldInfo.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IFieldInfo);
+
+            /** FieldInfo format. */
+            public format: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format);
+
+            /**
+             * Creates a new FieldInfo instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FieldInfo instance
+             */
+            public static create(properties?: google.api.IFieldInfo): google.api.FieldInfo;
+
+            /**
+             * Encodes the specified FieldInfo message. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+             * @param message FieldInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FieldInfo message, length delimited. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+             * @param message FieldInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FieldInfo message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FieldInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.FieldInfo;
+
+            /**
+             * Decodes a FieldInfo message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FieldInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.FieldInfo;
+
+            /**
+             * Verifies a FieldInfo message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FieldInfo message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FieldInfo
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.FieldInfo;
+
+            /**
+             * Creates a plain object from a FieldInfo message. Also converts values to other types if specified.
+             * @param message FieldInfo
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.FieldInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FieldInfo to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace FieldInfo {
+
+            /** Format enum. */
+            enum Format {
+                FORMAT_UNSPECIFIED = 0,
+                UUID4 = 1,
+                IPV4 = 2,
+                IPV6 = 3,
+                IPV4_OR_IPV6 = 4
+            }
         }
 
         /** Properties of a ResourceDescriptor. */
@@ -6794,6 +7034,9 @@ export namespace google {
 
             /** FieldOptions .google.api.fieldBehavior */
             ".google.api.fieldBehavior"?: (google.api.FieldBehavior[]|null);
+
+            /** FieldOptions .google.api.fieldInfo */
+            ".google.api.fieldInfo"?: (google.api.IFieldInfo|null);
 
             /** FieldOptions .google.api.resourceReference */
             ".google.api.resourceReference"?: (google.api.IResourceReference|null);

@@ -193,6 +193,9 @@ export class ConversationsClient {
       generatorPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/generators/{generator}'
       ),
+      generatorEvaluationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/generators/{generator}/evaluations/{evaluation}'
+      ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
@@ -312,6 +315,12 @@ export class ConversationsClient {
       ),
       projectLocationKnowledgeBaseDocumentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/knowledgeBases/{knowledge_base}/documents/{document}'
+      ),
+      sipTrunkPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/sipTrunks/{siptrunk}'
+      ),
+      toolPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/tools/{tool}'
       ),
     };
 
@@ -1141,6 +1150,15 @@ export class ConversationsClient {
  * @param {number[]} [request.triggerEvents]
  *   Optional. A list of trigger events. Generator will be triggered only if
  *   it's trigger event is included here.
+ * @param {string} [request.securitySettings]
+ *   Optional. Name of the CX SecuritySettings which is used to redact generated
+ *   response. If this field is empty, try to fetch v2 security_settings, which
+ *   is a project level setting. If this field is empty and no v2
+ *   security_settings set up in this project, no redaction will be done.
+ *
+ *   Format:
+ *   `projects/<Project ID>/locations/<Location ID>/securitySettings/<Security
+ *   Settings ID>`.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -2150,6 +2168,68 @@ export class ConversationsClient {
    */
   matchGeneratorFromGeneratorName(generatorName: string) {
     return this.pathTemplates.generatorPathTemplate.match(generatorName).generator;
+  }
+
+  /**
+   * Return a fully-qualified generatorEvaluation resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} generator
+   * @param {string} evaluation
+   * @returns {string} Resource name string.
+   */
+  generatorEvaluationPath(project:string,location:string,generator:string,evaluation:string) {
+    return this.pathTemplates.generatorEvaluationPathTemplate.render({
+      project: project,
+      location: location,
+      generator: generator,
+      evaluation: evaluation,
+    });
+  }
+
+  /**
+   * Parse the project from GeneratorEvaluation resource.
+   *
+   * @param {string} generatorEvaluationName
+   *   A fully-qualified path representing GeneratorEvaluation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromGeneratorEvaluationName(generatorEvaluationName: string) {
+    return this.pathTemplates.generatorEvaluationPathTemplate.match(generatorEvaluationName).project;
+  }
+
+  /**
+   * Parse the location from GeneratorEvaluation resource.
+   *
+   * @param {string} generatorEvaluationName
+   *   A fully-qualified path representing GeneratorEvaluation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromGeneratorEvaluationName(generatorEvaluationName: string) {
+    return this.pathTemplates.generatorEvaluationPathTemplate.match(generatorEvaluationName).location;
+  }
+
+  /**
+   * Parse the generator from GeneratorEvaluation resource.
+   *
+   * @param {string} generatorEvaluationName
+   *   A fully-qualified path representing GeneratorEvaluation resource.
+   * @returns {string} A string representing the generator.
+   */
+  matchGeneratorFromGeneratorEvaluationName(generatorEvaluationName: string) {
+    return this.pathTemplates.generatorEvaluationPathTemplate.match(generatorEvaluationName).generator;
+  }
+
+  /**
+   * Parse the evaluation from GeneratorEvaluation resource.
+   *
+   * @param {string} generatorEvaluationName
+   *   A fully-qualified path representing GeneratorEvaluation resource.
+   * @returns {string} A string representing the evaluation.
+   */
+  matchEvaluationFromGeneratorEvaluationName(generatorEvaluationName: string) {
+    return this.pathTemplates.generatorEvaluationPathTemplate.match(generatorEvaluationName).evaluation;
   }
 
   /**
@@ -4084,6 +4164,104 @@ export class ConversationsClient {
    */
   matchDocumentFromProjectLocationKnowledgeBaseDocumentName(projectLocationKnowledgeBaseDocumentName: string) {
     return this.pathTemplates.projectLocationKnowledgeBaseDocumentPathTemplate.match(projectLocationKnowledgeBaseDocumentName).document;
+  }
+
+  /**
+   * Return a fully-qualified sipTrunk resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} siptrunk
+   * @returns {string} Resource name string.
+   */
+  sipTrunkPath(project:string,location:string,siptrunk:string) {
+    return this.pathTemplates.sipTrunkPathTemplate.render({
+      project: project,
+      location: location,
+      siptrunk: siptrunk,
+    });
+  }
+
+  /**
+   * Parse the project from SipTrunk resource.
+   *
+   * @param {string} sipTrunkName
+   *   A fully-qualified path representing SipTrunk resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSipTrunkName(sipTrunkName: string) {
+    return this.pathTemplates.sipTrunkPathTemplate.match(sipTrunkName).project;
+  }
+
+  /**
+   * Parse the location from SipTrunk resource.
+   *
+   * @param {string} sipTrunkName
+   *   A fully-qualified path representing SipTrunk resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromSipTrunkName(sipTrunkName: string) {
+    return this.pathTemplates.sipTrunkPathTemplate.match(sipTrunkName).location;
+  }
+
+  /**
+   * Parse the siptrunk from SipTrunk resource.
+   *
+   * @param {string} sipTrunkName
+   *   A fully-qualified path representing SipTrunk resource.
+   * @returns {string} A string representing the siptrunk.
+   */
+  matchSiptrunkFromSipTrunkName(sipTrunkName: string) {
+    return this.pathTemplates.sipTrunkPathTemplate.match(sipTrunkName).siptrunk;
+  }
+
+  /**
+   * Return a fully-qualified tool resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} tool
+   * @returns {string} Resource name string.
+   */
+  toolPath(project:string,location:string,tool:string) {
+    return this.pathTemplates.toolPathTemplate.render({
+      project: project,
+      location: location,
+      tool: tool,
+    });
+  }
+
+  /**
+   * Parse the project from Tool resource.
+   *
+   * @param {string} toolName
+   *   A fully-qualified path representing Tool resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromToolName(toolName: string) {
+    return this.pathTemplates.toolPathTemplate.match(toolName).project;
+  }
+
+  /**
+   * Parse the location from Tool resource.
+   *
+   * @param {string} toolName
+   *   A fully-qualified path representing Tool resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromToolName(toolName: string) {
+    return this.pathTemplates.toolPathTemplate.match(toolName).location;
+  }
+
+  /**
+   * Parse the tool from Tool resource.
+   *
+   * @param {string} toolName
+   *   A fully-qualified path representing Tool resource.
+   * @returns {string} A string representing the tool.
+   */
+  matchToolFromToolName(toolName: string) {
+    return this.pathTemplates.toolPathTemplate.match(toolName).tool;
   }
 
   /**

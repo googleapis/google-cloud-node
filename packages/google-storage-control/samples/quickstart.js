@@ -47,7 +47,7 @@ function main(bucketName) {
 
     // Use response
     console.log(
-      `Bucket ${bucketName} has location type ${layout.locationType}.`
+      `Bucket ${bucketName} has location type ${layout.locationType}.`,
     );
   }
 

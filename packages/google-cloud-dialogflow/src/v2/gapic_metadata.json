@@ -995,6 +995,64 @@
         }
       }
     },
+    "GeneratorEvaluations": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "GeneratorEvaluationsClient",
+          "rpcs": {
+            "GetGeneratorEvaluation": {
+              "methods": [
+                "getGeneratorEvaluation"
+              ]
+            },
+            "DeleteGeneratorEvaluation": {
+              "methods": [
+                "deleteGeneratorEvaluation"
+              ]
+            },
+            "CreateGeneratorEvaluation": {
+              "methods": [
+                "createGeneratorEvaluation"
+              ]
+            },
+            "ListGeneratorEvaluations": {
+              "methods": [
+                "listGeneratorEvaluations",
+                "listGeneratorEvaluationsStream",
+                "listGeneratorEvaluationsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "GeneratorEvaluationsClient",
+          "rpcs": {
+            "GetGeneratorEvaluation": {
+              "methods": [
+                "getGeneratorEvaluation"
+              ]
+            },
+            "DeleteGeneratorEvaluation": {
+              "methods": [
+                "deleteGeneratorEvaluation"
+              ]
+            },
+            "CreateGeneratorEvaluation": {
+              "methods": [
+                "createGeneratorEvaluation"
+              ]
+            },
+            "ListGeneratorEvaluations": {
+              "methods": [
+                "listGeneratorEvaluations",
+                "listGeneratorEvaluationsStream",
+                "listGeneratorEvaluationsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "Generators": {
       "clients": {
         "grpc": {
@@ -1423,6 +1481,142 @@
             "DetectIntent": {
               "methods": [
                 "detectIntent"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "SipTrunks": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SipTrunksClient",
+          "rpcs": {
+            "CreateSipTrunk": {
+              "methods": [
+                "createSipTrunk"
+              ]
+            },
+            "DeleteSipTrunk": {
+              "methods": [
+                "deleteSipTrunk"
+              ]
+            },
+            "GetSipTrunk": {
+              "methods": [
+                "getSipTrunk"
+              ]
+            },
+            "UpdateSipTrunk": {
+              "methods": [
+                "updateSipTrunk"
+              ]
+            },
+            "ListSipTrunks": {
+              "methods": [
+                "listSipTrunks",
+                "listSipTrunksStream",
+                "listSipTrunksAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SipTrunksClient",
+          "rpcs": {
+            "CreateSipTrunk": {
+              "methods": [
+                "createSipTrunk"
+              ]
+            },
+            "DeleteSipTrunk": {
+              "methods": [
+                "deleteSipTrunk"
+              ]
+            },
+            "GetSipTrunk": {
+              "methods": [
+                "getSipTrunk"
+              ]
+            },
+            "UpdateSipTrunk": {
+              "methods": [
+                "updateSipTrunk"
+              ]
+            },
+            "ListSipTrunks": {
+              "methods": [
+                "listSipTrunks",
+                "listSipTrunksStream",
+                "listSipTrunksAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Tools": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ToolsClient",
+          "rpcs": {
+            "CreateTool": {
+              "methods": [
+                "createTool"
+              ]
+            },
+            "GetTool": {
+              "methods": [
+                "getTool"
+              ]
+            },
+            "DeleteTool": {
+              "methods": [
+                "deleteTool"
+              ]
+            },
+            "UpdateTool": {
+              "methods": [
+                "updateTool"
+              ]
+            },
+            "ListTools": {
+              "methods": [
+                "listTools",
+                "listToolsStream",
+                "listToolsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ToolsClient",
+          "rpcs": {
+            "CreateTool": {
+              "methods": [
+                "createTool"
+              ]
+            },
+            "GetTool": {
+              "methods": [
+                "getTool"
+              ]
+            },
+            "DeleteTool": {
+              "methods": [
+                "deleteTool"
+              ]
+            },
+            "UpdateTool": {
+              "methods": [
+                "updateTool"
+              ]
+            },
+            "ListTools": {
+              "methods": [
+                "listTools",
+                "listToolsStream",
+                "listToolsAsync"
               ]
             }
           }

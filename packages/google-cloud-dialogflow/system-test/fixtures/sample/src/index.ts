@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {AgentsClient, AnswerRecordsClient, ContextsClient, ConversationDatasetsClient, ConversationModelsClient, ConversationProfilesClient, ConversationsClient, DocumentsClient, EncryptionSpecServiceClient, EntityTypesClient, EnvironmentsClient, FulfillmentsClient, GeneratorsClient, IntentsClient, KnowledgeBasesClient, ParticipantsClient, SessionEntityTypesClient, SessionsClient, VersionsClient} from '@google-cloud/dialogflow';
+import {AgentsClient, AnswerRecordsClient, ContextsClient, ConversationDatasetsClient, ConversationModelsClient, ConversationProfilesClient, ConversationsClient, DocumentsClient, EncryptionSpecServiceClient, EntityTypesClient, EnvironmentsClient, FulfillmentsClient, GeneratorEvaluationsClient, GeneratorsClient, IntentsClient, KnowledgeBasesClient, ParticipantsClient, SessionEntityTypesClient, SessionsClient, SipTrunksClient, ToolsClient, VersionsClient} from '@google-cloud/dialogflow';
 
 // check that the client class type name can be used
 function doStuffWithAgentsClient(client: AgentsClient) {
@@ -55,6 +55,9 @@ function doStuffWithEnvironmentsClient(client: EnvironmentsClient) {
 function doStuffWithFulfillmentsClient(client: FulfillmentsClient) {
   client.close();
 }
+function doStuffWithGeneratorEvaluationsClient(client: GeneratorEvaluationsClient) {
+  client.close();
+}
 function doStuffWithGeneratorsClient(client: GeneratorsClient) {
   client.close();
 }
@@ -71,6 +74,12 @@ function doStuffWithSessionEntityTypesClient(client: SessionEntityTypesClient) {
   client.close();
 }
 function doStuffWithSessionsClient(client: SessionsClient) {
+  client.close();
+}
+function doStuffWithSipTrunksClient(client: SipTrunksClient) {
+  client.close();
+}
+function doStuffWithToolsClient(client: ToolsClient) {
   client.close();
 }
 function doStuffWithVersionsClient(client: VersionsClient) {
@@ -115,6 +124,9 @@ function main() {
   const fulfillmentsClient = new FulfillmentsClient();
   doStuffWithFulfillmentsClient(fulfillmentsClient);
   // check that the client instance can be created
+  const generatorEvaluationsClient = new GeneratorEvaluationsClient();
+  doStuffWithGeneratorEvaluationsClient(generatorEvaluationsClient);
+  // check that the client instance can be created
   const generatorsClient = new GeneratorsClient();
   doStuffWithGeneratorsClient(generatorsClient);
   // check that the client instance can be created
@@ -132,6 +144,12 @@ function main() {
   // check that the client instance can be created
   const sessionsClient = new SessionsClient();
   doStuffWithSessionsClient(sessionsClient);
+  // check that the client instance can be created
+  const sipTrunksClient = new SipTrunksClient();
+  doStuffWithSipTrunksClient(sipTrunksClient);
+  // check that the client instance can be created
+  const toolsClient = new ToolsClient();
+  doStuffWithToolsClient(toolsClient);
   // check that the client instance can be created
   const versionsClient = new VersionsClient();
   doStuffWithVersionsClient(versionsClient);

@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {AdBreakServiceClient, AdReviewCenterAdServiceClient, AdUnitServiceClient, ApplicationServiceClient, AudienceSegmentServiceClient, BandwidthGroupServiceClient, BrowserLanguageServiceClient, BrowserServiceClient, CmsMetadataKeyServiceClient, CmsMetadataValueServiceClient, CompanyServiceClient, ContactServiceClient, ContentBundleServiceClient, ContentLabelServiceClient, ContentServiceClient, CreativeTemplateServiceClient, CustomFieldServiceClient, CustomTargetingKeyServiceClient, CustomTargetingValueServiceClient, DeviceCapabilityServiceClient, DeviceCategoryServiceClient, DeviceManufacturerServiceClient, EntitySignalsMappingServiceClient, GeoTargetServiceClient, MobileCarrierServiceClient, MobileDeviceServiceClient, MobileDeviceSubmodelServiceClient, NetworkServiceClient, OperatingSystemServiceClient, OperatingSystemVersionServiceClient, OrderServiceClient, PlacementServiceClient, PrivateAuctionDealServiceClient, PrivateAuctionServiceClient, ProgrammaticBuyerServiceClient, ReportServiceClient, RoleServiceClient, SiteServiceClient, TaxonomyCategoryServiceClient, TeamServiceClient, UserServiceClient} from '@google-ads/admanager';
+import {AdBreakServiceClient, AdReviewCenterAdServiceClient, AdUnitServiceClient, ApplicationServiceClient, AudienceSegmentServiceClient, BandwidthGroupServiceClient, BrowserLanguageServiceClient, BrowserServiceClient, CmsMetadataKeyServiceClient, CmsMetadataValueServiceClient, CompanyServiceClient, ContactServiceClient, ContentBundleServiceClient, ContentLabelServiceClient, ContentServiceClient, CreativeTemplateServiceClient, CustomFieldServiceClient, CustomTargetingKeyServiceClient, CustomTargetingValueServiceClient, DeviceCapabilityServiceClient, DeviceCategoryServiceClient, DeviceManufacturerServiceClient, EntitySignalsMappingServiceClient, GeoTargetServiceClient, LineItemServiceClient, MobileCarrierServiceClient, MobileDeviceServiceClient, MobileDeviceSubmodelServiceClient, NetworkServiceClient, OperatingSystemServiceClient, OperatingSystemVersionServiceClient, OrderServiceClient, PlacementServiceClient, PrivateAuctionDealServiceClient, PrivateAuctionServiceClient, ProgrammaticBuyerServiceClient, ReportServiceClient, RoleServiceClient, SiteServiceClient, TaxonomyCategoryServiceClient, TeamServiceClient, UserServiceClient} from '@google-ads/admanager';
 
 // check that the client class type name can be used
 function doStuffWithAdBreakServiceClient(client: AdBreakServiceClient) {
@@ -89,6 +89,9 @@ function doStuffWithEntitySignalsMappingServiceClient(client: EntitySignalsMappi
   client.close();
 }
 function doStuffWithGeoTargetServiceClient(client: GeoTargetServiceClient) {
+  client.close();
+}
+function doStuffWithLineItemServiceClient(client: LineItemServiceClient) {
   client.close();
 }
 function doStuffWithMobileCarrierServiceClient(client: MobileCarrierServiceClient) {
@@ -216,6 +219,9 @@ function main() {
   // check that the client instance can be created
   const geoTargetServiceClient = new GeoTargetServiceClient();
   doStuffWithGeoTargetServiceClient(geoTargetServiceClient);
+  // check that the client instance can be created
+  const lineItemServiceClient = new LineItemServiceClient();
+  doStuffWithLineItemServiceClient(lineItemServiceClient);
   // check that the client instance can be created
   const mobileCarrierServiceClient = new MobileCarrierServiceClient();
   doStuffWithMobileCarrierServiceClient(mobileCarrierServiceClient);

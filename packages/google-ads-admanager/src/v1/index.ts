@@ -40,6 +40,7 @@ export {DeviceCategoryServiceClient} from './device_category_service_client';
 export {DeviceManufacturerServiceClient} from './device_manufacturer_service_client';
 export {EntitySignalsMappingServiceClient} from './entity_signals_mapping_service_client';
 export {GeoTargetServiceClient} from './geo_target_service_client';
+export {LineItemServiceClient} from './line_item_service_client';
 export {MobileCarrierServiceClient} from './mobile_carrier_service_client';
 export {MobileDeviceServiceClient} from './mobile_device_service_client';
 export {MobileDeviceSubmodelServiceClient} from './mobile_device_submodel_service_client';

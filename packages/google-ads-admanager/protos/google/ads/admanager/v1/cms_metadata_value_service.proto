@@ -36,7 +36,7 @@ service CmsMetadataValueService {
   option (google.api.oauth_scopes) =
       "https://www.googleapis.com/auth/admanager";
 
-  // API to retrieve a `CmsMetadataKey` object.
+  // API to retrieve a `CmsMetadataValue` object.
   rpc GetCmsMetadataValue(GetCmsMetadataValueRequest)
       returns (CmsMetadataValue) {
     option (google.api.http) = {
@@ -57,7 +57,7 @@ service CmsMetadataValueService {
 
 // Request object for `GetCmsMetadataValue` method.
 message GetCmsMetadataValueRequest {
-  // Required. The resource name of the CmsMetadataKey.
+  // Required. The resource name of the CmsMetadataValue.
   // Format: `networks/{network_code}/cmsMetadataValues/{cms_metadata_value_id}`
   string name = 1 [
     (google.api.field_behavior) = REQUIRED,

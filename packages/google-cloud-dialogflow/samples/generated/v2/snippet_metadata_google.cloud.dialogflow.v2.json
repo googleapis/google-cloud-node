@@ -2062,7 +2062,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 80,
+          "end": 90,
           "type": "FULL"
         }
       ],
@@ -2094,6 +2094,10 @@
           {
             "name": "trigger_events",
             "type": "TYPE_ENUM[]"
+          },
+          {
+            "name": "security_settings",
+            "type": "TYPE_STRING"
           }
         ],
         "resultType": ".google.cloud.dialogflow.v2.GenerateStatelessSuggestionResponse",
@@ -3523,6 +3527,178 @@
           "service": {
             "shortName": "Fulfillments",
             "fullName": "google.cloud.dialogflow.v2.Fulfillments"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2_generated_GeneratorEvaluations_CreateGeneratorEvaluation_async",
+      "title": "dialogflow createGeneratorEvaluation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates evaluation of a generator.",
+      "canonical": true,
+      "file": "generator_evaluations.create_generator_evaluation.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateGeneratorEvaluation",
+        "fullName": "google.cloud.dialogflow.v2.GeneratorEvaluations.CreateGeneratorEvaluation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "generator_evaluation",
+            "type": ".google.cloud.dialogflow.v2.GeneratorEvaluation"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "GeneratorEvaluationsClient",
+          "fullName": "google.cloud.dialogflow.v2.GeneratorEvaluationsClient"
+        },
+        "method": {
+          "shortName": "CreateGeneratorEvaluation",
+          "fullName": "google.cloud.dialogflow.v2.GeneratorEvaluations.CreateGeneratorEvaluation",
+          "service": {
+            "shortName": "GeneratorEvaluations",
+            "fullName": "google.cloud.dialogflow.v2.GeneratorEvaluations"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2_generated_GeneratorEvaluations_GetGeneratorEvaluation_async",
+      "title": "dialogflow getGeneratorEvaluation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets an evaluation of generator.",
+      "canonical": true,
+      "file": "generator_evaluations.get_generator_evaluation.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetGeneratorEvaluation",
+        "fullName": "google.cloud.dialogflow.v2.GeneratorEvaluations.GetGeneratorEvaluation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2.GeneratorEvaluation",
+        "client": {
+          "shortName": "GeneratorEvaluationsClient",
+          "fullName": "google.cloud.dialogflow.v2.GeneratorEvaluationsClient"
+        },
+        "method": {
+          "shortName": "GetGeneratorEvaluation",
+          "fullName": "google.cloud.dialogflow.v2.GeneratorEvaluations.GetGeneratorEvaluation",
+          "service": {
+            "shortName": "GeneratorEvaluations",
+            "fullName": "google.cloud.dialogflow.v2.GeneratorEvaluations"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2_generated_GeneratorEvaluations_ListGeneratorEvaluations_async",
+      "title": "dialogflow listGeneratorEvaluations Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists evaluations of generator.",
+      "canonical": true,
+      "file": "generator_evaluations.list_generator_evaluations.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListGeneratorEvaluations",
+        "fullName": "google.cloud.dialogflow.v2.GeneratorEvaluations.ListGeneratorEvaluations",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2.ListGeneratorEvaluationsResponse",
+        "client": {
+          "shortName": "GeneratorEvaluationsClient",
+          "fullName": "google.cloud.dialogflow.v2.GeneratorEvaluationsClient"
+        },
+        "method": {
+          "shortName": "ListGeneratorEvaluations",
+          "fullName": "google.cloud.dialogflow.v2.GeneratorEvaluations.ListGeneratorEvaluations",
+          "service": {
+            "shortName": "GeneratorEvaluations",
+            "fullName": "google.cloud.dialogflow.v2.GeneratorEvaluations"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2_generated_GeneratorEvaluations_DeleteGeneratorEvaluation_async",
+      "title": "dialogflow deleteGeneratorEvaluation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes an evaluation of generator.",
+      "canonical": true,
+      "file": "generator_evaluations.delete_generator_evaluation.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteGeneratorEvaluation",
+        "fullName": "google.cloud.dialogflow.v2.GeneratorEvaluations.DeleteGeneratorEvaluation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "GeneratorEvaluationsClient",
+          "fullName": "google.cloud.dialogflow.v2.GeneratorEvaluationsClient"
+        },
+        "method": {
+          "shortName": "DeleteGeneratorEvaluation",
+          "fullName": "google.cloud.dialogflow.v2.GeneratorEvaluations.DeleteGeneratorEvaluation",
+          "service": {
+            "shortName": "GeneratorEvaluations",
+            "fullName": "google.cloud.dialogflow.v2.GeneratorEvaluations"
           }
         }
       }
@@ -5211,6 +5387,442 @@
           "service": {
             "shortName": "Sessions",
             "fullName": "google.cloud.dialogflow.v2.Sessions"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2_generated_SipTrunks_CreateSipTrunk_async",
+      "title": "dialogflow createSipTrunk Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a SipTrunk for a specified location.",
+      "canonical": true,
+      "file": "sip_trunks.create_sip_trunk.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateSipTrunk",
+        "fullName": "google.cloud.dialogflow.v2.SipTrunks.CreateSipTrunk",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "sip_trunk",
+            "type": ".google.cloud.dialogflow.v2.SipTrunk"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2.SipTrunk",
+        "client": {
+          "shortName": "SipTrunksClient",
+          "fullName": "google.cloud.dialogflow.v2.SipTrunksClient"
+        },
+        "method": {
+          "shortName": "CreateSipTrunk",
+          "fullName": "google.cloud.dialogflow.v2.SipTrunks.CreateSipTrunk",
+          "service": {
+            "shortName": "SipTrunks",
+            "fullName": "google.cloud.dialogflow.v2.SipTrunks"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2_generated_SipTrunks_DeleteSipTrunk_async",
+      "title": "dialogflow deleteSipTrunk Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a specified SipTrunk.",
+      "canonical": true,
+      "file": "sip_trunks.delete_sip_trunk.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteSipTrunk",
+        "fullName": "google.cloud.dialogflow.v2.SipTrunks.DeleteSipTrunk",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "SipTrunksClient",
+          "fullName": "google.cloud.dialogflow.v2.SipTrunksClient"
+        },
+        "method": {
+          "shortName": "DeleteSipTrunk",
+          "fullName": "google.cloud.dialogflow.v2.SipTrunks.DeleteSipTrunk",
+          "service": {
+            "shortName": "SipTrunks",
+            "fullName": "google.cloud.dialogflow.v2.SipTrunks"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2_generated_SipTrunks_ListSipTrunks_async",
+      "title": "dialogflow listSipTrunks Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns a list of SipTrunks in the specified location.",
+      "canonical": true,
+      "file": "sip_trunks.list_sip_trunks.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListSipTrunks",
+        "fullName": "google.cloud.dialogflow.v2.SipTrunks.ListSipTrunks",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2.ListSipTrunksResponse",
+        "client": {
+          "shortName": "SipTrunksClient",
+          "fullName": "google.cloud.dialogflow.v2.SipTrunksClient"
+        },
+        "method": {
+          "shortName": "ListSipTrunks",
+          "fullName": "google.cloud.dialogflow.v2.SipTrunks.ListSipTrunks",
+          "service": {
+            "shortName": "SipTrunks",
+            "fullName": "google.cloud.dialogflow.v2.SipTrunks"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2_generated_SipTrunks_GetSipTrunk_async",
+      "title": "dialogflow getSipTrunk Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves the specified SipTrunk.",
+      "canonical": true,
+      "file": "sip_trunks.get_sip_trunk.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetSipTrunk",
+        "fullName": "google.cloud.dialogflow.v2.SipTrunks.GetSipTrunk",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2.SipTrunk",
+        "client": {
+          "shortName": "SipTrunksClient",
+          "fullName": "google.cloud.dialogflow.v2.SipTrunksClient"
+        },
+        "method": {
+          "shortName": "GetSipTrunk",
+          "fullName": "google.cloud.dialogflow.v2.SipTrunks.GetSipTrunk",
+          "service": {
+            "shortName": "SipTrunks",
+            "fullName": "google.cloud.dialogflow.v2.SipTrunks"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2_generated_SipTrunks_UpdateSipTrunk_async",
+      "title": "dialogflow updateSipTrunk Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the specified SipTrunk.",
+      "canonical": true,
+      "file": "sip_trunks.update_sip_trunk.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateSipTrunk",
+        "fullName": "google.cloud.dialogflow.v2.SipTrunks.UpdateSipTrunk",
+        "async": true,
+        "parameters": [
+          {
+            "name": "sip_trunk",
+            "type": ".google.cloud.dialogflow.v2.SipTrunk"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2.SipTrunk",
+        "client": {
+          "shortName": "SipTrunksClient",
+          "fullName": "google.cloud.dialogflow.v2.SipTrunksClient"
+        },
+        "method": {
+          "shortName": "UpdateSipTrunk",
+          "fullName": "google.cloud.dialogflow.v2.SipTrunks.UpdateSipTrunk",
+          "service": {
+            "shortName": "SipTrunks",
+            "fullName": "google.cloud.dialogflow.v2.SipTrunks"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2_generated_Tools_CreateTool_async",
+      "title": "dialogflow createTool Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a tool.",
+      "canonical": true,
+      "file": "tools.create_tool.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 71,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateTool",
+        "fullName": "google.cloud.dialogflow.v2.Tools.CreateTool",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "tool",
+            "type": ".google.cloud.dialogflow.v2.Tool"
+          },
+          {
+            "name": "tool_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2.Tool",
+        "client": {
+          "shortName": "ToolsClient",
+          "fullName": "google.cloud.dialogflow.v2.ToolsClient"
+        },
+        "method": {
+          "shortName": "CreateTool",
+          "fullName": "google.cloud.dialogflow.v2.Tools.CreateTool",
+          "service": {
+            "shortName": "Tools",
+            "fullName": "google.cloud.dialogflow.v2.Tools"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2_generated_Tools_GetTool_async",
+      "title": "dialogflow getTool Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves a tool.",
+      "canonical": true,
+      "file": "tools.get_tool.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetTool",
+        "fullName": "google.cloud.dialogflow.v2.Tools.GetTool",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2.Tool",
+        "client": {
+          "shortName": "ToolsClient",
+          "fullName": "google.cloud.dialogflow.v2.ToolsClient"
+        },
+        "method": {
+          "shortName": "GetTool",
+          "fullName": "google.cloud.dialogflow.v2.Tools.GetTool",
+          "service": {
+            "shortName": "Tools",
+            "fullName": "google.cloud.dialogflow.v2.Tools"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2_generated_Tools_ListTools_async",
+      "title": "dialogflow listTools Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists tools.",
+      "canonical": true,
+      "file": "tools.list_tools.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListTools",
+        "fullName": "google.cloud.dialogflow.v2.Tools.ListTools",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2.ListToolsResponse",
+        "client": {
+          "shortName": "ToolsClient",
+          "fullName": "google.cloud.dialogflow.v2.ToolsClient"
+        },
+        "method": {
+          "shortName": "ListTools",
+          "fullName": "google.cloud.dialogflow.v2.Tools.ListTools",
+          "service": {
+            "shortName": "Tools",
+            "fullName": "google.cloud.dialogflow.v2.Tools"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2_generated_Tools_DeleteTool_async",
+      "title": "dialogflow deleteTool Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a tool.",
+      "canonical": true,
+      "file": "tools.delete_tool.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteTool",
+        "fullName": "google.cloud.dialogflow.v2.Tools.DeleteTool",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "ToolsClient",
+          "fullName": "google.cloud.dialogflow.v2.ToolsClient"
+        },
+        "method": {
+          "shortName": "DeleteTool",
+          "fullName": "google.cloud.dialogflow.v2.Tools.DeleteTool",
+          "service": {
+            "shortName": "Tools",
+            "fullName": "google.cloud.dialogflow.v2.Tools"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2_generated_Tools_UpdateTool_async",
+      "title": "dialogflow updateTool Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a tool.",
+      "canonical": true,
+      "file": "tools.update_tool.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateTool",
+        "fullName": "google.cloud.dialogflow.v2.Tools.UpdateTool",
+        "async": true,
+        "parameters": [
+          {
+            "name": "tool",
+            "type": ".google.cloud.dialogflow.v2.Tool"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2.Tool",
+        "client": {
+          "shortName": "ToolsClient",
+          "fullName": "google.cloud.dialogflow.v2.ToolsClient"
+        },
+        "method": {
+          "shortName": "UpdateTool",
+          "fullName": "google.cloud.dialogflow.v2.Tools.UpdateTool",
+          "service": {
+            "shortName": "Tools",
+            "fullName": "google.cloud.dialogflow.v2.Tools"
           }
         }
       }

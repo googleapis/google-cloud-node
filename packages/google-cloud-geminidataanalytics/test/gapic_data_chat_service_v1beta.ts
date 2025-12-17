@@ -595,6 +595,114 @@ describe('v1beta.DataChatServiceClient', () => {
         });
     });
 
+    describe('queryData', () => {
+        it('invokes queryData without error', async () => {
+            const client = new datachatserviceModule.v1beta.DataChatServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.geminidataanalytics.v1beta.QueryDataRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.geminidataanalytics.v1beta.QueryDataRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.geminidataanalytics.v1beta.QueryDataResponse()
+            );
+            client.innerApiCalls.queryData = stubSimpleCall(expectedResponse);
+            const [response] = await client.queryData(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.queryData as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.queryData as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes queryData without error using callback', async () => {
+            const client = new datachatserviceModule.v1beta.DataChatServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.geminidataanalytics.v1beta.QueryDataRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.geminidataanalytics.v1beta.QueryDataRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.geminidataanalytics.v1beta.QueryDataResponse()
+            );
+            client.innerApiCalls.queryData = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.queryData(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.geminidataanalytics.v1beta.IQueryDataResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.queryData as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.queryData as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes queryData with error', async () => {
+            const client = new datachatserviceModule.v1beta.DataChatServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.geminidataanalytics.v1beta.QueryDataRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.geminidataanalytics.v1beta.QueryDataRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.queryData = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.queryData(request), expectedError);
+            const actualRequest = (client.innerApiCalls.queryData as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.queryData as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes queryData with closed client', async () => {
+            const client = new datachatserviceModule.v1beta.DataChatServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.geminidataanalytics.v1beta.QueryDataRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.geminidataanalytics.v1beta.QueryDataRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.queryData(request), expectedError);
+        });
+    });
+
     describe('chat', () => {
         it('invokes chat without error', async () => {
             const client = new datachatserviceModule.v1beta.DataChatServiceClient({
@@ -1481,6 +1589,44 @@ describe('v1beta.DataChatServiceClient', () => {
                 const result = client.matchDataAgentFromDataAgentName(fakePath);
                 assert.strictEqual(result, "dataAgentValue");
                 assert((client.pathTemplates.dataAgentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('location', async () => {
+            const fakePath = "/rendered/path/location";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new datachatserviceModule.v1beta.DataChatServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.locationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.locationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('locationPath', () => {
+                const result = client.locationPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.locationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromLocationName', () => {
+                const result = client.matchProjectFromLocationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromLocationName', () => {
+                const result = client.matchLocationFromLocationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

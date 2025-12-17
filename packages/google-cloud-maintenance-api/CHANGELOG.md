@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/maintenance-api-v0.2.0...maintenance-api-v0.3.0) (2025-12-15)
+
+
+### Features
+
+* Initial generation of library ([46ac6d1](https://github.com/googleapis/google-cloud-node/commit/46ac6d10178ff78a4771e2519b3540b322687115))
+
 ## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/maintenance-api-v0.1.1...maintenance-api-v0.2.0) (2025-12-09)
 
 

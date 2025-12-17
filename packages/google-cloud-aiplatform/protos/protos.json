@@ -4609,12 +4609,83 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "args": {
                           "type": "google.protobuf.Struct",
                           "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "partialArgs": {
+                          "rule": "repeated",
+                          "type": "PartialArg",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "willContinue": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "PartialArg": {
+                      "oneofs": {
+                        "delta": {
+                          "oneof": [
+                            "nullValue",
+                            "numberValue",
+                            "stringValue",
+                            "boolValue"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "nullValue": {
+                          "type": "google.protobuf.NullValue",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "numberValue": {
+                          "type": "double",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "stringValue": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "boolValue": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "jsonPath": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "willContinue": {
+                          "type": "bool",
+                          "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -5032,6 +5103,13 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "streamFunctionCallArguments": {
+                          "type": "bool",
+                          "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }

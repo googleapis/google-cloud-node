@@ -168,7 +168,7 @@
   "packages/google-cloud-apphub": "0.6.1",
   "packages/google-chat": "0.21.0",
   "packages/google-shopping-merchant-quota": "0.9.0",
-  "packages/google-storage-control": "0.6.1",
+  "packages/google-storage-control": "0.7.0",
   "packages/google-cloud-backupdr": "0.7.0",
   "packages/google-cloud-securesourcemanager": "0.8.1",
   "packages/google-shopping-merchant-notifications": "0.8.1",
@@ -205,7 +205,7 @@
   "packages/google-cloud-lustre": "0.2.1",
   "packages/google-cloud-storagebatchoperations": "0.1.1",
   "packages/google-apps-events-subscriptions": "0.1.1",
-  "packages/google-cloud-maintenance-api": "0.2.0",
+  "packages/google-cloud-maintenance-api": "0.3.0",
   "packages/google-cloud-managedkafka-schemaregistry": "0.1.1",
   "packages/google-cloud-licensemanager": "0.1.1",
   "packages/google-cloud-configdelivery": "0.1.1",
@@ -215,5 +215,6 @@
   "packages/google-cloud-locationfinder": "0.1.1",
   "packages/google-cloud-geminidataanalytics": "0.3.0",
   "packages/google-ads-datamanager": "0.1.0",
-  "packages/google-cloud-vectorsearch": "0.1.0"
+  "packages/google-cloud-vectorsearch": "0.1.0",
+  "packages/google-cloud-hypercomputecluster": "0.1.0"
 }

@@ -27,6 +27,30 @@
         "ListCustomTargetingKeys": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
+        },
+        "CreateCustomTargetingKey": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "BatchCreateCustomTargetingKeys": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateCustomTargetingKey": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "BatchUpdateCustomTargetingKeys": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "BatchActivateCustomTargetingKeys": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "BatchDeactivateCustomTargetingKeys": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
         }
       }
     }

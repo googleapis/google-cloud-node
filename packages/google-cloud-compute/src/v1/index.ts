@@ -18,6 +18,7 @@
 
 export {AcceleratorTypesClient} from './accelerator_types_client';
 export {AddressesClient} from './addresses_client';
+export {AdviceClient} from './advice_client';
 export {AutoscalersClient} from './autoscalers_client';
 export {BackendBucketsClient} from './backend_buckets_client';
 export {BackendServicesClient} from './backend_services_client';

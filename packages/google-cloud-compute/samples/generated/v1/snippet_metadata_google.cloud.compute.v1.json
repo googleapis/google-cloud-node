@@ -640,6 +640,54 @@
       }
     },
     {
+      "regionTag": "compute_v1_generated_Advice_CalendarMode_async",
+      "title": "AcceleratorTypes calendarMode Sample",
+      "origin": "API_DEFINITION",
+      "description": " Advise how, where and when to create the requested amount of instances with specified accelerators, within the specified time and location limits. The method recommends creating future reservations for the requested resources.",
+      "canonical": true,
+      "file": "advice.calendar_mode.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CalendarMode",
+        "fullName": "google.cloud.compute.v1.Advice.CalendarMode",
+        "async": true,
+        "parameters": [
+          {
+            "name": "calendar_mode_advice_request_resource",
+            "type": ".google.cloud.compute.v1.CalendarModeAdviceRequest"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1.CalendarModeAdviceResponse",
+        "client": {
+          "shortName": "AdviceClient",
+          "fullName": "google.cloud.compute.v1.AdviceClient"
+        },
+        "method": {
+          "shortName": "CalendarMode",
+          "fullName": "google.cloud.compute.v1.Advice.CalendarMode",
+          "service": {
+            "shortName": "Advice",
+            "fullName": "google.cloud.compute.v1.Advice"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "compute_v1_generated_Autoscalers_AggregatedList_async",
       "title": "AcceleratorTypes aggregatedList Sample",
       "origin": "API_DEFINITION",

@@ -258,6 +258,9 @@ export class AdUnitServiceClient {
       labelPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/labels/{label}'
       ),
+      lineItemPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/lineItems/{line_item}'
+      ),
       liveStreamEventPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/liveStreamEvents/{live_stream_event}'
       ),
@@ -370,7 +373,7 @@ export class AdUnitServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const adUnitServiceStubMethods =
-        ['getAdUnit', 'listAdUnits', 'listAdUnitSizes'];
+        ['getAdUnit', 'listAdUnits', 'listAdUnitSizes', 'createAdUnit', 'updateAdUnit', 'batchCreateAdUnits', 'batchUpdateAdUnits', 'batchActivateAdUnits', 'batchDeactivateAdUnits', 'batchArchiveAdUnits'];
     for (const methodName of adUnitServiceStubMethods) {
       const callPromise = this.adUnitServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -559,6 +562,693 @@ export class AdUnitServiceClient {
         {}|undefined
       ]) => {
         this._log.info('getAdUnit response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * API to create an `AdUnit` object.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource where this `AdUnit` will be created.
+ *   Format: `networks/{network_code}`
+ * @param {google.ads.admanager.v1.AdUnit} request.adUnit
+ *   Required. The `AdUnit` to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.AdUnit|AdUnit}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/ad_unit_service.create_ad_unit.js</caption>
+ * region_tag:admanager_v1_generated_AdUnitService_CreateAdUnit_async
+ */
+  createAdUnit(
+      request?: protos.google.ads.admanager.v1.ICreateAdUnitRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ads.admanager.v1.IAdUnit,
+        protos.google.ads.admanager.v1.ICreateAdUnitRequest|undefined, {}|undefined
+      ]>;
+  createAdUnit(
+      request: protos.google.ads.admanager.v1.ICreateAdUnitRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.ads.admanager.v1.IAdUnit,
+          protos.google.ads.admanager.v1.ICreateAdUnitRequest|null|undefined,
+          {}|null|undefined>): void;
+  createAdUnit(
+      request: protos.google.ads.admanager.v1.ICreateAdUnitRequest,
+      callback: Callback<
+          protos.google.ads.admanager.v1.IAdUnit,
+          protos.google.ads.admanager.v1.ICreateAdUnitRequest|null|undefined,
+          {}|null|undefined>): void;
+  createAdUnit(
+      request?: protos.google.ads.admanager.v1.ICreateAdUnitRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ads.admanager.v1.IAdUnit,
+          protos.google.ads.admanager.v1.ICreateAdUnitRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ads.admanager.v1.IAdUnit,
+          protos.google.ads.admanager.v1.ICreateAdUnitRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ads.admanager.v1.IAdUnit,
+        protos.google.ads.admanager.v1.ICreateAdUnitRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('createAdUnit request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.ads.admanager.v1.IAdUnit,
+        protos.google.ads.admanager.v1.ICreateAdUnitRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createAdUnit response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.createAdUnit(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ads.admanager.v1.IAdUnit,
+        protos.google.ads.admanager.v1.ICreateAdUnitRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createAdUnit response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * API to update an `AdUnit` object.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.ads.admanager.v1.AdUnit} request.adUnit
+ *   Required. The `AdUnit` to update.
+ *
+ *   The `AdUnit`'s name is used to identify the `AdUnit` to update. Format:
+ *   `networks/{network_code}/adUnits/{ad_unit_id}`
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. The list of fields to update.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.AdUnit|AdUnit}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/ad_unit_service.update_ad_unit.js</caption>
+ * region_tag:admanager_v1_generated_AdUnitService_UpdateAdUnit_async
+ */
+  updateAdUnit(
+      request?: protos.google.ads.admanager.v1.IUpdateAdUnitRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ads.admanager.v1.IAdUnit,
+        protos.google.ads.admanager.v1.IUpdateAdUnitRequest|undefined, {}|undefined
+      ]>;
+  updateAdUnit(
+      request: protos.google.ads.admanager.v1.IUpdateAdUnitRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.ads.admanager.v1.IAdUnit,
+          protos.google.ads.admanager.v1.IUpdateAdUnitRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateAdUnit(
+      request: protos.google.ads.admanager.v1.IUpdateAdUnitRequest,
+      callback: Callback<
+          protos.google.ads.admanager.v1.IAdUnit,
+          protos.google.ads.admanager.v1.IUpdateAdUnitRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateAdUnit(
+      request?: protos.google.ads.admanager.v1.IUpdateAdUnitRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ads.admanager.v1.IAdUnit,
+          protos.google.ads.admanager.v1.IUpdateAdUnitRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ads.admanager.v1.IAdUnit,
+          protos.google.ads.admanager.v1.IUpdateAdUnitRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ads.admanager.v1.IAdUnit,
+        protos.google.ads.admanager.v1.IUpdateAdUnitRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'ad_unit.name': request.adUnit!.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('updateAdUnit request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.ads.admanager.v1.IAdUnit,
+        protos.google.ads.admanager.v1.IUpdateAdUnitRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateAdUnit response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.updateAdUnit(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ads.admanager.v1.IAdUnit,
+        protos.google.ads.admanager.v1.IUpdateAdUnitRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateAdUnit response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * API to batch create `AdUnit` objects.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource where `AdUnits` will be created.
+ *   Format: `networks/{network_code}`
+ *   The parent field in the CreateAdUnitRequest must match this
+ *   field.
+ * @param {number[]} request.requests
+ *   Required. The `AdUnit` objects to create.
+ *   A maximum of 100 objects can be created in a batch.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchCreateAdUnitsResponse|BatchCreateAdUnitsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/ad_unit_service.batch_create_ad_units.js</caption>
+ * region_tag:admanager_v1_generated_AdUnitService_BatchCreateAdUnits_async
+ */
+  batchCreateAdUnits(
+      request?: protos.google.ads.admanager.v1.IBatchCreateAdUnitsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ads.admanager.v1.IBatchCreateAdUnitsResponse,
+        protos.google.ads.admanager.v1.IBatchCreateAdUnitsRequest|undefined, {}|undefined
+      ]>;
+  batchCreateAdUnits(
+      request: protos.google.ads.admanager.v1.IBatchCreateAdUnitsRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.ads.admanager.v1.IBatchCreateAdUnitsResponse,
+          protos.google.ads.admanager.v1.IBatchCreateAdUnitsRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchCreateAdUnits(
+      request: protos.google.ads.admanager.v1.IBatchCreateAdUnitsRequest,
+      callback: Callback<
+          protos.google.ads.admanager.v1.IBatchCreateAdUnitsResponse,
+          protos.google.ads.admanager.v1.IBatchCreateAdUnitsRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchCreateAdUnits(
+      request?: protos.google.ads.admanager.v1.IBatchCreateAdUnitsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ads.admanager.v1.IBatchCreateAdUnitsResponse,
+          protos.google.ads.admanager.v1.IBatchCreateAdUnitsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ads.admanager.v1.IBatchCreateAdUnitsResponse,
+          protos.google.ads.admanager.v1.IBatchCreateAdUnitsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ads.admanager.v1.IBatchCreateAdUnitsResponse,
+        protos.google.ads.admanager.v1.IBatchCreateAdUnitsRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('batchCreateAdUnits request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.ads.admanager.v1.IBatchCreateAdUnitsResponse,
+        protos.google.ads.admanager.v1.IBatchCreateAdUnitsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchCreateAdUnits response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.batchCreateAdUnits(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ads.admanager.v1.IBatchCreateAdUnitsResponse,
+        protos.google.ads.admanager.v1.IBatchCreateAdUnitsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('batchCreateAdUnits response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * API to batch update `AdUnit` objects.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource where `AdUnits` will be updated.
+ *   Format: `networks/{network_code}`
+ *   The parent field in the UpdateAdUnitRequest must match this
+ *   field.
+ * @param {number[]} request.requests
+ *   Required. The `AdUnit` objects to update.
+ *   A maximum of 100 objects can be updated in a batch.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchUpdateAdUnitsResponse|BatchUpdateAdUnitsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/ad_unit_service.batch_update_ad_units.js</caption>
+ * region_tag:admanager_v1_generated_AdUnitService_BatchUpdateAdUnits_async
+ */
+  batchUpdateAdUnits(
+      request?: protos.google.ads.admanager.v1.IBatchUpdateAdUnitsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ads.admanager.v1.IBatchUpdateAdUnitsResponse,
+        protos.google.ads.admanager.v1.IBatchUpdateAdUnitsRequest|undefined, {}|undefined
+      ]>;
+  batchUpdateAdUnits(
+      request: protos.google.ads.admanager.v1.IBatchUpdateAdUnitsRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.ads.admanager.v1.IBatchUpdateAdUnitsResponse,
+          protos.google.ads.admanager.v1.IBatchUpdateAdUnitsRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchUpdateAdUnits(
+      request: protos.google.ads.admanager.v1.IBatchUpdateAdUnitsRequest,
+      callback: Callback<
+          protos.google.ads.admanager.v1.IBatchUpdateAdUnitsResponse,
+          protos.google.ads.admanager.v1.IBatchUpdateAdUnitsRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchUpdateAdUnits(
+      request?: protos.google.ads.admanager.v1.IBatchUpdateAdUnitsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ads.admanager.v1.IBatchUpdateAdUnitsResponse,
+          protos.google.ads.admanager.v1.IBatchUpdateAdUnitsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ads.admanager.v1.IBatchUpdateAdUnitsResponse,
+          protos.google.ads.admanager.v1.IBatchUpdateAdUnitsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ads.admanager.v1.IBatchUpdateAdUnitsResponse,
+        protos.google.ads.admanager.v1.IBatchUpdateAdUnitsRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('batchUpdateAdUnits request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.ads.admanager.v1.IBatchUpdateAdUnitsResponse,
+        protos.google.ads.admanager.v1.IBatchUpdateAdUnitsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchUpdateAdUnits response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.batchUpdateAdUnits(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ads.admanager.v1.IBatchUpdateAdUnitsResponse,
+        protos.google.ads.admanager.v1.IBatchUpdateAdUnitsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('batchUpdateAdUnits response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * API to batch activate `AdUnit` objects.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Format: `networks/{network_code}`
+ * @param {string[]} request.names
+ *   Required. The resource names of the `AdUnit`s to activate.
+ *   Format: `networks/{network_code}/adUnits/{ad_unit_id}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchActivateAdUnitsResponse|BatchActivateAdUnitsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/ad_unit_service.batch_activate_ad_units.js</caption>
+ * region_tag:admanager_v1_generated_AdUnitService_BatchActivateAdUnits_async
+ */
+  batchActivateAdUnits(
+      request?: protos.google.ads.admanager.v1.IBatchActivateAdUnitsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ads.admanager.v1.IBatchActivateAdUnitsResponse,
+        protos.google.ads.admanager.v1.IBatchActivateAdUnitsRequest|undefined, {}|undefined
+      ]>;
+  batchActivateAdUnits(
+      request: protos.google.ads.admanager.v1.IBatchActivateAdUnitsRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.ads.admanager.v1.IBatchActivateAdUnitsResponse,
+          protos.google.ads.admanager.v1.IBatchActivateAdUnitsRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchActivateAdUnits(
+      request: protos.google.ads.admanager.v1.IBatchActivateAdUnitsRequest,
+      callback: Callback<
+          protos.google.ads.admanager.v1.IBatchActivateAdUnitsResponse,
+          protos.google.ads.admanager.v1.IBatchActivateAdUnitsRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchActivateAdUnits(
+      request?: protos.google.ads.admanager.v1.IBatchActivateAdUnitsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ads.admanager.v1.IBatchActivateAdUnitsResponse,
+          protos.google.ads.admanager.v1.IBatchActivateAdUnitsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ads.admanager.v1.IBatchActivateAdUnitsResponse,
+          protos.google.ads.admanager.v1.IBatchActivateAdUnitsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ads.admanager.v1.IBatchActivateAdUnitsResponse,
+        protos.google.ads.admanager.v1.IBatchActivateAdUnitsRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('batchActivateAdUnits request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.ads.admanager.v1.IBatchActivateAdUnitsResponse,
+        protos.google.ads.admanager.v1.IBatchActivateAdUnitsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchActivateAdUnits response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.batchActivateAdUnits(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ads.admanager.v1.IBatchActivateAdUnitsResponse,
+        protos.google.ads.admanager.v1.IBatchActivateAdUnitsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('batchActivateAdUnits response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Deactivates a list of `AdUnit` objects.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Format: `networks/{network_code}`
+ * @param {string[]} request.names
+ *   Required. The resource names of the `AdUnit`s to deactivate.
+ *   Format: `networks/{network_code}/adUnits/{ad_unit_id}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchDeactivateAdUnitsResponse|BatchDeactivateAdUnitsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/ad_unit_service.batch_deactivate_ad_units.js</caption>
+ * region_tag:admanager_v1_generated_AdUnitService_BatchDeactivateAdUnits_async
+ */
+  batchDeactivateAdUnits(
+      request?: protos.google.ads.admanager.v1.IBatchDeactivateAdUnitsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ads.admanager.v1.IBatchDeactivateAdUnitsResponse,
+        protos.google.ads.admanager.v1.IBatchDeactivateAdUnitsRequest|undefined, {}|undefined
+      ]>;
+  batchDeactivateAdUnits(
+      request: protos.google.ads.admanager.v1.IBatchDeactivateAdUnitsRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.ads.admanager.v1.IBatchDeactivateAdUnitsResponse,
+          protos.google.ads.admanager.v1.IBatchDeactivateAdUnitsRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchDeactivateAdUnits(
+      request: protos.google.ads.admanager.v1.IBatchDeactivateAdUnitsRequest,
+      callback: Callback<
+          protos.google.ads.admanager.v1.IBatchDeactivateAdUnitsResponse,
+          protos.google.ads.admanager.v1.IBatchDeactivateAdUnitsRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchDeactivateAdUnits(
+      request?: protos.google.ads.admanager.v1.IBatchDeactivateAdUnitsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ads.admanager.v1.IBatchDeactivateAdUnitsResponse,
+          protos.google.ads.admanager.v1.IBatchDeactivateAdUnitsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ads.admanager.v1.IBatchDeactivateAdUnitsResponse,
+          protos.google.ads.admanager.v1.IBatchDeactivateAdUnitsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ads.admanager.v1.IBatchDeactivateAdUnitsResponse,
+        protos.google.ads.admanager.v1.IBatchDeactivateAdUnitsRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('batchDeactivateAdUnits request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.ads.admanager.v1.IBatchDeactivateAdUnitsResponse,
+        protos.google.ads.admanager.v1.IBatchDeactivateAdUnitsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchDeactivateAdUnits response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.batchDeactivateAdUnits(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ads.admanager.v1.IBatchDeactivateAdUnitsResponse,
+        protos.google.ads.admanager.v1.IBatchDeactivateAdUnitsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('batchDeactivateAdUnits response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Archives a list of `AdUnit` objects.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Format: `networks/{network_code}`
+ * @param {string[]} request.names
+ *   Required. The resource names of the `AdUnit`s to archive.
+ *   Format: `networks/{network_code}/adUnits/{ad_unit_id}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchArchiveAdUnitsResponse|BatchArchiveAdUnitsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/ad_unit_service.batch_archive_ad_units.js</caption>
+ * region_tag:admanager_v1_generated_AdUnitService_BatchArchiveAdUnits_async
+ */
+  batchArchiveAdUnits(
+      request?: protos.google.ads.admanager.v1.IBatchArchiveAdUnitsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ads.admanager.v1.IBatchArchiveAdUnitsResponse,
+        protos.google.ads.admanager.v1.IBatchArchiveAdUnitsRequest|undefined, {}|undefined
+      ]>;
+  batchArchiveAdUnits(
+      request: protos.google.ads.admanager.v1.IBatchArchiveAdUnitsRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.ads.admanager.v1.IBatchArchiveAdUnitsResponse,
+          protos.google.ads.admanager.v1.IBatchArchiveAdUnitsRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchArchiveAdUnits(
+      request: protos.google.ads.admanager.v1.IBatchArchiveAdUnitsRequest,
+      callback: Callback<
+          protos.google.ads.admanager.v1.IBatchArchiveAdUnitsResponse,
+          protos.google.ads.admanager.v1.IBatchArchiveAdUnitsRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchArchiveAdUnits(
+      request?: protos.google.ads.admanager.v1.IBatchArchiveAdUnitsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ads.admanager.v1.IBatchArchiveAdUnitsResponse,
+          protos.google.ads.admanager.v1.IBatchArchiveAdUnitsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ads.admanager.v1.IBatchArchiveAdUnitsResponse,
+          protos.google.ads.admanager.v1.IBatchArchiveAdUnitsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ads.admanager.v1.IBatchArchiveAdUnitsResponse,
+        protos.google.ads.admanager.v1.IBatchArchiveAdUnitsRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('batchArchiveAdUnits request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.ads.admanager.v1.IBatchArchiveAdUnitsResponse,
+        protos.google.ads.admanager.v1.IBatchArchiveAdUnitsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchArchiveAdUnits response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.batchArchiveAdUnits(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ads.admanager.v1.IBatchArchiveAdUnitsResponse,
+        protos.google.ads.admanager.v1.IBatchArchiveAdUnitsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('batchArchiveAdUnits response %j', response);
         return [response, options, rawResponse];
       }).catch((error: any) => {
         if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
@@ -1987,6 +2677,42 @@ export class AdUnitServiceClient {
    */
   matchLabelFromLabelName(labelName: string) {
     return this.pathTemplates.labelPathTemplate.match(labelName).label;
+  }
+
+  /**
+   * Return a fully-qualified lineItem resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} line_item
+   * @returns {string} Resource name string.
+   */
+  lineItemPath(networkCode:string,lineItem:string) {
+    return this.pathTemplates.lineItemPathTemplate.render({
+      network_code: networkCode,
+      line_item: lineItem,
+    });
+  }
+
+  /**
+   * Parse the network_code from LineItem resource.
+   *
+   * @param {string} lineItemName
+   *   A fully-qualified path representing LineItem resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromLineItemName(lineItemName: string) {
+    return this.pathTemplates.lineItemPathTemplate.match(lineItemName).network_code;
+  }
+
+  /**
+   * Parse the line_item from LineItem resource.
+   *
+   * @param {string} lineItemName
+   *   A fully-qualified path representing LineItem resource.
+   * @returns {string} A string representing the line_item.
+   */
+  matchLineItemFromLineItemName(lineItemName: string) {
+    return this.pathTemplates.lineItemPathTemplate.match(lineItemName).line_item;
   }
 
   /**

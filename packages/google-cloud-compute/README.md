@@ -81,6 +81,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | move | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/addresses.move.js) |
 | set labels | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/addresses.set_labels.js) |
 | test iam permissions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/addresses.test_iam_permissions.js) |
+| calendar mode | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/advice.calendar_mode.js) |
 | aggregated list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/autoscalers.aggregated_list.js) |
 | delete | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/autoscalers.delete.js) |
 | get | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/autoscalers.get.js) |
@@ -1363,6 +1364,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | get | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/network_profiles.get.js) |
 | list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/network_profiles.list.js) |
 | add peering | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/networks.add_peering.js) |
+| cancel request remove peering | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/networks.cancel_request_remove_peering.js) |
 | delete | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/networks.delete.js) |
 | get | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/networks.get.js) |
 | get effective firewalls | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/networks.get_effective_firewalls.js) |
@@ -1553,6 +1555,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | insert | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/region_instance_group_manager_resize_requests.insert.js) |
 | list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/region_instance_group_manager_resize_requests.list.js) |
 | abandon instances | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/region_instance_group_managers.abandon_instances.js) |
+| adopt instances | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/region_instance_group_managers.adopt_instances.js) |
 | apply updates to instances | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/region_instance_group_managers.apply_updates_to_instances.js) |
 | create instances | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/region_instance_group_managers.create_instances.js) |
 | delete | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/region_instance_group_managers.delete.js) |

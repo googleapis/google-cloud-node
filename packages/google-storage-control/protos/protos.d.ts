@@ -5396,6 +5396,10538 @@ export namespace google {
                 }
             }
         }
+
+        /** Namespace v2. */
+        namespace v2 {
+
+            /** Represents a Storage */
+            class Storage extends $protobuf.rpc.Service {
+
+                /**
+                 * Constructs a new Storage service.
+                 * @param rpcImpl RPC implementation
+                 * @param [requestDelimited=false] Whether requests are length-delimited
+                 * @param [responseDelimited=false] Whether responses are length-delimited
+                 */
+                constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                /**
+                 * Creates new Storage service using the specified rpc implementation.
+                 * @param rpcImpl RPC implementation
+                 * @param [requestDelimited=false] Whether requests are length-delimited
+                 * @param [responseDelimited=false] Whether responses are length-delimited
+                 * @returns RPC service. Useful where requests and/or responses are streamed.
+                 */
+                public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): Storage;
+
+                /**
+                 * Calls DeleteBucket.
+                 * @param request DeleteBucketRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and Empty
+                 */
+                public deleteBucket(request: google.storage.v2.IDeleteBucketRequest, callback: google.storage.v2.Storage.DeleteBucketCallback): void;
+
+                /**
+                 * Calls DeleteBucket.
+                 * @param request DeleteBucketRequest message or plain object
+                 * @returns Promise
+                 */
+                public deleteBucket(request: google.storage.v2.IDeleteBucketRequest): Promise<google.protobuf.Empty>;
+
+                /**
+                 * Calls GetBucket.
+                 * @param request GetBucketRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and Bucket
+                 */
+                public getBucket(request: google.storage.v2.IGetBucketRequest, callback: google.storage.v2.Storage.GetBucketCallback): void;
+
+                /**
+                 * Calls GetBucket.
+                 * @param request GetBucketRequest message or plain object
+                 * @returns Promise
+                 */
+                public getBucket(request: google.storage.v2.IGetBucketRequest): Promise<google.storage.v2.Bucket>;
+
+                /**
+                 * Calls CreateBucket.
+                 * @param request CreateBucketRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and Bucket
+                 */
+                public createBucket(request: google.storage.v2.ICreateBucketRequest, callback: google.storage.v2.Storage.CreateBucketCallback): void;
+
+                /**
+                 * Calls CreateBucket.
+                 * @param request CreateBucketRequest message or plain object
+                 * @returns Promise
+                 */
+                public createBucket(request: google.storage.v2.ICreateBucketRequest): Promise<google.storage.v2.Bucket>;
+
+                /**
+                 * Calls ListBuckets.
+                 * @param request ListBucketsRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and ListBucketsResponse
+                 */
+                public listBuckets(request: google.storage.v2.IListBucketsRequest, callback: google.storage.v2.Storage.ListBucketsCallback): void;
+
+                /**
+                 * Calls ListBuckets.
+                 * @param request ListBucketsRequest message or plain object
+                 * @returns Promise
+                 */
+                public listBuckets(request: google.storage.v2.IListBucketsRequest): Promise<google.storage.v2.ListBucketsResponse>;
+
+                /**
+                 * Calls LockBucketRetentionPolicy.
+                 * @param request LockBucketRetentionPolicyRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and Bucket
+                 */
+                public lockBucketRetentionPolicy(request: google.storage.v2.ILockBucketRetentionPolicyRequest, callback: google.storage.v2.Storage.LockBucketRetentionPolicyCallback): void;
+
+                /**
+                 * Calls LockBucketRetentionPolicy.
+                 * @param request LockBucketRetentionPolicyRequest message or plain object
+                 * @returns Promise
+                 */
+                public lockBucketRetentionPolicy(request: google.storage.v2.ILockBucketRetentionPolicyRequest): Promise<google.storage.v2.Bucket>;
+
+                /**
+                 * Calls GetIamPolicy.
+                 * @param request GetIamPolicyRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and Policy
+                 */
+                public getIamPolicy(request: google.iam.v1.IGetIamPolicyRequest, callback: google.storage.v2.Storage.GetIamPolicyCallback): void;
+
+                /**
+                 * Calls GetIamPolicy.
+                 * @param request GetIamPolicyRequest message or plain object
+                 * @returns Promise
+                 */
+                public getIamPolicy(request: google.iam.v1.IGetIamPolicyRequest): Promise<google.iam.v1.Policy>;
+
+                /**
+                 * Calls SetIamPolicy.
+                 * @param request SetIamPolicyRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and Policy
+                 */
+                public setIamPolicy(request: google.iam.v1.ISetIamPolicyRequest, callback: google.storage.v2.Storage.SetIamPolicyCallback): void;
+
+                /**
+                 * Calls SetIamPolicy.
+                 * @param request SetIamPolicyRequest message or plain object
+                 * @returns Promise
+                 */
+                public setIamPolicy(request: google.iam.v1.ISetIamPolicyRequest): Promise<google.iam.v1.Policy>;
+
+                /**
+                 * Calls TestIamPermissions.
+                 * @param request TestIamPermissionsRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and TestIamPermissionsResponse
+                 */
+                public testIamPermissions(request: google.iam.v1.ITestIamPermissionsRequest, callback: google.storage.v2.Storage.TestIamPermissionsCallback): void;
+
+                /**
+                 * Calls TestIamPermissions.
+                 * @param request TestIamPermissionsRequest message or plain object
+                 * @returns Promise
+                 */
+                public testIamPermissions(request: google.iam.v1.ITestIamPermissionsRequest): Promise<google.iam.v1.TestIamPermissionsResponse>;
+
+                /**
+                 * Calls UpdateBucket.
+                 * @param request UpdateBucketRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and Bucket
+                 */
+                public updateBucket(request: google.storage.v2.IUpdateBucketRequest, callback: google.storage.v2.Storage.UpdateBucketCallback): void;
+
+                /**
+                 * Calls UpdateBucket.
+                 * @param request UpdateBucketRequest message or plain object
+                 * @returns Promise
+                 */
+                public updateBucket(request: google.storage.v2.IUpdateBucketRequest): Promise<google.storage.v2.Bucket>;
+
+                /**
+                 * Calls ComposeObject.
+                 * @param request ComposeObjectRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and StorageObject
+                 */
+                public composeObject(request: google.storage.v2.IComposeObjectRequest, callback: google.storage.v2.Storage.ComposeObjectCallback): void;
+
+                /**
+                 * Calls ComposeObject.
+                 * @param request ComposeObjectRequest message or plain object
+                 * @returns Promise
+                 */
+                public composeObject(request: google.storage.v2.IComposeObjectRequest): Promise<google.storage.v2.StorageObject>;
+
+                /**
+                 * Calls DeleteObject.
+                 * @param request DeleteObjectRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and Empty
+                 */
+                public deleteObject(request: google.storage.v2.IDeleteObjectRequest, callback: google.storage.v2.Storage.DeleteObjectCallback): void;
+
+                /**
+                 * Calls DeleteObject.
+                 * @param request DeleteObjectRequest message or plain object
+                 * @returns Promise
+                 */
+                public deleteObject(request: google.storage.v2.IDeleteObjectRequest): Promise<google.protobuf.Empty>;
+
+                /**
+                 * Calls RestoreObject.
+                 * @param request RestoreObjectRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and StorageObject
+                 */
+                public restoreObject(request: google.storage.v2.IRestoreObjectRequest, callback: google.storage.v2.Storage.RestoreObjectCallback): void;
+
+                /**
+                 * Calls RestoreObject.
+                 * @param request RestoreObjectRequest message or plain object
+                 * @returns Promise
+                 */
+                public restoreObject(request: google.storage.v2.IRestoreObjectRequest): Promise<google.storage.v2.StorageObject>;
+
+                /**
+                 * Calls CancelResumableWrite.
+                 * @param request CancelResumableWriteRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and CancelResumableWriteResponse
+                 */
+                public cancelResumableWrite(request: google.storage.v2.ICancelResumableWriteRequest, callback: google.storage.v2.Storage.CancelResumableWriteCallback): void;
+
+                /**
+                 * Calls CancelResumableWrite.
+                 * @param request CancelResumableWriteRequest message or plain object
+                 * @returns Promise
+                 */
+                public cancelResumableWrite(request: google.storage.v2.ICancelResumableWriteRequest): Promise<google.storage.v2.CancelResumableWriteResponse>;
+
+                /**
+                 * Calls GetObject.
+                 * @param request GetObjectRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and StorageObject
+                 */
+                public getObject(request: google.storage.v2.IGetObjectRequest, callback: google.storage.v2.Storage.GetObjectCallback): void;
+
+                /**
+                 * Calls GetObject.
+                 * @param request GetObjectRequest message or plain object
+                 * @returns Promise
+                 */
+                public getObject(request: google.storage.v2.IGetObjectRequest): Promise<google.storage.v2.StorageObject>;
+
+                /**
+                 * Calls ReadObject.
+                 * @param request ReadObjectRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and ReadObjectResponse
+                 */
+                public readObject(request: google.storage.v2.IReadObjectRequest, callback: google.storage.v2.Storage.ReadObjectCallback): void;
+
+                /**
+                 * Calls ReadObject.
+                 * @param request ReadObjectRequest message or plain object
+                 * @returns Promise
+                 */
+                public readObject(request: google.storage.v2.IReadObjectRequest): Promise<google.storage.v2.ReadObjectResponse>;
+
+                /**
+                 * Calls BidiReadObject.
+                 * @param request BidiReadObjectRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and BidiReadObjectResponse
+                 */
+                public bidiReadObject(request: google.storage.v2.IBidiReadObjectRequest, callback: google.storage.v2.Storage.BidiReadObjectCallback): void;
+
+                /**
+                 * Calls BidiReadObject.
+                 * @param request BidiReadObjectRequest message or plain object
+                 * @returns Promise
+                 */
+                public bidiReadObject(request: google.storage.v2.IBidiReadObjectRequest): Promise<google.storage.v2.BidiReadObjectResponse>;
+
+                /**
+                 * Calls UpdateObject.
+                 * @param request UpdateObjectRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and StorageObject
+                 */
+                public updateObject(request: google.storage.v2.IUpdateObjectRequest, callback: google.storage.v2.Storage.UpdateObjectCallback): void;
+
+                /**
+                 * Calls UpdateObject.
+                 * @param request UpdateObjectRequest message or plain object
+                 * @returns Promise
+                 */
+                public updateObject(request: google.storage.v2.IUpdateObjectRequest): Promise<google.storage.v2.StorageObject>;
+
+                /**
+                 * Calls WriteObject.
+                 * @param request WriteObjectRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and WriteObjectResponse
+                 */
+                public writeObject(request: google.storage.v2.IWriteObjectRequest, callback: google.storage.v2.Storage.WriteObjectCallback): void;
+
+                /**
+                 * Calls WriteObject.
+                 * @param request WriteObjectRequest message or plain object
+                 * @returns Promise
+                 */
+                public writeObject(request: google.storage.v2.IWriteObjectRequest): Promise<google.storage.v2.WriteObjectResponse>;
+
+                /**
+                 * Calls BidiWriteObject.
+                 * @param request BidiWriteObjectRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and BidiWriteObjectResponse
+                 */
+                public bidiWriteObject(request: google.storage.v2.IBidiWriteObjectRequest, callback: google.storage.v2.Storage.BidiWriteObjectCallback): void;
+
+                /**
+                 * Calls BidiWriteObject.
+                 * @param request BidiWriteObjectRequest message or plain object
+                 * @returns Promise
+                 */
+                public bidiWriteObject(request: google.storage.v2.IBidiWriteObjectRequest): Promise<google.storage.v2.BidiWriteObjectResponse>;
+
+                /**
+                 * Calls ListObjects.
+                 * @param request ListObjectsRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and ListObjectsResponse
+                 */
+                public listObjects(request: google.storage.v2.IListObjectsRequest, callback: google.storage.v2.Storage.ListObjectsCallback): void;
+
+                /**
+                 * Calls ListObjects.
+                 * @param request ListObjectsRequest message or plain object
+                 * @returns Promise
+                 */
+                public listObjects(request: google.storage.v2.IListObjectsRequest): Promise<google.storage.v2.ListObjectsResponse>;
+
+                /**
+                 * Calls RewriteObject.
+                 * @param request RewriteObjectRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and RewriteResponse
+                 */
+                public rewriteObject(request: google.storage.v2.IRewriteObjectRequest, callback: google.storage.v2.Storage.RewriteObjectCallback): void;
+
+                /**
+                 * Calls RewriteObject.
+                 * @param request RewriteObjectRequest message or plain object
+                 * @returns Promise
+                 */
+                public rewriteObject(request: google.storage.v2.IRewriteObjectRequest): Promise<google.storage.v2.RewriteResponse>;
+
+                /**
+                 * Calls StartResumableWrite.
+                 * @param request StartResumableWriteRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and StartResumableWriteResponse
+                 */
+                public startResumableWrite(request: google.storage.v2.IStartResumableWriteRequest, callback: google.storage.v2.Storage.StartResumableWriteCallback): void;
+
+                /**
+                 * Calls StartResumableWrite.
+                 * @param request StartResumableWriteRequest message or plain object
+                 * @returns Promise
+                 */
+                public startResumableWrite(request: google.storage.v2.IStartResumableWriteRequest): Promise<google.storage.v2.StartResumableWriteResponse>;
+
+                /**
+                 * Calls QueryWriteStatus.
+                 * @param request QueryWriteStatusRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and QueryWriteStatusResponse
+                 */
+                public queryWriteStatus(request: google.storage.v2.IQueryWriteStatusRequest, callback: google.storage.v2.Storage.QueryWriteStatusCallback): void;
+
+                /**
+                 * Calls QueryWriteStatus.
+                 * @param request QueryWriteStatusRequest message or plain object
+                 * @returns Promise
+                 */
+                public queryWriteStatus(request: google.storage.v2.IQueryWriteStatusRequest): Promise<google.storage.v2.QueryWriteStatusResponse>;
+
+                /**
+                 * Calls MoveObject.
+                 * @param request MoveObjectRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and StorageObject
+                 */
+                public moveObject(request: google.storage.v2.IMoveObjectRequest, callback: google.storage.v2.Storage.MoveObjectCallback): void;
+
+                /**
+                 * Calls MoveObject.
+                 * @param request MoveObjectRequest message or plain object
+                 * @returns Promise
+                 */
+                public moveObject(request: google.storage.v2.IMoveObjectRequest): Promise<google.storage.v2.StorageObject>;
+            }
+
+            namespace Storage {
+
+                /**
+                 * Callback as used by {@link google.storage.v2.Storage|deleteBucket}.
+                 * @param error Error, if any
+                 * @param [response] Empty
+                 */
+                type DeleteBucketCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                /**
+                 * Callback as used by {@link google.storage.v2.Storage|getBucket}.
+                 * @param error Error, if any
+                 * @param [response] Bucket
+                 */
+                type GetBucketCallback = (error: (Error|null), response?: google.storage.v2.Bucket) => void;
+
+                /**
+                 * Callback as used by {@link google.storage.v2.Storage|createBucket}.
+                 * @param error Error, if any
+                 * @param [response] Bucket
+                 */
+                type CreateBucketCallback = (error: (Error|null), response?: google.storage.v2.Bucket) => void;
+
+                /**
+                 * Callback as used by {@link google.storage.v2.Storage|listBuckets}.
+                 * @param error Error, if any
+                 * @param [response] ListBucketsResponse
+                 */
+                type ListBucketsCallback = (error: (Error|null), response?: google.storage.v2.ListBucketsResponse) => void;
+
+                /**
+                 * Callback as used by {@link google.storage.v2.Storage|lockBucketRetentionPolicy}.
+                 * @param error Error, if any
+                 * @param [response] Bucket
+                 */
+                type LockBucketRetentionPolicyCallback = (error: (Error|null), response?: google.storage.v2.Bucket) => void;
+
+                /**
+                 * Callback as used by {@link google.storage.v2.Storage|getIamPolicy}.
+                 * @param error Error, if any
+                 * @param [response] Policy
+                 */
+                type GetIamPolicyCallback = (error: (Error|null), response?: google.iam.v1.Policy) => void;
+
+                /**
+                 * Callback as used by {@link google.storage.v2.Storage|setIamPolicy}.
+                 * @param error Error, if any
+                 * @param [response] Policy
+                 */
+                type SetIamPolicyCallback = (error: (Error|null), response?: google.iam.v1.Policy) => void;
+
+                /**
+                 * Callback as used by {@link google.storage.v2.Storage|testIamPermissions}.
+                 * @param error Error, if any
+                 * @param [response] TestIamPermissionsResponse
+                 */
+                type TestIamPermissionsCallback = (error: (Error|null), response?: google.iam.v1.TestIamPermissionsResponse) => void;
+
+                /**
+                 * Callback as used by {@link google.storage.v2.Storage|updateBucket}.
+                 * @param error Error, if any
+                 * @param [response] Bucket
+                 */
+                type UpdateBucketCallback = (error: (Error|null), response?: google.storage.v2.Bucket) => void;
+
+                /**
+                 * Callback as used by {@link google.storage.v2.Storage|composeObject}.
+                 * @param error Error, if any
+                 * @param [response] StorageObject
+                 */
+                type ComposeObjectCallback = (error: (Error|null), response?: google.storage.v2.StorageObject) => void;
+
+                /**
+                 * Callback as used by {@link google.storage.v2.Storage|deleteObject}.
+                 * @param error Error, if any
+                 * @param [response] Empty
+                 */
+                type DeleteObjectCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                /**
+                 * Callback as used by {@link google.storage.v2.Storage|restoreObject}.
+                 * @param error Error, if any
+                 * @param [response] StorageObject
+                 */
+                type RestoreObjectCallback = (error: (Error|null), response?: google.storage.v2.StorageObject) => void;
+
+                /**
+                 * Callback as used by {@link google.storage.v2.Storage|cancelResumableWrite}.
+                 * @param error Error, if any
+                 * @param [response] CancelResumableWriteResponse
+                 */
+                type CancelResumableWriteCallback = (error: (Error|null), response?: google.storage.v2.CancelResumableWriteResponse) => void;
+
+                /**
+                 * Callback as used by {@link google.storage.v2.Storage|getObject}.
+                 * @param error Error, if any
+                 * @param [response] StorageObject
+                 */
+                type GetObjectCallback = (error: (Error|null), response?: google.storage.v2.StorageObject) => void;
+
+                /**
+                 * Callback as used by {@link google.storage.v2.Storage|readObject}.
+                 * @param error Error, if any
+                 * @param [response] ReadObjectResponse
+                 */
+                type ReadObjectCallback = (error: (Error|null), response?: google.storage.v2.ReadObjectResponse) => void;
+
+                /**
+                 * Callback as used by {@link google.storage.v2.Storage|bidiReadObject}.
+                 * @param error Error, if any
+                 * @param [response] BidiReadObjectResponse
+                 */
+                type BidiReadObjectCallback = (error: (Error|null), response?: google.storage.v2.BidiReadObjectResponse) => void;
+
+                /**
+                 * Callback as used by {@link google.storage.v2.Storage|updateObject}.
+                 * @param error Error, if any
+                 * @param [response] StorageObject
+                 */
+                type UpdateObjectCallback = (error: (Error|null), response?: google.storage.v2.StorageObject) => void;
+
+                /**
+                 * Callback as used by {@link google.storage.v2.Storage|writeObject}.
+                 * @param error Error, if any
+                 * @param [response] WriteObjectResponse
+                 */
+                type WriteObjectCallback = (error: (Error|null), response?: google.storage.v2.WriteObjectResponse) => void;
+
+                /**
+                 * Callback as used by {@link google.storage.v2.Storage|bidiWriteObject}.
+                 * @param error Error, if any
+                 * @param [response] BidiWriteObjectResponse
+                 */
+                type BidiWriteObjectCallback = (error: (Error|null), response?: google.storage.v2.BidiWriteObjectResponse) => void;
+
+                /**
+                 * Callback as used by {@link google.storage.v2.Storage|listObjects}.
+                 * @param error Error, if any
+                 * @param [response] ListObjectsResponse
+                 */
+                type ListObjectsCallback = (error: (Error|null), response?: google.storage.v2.ListObjectsResponse) => void;
+
+                /**
+                 * Callback as used by {@link google.storage.v2.Storage|rewriteObject}.
+                 * @param error Error, if any
+                 * @param [response] RewriteResponse
+                 */
+                type RewriteObjectCallback = (error: (Error|null), response?: google.storage.v2.RewriteResponse) => void;
+
+                /**
+                 * Callback as used by {@link google.storage.v2.Storage|startResumableWrite}.
+                 * @param error Error, if any
+                 * @param [response] StartResumableWriteResponse
+                 */
+                type StartResumableWriteCallback = (error: (Error|null), response?: google.storage.v2.StartResumableWriteResponse) => void;
+
+                /**
+                 * Callback as used by {@link google.storage.v2.Storage|queryWriteStatus}.
+                 * @param error Error, if any
+                 * @param [response] QueryWriteStatusResponse
+                 */
+                type QueryWriteStatusCallback = (error: (Error|null), response?: google.storage.v2.QueryWriteStatusResponse) => void;
+
+                /**
+                 * Callback as used by {@link google.storage.v2.Storage|moveObject}.
+                 * @param error Error, if any
+                 * @param [response] StorageObject
+                 */
+                type MoveObjectCallback = (error: (Error|null), response?: google.storage.v2.StorageObject) => void;
+            }
+
+            /** Properties of a DeleteBucketRequest. */
+            interface IDeleteBucketRequest {
+
+                /** DeleteBucketRequest name */
+                name?: (string|null);
+
+                /** DeleteBucketRequest ifMetagenerationMatch */
+                ifMetagenerationMatch?: (number|Long|string|null);
+
+                /** DeleteBucketRequest ifMetagenerationNotMatch */
+                ifMetagenerationNotMatch?: (number|Long|string|null);
+            }
+
+            /** Represents a DeleteBucketRequest. */
+            class DeleteBucketRequest implements IDeleteBucketRequest {
+
+                /**
+                 * Constructs a new DeleteBucketRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IDeleteBucketRequest);
+
+                /** DeleteBucketRequest name. */
+                public name: string;
+
+                /** DeleteBucketRequest ifMetagenerationMatch. */
+                public ifMetagenerationMatch?: (number|Long|string|null);
+
+                /** DeleteBucketRequest ifMetagenerationNotMatch. */
+                public ifMetagenerationNotMatch?: (number|Long|string|null);
+
+                /**
+                 * Creates a new DeleteBucketRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns DeleteBucketRequest instance
+                 */
+                public static create(properties?: google.storage.v2.IDeleteBucketRequest): google.storage.v2.DeleteBucketRequest;
+
+                /**
+                 * Encodes the specified DeleteBucketRequest message. Does not implicitly {@link google.storage.v2.DeleteBucketRequest.verify|verify} messages.
+                 * @param message DeleteBucketRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IDeleteBucketRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified DeleteBucketRequest message, length delimited. Does not implicitly {@link google.storage.v2.DeleteBucketRequest.verify|verify} messages.
+                 * @param message DeleteBucketRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IDeleteBucketRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a DeleteBucketRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns DeleteBucketRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.DeleteBucketRequest;
+
+                /**
+                 * Decodes a DeleteBucketRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns DeleteBucketRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.DeleteBucketRequest;
+
+                /**
+                 * Verifies a DeleteBucketRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a DeleteBucketRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns DeleteBucketRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.DeleteBucketRequest;
+
+                /**
+                 * Creates a plain object from a DeleteBucketRequest message. Also converts values to other types if specified.
+                 * @param message DeleteBucketRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.DeleteBucketRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this DeleteBucketRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for DeleteBucketRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a GetBucketRequest. */
+            interface IGetBucketRequest {
+
+                /** GetBucketRequest name */
+                name?: (string|null);
+
+                /** GetBucketRequest ifMetagenerationMatch */
+                ifMetagenerationMatch?: (number|Long|string|null);
+
+                /** GetBucketRequest ifMetagenerationNotMatch */
+                ifMetagenerationNotMatch?: (number|Long|string|null);
+
+                /** GetBucketRequest readMask */
+                readMask?: (google.protobuf.IFieldMask|null);
+            }
+
+            /** Represents a GetBucketRequest. */
+            class GetBucketRequest implements IGetBucketRequest {
+
+                /**
+                 * Constructs a new GetBucketRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IGetBucketRequest);
+
+                /** GetBucketRequest name. */
+                public name: string;
+
+                /** GetBucketRequest ifMetagenerationMatch. */
+                public ifMetagenerationMatch?: (number|Long|string|null);
+
+                /** GetBucketRequest ifMetagenerationNotMatch. */
+                public ifMetagenerationNotMatch?: (number|Long|string|null);
+
+                /** GetBucketRequest readMask. */
+                public readMask?: (google.protobuf.IFieldMask|null);
+
+                /**
+                 * Creates a new GetBucketRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns GetBucketRequest instance
+                 */
+                public static create(properties?: google.storage.v2.IGetBucketRequest): google.storage.v2.GetBucketRequest;
+
+                /**
+                 * Encodes the specified GetBucketRequest message. Does not implicitly {@link google.storage.v2.GetBucketRequest.verify|verify} messages.
+                 * @param message GetBucketRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IGetBucketRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified GetBucketRequest message, length delimited. Does not implicitly {@link google.storage.v2.GetBucketRequest.verify|verify} messages.
+                 * @param message GetBucketRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IGetBucketRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a GetBucketRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns GetBucketRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.GetBucketRequest;
+
+                /**
+                 * Decodes a GetBucketRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns GetBucketRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.GetBucketRequest;
+
+                /**
+                 * Verifies a GetBucketRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a GetBucketRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns GetBucketRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.GetBucketRequest;
+
+                /**
+                 * Creates a plain object from a GetBucketRequest message. Also converts values to other types if specified.
+                 * @param message GetBucketRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.GetBucketRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this GetBucketRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for GetBucketRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a CreateBucketRequest. */
+            interface ICreateBucketRequest {
+
+                /** CreateBucketRequest parent */
+                parent?: (string|null);
+
+                /** CreateBucketRequest bucket */
+                bucket?: (google.storage.v2.IBucket|null);
+
+                /** CreateBucketRequest bucketId */
+                bucketId?: (string|null);
+
+                /** CreateBucketRequest predefinedAcl */
+                predefinedAcl?: (string|null);
+
+                /** CreateBucketRequest predefinedDefaultObjectAcl */
+                predefinedDefaultObjectAcl?: (string|null);
+
+                /** CreateBucketRequest enableObjectRetention */
+                enableObjectRetention?: (boolean|null);
+            }
+
+            /** Represents a CreateBucketRequest. */
+            class CreateBucketRequest implements ICreateBucketRequest {
+
+                /**
+                 * Constructs a new CreateBucketRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.ICreateBucketRequest);
+
+                /** CreateBucketRequest parent. */
+                public parent: string;
+
+                /** CreateBucketRequest bucket. */
+                public bucket?: (google.storage.v2.IBucket|null);
+
+                /** CreateBucketRequest bucketId. */
+                public bucketId: string;
+
+                /** CreateBucketRequest predefinedAcl. */
+                public predefinedAcl: string;
+
+                /** CreateBucketRequest predefinedDefaultObjectAcl. */
+                public predefinedDefaultObjectAcl: string;
+
+                /** CreateBucketRequest enableObjectRetention. */
+                public enableObjectRetention: boolean;
+
+                /**
+                 * Creates a new CreateBucketRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns CreateBucketRequest instance
+                 */
+                public static create(properties?: google.storage.v2.ICreateBucketRequest): google.storage.v2.CreateBucketRequest;
+
+                /**
+                 * Encodes the specified CreateBucketRequest message. Does not implicitly {@link google.storage.v2.CreateBucketRequest.verify|verify} messages.
+                 * @param message CreateBucketRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.ICreateBucketRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified CreateBucketRequest message, length delimited. Does not implicitly {@link google.storage.v2.CreateBucketRequest.verify|verify} messages.
+                 * @param message CreateBucketRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.ICreateBucketRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a CreateBucketRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns CreateBucketRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.CreateBucketRequest;
+
+                /**
+                 * Decodes a CreateBucketRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns CreateBucketRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.CreateBucketRequest;
+
+                /**
+                 * Verifies a CreateBucketRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a CreateBucketRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns CreateBucketRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.CreateBucketRequest;
+
+                /**
+                 * Creates a plain object from a CreateBucketRequest message. Also converts values to other types if specified.
+                 * @param message CreateBucketRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.CreateBucketRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this CreateBucketRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for CreateBucketRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ListBucketsRequest. */
+            interface IListBucketsRequest {
+
+                /** ListBucketsRequest parent */
+                parent?: (string|null);
+
+                /** ListBucketsRequest pageSize */
+                pageSize?: (number|null);
+
+                /** ListBucketsRequest pageToken */
+                pageToken?: (string|null);
+
+                /** ListBucketsRequest prefix */
+                prefix?: (string|null);
+
+                /** ListBucketsRequest readMask */
+                readMask?: (google.protobuf.IFieldMask|null);
+
+                /** ListBucketsRequest returnPartialSuccess */
+                returnPartialSuccess?: (boolean|null);
+            }
+
+            /** Represents a ListBucketsRequest. */
+            class ListBucketsRequest implements IListBucketsRequest {
+
+                /**
+                 * Constructs a new ListBucketsRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IListBucketsRequest);
+
+                /** ListBucketsRequest parent. */
+                public parent: string;
+
+                /** ListBucketsRequest pageSize. */
+                public pageSize: number;
+
+                /** ListBucketsRequest pageToken. */
+                public pageToken: string;
+
+                /** ListBucketsRequest prefix. */
+                public prefix: string;
+
+                /** ListBucketsRequest readMask. */
+                public readMask?: (google.protobuf.IFieldMask|null);
+
+                /** ListBucketsRequest returnPartialSuccess. */
+                public returnPartialSuccess: boolean;
+
+                /**
+                 * Creates a new ListBucketsRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ListBucketsRequest instance
+                 */
+                public static create(properties?: google.storage.v2.IListBucketsRequest): google.storage.v2.ListBucketsRequest;
+
+                /**
+                 * Encodes the specified ListBucketsRequest message. Does not implicitly {@link google.storage.v2.ListBucketsRequest.verify|verify} messages.
+                 * @param message ListBucketsRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IListBucketsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ListBucketsRequest message, length delimited. Does not implicitly {@link google.storage.v2.ListBucketsRequest.verify|verify} messages.
+                 * @param message ListBucketsRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IListBucketsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ListBucketsRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ListBucketsRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.ListBucketsRequest;
+
+                /**
+                 * Decodes a ListBucketsRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ListBucketsRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.ListBucketsRequest;
+
+                /**
+                 * Verifies a ListBucketsRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ListBucketsRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ListBucketsRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.ListBucketsRequest;
+
+                /**
+                 * Creates a plain object from a ListBucketsRequest message. Also converts values to other types if specified.
+                 * @param message ListBucketsRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.ListBucketsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ListBucketsRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ListBucketsRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ListBucketsResponse. */
+            interface IListBucketsResponse {
+
+                /** ListBucketsResponse buckets */
+                buckets?: (google.storage.v2.IBucket[]|null);
+
+                /** ListBucketsResponse nextPageToken */
+                nextPageToken?: (string|null);
+
+                /** ListBucketsResponse unreachable */
+                unreachable?: (string[]|null);
+            }
+
+            /** Represents a ListBucketsResponse. */
+            class ListBucketsResponse implements IListBucketsResponse {
+
+                /**
+                 * Constructs a new ListBucketsResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IListBucketsResponse);
+
+                /** ListBucketsResponse buckets. */
+                public buckets: google.storage.v2.IBucket[];
+
+                /** ListBucketsResponse nextPageToken. */
+                public nextPageToken: string;
+
+                /** ListBucketsResponse unreachable. */
+                public unreachable: string[];
+
+                /**
+                 * Creates a new ListBucketsResponse instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ListBucketsResponse instance
+                 */
+                public static create(properties?: google.storage.v2.IListBucketsResponse): google.storage.v2.ListBucketsResponse;
+
+                /**
+                 * Encodes the specified ListBucketsResponse message. Does not implicitly {@link google.storage.v2.ListBucketsResponse.verify|verify} messages.
+                 * @param message ListBucketsResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IListBucketsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ListBucketsResponse message, length delimited. Does not implicitly {@link google.storage.v2.ListBucketsResponse.verify|verify} messages.
+                 * @param message ListBucketsResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IListBucketsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ListBucketsResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ListBucketsResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.ListBucketsResponse;
+
+                /**
+                 * Decodes a ListBucketsResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ListBucketsResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.ListBucketsResponse;
+
+                /**
+                 * Verifies a ListBucketsResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ListBucketsResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ListBucketsResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.ListBucketsResponse;
+
+                /**
+                 * Creates a plain object from a ListBucketsResponse message. Also converts values to other types if specified.
+                 * @param message ListBucketsResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.ListBucketsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ListBucketsResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ListBucketsResponse
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a LockBucketRetentionPolicyRequest. */
+            interface ILockBucketRetentionPolicyRequest {
+
+                /** LockBucketRetentionPolicyRequest bucket */
+                bucket?: (string|null);
+
+                /** LockBucketRetentionPolicyRequest ifMetagenerationMatch */
+                ifMetagenerationMatch?: (number|Long|string|null);
+            }
+
+            /** Represents a LockBucketRetentionPolicyRequest. */
+            class LockBucketRetentionPolicyRequest implements ILockBucketRetentionPolicyRequest {
+
+                /**
+                 * Constructs a new LockBucketRetentionPolicyRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.ILockBucketRetentionPolicyRequest);
+
+                /** LockBucketRetentionPolicyRequest bucket. */
+                public bucket: string;
+
+                /** LockBucketRetentionPolicyRequest ifMetagenerationMatch. */
+                public ifMetagenerationMatch: (number|Long|string);
+
+                /**
+                 * Creates a new LockBucketRetentionPolicyRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns LockBucketRetentionPolicyRequest instance
+                 */
+                public static create(properties?: google.storage.v2.ILockBucketRetentionPolicyRequest): google.storage.v2.LockBucketRetentionPolicyRequest;
+
+                /**
+                 * Encodes the specified LockBucketRetentionPolicyRequest message. Does not implicitly {@link google.storage.v2.LockBucketRetentionPolicyRequest.verify|verify} messages.
+                 * @param message LockBucketRetentionPolicyRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.ILockBucketRetentionPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified LockBucketRetentionPolicyRequest message, length delimited. Does not implicitly {@link google.storage.v2.LockBucketRetentionPolicyRequest.verify|verify} messages.
+                 * @param message LockBucketRetentionPolicyRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.ILockBucketRetentionPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a LockBucketRetentionPolicyRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns LockBucketRetentionPolicyRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.LockBucketRetentionPolicyRequest;
+
+                /**
+                 * Decodes a LockBucketRetentionPolicyRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns LockBucketRetentionPolicyRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.LockBucketRetentionPolicyRequest;
+
+                /**
+                 * Verifies a LockBucketRetentionPolicyRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a LockBucketRetentionPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns LockBucketRetentionPolicyRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.LockBucketRetentionPolicyRequest;
+
+                /**
+                 * Creates a plain object from a LockBucketRetentionPolicyRequest message. Also converts values to other types if specified.
+                 * @param message LockBucketRetentionPolicyRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.LockBucketRetentionPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this LockBucketRetentionPolicyRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for LockBucketRetentionPolicyRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of an UpdateBucketRequest. */
+            interface IUpdateBucketRequest {
+
+                /** UpdateBucketRequest bucket */
+                bucket?: (google.storage.v2.IBucket|null);
+
+                /** UpdateBucketRequest ifMetagenerationMatch */
+                ifMetagenerationMatch?: (number|Long|string|null);
+
+                /** UpdateBucketRequest ifMetagenerationNotMatch */
+                ifMetagenerationNotMatch?: (number|Long|string|null);
+
+                /** UpdateBucketRequest predefinedAcl */
+                predefinedAcl?: (string|null);
+
+                /** UpdateBucketRequest predefinedDefaultObjectAcl */
+                predefinedDefaultObjectAcl?: (string|null);
+
+                /** UpdateBucketRequest updateMask */
+                updateMask?: (google.protobuf.IFieldMask|null);
+            }
+
+            /** Represents an UpdateBucketRequest. */
+            class UpdateBucketRequest implements IUpdateBucketRequest {
+
+                /**
+                 * Constructs a new UpdateBucketRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IUpdateBucketRequest);
+
+                /** UpdateBucketRequest bucket. */
+                public bucket?: (google.storage.v2.IBucket|null);
+
+                /** UpdateBucketRequest ifMetagenerationMatch. */
+                public ifMetagenerationMatch?: (number|Long|string|null);
+
+                /** UpdateBucketRequest ifMetagenerationNotMatch. */
+                public ifMetagenerationNotMatch?: (number|Long|string|null);
+
+                /** UpdateBucketRequest predefinedAcl. */
+                public predefinedAcl: string;
+
+                /** UpdateBucketRequest predefinedDefaultObjectAcl. */
+                public predefinedDefaultObjectAcl: string;
+
+                /** UpdateBucketRequest updateMask. */
+                public updateMask?: (google.protobuf.IFieldMask|null);
+
+                /**
+                 * Creates a new UpdateBucketRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns UpdateBucketRequest instance
+                 */
+                public static create(properties?: google.storage.v2.IUpdateBucketRequest): google.storage.v2.UpdateBucketRequest;
+
+                /**
+                 * Encodes the specified UpdateBucketRequest message. Does not implicitly {@link google.storage.v2.UpdateBucketRequest.verify|verify} messages.
+                 * @param message UpdateBucketRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IUpdateBucketRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified UpdateBucketRequest message, length delimited. Does not implicitly {@link google.storage.v2.UpdateBucketRequest.verify|verify} messages.
+                 * @param message UpdateBucketRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IUpdateBucketRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an UpdateBucketRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns UpdateBucketRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.UpdateBucketRequest;
+
+                /**
+                 * Decodes an UpdateBucketRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns UpdateBucketRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.UpdateBucketRequest;
+
+                /**
+                 * Verifies an UpdateBucketRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an UpdateBucketRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns UpdateBucketRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.UpdateBucketRequest;
+
+                /**
+                 * Creates a plain object from an UpdateBucketRequest message. Also converts values to other types if specified.
+                 * @param message UpdateBucketRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.UpdateBucketRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this UpdateBucketRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for UpdateBucketRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ComposeObjectRequest. */
+            interface IComposeObjectRequest {
+
+                /** ComposeObjectRequest destination */
+                destination?: (google.storage.v2.IStorageObject|null);
+
+                /** ComposeObjectRequest sourceObjects */
+                sourceObjects?: (google.storage.v2.ComposeObjectRequest.ISourceObject[]|null);
+
+                /** ComposeObjectRequest destinationPredefinedAcl */
+                destinationPredefinedAcl?: (string|null);
+
+                /** ComposeObjectRequest ifGenerationMatch */
+                ifGenerationMatch?: (number|Long|string|null);
+
+                /** ComposeObjectRequest ifMetagenerationMatch */
+                ifMetagenerationMatch?: (number|Long|string|null);
+
+                /** ComposeObjectRequest kmsKey */
+                kmsKey?: (string|null);
+
+                /** ComposeObjectRequest commonObjectRequestParams */
+                commonObjectRequestParams?: (google.storage.v2.ICommonObjectRequestParams|null);
+
+                /** ComposeObjectRequest objectChecksums */
+                objectChecksums?: (google.storage.v2.IObjectChecksums|null);
+            }
+
+            /** Represents a ComposeObjectRequest. */
+            class ComposeObjectRequest implements IComposeObjectRequest {
+
+                /**
+                 * Constructs a new ComposeObjectRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IComposeObjectRequest);
+
+                /** ComposeObjectRequest destination. */
+                public destination?: (google.storage.v2.IStorageObject|null);
+
+                /** ComposeObjectRequest sourceObjects. */
+                public sourceObjects: google.storage.v2.ComposeObjectRequest.ISourceObject[];
+
+                /** ComposeObjectRequest destinationPredefinedAcl. */
+                public destinationPredefinedAcl: string;
+
+                /** ComposeObjectRequest ifGenerationMatch. */
+                public ifGenerationMatch?: (number|Long|string|null);
+
+                /** ComposeObjectRequest ifMetagenerationMatch. */
+                public ifMetagenerationMatch?: (number|Long|string|null);
+
+                /** ComposeObjectRequest kmsKey. */
+                public kmsKey: string;
+
+                /** ComposeObjectRequest commonObjectRequestParams. */
+                public commonObjectRequestParams?: (google.storage.v2.ICommonObjectRequestParams|null);
+
+                /** ComposeObjectRequest objectChecksums. */
+                public objectChecksums?: (google.storage.v2.IObjectChecksums|null);
+
+                /**
+                 * Creates a new ComposeObjectRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ComposeObjectRequest instance
+                 */
+                public static create(properties?: google.storage.v2.IComposeObjectRequest): google.storage.v2.ComposeObjectRequest;
+
+                /**
+                 * Encodes the specified ComposeObjectRequest message. Does not implicitly {@link google.storage.v2.ComposeObjectRequest.verify|verify} messages.
+                 * @param message ComposeObjectRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IComposeObjectRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ComposeObjectRequest message, length delimited. Does not implicitly {@link google.storage.v2.ComposeObjectRequest.verify|verify} messages.
+                 * @param message ComposeObjectRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IComposeObjectRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ComposeObjectRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ComposeObjectRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.ComposeObjectRequest;
+
+                /**
+                 * Decodes a ComposeObjectRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ComposeObjectRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.ComposeObjectRequest;
+
+                /**
+                 * Verifies a ComposeObjectRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ComposeObjectRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ComposeObjectRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.ComposeObjectRequest;
+
+                /**
+                 * Creates a plain object from a ComposeObjectRequest message. Also converts values to other types if specified.
+                 * @param message ComposeObjectRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.ComposeObjectRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ComposeObjectRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ComposeObjectRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace ComposeObjectRequest {
+
+                /** Properties of a SourceObject. */
+                interface ISourceObject {
+
+                    /** SourceObject name */
+                    name?: (string|null);
+
+                    /** SourceObject generation */
+                    generation?: (number|Long|string|null);
+
+                    /** SourceObject objectPreconditions */
+                    objectPreconditions?: (google.storage.v2.ComposeObjectRequest.SourceObject.IObjectPreconditions|null);
+                }
+
+                /** Represents a SourceObject. */
+                class SourceObject implements ISourceObject {
+
+                    /**
+                     * Constructs a new SourceObject.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.v2.ComposeObjectRequest.ISourceObject);
+
+                    /** SourceObject name. */
+                    public name: string;
+
+                    /** SourceObject generation. */
+                    public generation: (number|Long|string);
+
+                    /** SourceObject objectPreconditions. */
+                    public objectPreconditions?: (google.storage.v2.ComposeObjectRequest.SourceObject.IObjectPreconditions|null);
+
+                    /**
+                     * Creates a new SourceObject instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SourceObject instance
+                     */
+                    public static create(properties?: google.storage.v2.ComposeObjectRequest.ISourceObject): google.storage.v2.ComposeObjectRequest.SourceObject;
+
+                    /**
+                     * Encodes the specified SourceObject message. Does not implicitly {@link google.storage.v2.ComposeObjectRequest.SourceObject.verify|verify} messages.
+                     * @param message SourceObject message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.v2.ComposeObjectRequest.ISourceObject, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SourceObject message, length delimited. Does not implicitly {@link google.storage.v2.ComposeObjectRequest.SourceObject.verify|verify} messages.
+                     * @param message SourceObject message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.v2.ComposeObjectRequest.ISourceObject, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SourceObject message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SourceObject
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.ComposeObjectRequest.SourceObject;
+
+                    /**
+                     * Decodes a SourceObject message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SourceObject
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.ComposeObjectRequest.SourceObject;
+
+                    /**
+                     * Verifies a SourceObject message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SourceObject message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SourceObject
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.v2.ComposeObjectRequest.SourceObject;
+
+                    /**
+                     * Creates a plain object from a SourceObject message. Also converts values to other types if specified.
+                     * @param message SourceObject
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.v2.ComposeObjectRequest.SourceObject, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SourceObject to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SourceObject
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SourceObject {
+
+                    /** Properties of an ObjectPreconditions. */
+                    interface IObjectPreconditions {
+
+                        /** ObjectPreconditions ifGenerationMatch */
+                        ifGenerationMatch?: (number|Long|string|null);
+                    }
+
+                    /** Represents an ObjectPreconditions. */
+                    class ObjectPreconditions implements IObjectPreconditions {
+
+                        /**
+                         * Constructs a new ObjectPreconditions.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.storage.v2.ComposeObjectRequest.SourceObject.IObjectPreconditions);
+
+                        /** ObjectPreconditions ifGenerationMatch. */
+                        public ifGenerationMatch?: (number|Long|string|null);
+
+                        /**
+                         * Creates a new ObjectPreconditions instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ObjectPreconditions instance
+                         */
+                        public static create(properties?: google.storage.v2.ComposeObjectRequest.SourceObject.IObjectPreconditions): google.storage.v2.ComposeObjectRequest.SourceObject.ObjectPreconditions;
+
+                        /**
+                         * Encodes the specified ObjectPreconditions message. Does not implicitly {@link google.storage.v2.ComposeObjectRequest.SourceObject.ObjectPreconditions.verify|verify} messages.
+                         * @param message ObjectPreconditions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.storage.v2.ComposeObjectRequest.SourceObject.IObjectPreconditions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ObjectPreconditions message, length delimited. Does not implicitly {@link google.storage.v2.ComposeObjectRequest.SourceObject.ObjectPreconditions.verify|verify} messages.
+                         * @param message ObjectPreconditions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.storage.v2.ComposeObjectRequest.SourceObject.IObjectPreconditions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ObjectPreconditions message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ObjectPreconditions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.ComposeObjectRequest.SourceObject.ObjectPreconditions;
+
+                        /**
+                         * Decodes an ObjectPreconditions message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ObjectPreconditions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.ComposeObjectRequest.SourceObject.ObjectPreconditions;
+
+                        /**
+                         * Verifies an ObjectPreconditions message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ObjectPreconditions message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ObjectPreconditions
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.storage.v2.ComposeObjectRequest.SourceObject.ObjectPreconditions;
+
+                        /**
+                         * Creates a plain object from an ObjectPreconditions message. Also converts values to other types if specified.
+                         * @param message ObjectPreconditions
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.storage.v2.ComposeObjectRequest.SourceObject.ObjectPreconditions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ObjectPreconditions to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ObjectPreconditions
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+            }
+
+            /** Properties of a DeleteObjectRequest. */
+            interface IDeleteObjectRequest {
+
+                /** DeleteObjectRequest bucket */
+                bucket?: (string|null);
+
+                /** DeleteObjectRequest object */
+                object?: (string|null);
+
+                /** DeleteObjectRequest generation */
+                generation?: (number|Long|string|null);
+
+                /** DeleteObjectRequest ifGenerationMatch */
+                ifGenerationMatch?: (number|Long|string|null);
+
+                /** DeleteObjectRequest ifGenerationNotMatch */
+                ifGenerationNotMatch?: (number|Long|string|null);
+
+                /** DeleteObjectRequest ifMetagenerationMatch */
+                ifMetagenerationMatch?: (number|Long|string|null);
+
+                /** DeleteObjectRequest ifMetagenerationNotMatch */
+                ifMetagenerationNotMatch?: (number|Long|string|null);
+
+                /** DeleteObjectRequest commonObjectRequestParams */
+                commonObjectRequestParams?: (google.storage.v2.ICommonObjectRequestParams|null);
+            }
+
+            /** Represents a DeleteObjectRequest. */
+            class DeleteObjectRequest implements IDeleteObjectRequest {
+
+                /**
+                 * Constructs a new DeleteObjectRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IDeleteObjectRequest);
+
+                /** DeleteObjectRequest bucket. */
+                public bucket: string;
+
+                /** DeleteObjectRequest object. */
+                public object: string;
+
+                /** DeleteObjectRequest generation. */
+                public generation: (number|Long|string);
+
+                /** DeleteObjectRequest ifGenerationMatch. */
+                public ifGenerationMatch?: (number|Long|string|null);
+
+                /** DeleteObjectRequest ifGenerationNotMatch. */
+                public ifGenerationNotMatch?: (number|Long|string|null);
+
+                /** DeleteObjectRequest ifMetagenerationMatch. */
+                public ifMetagenerationMatch?: (number|Long|string|null);
+
+                /** DeleteObjectRequest ifMetagenerationNotMatch. */
+                public ifMetagenerationNotMatch?: (number|Long|string|null);
+
+                /** DeleteObjectRequest commonObjectRequestParams. */
+                public commonObjectRequestParams?: (google.storage.v2.ICommonObjectRequestParams|null);
+
+                /**
+                 * Creates a new DeleteObjectRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns DeleteObjectRequest instance
+                 */
+                public static create(properties?: google.storage.v2.IDeleteObjectRequest): google.storage.v2.DeleteObjectRequest;
+
+                /**
+                 * Encodes the specified DeleteObjectRequest message. Does not implicitly {@link google.storage.v2.DeleteObjectRequest.verify|verify} messages.
+                 * @param message DeleteObjectRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IDeleteObjectRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified DeleteObjectRequest message, length delimited. Does not implicitly {@link google.storage.v2.DeleteObjectRequest.verify|verify} messages.
+                 * @param message DeleteObjectRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IDeleteObjectRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a DeleteObjectRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns DeleteObjectRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.DeleteObjectRequest;
+
+                /**
+                 * Decodes a DeleteObjectRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns DeleteObjectRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.DeleteObjectRequest;
+
+                /**
+                 * Verifies a DeleteObjectRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a DeleteObjectRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns DeleteObjectRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.DeleteObjectRequest;
+
+                /**
+                 * Creates a plain object from a DeleteObjectRequest message. Also converts values to other types if specified.
+                 * @param message DeleteObjectRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.DeleteObjectRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this DeleteObjectRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for DeleteObjectRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a RestoreObjectRequest. */
+            interface IRestoreObjectRequest {
+
+                /** RestoreObjectRequest bucket */
+                bucket?: (string|null);
+
+                /** RestoreObjectRequest object */
+                object?: (string|null);
+
+                /** RestoreObjectRequest generation */
+                generation?: (number|Long|string|null);
+
+                /** RestoreObjectRequest restoreToken */
+                restoreToken?: (string|null);
+
+                /** RestoreObjectRequest ifGenerationMatch */
+                ifGenerationMatch?: (number|Long|string|null);
+
+                /** RestoreObjectRequest ifGenerationNotMatch */
+                ifGenerationNotMatch?: (number|Long|string|null);
+
+                /** RestoreObjectRequest ifMetagenerationMatch */
+                ifMetagenerationMatch?: (number|Long|string|null);
+
+                /** RestoreObjectRequest ifMetagenerationNotMatch */
+                ifMetagenerationNotMatch?: (number|Long|string|null);
+
+                /** RestoreObjectRequest copySourceAcl */
+                copySourceAcl?: (boolean|null);
+
+                /** RestoreObjectRequest commonObjectRequestParams */
+                commonObjectRequestParams?: (google.storage.v2.ICommonObjectRequestParams|null);
+            }
+
+            /** Represents a RestoreObjectRequest. */
+            class RestoreObjectRequest implements IRestoreObjectRequest {
+
+                /**
+                 * Constructs a new RestoreObjectRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IRestoreObjectRequest);
+
+                /** RestoreObjectRequest bucket. */
+                public bucket: string;
+
+                /** RestoreObjectRequest object. */
+                public object: string;
+
+                /** RestoreObjectRequest generation. */
+                public generation: (number|Long|string);
+
+                /** RestoreObjectRequest restoreToken. */
+                public restoreToken: string;
+
+                /** RestoreObjectRequest ifGenerationMatch. */
+                public ifGenerationMatch?: (number|Long|string|null);
+
+                /** RestoreObjectRequest ifGenerationNotMatch. */
+                public ifGenerationNotMatch?: (number|Long|string|null);
+
+                /** RestoreObjectRequest ifMetagenerationMatch. */
+                public ifMetagenerationMatch?: (number|Long|string|null);
+
+                /** RestoreObjectRequest ifMetagenerationNotMatch. */
+                public ifMetagenerationNotMatch?: (number|Long|string|null);
+
+                /** RestoreObjectRequest copySourceAcl. */
+                public copySourceAcl?: (boolean|null);
+
+                /** RestoreObjectRequest commonObjectRequestParams. */
+                public commonObjectRequestParams?: (google.storage.v2.ICommonObjectRequestParams|null);
+
+                /**
+                 * Creates a new RestoreObjectRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns RestoreObjectRequest instance
+                 */
+                public static create(properties?: google.storage.v2.IRestoreObjectRequest): google.storage.v2.RestoreObjectRequest;
+
+                /**
+                 * Encodes the specified RestoreObjectRequest message. Does not implicitly {@link google.storage.v2.RestoreObjectRequest.verify|verify} messages.
+                 * @param message RestoreObjectRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IRestoreObjectRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified RestoreObjectRequest message, length delimited. Does not implicitly {@link google.storage.v2.RestoreObjectRequest.verify|verify} messages.
+                 * @param message RestoreObjectRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IRestoreObjectRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a RestoreObjectRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns RestoreObjectRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.RestoreObjectRequest;
+
+                /**
+                 * Decodes a RestoreObjectRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns RestoreObjectRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.RestoreObjectRequest;
+
+                /**
+                 * Verifies a RestoreObjectRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a RestoreObjectRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns RestoreObjectRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.RestoreObjectRequest;
+
+                /**
+                 * Creates a plain object from a RestoreObjectRequest message. Also converts values to other types if specified.
+                 * @param message RestoreObjectRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.RestoreObjectRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this RestoreObjectRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for RestoreObjectRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a CancelResumableWriteRequest. */
+            interface ICancelResumableWriteRequest {
+
+                /** CancelResumableWriteRequest uploadId */
+                uploadId?: (string|null);
+            }
+
+            /** Represents a CancelResumableWriteRequest. */
+            class CancelResumableWriteRequest implements ICancelResumableWriteRequest {
+
+                /**
+                 * Constructs a new CancelResumableWriteRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.ICancelResumableWriteRequest);
+
+                /** CancelResumableWriteRequest uploadId. */
+                public uploadId: string;
+
+                /**
+                 * Creates a new CancelResumableWriteRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns CancelResumableWriteRequest instance
+                 */
+                public static create(properties?: google.storage.v2.ICancelResumableWriteRequest): google.storage.v2.CancelResumableWriteRequest;
+
+                /**
+                 * Encodes the specified CancelResumableWriteRequest message. Does not implicitly {@link google.storage.v2.CancelResumableWriteRequest.verify|verify} messages.
+                 * @param message CancelResumableWriteRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.ICancelResumableWriteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified CancelResumableWriteRequest message, length delimited. Does not implicitly {@link google.storage.v2.CancelResumableWriteRequest.verify|verify} messages.
+                 * @param message CancelResumableWriteRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.ICancelResumableWriteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a CancelResumableWriteRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns CancelResumableWriteRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.CancelResumableWriteRequest;
+
+                /**
+                 * Decodes a CancelResumableWriteRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns CancelResumableWriteRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.CancelResumableWriteRequest;
+
+                /**
+                 * Verifies a CancelResumableWriteRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a CancelResumableWriteRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns CancelResumableWriteRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.CancelResumableWriteRequest;
+
+                /**
+                 * Creates a plain object from a CancelResumableWriteRequest message. Also converts values to other types if specified.
+                 * @param message CancelResumableWriteRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.CancelResumableWriteRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this CancelResumableWriteRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for CancelResumableWriteRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a CancelResumableWriteResponse. */
+            interface ICancelResumableWriteResponse {
+            }
+
+            /** Represents a CancelResumableWriteResponse. */
+            class CancelResumableWriteResponse implements ICancelResumableWriteResponse {
+
+                /**
+                 * Constructs a new CancelResumableWriteResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.ICancelResumableWriteResponse);
+
+                /**
+                 * Creates a new CancelResumableWriteResponse instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns CancelResumableWriteResponse instance
+                 */
+                public static create(properties?: google.storage.v2.ICancelResumableWriteResponse): google.storage.v2.CancelResumableWriteResponse;
+
+                /**
+                 * Encodes the specified CancelResumableWriteResponse message. Does not implicitly {@link google.storage.v2.CancelResumableWriteResponse.verify|verify} messages.
+                 * @param message CancelResumableWriteResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.ICancelResumableWriteResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified CancelResumableWriteResponse message, length delimited. Does not implicitly {@link google.storage.v2.CancelResumableWriteResponse.verify|verify} messages.
+                 * @param message CancelResumableWriteResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.ICancelResumableWriteResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a CancelResumableWriteResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns CancelResumableWriteResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.CancelResumableWriteResponse;
+
+                /**
+                 * Decodes a CancelResumableWriteResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns CancelResumableWriteResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.CancelResumableWriteResponse;
+
+                /**
+                 * Verifies a CancelResumableWriteResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a CancelResumableWriteResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns CancelResumableWriteResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.CancelResumableWriteResponse;
+
+                /**
+                 * Creates a plain object from a CancelResumableWriteResponse message. Also converts values to other types if specified.
+                 * @param message CancelResumableWriteResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.CancelResumableWriteResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this CancelResumableWriteResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for CancelResumableWriteResponse
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ReadObjectRequest. */
+            interface IReadObjectRequest {
+
+                /** ReadObjectRequest bucket */
+                bucket?: (string|null);
+
+                /** ReadObjectRequest object */
+                object?: (string|null);
+
+                /** ReadObjectRequest generation */
+                generation?: (number|Long|string|null);
+
+                /** ReadObjectRequest readOffset */
+                readOffset?: (number|Long|string|null);
+
+                /** ReadObjectRequest readLimit */
+                readLimit?: (number|Long|string|null);
+
+                /** ReadObjectRequest ifGenerationMatch */
+                ifGenerationMatch?: (number|Long|string|null);
+
+                /** ReadObjectRequest ifGenerationNotMatch */
+                ifGenerationNotMatch?: (number|Long|string|null);
+
+                /** ReadObjectRequest ifMetagenerationMatch */
+                ifMetagenerationMatch?: (number|Long|string|null);
+
+                /** ReadObjectRequest ifMetagenerationNotMatch */
+                ifMetagenerationNotMatch?: (number|Long|string|null);
+
+                /** ReadObjectRequest commonObjectRequestParams */
+                commonObjectRequestParams?: (google.storage.v2.ICommonObjectRequestParams|null);
+
+                /** ReadObjectRequest readMask */
+                readMask?: (google.protobuf.IFieldMask|null);
+            }
+
+            /** Represents a ReadObjectRequest. */
+            class ReadObjectRequest implements IReadObjectRequest {
+
+                /**
+                 * Constructs a new ReadObjectRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IReadObjectRequest);
+
+                /** ReadObjectRequest bucket. */
+                public bucket: string;
+
+                /** ReadObjectRequest object. */
+                public object: string;
+
+                /** ReadObjectRequest generation. */
+                public generation: (number|Long|string);
+
+                /** ReadObjectRequest readOffset. */
+                public readOffset: (number|Long|string);
+
+                /** ReadObjectRequest readLimit. */
+                public readLimit: (number|Long|string);
+
+                /** ReadObjectRequest ifGenerationMatch. */
+                public ifGenerationMatch?: (number|Long|string|null);
+
+                /** ReadObjectRequest ifGenerationNotMatch. */
+                public ifGenerationNotMatch?: (number|Long|string|null);
+
+                /** ReadObjectRequest ifMetagenerationMatch. */
+                public ifMetagenerationMatch?: (number|Long|string|null);
+
+                /** ReadObjectRequest ifMetagenerationNotMatch. */
+                public ifMetagenerationNotMatch?: (number|Long|string|null);
+
+                /** ReadObjectRequest commonObjectRequestParams. */
+                public commonObjectRequestParams?: (google.storage.v2.ICommonObjectRequestParams|null);
+
+                /** ReadObjectRequest readMask. */
+                public readMask?: (google.protobuf.IFieldMask|null);
+
+                /**
+                 * Creates a new ReadObjectRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ReadObjectRequest instance
+                 */
+                public static create(properties?: google.storage.v2.IReadObjectRequest): google.storage.v2.ReadObjectRequest;
+
+                /**
+                 * Encodes the specified ReadObjectRequest message. Does not implicitly {@link google.storage.v2.ReadObjectRequest.verify|verify} messages.
+                 * @param message ReadObjectRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IReadObjectRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ReadObjectRequest message, length delimited. Does not implicitly {@link google.storage.v2.ReadObjectRequest.verify|verify} messages.
+                 * @param message ReadObjectRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IReadObjectRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ReadObjectRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ReadObjectRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.ReadObjectRequest;
+
+                /**
+                 * Decodes a ReadObjectRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ReadObjectRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.ReadObjectRequest;
+
+                /**
+                 * Verifies a ReadObjectRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ReadObjectRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ReadObjectRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.ReadObjectRequest;
+
+                /**
+                 * Creates a plain object from a ReadObjectRequest message. Also converts values to other types if specified.
+                 * @param message ReadObjectRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.ReadObjectRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ReadObjectRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ReadObjectRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a GetObjectRequest. */
+            interface IGetObjectRequest {
+
+                /** GetObjectRequest bucket */
+                bucket?: (string|null);
+
+                /** GetObjectRequest object */
+                object?: (string|null);
+
+                /** GetObjectRequest generation */
+                generation?: (number|Long|string|null);
+
+                /** GetObjectRequest softDeleted */
+                softDeleted?: (boolean|null);
+
+                /** GetObjectRequest ifGenerationMatch */
+                ifGenerationMatch?: (number|Long|string|null);
+
+                /** GetObjectRequest ifGenerationNotMatch */
+                ifGenerationNotMatch?: (number|Long|string|null);
+
+                /** GetObjectRequest ifMetagenerationMatch */
+                ifMetagenerationMatch?: (number|Long|string|null);
+
+                /** GetObjectRequest ifMetagenerationNotMatch */
+                ifMetagenerationNotMatch?: (number|Long|string|null);
+
+                /** GetObjectRequest commonObjectRequestParams */
+                commonObjectRequestParams?: (google.storage.v2.ICommonObjectRequestParams|null);
+
+                /** GetObjectRequest readMask */
+                readMask?: (google.protobuf.IFieldMask|null);
+
+                /** GetObjectRequest restoreToken */
+                restoreToken?: (string|null);
+            }
+
+            /** Represents a GetObjectRequest. */
+            class GetObjectRequest implements IGetObjectRequest {
+
+                /**
+                 * Constructs a new GetObjectRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IGetObjectRequest);
+
+                /** GetObjectRequest bucket. */
+                public bucket: string;
+
+                /** GetObjectRequest object. */
+                public object: string;
+
+                /** GetObjectRequest generation. */
+                public generation: (number|Long|string);
+
+                /** GetObjectRequest softDeleted. */
+                public softDeleted?: (boolean|null);
+
+                /** GetObjectRequest ifGenerationMatch. */
+                public ifGenerationMatch?: (number|Long|string|null);
+
+                /** GetObjectRequest ifGenerationNotMatch. */
+                public ifGenerationNotMatch?: (number|Long|string|null);
+
+                /** GetObjectRequest ifMetagenerationMatch. */
+                public ifMetagenerationMatch?: (number|Long|string|null);
+
+                /** GetObjectRequest ifMetagenerationNotMatch. */
+                public ifMetagenerationNotMatch?: (number|Long|string|null);
+
+                /** GetObjectRequest commonObjectRequestParams. */
+                public commonObjectRequestParams?: (google.storage.v2.ICommonObjectRequestParams|null);
+
+                /** GetObjectRequest readMask. */
+                public readMask?: (google.protobuf.IFieldMask|null);
+
+                /** GetObjectRequest restoreToken. */
+                public restoreToken: string;
+
+                /**
+                 * Creates a new GetObjectRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns GetObjectRequest instance
+                 */
+                public static create(properties?: google.storage.v2.IGetObjectRequest): google.storage.v2.GetObjectRequest;
+
+                /**
+                 * Encodes the specified GetObjectRequest message. Does not implicitly {@link google.storage.v2.GetObjectRequest.verify|verify} messages.
+                 * @param message GetObjectRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IGetObjectRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified GetObjectRequest message, length delimited. Does not implicitly {@link google.storage.v2.GetObjectRequest.verify|verify} messages.
+                 * @param message GetObjectRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IGetObjectRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a GetObjectRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns GetObjectRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.GetObjectRequest;
+
+                /**
+                 * Decodes a GetObjectRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns GetObjectRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.GetObjectRequest;
+
+                /**
+                 * Verifies a GetObjectRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a GetObjectRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns GetObjectRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.GetObjectRequest;
+
+                /**
+                 * Creates a plain object from a GetObjectRequest message. Also converts values to other types if specified.
+                 * @param message GetObjectRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.GetObjectRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this GetObjectRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for GetObjectRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ReadObjectResponse. */
+            interface IReadObjectResponse {
+
+                /** ReadObjectResponse checksummedData */
+                checksummedData?: (google.storage.v2.IChecksummedData|null);
+
+                /** ReadObjectResponse objectChecksums */
+                objectChecksums?: (google.storage.v2.IObjectChecksums|null);
+
+                /** ReadObjectResponse contentRange */
+                contentRange?: (google.storage.v2.IContentRange|null);
+
+                /** ReadObjectResponse metadata */
+                metadata?: (google.storage.v2.IStorageObject|null);
+            }
+
+            /** Represents a ReadObjectResponse. */
+            class ReadObjectResponse implements IReadObjectResponse {
+
+                /**
+                 * Constructs a new ReadObjectResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IReadObjectResponse);
+
+                /** ReadObjectResponse checksummedData. */
+                public checksummedData?: (google.storage.v2.IChecksummedData|null);
+
+                /** ReadObjectResponse objectChecksums. */
+                public objectChecksums?: (google.storage.v2.IObjectChecksums|null);
+
+                /** ReadObjectResponse contentRange. */
+                public contentRange?: (google.storage.v2.IContentRange|null);
+
+                /** ReadObjectResponse metadata. */
+                public metadata?: (google.storage.v2.IStorageObject|null);
+
+                /**
+                 * Creates a new ReadObjectResponse instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ReadObjectResponse instance
+                 */
+                public static create(properties?: google.storage.v2.IReadObjectResponse): google.storage.v2.ReadObjectResponse;
+
+                /**
+                 * Encodes the specified ReadObjectResponse message. Does not implicitly {@link google.storage.v2.ReadObjectResponse.verify|verify} messages.
+                 * @param message ReadObjectResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IReadObjectResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ReadObjectResponse message, length delimited. Does not implicitly {@link google.storage.v2.ReadObjectResponse.verify|verify} messages.
+                 * @param message ReadObjectResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IReadObjectResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ReadObjectResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ReadObjectResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.ReadObjectResponse;
+
+                /**
+                 * Decodes a ReadObjectResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ReadObjectResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.ReadObjectResponse;
+
+                /**
+                 * Verifies a ReadObjectResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ReadObjectResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ReadObjectResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.ReadObjectResponse;
+
+                /**
+                 * Creates a plain object from a ReadObjectResponse message. Also converts values to other types if specified.
+                 * @param message ReadObjectResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.ReadObjectResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ReadObjectResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ReadObjectResponse
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a BidiReadObjectSpec. */
+            interface IBidiReadObjectSpec {
+
+                /** BidiReadObjectSpec bucket */
+                bucket?: (string|null);
+
+                /** BidiReadObjectSpec object */
+                object?: (string|null);
+
+                /** BidiReadObjectSpec generation */
+                generation?: (number|Long|string|null);
+
+                /** BidiReadObjectSpec ifGenerationMatch */
+                ifGenerationMatch?: (number|Long|string|null);
+
+                /** BidiReadObjectSpec ifGenerationNotMatch */
+                ifGenerationNotMatch?: (number|Long|string|null);
+
+                /** BidiReadObjectSpec ifMetagenerationMatch */
+                ifMetagenerationMatch?: (number|Long|string|null);
+
+                /** BidiReadObjectSpec ifMetagenerationNotMatch */
+                ifMetagenerationNotMatch?: (number|Long|string|null);
+
+                /** BidiReadObjectSpec commonObjectRequestParams */
+                commonObjectRequestParams?: (google.storage.v2.ICommonObjectRequestParams|null);
+
+                /** BidiReadObjectSpec readMask */
+                readMask?: (google.protobuf.IFieldMask|null);
+
+                /** BidiReadObjectSpec readHandle */
+                readHandle?: (google.storage.v2.IBidiReadHandle|null);
+
+                /** BidiReadObjectSpec routingToken */
+                routingToken?: (string|null);
+            }
+
+            /** Represents a BidiReadObjectSpec. */
+            class BidiReadObjectSpec implements IBidiReadObjectSpec {
+
+                /**
+                 * Constructs a new BidiReadObjectSpec.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IBidiReadObjectSpec);
+
+                /** BidiReadObjectSpec bucket. */
+                public bucket: string;
+
+                /** BidiReadObjectSpec object. */
+                public object: string;
+
+                /** BidiReadObjectSpec generation. */
+                public generation: (number|Long|string);
+
+                /** BidiReadObjectSpec ifGenerationMatch. */
+                public ifGenerationMatch?: (number|Long|string|null);
+
+                /** BidiReadObjectSpec ifGenerationNotMatch. */
+                public ifGenerationNotMatch?: (number|Long|string|null);
+
+                /** BidiReadObjectSpec ifMetagenerationMatch. */
+                public ifMetagenerationMatch?: (number|Long|string|null);
+
+                /** BidiReadObjectSpec ifMetagenerationNotMatch. */
+                public ifMetagenerationNotMatch?: (number|Long|string|null);
+
+                /** BidiReadObjectSpec commonObjectRequestParams. */
+                public commonObjectRequestParams?: (google.storage.v2.ICommonObjectRequestParams|null);
+
+                /** BidiReadObjectSpec readMask. */
+                public readMask?: (google.protobuf.IFieldMask|null);
+
+                /** BidiReadObjectSpec readHandle. */
+                public readHandle?: (google.storage.v2.IBidiReadHandle|null);
+
+                /** BidiReadObjectSpec routingToken. */
+                public routingToken?: (string|null);
+
+                /**
+                 * Creates a new BidiReadObjectSpec instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns BidiReadObjectSpec instance
+                 */
+                public static create(properties?: google.storage.v2.IBidiReadObjectSpec): google.storage.v2.BidiReadObjectSpec;
+
+                /**
+                 * Encodes the specified BidiReadObjectSpec message. Does not implicitly {@link google.storage.v2.BidiReadObjectSpec.verify|verify} messages.
+                 * @param message BidiReadObjectSpec message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IBidiReadObjectSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified BidiReadObjectSpec message, length delimited. Does not implicitly {@link google.storage.v2.BidiReadObjectSpec.verify|verify} messages.
+                 * @param message BidiReadObjectSpec message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IBidiReadObjectSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a BidiReadObjectSpec message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns BidiReadObjectSpec
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.BidiReadObjectSpec;
+
+                /**
+                 * Decodes a BidiReadObjectSpec message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns BidiReadObjectSpec
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.BidiReadObjectSpec;
+
+                /**
+                 * Verifies a BidiReadObjectSpec message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a BidiReadObjectSpec message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns BidiReadObjectSpec
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.BidiReadObjectSpec;
+
+                /**
+                 * Creates a plain object from a BidiReadObjectSpec message. Also converts values to other types if specified.
+                 * @param message BidiReadObjectSpec
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.BidiReadObjectSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this BidiReadObjectSpec to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for BidiReadObjectSpec
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a BidiReadObjectRequest. */
+            interface IBidiReadObjectRequest {
+
+                /** BidiReadObjectRequest readObjectSpec */
+                readObjectSpec?: (google.storage.v2.IBidiReadObjectSpec|null);
+
+                /** BidiReadObjectRequest readRanges */
+                readRanges?: (google.storage.v2.IReadRange[]|null);
+            }
+
+            /** Represents a BidiReadObjectRequest. */
+            class BidiReadObjectRequest implements IBidiReadObjectRequest {
+
+                /**
+                 * Constructs a new BidiReadObjectRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IBidiReadObjectRequest);
+
+                /** BidiReadObjectRequest readObjectSpec. */
+                public readObjectSpec?: (google.storage.v2.IBidiReadObjectSpec|null);
+
+                /** BidiReadObjectRequest readRanges. */
+                public readRanges: google.storage.v2.IReadRange[];
+
+                /**
+                 * Creates a new BidiReadObjectRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns BidiReadObjectRequest instance
+                 */
+                public static create(properties?: google.storage.v2.IBidiReadObjectRequest): google.storage.v2.BidiReadObjectRequest;
+
+                /**
+                 * Encodes the specified BidiReadObjectRequest message. Does not implicitly {@link google.storage.v2.BidiReadObjectRequest.verify|verify} messages.
+                 * @param message BidiReadObjectRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IBidiReadObjectRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified BidiReadObjectRequest message, length delimited. Does not implicitly {@link google.storage.v2.BidiReadObjectRequest.verify|verify} messages.
+                 * @param message BidiReadObjectRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IBidiReadObjectRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a BidiReadObjectRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns BidiReadObjectRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.BidiReadObjectRequest;
+
+                /**
+                 * Decodes a BidiReadObjectRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns BidiReadObjectRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.BidiReadObjectRequest;
+
+                /**
+                 * Verifies a BidiReadObjectRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a BidiReadObjectRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns BidiReadObjectRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.BidiReadObjectRequest;
+
+                /**
+                 * Creates a plain object from a BidiReadObjectRequest message. Also converts values to other types if specified.
+                 * @param message BidiReadObjectRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.BidiReadObjectRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this BidiReadObjectRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for BidiReadObjectRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a BidiReadObjectResponse. */
+            interface IBidiReadObjectResponse {
+
+                /** BidiReadObjectResponse objectDataRanges */
+                objectDataRanges?: (google.storage.v2.IObjectRangeData[]|null);
+
+                /** BidiReadObjectResponse metadata */
+                metadata?: (google.storage.v2.IStorageObject|null);
+
+                /** BidiReadObjectResponse readHandle */
+                readHandle?: (google.storage.v2.IBidiReadHandle|null);
+            }
+
+            /** Represents a BidiReadObjectResponse. */
+            class BidiReadObjectResponse implements IBidiReadObjectResponse {
+
+                /**
+                 * Constructs a new BidiReadObjectResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IBidiReadObjectResponse);
+
+                /** BidiReadObjectResponse objectDataRanges. */
+                public objectDataRanges: google.storage.v2.IObjectRangeData[];
+
+                /** BidiReadObjectResponse metadata. */
+                public metadata?: (google.storage.v2.IStorageObject|null);
+
+                /** BidiReadObjectResponse readHandle. */
+                public readHandle?: (google.storage.v2.IBidiReadHandle|null);
+
+                /**
+                 * Creates a new BidiReadObjectResponse instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns BidiReadObjectResponse instance
+                 */
+                public static create(properties?: google.storage.v2.IBidiReadObjectResponse): google.storage.v2.BidiReadObjectResponse;
+
+                /**
+                 * Encodes the specified BidiReadObjectResponse message. Does not implicitly {@link google.storage.v2.BidiReadObjectResponse.verify|verify} messages.
+                 * @param message BidiReadObjectResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IBidiReadObjectResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified BidiReadObjectResponse message, length delimited. Does not implicitly {@link google.storage.v2.BidiReadObjectResponse.verify|verify} messages.
+                 * @param message BidiReadObjectResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IBidiReadObjectResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a BidiReadObjectResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns BidiReadObjectResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.BidiReadObjectResponse;
+
+                /**
+                 * Decodes a BidiReadObjectResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns BidiReadObjectResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.BidiReadObjectResponse;
+
+                /**
+                 * Verifies a BidiReadObjectResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a BidiReadObjectResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns BidiReadObjectResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.BidiReadObjectResponse;
+
+                /**
+                 * Creates a plain object from a BidiReadObjectResponse message. Also converts values to other types if specified.
+                 * @param message BidiReadObjectResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.BidiReadObjectResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this BidiReadObjectResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for BidiReadObjectResponse
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a BidiReadObjectRedirectedError. */
+            interface IBidiReadObjectRedirectedError {
+
+                /** BidiReadObjectRedirectedError readHandle */
+                readHandle?: (google.storage.v2.IBidiReadHandle|null);
+
+                /** BidiReadObjectRedirectedError routingToken */
+                routingToken?: (string|null);
+            }
+
+            /** Represents a BidiReadObjectRedirectedError. */
+            class BidiReadObjectRedirectedError implements IBidiReadObjectRedirectedError {
+
+                /**
+                 * Constructs a new BidiReadObjectRedirectedError.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IBidiReadObjectRedirectedError);
+
+                /** BidiReadObjectRedirectedError readHandle. */
+                public readHandle?: (google.storage.v2.IBidiReadHandle|null);
+
+                /** BidiReadObjectRedirectedError routingToken. */
+                public routingToken?: (string|null);
+
+                /**
+                 * Creates a new BidiReadObjectRedirectedError instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns BidiReadObjectRedirectedError instance
+                 */
+                public static create(properties?: google.storage.v2.IBidiReadObjectRedirectedError): google.storage.v2.BidiReadObjectRedirectedError;
+
+                /**
+                 * Encodes the specified BidiReadObjectRedirectedError message. Does not implicitly {@link google.storage.v2.BidiReadObjectRedirectedError.verify|verify} messages.
+                 * @param message BidiReadObjectRedirectedError message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IBidiReadObjectRedirectedError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified BidiReadObjectRedirectedError message, length delimited. Does not implicitly {@link google.storage.v2.BidiReadObjectRedirectedError.verify|verify} messages.
+                 * @param message BidiReadObjectRedirectedError message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IBidiReadObjectRedirectedError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a BidiReadObjectRedirectedError message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns BidiReadObjectRedirectedError
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.BidiReadObjectRedirectedError;
+
+                /**
+                 * Decodes a BidiReadObjectRedirectedError message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns BidiReadObjectRedirectedError
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.BidiReadObjectRedirectedError;
+
+                /**
+                 * Verifies a BidiReadObjectRedirectedError message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a BidiReadObjectRedirectedError message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns BidiReadObjectRedirectedError
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.BidiReadObjectRedirectedError;
+
+                /**
+                 * Creates a plain object from a BidiReadObjectRedirectedError message. Also converts values to other types if specified.
+                 * @param message BidiReadObjectRedirectedError
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.BidiReadObjectRedirectedError, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this BidiReadObjectRedirectedError to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for BidiReadObjectRedirectedError
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a BidiWriteObjectRedirectedError. */
+            interface IBidiWriteObjectRedirectedError {
+
+                /** BidiWriteObjectRedirectedError routingToken */
+                routingToken?: (string|null);
+
+                /** BidiWriteObjectRedirectedError writeHandle */
+                writeHandle?: (google.storage.v2.IBidiWriteHandle|null);
+
+                /** BidiWriteObjectRedirectedError generation */
+                generation?: (number|Long|string|null);
+            }
+
+            /** Represents a BidiWriteObjectRedirectedError. */
+            class BidiWriteObjectRedirectedError implements IBidiWriteObjectRedirectedError {
+
+                /**
+                 * Constructs a new BidiWriteObjectRedirectedError.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IBidiWriteObjectRedirectedError);
+
+                /** BidiWriteObjectRedirectedError routingToken. */
+                public routingToken?: (string|null);
+
+                /** BidiWriteObjectRedirectedError writeHandle. */
+                public writeHandle?: (google.storage.v2.IBidiWriteHandle|null);
+
+                /** BidiWriteObjectRedirectedError generation. */
+                public generation?: (number|Long|string|null);
+
+                /**
+                 * Creates a new BidiWriteObjectRedirectedError instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns BidiWriteObjectRedirectedError instance
+                 */
+                public static create(properties?: google.storage.v2.IBidiWriteObjectRedirectedError): google.storage.v2.BidiWriteObjectRedirectedError;
+
+                /**
+                 * Encodes the specified BidiWriteObjectRedirectedError message. Does not implicitly {@link google.storage.v2.BidiWriteObjectRedirectedError.verify|verify} messages.
+                 * @param message BidiWriteObjectRedirectedError message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IBidiWriteObjectRedirectedError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified BidiWriteObjectRedirectedError message, length delimited. Does not implicitly {@link google.storage.v2.BidiWriteObjectRedirectedError.verify|verify} messages.
+                 * @param message BidiWriteObjectRedirectedError message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IBidiWriteObjectRedirectedError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a BidiWriteObjectRedirectedError message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns BidiWriteObjectRedirectedError
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.BidiWriteObjectRedirectedError;
+
+                /**
+                 * Decodes a BidiWriteObjectRedirectedError message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns BidiWriteObjectRedirectedError
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.BidiWriteObjectRedirectedError;
+
+                /**
+                 * Verifies a BidiWriteObjectRedirectedError message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a BidiWriteObjectRedirectedError message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns BidiWriteObjectRedirectedError
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.BidiWriteObjectRedirectedError;
+
+                /**
+                 * Creates a plain object from a BidiWriteObjectRedirectedError message. Also converts values to other types if specified.
+                 * @param message BidiWriteObjectRedirectedError
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.BidiWriteObjectRedirectedError, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this BidiWriteObjectRedirectedError to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for BidiWriteObjectRedirectedError
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a BidiReadObjectError. */
+            interface IBidiReadObjectError {
+
+                /** BidiReadObjectError readRangeErrors */
+                readRangeErrors?: (google.storage.v2.IReadRangeError[]|null);
+            }
+
+            /** Represents a BidiReadObjectError. */
+            class BidiReadObjectError implements IBidiReadObjectError {
+
+                /**
+                 * Constructs a new BidiReadObjectError.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IBidiReadObjectError);
+
+                /** BidiReadObjectError readRangeErrors. */
+                public readRangeErrors: google.storage.v2.IReadRangeError[];
+
+                /**
+                 * Creates a new BidiReadObjectError instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns BidiReadObjectError instance
+                 */
+                public static create(properties?: google.storage.v2.IBidiReadObjectError): google.storage.v2.BidiReadObjectError;
+
+                /**
+                 * Encodes the specified BidiReadObjectError message. Does not implicitly {@link google.storage.v2.BidiReadObjectError.verify|verify} messages.
+                 * @param message BidiReadObjectError message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IBidiReadObjectError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified BidiReadObjectError message, length delimited. Does not implicitly {@link google.storage.v2.BidiReadObjectError.verify|verify} messages.
+                 * @param message BidiReadObjectError message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IBidiReadObjectError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a BidiReadObjectError message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns BidiReadObjectError
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.BidiReadObjectError;
+
+                /**
+                 * Decodes a BidiReadObjectError message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns BidiReadObjectError
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.BidiReadObjectError;
+
+                /**
+                 * Verifies a BidiReadObjectError message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a BidiReadObjectError message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns BidiReadObjectError
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.BidiReadObjectError;
+
+                /**
+                 * Creates a plain object from a BidiReadObjectError message. Also converts values to other types if specified.
+                 * @param message BidiReadObjectError
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.BidiReadObjectError, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this BidiReadObjectError to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for BidiReadObjectError
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ReadRangeError. */
+            interface IReadRangeError {
+
+                /** ReadRangeError readId */
+                readId?: (number|Long|string|null);
+
+                /** ReadRangeError status */
+                status?: (google.rpc.IStatus|null);
+            }
+
+            /** Represents a ReadRangeError. */
+            class ReadRangeError implements IReadRangeError {
+
+                /**
+                 * Constructs a new ReadRangeError.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IReadRangeError);
+
+                /** ReadRangeError readId. */
+                public readId: (number|Long|string);
+
+                /** ReadRangeError status. */
+                public status?: (google.rpc.IStatus|null);
+
+                /**
+                 * Creates a new ReadRangeError instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ReadRangeError instance
+                 */
+                public static create(properties?: google.storage.v2.IReadRangeError): google.storage.v2.ReadRangeError;
+
+                /**
+                 * Encodes the specified ReadRangeError message. Does not implicitly {@link google.storage.v2.ReadRangeError.verify|verify} messages.
+                 * @param message ReadRangeError message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IReadRangeError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ReadRangeError message, length delimited. Does not implicitly {@link google.storage.v2.ReadRangeError.verify|verify} messages.
+                 * @param message ReadRangeError message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IReadRangeError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ReadRangeError message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ReadRangeError
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.ReadRangeError;
+
+                /**
+                 * Decodes a ReadRangeError message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ReadRangeError
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.ReadRangeError;
+
+                /**
+                 * Verifies a ReadRangeError message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ReadRangeError message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ReadRangeError
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.ReadRangeError;
+
+                /**
+                 * Creates a plain object from a ReadRangeError message. Also converts values to other types if specified.
+                 * @param message ReadRangeError
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.ReadRangeError, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ReadRangeError to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ReadRangeError
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ReadRange. */
+            interface IReadRange {
+
+                /** ReadRange readOffset */
+                readOffset?: (number|Long|string|null);
+
+                /** ReadRange readLength */
+                readLength?: (number|Long|string|null);
+
+                /** ReadRange readId */
+                readId?: (number|Long|string|null);
+            }
+
+            /** Represents a ReadRange. */
+            class ReadRange implements IReadRange {
+
+                /**
+                 * Constructs a new ReadRange.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IReadRange);
+
+                /** ReadRange readOffset. */
+                public readOffset: (number|Long|string);
+
+                /** ReadRange readLength. */
+                public readLength: (number|Long|string);
+
+                /** ReadRange readId. */
+                public readId: (number|Long|string);
+
+                /**
+                 * Creates a new ReadRange instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ReadRange instance
+                 */
+                public static create(properties?: google.storage.v2.IReadRange): google.storage.v2.ReadRange;
+
+                /**
+                 * Encodes the specified ReadRange message. Does not implicitly {@link google.storage.v2.ReadRange.verify|verify} messages.
+                 * @param message ReadRange message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IReadRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ReadRange message, length delimited. Does not implicitly {@link google.storage.v2.ReadRange.verify|verify} messages.
+                 * @param message ReadRange message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IReadRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ReadRange message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ReadRange
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.ReadRange;
+
+                /**
+                 * Decodes a ReadRange message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ReadRange
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.ReadRange;
+
+                /**
+                 * Verifies a ReadRange message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ReadRange message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ReadRange
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.ReadRange;
+
+                /**
+                 * Creates a plain object from a ReadRange message. Also converts values to other types if specified.
+                 * @param message ReadRange
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.ReadRange, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ReadRange to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ReadRange
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of an ObjectRangeData. */
+            interface IObjectRangeData {
+
+                /** ObjectRangeData checksummedData */
+                checksummedData?: (google.storage.v2.IChecksummedData|null);
+
+                /** ObjectRangeData readRange */
+                readRange?: (google.storage.v2.IReadRange|null);
+
+                /** ObjectRangeData rangeEnd */
+                rangeEnd?: (boolean|null);
+            }
+
+            /** Represents an ObjectRangeData. */
+            class ObjectRangeData implements IObjectRangeData {
+
+                /**
+                 * Constructs a new ObjectRangeData.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IObjectRangeData);
+
+                /** ObjectRangeData checksummedData. */
+                public checksummedData?: (google.storage.v2.IChecksummedData|null);
+
+                /** ObjectRangeData readRange. */
+                public readRange?: (google.storage.v2.IReadRange|null);
+
+                /** ObjectRangeData rangeEnd. */
+                public rangeEnd: boolean;
+
+                /**
+                 * Creates a new ObjectRangeData instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ObjectRangeData instance
+                 */
+                public static create(properties?: google.storage.v2.IObjectRangeData): google.storage.v2.ObjectRangeData;
+
+                /**
+                 * Encodes the specified ObjectRangeData message. Does not implicitly {@link google.storage.v2.ObjectRangeData.verify|verify} messages.
+                 * @param message ObjectRangeData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IObjectRangeData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ObjectRangeData message, length delimited. Does not implicitly {@link google.storage.v2.ObjectRangeData.verify|verify} messages.
+                 * @param message ObjectRangeData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IObjectRangeData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an ObjectRangeData message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ObjectRangeData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.ObjectRangeData;
+
+                /**
+                 * Decodes an ObjectRangeData message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ObjectRangeData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.ObjectRangeData;
+
+                /**
+                 * Verifies an ObjectRangeData message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an ObjectRangeData message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ObjectRangeData
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.ObjectRangeData;
+
+                /**
+                 * Creates a plain object from an ObjectRangeData message. Also converts values to other types if specified.
+                 * @param message ObjectRangeData
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.ObjectRangeData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ObjectRangeData to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ObjectRangeData
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a BidiReadHandle. */
+            interface IBidiReadHandle {
+
+                /** BidiReadHandle handle */
+                handle?: (Uint8Array|Buffer|string|null);
+            }
+
+            /** Represents a BidiReadHandle. */
+            class BidiReadHandle implements IBidiReadHandle {
+
+                /**
+                 * Constructs a new BidiReadHandle.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IBidiReadHandle);
+
+                /** BidiReadHandle handle. */
+                public handle: (Uint8Array|Buffer|string);
+
+                /**
+                 * Creates a new BidiReadHandle instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns BidiReadHandle instance
+                 */
+                public static create(properties?: google.storage.v2.IBidiReadHandle): google.storage.v2.BidiReadHandle;
+
+                /**
+                 * Encodes the specified BidiReadHandle message. Does not implicitly {@link google.storage.v2.BidiReadHandle.verify|verify} messages.
+                 * @param message BidiReadHandle message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IBidiReadHandle, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified BidiReadHandle message, length delimited. Does not implicitly {@link google.storage.v2.BidiReadHandle.verify|verify} messages.
+                 * @param message BidiReadHandle message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IBidiReadHandle, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a BidiReadHandle message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns BidiReadHandle
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.BidiReadHandle;
+
+                /**
+                 * Decodes a BidiReadHandle message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns BidiReadHandle
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.BidiReadHandle;
+
+                /**
+                 * Verifies a BidiReadHandle message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a BidiReadHandle message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns BidiReadHandle
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.BidiReadHandle;
+
+                /**
+                 * Creates a plain object from a BidiReadHandle message. Also converts values to other types if specified.
+                 * @param message BidiReadHandle
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.BidiReadHandle, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this BidiReadHandle to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for BidiReadHandle
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a BidiWriteHandle. */
+            interface IBidiWriteHandle {
+
+                /** BidiWriteHandle handle */
+                handle?: (Uint8Array|Buffer|string|null);
+            }
+
+            /** Represents a BidiWriteHandle. */
+            class BidiWriteHandle implements IBidiWriteHandle {
+
+                /**
+                 * Constructs a new BidiWriteHandle.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IBidiWriteHandle);
+
+                /** BidiWriteHandle handle. */
+                public handle: (Uint8Array|Buffer|string);
+
+                /**
+                 * Creates a new BidiWriteHandle instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns BidiWriteHandle instance
+                 */
+                public static create(properties?: google.storage.v2.IBidiWriteHandle): google.storage.v2.BidiWriteHandle;
+
+                /**
+                 * Encodes the specified BidiWriteHandle message. Does not implicitly {@link google.storage.v2.BidiWriteHandle.verify|verify} messages.
+                 * @param message BidiWriteHandle message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IBidiWriteHandle, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified BidiWriteHandle message, length delimited. Does not implicitly {@link google.storage.v2.BidiWriteHandle.verify|verify} messages.
+                 * @param message BidiWriteHandle message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IBidiWriteHandle, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a BidiWriteHandle message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns BidiWriteHandle
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.BidiWriteHandle;
+
+                /**
+                 * Decodes a BidiWriteHandle message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns BidiWriteHandle
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.BidiWriteHandle;
+
+                /**
+                 * Verifies a BidiWriteHandle message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a BidiWriteHandle message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns BidiWriteHandle
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.BidiWriteHandle;
+
+                /**
+                 * Creates a plain object from a BidiWriteHandle message. Also converts values to other types if specified.
+                 * @param message BidiWriteHandle
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.BidiWriteHandle, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this BidiWriteHandle to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for BidiWriteHandle
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a WriteObjectSpec. */
+            interface IWriteObjectSpec {
+
+                /** WriteObjectSpec resource */
+                resource?: (google.storage.v2.IStorageObject|null);
+
+                /** WriteObjectSpec predefinedAcl */
+                predefinedAcl?: (string|null);
+
+                /** WriteObjectSpec ifGenerationMatch */
+                ifGenerationMatch?: (number|Long|string|null);
+
+                /** WriteObjectSpec ifGenerationNotMatch */
+                ifGenerationNotMatch?: (number|Long|string|null);
+
+                /** WriteObjectSpec ifMetagenerationMatch */
+                ifMetagenerationMatch?: (number|Long|string|null);
+
+                /** WriteObjectSpec ifMetagenerationNotMatch */
+                ifMetagenerationNotMatch?: (number|Long|string|null);
+
+                /** WriteObjectSpec objectSize */
+                objectSize?: (number|Long|string|null);
+
+                /** WriteObjectSpec appendable */
+                appendable?: (boolean|null);
+            }
+
+            /** Represents a WriteObjectSpec. */
+            class WriteObjectSpec implements IWriteObjectSpec {
+
+                /**
+                 * Constructs a new WriteObjectSpec.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IWriteObjectSpec);
+
+                /** WriteObjectSpec resource. */
+                public resource?: (google.storage.v2.IStorageObject|null);
+
+                /** WriteObjectSpec predefinedAcl. */
+                public predefinedAcl: string;
+
+                /** WriteObjectSpec ifGenerationMatch. */
+                public ifGenerationMatch?: (number|Long|string|null);
+
+                /** WriteObjectSpec ifGenerationNotMatch. */
+                public ifGenerationNotMatch?: (number|Long|string|null);
+
+                /** WriteObjectSpec ifMetagenerationMatch. */
+                public ifMetagenerationMatch?: (number|Long|string|null);
+
+                /** WriteObjectSpec ifMetagenerationNotMatch. */
+                public ifMetagenerationNotMatch?: (number|Long|string|null);
+
+                /** WriteObjectSpec objectSize. */
+                public objectSize?: (number|Long|string|null);
+
+                /** WriteObjectSpec appendable. */
+                public appendable?: (boolean|null);
+
+                /**
+                 * Creates a new WriteObjectSpec instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns WriteObjectSpec instance
+                 */
+                public static create(properties?: google.storage.v2.IWriteObjectSpec): google.storage.v2.WriteObjectSpec;
+
+                /**
+                 * Encodes the specified WriteObjectSpec message. Does not implicitly {@link google.storage.v2.WriteObjectSpec.verify|verify} messages.
+                 * @param message WriteObjectSpec message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IWriteObjectSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified WriteObjectSpec message, length delimited. Does not implicitly {@link google.storage.v2.WriteObjectSpec.verify|verify} messages.
+                 * @param message WriteObjectSpec message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IWriteObjectSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a WriteObjectSpec message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns WriteObjectSpec
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.WriteObjectSpec;
+
+                /**
+                 * Decodes a WriteObjectSpec message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns WriteObjectSpec
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.WriteObjectSpec;
+
+                /**
+                 * Verifies a WriteObjectSpec message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a WriteObjectSpec message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns WriteObjectSpec
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.WriteObjectSpec;
+
+                /**
+                 * Creates a plain object from a WriteObjectSpec message. Also converts values to other types if specified.
+                 * @param message WriteObjectSpec
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.WriteObjectSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this WriteObjectSpec to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for WriteObjectSpec
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a WriteObjectRequest. */
+            interface IWriteObjectRequest {
+
+                /** WriteObjectRequest uploadId */
+                uploadId?: (string|null);
+
+                /** WriteObjectRequest writeObjectSpec */
+                writeObjectSpec?: (google.storage.v2.IWriteObjectSpec|null);
+
+                /** WriteObjectRequest writeOffset */
+                writeOffset?: (number|Long|string|null);
+
+                /** WriteObjectRequest checksummedData */
+                checksummedData?: (google.storage.v2.IChecksummedData|null);
+
+                /** WriteObjectRequest objectChecksums */
+                objectChecksums?: (google.storage.v2.IObjectChecksums|null);
+
+                /** WriteObjectRequest finishWrite */
+                finishWrite?: (boolean|null);
+
+                /** WriteObjectRequest commonObjectRequestParams */
+                commonObjectRequestParams?: (google.storage.v2.ICommonObjectRequestParams|null);
+            }
+
+            /** Represents a WriteObjectRequest. */
+            class WriteObjectRequest implements IWriteObjectRequest {
+
+                /**
+                 * Constructs a new WriteObjectRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IWriteObjectRequest);
+
+                /** WriteObjectRequest uploadId. */
+                public uploadId?: (string|null);
+
+                /** WriteObjectRequest writeObjectSpec. */
+                public writeObjectSpec?: (google.storage.v2.IWriteObjectSpec|null);
+
+                /** WriteObjectRequest writeOffset. */
+                public writeOffset: (number|Long|string);
+
+                /** WriteObjectRequest checksummedData. */
+                public checksummedData?: (google.storage.v2.IChecksummedData|null);
+
+                /** WriteObjectRequest objectChecksums. */
+                public objectChecksums?: (google.storage.v2.IObjectChecksums|null);
+
+                /** WriteObjectRequest finishWrite. */
+                public finishWrite: boolean;
+
+                /** WriteObjectRequest commonObjectRequestParams. */
+                public commonObjectRequestParams?: (google.storage.v2.ICommonObjectRequestParams|null);
+
+                /** WriteObjectRequest firstMessage. */
+                public firstMessage?: ("uploadId"|"writeObjectSpec");
+
+                /** WriteObjectRequest data. */
+                public data?: "checksummedData";
+
+                /**
+                 * Creates a new WriteObjectRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns WriteObjectRequest instance
+                 */
+                public static create(properties?: google.storage.v2.IWriteObjectRequest): google.storage.v2.WriteObjectRequest;
+
+                /**
+                 * Encodes the specified WriteObjectRequest message. Does not implicitly {@link google.storage.v2.WriteObjectRequest.verify|verify} messages.
+                 * @param message WriteObjectRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IWriteObjectRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified WriteObjectRequest message, length delimited. Does not implicitly {@link google.storage.v2.WriteObjectRequest.verify|verify} messages.
+                 * @param message WriteObjectRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IWriteObjectRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a WriteObjectRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns WriteObjectRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.WriteObjectRequest;
+
+                /**
+                 * Decodes a WriteObjectRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns WriteObjectRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.WriteObjectRequest;
+
+                /**
+                 * Verifies a WriteObjectRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a WriteObjectRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns WriteObjectRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.WriteObjectRequest;
+
+                /**
+                 * Creates a plain object from a WriteObjectRequest message. Also converts values to other types if specified.
+                 * @param message WriteObjectRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.WriteObjectRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this WriteObjectRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for WriteObjectRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a WriteObjectResponse. */
+            interface IWriteObjectResponse {
+
+                /** WriteObjectResponse persistedSize */
+                persistedSize?: (number|Long|string|null);
+
+                /** WriteObjectResponse resource */
+                resource?: (google.storage.v2.IStorageObject|null);
+            }
+
+            /** Represents a WriteObjectResponse. */
+            class WriteObjectResponse implements IWriteObjectResponse {
+
+                /**
+                 * Constructs a new WriteObjectResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IWriteObjectResponse);
+
+                /** WriteObjectResponse persistedSize. */
+                public persistedSize?: (number|Long|string|null);
+
+                /** WriteObjectResponse resource. */
+                public resource?: (google.storage.v2.IStorageObject|null);
+
+                /** WriteObjectResponse writeStatus. */
+                public writeStatus?: ("persistedSize"|"resource");
+
+                /**
+                 * Creates a new WriteObjectResponse instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns WriteObjectResponse instance
+                 */
+                public static create(properties?: google.storage.v2.IWriteObjectResponse): google.storage.v2.WriteObjectResponse;
+
+                /**
+                 * Encodes the specified WriteObjectResponse message. Does not implicitly {@link google.storage.v2.WriteObjectResponse.verify|verify} messages.
+                 * @param message WriteObjectResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IWriteObjectResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified WriteObjectResponse message, length delimited. Does not implicitly {@link google.storage.v2.WriteObjectResponse.verify|verify} messages.
+                 * @param message WriteObjectResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IWriteObjectResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a WriteObjectResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns WriteObjectResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.WriteObjectResponse;
+
+                /**
+                 * Decodes a WriteObjectResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns WriteObjectResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.WriteObjectResponse;
+
+                /**
+                 * Verifies a WriteObjectResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a WriteObjectResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns WriteObjectResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.WriteObjectResponse;
+
+                /**
+                 * Creates a plain object from a WriteObjectResponse message. Also converts values to other types if specified.
+                 * @param message WriteObjectResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.WriteObjectResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this WriteObjectResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for WriteObjectResponse
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of an AppendObjectSpec. */
+            interface IAppendObjectSpec {
+
+                /** AppendObjectSpec bucket */
+                bucket?: (string|null);
+
+                /** AppendObjectSpec object */
+                object?: (string|null);
+
+                /** AppendObjectSpec generation */
+                generation?: (number|Long|string|null);
+
+                /** AppendObjectSpec ifMetagenerationMatch */
+                ifMetagenerationMatch?: (number|Long|string|null);
+
+                /** AppendObjectSpec ifMetagenerationNotMatch */
+                ifMetagenerationNotMatch?: (number|Long|string|null);
+
+                /** AppendObjectSpec routingToken */
+                routingToken?: (string|null);
+
+                /** AppendObjectSpec writeHandle */
+                writeHandle?: (google.storage.v2.IBidiWriteHandle|null);
+            }
+
+            /** Represents an AppendObjectSpec. */
+            class AppendObjectSpec implements IAppendObjectSpec {
+
+                /**
+                 * Constructs a new AppendObjectSpec.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IAppendObjectSpec);
+
+                /** AppendObjectSpec bucket. */
+                public bucket: string;
+
+                /** AppendObjectSpec object. */
+                public object: string;
+
+                /** AppendObjectSpec generation. */
+                public generation: (number|Long|string);
+
+                /** AppendObjectSpec ifMetagenerationMatch. */
+                public ifMetagenerationMatch?: (number|Long|string|null);
+
+                /** AppendObjectSpec ifMetagenerationNotMatch. */
+                public ifMetagenerationNotMatch?: (number|Long|string|null);
+
+                /** AppendObjectSpec routingToken. */
+                public routingToken?: (string|null);
+
+                /** AppendObjectSpec writeHandle. */
+                public writeHandle?: (google.storage.v2.IBidiWriteHandle|null);
+
+                /**
+                 * Creates a new AppendObjectSpec instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns AppendObjectSpec instance
+                 */
+                public static create(properties?: google.storage.v2.IAppendObjectSpec): google.storage.v2.AppendObjectSpec;
+
+                /**
+                 * Encodes the specified AppendObjectSpec message. Does not implicitly {@link google.storage.v2.AppendObjectSpec.verify|verify} messages.
+                 * @param message AppendObjectSpec message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IAppendObjectSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified AppendObjectSpec message, length delimited. Does not implicitly {@link google.storage.v2.AppendObjectSpec.verify|verify} messages.
+                 * @param message AppendObjectSpec message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IAppendObjectSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an AppendObjectSpec message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns AppendObjectSpec
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.AppendObjectSpec;
+
+                /**
+                 * Decodes an AppendObjectSpec message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns AppendObjectSpec
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.AppendObjectSpec;
+
+                /**
+                 * Verifies an AppendObjectSpec message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an AppendObjectSpec message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns AppendObjectSpec
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.AppendObjectSpec;
+
+                /**
+                 * Creates a plain object from an AppendObjectSpec message. Also converts values to other types if specified.
+                 * @param message AppendObjectSpec
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.AppendObjectSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this AppendObjectSpec to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for AppendObjectSpec
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a BidiWriteObjectRequest. */
+            interface IBidiWriteObjectRequest {
+
+                /** BidiWriteObjectRequest uploadId */
+                uploadId?: (string|null);
+
+                /** BidiWriteObjectRequest writeObjectSpec */
+                writeObjectSpec?: (google.storage.v2.IWriteObjectSpec|null);
+
+                /** BidiWriteObjectRequest appendObjectSpec */
+                appendObjectSpec?: (google.storage.v2.IAppendObjectSpec|null);
+
+                /** BidiWriteObjectRequest writeOffset */
+                writeOffset?: (number|Long|string|null);
+
+                /** BidiWriteObjectRequest checksummedData */
+                checksummedData?: (google.storage.v2.IChecksummedData|null);
+
+                /** BidiWriteObjectRequest objectChecksums */
+                objectChecksums?: (google.storage.v2.IObjectChecksums|null);
+
+                /** BidiWriteObjectRequest stateLookup */
+                stateLookup?: (boolean|null);
+
+                /** BidiWriteObjectRequest flush */
+                flush?: (boolean|null);
+
+                /** BidiWriteObjectRequest finishWrite */
+                finishWrite?: (boolean|null);
+
+                /** BidiWriteObjectRequest commonObjectRequestParams */
+                commonObjectRequestParams?: (google.storage.v2.ICommonObjectRequestParams|null);
+            }
+
+            /** Represents a BidiWriteObjectRequest. */
+            class BidiWriteObjectRequest implements IBidiWriteObjectRequest {
+
+                /**
+                 * Constructs a new BidiWriteObjectRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IBidiWriteObjectRequest);
+
+                /** BidiWriteObjectRequest uploadId. */
+                public uploadId?: (string|null);
+
+                /** BidiWriteObjectRequest writeObjectSpec. */
+                public writeObjectSpec?: (google.storage.v2.IWriteObjectSpec|null);
+
+                /** BidiWriteObjectRequest appendObjectSpec. */
+                public appendObjectSpec?: (google.storage.v2.IAppendObjectSpec|null);
+
+                /** BidiWriteObjectRequest writeOffset. */
+                public writeOffset: (number|Long|string);
+
+                /** BidiWriteObjectRequest checksummedData. */
+                public checksummedData?: (google.storage.v2.IChecksummedData|null);
+
+                /** BidiWriteObjectRequest objectChecksums. */
+                public objectChecksums?: (google.storage.v2.IObjectChecksums|null);
+
+                /** BidiWriteObjectRequest stateLookup. */
+                public stateLookup: boolean;
+
+                /** BidiWriteObjectRequest flush. */
+                public flush: boolean;
+
+                /** BidiWriteObjectRequest finishWrite. */
+                public finishWrite: boolean;
+
+                /** BidiWriteObjectRequest commonObjectRequestParams. */
+                public commonObjectRequestParams?: (google.storage.v2.ICommonObjectRequestParams|null);
+
+                /** BidiWriteObjectRequest firstMessage. */
+                public firstMessage?: ("uploadId"|"writeObjectSpec"|"appendObjectSpec");
+
+                /** BidiWriteObjectRequest data. */
+                public data?: "checksummedData";
+
+                /**
+                 * Creates a new BidiWriteObjectRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns BidiWriteObjectRequest instance
+                 */
+                public static create(properties?: google.storage.v2.IBidiWriteObjectRequest): google.storage.v2.BidiWriteObjectRequest;
+
+                /**
+                 * Encodes the specified BidiWriteObjectRequest message. Does not implicitly {@link google.storage.v2.BidiWriteObjectRequest.verify|verify} messages.
+                 * @param message BidiWriteObjectRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IBidiWriteObjectRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified BidiWriteObjectRequest message, length delimited. Does not implicitly {@link google.storage.v2.BidiWriteObjectRequest.verify|verify} messages.
+                 * @param message BidiWriteObjectRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IBidiWriteObjectRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a BidiWriteObjectRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns BidiWriteObjectRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.BidiWriteObjectRequest;
+
+                /**
+                 * Decodes a BidiWriteObjectRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns BidiWriteObjectRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.BidiWriteObjectRequest;
+
+                /**
+                 * Verifies a BidiWriteObjectRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a BidiWriteObjectRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns BidiWriteObjectRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.BidiWriteObjectRequest;
+
+                /**
+                 * Creates a plain object from a BidiWriteObjectRequest message. Also converts values to other types if specified.
+                 * @param message BidiWriteObjectRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.BidiWriteObjectRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this BidiWriteObjectRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for BidiWriteObjectRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a BidiWriteObjectResponse. */
+            interface IBidiWriteObjectResponse {
+
+                /** BidiWriteObjectResponse persistedSize */
+                persistedSize?: (number|Long|string|null);
+
+                /** BidiWriteObjectResponse resource */
+                resource?: (google.storage.v2.IStorageObject|null);
+
+                /** BidiWriteObjectResponse writeHandle */
+                writeHandle?: (google.storage.v2.IBidiWriteHandle|null);
+            }
+
+            /** Represents a BidiWriteObjectResponse. */
+            class BidiWriteObjectResponse implements IBidiWriteObjectResponse {
+
+                /**
+                 * Constructs a new BidiWriteObjectResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IBidiWriteObjectResponse);
+
+                /** BidiWriteObjectResponse persistedSize. */
+                public persistedSize?: (number|Long|string|null);
+
+                /** BidiWriteObjectResponse resource. */
+                public resource?: (google.storage.v2.IStorageObject|null);
+
+                /** BidiWriteObjectResponse writeHandle. */
+                public writeHandle?: (google.storage.v2.IBidiWriteHandle|null);
+
+                /** BidiWriteObjectResponse writeStatus. */
+                public writeStatus?: ("persistedSize"|"resource");
+
+                /**
+                 * Creates a new BidiWriteObjectResponse instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns BidiWriteObjectResponse instance
+                 */
+                public static create(properties?: google.storage.v2.IBidiWriteObjectResponse): google.storage.v2.BidiWriteObjectResponse;
+
+                /**
+                 * Encodes the specified BidiWriteObjectResponse message. Does not implicitly {@link google.storage.v2.BidiWriteObjectResponse.verify|verify} messages.
+                 * @param message BidiWriteObjectResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IBidiWriteObjectResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified BidiWriteObjectResponse message, length delimited. Does not implicitly {@link google.storage.v2.BidiWriteObjectResponse.verify|verify} messages.
+                 * @param message BidiWriteObjectResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IBidiWriteObjectResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a BidiWriteObjectResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns BidiWriteObjectResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.BidiWriteObjectResponse;
+
+                /**
+                 * Decodes a BidiWriteObjectResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns BidiWriteObjectResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.BidiWriteObjectResponse;
+
+                /**
+                 * Verifies a BidiWriteObjectResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a BidiWriteObjectResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns BidiWriteObjectResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.BidiWriteObjectResponse;
+
+                /**
+                 * Creates a plain object from a BidiWriteObjectResponse message. Also converts values to other types if specified.
+                 * @param message BidiWriteObjectResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.BidiWriteObjectResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this BidiWriteObjectResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for BidiWriteObjectResponse
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ListObjectsRequest. */
+            interface IListObjectsRequest {
+
+                /** ListObjectsRequest parent */
+                parent?: (string|null);
+
+                /** ListObjectsRequest pageSize */
+                pageSize?: (number|null);
+
+                /** ListObjectsRequest pageToken */
+                pageToken?: (string|null);
+
+                /** ListObjectsRequest delimiter */
+                delimiter?: (string|null);
+
+                /** ListObjectsRequest includeTrailingDelimiter */
+                includeTrailingDelimiter?: (boolean|null);
+
+                /** ListObjectsRequest prefix */
+                prefix?: (string|null);
+
+                /** ListObjectsRequest versions */
+                versions?: (boolean|null);
+
+                /** ListObjectsRequest readMask */
+                readMask?: (google.protobuf.IFieldMask|null);
+
+                /** ListObjectsRequest lexicographicStart */
+                lexicographicStart?: (string|null);
+
+                /** ListObjectsRequest lexicographicEnd */
+                lexicographicEnd?: (string|null);
+
+                /** ListObjectsRequest softDeleted */
+                softDeleted?: (boolean|null);
+
+                /** ListObjectsRequest includeFoldersAsPrefixes */
+                includeFoldersAsPrefixes?: (boolean|null);
+
+                /** ListObjectsRequest matchGlob */
+                matchGlob?: (string|null);
+
+                /** ListObjectsRequest filter */
+                filter?: (string|null);
+            }
+
+            /** Represents a ListObjectsRequest. */
+            class ListObjectsRequest implements IListObjectsRequest {
+
+                /**
+                 * Constructs a new ListObjectsRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IListObjectsRequest);
+
+                /** ListObjectsRequest parent. */
+                public parent: string;
+
+                /** ListObjectsRequest pageSize. */
+                public pageSize: number;
+
+                /** ListObjectsRequest pageToken. */
+                public pageToken: string;
+
+                /** ListObjectsRequest delimiter. */
+                public delimiter: string;
+
+                /** ListObjectsRequest includeTrailingDelimiter. */
+                public includeTrailingDelimiter: boolean;
+
+                /** ListObjectsRequest prefix. */
+                public prefix: string;
+
+                /** ListObjectsRequest versions. */
+                public versions: boolean;
+
+                /** ListObjectsRequest readMask. */
+                public readMask?: (google.protobuf.IFieldMask|null);
+
+                /** ListObjectsRequest lexicographicStart. */
+                public lexicographicStart: string;
+
+                /** ListObjectsRequest lexicographicEnd. */
+                public lexicographicEnd: string;
+
+                /** ListObjectsRequest softDeleted. */
+                public softDeleted: boolean;
+
+                /** ListObjectsRequest includeFoldersAsPrefixes. */
+                public includeFoldersAsPrefixes: boolean;
+
+                /** ListObjectsRequest matchGlob. */
+                public matchGlob: string;
+
+                /** ListObjectsRequest filter. */
+                public filter: string;
+
+                /**
+                 * Creates a new ListObjectsRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ListObjectsRequest instance
+                 */
+                public static create(properties?: google.storage.v2.IListObjectsRequest): google.storage.v2.ListObjectsRequest;
+
+                /**
+                 * Encodes the specified ListObjectsRequest message. Does not implicitly {@link google.storage.v2.ListObjectsRequest.verify|verify} messages.
+                 * @param message ListObjectsRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IListObjectsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ListObjectsRequest message, length delimited. Does not implicitly {@link google.storage.v2.ListObjectsRequest.verify|verify} messages.
+                 * @param message ListObjectsRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IListObjectsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ListObjectsRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ListObjectsRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.ListObjectsRequest;
+
+                /**
+                 * Decodes a ListObjectsRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ListObjectsRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.ListObjectsRequest;
+
+                /**
+                 * Verifies a ListObjectsRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ListObjectsRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ListObjectsRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.ListObjectsRequest;
+
+                /**
+                 * Creates a plain object from a ListObjectsRequest message. Also converts values to other types if specified.
+                 * @param message ListObjectsRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.ListObjectsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ListObjectsRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ListObjectsRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a QueryWriteStatusRequest. */
+            interface IQueryWriteStatusRequest {
+
+                /** QueryWriteStatusRequest uploadId */
+                uploadId?: (string|null);
+
+                /** QueryWriteStatusRequest commonObjectRequestParams */
+                commonObjectRequestParams?: (google.storage.v2.ICommonObjectRequestParams|null);
+            }
+
+            /** Represents a QueryWriteStatusRequest. */
+            class QueryWriteStatusRequest implements IQueryWriteStatusRequest {
+
+                /**
+                 * Constructs a new QueryWriteStatusRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IQueryWriteStatusRequest);
+
+                /** QueryWriteStatusRequest uploadId. */
+                public uploadId: string;
+
+                /** QueryWriteStatusRequest commonObjectRequestParams. */
+                public commonObjectRequestParams?: (google.storage.v2.ICommonObjectRequestParams|null);
+
+                /**
+                 * Creates a new QueryWriteStatusRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns QueryWriteStatusRequest instance
+                 */
+                public static create(properties?: google.storage.v2.IQueryWriteStatusRequest): google.storage.v2.QueryWriteStatusRequest;
+
+                /**
+                 * Encodes the specified QueryWriteStatusRequest message. Does not implicitly {@link google.storage.v2.QueryWriteStatusRequest.verify|verify} messages.
+                 * @param message QueryWriteStatusRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IQueryWriteStatusRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified QueryWriteStatusRequest message, length delimited. Does not implicitly {@link google.storage.v2.QueryWriteStatusRequest.verify|verify} messages.
+                 * @param message QueryWriteStatusRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IQueryWriteStatusRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a QueryWriteStatusRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns QueryWriteStatusRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.QueryWriteStatusRequest;
+
+                /**
+                 * Decodes a QueryWriteStatusRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns QueryWriteStatusRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.QueryWriteStatusRequest;
+
+                /**
+                 * Verifies a QueryWriteStatusRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a QueryWriteStatusRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns QueryWriteStatusRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.QueryWriteStatusRequest;
+
+                /**
+                 * Creates a plain object from a QueryWriteStatusRequest message. Also converts values to other types if specified.
+                 * @param message QueryWriteStatusRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.QueryWriteStatusRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this QueryWriteStatusRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for QueryWriteStatusRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a QueryWriteStatusResponse. */
+            interface IQueryWriteStatusResponse {
+
+                /** QueryWriteStatusResponse persistedSize */
+                persistedSize?: (number|Long|string|null);
+
+                /** QueryWriteStatusResponse resource */
+                resource?: (google.storage.v2.IStorageObject|null);
+            }
+
+            /** Represents a QueryWriteStatusResponse. */
+            class QueryWriteStatusResponse implements IQueryWriteStatusResponse {
+
+                /**
+                 * Constructs a new QueryWriteStatusResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IQueryWriteStatusResponse);
+
+                /** QueryWriteStatusResponse persistedSize. */
+                public persistedSize?: (number|Long|string|null);
+
+                /** QueryWriteStatusResponse resource. */
+                public resource?: (google.storage.v2.IStorageObject|null);
+
+                /** QueryWriteStatusResponse writeStatus. */
+                public writeStatus?: ("persistedSize"|"resource");
+
+                /**
+                 * Creates a new QueryWriteStatusResponse instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns QueryWriteStatusResponse instance
+                 */
+                public static create(properties?: google.storage.v2.IQueryWriteStatusResponse): google.storage.v2.QueryWriteStatusResponse;
+
+                /**
+                 * Encodes the specified QueryWriteStatusResponse message. Does not implicitly {@link google.storage.v2.QueryWriteStatusResponse.verify|verify} messages.
+                 * @param message QueryWriteStatusResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IQueryWriteStatusResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified QueryWriteStatusResponse message, length delimited. Does not implicitly {@link google.storage.v2.QueryWriteStatusResponse.verify|verify} messages.
+                 * @param message QueryWriteStatusResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IQueryWriteStatusResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a QueryWriteStatusResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns QueryWriteStatusResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.QueryWriteStatusResponse;
+
+                /**
+                 * Decodes a QueryWriteStatusResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns QueryWriteStatusResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.QueryWriteStatusResponse;
+
+                /**
+                 * Verifies a QueryWriteStatusResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a QueryWriteStatusResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns QueryWriteStatusResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.QueryWriteStatusResponse;
+
+                /**
+                 * Creates a plain object from a QueryWriteStatusResponse message. Also converts values to other types if specified.
+                 * @param message QueryWriteStatusResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.QueryWriteStatusResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this QueryWriteStatusResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for QueryWriteStatusResponse
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a RewriteObjectRequest. */
+            interface IRewriteObjectRequest {
+
+                /** RewriteObjectRequest destinationName */
+                destinationName?: (string|null);
+
+                /** RewriteObjectRequest destinationBucket */
+                destinationBucket?: (string|null);
+
+                /** RewriteObjectRequest destinationKmsKey */
+                destinationKmsKey?: (string|null);
+
+                /** RewriteObjectRequest destination */
+                destination?: (google.storage.v2.IStorageObject|null);
+
+                /** RewriteObjectRequest sourceBucket */
+                sourceBucket?: (string|null);
+
+                /** RewriteObjectRequest sourceObject */
+                sourceObject?: (string|null);
+
+                /** RewriteObjectRequest sourceGeneration */
+                sourceGeneration?: (number|Long|string|null);
+
+                /** RewriteObjectRequest rewriteToken */
+                rewriteToken?: (string|null);
+
+                /** RewriteObjectRequest destinationPredefinedAcl */
+                destinationPredefinedAcl?: (string|null);
+
+                /** RewriteObjectRequest ifGenerationMatch */
+                ifGenerationMatch?: (number|Long|string|null);
+
+                /** RewriteObjectRequest ifGenerationNotMatch */
+                ifGenerationNotMatch?: (number|Long|string|null);
+
+                /** RewriteObjectRequest ifMetagenerationMatch */
+                ifMetagenerationMatch?: (number|Long|string|null);
+
+                /** RewriteObjectRequest ifMetagenerationNotMatch */
+                ifMetagenerationNotMatch?: (number|Long|string|null);
+
+                /** RewriteObjectRequest ifSourceGenerationMatch */
+                ifSourceGenerationMatch?: (number|Long|string|null);
+
+                /** RewriteObjectRequest ifSourceGenerationNotMatch */
+                ifSourceGenerationNotMatch?: (number|Long|string|null);
+
+                /** RewriteObjectRequest ifSourceMetagenerationMatch */
+                ifSourceMetagenerationMatch?: (number|Long|string|null);
+
+                /** RewriteObjectRequest ifSourceMetagenerationNotMatch */
+                ifSourceMetagenerationNotMatch?: (number|Long|string|null);
+
+                /** RewriteObjectRequest maxBytesRewrittenPerCall */
+                maxBytesRewrittenPerCall?: (number|Long|string|null);
+
+                /** RewriteObjectRequest copySourceEncryptionAlgorithm */
+                copySourceEncryptionAlgorithm?: (string|null);
+
+                /** RewriteObjectRequest copySourceEncryptionKeyBytes */
+                copySourceEncryptionKeyBytes?: (Uint8Array|Buffer|string|null);
+
+                /** RewriteObjectRequest copySourceEncryptionKeySha256Bytes */
+                copySourceEncryptionKeySha256Bytes?: (Uint8Array|Buffer|string|null);
+
+                /** RewriteObjectRequest commonObjectRequestParams */
+                commonObjectRequestParams?: (google.storage.v2.ICommonObjectRequestParams|null);
+
+                /** RewriteObjectRequest objectChecksums */
+                objectChecksums?: (google.storage.v2.IObjectChecksums|null);
+            }
+
+            /** Represents a RewriteObjectRequest. */
+            class RewriteObjectRequest implements IRewriteObjectRequest {
+
+                /**
+                 * Constructs a new RewriteObjectRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IRewriteObjectRequest);
+
+                /** RewriteObjectRequest destinationName. */
+                public destinationName: string;
+
+                /** RewriteObjectRequest destinationBucket. */
+                public destinationBucket: string;
+
+                /** RewriteObjectRequest destinationKmsKey. */
+                public destinationKmsKey: string;
+
+                /** RewriteObjectRequest destination. */
+                public destination?: (google.storage.v2.IStorageObject|null);
+
+                /** RewriteObjectRequest sourceBucket. */
+                public sourceBucket: string;
+
+                /** RewriteObjectRequest sourceObject. */
+                public sourceObject: string;
+
+                /** RewriteObjectRequest sourceGeneration. */
+                public sourceGeneration: (number|Long|string);
+
+                /** RewriteObjectRequest rewriteToken. */
+                public rewriteToken: string;
+
+                /** RewriteObjectRequest destinationPredefinedAcl. */
+                public destinationPredefinedAcl: string;
+
+                /** RewriteObjectRequest ifGenerationMatch. */
+                public ifGenerationMatch?: (number|Long|string|null);
+
+                /** RewriteObjectRequest ifGenerationNotMatch. */
+                public ifGenerationNotMatch?: (number|Long|string|null);
+
+                /** RewriteObjectRequest ifMetagenerationMatch. */
+                public ifMetagenerationMatch?: (number|Long|string|null);
+
+                /** RewriteObjectRequest ifMetagenerationNotMatch. */
+                public ifMetagenerationNotMatch?: (number|Long|string|null);
+
+                /** RewriteObjectRequest ifSourceGenerationMatch. */
+                public ifSourceGenerationMatch?: (number|Long|string|null);
+
+                /** RewriteObjectRequest ifSourceGenerationNotMatch. */
+                public ifSourceGenerationNotMatch?: (number|Long|string|null);
+
+                /** RewriteObjectRequest ifSourceMetagenerationMatch. */
+                public ifSourceMetagenerationMatch?: (number|Long|string|null);
+
+                /** RewriteObjectRequest ifSourceMetagenerationNotMatch. */
+                public ifSourceMetagenerationNotMatch?: (number|Long|string|null);
+
+                /** RewriteObjectRequest maxBytesRewrittenPerCall. */
+                public maxBytesRewrittenPerCall: (number|Long|string);
+
+                /** RewriteObjectRequest copySourceEncryptionAlgorithm. */
+                public copySourceEncryptionAlgorithm: string;
+
+                /** RewriteObjectRequest copySourceEncryptionKeyBytes. */
+                public copySourceEncryptionKeyBytes: (Uint8Array|Buffer|string);
+
+                /** RewriteObjectRequest copySourceEncryptionKeySha256Bytes. */
+                public copySourceEncryptionKeySha256Bytes: (Uint8Array|Buffer|string);
+
+                /** RewriteObjectRequest commonObjectRequestParams. */
+                public commonObjectRequestParams?: (google.storage.v2.ICommonObjectRequestParams|null);
+
+                /** RewriteObjectRequest objectChecksums. */
+                public objectChecksums?: (google.storage.v2.IObjectChecksums|null);
+
+                /**
+                 * Creates a new RewriteObjectRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns RewriteObjectRequest instance
+                 */
+                public static create(properties?: google.storage.v2.IRewriteObjectRequest): google.storage.v2.RewriteObjectRequest;
+
+                /**
+                 * Encodes the specified RewriteObjectRequest message. Does not implicitly {@link google.storage.v2.RewriteObjectRequest.verify|verify} messages.
+                 * @param message RewriteObjectRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IRewriteObjectRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified RewriteObjectRequest message, length delimited. Does not implicitly {@link google.storage.v2.RewriteObjectRequest.verify|verify} messages.
+                 * @param message RewriteObjectRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IRewriteObjectRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a RewriteObjectRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns RewriteObjectRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.RewriteObjectRequest;
+
+                /**
+                 * Decodes a RewriteObjectRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns RewriteObjectRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.RewriteObjectRequest;
+
+                /**
+                 * Verifies a RewriteObjectRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a RewriteObjectRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns RewriteObjectRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.RewriteObjectRequest;
+
+                /**
+                 * Creates a plain object from a RewriteObjectRequest message. Also converts values to other types if specified.
+                 * @param message RewriteObjectRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.RewriteObjectRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this RewriteObjectRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for RewriteObjectRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a RewriteResponse. */
+            interface IRewriteResponse {
+
+                /** RewriteResponse totalBytesRewritten */
+                totalBytesRewritten?: (number|Long|string|null);
+
+                /** RewriteResponse objectSize */
+                objectSize?: (number|Long|string|null);
+
+                /** RewriteResponse done */
+                done?: (boolean|null);
+
+                /** RewriteResponse rewriteToken */
+                rewriteToken?: (string|null);
+
+                /** RewriteResponse resource */
+                resource?: (google.storage.v2.IStorageObject|null);
+            }
+
+            /** Represents a RewriteResponse. */
+            class RewriteResponse implements IRewriteResponse {
+
+                /**
+                 * Constructs a new RewriteResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IRewriteResponse);
+
+                /** RewriteResponse totalBytesRewritten. */
+                public totalBytesRewritten: (number|Long|string);
+
+                /** RewriteResponse objectSize. */
+                public objectSize: (number|Long|string);
+
+                /** RewriteResponse done. */
+                public done: boolean;
+
+                /** RewriteResponse rewriteToken. */
+                public rewriteToken: string;
+
+                /** RewriteResponse resource. */
+                public resource?: (google.storage.v2.IStorageObject|null);
+
+                /**
+                 * Creates a new RewriteResponse instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns RewriteResponse instance
+                 */
+                public static create(properties?: google.storage.v2.IRewriteResponse): google.storage.v2.RewriteResponse;
+
+                /**
+                 * Encodes the specified RewriteResponse message. Does not implicitly {@link google.storage.v2.RewriteResponse.verify|verify} messages.
+                 * @param message RewriteResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IRewriteResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified RewriteResponse message, length delimited. Does not implicitly {@link google.storage.v2.RewriteResponse.verify|verify} messages.
+                 * @param message RewriteResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IRewriteResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a RewriteResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns RewriteResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.RewriteResponse;
+
+                /**
+                 * Decodes a RewriteResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns RewriteResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.RewriteResponse;
+
+                /**
+                 * Verifies a RewriteResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a RewriteResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns RewriteResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.RewriteResponse;
+
+                /**
+                 * Creates a plain object from a RewriteResponse message. Also converts values to other types if specified.
+                 * @param message RewriteResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.RewriteResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this RewriteResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for RewriteResponse
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a MoveObjectRequest. */
+            interface IMoveObjectRequest {
+
+                /** MoveObjectRequest bucket */
+                bucket?: (string|null);
+
+                /** MoveObjectRequest sourceObject */
+                sourceObject?: (string|null);
+
+                /** MoveObjectRequest destinationObject */
+                destinationObject?: (string|null);
+
+                /** MoveObjectRequest ifSourceGenerationMatch */
+                ifSourceGenerationMatch?: (number|Long|string|null);
+
+                /** MoveObjectRequest ifSourceGenerationNotMatch */
+                ifSourceGenerationNotMatch?: (number|Long|string|null);
+
+                /** MoveObjectRequest ifSourceMetagenerationMatch */
+                ifSourceMetagenerationMatch?: (number|Long|string|null);
+
+                /** MoveObjectRequest ifSourceMetagenerationNotMatch */
+                ifSourceMetagenerationNotMatch?: (number|Long|string|null);
+
+                /** MoveObjectRequest ifGenerationMatch */
+                ifGenerationMatch?: (number|Long|string|null);
+
+                /** MoveObjectRequest ifGenerationNotMatch */
+                ifGenerationNotMatch?: (number|Long|string|null);
+
+                /** MoveObjectRequest ifMetagenerationMatch */
+                ifMetagenerationMatch?: (number|Long|string|null);
+
+                /** MoveObjectRequest ifMetagenerationNotMatch */
+                ifMetagenerationNotMatch?: (number|Long|string|null);
+            }
+
+            /** Represents a MoveObjectRequest. */
+            class MoveObjectRequest implements IMoveObjectRequest {
+
+                /**
+                 * Constructs a new MoveObjectRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IMoveObjectRequest);
+
+                /** MoveObjectRequest bucket. */
+                public bucket: string;
+
+                /** MoveObjectRequest sourceObject. */
+                public sourceObject: string;
+
+                /** MoveObjectRequest destinationObject. */
+                public destinationObject: string;
+
+                /** MoveObjectRequest ifSourceGenerationMatch. */
+                public ifSourceGenerationMatch?: (number|Long|string|null);
+
+                /** MoveObjectRequest ifSourceGenerationNotMatch. */
+                public ifSourceGenerationNotMatch?: (number|Long|string|null);
+
+                /** MoveObjectRequest ifSourceMetagenerationMatch. */
+                public ifSourceMetagenerationMatch?: (number|Long|string|null);
+
+                /** MoveObjectRequest ifSourceMetagenerationNotMatch. */
+                public ifSourceMetagenerationNotMatch?: (number|Long|string|null);
+
+                /** MoveObjectRequest ifGenerationMatch. */
+                public ifGenerationMatch?: (number|Long|string|null);
+
+                /** MoveObjectRequest ifGenerationNotMatch. */
+                public ifGenerationNotMatch?: (number|Long|string|null);
+
+                /** MoveObjectRequest ifMetagenerationMatch. */
+                public ifMetagenerationMatch?: (number|Long|string|null);
+
+                /** MoveObjectRequest ifMetagenerationNotMatch. */
+                public ifMetagenerationNotMatch?: (number|Long|string|null);
+
+                /**
+                 * Creates a new MoveObjectRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns MoveObjectRequest instance
+                 */
+                public static create(properties?: google.storage.v2.IMoveObjectRequest): google.storage.v2.MoveObjectRequest;
+
+                /**
+                 * Encodes the specified MoveObjectRequest message. Does not implicitly {@link google.storage.v2.MoveObjectRequest.verify|verify} messages.
+                 * @param message MoveObjectRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IMoveObjectRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified MoveObjectRequest message, length delimited. Does not implicitly {@link google.storage.v2.MoveObjectRequest.verify|verify} messages.
+                 * @param message MoveObjectRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IMoveObjectRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a MoveObjectRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns MoveObjectRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.MoveObjectRequest;
+
+                /**
+                 * Decodes a MoveObjectRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns MoveObjectRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.MoveObjectRequest;
+
+                /**
+                 * Verifies a MoveObjectRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a MoveObjectRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns MoveObjectRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.MoveObjectRequest;
+
+                /**
+                 * Creates a plain object from a MoveObjectRequest message. Also converts values to other types if specified.
+                 * @param message MoveObjectRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.MoveObjectRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this MoveObjectRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for MoveObjectRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a StartResumableWriteRequest. */
+            interface IStartResumableWriteRequest {
+
+                /** StartResumableWriteRequest writeObjectSpec */
+                writeObjectSpec?: (google.storage.v2.IWriteObjectSpec|null);
+
+                /** StartResumableWriteRequest commonObjectRequestParams */
+                commonObjectRequestParams?: (google.storage.v2.ICommonObjectRequestParams|null);
+
+                /** StartResumableWriteRequest objectChecksums */
+                objectChecksums?: (google.storage.v2.IObjectChecksums|null);
+            }
+
+            /** Represents a StartResumableWriteRequest. */
+            class StartResumableWriteRequest implements IStartResumableWriteRequest {
+
+                /**
+                 * Constructs a new StartResumableWriteRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IStartResumableWriteRequest);
+
+                /** StartResumableWriteRequest writeObjectSpec. */
+                public writeObjectSpec?: (google.storage.v2.IWriteObjectSpec|null);
+
+                /** StartResumableWriteRequest commonObjectRequestParams. */
+                public commonObjectRequestParams?: (google.storage.v2.ICommonObjectRequestParams|null);
+
+                /** StartResumableWriteRequest objectChecksums. */
+                public objectChecksums?: (google.storage.v2.IObjectChecksums|null);
+
+                /**
+                 * Creates a new StartResumableWriteRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns StartResumableWriteRequest instance
+                 */
+                public static create(properties?: google.storage.v2.IStartResumableWriteRequest): google.storage.v2.StartResumableWriteRequest;
+
+                /**
+                 * Encodes the specified StartResumableWriteRequest message. Does not implicitly {@link google.storage.v2.StartResumableWriteRequest.verify|verify} messages.
+                 * @param message StartResumableWriteRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IStartResumableWriteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified StartResumableWriteRequest message, length delimited. Does not implicitly {@link google.storage.v2.StartResumableWriteRequest.verify|verify} messages.
+                 * @param message StartResumableWriteRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IStartResumableWriteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a StartResumableWriteRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns StartResumableWriteRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.StartResumableWriteRequest;
+
+                /**
+                 * Decodes a StartResumableWriteRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns StartResumableWriteRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.StartResumableWriteRequest;
+
+                /**
+                 * Verifies a StartResumableWriteRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a StartResumableWriteRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns StartResumableWriteRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.StartResumableWriteRequest;
+
+                /**
+                 * Creates a plain object from a StartResumableWriteRequest message. Also converts values to other types if specified.
+                 * @param message StartResumableWriteRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.StartResumableWriteRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this StartResumableWriteRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for StartResumableWriteRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a StartResumableWriteResponse. */
+            interface IStartResumableWriteResponse {
+
+                /** StartResumableWriteResponse uploadId */
+                uploadId?: (string|null);
+            }
+
+            /** Represents a StartResumableWriteResponse. */
+            class StartResumableWriteResponse implements IStartResumableWriteResponse {
+
+                /**
+                 * Constructs a new StartResumableWriteResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IStartResumableWriteResponse);
+
+                /** StartResumableWriteResponse uploadId. */
+                public uploadId: string;
+
+                /**
+                 * Creates a new StartResumableWriteResponse instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns StartResumableWriteResponse instance
+                 */
+                public static create(properties?: google.storage.v2.IStartResumableWriteResponse): google.storage.v2.StartResumableWriteResponse;
+
+                /**
+                 * Encodes the specified StartResumableWriteResponse message. Does not implicitly {@link google.storage.v2.StartResumableWriteResponse.verify|verify} messages.
+                 * @param message StartResumableWriteResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IStartResumableWriteResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified StartResumableWriteResponse message, length delimited. Does not implicitly {@link google.storage.v2.StartResumableWriteResponse.verify|verify} messages.
+                 * @param message StartResumableWriteResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IStartResumableWriteResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a StartResumableWriteResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns StartResumableWriteResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.StartResumableWriteResponse;
+
+                /**
+                 * Decodes a StartResumableWriteResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns StartResumableWriteResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.StartResumableWriteResponse;
+
+                /**
+                 * Verifies a StartResumableWriteResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a StartResumableWriteResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns StartResumableWriteResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.StartResumableWriteResponse;
+
+                /**
+                 * Creates a plain object from a StartResumableWriteResponse message. Also converts values to other types if specified.
+                 * @param message StartResumableWriteResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.StartResumableWriteResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this StartResumableWriteResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for StartResumableWriteResponse
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of an UpdateObjectRequest. */
+            interface IUpdateObjectRequest {
+
+                /** UpdateObjectRequest object */
+                object?: (google.storage.v2.IStorageObject|null);
+
+                /** UpdateObjectRequest ifGenerationMatch */
+                ifGenerationMatch?: (number|Long|string|null);
+
+                /** UpdateObjectRequest ifGenerationNotMatch */
+                ifGenerationNotMatch?: (number|Long|string|null);
+
+                /** UpdateObjectRequest ifMetagenerationMatch */
+                ifMetagenerationMatch?: (number|Long|string|null);
+
+                /** UpdateObjectRequest ifMetagenerationNotMatch */
+                ifMetagenerationNotMatch?: (number|Long|string|null);
+
+                /** UpdateObjectRequest predefinedAcl */
+                predefinedAcl?: (string|null);
+
+                /** UpdateObjectRequest updateMask */
+                updateMask?: (google.protobuf.IFieldMask|null);
+
+                /** UpdateObjectRequest commonObjectRequestParams */
+                commonObjectRequestParams?: (google.storage.v2.ICommonObjectRequestParams|null);
+
+                /** UpdateObjectRequest overrideUnlockedRetention */
+                overrideUnlockedRetention?: (boolean|null);
+            }
+
+            /** Represents an UpdateObjectRequest. */
+            class UpdateObjectRequest implements IUpdateObjectRequest {
+
+                /**
+                 * Constructs a new UpdateObjectRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IUpdateObjectRequest);
+
+                /** UpdateObjectRequest object. */
+                public object?: (google.storage.v2.IStorageObject|null);
+
+                /** UpdateObjectRequest ifGenerationMatch. */
+                public ifGenerationMatch?: (number|Long|string|null);
+
+                /** UpdateObjectRequest ifGenerationNotMatch. */
+                public ifGenerationNotMatch?: (number|Long|string|null);
+
+                /** UpdateObjectRequest ifMetagenerationMatch. */
+                public ifMetagenerationMatch?: (number|Long|string|null);
+
+                /** UpdateObjectRequest ifMetagenerationNotMatch. */
+                public ifMetagenerationNotMatch?: (number|Long|string|null);
+
+                /** UpdateObjectRequest predefinedAcl. */
+                public predefinedAcl: string;
+
+                /** UpdateObjectRequest updateMask. */
+                public updateMask?: (google.protobuf.IFieldMask|null);
+
+                /** UpdateObjectRequest commonObjectRequestParams. */
+                public commonObjectRequestParams?: (google.storage.v2.ICommonObjectRequestParams|null);
+
+                /** UpdateObjectRequest overrideUnlockedRetention. */
+                public overrideUnlockedRetention: boolean;
+
+                /**
+                 * Creates a new UpdateObjectRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns UpdateObjectRequest instance
+                 */
+                public static create(properties?: google.storage.v2.IUpdateObjectRequest): google.storage.v2.UpdateObjectRequest;
+
+                /**
+                 * Encodes the specified UpdateObjectRequest message. Does not implicitly {@link google.storage.v2.UpdateObjectRequest.verify|verify} messages.
+                 * @param message UpdateObjectRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IUpdateObjectRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified UpdateObjectRequest message, length delimited. Does not implicitly {@link google.storage.v2.UpdateObjectRequest.verify|verify} messages.
+                 * @param message UpdateObjectRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IUpdateObjectRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an UpdateObjectRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns UpdateObjectRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.UpdateObjectRequest;
+
+                /**
+                 * Decodes an UpdateObjectRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns UpdateObjectRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.UpdateObjectRequest;
+
+                /**
+                 * Verifies an UpdateObjectRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an UpdateObjectRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns UpdateObjectRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.UpdateObjectRequest;
+
+                /**
+                 * Creates a plain object from an UpdateObjectRequest message. Also converts values to other types if specified.
+                 * @param message UpdateObjectRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.UpdateObjectRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this UpdateObjectRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for UpdateObjectRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a CommonObjectRequestParams. */
+            interface ICommonObjectRequestParams {
+
+                /** CommonObjectRequestParams encryptionAlgorithm */
+                encryptionAlgorithm?: (string|null);
+
+                /** CommonObjectRequestParams encryptionKeyBytes */
+                encryptionKeyBytes?: (Uint8Array|Buffer|string|null);
+
+                /** CommonObjectRequestParams encryptionKeySha256Bytes */
+                encryptionKeySha256Bytes?: (Uint8Array|Buffer|string|null);
+            }
+
+            /** Represents a CommonObjectRequestParams. */
+            class CommonObjectRequestParams implements ICommonObjectRequestParams {
+
+                /**
+                 * Constructs a new CommonObjectRequestParams.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.ICommonObjectRequestParams);
+
+                /** CommonObjectRequestParams encryptionAlgorithm. */
+                public encryptionAlgorithm: string;
+
+                /** CommonObjectRequestParams encryptionKeyBytes. */
+                public encryptionKeyBytes: (Uint8Array|Buffer|string);
+
+                /** CommonObjectRequestParams encryptionKeySha256Bytes. */
+                public encryptionKeySha256Bytes: (Uint8Array|Buffer|string);
+
+                /**
+                 * Creates a new CommonObjectRequestParams instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns CommonObjectRequestParams instance
+                 */
+                public static create(properties?: google.storage.v2.ICommonObjectRequestParams): google.storage.v2.CommonObjectRequestParams;
+
+                /**
+                 * Encodes the specified CommonObjectRequestParams message. Does not implicitly {@link google.storage.v2.CommonObjectRequestParams.verify|verify} messages.
+                 * @param message CommonObjectRequestParams message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.ICommonObjectRequestParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified CommonObjectRequestParams message, length delimited. Does not implicitly {@link google.storage.v2.CommonObjectRequestParams.verify|verify} messages.
+                 * @param message CommonObjectRequestParams message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.ICommonObjectRequestParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a CommonObjectRequestParams message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns CommonObjectRequestParams
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.CommonObjectRequestParams;
+
+                /**
+                 * Decodes a CommonObjectRequestParams message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns CommonObjectRequestParams
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.CommonObjectRequestParams;
+
+                /**
+                 * Verifies a CommonObjectRequestParams message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a CommonObjectRequestParams message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns CommonObjectRequestParams
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.CommonObjectRequestParams;
+
+                /**
+                 * Creates a plain object from a CommonObjectRequestParams message. Also converts values to other types if specified.
+                 * @param message CommonObjectRequestParams
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.CommonObjectRequestParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this CommonObjectRequestParams to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for CommonObjectRequestParams
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ServiceConstants. */
+            interface IServiceConstants {
+            }
+
+            /** Represents a ServiceConstants. */
+            class ServiceConstants implements IServiceConstants {
+
+                /**
+                 * Constructs a new ServiceConstants.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IServiceConstants);
+
+                /**
+                 * Creates a new ServiceConstants instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ServiceConstants instance
+                 */
+                public static create(properties?: google.storage.v2.IServiceConstants): google.storage.v2.ServiceConstants;
+
+                /**
+                 * Encodes the specified ServiceConstants message. Does not implicitly {@link google.storage.v2.ServiceConstants.verify|verify} messages.
+                 * @param message ServiceConstants message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IServiceConstants, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ServiceConstants message, length delimited. Does not implicitly {@link google.storage.v2.ServiceConstants.verify|verify} messages.
+                 * @param message ServiceConstants message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IServiceConstants, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ServiceConstants message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ServiceConstants
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.ServiceConstants;
+
+                /**
+                 * Decodes a ServiceConstants message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ServiceConstants
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.ServiceConstants;
+
+                /**
+                 * Verifies a ServiceConstants message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ServiceConstants message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ServiceConstants
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.ServiceConstants;
+
+                /**
+                 * Creates a plain object from a ServiceConstants message. Also converts values to other types if specified.
+                 * @param message ServiceConstants
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.ServiceConstants, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ServiceConstants to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ServiceConstants
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace ServiceConstants {
+
+                /** Values enum. */
+                enum Values {
+                    VALUES_UNSPECIFIED = 0,
+                    MAX_READ_CHUNK_BYTES = 2097152,
+                    MAX_WRITE_CHUNK_BYTES = 2097152,
+                    MAX_OBJECT_SIZE_MB = 5242880,
+                    MAX_CUSTOM_METADATA_FIELD_NAME_BYTES = 1024,
+                    MAX_CUSTOM_METADATA_FIELD_VALUE_BYTES = 4096,
+                    MAX_CUSTOM_METADATA_TOTAL_SIZE_BYTES = 8192,
+                    MAX_BUCKET_METADATA_TOTAL_SIZE_BYTES = 20480,
+                    MAX_NOTIFICATION_CONFIGS_PER_BUCKET = 100,
+                    MAX_LIFECYCLE_RULES_PER_BUCKET = 100,
+                    MAX_NOTIFICATION_CUSTOM_ATTRIBUTES = 5,
+                    MAX_NOTIFICATION_CUSTOM_ATTRIBUTE_KEY_LENGTH = 256,
+                    MAX_NOTIFICATION_CUSTOM_ATTRIBUTE_VALUE_LENGTH = 1024,
+                    MAX_LABELS_ENTRIES_COUNT = 64,
+                    MAX_LABELS_KEY_VALUE_LENGTH = 63,
+                    MAX_LABELS_KEY_VALUE_BYTES = 128,
+                    MAX_OBJECT_IDS_PER_DELETE_OBJECTS_REQUEST = 1000,
+                    SPLIT_TOKEN_MAX_VALID_DAYS = 14
+                }
+            }
+
+            /** Properties of a Bucket. */
+            interface IBucket {
+
+                /** Bucket name */
+                name?: (string|null);
+
+                /** Bucket bucketId */
+                bucketId?: (string|null);
+
+                /** Bucket etag */
+                etag?: (string|null);
+
+                /** Bucket project */
+                project?: (string|null);
+
+                /** Bucket metageneration */
+                metageneration?: (number|Long|string|null);
+
+                /** Bucket location */
+                location?: (string|null);
+
+                /** Bucket locationType */
+                locationType?: (string|null);
+
+                /** Bucket storageClass */
+                storageClass?: (string|null);
+
+                /** Bucket rpo */
+                rpo?: (string|null);
+
+                /** Bucket acl */
+                acl?: (google.storage.v2.IBucketAccessControl[]|null);
+
+                /** Bucket defaultObjectAcl */
+                defaultObjectAcl?: (google.storage.v2.IObjectAccessControl[]|null);
+
+                /** Bucket lifecycle */
+                lifecycle?: (google.storage.v2.Bucket.ILifecycle|null);
+
+                /** Bucket createTime */
+                createTime?: (google.protobuf.ITimestamp|null);
+
+                /** Bucket cors */
+                cors?: (google.storage.v2.Bucket.ICors[]|null);
+
+                /** Bucket updateTime */
+                updateTime?: (google.protobuf.ITimestamp|null);
+
+                /** Bucket defaultEventBasedHold */
+                defaultEventBasedHold?: (boolean|null);
+
+                /** Bucket labels */
+                labels?: ({ [k: string]: string }|null);
+
+                /** Bucket website */
+                website?: (google.storage.v2.Bucket.IWebsite|null);
+
+                /** Bucket versioning */
+                versioning?: (google.storage.v2.Bucket.IVersioning|null);
+
+                /** Bucket logging */
+                logging?: (google.storage.v2.Bucket.ILogging|null);
+
+                /** Bucket owner */
+                owner?: (google.storage.v2.IOwner|null);
+
+                /** Bucket encryption */
+                encryption?: (google.storage.v2.Bucket.IEncryption|null);
+
+                /** Bucket billing */
+                billing?: (google.storage.v2.Bucket.IBilling|null);
+
+                /** Bucket retentionPolicy */
+                retentionPolicy?: (google.storage.v2.Bucket.IRetentionPolicy|null);
+
+                /** Bucket iamConfig */
+                iamConfig?: (google.storage.v2.Bucket.IIamConfig|null);
+
+                /** Bucket satisfiesPzs */
+                satisfiesPzs?: (boolean|null);
+
+                /** Bucket customPlacementConfig */
+                customPlacementConfig?: (google.storage.v2.Bucket.ICustomPlacementConfig|null);
+
+                /** Bucket autoclass */
+                autoclass?: (google.storage.v2.Bucket.IAutoclass|null);
+
+                /** Bucket hierarchicalNamespace */
+                hierarchicalNamespace?: (google.storage.v2.Bucket.IHierarchicalNamespace|null);
+
+                /** Bucket softDeletePolicy */
+                softDeletePolicy?: (google.storage.v2.Bucket.ISoftDeletePolicy|null);
+
+                /** Bucket objectRetention */
+                objectRetention?: (google.storage.v2.Bucket.IObjectRetention|null);
+
+                /** Bucket ipFilter */
+                ipFilter?: (google.storage.v2.Bucket.IIpFilter|null);
+            }
+
+            /** Represents a Bucket. */
+            class Bucket implements IBucket {
+
+                /**
+                 * Constructs a new Bucket.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IBucket);
+
+                /** Bucket name. */
+                public name: string;
+
+                /** Bucket bucketId. */
+                public bucketId: string;
+
+                /** Bucket etag. */
+                public etag: string;
+
+                /** Bucket project. */
+                public project: string;
+
+                /** Bucket metageneration. */
+                public metageneration: (number|Long|string);
+
+                /** Bucket location. */
+                public location: string;
+
+                /** Bucket locationType. */
+                public locationType: string;
+
+                /** Bucket storageClass. */
+                public storageClass: string;
+
+                /** Bucket rpo. */
+                public rpo: string;
+
+                /** Bucket acl. */
+                public acl: google.storage.v2.IBucketAccessControl[];
+
+                /** Bucket defaultObjectAcl. */
+                public defaultObjectAcl: google.storage.v2.IObjectAccessControl[];
+
+                /** Bucket lifecycle. */
+                public lifecycle?: (google.storage.v2.Bucket.ILifecycle|null);
+
+                /** Bucket createTime. */
+                public createTime?: (google.protobuf.ITimestamp|null);
+
+                /** Bucket cors. */
+                public cors: google.storage.v2.Bucket.ICors[];
+
+                /** Bucket updateTime. */
+                public updateTime?: (google.protobuf.ITimestamp|null);
+
+                /** Bucket defaultEventBasedHold. */
+                public defaultEventBasedHold: boolean;
+
+                /** Bucket labels. */
+                public labels: { [k: string]: string };
+
+                /** Bucket website. */
+                public website?: (google.storage.v2.Bucket.IWebsite|null);
+
+                /** Bucket versioning. */
+                public versioning?: (google.storage.v2.Bucket.IVersioning|null);
+
+                /** Bucket logging. */
+                public logging?: (google.storage.v2.Bucket.ILogging|null);
+
+                /** Bucket owner. */
+                public owner?: (google.storage.v2.IOwner|null);
+
+                /** Bucket encryption. */
+                public encryption?: (google.storage.v2.Bucket.IEncryption|null);
+
+                /** Bucket billing. */
+                public billing?: (google.storage.v2.Bucket.IBilling|null);
+
+                /** Bucket retentionPolicy. */
+                public retentionPolicy?: (google.storage.v2.Bucket.IRetentionPolicy|null);
+
+                /** Bucket iamConfig. */
+                public iamConfig?: (google.storage.v2.Bucket.IIamConfig|null);
+
+                /** Bucket satisfiesPzs. */
+                public satisfiesPzs: boolean;
+
+                /** Bucket customPlacementConfig. */
+                public customPlacementConfig?: (google.storage.v2.Bucket.ICustomPlacementConfig|null);
+
+                /** Bucket autoclass. */
+                public autoclass?: (google.storage.v2.Bucket.IAutoclass|null);
+
+                /** Bucket hierarchicalNamespace. */
+                public hierarchicalNamespace?: (google.storage.v2.Bucket.IHierarchicalNamespace|null);
+
+                /** Bucket softDeletePolicy. */
+                public softDeletePolicy?: (google.storage.v2.Bucket.ISoftDeletePolicy|null);
+
+                /** Bucket objectRetention. */
+                public objectRetention?: (google.storage.v2.Bucket.IObjectRetention|null);
+
+                /** Bucket ipFilter. */
+                public ipFilter?: (google.storage.v2.Bucket.IIpFilter|null);
+
+                /**
+                 * Creates a new Bucket instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns Bucket instance
+                 */
+                public static create(properties?: google.storage.v2.IBucket): google.storage.v2.Bucket;
+
+                /**
+                 * Encodes the specified Bucket message. Does not implicitly {@link google.storage.v2.Bucket.verify|verify} messages.
+                 * @param message Bucket message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IBucket, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Bucket message, length delimited. Does not implicitly {@link google.storage.v2.Bucket.verify|verify} messages.
+                 * @param message Bucket message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IBucket, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a Bucket message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Bucket
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.Bucket;
+
+                /**
+                 * Decodes a Bucket message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Bucket
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.Bucket;
+
+                /**
+                 * Verifies a Bucket message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a Bucket message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Bucket
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.Bucket;
+
+                /**
+                 * Creates a plain object from a Bucket message. Also converts values to other types if specified.
+                 * @param message Bucket
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.Bucket, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Bucket to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for Bucket
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace Bucket {
+
+                /** Properties of a Billing. */
+                interface IBilling {
+
+                    /** Billing requesterPays */
+                    requesterPays?: (boolean|null);
+                }
+
+                /** Represents a Billing. */
+                class Billing implements IBilling {
+
+                    /**
+                     * Constructs a new Billing.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.v2.Bucket.IBilling);
+
+                    /** Billing requesterPays. */
+                    public requesterPays: boolean;
+
+                    /**
+                     * Creates a new Billing instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Billing instance
+                     */
+                    public static create(properties?: google.storage.v2.Bucket.IBilling): google.storage.v2.Bucket.Billing;
+
+                    /**
+                     * Encodes the specified Billing message. Does not implicitly {@link google.storage.v2.Bucket.Billing.verify|verify} messages.
+                     * @param message Billing message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.v2.Bucket.IBilling, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Billing message, length delimited. Does not implicitly {@link google.storage.v2.Bucket.Billing.verify|verify} messages.
+                     * @param message Billing message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.v2.Bucket.IBilling, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Billing message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Billing
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.Bucket.Billing;
+
+                    /**
+                     * Decodes a Billing message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Billing
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.Bucket.Billing;
+
+                    /**
+                     * Verifies a Billing message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Billing message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Billing
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.v2.Bucket.Billing;
+
+                    /**
+                     * Creates a plain object from a Billing message. Also converts values to other types if specified.
+                     * @param message Billing
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.v2.Bucket.Billing, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Billing to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Billing
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Cors. */
+                interface ICors {
+
+                    /** Cors origin */
+                    origin?: (string[]|null);
+
+                    /** Cors method */
+                    method?: (string[]|null);
+
+                    /** Cors responseHeader */
+                    responseHeader?: (string[]|null);
+
+                    /** Cors maxAgeSeconds */
+                    maxAgeSeconds?: (number|null);
+                }
+
+                /** Represents a Cors. */
+                class Cors implements ICors {
+
+                    /**
+                     * Constructs a new Cors.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.v2.Bucket.ICors);
+
+                    /** Cors origin. */
+                    public origin: string[];
+
+                    /** Cors method. */
+                    public method: string[];
+
+                    /** Cors responseHeader. */
+                    public responseHeader: string[];
+
+                    /** Cors maxAgeSeconds. */
+                    public maxAgeSeconds: number;
+
+                    /**
+                     * Creates a new Cors instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Cors instance
+                     */
+                    public static create(properties?: google.storage.v2.Bucket.ICors): google.storage.v2.Bucket.Cors;
+
+                    /**
+                     * Encodes the specified Cors message. Does not implicitly {@link google.storage.v2.Bucket.Cors.verify|verify} messages.
+                     * @param message Cors message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.v2.Bucket.ICors, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Cors message, length delimited. Does not implicitly {@link google.storage.v2.Bucket.Cors.verify|verify} messages.
+                     * @param message Cors message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.v2.Bucket.ICors, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Cors message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Cors
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.Bucket.Cors;
+
+                    /**
+                     * Decodes a Cors message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Cors
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.Bucket.Cors;
+
+                    /**
+                     * Verifies a Cors message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Cors message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Cors
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.v2.Bucket.Cors;
+
+                    /**
+                     * Creates a plain object from a Cors message. Also converts values to other types if specified.
+                     * @param message Cors
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.v2.Bucket.Cors, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Cors to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Cors
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an Encryption. */
+                interface IEncryption {
+
+                    /** Encryption defaultKmsKey */
+                    defaultKmsKey?: (string|null);
+
+                    /** Encryption googleManagedEncryptionEnforcementConfig */
+                    googleManagedEncryptionEnforcementConfig?: (google.storage.v2.Bucket.Encryption.IGoogleManagedEncryptionEnforcementConfig|null);
+
+                    /** Encryption customerManagedEncryptionEnforcementConfig */
+                    customerManagedEncryptionEnforcementConfig?: (google.storage.v2.Bucket.Encryption.ICustomerManagedEncryptionEnforcementConfig|null);
+
+                    /** Encryption customerSuppliedEncryptionEnforcementConfig */
+                    customerSuppliedEncryptionEnforcementConfig?: (google.storage.v2.Bucket.Encryption.ICustomerSuppliedEncryptionEnforcementConfig|null);
+                }
+
+                /** Represents an Encryption. */
+                class Encryption implements IEncryption {
+
+                    /**
+                     * Constructs a new Encryption.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.v2.Bucket.IEncryption);
+
+                    /** Encryption defaultKmsKey. */
+                    public defaultKmsKey: string;
+
+                    /** Encryption googleManagedEncryptionEnforcementConfig. */
+                    public googleManagedEncryptionEnforcementConfig?: (google.storage.v2.Bucket.Encryption.IGoogleManagedEncryptionEnforcementConfig|null);
+
+                    /** Encryption customerManagedEncryptionEnforcementConfig. */
+                    public customerManagedEncryptionEnforcementConfig?: (google.storage.v2.Bucket.Encryption.ICustomerManagedEncryptionEnforcementConfig|null);
+
+                    /** Encryption customerSuppliedEncryptionEnforcementConfig. */
+                    public customerSuppliedEncryptionEnforcementConfig?: (google.storage.v2.Bucket.Encryption.ICustomerSuppliedEncryptionEnforcementConfig|null);
+
+                    /**
+                     * Creates a new Encryption instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Encryption instance
+                     */
+                    public static create(properties?: google.storage.v2.Bucket.IEncryption): google.storage.v2.Bucket.Encryption;
+
+                    /**
+                     * Encodes the specified Encryption message. Does not implicitly {@link google.storage.v2.Bucket.Encryption.verify|verify} messages.
+                     * @param message Encryption message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.v2.Bucket.IEncryption, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Encryption message, length delimited. Does not implicitly {@link google.storage.v2.Bucket.Encryption.verify|verify} messages.
+                     * @param message Encryption message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.v2.Bucket.IEncryption, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Encryption message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Encryption
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.Bucket.Encryption;
+
+                    /**
+                     * Decodes an Encryption message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Encryption
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.Bucket.Encryption;
+
+                    /**
+                     * Verifies an Encryption message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Encryption message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Encryption
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.v2.Bucket.Encryption;
+
+                    /**
+                     * Creates a plain object from an Encryption message. Also converts values to other types if specified.
+                     * @param message Encryption
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.v2.Bucket.Encryption, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Encryption to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Encryption
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Encryption {
+
+                    /** Properties of a GoogleManagedEncryptionEnforcementConfig. */
+                    interface IGoogleManagedEncryptionEnforcementConfig {
+
+                        /** GoogleManagedEncryptionEnforcementConfig restrictionMode */
+                        restrictionMode?: (string|null);
+
+                        /** GoogleManagedEncryptionEnforcementConfig effectiveTime */
+                        effectiveTime?: (google.protobuf.ITimestamp|null);
+                    }
+
+                    /** Represents a GoogleManagedEncryptionEnforcementConfig. */
+                    class GoogleManagedEncryptionEnforcementConfig implements IGoogleManagedEncryptionEnforcementConfig {
+
+                        /**
+                         * Constructs a new GoogleManagedEncryptionEnforcementConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.storage.v2.Bucket.Encryption.IGoogleManagedEncryptionEnforcementConfig);
+
+                        /** GoogleManagedEncryptionEnforcementConfig restrictionMode. */
+                        public restrictionMode?: (string|null);
+
+                        /** GoogleManagedEncryptionEnforcementConfig effectiveTime. */
+                        public effectiveTime?: (google.protobuf.ITimestamp|null);
+
+                        /**
+                         * Creates a new GoogleManagedEncryptionEnforcementConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GoogleManagedEncryptionEnforcementConfig instance
+                         */
+                        public static create(properties?: google.storage.v2.Bucket.Encryption.IGoogleManagedEncryptionEnforcementConfig): google.storage.v2.Bucket.Encryption.GoogleManagedEncryptionEnforcementConfig;
+
+                        /**
+                         * Encodes the specified GoogleManagedEncryptionEnforcementConfig message. Does not implicitly {@link google.storage.v2.Bucket.Encryption.GoogleManagedEncryptionEnforcementConfig.verify|verify} messages.
+                         * @param message GoogleManagedEncryptionEnforcementConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.storage.v2.Bucket.Encryption.IGoogleManagedEncryptionEnforcementConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GoogleManagedEncryptionEnforcementConfig message, length delimited. Does not implicitly {@link google.storage.v2.Bucket.Encryption.GoogleManagedEncryptionEnforcementConfig.verify|verify} messages.
+                         * @param message GoogleManagedEncryptionEnforcementConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.storage.v2.Bucket.Encryption.IGoogleManagedEncryptionEnforcementConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GoogleManagedEncryptionEnforcementConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GoogleManagedEncryptionEnforcementConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.Bucket.Encryption.GoogleManagedEncryptionEnforcementConfig;
+
+                        /**
+                         * Decodes a GoogleManagedEncryptionEnforcementConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GoogleManagedEncryptionEnforcementConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.Bucket.Encryption.GoogleManagedEncryptionEnforcementConfig;
+
+                        /**
+                         * Verifies a GoogleManagedEncryptionEnforcementConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GoogleManagedEncryptionEnforcementConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GoogleManagedEncryptionEnforcementConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.storage.v2.Bucket.Encryption.GoogleManagedEncryptionEnforcementConfig;
+
+                        /**
+                         * Creates a plain object from a GoogleManagedEncryptionEnforcementConfig message. Also converts values to other types if specified.
+                         * @param message GoogleManagedEncryptionEnforcementConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.storage.v2.Bucket.Encryption.GoogleManagedEncryptionEnforcementConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GoogleManagedEncryptionEnforcementConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GoogleManagedEncryptionEnforcementConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a CustomerManagedEncryptionEnforcementConfig. */
+                    interface ICustomerManagedEncryptionEnforcementConfig {
+
+                        /** CustomerManagedEncryptionEnforcementConfig restrictionMode */
+                        restrictionMode?: (string|null);
+
+                        /** CustomerManagedEncryptionEnforcementConfig effectiveTime */
+                        effectiveTime?: (google.protobuf.ITimestamp|null);
+                    }
+
+                    /** Represents a CustomerManagedEncryptionEnforcementConfig. */
+                    class CustomerManagedEncryptionEnforcementConfig implements ICustomerManagedEncryptionEnforcementConfig {
+
+                        /**
+                         * Constructs a new CustomerManagedEncryptionEnforcementConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.storage.v2.Bucket.Encryption.ICustomerManagedEncryptionEnforcementConfig);
+
+                        /** CustomerManagedEncryptionEnforcementConfig restrictionMode. */
+                        public restrictionMode?: (string|null);
+
+                        /** CustomerManagedEncryptionEnforcementConfig effectiveTime. */
+                        public effectiveTime?: (google.protobuf.ITimestamp|null);
+
+                        /**
+                         * Creates a new CustomerManagedEncryptionEnforcementConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CustomerManagedEncryptionEnforcementConfig instance
+                         */
+                        public static create(properties?: google.storage.v2.Bucket.Encryption.ICustomerManagedEncryptionEnforcementConfig): google.storage.v2.Bucket.Encryption.CustomerManagedEncryptionEnforcementConfig;
+
+                        /**
+                         * Encodes the specified CustomerManagedEncryptionEnforcementConfig message. Does not implicitly {@link google.storage.v2.Bucket.Encryption.CustomerManagedEncryptionEnforcementConfig.verify|verify} messages.
+                         * @param message CustomerManagedEncryptionEnforcementConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.storage.v2.Bucket.Encryption.ICustomerManagedEncryptionEnforcementConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CustomerManagedEncryptionEnforcementConfig message, length delimited. Does not implicitly {@link google.storage.v2.Bucket.Encryption.CustomerManagedEncryptionEnforcementConfig.verify|verify} messages.
+                         * @param message CustomerManagedEncryptionEnforcementConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.storage.v2.Bucket.Encryption.ICustomerManagedEncryptionEnforcementConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CustomerManagedEncryptionEnforcementConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CustomerManagedEncryptionEnforcementConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.Bucket.Encryption.CustomerManagedEncryptionEnforcementConfig;
+
+                        /**
+                         * Decodes a CustomerManagedEncryptionEnforcementConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CustomerManagedEncryptionEnforcementConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.Bucket.Encryption.CustomerManagedEncryptionEnforcementConfig;
+
+                        /**
+                         * Verifies a CustomerManagedEncryptionEnforcementConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CustomerManagedEncryptionEnforcementConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CustomerManagedEncryptionEnforcementConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.storage.v2.Bucket.Encryption.CustomerManagedEncryptionEnforcementConfig;
+
+                        /**
+                         * Creates a plain object from a CustomerManagedEncryptionEnforcementConfig message. Also converts values to other types if specified.
+                         * @param message CustomerManagedEncryptionEnforcementConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.storage.v2.Bucket.Encryption.CustomerManagedEncryptionEnforcementConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CustomerManagedEncryptionEnforcementConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CustomerManagedEncryptionEnforcementConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a CustomerSuppliedEncryptionEnforcementConfig. */
+                    interface ICustomerSuppliedEncryptionEnforcementConfig {
+
+                        /** CustomerSuppliedEncryptionEnforcementConfig restrictionMode */
+                        restrictionMode?: (string|null);
+
+                        /** CustomerSuppliedEncryptionEnforcementConfig effectiveTime */
+                        effectiveTime?: (google.protobuf.ITimestamp|null);
+                    }
+
+                    /** Represents a CustomerSuppliedEncryptionEnforcementConfig. */
+                    class CustomerSuppliedEncryptionEnforcementConfig implements ICustomerSuppliedEncryptionEnforcementConfig {
+
+                        /**
+                         * Constructs a new CustomerSuppliedEncryptionEnforcementConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.storage.v2.Bucket.Encryption.ICustomerSuppliedEncryptionEnforcementConfig);
+
+                        /** CustomerSuppliedEncryptionEnforcementConfig restrictionMode. */
+                        public restrictionMode?: (string|null);
+
+                        /** CustomerSuppliedEncryptionEnforcementConfig effectiveTime. */
+                        public effectiveTime?: (google.protobuf.ITimestamp|null);
+
+                        /**
+                         * Creates a new CustomerSuppliedEncryptionEnforcementConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CustomerSuppliedEncryptionEnforcementConfig instance
+                         */
+                        public static create(properties?: google.storage.v2.Bucket.Encryption.ICustomerSuppliedEncryptionEnforcementConfig): google.storage.v2.Bucket.Encryption.CustomerSuppliedEncryptionEnforcementConfig;
+
+                        /**
+                         * Encodes the specified CustomerSuppliedEncryptionEnforcementConfig message. Does not implicitly {@link google.storage.v2.Bucket.Encryption.CustomerSuppliedEncryptionEnforcementConfig.verify|verify} messages.
+                         * @param message CustomerSuppliedEncryptionEnforcementConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.storage.v2.Bucket.Encryption.ICustomerSuppliedEncryptionEnforcementConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CustomerSuppliedEncryptionEnforcementConfig message, length delimited. Does not implicitly {@link google.storage.v2.Bucket.Encryption.CustomerSuppliedEncryptionEnforcementConfig.verify|verify} messages.
+                         * @param message CustomerSuppliedEncryptionEnforcementConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.storage.v2.Bucket.Encryption.ICustomerSuppliedEncryptionEnforcementConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CustomerSuppliedEncryptionEnforcementConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CustomerSuppliedEncryptionEnforcementConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.Bucket.Encryption.CustomerSuppliedEncryptionEnforcementConfig;
+
+                        /**
+                         * Decodes a CustomerSuppliedEncryptionEnforcementConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CustomerSuppliedEncryptionEnforcementConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.Bucket.Encryption.CustomerSuppliedEncryptionEnforcementConfig;
+
+                        /**
+                         * Verifies a CustomerSuppliedEncryptionEnforcementConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CustomerSuppliedEncryptionEnforcementConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CustomerSuppliedEncryptionEnforcementConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.storage.v2.Bucket.Encryption.CustomerSuppliedEncryptionEnforcementConfig;
+
+                        /**
+                         * Creates a plain object from a CustomerSuppliedEncryptionEnforcementConfig message. Also converts values to other types if specified.
+                         * @param message CustomerSuppliedEncryptionEnforcementConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.storage.v2.Bucket.Encryption.CustomerSuppliedEncryptionEnforcementConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CustomerSuppliedEncryptionEnforcementConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CustomerSuppliedEncryptionEnforcementConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of an IamConfig. */
+                interface IIamConfig {
+
+                    /** IamConfig uniformBucketLevelAccess */
+                    uniformBucketLevelAccess?: (google.storage.v2.Bucket.IamConfig.IUniformBucketLevelAccess|null);
+
+                    /** IamConfig publicAccessPrevention */
+                    publicAccessPrevention?: (string|null);
+                }
+
+                /** Represents an IamConfig. */
+                class IamConfig implements IIamConfig {
+
+                    /**
+                     * Constructs a new IamConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.v2.Bucket.IIamConfig);
+
+                    /** IamConfig uniformBucketLevelAccess. */
+                    public uniformBucketLevelAccess?: (google.storage.v2.Bucket.IamConfig.IUniformBucketLevelAccess|null);
+
+                    /** IamConfig publicAccessPrevention. */
+                    public publicAccessPrevention: string;
+
+                    /**
+                     * Creates a new IamConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns IamConfig instance
+                     */
+                    public static create(properties?: google.storage.v2.Bucket.IIamConfig): google.storage.v2.Bucket.IamConfig;
+
+                    /**
+                     * Encodes the specified IamConfig message. Does not implicitly {@link google.storage.v2.Bucket.IamConfig.verify|verify} messages.
+                     * @param message IamConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.v2.Bucket.IIamConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified IamConfig message, length delimited. Does not implicitly {@link google.storage.v2.Bucket.IamConfig.verify|verify} messages.
+                     * @param message IamConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.v2.Bucket.IIamConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an IamConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns IamConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.Bucket.IamConfig;
+
+                    /**
+                     * Decodes an IamConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns IamConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.Bucket.IamConfig;
+
+                    /**
+                     * Verifies an IamConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an IamConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns IamConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.v2.Bucket.IamConfig;
+
+                    /**
+                     * Creates a plain object from an IamConfig message. Also converts values to other types if specified.
+                     * @param message IamConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.v2.Bucket.IamConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this IamConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for IamConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace IamConfig {
+
+                    /** Properties of an UniformBucketLevelAccess. */
+                    interface IUniformBucketLevelAccess {
+
+                        /** UniformBucketLevelAccess enabled */
+                        enabled?: (boolean|null);
+
+                        /** UniformBucketLevelAccess lockTime */
+                        lockTime?: (google.protobuf.ITimestamp|null);
+                    }
+
+                    /** Represents an UniformBucketLevelAccess. */
+                    class UniformBucketLevelAccess implements IUniformBucketLevelAccess {
+
+                        /**
+                         * Constructs a new UniformBucketLevelAccess.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.storage.v2.Bucket.IamConfig.IUniformBucketLevelAccess);
+
+                        /** UniformBucketLevelAccess enabled. */
+                        public enabled: boolean;
+
+                        /** UniformBucketLevelAccess lockTime. */
+                        public lockTime?: (google.protobuf.ITimestamp|null);
+
+                        /**
+                         * Creates a new UniformBucketLevelAccess instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UniformBucketLevelAccess instance
+                         */
+                        public static create(properties?: google.storage.v2.Bucket.IamConfig.IUniformBucketLevelAccess): google.storage.v2.Bucket.IamConfig.UniformBucketLevelAccess;
+
+                        /**
+                         * Encodes the specified UniformBucketLevelAccess message. Does not implicitly {@link google.storage.v2.Bucket.IamConfig.UniformBucketLevelAccess.verify|verify} messages.
+                         * @param message UniformBucketLevelAccess message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.storage.v2.Bucket.IamConfig.IUniformBucketLevelAccess, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UniformBucketLevelAccess message, length delimited. Does not implicitly {@link google.storage.v2.Bucket.IamConfig.UniformBucketLevelAccess.verify|verify} messages.
+                         * @param message UniformBucketLevelAccess message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.storage.v2.Bucket.IamConfig.IUniformBucketLevelAccess, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an UniformBucketLevelAccess message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UniformBucketLevelAccess
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.Bucket.IamConfig.UniformBucketLevelAccess;
+
+                        /**
+                         * Decodes an UniformBucketLevelAccess message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UniformBucketLevelAccess
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.Bucket.IamConfig.UniformBucketLevelAccess;
+
+                        /**
+                         * Verifies an UniformBucketLevelAccess message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an UniformBucketLevelAccess message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UniformBucketLevelAccess
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.storage.v2.Bucket.IamConfig.UniformBucketLevelAccess;
+
+                        /**
+                         * Creates a plain object from an UniformBucketLevelAccess message. Also converts values to other types if specified.
+                         * @param message UniformBucketLevelAccess
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.storage.v2.Bucket.IamConfig.UniformBucketLevelAccess, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UniformBucketLevelAccess to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UniformBucketLevelAccess
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a Lifecycle. */
+                interface ILifecycle {
+
+                    /** Lifecycle rule */
+                    rule?: (google.storage.v2.Bucket.Lifecycle.IRule[]|null);
+                }
+
+                /** Represents a Lifecycle. */
+                class Lifecycle implements ILifecycle {
+
+                    /**
+                     * Constructs a new Lifecycle.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.v2.Bucket.ILifecycle);
+
+                    /** Lifecycle rule. */
+                    public rule: google.storage.v2.Bucket.Lifecycle.IRule[];
+
+                    /**
+                     * Creates a new Lifecycle instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Lifecycle instance
+                     */
+                    public static create(properties?: google.storage.v2.Bucket.ILifecycle): google.storage.v2.Bucket.Lifecycle;
+
+                    /**
+                     * Encodes the specified Lifecycle message. Does not implicitly {@link google.storage.v2.Bucket.Lifecycle.verify|verify} messages.
+                     * @param message Lifecycle message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.v2.Bucket.ILifecycle, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Lifecycle message, length delimited. Does not implicitly {@link google.storage.v2.Bucket.Lifecycle.verify|verify} messages.
+                     * @param message Lifecycle message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.v2.Bucket.ILifecycle, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Lifecycle message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Lifecycle
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.Bucket.Lifecycle;
+
+                    /**
+                     * Decodes a Lifecycle message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Lifecycle
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.Bucket.Lifecycle;
+
+                    /**
+                     * Verifies a Lifecycle message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Lifecycle message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Lifecycle
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.v2.Bucket.Lifecycle;
+
+                    /**
+                     * Creates a plain object from a Lifecycle message. Also converts values to other types if specified.
+                     * @param message Lifecycle
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.v2.Bucket.Lifecycle, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Lifecycle to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Lifecycle
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Lifecycle {
+
+                    /** Properties of a Rule. */
+                    interface IRule {
+
+                        /** Rule action */
+                        action?: (google.storage.v2.Bucket.Lifecycle.Rule.IAction|null);
+
+                        /** Rule condition */
+                        condition?: (google.storage.v2.Bucket.Lifecycle.Rule.ICondition|null);
+                    }
+
+                    /** Represents a Rule. */
+                    class Rule implements IRule {
+
+                        /**
+                         * Constructs a new Rule.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.storage.v2.Bucket.Lifecycle.IRule);
+
+                        /** Rule action. */
+                        public action?: (google.storage.v2.Bucket.Lifecycle.Rule.IAction|null);
+
+                        /** Rule condition. */
+                        public condition?: (google.storage.v2.Bucket.Lifecycle.Rule.ICondition|null);
+
+                        /**
+                         * Creates a new Rule instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Rule instance
+                         */
+                        public static create(properties?: google.storage.v2.Bucket.Lifecycle.IRule): google.storage.v2.Bucket.Lifecycle.Rule;
+
+                        /**
+                         * Encodes the specified Rule message. Does not implicitly {@link google.storage.v2.Bucket.Lifecycle.Rule.verify|verify} messages.
+                         * @param message Rule message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.storage.v2.Bucket.Lifecycle.IRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Rule message, length delimited. Does not implicitly {@link google.storage.v2.Bucket.Lifecycle.Rule.verify|verify} messages.
+                         * @param message Rule message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.storage.v2.Bucket.Lifecycle.IRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Rule message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Rule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.Bucket.Lifecycle.Rule;
+
+                        /**
+                         * Decodes a Rule message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Rule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.Bucket.Lifecycle.Rule;
+
+                        /**
+                         * Verifies a Rule message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Rule message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Rule
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.storage.v2.Bucket.Lifecycle.Rule;
+
+                        /**
+                         * Creates a plain object from a Rule message. Also converts values to other types if specified.
+                         * @param message Rule
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.storage.v2.Bucket.Lifecycle.Rule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Rule to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Rule
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Rule {
+
+                        /** Properties of an Action. */
+                        interface IAction {
+
+                            /** Action type */
+                            type?: (string|null);
+
+                            /** Action storageClass */
+                            storageClass?: (string|null);
+                        }
+
+                        /** Represents an Action. */
+                        class Action implements IAction {
+
+                            /**
+                             * Constructs a new Action.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.storage.v2.Bucket.Lifecycle.Rule.IAction);
+
+                            /** Action type. */
+                            public type: string;
+
+                            /** Action storageClass. */
+                            public storageClass: string;
+
+                            /**
+                             * Creates a new Action instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Action instance
+                             */
+                            public static create(properties?: google.storage.v2.Bucket.Lifecycle.Rule.IAction): google.storage.v2.Bucket.Lifecycle.Rule.Action;
+
+                            /**
+                             * Encodes the specified Action message. Does not implicitly {@link google.storage.v2.Bucket.Lifecycle.Rule.Action.verify|verify} messages.
+                             * @param message Action message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.storage.v2.Bucket.Lifecycle.Rule.IAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Action message, length delimited. Does not implicitly {@link google.storage.v2.Bucket.Lifecycle.Rule.Action.verify|verify} messages.
+                             * @param message Action message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.storage.v2.Bucket.Lifecycle.Rule.IAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an Action message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Action
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.Bucket.Lifecycle.Rule.Action;
+
+                            /**
+                             * Decodes an Action message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Action
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.Bucket.Lifecycle.Rule.Action;
+
+                            /**
+                             * Verifies an Action message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an Action message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Action
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.storage.v2.Bucket.Lifecycle.Rule.Action;
+
+                            /**
+                             * Creates a plain object from an Action message. Also converts values to other types if specified.
+                             * @param message Action
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.storage.v2.Bucket.Lifecycle.Rule.Action, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Action to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Action
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a Condition. */
+                        interface ICondition {
+
+                            /** Condition ageDays */
+                            ageDays?: (number|null);
+
+                            /** Condition createdBefore */
+                            createdBefore?: (google.type.IDate|null);
+
+                            /** Condition isLive */
+                            isLive?: (boolean|null);
+
+                            /** Condition numNewerVersions */
+                            numNewerVersions?: (number|null);
+
+                            /** Condition matchesStorageClass */
+                            matchesStorageClass?: (string[]|null);
+
+                            /** Condition daysSinceCustomTime */
+                            daysSinceCustomTime?: (number|null);
+
+                            /** Condition customTimeBefore */
+                            customTimeBefore?: (google.type.IDate|null);
+
+                            /** Condition daysSinceNoncurrentTime */
+                            daysSinceNoncurrentTime?: (number|null);
+
+                            /** Condition noncurrentTimeBefore */
+                            noncurrentTimeBefore?: (google.type.IDate|null);
+
+                            /** Condition matchesPrefix */
+                            matchesPrefix?: (string[]|null);
+
+                            /** Condition matchesSuffix */
+                            matchesSuffix?: (string[]|null);
+                        }
+
+                        /** Represents a Condition. */
+                        class Condition implements ICondition {
+
+                            /**
+                             * Constructs a new Condition.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.storage.v2.Bucket.Lifecycle.Rule.ICondition);
+
+                            /** Condition ageDays. */
+                            public ageDays?: (number|null);
+
+                            /** Condition createdBefore. */
+                            public createdBefore?: (google.type.IDate|null);
+
+                            /** Condition isLive. */
+                            public isLive?: (boolean|null);
+
+                            /** Condition numNewerVersions. */
+                            public numNewerVersions?: (number|null);
+
+                            /** Condition matchesStorageClass. */
+                            public matchesStorageClass: string[];
+
+                            /** Condition daysSinceCustomTime. */
+                            public daysSinceCustomTime?: (number|null);
+
+                            /** Condition customTimeBefore. */
+                            public customTimeBefore?: (google.type.IDate|null);
+
+                            /** Condition daysSinceNoncurrentTime. */
+                            public daysSinceNoncurrentTime?: (number|null);
+
+                            /** Condition noncurrentTimeBefore. */
+                            public noncurrentTimeBefore?: (google.type.IDate|null);
+
+                            /** Condition matchesPrefix. */
+                            public matchesPrefix: string[];
+
+                            /** Condition matchesSuffix. */
+                            public matchesSuffix: string[];
+
+                            /**
+                             * Creates a new Condition instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Condition instance
+                             */
+                            public static create(properties?: google.storage.v2.Bucket.Lifecycle.Rule.ICondition): google.storage.v2.Bucket.Lifecycle.Rule.Condition;
+
+                            /**
+                             * Encodes the specified Condition message. Does not implicitly {@link google.storage.v2.Bucket.Lifecycle.Rule.Condition.verify|verify} messages.
+                             * @param message Condition message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.storage.v2.Bucket.Lifecycle.Rule.ICondition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Condition message, length delimited. Does not implicitly {@link google.storage.v2.Bucket.Lifecycle.Rule.Condition.verify|verify} messages.
+                             * @param message Condition message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.storage.v2.Bucket.Lifecycle.Rule.ICondition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Condition message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Condition
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.Bucket.Lifecycle.Rule.Condition;
+
+                            /**
+                             * Decodes a Condition message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Condition
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.Bucket.Lifecycle.Rule.Condition;
+
+                            /**
+                             * Verifies a Condition message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Condition message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Condition
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.storage.v2.Bucket.Lifecycle.Rule.Condition;
+
+                            /**
+                             * Creates a plain object from a Condition message. Also converts values to other types if specified.
+                             * @param message Condition
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.storage.v2.Bucket.Lifecycle.Rule.Condition, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Condition to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Condition
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+                }
+
+                /** Properties of a Logging. */
+                interface ILogging {
+
+                    /** Logging logBucket */
+                    logBucket?: (string|null);
+
+                    /** Logging logObjectPrefix */
+                    logObjectPrefix?: (string|null);
+                }
+
+                /** Represents a Logging. */
+                class Logging implements ILogging {
+
+                    /**
+                     * Constructs a new Logging.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.v2.Bucket.ILogging);
+
+                    /** Logging logBucket. */
+                    public logBucket: string;
+
+                    /** Logging logObjectPrefix. */
+                    public logObjectPrefix: string;
+
+                    /**
+                     * Creates a new Logging instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Logging instance
+                     */
+                    public static create(properties?: google.storage.v2.Bucket.ILogging): google.storage.v2.Bucket.Logging;
+
+                    /**
+                     * Encodes the specified Logging message. Does not implicitly {@link google.storage.v2.Bucket.Logging.verify|verify} messages.
+                     * @param message Logging message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.v2.Bucket.ILogging, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Logging message, length delimited. Does not implicitly {@link google.storage.v2.Bucket.Logging.verify|verify} messages.
+                     * @param message Logging message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.v2.Bucket.ILogging, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Logging message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Logging
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.Bucket.Logging;
+
+                    /**
+                     * Decodes a Logging message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Logging
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.Bucket.Logging;
+
+                    /**
+                     * Verifies a Logging message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Logging message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Logging
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.v2.Bucket.Logging;
+
+                    /**
+                     * Creates a plain object from a Logging message. Also converts values to other types if specified.
+                     * @param message Logging
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.v2.Bucket.Logging, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Logging to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Logging
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ObjectRetention. */
+                interface IObjectRetention {
+
+                    /** ObjectRetention enabled */
+                    enabled?: (boolean|null);
+                }
+
+                /** Represents an ObjectRetention. */
+                class ObjectRetention implements IObjectRetention {
+
+                    /**
+                     * Constructs a new ObjectRetention.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.v2.Bucket.IObjectRetention);
+
+                    /** ObjectRetention enabled. */
+                    public enabled: boolean;
+
+                    /**
+                     * Creates a new ObjectRetention instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ObjectRetention instance
+                     */
+                    public static create(properties?: google.storage.v2.Bucket.IObjectRetention): google.storage.v2.Bucket.ObjectRetention;
+
+                    /**
+                     * Encodes the specified ObjectRetention message. Does not implicitly {@link google.storage.v2.Bucket.ObjectRetention.verify|verify} messages.
+                     * @param message ObjectRetention message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.v2.Bucket.IObjectRetention, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ObjectRetention message, length delimited. Does not implicitly {@link google.storage.v2.Bucket.ObjectRetention.verify|verify} messages.
+                     * @param message ObjectRetention message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.v2.Bucket.IObjectRetention, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ObjectRetention message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ObjectRetention
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.Bucket.ObjectRetention;
+
+                    /**
+                     * Decodes an ObjectRetention message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ObjectRetention
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.Bucket.ObjectRetention;
+
+                    /**
+                     * Verifies an ObjectRetention message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ObjectRetention message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ObjectRetention
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.v2.Bucket.ObjectRetention;
+
+                    /**
+                     * Creates a plain object from an ObjectRetention message. Also converts values to other types if specified.
+                     * @param message ObjectRetention
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.v2.Bucket.ObjectRetention, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ObjectRetention to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ObjectRetention
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RetentionPolicy. */
+                interface IRetentionPolicy {
+
+                    /** RetentionPolicy effectiveTime */
+                    effectiveTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RetentionPolicy isLocked */
+                    isLocked?: (boolean|null);
+
+                    /** RetentionPolicy retentionDuration */
+                    retentionDuration?: (google.protobuf.IDuration|null);
+                }
+
+                /** Represents a RetentionPolicy. */
+                class RetentionPolicy implements IRetentionPolicy {
+
+                    /**
+                     * Constructs a new RetentionPolicy.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.v2.Bucket.IRetentionPolicy);
+
+                    /** RetentionPolicy effectiveTime. */
+                    public effectiveTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RetentionPolicy isLocked. */
+                    public isLocked: boolean;
+
+                    /** RetentionPolicy retentionDuration. */
+                    public retentionDuration?: (google.protobuf.IDuration|null);
+
+                    /**
+                     * Creates a new RetentionPolicy instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RetentionPolicy instance
+                     */
+                    public static create(properties?: google.storage.v2.Bucket.IRetentionPolicy): google.storage.v2.Bucket.RetentionPolicy;
+
+                    /**
+                     * Encodes the specified RetentionPolicy message. Does not implicitly {@link google.storage.v2.Bucket.RetentionPolicy.verify|verify} messages.
+                     * @param message RetentionPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.v2.Bucket.IRetentionPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RetentionPolicy message, length delimited. Does not implicitly {@link google.storage.v2.Bucket.RetentionPolicy.verify|verify} messages.
+                     * @param message RetentionPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.v2.Bucket.IRetentionPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RetentionPolicy message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RetentionPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.Bucket.RetentionPolicy;
+
+                    /**
+                     * Decodes a RetentionPolicy message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RetentionPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.Bucket.RetentionPolicy;
+
+                    /**
+                     * Verifies a RetentionPolicy message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RetentionPolicy message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RetentionPolicy
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.v2.Bucket.RetentionPolicy;
+
+                    /**
+                     * Creates a plain object from a RetentionPolicy message. Also converts values to other types if specified.
+                     * @param message RetentionPolicy
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.v2.Bucket.RetentionPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RetentionPolicy to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RetentionPolicy
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SoftDeletePolicy. */
+                interface ISoftDeletePolicy {
+
+                    /** SoftDeletePolicy retentionDuration */
+                    retentionDuration?: (google.protobuf.IDuration|null);
+
+                    /** SoftDeletePolicy effectiveTime */
+                    effectiveTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a SoftDeletePolicy. */
+                class SoftDeletePolicy implements ISoftDeletePolicy {
+
+                    /**
+                     * Constructs a new SoftDeletePolicy.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.v2.Bucket.ISoftDeletePolicy);
+
+                    /** SoftDeletePolicy retentionDuration. */
+                    public retentionDuration?: (google.protobuf.IDuration|null);
+
+                    /** SoftDeletePolicy effectiveTime. */
+                    public effectiveTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new SoftDeletePolicy instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SoftDeletePolicy instance
+                     */
+                    public static create(properties?: google.storage.v2.Bucket.ISoftDeletePolicy): google.storage.v2.Bucket.SoftDeletePolicy;
+
+                    /**
+                     * Encodes the specified SoftDeletePolicy message. Does not implicitly {@link google.storage.v2.Bucket.SoftDeletePolicy.verify|verify} messages.
+                     * @param message SoftDeletePolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.v2.Bucket.ISoftDeletePolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SoftDeletePolicy message, length delimited. Does not implicitly {@link google.storage.v2.Bucket.SoftDeletePolicy.verify|verify} messages.
+                     * @param message SoftDeletePolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.v2.Bucket.ISoftDeletePolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SoftDeletePolicy message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SoftDeletePolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.Bucket.SoftDeletePolicy;
+
+                    /**
+                     * Decodes a SoftDeletePolicy message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SoftDeletePolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.Bucket.SoftDeletePolicy;
+
+                    /**
+                     * Verifies a SoftDeletePolicy message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SoftDeletePolicy message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SoftDeletePolicy
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.v2.Bucket.SoftDeletePolicy;
+
+                    /**
+                     * Creates a plain object from a SoftDeletePolicy message. Also converts values to other types if specified.
+                     * @param message SoftDeletePolicy
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.v2.Bucket.SoftDeletePolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SoftDeletePolicy to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SoftDeletePolicy
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Versioning. */
+                interface IVersioning {
+
+                    /** Versioning enabled */
+                    enabled?: (boolean|null);
+                }
+
+                /** Represents a Versioning. */
+                class Versioning implements IVersioning {
+
+                    /**
+                     * Constructs a new Versioning.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.v2.Bucket.IVersioning);
+
+                    /** Versioning enabled. */
+                    public enabled: boolean;
+
+                    /**
+                     * Creates a new Versioning instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Versioning instance
+                     */
+                    public static create(properties?: google.storage.v2.Bucket.IVersioning): google.storage.v2.Bucket.Versioning;
+
+                    /**
+                     * Encodes the specified Versioning message. Does not implicitly {@link google.storage.v2.Bucket.Versioning.verify|verify} messages.
+                     * @param message Versioning message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.v2.Bucket.IVersioning, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Versioning message, length delimited. Does not implicitly {@link google.storage.v2.Bucket.Versioning.verify|verify} messages.
+                     * @param message Versioning message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.v2.Bucket.IVersioning, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Versioning message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Versioning
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.Bucket.Versioning;
+
+                    /**
+                     * Decodes a Versioning message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Versioning
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.Bucket.Versioning;
+
+                    /**
+                     * Verifies a Versioning message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Versioning message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Versioning
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.v2.Bucket.Versioning;
+
+                    /**
+                     * Creates a plain object from a Versioning message. Also converts values to other types if specified.
+                     * @param message Versioning
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.v2.Bucket.Versioning, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Versioning to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Versioning
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Website. */
+                interface IWebsite {
+
+                    /** Website mainPageSuffix */
+                    mainPageSuffix?: (string|null);
+
+                    /** Website notFoundPage */
+                    notFoundPage?: (string|null);
+                }
+
+                /** Represents a Website. */
+                class Website implements IWebsite {
+
+                    /**
+                     * Constructs a new Website.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.v2.Bucket.IWebsite);
+
+                    /** Website mainPageSuffix. */
+                    public mainPageSuffix: string;
+
+                    /** Website notFoundPage. */
+                    public notFoundPage: string;
+
+                    /**
+                     * Creates a new Website instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Website instance
+                     */
+                    public static create(properties?: google.storage.v2.Bucket.IWebsite): google.storage.v2.Bucket.Website;
+
+                    /**
+                     * Encodes the specified Website message. Does not implicitly {@link google.storage.v2.Bucket.Website.verify|verify} messages.
+                     * @param message Website message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.v2.Bucket.IWebsite, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Website message, length delimited. Does not implicitly {@link google.storage.v2.Bucket.Website.verify|verify} messages.
+                     * @param message Website message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.v2.Bucket.IWebsite, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Website message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Website
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.Bucket.Website;
+
+                    /**
+                     * Decodes a Website message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Website
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.Bucket.Website;
+
+                    /**
+                     * Verifies a Website message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Website message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Website
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.v2.Bucket.Website;
+
+                    /**
+                     * Creates a plain object from a Website message. Also converts values to other types if specified.
+                     * @param message Website
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.v2.Bucket.Website, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Website to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Website
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CustomPlacementConfig. */
+                interface ICustomPlacementConfig {
+
+                    /** CustomPlacementConfig dataLocations */
+                    dataLocations?: (string[]|null);
+                }
+
+                /** Represents a CustomPlacementConfig. */
+                class CustomPlacementConfig implements ICustomPlacementConfig {
+
+                    /**
+                     * Constructs a new CustomPlacementConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.v2.Bucket.ICustomPlacementConfig);
+
+                    /** CustomPlacementConfig dataLocations. */
+                    public dataLocations: string[];
+
+                    /**
+                     * Creates a new CustomPlacementConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CustomPlacementConfig instance
+                     */
+                    public static create(properties?: google.storage.v2.Bucket.ICustomPlacementConfig): google.storage.v2.Bucket.CustomPlacementConfig;
+
+                    /**
+                     * Encodes the specified CustomPlacementConfig message. Does not implicitly {@link google.storage.v2.Bucket.CustomPlacementConfig.verify|verify} messages.
+                     * @param message CustomPlacementConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.v2.Bucket.ICustomPlacementConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CustomPlacementConfig message, length delimited. Does not implicitly {@link google.storage.v2.Bucket.CustomPlacementConfig.verify|verify} messages.
+                     * @param message CustomPlacementConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.v2.Bucket.ICustomPlacementConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CustomPlacementConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CustomPlacementConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.Bucket.CustomPlacementConfig;
+
+                    /**
+                     * Decodes a CustomPlacementConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CustomPlacementConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.Bucket.CustomPlacementConfig;
+
+                    /**
+                     * Verifies a CustomPlacementConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CustomPlacementConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CustomPlacementConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.v2.Bucket.CustomPlacementConfig;
+
+                    /**
+                     * Creates a plain object from a CustomPlacementConfig message. Also converts values to other types if specified.
+                     * @param message CustomPlacementConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.v2.Bucket.CustomPlacementConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CustomPlacementConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CustomPlacementConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an Autoclass. */
+                interface IAutoclass {
+
+                    /** Autoclass enabled */
+                    enabled?: (boolean|null);
+
+                    /** Autoclass toggleTime */
+                    toggleTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Autoclass terminalStorageClass */
+                    terminalStorageClass?: (string|null);
+
+                    /** Autoclass terminalStorageClassUpdateTime */
+                    terminalStorageClassUpdateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents an Autoclass. */
+                class Autoclass implements IAutoclass {
+
+                    /**
+                     * Constructs a new Autoclass.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.v2.Bucket.IAutoclass);
+
+                    /** Autoclass enabled. */
+                    public enabled: boolean;
+
+                    /** Autoclass toggleTime. */
+                    public toggleTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Autoclass terminalStorageClass. */
+                    public terminalStorageClass?: (string|null);
+
+                    /** Autoclass terminalStorageClassUpdateTime. */
+                    public terminalStorageClassUpdateTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new Autoclass instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Autoclass instance
+                     */
+                    public static create(properties?: google.storage.v2.Bucket.IAutoclass): google.storage.v2.Bucket.Autoclass;
+
+                    /**
+                     * Encodes the specified Autoclass message. Does not implicitly {@link google.storage.v2.Bucket.Autoclass.verify|verify} messages.
+                     * @param message Autoclass message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.v2.Bucket.IAutoclass, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Autoclass message, length delimited. Does not implicitly {@link google.storage.v2.Bucket.Autoclass.verify|verify} messages.
+                     * @param message Autoclass message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.v2.Bucket.IAutoclass, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Autoclass message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Autoclass
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.Bucket.Autoclass;
+
+                    /**
+                     * Decodes an Autoclass message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Autoclass
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.Bucket.Autoclass;
+
+                    /**
+                     * Verifies an Autoclass message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Autoclass message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Autoclass
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.v2.Bucket.Autoclass;
+
+                    /**
+                     * Creates a plain object from an Autoclass message. Also converts values to other types if specified.
+                     * @param message Autoclass
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.v2.Bucket.Autoclass, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Autoclass to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Autoclass
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an IpFilter. */
+                interface IIpFilter {
+
+                    /** IpFilter mode */
+                    mode?: (string|null);
+
+                    /** IpFilter publicNetworkSource */
+                    publicNetworkSource?: (google.storage.v2.Bucket.IpFilter.IPublicNetworkSource|null);
+
+                    /** IpFilter vpcNetworkSources */
+                    vpcNetworkSources?: (google.storage.v2.Bucket.IpFilter.IVpcNetworkSource[]|null);
+
+                    /** IpFilter allowCrossOrgVpcs */
+                    allowCrossOrgVpcs?: (boolean|null);
+
+                    /** IpFilter allowAllServiceAgentAccess */
+                    allowAllServiceAgentAccess?: (boolean|null);
+                }
+
+                /** Represents an IpFilter. */
+                class IpFilter implements IIpFilter {
+
+                    /**
+                     * Constructs a new IpFilter.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.v2.Bucket.IIpFilter);
+
+                    /** IpFilter mode. */
+                    public mode?: (string|null);
+
+                    /** IpFilter publicNetworkSource. */
+                    public publicNetworkSource?: (google.storage.v2.Bucket.IpFilter.IPublicNetworkSource|null);
+
+                    /** IpFilter vpcNetworkSources. */
+                    public vpcNetworkSources: google.storage.v2.Bucket.IpFilter.IVpcNetworkSource[];
+
+                    /** IpFilter allowCrossOrgVpcs. */
+                    public allowCrossOrgVpcs: boolean;
+
+                    /** IpFilter allowAllServiceAgentAccess. */
+                    public allowAllServiceAgentAccess?: (boolean|null);
+
+                    /**
+                     * Creates a new IpFilter instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns IpFilter instance
+                     */
+                    public static create(properties?: google.storage.v2.Bucket.IIpFilter): google.storage.v2.Bucket.IpFilter;
+
+                    /**
+                     * Encodes the specified IpFilter message. Does not implicitly {@link google.storage.v2.Bucket.IpFilter.verify|verify} messages.
+                     * @param message IpFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.v2.Bucket.IIpFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified IpFilter message, length delimited. Does not implicitly {@link google.storage.v2.Bucket.IpFilter.verify|verify} messages.
+                     * @param message IpFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.v2.Bucket.IIpFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an IpFilter message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns IpFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.Bucket.IpFilter;
+
+                    /**
+                     * Decodes an IpFilter message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns IpFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.Bucket.IpFilter;
+
+                    /**
+                     * Verifies an IpFilter message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an IpFilter message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns IpFilter
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.v2.Bucket.IpFilter;
+
+                    /**
+                     * Creates a plain object from an IpFilter message. Also converts values to other types if specified.
+                     * @param message IpFilter
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.v2.Bucket.IpFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this IpFilter to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for IpFilter
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace IpFilter {
+
+                    /** Properties of a PublicNetworkSource. */
+                    interface IPublicNetworkSource {
+
+                        /** PublicNetworkSource allowedIpCidrRanges */
+                        allowedIpCidrRanges?: (string[]|null);
+                    }
+
+                    /** Represents a PublicNetworkSource. */
+                    class PublicNetworkSource implements IPublicNetworkSource {
+
+                        /**
+                         * Constructs a new PublicNetworkSource.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.storage.v2.Bucket.IpFilter.IPublicNetworkSource);
+
+                        /** PublicNetworkSource allowedIpCidrRanges. */
+                        public allowedIpCidrRanges: string[];
+
+                        /**
+                         * Creates a new PublicNetworkSource instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PublicNetworkSource instance
+                         */
+                        public static create(properties?: google.storage.v2.Bucket.IpFilter.IPublicNetworkSource): google.storage.v2.Bucket.IpFilter.PublicNetworkSource;
+
+                        /**
+                         * Encodes the specified PublicNetworkSource message. Does not implicitly {@link google.storage.v2.Bucket.IpFilter.PublicNetworkSource.verify|verify} messages.
+                         * @param message PublicNetworkSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.storage.v2.Bucket.IpFilter.IPublicNetworkSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PublicNetworkSource message, length delimited. Does not implicitly {@link google.storage.v2.Bucket.IpFilter.PublicNetworkSource.verify|verify} messages.
+                         * @param message PublicNetworkSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.storage.v2.Bucket.IpFilter.IPublicNetworkSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PublicNetworkSource message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PublicNetworkSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.Bucket.IpFilter.PublicNetworkSource;
+
+                        /**
+                         * Decodes a PublicNetworkSource message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PublicNetworkSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.Bucket.IpFilter.PublicNetworkSource;
+
+                        /**
+                         * Verifies a PublicNetworkSource message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PublicNetworkSource message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PublicNetworkSource
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.storage.v2.Bucket.IpFilter.PublicNetworkSource;
+
+                        /**
+                         * Creates a plain object from a PublicNetworkSource message. Also converts values to other types if specified.
+                         * @param message PublicNetworkSource
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.storage.v2.Bucket.IpFilter.PublicNetworkSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PublicNetworkSource to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PublicNetworkSource
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a VpcNetworkSource. */
+                    interface IVpcNetworkSource {
+
+                        /** VpcNetworkSource network */
+                        network?: (string|null);
+
+                        /** VpcNetworkSource allowedIpCidrRanges */
+                        allowedIpCidrRanges?: (string[]|null);
+                    }
+
+                    /** Represents a VpcNetworkSource. */
+                    class VpcNetworkSource implements IVpcNetworkSource {
+
+                        /**
+                         * Constructs a new VpcNetworkSource.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.storage.v2.Bucket.IpFilter.IVpcNetworkSource);
+
+                        /** VpcNetworkSource network. */
+                        public network?: (string|null);
+
+                        /** VpcNetworkSource allowedIpCidrRanges. */
+                        public allowedIpCidrRanges: string[];
+
+                        /**
+                         * Creates a new VpcNetworkSource instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns VpcNetworkSource instance
+                         */
+                        public static create(properties?: google.storage.v2.Bucket.IpFilter.IVpcNetworkSource): google.storage.v2.Bucket.IpFilter.VpcNetworkSource;
+
+                        /**
+                         * Encodes the specified VpcNetworkSource message. Does not implicitly {@link google.storage.v2.Bucket.IpFilter.VpcNetworkSource.verify|verify} messages.
+                         * @param message VpcNetworkSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.storage.v2.Bucket.IpFilter.IVpcNetworkSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified VpcNetworkSource message, length delimited. Does not implicitly {@link google.storage.v2.Bucket.IpFilter.VpcNetworkSource.verify|verify} messages.
+                         * @param message VpcNetworkSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.storage.v2.Bucket.IpFilter.IVpcNetworkSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a VpcNetworkSource message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns VpcNetworkSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.Bucket.IpFilter.VpcNetworkSource;
+
+                        /**
+                         * Decodes a VpcNetworkSource message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns VpcNetworkSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.Bucket.IpFilter.VpcNetworkSource;
+
+                        /**
+                         * Verifies a VpcNetworkSource message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a VpcNetworkSource message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns VpcNetworkSource
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.storage.v2.Bucket.IpFilter.VpcNetworkSource;
+
+                        /**
+                         * Creates a plain object from a VpcNetworkSource message. Also converts values to other types if specified.
+                         * @param message VpcNetworkSource
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.storage.v2.Bucket.IpFilter.VpcNetworkSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this VpcNetworkSource to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for VpcNetworkSource
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a HierarchicalNamespace. */
+                interface IHierarchicalNamespace {
+
+                    /** HierarchicalNamespace enabled */
+                    enabled?: (boolean|null);
+                }
+
+                /** Represents a HierarchicalNamespace. */
+                class HierarchicalNamespace implements IHierarchicalNamespace {
+
+                    /**
+                     * Constructs a new HierarchicalNamespace.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.v2.Bucket.IHierarchicalNamespace);
+
+                    /** HierarchicalNamespace enabled. */
+                    public enabled: boolean;
+
+                    /**
+                     * Creates a new HierarchicalNamespace instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns HierarchicalNamespace instance
+                     */
+                    public static create(properties?: google.storage.v2.Bucket.IHierarchicalNamespace): google.storage.v2.Bucket.HierarchicalNamespace;
+
+                    /**
+                     * Encodes the specified HierarchicalNamespace message. Does not implicitly {@link google.storage.v2.Bucket.HierarchicalNamespace.verify|verify} messages.
+                     * @param message HierarchicalNamespace message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.v2.Bucket.IHierarchicalNamespace, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified HierarchicalNamespace message, length delimited. Does not implicitly {@link google.storage.v2.Bucket.HierarchicalNamespace.verify|verify} messages.
+                     * @param message HierarchicalNamespace message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.v2.Bucket.IHierarchicalNamespace, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a HierarchicalNamespace message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns HierarchicalNamespace
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.Bucket.HierarchicalNamespace;
+
+                    /**
+                     * Decodes a HierarchicalNamespace message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns HierarchicalNamespace
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.Bucket.HierarchicalNamespace;
+
+                    /**
+                     * Verifies a HierarchicalNamespace message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a HierarchicalNamespace message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns HierarchicalNamespace
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.v2.Bucket.HierarchicalNamespace;
+
+                    /**
+                     * Creates a plain object from a HierarchicalNamespace message. Also converts values to other types if specified.
+                     * @param message HierarchicalNamespace
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.v2.Bucket.HierarchicalNamespace, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this HierarchicalNamespace to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for HierarchicalNamespace
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+            }
+
+            /** Properties of a BucketAccessControl. */
+            interface IBucketAccessControl {
+
+                /** BucketAccessControl role */
+                role?: (string|null);
+
+                /** BucketAccessControl id */
+                id?: (string|null);
+
+                /** BucketAccessControl entity */
+                entity?: (string|null);
+
+                /** BucketAccessControl entityAlt */
+                entityAlt?: (string|null);
+
+                /** BucketAccessControl entityId */
+                entityId?: (string|null);
+
+                /** BucketAccessControl etag */
+                etag?: (string|null);
+
+                /** BucketAccessControl email */
+                email?: (string|null);
+
+                /** BucketAccessControl domain */
+                domain?: (string|null);
+
+                /** BucketAccessControl projectTeam */
+                projectTeam?: (google.storage.v2.IProjectTeam|null);
+            }
+
+            /** Represents a BucketAccessControl. */
+            class BucketAccessControl implements IBucketAccessControl {
+
+                /**
+                 * Constructs a new BucketAccessControl.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IBucketAccessControl);
+
+                /** BucketAccessControl role. */
+                public role: string;
+
+                /** BucketAccessControl id. */
+                public id: string;
+
+                /** BucketAccessControl entity. */
+                public entity: string;
+
+                /** BucketAccessControl entityAlt. */
+                public entityAlt: string;
+
+                /** BucketAccessControl entityId. */
+                public entityId: string;
+
+                /** BucketAccessControl etag. */
+                public etag: string;
+
+                /** BucketAccessControl email. */
+                public email: string;
+
+                /** BucketAccessControl domain. */
+                public domain: string;
+
+                /** BucketAccessControl projectTeam. */
+                public projectTeam?: (google.storage.v2.IProjectTeam|null);
+
+                /**
+                 * Creates a new BucketAccessControl instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns BucketAccessControl instance
+                 */
+                public static create(properties?: google.storage.v2.IBucketAccessControl): google.storage.v2.BucketAccessControl;
+
+                /**
+                 * Encodes the specified BucketAccessControl message. Does not implicitly {@link google.storage.v2.BucketAccessControl.verify|verify} messages.
+                 * @param message BucketAccessControl message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IBucketAccessControl, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified BucketAccessControl message, length delimited. Does not implicitly {@link google.storage.v2.BucketAccessControl.verify|verify} messages.
+                 * @param message BucketAccessControl message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IBucketAccessControl, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a BucketAccessControl message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns BucketAccessControl
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.BucketAccessControl;
+
+                /**
+                 * Decodes a BucketAccessControl message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns BucketAccessControl
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.BucketAccessControl;
+
+                /**
+                 * Verifies a BucketAccessControl message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a BucketAccessControl message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns BucketAccessControl
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.BucketAccessControl;
+
+                /**
+                 * Creates a plain object from a BucketAccessControl message. Also converts values to other types if specified.
+                 * @param message BucketAccessControl
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.BucketAccessControl, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this BucketAccessControl to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for BucketAccessControl
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ChecksummedData. */
+            interface IChecksummedData {
+
+                /** ChecksummedData content */
+                content?: (Uint8Array|Buffer|string|null);
+
+                /** ChecksummedData crc32c */
+                crc32c?: (number|null);
+            }
+
+            /** Represents a ChecksummedData. */
+            class ChecksummedData implements IChecksummedData {
+
+                /**
+                 * Constructs a new ChecksummedData.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IChecksummedData);
+
+                /** ChecksummedData content. */
+                public content: (Uint8Array|Buffer|string);
+
+                /** ChecksummedData crc32c. */
+                public crc32c?: (number|null);
+
+                /**
+                 * Creates a new ChecksummedData instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ChecksummedData instance
+                 */
+                public static create(properties?: google.storage.v2.IChecksummedData): google.storage.v2.ChecksummedData;
+
+                /**
+                 * Encodes the specified ChecksummedData message. Does not implicitly {@link google.storage.v2.ChecksummedData.verify|verify} messages.
+                 * @param message ChecksummedData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IChecksummedData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ChecksummedData message, length delimited. Does not implicitly {@link google.storage.v2.ChecksummedData.verify|verify} messages.
+                 * @param message ChecksummedData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IChecksummedData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ChecksummedData message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ChecksummedData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.ChecksummedData;
+
+                /**
+                 * Decodes a ChecksummedData message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ChecksummedData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.ChecksummedData;
+
+                /**
+                 * Verifies a ChecksummedData message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ChecksummedData message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ChecksummedData
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.ChecksummedData;
+
+                /**
+                 * Creates a plain object from a ChecksummedData message. Also converts values to other types if specified.
+                 * @param message ChecksummedData
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.ChecksummedData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ChecksummedData to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ChecksummedData
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of an ObjectChecksums. */
+            interface IObjectChecksums {
+
+                /** ObjectChecksums crc32c */
+                crc32c?: (number|null);
+
+                /** ObjectChecksums md5Hash */
+                md5Hash?: (Uint8Array|Buffer|string|null);
+            }
+
+            /** Represents an ObjectChecksums. */
+            class ObjectChecksums implements IObjectChecksums {
+
+                /**
+                 * Constructs a new ObjectChecksums.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IObjectChecksums);
+
+                /** ObjectChecksums crc32c. */
+                public crc32c?: (number|null);
+
+                /** ObjectChecksums md5Hash. */
+                public md5Hash: (Uint8Array|Buffer|string);
+
+                /**
+                 * Creates a new ObjectChecksums instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ObjectChecksums instance
+                 */
+                public static create(properties?: google.storage.v2.IObjectChecksums): google.storage.v2.ObjectChecksums;
+
+                /**
+                 * Encodes the specified ObjectChecksums message. Does not implicitly {@link google.storage.v2.ObjectChecksums.verify|verify} messages.
+                 * @param message ObjectChecksums message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IObjectChecksums, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ObjectChecksums message, length delimited. Does not implicitly {@link google.storage.v2.ObjectChecksums.verify|verify} messages.
+                 * @param message ObjectChecksums message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IObjectChecksums, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an ObjectChecksums message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ObjectChecksums
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.ObjectChecksums;
+
+                /**
+                 * Decodes an ObjectChecksums message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ObjectChecksums
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.ObjectChecksums;
+
+                /**
+                 * Verifies an ObjectChecksums message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an ObjectChecksums message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ObjectChecksums
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.ObjectChecksums;
+
+                /**
+                 * Creates a plain object from an ObjectChecksums message. Also converts values to other types if specified.
+                 * @param message ObjectChecksums
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.ObjectChecksums, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ObjectChecksums to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ObjectChecksums
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of an ObjectCustomContextPayload. */
+            interface IObjectCustomContextPayload {
+
+                /** ObjectCustomContextPayload value */
+                value?: (string|null);
+
+                /** ObjectCustomContextPayload createTime */
+                createTime?: (google.protobuf.ITimestamp|null);
+
+                /** ObjectCustomContextPayload updateTime */
+                updateTime?: (google.protobuf.ITimestamp|null);
+            }
+
+            /** Represents an ObjectCustomContextPayload. */
+            class ObjectCustomContextPayload implements IObjectCustomContextPayload {
+
+                /**
+                 * Constructs a new ObjectCustomContextPayload.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IObjectCustomContextPayload);
+
+                /** ObjectCustomContextPayload value. */
+                public value: string;
+
+                /** ObjectCustomContextPayload createTime. */
+                public createTime?: (google.protobuf.ITimestamp|null);
+
+                /** ObjectCustomContextPayload updateTime. */
+                public updateTime?: (google.protobuf.ITimestamp|null);
+
+                /**
+                 * Creates a new ObjectCustomContextPayload instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ObjectCustomContextPayload instance
+                 */
+                public static create(properties?: google.storage.v2.IObjectCustomContextPayload): google.storage.v2.ObjectCustomContextPayload;
+
+                /**
+                 * Encodes the specified ObjectCustomContextPayload message. Does not implicitly {@link google.storage.v2.ObjectCustomContextPayload.verify|verify} messages.
+                 * @param message ObjectCustomContextPayload message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IObjectCustomContextPayload, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ObjectCustomContextPayload message, length delimited. Does not implicitly {@link google.storage.v2.ObjectCustomContextPayload.verify|verify} messages.
+                 * @param message ObjectCustomContextPayload message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IObjectCustomContextPayload, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an ObjectCustomContextPayload message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ObjectCustomContextPayload
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.ObjectCustomContextPayload;
+
+                /**
+                 * Decodes an ObjectCustomContextPayload message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ObjectCustomContextPayload
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.ObjectCustomContextPayload;
+
+                /**
+                 * Verifies an ObjectCustomContextPayload message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an ObjectCustomContextPayload message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ObjectCustomContextPayload
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.ObjectCustomContextPayload;
+
+                /**
+                 * Creates a plain object from an ObjectCustomContextPayload message. Also converts values to other types if specified.
+                 * @param message ObjectCustomContextPayload
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.ObjectCustomContextPayload, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ObjectCustomContextPayload to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ObjectCustomContextPayload
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of an ObjectContexts. */
+            interface IObjectContexts {
+
+                /** ObjectContexts custom */
+                custom?: ({ [k: string]: google.storage.v2.IObjectCustomContextPayload }|null);
+            }
+
+            /** Represents an ObjectContexts. */
+            class ObjectContexts implements IObjectContexts {
+
+                /**
+                 * Constructs a new ObjectContexts.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IObjectContexts);
+
+                /** ObjectContexts custom. */
+                public custom: { [k: string]: google.storage.v2.IObjectCustomContextPayload };
+
+                /**
+                 * Creates a new ObjectContexts instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ObjectContexts instance
+                 */
+                public static create(properties?: google.storage.v2.IObjectContexts): google.storage.v2.ObjectContexts;
+
+                /**
+                 * Encodes the specified ObjectContexts message. Does not implicitly {@link google.storage.v2.ObjectContexts.verify|verify} messages.
+                 * @param message ObjectContexts message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IObjectContexts, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ObjectContexts message, length delimited. Does not implicitly {@link google.storage.v2.ObjectContexts.verify|verify} messages.
+                 * @param message ObjectContexts message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IObjectContexts, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an ObjectContexts message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ObjectContexts
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.ObjectContexts;
+
+                /**
+                 * Decodes an ObjectContexts message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ObjectContexts
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.ObjectContexts;
+
+                /**
+                 * Verifies an ObjectContexts message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an ObjectContexts message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ObjectContexts
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.ObjectContexts;
+
+                /**
+                 * Creates a plain object from an ObjectContexts message. Also converts values to other types if specified.
+                 * @param message ObjectContexts
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.ObjectContexts, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ObjectContexts to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ObjectContexts
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a CustomerEncryption. */
+            interface ICustomerEncryption {
+
+                /** CustomerEncryption encryptionAlgorithm */
+                encryptionAlgorithm?: (string|null);
+
+                /** CustomerEncryption keySha256Bytes */
+                keySha256Bytes?: (Uint8Array|Buffer|string|null);
+            }
+
+            /** Represents a CustomerEncryption. */
+            class CustomerEncryption implements ICustomerEncryption {
+
+                /**
+                 * Constructs a new CustomerEncryption.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.ICustomerEncryption);
+
+                /** CustomerEncryption encryptionAlgorithm. */
+                public encryptionAlgorithm: string;
+
+                /** CustomerEncryption keySha256Bytes. */
+                public keySha256Bytes: (Uint8Array|Buffer|string);
+
+                /**
+                 * Creates a new CustomerEncryption instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns CustomerEncryption instance
+                 */
+                public static create(properties?: google.storage.v2.ICustomerEncryption): google.storage.v2.CustomerEncryption;
+
+                /**
+                 * Encodes the specified CustomerEncryption message. Does not implicitly {@link google.storage.v2.CustomerEncryption.verify|verify} messages.
+                 * @param message CustomerEncryption message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.ICustomerEncryption, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified CustomerEncryption message, length delimited. Does not implicitly {@link google.storage.v2.CustomerEncryption.verify|verify} messages.
+                 * @param message CustomerEncryption message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.ICustomerEncryption, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a CustomerEncryption message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns CustomerEncryption
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.CustomerEncryption;
+
+                /**
+                 * Decodes a CustomerEncryption message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns CustomerEncryption
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.CustomerEncryption;
+
+                /**
+                 * Verifies a CustomerEncryption message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a CustomerEncryption message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns CustomerEncryption
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.CustomerEncryption;
+
+                /**
+                 * Creates a plain object from a CustomerEncryption message. Also converts values to other types if specified.
+                 * @param message CustomerEncryption
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.CustomerEncryption, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this CustomerEncryption to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for CustomerEncryption
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a StorageObject. */
+            interface IStorageObject {
+
+                /** StorageObject name */
+                name?: (string|null);
+
+                /** StorageObject bucket */
+                bucket?: (string|null);
+
+                /** StorageObject etag */
+                etag?: (string|null);
+
+                /** StorageObject generation */
+                generation?: (number|Long|string|null);
+
+                /** StorageObject restoreToken */
+                restoreToken?: (string|null);
+
+                /** StorageObject metageneration */
+                metageneration?: (number|Long|string|null);
+
+                /** StorageObject storageClass */
+                storageClass?: (string|null);
+
+                /** StorageObject size */
+                size?: (number|Long|string|null);
+
+                /** StorageObject contentEncoding */
+                contentEncoding?: (string|null);
+
+                /** StorageObject contentDisposition */
+                contentDisposition?: (string|null);
+
+                /** StorageObject cacheControl */
+                cacheControl?: (string|null);
+
+                /** StorageObject acl */
+                acl?: (google.storage.v2.IObjectAccessControl[]|null);
+
+                /** StorageObject contentLanguage */
+                contentLanguage?: (string|null);
+
+                /** StorageObject deleteTime */
+                deleteTime?: (google.protobuf.ITimestamp|null);
+
+                /** StorageObject finalizeTime */
+                finalizeTime?: (google.protobuf.ITimestamp|null);
+
+                /** StorageObject contentType */
+                contentType?: (string|null);
+
+                /** StorageObject createTime */
+                createTime?: (google.protobuf.ITimestamp|null);
+
+                /** StorageObject componentCount */
+                componentCount?: (number|null);
+
+                /** StorageObject checksums */
+                checksums?: (google.storage.v2.IObjectChecksums|null);
+
+                /** StorageObject updateTime */
+                updateTime?: (google.protobuf.ITimestamp|null);
+
+                /** StorageObject kmsKey */
+                kmsKey?: (string|null);
+
+                /** StorageObject updateStorageClassTime */
+                updateStorageClassTime?: (google.protobuf.ITimestamp|null);
+
+                /** StorageObject temporaryHold */
+                temporaryHold?: (boolean|null);
+
+                /** StorageObject retentionExpireTime */
+                retentionExpireTime?: (google.protobuf.ITimestamp|null);
+
+                /** StorageObject metadata */
+                metadata?: ({ [k: string]: string }|null);
+
+                /** StorageObject contexts */
+                contexts?: (google.storage.v2.IObjectContexts|null);
+
+                /** StorageObject eventBasedHold */
+                eventBasedHold?: (boolean|null);
+
+                /** StorageObject owner */
+                owner?: (google.storage.v2.IOwner|null);
+
+                /** StorageObject customerEncryption */
+                customerEncryption?: (google.storage.v2.ICustomerEncryption|null);
+
+                /** StorageObject customTime */
+                customTime?: (google.protobuf.ITimestamp|null);
+
+                /** StorageObject softDeleteTime */
+                softDeleteTime?: (google.protobuf.ITimestamp|null);
+
+                /** StorageObject hardDeleteTime */
+                hardDeleteTime?: (google.protobuf.ITimestamp|null);
+
+                /** StorageObject retention */
+                retention?: (google.storage.v2.StorageObject.IRetention|null);
+            }
+
+            /** Represents a StorageObject. */
+            class StorageObject implements IStorageObject {
+
+                /**
+                 * Constructs a new StorageObject.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IStorageObject);
+
+                /** StorageObject name. */
+                public name: string;
+
+                /** StorageObject bucket. */
+                public bucket: string;
+
+                /** StorageObject etag. */
+                public etag: string;
+
+                /** StorageObject generation. */
+                public generation: (number|Long|string);
+
+                /** StorageObject restoreToken. */
+                public restoreToken?: (string|null);
+
+                /** StorageObject metageneration. */
+                public metageneration: (number|Long|string);
+
+                /** StorageObject storageClass. */
+                public storageClass: string;
+
+                /** StorageObject size. */
+                public size: (number|Long|string);
+
+                /** StorageObject contentEncoding. */
+                public contentEncoding: string;
+
+                /** StorageObject contentDisposition. */
+                public contentDisposition: string;
+
+                /** StorageObject cacheControl. */
+                public cacheControl: string;
+
+                /** StorageObject acl. */
+                public acl: google.storage.v2.IObjectAccessControl[];
+
+                /** StorageObject contentLanguage. */
+                public contentLanguage: string;
+
+                /** StorageObject deleteTime. */
+                public deleteTime?: (google.protobuf.ITimestamp|null);
+
+                /** StorageObject finalizeTime. */
+                public finalizeTime?: (google.protobuf.ITimestamp|null);
+
+                /** StorageObject contentType. */
+                public contentType: string;
+
+                /** StorageObject createTime. */
+                public createTime?: (google.protobuf.ITimestamp|null);
+
+                /** StorageObject componentCount. */
+                public componentCount: number;
+
+                /** StorageObject checksums. */
+                public checksums?: (google.storage.v2.IObjectChecksums|null);
+
+                /** StorageObject updateTime. */
+                public updateTime?: (google.protobuf.ITimestamp|null);
+
+                /** StorageObject kmsKey. */
+                public kmsKey: string;
+
+                /** StorageObject updateStorageClassTime. */
+                public updateStorageClassTime?: (google.protobuf.ITimestamp|null);
+
+                /** StorageObject temporaryHold. */
+                public temporaryHold: boolean;
+
+                /** StorageObject retentionExpireTime. */
+                public retentionExpireTime?: (google.protobuf.ITimestamp|null);
+
+                /** StorageObject metadata. */
+                public metadata: { [k: string]: string };
+
+                /** StorageObject contexts. */
+                public contexts?: (google.storage.v2.IObjectContexts|null);
+
+                /** StorageObject eventBasedHold. */
+                public eventBasedHold?: (boolean|null);
+
+                /** StorageObject owner. */
+                public owner?: (google.storage.v2.IOwner|null);
+
+                /** StorageObject customerEncryption. */
+                public customerEncryption?: (google.storage.v2.ICustomerEncryption|null);
+
+                /** StorageObject customTime. */
+                public customTime?: (google.protobuf.ITimestamp|null);
+
+                /** StorageObject softDeleteTime. */
+                public softDeleteTime?: (google.protobuf.ITimestamp|null);
+
+                /** StorageObject hardDeleteTime. */
+                public hardDeleteTime?: (google.protobuf.ITimestamp|null);
+
+                /** StorageObject retention. */
+                public retention?: (google.storage.v2.StorageObject.IRetention|null);
+
+                /**
+                 * Creates a new StorageObject instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns StorageObject instance
+                 */
+                public static create(properties?: google.storage.v2.IStorageObject): google.storage.v2.StorageObject;
+
+                /**
+                 * Encodes the specified StorageObject message. Does not implicitly {@link google.storage.v2.StorageObject.verify|verify} messages.
+                 * @param message StorageObject message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IStorageObject, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified StorageObject message, length delimited. Does not implicitly {@link google.storage.v2.StorageObject.verify|verify} messages.
+                 * @param message StorageObject message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IStorageObject, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a StorageObject message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns StorageObject
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.StorageObject;
+
+                /**
+                 * Decodes a StorageObject message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns StorageObject
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.StorageObject;
+
+                /**
+                 * Verifies a StorageObject message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a StorageObject message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns StorageObject
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.StorageObject;
+
+                /**
+                 * Creates a plain object from a StorageObject message. Also converts values to other types if specified.
+                 * @param message StorageObject
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.StorageObject, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this StorageObject to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for StorageObject
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace StorageObject {
+
+                /** Properties of a Retention. */
+                interface IRetention {
+
+                    /** Retention mode */
+                    mode?: (google.storage.v2.StorageObject.Retention.Mode|keyof typeof google.storage.v2.StorageObject.Retention.Mode|null);
+
+                    /** Retention retainUntilTime */
+                    retainUntilTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a Retention. */
+                class Retention implements IRetention {
+
+                    /**
+                     * Constructs a new Retention.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.v2.StorageObject.IRetention);
+
+                    /** Retention mode. */
+                    public mode: (google.storage.v2.StorageObject.Retention.Mode|keyof typeof google.storage.v2.StorageObject.Retention.Mode);
+
+                    /** Retention retainUntilTime. */
+                    public retainUntilTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new Retention instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Retention instance
+                     */
+                    public static create(properties?: google.storage.v2.StorageObject.IRetention): google.storage.v2.StorageObject.Retention;
+
+                    /**
+                     * Encodes the specified Retention message. Does not implicitly {@link google.storage.v2.StorageObject.Retention.verify|verify} messages.
+                     * @param message Retention message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.v2.StorageObject.IRetention, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Retention message, length delimited. Does not implicitly {@link google.storage.v2.StorageObject.Retention.verify|verify} messages.
+                     * @param message Retention message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.v2.StorageObject.IRetention, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Retention message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Retention
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.StorageObject.Retention;
+
+                    /**
+                     * Decodes a Retention message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Retention
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.StorageObject.Retention;
+
+                    /**
+                     * Verifies a Retention message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Retention message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Retention
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.v2.StorageObject.Retention;
+
+                    /**
+                     * Creates a plain object from a Retention message. Also converts values to other types if specified.
+                     * @param message Retention
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.v2.StorageObject.Retention, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Retention to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Retention
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Retention {
+
+                    /** Mode enum. */
+                    enum Mode {
+                        MODE_UNSPECIFIED = 0,
+                        UNLOCKED = 1,
+                        LOCKED = 2
+                    }
+                }
+            }
+
+            /** Properties of an ObjectAccessControl. */
+            interface IObjectAccessControl {
+
+                /** ObjectAccessControl role */
+                role?: (string|null);
+
+                /** ObjectAccessControl id */
+                id?: (string|null);
+
+                /** ObjectAccessControl entity */
+                entity?: (string|null);
+
+                /** ObjectAccessControl entityAlt */
+                entityAlt?: (string|null);
+
+                /** ObjectAccessControl entityId */
+                entityId?: (string|null);
+
+                /** ObjectAccessControl etag */
+                etag?: (string|null);
+
+                /** ObjectAccessControl email */
+                email?: (string|null);
+
+                /** ObjectAccessControl domain */
+                domain?: (string|null);
+
+                /** ObjectAccessControl projectTeam */
+                projectTeam?: (google.storage.v2.IProjectTeam|null);
+            }
+
+            /** Represents an ObjectAccessControl. */
+            class ObjectAccessControl implements IObjectAccessControl {
+
+                /**
+                 * Constructs a new ObjectAccessControl.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IObjectAccessControl);
+
+                /** ObjectAccessControl role. */
+                public role: string;
+
+                /** ObjectAccessControl id. */
+                public id: string;
+
+                /** ObjectAccessControl entity. */
+                public entity: string;
+
+                /** ObjectAccessControl entityAlt. */
+                public entityAlt: string;
+
+                /** ObjectAccessControl entityId. */
+                public entityId: string;
+
+                /** ObjectAccessControl etag. */
+                public etag: string;
+
+                /** ObjectAccessControl email. */
+                public email: string;
+
+                /** ObjectAccessControl domain. */
+                public domain: string;
+
+                /** ObjectAccessControl projectTeam. */
+                public projectTeam?: (google.storage.v2.IProjectTeam|null);
+
+                /**
+                 * Creates a new ObjectAccessControl instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ObjectAccessControl instance
+                 */
+                public static create(properties?: google.storage.v2.IObjectAccessControl): google.storage.v2.ObjectAccessControl;
+
+                /**
+                 * Encodes the specified ObjectAccessControl message. Does not implicitly {@link google.storage.v2.ObjectAccessControl.verify|verify} messages.
+                 * @param message ObjectAccessControl message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IObjectAccessControl, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ObjectAccessControl message, length delimited. Does not implicitly {@link google.storage.v2.ObjectAccessControl.verify|verify} messages.
+                 * @param message ObjectAccessControl message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IObjectAccessControl, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an ObjectAccessControl message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ObjectAccessControl
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.ObjectAccessControl;
+
+                /**
+                 * Decodes an ObjectAccessControl message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ObjectAccessControl
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.ObjectAccessControl;
+
+                /**
+                 * Verifies an ObjectAccessControl message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an ObjectAccessControl message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ObjectAccessControl
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.ObjectAccessControl;
+
+                /**
+                 * Creates a plain object from an ObjectAccessControl message. Also converts values to other types if specified.
+                 * @param message ObjectAccessControl
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.ObjectAccessControl, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ObjectAccessControl to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ObjectAccessControl
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ListObjectsResponse. */
+            interface IListObjectsResponse {
+
+                /** ListObjectsResponse objects */
+                objects?: (google.storage.v2.IStorageObject[]|null);
+
+                /** ListObjectsResponse prefixes */
+                prefixes?: (string[]|null);
+
+                /** ListObjectsResponse nextPageToken */
+                nextPageToken?: (string|null);
+            }
+
+            /** Represents a ListObjectsResponse. */
+            class ListObjectsResponse implements IListObjectsResponse {
+
+                /**
+                 * Constructs a new ListObjectsResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IListObjectsResponse);
+
+                /** ListObjectsResponse objects. */
+                public objects: google.storage.v2.IStorageObject[];
+
+                /** ListObjectsResponse prefixes. */
+                public prefixes: string[];
+
+                /** ListObjectsResponse nextPageToken. */
+                public nextPageToken: string;
+
+                /**
+                 * Creates a new ListObjectsResponse instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ListObjectsResponse instance
+                 */
+                public static create(properties?: google.storage.v2.IListObjectsResponse): google.storage.v2.ListObjectsResponse;
+
+                /**
+                 * Encodes the specified ListObjectsResponse message. Does not implicitly {@link google.storage.v2.ListObjectsResponse.verify|verify} messages.
+                 * @param message ListObjectsResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IListObjectsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ListObjectsResponse message, length delimited. Does not implicitly {@link google.storage.v2.ListObjectsResponse.verify|verify} messages.
+                 * @param message ListObjectsResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IListObjectsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ListObjectsResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ListObjectsResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.ListObjectsResponse;
+
+                /**
+                 * Decodes a ListObjectsResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ListObjectsResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.ListObjectsResponse;
+
+                /**
+                 * Verifies a ListObjectsResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ListObjectsResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ListObjectsResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.ListObjectsResponse;
+
+                /**
+                 * Creates a plain object from a ListObjectsResponse message. Also converts values to other types if specified.
+                 * @param message ListObjectsResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.ListObjectsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ListObjectsResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ListObjectsResponse
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ProjectTeam. */
+            interface IProjectTeam {
+
+                /** ProjectTeam projectNumber */
+                projectNumber?: (string|null);
+
+                /** ProjectTeam team */
+                team?: (string|null);
+            }
+
+            /** Represents a ProjectTeam. */
+            class ProjectTeam implements IProjectTeam {
+
+                /**
+                 * Constructs a new ProjectTeam.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IProjectTeam);
+
+                /** ProjectTeam projectNumber. */
+                public projectNumber: string;
+
+                /** ProjectTeam team. */
+                public team: string;
+
+                /**
+                 * Creates a new ProjectTeam instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ProjectTeam instance
+                 */
+                public static create(properties?: google.storage.v2.IProjectTeam): google.storage.v2.ProjectTeam;
+
+                /**
+                 * Encodes the specified ProjectTeam message. Does not implicitly {@link google.storage.v2.ProjectTeam.verify|verify} messages.
+                 * @param message ProjectTeam message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IProjectTeam, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ProjectTeam message, length delimited. Does not implicitly {@link google.storage.v2.ProjectTeam.verify|verify} messages.
+                 * @param message ProjectTeam message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IProjectTeam, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ProjectTeam message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ProjectTeam
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.ProjectTeam;
+
+                /**
+                 * Decodes a ProjectTeam message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ProjectTeam
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.ProjectTeam;
+
+                /**
+                 * Verifies a ProjectTeam message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ProjectTeam message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ProjectTeam
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.ProjectTeam;
+
+                /**
+                 * Creates a plain object from a ProjectTeam message. Also converts values to other types if specified.
+                 * @param message ProjectTeam
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.ProjectTeam, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ProjectTeam to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ProjectTeam
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of an Owner. */
+            interface IOwner {
+
+                /** Owner entity */
+                entity?: (string|null);
+
+                /** Owner entityId */
+                entityId?: (string|null);
+            }
+
+            /** Represents an Owner. */
+            class Owner implements IOwner {
+
+                /**
+                 * Constructs a new Owner.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IOwner);
+
+                /** Owner entity. */
+                public entity: string;
+
+                /** Owner entityId. */
+                public entityId: string;
+
+                /**
+                 * Creates a new Owner instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns Owner instance
+                 */
+                public static create(properties?: google.storage.v2.IOwner): google.storage.v2.Owner;
+
+                /**
+                 * Encodes the specified Owner message. Does not implicitly {@link google.storage.v2.Owner.verify|verify} messages.
+                 * @param message Owner message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IOwner, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Owner message, length delimited. Does not implicitly {@link google.storage.v2.Owner.verify|verify} messages.
+                 * @param message Owner message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IOwner, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an Owner message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Owner
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.Owner;
+
+                /**
+                 * Decodes an Owner message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Owner
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.Owner;
+
+                /**
+                 * Verifies an Owner message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an Owner message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Owner
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.Owner;
+
+                /**
+                 * Creates a plain object from an Owner message. Also converts values to other types if specified.
+                 * @param message Owner
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.Owner, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Owner to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for Owner
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ContentRange. */
+            interface IContentRange {
+
+                /** ContentRange start */
+                start?: (number|Long|string|null);
+
+                /** ContentRange end */
+                end?: (number|Long|string|null);
+
+                /** ContentRange completeLength */
+                completeLength?: (number|Long|string|null);
+            }
+
+            /** Represents a ContentRange. */
+            class ContentRange implements IContentRange {
+
+                /**
+                 * Constructs a new ContentRange.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IContentRange);
+
+                /** ContentRange start. */
+                public start: (number|Long|string);
+
+                /** ContentRange end. */
+                public end: (number|Long|string);
+
+                /** ContentRange completeLength. */
+                public completeLength: (number|Long|string);
+
+                /**
+                 * Creates a new ContentRange instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ContentRange instance
+                 */
+                public static create(properties?: google.storage.v2.IContentRange): google.storage.v2.ContentRange;
+
+                /**
+                 * Encodes the specified ContentRange message. Does not implicitly {@link google.storage.v2.ContentRange.verify|verify} messages.
+                 * @param message ContentRange message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IContentRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ContentRange message, length delimited. Does not implicitly {@link google.storage.v2.ContentRange.verify|verify} messages.
+                 * @param message ContentRange message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IContentRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ContentRange message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ContentRange
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.ContentRange;
+
+                /**
+                 * Decodes a ContentRange message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ContentRange
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.ContentRange;
+
+                /**
+                 * Verifies a ContentRange message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ContentRange message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ContentRange
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.ContentRange;
+
+                /**
+                 * Creates a plain object from a ContentRange message. Also converts values to other types if specified.
+                 * @param message ContentRange
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.ContentRange, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ContentRange to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ContentRange
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+        }
     }
 
     /** Namespace api. */
@@ -5769,6 +16301,9 @@ export namespace google {
 
             /** CommonLanguageSettings destinations */
             destinations?: (google.api.ClientLibraryDestination[]|null);
+
+            /** CommonLanguageSettings selectiveGapicGeneration */
+            selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
         }
 
         /** Represents a CommonLanguageSettings. */
@@ -5785,6 +16320,9 @@ export namespace google {
 
             /** CommonLanguageSettings destinations. */
             public destinations: google.api.ClientLibraryDestination[];
+
+            /** CommonLanguageSettings selectiveGapicGeneration. */
+            public selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
 
             /**
              * Creates a new CommonLanguageSettings instance using the specified properties.
@@ -6486,6 +17024,9 @@ export namespace google {
 
             /** PythonSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PythonSettings experimentalFeatures */
+            experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
         }
 
         /** Represents a PythonSettings. */
@@ -6499,6 +17040,9 @@ export namespace google {
 
             /** PythonSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PythonSettings experimentalFeatures. */
+            public experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
 
             /**
              * Creates a new PythonSettings instance using the specified properties.
@@ -6576,6 +17120,118 @@ export namespace google {
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace PythonSettings {
+
+            /** Properties of an ExperimentalFeatures. */
+            interface IExperimentalFeatures {
+
+                /** ExperimentalFeatures restAsyncIoEnabled */
+                restAsyncIoEnabled?: (boolean|null);
+
+                /** ExperimentalFeatures protobufPythonicTypesEnabled */
+                protobufPythonicTypesEnabled?: (boolean|null);
+
+                /** ExperimentalFeatures unversionedPackageDisabled */
+                unversionedPackageDisabled?: (boolean|null);
+            }
+
+            /** Represents an ExperimentalFeatures. */
+            class ExperimentalFeatures implements IExperimentalFeatures {
+
+                /**
+                 * Constructs a new ExperimentalFeatures.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.api.PythonSettings.IExperimentalFeatures);
+
+                /** ExperimentalFeatures restAsyncIoEnabled. */
+                public restAsyncIoEnabled: boolean;
+
+                /** ExperimentalFeatures protobufPythonicTypesEnabled. */
+                public protobufPythonicTypesEnabled: boolean;
+
+                /** ExperimentalFeatures unversionedPackageDisabled. */
+                public unversionedPackageDisabled: boolean;
+
+                /**
+                 * Creates a new ExperimentalFeatures instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ExperimentalFeatures instance
+                 */
+                public static create(properties?: google.api.PythonSettings.IExperimentalFeatures): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Encodes the specified ExperimentalFeatures message. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                 * @param message ExperimentalFeatures message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ExperimentalFeatures message, length delimited. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                 * @param message ExperimentalFeatures message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an ExperimentalFeatures message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ExperimentalFeatures
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Decodes an ExperimentalFeatures message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ExperimentalFeatures
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Verifies an ExperimentalFeatures message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an ExperimentalFeatures message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ExperimentalFeatures
+                 */
+                public static fromObject(object: { [k: string]: any }): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Creates a plain object from an ExperimentalFeatures message. Also converts values to other types if specified.
+                 * @param message ExperimentalFeatures
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.api.PythonSettings.ExperimentalFeatures, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ExperimentalFeatures to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ExperimentalFeatures
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
         }
 
         /** Properties of a NodeSettings. */
@@ -6904,6 +17560,9 @@ export namespace google {
 
             /** GoSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** GoSettings renamedServices */
+            renamedServices?: ({ [k: string]: string }|null);
         }
 
         /** Represents a GoSettings. */
@@ -6917,6 +17576,9 @@ export namespace google {
 
             /** GoSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** GoSettings renamedServices. */
+            public renamedServices: { [k: string]: string };
 
             /**
              * Creates a new GoSettings instance using the specified properties.
@@ -7242,6 +17904,109 @@ export namespace google {
             PACKAGE_MANAGER = 20
         }
 
+        /** Properties of a SelectiveGapicGeneration. */
+        interface ISelectiveGapicGeneration {
+
+            /** SelectiveGapicGeneration methods */
+            methods?: (string[]|null);
+
+            /** SelectiveGapicGeneration generateOmittedAsInternal */
+            generateOmittedAsInternal?: (boolean|null);
+        }
+
+        /** Represents a SelectiveGapicGeneration. */
+        class SelectiveGapicGeneration implements ISelectiveGapicGeneration {
+
+            /**
+             * Constructs a new SelectiveGapicGeneration.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.ISelectiveGapicGeneration);
+
+            /** SelectiveGapicGeneration methods. */
+            public methods: string[];
+
+            /** SelectiveGapicGeneration generateOmittedAsInternal. */
+            public generateOmittedAsInternal: boolean;
+
+            /**
+             * Creates a new SelectiveGapicGeneration instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns SelectiveGapicGeneration instance
+             */
+            public static create(properties?: google.api.ISelectiveGapicGeneration): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Encodes the specified SelectiveGapicGeneration message. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+             * @param message SelectiveGapicGeneration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified SelectiveGapicGeneration message, length delimited. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+             * @param message SelectiveGapicGeneration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns SelectiveGapicGeneration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns SelectiveGapicGeneration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Verifies a SelectiveGapicGeneration message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a SelectiveGapicGeneration message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns SelectiveGapicGeneration
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Creates a plain object from a SelectiveGapicGeneration message. Also converts values to other types if specified.
+             * @param message SelectiveGapicGeneration
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.SelectiveGapicGeneration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this SelectiveGapicGeneration to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for SelectiveGapicGeneration
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** LaunchStage enum. */
         enum LaunchStage {
             LAUNCH_STAGE_UNSPECIFIED = 0,
@@ -7272,6 +18037,9 @@ export namespace google {
 
             /** FieldInfo format */
             format?: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format|null);
+
+            /** FieldInfo referencedTypes */
+            referencedTypes?: (google.api.ITypeReference[]|null);
         }
 
         /** Represents a FieldInfo. */
@@ -7285,6 +18053,9 @@ export namespace google {
 
             /** FieldInfo format. */
             public format: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format);
+
+            /** FieldInfo referencedTypes. */
+            public referencedTypes: google.api.ITypeReference[];
 
             /**
              * Creates a new FieldInfo instance using the specified properties.
@@ -7374,6 +18145,103 @@ export namespace google {
                 IPV6 = 3,
                 IPV4_OR_IPV6 = 4
             }
+        }
+
+        /** Properties of a TypeReference. */
+        interface ITypeReference {
+
+            /** TypeReference typeName */
+            typeName?: (string|null);
+        }
+
+        /** Represents a TypeReference. */
+        class TypeReference implements ITypeReference {
+
+            /**
+             * Constructs a new TypeReference.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.ITypeReference);
+
+            /** TypeReference typeName. */
+            public typeName: string;
+
+            /**
+             * Creates a new TypeReference instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns TypeReference instance
+             */
+            public static create(properties?: google.api.ITypeReference): google.api.TypeReference;
+
+            /**
+             * Encodes the specified TypeReference message. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+             * @param message TypeReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.ITypeReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified TypeReference message, length delimited. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+             * @param message TypeReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.ITypeReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a TypeReference message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns TypeReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.TypeReference;
+
+            /**
+             * Decodes a TypeReference message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns TypeReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.TypeReference;
+
+            /**
+             * Verifies a TypeReference message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a TypeReference message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns TypeReference
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.TypeReference;
+
+            /**
+             * Creates a plain object from a TypeReference message. Also converts values to other types if specified.
+             * @param message TypeReference
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.TypeReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this TypeReference to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for TypeReference
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a ResourceDescriptor. */
@@ -7932,6 +18800,7 @@ export namespace google {
         /** Edition enum. */
         enum Edition {
             EDITION_UNKNOWN = 0,
+            EDITION_LEGACY = 900,
             EDITION_PROTO2 = 998,
             EDITION_PROTO3 = 999,
             EDITION_2023 = 1000,
@@ -7961,6 +18830,9 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency */
             weakDependency?: (number[]|null);
+
+            /** FileDescriptorProto optionDependency */
+            optionDependency?: (string[]|null);
 
             /** FileDescriptorProto messageType */
             messageType?: (google.protobuf.IDescriptorProto[]|null);
@@ -8010,6 +18882,9 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency. */
             public weakDependency: number[];
+
+            /** FileDescriptorProto optionDependency. */
+            public optionDependency: string[];
 
             /** FileDescriptorProto messageType. */
             public messageType: google.protobuf.IDescriptorProto[];
@@ -8145,6 +19020,9 @@ export namespace google {
 
             /** DescriptorProto reservedName */
             reservedName?: (string[]|null);
+
+            /** DescriptorProto visibility */
+            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents a DescriptorProto. */
@@ -8185,6 +19063,9 @@ export namespace google {
 
             /** DescriptorProto reservedName. */
             public reservedName: string[];
+
+            /** DescriptorProto visibility. */
+            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new DescriptorProto instance using the specified properties.
@@ -9033,6 +19914,9 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName */
             reservedName?: (string[]|null);
+
+            /** EnumDescriptorProto visibility */
+            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents an EnumDescriptorProto. */
@@ -9058,6 +19942,9 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName. */
             public reservedName: string[];
+
+            /** EnumDescriptorProto visibility. */
+            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new EnumDescriptorProto instance using the specified properties.
@@ -9993,6 +20880,9 @@ export namespace google {
             /** FieldOptions features */
             features?: (google.protobuf.IFeatureSet|null);
 
+            /** FieldOptions featureSupport */
+            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
+
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
@@ -10050,6 +20940,9 @@ export namespace google {
 
             /** FieldOptions features. */
             public features?: (google.protobuf.IFeatureSet|null);
+
+            /** FieldOptions featureSupport. */
+            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** FieldOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -10266,6 +21159,121 @@ export namespace google {
 
                 /**
                  * Gets the default type url for EditionDefault
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a FeatureSupport. */
+            interface IFeatureSupport {
+
+                /** FeatureSupport editionIntroduced */
+                editionIntroduced?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport editionDeprecated */
+                editionDeprecated?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport deprecationWarning */
+                deprecationWarning?: (string|null);
+
+                /** FeatureSupport editionRemoved */
+                editionRemoved?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+            }
+
+            /** Represents a FeatureSupport. */
+            class FeatureSupport implements IFeatureSupport {
+
+                /**
+                 * Constructs a new FeatureSupport.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FieldOptions.IFeatureSupport);
+
+                /** FeatureSupport editionIntroduced. */
+                public editionIntroduced: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport editionDeprecated. */
+                public editionDeprecated: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport deprecationWarning. */
+                public deprecationWarning: string;
+
+                /** FeatureSupport editionRemoved. */
+                public editionRemoved: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /**
+                 * Creates a new FeatureSupport instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns FeatureSupport instance
+                 */
+                public static create(properties?: google.protobuf.FieldOptions.IFeatureSupport): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Encodes the specified FeatureSupport message. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                 * @param message FeatureSupport message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified FeatureSupport message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                 * @param message FeatureSupport message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a FeatureSupport message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns FeatureSupport
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Decodes a FeatureSupport message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns FeatureSupport
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Verifies a FeatureSupport message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a FeatureSupport message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns FeatureSupport
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Creates a plain object from a FeatureSupport message. Also converts values to other types if specified.
+                 * @param message FeatureSupport
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FieldOptions.FeatureSupport, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this FeatureSupport to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for FeatureSupport
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -10509,6 +21517,9 @@ export namespace google {
             /** EnumValueOptions debugRedact */
             debugRedact?: (boolean|null);
 
+            /** EnumValueOptions featureSupport */
+            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
+
             /** EnumValueOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -10530,6 +21541,9 @@ export namespace google {
 
             /** EnumValueOptions debugRedact. */
             public debugRedact: boolean;
+
+            /** EnumValueOptions featureSupport. */
+            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** EnumValueOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -11126,6 +22140,12 @@ export namespace google {
 
             /** FeatureSet jsonFormat */
             jsonFormat?: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat|null);
+
+            /** FeatureSet enforceNamingStyle */
+            enforceNamingStyle?: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle|null);
+
+            /** FeatureSet defaultSymbolVisibility */
+            defaultSymbolVisibility?: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null);
         }
 
         /** Represents a FeatureSet. */
@@ -11154,6 +22174,12 @@ export namespace google {
 
             /** FeatureSet jsonFormat. */
             public jsonFormat: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat);
+
+            /** FeatureSet enforceNamingStyle. */
+            public enforceNamingStyle: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle);
+
+            /** FeatureSet defaultSymbolVisibility. */
+            public defaultSymbolVisibility: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility);
 
             /**
              * Creates a new FeatureSet instance using the specified properties.
@@ -11277,6 +22303,116 @@ export namespace google {
                 ALLOW = 1,
                 LEGACY_BEST_EFFORT = 2
             }
+
+            /** EnforceNamingStyle enum. */
+            enum EnforceNamingStyle {
+                ENFORCE_NAMING_STYLE_UNKNOWN = 0,
+                STYLE2024 = 1,
+                STYLE_LEGACY = 2
+            }
+
+            /** Properties of a VisibilityFeature. */
+            interface IVisibilityFeature {
+            }
+
+            /** Represents a VisibilityFeature. */
+            class VisibilityFeature implements IVisibilityFeature {
+
+                /**
+                 * Constructs a new VisibilityFeature.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSet.IVisibilityFeature);
+
+                /**
+                 * Creates a new VisibilityFeature instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns VisibilityFeature instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSet.IVisibilityFeature): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Encodes the specified VisibilityFeature message. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                 * @param message VisibilityFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified VisibilityFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                 * @param message VisibilityFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a VisibilityFeature message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns VisibilityFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Decodes a VisibilityFeature message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns VisibilityFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Verifies a VisibilityFeature message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a VisibilityFeature message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns VisibilityFeature
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Creates a plain object from a VisibilityFeature message. Also converts values to other types if specified.
+                 * @param message VisibilityFeature
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSet.VisibilityFeature, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this VisibilityFeature to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for VisibilityFeature
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace VisibilityFeature {
+
+                /** DefaultSymbolVisibility enum. */
+                enum DefaultSymbolVisibility {
+                    DEFAULT_SYMBOL_VISIBILITY_UNKNOWN = 0,
+                    EXPORT_ALL = 1,
+                    EXPORT_TOP_LEVEL = 2,
+                    LOCAL_ALL = 3,
+                    STRICT = 4
+                }
+            }
         }
 
         /** Properties of a FeatureSetDefaults. */
@@ -11396,8 +22532,11 @@ export namespace google {
                 /** FeatureSetEditionDefault edition */
                 edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
 
-                /** FeatureSetEditionDefault features */
-                features?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault overridableFeatures */
+                overridableFeatures?: (google.protobuf.IFeatureSet|null);
+
+                /** FeatureSetEditionDefault fixedFeatures */
+                fixedFeatures?: (google.protobuf.IFeatureSet|null);
             }
 
             /** Represents a FeatureSetEditionDefault. */
@@ -11412,8 +22551,11 @@ export namespace google {
                 /** FeatureSetEditionDefault edition. */
                 public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
 
-                /** FeatureSetEditionDefault features. */
-                public features?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault overridableFeatures. */
+                public overridableFeatures?: (google.protobuf.IFeatureSet|null);
+
+                /** FeatureSetEditionDefault fixedFeatures. */
+                public fixedFeatures?: (google.protobuf.IFeatureSet|null);
 
                 /**
                  * Creates a new FeatureSetEditionDefault instance using the specified properties.
@@ -11944,6 +23086,13 @@ export namespace google {
                     ALIAS = 2
                 }
             }
+        }
+
+        /** SymbolVisibility enum. */
+        enum SymbolVisibility {
+            VISIBILITY_UNSET = 0,
+            VISIBILITY_LOCAL = 1,
+            VISIBILITY_EXPORT = 2
         }
 
         /** Properties of a Duration. */
@@ -13954,6 +25103,115 @@ export namespace google {
 
             /**
              * Gets the default type url for Expr
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a Date. */
+        interface IDate {
+
+            /** Date year */
+            year?: (number|null);
+
+            /** Date month */
+            month?: (number|null);
+
+            /** Date day */
+            day?: (number|null);
+        }
+
+        /** Represents a Date. */
+        class Date implements IDate {
+
+            /**
+             * Constructs a new Date.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.type.IDate);
+
+            /** Date year. */
+            public year: number;
+
+            /** Date month. */
+            public month: number;
+
+            /** Date day. */
+            public day: number;
+
+            /**
+             * Creates a new Date instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Date instance
+             */
+            public static create(properties?: google.type.IDate): google.type.Date;
+
+            /**
+             * Encodes the specified Date message. Does not implicitly {@link google.type.Date.verify|verify} messages.
+             * @param message Date message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.type.IDate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Date message, length delimited. Does not implicitly {@link google.type.Date.verify|verify} messages.
+             * @param message Date message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.type.IDate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Date message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Date
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.Date;
+
+            /**
+             * Decodes a Date message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Date
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.Date;
+
+            /**
+             * Verifies a Date message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Date message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Date
+             */
+            public static fromObject(object: { [k: string]: any }): google.type.Date;
+
+            /**
+             * Creates a plain object from a Date message. Also converts values to other types if specified.
+             * @param message Date
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.type.Date, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Date to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Date
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
