@@ -1768,6 +1768,7 @@ export namespace google {
                         IMAGE_PROHIBITED_CONTENT = 14,
                         IMAGE_OTHER = 15,
                         NO_IMAGE = 16,
+                        IMAGE_RECITATION = 17,
                         UNEXPECTED_TOOL_CALL = 12,
                         TOO_MANY_TOOL_CALLS = 13
                     }
@@ -2417,6 +2418,9 @@ export namespace google {
 
                     /** GroundingMetadata webSearchQueries */
                     webSearchQueries?: (string[]|null);
+
+                    /** GroundingMetadata googleMapsWidgetContextToken */
+                    googleMapsWidgetContextToken?: (string|null);
                 }
 
                 /** Represents a GroundingMetadata. */
@@ -2442,6 +2446,9 @@ export namespace google {
 
                     /** GroundingMetadata webSearchQueries. */
                     public webSearchQueries: string[];
+
+                    /** GroundingMetadata googleMapsWidgetContextToken. */
+                    public googleMapsWidgetContextToken?: (string|null);
 
                     /**
                      * Creates a new GroundingMetadata instance using the specified properties.
@@ -26737,6 +26744,12 @@ export namespace google {
 
                     /** Tool urlContext */
                     urlContext?: (google.ai.generativelanguage.v1beta.IUrlContext|null);
+
+                    /** Tool fileSearch */
+                    fileSearch?: (google.ai.generativelanguage.v1beta.IFileSearch|null);
+
+                    /** Tool googleMaps */
+                    googleMaps?: (google.ai.generativelanguage.v1beta.IGoogleMaps|null);
                 }
 
                 /** Represents a Tool. */
@@ -26765,6 +26778,12 @@ export namespace google {
 
                     /** Tool urlContext. */
                     public urlContext?: (google.ai.generativelanguage.v1beta.IUrlContext|null);
+
+                    /** Tool fileSearch. */
+                    public fileSearch?: (google.ai.generativelanguage.v1beta.IFileSearch|null);
+
+                    /** Tool googleMaps. */
+                    public googleMaps?: (google.ai.generativelanguage.v1beta.IGoogleMaps|null);
 
                     /**
                      * Creates a new Tool instance using the specified properties.
@@ -27056,6 +27075,103 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a GoogleMaps. */
+                interface IGoogleMaps {
+
+                    /** GoogleMaps enableWidget */
+                    enableWidget?: (boolean|null);
+                }
+
+                /** Represents a GoogleMaps. */
+                class GoogleMaps implements IGoogleMaps {
+
+                    /**
+                     * Constructs a new GoogleMaps.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ai.generativelanguage.v1beta.IGoogleMaps);
+
+                    /** GoogleMaps enableWidget. */
+                    public enableWidget: boolean;
+
+                    /**
+                     * Creates a new GoogleMaps instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoogleMaps instance
+                     */
+                    public static create(properties?: google.ai.generativelanguage.v1beta.IGoogleMaps): google.ai.generativelanguage.v1beta.GoogleMaps;
+
+                    /**
+                     * Encodes the specified GoogleMaps message. Does not implicitly {@link google.ai.generativelanguage.v1beta.GoogleMaps.verify|verify} messages.
+                     * @param message GoogleMaps message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ai.generativelanguage.v1beta.IGoogleMaps, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoogleMaps message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.GoogleMaps.verify|verify} messages.
+                     * @param message GoogleMaps message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta.IGoogleMaps, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoogleMaps message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoogleMaps
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.GoogleMaps;
+
+                    /**
+                     * Decodes a GoogleMaps message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoogleMaps
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.GoogleMaps;
+
+                    /**
+                     * Verifies a GoogleMaps message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoogleMaps message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoogleMaps
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.GoogleMaps;
+
+                    /**
+                     * Creates a plain object from a GoogleMaps message. Also converts values to other types if specified.
+                     * @param message GoogleMaps
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ai.generativelanguage.v1beta.GoogleMaps, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoogleMaps to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoogleMaps
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an UrlContext. */
                 interface IUrlContext {
                 }
@@ -27145,6 +27261,312 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FileSearch. */
+                interface IFileSearch {
+
+                    /** FileSearch retrievalResources */
+                    retrievalResources?: (google.ai.generativelanguage.v1beta.FileSearch.IRetrievalResource[]|null);
+
+                    /** FileSearch retrievalConfig */
+                    retrievalConfig?: (google.ai.generativelanguage.v1beta.FileSearch.IRetrievalConfig|null);
+                }
+
+                /** Represents a FileSearch. */
+                class FileSearch implements IFileSearch {
+
+                    /**
+                     * Constructs a new FileSearch.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ai.generativelanguage.v1beta.IFileSearch);
+
+                    /** FileSearch retrievalResources. */
+                    public retrievalResources: google.ai.generativelanguage.v1beta.FileSearch.IRetrievalResource[];
+
+                    /** FileSearch retrievalConfig. */
+                    public retrievalConfig?: (google.ai.generativelanguage.v1beta.FileSearch.IRetrievalConfig|null);
+
+                    /**
+                     * Creates a new FileSearch instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FileSearch instance
+                     */
+                    public static create(properties?: google.ai.generativelanguage.v1beta.IFileSearch): google.ai.generativelanguage.v1beta.FileSearch;
+
+                    /**
+                     * Encodes the specified FileSearch message. Does not implicitly {@link google.ai.generativelanguage.v1beta.FileSearch.verify|verify} messages.
+                     * @param message FileSearch message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ai.generativelanguage.v1beta.IFileSearch, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FileSearch message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.FileSearch.verify|verify} messages.
+                     * @param message FileSearch message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta.IFileSearch, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FileSearch message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FileSearch
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.FileSearch;
+
+                    /**
+                     * Decodes a FileSearch message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FileSearch
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.FileSearch;
+
+                    /**
+                     * Verifies a FileSearch message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FileSearch message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FileSearch
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.FileSearch;
+
+                    /**
+                     * Creates a plain object from a FileSearch message. Also converts values to other types if specified.
+                     * @param message FileSearch
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ai.generativelanguage.v1beta.FileSearch, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FileSearch to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FileSearch
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace FileSearch {
+
+                    /** Properties of a RetrievalResource. */
+                    interface IRetrievalResource {
+
+                        /** RetrievalResource ragStoreName */
+                        ragStoreName?: (string|null);
+                    }
+
+                    /** Represents a RetrievalResource. */
+                    class RetrievalResource implements IRetrievalResource {
+
+                        /**
+                         * Constructs a new RetrievalResource.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.ai.generativelanguage.v1beta.FileSearch.IRetrievalResource);
+
+                        /** RetrievalResource ragStoreName. */
+                        public ragStoreName: string;
+
+                        /**
+                         * Creates a new RetrievalResource instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RetrievalResource instance
+                         */
+                        public static create(properties?: google.ai.generativelanguage.v1beta.FileSearch.IRetrievalResource): google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource;
+
+                        /**
+                         * Encodes the specified RetrievalResource message. Does not implicitly {@link google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource.verify|verify} messages.
+                         * @param message RetrievalResource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.ai.generativelanguage.v1beta.FileSearch.IRetrievalResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RetrievalResource message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource.verify|verify} messages.
+                         * @param message RetrievalResource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.ai.generativelanguage.v1beta.FileSearch.IRetrievalResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RetrievalResource message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RetrievalResource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource;
+
+                        /**
+                         * Decodes a RetrievalResource message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RetrievalResource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource;
+
+                        /**
+                         * Verifies a RetrievalResource message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RetrievalResource message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RetrievalResource
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource;
+
+                        /**
+                         * Creates a plain object from a RetrievalResource message. Also converts values to other types if specified.
+                         * @param message RetrievalResource
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RetrievalResource to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RetrievalResource
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a RetrievalConfig. */
+                    interface IRetrievalConfig {
+
+                        /** RetrievalConfig topK */
+                        topK?: (number|null);
+
+                        /** RetrievalConfig metadataFilter */
+                        metadataFilter?: (string|null);
+                    }
+
+                    /** Represents a RetrievalConfig. */
+                    class RetrievalConfig implements IRetrievalConfig {
+
+                        /**
+                         * Constructs a new RetrievalConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.ai.generativelanguage.v1beta.FileSearch.IRetrievalConfig);
+
+                        /** RetrievalConfig topK. */
+                        public topK?: (number|null);
+
+                        /** RetrievalConfig metadataFilter. */
+                        public metadataFilter: string;
+
+                        /**
+                         * Creates a new RetrievalConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RetrievalConfig instance
+                         */
+                        public static create(properties?: google.ai.generativelanguage.v1beta.FileSearch.IRetrievalConfig): google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig;
+
+                        /**
+                         * Encodes the specified RetrievalConfig message. Does not implicitly {@link google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig.verify|verify} messages.
+                         * @param message RetrievalConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.ai.generativelanguage.v1beta.FileSearch.IRetrievalConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RetrievalConfig message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig.verify|verify} messages.
+                         * @param message RetrievalConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.ai.generativelanguage.v1beta.FileSearch.IRetrievalConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RetrievalConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RetrievalConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig;
+
+                        /**
+                         * Decodes a RetrievalConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RetrievalConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig;
+
+                        /**
+                         * Verifies a RetrievalConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RetrievalConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RetrievalConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig;
+
+                        /**
+                         * Creates a plain object from a RetrievalConfig message. Also converts values to other types if specified.
+                         * @param message RetrievalConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RetrievalConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RetrievalConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a GoogleSearchRetrieval. */
@@ -27452,6 +27874,9 @@ export namespace google {
 
                     /** ToolConfig functionCallingConfig */
                     functionCallingConfig?: (google.ai.generativelanguage.v1beta.IFunctionCallingConfig|null);
+
+                    /** ToolConfig retrievalConfig */
+                    retrievalConfig?: (google.ai.generativelanguage.v1beta.IRetrievalConfig|null);
                 }
 
                 /** Represents a ToolConfig. */
@@ -27465,6 +27890,9 @@ export namespace google {
 
                     /** ToolConfig functionCallingConfig. */
                     public functionCallingConfig?: (google.ai.generativelanguage.v1beta.IFunctionCallingConfig|null);
+
+                    /** ToolConfig retrievalConfig. */
+                    public retrievalConfig?: (google.ai.generativelanguage.v1beta.IRetrievalConfig|null);
 
                     /**
                      * Creates a new ToolConfig instance using the specified properties.
@@ -27538,6 +27966,109 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ToolConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RetrievalConfig. */
+                interface IRetrievalConfig {
+
+                    /** RetrievalConfig latLng */
+                    latLng?: (google.type.ILatLng|null);
+
+                    /** RetrievalConfig languageCode */
+                    languageCode?: (string|null);
+                }
+
+                /** Represents a RetrievalConfig. */
+                class RetrievalConfig implements IRetrievalConfig {
+
+                    /**
+                     * Constructs a new RetrievalConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ai.generativelanguage.v1beta.IRetrievalConfig);
+
+                    /** RetrievalConfig latLng. */
+                    public latLng?: (google.type.ILatLng|null);
+
+                    /** RetrievalConfig languageCode. */
+                    public languageCode: string;
+
+                    /**
+                     * Creates a new RetrievalConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RetrievalConfig instance
+                     */
+                    public static create(properties?: google.ai.generativelanguage.v1beta.IRetrievalConfig): google.ai.generativelanguage.v1beta.RetrievalConfig;
+
+                    /**
+                     * Encodes the specified RetrievalConfig message. Does not implicitly {@link google.ai.generativelanguage.v1beta.RetrievalConfig.verify|verify} messages.
+                     * @param message RetrievalConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ai.generativelanguage.v1beta.IRetrievalConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RetrievalConfig message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.RetrievalConfig.verify|verify} messages.
+                     * @param message RetrievalConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta.IRetrievalConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RetrievalConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RetrievalConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.RetrievalConfig;
+
+                    /**
+                     * Decodes a RetrievalConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RetrievalConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.RetrievalConfig;
+
+                    /**
+                     * Verifies a RetrievalConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RetrievalConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RetrievalConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.RetrievalConfig;
+
+                    /**
+                     * Creates a plain object from a RetrievalConfig message. Also converts values to other types if specified.
+                     * @param message RetrievalConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ai.generativelanguage.v1beta.RetrievalConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RetrievalConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RetrievalConfig
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -34311,6 +34842,9 @@ export namespace google {
 
                     /** GroundingMetadata webSearchQueries */
                     webSearchQueries?: (string[]|null);
+
+                    /** GroundingMetadata googleMapsWidgetContextToken */
+                    googleMapsWidgetContextToken?: (string|null);
                 }
 
                 /** Represents a GroundingMetadata. */
@@ -34336,6 +34870,9 @@ export namespace google {
 
                     /** GroundingMetadata webSearchQueries. */
                     public webSearchQueries: string[];
+
+                    /** GroundingMetadata googleMapsWidgetContextToken. */
+                    public googleMapsWidgetContextToken?: (string|null);
 
                     /**
                      * Creates a new GroundingMetadata instance using the specified properties.
@@ -34523,6 +35060,12 @@ export namespace google {
 
                     /** GroundingChunk web */
                     web?: (google.ai.generativelanguage.v1beta.GroundingChunk.IWeb|null);
+
+                    /** GroundingChunk retrievedContext */
+                    retrievedContext?: (google.ai.generativelanguage.v1beta.GroundingChunk.IRetrievedContext|null);
+
+                    /** GroundingChunk maps */
+                    maps?: (google.ai.generativelanguage.v1beta.GroundingChunk.IMaps|null);
                 }
 
                 /** Represents a GroundingChunk. */
@@ -34537,8 +35080,14 @@ export namespace google {
                     /** GroundingChunk web. */
                     public web?: (google.ai.generativelanguage.v1beta.GroundingChunk.IWeb|null);
 
+                    /** GroundingChunk retrievedContext. */
+                    public retrievedContext?: (google.ai.generativelanguage.v1beta.GroundingChunk.IRetrievedContext|null);
+
+                    /** GroundingChunk maps. */
+                    public maps?: (google.ai.generativelanguage.v1beta.GroundingChunk.IMaps|null);
+
                     /** GroundingChunk chunkType. */
-                    public chunkType?: "web";
+                    public chunkType?: ("web"|"retrievedContext"|"maps");
 
                     /**
                      * Creates a new GroundingChunk instance using the specified properties.
@@ -34721,6 +35270,448 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a RetrievedContext. */
+                    interface IRetrievedContext {
+
+                        /** RetrievedContext uri */
+                        uri?: (string|null);
+
+                        /** RetrievedContext title */
+                        title?: (string|null);
+
+                        /** RetrievedContext text */
+                        text?: (string|null);
+                    }
+
+                    /** Represents a RetrievedContext. */
+                    class RetrievedContext implements IRetrievedContext {
+
+                        /**
+                         * Constructs a new RetrievedContext.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.ai.generativelanguage.v1beta.GroundingChunk.IRetrievedContext);
+
+                        /** RetrievedContext uri. */
+                        public uri?: (string|null);
+
+                        /** RetrievedContext title. */
+                        public title?: (string|null);
+
+                        /** RetrievedContext text. */
+                        public text?: (string|null);
+
+                        /**
+                         * Creates a new RetrievedContext instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RetrievedContext instance
+                         */
+                        public static create(properties?: google.ai.generativelanguage.v1beta.GroundingChunk.IRetrievedContext): google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext;
+
+                        /**
+                         * Encodes the specified RetrievedContext message. Does not implicitly {@link google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext.verify|verify} messages.
+                         * @param message RetrievedContext message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.ai.generativelanguage.v1beta.GroundingChunk.IRetrievedContext, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RetrievedContext message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext.verify|verify} messages.
+                         * @param message RetrievedContext message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.ai.generativelanguage.v1beta.GroundingChunk.IRetrievedContext, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RetrievedContext message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RetrievedContext
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext;
+
+                        /**
+                         * Decodes a RetrievedContext message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RetrievedContext
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext;
+
+                        /**
+                         * Verifies a RetrievedContext message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RetrievedContext message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RetrievedContext
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext;
+
+                        /**
+                         * Creates a plain object from a RetrievedContext message. Also converts values to other types if specified.
+                         * @param message RetrievedContext
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RetrievedContext to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RetrievedContext
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a Maps. */
+                    interface IMaps {
+
+                        /** Maps uri */
+                        uri?: (string|null);
+
+                        /** Maps title */
+                        title?: (string|null);
+
+                        /** Maps text */
+                        text?: (string|null);
+
+                        /** Maps placeId */
+                        placeId?: (string|null);
+
+                        /** Maps placeAnswerSources */
+                        placeAnswerSources?: (google.ai.generativelanguage.v1beta.GroundingChunk.Maps.IPlaceAnswerSources|null);
+                    }
+
+                    /** Represents a Maps. */
+                    class Maps implements IMaps {
+
+                        /**
+                         * Constructs a new Maps.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.ai.generativelanguage.v1beta.GroundingChunk.IMaps);
+
+                        /** Maps uri. */
+                        public uri?: (string|null);
+
+                        /** Maps title. */
+                        public title?: (string|null);
+
+                        /** Maps text. */
+                        public text?: (string|null);
+
+                        /** Maps placeId. */
+                        public placeId?: (string|null);
+
+                        /** Maps placeAnswerSources. */
+                        public placeAnswerSources?: (google.ai.generativelanguage.v1beta.GroundingChunk.Maps.IPlaceAnswerSources|null);
+
+                        /**
+                         * Creates a new Maps instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Maps instance
+                         */
+                        public static create(properties?: google.ai.generativelanguage.v1beta.GroundingChunk.IMaps): google.ai.generativelanguage.v1beta.GroundingChunk.Maps;
+
+                        /**
+                         * Encodes the specified Maps message. Does not implicitly {@link google.ai.generativelanguage.v1beta.GroundingChunk.Maps.verify|verify} messages.
+                         * @param message Maps message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.ai.generativelanguage.v1beta.GroundingChunk.IMaps, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Maps message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.GroundingChunk.Maps.verify|verify} messages.
+                         * @param message Maps message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.ai.generativelanguage.v1beta.GroundingChunk.IMaps, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Maps message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Maps
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.GroundingChunk.Maps;
+
+                        /**
+                         * Decodes a Maps message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Maps
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.GroundingChunk.Maps;
+
+                        /**
+                         * Verifies a Maps message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Maps message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Maps
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.GroundingChunk.Maps;
+
+                        /**
+                         * Creates a plain object from a Maps message. Also converts values to other types if specified.
+                         * @param message Maps
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.ai.generativelanguage.v1beta.GroundingChunk.Maps, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Maps to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Maps
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Maps {
+
+                        /** Properties of a PlaceAnswerSources. */
+                        interface IPlaceAnswerSources {
+
+                            /** PlaceAnswerSources reviewSnippets */
+                            reviewSnippets?: (google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.IReviewSnippet[]|null);
+                        }
+
+                        /** Represents a PlaceAnswerSources. */
+                        class PlaceAnswerSources implements IPlaceAnswerSources {
+
+                            /**
+                             * Constructs a new PlaceAnswerSources.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.ai.generativelanguage.v1beta.GroundingChunk.Maps.IPlaceAnswerSources);
+
+                            /** PlaceAnswerSources reviewSnippets. */
+                            public reviewSnippets: google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.IReviewSnippet[];
+
+                            /**
+                             * Creates a new PlaceAnswerSources instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns PlaceAnswerSources instance
+                             */
+                            public static create(properties?: google.ai.generativelanguage.v1beta.GroundingChunk.Maps.IPlaceAnswerSources): google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources;
+
+                            /**
+                             * Encodes the specified PlaceAnswerSources message. Does not implicitly {@link google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.verify|verify} messages.
+                             * @param message PlaceAnswerSources message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.ai.generativelanguage.v1beta.GroundingChunk.Maps.IPlaceAnswerSources, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified PlaceAnswerSources message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.verify|verify} messages.
+                             * @param message PlaceAnswerSources message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.ai.generativelanguage.v1beta.GroundingChunk.Maps.IPlaceAnswerSources, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a PlaceAnswerSources message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns PlaceAnswerSources
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources;
+
+                            /**
+                             * Decodes a PlaceAnswerSources message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns PlaceAnswerSources
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources;
+
+                            /**
+                             * Verifies a PlaceAnswerSources message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a PlaceAnswerSources message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns PlaceAnswerSources
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources;
+
+                            /**
+                             * Creates a plain object from a PlaceAnswerSources message. Also converts values to other types if specified.
+                             * @param message PlaceAnswerSources
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this PlaceAnswerSources to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for PlaceAnswerSources
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace PlaceAnswerSources {
+
+                            /** Properties of a ReviewSnippet. */
+                            interface IReviewSnippet {
+
+                                /** ReviewSnippet reviewId */
+                                reviewId?: (string|null);
+
+                                /** ReviewSnippet googleMapsUri */
+                                googleMapsUri?: (string|null);
+
+                                /** ReviewSnippet title */
+                                title?: (string|null);
+                            }
+
+                            /** Represents a ReviewSnippet. */
+                            class ReviewSnippet implements IReviewSnippet {
+
+                                /**
+                                 * Constructs a new ReviewSnippet.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.IReviewSnippet);
+
+                                /** ReviewSnippet reviewId. */
+                                public reviewId?: (string|null);
+
+                                /** ReviewSnippet googleMapsUri. */
+                                public googleMapsUri?: (string|null);
+
+                                /** ReviewSnippet title. */
+                                public title?: (string|null);
+
+                                /**
+                                 * Creates a new ReviewSnippet instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns ReviewSnippet instance
+                                 */
+                                public static create(properties?: google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.IReviewSnippet): google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet;
+
+                                /**
+                                 * Encodes the specified ReviewSnippet message. Does not implicitly {@link google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet.verify|verify} messages.
+                                 * @param message ReviewSnippet message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.IReviewSnippet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified ReviewSnippet message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet.verify|verify} messages.
+                                 * @param message ReviewSnippet message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.IReviewSnippet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a ReviewSnippet message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns ReviewSnippet
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet;
+
+                                /**
+                                 * Decodes a ReviewSnippet message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns ReviewSnippet
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet;
+
+                                /**
+                                 * Verifies a ReviewSnippet message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a ReviewSnippet message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns ReviewSnippet
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet;
+
+                                /**
+                                 * Creates a plain object from a ReviewSnippet message. Also converts values to other types if specified.
+                                 * @param message ReviewSnippet
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this ReviewSnippet to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for ReviewSnippet
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+                        }
                     }
                 }
 
@@ -65544,6 +66535,109 @@ export namespace google {
 
             /**
              * Gets the default type url for Interval
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a LatLng. */
+        interface ILatLng {
+
+            /** LatLng latitude */
+            latitude?: (number|null);
+
+            /** LatLng longitude */
+            longitude?: (number|null);
+        }
+
+        /** Represents a LatLng. */
+        class LatLng implements ILatLng {
+
+            /**
+             * Constructs a new LatLng.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.type.ILatLng);
+
+            /** LatLng latitude. */
+            public latitude: number;
+
+            /** LatLng longitude. */
+            public longitude: number;
+
+            /**
+             * Creates a new LatLng instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns LatLng instance
+             */
+            public static create(properties?: google.type.ILatLng): google.type.LatLng;
+
+            /**
+             * Encodes the specified LatLng message. Does not implicitly {@link google.type.LatLng.verify|verify} messages.
+             * @param message LatLng message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.type.ILatLng, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified LatLng message, length delimited. Does not implicitly {@link google.type.LatLng.verify|verify} messages.
+             * @param message LatLng message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.type.ILatLng, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a LatLng message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns LatLng
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.LatLng;
+
+            /**
+             * Decodes a LatLng message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns LatLng
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.LatLng;
+
+            /**
+             * Verifies a LatLng message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a LatLng message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns LatLng
+             */
+            public static fromObject(object: { [k: string]: any }): google.type.LatLng;
+
+            /**
+             * Creates a plain object from a LatLng message. Also converts values to other types if specified.
+             * @param message LatLng
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.type.LatLng, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this LatLng to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for LatLng
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

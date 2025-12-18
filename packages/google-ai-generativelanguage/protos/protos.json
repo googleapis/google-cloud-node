@@ -495,6 +495,7 @@
                           "type": "google.protobuf.Value",
                           "id": 28,
                           "options": {
+                            "json_name": "responseJsonSchema",
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
@@ -776,6 +777,7 @@
                             "IMAGE_PROHIBITED_CONTENT": 14,
                             "IMAGE_OTHER": 15,
                             "NO_IMAGE": 16,
+                            "IMAGE_RECITATION": 17,
                             "UNEXPECTED_TOOL_CALL": 12,
                             "TOO_MANY_TOOL_CALLS": 13
                           }
@@ -917,6 +919,11 @@
                           "oneof": [
                             "retrievalMetadata"
                           ]
+                        },
+                        "_googleMapsWidgetContextToken": {
+                          "oneof": [
+                            "googleMapsWidgetContextToken"
+                          ]
                         }
                       },
                       "fields": {
@@ -949,6 +956,14 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 5
+                        },
+                        "googleMapsWidgetContextToken": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },
@@ -7886,6 +7901,20 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "fileSearch": {
+                          "type": "FileSearch",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "googleMaps": {
+                          "type": "GoogleMaps",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -7929,8 +7958,77 @@
                         }
                       }
                     },
+                    "GoogleMaps": {
+                      "fields": {
+                        "enableWidget": {
+                          "type": "bool",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
                     "UrlContext": {
                       "fields": {}
+                    },
+                    "FileSearch": {
+                      "fields": {
+                        "retrievalResources": {
+                          "rule": "repeated",
+                          "type": "RetrievalResource",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "retrievalConfig": {
+                          "type": "RetrievalConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "RetrievalResource": {
+                          "fields": {
+                            "ragStoreName": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "RetrievalConfig": {
+                          "oneofs": {
+                            "_topK": {
+                              "oneof": [
+                                "topK"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "topK": {
+                              "type": "int32",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
+                            "metadataFilter": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        }
+                      }
                     },
                     "GoogleSearchRetrieval": {
                       "fields": {
@@ -7978,6 +8076,31 @@
                         "functionCallingConfig": {
                           "type": "FunctionCallingConfig",
                           "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "retrievalConfig": {
+                          "type": "RetrievalConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "RetrievalConfig": {
+                      "fields": {
+                        "latLng": {
+                          "type": "google.type.LatLng",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "languageCode": {
+                          "type": "string",
+                          "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -10344,6 +10467,11 @@
                           "oneof": [
                             "retrievalMetadata"
                           ]
+                        },
+                        "_googleMapsWidgetContextToken": {
+                          "oneof": [
+                            "googleMapsWidgetContextToken"
+                          ]
                         }
                       },
                       "fields": {
@@ -10376,6 +10504,14 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 5
+                        },
+                        "googleMapsWidgetContextToken": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },
@@ -10401,7 +10537,9 @@
                       "oneofs": {
                         "chunkType": {
                           "oneof": [
-                            "web"
+                            "web",
+                            "retrievedContext",
+                            "maps"
                           ]
                         }
                       },
@@ -10409,6 +10547,20 @@
                         "web": {
                           "type": "Web",
                           "id": 1
+                        },
+                        "retrievedContext": {
+                          "type": "RetrievedContext",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "maps": {
+                          "type": "Maps",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -10438,6 +10590,172 @@
                               "id": 2,
                               "options": {
                                 "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
+                        "RetrievedContext": {
+                          "oneofs": {
+                            "_uri": {
+                              "oneof": [
+                                "uri"
+                              ]
+                            },
+                            "_title": {
+                              "oneof": [
+                                "title"
+                              ]
+                            },
+                            "_text": {
+                              "oneof": [
+                                "text"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "uri": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
+                            "title": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
+                            "text": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
+                        "Maps": {
+                          "oneofs": {
+                            "_uri": {
+                              "oneof": [
+                                "uri"
+                              ]
+                            },
+                            "_title": {
+                              "oneof": [
+                                "title"
+                              ]
+                            },
+                            "_text": {
+                              "oneof": [
+                                "text"
+                              ]
+                            },
+                            "_placeId": {
+                              "oneof": [
+                                "placeId"
+                              ]
+                            },
+                            "_placeAnswerSources": {
+                              "oneof": [
+                                "placeAnswerSources"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "uri": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "title": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "text": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "placeId": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "placeAnswerSources": {
+                              "type": "PlaceAnswerSources",
+                              "id": 5,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            }
+                          },
+                          "nested": {
+                            "PlaceAnswerSources": {
+                              "fields": {
+                                "reviewSnippets": {
+                                  "rule": "repeated",
+                                  "type": "ReviewSnippet",
+                                  "id": 1
+                                }
+                              },
+                              "nested": {
+                                "ReviewSnippet": {
+                                  "oneofs": {
+                                    "_reviewId": {
+                                      "oneof": [
+                                        "reviewId"
+                                      ]
+                                    },
+                                    "_googleMapsUri": {
+                                      "oneof": [
+                                        "googleMapsUri"
+                                      ]
+                                    },
+                                    "_title": {
+                                      "oneof": [
+                                        "title"
+                                      ]
+                                    }
+                                  },
+                                  "fields": {
+                                    "reviewId": {
+                                      "type": "string",
+                                      "id": 1,
+                                      "options": {
+                                        "proto3_optional": true
+                                      }
+                                    },
+                                    "googleMapsUri": {
+                                      "type": "string",
+                                      "id": 2,
+                                      "options": {
+                                        "proto3_optional": true
+                                      }
+                                    },
+                                    "title": {
+                                      "type": "string",
+                                      "id": 3,
+                                      "options": {
+                                        "proto3_optional": true
+                                      }
+                                    }
+                                  }
+                                }
                               }
                             }
                           }
@@ -19124,9 +19442,9 @@
         "type": {
           "options": {
             "cc_enable_arenas": true,
-            "go_package": "google.golang.org/genproto/googleapis/type/interval;interval",
+            "go_package": "google.golang.org/genproto/googleapis/type/latlng;latlng",
             "java_multiple_files": true,
-            "java_outer_classname": "IntervalProto",
+            "java_outer_classname": "LatLngProto",
             "java_package": "com.google.type",
             "objc_class_prefix": "GTP"
           },
@@ -19139,6 +19457,18 @@
                 },
                 "endTime": {
                   "type": "google.protobuf.Timestamp",
+                  "id": 2
+                }
+              }
+            },
+            "LatLng": {
+              "fields": {
+                "latitude": {
+                  "type": "double",
+                  "id": 1
+                },
+                "longitude": {
+                  "type": "double",
                   "id": 2
                 }
               }
