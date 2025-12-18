@@ -66316,6 +66316,8 @@
                          * @property {google.ai.generativelanguage.v1beta.Tool.IGoogleSearch|null} [googleSearch] Tool googleSearch
                          * @property {google.ai.generativelanguage.v1beta.Tool.IComputerUse|null} [computerUse] Tool computerUse
                          * @property {google.ai.generativelanguage.v1beta.IUrlContext|null} [urlContext] Tool urlContext
+                         * @property {google.ai.generativelanguage.v1beta.IFileSearch|null} [fileSearch] Tool fileSearch
+                         * @property {google.ai.generativelanguage.v1beta.IGoogleMaps|null} [googleMaps] Tool googleMaps
                          */
     
                         /**
@@ -66383,6 +66385,22 @@
                         Tool.prototype.urlContext = null;
     
                         /**
+                         * Tool fileSearch.
+                         * @member {google.ai.generativelanguage.v1beta.IFileSearch|null|undefined} fileSearch
+                         * @memberof google.ai.generativelanguage.v1beta.Tool
+                         * @instance
+                         */
+                        Tool.prototype.fileSearch = null;
+    
+                        /**
+                         * Tool googleMaps.
+                         * @member {google.ai.generativelanguage.v1beta.IGoogleMaps|null|undefined} googleMaps
+                         * @memberof google.ai.generativelanguage.v1beta.Tool
+                         * @instance
+                         */
+                        Tool.prototype.googleMaps = null;
+    
+                        /**
                          * Creates a new Tool instance using the specified properties.
                          * @function create
                          * @memberof google.ai.generativelanguage.v1beta.Tool
@@ -66419,6 +66437,10 @@
                                 $root.google.ai.generativelanguage.v1beta.Tool.ComputerUse.encode(message.computerUse, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.urlContext != null && Object.hasOwnProperty.call(message, "urlContext"))
                                 $root.google.ai.generativelanguage.v1beta.UrlContext.encode(message.urlContext, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.fileSearch != null && Object.hasOwnProperty.call(message, "fileSearch"))
+                                $root.google.ai.generativelanguage.v1beta.FileSearch.encode(message.fileSearch, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.googleMaps != null && Object.hasOwnProperty.call(message, "googleMaps"))
+                                $root.google.ai.generativelanguage.v1beta.GoogleMaps.encode(message.googleMaps, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                             return writer;
                         };
     
@@ -66479,6 +66501,14 @@
                                     }
                                 case 8: {
                                         message.urlContext = $root.google.ai.generativelanguage.v1beta.UrlContext.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.fileSearch = $root.google.ai.generativelanguage.v1beta.FileSearch.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 11: {
+                                        message.googleMaps = $root.google.ai.generativelanguage.v1beta.GoogleMaps.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -66550,6 +66580,16 @@
                                 if (error)
                                     return "urlContext." + error;
                             }
+                            if (message.fileSearch != null && message.hasOwnProperty("fileSearch")) {
+                                var error = $root.google.ai.generativelanguage.v1beta.FileSearch.verify(message.fileSearch);
+                                if (error)
+                                    return "fileSearch." + error;
+                            }
+                            if (message.googleMaps != null && message.hasOwnProperty("googleMaps")) {
+                                var error = $root.google.ai.generativelanguage.v1beta.GoogleMaps.verify(message.googleMaps);
+                                if (error)
+                                    return "googleMaps." + error;
+                            }
                             return null;
                         };
     
@@ -66600,6 +66640,16 @@
                                     throw TypeError(".google.ai.generativelanguage.v1beta.Tool.urlContext: object expected");
                                 message.urlContext = $root.google.ai.generativelanguage.v1beta.UrlContext.fromObject(object.urlContext);
                             }
+                            if (object.fileSearch != null) {
+                                if (typeof object.fileSearch !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.Tool.fileSearch: object expected");
+                                message.fileSearch = $root.google.ai.generativelanguage.v1beta.FileSearch.fromObject(object.fileSearch);
+                            }
+                            if (object.googleMaps != null) {
+                                if (typeof object.googleMaps !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.Tool.googleMaps: object expected");
+                                message.googleMaps = $root.google.ai.generativelanguage.v1beta.GoogleMaps.fromObject(object.googleMaps);
+                            }
                             return message;
                         };
     
@@ -66624,6 +66674,8 @@
                                 object.googleSearch = null;
                                 object.computerUse = null;
                                 object.urlContext = null;
+                                object.fileSearch = null;
+                                object.googleMaps = null;
                             }
                             if (message.functionDeclarations && message.functionDeclarations.length) {
                                 object.functionDeclarations = [];
@@ -66640,6 +66692,10 @@
                                 object.computerUse = $root.google.ai.generativelanguage.v1beta.Tool.ComputerUse.toObject(message.computerUse, options);
                             if (message.urlContext != null && message.hasOwnProperty("urlContext"))
                                 object.urlContext = $root.google.ai.generativelanguage.v1beta.UrlContext.toObject(message.urlContext, options);
+                            if (message.fileSearch != null && message.hasOwnProperty("fileSearch"))
+                                object.fileSearch = $root.google.ai.generativelanguage.v1beta.FileSearch.toObject(message.fileSearch, options);
+                            if (message.googleMaps != null && message.hasOwnProperty("googleMaps"))
+                                object.googleMaps = $root.google.ai.generativelanguage.v1beta.GoogleMaps.toObject(message.googleMaps, options);
                             return object;
                         };
     
@@ -67160,6 +67216,211 @@
                         return Tool;
                     })();
     
+                    v1beta.GoogleMaps = (function() {
+    
+                        /**
+                         * Properties of a GoogleMaps.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @interface IGoogleMaps
+                         * @property {boolean|null} [enableWidget] GoogleMaps enableWidget
+                         */
+    
+                        /**
+                         * Constructs a new GoogleMaps.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @classdesc Represents a GoogleMaps.
+                         * @implements IGoogleMaps
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta.IGoogleMaps=} [properties] Properties to set
+                         */
+                        function GoogleMaps(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GoogleMaps enableWidget.
+                         * @member {boolean} enableWidget
+                         * @memberof google.ai.generativelanguage.v1beta.GoogleMaps
+                         * @instance
+                         */
+                        GoogleMaps.prototype.enableWidget = false;
+    
+                        /**
+                         * Creates a new GoogleMaps instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta.GoogleMaps
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IGoogleMaps=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta.GoogleMaps} GoogleMaps instance
+                         */
+                        GoogleMaps.create = function create(properties) {
+                            return new GoogleMaps(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GoogleMaps message. Does not implicitly {@link google.ai.generativelanguage.v1beta.GoogleMaps.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta.GoogleMaps
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IGoogleMaps} message GoogleMaps message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GoogleMaps.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.enableWidget != null && Object.hasOwnProperty.call(message, "enableWidget"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enableWidget);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GoogleMaps message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.GoogleMaps.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.GoogleMaps
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IGoogleMaps} message GoogleMaps message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GoogleMaps.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GoogleMaps message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta.GoogleMaps
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta.GoogleMaps} GoogleMaps
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GoogleMaps.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.GoogleMaps();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.enableWidget = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GoogleMaps message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.GoogleMaps
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta.GoogleMaps} GoogleMaps
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GoogleMaps.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GoogleMaps message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta.GoogleMaps
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GoogleMaps.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.enableWidget != null && message.hasOwnProperty("enableWidget"))
+                                if (typeof message.enableWidget !== "boolean")
+                                    return "enableWidget: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GoogleMaps message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta.GoogleMaps
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta.GoogleMaps} GoogleMaps
+                         */
+                        GoogleMaps.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta.GoogleMaps)
+                                return object;
+                            var message = new $root.google.ai.generativelanguage.v1beta.GoogleMaps();
+                            if (object.enableWidget != null)
+                                message.enableWidget = Boolean(object.enableWidget);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GoogleMaps message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta.GoogleMaps
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.GoogleMaps} message GoogleMaps
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GoogleMaps.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.enableWidget = false;
+                            if (message.enableWidget != null && message.hasOwnProperty("enableWidget"))
+                                object.enableWidget = message.enableWidget;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GoogleMaps to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta.GoogleMaps
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GoogleMaps.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GoogleMaps
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta.GoogleMaps
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GoogleMaps.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.GoogleMaps";
+                        };
+    
+                        return GoogleMaps;
+                    })();
+    
                     v1beta.UrlContext = (function() {
     
                         /**
@@ -67335,6 +67596,708 @@
                         };
     
                         return UrlContext;
+                    })();
+    
+                    v1beta.FileSearch = (function() {
+    
+                        /**
+                         * Properties of a FileSearch.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @interface IFileSearch
+                         * @property {Array.<google.ai.generativelanguage.v1beta.FileSearch.IRetrievalResource>|null} [retrievalResources] FileSearch retrievalResources
+                         * @property {google.ai.generativelanguage.v1beta.FileSearch.IRetrievalConfig|null} [retrievalConfig] FileSearch retrievalConfig
+                         */
+    
+                        /**
+                         * Constructs a new FileSearch.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @classdesc Represents a FileSearch.
+                         * @implements IFileSearch
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta.IFileSearch=} [properties] Properties to set
+                         */
+                        function FileSearch(properties) {
+                            this.retrievalResources = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * FileSearch retrievalResources.
+                         * @member {Array.<google.ai.generativelanguage.v1beta.FileSearch.IRetrievalResource>} retrievalResources
+                         * @memberof google.ai.generativelanguage.v1beta.FileSearch
+                         * @instance
+                         */
+                        FileSearch.prototype.retrievalResources = $util.emptyArray;
+    
+                        /**
+                         * FileSearch retrievalConfig.
+                         * @member {google.ai.generativelanguage.v1beta.FileSearch.IRetrievalConfig|null|undefined} retrievalConfig
+                         * @memberof google.ai.generativelanguage.v1beta.FileSearch
+                         * @instance
+                         */
+                        FileSearch.prototype.retrievalConfig = null;
+    
+                        /**
+                         * Creates a new FileSearch instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta.FileSearch
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IFileSearch=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta.FileSearch} FileSearch instance
+                         */
+                        FileSearch.create = function create(properties) {
+                            return new FileSearch(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FileSearch message. Does not implicitly {@link google.ai.generativelanguage.v1beta.FileSearch.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta.FileSearch
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IFileSearch} message FileSearch message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FileSearch.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.retrievalResources != null && message.retrievalResources.length)
+                                for (var i = 0; i < message.retrievalResources.length; ++i)
+                                    $root.google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource.encode(message.retrievalResources[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.retrievalConfig != null && Object.hasOwnProperty.call(message, "retrievalConfig"))
+                                $root.google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig.encode(message.retrievalConfig, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FileSearch message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.FileSearch.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.FileSearch
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IFileSearch} message FileSearch message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FileSearch.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FileSearch message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta.FileSearch
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta.FileSearch} FileSearch
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FileSearch.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.FileSearch();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.retrievalResources && message.retrievalResources.length))
+                                            message.retrievalResources = [];
+                                        message.retrievalResources.push($root.google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.retrievalConfig = $root.google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FileSearch message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.FileSearch
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta.FileSearch} FileSearch
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FileSearch.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FileSearch message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta.FileSearch
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FileSearch.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.retrievalResources != null && message.hasOwnProperty("retrievalResources")) {
+                                if (!Array.isArray(message.retrievalResources))
+                                    return "retrievalResources: array expected";
+                                for (var i = 0; i < message.retrievalResources.length; ++i) {
+                                    var error = $root.google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource.verify(message.retrievalResources[i]);
+                                    if (error)
+                                        return "retrievalResources." + error;
+                                }
+                            }
+                            if (message.retrievalConfig != null && message.hasOwnProperty("retrievalConfig")) {
+                                var error = $root.google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig.verify(message.retrievalConfig);
+                                if (error)
+                                    return "retrievalConfig." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FileSearch message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta.FileSearch
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta.FileSearch} FileSearch
+                         */
+                        FileSearch.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta.FileSearch)
+                                return object;
+                            var message = new $root.google.ai.generativelanguage.v1beta.FileSearch();
+                            if (object.retrievalResources) {
+                                if (!Array.isArray(object.retrievalResources))
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.FileSearch.retrievalResources: array expected");
+                                message.retrievalResources = [];
+                                for (var i = 0; i < object.retrievalResources.length; ++i) {
+                                    if (typeof object.retrievalResources[i] !== "object")
+                                        throw TypeError(".google.ai.generativelanguage.v1beta.FileSearch.retrievalResources: object expected");
+                                    message.retrievalResources[i] = $root.google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource.fromObject(object.retrievalResources[i]);
+                                }
+                            }
+                            if (object.retrievalConfig != null) {
+                                if (typeof object.retrievalConfig !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.FileSearch.retrievalConfig: object expected");
+                                message.retrievalConfig = $root.google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig.fromObject(object.retrievalConfig);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a FileSearch message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta.FileSearch
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.FileSearch} message FileSearch
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FileSearch.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.retrievalResources = [];
+                            if (options.defaults)
+                                object.retrievalConfig = null;
+                            if (message.retrievalResources && message.retrievalResources.length) {
+                                object.retrievalResources = [];
+                                for (var j = 0; j < message.retrievalResources.length; ++j)
+                                    object.retrievalResources[j] = $root.google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource.toObject(message.retrievalResources[j], options);
+                            }
+                            if (message.retrievalConfig != null && message.hasOwnProperty("retrievalConfig"))
+                                object.retrievalConfig = $root.google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig.toObject(message.retrievalConfig, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this FileSearch to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta.FileSearch
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FileSearch.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FileSearch
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta.FileSearch
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FileSearch.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.FileSearch";
+                        };
+    
+                        FileSearch.RetrievalResource = (function() {
+    
+                            /**
+                             * Properties of a RetrievalResource.
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch
+                             * @interface IRetrievalResource
+                             * @property {string|null} [ragStoreName] RetrievalResource ragStoreName
+                             */
+    
+                            /**
+                             * Constructs a new RetrievalResource.
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch
+                             * @classdesc Represents a RetrievalResource.
+                             * @implements IRetrievalResource
+                             * @constructor
+                             * @param {google.ai.generativelanguage.v1beta.FileSearch.IRetrievalResource=} [properties] Properties to set
+                             */
+                            function RetrievalResource(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * RetrievalResource ragStoreName.
+                             * @member {string} ragStoreName
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource
+                             * @instance
+                             */
+                            RetrievalResource.prototype.ragStoreName = "";
+    
+                            /**
+                             * Creates a new RetrievalResource instance using the specified properties.
+                             * @function create
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.FileSearch.IRetrievalResource=} [properties] Properties to set
+                             * @returns {google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource} RetrievalResource instance
+                             */
+                            RetrievalResource.create = function create(properties) {
+                                return new RetrievalResource(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified RetrievalResource message. Does not implicitly {@link google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.FileSearch.IRetrievalResource} message RetrievalResource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RetrievalResource.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.ragStoreName != null && Object.hasOwnProperty.call(message, "ragStoreName"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.ragStoreName);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified RetrievalResource message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.FileSearch.IRetrievalResource} message RetrievalResource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RetrievalResource.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a RetrievalResource message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource} RetrievalResource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RetrievalResource.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.ragStoreName = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a RetrievalResource message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource} RetrievalResource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RetrievalResource.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a RetrievalResource message.
+                             * @function verify
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            RetrievalResource.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.ragStoreName != null && message.hasOwnProperty("ragStoreName"))
+                                    if (!$util.isString(message.ragStoreName))
+                                        return "ragStoreName: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a RetrievalResource message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource} RetrievalResource
+                             */
+                            RetrievalResource.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource)
+                                    return object;
+                                var message = new $root.google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource();
+                                if (object.ragStoreName != null)
+                                    message.ragStoreName = String(object.ragStoreName);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a RetrievalResource message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource} message RetrievalResource
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            RetrievalResource.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.ragStoreName = "";
+                                if (message.ragStoreName != null && message.hasOwnProperty("ragStoreName"))
+                                    object.ragStoreName = message.ragStoreName;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this RetrievalResource to JSON.
+                             * @function toJSON
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            RetrievalResource.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for RetrievalResource
+                             * @function getTypeUrl
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            RetrievalResource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource";
+                            };
+    
+                            return RetrievalResource;
+                        })();
+    
+                        FileSearch.RetrievalConfig = (function() {
+    
+                            /**
+                             * Properties of a RetrievalConfig.
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch
+                             * @interface IRetrievalConfig
+                             * @property {number|null} [topK] RetrievalConfig topK
+                             * @property {string|null} [metadataFilter] RetrievalConfig metadataFilter
+                             */
+    
+                            /**
+                             * Constructs a new RetrievalConfig.
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch
+                             * @classdesc Represents a RetrievalConfig.
+                             * @implements IRetrievalConfig
+                             * @constructor
+                             * @param {google.ai.generativelanguage.v1beta.FileSearch.IRetrievalConfig=} [properties] Properties to set
+                             */
+                            function RetrievalConfig(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * RetrievalConfig topK.
+                             * @member {number|null|undefined} topK
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig
+                             * @instance
+                             */
+                            RetrievalConfig.prototype.topK = null;
+    
+                            /**
+                             * RetrievalConfig metadataFilter.
+                             * @member {string} metadataFilter
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig
+                             * @instance
+                             */
+                            RetrievalConfig.prototype.metadataFilter = "";
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(RetrievalConfig.prototype, "_topK", {
+                                get: $util.oneOfGetter($oneOfFields = ["topK"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new RetrievalConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.FileSearch.IRetrievalConfig=} [properties] Properties to set
+                             * @returns {google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig} RetrievalConfig instance
+                             */
+                            RetrievalConfig.create = function create(properties) {
+                                return new RetrievalConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified RetrievalConfig message. Does not implicitly {@link google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.FileSearch.IRetrievalConfig} message RetrievalConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RetrievalConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.topK != null && Object.hasOwnProperty.call(message, "topK"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.topK);
+                                if (message.metadataFilter != null && Object.hasOwnProperty.call(message, "metadataFilter"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.metadataFilter);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified RetrievalConfig message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.FileSearch.IRetrievalConfig} message RetrievalConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RetrievalConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a RetrievalConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig} RetrievalConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RetrievalConfig.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.topK = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.metadataFilter = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a RetrievalConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig} RetrievalConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RetrievalConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a RetrievalConfig message.
+                             * @function verify
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            RetrievalConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.topK != null && message.hasOwnProperty("topK")) {
+                                    properties._topK = 1;
+                                    if (!$util.isInteger(message.topK))
+                                        return "topK: integer expected";
+                                }
+                                if (message.metadataFilter != null && message.hasOwnProperty("metadataFilter"))
+                                    if (!$util.isString(message.metadataFilter))
+                                        return "metadataFilter: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a RetrievalConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig} RetrievalConfig
+                             */
+                            RetrievalConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig)
+                                    return object;
+                                var message = new $root.google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig();
+                                if (object.topK != null)
+                                    message.topK = object.topK | 0;
+                                if (object.metadataFilter != null)
+                                    message.metadataFilter = String(object.metadataFilter);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a RetrievalConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig} message RetrievalConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            RetrievalConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.metadataFilter = "";
+                                if (message.topK != null && message.hasOwnProperty("topK")) {
+                                    object.topK = message.topK;
+                                    if (options.oneofs)
+                                        object._topK = "topK";
+                                }
+                                if (message.metadataFilter != null && message.hasOwnProperty("metadataFilter"))
+                                    object.metadataFilter = message.metadataFilter;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this RetrievalConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            RetrievalConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for RetrievalConfig
+                             * @function getTypeUrl
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            RetrievalConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig";
+                            };
+    
+                            return RetrievalConfig;
+                        })();
+    
+                        return FileSearch;
                     })();
     
                     v1beta.GoogleSearchRetrieval = (function() {
@@ -68006,6 +68969,7 @@
                          * @memberof google.ai.generativelanguage.v1beta
                          * @interface IToolConfig
                          * @property {google.ai.generativelanguage.v1beta.IFunctionCallingConfig|null} [functionCallingConfig] ToolConfig functionCallingConfig
+                         * @property {google.ai.generativelanguage.v1beta.IRetrievalConfig|null} [retrievalConfig] ToolConfig retrievalConfig
                          */
     
                         /**
@@ -68030,6 +68994,14 @@
                          * @instance
                          */
                         ToolConfig.prototype.functionCallingConfig = null;
+    
+                        /**
+                         * ToolConfig retrievalConfig.
+                         * @member {google.ai.generativelanguage.v1beta.IRetrievalConfig|null|undefined} retrievalConfig
+                         * @memberof google.ai.generativelanguage.v1beta.ToolConfig
+                         * @instance
+                         */
+                        ToolConfig.prototype.retrievalConfig = null;
     
                         /**
                          * Creates a new ToolConfig instance using the specified properties.
@@ -68057,6 +69029,8 @@
                                 writer = $Writer.create();
                             if (message.functionCallingConfig != null && Object.hasOwnProperty.call(message, "functionCallingConfig"))
                                 $root.google.ai.generativelanguage.v1beta.FunctionCallingConfig.encode(message.functionCallingConfig, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.retrievalConfig != null && Object.hasOwnProperty.call(message, "retrievalConfig"))
+                                $root.google.ai.generativelanguage.v1beta.RetrievalConfig.encode(message.retrievalConfig, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             return writer;
                         };
     
@@ -68095,6 +69069,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.functionCallingConfig = $root.google.ai.generativelanguage.v1beta.FunctionCallingConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.retrievalConfig = $root.google.ai.generativelanguage.v1beta.RetrievalConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -68137,6 +69115,11 @@
                                 if (error)
                                     return "functionCallingConfig." + error;
                             }
+                            if (message.retrievalConfig != null && message.hasOwnProperty("retrievalConfig")) {
+                                var error = $root.google.ai.generativelanguage.v1beta.RetrievalConfig.verify(message.retrievalConfig);
+                                if (error)
+                                    return "retrievalConfig." + error;
+                            }
                             return null;
                         };
     
@@ -68157,6 +69140,11 @@
                                     throw TypeError(".google.ai.generativelanguage.v1beta.ToolConfig.functionCallingConfig: object expected");
                                 message.functionCallingConfig = $root.google.ai.generativelanguage.v1beta.FunctionCallingConfig.fromObject(object.functionCallingConfig);
                             }
+                            if (object.retrievalConfig != null) {
+                                if (typeof object.retrievalConfig !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.ToolConfig.retrievalConfig: object expected");
+                                message.retrievalConfig = $root.google.ai.generativelanguage.v1beta.RetrievalConfig.fromObject(object.retrievalConfig);
+                            }
                             return message;
                         };
     
@@ -68173,10 +69161,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.functionCallingConfig = null;
+                                object.retrievalConfig = null;
+                            }
                             if (message.functionCallingConfig != null && message.hasOwnProperty("functionCallingConfig"))
                                 object.functionCallingConfig = $root.google.ai.generativelanguage.v1beta.FunctionCallingConfig.toObject(message.functionCallingConfig, options);
+                            if (message.retrievalConfig != null && message.hasOwnProperty("retrievalConfig"))
+                                object.retrievalConfig = $root.google.ai.generativelanguage.v1beta.RetrievalConfig.toObject(message.retrievalConfig, options);
                             return object;
                         };
     
@@ -68207,6 +69199,240 @@
                         };
     
                         return ToolConfig;
+                    })();
+    
+                    v1beta.RetrievalConfig = (function() {
+    
+                        /**
+                         * Properties of a RetrievalConfig.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @interface IRetrievalConfig
+                         * @property {google.type.ILatLng|null} [latLng] RetrievalConfig latLng
+                         * @property {string|null} [languageCode] RetrievalConfig languageCode
+                         */
+    
+                        /**
+                         * Constructs a new RetrievalConfig.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @classdesc Represents a RetrievalConfig.
+                         * @implements IRetrievalConfig
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta.IRetrievalConfig=} [properties] Properties to set
+                         */
+                        function RetrievalConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RetrievalConfig latLng.
+                         * @member {google.type.ILatLng|null|undefined} latLng
+                         * @memberof google.ai.generativelanguage.v1beta.RetrievalConfig
+                         * @instance
+                         */
+                        RetrievalConfig.prototype.latLng = null;
+    
+                        /**
+                         * RetrievalConfig languageCode.
+                         * @member {string} languageCode
+                         * @memberof google.ai.generativelanguage.v1beta.RetrievalConfig
+                         * @instance
+                         */
+                        RetrievalConfig.prototype.languageCode = "";
+    
+                        /**
+                         * Creates a new RetrievalConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta.RetrievalConfig
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IRetrievalConfig=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta.RetrievalConfig} RetrievalConfig instance
+                         */
+                        RetrievalConfig.create = function create(properties) {
+                            return new RetrievalConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RetrievalConfig message. Does not implicitly {@link google.ai.generativelanguage.v1beta.RetrievalConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta.RetrievalConfig
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IRetrievalConfig} message RetrievalConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RetrievalConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.latLng != null && Object.hasOwnProperty.call(message, "latLng"))
+                                $root.google.type.LatLng.encode(message.latLng, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.languageCode != null && Object.hasOwnProperty.call(message, "languageCode"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.languageCode);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RetrievalConfig message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.RetrievalConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.RetrievalConfig
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IRetrievalConfig} message RetrievalConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RetrievalConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RetrievalConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta.RetrievalConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta.RetrievalConfig} RetrievalConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RetrievalConfig.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.RetrievalConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.latLng = $root.google.type.LatLng.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.languageCode = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RetrievalConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.RetrievalConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta.RetrievalConfig} RetrievalConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RetrievalConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RetrievalConfig message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta.RetrievalConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RetrievalConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.latLng != null && message.hasOwnProperty("latLng")) {
+                                var error = $root.google.type.LatLng.verify(message.latLng);
+                                if (error)
+                                    return "latLng." + error;
+                            }
+                            if (message.languageCode != null && message.hasOwnProperty("languageCode"))
+                                if (!$util.isString(message.languageCode))
+                                    return "languageCode: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RetrievalConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta.RetrievalConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta.RetrievalConfig} RetrievalConfig
+                         */
+                        RetrievalConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta.RetrievalConfig)
+                                return object;
+                            var message = new $root.google.ai.generativelanguage.v1beta.RetrievalConfig();
+                            if (object.latLng != null) {
+                                if (typeof object.latLng !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.RetrievalConfig.latLng: object expected");
+                                message.latLng = $root.google.type.LatLng.fromObject(object.latLng);
+                            }
+                            if (object.languageCode != null)
+                                message.languageCode = String(object.languageCode);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RetrievalConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta.RetrievalConfig
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.RetrievalConfig} message RetrievalConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RetrievalConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.latLng = null;
+                                object.languageCode = "";
+                            }
+                            if (message.latLng != null && message.hasOwnProperty("latLng"))
+                                object.latLng = $root.google.type.LatLng.toObject(message.latLng, options);
+                            if (message.languageCode != null && message.hasOwnProperty("languageCode"))
+                                object.languageCode = message.languageCode;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RetrievalConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta.RetrievalConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RetrievalConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RetrievalConfig
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta.RetrievalConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RetrievalConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.RetrievalConfig";
+                        };
+    
+                        return RetrievalConfig;
                     })();
     
                     v1beta.FunctionCallingConfig = (function() {
@@ -86080,6 +87306,7 @@
                          * @property {Array.<google.ai.generativelanguage.v1beta.IGroundingSupport>|null} [groundingSupports] GroundingMetadata groundingSupports
                          * @property {google.ai.generativelanguage.v1beta.IRetrievalMetadata|null} [retrievalMetadata] GroundingMetadata retrievalMetadata
                          * @property {Array.<string>|null} [webSearchQueries] GroundingMetadata webSearchQueries
+                         * @property {string|null} [googleMapsWidgetContextToken] GroundingMetadata googleMapsWidgetContextToken
                          */
     
                         /**
@@ -86140,6 +87367,14 @@
                          */
                         GroundingMetadata.prototype.webSearchQueries = $util.emptyArray;
     
+                        /**
+                         * GroundingMetadata googleMapsWidgetContextToken.
+                         * @member {string|null|undefined} googleMapsWidgetContextToken
+                         * @memberof google.ai.generativelanguage.v1beta.GroundingMetadata
+                         * @instance
+                         */
+                        GroundingMetadata.prototype.googleMapsWidgetContextToken = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -86152,6 +87387,12 @@
                         // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GroundingMetadata.prototype, "_retrievalMetadata", {
                             get: $util.oneOfGetter($oneOfFields = ["retrievalMetadata"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(GroundingMetadata.prototype, "_googleMapsWidgetContextToken", {
+                            get: $util.oneOfGetter($oneOfFields = ["googleMapsWidgetContextToken"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -86192,6 +87433,8 @@
                             if (message.webSearchQueries != null && message.webSearchQueries.length)
                                 for (var i = 0; i < message.webSearchQueries.length; ++i)
                                     writer.uint32(/* id 5, wireType 2 =*/42).string(message.webSearchQueries[i]);
+                            if (message.googleMapsWidgetContextToken != null && Object.hasOwnProperty.call(message, "googleMapsWidgetContextToken"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.googleMapsWidgetContextToken);
                             return writer;
                         };
     
@@ -86252,6 +87495,10 @@
                                         if (!(message.webSearchQueries && message.webSearchQueries.length))
                                             message.webSearchQueries = [];
                                         message.webSearchQueries.push(reader.string());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.googleMapsWidgetContextToken = reader.string();
                                         break;
                                     }
                                 default:
@@ -86331,6 +87578,11 @@
                                     if (!$util.isString(message.webSearchQueries[i]))
                                         return "webSearchQueries: string[] expected";
                             }
+                            if (message.googleMapsWidgetContextToken != null && message.hasOwnProperty("googleMapsWidgetContextToken")) {
+                                properties._googleMapsWidgetContextToken = 1;
+                                if (!$util.isString(message.googleMapsWidgetContextToken))
+                                    return "googleMapsWidgetContextToken: string expected";
+                            }
                             return null;
                         };
     
@@ -86383,6 +87635,8 @@
                                 for (var i = 0; i < object.webSearchQueries.length; ++i)
                                     message.webSearchQueries[i] = String(object.webSearchQueries[i]);
                             }
+                            if (object.googleMapsWidgetContextToken != null)
+                                message.googleMapsWidgetContextToken = String(object.googleMapsWidgetContextToken);
                             return message;
                         };
     
@@ -86428,6 +87682,11 @@
                                 object.webSearchQueries = [];
                                 for (var j = 0; j < message.webSearchQueries.length; ++j)
                                     object.webSearchQueries[j] = message.webSearchQueries[j];
+                            }
+                            if (message.googleMapsWidgetContextToken != null && message.hasOwnProperty("googleMapsWidgetContextToken")) {
+                                object.googleMapsWidgetContextToken = message.googleMapsWidgetContextToken;
+                                if (options.oneofs)
+                                    object._googleMapsWidgetContextToken = "googleMapsWidgetContextToken";
                             }
                             return object;
                         };
@@ -86706,6 +87965,8 @@
                          * @memberof google.ai.generativelanguage.v1beta
                          * @interface IGroundingChunk
                          * @property {google.ai.generativelanguage.v1beta.GroundingChunk.IWeb|null} [web] GroundingChunk web
+                         * @property {google.ai.generativelanguage.v1beta.GroundingChunk.IRetrievedContext|null} [retrievedContext] GroundingChunk retrievedContext
+                         * @property {google.ai.generativelanguage.v1beta.GroundingChunk.IMaps|null} [maps] GroundingChunk maps
                          */
     
                         /**
@@ -86731,17 +87992,33 @@
                          */
                         GroundingChunk.prototype.web = null;
     
+                        /**
+                         * GroundingChunk retrievedContext.
+                         * @member {google.ai.generativelanguage.v1beta.GroundingChunk.IRetrievedContext|null|undefined} retrievedContext
+                         * @memberof google.ai.generativelanguage.v1beta.GroundingChunk
+                         * @instance
+                         */
+                        GroundingChunk.prototype.retrievedContext = null;
+    
+                        /**
+                         * GroundingChunk maps.
+                         * @member {google.ai.generativelanguage.v1beta.GroundingChunk.IMaps|null|undefined} maps
+                         * @memberof google.ai.generativelanguage.v1beta.GroundingChunk
+                         * @instance
+                         */
+                        GroundingChunk.prototype.maps = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * GroundingChunk chunkType.
-                         * @member {"web"|undefined} chunkType
+                         * @member {"web"|"retrievedContext"|"maps"|undefined} chunkType
                          * @memberof google.ai.generativelanguage.v1beta.GroundingChunk
                          * @instance
                          */
                         Object.defineProperty(GroundingChunk.prototype, "chunkType", {
-                            get: $util.oneOfGetter($oneOfFields = ["web"]),
+                            get: $util.oneOfGetter($oneOfFields = ["web", "retrievedContext", "maps"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -86771,6 +88048,10 @@
                                 writer = $Writer.create();
                             if (message.web != null && Object.hasOwnProperty.call(message, "web"))
                                 $root.google.ai.generativelanguage.v1beta.GroundingChunk.Web.encode(message.web, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.retrievedContext != null && Object.hasOwnProperty.call(message, "retrievedContext"))
+                                $root.google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext.encode(message.retrievedContext, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.maps != null && Object.hasOwnProperty.call(message, "maps"))
+                                $root.google.ai.generativelanguage.v1beta.GroundingChunk.Maps.encode(message.maps, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             return writer;
                         };
     
@@ -86809,6 +88090,14 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.web = $root.google.ai.generativelanguage.v1beta.GroundingChunk.Web.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.retrievedContext = $root.google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.maps = $root.google.ai.generativelanguage.v1beta.GroundingChunk.Maps.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -86855,6 +88144,26 @@
                                         return "web." + error;
                                 }
                             }
+                            if (message.retrievedContext != null && message.hasOwnProperty("retrievedContext")) {
+                                if (properties.chunkType === 1)
+                                    return "chunkType: multiple values";
+                                properties.chunkType = 1;
+                                {
+                                    var error = $root.google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext.verify(message.retrievedContext);
+                                    if (error)
+                                        return "retrievedContext." + error;
+                                }
+                            }
+                            if (message.maps != null && message.hasOwnProperty("maps")) {
+                                if (properties.chunkType === 1)
+                                    return "chunkType: multiple values";
+                                properties.chunkType = 1;
+                                {
+                                    var error = $root.google.ai.generativelanguage.v1beta.GroundingChunk.Maps.verify(message.maps);
+                                    if (error)
+                                        return "maps." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -86874,6 +88183,16 @@
                                 if (typeof object.web !== "object")
                                     throw TypeError(".google.ai.generativelanguage.v1beta.GroundingChunk.web: object expected");
                                 message.web = $root.google.ai.generativelanguage.v1beta.GroundingChunk.Web.fromObject(object.web);
+                            }
+                            if (object.retrievedContext != null) {
+                                if (typeof object.retrievedContext !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.GroundingChunk.retrievedContext: object expected");
+                                message.retrievedContext = $root.google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext.fromObject(object.retrievedContext);
+                            }
+                            if (object.maps != null) {
+                                if (typeof object.maps !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.GroundingChunk.maps: object expected");
+                                message.maps = $root.google.ai.generativelanguage.v1beta.GroundingChunk.Maps.fromObject(object.maps);
                             }
                             return message;
                         };
@@ -86895,6 +88214,16 @@
                                 object.web = $root.google.ai.generativelanguage.v1beta.GroundingChunk.Web.toObject(message.web, options);
                                 if (options.oneofs)
                                     object.chunkType = "web";
+                            }
+                            if (message.retrievedContext != null && message.hasOwnProperty("retrievedContext")) {
+                                object.retrievedContext = $root.google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext.toObject(message.retrievedContext, options);
+                                if (options.oneofs)
+                                    object.chunkType = "retrievedContext";
+                            }
+                            if (message.maps != null && message.hasOwnProperty("maps")) {
+                                object.maps = $root.google.ai.generativelanguage.v1beta.GroundingChunk.Maps.toObject(message.maps, options);
+                                if (options.oneofs)
+                                    object.chunkType = "maps";
                             }
                             return object;
                         };
@@ -87174,6 +88503,1156 @@
                             };
     
                             return Web;
+                        })();
+    
+                        GroundingChunk.RetrievedContext = (function() {
+    
+                            /**
+                             * Properties of a RetrievedContext.
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk
+                             * @interface IRetrievedContext
+                             * @property {string|null} [uri] RetrievedContext uri
+                             * @property {string|null} [title] RetrievedContext title
+                             * @property {string|null} [text] RetrievedContext text
+                             */
+    
+                            /**
+                             * Constructs a new RetrievedContext.
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk
+                             * @classdesc Represents a RetrievedContext.
+                             * @implements IRetrievedContext
+                             * @constructor
+                             * @param {google.ai.generativelanguage.v1beta.GroundingChunk.IRetrievedContext=} [properties] Properties to set
+                             */
+                            function RetrievedContext(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * RetrievedContext uri.
+                             * @member {string|null|undefined} uri
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext
+                             * @instance
+                             */
+                            RetrievedContext.prototype.uri = null;
+    
+                            /**
+                             * RetrievedContext title.
+                             * @member {string|null|undefined} title
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext
+                             * @instance
+                             */
+                            RetrievedContext.prototype.title = null;
+    
+                            /**
+                             * RetrievedContext text.
+                             * @member {string|null|undefined} text
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext
+                             * @instance
+                             */
+                            RetrievedContext.prototype.text = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(RetrievedContext.prototype, "_uri", {
+                                get: $util.oneOfGetter($oneOfFields = ["uri"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(RetrievedContext.prototype, "_title", {
+                                get: $util.oneOfGetter($oneOfFields = ["title"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(RetrievedContext.prototype, "_text", {
+                                get: $util.oneOfGetter($oneOfFields = ["text"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new RetrievedContext instance using the specified properties.
+                             * @function create
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.GroundingChunk.IRetrievedContext=} [properties] Properties to set
+                             * @returns {google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext} RetrievedContext instance
+                             */
+                            RetrievedContext.create = function create(properties) {
+                                return new RetrievedContext(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified RetrievedContext message. Does not implicitly {@link google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.GroundingChunk.IRetrievedContext} message RetrievedContext message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RetrievedContext.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
+                                if (message.title != null && Object.hasOwnProperty.call(message, "title"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.title);
+                                if (message.text != null && Object.hasOwnProperty.call(message, "text"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.text);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified RetrievedContext message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.GroundingChunk.IRetrievedContext} message RetrievedContext message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RetrievedContext.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a RetrievedContext message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext} RetrievedContext
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RetrievedContext.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.uri = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.title = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.text = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a RetrievedContext message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext} RetrievedContext
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RetrievedContext.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a RetrievedContext message.
+                             * @function verify
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            RetrievedContext.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.uri != null && message.hasOwnProperty("uri")) {
+                                    properties._uri = 1;
+                                    if (!$util.isString(message.uri))
+                                        return "uri: string expected";
+                                }
+                                if (message.title != null && message.hasOwnProperty("title")) {
+                                    properties._title = 1;
+                                    if (!$util.isString(message.title))
+                                        return "title: string expected";
+                                }
+                                if (message.text != null && message.hasOwnProperty("text")) {
+                                    properties._text = 1;
+                                    if (!$util.isString(message.text))
+                                        return "text: string expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a RetrievedContext message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext} RetrievedContext
+                             */
+                            RetrievedContext.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext)
+                                    return object;
+                                var message = new $root.google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext();
+                                if (object.uri != null)
+                                    message.uri = String(object.uri);
+                                if (object.title != null)
+                                    message.title = String(object.title);
+                                if (object.text != null)
+                                    message.text = String(object.text);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a RetrievedContext message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext} message RetrievedContext
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            RetrievedContext.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.uri != null && message.hasOwnProperty("uri")) {
+                                    object.uri = message.uri;
+                                    if (options.oneofs)
+                                        object._uri = "uri";
+                                }
+                                if (message.title != null && message.hasOwnProperty("title")) {
+                                    object.title = message.title;
+                                    if (options.oneofs)
+                                        object._title = "title";
+                                }
+                                if (message.text != null && message.hasOwnProperty("text")) {
+                                    object.text = message.text;
+                                    if (options.oneofs)
+                                        object._text = "text";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this RetrievedContext to JSON.
+                             * @function toJSON
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            RetrievedContext.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for RetrievedContext
+                             * @function getTypeUrl
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            RetrievedContext.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext";
+                            };
+    
+                            return RetrievedContext;
+                        })();
+    
+                        GroundingChunk.Maps = (function() {
+    
+                            /**
+                             * Properties of a Maps.
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk
+                             * @interface IMaps
+                             * @property {string|null} [uri] Maps uri
+                             * @property {string|null} [title] Maps title
+                             * @property {string|null} [text] Maps text
+                             * @property {string|null} [placeId] Maps placeId
+                             * @property {google.ai.generativelanguage.v1beta.GroundingChunk.Maps.IPlaceAnswerSources|null} [placeAnswerSources] Maps placeAnswerSources
+                             */
+    
+                            /**
+                             * Constructs a new Maps.
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk
+                             * @classdesc Represents a Maps.
+                             * @implements IMaps
+                             * @constructor
+                             * @param {google.ai.generativelanguage.v1beta.GroundingChunk.IMaps=} [properties] Properties to set
+                             */
+                            function Maps(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Maps uri.
+                             * @member {string|null|undefined} uri
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps
+                             * @instance
+                             */
+                            Maps.prototype.uri = null;
+    
+                            /**
+                             * Maps title.
+                             * @member {string|null|undefined} title
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps
+                             * @instance
+                             */
+                            Maps.prototype.title = null;
+    
+                            /**
+                             * Maps text.
+                             * @member {string|null|undefined} text
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps
+                             * @instance
+                             */
+                            Maps.prototype.text = null;
+    
+                            /**
+                             * Maps placeId.
+                             * @member {string|null|undefined} placeId
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps
+                             * @instance
+                             */
+                            Maps.prototype.placeId = null;
+    
+                            /**
+                             * Maps placeAnswerSources.
+                             * @member {google.ai.generativelanguage.v1beta.GroundingChunk.Maps.IPlaceAnswerSources|null|undefined} placeAnswerSources
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps
+                             * @instance
+                             */
+                            Maps.prototype.placeAnswerSources = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(Maps.prototype, "_uri", {
+                                get: $util.oneOfGetter($oneOfFields = ["uri"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(Maps.prototype, "_title", {
+                                get: $util.oneOfGetter($oneOfFields = ["title"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(Maps.prototype, "_text", {
+                                get: $util.oneOfGetter($oneOfFields = ["text"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(Maps.prototype, "_placeId", {
+                                get: $util.oneOfGetter($oneOfFields = ["placeId"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(Maps.prototype, "_placeAnswerSources", {
+                                get: $util.oneOfGetter($oneOfFields = ["placeAnswerSources"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new Maps instance using the specified properties.
+                             * @function create
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.GroundingChunk.IMaps=} [properties] Properties to set
+                             * @returns {google.ai.generativelanguage.v1beta.GroundingChunk.Maps} Maps instance
+                             */
+                            Maps.create = function create(properties) {
+                                return new Maps(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Maps message. Does not implicitly {@link google.ai.generativelanguage.v1beta.GroundingChunk.Maps.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.GroundingChunk.IMaps} message Maps message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Maps.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
+                                if (message.title != null && Object.hasOwnProperty.call(message, "title"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.title);
+                                if (message.text != null && Object.hasOwnProperty.call(message, "text"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.text);
+                                if (message.placeId != null && Object.hasOwnProperty.call(message, "placeId"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.placeId);
+                                if (message.placeAnswerSources != null && Object.hasOwnProperty.call(message, "placeAnswerSources"))
+                                    $root.google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.encode(message.placeAnswerSources, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Maps message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.GroundingChunk.Maps.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.GroundingChunk.IMaps} message Maps message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Maps.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Maps message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.ai.generativelanguage.v1beta.GroundingChunk.Maps} Maps
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Maps.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.GroundingChunk.Maps();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.uri = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.title = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.text = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.placeId = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.placeAnswerSources = $root.google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Maps message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.ai.generativelanguage.v1beta.GroundingChunk.Maps} Maps
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Maps.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Maps message.
+                             * @function verify
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Maps.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.uri != null && message.hasOwnProperty("uri")) {
+                                    properties._uri = 1;
+                                    if (!$util.isString(message.uri))
+                                        return "uri: string expected";
+                                }
+                                if (message.title != null && message.hasOwnProperty("title")) {
+                                    properties._title = 1;
+                                    if (!$util.isString(message.title))
+                                        return "title: string expected";
+                                }
+                                if (message.text != null && message.hasOwnProperty("text")) {
+                                    properties._text = 1;
+                                    if (!$util.isString(message.text))
+                                        return "text: string expected";
+                                }
+                                if (message.placeId != null && message.hasOwnProperty("placeId")) {
+                                    properties._placeId = 1;
+                                    if (!$util.isString(message.placeId))
+                                        return "placeId: string expected";
+                                }
+                                if (message.placeAnswerSources != null && message.hasOwnProperty("placeAnswerSources")) {
+                                    properties._placeAnswerSources = 1;
+                                    {
+                                        var error = $root.google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.verify(message.placeAnswerSources);
+                                        if (error)
+                                            return "placeAnswerSources." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Maps message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.ai.generativelanguage.v1beta.GroundingChunk.Maps} Maps
+                             */
+                            Maps.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.ai.generativelanguage.v1beta.GroundingChunk.Maps)
+                                    return object;
+                                var message = new $root.google.ai.generativelanguage.v1beta.GroundingChunk.Maps();
+                                if (object.uri != null)
+                                    message.uri = String(object.uri);
+                                if (object.title != null)
+                                    message.title = String(object.title);
+                                if (object.text != null)
+                                    message.text = String(object.text);
+                                if (object.placeId != null)
+                                    message.placeId = String(object.placeId);
+                                if (object.placeAnswerSources != null) {
+                                    if (typeof object.placeAnswerSources !== "object")
+                                        throw TypeError(".google.ai.generativelanguage.v1beta.GroundingChunk.Maps.placeAnswerSources: object expected");
+                                    message.placeAnswerSources = $root.google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.fromObject(object.placeAnswerSources);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Maps message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.GroundingChunk.Maps} message Maps
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Maps.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.uri != null && message.hasOwnProperty("uri")) {
+                                    object.uri = message.uri;
+                                    if (options.oneofs)
+                                        object._uri = "uri";
+                                }
+                                if (message.title != null && message.hasOwnProperty("title")) {
+                                    object.title = message.title;
+                                    if (options.oneofs)
+                                        object._title = "title";
+                                }
+                                if (message.text != null && message.hasOwnProperty("text")) {
+                                    object.text = message.text;
+                                    if (options.oneofs)
+                                        object._text = "text";
+                                }
+                                if (message.placeId != null && message.hasOwnProperty("placeId")) {
+                                    object.placeId = message.placeId;
+                                    if (options.oneofs)
+                                        object._placeId = "placeId";
+                                }
+                                if (message.placeAnswerSources != null && message.hasOwnProperty("placeAnswerSources")) {
+                                    object.placeAnswerSources = $root.google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.toObject(message.placeAnswerSources, options);
+                                    if (options.oneofs)
+                                        object._placeAnswerSources = "placeAnswerSources";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Maps to JSON.
+                             * @function toJSON
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Maps.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Maps
+                             * @function getTypeUrl
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Maps.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.GroundingChunk.Maps";
+                            };
+    
+                            Maps.PlaceAnswerSources = (function() {
+    
+                                /**
+                                 * Properties of a PlaceAnswerSources.
+                                 * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps
+                                 * @interface IPlaceAnswerSources
+                                 * @property {Array.<google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.IReviewSnippet>|null} [reviewSnippets] PlaceAnswerSources reviewSnippets
+                                 */
+    
+                                /**
+                                 * Constructs a new PlaceAnswerSources.
+                                 * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps
+                                 * @classdesc Represents a PlaceAnswerSources.
+                                 * @implements IPlaceAnswerSources
+                                 * @constructor
+                                 * @param {google.ai.generativelanguage.v1beta.GroundingChunk.Maps.IPlaceAnswerSources=} [properties] Properties to set
+                                 */
+                                function PlaceAnswerSources(properties) {
+                                    this.reviewSnippets = [];
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * PlaceAnswerSources reviewSnippets.
+                                 * @member {Array.<google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.IReviewSnippet>} reviewSnippets
+                                 * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources
+                                 * @instance
+                                 */
+                                PlaceAnswerSources.prototype.reviewSnippets = $util.emptyArray;
+    
+                                /**
+                                 * Creates a new PlaceAnswerSources instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources
+                                 * @static
+                                 * @param {google.ai.generativelanguage.v1beta.GroundingChunk.Maps.IPlaceAnswerSources=} [properties] Properties to set
+                                 * @returns {google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources} PlaceAnswerSources instance
+                                 */
+                                PlaceAnswerSources.create = function create(properties) {
+                                    return new PlaceAnswerSources(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified PlaceAnswerSources message. Does not implicitly {@link google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources
+                                 * @static
+                                 * @param {google.ai.generativelanguage.v1beta.GroundingChunk.Maps.IPlaceAnswerSources} message PlaceAnswerSources message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                PlaceAnswerSources.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.reviewSnippets != null && message.reviewSnippets.length)
+                                        for (var i = 0; i < message.reviewSnippets.length; ++i)
+                                            $root.google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet.encode(message.reviewSnippets[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified PlaceAnswerSources message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources
+                                 * @static
+                                 * @param {google.ai.generativelanguage.v1beta.GroundingChunk.Maps.IPlaceAnswerSources} message PlaceAnswerSources message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                PlaceAnswerSources.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a PlaceAnswerSources message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources} PlaceAnswerSources
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                PlaceAnswerSources.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                if (!(message.reviewSnippets && message.reviewSnippets.length))
+                                                    message.reviewSnippets = [];
+                                                message.reviewSnippets.push($root.google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet.decode(reader, reader.uint32()));
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a PlaceAnswerSources message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources} PlaceAnswerSources
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                PlaceAnswerSources.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a PlaceAnswerSources message.
+                                 * @function verify
+                                 * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                PlaceAnswerSources.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.reviewSnippets != null && message.hasOwnProperty("reviewSnippets")) {
+                                        if (!Array.isArray(message.reviewSnippets))
+                                            return "reviewSnippets: array expected";
+                                        for (var i = 0; i < message.reviewSnippets.length; ++i) {
+                                            var error = $root.google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet.verify(message.reviewSnippets[i]);
+                                            if (error)
+                                                return "reviewSnippets." + error;
+                                        }
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a PlaceAnswerSources message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources} PlaceAnswerSources
+                                 */
+                                PlaceAnswerSources.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources)
+                                        return object;
+                                    var message = new $root.google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources();
+                                    if (object.reviewSnippets) {
+                                        if (!Array.isArray(object.reviewSnippets))
+                                            throw TypeError(".google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.reviewSnippets: array expected");
+                                        message.reviewSnippets = [];
+                                        for (var i = 0; i < object.reviewSnippets.length; ++i) {
+                                            if (typeof object.reviewSnippets[i] !== "object")
+                                                throw TypeError(".google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.reviewSnippets: object expected");
+                                            message.reviewSnippets[i] = $root.google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet.fromObject(object.reviewSnippets[i]);
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a PlaceAnswerSources message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources
+                                 * @static
+                                 * @param {google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources} message PlaceAnswerSources
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                PlaceAnswerSources.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.arrays || options.defaults)
+                                        object.reviewSnippets = [];
+                                    if (message.reviewSnippets && message.reviewSnippets.length) {
+                                        object.reviewSnippets = [];
+                                        for (var j = 0; j < message.reviewSnippets.length; ++j)
+                                            object.reviewSnippets[j] = $root.google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet.toObject(message.reviewSnippets[j], options);
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this PlaceAnswerSources to JSON.
+                                 * @function toJSON
+                                 * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                PlaceAnswerSources.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for PlaceAnswerSources
+                                 * @function getTypeUrl
+                                 * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                PlaceAnswerSources.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources";
+                                };
+    
+                                PlaceAnswerSources.ReviewSnippet = (function() {
+    
+                                    /**
+                                     * Properties of a ReviewSnippet.
+                                     * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources
+                                     * @interface IReviewSnippet
+                                     * @property {string|null} [reviewId] ReviewSnippet reviewId
+                                     * @property {string|null} [googleMapsUri] ReviewSnippet googleMapsUri
+                                     * @property {string|null} [title] ReviewSnippet title
+                                     */
+    
+                                    /**
+                                     * Constructs a new ReviewSnippet.
+                                     * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources
+                                     * @classdesc Represents a ReviewSnippet.
+                                     * @implements IReviewSnippet
+                                     * @constructor
+                                     * @param {google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.IReviewSnippet=} [properties] Properties to set
+                                     */
+                                    function ReviewSnippet(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * ReviewSnippet reviewId.
+                                     * @member {string|null|undefined} reviewId
+                                     * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet
+                                     * @instance
+                                     */
+                                    ReviewSnippet.prototype.reviewId = null;
+    
+                                    /**
+                                     * ReviewSnippet googleMapsUri.
+                                     * @member {string|null|undefined} googleMapsUri
+                                     * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet
+                                     * @instance
+                                     */
+                                    ReviewSnippet.prototype.googleMapsUri = null;
+    
+                                    /**
+                                     * ReviewSnippet title.
+                                     * @member {string|null|undefined} title
+                                     * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet
+                                     * @instance
+                                     */
+                                    ReviewSnippet.prototype.title = null;
+    
+                                    // OneOf field names bound to virtual getters and setters
+                                    var $oneOfFields;
+    
+                                    // Virtual OneOf for proto3 optional field
+                                    Object.defineProperty(ReviewSnippet.prototype, "_reviewId", {
+                                        get: $util.oneOfGetter($oneOfFields = ["reviewId"]),
+                                        set: $util.oneOfSetter($oneOfFields)
+                                    });
+    
+                                    // Virtual OneOf for proto3 optional field
+                                    Object.defineProperty(ReviewSnippet.prototype, "_googleMapsUri", {
+                                        get: $util.oneOfGetter($oneOfFields = ["googleMapsUri"]),
+                                        set: $util.oneOfSetter($oneOfFields)
+                                    });
+    
+                                    // Virtual OneOf for proto3 optional field
+                                    Object.defineProperty(ReviewSnippet.prototype, "_title", {
+                                        get: $util.oneOfGetter($oneOfFields = ["title"]),
+                                        set: $util.oneOfSetter($oneOfFields)
+                                    });
+    
+                                    /**
+                                     * Creates a new ReviewSnippet instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet
+                                     * @static
+                                     * @param {google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.IReviewSnippet=} [properties] Properties to set
+                                     * @returns {google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet} ReviewSnippet instance
+                                     */
+                                    ReviewSnippet.create = function create(properties) {
+                                        return new ReviewSnippet(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified ReviewSnippet message. Does not implicitly {@link google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet
+                                     * @static
+                                     * @param {google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.IReviewSnippet} message ReviewSnippet message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    ReviewSnippet.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.reviewId != null && Object.hasOwnProperty.call(message, "reviewId"))
+                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.reviewId);
+                                        if (message.googleMapsUri != null && Object.hasOwnProperty.call(message, "googleMapsUri"))
+                                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.googleMapsUri);
+                                        if (message.title != null && Object.hasOwnProperty.call(message, "title"))
+                                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.title);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified ReviewSnippet message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet
+                                     * @static
+                                     * @param {google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.IReviewSnippet} message ReviewSnippet message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    ReviewSnippet.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a ReviewSnippet message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet} ReviewSnippet
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    ReviewSnippet.decode = function decode(reader, length, error) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            if (tag === error)
+                                                break;
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    message.reviewId = reader.string();
+                                                    break;
+                                                }
+                                            case 2: {
+                                                    message.googleMapsUri = reader.string();
+                                                    break;
+                                                }
+                                            case 3: {
+                                                    message.title = reader.string();
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a ReviewSnippet message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet} ReviewSnippet
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    ReviewSnippet.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a ReviewSnippet message.
+                                     * @function verify
+                                     * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    ReviewSnippet.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        var properties = {};
+                                        if (message.reviewId != null && message.hasOwnProperty("reviewId")) {
+                                            properties._reviewId = 1;
+                                            if (!$util.isString(message.reviewId))
+                                                return "reviewId: string expected";
+                                        }
+                                        if (message.googleMapsUri != null && message.hasOwnProperty("googleMapsUri")) {
+                                            properties._googleMapsUri = 1;
+                                            if (!$util.isString(message.googleMapsUri))
+                                                return "googleMapsUri: string expected";
+                                        }
+                                        if (message.title != null && message.hasOwnProperty("title")) {
+                                            properties._title = 1;
+                                            if (!$util.isString(message.title))
+                                                return "title: string expected";
+                                        }
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a ReviewSnippet message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet} ReviewSnippet
+                                     */
+                                    ReviewSnippet.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet)
+                                            return object;
+                                        var message = new $root.google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet();
+                                        if (object.reviewId != null)
+                                            message.reviewId = String(object.reviewId);
+                                        if (object.googleMapsUri != null)
+                                            message.googleMapsUri = String(object.googleMapsUri);
+                                        if (object.title != null)
+                                            message.title = String(object.title);
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a ReviewSnippet message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet
+                                     * @static
+                                     * @param {google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet} message ReviewSnippet
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    ReviewSnippet.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (message.reviewId != null && message.hasOwnProperty("reviewId")) {
+                                            object.reviewId = message.reviewId;
+                                            if (options.oneofs)
+                                                object._reviewId = "reviewId";
+                                        }
+                                        if (message.googleMapsUri != null && message.hasOwnProperty("googleMapsUri")) {
+                                            object.googleMapsUri = message.googleMapsUri;
+                                            if (options.oneofs)
+                                                object._googleMapsUri = "googleMapsUri";
+                                        }
+                                        if (message.title != null && message.hasOwnProperty("title")) {
+                                            object.title = message.title;
+                                            if (options.oneofs)
+                                                object._title = "title";
+                                        }
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this ReviewSnippet to JSON.
+                                     * @function toJSON
+                                     * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    ReviewSnippet.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for ReviewSnippet
+                                     * @function getTypeUrl
+                                     * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    ReviewSnippet.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet";
+                                    };
+    
+                                    return ReviewSnippet;
+                                })();
+    
+                                return PlaceAnswerSources;
+                            })();
+    
+                            return Maps;
                         })();
     
                         return GroundingChunk;
@@ -164583,6 +167062,235 @@
                 };
     
                 return Interval;
+            })();
+    
+            type.LatLng = (function() {
+    
+                /**
+                 * Properties of a LatLng.
+                 * @memberof google.type
+                 * @interface ILatLng
+                 * @property {number|null} [latitude] LatLng latitude
+                 * @property {number|null} [longitude] LatLng longitude
+                 */
+    
+                /**
+                 * Constructs a new LatLng.
+                 * @memberof google.type
+                 * @classdesc Represents a LatLng.
+                 * @implements ILatLng
+                 * @constructor
+                 * @param {google.type.ILatLng=} [properties] Properties to set
+                 */
+                function LatLng(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * LatLng latitude.
+                 * @member {number} latitude
+                 * @memberof google.type.LatLng
+                 * @instance
+                 */
+                LatLng.prototype.latitude = 0;
+    
+                /**
+                 * LatLng longitude.
+                 * @member {number} longitude
+                 * @memberof google.type.LatLng
+                 * @instance
+                 */
+                LatLng.prototype.longitude = 0;
+    
+                /**
+                 * Creates a new LatLng instance using the specified properties.
+                 * @function create
+                 * @memberof google.type.LatLng
+                 * @static
+                 * @param {google.type.ILatLng=} [properties] Properties to set
+                 * @returns {google.type.LatLng} LatLng instance
+                 */
+                LatLng.create = function create(properties) {
+                    return new LatLng(properties);
+                };
+    
+                /**
+                 * Encodes the specified LatLng message. Does not implicitly {@link google.type.LatLng.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.type.LatLng
+                 * @static
+                 * @param {google.type.ILatLng} message LatLng message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                LatLng.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.latitude != null && Object.hasOwnProperty.call(message, "latitude"))
+                        writer.uint32(/* id 1, wireType 1 =*/9).double(message.latitude);
+                    if (message.longitude != null && Object.hasOwnProperty.call(message, "longitude"))
+                        writer.uint32(/* id 2, wireType 1 =*/17).double(message.longitude);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified LatLng message, length delimited. Does not implicitly {@link google.type.LatLng.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.type.LatLng
+                 * @static
+                 * @param {google.type.ILatLng} message LatLng message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                LatLng.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a LatLng message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.type.LatLng
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.type.LatLng} LatLng
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                LatLng.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.LatLng();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.latitude = reader.double();
+                                break;
+                            }
+                        case 2: {
+                                message.longitude = reader.double();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a LatLng message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.type.LatLng
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.type.LatLng} LatLng
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                LatLng.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a LatLng message.
+                 * @function verify
+                 * @memberof google.type.LatLng
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                LatLng.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.latitude != null && message.hasOwnProperty("latitude"))
+                        if (typeof message.latitude !== "number")
+                            return "latitude: number expected";
+                    if (message.longitude != null && message.hasOwnProperty("longitude"))
+                        if (typeof message.longitude !== "number")
+                            return "longitude: number expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a LatLng message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.type.LatLng
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.type.LatLng} LatLng
+                 */
+                LatLng.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.type.LatLng)
+                        return object;
+                    var message = new $root.google.type.LatLng();
+                    if (object.latitude != null)
+                        message.latitude = Number(object.latitude);
+                    if (object.longitude != null)
+                        message.longitude = Number(object.longitude);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a LatLng message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.type.LatLng
+                 * @static
+                 * @param {google.type.LatLng} message LatLng
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                LatLng.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.latitude = 0;
+                        object.longitude = 0;
+                    }
+                    if (message.latitude != null && message.hasOwnProperty("latitude"))
+                        object.latitude = options.json && !isFinite(message.latitude) ? String(message.latitude) : message.latitude;
+                    if (message.longitude != null && message.hasOwnProperty("longitude"))
+                        object.longitude = options.json && !isFinite(message.longitude) ? String(message.longitude) : message.longitude;
+                    return object;
+                };
+    
+                /**
+                 * Converts this LatLng to JSON.
+                 * @function toJSON
+                 * @memberof google.type.LatLng
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                LatLng.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for LatLng
+                 * @function getTypeUrl
+                 * @memberof google.type.LatLng
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                LatLng.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.type.LatLng";
+                };
+    
+                return LatLng;
             })();
     
             return type;
