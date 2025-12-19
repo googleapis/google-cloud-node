@@ -7568,6 +7568,121 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a LustreMount. */
+                interface ILustreMount {
+
+                    /** LustreMount instanceIp */
+                    instanceIp?: (string|null);
+
+                    /** LustreMount volumeHandle */
+                    volumeHandle?: (string|null);
+
+                    /** LustreMount filesystem */
+                    filesystem?: (string|null);
+
+                    /** LustreMount mountPoint */
+                    mountPoint?: (string|null);
+                }
+
+                /** Represents a LustreMount. */
+                class LustreMount implements ILustreMount {
+
+                    /**
+                     * Constructs a new LustreMount.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1.ILustreMount);
+
+                    /** LustreMount instanceIp. */
+                    public instanceIp: string;
+
+                    /** LustreMount volumeHandle. */
+                    public volumeHandle: string;
+
+                    /** LustreMount filesystem. */
+                    public filesystem: string;
+
+                    /** LustreMount mountPoint. */
+                    public mountPoint: string;
+
+                    /**
+                     * Creates a new LustreMount instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns LustreMount instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1.ILustreMount): google.cloud.aiplatform.v1.LustreMount;
+
+                    /**
+                     * Encodes the specified LustreMount message. Does not implicitly {@link google.cloud.aiplatform.v1.LustreMount.verify|verify} messages.
+                     * @param message LustreMount message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1.ILustreMount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified LustreMount message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.LustreMount.verify|verify} messages.
+                     * @param message LustreMount message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1.ILustreMount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a LustreMount message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns LustreMount
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.LustreMount;
+
+                    /**
+                     * Decodes a LustreMount message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns LustreMount
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.LustreMount;
+
+                    /**
+                     * Verifies a LustreMount message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a LustreMount message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns LustreMount
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.LustreMount;
+
+                    /**
+                     * Creates a plain object from a LustreMount message. Also converts values to other types if specified.
+                     * @param message LustreMount
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1.LustreMount, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this LustreMount to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for LustreMount
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an AutoscalingMetricSpec. */
                 interface IAutoscalingMetricSpec {
 
@@ -23080,6 +23195,9 @@ export namespace google {
                     /** WorkerPoolSpec nfsMounts */
                     nfsMounts?: (google.cloud.aiplatform.v1.INfsMount[]|null);
 
+                    /** WorkerPoolSpec lustreMounts */
+                    lustreMounts?: (google.cloud.aiplatform.v1.ILustreMount[]|null);
+
                     /** WorkerPoolSpec diskSpec */
                     diskSpec?: (google.cloud.aiplatform.v1.IDiskSpec|null);
                 }
@@ -23107,6 +23225,9 @@ export namespace google {
 
                     /** WorkerPoolSpec nfsMounts. */
                     public nfsMounts: google.cloud.aiplatform.v1.INfsMount[];
+
+                    /** WorkerPoolSpec lustreMounts. */
+                    public lustreMounts: google.cloud.aiplatform.v1.ILustreMount[];
 
                     /** WorkerPoolSpec diskSpec. */
                     public diskSpec?: (google.cloud.aiplatform.v1.IDiskSpec|null);
