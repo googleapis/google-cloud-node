@@ -11011,6 +11011,7 @@
                          * @property {Array.<google.devtools.artifactregistry.v1.ITag>|null} [relatedTags] Version relatedTags
                          * @property {google.protobuf.IStruct|null} [metadata] Version metadata
                          * @property {Object.<string,string>|null} [annotations] Version annotations
+                         * @property {Array.<google.devtools.artifactregistry.v1.IHash>|null} [fingerprints] Version fingerprints
                          */
     
                         /**
@@ -11024,6 +11025,7 @@
                         function Version(properties) {
                             this.relatedTags = [];
                             this.annotations = {};
+                            this.fingerprints = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -11087,6 +11089,14 @@
                         Version.prototype.annotations = $util.emptyObject;
     
                         /**
+                         * Version fingerprints.
+                         * @member {Array.<google.devtools.artifactregistry.v1.IHash>} fingerprints
+                         * @memberof google.devtools.artifactregistry.v1.Version
+                         * @instance
+                         */
+                        Version.prototype.fingerprints = $util.emptyArray;
+    
+                        /**
                          * Creates a new Version instance using the specified properties.
                          * @function create
                          * @memberof google.devtools.artifactregistry.v1.Version
@@ -11126,6 +11136,9 @@
                             if (message.annotations != null && Object.hasOwnProperty.call(message, "annotations"))
                                 for (var keys = Object.keys(message.annotations), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 9, wireType 2 =*/74).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.annotations[keys[i]]).ldelim();
+                            if (message.fingerprints != null && message.fingerprints.length)
+                                for (var i = 0; i < message.fingerprints.length; ++i)
+                                    $root.google.devtools.artifactregistry.v1.Hash.encode(message.fingerprints[i], writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                             return writer;
                         };
     
@@ -11211,6 +11224,12 @@
                                         message.annotations[key] = value;
                                         break;
                                     }
+                                case 10: {
+                                        if (!(message.fingerprints && message.fingerprints.length))
+                                            message.fingerprints = [];
+                                        message.fingerprints.push($root.google.devtools.artifactregistry.v1.Hash.decode(reader, reader.uint32()));
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -11284,6 +11303,15 @@
                                     if (!$util.isString(message.annotations[key[i]]))
                                         return "annotations: string{k:string} expected";
                             }
+                            if (message.fingerprints != null && message.hasOwnProperty("fingerprints")) {
+                                if (!Array.isArray(message.fingerprints))
+                                    return "fingerprints: array expected";
+                                for (var i = 0; i < message.fingerprints.length; ++i) {
+                                    var error = $root.google.devtools.artifactregistry.v1.Hash.verify(message.fingerprints[i]);
+                                    if (error)
+                                        return "fingerprints." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -11335,6 +11363,16 @@
                                 for (var keys = Object.keys(object.annotations), i = 0; i < keys.length; ++i)
                                     message.annotations[keys[i]] = String(object.annotations[keys[i]]);
                             }
+                            if (object.fingerprints) {
+                                if (!Array.isArray(object.fingerprints))
+                                    throw TypeError(".google.devtools.artifactregistry.v1.Version.fingerprints: array expected");
+                                message.fingerprints = [];
+                                for (var i = 0; i < object.fingerprints.length; ++i) {
+                                    if (typeof object.fingerprints[i] !== "object")
+                                        throw TypeError(".google.devtools.artifactregistry.v1.Version.fingerprints: object expected");
+                                    message.fingerprints[i] = $root.google.devtools.artifactregistry.v1.Hash.fromObject(object.fingerprints[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -11351,8 +11389,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.relatedTags = [];
+                                object.fingerprints = [];
+                            }
                             if (options.objects || options.defaults)
                                 object.annotations = {};
                             if (options.defaults) {
@@ -11382,6 +11422,11 @@
                                 object.annotations = {};
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.annotations[keys2[j]] = message.annotations[keys2[j]];
+                            }
+                            if (message.fingerprints && message.fingerprints.length) {
+                                object.fingerprints = [];
+                                for (var j = 0; j < message.fingerprints.length; ++j)
+                                    object.fingerprints[j] = $root.google.devtools.artifactregistry.v1.Hash.toObject(message.fingerprints[j], options);
                             }
                             return object;
                         };

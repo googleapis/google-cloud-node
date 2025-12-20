@@ -4337,7 +4337,7 @@ export class ArtifactRegistryClient {
     return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.devtools.artifactregistry.v1.OperationMetadata>;
   }
 /**
- * Exports an artifact.
+ * Exports an artifact to a Cloud Storage bucket.
  *
  * @param {Object} request
  *   The request object that will be sent.

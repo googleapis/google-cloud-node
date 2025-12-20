@@ -4484,6 +4484,9 @@ export namespace google {
 
                     /** Version annotations */
                     annotations?: ({ [k: string]: string }|null);
+
+                    /** Version fingerprints */
+                    fingerprints?: (google.devtools.artifactregistry.v1.IHash[]|null);
                 }
 
                 /** Represents a Version. */
@@ -4515,6 +4518,9 @@ export namespace google {
 
                     /** Version annotations. */
                     public annotations: { [k: string]: string };
+
+                    /** Version fingerprints. */
+                    public fingerprints: google.devtools.artifactregistry.v1.IHash[];
 
                     /**
                      * Creates a new Version instance using the specified properties.

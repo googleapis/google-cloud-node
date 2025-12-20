@@ -2215,7 +2215,7 @@
       "regionTag": "artifactregistry_v1_generated_ArtifactRegistry_ExportArtifact_async",
       "title": "ArtifactRegistry exportArtifact Sample",
       "origin": "API_DEFINITION",
-      "description": " Exports an artifact.",
+      "description": " Exports an artifact to a Cloud Storage bucket.",
       "canonical": true,
       "file": "artifact_registry.export_artifact.js",
       "language": "JAVASCRIPT",
