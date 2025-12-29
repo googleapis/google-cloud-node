@@ -1341,6 +1341,7 @@
                               "type": "bool",
                               "id": 10,
                               "options": {
+                                "deprecated": true,
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
