@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/cloud/apiregistry/google-cloud-apigeeregistry-nodejs
+    - source: /google/cloud/apiregistry/google-cloud-apiregistry-nodejs
       dest: /owl-bot-staging/google-cloud-apiregistry
 
 api-name: cloudapiregistry
