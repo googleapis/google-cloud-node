@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,9 +18,11 @@
 
 export {SqlAvailableDatabaseVersionsServiceClient} from './sql_available_database_versions_service_client';
 export {SqlBackupRunsServiceClient} from './sql_backup_runs_service_client';
+export {SqlBackupsServiceClient} from './sql_backups_service_client';
 export {SqlConnectServiceClient} from './sql_connect_service_client';
 export {SqlDatabasesServiceClient} from './sql_databases_service_client';
 export {SqlEventsServiceClient} from './sql_events_service_client';
+export {SqlFeatureEligibilityServiceClient} from './sql_feature_eligibility_service_client';
 export {SqlFlagsServiceClient} from './sql_flags_service_client';
 export {SqlIamPoliciesServiceClient} from './sql_iam_policies_service_client';
 export {SqlInstanceNamesServiceClient} from './sql_instance_names_service_client';
