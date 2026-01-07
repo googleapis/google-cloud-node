@@ -86660,6 +86660,11 @@
                             "description"
                           ]
                         },
+                        "_exapoolProvisionedCapacityGb": {
+                          "oneof": [
+                            "exapoolProvisionedCapacityGb"
+                          ]
+                        },
                         "_id": {
                           "oneof": [
                             "id"
@@ -86754,6 +86759,13 @@
                         "description": {
                           "type": "string",
                           "id": 422937596,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "exapoolProvisionedCapacityGb": {
+                          "type": "StoragePoolExapoolProvisionedCapacityGb",
+                          "id": 345174240,
                           "options": {
                             "proto3_optional": true
                           }
@@ -87116,6 +87128,48 @@
                         }
                       }
                     },
+                    "StoragePoolExapoolProvisionedCapacityGb": {
+                      "oneofs": {
+                        "_capacityOptimized": {
+                          "oneof": [
+                            "capacityOptimized"
+                          ]
+                        },
+                        "_readOptimized": {
+                          "oneof": [
+                            "readOptimized"
+                          ]
+                        },
+                        "_writeOptimized": {
+                          "oneof": [
+                            "writeOptimized"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "capacityOptimized": {
+                          "type": "int64",
+                          "id": 251131874,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "readOptimized": {
+                          "type": "int64",
+                          "id": 389863870,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "writeOptimized": {
+                          "type": "int64",
+                          "id": 492523719,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "StoragePoolList": {
                       "oneofs": {
                         "_etag": {
@@ -87299,6 +87353,26 @@
                             "diskCount"
                           ]
                         },
+                        "_exapoolMaxReadIops": {
+                          "oneof": [
+                            "exapoolMaxReadIops"
+                          ]
+                        },
+                        "_exapoolMaxReadThroughput": {
+                          "oneof": [
+                            "exapoolMaxReadThroughput"
+                          ]
+                        },
+                        "_exapoolMaxWriteIops": {
+                          "oneof": [
+                            "exapoolMaxWriteIops"
+                          ]
+                        },
+                        "_exapoolMaxWriteThroughput": {
+                          "oneof": [
+                            "exapoolMaxWriteThroughput"
+                          ]
+                        },
                         "_lastResizeTimestamp": {
                           "oneof": [
                             "lastResizeTimestamp"
@@ -87349,6 +87423,34 @@
                         "diskCount": {
                           "type": "int64",
                           "id": 182933485,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "exapoolMaxReadIops": {
+                          "type": "int64",
+                          "id": 59241794,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "exapoolMaxReadThroughput": {
+                          "type": "int64",
+                          "id": 390933251,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "exapoolMaxWriteIops": {
+                          "type": "int64",
+                          "id": 293212537,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "exapoolMaxWriteThroughput": {
+                          "type": "int64",
+                          "id": 330367482,
                           "options": {
                             "proto3_optional": true
                           }
@@ -163587,6 +163689,7 @@
                             "BPS_20G": 278693967,
                             "BPS_2G": 355358479,
                             "BPS_300M": 49607540,
+                            "BPS_400G": 49637325,
                             "BPS_400M": 49637331,
                             "BPS_500M": 49667122,
                             "BPS_50G": 278696850,
@@ -215542,6 +215645,11 @@
                             "description"
                           ]
                         },
+                        "_exapoolProvisionedCapacityGb": {
+                          "oneof": [
+                            "exapoolProvisionedCapacityGb"
+                          ]
+                        },
                         "_id": {
                           "oneof": [
                             "id"
@@ -215636,6 +215744,13 @@
                         "description": {
                           "type": "string",
                           "id": 422937596,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "exapoolProvisionedCapacityGb": {
+                          "type": "StoragePoolExapoolProvisionedCapacityGb",
+                          "id": 345174240,
                           "options": {
                             "proto3_optional": true
                           }
@@ -215998,6 +216113,48 @@
                         }
                       }
                     },
+                    "StoragePoolExapoolProvisionedCapacityGb": {
+                      "oneofs": {
+                        "_capacityOptimized": {
+                          "oneof": [
+                            "capacityOptimized"
+                          ]
+                        },
+                        "_readOptimized": {
+                          "oneof": [
+                            "readOptimized"
+                          ]
+                        },
+                        "_writeOptimized": {
+                          "oneof": [
+                            "writeOptimized"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "capacityOptimized": {
+                          "type": "int64",
+                          "id": 251131874,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "readOptimized": {
+                          "type": "int64",
+                          "id": 389863870,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "writeOptimized": {
+                          "type": "int64",
+                          "id": 492523719,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "StoragePoolList": {
                       "oneofs": {
                         "_etag": {
@@ -216181,6 +216338,26 @@
                             "diskCount"
                           ]
                         },
+                        "_exapoolMaxReadIops": {
+                          "oneof": [
+                            "exapoolMaxReadIops"
+                          ]
+                        },
+                        "_exapoolMaxReadThroughput": {
+                          "oneof": [
+                            "exapoolMaxReadThroughput"
+                          ]
+                        },
+                        "_exapoolMaxWriteIops": {
+                          "oneof": [
+                            "exapoolMaxWriteIops"
+                          ]
+                        },
+                        "_exapoolMaxWriteThroughput": {
+                          "oneof": [
+                            "exapoolMaxWriteThroughput"
+                          ]
+                        },
                         "_lastResizeTimestamp": {
                           "oneof": [
                             "lastResizeTimestamp"
@@ -216231,6 +216408,34 @@
                         "diskCount": {
                           "type": "int64",
                           "id": 182933485,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "exapoolMaxReadIops": {
+                          "type": "int64",
+                          "id": 59241794,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "exapoolMaxReadThroughput": {
+                          "type": "int64",
+                          "id": 390933251,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "exapoolMaxWriteIops": {
+                          "type": "int64",
+                          "id": 293212537,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "exapoolMaxWriteThroughput": {
+                          "type": "int64",
+                          "id": 330367482,
                           "options": {
                             "proto3_optional": true
                           }
