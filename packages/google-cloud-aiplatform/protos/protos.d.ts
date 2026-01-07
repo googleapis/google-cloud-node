@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -164102,6 +164102,12 @@ export namespace google {
 
                     /** FunctionCall args */
                     args?: (google.protobuf.IStruct|null);
+
+                    /** FunctionCall partialArgs */
+                    partialArgs?: (google.cloud.aiplatform.v1beta1.IPartialArg[]|null);
+
+                    /** FunctionCall willContinue */
+                    willContinue?: (boolean|null);
                 }
 
                 /** Represents a FunctionCall. */
@@ -164121,6 +164127,12 @@ export namespace google {
 
                     /** FunctionCall args. */
                     public args?: (google.protobuf.IStruct|null);
+
+                    /** FunctionCall partialArgs. */
+                    public partialArgs: google.cloud.aiplatform.v1beta1.IPartialArg[];
+
+                    /** FunctionCall willContinue. */
+                    public willContinue: boolean;
 
                     /**
                      * Creates a new FunctionCall instance using the specified properties.
@@ -164194,6 +164206,136 @@ export namespace google {
 
                     /**
                      * Gets the default type url for FunctionCall
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PartialArg. */
+                interface IPartialArg {
+
+                    /** PartialArg nullValue */
+                    nullValue?: (google.protobuf.NullValue|keyof typeof google.protobuf.NullValue|null);
+
+                    /** PartialArg numberValue */
+                    numberValue?: (number|null);
+
+                    /** PartialArg stringValue */
+                    stringValue?: (string|null);
+
+                    /** PartialArg boolValue */
+                    boolValue?: (boolean|null);
+
+                    /** PartialArg jsonPath */
+                    jsonPath?: (string|null);
+
+                    /** PartialArg willContinue */
+                    willContinue?: (boolean|null);
+                }
+
+                /** Represents a PartialArg. */
+                class PartialArg implements IPartialArg {
+
+                    /**
+                     * Constructs a new PartialArg.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IPartialArg);
+
+                    /** PartialArg nullValue. */
+                    public nullValue?: (google.protobuf.NullValue|keyof typeof google.protobuf.NullValue|null);
+
+                    /** PartialArg numberValue. */
+                    public numberValue?: (number|null);
+
+                    /** PartialArg stringValue. */
+                    public stringValue?: (string|null);
+
+                    /** PartialArg boolValue. */
+                    public boolValue?: (boolean|null);
+
+                    /** PartialArg jsonPath. */
+                    public jsonPath: string;
+
+                    /** PartialArg willContinue. */
+                    public willContinue: boolean;
+
+                    /** PartialArg delta. */
+                    public delta?: ("nullValue"|"numberValue"|"stringValue"|"boolValue");
+
+                    /**
+                     * Creates a new PartialArg instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PartialArg instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IPartialArg): google.cloud.aiplatform.v1beta1.PartialArg;
+
+                    /**
+                     * Encodes the specified PartialArg message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.PartialArg.verify|verify} messages.
+                     * @param message PartialArg message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IPartialArg, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PartialArg message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.PartialArg.verify|verify} messages.
+                     * @param message PartialArg message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IPartialArg, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PartialArg message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PartialArg
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.PartialArg;
+
+                    /**
+                     * Decodes a PartialArg message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PartialArg
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.PartialArg;
+
+                    /**
+                     * Verifies a PartialArg message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PartialArg message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PartialArg
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.PartialArg;
+
+                    /**
+                     * Creates a plain object from a PartialArg message. Also converts values to other types if specified.
+                     * @param message PartialArg
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.PartialArg, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PartialArg to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PartialArg
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -165957,6 +166099,9 @@ export namespace google {
 
                     /** FunctionCallingConfig allowedFunctionNames */
                     allowedFunctionNames?: (string[]|null);
+
+                    /** FunctionCallingConfig streamFunctionCallArguments */
+                    streamFunctionCallArguments?: (boolean|null);
                 }
 
                 /** Represents a FunctionCallingConfig. */
@@ -165973,6 +166118,9 @@ export namespace google {
 
                     /** FunctionCallingConfig allowedFunctionNames. */
                     public allowedFunctionNames: string[];
+
+                    /** FunctionCallingConfig streamFunctionCallArguments. */
+                    public streamFunctionCallArguments: boolean;
 
                     /**
                      * Creates a new FunctionCallingConfig instance using the specified properties.
