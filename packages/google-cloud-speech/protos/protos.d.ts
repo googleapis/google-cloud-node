@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -11950,6 +11950,103 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a CustomPromptConfig. */
+                interface ICustomPromptConfig {
+
+                    /** CustomPromptConfig customPrompt */
+                    customPrompt?: (string|null);
+                }
+
+                /** Represents a CustomPromptConfig. */
+                class CustomPromptConfig implements ICustomPromptConfig {
+
+                    /**
+                     * Constructs a new CustomPromptConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.speech.v2.ICustomPromptConfig);
+
+                    /** CustomPromptConfig customPrompt. */
+                    public customPrompt: string;
+
+                    /**
+                     * Creates a new CustomPromptConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CustomPromptConfig instance
+                     */
+                    public static create(properties?: google.cloud.speech.v2.ICustomPromptConfig): google.cloud.speech.v2.CustomPromptConfig;
+
+                    /**
+                     * Encodes the specified CustomPromptConfig message. Does not implicitly {@link google.cloud.speech.v2.CustomPromptConfig.verify|verify} messages.
+                     * @param message CustomPromptConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.speech.v2.ICustomPromptConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CustomPromptConfig message, length delimited. Does not implicitly {@link google.cloud.speech.v2.CustomPromptConfig.verify|verify} messages.
+                     * @param message CustomPromptConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.speech.v2.ICustomPromptConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CustomPromptConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CustomPromptConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.speech.v2.CustomPromptConfig;
+
+                    /**
+                     * Decodes a CustomPromptConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CustomPromptConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.speech.v2.CustomPromptConfig;
+
+                    /**
+                     * Verifies a CustomPromptConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CustomPromptConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CustomPromptConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.speech.v2.CustomPromptConfig;
+
+                    /**
+                     * Creates a plain object from a CustomPromptConfig message. Also converts values to other types if specified.
+                     * @param message CustomPromptConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.speech.v2.CustomPromptConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CustomPromptConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CustomPromptConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a RecognitionFeatures. */
                 interface IRecognitionFeatures {
 
@@ -11979,6 +12076,9 @@ export namespace google {
 
                     /** RecognitionFeatures maxAlternatives */
                     maxAlternatives?: (number|null);
+
+                    /** RecognitionFeatures customPromptConfig */
+                    customPromptConfig?: (google.cloud.speech.v2.ICustomPromptConfig|null);
                 }
 
                 /** Represents a RecognitionFeatures. */
@@ -12016,6 +12116,9 @@ export namespace google {
 
                     /** RecognitionFeatures maxAlternatives. */
                     public maxAlternatives: number;
+
+                    /** RecognitionFeatures customPromptConfig. */
+                    public customPromptConfig?: (google.cloud.speech.v2.ICustomPromptConfig|null);
 
                     /**
                      * Creates a new RecognitionFeatures instance using the specified properties.
@@ -13005,6 +13108,9 @@ export namespace google {
 
                     /** RecognitionResponseMetadata totalBilledDuration */
                     totalBilledDuration?: (google.protobuf.IDuration|null);
+
+                    /** RecognitionResponseMetadata prompt */
+                    prompt?: (string|null);
                 }
 
                 /** Represents a RecognitionResponseMetadata. */
@@ -13021,6 +13127,9 @@ export namespace google {
 
                     /** RecognitionResponseMetadata totalBilledDuration. */
                     public totalBilledDuration?: (google.protobuf.IDuration|null);
+
+                    /** RecognitionResponseMetadata prompt. */
+                    public prompt?: (string|null);
 
                     /**
                      * Creates a new RecognitionResponseMetadata instance using the specified properties.
