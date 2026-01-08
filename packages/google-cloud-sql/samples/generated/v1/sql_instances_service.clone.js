@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main() {
+function main(instance, project, body) {
   // [START sqladmin_v1_generated_SqlInstancesService_Clone_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -29,12 +29,12 @@ function main() {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The ID of the Cloud SQL instance to be cloned (source). This does not
-   *  include the project ID.
+   *  Required. The ID of the Cloud SQL instance to be cloned (source). This does
+   *  not include the project ID.
    */
   // const instance = 'abc123'
   /**
-   *  Project ID of the source as well as the clone Cloud SQL instance.
+   *  Required. Project ID of the source as well as the clone Cloud SQL instance.
    */
   // const project = 'my-project'
   /**
@@ -50,6 +50,9 @@ function main() {
   async function callClone() {
     // Construct request
     const request = {
+      instance,
+      project,
+      body,
     };
 
     // Run request

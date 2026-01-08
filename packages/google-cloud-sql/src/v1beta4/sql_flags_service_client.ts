@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -58,6 +58,7 @@ export class SqlFlagsServiceClient {
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
   locationsClient: LocationsClient;
+  pathTemplates: {[name: string]: gax.PathTemplate};
   sqlFlagsServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -176,6 +177,18 @@ export class SqlFlagsServiceClient {
     }
     // Load the applicable protos.
     this._protos = this._gaxGrpc.loadProtoJSON(jsonProtos);
+
+    // This API contains "path templates"; forward-slash-separated
+    // identifiers to uniquely identify resources within the API.
+    // Create useful helper objects for these.
+    this.pathTemplates = {
+      backupPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/backups/{backup}'
+      ),
+      projectPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}'
+      ),
+    };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
@@ -331,6 +344,9 @@ export class SqlFlagsServiceClient {
  * @param {string} request.databaseVersion
  *   Database type and version you want to retrieve flags for. By default, this
  *   method returns flags for all database types and versions.
+ * @param {google.cloud.sql.v1beta4.SqlFlagScope} [request.flagScope]
+ *   Optional. Specify the scope of flags to be returned by SqlFlagsListService.
+ *   Return list of database flags if unspecified.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -492,6 +508,68 @@ export class SqlFlagsServiceClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
+  // --------------------
+  // -- Path templates --
+  // --------------------
+
+  /**
+   * Return a fully-qualified backup resource name string.
+   *
+   * @param {string} project
+   * @param {string} backup
+   * @returns {string} Resource name string.
+   */
+  backupPath(project:string,backup:string) {
+    return this.pathTemplates.backupPathTemplate.render({
+      project: project,
+      backup: backup,
+    });
+  }
+
+  /**
+   * Parse the project from Backup resource.
+   *
+   * @param {string} backupName
+   *   A fully-qualified path representing Backup resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromBackupName(backupName: string) {
+    return this.pathTemplates.backupPathTemplate.match(backupName).project;
+  }
+
+  /**
+   * Parse the backup from Backup resource.
+   *
+   * @param {string} backupName
+   *   A fully-qualified path representing Backup resource.
+   * @returns {string} A string representing the backup.
+   */
+  matchBackupFromBackupName(backupName: string) {
+    return this.pathTemplates.backupPathTemplate.match(backupName).backup;
+  }
+
+  /**
+   * Return a fully-qualified project resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  projectPath(project:string) {
+    return this.pathTemplates.projectPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
+   * Parse the project from Project resource.
+   *
+   * @param {string} projectName
+   *   A fully-qualified path representing Project resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectName(projectName: string) {
+    return this.pathTemplates.projectPathTemplate.match(projectName).project;
+  }
 
   /**
    * Terminate the gRPC channel and close the client.
