@@ -71,6 +71,74 @@
         }
       }
     },
+    "SqlBackupsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SqlBackupsServiceClient",
+          "rpcs": {
+            "CreateBackup": {
+              "methods": [
+                "createBackup"
+              ]
+            },
+            "GetBackup": {
+              "methods": [
+                "getBackup"
+              ]
+            },
+            "UpdateBackup": {
+              "methods": [
+                "updateBackup"
+              ]
+            },
+            "DeleteBackup": {
+              "methods": [
+                "deleteBackup"
+              ]
+            },
+            "ListBackups": {
+              "methods": [
+                "listBackups",
+                "listBackupsStream",
+                "listBackupsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SqlBackupsServiceClient",
+          "rpcs": {
+            "CreateBackup": {
+              "methods": [
+                "createBackup"
+              ]
+            },
+            "GetBackup": {
+              "methods": [
+                "getBackup"
+              ]
+            },
+            "UpdateBackup": {
+              "methods": [
+                "updateBackup"
+              ]
+            },
+            "DeleteBackup": {
+              "methods": [
+                "deleteBackup"
+              ]
+            },
+            "ListBackups": {
+              "methods": [
+                "listBackups",
+                "listBackupsStream",
+                "listBackupsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "SqlConnectService": {
       "clients": {
         "grpc": {
@@ -191,6 +259,18 @@
         }
       }
     },
+    "SqlFeatureEligibilityService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SqlFeatureEligibilityServiceClient",
+          "rpcs": {}
+        },
+        "grpc-fallback": {
+          "libraryClient": "SqlFeatureEligibilityServiceClient",
+          "rpcs": {}
+        }
+      }
+    },
     "SqlFlagsService": {
       "clients": {
         "grpc": {
@@ -249,6 +329,16 @@
                 "addServerCa"
               ]
             },
+            "AddServerCertificate": {
+              "methods": [
+                "addServerCertificate"
+              ]
+            },
+            "AddEntraIdCertificate": {
+              "methods": [
+                "addEntraIdCertificate"
+              ]
+            },
             "Clone": {
               "methods": [
                 "clone"
@@ -309,6 +399,16 @@
                 "listServerCas"
               ]
             },
+            "ListServerCertificates": {
+              "methods": [
+                "listServerCertificates"
+              ]
+            },
+            "ListEntraIdCertificates": {
+              "methods": [
+                "listEntraIdCertificates"
+              ]
+            },
             "Patch": {
               "methods": [
                 "patch"
@@ -342,6 +442,16 @@
             "RotateServerCa": {
               "methods": [
                 "rotateServerCa"
+              ]
+            },
+            "RotateServerCertificate": {
+              "methods": [
+                "rotateServerCertificate"
+              ]
+            },
+            "RotateEntraIdCertificate": {
+              "methods": [
+                "rotateEntraIdCertificate"
               ]
             },
             "StartReplica": {
@@ -404,6 +514,11 @@
                 "getLatestRecoveryTime"
               ]
             },
+            "ExecuteSql": {
+              "methods": [
+                "executeSql"
+              ]
+            },
             "AcquireSsrsLease": {
               "methods": [
                 "acquireSsrsLease"
@@ -412,6 +527,16 @@
             "ReleaseSsrsLease": {
               "methods": [
                 "releaseSsrsLease"
+              ]
+            },
+            "PreCheckMajorVersionUpgrade": {
+              "methods": [
+                "preCheckMajorVersionUpgrade"
+              ]
+            },
+            "PointInTimeRestore": {
+              "methods": [
+                "pointInTimeRestore"
               ]
             }
           }
@@ -424,6 +549,16 @@
                 "addServerCa"
               ]
             },
+            "AddServerCertificate": {
+              "methods": [
+                "addServerCertificate"
+              ]
+            },
+            "AddEntraIdCertificate": {
+              "methods": [
+                "addEntraIdCertificate"
+              ]
+            },
             "Clone": {
               "methods": [
                 "clone"
@@ -484,6 +619,16 @@
                 "listServerCas"
               ]
             },
+            "ListServerCertificates": {
+              "methods": [
+                "listServerCertificates"
+              ]
+            },
+            "ListEntraIdCertificates": {
+              "methods": [
+                "listEntraIdCertificates"
+              ]
+            },
             "Patch": {
               "methods": [
                 "patch"
@@ -517,6 +662,16 @@
             "RotateServerCa": {
               "methods": [
                 "rotateServerCa"
+              ]
+            },
+            "RotateServerCertificate": {
+              "methods": [
+                "rotateServerCertificate"
+              ]
+            },
+            "RotateEntraIdCertificate": {
+              "methods": [
+                "rotateEntraIdCertificate"
               ]
             },
             "StartReplica": {
@@ -579,6 +734,11 @@
                 "getLatestRecoveryTime"
               ]
             },
+            "ExecuteSql": {
+              "methods": [
+                "executeSql"
+              ]
+            },
             "AcquireSsrsLease": {
               "methods": [
                 "acquireSsrsLease"
@@ -587,6 +747,16 @@
             "ReleaseSsrsLease": {
               "methods": [
                 "releaseSsrsLease"
+              ]
+            },
+            "PreCheckMajorVersionUpgrade": {
+              "methods": [
+                "preCheckMajorVersionUpgrade"
+              ]
+            },
+            "PointInTimeRestore": {
+              "methods": [
+                "pointInTimeRestore"
               ]
             }
           }

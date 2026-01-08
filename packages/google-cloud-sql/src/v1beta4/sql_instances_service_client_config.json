@@ -25,6 +25,16 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "AddServerCertificate": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "AddEntraIdCertificate": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "Clone": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
@@ -85,6 +95,16 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "ListServerCertificates": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListEntraIdCertificates": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "Patch": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
@@ -116,6 +136,16 @@
           "retry_params_name": "default"
         },
         "RotateServerCa": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "RotateServerCertificate": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "RotateEntraIdCertificate": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
@@ -180,12 +210,27 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "ExecuteSql": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "AcquireSsrsLease": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "ReleaseSsrsLease": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "PreCheckMajorVersionUpgrade": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "PointInTimeRestore": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"

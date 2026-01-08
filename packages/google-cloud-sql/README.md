@@ -63,6 +63,11 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | get | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_backup_runs_service.get.js) |
 | insert | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_backup_runs_service.insert.js) |
 | list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_backup_runs_service.list.js) |
+| create backup | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_backups_service.create_backup.js) |
+| delete backup | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_backups_service.delete_backup.js) |
+| get backup | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_backups_service.get_backup.js) |
+| list backups | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_backups_service.list_backups.js) |
+| update backup | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_backups_service.update_backup.js) |
 | generate ephemeral cert | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_connect_service.generate_ephemeral_cert.js) |
 | get connect settings | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_connect_service.get_connect_settings.js) |
 | delete | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_databases_service.delete.js) |
@@ -73,12 +78,15 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_databases_service.update.js) |
 | list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_flags_service.list.js) |
 | acquire ssrs lease | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.acquire_ssrs_lease.js) |
+| add entra id certificate | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.add_entra_id_certificate.js) |
 | add server ca | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.add_server_ca.js) |
+| add server certificate | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.add_server_certificate.js) |
 | clone | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.clone.js) |
 | create ephemeral | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.create_ephemeral.js) |
 | delete | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.delete.js) |
 | demote | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.demote.js) |
 | demote master | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.demote_master.js) |
+| execute sql | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.execute_sql.js) |
 | export | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.export.js) |
 | failover | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.failover.js) |
 | get | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.get.js) |
@@ -87,9 +95,13 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | import | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.import.js) |
 | insert | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.insert.js) |
 | list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.list.js) |
+| list entra id certificates | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.list_entra_id_certificates.js) |
 | list server cas | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.list_server_cas.js) |
+| list server certificates | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.list_server_certificates.js) |
 | patch | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.patch.js) |
 | perform disk shrink | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.perform_disk_shrink.js) |
+| point in time restore | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.point_in_time_restore.js) |
+| pre check major version upgrade | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.pre_check_major_version_upgrade.js) |
 | promote replica | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.promote_replica.js) |
 | reencrypt | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.reencrypt.js) |
 | release ssrs lease | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.release_ssrs_lease.js) |
@@ -98,7 +110,9 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | reset ssl config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.reset_ssl_config.js) |
 | restart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.restart.js) |
 | restore backup | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.restore_backup.js) |
+| rotate entra id certificate | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.rotate_entra_id_certificate.js) |
 | rotate server ca | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.rotate_server_ca.js) |
+| rotate server certificate | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.rotate_server_certificate.js) |
 | start external sync | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.start_external_sync.js) |
 | start replica | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.start_replica.js) |
 | stop replica | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.stop_replica.js) |
@@ -124,6 +138,11 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | get | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_backup_runs_service.get.js) |
 | insert | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_backup_runs_service.insert.js) |
 | list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_backup_runs_service.list.js) |
+| create backup | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_backups_service.create_backup.js) |
+| delete backup | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_backups_service.delete_backup.js) |
+| get backup | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_backups_service.get_backup.js) |
+| list backups | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_backups_service.list_backups.js) |
+| update backup | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_backups_service.update_backup.js) |
 | generate ephemeral cert | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_connect_service.generate_ephemeral_cert.js) |
 | get connect settings | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_connect_service.get_connect_settings.js) |
 | delete | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_databases_service.delete.js) |
@@ -134,12 +153,15 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_databases_service.update.js) |
 | list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_flags_service.list.js) |
 | acquire ssrs lease | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.acquire_ssrs_lease.js) |
+| add entra id certificate | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.add_entra_id_certificate.js) |
 | add server ca | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.add_server_ca.js) |
+| add server certificate | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.add_server_certificate.js) |
 | clone | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.clone.js) |
 | create ephemeral | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.create_ephemeral.js) |
 | delete | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.delete.js) |
 | demote | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.demote.js) |
 | demote master | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.demote_master.js) |
+| execute sql | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.execute_sql.js) |
 | export | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.export.js) |
 | failover | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.failover.js) |
 | get | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.get.js) |
@@ -148,9 +170,13 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | import | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.import.js) |
 | insert | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.insert.js) |
 | list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.list.js) |
+| list entra id certificates | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.list_entra_id_certificates.js) |
 | list server cas | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.list_server_cas.js) |
+| list server certificates | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.list_server_certificates.js) |
 | patch | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.patch.js) |
 | perform disk shrink | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.perform_disk_shrink.js) |
+| point in time restore | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.point_in_time_restore.js) |
+| pre check major version upgrade | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.pre_check_major_version_upgrade.js) |
 | promote replica | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.promote_replica.js) |
 | reencrypt | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.reencrypt.js) |
 | release ssrs lease | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.release_ssrs_lease.js) |
@@ -159,7 +185,9 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | reset ssl config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.reset_ssl_config.js) |
 | restart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.restart.js) |
 | restore backup | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.restore_backup.js) |
+| rotate entra id certificate | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.rotate_entra_id_certificate.js) |
 | rotate server ca | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.rotate_server_ca.js) |
+| rotate server certificate | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.rotate_server_certificate.js) |
 | start external sync | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.start_external_sync.js) |
 | start replica | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.start_replica.js) |
 | stop replica | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.stop_replica.js) |

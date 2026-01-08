@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -59,6 +59,7 @@ export class SqlUsersServiceClient {
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
   locationsClient: LocationsClient;
+  pathTemplates: {[name: string]: gax.PathTemplate};
   sqlUsersServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -177,6 +178,15 @@ export class SqlUsersServiceClient {
     }
     // Load the applicable protos.
     this._protos = this._gaxGrpc.loadProtoJSON(jsonProtos);
+
+    // This API contains "path templates"; forward-slash-separated
+    // identifiers to uniquely identify resources within the API.
+    // Create useful helper objects for these.
+    this.pathTemplates = {
+      backupPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/backups/{backup}'
+      ),
+    };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
@@ -735,6 +745,9 @@ export class SqlUsersServiceClient {
  *   Name of the user in the instance.
  * @param {string} request.project
  *   Project ID of the project that contains the instance.
+ * @param {string[]} [request.databaseRoles]
+ *   Optional. List of database roles to grant to the user. body.database_roles
+ *   will be ignored for update request.
  * @param {google.cloud.sql.v1.User} request.body
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -903,6 +916,45 @@ export class SqlUsersServiceClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
+  // --------------------
+  // -- Path templates --
+  // --------------------
+
+  /**
+   * Return a fully-qualified backup resource name string.
+   *
+   * @param {string} project
+   * @param {string} backup
+   * @returns {string} Resource name string.
+   */
+  backupPath(project:string,backup:string) {
+    return this.pathTemplates.backupPathTemplate.render({
+      project: project,
+      backup: backup,
+    });
+  }
+
+  /**
+   * Parse the project from Backup resource.
+   *
+   * @param {string} backupName
+   *   A fully-qualified path representing Backup resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromBackupName(backupName: string) {
+    return this.pathTemplates.backupPathTemplate.match(backupName).project;
+  }
+
+  /**
+   * Parse the backup from Backup resource.
+   *
+   * @param {string} backupName
+   *   A fully-qualified path representing Backup resource.
+   * @returns {string} A string representing the backup.
+   */
+  matchBackupFromBackupName(backupName: string) {
+    return this.pathTemplates.backupPathTemplate.match(backupName).backup;
+  }
 
   /**
    * Terminate the gRPC channel and close the client.
