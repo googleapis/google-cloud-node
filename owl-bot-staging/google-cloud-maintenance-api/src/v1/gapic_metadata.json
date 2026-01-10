@@ -1,0 +1,61 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.maintenance.api.v1",
+  "libraryPackage": "@google-cloud/maintenance-api",
+  "services": {
+    "Maintenance": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "MaintenanceClient",
+          "rpcs": {
+            "GetResourceMaintenance": {
+              "methods": [
+                "getResourceMaintenance"
+              ]
+            },
+            "SummarizeMaintenances": {
+              "methods": [
+                "summarizeMaintenances",
+                "summarizeMaintenancesStream",
+                "summarizeMaintenancesAsync"
+              ]
+            },
+            "ListResourceMaintenances": {
+              "methods": [
+                "listResourceMaintenances",
+                "listResourceMaintenancesStream",
+                "listResourceMaintenancesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "MaintenanceClient",
+          "rpcs": {
+            "GetResourceMaintenance": {
+              "methods": [
+                "getResourceMaintenance"
+              ]
+            },
+            "SummarizeMaintenances": {
+              "methods": [
+                "summarizeMaintenances",
+                "summarizeMaintenancesStream",
+                "summarizeMaintenancesAsync"
+              ]
+            },
+            "ListResourceMaintenances": {
+              "methods": [
+                "listResourceMaintenances",
+                "listResourceMaintenancesStream",
+                "listResourceMaintenancesAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

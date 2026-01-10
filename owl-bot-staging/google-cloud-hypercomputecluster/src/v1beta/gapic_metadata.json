@@ -1,0 +1,77 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.hypercomputecluster.v1beta",
+  "libraryPackage": "@google-cloud/hypercomputecluster",
+  "services": {
+    "HypercomputeCluster": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "HypercomputeClusterClient",
+          "rpcs": {
+            "GetCluster": {
+              "methods": [
+                "getCluster"
+              ]
+            },
+            "CreateCluster": {
+              "methods": [
+                "createCluster"
+              ]
+            },
+            "UpdateCluster": {
+              "methods": [
+                "updateCluster"
+              ]
+            },
+            "DeleteCluster": {
+              "methods": [
+                "deleteCluster"
+              ]
+            },
+            "ListClusters": {
+              "methods": [
+                "listClusters",
+                "listClustersStream",
+                "listClustersAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "HypercomputeClusterClient",
+          "rpcs": {
+            "GetCluster": {
+              "methods": [
+                "getCluster"
+              ]
+            },
+            "CreateCluster": {
+              "methods": [
+                "createCluster"
+              ]
+            },
+            "UpdateCluster": {
+              "methods": [
+                "updateCluster"
+              ]
+            },
+            "DeleteCluster": {
+              "methods": [
+                "deleteCluster"
+              ]
+            },
+            "ListClusters": {
+              "methods": [
+                "listClusters",
+                "listClustersStream",
+                "listClustersAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
