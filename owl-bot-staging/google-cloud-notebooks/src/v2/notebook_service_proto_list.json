@@ -1,0 +1,7 @@
+[
+  "../../protos/google/cloud/notebooks/v2/diagnostic_config.proto",
+  "../../protos/google/cloud/notebooks/v2/event.proto",
+  "../../protos/google/cloud/notebooks/v2/gce_setup.proto",
+  "../../protos/google/cloud/notebooks/v2/instance.proto",
+  "../../protos/google/cloud/notebooks/v2/service.proto"
+]

@@ -1,0 +1,409 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.networksecurity.v1",
+  "libraryPackage": "@google-cloud/network-security",
+  "services": {
+    "AddressGroupService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "AddressGroupServiceClient",
+          "rpcs": {
+            "GetAddressGroup": {
+              "methods": [
+                "getAddressGroup"
+              ]
+            },
+            "CreateAddressGroup": {
+              "methods": [
+                "createAddressGroup"
+              ]
+            },
+            "UpdateAddressGroup": {
+              "methods": [
+                "updateAddressGroup"
+              ]
+            },
+            "AddAddressGroupItems": {
+              "methods": [
+                "addAddressGroupItems"
+              ]
+            },
+            "RemoveAddressGroupItems": {
+              "methods": [
+                "removeAddressGroupItems"
+              ]
+            },
+            "CloneAddressGroupItems": {
+              "methods": [
+                "cloneAddressGroupItems"
+              ]
+            },
+            "DeleteAddressGroup": {
+              "methods": [
+                "deleteAddressGroup"
+              ]
+            },
+            "ListAddressGroups": {
+              "methods": [
+                "listAddressGroups",
+                "listAddressGroupsStream",
+                "listAddressGroupsAsync"
+              ]
+            },
+            "ListAddressGroupReferences": {
+              "methods": [
+                "listAddressGroupReferences",
+                "listAddressGroupReferencesStream",
+                "listAddressGroupReferencesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "AddressGroupServiceClient",
+          "rpcs": {
+            "GetAddressGroup": {
+              "methods": [
+                "getAddressGroup"
+              ]
+            },
+            "CreateAddressGroup": {
+              "methods": [
+                "createAddressGroup"
+              ]
+            },
+            "UpdateAddressGroup": {
+              "methods": [
+                "updateAddressGroup"
+              ]
+            },
+            "AddAddressGroupItems": {
+              "methods": [
+                "addAddressGroupItems"
+              ]
+            },
+            "RemoveAddressGroupItems": {
+              "methods": [
+                "removeAddressGroupItems"
+              ]
+            },
+            "CloneAddressGroupItems": {
+              "methods": [
+                "cloneAddressGroupItems"
+              ]
+            },
+            "DeleteAddressGroup": {
+              "methods": [
+                "deleteAddressGroup"
+              ]
+            },
+            "ListAddressGroups": {
+              "methods": [
+                "listAddressGroups",
+                "listAddressGroupsStream",
+                "listAddressGroupsAsync"
+              ]
+            },
+            "ListAddressGroupReferences": {
+              "methods": [
+                "listAddressGroupReferences",
+                "listAddressGroupReferencesStream",
+                "listAddressGroupReferencesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "NetworkSecurity": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "NetworkSecurityClient",
+          "rpcs": {
+            "GetAuthorizationPolicy": {
+              "methods": [
+                "getAuthorizationPolicy"
+              ]
+            },
+            "GetServerTlsPolicy": {
+              "methods": [
+                "getServerTlsPolicy"
+              ]
+            },
+            "GetClientTlsPolicy": {
+              "methods": [
+                "getClientTlsPolicy"
+              ]
+            },
+            "CreateAuthorizationPolicy": {
+              "methods": [
+                "createAuthorizationPolicy"
+              ]
+            },
+            "UpdateAuthorizationPolicy": {
+              "methods": [
+                "updateAuthorizationPolicy"
+              ]
+            },
+            "DeleteAuthorizationPolicy": {
+              "methods": [
+                "deleteAuthorizationPolicy"
+              ]
+            },
+            "CreateServerTlsPolicy": {
+              "methods": [
+                "createServerTlsPolicy"
+              ]
+            },
+            "UpdateServerTlsPolicy": {
+              "methods": [
+                "updateServerTlsPolicy"
+              ]
+            },
+            "DeleteServerTlsPolicy": {
+              "methods": [
+                "deleteServerTlsPolicy"
+              ]
+            },
+            "CreateClientTlsPolicy": {
+              "methods": [
+                "createClientTlsPolicy"
+              ]
+            },
+            "UpdateClientTlsPolicy": {
+              "methods": [
+                "updateClientTlsPolicy"
+              ]
+            },
+            "DeleteClientTlsPolicy": {
+              "methods": [
+                "deleteClientTlsPolicy"
+              ]
+            },
+            "ListAuthorizationPolicies": {
+              "methods": [
+                "listAuthorizationPolicies",
+                "listAuthorizationPoliciesStream",
+                "listAuthorizationPoliciesAsync"
+              ]
+            },
+            "ListServerTlsPolicies": {
+              "methods": [
+                "listServerTlsPolicies",
+                "listServerTlsPoliciesStream",
+                "listServerTlsPoliciesAsync"
+              ]
+            },
+            "ListClientTlsPolicies": {
+              "methods": [
+                "listClientTlsPolicies",
+                "listClientTlsPoliciesStream",
+                "listClientTlsPoliciesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "NetworkSecurityClient",
+          "rpcs": {
+            "GetAuthorizationPolicy": {
+              "methods": [
+                "getAuthorizationPolicy"
+              ]
+            },
+            "GetServerTlsPolicy": {
+              "methods": [
+                "getServerTlsPolicy"
+              ]
+            },
+            "GetClientTlsPolicy": {
+              "methods": [
+                "getClientTlsPolicy"
+              ]
+            },
+            "CreateAuthorizationPolicy": {
+              "methods": [
+                "createAuthorizationPolicy"
+              ]
+            },
+            "UpdateAuthorizationPolicy": {
+              "methods": [
+                "updateAuthorizationPolicy"
+              ]
+            },
+            "DeleteAuthorizationPolicy": {
+              "methods": [
+                "deleteAuthorizationPolicy"
+              ]
+            },
+            "CreateServerTlsPolicy": {
+              "methods": [
+                "createServerTlsPolicy"
+              ]
+            },
+            "UpdateServerTlsPolicy": {
+              "methods": [
+                "updateServerTlsPolicy"
+              ]
+            },
+            "DeleteServerTlsPolicy": {
+              "methods": [
+                "deleteServerTlsPolicy"
+              ]
+            },
+            "CreateClientTlsPolicy": {
+              "methods": [
+                "createClientTlsPolicy"
+              ]
+            },
+            "UpdateClientTlsPolicy": {
+              "methods": [
+                "updateClientTlsPolicy"
+              ]
+            },
+            "DeleteClientTlsPolicy": {
+              "methods": [
+                "deleteClientTlsPolicy"
+              ]
+            },
+            "ListAuthorizationPolicies": {
+              "methods": [
+                "listAuthorizationPolicies",
+                "listAuthorizationPoliciesStream",
+                "listAuthorizationPoliciesAsync"
+              ]
+            },
+            "ListServerTlsPolicies": {
+              "methods": [
+                "listServerTlsPolicies",
+                "listServerTlsPoliciesStream",
+                "listServerTlsPoliciesAsync"
+              ]
+            },
+            "ListClientTlsPolicies": {
+              "methods": [
+                "listClientTlsPolicies",
+                "listClientTlsPoliciesStream",
+                "listClientTlsPoliciesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "OrganizationAddressGroupService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "OrganizationAddressGroupServiceClient",
+          "rpcs": {
+            "GetAddressGroup": {
+              "methods": [
+                "getAddressGroup"
+              ]
+            },
+            "CreateAddressGroup": {
+              "methods": [
+                "createAddressGroup"
+              ]
+            },
+            "UpdateAddressGroup": {
+              "methods": [
+                "updateAddressGroup"
+              ]
+            },
+            "AddAddressGroupItems": {
+              "methods": [
+                "addAddressGroupItems"
+              ]
+            },
+            "RemoveAddressGroupItems": {
+              "methods": [
+                "removeAddressGroupItems"
+              ]
+            },
+            "CloneAddressGroupItems": {
+              "methods": [
+                "cloneAddressGroupItems"
+              ]
+            },
+            "DeleteAddressGroup": {
+              "methods": [
+                "deleteAddressGroup"
+              ]
+            },
+            "ListAddressGroups": {
+              "methods": [
+                "listAddressGroups",
+                "listAddressGroupsStream",
+                "listAddressGroupsAsync"
+              ]
+            },
+            "ListAddressGroupReferences": {
+              "methods": [
+                "listAddressGroupReferences",
+                "listAddressGroupReferencesStream",
+                "listAddressGroupReferencesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "OrganizationAddressGroupServiceClient",
+          "rpcs": {
+            "GetAddressGroup": {
+              "methods": [
+                "getAddressGroup"
+              ]
+            },
+            "CreateAddressGroup": {
+              "methods": [
+                "createAddressGroup"
+              ]
+            },
+            "UpdateAddressGroup": {
+              "methods": [
+                "updateAddressGroup"
+              ]
+            },
+            "AddAddressGroupItems": {
+              "methods": [
+                "addAddressGroupItems"
+              ]
+            },
+            "RemoveAddressGroupItems": {
+              "methods": [
+                "removeAddressGroupItems"
+              ]
+            },
+            "CloneAddressGroupItems": {
+              "methods": [
+                "cloneAddressGroupItems"
+              ]
+            },
+            "DeleteAddressGroup": {
+              "methods": [
+                "deleteAddressGroup"
+              ]
+            },
+            "ListAddressGroups": {
+              "methods": [
+                "listAddressGroups",
+                "listAddressGroupsStream",
+                "listAddressGroupsAsync"
+              ]
+            },
+            "ListAddressGroupReferences": {
+              "methods": [
+                "listAddressGroupReferences",
+                "listAddressGroupReferencesStream",
+                "listAddressGroupReferencesAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
