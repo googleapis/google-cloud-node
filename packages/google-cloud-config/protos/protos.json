@@ -574,6 +574,52 @@
                               "(google.api.method_signature)": "name"
                             }
                           ]
+                        },
+                        "GetAutoMigrationConfig": {
+                          "requestType": "GetAutoMigrationConfigRequest",
+                          "responseType": "AutoMigrationConfig",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/autoMigrationConfig}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/autoMigrationConfig}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateAutoMigrationConfig": {
+                          "requestType": "UpdateAutoMigrationConfigRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{auto_migration_config.name=projects/*/locations/*/autoMigrationConfig}",
+                            "(google.api.http).body": "auto_migration_config",
+                            "(google.api.method_signature)": "auto_migration_config,update_mask",
+                            "(google.longrunning.operation_info).response_type": "AutoMigrationConfig",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{auto_migration_config.name=projects/*/locations/*/autoMigrationConfig}",
+                                "body": "auto_migration_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "auto_migration_config,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "AutoMigrationConfig",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -818,7 +864,8 @@
                             "DELETE_BUILD_API_FAILED": 5,
                             "DELETE_BUILD_RUN_FAILED": 6,
                             "BUCKET_CREATION_PERMISSION_DENIED": 7,
-                            "BUCKET_CREATION_FAILED": 8
+                            "BUCKET_CREATION_FAILED": 8,
+                            "EXTERNAL_VALUE_SOURCE_IMPORT_FAILED": 10
                           }
                         },
                         "LockState": {
@@ -1377,7 +1424,8 @@
                             "CLOUD_BUILD_PERMISSION_DENIED": 1,
                             "APPLY_BUILD_API_FAILED": 4,
                             "APPLY_BUILD_RUN_FAILED": 5,
-                            "QUOTA_VALIDATION_FAILED": 7
+                            "QUOTA_VALIDATION_FAILED": 7,
+                            "EXTERNAL_VALUE_SOURCE_IMPORT_FAILED": 8
                           }
                         }
                       }
@@ -2012,7 +2060,8 @@
                             "BUCKET_CREATION_FAILED": 3,
                             "DEPLOYMENT_LOCK_ACQUIRE_FAILED": 4,
                             "PREVIEW_BUILD_API_FAILED": 5,
-                            "PREVIEW_BUILD_RUN_FAILED": 6
+                            "PREVIEW_BUILD_RUN_FAILED": 6,
+                            "EXTERNAL_VALUE_SOURCE_IMPORT_FAILED": 7
                           }
                         }
                       }
@@ -2782,6 +2831,67 @@
                           "values": {
                             "PROVIDER_SOURCE_UNSPECIFIED": 0,
                             "SERVICE_MAINTAINED": 1
+                          }
+                        }
+                      }
+                    },
+                    "GetAutoMigrationConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "config.googleapis.com/AutoMigrationConfig"
+                          }
+                        }
+                      }
+                    },
+                    "AutoMigrationConfig": {
+                      "options": {
+                        "(google.api.resource).type": "config.googleapis.com/AutoMigrationConfig",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/autoMigrationConfig",
+                        "(google.api.resource).plural": "autoMigrationConfigs",
+                        "(google.api.resource).singular": "autoMigrationConfig"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "autoMigrationEnabled": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateAutoMigrationConfigRequest": {
+                      "fields": {
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "autoMigrationConfig": {
+                          "type": "AutoMigrationConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
                       }

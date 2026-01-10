@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -423,6 +423,34 @@ export namespace google {
                      * @returns Promise
                      */
                     public getResourceDrift(request: google.cloud.config.v1.IGetResourceDriftRequest): Promise<google.cloud.config.v1.ResourceDrift>;
+
+                    /**
+                     * Calls GetAutoMigrationConfig.
+                     * @param request GetAutoMigrationConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AutoMigrationConfig
+                     */
+                    public getAutoMigrationConfig(request: google.cloud.config.v1.IGetAutoMigrationConfigRequest, callback: google.cloud.config.v1.Config.GetAutoMigrationConfigCallback): void;
+
+                    /**
+                     * Calls GetAutoMigrationConfig.
+                     * @param request GetAutoMigrationConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getAutoMigrationConfig(request: google.cloud.config.v1.IGetAutoMigrationConfigRequest): Promise<google.cloud.config.v1.AutoMigrationConfig>;
+
+                    /**
+                     * Calls UpdateAutoMigrationConfig.
+                     * @param request UpdateAutoMigrationConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateAutoMigrationConfig(request: google.cloud.config.v1.IUpdateAutoMigrationConfigRequest, callback: google.cloud.config.v1.Config.UpdateAutoMigrationConfigCallback): void;
+
+                    /**
+                     * Calls UpdateAutoMigrationConfig.
+                     * @param request UpdateAutoMigrationConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateAutoMigrationConfig(request: google.cloud.config.v1.IUpdateAutoMigrationConfigRequest): Promise<google.longrunning.Operation>;
                 }
 
                 namespace Config {
@@ -615,6 +643,20 @@ export namespace google {
                      * @param [response] ResourceDrift
                      */
                     type GetResourceDriftCallback = (error: (Error|null), response?: google.cloud.config.v1.ResourceDrift) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.config.v1.Config|getAutoMigrationConfig}.
+                     * @param error Error, if any
+                     * @param [response] AutoMigrationConfig
+                     */
+                    type GetAutoMigrationConfigCallback = (error: (Error|null), response?: google.cloud.config.v1.AutoMigrationConfig) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.config.v1.Config|updateAutoMigrationConfig}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateAutoMigrationConfigCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                 }
 
                 /** QuotaValidation enum. */
@@ -884,7 +926,8 @@ export namespace google {
                         DELETE_BUILD_API_FAILED = 5,
                         DELETE_BUILD_RUN_FAILED = 6,
                         BUCKET_CREATION_PERMISSION_DENIED = 7,
-                        BUCKET_CREATION_FAILED = 8
+                        BUCKET_CREATION_FAILED = 8,
+                        EXTERNAL_VALUE_SOURCE_IMPORT_FAILED = 10
                     }
 
                     /** LockState enum. */
@@ -2715,7 +2758,8 @@ export namespace google {
                         CLOUD_BUILD_PERMISSION_DENIED = 1,
                         APPLY_BUILD_API_FAILED = 4,
                         APPLY_BUILD_RUN_FAILED = 5,
-                        QUOTA_VALIDATION_FAILED = 7
+                        QUOTA_VALIDATION_FAILED = 7,
+                        EXTERNAL_VALUE_SOURCE_IMPORT_FAILED = 8
                     }
                 }
 
@@ -4936,7 +4980,8 @@ export namespace google {
                         BUCKET_CREATION_FAILED = 3,
                         DEPLOYMENT_LOCK_ACQUIRE_FAILED = 4,
                         PREVIEW_BUILD_API_FAILED = 5,
-                        PREVIEW_BUILD_RUN_FAILED = 6
+                        PREVIEW_BUILD_RUN_FAILED = 6,
+                        EXTERNAL_VALUE_SOURCE_IMPORT_FAILED = 7
                     }
                 }
 
@@ -7950,6 +7995,315 @@ export namespace google {
                         PROVIDER_SOURCE_UNSPECIFIED = 0,
                         SERVICE_MAINTAINED = 1
                     }
+                }
+
+                /** Properties of a GetAutoMigrationConfigRequest. */
+                interface IGetAutoMigrationConfigRequest {
+
+                    /** GetAutoMigrationConfigRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetAutoMigrationConfigRequest. */
+                class GetAutoMigrationConfigRequest implements IGetAutoMigrationConfigRequest {
+
+                    /**
+                     * Constructs a new GetAutoMigrationConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.config.v1.IGetAutoMigrationConfigRequest);
+
+                    /** GetAutoMigrationConfigRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetAutoMigrationConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetAutoMigrationConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.config.v1.IGetAutoMigrationConfigRequest): google.cloud.config.v1.GetAutoMigrationConfigRequest;
+
+                    /**
+                     * Encodes the specified GetAutoMigrationConfigRequest message. Does not implicitly {@link google.cloud.config.v1.GetAutoMigrationConfigRequest.verify|verify} messages.
+                     * @param message GetAutoMigrationConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.config.v1.IGetAutoMigrationConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetAutoMigrationConfigRequest message, length delimited. Does not implicitly {@link google.cloud.config.v1.GetAutoMigrationConfigRequest.verify|verify} messages.
+                     * @param message GetAutoMigrationConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.config.v1.IGetAutoMigrationConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetAutoMigrationConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetAutoMigrationConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.config.v1.GetAutoMigrationConfigRequest;
+
+                    /**
+                     * Decodes a GetAutoMigrationConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetAutoMigrationConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.config.v1.GetAutoMigrationConfigRequest;
+
+                    /**
+                     * Verifies a GetAutoMigrationConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetAutoMigrationConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetAutoMigrationConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.config.v1.GetAutoMigrationConfigRequest;
+
+                    /**
+                     * Creates a plain object from a GetAutoMigrationConfigRequest message. Also converts values to other types if specified.
+                     * @param message GetAutoMigrationConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.config.v1.GetAutoMigrationConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetAutoMigrationConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetAutoMigrationConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AutoMigrationConfig. */
+                interface IAutoMigrationConfig {
+
+                    /** AutoMigrationConfig name */
+                    name?: (string|null);
+
+                    /** AutoMigrationConfig updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AutoMigrationConfig autoMigrationEnabled */
+                    autoMigrationEnabled?: (boolean|null);
+                }
+
+                /** Represents an AutoMigrationConfig. */
+                class AutoMigrationConfig implements IAutoMigrationConfig {
+
+                    /**
+                     * Constructs a new AutoMigrationConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.config.v1.IAutoMigrationConfig);
+
+                    /** AutoMigrationConfig name. */
+                    public name: string;
+
+                    /** AutoMigrationConfig updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AutoMigrationConfig autoMigrationEnabled. */
+                    public autoMigrationEnabled: boolean;
+
+                    /**
+                     * Creates a new AutoMigrationConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AutoMigrationConfig instance
+                     */
+                    public static create(properties?: google.cloud.config.v1.IAutoMigrationConfig): google.cloud.config.v1.AutoMigrationConfig;
+
+                    /**
+                     * Encodes the specified AutoMigrationConfig message. Does not implicitly {@link google.cloud.config.v1.AutoMigrationConfig.verify|verify} messages.
+                     * @param message AutoMigrationConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.config.v1.IAutoMigrationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AutoMigrationConfig message, length delimited. Does not implicitly {@link google.cloud.config.v1.AutoMigrationConfig.verify|verify} messages.
+                     * @param message AutoMigrationConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.config.v1.IAutoMigrationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AutoMigrationConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AutoMigrationConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.config.v1.AutoMigrationConfig;
+
+                    /**
+                     * Decodes an AutoMigrationConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AutoMigrationConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.config.v1.AutoMigrationConfig;
+
+                    /**
+                     * Verifies an AutoMigrationConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AutoMigrationConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AutoMigrationConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.config.v1.AutoMigrationConfig;
+
+                    /**
+                     * Creates a plain object from an AutoMigrationConfig message. Also converts values to other types if specified.
+                     * @param message AutoMigrationConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.config.v1.AutoMigrationConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AutoMigrationConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AutoMigrationConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateAutoMigrationConfigRequest. */
+                interface IUpdateAutoMigrationConfigRequest {
+
+                    /** UpdateAutoMigrationConfigRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateAutoMigrationConfigRequest autoMigrationConfig */
+                    autoMigrationConfig?: (google.cloud.config.v1.IAutoMigrationConfig|null);
+                }
+
+                /** Represents an UpdateAutoMigrationConfigRequest. */
+                class UpdateAutoMigrationConfigRequest implements IUpdateAutoMigrationConfigRequest {
+
+                    /**
+                     * Constructs a new UpdateAutoMigrationConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.config.v1.IUpdateAutoMigrationConfigRequest);
+
+                    /** UpdateAutoMigrationConfigRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateAutoMigrationConfigRequest autoMigrationConfig. */
+                    public autoMigrationConfig?: (google.cloud.config.v1.IAutoMigrationConfig|null);
+
+                    /**
+                     * Creates a new UpdateAutoMigrationConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateAutoMigrationConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.config.v1.IUpdateAutoMigrationConfigRequest): google.cloud.config.v1.UpdateAutoMigrationConfigRequest;
+
+                    /**
+                     * Encodes the specified UpdateAutoMigrationConfigRequest message. Does not implicitly {@link google.cloud.config.v1.UpdateAutoMigrationConfigRequest.verify|verify} messages.
+                     * @param message UpdateAutoMigrationConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.config.v1.IUpdateAutoMigrationConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateAutoMigrationConfigRequest message, length delimited. Does not implicitly {@link google.cloud.config.v1.UpdateAutoMigrationConfigRequest.verify|verify} messages.
+                     * @param message UpdateAutoMigrationConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.config.v1.IUpdateAutoMigrationConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateAutoMigrationConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateAutoMigrationConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.config.v1.UpdateAutoMigrationConfigRequest;
+
+                    /**
+                     * Decodes an UpdateAutoMigrationConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateAutoMigrationConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.config.v1.UpdateAutoMigrationConfigRequest;
+
+                    /**
+                     * Verifies an UpdateAutoMigrationConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateAutoMigrationConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateAutoMigrationConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.config.v1.UpdateAutoMigrationConfigRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateAutoMigrationConfigRequest message. Also converts values to other types if specified.
+                     * @param message UpdateAutoMigrationConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.config.v1.UpdateAutoMigrationConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateAutoMigrationConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateAutoMigrationConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
             }
         }
