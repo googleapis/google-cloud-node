@@ -11,7 +11,7 @@
                     "csharp_namespace": "Google.Cloud.BackupDR.V1",
                     "go_package": "cloud.google.com/go/backupdr/apiv1/backupdrpb;backupdrpb",
                     "java_multiple_files": true,
-                    "java_outer_classname": "DataSourceReferenceProto",
+                    "java_outer_classname": "ProtectionSummaryProto",
                     "java_package": "com.google.cloud.backupdr.v1",
                     "php_namespace": "Google\\Cloud\\BackupDR\\V1",
                     "ruby_package": "Google::Cloud::BackupDR::V1",
@@ -6548,6 +6548,350 @@
                         "nextPageToken": {
                           "type": "string",
                           "id": 2
+                        }
+                      }
+                    },
+                    "BackupDrProtectionSummary": {
+                      "options": {
+                        "(google.api.default_host)": "backupdr.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "ListResourceBackupConfigs": {
+                          "requestType": "ListResourceBackupConfigsRequest",
+                          "responseType": "ListResourceBackupConfigsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/resourceBackupConfigs",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/resourceBackupConfigs"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "ListResourceBackupConfigsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListResourceBackupConfigsResponse": {
+                      "fields": {
+                        "resourceBackupConfigs": {
+                          "rule": "repeated",
+                          "type": "ResourceBackupConfig",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ResourceBackupConfig": {
+                      "options": {
+                        "(google.api.resource).type": "backupdr.googleapis.com/ResourceBackupConfig",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/resourceBackupConfigs/{resource_backup_config}",
+                        "(google.api.resource).plural": "resourceBackupConfigs",
+                        "(google.api.resource).singular": "resourceBackupConfig"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "uid": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "targetResource": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "targetResourceDisplayName": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "targetResourceType": {
+                          "type": "ResourceType",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "targetResourceLabels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 6
+                        },
+                        "backupConfigsDetails": {
+                          "rule": "repeated",
+                          "type": "BackupConfigDetails",
+                          "id": 7
+                        },
+                        "backupConfigured": {
+                          "type": "bool",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "vaulted": {
+                          "type": "bool",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ResourceType": {
+                          "values": {
+                            "RESOURCE_TYPE_UNSPECIFIED": 0,
+                            "CLOUD_SQL_INSTANCE": 1,
+                            "COMPUTE_ENGINE_VM": 2,
+                            "COMPUTE_ENGINE_DISK": 3,
+                            "COMPUTE_ENGINE_REGIONAL_DISK": 4
+                          }
+                        }
+                      }
+                    },
+                    "BackupConfigDetails": {
+                      "oneofs": {
+                        "planSpecificConfig": {
+                          "oneof": [
+                            "backupDrPlanConfig",
+                            "backupDrTemplateConfig"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "backupConfigSource": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "backupConfigSourceDisplayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "type": {
+                          "type": "Type",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "pitrSettings": {
+                          "type": "PitrSettings",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "latestSuccessfulBackupTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "applicableResource": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "backupVault": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "backupLocations": {
+                          "rule": "repeated",
+                          "type": "BackupLocation",
+                          "id": 12
+                        },
+                        "backupDrPlanConfig": {
+                          "type": "BackupDrPlanConfig",
+                          "id": 10
+                        },
+                        "backupDrTemplateConfig": {
+                          "type": "BackupDrTemplateConfig",
+                          "id": 11
+                        }
+                      },
+                      "nested": {
+                        "Type": {
+                          "values": {
+                            "TYPE_UNSPECIFIED": 0,
+                            "CLOUD_SQL_INSTANCE_BACKUP_CONFIG": 1,
+                            "COMPUTE_ENGINE_RESOURCE_POLICY": 2,
+                            "BACKUPDR_BACKUP_PLAN": 3,
+                            "BACKUPDR_TEMPLATE": 4
+                          }
+                        },
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "ACTIVE": 1,
+                            "INACTIVE": 2,
+                            "ERROR": 3
+                          }
+                        }
+                      }
+                    },
+                    "PitrSettings": {
+                      "fields": {
+                        "retentionDays": {
+                          "type": "int32",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "BackupDrTemplateConfig": {
+                      "fields": {
+                        "firstPartyManagementUri": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "thirdPartyManagementUri": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "BackupDrPlanConfig": {
+                      "fields": {
+                        "backupDrPlanRules": {
+                          "rule": "repeated",
+                          "type": "BackupDrPlanRule",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "BackupDrPlanRule": {
+                      "fields": {
+                        "ruleId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "lastSuccessfulBackupTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "BackupLocation": {
+                      "fields": {
+                        "type": {
+                          "type": "Type",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "locationId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Type": {
+                          "values": {
+                            "TYPE_UNSPECIFIED": 0,
+                            "ZONAL": 1,
+                            "REGIONAL": 2,
+                            "MULTI_REGIONAL": 3
+                          }
                         }
                       }
                     }

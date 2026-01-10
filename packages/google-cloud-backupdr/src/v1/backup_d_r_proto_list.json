@@ -7,5 +7,6 @@
   "../../protos/google/cloud/backupdr/v1/backupvault_cloudsql.proto",
   "../../protos/google/cloud/backupdr/v1/backupvault_disk.proto",
   "../../protos/google/cloud/backupdr/v1/backupvault_gce.proto",
-  "../../protos/google/cloud/backupdr/v1/datasourcereference.proto"
+  "../../protos/google/cloud/backupdr/v1/datasourcereference.proto",
+  "../../protos/google/cloud/backupdr/v1/protection_summary.proto"
 ]

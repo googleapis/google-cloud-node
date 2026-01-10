@@ -95,6 +95,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update backup plan association | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.update_backup_plan_association.js) |
 | update backup vault | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.update_backup_vault.js) |
 | update data source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.update_data_source.js) |
+| list resource backup configs | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/backup_dr_protection_summary.list_resource_backup_configs.js) |
 | cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/snippet_metadata_google.cloud.backupdr.v1.json) |
 
 
