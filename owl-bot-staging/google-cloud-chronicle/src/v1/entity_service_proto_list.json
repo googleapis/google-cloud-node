@@ -1,0 +1,7 @@
+[
+  "../../protos/google/cloud/chronicle/v1/data_access_control.proto",
+  "../../protos/google/cloud/chronicle/v1/entity.proto",
+  "../../protos/google/cloud/chronicle/v1/instance.proto",
+  "../../protos/google/cloud/chronicle/v1/reference_list.proto",
+  "../../protos/google/cloud/chronicle/v1/rule.proto"
+]
