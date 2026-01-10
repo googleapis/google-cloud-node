@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ function main(requestId) {
   // const requestId = 'abc123'
 
   // Imports the Datamanager library
-  const {IngestionServiceClient} = require('@google-ads/datamanager').v1;
+  const {IngestionServiceClient} = require('@google-cloud/datamanager').v1;
 
   // Instantiates a client
   const datamanagerClient = new IngestionServiceClient();

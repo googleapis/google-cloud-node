@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -910,6 +910,12 @@ export namespace google {
 
                     /** Item unitPrice */
                     unitPrice?: (number|null);
+
+                    /** Item itemId */
+                    itemId?: (string|null);
+
+                    /** Item additionalItemParameters */
+                    additionalItemParameters?: (google.ads.datamanager.v1.IItemParameter[]|null);
                 }
 
                 /** Represents an Item. */
@@ -929,6 +935,12 @@ export namespace google {
 
                     /** Item unitPrice. */
                     public unitPrice: number;
+
+                    /** Item itemId. */
+                    public itemId: string;
+
+                    /** Item additionalItemParameters. */
+                    public additionalItemParameters: google.ads.datamanager.v1.IItemParameter[];
 
                     /**
                      * Creates a new Item instance using the specified properties.
@@ -1002,6 +1014,109 @@ export namespace google {
 
                     /**
                      * Gets the default type url for Item
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ItemParameter. */
+                interface IItemParameter {
+
+                    /** ItemParameter parameterName */
+                    parameterName?: (string|null);
+
+                    /** ItemParameter value */
+                    value?: (string|null);
+                }
+
+                /** Represents an ItemParameter. */
+                class ItemParameter implements IItemParameter {
+
+                    /**
+                     * Constructs a new ItemParameter.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.datamanager.v1.IItemParameter);
+
+                    /** ItemParameter parameterName. */
+                    public parameterName: string;
+
+                    /** ItemParameter value. */
+                    public value: string;
+
+                    /**
+                     * Creates a new ItemParameter instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ItemParameter instance
+                     */
+                    public static create(properties?: google.ads.datamanager.v1.IItemParameter): google.ads.datamanager.v1.ItemParameter;
+
+                    /**
+                     * Encodes the specified ItemParameter message. Does not implicitly {@link google.ads.datamanager.v1.ItemParameter.verify|verify} messages.
+                     * @param message ItemParameter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.datamanager.v1.IItemParameter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ItemParameter message, length delimited. Does not implicitly {@link google.ads.datamanager.v1.ItemParameter.verify|verify} messages.
+                     * @param message ItemParameter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.datamanager.v1.IItemParameter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ItemParameter message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ItemParameter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.datamanager.v1.ItemParameter;
+
+                    /**
+                     * Decodes an ItemParameter message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ItemParameter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.datamanager.v1.ItemParameter;
+
+                    /**
+                     * Verifies an ItemParameter message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ItemParameter message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ItemParameter
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.datamanager.v1.ItemParameter;
+
+                    /**
+                     * Creates a plain object from an ItemParameter message. Also converts values to other types if specified.
+                     * @param message ItemParameter
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.datamanager.v1.ItemParameter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ItemParameter to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ItemParameter
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -1246,7 +1361,8 @@ export namespace google {
                         GOOGLE_ADS = 1,
                         DISPLAY_VIDEO_PARTNER = 2,
                         DISPLAY_VIDEO_ADVERTISER = 3,
-                        DATA_PARTNER = 4
+                        DATA_PARTNER = 4,
+                        GOOGLE_ANALYTICS_PROPERTY = 5
                     }
                 }
 
@@ -1367,6 +1483,9 @@ export namespace google {
 
                     /** EncryptionInfo gcpWrappedKeyInfo */
                     gcpWrappedKeyInfo?: (google.ads.datamanager.v1.IGcpWrappedKeyInfo|null);
+
+                    /** EncryptionInfo awsWrappedKeyInfo */
+                    awsWrappedKeyInfo?: (google.ads.datamanager.v1.IAwsWrappedKeyInfo|null);
                 }
 
                 /** Represents an EncryptionInfo. */
@@ -1381,8 +1500,11 @@ export namespace google {
                     /** EncryptionInfo gcpWrappedKeyInfo. */
                     public gcpWrappedKeyInfo?: (google.ads.datamanager.v1.IGcpWrappedKeyInfo|null);
 
+                    /** EncryptionInfo awsWrappedKeyInfo. */
+                    public awsWrappedKeyInfo?: (google.ads.datamanager.v1.IAwsWrappedKeyInfo|null);
+
                     /** EncryptionInfo wrappedKey. */
-                    public wrappedKey?: "gcpWrappedKeyInfo";
+                    public wrappedKey?: ("gcpWrappedKeyInfo"|"awsWrappedKeyInfo");
 
                     /**
                      * Creates a new EncryptionInfo instance using the specified properties.
@@ -1586,6 +1708,130 @@ export namespace google {
                     }
                 }
 
+                /** Properties of an AwsWrappedKeyInfo. */
+                interface IAwsWrappedKeyInfo {
+
+                    /** AwsWrappedKeyInfo keyType */
+                    keyType?: (google.ads.datamanager.v1.AwsWrappedKeyInfo.KeyType|keyof typeof google.ads.datamanager.v1.AwsWrappedKeyInfo.KeyType|null);
+
+                    /** AwsWrappedKeyInfo roleArn */
+                    roleArn?: (string|null);
+
+                    /** AwsWrappedKeyInfo kekUri */
+                    kekUri?: (string|null);
+
+                    /** AwsWrappedKeyInfo encryptedDek */
+                    encryptedDek?: (string|null);
+                }
+
+                /** Represents an AwsWrappedKeyInfo. */
+                class AwsWrappedKeyInfo implements IAwsWrappedKeyInfo {
+
+                    /**
+                     * Constructs a new AwsWrappedKeyInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.datamanager.v1.IAwsWrappedKeyInfo);
+
+                    /** AwsWrappedKeyInfo keyType. */
+                    public keyType: (google.ads.datamanager.v1.AwsWrappedKeyInfo.KeyType|keyof typeof google.ads.datamanager.v1.AwsWrappedKeyInfo.KeyType);
+
+                    /** AwsWrappedKeyInfo roleArn. */
+                    public roleArn: string;
+
+                    /** AwsWrappedKeyInfo kekUri. */
+                    public kekUri: string;
+
+                    /** AwsWrappedKeyInfo encryptedDek. */
+                    public encryptedDek: string;
+
+                    /**
+                     * Creates a new AwsWrappedKeyInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AwsWrappedKeyInfo instance
+                     */
+                    public static create(properties?: google.ads.datamanager.v1.IAwsWrappedKeyInfo): google.ads.datamanager.v1.AwsWrappedKeyInfo;
+
+                    /**
+                     * Encodes the specified AwsWrappedKeyInfo message. Does not implicitly {@link google.ads.datamanager.v1.AwsWrappedKeyInfo.verify|verify} messages.
+                     * @param message AwsWrappedKeyInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.datamanager.v1.IAwsWrappedKeyInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AwsWrappedKeyInfo message, length delimited. Does not implicitly {@link google.ads.datamanager.v1.AwsWrappedKeyInfo.verify|verify} messages.
+                     * @param message AwsWrappedKeyInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.datamanager.v1.IAwsWrappedKeyInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AwsWrappedKeyInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AwsWrappedKeyInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.datamanager.v1.AwsWrappedKeyInfo;
+
+                    /**
+                     * Decodes an AwsWrappedKeyInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AwsWrappedKeyInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.datamanager.v1.AwsWrappedKeyInfo;
+
+                    /**
+                     * Verifies an AwsWrappedKeyInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AwsWrappedKeyInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AwsWrappedKeyInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.datamanager.v1.AwsWrappedKeyInfo;
+
+                    /**
+                     * Creates a plain object from an AwsWrappedKeyInfo message. Also converts values to other types if specified.
+                     * @param message AwsWrappedKeyInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.datamanager.v1.AwsWrappedKeyInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AwsWrappedKeyInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AwsWrappedKeyInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AwsWrappedKeyInfo {
+
+                    /** KeyType enum. */
+                    enum KeyType {
+                        KEY_TYPE_UNSPECIFIED = 0,
+                        XCHACHA20_POLY1305 = 1
+                    }
+                }
+
                 /** ErrorReason enum. */
                 enum ErrorReason {
                     ERROR_REASON_UNSPECIFIED = 0,
@@ -1625,8 +1871,21 @@ export namespace google {
                     DESTINATION_ACCOUNT_DATA_POLICY_PROHIBITS_ENHANCED_CONVERSIONS = 34,
                     DESTINATION_ACCOUNT_ENHANCED_CONVERSIONS_TERMS_NOT_SIGNED = 35,
                     DUPLICATE_DESTINATION_REFERENCE = 36,
+                    UNSUPPORTED_OPERATING_ACCOUNT_FOR_DATA_PARTNER = 37,
+                    UNSUPPORTED_LINKED_ACCOUNT_FOR_DATA_PARTNER = 38,
                     NO_IDENTIFIERS_PROVIDED = 39,
-                    INVALID_REQUEST_ID = 48
+                    INVALID_PROPERTY_TYPE = 40,
+                    INVALID_STREAM_TYPE = 41,
+                    LINKED_ACCOUNT_ONLY_ALLOWED_WITH_DATA_PARTNER_LOGIN_ACCOUNT = 42,
+                    OPERATING_ACCOUNT_LOGIN_ACCOUNT_MISMATCH = 43,
+                    EVENT_TIME_INVALID = 44,
+                    RESERVED_NAME_USED = 45,
+                    INVALID_EVENT_NAME = 46,
+                    NOT_ALLOWLISTED = 47,
+                    INVALID_REQUEST_ID = 48,
+                    MULTIPLE_DESTINATIONS_FOR_GOOGLE_ANALYTICS_EVENT = 49,
+                    FIELD_VALUE_TOO_LONG = 50,
+                    TOO_MANY_ELEMENTS = 51
                 }
 
                 /** Properties of an Event. */
@@ -1676,6 +1935,18 @@ export namespace google {
 
                     /** Event userProperties */
                     userProperties?: (google.ads.datamanager.v1.IUserProperties|null);
+
+                    /** Event eventName */
+                    eventName?: (string|null);
+
+                    /** Event clientId */
+                    clientId?: (string|null);
+
+                    /** Event userId */
+                    userId?: (string|null);
+
+                    /** Event additionalEventParameters */
+                    additionalEventParameters?: (google.ads.datamanager.v1.IEventParameter[]|null);
                 }
 
                 /** Represents an Event. */
@@ -1731,6 +2002,18 @@ export namespace google {
 
                     /** Event userProperties. */
                     public userProperties?: (google.ads.datamanager.v1.IUserProperties|null);
+
+                    /** Event eventName. */
+                    public eventName: string;
+
+                    /** Event clientId. */
+                    public clientId: string;
+
+                    /** Event userId. */
+                    public userId: string;
+
+                    /** Event additionalEventParameters. */
+                    public additionalEventParameters: google.ads.datamanager.v1.IEventParameter[];
 
                     /**
                      * Creates a new Event instance using the specified properties.
@@ -2040,6 +2323,109 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an EventParameter. */
+                interface IEventParameter {
+
+                    /** EventParameter parameterName */
+                    parameterName?: (string|null);
+
+                    /** EventParameter value */
+                    value?: (string|null);
+                }
+
+                /** Represents an EventParameter. */
+                class EventParameter implements IEventParameter {
+
+                    /**
+                     * Constructs a new EventParameter.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.datamanager.v1.IEventParameter);
+
+                    /** EventParameter parameterName. */
+                    public parameterName: string;
+
+                    /** EventParameter value. */
+                    public value: string;
+
+                    /**
+                     * Creates a new EventParameter instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EventParameter instance
+                     */
+                    public static create(properties?: google.ads.datamanager.v1.IEventParameter): google.ads.datamanager.v1.EventParameter;
+
+                    /**
+                     * Encodes the specified EventParameter message. Does not implicitly {@link google.ads.datamanager.v1.EventParameter.verify|verify} messages.
+                     * @param message EventParameter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.datamanager.v1.IEventParameter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EventParameter message, length delimited. Does not implicitly {@link google.ads.datamanager.v1.EventParameter.verify|verify} messages.
+                     * @param message EventParameter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.datamanager.v1.IEventParameter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EventParameter message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EventParameter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.datamanager.v1.EventParameter;
+
+                    /**
+                     * Decodes an EventParameter message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EventParameter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.datamanager.v1.EventParameter;
+
+                    /**
+                     * Verifies an EventParameter message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EventParameter message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EventParameter
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.datamanager.v1.EventParameter;
+
+                    /**
+                     * Creates a plain object from an EventParameter message. Also converts values to other types if specified.
+                     * @param message EventParameter
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.datamanager.v1.EventParameter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EventParameter to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EventParameter
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** EventSource enum. */
                 enum EventSource {
                     EVENT_SOURCE_UNSPECIFIED = 0,
@@ -2161,6 +2547,9 @@ export namespace google {
 
                     /** UserProperties customerValueBucket */
                     customerValueBucket?: (google.ads.datamanager.v1.CustomerValueBucket|keyof typeof google.ads.datamanager.v1.CustomerValueBucket|null);
+
+                    /** UserProperties additionalUserProperties */
+                    additionalUserProperties?: (google.ads.datamanager.v1.IUserProperty[]|null);
                 }
 
                 /** Represents a UserProperties. */
@@ -2177,6 +2566,9 @@ export namespace google {
 
                     /** UserProperties customerValueBucket. */
                     public customerValueBucket: (google.ads.datamanager.v1.CustomerValueBucket|keyof typeof google.ads.datamanager.v1.CustomerValueBucket);
+
+                    /** UserProperties additionalUserProperties. */
+                    public additionalUserProperties: google.ads.datamanager.v1.IUserProperty[];
 
                     /**
                      * Creates a new UserProperties instance using the specified properties.
@@ -2250,6 +2642,109 @@ export namespace google {
 
                     /**
                      * Gets the default type url for UserProperties
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a UserProperty. */
+                interface IUserProperty {
+
+                    /** UserProperty propertyName */
+                    propertyName?: (string|null);
+
+                    /** UserProperty value */
+                    value?: (string|null);
+                }
+
+                /** Represents a UserProperty. */
+                class UserProperty implements IUserProperty {
+
+                    /**
+                     * Constructs a new UserProperty.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.datamanager.v1.IUserProperty);
+
+                    /** UserProperty propertyName. */
+                    public propertyName: string;
+
+                    /** UserProperty value. */
+                    public value: string;
+
+                    /**
+                     * Creates a new UserProperty instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UserProperty instance
+                     */
+                    public static create(properties?: google.ads.datamanager.v1.IUserProperty): google.ads.datamanager.v1.UserProperty;
+
+                    /**
+                     * Encodes the specified UserProperty message. Does not implicitly {@link google.ads.datamanager.v1.UserProperty.verify|verify} messages.
+                     * @param message UserProperty message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.datamanager.v1.IUserProperty, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UserProperty message, length delimited. Does not implicitly {@link google.ads.datamanager.v1.UserProperty.verify|verify} messages.
+                     * @param message UserProperty message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.datamanager.v1.IUserProperty, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a UserProperty message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UserProperty
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.datamanager.v1.UserProperty;
+
+                    /**
+                     * Decodes a UserProperty message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UserProperty
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.datamanager.v1.UserProperty;
+
+                    /**
+                     * Verifies a UserProperty message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a UserProperty message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UserProperty
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.datamanager.v1.UserProperty;
+
+                    /**
+                     * Creates a plain object from a UserProperty message. Also converts values to other types if specified.
+                     * @param message UserProperty
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.datamanager.v1.UserProperty, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UserProperty to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UserProperty
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -4788,6 +5283,7 @@ export namespace google {
                     PROCESSING_ERROR_REASON_INVALID_KEK = 22,
                     PROCESSING_ERROR_REASON_WIP_AUTH_FAILED = 23,
                     PROCESSING_ERROR_REASON_KEK_PERMISSION_DENIED = 24,
+                    PROCESSING_ERROR_REASON_AWS_AUTH_FAILED = 27,
                     PROCESSING_ERROR_REASON_USER_IDENTIFIER_DECRYPTION_ERROR = 25,
                     PROCESSING_ERROR_OPERATING_ACCOUNT_MISMATCH_FOR_AD_IDENTIFIER = 26
                 }
@@ -4802,7 +5298,8 @@ export namespace google {
                     PROCESSING_WARNING_REASON_INVALID_WIP = 5,
                     PROCESSING_WARNING_REASON_INVALID_KEK = 6,
                     PROCESSING_WARNING_REASON_USER_IDENTIFIER_DECRYPTION_ERROR = 7,
-                    PROCESSING_WARNING_REASON_INTERNAL_ERROR = 8
+                    PROCESSING_WARNING_REASON_INTERNAL_ERROR = 8,
+                    PROCESSING_WARNING_REASON_AWS_AUTH_FAILED = 9
                 }
 
                 /** Properties of a TermsOfService. */
