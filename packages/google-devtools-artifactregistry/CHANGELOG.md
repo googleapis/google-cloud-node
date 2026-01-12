@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.6.0](https://github.com/googleapis/google-cloud-node/compare/artifact-registry-v4.5.0...artifact-registry-v4.6.0) (2026-01-12)
+
+
+### Features
+
+* [artifactregistry] add Fingerprint to Artifact Registry Version resource ([#6960](https://github.com/googleapis/google-cloud-node/issues/6960)) ([5655c23](https://github.com/googleapis/google-cloud-node/commit/5655c23d30f8ce5e6f724aa210b667aa91ea3725))
+
 ## [4.5.0](https://github.com/googleapis/google-cloud-node/compare/artifact-registry-v4.4.0...artifact-registry-v4.5.0) (2025-12-09)
 
 
