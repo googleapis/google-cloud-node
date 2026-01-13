@@ -436,6 +436,34 @@
           }
         }
       }
+    },
+    "BackupDrProtectionSummary": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "BackupDrProtectionSummaryClient",
+          "rpcs": {
+            "ListResourceBackupConfigs": {
+              "methods": [
+                "listResourceBackupConfigs",
+                "listResourceBackupConfigsStream",
+                "listResourceBackupConfigsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "BackupDrProtectionSummaryClient",
+          "rpcs": {
+            "ListResourceBackupConfigs": {
+              "methods": [
+                "listResourceBackupConfigs",
+                "listResourceBackupConfigsStream",
+                "listResourceBackupConfigsAsync"
+              ]
+            }
+          }
+        }
+      }
     }
   }
 }

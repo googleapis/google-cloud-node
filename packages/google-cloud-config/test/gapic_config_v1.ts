@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -1679,6 +1679,114 @@ describe('v1.ConfigClient', () => {
         });
     });
 
+    describe('getAutoMigrationConfig', () => {
+        it('invokes getAutoMigrationConfig without error', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.GetAutoMigrationConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.GetAutoMigrationConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.config.v1.AutoMigrationConfig()
+            );
+            client.innerApiCalls.getAutoMigrationConfig = stubSimpleCall(expectedResponse);
+            const [response] = await client.getAutoMigrationConfig(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getAutoMigrationConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAutoMigrationConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAutoMigrationConfig without error using callback', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.GetAutoMigrationConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.GetAutoMigrationConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.config.v1.AutoMigrationConfig()
+            );
+            client.innerApiCalls.getAutoMigrationConfig = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getAutoMigrationConfig(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.config.v1.IAutoMigrationConfig|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getAutoMigrationConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAutoMigrationConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAutoMigrationConfig with error', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.GetAutoMigrationConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.GetAutoMigrationConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getAutoMigrationConfig = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getAutoMigrationConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getAutoMigrationConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAutoMigrationConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAutoMigrationConfig with closed client', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.GetAutoMigrationConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.GetAutoMigrationConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getAutoMigrationConfig(request), expectedError);
+        });
+    });
+
     describe('createDeployment', () => {
         it('invokes createDeployment without error', async () => {
             const client = new configModule.v1.ConfigClient({
@@ -2756,6 +2864,164 @@ describe('v1.ConfigClient', () => {
 
             client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.checkDeletePreviewProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateAutoMigrationConfig', () => {
+        it('invokes updateAutoMigrationConfig without error', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.UpdateAutoMigrationConfigRequest()
+            );
+            request.autoMigrationConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.UpdateAutoMigrationConfigRequest', ['autoMigrationConfig', 'name']);
+            request.autoMigrationConfig.name = defaultValue1;
+            const expectedHeaderRequestParams = `auto_migration_config.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateAutoMigrationConfig = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateAutoMigrationConfig(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateAutoMigrationConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAutoMigrationConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAutoMigrationConfig without error using callback', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.UpdateAutoMigrationConfigRequest()
+            );
+            request.autoMigrationConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.UpdateAutoMigrationConfigRequest', ['autoMigrationConfig', 'name']);
+            request.autoMigrationConfig.name = defaultValue1;
+            const expectedHeaderRequestParams = `auto_migration_config.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateAutoMigrationConfig = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateAutoMigrationConfig(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.config.v1.IAutoMigrationConfig, protos.google.cloud.config.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.config.v1.IAutoMigrationConfig, protos.google.cloud.config.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateAutoMigrationConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAutoMigrationConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAutoMigrationConfig with call error', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.UpdateAutoMigrationConfigRequest()
+            );
+            request.autoMigrationConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.UpdateAutoMigrationConfigRequest', ['autoMigrationConfig', 'name']);
+            request.autoMigrationConfig.name = defaultValue1;
+            const expectedHeaderRequestParams = `auto_migration_config.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateAutoMigrationConfig = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateAutoMigrationConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateAutoMigrationConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAutoMigrationConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAutoMigrationConfig with LRO error', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.UpdateAutoMigrationConfigRequest()
+            );
+            request.autoMigrationConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.UpdateAutoMigrationConfigRequest', ['autoMigrationConfig', 'name']);
+            request.autoMigrationConfig.name = defaultValue1;
+            const expectedHeaderRequestParams = `auto_migration_config.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateAutoMigrationConfig = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateAutoMigrationConfig(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateAutoMigrationConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAutoMigrationConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateAutoMigrationConfigProgress without error', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateAutoMigrationConfigProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateAutoMigrationConfigProgress with error', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateAutoMigrationConfigProgress(''), expectedError);
             assert((client.operationsClient.getOperation as SinonStub)
                 .getCall(0));
         });
@@ -5174,6 +5440,44 @@ describe('v1.ConfigClient', () => {
     });
 
     describe('Path templates', () => {
+
+        describe('autoMigrationConfig', async () => {
+            const fakePath = "/rendered/path/autoMigrationConfig";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new configModule.v1.ConfigClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.autoMigrationConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.autoMigrationConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('autoMigrationConfigPath', () => {
+                const result = client.autoMigrationConfigPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.autoMigrationConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromAutoMigrationConfigName', () => {
+                const result = client.matchProjectFromAutoMigrationConfigName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.autoMigrationConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromAutoMigrationConfigName', () => {
+                const result = client.matchLocationFromAutoMigrationConfigName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.autoMigrationConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
 
         describe('deployment', async () => {
             const fakePath = "/rendered/path/deployment";

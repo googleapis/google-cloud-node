@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -7880,6 +7880,52 @@ describe('v1.BackupDRClient', () => {
                 const result = client.matchProjectFromProjectName(fakePath);
                 assert.strictEqual(result, "projectValue");
                 assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('resourceBackupConfig', async () => {
+            const fakePath = "/rendered/path/resourceBackupConfig";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                resource_backup_config: "resourceBackupConfigValue",
+            };
+            const client = new backupdrModule.v1.BackupDRClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.resourceBackupConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.resourceBackupConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('resourceBackupConfigPath', () => {
+                const result = client.resourceBackupConfigPath("projectValue", "locationValue", "resourceBackupConfigValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.resourceBackupConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromResourceBackupConfigName', () => {
+                const result = client.matchProjectFromResourceBackupConfigName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.resourceBackupConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromResourceBackupConfigName', () => {
+                const result = client.matchLocationFromResourceBackupConfigName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.resourceBackupConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchResourceBackupConfigFromResourceBackupConfigName', () => {
+                const result = client.matchResourceBackupConfigFromResourceBackupConfigName(fakePath);
+                assert.strictEqual(result, "resourceBackupConfigValue");
+                assert((client.pathTemplates.resourceBackupConfigPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
