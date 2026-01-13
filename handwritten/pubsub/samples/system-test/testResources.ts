@@ -12,6 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// I don't like that these two files (this plus ".test") are duplicated
+// across the two test structures, but because of the tangle of rootDirs
+// and package.json "files", it's hard to avoid it.
+
 import * as uuid from 'uuid';
 
 // Returns a shortened UUID that can be used to identify a
@@ -76,7 +80,7 @@ export class TestResources {
   getPrefix(testId?: string): string {
     if (testId) {
       return [this.testSuiteId, this.currentTime, normalizeId(testId)].join(
-        '-'
+        '-',
       );
     } else {
       return [this.testSuiteId, this.currentTime].join('-');
@@ -97,7 +101,7 @@ export class TestResources {
    */
   generateBigQueryName(testId: string): string {
     return [normalizeId(this.getPrefix(testId)), this.tokenMaker.uuid()].join(
-      '_'
+      '_',
     );
   }
 
@@ -107,45 +111,39 @@ export class TestResources {
    */
   generateStorageName(testId: string): string {
     return [normalizeId(this.getPrefix(testId)), this.tokenMaker.uuid()].join(
-      '_'
+      '_',
     );
   }
 
-  /*!
+  /**
    * Given a list of resource names (and a test ID), this will return
    * a list of all resources that should be deleted to clean up for
    * the current run of that particular test.
-   *
-   * Leaving this commented out for now since it's not actively needed.
    */
-  /*filterForTest(testId: string, allResources: Resource[]): Resource[] {
+  filterForTest(testId: string, allResources: Resource[]): Resource[] {
     const prefix = this.getPrefix(testId);
     return allResources.filter(n => n.name?.includes(prefix));
-  }*/
+  }
 
-  /*!
+  /**
    * Given a list of resource names, this will return a list of all
    * resources that should be deleted to clean up after the current
    * run of a test suite.
-   *
-   * Leaving this commented out for now since it's not actively needed.
    */
-  /*filterForCurrentRun(allResources: Resource[]): Resource[] {
+  filterForCurrentRun(allResources: Resource[]): Resource[] {
     const prefix = this.getPrefix();
     return allResources.filter(n => n.name?.includes(prefix));
-  }*/
+  }
 
   /**
    * Given a list of resource names, this will return a list of all
    * resources that should be deleted to clean up after any run
    * of the current test suite. Note that some of the names may
    * still be in use.
-   *
-   * Leaving this commented out for now since it's not actively needed.
    */
-  /*filterForSuite(allResources: Resource[]): Resource[] {
+  filterForSuite(allResources: Resource[]): Resource[] {
     return allResources.filter(n => n.name?.includes(this.testSuiteId));
-  }*/
+  }
 
   /**
    * Given a list of resource names, this will return a list of all
