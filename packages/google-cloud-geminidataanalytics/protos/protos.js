@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -13400,6 +13400,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.geminidataanalytics.v1alpha.DataAgentService|createDataAgentSync}.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.DataAgentService
+                         * @typedef CreateDataAgentSyncCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.geminidataanalytics.v1alpha.DataAgent} [response] DataAgent
+                         */
+    
+                        /**
+                         * Calls CreateDataAgentSync.
+                         * @function createDataAgentSync
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.DataAgentService
+                         * @instance
+                         * @param {google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest} request CreateDataAgentRequest message or plain object
+                         * @param {google.cloud.geminidataanalytics.v1alpha.DataAgentService.CreateDataAgentSyncCallback} callback Node-style callback called with the error, if any, and DataAgent
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataAgentService.prototype.createDataAgentSync = function createDataAgentSync(request, callback) {
+                            return this.rpcCall(createDataAgentSync, $root.google.cloud.geminidataanalytics.v1alpha.CreateDataAgentRequest, $root.google.cloud.geminidataanalytics.v1alpha.DataAgent, request, callback);
+                        }, "name", { value: "CreateDataAgentSync" });
+    
+                        /**
+                         * Calls CreateDataAgentSync.
+                         * @function createDataAgentSync
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.DataAgentService
+                         * @instance
+                         * @param {google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest} request CreateDataAgentRequest message or plain object
+                         * @returns {Promise<google.cloud.geminidataanalytics.v1alpha.DataAgent>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.geminidataanalytics.v1alpha.DataAgentService|updateDataAgent}.
                          * @memberof google.cloud.geminidataanalytics.v1alpha.DataAgentService
                          * @typedef UpdateDataAgentCallback
@@ -13433,6 +13466,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.geminidataanalytics.v1alpha.DataAgentService|updateDataAgentSync}.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.DataAgentService
+                         * @typedef UpdateDataAgentSyncCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.geminidataanalytics.v1alpha.DataAgent} [response] DataAgent
+                         */
+    
+                        /**
+                         * Calls UpdateDataAgentSync.
+                         * @function updateDataAgentSync
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.DataAgentService
+                         * @instance
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest} request UpdateDataAgentRequest message or plain object
+                         * @param {google.cloud.geminidataanalytics.v1alpha.DataAgentService.UpdateDataAgentSyncCallback} callback Node-style callback called with the error, if any, and DataAgent
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataAgentService.prototype.updateDataAgentSync = function updateDataAgentSync(request, callback) {
+                            return this.rpcCall(updateDataAgentSync, $root.google.cloud.geminidataanalytics.v1alpha.UpdateDataAgentRequest, $root.google.cloud.geminidataanalytics.v1alpha.DataAgent, request, callback);
+                        }, "name", { value: "UpdateDataAgentSync" });
+    
+                        /**
+                         * Calls UpdateDataAgentSync.
+                         * @function updateDataAgentSync
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.DataAgentService
+                         * @instance
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest} request UpdateDataAgentRequest message or plain object
+                         * @returns {Promise<google.cloud.geminidataanalytics.v1alpha.DataAgent>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.geminidataanalytics.v1alpha.DataAgentService|deleteDataAgent}.
                          * @memberof google.cloud.geminidataanalytics.v1alpha.DataAgentService
                          * @typedef DeleteDataAgentCallback
@@ -13462,6 +13528,39 @@
                          * @instance
                          * @param {google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest} request DeleteDataAgentRequest message or plain object
                          * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.geminidataanalytics.v1alpha.DataAgentService|deleteDataAgentSync}.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.DataAgentService
+                         * @typedef DeleteDataAgentSyncCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls DeleteDataAgentSync.
+                         * @function deleteDataAgentSync
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.DataAgentService
+                         * @instance
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest} request DeleteDataAgentRequest message or plain object
+                         * @param {google.cloud.geminidataanalytics.v1alpha.DataAgentService.DeleteDataAgentSyncCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataAgentService.prototype.deleteDataAgentSync = function deleteDataAgentSync(request, callback) {
+                            return this.rpcCall(deleteDataAgentSync, $root.google.cloud.geminidataanalytics.v1alpha.DeleteDataAgentRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "DeleteDataAgentSync" });
+    
+                        /**
+                         * Calls DeleteDataAgentSync.
+                         * @function deleteDataAgentSync
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.DataAgentService
+                         * @instance
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest} request DeleteDataAgentRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
                          * @variation 2
                          */
     

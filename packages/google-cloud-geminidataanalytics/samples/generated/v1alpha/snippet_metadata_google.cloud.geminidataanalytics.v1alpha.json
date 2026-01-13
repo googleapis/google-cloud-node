@@ -228,6 +228,58 @@
       }
     },
     {
+      "regionTag": "geminidataanalytics_v1alpha_generated_DataAgentService_CreateDataAgentSync_async",
+      "title": "DataAgentService createDataAgentSync Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new DataAgent in a given project and location synchronously.",
+      "canonical": true,
+      "file": "data_agent_service.create_data_agent_sync.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateDataAgentSync",
+        "fullName": "google.cloud.geminidataanalytics.v1alpha.DataAgentService.CreateDataAgentSync",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "data_agent_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "data_agent",
+            "type": ".google.cloud.geminidataanalytics.v1alpha.DataAgent"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.geminidataanalytics.v1alpha.DataAgent",
+        "client": {
+          "shortName": "DataAgentServiceClient",
+          "fullName": "google.cloud.geminidataanalytics.v1alpha.DataAgentServiceClient"
+        },
+        "method": {
+          "shortName": "CreateDataAgentSync",
+          "fullName": "google.cloud.geminidataanalytics.v1alpha.DataAgentService.CreateDataAgentSync",
+          "service": {
+            "shortName": "DataAgentService",
+            "fullName": "google.cloud.geminidataanalytics.v1alpha.DataAgentService"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "geminidataanalytics_v1alpha_generated_DataAgentService_UpdateDataAgent_async",
       "title": "DataAgentService updateDataAgent Sample",
       "origin": "API_DEFINITION",
@@ -276,6 +328,54 @@
       }
     },
     {
+      "regionTag": "geminidataanalytics_v1alpha_generated_DataAgentService_UpdateDataAgentSync_async",
+      "title": "DataAgentService updateDataAgentSync Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the parameters of a single DataAgent synchronously.",
+      "canonical": true,
+      "file": "data_agent_service.update_data_agent_sync.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateDataAgentSync",
+        "fullName": "google.cloud.geminidataanalytics.v1alpha.DataAgentService.UpdateDataAgentSync",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "data_agent",
+            "type": ".google.cloud.geminidataanalytics.v1alpha.DataAgent"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.geminidataanalytics.v1alpha.DataAgent",
+        "client": {
+          "shortName": "DataAgentServiceClient",
+          "fullName": "google.cloud.geminidataanalytics.v1alpha.DataAgentServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateDataAgentSync",
+          "fullName": "google.cloud.geminidataanalytics.v1alpha.DataAgentService.UpdateDataAgentSync",
+          "service": {
+            "shortName": "DataAgentService",
+            "fullName": "google.cloud.geminidataanalytics.v1alpha.DataAgentService"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "geminidataanalytics_v1alpha_generated_DataAgentService_DeleteDataAgent_async",
       "title": "DataAgentService deleteDataAgent Sample",
       "origin": "API_DEFINITION",
@@ -312,6 +412,50 @@
         "method": {
           "shortName": "DeleteDataAgent",
           "fullName": "google.cloud.geminidataanalytics.v1alpha.DataAgentService.DeleteDataAgent",
+          "service": {
+            "shortName": "DataAgentService",
+            "fullName": "google.cloud.geminidataanalytics.v1alpha.DataAgentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "geminidataanalytics_v1alpha_generated_DataAgentService_DeleteDataAgentSync_async",
+      "title": "DataAgentService deleteDataAgentSync Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single DataAgent synchronously.",
+      "canonical": true,
+      "file": "data_agent_service.delete_data_agent_sync.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteDataAgentSync",
+        "fullName": "google.cloud.geminidataanalytics.v1alpha.DataAgentService.DeleteDataAgentSync",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "DataAgentServiceClient",
+          "fullName": "google.cloud.geminidataanalytics.v1alpha.DataAgentServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteDataAgentSync",
+          "fullName": "google.cloud.geminidataanalytics.v1alpha.DataAgentService.DeleteDataAgentSync",
           "service": {
             "shortName": "DataAgentService",
             "fullName": "google.cloud.geminidataanalytics.v1alpha.DataAgentService"
