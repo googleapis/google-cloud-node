@@ -45,3 +45,4 @@ ${SCRIPT_DIR}/migrate-git-history.sh \
 # run the script to update the split repo and either delete all the samples or just update the README
 ${SCRIPT_DIR}/delete-everything-split-repo.sh "${SPLIT_REPO}" "${ARTIFACT_NAME}"
 ${SCRIPT_DIR}/update-readme-only-split-repo.sh "${SPLIT_REPO}" "${ARTIFACT_NAME}"
+
