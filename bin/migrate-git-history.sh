@@ -130,7 +130,7 @@ git merge --allow-unrelated-histories migration/main --no-edit
 
 if [[ ! -z "${UPDATE_SCRIPT}" ]]
 then
-  bash "${UPDATE_SCRIPT}"
+  bash "${UPDATE_SCRIPT}" "${PACKAGE_PATH}"
 fi
 
 git push -u origin "${BRANCH}" --force

@@ -23,15 +23,13 @@ fi
  
 # repo name (e.g. nodejs-asset)
 SPLIT_REPO=$1
-# destination directory (e.g. google-cloud-asset)
-ARTIFACT_NAME=$2
- 
+# destination directory (e.g. packages/google-cloud-asset)
+export PACKAGE_PATH="$2"
+  
 ## Get the directory of the build script
 SCRIPT_DIR=$(realpath $(dirname "${BASH_SOURCE[0]}"))
  
 export UPDATE_SCRIPT="${SCRIPT_DIR}/split-repo-post-process.sh"
-export PACKAGE_PATH="packages/${ARTIFACT_NAME}"
- 
 # run the migrate script, remove .kokoro and .github folders
 # keep the .github/.OwlBot.yaml config
 ${SCRIPT_DIR}/migrate-git-history.sh \
