@@ -156,7 +156,6 @@
     "packages/google-cloud-security-publicca": {},
     "packages/google-cloud-securitycenter": {},
     "packages/google-cloud-securitycentermanagement": {},
-    "packages/google-cloud-securesourcemanager": {},
     "packages/google-cloud-servicedirectory": {},
     "packages/google-cloud-servicehealth": {},
     "packages/google-cloud-shell": {},
