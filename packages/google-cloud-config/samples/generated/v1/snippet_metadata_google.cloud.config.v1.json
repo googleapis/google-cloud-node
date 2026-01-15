@@ -1270,6 +1270,90 @@
           }
         }
       }
+    },
+    {
+      "regionTag": "config_v1_generated_Config_GetAutoMigrationConfig_async",
+      "title": "Config getAutoMigrationConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get the AutoMigrationConfig for a given project and location.",
+      "canonical": true,
+      "file": "config.get_auto_migration_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetAutoMigrationConfig",
+        "fullName": "google.cloud.config.v1.Config.GetAutoMigrationConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.config.v1.AutoMigrationConfig",
+        "client": {
+          "shortName": "ConfigClient",
+          "fullName": "google.cloud.config.v1.ConfigClient"
+        },
+        "method": {
+          "shortName": "GetAutoMigrationConfig",
+          "fullName": "google.cloud.config.v1.Config.GetAutoMigrationConfig",
+          "service": {
+            "shortName": "Config",
+            "fullName": "google.cloud.config.v1.Config"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "config_v1_generated_Config_UpdateAutoMigrationConfig_async",
+      "title": "Config updateAutoMigrationConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the AutoMigrationConfig for a given project and location.",
+      "canonical": true,
+      "file": "config.update_auto_migration_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateAutoMigrationConfig",
+        "fullName": "google.cloud.config.v1.Config.UpdateAutoMigrationConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "auto_migration_config",
+            "type": ".google.cloud.config.v1.AutoMigrationConfig"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ConfigClient",
+          "fullName": "google.cloud.config.v1.ConfigClient"
+        },
+        "method": {
+          "shortName": "UpdateAutoMigrationConfig",
+          "fullName": "google.cloud.config.v1.Config.UpdateAutoMigrationConfig",
+          "service": {
+            "shortName": "Config",
+            "fullName": "google.cloud.config.v1.Config"
+          }
+        }
+      }
     }
   ]
 }

@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/gkemulticloud-v2.2.1...gkemulticloud-v2.3.0) (2026-01-12)
+
+
+### Features
+
+* [gkemulticloud] added custom tolerations and labels support for Attached Clusters ([#6917](https://github.com/googleapis/google-cloud-node/issues/6917)) ([c9004db](https://github.com/googleapis/google-cloud-node/commit/c9004db0788709eb24f695a7412880e31ee29051))
+
 ## [2.2.1](https://github.com/googleapis/google-cloud-node/compare/gkemulticloud-v2.2.0...gkemulticloud-v2.2.1) (2025-10-13)
 
 

@@ -1,0 +1,5 @@
+[
+  "../../protos/google/cloud/apiregistry/v1beta/common.proto",
+  "../../protos/google/cloud/apiregistry/v1beta/resources.proto",
+  "../../protos/google/cloud/apiregistry/v1beta/service.proto"
+]

@@ -5,6 +5,150 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "7af18d7e779daec20446b8307412c6b1b7ea0166",
+          "message": "[geminidataanalytics] add LookerGoldenQuery to Context",
+          "issues": [
+            "6951"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/geminidataanalytics",
+      "id": "012f6756-68ac-4a9c-a59f-92a5e3341461",
+      "createTime": "2026-01-12T17:04:01.294Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "227bf51ea4ff0aff802a3550fc04b4bc971f29cb",
+          "message": "[memorystore] A new field `Instance.simulate_maintenance_event` is added to message `.google.cloud.memorystore.v1.`",
+          "issues": [
+            "6949"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/memorystore",
+      "id": "b7521fa0-592f-4e06-ae3f-0921559296e0",
+      "createTime": "2026-01-12T17:04:01.273Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5655c23d30f8ce5e6f724aa210b667aa91ea3725",
+          "message": "[artifactregistry] add Fingerprint to Artifact Registry Version resource",
+          "issues": [
+            "6960"
+          ]
+        }
+      ],
+      "version": "4.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/artifact-registry",
+      "id": "2f22a3ff-0f47-4d40-a64f-029853699eca",
+      "createTime": "2026-01-12T17:04:01.244Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c9004db0788709eb24f695a7412880e31ee29051",
+          "message": "[gkemulticloud] added custom tolerations and labels support for Attached Clusters",
+          "issues": [
+            "6917"
+          ]
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gkemulticloud",
+      "id": "9dcad91e-2427-4e4c-a4cd-e61e8d7b21eb",
+      "createTime": "2026-01-12T17:04:01.213Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "54c6ed08338e72714537730f618f28f40bc9b7c5",
+          "message": "Remove duplicate region tags",
+          "issues": [
+            "6950"
+          ]
+        }
+      ],
+      "version": "5.1.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-data-transfer",
+      "id": "3e4461de-e544-4722-bff5-2377f6d6bcda",
+      "createTime": "2026-01-12T17:04:01.185Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "fcfdd73f0fd8acdf1849f5fccb97b3f9a969c72c",
+          "message": "[alloydb] add POSTGRES_18 to DatabaseVersion",
+          "issues": [
+            "6955"
+          ]
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/alloydb",
+      "id": "7b6b74e1-efe1-4c5a-af80-06129b8c1555",
+      "createTime": "2026-01-12T17:04:01.166Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "168fe8615035b62ef60d0283895e6c517c1f281d",
+          "message": "Add Lustre support to the Vertex Training Custom Job API",
+          "issues": [
+            "6959"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "8e2862c632772bb21380731c23b85ef96f477350",
+          "message": "Add Lustre support to the Vertex Training Custom Job API",
+          "issues": [
+            "6952"
+          ]
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "c43e94f7-4c53-46d2-9252-0657301beeb2",
+      "createTime": "2026-01-12T17:04:01.136Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "869263a1675d4063fade629e9e92508b903497b9",
+          "message": "[generativelanguage] add support for GoogleMaps and FileSearch tools",
+          "issues": [
+            "6957"
+          ]
+        }
+      ],
+      "version": "3.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ai/generativelanguage",
+      "id": "da39ac69-fefd-4714-82ef-0274be0a53d6",
+      "createTime": "2026-01-12T17:04:01.118Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "681d7af64253a12c62e81789d8dc7d48150f0f76",
           "message": "Initial generation of library",
           "issues": []
@@ -67373,5 +67517,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-12-15T21:30:17.451Z"
+  "updateTime": "2026-01-12T17:04:01.294Z"
 }

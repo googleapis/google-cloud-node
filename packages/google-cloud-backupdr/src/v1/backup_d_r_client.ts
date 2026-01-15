@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -216,6 +216,9 @@ export class BackupDRClient {
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
+      ),
+      resourceBackupConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/resourceBackupConfigs/{resource_backup_config}'
       ),
     };
 
@@ -7373,6 +7376,55 @@ export class BackupDRClient {
    */
   matchProjectFromProjectName(projectName: string) {
     return this.pathTemplates.projectPathTemplate.match(projectName).project;
+  }
+
+  /**
+   * Return a fully-qualified resourceBackupConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} resource_backup_config
+   * @returns {string} Resource name string.
+   */
+  resourceBackupConfigPath(project:string,location:string,resourceBackupConfig:string) {
+    return this.pathTemplates.resourceBackupConfigPathTemplate.render({
+      project: project,
+      location: location,
+      resource_backup_config: resourceBackupConfig,
+    });
+  }
+
+  /**
+   * Parse the project from ResourceBackupConfig resource.
+   *
+   * @param {string} resourceBackupConfigName
+   *   A fully-qualified path representing ResourceBackupConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromResourceBackupConfigName(resourceBackupConfigName: string) {
+    return this.pathTemplates.resourceBackupConfigPathTemplate.match(resourceBackupConfigName).project;
+  }
+
+  /**
+   * Parse the location from ResourceBackupConfig resource.
+   *
+   * @param {string} resourceBackupConfigName
+   *   A fully-qualified path representing ResourceBackupConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromResourceBackupConfigName(resourceBackupConfigName: string) {
+    return this.pathTemplates.resourceBackupConfigPathTemplate.match(resourceBackupConfigName).location;
+  }
+
+  /**
+   * Parse the resource_backup_config from ResourceBackupConfig resource.
+   *
+   * @param {string} resourceBackupConfigName
+   *   A fully-qualified path representing ResourceBackupConfig resource.
+   * @returns {string} A string representing the resource_backup_config.
+   */
+  matchResourceBackupConfigFromResourceBackupConfigName(resourceBackupConfigName: string) {
+    return this.pathTemplates.resourceBackupConfigPathTemplate.match(resourceBackupConfigName).resource_backup_config;
   }
 
   /**

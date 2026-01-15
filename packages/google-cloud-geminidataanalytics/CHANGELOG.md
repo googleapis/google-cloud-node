@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/geminidataanalytics-v0.3.0...geminidataanalytics-v0.4.0) (2026-01-12)
+
+
+### Features
+
+* [geminidataanalytics] add LookerGoldenQuery to Context ([#6951](https://github.com/googleapis/google-cloud-node/issues/6951)) ([7af18d7](https://github.com/googleapis/google-cloud-node/commit/7af18d7e779daec20446b8307412c6b1b7ea0166))
+
 ## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/geminidataanalytics-v0.2.0...geminidataanalytics-v0.3.0) (2025-12-09)
 
 

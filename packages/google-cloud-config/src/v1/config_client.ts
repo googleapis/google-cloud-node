@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -188,6 +188,9 @@ export class ConfigClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      autoMigrationConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/autoMigrationConfig'
+      ),
       deploymentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/deployments/{deployment}'
       ),
@@ -281,6 +284,10 @@ export class ConfigClient {
       '.google.cloud.config.v1.Preview') as gax.protobuf.Type;
     const deletePreviewMetadata = protoFilesRoot.lookup(
       '.google.cloud.config.v1.OperationMetadata') as gax.protobuf.Type;
+    const updateAutoMigrationConfigResponse = protoFilesRoot.lookup(
+      '.google.cloud.config.v1.AutoMigrationConfig') as gax.protobuf.Type;
+    const updateAutoMigrationConfigMetadata = protoFilesRoot.lookup(
+      '.google.cloud.config.v1.OperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createDeployment: new this._gaxModule.LongrunningDescriptor(
@@ -310,7 +317,11 @@ export class ConfigClient {
       deletePreview: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deletePreviewResponse.decode.bind(deletePreviewResponse),
-        deletePreviewMetadata.decode.bind(deletePreviewMetadata))
+        deletePreviewMetadata.decode.bind(deletePreviewMetadata)),
+      updateAutoMigrationConfig: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateAutoMigrationConfigResponse.decode.bind(updateAutoMigrationConfigResponse),
+        updateAutoMigrationConfigMetadata.decode.bind(updateAutoMigrationConfigMetadata))
     };
 
     // Put together the default options sent with requests.
@@ -356,7 +367,7 @@ export class ConfigClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const configStubMethods =
-        ['listDeployments', 'getDeployment', 'createDeployment', 'updateDeployment', 'deleteDeployment', 'listRevisions', 'getRevision', 'getResource', 'listResources', 'exportDeploymentStatefile', 'exportRevisionStatefile', 'importStatefile', 'deleteStatefile', 'lockDeployment', 'unlockDeployment', 'exportLockInfo', 'createPreview', 'getPreview', 'listPreviews', 'deletePreview', 'exportPreviewResult', 'listTerraformVersions', 'getTerraformVersion', 'listResourceChanges', 'getResourceChange', 'listResourceDrifts', 'getResourceDrift'];
+        ['listDeployments', 'getDeployment', 'createDeployment', 'updateDeployment', 'deleteDeployment', 'listRevisions', 'getRevision', 'getResource', 'listResources', 'exportDeploymentStatefile', 'exportRevisionStatefile', 'importStatefile', 'deleteStatefile', 'lockDeployment', 'unlockDeployment', 'exportLockInfo', 'createPreview', 'getPreview', 'listPreviews', 'deletePreview', 'exportPreviewResult', 'listTerraformVersions', 'getTerraformVersion', 'listResourceChanges', 'getResourceChange', 'listResourceDrifts', 'getResourceDrift', 'getAutoMigrationConfig', 'updateAutoMigrationConfig'];
     for (const methodName of configStubMethods) {
       const callPromise = this.configStub.then(
         stub => (...args: Array<{}>) => {
@@ -1716,6 +1727,102 @@ export class ConfigClient {
         throw error;
       });
   }
+/**
+ * Get the AutoMigrationConfig for a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the AutoMigrationConfig.
+ *   Format:
+ *   'projects/{project_id}/locations/{location}/AutoMigrationConfig'.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.config.v1.AutoMigrationConfig|AutoMigrationConfig}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/config.get_auto_migration_config.js</caption>
+ * region_tag:config_v1_generated_Config_GetAutoMigrationConfig_async
+ */
+  getAutoMigrationConfig(
+      request?: protos.google.cloud.config.v1.IGetAutoMigrationConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.config.v1.IAutoMigrationConfig,
+        protos.google.cloud.config.v1.IGetAutoMigrationConfigRequest|undefined, {}|undefined
+      ]>;
+  getAutoMigrationConfig(
+      request: protos.google.cloud.config.v1.IGetAutoMigrationConfigRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.config.v1.IAutoMigrationConfig,
+          protos.google.cloud.config.v1.IGetAutoMigrationConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getAutoMigrationConfig(
+      request: protos.google.cloud.config.v1.IGetAutoMigrationConfigRequest,
+      callback: Callback<
+          protos.google.cloud.config.v1.IAutoMigrationConfig,
+          protos.google.cloud.config.v1.IGetAutoMigrationConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getAutoMigrationConfig(
+      request?: protos.google.cloud.config.v1.IGetAutoMigrationConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.config.v1.IAutoMigrationConfig,
+          protos.google.cloud.config.v1.IGetAutoMigrationConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.config.v1.IAutoMigrationConfig,
+          protos.google.cloud.config.v1.IGetAutoMigrationConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.config.v1.IAutoMigrationConfig,
+        protos.google.cloud.config.v1.IGetAutoMigrationConfigRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('getAutoMigrationConfig request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.config.v1.IAutoMigrationConfig,
+        protos.google.cloud.config.v1.IGetAutoMigrationConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAutoMigrationConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getAutoMigrationConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.config.v1.IAutoMigrationConfig,
+        protos.google.cloud.config.v1.IGetAutoMigrationConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getAutoMigrationConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
 
 /**
  * Creates a {@link protos.google.cloud.config.v1.Deployment|Deployment}.
@@ -2571,6 +2678,116 @@ export class ConfigClient {
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deletePreview, this._gaxModule.createDefaultBackoffSettings());
     return decodeOperation as LROperation<protos.google.cloud.config.v1.Preview, protos.google.cloud.config.v1.OperationMetadata>;
+  }
+/**
+ * Updates the AutoMigrationConfig for a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. The update mask applies to the resource. See
+ *   {@link protos.google.protobuf.FieldMask|google.protobuf.FieldMask}.
+ * @param {google.cloud.config.v1.AutoMigrationConfig} request.autoMigrationConfig
+ *   Required. The AutoMigrationConfig to update.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/config.update_auto_migration_config.js</caption>
+ * region_tag:config_v1_generated_Config_UpdateAutoMigrationConfig_async
+ */
+  updateAutoMigrationConfig(
+      request?: protos.google.cloud.config.v1.IUpdateAutoMigrationConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.config.v1.IAutoMigrationConfig, protos.google.cloud.config.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  updateAutoMigrationConfig(
+      request: protos.google.cloud.config.v1.IUpdateAutoMigrationConfigRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.config.v1.IAutoMigrationConfig, protos.google.cloud.config.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  updateAutoMigrationConfig(
+      request: protos.google.cloud.config.v1.IUpdateAutoMigrationConfigRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.config.v1.IAutoMigrationConfig, protos.google.cloud.config.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  updateAutoMigrationConfig(
+      request?: protos.google.cloud.config.v1.IUpdateAutoMigrationConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.config.v1.IAutoMigrationConfig, protos.google.cloud.config.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.config.v1.IAutoMigrationConfig, protos.google.cloud.config.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.config.v1.IAutoMigrationConfig, protos.google.cloud.config.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'auto_migration_config.name': request.autoMigrationConfig!.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.config.v1.IAutoMigrationConfig, protos.google.cloud.config.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateAutoMigrationConfig response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateAutoMigrationConfig request %j', request);
+    return this.innerApiCalls.updateAutoMigrationConfig(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.config.v1.IAutoMigrationConfig, protos.google.cloud.config.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateAutoMigrationConfig response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `updateAutoMigrationConfig()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/config.update_auto_migration_config.js</caption>
+ * region_tag:config_v1_generated_Config_UpdateAutoMigrationConfig_async
+ */
+  async checkUpdateAutoMigrationConfigProgress(name: string): Promise<LROperation<protos.google.cloud.config.v1.AutoMigrationConfig, protos.google.cloud.config.v1.OperationMetadata>>{
+    this._log.info('updateAutoMigrationConfig long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateAutoMigrationConfig, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.config.v1.AutoMigrationConfig, protos.google.cloud.config.v1.OperationMetadata>;
   }
  /**
  * Lists {@link protos.google.cloud.config.v1.Deployment|Deployment}s in a given project
@@ -4868,6 +5085,42 @@ export class ConfigClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified autoMigrationConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  autoMigrationConfigPath(project:string,location:string) {
+    return this.pathTemplates.autoMigrationConfigPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from AutoMigrationConfig resource.
+   *
+   * @param {string} autoMigrationConfigName
+   *   A fully-qualified path representing AutoMigrationConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAutoMigrationConfigName(autoMigrationConfigName: string) {
+    return this.pathTemplates.autoMigrationConfigPathTemplate.match(autoMigrationConfigName).project;
+  }
+
+  /**
+   * Parse the location from AutoMigrationConfig resource.
+   *
+   * @param {string} autoMigrationConfigName
+   *   A fully-qualified path representing AutoMigrationConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAutoMigrationConfigName(autoMigrationConfigName: string) {
+    return this.pathTemplates.autoMigrationConfigPathTemplate.match(autoMigrationConfigName).location;
+  }
 
   /**
    * Return a fully-qualified deployment resource name string.

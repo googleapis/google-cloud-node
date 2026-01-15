@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -42943,6 +42943,2900 @@
                         };
     
                         return FetchDataSourceReferencesForResourceTypeResponse;
+                    })();
+    
+                    v1.BackupDrProtectionSummary = (function() {
+    
+                        /**
+                         * Constructs a new BackupDrProtectionSummary service.
+                         * @memberof google.cloud.backupdr.v1
+                         * @classdesc Represents a BackupDrProtectionSummary
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function BackupDrProtectionSummary(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (BackupDrProtectionSummary.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = BackupDrProtectionSummary;
+    
+                        /**
+                         * Creates new BackupDrProtectionSummary service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.backupdr.v1.BackupDrProtectionSummary
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {BackupDrProtectionSummary} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        BackupDrProtectionSummary.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.backupdr.v1.BackupDrProtectionSummary|listResourceBackupConfigs}.
+                         * @memberof google.cloud.backupdr.v1.BackupDrProtectionSummary
+                         * @typedef ListResourceBackupConfigsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.backupdr.v1.ListResourceBackupConfigsResponse} [response] ListResourceBackupConfigsResponse
+                         */
+    
+                        /**
+                         * Calls ListResourceBackupConfigs.
+                         * @function listResourceBackupConfigs
+                         * @memberof google.cloud.backupdr.v1.BackupDrProtectionSummary
+                         * @instance
+                         * @param {google.cloud.backupdr.v1.IListResourceBackupConfigsRequest} request ListResourceBackupConfigsRequest message or plain object
+                         * @param {google.cloud.backupdr.v1.BackupDrProtectionSummary.ListResourceBackupConfigsCallback} callback Node-style callback called with the error, if any, and ListResourceBackupConfigsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(BackupDrProtectionSummary.prototype.listResourceBackupConfigs = function listResourceBackupConfigs(request, callback) {
+                            return this.rpcCall(listResourceBackupConfigs, $root.google.cloud.backupdr.v1.ListResourceBackupConfigsRequest, $root.google.cloud.backupdr.v1.ListResourceBackupConfigsResponse, request, callback);
+                        }, "name", { value: "ListResourceBackupConfigs" });
+    
+                        /**
+                         * Calls ListResourceBackupConfigs.
+                         * @function listResourceBackupConfigs
+                         * @memberof google.cloud.backupdr.v1.BackupDrProtectionSummary
+                         * @instance
+                         * @param {google.cloud.backupdr.v1.IListResourceBackupConfigsRequest} request ListResourceBackupConfigsRequest message or plain object
+                         * @returns {Promise<google.cloud.backupdr.v1.ListResourceBackupConfigsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        return BackupDrProtectionSummary;
+                    })();
+    
+                    v1.ListResourceBackupConfigsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListResourceBackupConfigsRequest.
+                         * @memberof google.cloud.backupdr.v1
+                         * @interface IListResourceBackupConfigsRequest
+                         * @property {string|null} [parent] ListResourceBackupConfigsRequest parent
+                         * @property {number|null} [pageSize] ListResourceBackupConfigsRequest pageSize
+                         * @property {string|null} [pageToken] ListResourceBackupConfigsRequest pageToken
+                         * @property {string|null} [filter] ListResourceBackupConfigsRequest filter
+                         * @property {string|null} [orderBy] ListResourceBackupConfigsRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListResourceBackupConfigsRequest.
+                         * @memberof google.cloud.backupdr.v1
+                         * @classdesc Represents a ListResourceBackupConfigsRequest.
+                         * @implements IListResourceBackupConfigsRequest
+                         * @constructor
+                         * @param {google.cloud.backupdr.v1.IListResourceBackupConfigsRequest=} [properties] Properties to set
+                         */
+                        function ListResourceBackupConfigsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListResourceBackupConfigsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.backupdr.v1.ListResourceBackupConfigsRequest
+                         * @instance
+                         */
+                        ListResourceBackupConfigsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListResourceBackupConfigsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.backupdr.v1.ListResourceBackupConfigsRequest
+                         * @instance
+                         */
+                        ListResourceBackupConfigsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListResourceBackupConfigsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.backupdr.v1.ListResourceBackupConfigsRequest
+                         * @instance
+                         */
+                        ListResourceBackupConfigsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListResourceBackupConfigsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.backupdr.v1.ListResourceBackupConfigsRequest
+                         * @instance
+                         */
+                        ListResourceBackupConfigsRequest.prototype.filter = "";
+    
+                        /**
+                         * ListResourceBackupConfigsRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.backupdr.v1.ListResourceBackupConfigsRequest
+                         * @instance
+                         */
+                        ListResourceBackupConfigsRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListResourceBackupConfigsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.backupdr.v1.ListResourceBackupConfigsRequest
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IListResourceBackupConfigsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.backupdr.v1.ListResourceBackupConfigsRequest} ListResourceBackupConfigsRequest instance
+                         */
+                        ListResourceBackupConfigsRequest.create = function create(properties) {
+                            return new ListResourceBackupConfigsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListResourceBackupConfigsRequest message. Does not implicitly {@link google.cloud.backupdr.v1.ListResourceBackupConfigsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.backupdr.v1.ListResourceBackupConfigsRequest
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IListResourceBackupConfigsRequest} message ListResourceBackupConfigsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListResourceBackupConfigsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListResourceBackupConfigsRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.ListResourceBackupConfigsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.backupdr.v1.ListResourceBackupConfigsRequest
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IListResourceBackupConfigsRequest} message ListResourceBackupConfigsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListResourceBackupConfigsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListResourceBackupConfigsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.backupdr.v1.ListResourceBackupConfigsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.backupdr.v1.ListResourceBackupConfigsRequest} ListResourceBackupConfigsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListResourceBackupConfigsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.backupdr.v1.ListResourceBackupConfigsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListResourceBackupConfigsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.backupdr.v1.ListResourceBackupConfigsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.backupdr.v1.ListResourceBackupConfigsRequest} ListResourceBackupConfigsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListResourceBackupConfigsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListResourceBackupConfigsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.backupdr.v1.ListResourceBackupConfigsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListResourceBackupConfigsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListResourceBackupConfigsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.backupdr.v1.ListResourceBackupConfigsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.backupdr.v1.ListResourceBackupConfigsRequest} ListResourceBackupConfigsRequest
+                         */
+                        ListResourceBackupConfigsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.backupdr.v1.ListResourceBackupConfigsRequest)
+                                return object;
+                            var message = new $root.google.cloud.backupdr.v1.ListResourceBackupConfigsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListResourceBackupConfigsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.backupdr.v1.ListResourceBackupConfigsRequest
+                         * @static
+                         * @param {google.cloud.backupdr.v1.ListResourceBackupConfigsRequest} message ListResourceBackupConfigsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListResourceBackupConfigsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListResourceBackupConfigsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.backupdr.v1.ListResourceBackupConfigsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListResourceBackupConfigsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListResourceBackupConfigsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.backupdr.v1.ListResourceBackupConfigsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListResourceBackupConfigsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.backupdr.v1.ListResourceBackupConfigsRequest";
+                        };
+    
+                        return ListResourceBackupConfigsRequest;
+                    })();
+    
+                    v1.ListResourceBackupConfigsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListResourceBackupConfigsResponse.
+                         * @memberof google.cloud.backupdr.v1
+                         * @interface IListResourceBackupConfigsResponse
+                         * @property {Array.<google.cloud.backupdr.v1.IResourceBackupConfig>|null} [resourceBackupConfigs] ListResourceBackupConfigsResponse resourceBackupConfigs
+                         * @property {string|null} [nextPageToken] ListResourceBackupConfigsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListResourceBackupConfigsResponse.
+                         * @memberof google.cloud.backupdr.v1
+                         * @classdesc Represents a ListResourceBackupConfigsResponse.
+                         * @implements IListResourceBackupConfigsResponse
+                         * @constructor
+                         * @param {google.cloud.backupdr.v1.IListResourceBackupConfigsResponse=} [properties] Properties to set
+                         */
+                        function ListResourceBackupConfigsResponse(properties) {
+                            this.resourceBackupConfigs = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListResourceBackupConfigsResponse resourceBackupConfigs.
+                         * @member {Array.<google.cloud.backupdr.v1.IResourceBackupConfig>} resourceBackupConfigs
+                         * @memberof google.cloud.backupdr.v1.ListResourceBackupConfigsResponse
+                         * @instance
+                         */
+                        ListResourceBackupConfigsResponse.prototype.resourceBackupConfigs = $util.emptyArray;
+    
+                        /**
+                         * ListResourceBackupConfigsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.backupdr.v1.ListResourceBackupConfigsResponse
+                         * @instance
+                         */
+                        ListResourceBackupConfigsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListResourceBackupConfigsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.backupdr.v1.ListResourceBackupConfigsResponse
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IListResourceBackupConfigsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.backupdr.v1.ListResourceBackupConfigsResponse} ListResourceBackupConfigsResponse instance
+                         */
+                        ListResourceBackupConfigsResponse.create = function create(properties) {
+                            return new ListResourceBackupConfigsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListResourceBackupConfigsResponse message. Does not implicitly {@link google.cloud.backupdr.v1.ListResourceBackupConfigsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.backupdr.v1.ListResourceBackupConfigsResponse
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IListResourceBackupConfigsResponse} message ListResourceBackupConfigsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListResourceBackupConfigsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.resourceBackupConfigs != null && message.resourceBackupConfigs.length)
+                                for (var i = 0; i < message.resourceBackupConfigs.length; ++i)
+                                    $root.google.cloud.backupdr.v1.ResourceBackupConfig.encode(message.resourceBackupConfigs[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListResourceBackupConfigsResponse message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.ListResourceBackupConfigsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.backupdr.v1.ListResourceBackupConfigsResponse
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IListResourceBackupConfigsResponse} message ListResourceBackupConfigsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListResourceBackupConfigsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListResourceBackupConfigsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.backupdr.v1.ListResourceBackupConfigsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.backupdr.v1.ListResourceBackupConfigsResponse} ListResourceBackupConfigsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListResourceBackupConfigsResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.backupdr.v1.ListResourceBackupConfigsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.resourceBackupConfigs && message.resourceBackupConfigs.length))
+                                            message.resourceBackupConfigs = [];
+                                        message.resourceBackupConfigs.push($root.google.cloud.backupdr.v1.ResourceBackupConfig.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListResourceBackupConfigsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.backupdr.v1.ListResourceBackupConfigsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.backupdr.v1.ListResourceBackupConfigsResponse} ListResourceBackupConfigsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListResourceBackupConfigsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListResourceBackupConfigsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.backupdr.v1.ListResourceBackupConfigsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListResourceBackupConfigsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.resourceBackupConfigs != null && message.hasOwnProperty("resourceBackupConfigs")) {
+                                if (!Array.isArray(message.resourceBackupConfigs))
+                                    return "resourceBackupConfigs: array expected";
+                                for (var i = 0; i < message.resourceBackupConfigs.length; ++i) {
+                                    var error = $root.google.cloud.backupdr.v1.ResourceBackupConfig.verify(message.resourceBackupConfigs[i]);
+                                    if (error)
+                                        return "resourceBackupConfigs." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListResourceBackupConfigsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.backupdr.v1.ListResourceBackupConfigsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.backupdr.v1.ListResourceBackupConfigsResponse} ListResourceBackupConfigsResponse
+                         */
+                        ListResourceBackupConfigsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.backupdr.v1.ListResourceBackupConfigsResponse)
+                                return object;
+                            var message = new $root.google.cloud.backupdr.v1.ListResourceBackupConfigsResponse();
+                            if (object.resourceBackupConfigs) {
+                                if (!Array.isArray(object.resourceBackupConfigs))
+                                    throw TypeError(".google.cloud.backupdr.v1.ListResourceBackupConfigsResponse.resourceBackupConfigs: array expected");
+                                message.resourceBackupConfigs = [];
+                                for (var i = 0; i < object.resourceBackupConfigs.length; ++i) {
+                                    if (typeof object.resourceBackupConfigs[i] !== "object")
+                                        throw TypeError(".google.cloud.backupdr.v1.ListResourceBackupConfigsResponse.resourceBackupConfigs: object expected");
+                                    message.resourceBackupConfigs[i] = $root.google.cloud.backupdr.v1.ResourceBackupConfig.fromObject(object.resourceBackupConfigs[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListResourceBackupConfigsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.backupdr.v1.ListResourceBackupConfigsResponse
+                         * @static
+                         * @param {google.cloud.backupdr.v1.ListResourceBackupConfigsResponse} message ListResourceBackupConfigsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListResourceBackupConfigsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.resourceBackupConfigs = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.resourceBackupConfigs && message.resourceBackupConfigs.length) {
+                                object.resourceBackupConfigs = [];
+                                for (var j = 0; j < message.resourceBackupConfigs.length; ++j)
+                                    object.resourceBackupConfigs[j] = $root.google.cloud.backupdr.v1.ResourceBackupConfig.toObject(message.resourceBackupConfigs[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListResourceBackupConfigsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.backupdr.v1.ListResourceBackupConfigsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListResourceBackupConfigsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListResourceBackupConfigsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.backupdr.v1.ListResourceBackupConfigsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListResourceBackupConfigsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.backupdr.v1.ListResourceBackupConfigsResponse";
+                        };
+    
+                        return ListResourceBackupConfigsResponse;
+                    })();
+    
+                    v1.ResourceBackupConfig = (function() {
+    
+                        /**
+                         * Properties of a ResourceBackupConfig.
+                         * @memberof google.cloud.backupdr.v1
+                         * @interface IResourceBackupConfig
+                         * @property {string|null} [name] ResourceBackupConfig name
+                         * @property {string|null} [uid] ResourceBackupConfig uid
+                         * @property {string|null} [targetResource] ResourceBackupConfig targetResource
+                         * @property {string|null} [targetResourceDisplayName] ResourceBackupConfig targetResourceDisplayName
+                         * @property {google.cloud.backupdr.v1.ResourceBackupConfig.ResourceType|null} [targetResourceType] ResourceBackupConfig targetResourceType
+                         * @property {Object.<string,string>|null} [targetResourceLabels] ResourceBackupConfig targetResourceLabels
+                         * @property {Array.<google.cloud.backupdr.v1.IBackupConfigDetails>|null} [backupConfigsDetails] ResourceBackupConfig backupConfigsDetails
+                         * @property {boolean|null} [backupConfigured] ResourceBackupConfig backupConfigured
+                         * @property {boolean|null} [vaulted] ResourceBackupConfig vaulted
+                         */
+    
+                        /**
+                         * Constructs a new ResourceBackupConfig.
+                         * @memberof google.cloud.backupdr.v1
+                         * @classdesc Represents a ResourceBackupConfig.
+                         * @implements IResourceBackupConfig
+                         * @constructor
+                         * @param {google.cloud.backupdr.v1.IResourceBackupConfig=} [properties] Properties to set
+                         */
+                        function ResourceBackupConfig(properties) {
+                            this.targetResourceLabels = {};
+                            this.backupConfigsDetails = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ResourceBackupConfig name.
+                         * @member {string} name
+                         * @memberof google.cloud.backupdr.v1.ResourceBackupConfig
+                         * @instance
+                         */
+                        ResourceBackupConfig.prototype.name = "";
+    
+                        /**
+                         * ResourceBackupConfig uid.
+                         * @member {string} uid
+                         * @memberof google.cloud.backupdr.v1.ResourceBackupConfig
+                         * @instance
+                         */
+                        ResourceBackupConfig.prototype.uid = "";
+    
+                        /**
+                         * ResourceBackupConfig targetResource.
+                         * @member {string} targetResource
+                         * @memberof google.cloud.backupdr.v1.ResourceBackupConfig
+                         * @instance
+                         */
+                        ResourceBackupConfig.prototype.targetResource = "";
+    
+                        /**
+                         * ResourceBackupConfig targetResourceDisplayName.
+                         * @member {string} targetResourceDisplayName
+                         * @memberof google.cloud.backupdr.v1.ResourceBackupConfig
+                         * @instance
+                         */
+                        ResourceBackupConfig.prototype.targetResourceDisplayName = "";
+    
+                        /**
+                         * ResourceBackupConfig targetResourceType.
+                         * @member {google.cloud.backupdr.v1.ResourceBackupConfig.ResourceType} targetResourceType
+                         * @memberof google.cloud.backupdr.v1.ResourceBackupConfig
+                         * @instance
+                         */
+                        ResourceBackupConfig.prototype.targetResourceType = 0;
+    
+                        /**
+                         * ResourceBackupConfig targetResourceLabels.
+                         * @member {Object.<string,string>} targetResourceLabels
+                         * @memberof google.cloud.backupdr.v1.ResourceBackupConfig
+                         * @instance
+                         */
+                        ResourceBackupConfig.prototype.targetResourceLabels = $util.emptyObject;
+    
+                        /**
+                         * ResourceBackupConfig backupConfigsDetails.
+                         * @member {Array.<google.cloud.backupdr.v1.IBackupConfigDetails>} backupConfigsDetails
+                         * @memberof google.cloud.backupdr.v1.ResourceBackupConfig
+                         * @instance
+                         */
+                        ResourceBackupConfig.prototype.backupConfigsDetails = $util.emptyArray;
+    
+                        /**
+                         * ResourceBackupConfig backupConfigured.
+                         * @member {boolean} backupConfigured
+                         * @memberof google.cloud.backupdr.v1.ResourceBackupConfig
+                         * @instance
+                         */
+                        ResourceBackupConfig.prototype.backupConfigured = false;
+    
+                        /**
+                         * ResourceBackupConfig vaulted.
+                         * @member {boolean} vaulted
+                         * @memberof google.cloud.backupdr.v1.ResourceBackupConfig
+                         * @instance
+                         */
+                        ResourceBackupConfig.prototype.vaulted = false;
+    
+                        /**
+                         * Creates a new ResourceBackupConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.backupdr.v1.ResourceBackupConfig
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IResourceBackupConfig=} [properties] Properties to set
+                         * @returns {google.cloud.backupdr.v1.ResourceBackupConfig} ResourceBackupConfig instance
+                         */
+                        ResourceBackupConfig.create = function create(properties) {
+                            return new ResourceBackupConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ResourceBackupConfig message. Does not implicitly {@link google.cloud.backupdr.v1.ResourceBackupConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.backupdr.v1.ResourceBackupConfig
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IResourceBackupConfig} message ResourceBackupConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResourceBackupConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.uid);
+                            if (message.targetResource != null && Object.hasOwnProperty.call(message, "targetResource"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.targetResource);
+                            if (message.targetResourceDisplayName != null && Object.hasOwnProperty.call(message, "targetResourceDisplayName"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.targetResourceDisplayName);
+                            if (message.targetResourceType != null && Object.hasOwnProperty.call(message, "targetResourceType"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.targetResourceType);
+                            if (message.targetResourceLabels != null && Object.hasOwnProperty.call(message, "targetResourceLabels"))
+                                for (var keys = Object.keys(message.targetResourceLabels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 6, wireType 2 =*/50).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.targetResourceLabels[keys[i]]).ldelim();
+                            if (message.backupConfigsDetails != null && message.backupConfigsDetails.length)
+                                for (var i = 0; i < message.backupConfigsDetails.length; ++i)
+                                    $root.google.cloud.backupdr.v1.BackupConfigDetails.encode(message.backupConfigsDetails[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.backupConfigured != null && Object.hasOwnProperty.call(message, "backupConfigured"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).bool(message.backupConfigured);
+                            if (message.vaulted != null && Object.hasOwnProperty.call(message, "vaulted"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).bool(message.vaulted);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ResourceBackupConfig message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.ResourceBackupConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.backupdr.v1.ResourceBackupConfig
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IResourceBackupConfig} message ResourceBackupConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResourceBackupConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ResourceBackupConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.backupdr.v1.ResourceBackupConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.backupdr.v1.ResourceBackupConfig} ResourceBackupConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResourceBackupConfig.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.backupdr.v1.ResourceBackupConfig(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.uid = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.targetResource = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.targetResourceDisplayName = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.targetResourceType = reader.int32();
+                                        break;
+                                    }
+                                case 6: {
+                                        if (message.targetResourceLabels === $util.emptyObject)
+                                            message.targetResourceLabels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.targetResourceLabels[key] = value;
+                                        break;
+                                    }
+                                case 7: {
+                                        if (!(message.backupConfigsDetails && message.backupConfigsDetails.length))
+                                            message.backupConfigsDetails = [];
+                                        message.backupConfigsDetails.push($root.google.cloud.backupdr.v1.BackupConfigDetails.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 8: {
+                                        message.backupConfigured = reader.bool();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.vaulted = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ResourceBackupConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.backupdr.v1.ResourceBackupConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.backupdr.v1.ResourceBackupConfig} ResourceBackupConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResourceBackupConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ResourceBackupConfig message.
+                         * @function verify
+                         * @memberof google.cloud.backupdr.v1.ResourceBackupConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ResourceBackupConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                if (!$util.isString(message.uid))
+                                    return "uid: string expected";
+                            if (message.targetResource != null && message.hasOwnProperty("targetResource"))
+                                if (!$util.isString(message.targetResource))
+                                    return "targetResource: string expected";
+                            if (message.targetResourceDisplayName != null && message.hasOwnProperty("targetResourceDisplayName"))
+                                if (!$util.isString(message.targetResourceDisplayName))
+                                    return "targetResourceDisplayName: string expected";
+                            if (message.targetResourceType != null && message.hasOwnProperty("targetResourceType"))
+                                switch (message.targetResourceType) {
+                                default:
+                                    return "targetResourceType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.targetResourceLabels != null && message.hasOwnProperty("targetResourceLabels")) {
+                                if (!$util.isObject(message.targetResourceLabels))
+                                    return "targetResourceLabels: object expected";
+                                var key = Object.keys(message.targetResourceLabels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.targetResourceLabels[key[i]]))
+                                        return "targetResourceLabels: string{k:string} expected";
+                            }
+                            if (message.backupConfigsDetails != null && message.hasOwnProperty("backupConfigsDetails")) {
+                                if (!Array.isArray(message.backupConfigsDetails))
+                                    return "backupConfigsDetails: array expected";
+                                for (var i = 0; i < message.backupConfigsDetails.length; ++i) {
+                                    var error = $root.google.cloud.backupdr.v1.BackupConfigDetails.verify(message.backupConfigsDetails[i]);
+                                    if (error)
+                                        return "backupConfigsDetails." + error;
+                                }
+                            }
+                            if (message.backupConfigured != null && message.hasOwnProperty("backupConfigured"))
+                                if (typeof message.backupConfigured !== "boolean")
+                                    return "backupConfigured: boolean expected";
+                            if (message.vaulted != null && message.hasOwnProperty("vaulted"))
+                                if (typeof message.vaulted !== "boolean")
+                                    return "vaulted: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ResourceBackupConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.backupdr.v1.ResourceBackupConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.backupdr.v1.ResourceBackupConfig} ResourceBackupConfig
+                         */
+                        ResourceBackupConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.backupdr.v1.ResourceBackupConfig)
+                                return object;
+                            var message = new $root.google.cloud.backupdr.v1.ResourceBackupConfig();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.uid != null)
+                                message.uid = String(object.uid);
+                            if (object.targetResource != null)
+                                message.targetResource = String(object.targetResource);
+                            if (object.targetResourceDisplayName != null)
+                                message.targetResourceDisplayName = String(object.targetResourceDisplayName);
+                            switch (object.targetResourceType) {
+                            default:
+                                if (typeof object.targetResourceType === "number") {
+                                    message.targetResourceType = object.targetResourceType;
+                                    break;
+                                }
+                                break;
+                            case "RESOURCE_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.targetResourceType = 0;
+                                break;
+                            case "CLOUD_SQL_INSTANCE":
+                            case 1:
+                                message.targetResourceType = 1;
+                                break;
+                            case "COMPUTE_ENGINE_VM":
+                            case 2:
+                                message.targetResourceType = 2;
+                                break;
+                            case "COMPUTE_ENGINE_DISK":
+                            case 3:
+                                message.targetResourceType = 3;
+                                break;
+                            case "COMPUTE_ENGINE_REGIONAL_DISK":
+                            case 4:
+                                message.targetResourceType = 4;
+                                break;
+                            }
+                            if (object.targetResourceLabels) {
+                                if (typeof object.targetResourceLabels !== "object")
+                                    throw TypeError(".google.cloud.backupdr.v1.ResourceBackupConfig.targetResourceLabels: object expected");
+                                message.targetResourceLabels = {};
+                                for (var keys = Object.keys(object.targetResourceLabels), i = 0; i < keys.length; ++i)
+                                    message.targetResourceLabels[keys[i]] = String(object.targetResourceLabels[keys[i]]);
+                            }
+                            if (object.backupConfigsDetails) {
+                                if (!Array.isArray(object.backupConfigsDetails))
+                                    throw TypeError(".google.cloud.backupdr.v1.ResourceBackupConfig.backupConfigsDetails: array expected");
+                                message.backupConfigsDetails = [];
+                                for (var i = 0; i < object.backupConfigsDetails.length; ++i) {
+                                    if (typeof object.backupConfigsDetails[i] !== "object")
+                                        throw TypeError(".google.cloud.backupdr.v1.ResourceBackupConfig.backupConfigsDetails: object expected");
+                                    message.backupConfigsDetails[i] = $root.google.cloud.backupdr.v1.BackupConfigDetails.fromObject(object.backupConfigsDetails[i]);
+                                }
+                            }
+                            if (object.backupConfigured != null)
+                                message.backupConfigured = Boolean(object.backupConfigured);
+                            if (object.vaulted != null)
+                                message.vaulted = Boolean(object.vaulted);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ResourceBackupConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.backupdr.v1.ResourceBackupConfig
+                         * @static
+                         * @param {google.cloud.backupdr.v1.ResourceBackupConfig} message ResourceBackupConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ResourceBackupConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.backupConfigsDetails = [];
+                            if (options.objects || options.defaults)
+                                object.targetResourceLabels = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.uid = "";
+                                object.targetResource = "";
+                                object.targetResourceDisplayName = "";
+                                object.targetResourceType = options.enums === String ? "RESOURCE_TYPE_UNSPECIFIED" : 0;
+                                object.backupConfigured = false;
+                                object.vaulted = false;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                object.uid = message.uid;
+                            if (message.targetResource != null && message.hasOwnProperty("targetResource"))
+                                object.targetResource = message.targetResource;
+                            if (message.targetResourceDisplayName != null && message.hasOwnProperty("targetResourceDisplayName"))
+                                object.targetResourceDisplayName = message.targetResourceDisplayName;
+                            if (message.targetResourceType != null && message.hasOwnProperty("targetResourceType"))
+                                object.targetResourceType = options.enums === String ? $root.google.cloud.backupdr.v1.ResourceBackupConfig.ResourceType[message.targetResourceType] === undefined ? message.targetResourceType : $root.google.cloud.backupdr.v1.ResourceBackupConfig.ResourceType[message.targetResourceType] : message.targetResourceType;
+                            var keys2;
+                            if (message.targetResourceLabels && (keys2 = Object.keys(message.targetResourceLabels)).length) {
+                                object.targetResourceLabels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.targetResourceLabels[keys2[j]] = message.targetResourceLabels[keys2[j]];
+                            }
+                            if (message.backupConfigsDetails && message.backupConfigsDetails.length) {
+                                object.backupConfigsDetails = [];
+                                for (var j = 0; j < message.backupConfigsDetails.length; ++j)
+                                    object.backupConfigsDetails[j] = $root.google.cloud.backupdr.v1.BackupConfigDetails.toObject(message.backupConfigsDetails[j], options);
+                            }
+                            if (message.backupConfigured != null && message.hasOwnProperty("backupConfigured"))
+                                object.backupConfigured = message.backupConfigured;
+                            if (message.vaulted != null && message.hasOwnProperty("vaulted"))
+                                object.vaulted = message.vaulted;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ResourceBackupConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.backupdr.v1.ResourceBackupConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ResourceBackupConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ResourceBackupConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.backupdr.v1.ResourceBackupConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ResourceBackupConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.backupdr.v1.ResourceBackupConfig";
+                        };
+    
+                        /**
+                         * ResourceType enum.
+                         * @name google.cloud.backupdr.v1.ResourceBackupConfig.ResourceType
+                         * @enum {number}
+                         * @property {number} RESOURCE_TYPE_UNSPECIFIED=0 RESOURCE_TYPE_UNSPECIFIED value
+                         * @property {number} CLOUD_SQL_INSTANCE=1 CLOUD_SQL_INSTANCE value
+                         * @property {number} COMPUTE_ENGINE_VM=2 COMPUTE_ENGINE_VM value
+                         * @property {number} COMPUTE_ENGINE_DISK=3 COMPUTE_ENGINE_DISK value
+                         * @property {number} COMPUTE_ENGINE_REGIONAL_DISK=4 COMPUTE_ENGINE_REGIONAL_DISK value
+                         */
+                        ResourceBackupConfig.ResourceType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "RESOURCE_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CLOUD_SQL_INSTANCE"] = 1;
+                            values[valuesById[2] = "COMPUTE_ENGINE_VM"] = 2;
+                            values[valuesById[3] = "COMPUTE_ENGINE_DISK"] = 3;
+                            values[valuesById[4] = "COMPUTE_ENGINE_REGIONAL_DISK"] = 4;
+                            return values;
+                        })();
+    
+                        return ResourceBackupConfig;
+                    })();
+    
+                    v1.BackupConfigDetails = (function() {
+    
+                        /**
+                         * Properties of a BackupConfigDetails.
+                         * @memberof google.cloud.backupdr.v1
+                         * @interface IBackupConfigDetails
+                         * @property {string|null} [backupConfigSource] BackupConfigDetails backupConfigSource
+                         * @property {string|null} [backupConfigSourceDisplayName] BackupConfigDetails backupConfigSourceDisplayName
+                         * @property {google.cloud.backupdr.v1.BackupConfigDetails.Type|null} [type] BackupConfigDetails type
+                         * @property {google.cloud.backupdr.v1.BackupConfigDetails.State|null} [state] BackupConfigDetails state
+                         * @property {google.cloud.backupdr.v1.IPitrSettings|null} [pitrSettings] BackupConfigDetails pitrSettings
+                         * @property {google.protobuf.ITimestamp|null} [latestSuccessfulBackupTime] BackupConfigDetails latestSuccessfulBackupTime
+                         * @property {string|null} [applicableResource] BackupConfigDetails applicableResource
+                         * @property {string|null} [backupVault] BackupConfigDetails backupVault
+                         * @property {Array.<google.cloud.backupdr.v1.IBackupLocation>|null} [backupLocations] BackupConfigDetails backupLocations
+                         * @property {google.cloud.backupdr.v1.IBackupDrPlanConfig|null} [backupDrPlanConfig] BackupConfigDetails backupDrPlanConfig
+                         * @property {google.cloud.backupdr.v1.IBackupDrTemplateConfig|null} [backupDrTemplateConfig] BackupConfigDetails backupDrTemplateConfig
+                         */
+    
+                        /**
+                         * Constructs a new BackupConfigDetails.
+                         * @memberof google.cloud.backupdr.v1
+                         * @classdesc Represents a BackupConfigDetails.
+                         * @implements IBackupConfigDetails
+                         * @constructor
+                         * @param {google.cloud.backupdr.v1.IBackupConfigDetails=} [properties] Properties to set
+                         */
+                        function BackupConfigDetails(properties) {
+                            this.backupLocations = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BackupConfigDetails backupConfigSource.
+                         * @member {string} backupConfigSource
+                         * @memberof google.cloud.backupdr.v1.BackupConfigDetails
+                         * @instance
+                         */
+                        BackupConfigDetails.prototype.backupConfigSource = "";
+    
+                        /**
+                         * BackupConfigDetails backupConfigSourceDisplayName.
+                         * @member {string} backupConfigSourceDisplayName
+                         * @memberof google.cloud.backupdr.v1.BackupConfigDetails
+                         * @instance
+                         */
+                        BackupConfigDetails.prototype.backupConfigSourceDisplayName = "";
+    
+                        /**
+                         * BackupConfigDetails type.
+                         * @member {google.cloud.backupdr.v1.BackupConfigDetails.Type} type
+                         * @memberof google.cloud.backupdr.v1.BackupConfigDetails
+                         * @instance
+                         */
+                        BackupConfigDetails.prototype.type = 0;
+    
+                        /**
+                         * BackupConfigDetails state.
+                         * @member {google.cloud.backupdr.v1.BackupConfigDetails.State} state
+                         * @memberof google.cloud.backupdr.v1.BackupConfigDetails
+                         * @instance
+                         */
+                        BackupConfigDetails.prototype.state = 0;
+    
+                        /**
+                         * BackupConfigDetails pitrSettings.
+                         * @member {google.cloud.backupdr.v1.IPitrSettings|null|undefined} pitrSettings
+                         * @memberof google.cloud.backupdr.v1.BackupConfigDetails
+                         * @instance
+                         */
+                        BackupConfigDetails.prototype.pitrSettings = null;
+    
+                        /**
+                         * BackupConfigDetails latestSuccessfulBackupTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} latestSuccessfulBackupTime
+                         * @memberof google.cloud.backupdr.v1.BackupConfigDetails
+                         * @instance
+                         */
+                        BackupConfigDetails.prototype.latestSuccessfulBackupTime = null;
+    
+                        /**
+                         * BackupConfigDetails applicableResource.
+                         * @member {string} applicableResource
+                         * @memberof google.cloud.backupdr.v1.BackupConfigDetails
+                         * @instance
+                         */
+                        BackupConfigDetails.prototype.applicableResource = "";
+    
+                        /**
+                         * BackupConfigDetails backupVault.
+                         * @member {string} backupVault
+                         * @memberof google.cloud.backupdr.v1.BackupConfigDetails
+                         * @instance
+                         */
+                        BackupConfigDetails.prototype.backupVault = "";
+    
+                        /**
+                         * BackupConfigDetails backupLocations.
+                         * @member {Array.<google.cloud.backupdr.v1.IBackupLocation>} backupLocations
+                         * @memberof google.cloud.backupdr.v1.BackupConfigDetails
+                         * @instance
+                         */
+                        BackupConfigDetails.prototype.backupLocations = $util.emptyArray;
+    
+                        /**
+                         * BackupConfigDetails backupDrPlanConfig.
+                         * @member {google.cloud.backupdr.v1.IBackupDrPlanConfig|null|undefined} backupDrPlanConfig
+                         * @memberof google.cloud.backupdr.v1.BackupConfigDetails
+                         * @instance
+                         */
+                        BackupConfigDetails.prototype.backupDrPlanConfig = null;
+    
+                        /**
+                         * BackupConfigDetails backupDrTemplateConfig.
+                         * @member {google.cloud.backupdr.v1.IBackupDrTemplateConfig|null|undefined} backupDrTemplateConfig
+                         * @memberof google.cloud.backupdr.v1.BackupConfigDetails
+                         * @instance
+                         */
+                        BackupConfigDetails.prototype.backupDrTemplateConfig = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * BackupConfigDetails planSpecificConfig.
+                         * @member {"backupDrPlanConfig"|"backupDrTemplateConfig"|undefined} planSpecificConfig
+                         * @memberof google.cloud.backupdr.v1.BackupConfigDetails
+                         * @instance
+                         */
+                        Object.defineProperty(BackupConfigDetails.prototype, "planSpecificConfig", {
+                            get: $util.oneOfGetter($oneOfFields = ["backupDrPlanConfig", "backupDrTemplateConfig"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new BackupConfigDetails instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.backupdr.v1.BackupConfigDetails
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IBackupConfigDetails=} [properties] Properties to set
+                         * @returns {google.cloud.backupdr.v1.BackupConfigDetails} BackupConfigDetails instance
+                         */
+                        BackupConfigDetails.create = function create(properties) {
+                            return new BackupConfigDetails(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BackupConfigDetails message. Does not implicitly {@link google.cloud.backupdr.v1.BackupConfigDetails.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.backupdr.v1.BackupConfigDetails
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IBackupConfigDetails} message BackupConfigDetails message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BackupConfigDetails.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.backupConfigSource != null && Object.hasOwnProperty.call(message, "backupConfigSource"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.backupConfigSource);
+                            if (message.backupConfigSourceDisplayName != null && Object.hasOwnProperty.call(message, "backupConfigSourceDisplayName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.backupConfigSourceDisplayName);
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.type);
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.state);
+                            if (message.pitrSettings != null && Object.hasOwnProperty.call(message, "pitrSettings"))
+                                $root.google.cloud.backupdr.v1.PitrSettings.encode(message.pitrSettings, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.latestSuccessfulBackupTime != null && Object.hasOwnProperty.call(message, "latestSuccessfulBackupTime"))
+                                $root.google.protobuf.Timestamp.encode(message.latestSuccessfulBackupTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.applicableResource != null && Object.hasOwnProperty.call(message, "applicableResource"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.applicableResource);
+                            if (message.backupVault != null && Object.hasOwnProperty.call(message, "backupVault"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.backupVault);
+                            if (message.backupDrPlanConfig != null && Object.hasOwnProperty.call(message, "backupDrPlanConfig"))
+                                $root.google.cloud.backupdr.v1.BackupDrPlanConfig.encode(message.backupDrPlanConfig, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.backupDrTemplateConfig != null && Object.hasOwnProperty.call(message, "backupDrTemplateConfig"))
+                                $root.google.cloud.backupdr.v1.BackupDrTemplateConfig.encode(message.backupDrTemplateConfig, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            if (message.backupLocations != null && message.backupLocations.length)
+                                for (var i = 0; i < message.backupLocations.length; ++i)
+                                    $root.google.cloud.backupdr.v1.BackupLocation.encode(message.backupLocations[i], writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BackupConfigDetails message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.BackupConfigDetails.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.backupdr.v1.BackupConfigDetails
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IBackupConfigDetails} message BackupConfigDetails message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BackupConfigDetails.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BackupConfigDetails message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.backupdr.v1.BackupConfigDetails
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.backupdr.v1.BackupConfigDetails} BackupConfigDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BackupConfigDetails.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.backupdr.v1.BackupConfigDetails();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.backupConfigSource = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.backupConfigSourceDisplayName = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.type = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.pitrSettings = $root.google.cloud.backupdr.v1.PitrSettings.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.latestSuccessfulBackupTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.applicableResource = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.backupVault = reader.string();
+                                        break;
+                                    }
+                                case 12: {
+                                        if (!(message.backupLocations && message.backupLocations.length))
+                                            message.backupLocations = [];
+                                        message.backupLocations.push($root.google.cloud.backupdr.v1.BackupLocation.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 10: {
+                                        message.backupDrPlanConfig = $root.google.cloud.backupdr.v1.BackupDrPlanConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 11: {
+                                        message.backupDrTemplateConfig = $root.google.cloud.backupdr.v1.BackupDrTemplateConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BackupConfigDetails message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.backupdr.v1.BackupConfigDetails
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.backupdr.v1.BackupConfigDetails} BackupConfigDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BackupConfigDetails.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BackupConfigDetails message.
+                         * @function verify
+                         * @memberof google.cloud.backupdr.v1.BackupConfigDetails
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BackupConfigDetails.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.backupConfigSource != null && message.hasOwnProperty("backupConfigSource"))
+                                if (!$util.isString(message.backupConfigSource))
+                                    return "backupConfigSource: string expected";
+                            if (message.backupConfigSourceDisplayName != null && message.hasOwnProperty("backupConfigSourceDisplayName"))
+                                if (!$util.isString(message.backupConfigSourceDisplayName))
+                                    return "backupConfigSourceDisplayName: string expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                switch (message.type) {
+                                default:
+                                    return "type: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.pitrSettings != null && message.hasOwnProperty("pitrSettings")) {
+                                var error = $root.google.cloud.backupdr.v1.PitrSettings.verify(message.pitrSettings);
+                                if (error)
+                                    return "pitrSettings." + error;
+                            }
+                            if (message.latestSuccessfulBackupTime != null && message.hasOwnProperty("latestSuccessfulBackupTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.latestSuccessfulBackupTime);
+                                if (error)
+                                    return "latestSuccessfulBackupTime." + error;
+                            }
+                            if (message.applicableResource != null && message.hasOwnProperty("applicableResource"))
+                                if (!$util.isString(message.applicableResource))
+                                    return "applicableResource: string expected";
+                            if (message.backupVault != null && message.hasOwnProperty("backupVault"))
+                                if (!$util.isString(message.backupVault))
+                                    return "backupVault: string expected";
+                            if (message.backupLocations != null && message.hasOwnProperty("backupLocations")) {
+                                if (!Array.isArray(message.backupLocations))
+                                    return "backupLocations: array expected";
+                                for (var i = 0; i < message.backupLocations.length; ++i) {
+                                    var error = $root.google.cloud.backupdr.v1.BackupLocation.verify(message.backupLocations[i]);
+                                    if (error)
+                                        return "backupLocations." + error;
+                                }
+                            }
+                            if (message.backupDrPlanConfig != null && message.hasOwnProperty("backupDrPlanConfig")) {
+                                properties.planSpecificConfig = 1;
+                                {
+                                    var error = $root.google.cloud.backupdr.v1.BackupDrPlanConfig.verify(message.backupDrPlanConfig);
+                                    if (error)
+                                        return "backupDrPlanConfig." + error;
+                                }
+                            }
+                            if (message.backupDrTemplateConfig != null && message.hasOwnProperty("backupDrTemplateConfig")) {
+                                if (properties.planSpecificConfig === 1)
+                                    return "planSpecificConfig: multiple values";
+                                properties.planSpecificConfig = 1;
+                                {
+                                    var error = $root.google.cloud.backupdr.v1.BackupDrTemplateConfig.verify(message.backupDrTemplateConfig);
+                                    if (error)
+                                        return "backupDrTemplateConfig." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BackupConfigDetails message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.backupdr.v1.BackupConfigDetails
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.backupdr.v1.BackupConfigDetails} BackupConfigDetails
+                         */
+                        BackupConfigDetails.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.backupdr.v1.BackupConfigDetails)
+                                return object;
+                            var message = new $root.google.cloud.backupdr.v1.BackupConfigDetails();
+                            if (object.backupConfigSource != null)
+                                message.backupConfigSource = String(object.backupConfigSource);
+                            if (object.backupConfigSourceDisplayName != null)
+                                message.backupConfigSourceDisplayName = String(object.backupConfigSourceDisplayName);
+                            switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
+                            case "TYPE_UNSPECIFIED":
+                            case 0:
+                                message.type = 0;
+                                break;
+                            case "CLOUD_SQL_INSTANCE_BACKUP_CONFIG":
+                            case 1:
+                                message.type = 1;
+                                break;
+                            case "COMPUTE_ENGINE_RESOURCE_POLICY":
+                            case 2:
+                                message.type = 2;
+                                break;
+                            case "BACKUPDR_BACKUP_PLAN":
+                            case 3:
+                                message.type = 3;
+                                break;
+                            case "BACKUPDR_TEMPLATE":
+                            case 4:
+                                message.type = 4;
+                                break;
+                            }
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "ACTIVE":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "INACTIVE":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "ERROR":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            }
+                            if (object.pitrSettings != null) {
+                                if (typeof object.pitrSettings !== "object")
+                                    throw TypeError(".google.cloud.backupdr.v1.BackupConfigDetails.pitrSettings: object expected");
+                                message.pitrSettings = $root.google.cloud.backupdr.v1.PitrSettings.fromObject(object.pitrSettings);
+                            }
+                            if (object.latestSuccessfulBackupTime != null) {
+                                if (typeof object.latestSuccessfulBackupTime !== "object")
+                                    throw TypeError(".google.cloud.backupdr.v1.BackupConfigDetails.latestSuccessfulBackupTime: object expected");
+                                message.latestSuccessfulBackupTime = $root.google.protobuf.Timestamp.fromObject(object.latestSuccessfulBackupTime);
+                            }
+                            if (object.applicableResource != null)
+                                message.applicableResource = String(object.applicableResource);
+                            if (object.backupVault != null)
+                                message.backupVault = String(object.backupVault);
+                            if (object.backupLocations) {
+                                if (!Array.isArray(object.backupLocations))
+                                    throw TypeError(".google.cloud.backupdr.v1.BackupConfigDetails.backupLocations: array expected");
+                                message.backupLocations = [];
+                                for (var i = 0; i < object.backupLocations.length; ++i) {
+                                    if (typeof object.backupLocations[i] !== "object")
+                                        throw TypeError(".google.cloud.backupdr.v1.BackupConfigDetails.backupLocations: object expected");
+                                    message.backupLocations[i] = $root.google.cloud.backupdr.v1.BackupLocation.fromObject(object.backupLocations[i]);
+                                }
+                            }
+                            if (object.backupDrPlanConfig != null) {
+                                if (typeof object.backupDrPlanConfig !== "object")
+                                    throw TypeError(".google.cloud.backupdr.v1.BackupConfigDetails.backupDrPlanConfig: object expected");
+                                message.backupDrPlanConfig = $root.google.cloud.backupdr.v1.BackupDrPlanConfig.fromObject(object.backupDrPlanConfig);
+                            }
+                            if (object.backupDrTemplateConfig != null) {
+                                if (typeof object.backupDrTemplateConfig !== "object")
+                                    throw TypeError(".google.cloud.backupdr.v1.BackupConfigDetails.backupDrTemplateConfig: object expected");
+                                message.backupDrTemplateConfig = $root.google.cloud.backupdr.v1.BackupDrTemplateConfig.fromObject(object.backupDrTemplateConfig);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BackupConfigDetails message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.backupdr.v1.BackupConfigDetails
+                         * @static
+                         * @param {google.cloud.backupdr.v1.BackupConfigDetails} message BackupConfigDetails
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BackupConfigDetails.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.backupLocations = [];
+                            if (options.defaults) {
+                                object.backupConfigSource = "";
+                                object.backupConfigSourceDisplayName = "";
+                                object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.pitrSettings = null;
+                                object.latestSuccessfulBackupTime = null;
+                                object.applicableResource = "";
+                                object.backupVault = "";
+                            }
+                            if (message.backupConfigSource != null && message.hasOwnProperty("backupConfigSource"))
+                                object.backupConfigSource = message.backupConfigSource;
+                            if (message.backupConfigSourceDisplayName != null && message.hasOwnProperty("backupConfigSourceDisplayName"))
+                                object.backupConfigSourceDisplayName = message.backupConfigSourceDisplayName;
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = options.enums === String ? $root.google.cloud.backupdr.v1.BackupConfigDetails.Type[message.type] === undefined ? message.type : $root.google.cloud.backupdr.v1.BackupConfigDetails.Type[message.type] : message.type;
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.backupdr.v1.BackupConfigDetails.State[message.state] === undefined ? message.state : $root.google.cloud.backupdr.v1.BackupConfigDetails.State[message.state] : message.state;
+                            if (message.pitrSettings != null && message.hasOwnProperty("pitrSettings"))
+                                object.pitrSettings = $root.google.cloud.backupdr.v1.PitrSettings.toObject(message.pitrSettings, options);
+                            if (message.latestSuccessfulBackupTime != null && message.hasOwnProperty("latestSuccessfulBackupTime"))
+                                object.latestSuccessfulBackupTime = $root.google.protobuf.Timestamp.toObject(message.latestSuccessfulBackupTime, options);
+                            if (message.applicableResource != null && message.hasOwnProperty("applicableResource"))
+                                object.applicableResource = message.applicableResource;
+                            if (message.backupVault != null && message.hasOwnProperty("backupVault"))
+                                object.backupVault = message.backupVault;
+                            if (message.backupDrPlanConfig != null && message.hasOwnProperty("backupDrPlanConfig")) {
+                                object.backupDrPlanConfig = $root.google.cloud.backupdr.v1.BackupDrPlanConfig.toObject(message.backupDrPlanConfig, options);
+                                if (options.oneofs)
+                                    object.planSpecificConfig = "backupDrPlanConfig";
+                            }
+                            if (message.backupDrTemplateConfig != null && message.hasOwnProperty("backupDrTemplateConfig")) {
+                                object.backupDrTemplateConfig = $root.google.cloud.backupdr.v1.BackupDrTemplateConfig.toObject(message.backupDrTemplateConfig, options);
+                                if (options.oneofs)
+                                    object.planSpecificConfig = "backupDrTemplateConfig";
+                            }
+                            if (message.backupLocations && message.backupLocations.length) {
+                                object.backupLocations = [];
+                                for (var j = 0; j < message.backupLocations.length; ++j)
+                                    object.backupLocations[j] = $root.google.cloud.backupdr.v1.BackupLocation.toObject(message.backupLocations[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BackupConfigDetails to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.backupdr.v1.BackupConfigDetails
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BackupConfigDetails.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BackupConfigDetails
+                         * @function getTypeUrl
+                         * @memberof google.cloud.backupdr.v1.BackupConfigDetails
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BackupConfigDetails.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.backupdr.v1.BackupConfigDetails";
+                        };
+    
+                        /**
+                         * Type enum.
+                         * @name google.cloud.backupdr.v1.BackupConfigDetails.Type
+                         * @enum {number}
+                         * @property {number} TYPE_UNSPECIFIED=0 TYPE_UNSPECIFIED value
+                         * @property {number} CLOUD_SQL_INSTANCE_BACKUP_CONFIG=1 CLOUD_SQL_INSTANCE_BACKUP_CONFIG value
+                         * @property {number} COMPUTE_ENGINE_RESOURCE_POLICY=2 COMPUTE_ENGINE_RESOURCE_POLICY value
+                         * @property {number} BACKUPDR_BACKUP_PLAN=3 BACKUPDR_BACKUP_PLAN value
+                         * @property {number} BACKUPDR_TEMPLATE=4 BACKUPDR_TEMPLATE value
+                         */
+                        BackupConfigDetails.Type = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CLOUD_SQL_INSTANCE_BACKUP_CONFIG"] = 1;
+                            values[valuesById[2] = "COMPUTE_ENGINE_RESOURCE_POLICY"] = 2;
+                            values[valuesById[3] = "BACKUPDR_BACKUP_PLAN"] = 3;
+                            values[valuesById[4] = "BACKUPDR_TEMPLATE"] = 4;
+                            return values;
+                        })();
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.backupdr.v1.BackupConfigDetails.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} ACTIVE=1 ACTIVE value
+                         * @property {number} INACTIVE=2 INACTIVE value
+                         * @property {number} ERROR=3 ERROR value
+                         */
+                        BackupConfigDetails.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ACTIVE"] = 1;
+                            values[valuesById[2] = "INACTIVE"] = 2;
+                            values[valuesById[3] = "ERROR"] = 3;
+                            return values;
+                        })();
+    
+                        return BackupConfigDetails;
+                    })();
+    
+                    v1.PitrSettings = (function() {
+    
+                        /**
+                         * Properties of a PitrSettings.
+                         * @memberof google.cloud.backupdr.v1
+                         * @interface IPitrSettings
+                         * @property {number|null} [retentionDays] PitrSettings retentionDays
+                         */
+    
+                        /**
+                         * Constructs a new PitrSettings.
+                         * @memberof google.cloud.backupdr.v1
+                         * @classdesc Represents a PitrSettings.
+                         * @implements IPitrSettings
+                         * @constructor
+                         * @param {google.cloud.backupdr.v1.IPitrSettings=} [properties] Properties to set
+                         */
+                        function PitrSettings(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PitrSettings retentionDays.
+                         * @member {number} retentionDays
+                         * @memberof google.cloud.backupdr.v1.PitrSettings
+                         * @instance
+                         */
+                        PitrSettings.prototype.retentionDays = 0;
+    
+                        /**
+                         * Creates a new PitrSettings instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.backupdr.v1.PitrSettings
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IPitrSettings=} [properties] Properties to set
+                         * @returns {google.cloud.backupdr.v1.PitrSettings} PitrSettings instance
+                         */
+                        PitrSettings.create = function create(properties) {
+                            return new PitrSettings(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PitrSettings message. Does not implicitly {@link google.cloud.backupdr.v1.PitrSettings.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.backupdr.v1.PitrSettings
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IPitrSettings} message PitrSettings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PitrSettings.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.retentionDays != null && Object.hasOwnProperty.call(message, "retentionDays"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.retentionDays);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PitrSettings message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.PitrSettings.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.backupdr.v1.PitrSettings
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IPitrSettings} message PitrSettings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PitrSettings.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PitrSettings message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.backupdr.v1.PitrSettings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.backupdr.v1.PitrSettings} PitrSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PitrSettings.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.backupdr.v1.PitrSettings();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.retentionDays = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PitrSettings message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.backupdr.v1.PitrSettings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.backupdr.v1.PitrSettings} PitrSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PitrSettings.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PitrSettings message.
+                         * @function verify
+                         * @memberof google.cloud.backupdr.v1.PitrSettings
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PitrSettings.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.retentionDays != null && message.hasOwnProperty("retentionDays"))
+                                if (!$util.isInteger(message.retentionDays))
+                                    return "retentionDays: integer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PitrSettings message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.backupdr.v1.PitrSettings
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.backupdr.v1.PitrSettings} PitrSettings
+                         */
+                        PitrSettings.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.backupdr.v1.PitrSettings)
+                                return object;
+                            var message = new $root.google.cloud.backupdr.v1.PitrSettings();
+                            if (object.retentionDays != null)
+                                message.retentionDays = object.retentionDays | 0;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PitrSettings message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.backupdr.v1.PitrSettings
+                         * @static
+                         * @param {google.cloud.backupdr.v1.PitrSettings} message PitrSettings
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PitrSettings.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.retentionDays = 0;
+                            if (message.retentionDays != null && message.hasOwnProperty("retentionDays"))
+                                object.retentionDays = message.retentionDays;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PitrSettings to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.backupdr.v1.PitrSettings
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PitrSettings.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PitrSettings
+                         * @function getTypeUrl
+                         * @memberof google.cloud.backupdr.v1.PitrSettings
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PitrSettings.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.backupdr.v1.PitrSettings";
+                        };
+    
+                        return PitrSettings;
+                    })();
+    
+                    v1.BackupDrTemplateConfig = (function() {
+    
+                        /**
+                         * Properties of a BackupDrTemplateConfig.
+                         * @memberof google.cloud.backupdr.v1
+                         * @interface IBackupDrTemplateConfig
+                         * @property {string|null} [firstPartyManagementUri] BackupDrTemplateConfig firstPartyManagementUri
+                         * @property {string|null} [thirdPartyManagementUri] BackupDrTemplateConfig thirdPartyManagementUri
+                         */
+    
+                        /**
+                         * Constructs a new BackupDrTemplateConfig.
+                         * @memberof google.cloud.backupdr.v1
+                         * @classdesc Represents a BackupDrTemplateConfig.
+                         * @implements IBackupDrTemplateConfig
+                         * @constructor
+                         * @param {google.cloud.backupdr.v1.IBackupDrTemplateConfig=} [properties] Properties to set
+                         */
+                        function BackupDrTemplateConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BackupDrTemplateConfig firstPartyManagementUri.
+                         * @member {string} firstPartyManagementUri
+                         * @memberof google.cloud.backupdr.v1.BackupDrTemplateConfig
+                         * @instance
+                         */
+                        BackupDrTemplateConfig.prototype.firstPartyManagementUri = "";
+    
+                        /**
+                         * BackupDrTemplateConfig thirdPartyManagementUri.
+                         * @member {string} thirdPartyManagementUri
+                         * @memberof google.cloud.backupdr.v1.BackupDrTemplateConfig
+                         * @instance
+                         */
+                        BackupDrTemplateConfig.prototype.thirdPartyManagementUri = "";
+    
+                        /**
+                         * Creates a new BackupDrTemplateConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.backupdr.v1.BackupDrTemplateConfig
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IBackupDrTemplateConfig=} [properties] Properties to set
+                         * @returns {google.cloud.backupdr.v1.BackupDrTemplateConfig} BackupDrTemplateConfig instance
+                         */
+                        BackupDrTemplateConfig.create = function create(properties) {
+                            return new BackupDrTemplateConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BackupDrTemplateConfig message. Does not implicitly {@link google.cloud.backupdr.v1.BackupDrTemplateConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.backupdr.v1.BackupDrTemplateConfig
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IBackupDrTemplateConfig} message BackupDrTemplateConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BackupDrTemplateConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.firstPartyManagementUri != null && Object.hasOwnProperty.call(message, "firstPartyManagementUri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.firstPartyManagementUri);
+                            if (message.thirdPartyManagementUri != null && Object.hasOwnProperty.call(message, "thirdPartyManagementUri"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.thirdPartyManagementUri);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BackupDrTemplateConfig message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.BackupDrTemplateConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.backupdr.v1.BackupDrTemplateConfig
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IBackupDrTemplateConfig} message BackupDrTemplateConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BackupDrTemplateConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BackupDrTemplateConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.backupdr.v1.BackupDrTemplateConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.backupdr.v1.BackupDrTemplateConfig} BackupDrTemplateConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BackupDrTemplateConfig.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.backupdr.v1.BackupDrTemplateConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.firstPartyManagementUri = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.thirdPartyManagementUri = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BackupDrTemplateConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.backupdr.v1.BackupDrTemplateConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.backupdr.v1.BackupDrTemplateConfig} BackupDrTemplateConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BackupDrTemplateConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BackupDrTemplateConfig message.
+                         * @function verify
+                         * @memberof google.cloud.backupdr.v1.BackupDrTemplateConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BackupDrTemplateConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.firstPartyManagementUri != null && message.hasOwnProperty("firstPartyManagementUri"))
+                                if (!$util.isString(message.firstPartyManagementUri))
+                                    return "firstPartyManagementUri: string expected";
+                            if (message.thirdPartyManagementUri != null && message.hasOwnProperty("thirdPartyManagementUri"))
+                                if (!$util.isString(message.thirdPartyManagementUri))
+                                    return "thirdPartyManagementUri: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BackupDrTemplateConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.backupdr.v1.BackupDrTemplateConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.backupdr.v1.BackupDrTemplateConfig} BackupDrTemplateConfig
+                         */
+                        BackupDrTemplateConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.backupdr.v1.BackupDrTemplateConfig)
+                                return object;
+                            var message = new $root.google.cloud.backupdr.v1.BackupDrTemplateConfig();
+                            if (object.firstPartyManagementUri != null)
+                                message.firstPartyManagementUri = String(object.firstPartyManagementUri);
+                            if (object.thirdPartyManagementUri != null)
+                                message.thirdPartyManagementUri = String(object.thirdPartyManagementUri);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BackupDrTemplateConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.backupdr.v1.BackupDrTemplateConfig
+                         * @static
+                         * @param {google.cloud.backupdr.v1.BackupDrTemplateConfig} message BackupDrTemplateConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BackupDrTemplateConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.firstPartyManagementUri = "";
+                                object.thirdPartyManagementUri = "";
+                            }
+                            if (message.firstPartyManagementUri != null && message.hasOwnProperty("firstPartyManagementUri"))
+                                object.firstPartyManagementUri = message.firstPartyManagementUri;
+                            if (message.thirdPartyManagementUri != null && message.hasOwnProperty("thirdPartyManagementUri"))
+                                object.thirdPartyManagementUri = message.thirdPartyManagementUri;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BackupDrTemplateConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.backupdr.v1.BackupDrTemplateConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BackupDrTemplateConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BackupDrTemplateConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.backupdr.v1.BackupDrTemplateConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BackupDrTemplateConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.backupdr.v1.BackupDrTemplateConfig";
+                        };
+    
+                        return BackupDrTemplateConfig;
+                    })();
+    
+                    v1.BackupDrPlanConfig = (function() {
+    
+                        /**
+                         * Properties of a BackupDrPlanConfig.
+                         * @memberof google.cloud.backupdr.v1
+                         * @interface IBackupDrPlanConfig
+                         * @property {Array.<google.cloud.backupdr.v1.IBackupDrPlanRule>|null} [backupDrPlanRules] BackupDrPlanConfig backupDrPlanRules
+                         */
+    
+                        /**
+                         * Constructs a new BackupDrPlanConfig.
+                         * @memberof google.cloud.backupdr.v1
+                         * @classdesc Represents a BackupDrPlanConfig.
+                         * @implements IBackupDrPlanConfig
+                         * @constructor
+                         * @param {google.cloud.backupdr.v1.IBackupDrPlanConfig=} [properties] Properties to set
+                         */
+                        function BackupDrPlanConfig(properties) {
+                            this.backupDrPlanRules = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BackupDrPlanConfig backupDrPlanRules.
+                         * @member {Array.<google.cloud.backupdr.v1.IBackupDrPlanRule>} backupDrPlanRules
+                         * @memberof google.cloud.backupdr.v1.BackupDrPlanConfig
+                         * @instance
+                         */
+                        BackupDrPlanConfig.prototype.backupDrPlanRules = $util.emptyArray;
+    
+                        /**
+                         * Creates a new BackupDrPlanConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.backupdr.v1.BackupDrPlanConfig
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IBackupDrPlanConfig=} [properties] Properties to set
+                         * @returns {google.cloud.backupdr.v1.BackupDrPlanConfig} BackupDrPlanConfig instance
+                         */
+                        BackupDrPlanConfig.create = function create(properties) {
+                            return new BackupDrPlanConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BackupDrPlanConfig message. Does not implicitly {@link google.cloud.backupdr.v1.BackupDrPlanConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.backupdr.v1.BackupDrPlanConfig
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IBackupDrPlanConfig} message BackupDrPlanConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BackupDrPlanConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.backupDrPlanRules != null && message.backupDrPlanRules.length)
+                                for (var i = 0; i < message.backupDrPlanRules.length; ++i)
+                                    $root.google.cloud.backupdr.v1.BackupDrPlanRule.encode(message.backupDrPlanRules[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BackupDrPlanConfig message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.BackupDrPlanConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.backupdr.v1.BackupDrPlanConfig
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IBackupDrPlanConfig} message BackupDrPlanConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BackupDrPlanConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BackupDrPlanConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.backupdr.v1.BackupDrPlanConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.backupdr.v1.BackupDrPlanConfig} BackupDrPlanConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BackupDrPlanConfig.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.backupdr.v1.BackupDrPlanConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.backupDrPlanRules && message.backupDrPlanRules.length))
+                                            message.backupDrPlanRules = [];
+                                        message.backupDrPlanRules.push($root.google.cloud.backupdr.v1.BackupDrPlanRule.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BackupDrPlanConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.backupdr.v1.BackupDrPlanConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.backupdr.v1.BackupDrPlanConfig} BackupDrPlanConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BackupDrPlanConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BackupDrPlanConfig message.
+                         * @function verify
+                         * @memberof google.cloud.backupdr.v1.BackupDrPlanConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BackupDrPlanConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.backupDrPlanRules != null && message.hasOwnProperty("backupDrPlanRules")) {
+                                if (!Array.isArray(message.backupDrPlanRules))
+                                    return "backupDrPlanRules: array expected";
+                                for (var i = 0; i < message.backupDrPlanRules.length; ++i) {
+                                    var error = $root.google.cloud.backupdr.v1.BackupDrPlanRule.verify(message.backupDrPlanRules[i]);
+                                    if (error)
+                                        return "backupDrPlanRules." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BackupDrPlanConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.backupdr.v1.BackupDrPlanConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.backupdr.v1.BackupDrPlanConfig} BackupDrPlanConfig
+                         */
+                        BackupDrPlanConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.backupdr.v1.BackupDrPlanConfig)
+                                return object;
+                            var message = new $root.google.cloud.backupdr.v1.BackupDrPlanConfig();
+                            if (object.backupDrPlanRules) {
+                                if (!Array.isArray(object.backupDrPlanRules))
+                                    throw TypeError(".google.cloud.backupdr.v1.BackupDrPlanConfig.backupDrPlanRules: array expected");
+                                message.backupDrPlanRules = [];
+                                for (var i = 0; i < object.backupDrPlanRules.length; ++i) {
+                                    if (typeof object.backupDrPlanRules[i] !== "object")
+                                        throw TypeError(".google.cloud.backupdr.v1.BackupDrPlanConfig.backupDrPlanRules: object expected");
+                                    message.backupDrPlanRules[i] = $root.google.cloud.backupdr.v1.BackupDrPlanRule.fromObject(object.backupDrPlanRules[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BackupDrPlanConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.backupdr.v1.BackupDrPlanConfig
+                         * @static
+                         * @param {google.cloud.backupdr.v1.BackupDrPlanConfig} message BackupDrPlanConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BackupDrPlanConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.backupDrPlanRules = [];
+                            if (message.backupDrPlanRules && message.backupDrPlanRules.length) {
+                                object.backupDrPlanRules = [];
+                                for (var j = 0; j < message.backupDrPlanRules.length; ++j)
+                                    object.backupDrPlanRules[j] = $root.google.cloud.backupdr.v1.BackupDrPlanRule.toObject(message.backupDrPlanRules[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BackupDrPlanConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.backupdr.v1.BackupDrPlanConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BackupDrPlanConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BackupDrPlanConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.backupdr.v1.BackupDrPlanConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BackupDrPlanConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.backupdr.v1.BackupDrPlanConfig";
+                        };
+    
+                        return BackupDrPlanConfig;
+                    })();
+    
+                    v1.BackupDrPlanRule = (function() {
+    
+                        /**
+                         * Properties of a BackupDrPlanRule.
+                         * @memberof google.cloud.backupdr.v1
+                         * @interface IBackupDrPlanRule
+                         * @property {string|null} [ruleId] BackupDrPlanRule ruleId
+                         * @property {google.protobuf.ITimestamp|null} [lastSuccessfulBackupTime] BackupDrPlanRule lastSuccessfulBackupTime
+                         */
+    
+                        /**
+                         * Constructs a new BackupDrPlanRule.
+                         * @memberof google.cloud.backupdr.v1
+                         * @classdesc Represents a BackupDrPlanRule.
+                         * @implements IBackupDrPlanRule
+                         * @constructor
+                         * @param {google.cloud.backupdr.v1.IBackupDrPlanRule=} [properties] Properties to set
+                         */
+                        function BackupDrPlanRule(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BackupDrPlanRule ruleId.
+                         * @member {string} ruleId
+                         * @memberof google.cloud.backupdr.v1.BackupDrPlanRule
+                         * @instance
+                         */
+                        BackupDrPlanRule.prototype.ruleId = "";
+    
+                        /**
+                         * BackupDrPlanRule lastSuccessfulBackupTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} lastSuccessfulBackupTime
+                         * @memberof google.cloud.backupdr.v1.BackupDrPlanRule
+                         * @instance
+                         */
+                        BackupDrPlanRule.prototype.lastSuccessfulBackupTime = null;
+    
+                        /**
+                         * Creates a new BackupDrPlanRule instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.backupdr.v1.BackupDrPlanRule
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IBackupDrPlanRule=} [properties] Properties to set
+                         * @returns {google.cloud.backupdr.v1.BackupDrPlanRule} BackupDrPlanRule instance
+                         */
+                        BackupDrPlanRule.create = function create(properties) {
+                            return new BackupDrPlanRule(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BackupDrPlanRule message. Does not implicitly {@link google.cloud.backupdr.v1.BackupDrPlanRule.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.backupdr.v1.BackupDrPlanRule
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IBackupDrPlanRule} message BackupDrPlanRule message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BackupDrPlanRule.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.ruleId != null && Object.hasOwnProperty.call(message, "ruleId"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.ruleId);
+                            if (message.lastSuccessfulBackupTime != null && Object.hasOwnProperty.call(message, "lastSuccessfulBackupTime"))
+                                $root.google.protobuf.Timestamp.encode(message.lastSuccessfulBackupTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BackupDrPlanRule message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.BackupDrPlanRule.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.backupdr.v1.BackupDrPlanRule
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IBackupDrPlanRule} message BackupDrPlanRule message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BackupDrPlanRule.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BackupDrPlanRule message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.backupdr.v1.BackupDrPlanRule
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.backupdr.v1.BackupDrPlanRule} BackupDrPlanRule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BackupDrPlanRule.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.backupdr.v1.BackupDrPlanRule();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.ruleId = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.lastSuccessfulBackupTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BackupDrPlanRule message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.backupdr.v1.BackupDrPlanRule
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.backupdr.v1.BackupDrPlanRule} BackupDrPlanRule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BackupDrPlanRule.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BackupDrPlanRule message.
+                         * @function verify
+                         * @memberof google.cloud.backupdr.v1.BackupDrPlanRule
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BackupDrPlanRule.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.ruleId != null && message.hasOwnProperty("ruleId"))
+                                if (!$util.isString(message.ruleId))
+                                    return "ruleId: string expected";
+                            if (message.lastSuccessfulBackupTime != null && message.hasOwnProperty("lastSuccessfulBackupTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.lastSuccessfulBackupTime);
+                                if (error)
+                                    return "lastSuccessfulBackupTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BackupDrPlanRule message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.backupdr.v1.BackupDrPlanRule
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.backupdr.v1.BackupDrPlanRule} BackupDrPlanRule
+                         */
+                        BackupDrPlanRule.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.backupdr.v1.BackupDrPlanRule)
+                                return object;
+                            var message = new $root.google.cloud.backupdr.v1.BackupDrPlanRule();
+                            if (object.ruleId != null)
+                                message.ruleId = String(object.ruleId);
+                            if (object.lastSuccessfulBackupTime != null) {
+                                if (typeof object.lastSuccessfulBackupTime !== "object")
+                                    throw TypeError(".google.cloud.backupdr.v1.BackupDrPlanRule.lastSuccessfulBackupTime: object expected");
+                                message.lastSuccessfulBackupTime = $root.google.protobuf.Timestamp.fromObject(object.lastSuccessfulBackupTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BackupDrPlanRule message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.backupdr.v1.BackupDrPlanRule
+                         * @static
+                         * @param {google.cloud.backupdr.v1.BackupDrPlanRule} message BackupDrPlanRule
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BackupDrPlanRule.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.ruleId = "";
+                                object.lastSuccessfulBackupTime = null;
+                            }
+                            if (message.ruleId != null && message.hasOwnProperty("ruleId"))
+                                object.ruleId = message.ruleId;
+                            if (message.lastSuccessfulBackupTime != null && message.hasOwnProperty("lastSuccessfulBackupTime"))
+                                object.lastSuccessfulBackupTime = $root.google.protobuf.Timestamp.toObject(message.lastSuccessfulBackupTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BackupDrPlanRule to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.backupdr.v1.BackupDrPlanRule
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BackupDrPlanRule.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BackupDrPlanRule
+                         * @function getTypeUrl
+                         * @memberof google.cloud.backupdr.v1.BackupDrPlanRule
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BackupDrPlanRule.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.backupdr.v1.BackupDrPlanRule";
+                        };
+    
+                        return BackupDrPlanRule;
+                    })();
+    
+                    v1.BackupLocation = (function() {
+    
+                        /**
+                         * Properties of a BackupLocation.
+                         * @memberof google.cloud.backupdr.v1
+                         * @interface IBackupLocation
+                         * @property {google.cloud.backupdr.v1.BackupLocation.Type|null} [type] BackupLocation type
+                         * @property {string|null} [locationId] BackupLocation locationId
+                         */
+    
+                        /**
+                         * Constructs a new BackupLocation.
+                         * @memberof google.cloud.backupdr.v1
+                         * @classdesc Represents a BackupLocation.
+                         * @implements IBackupLocation
+                         * @constructor
+                         * @param {google.cloud.backupdr.v1.IBackupLocation=} [properties] Properties to set
+                         */
+                        function BackupLocation(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BackupLocation type.
+                         * @member {google.cloud.backupdr.v1.BackupLocation.Type} type
+                         * @memberof google.cloud.backupdr.v1.BackupLocation
+                         * @instance
+                         */
+                        BackupLocation.prototype.type = 0;
+    
+                        /**
+                         * BackupLocation locationId.
+                         * @member {string} locationId
+                         * @memberof google.cloud.backupdr.v1.BackupLocation
+                         * @instance
+                         */
+                        BackupLocation.prototype.locationId = "";
+    
+                        /**
+                         * Creates a new BackupLocation instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.backupdr.v1.BackupLocation
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IBackupLocation=} [properties] Properties to set
+                         * @returns {google.cloud.backupdr.v1.BackupLocation} BackupLocation instance
+                         */
+                        BackupLocation.create = function create(properties) {
+                            return new BackupLocation(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BackupLocation message. Does not implicitly {@link google.cloud.backupdr.v1.BackupLocation.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.backupdr.v1.BackupLocation
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IBackupLocation} message BackupLocation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BackupLocation.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.type);
+                            if (message.locationId != null && Object.hasOwnProperty.call(message, "locationId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.locationId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BackupLocation message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.BackupLocation.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.backupdr.v1.BackupLocation
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IBackupLocation} message BackupLocation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BackupLocation.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BackupLocation message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.backupdr.v1.BackupLocation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.backupdr.v1.BackupLocation} BackupLocation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BackupLocation.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.backupdr.v1.BackupLocation();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.type = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.locationId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BackupLocation message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.backupdr.v1.BackupLocation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.backupdr.v1.BackupLocation} BackupLocation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BackupLocation.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BackupLocation message.
+                         * @function verify
+                         * @memberof google.cloud.backupdr.v1.BackupLocation
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BackupLocation.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                switch (message.type) {
+                                default:
+                                    return "type: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                if (!$util.isString(message.locationId))
+                                    return "locationId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BackupLocation message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.backupdr.v1.BackupLocation
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.backupdr.v1.BackupLocation} BackupLocation
+                         */
+                        BackupLocation.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.backupdr.v1.BackupLocation)
+                                return object;
+                            var message = new $root.google.cloud.backupdr.v1.BackupLocation();
+                            switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
+                            case "TYPE_UNSPECIFIED":
+                            case 0:
+                                message.type = 0;
+                                break;
+                            case "ZONAL":
+                            case 1:
+                                message.type = 1;
+                                break;
+                            case "REGIONAL":
+                            case 2:
+                                message.type = 2;
+                                break;
+                            case "MULTI_REGIONAL":
+                            case 3:
+                                message.type = 3;
+                                break;
+                            }
+                            if (object.locationId != null)
+                                message.locationId = String(object.locationId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BackupLocation message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.backupdr.v1.BackupLocation
+                         * @static
+                         * @param {google.cloud.backupdr.v1.BackupLocation} message BackupLocation
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BackupLocation.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
+                                object.locationId = "";
+                            }
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = options.enums === String ? $root.google.cloud.backupdr.v1.BackupLocation.Type[message.type] === undefined ? message.type : $root.google.cloud.backupdr.v1.BackupLocation.Type[message.type] : message.type;
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                object.locationId = message.locationId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BackupLocation to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.backupdr.v1.BackupLocation
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BackupLocation.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BackupLocation
+                         * @function getTypeUrl
+                         * @memberof google.cloud.backupdr.v1.BackupLocation
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BackupLocation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.backupdr.v1.BackupLocation";
+                        };
+    
+                        /**
+                         * Type enum.
+                         * @name google.cloud.backupdr.v1.BackupLocation.Type
+                         * @enum {number}
+                         * @property {number} TYPE_UNSPECIFIED=0 TYPE_UNSPECIFIED value
+                         * @property {number} ZONAL=1 ZONAL value
+                         * @property {number} REGIONAL=2 REGIONAL value
+                         * @property {number} MULTI_REGIONAL=3 MULTI_REGIONAL value
+                         */
+                        BackupLocation.Type = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ZONAL"] = 1;
+                            values[valuesById[2] = "REGIONAL"] = 2;
+                            values[valuesById[3] = "MULTI_REGIONAL"] = 3;
+                            return values;
+                        })();
+    
+                        return BackupLocation;
                     })();
     
                     return v1;

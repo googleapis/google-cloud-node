@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v2.2.1...alloydb-v2.3.0) (2026-01-12)
+
+
+### Features
+
+* [alloydb] add POSTGRES_18 to DatabaseVersion ([#6955](https://github.com/googleapis/google-cloud-node/issues/6955)) ([fcfdd73](https://github.com/googleapis/google-cloud-node/commit/fcfdd73f0fd8acdf1849f5fccb97b3f9a969c72c))
+
 ## [2.2.1](https://github.com/googleapis/google-cloud-node/compare/alloydb-v2.2.0...alloydb-v2.2.1) (2025-10-13)
 
 

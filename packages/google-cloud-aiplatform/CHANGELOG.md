@@ -1,5 +1,13 @@
 # Changelog
 
+## [6.1.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v6.0.0...aiplatform-v6.1.0) (2026-01-12)
+
+
+### Features
+
+* Add Lustre support to the Vertex Training Custom Job API ([#6952](https://github.com/googleapis/google-cloud-node/issues/6952)) ([8e2862c](https://github.com/googleapis/google-cloud-node/commit/8e2862c632772bb21380731c23b85ef96f477350))
+* Add Lustre support to the Vertex Training Custom Job API ([#6959](https://github.com/googleapis/google-cloud-node/issues/6959)) ([168fe86](https://github.com/googleapis/google-cloud-node/commit/168fe8615035b62ef60d0283895e6c517c1f281d))
+
 ## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.14.0...aiplatform-v6.0.0) (2025-12-09)
 
 

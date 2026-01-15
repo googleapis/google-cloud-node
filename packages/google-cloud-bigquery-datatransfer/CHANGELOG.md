@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/bigquery-data-transfer?activeTab=versions
 
+## [5.1.2](https://github.com/googleapis/google-cloud-node/compare/bigquery-data-transfer-v5.1.1...bigquery-data-transfer-v5.1.2) (2026-01-12)
+
+
+### Bug Fixes
+
+* Remove duplicate region tags ([#6950](https://github.com/googleapis/google-cloud-node/issues/6950)) ([54c6ed0](https://github.com/googleapis/google-cloud-node/commit/54c6ed08338e72714537730f618f28f40bc9b7c5))
+
 ## [5.1.1](https://github.com/googleapis/google-cloud-node/compare/bigquery-data-transfer-v5.1.0...bigquery-data-transfer-v5.1.1) (2025-10-13)
 
 
