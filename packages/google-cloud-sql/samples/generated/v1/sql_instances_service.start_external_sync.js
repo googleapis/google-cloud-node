@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -59,6 +59,13 @@ function main() {
    *  used. Valid values are `LOGICAL` or `PHYSICAL`. Only applicable to MySQL.
    */
   // const migrationType = {}
+  /**
+   *  Optional. MySQL only. True if end-user has confirmed that this SES call
+   *  will wipe replica databases overlapping with the proposed selected_objects.
+   *  If this field is not set and there are both overlapping and additional
+   *  databases proposed, an error will be returned.
+   */
+  // const replicaOverwriteEnabled = true
 
   // Imports the Sql library
   const {SqlInstancesServiceClient} = require('@google-cloud/sql').v1;

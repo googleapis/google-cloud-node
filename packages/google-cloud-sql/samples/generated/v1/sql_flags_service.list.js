@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -33,6 +33,11 @@ function main() {
    *  method returns flags for all database types and versions.
    */
   // const databaseVersion = 'abc123'
+  /**
+   *  Optional. Specify the scope of flags to be returned by SqlFlagsListService.
+   *  Return list of database flags if unspecified.
+   */
+  // const flagScope = {}
 
   // Imports the Sql library
   const {SqlFlagsServiceClient} = require('@google-cloud/sql').v1;

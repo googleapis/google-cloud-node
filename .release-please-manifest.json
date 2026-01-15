@@ -151,6 +151,7 @@
   "packages/google-cloud-security-publicca": "2.2.1",
   "packages/google-cloud-securitycenter": "9.2.1",
   "packages/google-cloud-securitycentermanagement": "0.7.1",
+  "packages/google-cloud-securesourcemanager": "0.8.1",
   "packages/google-cloud-servicedirectory": "6.1.1",
   "packages/google-cloud-servicehealth": "0.7.1",
   "packages/google-cloud-shell": "4.1.1",

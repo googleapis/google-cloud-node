@@ -35196,6 +35196,126 @@
       }
     },
     {
+      "regionTag": "compute_v1beta_generated_RegionMultiMigMembers_Get_async",
+      "title": "AcceleratorTypes get Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves information about the specified multi-MIG member.",
+      "canonical": true,
+      "file": "region_multi_mig_members.get.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Get",
+        "fullName": "google.cloud.compute.v1beta.RegionMultiMigMembers.Get",
+        "async": true,
+        "parameters": [
+          {
+            "name": "multi_mig",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "multi_mig_member",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.MultiMigMember",
+        "client": {
+          "shortName": "RegionMultiMigMembersClient",
+          "fullName": "google.cloud.compute.v1beta.RegionMultiMigMembersClient"
+        },
+        "method": {
+          "shortName": "Get",
+          "fullName": "google.cloud.compute.v1beta.RegionMultiMigMembers.Get",
+          "service": {
+            "shortName": "RegionMultiMigMembers",
+            "fullName": "google.cloud.compute.v1beta.RegionMultiMigMembers"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_RegionMultiMigMembers_List_async",
+      "title": "AcceleratorTypes list Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves a list of members of a specific multi-MIG.",
+      "canonical": true,
+      "file": "region_multi_mig_members.list.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 151,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "List",
+        "fullName": "google.cloud.compute.v1beta.RegionMultiMigMembers.List",
+        "async": true,
+        "parameters": [
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "max_results",
+            "type": "TYPE_UINT32"
+          },
+          {
+            "name": "multi_mig",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "return_partial_success",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.MultiMigMemberList",
+        "client": {
+          "shortName": "RegionMultiMigMembersClient",
+          "fullName": "google.cloud.compute.v1beta.RegionMultiMigMembersClient"
+        },
+        "method": {
+          "shortName": "List",
+          "fullName": "google.cloud.compute.v1beta.RegionMultiMigMembers.List",
+          "service": {
+            "shortName": "RegionMultiMigMembers",
+            "fullName": "google.cloud.compute.v1beta.RegionMultiMigMembers"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "compute_v1beta_generated_RegionMultiMigs_Delete_async",
       "title": "AcceleratorTypes delete Sample",
       "origin": "API_DEFINITION",

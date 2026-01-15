@@ -15,8 +15,8 @@
                     "java_package": "com.google.cloud.netapp.v1",
                     "php_namespace": "Google\\Cloud\\NetApp\\V1",
                     "ruby_package": "Google::Cloud::NetApp::V1",
-                    "(google.api.resource_definition).type": "compute.googleapis.com/Network",
-                    "(google.api.resource_definition).pattern": "projects/{project}/global/networks/{network}"
+                    "(google.api.resource_definition).type": "cloudkms.googleapis.com/CryptoKeyVersion",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{crypto_key_version}"
                   },
                   "nested": {
                     "ListActiveDirectoriesRequest": {
@@ -859,6 +859,28 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "kmsConfig": {
+                          "type": "string",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "netapp.googleapis.com/KmsConfig"
+                          }
+                        },
+                        "encryptionState": {
+                          "type": "EncryptionState",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "backupsCryptoKeyVersion": {
+                          "type": "string",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -916,6 +938,15 @@
                             "BACKUP_VAULT_TYPE_UNSPECIFIED": 0,
                             "IN_REGION": 1,
                             "CROSS_REGION": 2
+                          }
+                        },
+                        "EncryptionState": {
+                          "values": {
+                            "ENCRYPTION_STATE_UNSPECIFIED": 0,
+                            "ENCRYPTION_STATE_PENDING": 1,
+                            "ENCRYPTION_STATE_COMPLETED": 2,
+                            "ENCRYPTION_STATE_IN_PROGRESS": 3,
+                            "ENCRYPTION_STATE_FAILED": 4
                           }
                         }
                       }
@@ -2451,6 +2482,148 @@
                               }
                             }
                           ]
+                        },
+                        "RestoreBackupFiles": {
+                          "requestType": "RestoreBackupFilesRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/volumes/*}:restore",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "RestoreBackupFilesResponse",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/volumes/*}:restore",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "RestoreBackupFilesResponse",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ListHostGroups": {
+                          "requestType": "ListHostGroupsRequest",
+                          "responseType": "ListHostGroupsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/hostGroups",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/hostGroups"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetHostGroup": {
+                          "requestType": "GetHostGroupRequest",
+                          "responseType": "HostGroup",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/hostGroups/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/hostGroups/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateHostGroup": {
+                          "requestType": "CreateHostGroupRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/hostGroups",
+                            "(google.api.http).body": "host_group",
+                            "(google.api.method_signature)": "parent,host_group,host_group_id",
+                            "(google.longrunning.operation_info).response_type": "HostGroup",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/hostGroups",
+                                "body": "host_group"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,host_group,host_group_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "HostGroup",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateHostGroup": {
+                          "requestType": "UpdateHostGroupRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{host_group.name=projects/*/locations/*/hostGroups/*}",
+                            "(google.api.http).body": "host_group",
+                            "(google.api.method_signature)": "host_group,update_mask",
+                            "(google.longrunning.operation_info).response_type": "HostGroup",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{host_group.name=projects/*/locations/*/hostGroups/*}",
+                                "body": "host_group"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "host_group,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "HostGroup",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteHostGroup": {
+                          "requestType": "DeleteHostGroupRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/hostGroups/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/hostGroups/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -2501,6 +2674,324 @@
                         "apiVersion": {
                           "type": "string",
                           "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "ListHostGroupsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "netapp.googleapis.com/HostGroup"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListHostGroupsResponse": {
+                      "fields": {
+                        "hostGroups": {
+                          "rule": "repeated",
+                          "type": "HostGroup",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GetHostGroupRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "netapp.googleapis.com/HostGroup"
+                          }
+                        }
+                      }
+                    },
+                    "CreateHostGroupRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "netapp.googleapis.com/HostGroup"
+                          }
+                        },
+                        "hostGroup": {
+                          "type": "HostGroup",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "hostGroupId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateHostGroupRequest": {
+                      "fields": {
+                        "hostGroup": {
+                          "type": "HostGroup",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteHostGroupRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "netapp.googleapis.com/HostGroup"
+                          }
+                        }
+                      }
+                    },
+                    "HostGroup": {
+                      "options": {
+                        "(google.api.resource).type": "netapp.googleapis.com/HostGroup",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/hostGroups/{host_group}",
+                        "(google.api.resource).plural": "hostGroups",
+                        "(google.api.resource).singular": "hostGroup"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "type": {
+                          "type": "Type",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "hosts": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "osType": {
+                          "type": "OsType",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Type": {
+                          "values": {
+                            "TYPE_UNSPECIFIED": 0,
+                            "ISCSI_INITIATOR": 1
+                          }
+                        },
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "CREATING": 1,
+                            "READY": 2,
+                            "UPDATING": 3,
+                            "DELETING": 4,
+                            "DISABLED": 5
+                          }
+                        }
+                      }
+                    },
+                    "ServiceLevel": {
+                      "values": {
+                        "SERVICE_LEVEL_UNSPECIFIED": 0,
+                        "PREMIUM": 1,
+                        "EXTREME": 2,
+                        "STANDARD": 3,
+                        "FLEX": 4
+                      }
+                    },
+                    "FlexPerformance": {
+                      "values": {
+                        "FLEX_PERFORMANCE_UNSPECIFIED": 0,
+                        "FLEX_PERFORMANCE_DEFAULT": 1,
+                        "FLEX_PERFORMANCE_CUSTOM": 2
+                      }
+                    },
+                    "EncryptionType": {
+                      "values": {
+                        "ENCRYPTION_TYPE_UNSPECIFIED": 0,
+                        "SERVICE_MANAGED": 1,
+                        "CLOUD_KMS": 2
+                      }
+                    },
+                    "DirectoryServiceType": {
+                      "values": {
+                        "DIRECTORY_SERVICE_TYPE_UNSPECIFIED": 0,
+                        "ACTIVE_DIRECTORY": 1
+                      }
+                    },
+                    "StoragePoolType": {
+                      "values": {
+                        "STORAGE_POOL_TYPE_UNSPECIFIED": 0,
+                        "FILE": 1,
+                        "UNIFIED": 2,
+                        "UNIFIED_LARGE_CAPACITY": 3
+                      }
+                    },
+                    "HybridReplicationSchedule": {
+                      "values": {
+                        "HYBRID_REPLICATION_SCHEDULE_UNSPECIFIED": 0,
+                        "EVERY_10_MINUTES": 1,
+                        "HOURLY": 2,
+                        "DAILY": 3
+                      }
+                    },
+                    "QosType": {
+                      "values": {
+                        "QOS_TYPE_UNSPECIFIED": 0,
+                        "AUTO": 1,
+                        "MANUAL": 2
+                      }
+                    },
+                    "OsType": {
+                      "values": {
+                        "OS_TYPE_UNSPECIFIED": 0,
+                        "LINUX": 1,
+                        "WINDOWS": 2,
+                        "ESXI": 3
+                      }
+                    },
+                    "LocationMetadata": {
+                      "fields": {
+                        "supportedServiceLevels": {
+                          "rule": "repeated",
+                          "type": "ServiceLevel",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "supportedFlexPerformance": {
+                          "rule": "repeated",
+                          "type": "FlexPerformance",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "hasVcp": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "hasOntapProxy": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "UserCommands": {
+                      "fields": {
+                        "commands": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -3588,95 +4079,13 @@
                         }
                       }
                     },
-                    "ServiceLevel": {
-                      "values": {
-                        "SERVICE_LEVEL_UNSPECIFIED": 0,
-                        "PREMIUM": 1,
-                        "EXTREME": 2,
-                        "STANDARD": 3,
-                        "FLEX": 4
-                      }
-                    },
-                    "FlexPerformance": {
-                      "values": {
-                        "FLEX_PERFORMANCE_UNSPECIFIED": 0,
-                        "FLEX_PERFORMANCE_DEFAULT": 1,
-                        "FLEX_PERFORMANCE_CUSTOM": 2
-                      }
-                    },
-                    "EncryptionType": {
-                      "values": {
-                        "ENCRYPTION_TYPE_UNSPECIFIED": 0,
-                        "SERVICE_MANAGED": 1,
-                        "CLOUD_KMS": 2
-                      }
-                    },
-                    "DirectoryServiceType": {
-                      "values": {
-                        "DIRECTORY_SERVICE_TYPE_UNSPECIFIED": 0,
-                        "ACTIVE_DIRECTORY": 1
-                      }
-                    },
-                    "HybridReplicationSchedule": {
-                      "values": {
-                        "HYBRID_REPLICATION_SCHEDULE_UNSPECIFIED": 0,
-                        "EVERY_10_MINUTES": 1,
-                        "HOURLY": 2,
-                        "DAILY": 3
-                      }
-                    },
-                    "QosType": {
-                      "values": {
-                        "QOS_TYPE_UNSPECIFIED": 0,
-                        "AUTO": 1,
-                        "MANUAL": 2
-                      }
-                    },
-                    "LocationMetadata": {
-                      "fields": {
-                        "supportedServiceLevels": {
-                          "rule": "repeated",
-                          "type": "ServiceLevel",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "supportedFlexPerformance": {
-                          "rule": "repeated",
-                          "type": "FlexPerformance",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "hasVcp": {
-                          "type": "bool",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      }
-                    },
-                    "UserCommands": {
-                      "fields": {
-                        "commands": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      }
-                    },
                     "Protocols": {
                       "values": {
                         "PROTOCOLS_UNSPECIFIED": 0,
                         "NFSV3": 1,
                         "NFSV4": 2,
-                        "SMB": 3
+                        "SMB": 3,
+                        "ISCSI": 4
                       }
                     },
                     "AccessType": {
@@ -4153,11 +4562,26 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "cacheParameters": {
+                          "type": "CacheParameters",
+                          "id": 42,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "hotTierSizeUsedGib": {
                           "type": "int64",
                           "id": 44,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "blockDevices": {
+                          "rule": "repeated",
+                          "type": "BlockDevice",
+                          "id": 45,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       },
@@ -4856,6 +5280,292 @@
                         }
                       }
                     },
+                    "CacheParameters": {
+                      "oneofs": {
+                        "_enableGlobalFileLock": {
+                          "oneof": [
+                            "enableGlobalFileLock"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "peerVolumeName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "peerClusterName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "peerSvmName": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "peerIpAddresses": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "enableGlobalFileLock": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "cacheConfig": {
+                          "type": "CacheConfig",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "cacheState": {
+                          "type": "CacheState",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "command": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "peeringCommandExpiryTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "passphrase": {
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "stateDetails": {
+                          "type": "string",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "CacheState": {
+                          "values": {
+                            "CACHE_STATE_UNSPECIFIED": 0,
+                            "PENDING_CLUSTER_PEERING": 1,
+                            "PENDING_SVM_PEERING": 2,
+                            "PEERED": 3,
+                            "ERROR": 4
+                          }
+                        }
+                      }
+                    },
+                    "CacheConfig": {
+                      "oneofs": {
+                        "_writebackEnabled": {
+                          "oneof": [
+                            "writebackEnabled"
+                          ]
+                        },
+                        "_cifsChangeNotifyEnabled": {
+                          "oneof": [
+                            "cifsChangeNotifyEnabled"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "cachePrePopulate": {
+                          "type": "CachePrePopulate",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "writebackEnabled": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "cifsChangeNotifyEnabled": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "cachePrePopulateState": {
+                          "type": "CachePrePopulateState",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "CachePrePopulateState": {
+                          "values": {
+                            "CACHE_PRE_POPULATE_STATE_UNSPECIFIED": 0,
+                            "NOT_NEEDED": 1,
+                            "IN_PROGRESS": 2,
+                            "COMPLETE": 3,
+                            "ERROR": 4
+                          }
+                        }
+                      }
+                    },
+                    "CachePrePopulate": {
+                      "oneofs": {
+                        "_recursion": {
+                          "oneof": [
+                            "recursion"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "pathList": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "excludePathList": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "recursion": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "BlockDevice": {
+                      "oneofs": {
+                        "_name": {
+                          "oneof": [
+                            "name"
+                          ]
+                        },
+                        "_sizeGib": {
+                          "oneof": [
+                            "sizeGib"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "hostGroups": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "netapp.googleapis.com/HostGroup"
+                          }
+                        },
+                        "identifier": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "sizeGib": {
+                          "type": "int64",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "osType": {
+                          "type": "OsType",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        }
+                      }
+                    },
+                    "RestoreBackupFilesRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "netapp.googleapis.com/Volume"
+                          }
+                        },
+                        "backup": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "netapp.googleapis.com/Backup"
+                          }
+                        },
+                        "fileList": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "restoreDestinationPath": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "RestoreBackupFilesResponse": {
+                      "fields": {}
+                    },
                     "ListSnapshotsRequest": {
                       "fields": {
                         "parent": {
@@ -5192,6 +5902,11 @@
                           "oneof": [
                             "enableHotTierAutoResize"
                           ]
+                        },
+                        "_type": {
+                          "oneof": [
+                            "type"
+                          ]
                         }
                       },
                       "fields": {
@@ -5416,6 +6131,14 @@
                           "id": 34,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "type": {
+                          "type": "StoragePoolType",
+                          "id": 35,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         }
                       },

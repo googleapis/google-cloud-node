@@ -237,6 +237,39 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "itemId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "additionalItemParameters": {
+                          "rule": "repeated",
+                          "type": "ItemParameter",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ItemParameter": {
+                      "fields": {
+                        "parameterName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "value": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -310,7 +343,8 @@
                             "GOOGLE_ADS": 1,
                             "DISPLAY_VIDEO_PARTNER": 2,
                             "DISPLAY_VIDEO_ADVERTISER": 3,
-                            "DATA_PARTNER": 4
+                            "DATA_PARTNER": 4,
+                            "GOOGLE_ANALYTICS_PROPERTY": 5
                           }
                         }
                       }
@@ -349,7 +383,8 @@
                       "oneofs": {
                         "wrappedKey": {
                           "oneof": [
-                            "gcpWrappedKeyInfo"
+                            "gcpWrappedKeyInfo",
+                            "awsWrappedKeyInfo"
                           ]
                         }
                       },
@@ -357,6 +392,10 @@
                         "gcpWrappedKeyInfo": {
                           "type": "GcpWrappedKeyInfo",
                           "id": 1
+                        },
+                        "awsWrappedKeyInfo": {
+                          "type": "AwsWrappedKeyInfo",
+                          "id": 2
                         }
                       }
                     },
@@ -370,6 +409,46 @@
                           }
                         },
                         "wipProvider": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "kekUri": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "encryptedDek": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "KeyType": {
+                          "values": {
+                            "KEY_TYPE_UNSPECIFIED": 0,
+                            "XCHACHA20_POLY1305": 1
+                          }
+                        }
+                      }
+                    },
+                    "AwsWrappedKeyInfo": {
+                      "fields": {
+                        "keyType": {
+                          "type": "KeyType",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "roleArn": {
                           "type": "string",
                           "id": 2,
                           "options": {
@@ -439,8 +518,21 @@
                         "DESTINATION_ACCOUNT_DATA_POLICY_PROHIBITS_ENHANCED_CONVERSIONS": 34,
                         "DESTINATION_ACCOUNT_ENHANCED_CONVERSIONS_TERMS_NOT_SIGNED": 35,
                         "DUPLICATE_DESTINATION_REFERENCE": 36,
+                        "UNSUPPORTED_OPERATING_ACCOUNT_FOR_DATA_PARTNER": 37,
+                        "UNSUPPORTED_LINKED_ACCOUNT_FOR_DATA_PARTNER": 38,
                         "NO_IDENTIFIERS_PROVIDED": 39,
-                        "INVALID_REQUEST_ID": 48
+                        "INVALID_PROPERTY_TYPE": 40,
+                        "INVALID_STREAM_TYPE": 41,
+                        "LINKED_ACCOUNT_ONLY_ALLOWED_WITH_DATA_PARTNER_LOGIN_ACCOUNT": 42,
+                        "OPERATING_ACCOUNT_LOGIN_ACCOUNT_MISMATCH": 43,
+                        "EVENT_TIME_INVALID": 44,
+                        "RESERVED_NAME_USED": 45,
+                        "INVALID_EVENT_NAME": 46,
+                        "NOT_ALLOWLISTED": 47,
+                        "INVALID_REQUEST_ID": 48,
+                        "MULTIPLE_DESTINATIONS_FOR_GOOGLE_ANALYTICS_EVENT": 49,
+                        "FIELD_VALUE_TOO_LONG": 50,
+                        "TOO_MANY_ELEMENTS": 51
                       }
                     },
                     "Event": {
@@ -552,6 +644,35 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "eventName": {
+                          "type": "string",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "clientId": {
+                          "type": "string",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "userId": {
+                          "type": "string",
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "additionalEventParameters": {
+                          "rule": "repeated",
+                          "type": "EventParameter",
+                          "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -620,6 +741,24 @@
                         }
                       }
                     },
+                    "EventParameter": {
+                      "fields": {
+                        "parameterName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "value": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "EventSource": {
                       "values": {
                         "EVENT_SOURCE_UNSPECIFIED": 0,
@@ -662,6 +801,32 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "additionalUserProperties": {
+                          "rule": "repeated",
+                          "type": "UserProperty",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UserProperty": {
+                      "fields": {
+                        "propertyName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "value": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
                       }
@@ -1217,6 +1382,7 @@
                         "PROCESSING_ERROR_REASON_INVALID_KEK": 22,
                         "PROCESSING_ERROR_REASON_WIP_AUTH_FAILED": 23,
                         "PROCESSING_ERROR_REASON_KEK_PERMISSION_DENIED": 24,
+                        "PROCESSING_ERROR_REASON_AWS_AUTH_FAILED": 27,
                         "PROCESSING_ERROR_REASON_USER_IDENTIFIER_DECRYPTION_ERROR": 25,
                         "PROCESSING_ERROR_OPERATING_ACCOUNT_MISMATCH_FOR_AD_IDENTIFIER": 26
                       }
@@ -1231,7 +1397,8 @@
                         "PROCESSING_WARNING_REASON_INVALID_WIP": 5,
                         "PROCESSING_WARNING_REASON_INVALID_KEK": 6,
                         "PROCESSING_WARNING_REASON_USER_IDENTIFIER_DECRYPTION_ERROR": 7,
-                        "PROCESSING_WARNING_REASON_INTERNAL_ERROR": 8
+                        "PROCESSING_WARNING_REASON_INTERNAL_ERROR": 8,
+                        "PROCESSING_WARNING_REASON_AWS_AUTH_FAILED": 9
                       }
                     },
                     "TermsOfService": {

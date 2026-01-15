@@ -91,6 +91,7 @@ export {RegionInstanceGroupsClient} from './region_instance_groups_client';
 export {RegionInstancesClient} from './region_instances_client';
 export {RegionInstanceTemplatesClient} from './region_instance_templates_client';
 export {RegionInstantSnapshotsClient} from './region_instant_snapshots_client';
+export {RegionMultiMigMembersClient} from './region_multi_mig_members_client';
 export {RegionMultiMigsClient} from './region_multi_migs_client';
 export {RegionNetworkEndpointGroupsClient} from './region_network_endpoint_groups_client';
 export {RegionNetworkFirewallPoliciesClient} from './region_network_firewall_policies_client';
