@@ -1,0 +1,15 @@
+**/*.log
+**/node_modules
+.coverage
+.DS_Store
+.nyc_output
+docs/
+google-cloud-error-reporting-*.tgz
+out/
+system-test/secrets.js
+system-test/*key.json
+build
+.vscode
+package-lock.json
+key.json
+__pycache__
