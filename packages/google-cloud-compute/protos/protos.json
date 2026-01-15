@@ -9837,6 +9837,11 @@
                             "network"
                           ]
                         },
+                        "_networkPassThroughLbTrafficPolicy": {
+                          "oneof": [
+                            "networkPassThroughLbTrafficPolicy"
+                          ]
+                        },
                         "_outlierDetection": {
                           "oneof": [
                             "outlierDetection"
@@ -10127,6 +10132,13 @@
                         "network": {
                           "type": "string",
                           "id": 232872494,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "networkPassThroughLbTrafficPolicy": {
+                          "type": "BackendServiceNetworkPassThroughLbTrafficPolicy",
+                          "id": 230323750,
                           "options": {
                             "proto3_optional": true
                           }
@@ -11237,6 +11249,64 @@
                             "CUSTOM": 388595569,
                             "EXCLUDE_ALL_OPTIONAL": 168636099,
                             "INCLUDE_ALL_OPTIONAL": 535606965
+                          }
+                        }
+                      }
+                    },
+                    "BackendServiceNetworkPassThroughLbTrafficPolicy": {
+                      "oneofs": {
+                        "_zonalAffinity": {
+                          "oneof": [
+                            "zonalAffinity"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "zonalAffinity": {
+                          "type": "BackendServiceNetworkPassThroughLbTrafficPolicyZonalAffinity",
+                          "id": 536266051,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "BackendServiceNetworkPassThroughLbTrafficPolicyZonalAffinity": {
+                      "oneofs": {
+                        "_spillover": {
+                          "oneof": [
+                            "spillover"
+                          ]
+                        },
+                        "_spilloverRatio": {
+                          "oneof": [
+                            "spilloverRatio"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "spillover": {
+                          "type": "string",
+                          "id": 505501440,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "spilloverRatio": {
+                          "type": "float",
+                          "id": 135580172,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Spillover": {
+                          "values": {
+                            "UNDEFINED_SPILLOVER": 0,
+                            "ZONAL_AFFINITY_DISABLED": 230207960,
+                            "ZONAL_AFFINITY_SPILL_CROSS_ZONE": 251048410,
+                            "ZONAL_AFFINITY_STAY_WITHIN_ZONE": 12177782
                           }
                         }
                       }
@@ -13189,9 +13259,15 @@
                             "MEMORY_OPTIMIZED_M3": 276301372,
                             "MEMORY_OPTIMIZED_M4": 276301373,
                             "MEMORY_OPTIMIZED_M4_6TB": 210543650,
+                            "MEMORY_OPTIMIZED_X4_1440_24T": 206669823,
                             "MEMORY_OPTIMIZED_X4_16TB": 183089120,
+                            "MEMORY_OPTIMIZED_X4_1920_32T": 291963529,
                             "MEMORY_OPTIMIZED_X4_24TB": 183116989,
                             "MEMORY_OPTIMIZED_X4_32TB": 183144858,
+                            "MEMORY_OPTIMIZED_X4_480_6T": 478547742,
+                            "MEMORY_OPTIMIZED_X4_480_8T": 478547804,
+                            "MEMORY_OPTIMIZED_X4_960_12T": 424752410,
+                            "MEMORY_OPTIMIZED_X4_960_16T": 424752534,
                             "STORAGE_OPTIMIZED_Z3": 316796085,
                             "TYPE_UNSPECIFIED": 437714322
                           }
@@ -21303,9 +21379,19 @@
                     },
                     "FirewallPolicyRuleMatcher": {
                       "oneofs": {
+                        "_destNetworkContext": {
+                          "oneof": [
+                            "destNetworkContext"
+                          ]
+                        },
                         "_destNetworkType": {
                           "oneof": [
                             "destNetworkType"
+                          ]
+                        },
+                        "_srcNetworkContext": {
+                          "oneof": [
+                            "srcNetworkContext"
                           ]
                         },
                         "_srcNetworkType": {
@@ -21329,6 +21415,13 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 337357713
+                        },
+                        "destNetworkContext": {
+                          "type": "string",
+                          "id": 76347649,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         },
                         "destNetworkType": {
                           "type": "string",
@@ -21367,6 +21460,13 @@
                           "type": "string",
                           "id": 432128083
                         },
+                        "srcNetworkContext": {
+                          "type": "string",
+                          "id": 147649603,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "srcNetworkType": {
                           "type": "string",
                           "id": 309819686,
@@ -21396,9 +21496,19 @@
                         }
                       },
                       "nested": {
+                        "DestNetworkContext": {
+                          "values": {
+                            "UNDEFINED_DEST_NETWORK_CONTEXT": 0
+                          }
+                        },
                         "DestNetworkType": {
                           "values": {
                             "UNDEFINED_DEST_NETWORK_TYPE": 0
+                          }
+                        },
+                        "SrcNetworkContext": {
+                          "values": {
+                            "UNDEFINED_SRC_NETWORK_CONTEXT": 0
                           }
                         },
                         "SrcNetworkType": {
@@ -44282,6 +44392,11 @@
                             "osLicense"
                           ]
                         },
+                        "_params": {
+                          "oneof": [
+                            "params"
+                          ]
+                        },
                         "_removableFromDisk": {
                           "oneof": [
                             "removableFromDisk"
@@ -44402,6 +44517,13 @@
                         "osLicense": {
                           "type": "bool",
                           "id": 487986406,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "params": {
+                          "type": "LicenseParams",
+                          "id": 78313862,
                           "options": {
                             "proto3_optional": true
                           }
@@ -44608,6 +44730,15 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        }
+                      }
+                    },
+                    "LicenseParams": {
+                      "fields": {
+                        "resourceManagerTags": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 377671164
                         }
                       }
                     },
@@ -59116,6 +59247,11 @@
                     },
                     "NetworkProfileNetworkFeatures": {
                       "oneofs": {
+                        "_allowAddressCreation": {
+                          "oneof": [
+                            "allowAddressCreation"
+                          ]
+                        },
                         "_allowAliasIpRanges": {
                           "oneof": [
                             "allowAliasIpRanges"
@@ -59151,6 +59287,11 @@
                             "allowExternalIpAccess"
                           ]
                         },
+                        "_allowFirewallPolicy": {
+                          "oneof": [
+                            "allowFirewallPolicy"
+                          ]
+                        },
                         "_allowInterconnect": {
                           "oneof": [
                             "allowInterconnect"
@@ -59169,6 +59310,11 @@
                         "_allowMultiNicInSameNetwork": {
                           "oneof": [
                             "allowMultiNicInSameNetwork"
+                          ]
+                        },
+                        "_allowMultiNicInSameSubnetwork": {
+                          "oneof": [
+                            "allowMultiNicInSameSubnetwork"
                           ]
                         },
                         "_allowMulticast": {
@@ -59216,6 +59362,16 @@
                             "allowSubInterfaces"
                           ]
                         },
+                        "_allowSubnetworkCreation": {
+                          "oneof": [
+                            "allowSubnetworkCreation"
+                          ]
+                        },
+                        "_allowVpcFirewallRules": {
+                          "oneof": [
+                            "allowVpcFirewallRules"
+                          ]
+                        },
                         "_allowVpcPeering": {
                           "oneof": [
                             "allowVpcPeering"
@@ -59231,6 +59387,11 @@
                             "multicast"
                           ]
                         },
+                        "_predefinedNetworkInternalIpv6Range": {
+                          "oneof": [
+                            "predefinedNetworkInternalIpv6Range"
+                          ]
+                        },
                         "_unicast": {
                           "oneof": [
                             "unicast"
@@ -59242,6 +59403,13 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 433024768
+                        },
+                        "allowAddressCreation": {
+                          "type": "string",
+                          "id": 450941184,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         },
                         "allowAliasIpRanges": {
                           "type": "string",
@@ -59292,6 +59460,13 @@
                             "proto3_optional": true
                           }
                         },
+                        "allowFirewallPolicy": {
+                          "type": "string",
+                          "id": 254200923,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "allowInterconnect": {
                           "type": "string",
                           "id": 280512964,
@@ -59316,6 +59491,13 @@
                         "allowMultiNicInSameNetwork": {
                           "type": "string",
                           "id": 88251004,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "allowMultiNicInSameSubnetwork": {
+                          "type": "string",
+                          "id": 278087904,
                           "options": {
                             "proto3_optional": true
                           }
@@ -59383,6 +59565,20 @@
                             "proto3_optional": true
                           }
                         },
+                        "allowSubnetworkCreation": {
+                          "type": "string",
+                          "id": 459328026,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "allowVpcFirewallRules": {
+                          "type": "string",
+                          "id": 509076420,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "allowVpcPeering": {
                           "type": "string",
                           "id": 115402228,
@@ -59397,6 +59593,11 @@
                             "proto3_optional": true
                           }
                         },
+                        "firewallPolicyTypes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 390742027
+                        },
                         "interfaceTypes": {
                           "rule": "repeated",
                           "type": "string",
@@ -59408,6 +59609,18 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        },
+                        "predefinedNetworkInternalIpv6Range": {
+                          "type": "string",
+                          "id": 527810909,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "predefinedSubnetworkRanges": {
+                          "rule": "repeated",
+                          "type": "NetworkProfileNetworkFeaturesPredefinedSubnetworkRange",
+                          "id": 408740430
                         },
                         "subnetPurposes": {
                           "rule": "repeated",
@@ -59449,6 +59662,13 @@
                             "SERVERLESS": 270492508,
                             "SHARED_LOADBALANCER_VIP": 294447572,
                             "VPC_PEERING": 400800170
+                          }
+                        },
+                        "AllowAddressCreation": {
+                          "values": {
+                            "UNDEFINED_ALLOW_ADDRESS_CREATION": 0,
+                            "ADDRESS_CREATION_ALLOWED": 181903667,
+                            "ADDRESS_CREATION_BLOCKED": 534937975
                           }
                         },
                         "AllowAliasIpRanges": {
@@ -59500,6 +59720,13 @@
                             "EXTERNAL_IP_ACCESS_BLOCKED": 462564501
                           }
                         },
+                        "AllowFirewallPolicy": {
+                          "values": {
+                            "UNDEFINED_ALLOW_FIREWALL_POLICY": 0,
+                            "FIREWALL_POLICY_ALLOWED": 388488346,
+                            "FIREWALL_POLICY_BLOCKED": 204651742
+                          }
+                        },
                         "AllowInterconnect": {
                           "values": {
                             "UNDEFINED_ALLOW_INTERCONNECT": 0,
@@ -59526,6 +59753,13 @@
                             "UNDEFINED_ALLOW_MULTI_NIC_IN_SAME_NETWORK": 0,
                             "MULTI_NIC_IN_SAME_NETWORK_ALLOWED": 457555419,
                             "MULTI_NIC_IN_SAME_NETWORK_BLOCKED": 273718815
+                          }
+                        },
+                        "AllowMultiNicInSameSubnetwork": {
+                          "values": {
+                            "UNDEFINED_ALLOW_MULTI_NIC_IN_SAME_SUBNETWORK": 0,
+                            "MULTI_NIC_IN_SAME_SUBNETWORK_ALLOWED": 288044595,
+                            "MULTI_NIC_IN_SAME_SUBNETWORK_BLOCKED": 104207991
                           }
                         },
                         "AllowMulticast": {
@@ -59591,6 +59825,20 @@
                             "SUBINTERFACES_BLOCKED": 511720199
                           }
                         },
+                        "AllowSubnetworkCreation": {
+                          "values": {
+                            "UNDEFINED_ALLOW_SUBNETWORK_CREATION": 0,
+                            "SUBNETWORK_CREATION_ALLOWED": 158580825,
+                            "SUBNETWORK_CREATION_BLOCKED": 511615133
+                          }
+                        },
+                        "AllowVpcFirewallRules": {
+                          "values": {
+                            "UNDEFINED_ALLOW_VPC_FIREWALL_RULES": 0,
+                            "VPC_FIREWALL_RULES_ALLOWED": 489586007,
+                            "VPC_FIREWALL_RULES_BLOCKED": 305749403
+                          }
+                        },
                         "AllowVpcPeering": {
                           "values": {
                             "UNDEFINED_ALLOW_VPC_PEERING": 0,
@@ -59603,6 +59851,13 @@
                             "UNDEFINED_ALLOW_VPN": 0,
                             "VPN_ALLOWED": 162163997,
                             "VPN_BLOCKED": 515198305
+                          }
+                        },
+                        "FirewallPolicyTypes": {
+                          "values": {
+                            "UNDEFINED_FIREWALL_POLICY_TYPES": 0,
+                            "RDMA_ROCE_POLICY": 148757145,
+                            "VPC_POLICY": 74319208
                           }
                         },
                         "InterfaceTypes": {
@@ -59663,6 +59918,36 @@
                             "UNDEFINED_UNICAST": 0,
                             "UNICAST_SDN": 379954157,
                             "UNICAST_ULL": 379956325
+                          }
+                        }
+                      }
+                    },
+                    "NetworkProfileNetworkFeaturesPredefinedSubnetworkRange": {
+                      "oneofs": {
+                        "_ipv6Range": {
+                          "oneof": [
+                            "ipv6Range"
+                          ]
+                        },
+                        "_namePrefix": {
+                          "oneof": [
+                            "namePrefix"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "ipv6Range": {
+                          "type": "string",
+                          "id": 50053349,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "namePrefix": {
+                          "type": "string",
+                          "id": 236409542,
+                          "options": {
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -59733,7 +60018,8 @@
                           "values": {
                             "UNDEFINED_RDMA_SUBTYPE": 0,
                             "FALCON": 455787729,
-                            "ROCE": 2520927
+                            "ROCE": 2520927,
+                            "ROCE_METAL": 421218823
                           }
                         },
                         "UllSubtype": {
@@ -71628,6 +71914,11 @@
                             "inUseCount"
                           ]
                         },
+                        "_inUseHostCount": {
+                          "oneof": [
+                            "inUseHostCount"
+                          ]
+                        },
                         "_kind": {
                           "oneof": [
                             "kind"
@@ -71711,6 +72002,13 @@
                         "inUseCount": {
                           "type": "int32",
                           "id": 493458877,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "inUseHostCount": {
+                          "type": "int32",
+                          "id": 364069834,
                           "options": {
                             "proto3_optional": true
                           }
@@ -72149,6 +72447,11 @@
                             "inUseCount"
                           ]
                         },
+                        "_inUseHostCount": {
+                          "oneof": [
+                            "inUseHostCount"
+                          ]
+                        },
                         "_kind": {
                           "oneof": [
                             "kind"
@@ -72229,6 +72532,13 @@
                         "inUseCount": {
                           "type": "int32",
                           "id": 493458877,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "inUseHostCount": {
+                          "type": "int32",
+                          "id": 364069834,
                           "options": {
                             "proto3_optional": true
                           }
@@ -85022,6 +85332,11 @@
                             "minCpuPlatform"
                           ]
                         },
+                        "_postKeyRevocationActionType": {
+                          "oneof": [
+                            "postKeyRevocationActionType"
+                          ]
+                        },
                         "_scheduling": {
                           "oneof": [
                             "scheduling"
@@ -85103,6 +85418,13 @@
                           "type": "NetworkInterface",
                           "id": 52735243
                         },
+                        "postKeyRevocationActionType": {
+                          "type": "string",
+                          "id": 292972897,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "scheduling": {
                           "type": "Scheduling",
                           "id": 386688404,
@@ -85130,6 +85452,14 @@
                             "KEY_REVOCATION_ACTION_TYPE_UNSPECIFIED": 467110106,
                             "NONE": 2402104,
                             "STOP": 2555906
+                          }
+                        },
+                        "PostKeyRevocationActionType": {
+                          "values": {
+                            "UNDEFINED_POST_KEY_REVOCATION_ACTION_TYPE": 0,
+                            "NOOP": 2402146,
+                            "POST_KEY_REVOCATION_ACTION_TYPE_UNSPECIFIED": 228738393,
+                            "SHUTDOWN": 76412502
                           }
                         }
                       }
@@ -86685,6 +87015,11 @@
                             "name"
                           ]
                         },
+                        "_params": {
+                          "oneof": [
+                            "params"
+                          ]
+                        },
                         "_performanceProvisioningType": {
                           "oneof": [
                             "performanceProvisioningType"
@@ -86799,6 +87134,13 @@
                         "name": {
                           "type": "string",
                           "id": 3373707,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "params": {
+                          "type": "StoragePoolParams",
+                          "id": 78313862,
                           "options": {
                             "proto3_optional": true
                           }
@@ -87343,6 +87685,15 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        }
+                      }
+                    },
+                    "StoragePoolParams": {
+                      "fields": {
+                        "resourceManagerTags": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 377671164
                         }
                       }
                     },
@@ -91939,6 +92290,38 @@
                         }
                       }
                     },
+                    "TestIamPermissionsAutoscalerRequest": {
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 195806222,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "testPermissionsRequestResource": {
+                          "type": "TestPermissionsRequest",
+                          "id": 439214758,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "zone": {
+                          "type": "string",
+                          "id": 3744684,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "TestIamPermissionsBackendBucketRequest": {
                       "fields": {
                         "project": {
@@ -92090,6 +92473,31 @@
                       }
                     },
                     "TestIamPermissionsGlobalAddressRequest": {
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 195806222,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "testPermissionsRequestResource": {
+                          "type": "TestPermissionsRequest",
+                          "id": 439214758,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "TestIamPermissionsHealthCheckRequest": {
                       "fields": {
                         "project": {
                           "type": "string",
@@ -92570,6 +92978,38 @@
                         }
                       }
                     },
+                    "TestIamPermissionsRegionAutoscalerRequest": {
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 195806222,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "testPermissionsRequestResource": {
+                          "type": "TestPermissionsRequest",
+                          "id": 439214758,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "TestIamPermissionsRegionBackendServiceRequest": {
                       "fields": {
                         "project": {
@@ -92603,6 +93043,38 @@
                       }
                     },
                     "TestIamPermissionsRegionDiskRequest": {
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 195806222,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "testPermissionsRequestResource": {
+                          "type": "TestPermissionsRequest",
+                          "id": 439214758,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "TestIamPermissionsRegionHealthCheckRequest": {
                       "fields": {
                         "project": {
                           "type": "string",
@@ -92699,6 +93171,38 @@
                       }
                     },
                     "TestIamPermissionsRegionNetworkFirewallPolicyRequest": {
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 195806222,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "testPermissionsRequestResource": {
+                          "type": "TestPermissionsRequest",
+                          "id": 439214758,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "TestIamPermissionsRegionNotificationEndpointRequest": {
                       "fields": {
                         "project": {
                           "type": "string",
@@ -92852,6 +93356,31 @@
                         "region": {
                           "type": "string",
                           "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 195806222,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "testPermissionsRequestResource": {
+                          "type": "TestPermissionsRequest",
+                          "id": 439214758,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "TestIamPermissionsRouteRequest": {
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
@@ -93037,6 +93566,81 @@
                         "region": {
                           "type": "string",
                           "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 195806222,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "testPermissionsRequestResource": {
+                          "type": "TestPermissionsRequest",
+                          "id": 439214758,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "TestIamPermissionsTargetSslProxyRequest": {
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 195806222,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "testPermissionsRequestResource": {
+                          "type": "TestPermissionsRequest",
+                          "id": 439214758,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "TestIamPermissionsTargetTcpProxyRequest": {
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 195806222,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "testPermissionsRequestResource": {
+                          "type": "TestPermissionsRequest",
+                          "id": 439214758,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "TestIamPermissionsUrlMapRequest": {
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
@@ -98647,6 +99251,26 @@
                             }
                           ]
                         },
+                        "TestIamPermissions": {
+                          "requestType": "TestIamPermissionsAutoscalerRequest",
+                          "responseType": "TestPermissionsResponse",
+                          "options": {
+                            "(google.api.http).body": "test_permissions_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/zones/{zone}/autoscalers/{resource}/testIamPermissions",
+                            "(google.api.method_signature)": "project,zone,resource,test_permissions_request_resource"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "test_permissions_request_resource",
+                                "post": "/compute/v1/projects/{project}/zones/{zone}/autoscalers/{resource}/testIamPermissions"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,zone,resource,test_permissions_request_resource"
+                            }
+                          ]
+                        },
                         "Update": {
                           "requestType": "UpdateAutoscalerRequest",
                           "responseType": "Operation",
@@ -101804,6 +102428,26 @@
                             },
                             {
                               "(google.cloud.operation_service)": "GlobalOperations"
+                            }
+                          ]
+                        },
+                        "TestIamPermissions": {
+                          "requestType": "TestIamPermissionsHealthCheckRequest",
+                          "responseType": "TestPermissionsResponse",
+                          "options": {
+                            "(google.api.http).body": "test_permissions_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/global/healthChecks/{resource}/testIamPermissions",
+                            "(google.api.method_signature)": "project,resource,test_permissions_request_resource"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "test_permissions_request_resource",
+                                "post": "/compute/v1/projects/{project}/global/healthChecks/{resource}/testIamPermissions"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,resource,test_permissions_request_resource"
                             }
                           ]
                         },
@@ -108935,6 +109579,26 @@
                             }
                           ]
                         },
+                        "TestIamPermissions": {
+                          "requestType": "TestIamPermissionsRegionAutoscalerRequest",
+                          "responseType": "TestPermissionsResponse",
+                          "options": {
+                            "(google.api.http).body": "test_permissions_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/regions/{region}/autoscalers/{resource}/testIamPermissions",
+                            "(google.api.method_signature)": "project,region,resource,test_permissions_request_resource"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "test_permissions_request_resource",
+                                "post": "/compute/v1/projects/{project}/regions/{region}/autoscalers/{resource}/testIamPermissions"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,resource,test_permissions_request_resource"
+                            }
+                          ]
+                        },
                         "Update": {
                           "requestType": "UpdateRegionAutoscalerRequest",
                           "responseType": "Operation",
@@ -109982,6 +110646,26 @@
                             },
                             {
                               "(google.cloud.operation_service)": "RegionOperations"
+                            }
+                          ]
+                        },
+                        "TestIamPermissions": {
+                          "requestType": "TestIamPermissionsRegionHealthCheckRequest",
+                          "responseType": "TestPermissionsResponse",
+                          "options": {
+                            "(google.api.http).body": "test_permissions_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/regions/{region}/healthChecks/{resource}/testIamPermissions",
+                            "(google.api.method_signature)": "project,region,resource,test_permissions_request_resource"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "test_permissions_request_resource",
+                                "post": "/compute/v1/projects/{project}/regions/{region}/healthChecks/{resource}/testIamPermissions"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,resource,test_permissions_request_resource"
                             }
                           ]
                         },
@@ -111544,6 +112228,26 @@
                             },
                             {
                               "(google.api.method_signature)": "project,region"
+                            }
+                          ]
+                        },
+                        "TestIamPermissions": {
+                          "requestType": "TestIamPermissionsRegionNotificationEndpointRequest",
+                          "responseType": "TestPermissionsResponse",
+                          "options": {
+                            "(google.api.http).body": "test_permissions_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/regions/{region}/notificationEndpoints/{resource}/testIamPermissions",
+                            "(google.api.method_signature)": "project,region,resource,test_permissions_request_resource"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "test_permissions_request_resource",
+                                "post": "/compute/v1/projects/{project}/regions/{region}/notificationEndpoints/{resource}/testIamPermissions"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,resource,test_permissions_request_resource"
                             }
                           ]
                         }
@@ -113816,6 +114520,26 @@
                             },
                             {
                               "(google.api.method_signature)": "project"
+                            }
+                          ]
+                        },
+                        "TestIamPermissions": {
+                          "requestType": "TestIamPermissionsRouteRequest",
+                          "responseType": "TestPermissionsResponse",
+                          "options": {
+                            "(google.api.http).body": "test_permissions_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/global/routes/{resource}/testIamPermissions",
+                            "(google.api.method_signature)": "project,resource,test_permissions_request_resource"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "test_permissions_request_resource",
+                                "post": "/compute/v1/projects/{project}/global/routes/{resource}/testIamPermissions"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,resource,test_permissions_request_resource"
                             }
                           ]
                         }
@@ -116452,6 +117176,26 @@
                               "(google.cloud.operation_service)": "GlobalOperations"
                             }
                           ]
+                        },
+                        "TestIamPermissions": {
+                          "requestType": "TestIamPermissionsTargetSslProxyRequest",
+                          "responseType": "TestPermissionsResponse",
+                          "options": {
+                            "(google.api.http).body": "test_permissions_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/global/targetSslProxies/{resource}/testIamPermissions",
+                            "(google.api.method_signature)": "project,resource,test_permissions_request_resource"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "test_permissions_request_resource",
+                                "post": "/compute/v1/projects/{project}/global/targetSslProxies/{resource}/testIamPermissions"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,resource,test_permissions_request_resource"
+                            }
+                          ]
                         }
                       }
                     },
@@ -116606,6 +117350,26 @@
                             },
                             {
                               "(google.cloud.operation_service)": "GlobalOperations"
+                            }
+                          ]
+                        },
+                        "TestIamPermissions": {
+                          "requestType": "TestIamPermissionsTargetTcpProxyRequest",
+                          "responseType": "TestPermissionsResponse",
+                          "options": {
+                            "(google.api.http).body": "test_permissions_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/global/targetTcpProxies/{resource}/testIamPermissions",
+                            "(google.api.method_signature)": "project,resource,test_permissions_request_resource"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "test_permissions_request_resource",
+                                "post": "/compute/v1/projects/{project}/global/targetTcpProxies/{resource}/testIamPermissions"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,resource,test_permissions_request_resource"
                             }
                           ]
                         }
@@ -116894,6 +117658,26 @@
                             },
                             {
                               "(google.cloud.operation_service)": "GlobalOperations"
+                            }
+                          ]
+                        },
+                        "TestIamPermissions": {
+                          "requestType": "TestIamPermissionsUrlMapRequest",
+                          "responseType": "TestPermissionsResponse",
+                          "options": {
+                            "(google.api.http).body": "test_permissions_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/global/urlMaps/{resource}/testIamPermissions",
+                            "(google.api.method_signature)": "project,resource,test_permissions_request_resource"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "test_permissions_request_resource",
+                                "post": "/compute/v1/projects/{project}/global/urlMaps/{resource}/testIamPermissions"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,resource,test_permissions_request_resource"
                             }
                           ]
                         },
