@@ -8073,6 +8073,44 @@
         }
       }
     },
+    "RegionMultiMigMembers": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RegionMultiMigMembersClient",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RegionMultiMigMembersClient",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "RegionMultiMigs": {
       "clients": {
         "grpc": {

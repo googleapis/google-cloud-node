@@ -132240,9 +132240,15 @@
                             "MEMORY_OPTIMIZED_M3": 276301372,
                             "MEMORY_OPTIMIZED_M4": 276301373,
                             "MEMORY_OPTIMIZED_M4_6TB": 210543650,
+                            "MEMORY_OPTIMIZED_X4_1440_24T": 206669823,
                             "MEMORY_OPTIMIZED_X4_16TB": 183089120,
+                            "MEMORY_OPTIMIZED_X4_1920_32T": 291963529,
                             "MEMORY_OPTIMIZED_X4_24TB": 183116989,
                             "MEMORY_OPTIMIZED_X4_32TB": 183144858,
+                            "MEMORY_OPTIMIZED_X4_480_6T": 478547742,
+                            "MEMORY_OPTIMIZED_X4_480_8T": 478547804,
+                            "MEMORY_OPTIMIZED_X4_960_12T": 424752410,
+                            "MEMORY_OPTIMIZED_X4_960_16T": 424752534,
                             "STORAGE_OPTIMIZED_Z3": 316796085,
                             "TYPE_UNSPECIFIED": 437714322
                           }
@@ -147479,6 +147485,38 @@
                         "instantSnapshot": {
                           "type": "string",
                           "id": 391638626,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetRegionMultiMigMemberRequest": {
+                      "fields": {
+                        "multiMig": {
+                          "type": "string",
+                          "id": 403990085,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "multiMigMember": {
+                          "type": "string",
+                          "id": 36731348,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
@@ -167500,6 +167538,11 @@
                             "osLicense"
                           ]
                         },
+                        "_params": {
+                          "oneof": [
+                            "params"
+                          ]
+                        },
                         "_removableFromDisk": {
                           "oneof": [
                             "removableFromDisk"
@@ -167620,6 +167663,13 @@
                         "osLicense": {
                           "type": "bool",
                           "id": 487986406,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "params": {
+                          "type": "LicenseParams",
+                          "id": 78313862,
                           "options": {
                             "proto3_optional": true
                           }
@@ -167826,6 +167876,15 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        }
+                      }
+                    },
+                    "LicenseParams": {
+                      "fields": {
+                        "resourceManagerTags": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 377671164
                         }
                       }
                     },
@@ -175018,6 +175077,93 @@
                         }
                       }
                     },
+                    "ListRegionMultiMigMembersRequest": {
+                      "oneofs": {
+                        "_filter": {
+                          "oneof": [
+                            "filter"
+                          ]
+                        },
+                        "_maxResults": {
+                          "oneof": [
+                            "maxResults"
+                          ]
+                        },
+                        "_orderBy": {
+                          "oneof": [
+                            "orderBy"
+                          ]
+                        },
+                        "_pageToken": {
+                          "oneof": [
+                            "pageToken"
+                          ]
+                        },
+                        "_returnPartialSuccess": {
+                          "oneof": [
+                            "returnPartialSuccess"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "filter": {
+                          "type": "string",
+                          "id": 336120696,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxResults": {
+                          "type": "uint32",
+                          "id": 54715419,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "multiMig": {
+                          "type": "string",
+                          "id": 403990085,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 160562920,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 19994697,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "returnPartialSuccess": {
+                          "type": "bool",
+                          "id": 517198390,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "ListRegionMultiMigsRequest": {
                       "oneofs": {
                         "_filter": {
@@ -180953,6 +181099,185 @@
                         }
                       }
                     },
+                    "MultiMigMember": {
+                      "oneofs": {
+                        "_creationTimestamp": {
+                          "oneof": [
+                            "creationTimestamp"
+                          ]
+                        },
+                        "_id": {
+                          "oneof": [
+                            "id"
+                          ]
+                        },
+                        "_kind": {
+                          "oneof": [
+                            "kind"
+                          ]
+                        },
+                        "_name": {
+                          "oneof": [
+                            "name"
+                          ]
+                        },
+                        "_region": {
+                          "oneof": [
+                            "region"
+                          ]
+                        },
+                        "_selfLink": {
+                          "oneof": [
+                            "selfLink"
+                          ]
+                        },
+                        "_status": {
+                          "oneof": [
+                            "status"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "creationTimestamp": {
+                          "type": "string",
+                          "id": 30525366,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "id": {
+                          "type": "uint64",
+                          "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 3292052,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 3373707,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLink": {
+                          "type": "string",
+                          "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "status": {
+                          "type": "MultiMigMemberStatus",
+                          "id": 181260274,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "MultiMigMemberList": {
+                      "oneofs": {
+                        "_id": {
+                          "oneof": [
+                            "id"
+                          ]
+                        },
+                        "_kind": {
+                          "oneof": [
+                            "kind"
+                          ]
+                        },
+                        "_nextPageToken": {
+                          "oneof": [
+                            "nextPageToken"
+                          ]
+                        },
+                        "_selfLink": {
+                          "oneof": [
+                            "selfLink"
+                          ]
+                        },
+                        "_warning": {
+                          "oneof": [
+                            "warning"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "id": {
+                          "type": "string",
+                          "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "items": {
+                          "rule": "repeated",
+                          "type": "MultiMigMember",
+                          "id": 100526016
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 3292052,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 79797525,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLink": {
+                          "type": "string",
+                          "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "warning": {
+                          "type": "Warning",
+                          "id": 50704284,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "MultiMigMemberStatus": {
+                      "oneofs": {
+                        "_instanceGroupManager": {
+                          "oneof": [
+                            "instanceGroupManager"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "instanceGroupManager": {
+                          "type": "string",
+                          "id": 249363395,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "MultiMigResourcePolicies": {
                       "oneofs": {
                         "_workloadPolicy": {
@@ -180972,11 +181297,25 @@
                       }
                     },
                     "MultiMigStatus": {
+                      "oneofs": {
+                        "_membersCount": {
+                          "oneof": [
+                            "membersCount"
+                          ]
+                        }
+                      },
                       "fields": {
                         "appliedAcceleratorTopologies": {
                           "rule": "repeated",
                           "type": "MultiMigStatusAcceleratorTopology",
                           "id": 481392547
+                        },
+                        "membersCount": {
+                          "type": "int32",
+                          "id": 215189097,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },
@@ -183246,6 +183585,11 @@
                             "kind"
                           ]
                         },
+                        "_macAddress": {
+                          "oneof": [
+                            "macAddress"
+                          ]
+                        },
                         "_name": {
                           "oneof": [
                             "name"
@@ -183351,6 +183695,13 @@
                         "kind": {
                           "type": "string",
                           "id": 3292052,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "macAddress": {
+                          "type": "string",
+                          "id": 332540164,
                           "options": {
                             "proto3_optional": true
                           }
@@ -184707,6 +185058,11 @@
                     },
                     "NetworkProfileNetworkFeatures": {
                       "oneofs": {
+                        "_allowAddressCreation": {
+                          "oneof": [
+                            "allowAddressCreation"
+                          ]
+                        },
                         "_allowAliasIpRanges": {
                           "oneof": [
                             "allowAliasIpRanges"
@@ -184767,6 +185123,11 @@
                             "allowMultiNicInSameNetwork"
                           ]
                         },
+                        "_allowMultiNicInSameSubnetwork": {
+                          "oneof": [
+                            "allowMultiNicInSameSubnetwork"
+                          ]
+                        },
                         "_allowMulticast": {
                           "oneof": [
                             "allowMulticast"
@@ -184812,6 +185173,16 @@
                             "allowSubInterfaces"
                           ]
                         },
+                        "_allowSubnetworkCreation": {
+                          "oneof": [
+                            "allowSubnetworkCreation"
+                          ]
+                        },
+                        "_allowVpcFirewallRules": {
+                          "oneof": [
+                            "allowVpcFirewallRules"
+                          ]
+                        },
                         "_allowVpcPeering": {
                           "oneof": [
                             "allowVpcPeering"
@@ -184827,6 +185198,11 @@
                             "multicast"
                           ]
                         },
+                        "_predefinedNetworkInternalIpv6Range": {
+                          "oneof": [
+                            "predefinedNetworkInternalIpv6Range"
+                          ]
+                        },
                         "_unicast": {
                           "oneof": [
                             "unicast"
@@ -184838,6 +185214,13 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 433024768
+                        },
+                        "allowAddressCreation": {
+                          "type": "string",
+                          "id": 450941184,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         },
                         "allowAliasIpRanges": {
                           "type": "string",
@@ -184923,6 +185306,13 @@
                             "proto3_optional": true
                           }
                         },
+                        "allowMultiNicInSameSubnetwork": {
+                          "type": "string",
+                          "id": 278087904,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "allowMulticast": {
                           "type": "string",
                           "id": 11002498,
@@ -184986,6 +185376,20 @@
                             "proto3_optional": true
                           }
                         },
+                        "allowSubnetworkCreation": {
+                          "type": "string",
+                          "id": 459328026,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "allowVpcFirewallRules": {
+                          "type": "string",
+                          "id": 509076420,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "allowVpcPeering": {
                           "type": "string",
                           "id": 115402228,
@@ -185016,6 +185420,18 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        },
+                        "predefinedNetworkInternalIpv6Range": {
+                          "type": "string",
+                          "id": 527810909,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "predefinedSubnetworkRanges": {
+                          "rule": "repeated",
+                          "type": "NetworkProfileNetworkFeaturesPredefinedSubnetworkRange",
+                          "id": 408740430
                         },
                         "subnetPurposes": {
                           "rule": "repeated",
@@ -185057,6 +185473,13 @@
                             "SERVERLESS": 270492508,
                             "SHARED_LOADBALANCER_VIP": 294447572,
                             "VPC_PEERING": 400800170
+                          }
+                        },
+                        "AllowAddressCreation": {
+                          "values": {
+                            "UNDEFINED_ALLOW_ADDRESS_CREATION": 0,
+                            "ADDRESS_CREATION_ALLOWED": 181903667,
+                            "ADDRESS_CREATION_BLOCKED": 534937975
                           }
                         },
                         "AllowAliasIpRanges": {
@@ -185143,6 +185566,13 @@
                             "MULTI_NIC_IN_SAME_NETWORK_BLOCKED": 273718815
                           }
                         },
+                        "AllowMultiNicInSameSubnetwork": {
+                          "values": {
+                            "UNDEFINED_ALLOW_MULTI_NIC_IN_SAME_SUBNETWORK": 0,
+                            "MULTI_NIC_IN_SAME_SUBNETWORK_ALLOWED": 288044595,
+                            "MULTI_NIC_IN_SAME_SUBNETWORK_BLOCKED": 104207991
+                          }
+                        },
                         "AllowMulticast": {
                           "values": {
                             "UNDEFINED_ALLOW_MULTICAST": 0,
@@ -185204,6 +185634,20 @@
                             "UNDEFINED_ALLOW_SUB_INTERFACES": 0,
                             "SUBINTERFACES_ALLOWED": 158685891,
                             "SUBINTERFACES_BLOCKED": 511720199
+                          }
+                        },
+                        "AllowSubnetworkCreation": {
+                          "values": {
+                            "UNDEFINED_ALLOW_SUBNETWORK_CREATION": 0,
+                            "SUBNETWORK_CREATION_ALLOWED": 158580825,
+                            "SUBNETWORK_CREATION_BLOCKED": 511615133
+                          }
+                        },
+                        "AllowVpcFirewallRules": {
+                          "values": {
+                            "UNDEFINED_ALLOW_VPC_FIREWALL_RULES": 0,
+                            "VPC_FIREWALL_RULES_ALLOWED": 489586007,
+                            "VPC_FIREWALL_RULES_BLOCKED": 305749403
                           }
                         },
                         "AllowVpcPeering": {
@@ -185289,6 +185733,36 @@
                         }
                       }
                     },
+                    "NetworkProfileNetworkFeaturesPredefinedSubnetworkRange": {
+                      "oneofs": {
+                        "_ipv6Range": {
+                          "oneof": [
+                            "ipv6Range"
+                          ]
+                        },
+                        "_namePrefix": {
+                          "oneof": [
+                            "namePrefix"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "ipv6Range": {
+                          "type": "string",
+                          "id": 50053349,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "namePrefix": {
+                          "type": "string",
+                          "id": 236409542,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "NetworkProfileProfileType": {
                       "oneofs": {
                         "_networkType": {
@@ -185355,7 +185829,8 @@
                           "values": {
                             "UNDEFINED_RDMA_SUBTYPE": 0,
                             "FALCON": 455787729,
-                            "ROCE": 2520927
+                            "ROCE": 2520927,
+                            "ROCE_METAL": 421218823
                           }
                         },
                         "UllSubtype": {
@@ -215670,6 +216145,11 @@
                             "name"
                           ]
                         },
+                        "_params": {
+                          "oneof": [
+                            "params"
+                          ]
+                        },
                         "_performanceProvisioningType": {
                           "oneof": [
                             "performanceProvisioningType"
@@ -215784,6 +216264,13 @@
                         "name": {
                           "type": "string",
                           "id": 3373707,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "params": {
+                          "type": "StoragePoolParams",
+                          "id": 78313862,
                           "options": {
                             "proto3_optional": true
                           }
@@ -216328,6 +216815,15 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        }
+                      }
+                    },
+                    "StoragePoolParams": {
+                      "fields": {
+                        "resourceManagerTags": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 377671164
                         }
                       }
                     },
@@ -227392,6 +227888,11 @@
                     },
                     "VpnTunnel": {
                       "oneofs": {
+                        "_capacityTier": {
+                          "oneof": [
+                            "capacityTier"
+                          ]
+                        },
                         "_cipherSuite": {
                           "oneof": [
                             "cipherSuite"
@@ -227504,6 +228005,13 @@
                         }
                       },
                       "fields": {
+                        "capacityTier": {
+                          "type": "string",
+                          "id": 418241095,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "cipherSuite": {
                           "type": "VpnTunnelCipherSuite",
                           "id": 443788228,
@@ -227675,6 +228183,13 @@
                         }
                       },
                       "nested": {
+                        "CapacityTier": {
+                          "values": {
+                            "UNDEFINED_CAPACITY_TIER": 0,
+                            "DEFAULT": 115302945,
+                            "HIGH": 2217378
+                          }
+                        },
                         "Status": {
                           "values": {
                             "UNDEFINED_STATUS": 0,
@@ -243633,6 +244148,50 @@
                             },
                             {
                               "(google.api.method_signature)": "project,region,resource,test_permissions_request_resource"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "RegionMultiMigMembers": {
+                      "options": {
+                        "(google.api.default_host)": "compute.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/compute.readonly,https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "Get": {
+                          "requestType": "GetRegionMultiMigMemberRequest",
+                          "responseType": "MultiMigMember",
+                          "options": {
+                            "(google.api.http).get": "/compute/beta/projects/{project}/regions/{region}/multiMigs/{multi_mig}/multiMigMembers/{multi_mig_member}",
+                            "(google.api.method_signature)": "project,region,multi_mig,multi_mig_member"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/beta/projects/{project}/regions/{region}/multiMigs/{multi_mig}/multiMigMembers/{multi_mig_member}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,multi_mig,multi_mig_member"
+                            }
+                          ]
+                        },
+                        "List": {
+                          "requestType": "ListRegionMultiMigMembersRequest",
+                          "responseType": "MultiMigMemberList",
+                          "options": {
+                            "(google.api.http).get": "/compute/beta/projects/{project}/regions/{region}/multiMigs/{multi_mig}/multiMigMembers",
+                            "(google.api.method_signature)": "project,region,multi_mig"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/beta/projects/{project}/regions/{region}/multiMigs/{multi_mig}/multiMigMembers"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,multi_mig"
                             }
                           ]
                         }
