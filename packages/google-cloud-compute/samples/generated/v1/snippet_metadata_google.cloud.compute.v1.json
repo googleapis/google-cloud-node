@@ -1028,6 +1028,58 @@
       }
     },
     {
+      "regionTag": "compute_v1_generated_Autoscalers_TestIamPermissions_async",
+      "title": "AcceleratorTypes testIamPermissions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns permissions that a caller has on the specified resource.",
+      "canonical": true,
+      "file": "autoscalers.test_iam_permissions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "TestIamPermissions",
+        "fullName": "google.cloud.compute.v1.Autoscalers.TestIamPermissions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "test_permissions_request_resource",
+            "type": ".google.cloud.compute.v1.TestPermissionsRequest"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1.TestPermissionsResponse",
+        "client": {
+          "shortName": "AutoscalersClient",
+          "fullName": "google.cloud.compute.v1.AutoscalersClient"
+        },
+        "method": {
+          "shortName": "TestIamPermissions",
+          "fullName": "google.cloud.compute.v1.Autoscalers.TestIamPermissions",
+          "service": {
+            "shortName": "Autoscalers",
+            "fullName": "google.cloud.compute.v1.Autoscalers"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "compute_v1_generated_Autoscalers_Update_async",
       "title": "AcceleratorTypes update Sample",
       "origin": "API_DEFINITION",
@@ -8448,6 +8500,54 @@
         "method": {
           "shortName": "Patch",
           "fullName": "google.cloud.compute.v1.HealthChecks.Patch",
+          "service": {
+            "shortName": "HealthChecks",
+            "fullName": "google.cloud.compute.v1.HealthChecks"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1_generated_HealthChecks_TestIamPermissions_async",
+      "title": "AcceleratorTypes testIamPermissions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns permissions that a caller has on the specified resource.",
+      "canonical": true,
+      "file": "health_checks.test_iam_permissions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "TestIamPermissions",
+        "fullName": "google.cloud.compute.v1.HealthChecks.TestIamPermissions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "test_permissions_request_resource",
+            "type": ".google.cloud.compute.v1.TestPermissionsRequest"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1.TestPermissionsResponse",
+        "client": {
+          "shortName": "HealthChecksClient",
+          "fullName": "google.cloud.compute.v1.HealthChecksClient"
+        },
+        "method": {
+          "shortName": "TestIamPermissions",
+          "fullName": "google.cloud.compute.v1.HealthChecks.TestIamPermissions",
           "service": {
             "shortName": "HealthChecks",
             "fullName": "google.cloud.compute.v1.HealthChecks"
@@ -25868,6 +25968,58 @@
       }
     },
     {
+      "regionTag": "compute_v1_generated_RegionAutoscalers_TestIamPermissions_async",
+      "title": "AcceleratorTypes testIamPermissions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns permissions that a caller has on the specified resource.",
+      "canonical": true,
+      "file": "region_autoscalers.test_iam_permissions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "TestIamPermissions",
+        "fullName": "google.cloud.compute.v1.RegionAutoscalers.TestIamPermissions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "test_permissions_request_resource",
+            "type": ".google.cloud.compute.v1.TestPermissionsRequest"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1.TestPermissionsResponse",
+        "client": {
+          "shortName": "RegionAutoscalersClient",
+          "fullName": "google.cloud.compute.v1.RegionAutoscalersClient"
+        },
+        "method": {
+          "shortName": "TestIamPermissions",
+          "fullName": "google.cloud.compute.v1.RegionAutoscalers.TestIamPermissions",
+          "service": {
+            "shortName": "RegionAutoscalers",
+            "fullName": "google.cloud.compute.v1.RegionAutoscalers"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "compute_v1_generated_RegionAutoscalers_Update_async",
       "title": "AcceleratorTypes update Sample",
       "origin": "API_DEFINITION",
@@ -28184,6 +28336,58 @@
         "method": {
           "shortName": "Patch",
           "fullName": "google.cloud.compute.v1.RegionHealthChecks.Patch",
+          "service": {
+            "shortName": "RegionHealthChecks",
+            "fullName": "google.cloud.compute.v1.RegionHealthChecks"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1_generated_RegionHealthChecks_TestIamPermissions_async",
+      "title": "AcceleratorTypes testIamPermissions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns permissions that a caller has on the specified resource.",
+      "canonical": true,
+      "file": "region_health_checks.test_iam_permissions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "TestIamPermissions",
+        "fullName": "google.cloud.compute.v1.RegionHealthChecks.TestIamPermissions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "test_permissions_request_resource",
+            "type": ".google.cloud.compute.v1.TestPermissionsRequest"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1.TestPermissionsResponse",
+        "client": {
+          "shortName": "RegionHealthChecksClient",
+          "fullName": "google.cloud.compute.v1.RegionHealthChecksClient"
+        },
+        "method": {
+          "shortName": "TestIamPermissions",
+          "fullName": "google.cloud.compute.v1.RegionHealthChecks.TestIamPermissions",
           "service": {
             "shortName": "RegionHealthChecks",
             "fullName": "google.cloud.compute.v1.RegionHealthChecks"
@@ -32352,6 +32556,58 @@
         "method": {
           "shortName": "List",
           "fullName": "google.cloud.compute.v1.RegionNotificationEndpoints.List",
+          "service": {
+            "shortName": "RegionNotificationEndpoints",
+            "fullName": "google.cloud.compute.v1.RegionNotificationEndpoints"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1_generated_RegionNotificationEndpoints_TestIamPermissions_async",
+      "title": "AcceleratorTypes testIamPermissions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns permissions that a caller has on the specified resource.",
+      "canonical": true,
+      "file": "region_notification_endpoints.test_iam_permissions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "TestIamPermissions",
+        "fullName": "google.cloud.compute.v1.RegionNotificationEndpoints.TestIamPermissions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "test_permissions_request_resource",
+            "type": ".google.cloud.compute.v1.TestPermissionsRequest"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1.TestPermissionsResponse",
+        "client": {
+          "shortName": "RegionNotificationEndpointsClient",
+          "fullName": "google.cloud.compute.v1.RegionNotificationEndpointsClient"
+        },
+        "method": {
+          "shortName": "TestIamPermissions",
+          "fullName": "google.cloud.compute.v1.RegionNotificationEndpoints.TestIamPermissions",
           "service": {
             "shortName": "RegionNotificationEndpoints",
             "fullName": "google.cloud.compute.v1.RegionNotificationEndpoints"
@@ -38164,6 +38420,54 @@
         "method": {
           "shortName": "List",
           "fullName": "google.cloud.compute.v1.Routes.List",
+          "service": {
+            "shortName": "Routes",
+            "fullName": "google.cloud.compute.v1.Routes"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1_generated_Routes_TestIamPermissions_async",
+      "title": "AcceleratorTypes testIamPermissions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns permissions that a caller has on the specified resource.",
+      "canonical": true,
+      "file": "routes.test_iam_permissions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "TestIamPermissions",
+        "fullName": "google.cloud.compute.v1.Routes.TestIamPermissions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "test_permissions_request_resource",
+            "type": ".google.cloud.compute.v1.TestPermissionsRequest"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1.TestPermissionsResponse",
+        "client": {
+          "shortName": "RoutesClient",
+          "fullName": "google.cloud.compute.v1.RoutesClient"
+        },
+        "method": {
+          "shortName": "TestIamPermissions",
+          "fullName": "google.cloud.compute.v1.Routes.TestIamPermissions",
           "service": {
             "shortName": "Routes",
             "fullName": "google.cloud.compute.v1.Routes"
@@ -44668,6 +44972,54 @@
       }
     },
     {
+      "regionTag": "compute_v1_generated_TargetSslProxies_TestIamPermissions_async",
+      "title": "AcceleratorTypes testIamPermissions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns permissions that a caller has on the specified resource.",
+      "canonical": true,
+      "file": "target_ssl_proxies.test_iam_permissions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "TestIamPermissions",
+        "fullName": "google.cloud.compute.v1.TargetSslProxies.TestIamPermissions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "test_permissions_request_resource",
+            "type": ".google.cloud.compute.v1.TestPermissionsRequest"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1.TestPermissionsResponse",
+        "client": {
+          "shortName": "TargetSslProxiesClient",
+          "fullName": "google.cloud.compute.v1.TargetSslProxiesClient"
+        },
+        "method": {
+          "shortName": "TestIamPermissions",
+          "fullName": "google.cloud.compute.v1.TargetSslProxies.TestIamPermissions",
+          "service": {
+            "shortName": "TargetSslProxies",
+            "fullName": "google.cloud.compute.v1.TargetSslProxies"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "compute_v1_generated_TargetTcpProxies_AggregatedList_async",
       "title": "AcceleratorTypes aggregatedList Sample",
       "origin": "API_DEFINITION",
@@ -45032,6 +45384,54 @@
         "method": {
           "shortName": "SetProxyHeader",
           "fullName": "google.cloud.compute.v1.TargetTcpProxies.SetProxyHeader",
+          "service": {
+            "shortName": "TargetTcpProxies",
+            "fullName": "google.cloud.compute.v1.TargetTcpProxies"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1_generated_TargetTcpProxies_TestIamPermissions_async",
+      "title": "AcceleratorTypes testIamPermissions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns permissions that a caller has on the specified resource.",
+      "canonical": true,
+      "file": "target_tcp_proxies.test_iam_permissions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "TestIamPermissions",
+        "fullName": "google.cloud.compute.v1.TargetTcpProxies.TestIamPermissions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "test_permissions_request_resource",
+            "type": ".google.cloud.compute.v1.TestPermissionsRequest"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1.TestPermissionsResponse",
+        "client": {
+          "shortName": "TargetTcpProxiesClient",
+          "fullName": "google.cloud.compute.v1.TargetTcpProxiesClient"
+        },
+        "method": {
+          "shortName": "TestIamPermissions",
+          "fullName": "google.cloud.compute.v1.TargetTcpProxies.TestIamPermissions",
           "service": {
             "shortName": "TargetTcpProxies",
             "fullName": "google.cloud.compute.v1.TargetTcpProxies"
@@ -45744,6 +46144,54 @@
         "method": {
           "shortName": "Patch",
           "fullName": "google.cloud.compute.v1.UrlMaps.Patch",
+          "service": {
+            "shortName": "UrlMaps",
+            "fullName": "google.cloud.compute.v1.UrlMaps"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1_generated_UrlMaps_TestIamPermissions_async",
+      "title": "AcceleratorTypes testIamPermissions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns permissions that a caller has on the specified resource.",
+      "canonical": true,
+      "file": "url_maps.test_iam_permissions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "TestIamPermissions",
+        "fullName": "google.cloud.compute.v1.UrlMaps.TestIamPermissions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "test_permissions_request_resource",
+            "type": ".google.cloud.compute.v1.TestPermissionsRequest"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1.TestPermissionsResponse",
+        "client": {
+          "shortName": "UrlMapsClient",
+          "fullName": "google.cloud.compute.v1.UrlMapsClient"
+        },
+        "method": {
+          "shortName": "TestIamPermissions",
+          "fullName": "google.cloud.compute.v1.UrlMaps.TestIamPermissions",
           "service": {
             "shortName": "UrlMaps",
             "fullName": "google.cloud.compute.v1.UrlMaps"

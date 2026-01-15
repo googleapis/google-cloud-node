@@ -196,6 +196,9 @@ export class NetAppClient {
       backupVaultPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/backupVaults/{backup_vault}'
       ),
+      hostGroupPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/hostGroups/{host_group}'
+      ),
       kmsConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/kmsConfigs/{kms_config}'
       ),
@@ -239,7 +242,9 @@ export class NetAppClient {
       listBackupPolicies:
           new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'backupPolicies'),
       listQuotaRules:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'quotaRules')
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'quotaRules'),
+      listHostGroups:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'hostGroups')
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -411,6 +416,22 @@ export class NetAppClient {
       '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteQuotaRuleMetadata = protoFilesRoot.lookup(
       '.google.cloud.netapp.v1.OperationMetadata') as gax.protobuf.Type;
+    const restoreBackupFilesResponse = protoFilesRoot.lookup(
+      '.google.cloud.netapp.v1.RestoreBackupFilesResponse') as gax.protobuf.Type;
+    const restoreBackupFilesMetadata = protoFilesRoot.lookup(
+      '.google.cloud.netapp.v1.OperationMetadata') as gax.protobuf.Type;
+    const createHostGroupResponse = protoFilesRoot.lookup(
+      '.google.cloud.netapp.v1.HostGroup') as gax.protobuf.Type;
+    const createHostGroupMetadata = protoFilesRoot.lookup(
+      '.google.cloud.netapp.v1.OperationMetadata') as gax.protobuf.Type;
+    const updateHostGroupResponse = protoFilesRoot.lookup(
+      '.google.cloud.netapp.v1.HostGroup') as gax.protobuf.Type;
+    const updateHostGroupMetadata = protoFilesRoot.lookup(
+      '.google.cloud.netapp.v1.OperationMetadata') as gax.protobuf.Type;
+    const deleteHostGroupResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty') as gax.protobuf.Type;
+    const deleteHostGroupMetadata = protoFilesRoot.lookup(
+      '.google.cloud.netapp.v1.OperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createStoragePool: new this._gaxModule.LongrunningDescriptor(
@@ -568,7 +589,23 @@ export class NetAppClient {
       deleteQuotaRule: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteQuotaRuleResponse.decode.bind(deleteQuotaRuleResponse),
-        deleteQuotaRuleMetadata.decode.bind(deleteQuotaRuleMetadata))
+        deleteQuotaRuleMetadata.decode.bind(deleteQuotaRuleMetadata)),
+      restoreBackupFiles: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        restoreBackupFilesResponse.decode.bind(restoreBackupFilesResponse),
+        restoreBackupFilesMetadata.decode.bind(restoreBackupFilesMetadata)),
+      createHostGroup: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createHostGroupResponse.decode.bind(createHostGroupResponse),
+        createHostGroupMetadata.decode.bind(createHostGroupMetadata)),
+      updateHostGroup: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateHostGroupResponse.decode.bind(updateHostGroupResponse),
+        updateHostGroupMetadata.decode.bind(updateHostGroupMetadata)),
+      deleteHostGroup: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteHostGroupResponse.decode.bind(deleteHostGroupResponse),
+        deleteHostGroupMetadata.decode.bind(deleteHostGroupMetadata))
     };
 
     // Put together the default options sent with requests.
@@ -614,7 +651,7 @@ export class NetAppClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const netAppStubMethods =
-        ['listStoragePools', 'createStoragePool', 'getStoragePool', 'updateStoragePool', 'deleteStoragePool', 'validateDirectoryService', 'switchActiveReplicaZone', 'listVolumes', 'getVolume', 'createVolume', 'updateVolume', 'deleteVolume', 'revertVolume', 'listSnapshots', 'getSnapshot', 'createSnapshot', 'deleteSnapshot', 'updateSnapshot', 'listActiveDirectories', 'getActiveDirectory', 'createActiveDirectory', 'updateActiveDirectory', 'deleteActiveDirectory', 'listKmsConfigs', 'createKmsConfig', 'getKmsConfig', 'updateKmsConfig', 'encryptVolumes', 'verifyKmsConfig', 'deleteKmsConfig', 'listReplications', 'getReplication', 'createReplication', 'deleteReplication', 'updateReplication', 'stopReplication', 'resumeReplication', 'reverseReplicationDirection', 'establishPeering', 'syncReplication', 'createBackupVault', 'getBackupVault', 'listBackupVaults', 'updateBackupVault', 'deleteBackupVault', 'createBackup', 'getBackup', 'listBackups', 'deleteBackup', 'updateBackup', 'createBackupPolicy', 'getBackupPolicy', 'listBackupPolicies', 'updateBackupPolicy', 'deleteBackupPolicy', 'listQuotaRules', 'getQuotaRule', 'createQuotaRule', 'updateQuotaRule', 'deleteQuotaRule'];
+        ['listStoragePools', 'createStoragePool', 'getStoragePool', 'updateStoragePool', 'deleteStoragePool', 'validateDirectoryService', 'switchActiveReplicaZone', 'listVolumes', 'getVolume', 'createVolume', 'updateVolume', 'deleteVolume', 'revertVolume', 'listSnapshots', 'getSnapshot', 'createSnapshot', 'deleteSnapshot', 'updateSnapshot', 'listActiveDirectories', 'getActiveDirectory', 'createActiveDirectory', 'updateActiveDirectory', 'deleteActiveDirectory', 'listKmsConfigs', 'createKmsConfig', 'getKmsConfig', 'updateKmsConfig', 'encryptVolumes', 'verifyKmsConfig', 'deleteKmsConfig', 'listReplications', 'getReplication', 'createReplication', 'deleteReplication', 'updateReplication', 'stopReplication', 'resumeReplication', 'reverseReplicationDirection', 'establishPeering', 'syncReplication', 'createBackupVault', 'getBackupVault', 'listBackupVaults', 'updateBackupVault', 'deleteBackupVault', 'createBackup', 'getBackup', 'listBackups', 'deleteBackup', 'updateBackup', 'createBackupPolicy', 'getBackupPolicy', 'listBackupPolicies', 'updateBackupPolicy', 'deleteBackupPolicy', 'listQuotaRules', 'getQuotaRule', 'createQuotaRule', 'updateQuotaRule', 'deleteQuotaRule', 'restoreBackupFiles', 'listHostGroups', 'getHostGroup', 'createHostGroup', 'updateHostGroup', 'deleteHostGroup'];
     for (const methodName of netAppStubMethods) {
       const callPromise = this.netAppStub.then(
         stub => (...args: Array<{}>) => {
@@ -1748,6 +1785,102 @@ export class NetAppClient {
         {}|undefined
       ]) => {
         this._log.info('getQuotaRule response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Returns details of the specified host group.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the host group.
+ *   Format:
+ *   `projects/{project_number}/locations/{location_id}/hostGroups/{host_group_id}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.netapp.v1.HostGroup|HostGroup}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/net_app.get_host_group.js</caption>
+ * region_tag:netapp_v1_generated_NetApp_GetHostGroup_async
+ */
+  getHostGroup(
+      request?: protos.google.cloud.netapp.v1.IGetHostGroupRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.netapp.v1.IHostGroup,
+        protos.google.cloud.netapp.v1.IGetHostGroupRequest|undefined, {}|undefined
+      ]>;
+  getHostGroup(
+      request: protos.google.cloud.netapp.v1.IGetHostGroupRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.netapp.v1.IHostGroup,
+          protos.google.cloud.netapp.v1.IGetHostGroupRequest|null|undefined,
+          {}|null|undefined>): void;
+  getHostGroup(
+      request: protos.google.cloud.netapp.v1.IGetHostGroupRequest,
+      callback: Callback<
+          protos.google.cloud.netapp.v1.IHostGroup,
+          protos.google.cloud.netapp.v1.IGetHostGroupRequest|null|undefined,
+          {}|null|undefined>): void;
+  getHostGroup(
+      request?: protos.google.cloud.netapp.v1.IGetHostGroupRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.netapp.v1.IHostGroup,
+          protos.google.cloud.netapp.v1.IGetHostGroupRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.netapp.v1.IHostGroup,
+          protos.google.cloud.netapp.v1.IGetHostGroupRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.netapp.v1.IHostGroup,
+        protos.google.cloud.netapp.v1.IGetHostGroupRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('getHostGroup request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.netapp.v1.IHostGroup,
+        protos.google.cloud.netapp.v1.IGetHostGroupRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getHostGroup response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getHostGroup(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.netapp.v1.IHostGroup,
+        protos.google.cloud.netapp.v1.IGetHostGroupRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getHostGroup response %j', response);
         return [response, options, rawResponse];
       }).catch((error: any) => {
         if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
@@ -6113,6 +6246,458 @@ export class NetAppClient {
     const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteQuotaRule, this._gaxModule.createDefaultBackoffSettings());
     return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.netapp.v1.OperationMetadata>;
   }
+/**
+ * Restore files from a backup to a volume.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The volume resource name, in the format
+ *   `projects/{project_id}/locations/{location}/volumes/{volume_id}`
+ * @param {string} request.backup
+ *   Required. The backup resource name, in the format
+ *   `projects/{project_id}/locations/{location}/backupVaults/{backup_vault_id}/backups/{backup_id}`
+ * @param {string[]} request.fileList
+ *   Required. List of files to be restored, specified by their absolute path in
+ *   the source volume.
+ * @param {string} [request.restoreDestinationPath]
+ *   Optional. Absolute directory path in the destination volume. This is
+ *   required if the `file_list` is provided.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/net_app.restore_backup_files.js</caption>
+ * region_tag:netapp_v1_generated_NetApp_RestoreBackupFiles_async
+ */
+  restoreBackupFiles(
+      request?: protos.google.cloud.netapp.v1.IRestoreBackupFilesRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.netapp.v1.IRestoreBackupFilesResponse, protos.google.cloud.netapp.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  restoreBackupFiles(
+      request: protos.google.cloud.netapp.v1.IRestoreBackupFilesRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.netapp.v1.IRestoreBackupFilesResponse, protos.google.cloud.netapp.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  restoreBackupFiles(
+      request: protos.google.cloud.netapp.v1.IRestoreBackupFilesRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.netapp.v1.IRestoreBackupFilesResponse, protos.google.cloud.netapp.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  restoreBackupFiles(
+      request?: protos.google.cloud.netapp.v1.IRestoreBackupFilesRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.netapp.v1.IRestoreBackupFilesResponse, protos.google.cloud.netapp.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.netapp.v1.IRestoreBackupFilesResponse, protos.google.cloud.netapp.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.netapp.v1.IRestoreBackupFilesResponse, protos.google.cloud.netapp.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.netapp.v1.IRestoreBackupFilesResponse, protos.google.cloud.netapp.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('restoreBackupFiles response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('restoreBackupFiles request %j', request);
+    return this.innerApiCalls.restoreBackupFiles(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.netapp.v1.IRestoreBackupFilesResponse, protos.google.cloud.netapp.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('restoreBackupFiles response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `restoreBackupFiles()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/net_app.restore_backup_files.js</caption>
+ * region_tag:netapp_v1_generated_NetApp_RestoreBackupFiles_async
+ */
+  async checkRestoreBackupFilesProgress(name: string): Promise<LROperation<protos.google.cloud.netapp.v1.RestoreBackupFilesResponse, protos.google.cloud.netapp.v1.OperationMetadata>>{
+    this._log.info('restoreBackupFiles long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.restoreBackupFiles, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.netapp.v1.RestoreBackupFilesResponse, protos.google.cloud.netapp.v1.OperationMetadata>;
+  }
+/**
+ * Creates a new host group.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for CreateHostGroupRequest
+ * @param {google.cloud.netapp.v1.HostGroup} request.hostGroup
+ *   Required. Fields of the host group to create.
+ * @param {string} request.hostGroupId
+ *   Required. ID of the host group to create. Must be unique within the parent
+ *   resource. Must contain only letters, numbers, and hyphen, with
+ *   the first character a letter or underscore, the last a letter or underscore
+ *   or a number, and a 63 character maximum.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/net_app.create_host_group.js</caption>
+ * region_tag:netapp_v1_generated_NetApp_CreateHostGroup_async
+ */
+  createHostGroup(
+      request?: protos.google.cloud.netapp.v1.ICreateHostGroupRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.netapp.v1.IHostGroup, protos.google.cloud.netapp.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  createHostGroup(
+      request: protos.google.cloud.netapp.v1.ICreateHostGroupRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.netapp.v1.IHostGroup, protos.google.cloud.netapp.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  createHostGroup(
+      request: protos.google.cloud.netapp.v1.ICreateHostGroupRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.netapp.v1.IHostGroup, protos.google.cloud.netapp.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  createHostGroup(
+      request?: protos.google.cloud.netapp.v1.ICreateHostGroupRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.netapp.v1.IHostGroup, protos.google.cloud.netapp.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.netapp.v1.IHostGroup, protos.google.cloud.netapp.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.netapp.v1.IHostGroup, protos.google.cloud.netapp.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.netapp.v1.IHostGroup, protos.google.cloud.netapp.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createHostGroup response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createHostGroup request %j', request);
+    return this.innerApiCalls.createHostGroup(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.netapp.v1.IHostGroup, protos.google.cloud.netapp.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createHostGroup response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `createHostGroup()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/net_app.create_host_group.js</caption>
+ * region_tag:netapp_v1_generated_NetApp_CreateHostGroup_async
+ */
+  async checkCreateHostGroupProgress(name: string): Promise<LROperation<protos.google.cloud.netapp.v1.HostGroup, protos.google.cloud.netapp.v1.OperationMetadata>>{
+    this._log.info('createHostGroup long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createHostGroup, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.netapp.v1.HostGroup, protos.google.cloud.netapp.v1.OperationMetadata>;
+  }
+/**
+ * Updates an existing host group.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.netapp.v1.HostGroup} request.hostGroup
+ *   Required. The host group to update.
+ *   The host group's `name` field is used to identify the host group.
+ *   Format:
+ *   `projects/{project_number}/locations/{location_id}/hostGroups/{host_group_id}`.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. The list of fields to update.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/net_app.update_host_group.js</caption>
+ * region_tag:netapp_v1_generated_NetApp_UpdateHostGroup_async
+ */
+  updateHostGroup(
+      request?: protos.google.cloud.netapp.v1.IUpdateHostGroupRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.netapp.v1.IHostGroup, protos.google.cloud.netapp.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  updateHostGroup(
+      request: protos.google.cloud.netapp.v1.IUpdateHostGroupRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.netapp.v1.IHostGroup, protos.google.cloud.netapp.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  updateHostGroup(
+      request: protos.google.cloud.netapp.v1.IUpdateHostGroupRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.netapp.v1.IHostGroup, protos.google.cloud.netapp.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  updateHostGroup(
+      request?: protos.google.cloud.netapp.v1.IUpdateHostGroupRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.netapp.v1.IHostGroup, protos.google.cloud.netapp.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.netapp.v1.IHostGroup, protos.google.cloud.netapp.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.netapp.v1.IHostGroup, protos.google.cloud.netapp.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'host_group.name': request.hostGroup!.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.netapp.v1.IHostGroup, protos.google.cloud.netapp.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateHostGroup response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateHostGroup request %j', request);
+    return this.innerApiCalls.updateHostGroup(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.netapp.v1.IHostGroup, protos.google.cloud.netapp.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateHostGroup response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `updateHostGroup()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/net_app.update_host_group.js</caption>
+ * region_tag:netapp_v1_generated_NetApp_UpdateHostGroup_async
+ */
+  async checkUpdateHostGroupProgress(name: string): Promise<LROperation<protos.google.cloud.netapp.v1.HostGroup, protos.google.cloud.netapp.v1.OperationMetadata>>{
+    this._log.info('updateHostGroup long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateHostGroup, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.netapp.v1.HostGroup, protos.google.cloud.netapp.v1.OperationMetadata>;
+  }
+/**
+ * Deletes a host group.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the host group.
+ *   Format:
+ *   `projects/{project_number}/locations/{location_id}/hostGroups/{host_group_id}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/net_app.delete_host_group.js</caption>
+ * region_tag:netapp_v1_generated_NetApp_DeleteHostGroup_async
+ */
+  deleteHostGroup(
+      request?: protos.google.cloud.netapp.v1.IDeleteHostGroupRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.netapp.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  deleteHostGroup(
+      request: protos.google.cloud.netapp.v1.IDeleteHostGroupRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.netapp.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deleteHostGroup(
+      request: protos.google.cloud.netapp.v1.IDeleteHostGroupRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.netapp.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deleteHostGroup(
+      request?: protos.google.cloud.netapp.v1.IDeleteHostGroupRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.netapp.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.netapp.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.netapp.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.netapp.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteHostGroup response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteHostGroup request %j', request);
+    return this.innerApiCalls.deleteHostGroup(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.netapp.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteHostGroup response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `deleteHostGroup()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/net_app.delete_host_group.js</caption>
+ * region_tag:netapp_v1_generated_NetApp_DeleteHostGroup_async
+ */
+  async checkDeleteHostGroupProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.netapp.v1.OperationMetadata>>{
+    this._log.info('deleteHostGroup long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteHostGroup, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.netapp.v1.OperationMetadata>;
+  }
  /**
  * Returns descriptions of all storage pools owned by the caller.
  *
@@ -8233,6 +8818,213 @@ export class NetAppClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.netapp.v1.IQuotaRule>;
   }
+ /**
+ * Returns a list of host groups in a `location`. Use `-` as location to list
+ * host groups across all locations.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListHostGroupsRequest
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, the server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filter to apply to the request.
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.netapp.v1.HostGroup|HostGroup}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listHostGroupsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listHostGroups(
+      request?: protos.google.cloud.netapp.v1.IListHostGroupsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.netapp.v1.IHostGroup[],
+        protos.google.cloud.netapp.v1.IListHostGroupsRequest|null,
+        protos.google.cloud.netapp.v1.IListHostGroupsResponse
+      ]>;
+  listHostGroups(
+      request: protos.google.cloud.netapp.v1.IListHostGroupsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
+          protos.google.cloud.netapp.v1.IListHostGroupsRequest,
+          protos.google.cloud.netapp.v1.IListHostGroupsResponse|null|undefined,
+          protos.google.cloud.netapp.v1.IHostGroup>): void;
+  listHostGroups(
+      request: protos.google.cloud.netapp.v1.IListHostGroupsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.netapp.v1.IListHostGroupsRequest,
+          protos.google.cloud.netapp.v1.IListHostGroupsResponse|null|undefined,
+          protos.google.cloud.netapp.v1.IHostGroup>): void;
+  listHostGroups(
+      request?: protos.google.cloud.netapp.v1.IListHostGroupsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.netapp.v1.IListHostGroupsRequest,
+          protos.google.cloud.netapp.v1.IListHostGroupsResponse|null|undefined,
+          protos.google.cloud.netapp.v1.IHostGroup>,
+      callback?: PaginationCallback<
+          protos.google.cloud.netapp.v1.IListHostGroupsRequest,
+          protos.google.cloud.netapp.v1.IListHostGroupsResponse|null|undefined,
+          protos.google.cloud.netapp.v1.IHostGroup>):
+      Promise<[
+        protos.google.cloud.netapp.v1.IHostGroup[],
+        protos.google.cloud.netapp.v1.IListHostGroupsRequest|null,
+        protos.google.cloud.netapp.v1.IListHostGroupsResponse
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.netapp.v1.IListHostGroupsRequest,
+      protos.google.cloud.netapp.v1.IListHostGroupsResponse|null|undefined,
+      protos.google.cloud.netapp.v1.IHostGroup>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listHostGroups values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listHostGroups request %j', request);
+    return this.innerApiCalls
+      .listHostGroups(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.cloud.netapp.v1.IHostGroup[],
+        protos.google.cloud.netapp.v1.IListHostGroupsRequest|null,
+        protos.google.cloud.netapp.v1.IListHostGroupsResponse
+      ]) => {
+        this._log.info('listHostGroups values %j', response);
+        return [response, input, output];
+      });
+  }
+
+/**
+ * Equivalent to `listHostGroups`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListHostGroupsRequest
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, the server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filter to apply to the request.
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.netapp.v1.HostGroup|HostGroup} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listHostGroupsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listHostGroupsStream(
+      request?: protos.google.cloud.netapp.v1.IListHostGroupsRequest,
+      options?: CallOptions):
+    Transform{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listHostGroups'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listHostGroups stream %j', request);
+    return this.descriptors.page.listHostGroups.createStream(
+      this.innerApiCalls.listHostGroups as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+/**
+ * Equivalent to `listHostGroups`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListHostGroupsRequest
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, the server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filter to apply to the request.
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.netapp.v1.HostGroup|HostGroup}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/net_app.list_host_groups.js</caption>
+ * region_tag:netapp_v1_generated_NetApp_ListHostGroups_async
+ */
+  listHostGroupsAsync(
+      request?: protos.google.cloud.netapp.v1.IListHostGroupsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.netapp.v1.IHostGroup>{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listHostGroups'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listHostGroups iterate %j', request);
+    return this.descriptors.page.listHostGroups.asyncIterate(
+      this.innerApiCalls['listHostGroups'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.netapp.v1.IHostGroup>;
+  }
 /**
    * Gets information about a location.
    *
@@ -8746,6 +9538,55 @@ export class NetAppClient {
    */
   matchBackupVaultFromBackupVaultName(backupVaultName: string) {
     return this.pathTemplates.backupVaultPathTemplate.match(backupVaultName).backup_vault;
+  }
+
+  /**
+   * Return a fully-qualified hostGroup resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} host_group
+   * @returns {string} Resource name string.
+   */
+  hostGroupPath(project:string,location:string,hostGroup:string) {
+    return this.pathTemplates.hostGroupPathTemplate.render({
+      project: project,
+      location: location,
+      host_group: hostGroup,
+    });
+  }
+
+  /**
+   * Parse the project from HostGroup resource.
+   *
+   * @param {string} hostGroupName
+   *   A fully-qualified path representing HostGroup resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromHostGroupName(hostGroupName: string) {
+    return this.pathTemplates.hostGroupPathTemplate.match(hostGroupName).project;
+  }
+
+  /**
+   * Parse the location from HostGroup resource.
+   *
+   * @param {string} hostGroupName
+   *   A fully-qualified path representing HostGroup resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromHostGroupName(hostGroupName: string) {
+    return this.pathTemplates.hostGroupPathTemplate.match(hostGroupName).location;
+  }
+
+  /**
+   * Parse the host_group from HostGroup resource.
+   *
+   * @param {string} hostGroupName
+   *   A fully-qualified path representing HostGroup resource.
+   * @returns {string} A string representing the host_group.
+   */
+  matchHostGroupFromHostGroupName(hostGroupName: string) {
+    return this.pathTemplates.hostGroupPathTemplate.match(hostGroupName).host_group;
   }
 
   /**

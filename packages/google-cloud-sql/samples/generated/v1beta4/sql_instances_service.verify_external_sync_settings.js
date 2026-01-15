@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -63,6 +63,11 @@ function main() {
    *  PostgreSQL.
    */
   // const syncParallelLevel = {}
+  /**
+   *  Optional. Migrate only the specified objects from the source instance. If
+   *  this field is empty, then migrate all objects.
+   */
+  // const selectedObjects = [1,2,3,4]
 
   // Imports the Sql library
   const {SqlInstancesServiceClient} = require('@google-cloud/sql').v1beta4;

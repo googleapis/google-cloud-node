@@ -15,6 +15,21 @@
                 "getDataAgent"
               ]
             },
+            "CreateDataAgentSync": {
+              "methods": [
+                "createDataAgentSync"
+              ]
+            },
+            "UpdateDataAgentSync": {
+              "methods": [
+                "updateDataAgentSync"
+              ]
+            },
+            "DeleteDataAgentSync": {
+              "methods": [
+                "deleteDataAgentSync"
+              ]
+            },
             "GetIamPolicy": {
               "methods": [
                 "getIamPolicy"
@@ -62,6 +77,21 @@
             "GetDataAgent": {
               "methods": [
                 "getDataAgent"
+              ]
+            },
+            "CreateDataAgentSync": {
+              "methods": [
+                "createDataAgentSync"
+              ]
+            },
+            "UpdateDataAgentSync": {
+              "methods": [
+                "updateDataAgentSync"
+              ]
+            },
+            "DeleteDataAgentSync": {
+              "methods": [
+                "deleteDataAgentSync"
               ]
             },
             "GetIamPolicy": {

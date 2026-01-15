@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -5335,6 +5335,20 @@ export namespace google {
                     public createDataAgent(request: google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls CreateDataAgentSync.
+                     * @param request CreateDataAgentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DataAgent
+                     */
+                    public createDataAgentSync(request: google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest, callback: google.cloud.geminidataanalytics.v1alpha.DataAgentService.CreateDataAgentSyncCallback): void;
+
+                    /**
+                     * Calls CreateDataAgentSync.
+                     * @param request CreateDataAgentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createDataAgentSync(request: google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest): Promise<google.cloud.geminidataanalytics.v1alpha.DataAgent>;
+
+                    /**
                      * Calls UpdateDataAgent.
                      * @param request UpdateDataAgentRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
@@ -5349,6 +5363,20 @@ export namespace google {
                     public updateDataAgent(request: google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls UpdateDataAgentSync.
+                     * @param request UpdateDataAgentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DataAgent
+                     */
+                    public updateDataAgentSync(request: google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest, callback: google.cloud.geminidataanalytics.v1alpha.DataAgentService.UpdateDataAgentSyncCallback): void;
+
+                    /**
+                     * Calls UpdateDataAgentSync.
+                     * @param request UpdateDataAgentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateDataAgentSync(request: google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest): Promise<google.cloud.geminidataanalytics.v1alpha.DataAgent>;
+
+                    /**
                      * Calls DeleteDataAgent.
                      * @param request DeleteDataAgentRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
@@ -5361,6 +5389,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public deleteDataAgent(request: google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteDataAgentSync.
+                     * @param request DeleteDataAgentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteDataAgentSync(request: google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest, callback: google.cloud.geminidataanalytics.v1alpha.DataAgentService.DeleteDataAgentSyncCallback): void;
+
+                    /**
+                     * Calls DeleteDataAgentSync.
+                     * @param request DeleteDataAgentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteDataAgentSync(request: google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest): Promise<google.protobuf.Empty>;
 
                     /**
                      * Calls GetIamPolicy.
@@ -5422,6 +5464,13 @@ export namespace google {
                     type CreateDataAgentCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.geminidataanalytics.v1alpha.DataAgentService|createDataAgentSync}.
+                     * @param error Error, if any
+                     * @param [response] DataAgent
+                     */
+                    type CreateDataAgentSyncCallback = (error: (Error|null), response?: google.cloud.geminidataanalytics.v1alpha.DataAgent) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.geminidataanalytics.v1alpha.DataAgentService|updateDataAgent}.
                      * @param error Error, if any
                      * @param [response] Operation
@@ -5429,11 +5478,25 @@ export namespace google {
                     type UpdateDataAgentCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.geminidataanalytics.v1alpha.DataAgentService|updateDataAgentSync}.
+                     * @param error Error, if any
+                     * @param [response] DataAgent
+                     */
+                    type UpdateDataAgentSyncCallback = (error: (Error|null), response?: google.cloud.geminidataanalytics.v1alpha.DataAgent) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.geminidataanalytics.v1alpha.DataAgentService|deleteDataAgent}.
                      * @param error Error, if any
                      * @param [response] Operation
                      */
                     type DeleteDataAgentCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.geminidataanalytics.v1alpha.DataAgentService|deleteDataAgentSync}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteDataAgentSyncCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.geminidataanalytics.v1alpha.DataAgentService|getIamPolicy}.
@@ -15855,6 +15918,20 @@ export namespace google {
                     public createDataAgent(request: google.cloud.geminidataanalytics.v1beta.ICreateDataAgentRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls CreateDataAgentSync.
+                     * @param request CreateDataAgentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DataAgent
+                     */
+                    public createDataAgentSync(request: google.cloud.geminidataanalytics.v1beta.ICreateDataAgentRequest, callback: google.cloud.geminidataanalytics.v1beta.DataAgentService.CreateDataAgentSyncCallback): void;
+
+                    /**
+                     * Calls CreateDataAgentSync.
+                     * @param request CreateDataAgentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createDataAgentSync(request: google.cloud.geminidataanalytics.v1beta.ICreateDataAgentRequest): Promise<google.cloud.geminidataanalytics.v1beta.DataAgent>;
+
+                    /**
                      * Calls UpdateDataAgent.
                      * @param request UpdateDataAgentRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
@@ -15869,6 +15946,20 @@ export namespace google {
                     public updateDataAgent(request: google.cloud.geminidataanalytics.v1beta.IUpdateDataAgentRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls UpdateDataAgentSync.
+                     * @param request UpdateDataAgentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DataAgent
+                     */
+                    public updateDataAgentSync(request: google.cloud.geminidataanalytics.v1beta.IUpdateDataAgentRequest, callback: google.cloud.geminidataanalytics.v1beta.DataAgentService.UpdateDataAgentSyncCallback): void;
+
+                    /**
+                     * Calls UpdateDataAgentSync.
+                     * @param request UpdateDataAgentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateDataAgentSync(request: google.cloud.geminidataanalytics.v1beta.IUpdateDataAgentRequest): Promise<google.cloud.geminidataanalytics.v1beta.DataAgent>;
+
+                    /**
                      * Calls DeleteDataAgent.
                      * @param request DeleteDataAgentRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
@@ -15881,6 +15972,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public deleteDataAgent(request: google.cloud.geminidataanalytics.v1beta.IDeleteDataAgentRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteDataAgentSync.
+                     * @param request DeleteDataAgentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteDataAgentSync(request: google.cloud.geminidataanalytics.v1beta.IDeleteDataAgentRequest, callback: google.cloud.geminidataanalytics.v1beta.DataAgentService.DeleteDataAgentSyncCallback): void;
+
+                    /**
+                     * Calls DeleteDataAgentSync.
+                     * @param request DeleteDataAgentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteDataAgentSync(request: google.cloud.geminidataanalytics.v1beta.IDeleteDataAgentRequest): Promise<google.protobuf.Empty>;
 
                     /**
                      * Calls GetIamPolicy.
@@ -15942,6 +16047,13 @@ export namespace google {
                     type CreateDataAgentCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.geminidataanalytics.v1beta.DataAgentService|createDataAgentSync}.
+                     * @param error Error, if any
+                     * @param [response] DataAgent
+                     */
+                    type CreateDataAgentSyncCallback = (error: (Error|null), response?: google.cloud.geminidataanalytics.v1beta.DataAgent) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.geminidataanalytics.v1beta.DataAgentService|updateDataAgent}.
                      * @param error Error, if any
                      * @param [response] Operation
@@ -15949,11 +16061,25 @@ export namespace google {
                     type UpdateDataAgentCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.geminidataanalytics.v1beta.DataAgentService|updateDataAgentSync}.
+                     * @param error Error, if any
+                     * @param [response] DataAgent
+                     */
+                    type UpdateDataAgentSyncCallback = (error: (Error|null), response?: google.cloud.geminidataanalytics.v1beta.DataAgent) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.geminidataanalytics.v1beta.DataAgentService|deleteDataAgent}.
                      * @param error Error, if any
                      * @param [response] Operation
                      */
                     type DeleteDataAgentCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.geminidataanalytics.v1beta.DataAgentService|deleteDataAgentSync}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteDataAgentSyncCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.geminidataanalytics.v1beta.DataAgentService|getIamPolicy}.

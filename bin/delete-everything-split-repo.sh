@@ -23,7 +23,7 @@ fi
 
 # repo name (e.g. nodejs-asset)
 SPLIT_REPO=$1
-# destination directory (e.g. google-cloud-asset)
+# destination directory (e.g. packages/google-cloud-asset)
 ARTIFACT_NAME=$2
 
 rm -rf "/tmp/${SPLIT_REPO}"
@@ -154,7 +154,7 @@ chmod u+x "/tmp/${SPLIT_REPO}/.kokoro/system-test.sh"
 README_MD="/tmp/${SPLIT_REPO}/README.md"
 
 README_CONTENT=$(cat $README_MD)
-echo -e "**_THIS REPOSITORY IS DEPRECATED. ALL OF ITS CONTENT AND HISTORY HAS BEEN MOVED TO [GOOGLE-CLOUD-NODE](https://github.com/googleapis/google-cloud-node/tree/main/packages/${ARTIFACT_NAME})_**\n\n$README_CONTENT" > "$README_MD"
+echo -e "**_THIS REPOSITORY IS DEPRECATED. ALL OF ITS CONTENT AND HISTORY HAS BEEN MOVED TO [GOOGLE-CLOUD-NODE](https://github.com/googleapis/google-cloud-node/tree/main/${ARTIFACT_NAME})_**\n\n$README_CONTENT" > "$README_MD"
 
 git add .
 git commit -m 'build: update README for deprecation notice and delete all files except samples'

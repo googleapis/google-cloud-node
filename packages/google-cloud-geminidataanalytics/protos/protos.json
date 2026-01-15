@@ -1388,6 +1388,26 @@
                             }
                           ]
                         },
+                        "CreateDataAgentSync": {
+                          "requestType": "CreateDataAgentRequest",
+                          "responseType": "DataAgent",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{parent=projects/*/locations/*}/dataAgents:createSync",
+                            "(google.api.http).body": "data_agent",
+                            "(google.api.method_signature)": "parent,data_agent,data_agent_id"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{parent=projects/*/locations/*}/dataAgents:createSync",
+                                "body": "data_agent"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,data_agent,data_agent_id"
+                            }
+                          ]
+                        },
                         "UpdateDataAgent": {
                           "requestType": "UpdateDataAgentRequest",
                           "responseType": "google.longrunning.Operation",
@@ -1416,6 +1436,26 @@
                             }
                           ]
                         },
+                        "UpdateDataAgentSync": {
+                          "requestType": "UpdateDataAgentRequest",
+                          "responseType": "DataAgent",
+                          "options": {
+                            "(google.api.http).patch": "/v1alpha/{data_agent.name=projects/*/locations/*/dataAgents/*}:updateSync",
+                            "(google.api.http).body": "data_agent",
+                            "(google.api.method_signature)": "data_agent,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1alpha/{data_agent.name=projects/*/locations/*/dataAgents/*}:updateSync",
+                                "body": "data_agent"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "data_agent,update_mask"
+                            }
+                          ]
+                        },
                         "DeleteDataAgent": {
                           "requestType": "DeleteDataAgentRequest",
                           "responseType": "google.longrunning.Operation",
@@ -1439,6 +1479,24 @@
                                 "response_type": "google.protobuf.Empty",
                                 "metadata_type": "OperationMetadata"
                               }
+                            }
+                          ]
+                        },
+                        "DeleteDataAgentSync": {
+                          "requestType": "DeleteDataAgentRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1alpha/{name=projects/*/locations/*/dataAgents/*}:deleteSync",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1alpha/{name=projects/*/locations/*/dataAgents/*}:deleteSync"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
                             }
                           ]
                         },
@@ -4180,6 +4238,26 @@
                             }
                           ]
                         },
+                        "CreateDataAgentSync": {
+                          "requestType": "CreateDataAgentRequest",
+                          "responseType": "DataAgent",
+                          "options": {
+                            "(google.api.http).post": "/v1beta/{parent=projects/*/locations/*}/dataAgents:createSync",
+                            "(google.api.http).body": "data_agent",
+                            "(google.api.method_signature)": "parent,data_agent,data_agent_id"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{parent=projects/*/locations/*}/dataAgents:createSync",
+                                "body": "data_agent"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,data_agent,data_agent_id"
+                            }
+                          ]
+                        },
                         "UpdateDataAgent": {
                           "requestType": "UpdateDataAgentRequest",
                           "responseType": "google.longrunning.Operation",
@@ -4208,6 +4286,26 @@
                             }
                           ]
                         },
+                        "UpdateDataAgentSync": {
+                          "requestType": "UpdateDataAgentRequest",
+                          "responseType": "DataAgent",
+                          "options": {
+                            "(google.api.http).patch": "/v1beta/{data_agent.name=projects/*/locations/*/dataAgents/*}:updateSync",
+                            "(google.api.http).body": "data_agent",
+                            "(google.api.method_signature)": "data_agent,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta/{data_agent.name=projects/*/locations/*/dataAgents/*}:updateSync",
+                                "body": "data_agent"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "data_agent,update_mask"
+                            }
+                          ]
+                        },
                         "DeleteDataAgent": {
                           "requestType": "DeleteDataAgentRequest",
                           "responseType": "google.longrunning.Operation",
@@ -4231,6 +4329,24 @@
                                 "response_type": "google.protobuf.Empty",
                                 "metadata_type": "OperationMetadata"
                               }
+                            }
+                          ]
+                        },
+                        "DeleteDataAgentSync": {
+                          "requestType": "DeleteDataAgentRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1beta/{name=projects/*/locations/*/dataAgents/*}:deleteSync",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta/{name=projects/*/locations/*/dataAgents/*}:deleteSync"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
                             }
                           ]
                         },

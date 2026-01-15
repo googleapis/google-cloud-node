@@ -6723,6 +6723,9 @@
                          * @property {string|null} [sourceBackupVault] BackupVault sourceBackupVault
                          * @property {string|null} [destinationBackupVault] BackupVault destinationBackupVault
                          * @property {google.cloud.netapp.v1.BackupVault.IBackupRetentionPolicy|null} [backupRetentionPolicy] BackupVault backupRetentionPolicy
+                         * @property {string|null} [kmsConfig] BackupVault kmsConfig
+                         * @property {google.cloud.netapp.v1.BackupVault.EncryptionState|null} [encryptionState] BackupVault encryptionState
+                         * @property {string|null} [backupsCryptoKeyVersion] BackupVault backupsCryptoKeyVersion
                          */
     
                         /**
@@ -6830,6 +6833,30 @@
                         BackupVault.prototype.backupRetentionPolicy = null;
     
                         /**
+                         * BackupVault kmsConfig.
+                         * @member {string} kmsConfig
+                         * @memberof google.cloud.netapp.v1.BackupVault
+                         * @instance
+                         */
+                        BackupVault.prototype.kmsConfig = "";
+    
+                        /**
+                         * BackupVault encryptionState.
+                         * @member {google.cloud.netapp.v1.BackupVault.EncryptionState} encryptionState
+                         * @memberof google.cloud.netapp.v1.BackupVault
+                         * @instance
+                         */
+                        BackupVault.prototype.encryptionState = 0;
+    
+                        /**
+                         * BackupVault backupsCryptoKeyVersion.
+                         * @member {string} backupsCryptoKeyVersion
+                         * @memberof google.cloud.netapp.v1.BackupVault
+                         * @instance
+                         */
+                        BackupVault.prototype.backupsCryptoKeyVersion = "";
+    
+                        /**
                          * Creates a new BackupVault instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.netapp.v1.BackupVault
@@ -6876,6 +6903,12 @@
                                 writer.uint32(/* id 10, wireType 2 =*/82).string(message.destinationBackupVault);
                             if (message.backupRetentionPolicy != null && Object.hasOwnProperty.call(message, "backupRetentionPolicy"))
                                 $root.google.cloud.netapp.v1.BackupVault.BackupRetentionPolicy.encode(message.backupRetentionPolicy, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            if (message.kmsConfig != null && Object.hasOwnProperty.call(message, "kmsConfig"))
+                                writer.uint32(/* id 12, wireType 2 =*/98).string(message.kmsConfig);
+                            if (message.encryptionState != null && Object.hasOwnProperty.call(message, "encryptionState"))
+                                writer.uint32(/* id 13, wireType 0 =*/104).int32(message.encryptionState);
+                            if (message.backupsCryptoKeyVersion != null && Object.hasOwnProperty.call(message, "backupsCryptoKeyVersion"))
+                                writer.uint32(/* id 14, wireType 2 =*/114).string(message.backupsCryptoKeyVersion);
                             return writer;
                         };
     
@@ -6975,6 +7008,18 @@
                                         message.backupRetentionPolicy = $root.google.cloud.netapp.v1.BackupVault.BackupRetentionPolicy.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 12: {
+                                        message.kmsConfig = reader.string();
+                                        break;
+                                    }
+                                case 13: {
+                                        message.encryptionState = reader.int32();
+                                        break;
+                                    }
+                                case 14: {
+                                        message.backupsCryptoKeyVersion = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -7067,6 +7112,23 @@
                                 if (error)
                                     return "backupRetentionPolicy." + error;
                             }
+                            if (message.kmsConfig != null && message.hasOwnProperty("kmsConfig"))
+                                if (!$util.isString(message.kmsConfig))
+                                    return "kmsConfig: string expected";
+                            if (message.encryptionState != null && message.hasOwnProperty("encryptionState"))
+                                switch (message.encryptionState) {
+                                default:
+                                    return "encryptionState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.backupsCryptoKeyVersion != null && message.hasOwnProperty("backupsCryptoKeyVersion"))
+                                if (!$util.isString(message.backupsCryptoKeyVersion))
+                                    return "backupsCryptoKeyVersion: string expected";
                             return null;
                         };
     
@@ -7163,6 +7225,38 @@
                                     throw TypeError(".google.cloud.netapp.v1.BackupVault.backupRetentionPolicy: object expected");
                                 message.backupRetentionPolicy = $root.google.cloud.netapp.v1.BackupVault.BackupRetentionPolicy.fromObject(object.backupRetentionPolicy);
                             }
+                            if (object.kmsConfig != null)
+                                message.kmsConfig = String(object.kmsConfig);
+                            switch (object.encryptionState) {
+                            default:
+                                if (typeof object.encryptionState === "number") {
+                                    message.encryptionState = object.encryptionState;
+                                    break;
+                                }
+                                break;
+                            case "ENCRYPTION_STATE_UNSPECIFIED":
+                            case 0:
+                                message.encryptionState = 0;
+                                break;
+                            case "ENCRYPTION_STATE_PENDING":
+                            case 1:
+                                message.encryptionState = 1;
+                                break;
+                            case "ENCRYPTION_STATE_COMPLETED":
+                            case 2:
+                                message.encryptionState = 2;
+                                break;
+                            case "ENCRYPTION_STATE_IN_PROGRESS":
+                            case 3:
+                                message.encryptionState = 3;
+                                break;
+                            case "ENCRYPTION_STATE_FAILED":
+                            case 4:
+                                message.encryptionState = 4;
+                                break;
+                            }
+                            if (object.backupsCryptoKeyVersion != null)
+                                message.backupsCryptoKeyVersion = String(object.backupsCryptoKeyVersion);
                             return message;
                         };
     
@@ -7192,6 +7286,9 @@
                                 object.sourceBackupVault = "";
                                 object.destinationBackupVault = "";
                                 object.backupRetentionPolicy = null;
+                                object.kmsConfig = "";
+                                object.encryptionState = options.enums === String ? "ENCRYPTION_STATE_UNSPECIFIED" : 0;
+                                object.backupsCryptoKeyVersion = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -7219,6 +7316,12 @@
                                 object.destinationBackupVault = message.destinationBackupVault;
                             if (message.backupRetentionPolicy != null && message.hasOwnProperty("backupRetentionPolicy"))
                                 object.backupRetentionPolicy = $root.google.cloud.netapp.v1.BackupVault.BackupRetentionPolicy.toObject(message.backupRetentionPolicy, options);
+                            if (message.kmsConfig != null && message.hasOwnProperty("kmsConfig"))
+                                object.kmsConfig = message.kmsConfig;
+                            if (message.encryptionState != null && message.hasOwnProperty("encryptionState"))
+                                object.encryptionState = options.enums === String ? $root.google.cloud.netapp.v1.BackupVault.EncryptionState[message.encryptionState] === undefined ? message.encryptionState : $root.google.cloud.netapp.v1.BackupVault.EncryptionState[message.encryptionState] : message.encryptionState;
+                            if (message.backupsCryptoKeyVersion != null && message.hasOwnProperty("backupsCryptoKeyVersion"))
+                                object.backupsCryptoKeyVersion = message.backupsCryptoKeyVersion;
                             return object;
                         };
     
@@ -7581,6 +7684,26 @@
                             values[valuesById[0] = "BACKUP_VAULT_TYPE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "IN_REGION"] = 1;
                             values[valuesById[2] = "CROSS_REGION"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * EncryptionState enum.
+                         * @name google.cloud.netapp.v1.BackupVault.EncryptionState
+                         * @enum {number}
+                         * @property {number} ENCRYPTION_STATE_UNSPECIFIED=0 ENCRYPTION_STATE_UNSPECIFIED value
+                         * @property {number} ENCRYPTION_STATE_PENDING=1 ENCRYPTION_STATE_PENDING value
+                         * @property {number} ENCRYPTION_STATE_COMPLETED=2 ENCRYPTION_STATE_COMPLETED value
+                         * @property {number} ENCRYPTION_STATE_IN_PROGRESS=3 ENCRYPTION_STATE_IN_PROGRESS value
+                         * @property {number} ENCRYPTION_STATE_FAILED=4 ENCRYPTION_STATE_FAILED value
+                         */
+                        BackupVault.EncryptionState = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ENCRYPTION_STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ENCRYPTION_STATE_PENDING"] = 1;
+                            values[valuesById[2] = "ENCRYPTION_STATE_COMPLETED"] = 2;
+                            values[valuesById[3] = "ENCRYPTION_STATE_IN_PROGRESS"] = 3;
+                            values[valuesById[4] = "ENCRYPTION_STATE_FAILED"] = 4;
                             return values;
                         })();
     
@@ -11093,6 +11216,204 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.netapp.v1.NetApp|restoreBackupFiles}.
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @typedef RestoreBackupFilesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls RestoreBackupFiles.
+                         * @function restoreBackupFiles
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IRestoreBackupFilesRequest} request RestoreBackupFilesRequest message or plain object
+                         * @param {google.cloud.netapp.v1.NetApp.RestoreBackupFilesCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetApp.prototype.restoreBackupFiles = function restoreBackupFiles(request, callback) {
+                            return this.rpcCall(restoreBackupFiles, $root.google.cloud.netapp.v1.RestoreBackupFilesRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "RestoreBackupFiles" });
+    
+                        /**
+                         * Calls RestoreBackupFiles.
+                         * @function restoreBackupFiles
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IRestoreBackupFilesRequest} request RestoreBackupFilesRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.netapp.v1.NetApp|listHostGroups}.
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @typedef ListHostGroupsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.netapp.v1.ListHostGroupsResponse} [response] ListHostGroupsResponse
+                         */
+    
+                        /**
+                         * Calls ListHostGroups.
+                         * @function listHostGroups
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IListHostGroupsRequest} request ListHostGroupsRequest message or plain object
+                         * @param {google.cloud.netapp.v1.NetApp.ListHostGroupsCallback} callback Node-style callback called with the error, if any, and ListHostGroupsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetApp.prototype.listHostGroups = function listHostGroups(request, callback) {
+                            return this.rpcCall(listHostGroups, $root.google.cloud.netapp.v1.ListHostGroupsRequest, $root.google.cloud.netapp.v1.ListHostGroupsResponse, request, callback);
+                        }, "name", { value: "ListHostGroups" });
+    
+                        /**
+                         * Calls ListHostGroups.
+                         * @function listHostGroups
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IListHostGroupsRequest} request ListHostGroupsRequest message or plain object
+                         * @returns {Promise<google.cloud.netapp.v1.ListHostGroupsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.netapp.v1.NetApp|getHostGroup}.
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @typedef GetHostGroupCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.netapp.v1.HostGroup} [response] HostGroup
+                         */
+    
+                        /**
+                         * Calls GetHostGroup.
+                         * @function getHostGroup
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IGetHostGroupRequest} request GetHostGroupRequest message or plain object
+                         * @param {google.cloud.netapp.v1.NetApp.GetHostGroupCallback} callback Node-style callback called with the error, if any, and HostGroup
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetApp.prototype.getHostGroup = function getHostGroup(request, callback) {
+                            return this.rpcCall(getHostGroup, $root.google.cloud.netapp.v1.GetHostGroupRequest, $root.google.cloud.netapp.v1.HostGroup, request, callback);
+                        }, "name", { value: "GetHostGroup" });
+    
+                        /**
+                         * Calls GetHostGroup.
+                         * @function getHostGroup
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IGetHostGroupRequest} request GetHostGroupRequest message or plain object
+                         * @returns {Promise<google.cloud.netapp.v1.HostGroup>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.netapp.v1.NetApp|createHostGroup}.
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @typedef CreateHostGroupCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateHostGroup.
+                         * @function createHostGroup
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.ICreateHostGroupRequest} request CreateHostGroupRequest message or plain object
+                         * @param {google.cloud.netapp.v1.NetApp.CreateHostGroupCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetApp.prototype.createHostGroup = function createHostGroup(request, callback) {
+                            return this.rpcCall(createHostGroup, $root.google.cloud.netapp.v1.CreateHostGroupRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateHostGroup" });
+    
+                        /**
+                         * Calls CreateHostGroup.
+                         * @function createHostGroup
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.ICreateHostGroupRequest} request CreateHostGroupRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.netapp.v1.NetApp|updateHostGroup}.
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @typedef UpdateHostGroupCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateHostGroup.
+                         * @function updateHostGroup
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IUpdateHostGroupRequest} request UpdateHostGroupRequest message or plain object
+                         * @param {google.cloud.netapp.v1.NetApp.UpdateHostGroupCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetApp.prototype.updateHostGroup = function updateHostGroup(request, callback) {
+                            return this.rpcCall(updateHostGroup, $root.google.cloud.netapp.v1.UpdateHostGroupRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateHostGroup" });
+    
+                        /**
+                         * Calls UpdateHostGroup.
+                         * @function updateHostGroup
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IUpdateHostGroupRequest} request UpdateHostGroupRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.netapp.v1.NetApp|deleteHostGroup}.
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @typedef DeleteHostGroupCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteHostGroup.
+                         * @function deleteHostGroup
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IDeleteHostGroupRequest} request DeleteHostGroupRequest message or plain object
+                         * @param {google.cloud.netapp.v1.NetApp.DeleteHostGroupCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetApp.prototype.deleteHostGroup = function deleteHostGroup(request, callback) {
+                            return this.rpcCall(deleteHostGroup, $root.google.cloud.netapp.v1.DeleteHostGroupRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteHostGroup" });
+    
+                        /**
+                         * Calls DeleteHostGroup.
+                         * @function deleteHostGroup
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IDeleteHostGroupRequest} request DeleteHostGroupRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
                         return NetApp;
                     })();
     
@@ -11448,6 +11769,2788 @@
                         };
     
                         return OperationMetadata;
+                    })();
+    
+                    v1.ListHostGroupsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListHostGroupsRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface IListHostGroupsRequest
+                         * @property {string|null} [parent] ListHostGroupsRequest parent
+                         * @property {number|null} [pageSize] ListHostGroupsRequest pageSize
+                         * @property {string|null} [pageToken] ListHostGroupsRequest pageToken
+                         * @property {string|null} [filter] ListHostGroupsRequest filter
+                         * @property {string|null} [orderBy] ListHostGroupsRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListHostGroupsRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents a ListHostGroupsRequest.
+                         * @implements IListHostGroupsRequest
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.IListHostGroupsRequest=} [properties] Properties to set
+                         */
+                        function ListHostGroupsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListHostGroupsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.netapp.v1.ListHostGroupsRequest
+                         * @instance
+                         */
+                        ListHostGroupsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListHostGroupsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.netapp.v1.ListHostGroupsRequest
+                         * @instance
+                         */
+                        ListHostGroupsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListHostGroupsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.netapp.v1.ListHostGroupsRequest
+                         * @instance
+                         */
+                        ListHostGroupsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListHostGroupsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.netapp.v1.ListHostGroupsRequest
+                         * @instance
+                         */
+                        ListHostGroupsRequest.prototype.filter = "";
+    
+                        /**
+                         * ListHostGroupsRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.netapp.v1.ListHostGroupsRequest
+                         * @instance
+                         */
+                        ListHostGroupsRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListHostGroupsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.ListHostGroupsRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IListHostGroupsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.ListHostGroupsRequest} ListHostGroupsRequest instance
+                         */
+                        ListHostGroupsRequest.create = function create(properties) {
+                            return new ListHostGroupsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListHostGroupsRequest message. Does not implicitly {@link google.cloud.netapp.v1.ListHostGroupsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.ListHostGroupsRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IListHostGroupsRequest} message ListHostGroupsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListHostGroupsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListHostGroupsRequest message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.ListHostGroupsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.ListHostGroupsRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IListHostGroupsRequest} message ListHostGroupsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListHostGroupsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListHostGroupsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.ListHostGroupsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.ListHostGroupsRequest} ListHostGroupsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListHostGroupsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.ListHostGroupsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListHostGroupsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.ListHostGroupsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.ListHostGroupsRequest} ListHostGroupsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListHostGroupsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListHostGroupsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.ListHostGroupsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListHostGroupsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListHostGroupsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.ListHostGroupsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.ListHostGroupsRequest} ListHostGroupsRequest
+                         */
+                        ListHostGroupsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.ListHostGroupsRequest)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.ListHostGroupsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListHostGroupsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.ListHostGroupsRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.ListHostGroupsRequest} message ListHostGroupsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListHostGroupsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListHostGroupsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.ListHostGroupsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListHostGroupsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListHostGroupsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.ListHostGroupsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListHostGroupsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.ListHostGroupsRequest";
+                        };
+    
+                        return ListHostGroupsRequest;
+                    })();
+    
+                    v1.ListHostGroupsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListHostGroupsResponse.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface IListHostGroupsResponse
+                         * @property {Array.<google.cloud.netapp.v1.IHostGroup>|null} [hostGroups] ListHostGroupsResponse hostGroups
+                         * @property {string|null} [nextPageToken] ListHostGroupsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListHostGroupsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListHostGroupsResponse.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents a ListHostGroupsResponse.
+                         * @implements IListHostGroupsResponse
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.IListHostGroupsResponse=} [properties] Properties to set
+                         */
+                        function ListHostGroupsResponse(properties) {
+                            this.hostGroups = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListHostGroupsResponse hostGroups.
+                         * @member {Array.<google.cloud.netapp.v1.IHostGroup>} hostGroups
+                         * @memberof google.cloud.netapp.v1.ListHostGroupsResponse
+                         * @instance
+                         */
+                        ListHostGroupsResponse.prototype.hostGroups = $util.emptyArray;
+    
+                        /**
+                         * ListHostGroupsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.netapp.v1.ListHostGroupsResponse
+                         * @instance
+                         */
+                        ListHostGroupsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListHostGroupsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.netapp.v1.ListHostGroupsResponse
+                         * @instance
+                         */
+                        ListHostGroupsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListHostGroupsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.ListHostGroupsResponse
+                         * @static
+                         * @param {google.cloud.netapp.v1.IListHostGroupsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.ListHostGroupsResponse} ListHostGroupsResponse instance
+                         */
+                        ListHostGroupsResponse.create = function create(properties) {
+                            return new ListHostGroupsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListHostGroupsResponse message. Does not implicitly {@link google.cloud.netapp.v1.ListHostGroupsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.ListHostGroupsResponse
+                         * @static
+                         * @param {google.cloud.netapp.v1.IListHostGroupsResponse} message ListHostGroupsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListHostGroupsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.hostGroups != null && message.hostGroups.length)
+                                for (var i = 0; i < message.hostGroups.length; ++i)
+                                    $root.google.cloud.netapp.v1.HostGroup.encode(message.hostGroups[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListHostGroupsResponse message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.ListHostGroupsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.ListHostGroupsResponse
+                         * @static
+                         * @param {google.cloud.netapp.v1.IListHostGroupsResponse} message ListHostGroupsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListHostGroupsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListHostGroupsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.ListHostGroupsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.ListHostGroupsResponse} ListHostGroupsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListHostGroupsResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.ListHostGroupsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.hostGroups && message.hostGroups.length))
+                                            message.hostGroups = [];
+                                        message.hostGroups.push($root.google.cloud.netapp.v1.HostGroup.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListHostGroupsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.ListHostGroupsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.ListHostGroupsResponse} ListHostGroupsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListHostGroupsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListHostGroupsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.ListHostGroupsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListHostGroupsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.hostGroups != null && message.hasOwnProperty("hostGroups")) {
+                                if (!Array.isArray(message.hostGroups))
+                                    return "hostGroups: array expected";
+                                for (var i = 0; i < message.hostGroups.length; ++i) {
+                                    var error = $root.google.cloud.netapp.v1.HostGroup.verify(message.hostGroups[i]);
+                                    if (error)
+                                        return "hostGroups." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListHostGroupsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.ListHostGroupsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.ListHostGroupsResponse} ListHostGroupsResponse
+                         */
+                        ListHostGroupsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.ListHostGroupsResponse)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.ListHostGroupsResponse();
+                            if (object.hostGroups) {
+                                if (!Array.isArray(object.hostGroups))
+                                    throw TypeError(".google.cloud.netapp.v1.ListHostGroupsResponse.hostGroups: array expected");
+                                message.hostGroups = [];
+                                for (var i = 0; i < object.hostGroups.length; ++i) {
+                                    if (typeof object.hostGroups[i] !== "object")
+                                        throw TypeError(".google.cloud.netapp.v1.ListHostGroupsResponse.hostGroups: object expected");
+                                    message.hostGroups[i] = $root.google.cloud.netapp.v1.HostGroup.fromObject(object.hostGroups[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.netapp.v1.ListHostGroupsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListHostGroupsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.ListHostGroupsResponse
+                         * @static
+                         * @param {google.cloud.netapp.v1.ListHostGroupsResponse} message ListHostGroupsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListHostGroupsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.hostGroups = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.hostGroups && message.hostGroups.length) {
+                                object.hostGroups = [];
+                                for (var j = 0; j < message.hostGroups.length; ++j)
+                                    object.hostGroups[j] = $root.google.cloud.netapp.v1.HostGroup.toObject(message.hostGroups[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListHostGroupsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.ListHostGroupsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListHostGroupsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListHostGroupsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.ListHostGroupsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListHostGroupsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.ListHostGroupsResponse";
+                        };
+    
+                        return ListHostGroupsResponse;
+                    })();
+    
+                    v1.GetHostGroupRequest = (function() {
+    
+                        /**
+                         * Properties of a GetHostGroupRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface IGetHostGroupRequest
+                         * @property {string|null} [name] GetHostGroupRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetHostGroupRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents a GetHostGroupRequest.
+                         * @implements IGetHostGroupRequest
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.IGetHostGroupRequest=} [properties] Properties to set
+                         */
+                        function GetHostGroupRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetHostGroupRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.netapp.v1.GetHostGroupRequest
+                         * @instance
+                         */
+                        GetHostGroupRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetHostGroupRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.GetHostGroupRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IGetHostGroupRequest=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.GetHostGroupRequest} GetHostGroupRequest instance
+                         */
+                        GetHostGroupRequest.create = function create(properties) {
+                            return new GetHostGroupRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetHostGroupRequest message. Does not implicitly {@link google.cloud.netapp.v1.GetHostGroupRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.GetHostGroupRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IGetHostGroupRequest} message GetHostGroupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetHostGroupRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetHostGroupRequest message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.GetHostGroupRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.GetHostGroupRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IGetHostGroupRequest} message GetHostGroupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetHostGroupRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetHostGroupRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.GetHostGroupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.GetHostGroupRequest} GetHostGroupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetHostGroupRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.GetHostGroupRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetHostGroupRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.GetHostGroupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.GetHostGroupRequest} GetHostGroupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetHostGroupRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetHostGroupRequest message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.GetHostGroupRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetHostGroupRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetHostGroupRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.GetHostGroupRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.GetHostGroupRequest} GetHostGroupRequest
+                         */
+                        GetHostGroupRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.GetHostGroupRequest)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.GetHostGroupRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetHostGroupRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.GetHostGroupRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.GetHostGroupRequest} message GetHostGroupRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetHostGroupRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetHostGroupRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.GetHostGroupRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetHostGroupRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetHostGroupRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.GetHostGroupRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetHostGroupRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.GetHostGroupRequest";
+                        };
+    
+                        return GetHostGroupRequest;
+                    })();
+    
+                    v1.CreateHostGroupRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateHostGroupRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface ICreateHostGroupRequest
+                         * @property {string|null} [parent] CreateHostGroupRequest parent
+                         * @property {google.cloud.netapp.v1.IHostGroup|null} [hostGroup] CreateHostGroupRequest hostGroup
+                         * @property {string|null} [hostGroupId] CreateHostGroupRequest hostGroupId
+                         */
+    
+                        /**
+                         * Constructs a new CreateHostGroupRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents a CreateHostGroupRequest.
+                         * @implements ICreateHostGroupRequest
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.ICreateHostGroupRequest=} [properties] Properties to set
+                         */
+                        function CreateHostGroupRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateHostGroupRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.netapp.v1.CreateHostGroupRequest
+                         * @instance
+                         */
+                        CreateHostGroupRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateHostGroupRequest hostGroup.
+                         * @member {google.cloud.netapp.v1.IHostGroup|null|undefined} hostGroup
+                         * @memberof google.cloud.netapp.v1.CreateHostGroupRequest
+                         * @instance
+                         */
+                        CreateHostGroupRequest.prototype.hostGroup = null;
+    
+                        /**
+                         * CreateHostGroupRequest hostGroupId.
+                         * @member {string} hostGroupId
+                         * @memberof google.cloud.netapp.v1.CreateHostGroupRequest
+                         * @instance
+                         */
+                        CreateHostGroupRequest.prototype.hostGroupId = "";
+    
+                        /**
+                         * Creates a new CreateHostGroupRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.CreateHostGroupRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.ICreateHostGroupRequest=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.CreateHostGroupRequest} CreateHostGroupRequest instance
+                         */
+                        CreateHostGroupRequest.create = function create(properties) {
+                            return new CreateHostGroupRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateHostGroupRequest message. Does not implicitly {@link google.cloud.netapp.v1.CreateHostGroupRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.CreateHostGroupRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.ICreateHostGroupRequest} message CreateHostGroupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateHostGroupRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.hostGroup != null && Object.hasOwnProperty.call(message, "hostGroup"))
+                                $root.google.cloud.netapp.v1.HostGroup.encode(message.hostGroup, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.hostGroupId != null && Object.hasOwnProperty.call(message, "hostGroupId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.hostGroupId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateHostGroupRequest message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.CreateHostGroupRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.CreateHostGroupRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.ICreateHostGroupRequest} message CreateHostGroupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateHostGroupRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateHostGroupRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.CreateHostGroupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.CreateHostGroupRequest} CreateHostGroupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateHostGroupRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.CreateHostGroupRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.hostGroup = $root.google.cloud.netapp.v1.HostGroup.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.hostGroupId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateHostGroupRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.CreateHostGroupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.CreateHostGroupRequest} CreateHostGroupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateHostGroupRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateHostGroupRequest message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.CreateHostGroupRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateHostGroupRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.hostGroup != null && message.hasOwnProperty("hostGroup")) {
+                                var error = $root.google.cloud.netapp.v1.HostGroup.verify(message.hostGroup);
+                                if (error)
+                                    return "hostGroup." + error;
+                            }
+                            if (message.hostGroupId != null && message.hasOwnProperty("hostGroupId"))
+                                if (!$util.isString(message.hostGroupId))
+                                    return "hostGroupId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateHostGroupRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.CreateHostGroupRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.CreateHostGroupRequest} CreateHostGroupRequest
+                         */
+                        CreateHostGroupRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.CreateHostGroupRequest)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.CreateHostGroupRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.hostGroup != null) {
+                                if (typeof object.hostGroup !== "object")
+                                    throw TypeError(".google.cloud.netapp.v1.CreateHostGroupRequest.hostGroup: object expected");
+                                message.hostGroup = $root.google.cloud.netapp.v1.HostGroup.fromObject(object.hostGroup);
+                            }
+                            if (object.hostGroupId != null)
+                                message.hostGroupId = String(object.hostGroupId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateHostGroupRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.CreateHostGroupRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.CreateHostGroupRequest} message CreateHostGroupRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateHostGroupRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.hostGroup = null;
+                                object.hostGroupId = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.hostGroup != null && message.hasOwnProperty("hostGroup"))
+                                object.hostGroup = $root.google.cloud.netapp.v1.HostGroup.toObject(message.hostGroup, options);
+                            if (message.hostGroupId != null && message.hasOwnProperty("hostGroupId"))
+                                object.hostGroupId = message.hostGroupId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateHostGroupRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.CreateHostGroupRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateHostGroupRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateHostGroupRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.CreateHostGroupRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateHostGroupRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.CreateHostGroupRequest";
+                        };
+    
+                        return CreateHostGroupRequest;
+                    })();
+    
+                    v1.UpdateHostGroupRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateHostGroupRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface IUpdateHostGroupRequest
+                         * @property {google.cloud.netapp.v1.IHostGroup|null} [hostGroup] UpdateHostGroupRequest hostGroup
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateHostGroupRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateHostGroupRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents an UpdateHostGroupRequest.
+                         * @implements IUpdateHostGroupRequest
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.IUpdateHostGroupRequest=} [properties] Properties to set
+                         */
+                        function UpdateHostGroupRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateHostGroupRequest hostGroup.
+                         * @member {google.cloud.netapp.v1.IHostGroup|null|undefined} hostGroup
+                         * @memberof google.cloud.netapp.v1.UpdateHostGroupRequest
+                         * @instance
+                         */
+                        UpdateHostGroupRequest.prototype.hostGroup = null;
+    
+                        /**
+                         * UpdateHostGroupRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.netapp.v1.UpdateHostGroupRequest
+                         * @instance
+                         */
+                        UpdateHostGroupRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateHostGroupRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.UpdateHostGroupRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IUpdateHostGroupRequest=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.UpdateHostGroupRequest} UpdateHostGroupRequest instance
+                         */
+                        UpdateHostGroupRequest.create = function create(properties) {
+                            return new UpdateHostGroupRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateHostGroupRequest message. Does not implicitly {@link google.cloud.netapp.v1.UpdateHostGroupRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.UpdateHostGroupRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IUpdateHostGroupRequest} message UpdateHostGroupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateHostGroupRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.hostGroup != null && Object.hasOwnProperty.call(message, "hostGroup"))
+                                $root.google.cloud.netapp.v1.HostGroup.encode(message.hostGroup, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateHostGroupRequest message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.UpdateHostGroupRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.UpdateHostGroupRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IUpdateHostGroupRequest} message UpdateHostGroupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateHostGroupRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateHostGroupRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.UpdateHostGroupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.UpdateHostGroupRequest} UpdateHostGroupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateHostGroupRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.UpdateHostGroupRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.hostGroup = $root.google.cloud.netapp.v1.HostGroup.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateHostGroupRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.UpdateHostGroupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.UpdateHostGroupRequest} UpdateHostGroupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateHostGroupRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateHostGroupRequest message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.UpdateHostGroupRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateHostGroupRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.hostGroup != null && message.hasOwnProperty("hostGroup")) {
+                                var error = $root.google.cloud.netapp.v1.HostGroup.verify(message.hostGroup);
+                                if (error)
+                                    return "hostGroup." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateHostGroupRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.UpdateHostGroupRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.UpdateHostGroupRequest} UpdateHostGroupRequest
+                         */
+                        UpdateHostGroupRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.UpdateHostGroupRequest)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.UpdateHostGroupRequest();
+                            if (object.hostGroup != null) {
+                                if (typeof object.hostGroup !== "object")
+                                    throw TypeError(".google.cloud.netapp.v1.UpdateHostGroupRequest.hostGroup: object expected");
+                                message.hostGroup = $root.google.cloud.netapp.v1.HostGroup.fromObject(object.hostGroup);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.netapp.v1.UpdateHostGroupRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateHostGroupRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.UpdateHostGroupRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.UpdateHostGroupRequest} message UpdateHostGroupRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateHostGroupRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.hostGroup = null;
+                                object.updateMask = null;
+                            }
+                            if (message.hostGroup != null && message.hasOwnProperty("hostGroup"))
+                                object.hostGroup = $root.google.cloud.netapp.v1.HostGroup.toObject(message.hostGroup, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateHostGroupRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.UpdateHostGroupRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateHostGroupRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateHostGroupRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.UpdateHostGroupRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateHostGroupRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.UpdateHostGroupRequest";
+                        };
+    
+                        return UpdateHostGroupRequest;
+                    })();
+    
+                    v1.DeleteHostGroupRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteHostGroupRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface IDeleteHostGroupRequest
+                         * @property {string|null} [name] DeleteHostGroupRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteHostGroupRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents a DeleteHostGroupRequest.
+                         * @implements IDeleteHostGroupRequest
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.IDeleteHostGroupRequest=} [properties] Properties to set
+                         */
+                        function DeleteHostGroupRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteHostGroupRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.netapp.v1.DeleteHostGroupRequest
+                         * @instance
+                         */
+                        DeleteHostGroupRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteHostGroupRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.DeleteHostGroupRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IDeleteHostGroupRequest=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.DeleteHostGroupRequest} DeleteHostGroupRequest instance
+                         */
+                        DeleteHostGroupRequest.create = function create(properties) {
+                            return new DeleteHostGroupRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteHostGroupRequest message. Does not implicitly {@link google.cloud.netapp.v1.DeleteHostGroupRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.DeleteHostGroupRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IDeleteHostGroupRequest} message DeleteHostGroupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteHostGroupRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteHostGroupRequest message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.DeleteHostGroupRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.DeleteHostGroupRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IDeleteHostGroupRequest} message DeleteHostGroupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteHostGroupRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteHostGroupRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.DeleteHostGroupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.DeleteHostGroupRequest} DeleteHostGroupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteHostGroupRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.DeleteHostGroupRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteHostGroupRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.DeleteHostGroupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.DeleteHostGroupRequest} DeleteHostGroupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteHostGroupRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteHostGroupRequest message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.DeleteHostGroupRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteHostGroupRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteHostGroupRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.DeleteHostGroupRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.DeleteHostGroupRequest} DeleteHostGroupRequest
+                         */
+                        DeleteHostGroupRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.DeleteHostGroupRequest)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.DeleteHostGroupRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteHostGroupRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.DeleteHostGroupRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.DeleteHostGroupRequest} message DeleteHostGroupRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteHostGroupRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteHostGroupRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.DeleteHostGroupRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteHostGroupRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteHostGroupRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.DeleteHostGroupRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteHostGroupRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.DeleteHostGroupRequest";
+                        };
+    
+                        return DeleteHostGroupRequest;
+                    })();
+    
+                    v1.HostGroup = (function() {
+    
+                        /**
+                         * Properties of a HostGroup.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface IHostGroup
+                         * @property {string|null} [name] HostGroup name
+                         * @property {google.cloud.netapp.v1.HostGroup.Type|null} [type] HostGroup type
+                         * @property {google.cloud.netapp.v1.HostGroup.State|null} [state] HostGroup state
+                         * @property {google.protobuf.ITimestamp|null} [createTime] HostGroup createTime
+                         * @property {Array.<string>|null} [hosts] HostGroup hosts
+                         * @property {google.cloud.netapp.v1.OsType|null} [osType] HostGroup osType
+                         * @property {string|null} [description] HostGroup description
+                         * @property {Object.<string,string>|null} [labels] HostGroup labels
+                         */
+    
+                        /**
+                         * Constructs a new HostGroup.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents a HostGroup.
+                         * @implements IHostGroup
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.IHostGroup=} [properties] Properties to set
+                         */
+                        function HostGroup(properties) {
+                            this.hosts = [];
+                            this.labels = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * HostGroup name.
+                         * @member {string} name
+                         * @memberof google.cloud.netapp.v1.HostGroup
+                         * @instance
+                         */
+                        HostGroup.prototype.name = "";
+    
+                        /**
+                         * HostGroup type.
+                         * @member {google.cloud.netapp.v1.HostGroup.Type} type
+                         * @memberof google.cloud.netapp.v1.HostGroup
+                         * @instance
+                         */
+                        HostGroup.prototype.type = 0;
+    
+                        /**
+                         * HostGroup state.
+                         * @member {google.cloud.netapp.v1.HostGroup.State} state
+                         * @memberof google.cloud.netapp.v1.HostGroup
+                         * @instance
+                         */
+                        HostGroup.prototype.state = 0;
+    
+                        /**
+                         * HostGroup createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.netapp.v1.HostGroup
+                         * @instance
+                         */
+                        HostGroup.prototype.createTime = null;
+    
+                        /**
+                         * HostGroup hosts.
+                         * @member {Array.<string>} hosts
+                         * @memberof google.cloud.netapp.v1.HostGroup
+                         * @instance
+                         */
+                        HostGroup.prototype.hosts = $util.emptyArray;
+    
+                        /**
+                         * HostGroup osType.
+                         * @member {google.cloud.netapp.v1.OsType} osType
+                         * @memberof google.cloud.netapp.v1.HostGroup
+                         * @instance
+                         */
+                        HostGroup.prototype.osType = 0;
+    
+                        /**
+                         * HostGroup description.
+                         * @member {string} description
+                         * @memberof google.cloud.netapp.v1.HostGroup
+                         * @instance
+                         */
+                        HostGroup.prototype.description = "";
+    
+                        /**
+                         * HostGroup labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.netapp.v1.HostGroup
+                         * @instance
+                         */
+                        HostGroup.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * Creates a new HostGroup instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.HostGroup
+                         * @static
+                         * @param {google.cloud.netapp.v1.IHostGroup=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.HostGroup} HostGroup instance
+                         */
+                        HostGroup.create = function create(properties) {
+                            return new HostGroup(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified HostGroup message. Does not implicitly {@link google.cloud.netapp.v1.HostGroup.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.HostGroup
+                         * @static
+                         * @param {google.cloud.netapp.v1.IHostGroup} message HostGroup message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        HostGroup.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.type);
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.state);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.hosts != null && message.hosts.length)
+                                for (var i = 0; i < message.hosts.length; ++i)
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.hosts[i]);
+                            if (message.osType != null && Object.hasOwnProperty.call(message, "osType"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.osType);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.description);
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 8, wireType 2 =*/66).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified HostGroup message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.HostGroup.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.HostGroup
+                         * @static
+                         * @param {google.cloud.netapp.v1.IHostGroup} message HostGroup message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        HostGroup.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a HostGroup message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.HostGroup
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.HostGroup} HostGroup
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        HostGroup.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.HostGroup(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.type = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        if (!(message.hosts && message.hosts.length))
+                                            message.hosts = [];
+                                        message.hosts.push(reader.string());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.osType = reader.int32();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a HostGroup message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.HostGroup
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.HostGroup} HostGroup
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        HostGroup.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a HostGroup message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.HostGroup
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        HostGroup.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                switch (message.type) {
+                                default:
+                                    return "type: enum value expected";
+                                case 0:
+                                case 1:
+                                    break;
+                                }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.hosts != null && message.hasOwnProperty("hosts")) {
+                                if (!Array.isArray(message.hosts))
+                                    return "hosts: array expected";
+                                for (var i = 0; i < message.hosts.length; ++i)
+                                    if (!$util.isString(message.hosts[i]))
+                                        return "hosts: string[] expected";
+                            }
+                            if (message.osType != null && message.hasOwnProperty("osType"))
+                                switch (message.osType) {
+                                default:
+                                    return "osType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a HostGroup message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.HostGroup
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.HostGroup} HostGroup
+                         */
+                        HostGroup.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.HostGroup)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.HostGroup();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
+                            case "TYPE_UNSPECIFIED":
+                            case 0:
+                                message.type = 0;
+                                break;
+                            case "ISCSI_INITIATOR":
+                            case 1:
+                                message.type = 1;
+                                break;
+                            }
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "CREATING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "READY":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "UPDATING":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "DELETING":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            case "DISABLED":
+                            case 5:
+                                message.state = 5;
+                                break;
+                            }
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.netapp.v1.HostGroup.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.hosts) {
+                                if (!Array.isArray(object.hosts))
+                                    throw TypeError(".google.cloud.netapp.v1.HostGroup.hosts: array expected");
+                                message.hosts = [];
+                                for (var i = 0; i < object.hosts.length; ++i)
+                                    message.hosts[i] = String(object.hosts[i]);
+                            }
+                            switch (object.osType) {
+                            default:
+                                if (typeof object.osType === "number") {
+                                    message.osType = object.osType;
+                                    break;
+                                }
+                                break;
+                            case "OS_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.osType = 0;
+                                break;
+                            case "LINUX":
+                            case 1:
+                                message.osType = 1;
+                                break;
+                            case "WINDOWS":
+                            case 2:
+                                message.osType = 2;
+                                break;
+                            case "ESXI":
+                            case 3:
+                                message.osType = 3;
+                                break;
+                            }
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.netapp.v1.HostGroup.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a HostGroup message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.HostGroup
+                         * @static
+                         * @param {google.cloud.netapp.v1.HostGroup} message HostGroup
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        HostGroup.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.hosts = [];
+                            if (options.objects || options.defaults)
+                                object.labels = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.createTime = null;
+                                object.osType = options.enums === String ? "OS_TYPE_UNSPECIFIED" : 0;
+                                object.description = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = options.enums === String ? $root.google.cloud.netapp.v1.HostGroup.Type[message.type] === undefined ? message.type : $root.google.cloud.netapp.v1.HostGroup.Type[message.type] : message.type;
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.netapp.v1.HostGroup.State[message.state] === undefined ? message.state : $root.google.cloud.netapp.v1.HostGroup.State[message.state] : message.state;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.hosts && message.hosts.length) {
+                                object.hosts = [];
+                                for (var j = 0; j < message.hosts.length; ++j)
+                                    object.hosts[j] = message.hosts[j];
+                            }
+                            if (message.osType != null && message.hasOwnProperty("osType"))
+                                object.osType = options.enums === String ? $root.google.cloud.netapp.v1.OsType[message.osType] === undefined ? message.osType : $root.google.cloud.netapp.v1.OsType[message.osType] : message.osType;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this HostGroup to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.HostGroup
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        HostGroup.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for HostGroup
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.HostGroup
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        HostGroup.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.HostGroup";
+                        };
+    
+                        /**
+                         * Type enum.
+                         * @name google.cloud.netapp.v1.HostGroup.Type
+                         * @enum {number}
+                         * @property {number} TYPE_UNSPECIFIED=0 TYPE_UNSPECIFIED value
+                         * @property {number} ISCSI_INITIATOR=1 ISCSI_INITIATOR value
+                         */
+                        HostGroup.Type = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ISCSI_INITIATOR"] = 1;
+                            return values;
+                        })();
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.netapp.v1.HostGroup.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} CREATING=1 CREATING value
+                         * @property {number} READY=2 READY value
+                         * @property {number} UPDATING=3 UPDATING value
+                         * @property {number} DELETING=4 DELETING value
+                         * @property {number} DISABLED=5 DISABLED value
+                         */
+                        HostGroup.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CREATING"] = 1;
+                            values[valuesById[2] = "READY"] = 2;
+                            values[valuesById[3] = "UPDATING"] = 3;
+                            values[valuesById[4] = "DELETING"] = 4;
+                            values[valuesById[5] = "DISABLED"] = 5;
+                            return values;
+                        })();
+    
+                        return HostGroup;
+                    })();
+    
+                    /**
+                     * ServiceLevel enum.
+                     * @name google.cloud.netapp.v1.ServiceLevel
+                     * @enum {number}
+                     * @property {number} SERVICE_LEVEL_UNSPECIFIED=0 SERVICE_LEVEL_UNSPECIFIED value
+                     * @property {number} PREMIUM=1 PREMIUM value
+                     * @property {number} EXTREME=2 EXTREME value
+                     * @property {number} STANDARD=3 STANDARD value
+                     * @property {number} FLEX=4 FLEX value
+                     */
+                    v1.ServiceLevel = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "SERVICE_LEVEL_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "PREMIUM"] = 1;
+                        values[valuesById[2] = "EXTREME"] = 2;
+                        values[valuesById[3] = "STANDARD"] = 3;
+                        values[valuesById[4] = "FLEX"] = 4;
+                        return values;
+                    })();
+    
+                    /**
+                     * FlexPerformance enum.
+                     * @name google.cloud.netapp.v1.FlexPerformance
+                     * @enum {number}
+                     * @property {number} FLEX_PERFORMANCE_UNSPECIFIED=0 FLEX_PERFORMANCE_UNSPECIFIED value
+                     * @property {number} FLEX_PERFORMANCE_DEFAULT=1 FLEX_PERFORMANCE_DEFAULT value
+                     * @property {number} FLEX_PERFORMANCE_CUSTOM=2 FLEX_PERFORMANCE_CUSTOM value
+                     */
+                    v1.FlexPerformance = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "FLEX_PERFORMANCE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "FLEX_PERFORMANCE_DEFAULT"] = 1;
+                        values[valuesById[2] = "FLEX_PERFORMANCE_CUSTOM"] = 2;
+                        return values;
+                    })();
+    
+                    /**
+                     * EncryptionType enum.
+                     * @name google.cloud.netapp.v1.EncryptionType
+                     * @enum {number}
+                     * @property {number} ENCRYPTION_TYPE_UNSPECIFIED=0 ENCRYPTION_TYPE_UNSPECIFIED value
+                     * @property {number} SERVICE_MANAGED=1 SERVICE_MANAGED value
+                     * @property {number} CLOUD_KMS=2 CLOUD_KMS value
+                     */
+                    v1.EncryptionType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "ENCRYPTION_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "SERVICE_MANAGED"] = 1;
+                        values[valuesById[2] = "CLOUD_KMS"] = 2;
+                        return values;
+                    })();
+    
+                    /**
+                     * DirectoryServiceType enum.
+                     * @name google.cloud.netapp.v1.DirectoryServiceType
+                     * @enum {number}
+                     * @property {number} DIRECTORY_SERVICE_TYPE_UNSPECIFIED=0 DIRECTORY_SERVICE_TYPE_UNSPECIFIED value
+                     * @property {number} ACTIVE_DIRECTORY=1 ACTIVE_DIRECTORY value
+                     */
+                    v1.DirectoryServiceType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "DIRECTORY_SERVICE_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "ACTIVE_DIRECTORY"] = 1;
+                        return values;
+                    })();
+    
+                    /**
+                     * StoragePoolType enum.
+                     * @name google.cloud.netapp.v1.StoragePoolType
+                     * @enum {number}
+                     * @property {number} STORAGE_POOL_TYPE_UNSPECIFIED=0 STORAGE_POOL_TYPE_UNSPECIFIED value
+                     * @property {number} FILE=1 FILE value
+                     * @property {number} UNIFIED=2 UNIFIED value
+                     * @property {number} UNIFIED_LARGE_CAPACITY=3 UNIFIED_LARGE_CAPACITY value
+                     */
+                    v1.StoragePoolType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "STORAGE_POOL_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "FILE"] = 1;
+                        values[valuesById[2] = "UNIFIED"] = 2;
+                        values[valuesById[3] = "UNIFIED_LARGE_CAPACITY"] = 3;
+                        return values;
+                    })();
+    
+                    /**
+                     * HybridReplicationSchedule enum.
+                     * @name google.cloud.netapp.v1.HybridReplicationSchedule
+                     * @enum {number}
+                     * @property {number} HYBRID_REPLICATION_SCHEDULE_UNSPECIFIED=0 HYBRID_REPLICATION_SCHEDULE_UNSPECIFIED value
+                     * @property {number} EVERY_10_MINUTES=1 EVERY_10_MINUTES value
+                     * @property {number} HOURLY=2 HOURLY value
+                     * @property {number} DAILY=3 DAILY value
+                     */
+                    v1.HybridReplicationSchedule = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "HYBRID_REPLICATION_SCHEDULE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "EVERY_10_MINUTES"] = 1;
+                        values[valuesById[2] = "HOURLY"] = 2;
+                        values[valuesById[3] = "DAILY"] = 3;
+                        return values;
+                    })();
+    
+                    /**
+                     * QosType enum.
+                     * @name google.cloud.netapp.v1.QosType
+                     * @enum {number}
+                     * @property {number} QOS_TYPE_UNSPECIFIED=0 QOS_TYPE_UNSPECIFIED value
+                     * @property {number} AUTO=1 AUTO value
+                     * @property {number} MANUAL=2 MANUAL value
+                     */
+                    v1.QosType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "QOS_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "AUTO"] = 1;
+                        values[valuesById[2] = "MANUAL"] = 2;
+                        return values;
+                    })();
+    
+                    /**
+                     * OsType enum.
+                     * @name google.cloud.netapp.v1.OsType
+                     * @enum {number}
+                     * @property {number} OS_TYPE_UNSPECIFIED=0 OS_TYPE_UNSPECIFIED value
+                     * @property {number} LINUX=1 LINUX value
+                     * @property {number} WINDOWS=2 WINDOWS value
+                     * @property {number} ESXI=3 ESXI value
+                     */
+                    v1.OsType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "OS_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "LINUX"] = 1;
+                        values[valuesById[2] = "WINDOWS"] = 2;
+                        values[valuesById[3] = "ESXI"] = 3;
+                        return values;
+                    })();
+    
+                    v1.LocationMetadata = (function() {
+    
+                        /**
+                         * Properties of a LocationMetadata.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface ILocationMetadata
+                         * @property {Array.<google.cloud.netapp.v1.ServiceLevel>|null} [supportedServiceLevels] LocationMetadata supportedServiceLevels
+                         * @property {Array.<google.cloud.netapp.v1.FlexPerformance>|null} [supportedFlexPerformance] LocationMetadata supportedFlexPerformance
+                         * @property {boolean|null} [hasVcp] LocationMetadata hasVcp
+                         * @property {boolean|null} [hasOntapProxy] LocationMetadata hasOntapProxy
+                         */
+    
+                        /**
+                         * Constructs a new LocationMetadata.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents a LocationMetadata.
+                         * @implements ILocationMetadata
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.ILocationMetadata=} [properties] Properties to set
+                         */
+                        function LocationMetadata(properties) {
+                            this.supportedServiceLevels = [];
+                            this.supportedFlexPerformance = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * LocationMetadata supportedServiceLevels.
+                         * @member {Array.<google.cloud.netapp.v1.ServiceLevel>} supportedServiceLevels
+                         * @memberof google.cloud.netapp.v1.LocationMetadata
+                         * @instance
+                         */
+                        LocationMetadata.prototype.supportedServiceLevels = $util.emptyArray;
+    
+                        /**
+                         * LocationMetadata supportedFlexPerformance.
+                         * @member {Array.<google.cloud.netapp.v1.FlexPerformance>} supportedFlexPerformance
+                         * @memberof google.cloud.netapp.v1.LocationMetadata
+                         * @instance
+                         */
+                        LocationMetadata.prototype.supportedFlexPerformance = $util.emptyArray;
+    
+                        /**
+                         * LocationMetadata hasVcp.
+                         * @member {boolean} hasVcp
+                         * @memberof google.cloud.netapp.v1.LocationMetadata
+                         * @instance
+                         */
+                        LocationMetadata.prototype.hasVcp = false;
+    
+                        /**
+                         * LocationMetadata hasOntapProxy.
+                         * @member {boolean} hasOntapProxy
+                         * @memberof google.cloud.netapp.v1.LocationMetadata
+                         * @instance
+                         */
+                        LocationMetadata.prototype.hasOntapProxy = false;
+    
+                        /**
+                         * Creates a new LocationMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.LocationMetadata
+                         * @static
+                         * @param {google.cloud.netapp.v1.ILocationMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.LocationMetadata} LocationMetadata instance
+                         */
+                        LocationMetadata.create = function create(properties) {
+                            return new LocationMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified LocationMetadata message. Does not implicitly {@link google.cloud.netapp.v1.LocationMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.LocationMetadata
+                         * @static
+                         * @param {google.cloud.netapp.v1.ILocationMetadata} message LocationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LocationMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.supportedServiceLevels != null && message.supportedServiceLevels.length) {
+                                writer.uint32(/* id 1, wireType 2 =*/10).fork();
+                                for (var i = 0; i < message.supportedServiceLevels.length; ++i)
+                                    writer.int32(message.supportedServiceLevels[i]);
+                                writer.ldelim();
+                            }
+                            if (message.supportedFlexPerformance != null && message.supportedFlexPerformance.length) {
+                                writer.uint32(/* id 2, wireType 2 =*/18).fork();
+                                for (var i = 0; i < message.supportedFlexPerformance.length; ++i)
+                                    writer.int32(message.supportedFlexPerformance[i]);
+                                writer.ldelim();
+                            }
+                            if (message.hasVcp != null && Object.hasOwnProperty.call(message, "hasVcp"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.hasVcp);
+                            if (message.hasOntapProxy != null && Object.hasOwnProperty.call(message, "hasOntapProxy"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.hasOntapProxy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified LocationMetadata message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.LocationMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.LocationMetadata
+                         * @static
+                         * @param {google.cloud.netapp.v1.ILocationMetadata} message LocationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LocationMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a LocationMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.LocationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.LocationMetadata} LocationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LocationMetadata.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.LocationMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.supportedServiceLevels && message.supportedServiceLevels.length))
+                                            message.supportedServiceLevels = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.supportedServiceLevels.push(reader.int32());
+                                        } else
+                                            message.supportedServiceLevels.push(reader.int32());
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.supportedFlexPerformance && message.supportedFlexPerformance.length))
+                                            message.supportedFlexPerformance = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.supportedFlexPerformance.push(reader.int32());
+                                        } else
+                                            message.supportedFlexPerformance.push(reader.int32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.hasVcp = reader.bool();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.hasOntapProxy = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a LocationMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.LocationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.LocationMetadata} LocationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LocationMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a LocationMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.LocationMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        LocationMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.supportedServiceLevels != null && message.hasOwnProperty("supportedServiceLevels")) {
+                                if (!Array.isArray(message.supportedServiceLevels))
+                                    return "supportedServiceLevels: array expected";
+                                for (var i = 0; i < message.supportedServiceLevels.length; ++i)
+                                    switch (message.supportedServiceLevels[i]) {
+                                    default:
+                                        return "supportedServiceLevels: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        break;
+                                    }
+                            }
+                            if (message.supportedFlexPerformance != null && message.hasOwnProperty("supportedFlexPerformance")) {
+                                if (!Array.isArray(message.supportedFlexPerformance))
+                                    return "supportedFlexPerformance: array expected";
+                                for (var i = 0; i < message.supportedFlexPerformance.length; ++i)
+                                    switch (message.supportedFlexPerformance[i]) {
+                                    default:
+                                        return "supportedFlexPerformance: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                            }
+                            if (message.hasVcp != null && message.hasOwnProperty("hasVcp"))
+                                if (typeof message.hasVcp !== "boolean")
+                                    return "hasVcp: boolean expected";
+                            if (message.hasOntapProxy != null && message.hasOwnProperty("hasOntapProxy"))
+                                if (typeof message.hasOntapProxy !== "boolean")
+                                    return "hasOntapProxy: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a LocationMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.LocationMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.LocationMetadata} LocationMetadata
+                         */
+                        LocationMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.LocationMetadata)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.LocationMetadata();
+                            if (object.supportedServiceLevels) {
+                                if (!Array.isArray(object.supportedServiceLevels))
+                                    throw TypeError(".google.cloud.netapp.v1.LocationMetadata.supportedServiceLevels: array expected");
+                                message.supportedServiceLevels = [];
+                                for (var i = 0; i < object.supportedServiceLevels.length; ++i)
+                                    switch (object.supportedServiceLevels[i]) {
+                                    default:
+                                        if (typeof object.supportedServiceLevels[i] === "number") {
+                                            message.supportedServiceLevels[i] = object.supportedServiceLevels[i];
+                                            break;
+                                        }
+                                    case "SERVICE_LEVEL_UNSPECIFIED":
+                                    case 0:
+                                        message.supportedServiceLevels[i] = 0;
+                                        break;
+                                    case "PREMIUM":
+                                    case 1:
+                                        message.supportedServiceLevels[i] = 1;
+                                        break;
+                                    case "EXTREME":
+                                    case 2:
+                                        message.supportedServiceLevels[i] = 2;
+                                        break;
+                                    case "STANDARD":
+                                    case 3:
+                                        message.supportedServiceLevels[i] = 3;
+                                        break;
+                                    case "FLEX":
+                                    case 4:
+                                        message.supportedServiceLevels[i] = 4;
+                                        break;
+                                    }
+                            }
+                            if (object.supportedFlexPerformance) {
+                                if (!Array.isArray(object.supportedFlexPerformance))
+                                    throw TypeError(".google.cloud.netapp.v1.LocationMetadata.supportedFlexPerformance: array expected");
+                                message.supportedFlexPerformance = [];
+                                for (var i = 0; i < object.supportedFlexPerformance.length; ++i)
+                                    switch (object.supportedFlexPerformance[i]) {
+                                    default:
+                                        if (typeof object.supportedFlexPerformance[i] === "number") {
+                                            message.supportedFlexPerformance[i] = object.supportedFlexPerformance[i];
+                                            break;
+                                        }
+                                    case "FLEX_PERFORMANCE_UNSPECIFIED":
+                                    case 0:
+                                        message.supportedFlexPerformance[i] = 0;
+                                        break;
+                                    case "FLEX_PERFORMANCE_DEFAULT":
+                                    case 1:
+                                        message.supportedFlexPerformance[i] = 1;
+                                        break;
+                                    case "FLEX_PERFORMANCE_CUSTOM":
+                                    case 2:
+                                        message.supportedFlexPerformance[i] = 2;
+                                        break;
+                                    }
+                            }
+                            if (object.hasVcp != null)
+                                message.hasVcp = Boolean(object.hasVcp);
+                            if (object.hasOntapProxy != null)
+                                message.hasOntapProxy = Boolean(object.hasOntapProxy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a LocationMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.LocationMetadata
+                         * @static
+                         * @param {google.cloud.netapp.v1.LocationMetadata} message LocationMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        LocationMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.supportedServiceLevels = [];
+                                object.supportedFlexPerformance = [];
+                            }
+                            if (options.defaults) {
+                                object.hasVcp = false;
+                                object.hasOntapProxy = false;
+                            }
+                            if (message.supportedServiceLevels && message.supportedServiceLevels.length) {
+                                object.supportedServiceLevels = [];
+                                for (var j = 0; j < message.supportedServiceLevels.length; ++j)
+                                    object.supportedServiceLevels[j] = options.enums === String ? $root.google.cloud.netapp.v1.ServiceLevel[message.supportedServiceLevels[j]] === undefined ? message.supportedServiceLevels[j] : $root.google.cloud.netapp.v1.ServiceLevel[message.supportedServiceLevels[j]] : message.supportedServiceLevels[j];
+                            }
+                            if (message.supportedFlexPerformance && message.supportedFlexPerformance.length) {
+                                object.supportedFlexPerformance = [];
+                                for (var j = 0; j < message.supportedFlexPerformance.length; ++j)
+                                    object.supportedFlexPerformance[j] = options.enums === String ? $root.google.cloud.netapp.v1.FlexPerformance[message.supportedFlexPerformance[j]] === undefined ? message.supportedFlexPerformance[j] : $root.google.cloud.netapp.v1.FlexPerformance[message.supportedFlexPerformance[j]] : message.supportedFlexPerformance[j];
+                            }
+                            if (message.hasVcp != null && message.hasOwnProperty("hasVcp"))
+                                object.hasVcp = message.hasVcp;
+                            if (message.hasOntapProxy != null && message.hasOwnProperty("hasOntapProxy"))
+                                object.hasOntapProxy = message.hasOntapProxy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this LocationMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.LocationMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        LocationMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for LocationMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.LocationMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        LocationMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.LocationMetadata";
+                        };
+    
+                        return LocationMetadata;
+                    })();
+    
+                    v1.UserCommands = (function() {
+    
+                        /**
+                         * Properties of a UserCommands.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface IUserCommands
+                         * @property {Array.<string>|null} [commands] UserCommands commands
+                         */
+    
+                        /**
+                         * Constructs a new UserCommands.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents a UserCommands.
+                         * @implements IUserCommands
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.IUserCommands=} [properties] Properties to set
+                         */
+                        function UserCommands(properties) {
+                            this.commands = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UserCommands commands.
+                         * @member {Array.<string>} commands
+                         * @memberof google.cloud.netapp.v1.UserCommands
+                         * @instance
+                         */
+                        UserCommands.prototype.commands = $util.emptyArray;
+    
+                        /**
+                         * Creates a new UserCommands instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.UserCommands
+                         * @static
+                         * @param {google.cloud.netapp.v1.IUserCommands=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.UserCommands} UserCommands instance
+                         */
+                        UserCommands.create = function create(properties) {
+                            return new UserCommands(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UserCommands message. Does not implicitly {@link google.cloud.netapp.v1.UserCommands.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.UserCommands
+                         * @static
+                         * @param {google.cloud.netapp.v1.IUserCommands} message UserCommands message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UserCommands.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.commands != null && message.commands.length)
+                                for (var i = 0; i < message.commands.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.commands[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UserCommands message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.UserCommands.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.UserCommands
+                         * @static
+                         * @param {google.cloud.netapp.v1.IUserCommands} message UserCommands message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UserCommands.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a UserCommands message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.UserCommands
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.UserCommands} UserCommands
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UserCommands.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.UserCommands();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.commands && message.commands.length))
+                                            message.commands = [];
+                                        message.commands.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a UserCommands message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.UserCommands
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.UserCommands} UserCommands
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UserCommands.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a UserCommands message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.UserCommands
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UserCommands.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.commands != null && message.hasOwnProperty("commands")) {
+                                if (!Array.isArray(message.commands))
+                                    return "commands: array expected";
+                                for (var i = 0; i < message.commands.length; ++i)
+                                    if (!$util.isString(message.commands[i]))
+                                        return "commands: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a UserCommands message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.UserCommands
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.UserCommands} UserCommands
+                         */
+                        UserCommands.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.UserCommands)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.UserCommands();
+                            if (object.commands) {
+                                if (!Array.isArray(object.commands))
+                                    throw TypeError(".google.cloud.netapp.v1.UserCommands.commands: array expected");
+                                message.commands = [];
+                                for (var i = 0; i < object.commands.length; ++i)
+                                    message.commands[i] = String(object.commands[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a UserCommands message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.UserCommands
+                         * @static
+                         * @param {google.cloud.netapp.v1.UserCommands} message UserCommands
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UserCommands.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.commands = [];
+                            if (message.commands && message.commands.length) {
+                                object.commands = [];
+                                for (var j = 0; j < message.commands.length; ++j)
+                                    object.commands[j] = message.commands[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UserCommands to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.UserCommands
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UserCommands.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UserCommands
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.UserCommands
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UserCommands.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.UserCommands";
+                        };
+    
+                        return UserCommands;
                     })();
     
                     v1.GetKmsConfigRequest = (function() {
@@ -21004,686 +24107,6 @@
                     })();
     
                     /**
-                     * ServiceLevel enum.
-                     * @name google.cloud.netapp.v1.ServiceLevel
-                     * @enum {number}
-                     * @property {number} SERVICE_LEVEL_UNSPECIFIED=0 SERVICE_LEVEL_UNSPECIFIED value
-                     * @property {number} PREMIUM=1 PREMIUM value
-                     * @property {number} EXTREME=2 EXTREME value
-                     * @property {number} STANDARD=3 STANDARD value
-                     * @property {number} FLEX=4 FLEX value
-                     */
-                    v1.ServiceLevel = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "SERVICE_LEVEL_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "PREMIUM"] = 1;
-                        values[valuesById[2] = "EXTREME"] = 2;
-                        values[valuesById[3] = "STANDARD"] = 3;
-                        values[valuesById[4] = "FLEX"] = 4;
-                        return values;
-                    })();
-    
-                    /**
-                     * FlexPerformance enum.
-                     * @name google.cloud.netapp.v1.FlexPerformance
-                     * @enum {number}
-                     * @property {number} FLEX_PERFORMANCE_UNSPECIFIED=0 FLEX_PERFORMANCE_UNSPECIFIED value
-                     * @property {number} FLEX_PERFORMANCE_DEFAULT=1 FLEX_PERFORMANCE_DEFAULT value
-                     * @property {number} FLEX_PERFORMANCE_CUSTOM=2 FLEX_PERFORMANCE_CUSTOM value
-                     */
-                    v1.FlexPerformance = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "FLEX_PERFORMANCE_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "FLEX_PERFORMANCE_DEFAULT"] = 1;
-                        values[valuesById[2] = "FLEX_PERFORMANCE_CUSTOM"] = 2;
-                        return values;
-                    })();
-    
-                    /**
-                     * EncryptionType enum.
-                     * @name google.cloud.netapp.v1.EncryptionType
-                     * @enum {number}
-                     * @property {number} ENCRYPTION_TYPE_UNSPECIFIED=0 ENCRYPTION_TYPE_UNSPECIFIED value
-                     * @property {number} SERVICE_MANAGED=1 SERVICE_MANAGED value
-                     * @property {number} CLOUD_KMS=2 CLOUD_KMS value
-                     */
-                    v1.EncryptionType = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "ENCRYPTION_TYPE_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "SERVICE_MANAGED"] = 1;
-                        values[valuesById[2] = "CLOUD_KMS"] = 2;
-                        return values;
-                    })();
-    
-                    /**
-                     * DirectoryServiceType enum.
-                     * @name google.cloud.netapp.v1.DirectoryServiceType
-                     * @enum {number}
-                     * @property {number} DIRECTORY_SERVICE_TYPE_UNSPECIFIED=0 DIRECTORY_SERVICE_TYPE_UNSPECIFIED value
-                     * @property {number} ACTIVE_DIRECTORY=1 ACTIVE_DIRECTORY value
-                     */
-                    v1.DirectoryServiceType = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "DIRECTORY_SERVICE_TYPE_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "ACTIVE_DIRECTORY"] = 1;
-                        return values;
-                    })();
-    
-                    /**
-                     * HybridReplicationSchedule enum.
-                     * @name google.cloud.netapp.v1.HybridReplicationSchedule
-                     * @enum {number}
-                     * @property {number} HYBRID_REPLICATION_SCHEDULE_UNSPECIFIED=0 HYBRID_REPLICATION_SCHEDULE_UNSPECIFIED value
-                     * @property {number} EVERY_10_MINUTES=1 EVERY_10_MINUTES value
-                     * @property {number} HOURLY=2 HOURLY value
-                     * @property {number} DAILY=3 DAILY value
-                     */
-                    v1.HybridReplicationSchedule = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "HYBRID_REPLICATION_SCHEDULE_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "EVERY_10_MINUTES"] = 1;
-                        values[valuesById[2] = "HOURLY"] = 2;
-                        values[valuesById[3] = "DAILY"] = 3;
-                        return values;
-                    })();
-    
-                    /**
-                     * QosType enum.
-                     * @name google.cloud.netapp.v1.QosType
-                     * @enum {number}
-                     * @property {number} QOS_TYPE_UNSPECIFIED=0 QOS_TYPE_UNSPECIFIED value
-                     * @property {number} AUTO=1 AUTO value
-                     * @property {number} MANUAL=2 MANUAL value
-                     */
-                    v1.QosType = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "QOS_TYPE_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "AUTO"] = 1;
-                        values[valuesById[2] = "MANUAL"] = 2;
-                        return values;
-                    })();
-    
-                    v1.LocationMetadata = (function() {
-    
-                        /**
-                         * Properties of a LocationMetadata.
-                         * @memberof google.cloud.netapp.v1
-                         * @interface ILocationMetadata
-                         * @property {Array.<google.cloud.netapp.v1.ServiceLevel>|null} [supportedServiceLevels] LocationMetadata supportedServiceLevels
-                         * @property {Array.<google.cloud.netapp.v1.FlexPerformance>|null} [supportedFlexPerformance] LocationMetadata supportedFlexPerformance
-                         * @property {boolean|null} [hasVcp] LocationMetadata hasVcp
-                         */
-    
-                        /**
-                         * Constructs a new LocationMetadata.
-                         * @memberof google.cloud.netapp.v1
-                         * @classdesc Represents a LocationMetadata.
-                         * @implements ILocationMetadata
-                         * @constructor
-                         * @param {google.cloud.netapp.v1.ILocationMetadata=} [properties] Properties to set
-                         */
-                        function LocationMetadata(properties) {
-                            this.supportedServiceLevels = [];
-                            this.supportedFlexPerformance = [];
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * LocationMetadata supportedServiceLevels.
-                         * @member {Array.<google.cloud.netapp.v1.ServiceLevel>} supportedServiceLevels
-                         * @memberof google.cloud.netapp.v1.LocationMetadata
-                         * @instance
-                         */
-                        LocationMetadata.prototype.supportedServiceLevels = $util.emptyArray;
-    
-                        /**
-                         * LocationMetadata supportedFlexPerformance.
-                         * @member {Array.<google.cloud.netapp.v1.FlexPerformance>} supportedFlexPerformance
-                         * @memberof google.cloud.netapp.v1.LocationMetadata
-                         * @instance
-                         */
-                        LocationMetadata.prototype.supportedFlexPerformance = $util.emptyArray;
-    
-                        /**
-                         * LocationMetadata hasVcp.
-                         * @member {boolean} hasVcp
-                         * @memberof google.cloud.netapp.v1.LocationMetadata
-                         * @instance
-                         */
-                        LocationMetadata.prototype.hasVcp = false;
-    
-                        /**
-                         * Creates a new LocationMetadata instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.netapp.v1.LocationMetadata
-                         * @static
-                         * @param {google.cloud.netapp.v1.ILocationMetadata=} [properties] Properties to set
-                         * @returns {google.cloud.netapp.v1.LocationMetadata} LocationMetadata instance
-                         */
-                        LocationMetadata.create = function create(properties) {
-                            return new LocationMetadata(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified LocationMetadata message. Does not implicitly {@link google.cloud.netapp.v1.LocationMetadata.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.netapp.v1.LocationMetadata
-                         * @static
-                         * @param {google.cloud.netapp.v1.ILocationMetadata} message LocationMetadata message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        LocationMetadata.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.supportedServiceLevels != null && message.supportedServiceLevels.length) {
-                                writer.uint32(/* id 1, wireType 2 =*/10).fork();
-                                for (var i = 0; i < message.supportedServiceLevels.length; ++i)
-                                    writer.int32(message.supportedServiceLevels[i]);
-                                writer.ldelim();
-                            }
-                            if (message.supportedFlexPerformance != null && message.supportedFlexPerformance.length) {
-                                writer.uint32(/* id 2, wireType 2 =*/18).fork();
-                                for (var i = 0; i < message.supportedFlexPerformance.length; ++i)
-                                    writer.int32(message.supportedFlexPerformance[i]);
-                                writer.ldelim();
-                            }
-                            if (message.hasVcp != null && Object.hasOwnProperty.call(message, "hasVcp"))
-                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.hasVcp);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified LocationMetadata message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.LocationMetadata.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.netapp.v1.LocationMetadata
-                         * @static
-                         * @param {google.cloud.netapp.v1.ILocationMetadata} message LocationMetadata message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        LocationMetadata.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a LocationMetadata message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.netapp.v1.LocationMetadata
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.netapp.v1.LocationMetadata} LocationMetadata
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        LocationMetadata.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.LocationMetadata();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        if (!(message.supportedServiceLevels && message.supportedServiceLevels.length))
-                                            message.supportedServiceLevels = [];
-                                        if ((tag & 7) === 2) {
-                                            var end2 = reader.uint32() + reader.pos;
-                                            while (reader.pos < end2)
-                                                message.supportedServiceLevels.push(reader.int32());
-                                        } else
-                                            message.supportedServiceLevels.push(reader.int32());
-                                        break;
-                                    }
-                                case 2: {
-                                        if (!(message.supportedFlexPerformance && message.supportedFlexPerformance.length))
-                                            message.supportedFlexPerformance = [];
-                                        if ((tag & 7) === 2) {
-                                            var end2 = reader.uint32() + reader.pos;
-                                            while (reader.pos < end2)
-                                                message.supportedFlexPerformance.push(reader.int32());
-                                        } else
-                                            message.supportedFlexPerformance.push(reader.int32());
-                                        break;
-                                    }
-                                case 3: {
-                                        message.hasVcp = reader.bool();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a LocationMetadata message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.netapp.v1.LocationMetadata
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.netapp.v1.LocationMetadata} LocationMetadata
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        LocationMetadata.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a LocationMetadata message.
-                         * @function verify
-                         * @memberof google.cloud.netapp.v1.LocationMetadata
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        LocationMetadata.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.supportedServiceLevels != null && message.hasOwnProperty("supportedServiceLevels")) {
-                                if (!Array.isArray(message.supportedServiceLevels))
-                                    return "supportedServiceLevels: array expected";
-                                for (var i = 0; i < message.supportedServiceLevels.length; ++i)
-                                    switch (message.supportedServiceLevels[i]) {
-                                    default:
-                                        return "supportedServiceLevels: enum value[] expected";
-                                    case 0:
-                                    case 1:
-                                    case 2:
-                                    case 3:
-                                    case 4:
-                                        break;
-                                    }
-                            }
-                            if (message.supportedFlexPerformance != null && message.hasOwnProperty("supportedFlexPerformance")) {
-                                if (!Array.isArray(message.supportedFlexPerformance))
-                                    return "supportedFlexPerformance: array expected";
-                                for (var i = 0; i < message.supportedFlexPerformance.length; ++i)
-                                    switch (message.supportedFlexPerformance[i]) {
-                                    default:
-                                        return "supportedFlexPerformance: enum value[] expected";
-                                    case 0:
-                                    case 1:
-                                    case 2:
-                                        break;
-                                    }
-                            }
-                            if (message.hasVcp != null && message.hasOwnProperty("hasVcp"))
-                                if (typeof message.hasVcp !== "boolean")
-                                    return "hasVcp: boolean expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a LocationMetadata message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.netapp.v1.LocationMetadata
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.netapp.v1.LocationMetadata} LocationMetadata
-                         */
-                        LocationMetadata.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.netapp.v1.LocationMetadata)
-                                return object;
-                            var message = new $root.google.cloud.netapp.v1.LocationMetadata();
-                            if (object.supportedServiceLevels) {
-                                if (!Array.isArray(object.supportedServiceLevels))
-                                    throw TypeError(".google.cloud.netapp.v1.LocationMetadata.supportedServiceLevels: array expected");
-                                message.supportedServiceLevels = [];
-                                for (var i = 0; i < object.supportedServiceLevels.length; ++i)
-                                    switch (object.supportedServiceLevels[i]) {
-                                    default:
-                                        if (typeof object.supportedServiceLevels[i] === "number") {
-                                            message.supportedServiceLevels[i] = object.supportedServiceLevels[i];
-                                            break;
-                                        }
-                                    case "SERVICE_LEVEL_UNSPECIFIED":
-                                    case 0:
-                                        message.supportedServiceLevels[i] = 0;
-                                        break;
-                                    case "PREMIUM":
-                                    case 1:
-                                        message.supportedServiceLevels[i] = 1;
-                                        break;
-                                    case "EXTREME":
-                                    case 2:
-                                        message.supportedServiceLevels[i] = 2;
-                                        break;
-                                    case "STANDARD":
-                                    case 3:
-                                        message.supportedServiceLevels[i] = 3;
-                                        break;
-                                    case "FLEX":
-                                    case 4:
-                                        message.supportedServiceLevels[i] = 4;
-                                        break;
-                                    }
-                            }
-                            if (object.supportedFlexPerformance) {
-                                if (!Array.isArray(object.supportedFlexPerformance))
-                                    throw TypeError(".google.cloud.netapp.v1.LocationMetadata.supportedFlexPerformance: array expected");
-                                message.supportedFlexPerformance = [];
-                                for (var i = 0; i < object.supportedFlexPerformance.length; ++i)
-                                    switch (object.supportedFlexPerformance[i]) {
-                                    default:
-                                        if (typeof object.supportedFlexPerformance[i] === "number") {
-                                            message.supportedFlexPerformance[i] = object.supportedFlexPerformance[i];
-                                            break;
-                                        }
-                                    case "FLEX_PERFORMANCE_UNSPECIFIED":
-                                    case 0:
-                                        message.supportedFlexPerformance[i] = 0;
-                                        break;
-                                    case "FLEX_PERFORMANCE_DEFAULT":
-                                    case 1:
-                                        message.supportedFlexPerformance[i] = 1;
-                                        break;
-                                    case "FLEX_PERFORMANCE_CUSTOM":
-                                    case 2:
-                                        message.supportedFlexPerformance[i] = 2;
-                                        break;
-                                    }
-                            }
-                            if (object.hasVcp != null)
-                                message.hasVcp = Boolean(object.hasVcp);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a LocationMetadata message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.netapp.v1.LocationMetadata
-                         * @static
-                         * @param {google.cloud.netapp.v1.LocationMetadata} message LocationMetadata
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        LocationMetadata.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.arrays || options.defaults) {
-                                object.supportedServiceLevels = [];
-                                object.supportedFlexPerformance = [];
-                            }
-                            if (options.defaults)
-                                object.hasVcp = false;
-                            if (message.supportedServiceLevels && message.supportedServiceLevels.length) {
-                                object.supportedServiceLevels = [];
-                                for (var j = 0; j < message.supportedServiceLevels.length; ++j)
-                                    object.supportedServiceLevels[j] = options.enums === String ? $root.google.cloud.netapp.v1.ServiceLevel[message.supportedServiceLevels[j]] === undefined ? message.supportedServiceLevels[j] : $root.google.cloud.netapp.v1.ServiceLevel[message.supportedServiceLevels[j]] : message.supportedServiceLevels[j];
-                            }
-                            if (message.supportedFlexPerformance && message.supportedFlexPerformance.length) {
-                                object.supportedFlexPerformance = [];
-                                for (var j = 0; j < message.supportedFlexPerformance.length; ++j)
-                                    object.supportedFlexPerformance[j] = options.enums === String ? $root.google.cloud.netapp.v1.FlexPerformance[message.supportedFlexPerformance[j]] === undefined ? message.supportedFlexPerformance[j] : $root.google.cloud.netapp.v1.FlexPerformance[message.supportedFlexPerformance[j]] : message.supportedFlexPerformance[j];
-                            }
-                            if (message.hasVcp != null && message.hasOwnProperty("hasVcp"))
-                                object.hasVcp = message.hasVcp;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this LocationMetadata to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.netapp.v1.LocationMetadata
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        LocationMetadata.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for LocationMetadata
-                         * @function getTypeUrl
-                         * @memberof google.cloud.netapp.v1.LocationMetadata
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        LocationMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.netapp.v1.LocationMetadata";
-                        };
-    
-                        return LocationMetadata;
-                    })();
-    
-                    v1.UserCommands = (function() {
-    
-                        /**
-                         * Properties of a UserCommands.
-                         * @memberof google.cloud.netapp.v1
-                         * @interface IUserCommands
-                         * @property {Array.<string>|null} [commands] UserCommands commands
-                         */
-    
-                        /**
-                         * Constructs a new UserCommands.
-                         * @memberof google.cloud.netapp.v1
-                         * @classdesc Represents a UserCommands.
-                         * @implements IUserCommands
-                         * @constructor
-                         * @param {google.cloud.netapp.v1.IUserCommands=} [properties] Properties to set
-                         */
-                        function UserCommands(properties) {
-                            this.commands = [];
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * UserCommands commands.
-                         * @member {Array.<string>} commands
-                         * @memberof google.cloud.netapp.v1.UserCommands
-                         * @instance
-                         */
-                        UserCommands.prototype.commands = $util.emptyArray;
-    
-                        /**
-                         * Creates a new UserCommands instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.netapp.v1.UserCommands
-                         * @static
-                         * @param {google.cloud.netapp.v1.IUserCommands=} [properties] Properties to set
-                         * @returns {google.cloud.netapp.v1.UserCommands} UserCommands instance
-                         */
-                        UserCommands.create = function create(properties) {
-                            return new UserCommands(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified UserCommands message. Does not implicitly {@link google.cloud.netapp.v1.UserCommands.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.netapp.v1.UserCommands
-                         * @static
-                         * @param {google.cloud.netapp.v1.IUserCommands} message UserCommands message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        UserCommands.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.commands != null && message.commands.length)
-                                for (var i = 0; i < message.commands.length; ++i)
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.commands[i]);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified UserCommands message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.UserCommands.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.netapp.v1.UserCommands
-                         * @static
-                         * @param {google.cloud.netapp.v1.IUserCommands} message UserCommands message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        UserCommands.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a UserCommands message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.netapp.v1.UserCommands
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.netapp.v1.UserCommands} UserCommands
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        UserCommands.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.UserCommands();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        if (!(message.commands && message.commands.length))
-                                            message.commands = [];
-                                        message.commands.push(reader.string());
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a UserCommands message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.netapp.v1.UserCommands
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.netapp.v1.UserCommands} UserCommands
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        UserCommands.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a UserCommands message.
-                         * @function verify
-                         * @memberof google.cloud.netapp.v1.UserCommands
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        UserCommands.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.commands != null && message.hasOwnProperty("commands")) {
-                                if (!Array.isArray(message.commands))
-                                    return "commands: array expected";
-                                for (var i = 0; i < message.commands.length; ++i)
-                                    if (!$util.isString(message.commands[i]))
-                                        return "commands: string[] expected";
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a UserCommands message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.netapp.v1.UserCommands
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.netapp.v1.UserCommands} UserCommands
-                         */
-                        UserCommands.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.netapp.v1.UserCommands)
-                                return object;
-                            var message = new $root.google.cloud.netapp.v1.UserCommands();
-                            if (object.commands) {
-                                if (!Array.isArray(object.commands))
-                                    throw TypeError(".google.cloud.netapp.v1.UserCommands.commands: array expected");
-                                message.commands = [];
-                                for (var i = 0; i < object.commands.length; ++i)
-                                    message.commands[i] = String(object.commands[i]);
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a UserCommands message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.netapp.v1.UserCommands
-                         * @static
-                         * @param {google.cloud.netapp.v1.UserCommands} message UserCommands
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        UserCommands.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.arrays || options.defaults)
-                                object.commands = [];
-                            if (message.commands && message.commands.length) {
-                                object.commands = [];
-                                for (var j = 0; j < message.commands.length; ++j)
-                                    object.commands[j] = message.commands[j];
-                            }
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this UserCommands to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.netapp.v1.UserCommands
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        UserCommands.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for UserCommands
-                         * @function getTypeUrl
-                         * @memberof google.cloud.netapp.v1.UserCommands
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        UserCommands.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.netapp.v1.UserCommands";
-                        };
-    
-                        return UserCommands;
-                    })();
-    
-                    /**
                      * Protocols enum.
                      * @name google.cloud.netapp.v1.Protocols
                      * @enum {number}
@@ -21691,6 +24114,7 @@
                      * @property {number} NFSV3=1 NFSV3 value
                      * @property {number} NFSV4=2 NFSV4 value
                      * @property {number} SMB=3 SMB value
+                     * @property {number} ISCSI=4 ISCSI value
                      */
                     v1.Protocols = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -21698,6 +24122,7 @@
                         values[valuesById[1] = "NFSV3"] = 1;
                         values[valuesById[2] = "NFSV4"] = 2;
                         values[valuesById[3] = "SMB"] = 3;
+                        values[valuesById[4] = "ISCSI"] = 4;
                         return values;
                     })();
     
@@ -23571,7 +25996,9 @@
                          * @property {number|Long|null} [coldTierSizeGib] Volume coldTierSizeGib
                          * @property {google.cloud.netapp.v1.IHybridReplicationParameters|null} [hybridReplicationParameters] Volume hybridReplicationParameters
                          * @property {number|null} [throughputMibps] Volume throughputMibps
+                         * @property {google.cloud.netapp.v1.ICacheParameters|null} [cacheParameters] Volume cacheParameters
                          * @property {number|Long|null} [hotTierSizeUsedGib] Volume hotTierSizeUsedGib
+                         * @property {Array.<google.cloud.netapp.v1.IBlockDevice>|null} [blockDevices] Volume blockDevices
                          */
     
                         /**
@@ -23588,6 +26015,7 @@
                             this.mountOptions = [];
                             this.labels = {};
                             this.restrictedActions = [];
+                            this.blockDevices = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -23907,12 +26335,28 @@
                         Volume.prototype.throughputMibps = 0;
     
                         /**
+                         * Volume cacheParameters.
+                         * @member {google.cloud.netapp.v1.ICacheParameters|null|undefined} cacheParameters
+                         * @memberof google.cloud.netapp.v1.Volume
+                         * @instance
+                         */
+                        Volume.prototype.cacheParameters = null;
+    
+                        /**
                          * Volume hotTierSizeUsedGib.
                          * @member {number|Long} hotTierSizeUsedGib
                          * @memberof google.cloud.netapp.v1.Volume
                          * @instance
                          */
                         Volume.prototype.hotTierSizeUsedGib = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * Volume blockDevices.
+                         * @member {Array.<google.cloud.netapp.v1.IBlockDevice>} blockDevices
+                         * @memberof google.cloud.netapp.v1.Volume
+                         * @instance
+                         */
+                        Volume.prototype.blockDevices = $util.emptyArray;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -24045,8 +26489,13 @@
                                 $root.google.cloud.netapp.v1.HybridReplicationParameters.encode(message.hybridReplicationParameters, writer.uint32(/* id 40, wireType 2 =*/322).fork()).ldelim();
                             if (message.throughputMibps != null && Object.hasOwnProperty.call(message, "throughputMibps"))
                                 writer.uint32(/* id 41, wireType 1 =*/329).double(message.throughputMibps);
+                            if (message.cacheParameters != null && Object.hasOwnProperty.call(message, "cacheParameters"))
+                                $root.google.cloud.netapp.v1.CacheParameters.encode(message.cacheParameters, writer.uint32(/* id 42, wireType 2 =*/338).fork()).ldelim();
                             if (message.hotTierSizeUsedGib != null && Object.hasOwnProperty.call(message, "hotTierSizeUsedGib"))
                                 writer.uint32(/* id 44, wireType 0 =*/352).int64(message.hotTierSizeUsedGib);
+                            if (message.blockDevices != null && message.blockDevices.length)
+                                for (var i = 0; i < message.blockDevices.length; ++i)
+                                    $root.google.cloud.netapp.v1.BlockDevice.encode(message.blockDevices[i], writer.uint32(/* id 45, wireType 2 =*/362).fork()).ldelim();
                             return writer;
                         };
     
@@ -24281,8 +26730,18 @@
                                         message.throughputMibps = reader.double();
                                         break;
                                     }
+                                case 42: {
+                                        message.cacheParameters = $root.google.cloud.netapp.v1.CacheParameters.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 44: {
                                         message.hotTierSizeUsedGib = reader.int64();
+                                        break;
+                                    }
+                                case 45: {
+                                        if (!(message.blockDevices && message.blockDevices.length))
+                                            message.blockDevices = [];
+                                        message.blockDevices.push($root.google.cloud.netapp.v1.BlockDevice.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -24390,6 +26849,7 @@
                                     case 1:
                                     case 2:
                                     case 3:
+                                    case 4:
                                         break;
                                     }
                             }
@@ -24539,9 +26999,23 @@
                             if (message.throughputMibps != null && message.hasOwnProperty("throughputMibps"))
                                 if (typeof message.throughputMibps !== "number")
                                     return "throughputMibps: number expected";
+                            if (message.cacheParameters != null && message.hasOwnProperty("cacheParameters")) {
+                                var error = $root.google.cloud.netapp.v1.CacheParameters.verify(message.cacheParameters);
+                                if (error)
+                                    return "cacheParameters." + error;
+                            }
                             if (message.hotTierSizeUsedGib != null && message.hasOwnProperty("hotTierSizeUsedGib"))
                                 if (!$util.isInteger(message.hotTierSizeUsedGib) && !(message.hotTierSizeUsedGib && $util.isInteger(message.hotTierSizeUsedGib.low) && $util.isInteger(message.hotTierSizeUsedGib.high)))
                                     return "hotTierSizeUsedGib: integer|Long expected";
+                            if (message.blockDevices != null && message.hasOwnProperty("blockDevices")) {
+                                if (!Array.isArray(message.blockDevices))
+                                    return "blockDevices: array expected";
+                                for (var i = 0; i < message.blockDevices.length; ++i) {
+                                    var error = $root.google.cloud.netapp.v1.BlockDevice.verify(message.blockDevices[i]);
+                                    if (error)
+                                        return "blockDevices." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -24690,6 +27164,10 @@
                                     case "SMB":
                                     case 3:
                                         message.protocols[i] = 3;
+                                        break;
+                                    case "ISCSI":
+                                    case 4:
+                                        message.protocols[i] = 4;
                                         break;
                                     }
                             }
@@ -24895,6 +27373,11 @@
                             }
                             if (object.throughputMibps != null)
                                 message.throughputMibps = Number(object.throughputMibps);
+                            if (object.cacheParameters != null) {
+                                if (typeof object.cacheParameters !== "object")
+                                    throw TypeError(".google.cloud.netapp.v1.Volume.cacheParameters: object expected");
+                                message.cacheParameters = $root.google.cloud.netapp.v1.CacheParameters.fromObject(object.cacheParameters);
+                            }
                             if (object.hotTierSizeUsedGib != null)
                                 if ($util.Long)
                                     (message.hotTierSizeUsedGib = $util.Long.fromValue(object.hotTierSizeUsedGib)).unsigned = false;
@@ -24904,6 +27387,16 @@
                                     message.hotTierSizeUsedGib = object.hotTierSizeUsedGib;
                                 else if (typeof object.hotTierSizeUsedGib === "object")
                                     message.hotTierSizeUsedGib = new $util.LongBits(object.hotTierSizeUsedGib.low >>> 0, object.hotTierSizeUsedGib.high >>> 0).toNumber();
+                            if (object.blockDevices) {
+                                if (!Array.isArray(object.blockDevices))
+                                    throw TypeError(".google.cloud.netapp.v1.Volume.blockDevices: array expected");
+                                message.blockDevices = [];
+                                for (var i = 0; i < object.blockDevices.length; ++i) {
+                                    if (typeof object.blockDevices[i] !== "object")
+                                        throw TypeError(".google.cloud.netapp.v1.Volume.blockDevices: object expected");
+                                    message.blockDevices[i] = $root.google.cloud.netapp.v1.BlockDevice.fromObject(object.blockDevices[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -24925,6 +27418,7 @@
                                 object.smbSettings = [];
                                 object.mountOptions = [];
                                 object.restrictedActions = [];
+                                object.blockDevices = [];
                             }
                             if (options.objects || options.defaults)
                                 object.labels = {};
@@ -24973,6 +27467,7 @@
                                     object.coldTierSizeGib = options.longs === String ? "0" : 0;
                                 object.hybridReplicationParameters = null;
                                 object.throughputMibps = 0;
+                                object.cacheParameters = null;
                                 if ($util.Long) {
                                     var long = new $util.Long(0, 0, false);
                                     object.hotTierSizeUsedGib = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
@@ -25088,11 +27583,18 @@
                                 object.hybridReplicationParameters = $root.google.cloud.netapp.v1.HybridReplicationParameters.toObject(message.hybridReplicationParameters, options);
                             if (message.throughputMibps != null && message.hasOwnProperty("throughputMibps"))
                                 object.throughputMibps = options.json && !isFinite(message.throughputMibps) ? String(message.throughputMibps) : message.throughputMibps;
+                            if (message.cacheParameters != null && message.hasOwnProperty("cacheParameters"))
+                                object.cacheParameters = $root.google.cloud.netapp.v1.CacheParameters.toObject(message.cacheParameters, options);
                             if (message.hotTierSizeUsedGib != null && message.hasOwnProperty("hotTierSizeUsedGib"))
                                 if (typeof message.hotTierSizeUsedGib === "number")
                                     object.hotTierSizeUsedGib = options.longs === String ? String(message.hotTierSizeUsedGib) : message.hotTierSizeUsedGib;
                                 else
                                     object.hotTierSizeUsedGib = options.longs === String ? $util.Long.prototype.toString.call(message.hotTierSizeUsedGib) : options.longs === Number ? new $util.LongBits(message.hotTierSizeUsedGib.low >>> 0, message.hotTierSizeUsedGib.high >>> 0).toNumber() : message.hotTierSizeUsedGib;
+                            if (message.blockDevices && message.blockDevices.length) {
+                                object.blockDevices = [];
+                                for (var j = 0; j < message.blockDevices.length; ++j)
+                                    object.blockDevices[j] = $root.google.cloud.netapp.v1.BlockDevice.toObject(message.blockDevices[j], options);
+                            }
                             return object;
                         };
     
@@ -27831,6 +30333,7 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             if (message.instructions != null && message.hasOwnProperty("instructions"))
@@ -27880,6 +30383,10 @@
                             case "SMB":
                             case 3:
                                 message.protocol = 3;
+                                break;
+                            case "ISCSI":
+                            case 4:
+                                message.protocol = 4;
                                 break;
                             }
                             if (object.instructions != null)
@@ -29422,6 +31929,2040 @@
                         })();
     
                         return HybridReplicationParameters;
+                    })();
+    
+                    v1.CacheParameters = (function() {
+    
+                        /**
+                         * Properties of a CacheParameters.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface ICacheParameters
+                         * @property {string|null} [peerVolumeName] CacheParameters peerVolumeName
+                         * @property {string|null} [peerClusterName] CacheParameters peerClusterName
+                         * @property {string|null} [peerSvmName] CacheParameters peerSvmName
+                         * @property {Array.<string>|null} [peerIpAddresses] CacheParameters peerIpAddresses
+                         * @property {boolean|null} [enableGlobalFileLock] CacheParameters enableGlobalFileLock
+                         * @property {google.cloud.netapp.v1.ICacheConfig|null} [cacheConfig] CacheParameters cacheConfig
+                         * @property {google.cloud.netapp.v1.CacheParameters.CacheState|null} [cacheState] CacheParameters cacheState
+                         * @property {string|null} [command] CacheParameters command
+                         * @property {google.protobuf.ITimestamp|null} [peeringCommandExpiryTime] CacheParameters peeringCommandExpiryTime
+                         * @property {string|null} [passphrase] CacheParameters passphrase
+                         * @property {string|null} [stateDetails] CacheParameters stateDetails
+                         */
+    
+                        /**
+                         * Constructs a new CacheParameters.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents a CacheParameters.
+                         * @implements ICacheParameters
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.ICacheParameters=} [properties] Properties to set
+                         */
+                        function CacheParameters(properties) {
+                            this.peerIpAddresses = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CacheParameters peerVolumeName.
+                         * @member {string} peerVolumeName
+                         * @memberof google.cloud.netapp.v1.CacheParameters
+                         * @instance
+                         */
+                        CacheParameters.prototype.peerVolumeName = "";
+    
+                        /**
+                         * CacheParameters peerClusterName.
+                         * @member {string} peerClusterName
+                         * @memberof google.cloud.netapp.v1.CacheParameters
+                         * @instance
+                         */
+                        CacheParameters.prototype.peerClusterName = "";
+    
+                        /**
+                         * CacheParameters peerSvmName.
+                         * @member {string} peerSvmName
+                         * @memberof google.cloud.netapp.v1.CacheParameters
+                         * @instance
+                         */
+                        CacheParameters.prototype.peerSvmName = "";
+    
+                        /**
+                         * CacheParameters peerIpAddresses.
+                         * @member {Array.<string>} peerIpAddresses
+                         * @memberof google.cloud.netapp.v1.CacheParameters
+                         * @instance
+                         */
+                        CacheParameters.prototype.peerIpAddresses = $util.emptyArray;
+    
+                        /**
+                         * CacheParameters enableGlobalFileLock.
+                         * @member {boolean|null|undefined} enableGlobalFileLock
+                         * @memberof google.cloud.netapp.v1.CacheParameters
+                         * @instance
+                         */
+                        CacheParameters.prototype.enableGlobalFileLock = null;
+    
+                        /**
+                         * CacheParameters cacheConfig.
+                         * @member {google.cloud.netapp.v1.ICacheConfig|null|undefined} cacheConfig
+                         * @memberof google.cloud.netapp.v1.CacheParameters
+                         * @instance
+                         */
+                        CacheParameters.prototype.cacheConfig = null;
+    
+                        /**
+                         * CacheParameters cacheState.
+                         * @member {google.cloud.netapp.v1.CacheParameters.CacheState} cacheState
+                         * @memberof google.cloud.netapp.v1.CacheParameters
+                         * @instance
+                         */
+                        CacheParameters.prototype.cacheState = 0;
+    
+                        /**
+                         * CacheParameters command.
+                         * @member {string} command
+                         * @memberof google.cloud.netapp.v1.CacheParameters
+                         * @instance
+                         */
+                        CacheParameters.prototype.command = "";
+    
+                        /**
+                         * CacheParameters peeringCommandExpiryTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} peeringCommandExpiryTime
+                         * @memberof google.cloud.netapp.v1.CacheParameters
+                         * @instance
+                         */
+                        CacheParameters.prototype.peeringCommandExpiryTime = null;
+    
+                        /**
+                         * CacheParameters passphrase.
+                         * @member {string} passphrase
+                         * @memberof google.cloud.netapp.v1.CacheParameters
+                         * @instance
+                         */
+                        CacheParameters.prototype.passphrase = "";
+    
+                        /**
+                         * CacheParameters stateDetails.
+                         * @member {string} stateDetails
+                         * @memberof google.cloud.netapp.v1.CacheParameters
+                         * @instance
+                         */
+                        CacheParameters.prototype.stateDetails = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(CacheParameters.prototype, "_enableGlobalFileLock", {
+                            get: $util.oneOfGetter($oneOfFields = ["enableGlobalFileLock"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new CacheParameters instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.CacheParameters
+                         * @static
+                         * @param {google.cloud.netapp.v1.ICacheParameters=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.CacheParameters} CacheParameters instance
+                         */
+                        CacheParameters.create = function create(properties) {
+                            return new CacheParameters(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CacheParameters message. Does not implicitly {@link google.cloud.netapp.v1.CacheParameters.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.CacheParameters
+                         * @static
+                         * @param {google.cloud.netapp.v1.ICacheParameters} message CacheParameters message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CacheParameters.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.peerVolumeName != null && Object.hasOwnProperty.call(message, "peerVolumeName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.peerVolumeName);
+                            if (message.peerClusterName != null && Object.hasOwnProperty.call(message, "peerClusterName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.peerClusterName);
+                            if (message.peerSvmName != null && Object.hasOwnProperty.call(message, "peerSvmName"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.peerSvmName);
+                            if (message.peerIpAddresses != null && message.peerIpAddresses.length)
+                                for (var i = 0; i < message.peerIpAddresses.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.peerIpAddresses[i]);
+                            if (message.enableGlobalFileLock != null && Object.hasOwnProperty.call(message, "enableGlobalFileLock"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.enableGlobalFileLock);
+                            if (message.cacheConfig != null && Object.hasOwnProperty.call(message, "cacheConfig"))
+                                $root.google.cloud.netapp.v1.CacheConfig.encode(message.cacheConfig, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.cacheState != null && Object.hasOwnProperty.call(message, "cacheState"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.cacheState);
+                            if (message.command != null && Object.hasOwnProperty.call(message, "command"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.command);
+                            if (message.peeringCommandExpiryTime != null && Object.hasOwnProperty.call(message, "peeringCommandExpiryTime"))
+                                $root.google.protobuf.Timestamp.encode(message.peeringCommandExpiryTime, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.passphrase != null && Object.hasOwnProperty.call(message, "passphrase"))
+                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.passphrase);
+                            if (message.stateDetails != null && Object.hasOwnProperty.call(message, "stateDetails"))
+                                writer.uint32(/* id 12, wireType 2 =*/98).string(message.stateDetails);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CacheParameters message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.CacheParameters.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.CacheParameters
+                         * @static
+                         * @param {google.cloud.netapp.v1.ICacheParameters} message CacheParameters message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CacheParameters.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CacheParameters message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.CacheParameters
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.CacheParameters} CacheParameters
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CacheParameters.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.CacheParameters();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.peerVolumeName = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.peerClusterName = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.peerSvmName = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.peerIpAddresses && message.peerIpAddresses.length))
+                                            message.peerIpAddresses = [];
+                                        message.peerIpAddresses.push(reader.string());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.enableGlobalFileLock = reader.bool();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.cacheConfig = $root.google.cloud.netapp.v1.CacheConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.cacheState = reader.int32();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.command = reader.string();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.peeringCommandExpiryTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 10: {
+                                        message.passphrase = reader.string();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.stateDetails = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CacheParameters message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.CacheParameters
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.CacheParameters} CacheParameters
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CacheParameters.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CacheParameters message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.CacheParameters
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CacheParameters.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.peerVolumeName != null && message.hasOwnProperty("peerVolumeName"))
+                                if (!$util.isString(message.peerVolumeName))
+                                    return "peerVolumeName: string expected";
+                            if (message.peerClusterName != null && message.hasOwnProperty("peerClusterName"))
+                                if (!$util.isString(message.peerClusterName))
+                                    return "peerClusterName: string expected";
+                            if (message.peerSvmName != null && message.hasOwnProperty("peerSvmName"))
+                                if (!$util.isString(message.peerSvmName))
+                                    return "peerSvmName: string expected";
+                            if (message.peerIpAddresses != null && message.hasOwnProperty("peerIpAddresses")) {
+                                if (!Array.isArray(message.peerIpAddresses))
+                                    return "peerIpAddresses: array expected";
+                                for (var i = 0; i < message.peerIpAddresses.length; ++i)
+                                    if (!$util.isString(message.peerIpAddresses[i]))
+                                        return "peerIpAddresses: string[] expected";
+                            }
+                            if (message.enableGlobalFileLock != null && message.hasOwnProperty("enableGlobalFileLock")) {
+                                properties._enableGlobalFileLock = 1;
+                                if (typeof message.enableGlobalFileLock !== "boolean")
+                                    return "enableGlobalFileLock: boolean expected";
+                            }
+                            if (message.cacheConfig != null && message.hasOwnProperty("cacheConfig")) {
+                                var error = $root.google.cloud.netapp.v1.CacheConfig.verify(message.cacheConfig);
+                                if (error)
+                                    return "cacheConfig." + error;
+                            }
+                            if (message.cacheState != null && message.hasOwnProperty("cacheState"))
+                                switch (message.cacheState) {
+                                default:
+                                    return "cacheState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.command != null && message.hasOwnProperty("command"))
+                                if (!$util.isString(message.command))
+                                    return "command: string expected";
+                            if (message.peeringCommandExpiryTime != null && message.hasOwnProperty("peeringCommandExpiryTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.peeringCommandExpiryTime);
+                                if (error)
+                                    return "peeringCommandExpiryTime." + error;
+                            }
+                            if (message.passphrase != null && message.hasOwnProperty("passphrase"))
+                                if (!$util.isString(message.passphrase))
+                                    return "passphrase: string expected";
+                            if (message.stateDetails != null && message.hasOwnProperty("stateDetails"))
+                                if (!$util.isString(message.stateDetails))
+                                    return "stateDetails: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CacheParameters message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.CacheParameters
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.CacheParameters} CacheParameters
+                         */
+                        CacheParameters.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.CacheParameters)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.CacheParameters();
+                            if (object.peerVolumeName != null)
+                                message.peerVolumeName = String(object.peerVolumeName);
+                            if (object.peerClusterName != null)
+                                message.peerClusterName = String(object.peerClusterName);
+                            if (object.peerSvmName != null)
+                                message.peerSvmName = String(object.peerSvmName);
+                            if (object.peerIpAddresses) {
+                                if (!Array.isArray(object.peerIpAddresses))
+                                    throw TypeError(".google.cloud.netapp.v1.CacheParameters.peerIpAddresses: array expected");
+                                message.peerIpAddresses = [];
+                                for (var i = 0; i < object.peerIpAddresses.length; ++i)
+                                    message.peerIpAddresses[i] = String(object.peerIpAddresses[i]);
+                            }
+                            if (object.enableGlobalFileLock != null)
+                                message.enableGlobalFileLock = Boolean(object.enableGlobalFileLock);
+                            if (object.cacheConfig != null) {
+                                if (typeof object.cacheConfig !== "object")
+                                    throw TypeError(".google.cloud.netapp.v1.CacheParameters.cacheConfig: object expected");
+                                message.cacheConfig = $root.google.cloud.netapp.v1.CacheConfig.fromObject(object.cacheConfig);
+                            }
+                            switch (object.cacheState) {
+                            default:
+                                if (typeof object.cacheState === "number") {
+                                    message.cacheState = object.cacheState;
+                                    break;
+                                }
+                                break;
+                            case "CACHE_STATE_UNSPECIFIED":
+                            case 0:
+                                message.cacheState = 0;
+                                break;
+                            case "PENDING_CLUSTER_PEERING":
+                            case 1:
+                                message.cacheState = 1;
+                                break;
+                            case "PENDING_SVM_PEERING":
+                            case 2:
+                                message.cacheState = 2;
+                                break;
+                            case "PEERED":
+                            case 3:
+                                message.cacheState = 3;
+                                break;
+                            case "ERROR":
+                            case 4:
+                                message.cacheState = 4;
+                                break;
+                            }
+                            if (object.command != null)
+                                message.command = String(object.command);
+                            if (object.peeringCommandExpiryTime != null) {
+                                if (typeof object.peeringCommandExpiryTime !== "object")
+                                    throw TypeError(".google.cloud.netapp.v1.CacheParameters.peeringCommandExpiryTime: object expected");
+                                message.peeringCommandExpiryTime = $root.google.protobuf.Timestamp.fromObject(object.peeringCommandExpiryTime);
+                            }
+                            if (object.passphrase != null)
+                                message.passphrase = String(object.passphrase);
+                            if (object.stateDetails != null)
+                                message.stateDetails = String(object.stateDetails);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CacheParameters message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.CacheParameters
+                         * @static
+                         * @param {google.cloud.netapp.v1.CacheParameters} message CacheParameters
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CacheParameters.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.peerIpAddresses = [];
+                            if (options.defaults) {
+                                object.peerVolumeName = "";
+                                object.peerClusterName = "";
+                                object.peerSvmName = "";
+                                object.cacheConfig = null;
+                                object.cacheState = options.enums === String ? "CACHE_STATE_UNSPECIFIED" : 0;
+                                object.command = "";
+                                object.peeringCommandExpiryTime = null;
+                                object.passphrase = "";
+                                object.stateDetails = "";
+                            }
+                            if (message.peerVolumeName != null && message.hasOwnProperty("peerVolumeName"))
+                                object.peerVolumeName = message.peerVolumeName;
+                            if (message.peerClusterName != null && message.hasOwnProperty("peerClusterName"))
+                                object.peerClusterName = message.peerClusterName;
+                            if (message.peerSvmName != null && message.hasOwnProperty("peerSvmName"))
+                                object.peerSvmName = message.peerSvmName;
+                            if (message.peerIpAddresses && message.peerIpAddresses.length) {
+                                object.peerIpAddresses = [];
+                                for (var j = 0; j < message.peerIpAddresses.length; ++j)
+                                    object.peerIpAddresses[j] = message.peerIpAddresses[j];
+                            }
+                            if (message.enableGlobalFileLock != null && message.hasOwnProperty("enableGlobalFileLock")) {
+                                object.enableGlobalFileLock = message.enableGlobalFileLock;
+                                if (options.oneofs)
+                                    object._enableGlobalFileLock = "enableGlobalFileLock";
+                            }
+                            if (message.cacheConfig != null && message.hasOwnProperty("cacheConfig"))
+                                object.cacheConfig = $root.google.cloud.netapp.v1.CacheConfig.toObject(message.cacheConfig, options);
+                            if (message.cacheState != null && message.hasOwnProperty("cacheState"))
+                                object.cacheState = options.enums === String ? $root.google.cloud.netapp.v1.CacheParameters.CacheState[message.cacheState] === undefined ? message.cacheState : $root.google.cloud.netapp.v1.CacheParameters.CacheState[message.cacheState] : message.cacheState;
+                            if (message.command != null && message.hasOwnProperty("command"))
+                                object.command = message.command;
+                            if (message.peeringCommandExpiryTime != null && message.hasOwnProperty("peeringCommandExpiryTime"))
+                                object.peeringCommandExpiryTime = $root.google.protobuf.Timestamp.toObject(message.peeringCommandExpiryTime, options);
+                            if (message.passphrase != null && message.hasOwnProperty("passphrase"))
+                                object.passphrase = message.passphrase;
+                            if (message.stateDetails != null && message.hasOwnProperty("stateDetails"))
+                                object.stateDetails = message.stateDetails;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CacheParameters to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.CacheParameters
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CacheParameters.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CacheParameters
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.CacheParameters
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CacheParameters.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.CacheParameters";
+                        };
+    
+                        /**
+                         * CacheState enum.
+                         * @name google.cloud.netapp.v1.CacheParameters.CacheState
+                         * @enum {number}
+                         * @property {number} CACHE_STATE_UNSPECIFIED=0 CACHE_STATE_UNSPECIFIED value
+                         * @property {number} PENDING_CLUSTER_PEERING=1 PENDING_CLUSTER_PEERING value
+                         * @property {number} PENDING_SVM_PEERING=2 PENDING_SVM_PEERING value
+                         * @property {number} PEERED=3 PEERED value
+                         * @property {number} ERROR=4 ERROR value
+                         */
+                        CacheParameters.CacheState = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "CACHE_STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "PENDING_CLUSTER_PEERING"] = 1;
+                            values[valuesById[2] = "PENDING_SVM_PEERING"] = 2;
+                            values[valuesById[3] = "PEERED"] = 3;
+                            values[valuesById[4] = "ERROR"] = 4;
+                            return values;
+                        })();
+    
+                        return CacheParameters;
+                    })();
+    
+                    v1.CacheConfig = (function() {
+    
+                        /**
+                         * Properties of a CacheConfig.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface ICacheConfig
+                         * @property {google.cloud.netapp.v1.ICachePrePopulate|null} [cachePrePopulate] CacheConfig cachePrePopulate
+                         * @property {boolean|null} [writebackEnabled] CacheConfig writebackEnabled
+                         * @property {boolean|null} [cifsChangeNotifyEnabled] CacheConfig cifsChangeNotifyEnabled
+                         * @property {google.cloud.netapp.v1.CacheConfig.CachePrePopulateState|null} [cachePrePopulateState] CacheConfig cachePrePopulateState
+                         */
+    
+                        /**
+                         * Constructs a new CacheConfig.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents a CacheConfig.
+                         * @implements ICacheConfig
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.ICacheConfig=} [properties] Properties to set
+                         */
+                        function CacheConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CacheConfig cachePrePopulate.
+                         * @member {google.cloud.netapp.v1.ICachePrePopulate|null|undefined} cachePrePopulate
+                         * @memberof google.cloud.netapp.v1.CacheConfig
+                         * @instance
+                         */
+                        CacheConfig.prototype.cachePrePopulate = null;
+    
+                        /**
+                         * CacheConfig writebackEnabled.
+                         * @member {boolean|null|undefined} writebackEnabled
+                         * @memberof google.cloud.netapp.v1.CacheConfig
+                         * @instance
+                         */
+                        CacheConfig.prototype.writebackEnabled = null;
+    
+                        /**
+                         * CacheConfig cifsChangeNotifyEnabled.
+                         * @member {boolean|null|undefined} cifsChangeNotifyEnabled
+                         * @memberof google.cloud.netapp.v1.CacheConfig
+                         * @instance
+                         */
+                        CacheConfig.prototype.cifsChangeNotifyEnabled = null;
+    
+                        /**
+                         * CacheConfig cachePrePopulateState.
+                         * @member {google.cloud.netapp.v1.CacheConfig.CachePrePopulateState} cachePrePopulateState
+                         * @memberof google.cloud.netapp.v1.CacheConfig
+                         * @instance
+                         */
+                        CacheConfig.prototype.cachePrePopulateState = 0;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(CacheConfig.prototype, "_writebackEnabled", {
+                            get: $util.oneOfGetter($oneOfFields = ["writebackEnabled"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(CacheConfig.prototype, "_cifsChangeNotifyEnabled", {
+                            get: $util.oneOfGetter($oneOfFields = ["cifsChangeNotifyEnabled"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new CacheConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.CacheConfig
+                         * @static
+                         * @param {google.cloud.netapp.v1.ICacheConfig=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.CacheConfig} CacheConfig instance
+                         */
+                        CacheConfig.create = function create(properties) {
+                            return new CacheConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CacheConfig message. Does not implicitly {@link google.cloud.netapp.v1.CacheConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.CacheConfig
+                         * @static
+                         * @param {google.cloud.netapp.v1.ICacheConfig} message CacheConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CacheConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.cachePrePopulate != null && Object.hasOwnProperty.call(message, "cachePrePopulate"))
+                                $root.google.cloud.netapp.v1.CachePrePopulate.encode(message.cachePrePopulate, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.writebackEnabled != null && Object.hasOwnProperty.call(message, "writebackEnabled"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.writebackEnabled);
+                            if (message.cifsChangeNotifyEnabled != null && Object.hasOwnProperty.call(message, "cifsChangeNotifyEnabled"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.cifsChangeNotifyEnabled);
+                            if (message.cachePrePopulateState != null && Object.hasOwnProperty.call(message, "cachePrePopulateState"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.cachePrePopulateState);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CacheConfig message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.CacheConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.CacheConfig
+                         * @static
+                         * @param {google.cloud.netapp.v1.ICacheConfig} message CacheConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CacheConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CacheConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.CacheConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.CacheConfig} CacheConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CacheConfig.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.CacheConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.cachePrePopulate = $root.google.cloud.netapp.v1.CachePrePopulate.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.writebackEnabled = reader.bool();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.cifsChangeNotifyEnabled = reader.bool();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.cachePrePopulateState = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CacheConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.CacheConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.CacheConfig} CacheConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CacheConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CacheConfig message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.CacheConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CacheConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.cachePrePopulate != null && message.hasOwnProperty("cachePrePopulate")) {
+                                var error = $root.google.cloud.netapp.v1.CachePrePopulate.verify(message.cachePrePopulate);
+                                if (error)
+                                    return "cachePrePopulate." + error;
+                            }
+                            if (message.writebackEnabled != null && message.hasOwnProperty("writebackEnabled")) {
+                                properties._writebackEnabled = 1;
+                                if (typeof message.writebackEnabled !== "boolean")
+                                    return "writebackEnabled: boolean expected";
+                            }
+                            if (message.cifsChangeNotifyEnabled != null && message.hasOwnProperty("cifsChangeNotifyEnabled")) {
+                                properties._cifsChangeNotifyEnabled = 1;
+                                if (typeof message.cifsChangeNotifyEnabled !== "boolean")
+                                    return "cifsChangeNotifyEnabled: boolean expected";
+                            }
+                            if (message.cachePrePopulateState != null && message.hasOwnProperty("cachePrePopulateState"))
+                                switch (message.cachePrePopulateState) {
+                                default:
+                                    return "cachePrePopulateState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CacheConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.CacheConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.CacheConfig} CacheConfig
+                         */
+                        CacheConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.CacheConfig)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.CacheConfig();
+                            if (object.cachePrePopulate != null) {
+                                if (typeof object.cachePrePopulate !== "object")
+                                    throw TypeError(".google.cloud.netapp.v1.CacheConfig.cachePrePopulate: object expected");
+                                message.cachePrePopulate = $root.google.cloud.netapp.v1.CachePrePopulate.fromObject(object.cachePrePopulate);
+                            }
+                            if (object.writebackEnabled != null)
+                                message.writebackEnabled = Boolean(object.writebackEnabled);
+                            if (object.cifsChangeNotifyEnabled != null)
+                                message.cifsChangeNotifyEnabled = Boolean(object.cifsChangeNotifyEnabled);
+                            switch (object.cachePrePopulateState) {
+                            default:
+                                if (typeof object.cachePrePopulateState === "number") {
+                                    message.cachePrePopulateState = object.cachePrePopulateState;
+                                    break;
+                                }
+                                break;
+                            case "CACHE_PRE_POPULATE_STATE_UNSPECIFIED":
+                            case 0:
+                                message.cachePrePopulateState = 0;
+                                break;
+                            case "NOT_NEEDED":
+                            case 1:
+                                message.cachePrePopulateState = 1;
+                                break;
+                            case "IN_PROGRESS":
+                            case 2:
+                                message.cachePrePopulateState = 2;
+                                break;
+                            case "COMPLETE":
+                            case 3:
+                                message.cachePrePopulateState = 3;
+                                break;
+                            case "ERROR":
+                            case 4:
+                                message.cachePrePopulateState = 4;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CacheConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.CacheConfig
+                         * @static
+                         * @param {google.cloud.netapp.v1.CacheConfig} message CacheConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CacheConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.cachePrePopulate = null;
+                                object.cachePrePopulateState = options.enums === String ? "CACHE_PRE_POPULATE_STATE_UNSPECIFIED" : 0;
+                            }
+                            if (message.cachePrePopulate != null && message.hasOwnProperty("cachePrePopulate"))
+                                object.cachePrePopulate = $root.google.cloud.netapp.v1.CachePrePopulate.toObject(message.cachePrePopulate, options);
+                            if (message.writebackEnabled != null && message.hasOwnProperty("writebackEnabled")) {
+                                object.writebackEnabled = message.writebackEnabled;
+                                if (options.oneofs)
+                                    object._writebackEnabled = "writebackEnabled";
+                            }
+                            if (message.cifsChangeNotifyEnabled != null && message.hasOwnProperty("cifsChangeNotifyEnabled")) {
+                                object.cifsChangeNotifyEnabled = message.cifsChangeNotifyEnabled;
+                                if (options.oneofs)
+                                    object._cifsChangeNotifyEnabled = "cifsChangeNotifyEnabled";
+                            }
+                            if (message.cachePrePopulateState != null && message.hasOwnProperty("cachePrePopulateState"))
+                                object.cachePrePopulateState = options.enums === String ? $root.google.cloud.netapp.v1.CacheConfig.CachePrePopulateState[message.cachePrePopulateState] === undefined ? message.cachePrePopulateState : $root.google.cloud.netapp.v1.CacheConfig.CachePrePopulateState[message.cachePrePopulateState] : message.cachePrePopulateState;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CacheConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.CacheConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CacheConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CacheConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.CacheConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CacheConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.CacheConfig";
+                        };
+    
+                        /**
+                         * CachePrePopulateState enum.
+                         * @name google.cloud.netapp.v1.CacheConfig.CachePrePopulateState
+                         * @enum {number}
+                         * @property {number} CACHE_PRE_POPULATE_STATE_UNSPECIFIED=0 CACHE_PRE_POPULATE_STATE_UNSPECIFIED value
+                         * @property {number} NOT_NEEDED=1 NOT_NEEDED value
+                         * @property {number} IN_PROGRESS=2 IN_PROGRESS value
+                         * @property {number} COMPLETE=3 COMPLETE value
+                         * @property {number} ERROR=4 ERROR value
+                         */
+                        CacheConfig.CachePrePopulateState = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "CACHE_PRE_POPULATE_STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "NOT_NEEDED"] = 1;
+                            values[valuesById[2] = "IN_PROGRESS"] = 2;
+                            values[valuesById[3] = "COMPLETE"] = 3;
+                            values[valuesById[4] = "ERROR"] = 4;
+                            return values;
+                        })();
+    
+                        return CacheConfig;
+                    })();
+    
+                    v1.CachePrePopulate = (function() {
+    
+                        /**
+                         * Properties of a CachePrePopulate.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface ICachePrePopulate
+                         * @property {Array.<string>|null} [pathList] CachePrePopulate pathList
+                         * @property {Array.<string>|null} [excludePathList] CachePrePopulate excludePathList
+                         * @property {boolean|null} [recursion] CachePrePopulate recursion
+                         */
+    
+                        /**
+                         * Constructs a new CachePrePopulate.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents a CachePrePopulate.
+                         * @implements ICachePrePopulate
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.ICachePrePopulate=} [properties] Properties to set
+                         */
+                        function CachePrePopulate(properties) {
+                            this.pathList = [];
+                            this.excludePathList = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CachePrePopulate pathList.
+                         * @member {Array.<string>} pathList
+                         * @memberof google.cloud.netapp.v1.CachePrePopulate
+                         * @instance
+                         */
+                        CachePrePopulate.prototype.pathList = $util.emptyArray;
+    
+                        /**
+                         * CachePrePopulate excludePathList.
+                         * @member {Array.<string>} excludePathList
+                         * @memberof google.cloud.netapp.v1.CachePrePopulate
+                         * @instance
+                         */
+                        CachePrePopulate.prototype.excludePathList = $util.emptyArray;
+    
+                        /**
+                         * CachePrePopulate recursion.
+                         * @member {boolean|null|undefined} recursion
+                         * @memberof google.cloud.netapp.v1.CachePrePopulate
+                         * @instance
+                         */
+                        CachePrePopulate.prototype.recursion = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(CachePrePopulate.prototype, "_recursion", {
+                            get: $util.oneOfGetter($oneOfFields = ["recursion"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new CachePrePopulate instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.CachePrePopulate
+                         * @static
+                         * @param {google.cloud.netapp.v1.ICachePrePopulate=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.CachePrePopulate} CachePrePopulate instance
+                         */
+                        CachePrePopulate.create = function create(properties) {
+                            return new CachePrePopulate(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CachePrePopulate message. Does not implicitly {@link google.cloud.netapp.v1.CachePrePopulate.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.CachePrePopulate
+                         * @static
+                         * @param {google.cloud.netapp.v1.ICachePrePopulate} message CachePrePopulate message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CachePrePopulate.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.pathList != null && message.pathList.length)
+                                for (var i = 0; i < message.pathList.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.pathList[i]);
+                            if (message.excludePathList != null && message.excludePathList.length)
+                                for (var i = 0; i < message.excludePathList.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.excludePathList[i]);
+                            if (message.recursion != null && Object.hasOwnProperty.call(message, "recursion"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.recursion);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CachePrePopulate message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.CachePrePopulate.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.CachePrePopulate
+                         * @static
+                         * @param {google.cloud.netapp.v1.ICachePrePopulate} message CachePrePopulate message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CachePrePopulate.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CachePrePopulate message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.CachePrePopulate
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.CachePrePopulate} CachePrePopulate
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CachePrePopulate.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.CachePrePopulate();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.pathList && message.pathList.length))
+                                            message.pathList = [];
+                                        message.pathList.push(reader.string());
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.excludePathList && message.excludePathList.length))
+                                            message.excludePathList = [];
+                                        message.excludePathList.push(reader.string());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.recursion = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CachePrePopulate message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.CachePrePopulate
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.CachePrePopulate} CachePrePopulate
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CachePrePopulate.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CachePrePopulate message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.CachePrePopulate
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CachePrePopulate.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.pathList != null && message.hasOwnProperty("pathList")) {
+                                if (!Array.isArray(message.pathList))
+                                    return "pathList: array expected";
+                                for (var i = 0; i < message.pathList.length; ++i)
+                                    if (!$util.isString(message.pathList[i]))
+                                        return "pathList: string[] expected";
+                            }
+                            if (message.excludePathList != null && message.hasOwnProperty("excludePathList")) {
+                                if (!Array.isArray(message.excludePathList))
+                                    return "excludePathList: array expected";
+                                for (var i = 0; i < message.excludePathList.length; ++i)
+                                    if (!$util.isString(message.excludePathList[i]))
+                                        return "excludePathList: string[] expected";
+                            }
+                            if (message.recursion != null && message.hasOwnProperty("recursion")) {
+                                properties._recursion = 1;
+                                if (typeof message.recursion !== "boolean")
+                                    return "recursion: boolean expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CachePrePopulate message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.CachePrePopulate
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.CachePrePopulate} CachePrePopulate
+                         */
+                        CachePrePopulate.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.CachePrePopulate)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.CachePrePopulate();
+                            if (object.pathList) {
+                                if (!Array.isArray(object.pathList))
+                                    throw TypeError(".google.cloud.netapp.v1.CachePrePopulate.pathList: array expected");
+                                message.pathList = [];
+                                for (var i = 0; i < object.pathList.length; ++i)
+                                    message.pathList[i] = String(object.pathList[i]);
+                            }
+                            if (object.excludePathList) {
+                                if (!Array.isArray(object.excludePathList))
+                                    throw TypeError(".google.cloud.netapp.v1.CachePrePopulate.excludePathList: array expected");
+                                message.excludePathList = [];
+                                for (var i = 0; i < object.excludePathList.length; ++i)
+                                    message.excludePathList[i] = String(object.excludePathList[i]);
+                            }
+                            if (object.recursion != null)
+                                message.recursion = Boolean(object.recursion);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CachePrePopulate message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.CachePrePopulate
+                         * @static
+                         * @param {google.cloud.netapp.v1.CachePrePopulate} message CachePrePopulate
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CachePrePopulate.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.pathList = [];
+                                object.excludePathList = [];
+                            }
+                            if (message.pathList && message.pathList.length) {
+                                object.pathList = [];
+                                for (var j = 0; j < message.pathList.length; ++j)
+                                    object.pathList[j] = message.pathList[j];
+                            }
+                            if (message.excludePathList && message.excludePathList.length) {
+                                object.excludePathList = [];
+                                for (var j = 0; j < message.excludePathList.length; ++j)
+                                    object.excludePathList[j] = message.excludePathList[j];
+                            }
+                            if (message.recursion != null && message.hasOwnProperty("recursion")) {
+                                object.recursion = message.recursion;
+                                if (options.oneofs)
+                                    object._recursion = "recursion";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CachePrePopulate to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.CachePrePopulate
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CachePrePopulate.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CachePrePopulate
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.CachePrePopulate
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CachePrePopulate.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.CachePrePopulate";
+                        };
+    
+                        return CachePrePopulate;
+                    })();
+    
+                    v1.BlockDevice = (function() {
+    
+                        /**
+                         * Properties of a BlockDevice.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface IBlockDevice
+                         * @property {string|null} [name] BlockDevice name
+                         * @property {Array.<string>|null} [hostGroups] BlockDevice hostGroups
+                         * @property {string|null} [identifier] BlockDevice identifier
+                         * @property {number|Long|null} [sizeGib] BlockDevice sizeGib
+                         * @property {google.cloud.netapp.v1.OsType|null} [osType] BlockDevice osType
+                         */
+    
+                        /**
+                         * Constructs a new BlockDevice.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents a BlockDevice.
+                         * @implements IBlockDevice
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.IBlockDevice=} [properties] Properties to set
+                         */
+                        function BlockDevice(properties) {
+                            this.hostGroups = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BlockDevice name.
+                         * @member {string|null|undefined} name
+                         * @memberof google.cloud.netapp.v1.BlockDevice
+                         * @instance
+                         */
+                        BlockDevice.prototype.name = null;
+    
+                        /**
+                         * BlockDevice hostGroups.
+                         * @member {Array.<string>} hostGroups
+                         * @memberof google.cloud.netapp.v1.BlockDevice
+                         * @instance
+                         */
+                        BlockDevice.prototype.hostGroups = $util.emptyArray;
+    
+                        /**
+                         * BlockDevice identifier.
+                         * @member {string} identifier
+                         * @memberof google.cloud.netapp.v1.BlockDevice
+                         * @instance
+                         */
+                        BlockDevice.prototype.identifier = "";
+    
+                        /**
+                         * BlockDevice sizeGib.
+                         * @member {number|Long|null|undefined} sizeGib
+                         * @memberof google.cloud.netapp.v1.BlockDevice
+                         * @instance
+                         */
+                        BlockDevice.prototype.sizeGib = null;
+    
+                        /**
+                         * BlockDevice osType.
+                         * @member {google.cloud.netapp.v1.OsType} osType
+                         * @memberof google.cloud.netapp.v1.BlockDevice
+                         * @instance
+                         */
+                        BlockDevice.prototype.osType = 0;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(BlockDevice.prototype, "_name", {
+                            get: $util.oneOfGetter($oneOfFields = ["name"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(BlockDevice.prototype, "_sizeGib", {
+                            get: $util.oneOfGetter($oneOfFields = ["sizeGib"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new BlockDevice instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.BlockDevice
+                         * @static
+                         * @param {google.cloud.netapp.v1.IBlockDevice=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.BlockDevice} BlockDevice instance
+                         */
+                        BlockDevice.create = function create(properties) {
+                            return new BlockDevice(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BlockDevice message. Does not implicitly {@link google.cloud.netapp.v1.BlockDevice.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.BlockDevice
+                         * @static
+                         * @param {google.cloud.netapp.v1.IBlockDevice} message BlockDevice message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BlockDevice.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.hostGroups != null && message.hostGroups.length)
+                                for (var i = 0; i < message.hostGroups.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.hostGroups[i]);
+                            if (message.identifier != null && Object.hasOwnProperty.call(message, "identifier"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.identifier);
+                            if (message.sizeGib != null && Object.hasOwnProperty.call(message, "sizeGib"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int64(message.sizeGib);
+                            if (message.osType != null && Object.hasOwnProperty.call(message, "osType"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.osType);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BlockDevice message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.BlockDevice.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.BlockDevice
+                         * @static
+                         * @param {google.cloud.netapp.v1.IBlockDevice} message BlockDevice message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BlockDevice.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BlockDevice message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.BlockDevice
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.BlockDevice} BlockDevice
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BlockDevice.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.BlockDevice();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.hostGroups && message.hostGroups.length))
+                                            message.hostGroups = [];
+                                        message.hostGroups.push(reader.string());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.identifier = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.sizeGib = reader.int64();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.osType = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BlockDevice message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.BlockDevice
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.BlockDevice} BlockDevice
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BlockDevice.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BlockDevice message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.BlockDevice
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BlockDevice.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.name != null && message.hasOwnProperty("name")) {
+                                properties._name = 1;
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            }
+                            if (message.hostGroups != null && message.hasOwnProperty("hostGroups")) {
+                                if (!Array.isArray(message.hostGroups))
+                                    return "hostGroups: array expected";
+                                for (var i = 0; i < message.hostGroups.length; ++i)
+                                    if (!$util.isString(message.hostGroups[i]))
+                                        return "hostGroups: string[] expected";
+                            }
+                            if (message.identifier != null && message.hasOwnProperty("identifier"))
+                                if (!$util.isString(message.identifier))
+                                    return "identifier: string expected";
+                            if (message.sizeGib != null && message.hasOwnProperty("sizeGib")) {
+                                properties._sizeGib = 1;
+                                if (!$util.isInteger(message.sizeGib) && !(message.sizeGib && $util.isInteger(message.sizeGib.low) && $util.isInteger(message.sizeGib.high)))
+                                    return "sizeGib: integer|Long expected";
+                            }
+                            if (message.osType != null && message.hasOwnProperty("osType"))
+                                switch (message.osType) {
+                                default:
+                                    return "osType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BlockDevice message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.BlockDevice
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.BlockDevice} BlockDevice
+                         */
+                        BlockDevice.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.BlockDevice)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.BlockDevice();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.hostGroups) {
+                                if (!Array.isArray(object.hostGroups))
+                                    throw TypeError(".google.cloud.netapp.v1.BlockDevice.hostGroups: array expected");
+                                message.hostGroups = [];
+                                for (var i = 0; i < object.hostGroups.length; ++i)
+                                    message.hostGroups[i] = String(object.hostGroups[i]);
+                            }
+                            if (object.identifier != null)
+                                message.identifier = String(object.identifier);
+                            if (object.sizeGib != null)
+                                if ($util.Long)
+                                    (message.sizeGib = $util.Long.fromValue(object.sizeGib)).unsigned = false;
+                                else if (typeof object.sizeGib === "string")
+                                    message.sizeGib = parseInt(object.sizeGib, 10);
+                                else if (typeof object.sizeGib === "number")
+                                    message.sizeGib = object.sizeGib;
+                                else if (typeof object.sizeGib === "object")
+                                    message.sizeGib = new $util.LongBits(object.sizeGib.low >>> 0, object.sizeGib.high >>> 0).toNumber();
+                            switch (object.osType) {
+                            default:
+                                if (typeof object.osType === "number") {
+                                    message.osType = object.osType;
+                                    break;
+                                }
+                                break;
+                            case "OS_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.osType = 0;
+                                break;
+                            case "LINUX":
+                            case 1:
+                                message.osType = 1;
+                                break;
+                            case "WINDOWS":
+                            case 2:
+                                message.osType = 2;
+                                break;
+                            case "ESXI":
+                            case 3:
+                                message.osType = 3;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BlockDevice message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.BlockDevice
+                         * @static
+                         * @param {google.cloud.netapp.v1.BlockDevice} message BlockDevice
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BlockDevice.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.hostGroups = [];
+                            if (options.defaults) {
+                                object.identifier = "";
+                                object.osType = options.enums === String ? "OS_TYPE_UNSPECIFIED" : 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name")) {
+                                object.name = message.name;
+                                if (options.oneofs)
+                                    object._name = "name";
+                            }
+                            if (message.hostGroups && message.hostGroups.length) {
+                                object.hostGroups = [];
+                                for (var j = 0; j < message.hostGroups.length; ++j)
+                                    object.hostGroups[j] = message.hostGroups[j];
+                            }
+                            if (message.identifier != null && message.hasOwnProperty("identifier"))
+                                object.identifier = message.identifier;
+                            if (message.sizeGib != null && message.hasOwnProperty("sizeGib")) {
+                                if (typeof message.sizeGib === "number")
+                                    object.sizeGib = options.longs === String ? String(message.sizeGib) : message.sizeGib;
+                                else
+                                    object.sizeGib = options.longs === String ? $util.Long.prototype.toString.call(message.sizeGib) : options.longs === Number ? new $util.LongBits(message.sizeGib.low >>> 0, message.sizeGib.high >>> 0).toNumber() : message.sizeGib;
+                                if (options.oneofs)
+                                    object._sizeGib = "sizeGib";
+                            }
+                            if (message.osType != null && message.hasOwnProperty("osType"))
+                                object.osType = options.enums === String ? $root.google.cloud.netapp.v1.OsType[message.osType] === undefined ? message.osType : $root.google.cloud.netapp.v1.OsType[message.osType] : message.osType;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BlockDevice to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.BlockDevice
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BlockDevice.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BlockDevice
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.BlockDevice
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BlockDevice.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.BlockDevice";
+                        };
+    
+                        return BlockDevice;
+                    })();
+    
+                    v1.RestoreBackupFilesRequest = (function() {
+    
+                        /**
+                         * Properties of a RestoreBackupFilesRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface IRestoreBackupFilesRequest
+                         * @property {string|null} [name] RestoreBackupFilesRequest name
+                         * @property {string|null} [backup] RestoreBackupFilesRequest backup
+                         * @property {Array.<string>|null} [fileList] RestoreBackupFilesRequest fileList
+                         * @property {string|null} [restoreDestinationPath] RestoreBackupFilesRequest restoreDestinationPath
+                         */
+    
+                        /**
+                         * Constructs a new RestoreBackupFilesRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents a RestoreBackupFilesRequest.
+                         * @implements IRestoreBackupFilesRequest
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.IRestoreBackupFilesRequest=} [properties] Properties to set
+                         */
+                        function RestoreBackupFilesRequest(properties) {
+                            this.fileList = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RestoreBackupFilesRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.netapp.v1.RestoreBackupFilesRequest
+                         * @instance
+                         */
+                        RestoreBackupFilesRequest.prototype.name = "";
+    
+                        /**
+                         * RestoreBackupFilesRequest backup.
+                         * @member {string} backup
+                         * @memberof google.cloud.netapp.v1.RestoreBackupFilesRequest
+                         * @instance
+                         */
+                        RestoreBackupFilesRequest.prototype.backup = "";
+    
+                        /**
+                         * RestoreBackupFilesRequest fileList.
+                         * @member {Array.<string>} fileList
+                         * @memberof google.cloud.netapp.v1.RestoreBackupFilesRequest
+                         * @instance
+                         */
+                        RestoreBackupFilesRequest.prototype.fileList = $util.emptyArray;
+    
+                        /**
+                         * RestoreBackupFilesRequest restoreDestinationPath.
+                         * @member {string} restoreDestinationPath
+                         * @memberof google.cloud.netapp.v1.RestoreBackupFilesRequest
+                         * @instance
+                         */
+                        RestoreBackupFilesRequest.prototype.restoreDestinationPath = "";
+    
+                        /**
+                         * Creates a new RestoreBackupFilesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.RestoreBackupFilesRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IRestoreBackupFilesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.RestoreBackupFilesRequest} RestoreBackupFilesRequest instance
+                         */
+                        RestoreBackupFilesRequest.create = function create(properties) {
+                            return new RestoreBackupFilesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RestoreBackupFilesRequest message. Does not implicitly {@link google.cloud.netapp.v1.RestoreBackupFilesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.RestoreBackupFilesRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IRestoreBackupFilesRequest} message RestoreBackupFilesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RestoreBackupFilesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.backup != null && Object.hasOwnProperty.call(message, "backup"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.backup);
+                            if (message.fileList != null && message.fileList.length)
+                                for (var i = 0; i < message.fileList.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.fileList[i]);
+                            if (message.restoreDestinationPath != null && Object.hasOwnProperty.call(message, "restoreDestinationPath"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.restoreDestinationPath);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RestoreBackupFilesRequest message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.RestoreBackupFilesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.RestoreBackupFilesRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IRestoreBackupFilesRequest} message RestoreBackupFilesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RestoreBackupFilesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RestoreBackupFilesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.RestoreBackupFilesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.RestoreBackupFilesRequest} RestoreBackupFilesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RestoreBackupFilesRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.RestoreBackupFilesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.backup = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.fileList && message.fileList.length))
+                                            message.fileList = [];
+                                        message.fileList.push(reader.string());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.restoreDestinationPath = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RestoreBackupFilesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.RestoreBackupFilesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.RestoreBackupFilesRequest} RestoreBackupFilesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RestoreBackupFilesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RestoreBackupFilesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.RestoreBackupFilesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RestoreBackupFilesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.backup != null && message.hasOwnProperty("backup"))
+                                if (!$util.isString(message.backup))
+                                    return "backup: string expected";
+                            if (message.fileList != null && message.hasOwnProperty("fileList")) {
+                                if (!Array.isArray(message.fileList))
+                                    return "fileList: array expected";
+                                for (var i = 0; i < message.fileList.length; ++i)
+                                    if (!$util.isString(message.fileList[i]))
+                                        return "fileList: string[] expected";
+                            }
+                            if (message.restoreDestinationPath != null && message.hasOwnProperty("restoreDestinationPath"))
+                                if (!$util.isString(message.restoreDestinationPath))
+                                    return "restoreDestinationPath: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RestoreBackupFilesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.RestoreBackupFilesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.RestoreBackupFilesRequest} RestoreBackupFilesRequest
+                         */
+                        RestoreBackupFilesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.RestoreBackupFilesRequest)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.RestoreBackupFilesRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.backup != null)
+                                message.backup = String(object.backup);
+                            if (object.fileList) {
+                                if (!Array.isArray(object.fileList))
+                                    throw TypeError(".google.cloud.netapp.v1.RestoreBackupFilesRequest.fileList: array expected");
+                                message.fileList = [];
+                                for (var i = 0; i < object.fileList.length; ++i)
+                                    message.fileList[i] = String(object.fileList[i]);
+                            }
+                            if (object.restoreDestinationPath != null)
+                                message.restoreDestinationPath = String(object.restoreDestinationPath);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RestoreBackupFilesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.RestoreBackupFilesRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.RestoreBackupFilesRequest} message RestoreBackupFilesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RestoreBackupFilesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.fileList = [];
+                            if (options.defaults) {
+                                object.name = "";
+                                object.backup = "";
+                                object.restoreDestinationPath = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.backup != null && message.hasOwnProperty("backup"))
+                                object.backup = message.backup;
+                            if (message.fileList && message.fileList.length) {
+                                object.fileList = [];
+                                for (var j = 0; j < message.fileList.length; ++j)
+                                    object.fileList[j] = message.fileList[j];
+                            }
+                            if (message.restoreDestinationPath != null && message.hasOwnProperty("restoreDestinationPath"))
+                                object.restoreDestinationPath = message.restoreDestinationPath;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RestoreBackupFilesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.RestoreBackupFilesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RestoreBackupFilesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RestoreBackupFilesRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.RestoreBackupFilesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RestoreBackupFilesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.RestoreBackupFilesRequest";
+                        };
+    
+                        return RestoreBackupFilesRequest;
+                    })();
+    
+                    v1.RestoreBackupFilesResponse = (function() {
+    
+                        /**
+                         * Properties of a RestoreBackupFilesResponse.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface IRestoreBackupFilesResponse
+                         */
+    
+                        /**
+                         * Constructs a new RestoreBackupFilesResponse.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents a RestoreBackupFilesResponse.
+                         * @implements IRestoreBackupFilesResponse
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.IRestoreBackupFilesResponse=} [properties] Properties to set
+                         */
+                        function RestoreBackupFilesResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new RestoreBackupFilesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.RestoreBackupFilesResponse
+                         * @static
+                         * @param {google.cloud.netapp.v1.IRestoreBackupFilesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.RestoreBackupFilesResponse} RestoreBackupFilesResponse instance
+                         */
+                        RestoreBackupFilesResponse.create = function create(properties) {
+                            return new RestoreBackupFilesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RestoreBackupFilesResponse message. Does not implicitly {@link google.cloud.netapp.v1.RestoreBackupFilesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.RestoreBackupFilesResponse
+                         * @static
+                         * @param {google.cloud.netapp.v1.IRestoreBackupFilesResponse} message RestoreBackupFilesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RestoreBackupFilesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RestoreBackupFilesResponse message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.RestoreBackupFilesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.RestoreBackupFilesResponse
+                         * @static
+                         * @param {google.cloud.netapp.v1.IRestoreBackupFilesResponse} message RestoreBackupFilesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RestoreBackupFilesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RestoreBackupFilesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.RestoreBackupFilesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.RestoreBackupFilesResponse} RestoreBackupFilesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RestoreBackupFilesResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.RestoreBackupFilesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RestoreBackupFilesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.RestoreBackupFilesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.RestoreBackupFilesResponse} RestoreBackupFilesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RestoreBackupFilesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RestoreBackupFilesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.RestoreBackupFilesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RestoreBackupFilesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RestoreBackupFilesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.RestoreBackupFilesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.RestoreBackupFilesResponse} RestoreBackupFilesResponse
+                         */
+                        RestoreBackupFilesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.RestoreBackupFilesResponse)
+                                return object;
+                            return new $root.google.cloud.netapp.v1.RestoreBackupFilesResponse();
+                        };
+    
+                        /**
+                         * Creates a plain object from a RestoreBackupFilesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.RestoreBackupFilesResponse
+                         * @static
+                         * @param {google.cloud.netapp.v1.RestoreBackupFilesResponse} message RestoreBackupFilesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RestoreBackupFilesResponse.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this RestoreBackupFilesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.RestoreBackupFilesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RestoreBackupFilesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RestoreBackupFilesResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.RestoreBackupFilesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RestoreBackupFilesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.RestoreBackupFilesResponse";
+                        };
+    
+                        return RestoreBackupFilesResponse;
                     })();
     
                     v1.ListSnapshotsRequest = (function() {
@@ -33107,6 +37648,7 @@
                          * @property {number|null} [availableThroughputMibps] StoragePool availableThroughputMibps
                          * @property {number|Long|null} [coldTierSizeUsedGib] StoragePool coldTierSizeUsedGib
                          * @property {number|Long|null} [hotTierSizeUsedGib] StoragePool hotTierSizeUsedGib
+                         * @property {google.cloud.netapp.v1.StoragePoolType|null} [type] StoragePool type
                          */
     
                         /**
@@ -33373,6 +37915,14 @@
                          */
                         StoragePool.prototype.hotTierSizeUsedGib = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
+                        /**
+                         * StoragePool type.
+                         * @member {google.cloud.netapp.v1.StoragePoolType|null|undefined} type
+                         * @memberof google.cloud.netapp.v1.StoragePool
+                         * @instance
+                         */
+                        StoragePool.prototype.type = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -33385,6 +37935,12 @@
                         // Virtual OneOf for proto3 optional field
                         Object.defineProperty(StoragePool.prototype, "_enableHotTierAutoResize", {
                             get: $util.oneOfGetter($oneOfFields = ["enableHotTierAutoResize"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(StoragePool.prototype, "_type", {
+                            get: $util.oneOfGetter($oneOfFields = ["type"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -33475,6 +38031,8 @@
                                 writer.uint32(/* id 33, wireType 0 =*/264).int64(message.coldTierSizeUsedGib);
                             if (message.hotTierSizeUsedGib != null && Object.hasOwnProperty.call(message, "hotTierSizeUsedGib"))
                                 writer.uint32(/* id 34, wireType 0 =*/272).int64(message.hotTierSizeUsedGib);
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 35, wireType 0 =*/280).int32(message.type);
                             return writer;
                         };
     
@@ -33654,6 +38212,10 @@
                                         message.hotTierSizeUsedGib = reader.int64();
                                         break;
                                     }
+                                case 35: {
+                                        message.type = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -33825,6 +38387,18 @@
                             if (message.hotTierSizeUsedGib != null && message.hasOwnProperty("hotTierSizeUsedGib"))
                                 if (!$util.isInteger(message.hotTierSizeUsedGib) && !(message.hotTierSizeUsedGib && $util.isInteger(message.hotTierSizeUsedGib.low) && $util.isInteger(message.hotTierSizeUsedGib.high)))
                                     return "hotTierSizeUsedGib: integer|Long expected";
+                            if (message.type != null && message.hasOwnProperty("type")) {
+                                properties._type = 1;
+                                switch (message.type) {
+                                default:
+                                    return "type: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            }
                             return null;
                         };
     
@@ -34059,6 +38633,30 @@
                                     message.hotTierSizeUsedGib = object.hotTierSizeUsedGib;
                                 else if (typeof object.hotTierSizeUsedGib === "object")
                                     message.hotTierSizeUsedGib = new $util.LongBits(object.hotTierSizeUsedGib.low >>> 0, object.hotTierSizeUsedGib.high >>> 0).toNumber();
+                            switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
+                            case "STORAGE_POOL_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.type = 0;
+                                break;
+                            case "FILE":
+                            case 1:
+                                message.type = 1;
+                                break;
+                            case "UNIFIED":
+                            case 2:
+                                message.type = 2;
+                                break;
+                            case "UNIFIED_LARGE_CAPACITY":
+                            case 3:
+                                message.type = 3;
+                                break;
+                            }
                             return message;
                         };
     
@@ -34228,6 +38826,11 @@
                                     object.hotTierSizeUsedGib = options.longs === String ? String(message.hotTierSizeUsedGib) : message.hotTierSizeUsedGib;
                                 else
                                     object.hotTierSizeUsedGib = options.longs === String ? $util.Long.prototype.toString.call(message.hotTierSizeUsedGib) : options.longs === Number ? new $util.LongBits(message.hotTierSizeUsedGib.low >>> 0, message.hotTierSizeUsedGib.high >>> 0).toNumber() : message.hotTierSizeUsedGib;
+                            if (message.type != null && message.hasOwnProperty("type")) {
+                                object.type = options.enums === String ? $root.google.cloud.netapp.v1.StoragePoolType[message.type] === undefined ? message.type : $root.google.cloud.netapp.v1.StoragePoolType[message.type] : message.type;
+                                if (options.oneofs)
+                                    object._type = "type";
+                            }
                             return object;
                         };
     

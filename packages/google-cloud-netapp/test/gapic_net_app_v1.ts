@@ -1463,6 +1463,114 @@ describe('v1.NetAppClient', () => {
         });
     });
 
+    describe('getHostGroup', () => {
+        it('invokes getHostGroup without error', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.GetHostGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.netapp.v1.GetHostGroupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.HostGroup()
+            );
+            client.innerApiCalls.getHostGroup = stubSimpleCall(expectedResponse);
+            const [response] = await client.getHostGroup(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getHostGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getHostGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getHostGroup without error using callback', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.GetHostGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.netapp.v1.GetHostGroupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.HostGroup()
+            );
+            client.innerApiCalls.getHostGroup = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getHostGroup(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.netapp.v1.IHostGroup|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getHostGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getHostGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getHostGroup with error', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.GetHostGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.netapp.v1.GetHostGroupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getHostGroup = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getHostGroup(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getHostGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getHostGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getHostGroup with closed client', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.GetHostGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.netapp.v1.GetHostGroupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getHostGroup(request), expectedError);
+        });
+    });
+
     describe('createStoragePool', () => {
         it('invokes createStoragePool without error', async () => {
             const client = new netappModule.v1.NetAppClient({
@@ -7509,6 +7617,626 @@ describe('v1.NetAppClient', () => {
         });
     });
 
+    describe('restoreBackupFiles', () => {
+        it('invokes restoreBackupFiles without error', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.RestoreBackupFilesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.netapp.v1.RestoreBackupFilesRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.restoreBackupFiles = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.restoreBackupFiles(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.restoreBackupFiles as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.restoreBackupFiles as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes restoreBackupFiles without error using callback', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.RestoreBackupFilesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.netapp.v1.RestoreBackupFilesRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.restoreBackupFiles = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.restoreBackupFiles(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.netapp.v1.IRestoreBackupFilesResponse, protos.google.cloud.netapp.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.netapp.v1.IRestoreBackupFilesResponse, protos.google.cloud.netapp.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.restoreBackupFiles as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.restoreBackupFiles as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes restoreBackupFiles with call error', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.RestoreBackupFilesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.netapp.v1.RestoreBackupFilesRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.restoreBackupFiles = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.restoreBackupFiles(request), expectedError);
+            const actualRequest = (client.innerApiCalls.restoreBackupFiles as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.restoreBackupFiles as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes restoreBackupFiles with LRO error', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.RestoreBackupFilesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.netapp.v1.RestoreBackupFilesRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.restoreBackupFiles = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.restoreBackupFiles(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.restoreBackupFiles as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.restoreBackupFiles as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkRestoreBackupFilesProgress without error', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkRestoreBackupFilesProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkRestoreBackupFilesProgress with error', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkRestoreBackupFilesProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createHostGroup', () => {
+        it('invokes createHostGroup without error', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.CreateHostGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.netapp.v1.CreateHostGroupRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createHostGroup = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createHostGroup(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createHostGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createHostGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createHostGroup without error using callback', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.CreateHostGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.netapp.v1.CreateHostGroupRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createHostGroup = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createHostGroup(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.netapp.v1.IHostGroup, protos.google.cloud.netapp.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.netapp.v1.IHostGroup, protos.google.cloud.netapp.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createHostGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createHostGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createHostGroup with call error', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.CreateHostGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.netapp.v1.CreateHostGroupRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createHostGroup = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createHostGroup(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createHostGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createHostGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createHostGroup with LRO error', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.CreateHostGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.netapp.v1.CreateHostGroupRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createHostGroup = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createHostGroup(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createHostGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createHostGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateHostGroupProgress without error', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateHostGroupProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateHostGroupProgress with error', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateHostGroupProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateHostGroup', () => {
+        it('invokes updateHostGroup without error', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.UpdateHostGroupRequest()
+            );
+            request.hostGroup ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.netapp.v1.UpdateHostGroupRequest', ['hostGroup', 'name']);
+            request.hostGroup.name = defaultValue1;
+            const expectedHeaderRequestParams = `host_group.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateHostGroup = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateHostGroup(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateHostGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateHostGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateHostGroup without error using callback', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.UpdateHostGroupRequest()
+            );
+            request.hostGroup ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.netapp.v1.UpdateHostGroupRequest', ['hostGroup', 'name']);
+            request.hostGroup.name = defaultValue1;
+            const expectedHeaderRequestParams = `host_group.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateHostGroup = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateHostGroup(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.netapp.v1.IHostGroup, protos.google.cloud.netapp.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.netapp.v1.IHostGroup, protos.google.cloud.netapp.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateHostGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateHostGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateHostGroup with call error', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.UpdateHostGroupRequest()
+            );
+            request.hostGroup ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.netapp.v1.UpdateHostGroupRequest', ['hostGroup', 'name']);
+            request.hostGroup.name = defaultValue1;
+            const expectedHeaderRequestParams = `host_group.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateHostGroup = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateHostGroup(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateHostGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateHostGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateHostGroup with LRO error', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.UpdateHostGroupRequest()
+            );
+            request.hostGroup ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.netapp.v1.UpdateHostGroupRequest', ['hostGroup', 'name']);
+            request.hostGroup.name = defaultValue1;
+            const expectedHeaderRequestParams = `host_group.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateHostGroup = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateHostGroup(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateHostGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateHostGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateHostGroupProgress without error', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateHostGroupProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateHostGroupProgress with error', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateHostGroupProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteHostGroup', () => {
+        it('invokes deleteHostGroup without error', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.DeleteHostGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.netapp.v1.DeleteHostGroupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteHostGroup = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteHostGroup(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteHostGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteHostGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteHostGroup without error using callback', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.DeleteHostGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.netapp.v1.DeleteHostGroupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteHostGroup = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteHostGroup(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.netapp.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.netapp.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteHostGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteHostGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteHostGroup with call error', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.DeleteHostGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.netapp.v1.DeleteHostGroupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteHostGroup = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteHostGroup(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteHostGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteHostGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteHostGroup with LRO error', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.DeleteHostGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.netapp.v1.DeleteHostGroupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteHostGroup = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteHostGroup(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteHostGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteHostGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteHostGroupProgress without error', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteHostGroupProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteHostGroupProgress with error', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteHostGroupProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
     describe('listStoragePools', () => {
         it('invokes listStoragePools without error', async () => {
             const client = new netappModule.v1.NetAppClient({
@@ -9958,6 +10686,251 @@ describe('v1.NetAppClient', () => {
             );
         });
     });
+
+    describe('listHostGroups', () => {
+        it('invokes listHostGroups without error', async () => {
+            const client = new netappModule.v1.NetAppClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.ListHostGroupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.netapp.v1.ListHostGroupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.netapp.v1.HostGroup()),
+              generateSampleMessage(new protos.google.cloud.netapp.v1.HostGroup()),
+              generateSampleMessage(new protos.google.cloud.netapp.v1.HostGroup()),
+            ];
+            client.innerApiCalls.listHostGroups = stubSimpleCall(expectedResponse);
+            const [response] = await client.listHostGroups(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listHostGroups as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listHostGroups as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listHostGroups without error using callback', async () => {
+            const client = new netappModule.v1.NetAppClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.ListHostGroupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.netapp.v1.ListHostGroupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.netapp.v1.HostGroup()),
+              generateSampleMessage(new protos.google.cloud.netapp.v1.HostGroup()),
+              generateSampleMessage(new protos.google.cloud.netapp.v1.HostGroup()),
+            ];
+            client.innerApiCalls.listHostGroups = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listHostGroups(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.netapp.v1.IHostGroup[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listHostGroups as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listHostGroups as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listHostGroups with error', async () => {
+            const client = new netappModule.v1.NetAppClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.ListHostGroupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.netapp.v1.ListHostGroupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listHostGroups = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listHostGroups(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listHostGroups as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listHostGroups as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listHostGroupsStream without error', async () => {
+            const client = new netappModule.v1.NetAppClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.ListHostGroupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.netapp.v1.ListHostGroupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.netapp.v1.HostGroup()),
+              generateSampleMessage(new protos.google.cloud.netapp.v1.HostGroup()),
+              generateSampleMessage(new protos.google.cloud.netapp.v1.HostGroup()),
+            ];
+            client.descriptors.page.listHostGroups.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listHostGroupsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.netapp.v1.HostGroup[] = [];
+                stream.on('data', (response: protos.google.cloud.netapp.v1.HostGroup) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listHostGroups.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listHostGroups, request));
+            assert(
+                (client.descriptors.page.listHostGroups.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listHostGroupsStream with error', async () => {
+            const client = new netappModule.v1.NetAppClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.ListHostGroupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.netapp.v1.ListHostGroupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listHostGroups.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listHostGroupsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.netapp.v1.HostGroup[] = [];
+                stream.on('data', (response: protos.google.cloud.netapp.v1.HostGroup) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listHostGroups.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listHostGroups, request));
+            assert(
+                (client.descriptors.page.listHostGroups.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listHostGroups without error', async () => {
+            const client = new netappModule.v1.NetAppClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.ListHostGroupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.netapp.v1.ListHostGroupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.netapp.v1.HostGroup()),
+              generateSampleMessage(new protos.google.cloud.netapp.v1.HostGroup()),
+              generateSampleMessage(new protos.google.cloud.netapp.v1.HostGroup()),
+            ];
+            client.descriptors.page.listHostGroups.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.netapp.v1.IHostGroup[] = [];
+            const iterable = client.listHostGroupsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listHostGroups.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listHostGroups.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listHostGroups with error', async () => {
+            const client = new netappModule.v1.NetAppClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.netapp.v1.ListHostGroupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.netapp.v1.ListHostGroupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listHostGroups.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listHostGroupsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.netapp.v1.IHostGroup[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listHostGroups.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listHostGroups.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
     describe('getLocation', () => {
         it('invokes getLocation without error', async () => {
             const client = new netappModule.v1.NetAppClient({
@@ -10570,6 +11543,52 @@ describe('v1.NetAppClient', () => {
                 const result = client.matchBackupVaultFromBackupVaultName(fakePath);
                 assert.strictEqual(result, "backupVaultValue");
                 assert((client.pathTemplates.backupVaultPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('hostGroup', async () => {
+            const fakePath = "/rendered/path/hostGroup";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                host_group: "hostGroupValue",
+            };
+            const client = new netappModule.v1.NetAppClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.hostGroupPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.hostGroupPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('hostGroupPath', () => {
+                const result = client.hostGroupPath("projectValue", "locationValue", "hostGroupValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.hostGroupPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromHostGroupName', () => {
+                const result = client.matchProjectFromHostGroupName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.hostGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromHostGroupName', () => {
+                const result = client.matchLocationFromHostGroupName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.hostGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchHostGroupFromHostGroupName', () => {
+                const result = client.matchHostGroupFromHostGroupName(fakePath);
+                assert.strictEqual(result, "hostGroupValue");
+                assert((client.pathTemplates.hostGroupPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

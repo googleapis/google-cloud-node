@@ -69,25 +69,14 @@ then
   mv "${PACKAGE_PATH}/.repo-metadata2.json" "${PACKAGE_PATH}/.repo-metadata.json"
 fi
  
-# update system tests scripts
-echo "adding compile step to system-test"
-# using a temp file because jq doesn't like writing to the input file as it reads
-jq -r ".scripts[\"system-test\"] = \"npm run compile && c8 mocha build/system-test\"" ${PACKAGE_PATH}/package.json > ${PACKAGE_PATH}/package2.json
-mv ${PACKAGE_PATH}/package2.json ${PACKAGE_PATH}/package.json
- 
-echo "adding compile step to samples-test"
-# using a temp file because jq doesn't like writing to the input file as it reads
-jq -r ".scripts[\"samples-test\"] = \"npm run compile && cd samples/ && npm link ../ && npm i && npm test\"" ${PACKAGE_PATH}/package.json > ${PACKAGE_PATH}/package2.json
-mv ${PACKAGE_PATH}/package2.json ${PACKAGE_PATH}/package.json
- 
 echo "updating repository object type"
 # using a temp file because jq doesn't like writing to the input file as it reads
-jq -r ".repository = {\"type\": \"git\", \"directory\": \"packages/${PACKAGE_NAME}\", \"url\": \"https://github.com/googleapis/google-cloud-node.git\"}" ${PACKAGE_PATH}/package.json > ${PACKAGE_PATH}/package2.json
+jq -r ".repository = {\"type\": \"git\", \"directory\": \"${PACKAGE_PATH}\", \"url\": \"https://github.com/googleapis/google-cloud-node.git\"}" ${PACKAGE_PATH}/package.json > ${PACKAGE_PATH}/package2.json
 mv ${PACKAGE_PATH}/package2.json ${PACKAGE_PATH}/package.json
  
 echo "updating homepage"
 # using a temp file because jq doesn't like writing to the input file as it reads
-jq -r ".homepage = \"https://github.com/googleapis/google-cloud-node/tree/main/packages/${PACKAGE_NAME}\"" ${PACKAGE_PATH}/package.json > ${PACKAGE_PATH}/package2.json
+jq -r ".homepage = \"https://github.com/googleapis/google-cloud-node/tree/main/${PACKAGE_PATH}\"" ${PACKAGE_PATH}/package.json > ${PACKAGE_PATH}/package2.json
 mv ${PACKAGE_PATH}/package2.json ${PACKAGE_PATH}/package.json
  
 if !(test -f "${PACKAGE_PATH}/owlbot.py"); then
