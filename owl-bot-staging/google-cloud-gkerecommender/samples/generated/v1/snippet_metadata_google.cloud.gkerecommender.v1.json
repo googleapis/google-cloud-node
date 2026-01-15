@@ -1,0 +1,323 @@
+{
+  "clientLibrary": {
+    "name": "nodejs-gkerecommender",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.gkerecommender.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "regionTag": "gkerecommender_v1_generated_GkeInferenceQuickstart_FetchModels_async",
+      "title": "GkeInferenceQuickstart fetchModels Sample",
+      "origin": "API_DEFINITION",
+      "description": " Fetches available models. Open-source models follow the Huggingface Hub `owner/model_name` format.",
+      "canonical": true,
+      "file": "gke_inference_quickstart.fetch_models.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "FetchModels",
+        "fullName": "google.cloud.gkerecommender.v1.GkeInferenceQuickstart.FetchModels",
+        "async": true,
+        "parameters": [
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.gkerecommender.v1.FetchModelsResponse",
+        "client": {
+          "shortName": "GkeInferenceQuickstartClient",
+          "fullName": "google.cloud.gkerecommender.v1.GkeInferenceQuickstartClient"
+        },
+        "method": {
+          "shortName": "FetchModels",
+          "fullName": "google.cloud.gkerecommender.v1.GkeInferenceQuickstart.FetchModels",
+          "service": {
+            "shortName": "GkeInferenceQuickstart",
+            "fullName": "google.cloud.gkerecommender.v1.GkeInferenceQuickstart"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gkerecommender_v1_generated_GkeInferenceQuickstart_FetchModelServers_async",
+      "title": "GkeInferenceQuickstart fetchModelServers Sample",
+      "origin": "API_DEFINITION",
+      "description": " Fetches available model servers. Open-source model servers use simplified, lowercase names (e.g., `vllm`).",
+      "canonical": true,
+      "file": "gke_inference_quickstart.fetch_model_servers.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "FetchModelServers",
+        "fullName": "google.cloud.gkerecommender.v1.GkeInferenceQuickstart.FetchModelServers",
+        "async": true,
+        "parameters": [
+          {
+            "name": "model",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.gkerecommender.v1.FetchModelServersResponse",
+        "client": {
+          "shortName": "GkeInferenceQuickstartClient",
+          "fullName": "google.cloud.gkerecommender.v1.GkeInferenceQuickstartClient"
+        },
+        "method": {
+          "shortName": "FetchModelServers",
+          "fullName": "google.cloud.gkerecommender.v1.GkeInferenceQuickstart.FetchModelServers",
+          "service": {
+            "shortName": "GkeInferenceQuickstart",
+            "fullName": "google.cloud.gkerecommender.v1.GkeInferenceQuickstart"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gkerecommender_v1_generated_GkeInferenceQuickstart_FetchModelServerVersions_async",
+      "title": "GkeInferenceQuickstart fetchModelServerVersions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Fetches available model server versions. Open-source servers use their own versioning schemas (e.g., `vllm` uses semver like `v1.0.0`). Some model servers have different versioning schemas depending on the accelerator. For example, `vllm` uses semver on GPUs, but returns nightly build tags on TPUs. All available versions will be returned when different schemas are present.",
+      "canonical": true,
+      "file": "gke_inference_quickstart.fetch_model_server_versions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 85,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "FetchModelServerVersions",
+        "fullName": "google.cloud.gkerecommender.v1.GkeInferenceQuickstart.FetchModelServerVersions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "model",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "model_server",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.gkerecommender.v1.FetchModelServerVersionsResponse",
+        "client": {
+          "shortName": "GkeInferenceQuickstartClient",
+          "fullName": "google.cloud.gkerecommender.v1.GkeInferenceQuickstartClient"
+        },
+        "method": {
+          "shortName": "FetchModelServerVersions",
+          "fullName": "google.cloud.gkerecommender.v1.GkeInferenceQuickstart.FetchModelServerVersions",
+          "service": {
+            "shortName": "GkeInferenceQuickstart",
+            "fullName": "google.cloud.gkerecommender.v1.GkeInferenceQuickstart"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gkerecommender_v1_generated_GkeInferenceQuickstart_FetchProfiles_async",
+      "title": "GkeInferenceQuickstart fetchProfiles Sample",
+      "origin": "API_DEFINITION",
+      "description": " Fetches available profiles. A profile contains performance metrics and cost information for a specific model server setup. Profiles can be filtered by parameters. If no filters are provided, all profiles are returned. Profiles display a single value per performance metric based on the provided performance requirements. If no requirements are given, the metrics represent the inflection point. See [Run best practice inference with GKE Inference Quickstart recipes](https://cloud.google.com/kubernetes-engine/docs/how-to/machine-learning/inference/inference-quickstart#how) for details.",
+      "canonical": true,
+      "file": "gke_inference_quickstart.fetch_profiles.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 97,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "FetchProfiles",
+        "fullName": "google.cloud.gkerecommender.v1.GkeInferenceQuickstart.FetchProfiles",
+        "async": true,
+        "parameters": [
+          {
+            "name": "model",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "model_server",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "model_server_version",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "performance_requirements",
+            "type": ".google.cloud.gkerecommender.v1.PerformanceRequirements"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.gkerecommender.v1.FetchProfilesResponse",
+        "client": {
+          "shortName": "GkeInferenceQuickstartClient",
+          "fullName": "google.cloud.gkerecommender.v1.GkeInferenceQuickstartClient"
+        },
+        "method": {
+          "shortName": "FetchProfiles",
+          "fullName": "google.cloud.gkerecommender.v1.GkeInferenceQuickstart.FetchProfiles",
+          "service": {
+            "shortName": "GkeInferenceQuickstart",
+            "fullName": "google.cloud.gkerecommender.v1.GkeInferenceQuickstart"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gkerecommender_v1_generated_GkeInferenceQuickstart_GenerateOptimizedManifest_async",
+      "title": "GkeInferenceQuickstart generateOptimizedManifest Sample",
+      "origin": "API_DEFINITION",
+      "description": " Generates an optimized deployment manifest for a given model and model server, based on the specified accelerator, performance targets, and configurations. See [Run best practice inference with GKE Inference Quickstart recipes](https://cloud.google.com/kubernetes-engine/docs/how-to/machine-learning/inference/inference-quickstart) for deployment details.",
+      "canonical": true,
+      "file": "gke_inference_quickstart.generate_optimized_manifest.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 80,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GenerateOptimizedManifest",
+        "fullName": "google.cloud.gkerecommender.v1.GkeInferenceQuickstart.GenerateOptimizedManifest",
+        "async": true,
+        "parameters": [
+          {
+            "name": "model_server_info",
+            "type": ".google.cloud.gkerecommender.v1.ModelServerInfo"
+          },
+          {
+            "name": "accelerator_type",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "kubernetes_namespace",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "performance_requirements",
+            "type": ".google.cloud.gkerecommender.v1.PerformanceRequirements"
+          },
+          {
+            "name": "storage_config",
+            "type": ".google.cloud.gkerecommender.v1.StorageConfig"
+          }
+        ],
+        "resultType": ".google.cloud.gkerecommender.v1.GenerateOptimizedManifestResponse",
+        "client": {
+          "shortName": "GkeInferenceQuickstartClient",
+          "fullName": "google.cloud.gkerecommender.v1.GkeInferenceQuickstartClient"
+        },
+        "method": {
+          "shortName": "GenerateOptimizedManifest",
+          "fullName": "google.cloud.gkerecommender.v1.GkeInferenceQuickstart.GenerateOptimizedManifest",
+          "service": {
+            "shortName": "GkeInferenceQuickstart",
+            "fullName": "google.cloud.gkerecommender.v1.GkeInferenceQuickstart"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gkerecommender_v1_generated_GkeInferenceQuickstart_FetchBenchmarkingData_async",
+      "title": "GkeInferenceQuickstart fetchBenchmarkingData Sample",
+      "origin": "API_DEFINITION",
+      "description": " Fetches all of the benchmarking data available for a profile. Benchmarking data returns all of the performance metrics available for a given model server setup on a given instance type.",
+      "canonical": true,
+      "file": "gke_inference_quickstart.fetch_benchmarking_data.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "FetchBenchmarkingData",
+        "fullName": "google.cloud.gkerecommender.v1.GkeInferenceQuickstart.FetchBenchmarkingData",
+        "async": true,
+        "parameters": [
+          {
+            "name": "model_server_info",
+            "type": ".google.cloud.gkerecommender.v1.ModelServerInfo"
+          },
+          {
+            "name": "instance_type",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "pricing_model",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.gkerecommender.v1.FetchBenchmarkingDataResponse",
+        "client": {
+          "shortName": "GkeInferenceQuickstartClient",
+          "fullName": "google.cloud.gkerecommender.v1.GkeInferenceQuickstartClient"
+        },
+        "method": {
+          "shortName": "FetchBenchmarkingData",
+          "fullName": "google.cloud.gkerecommender.v1.GkeInferenceQuickstart.FetchBenchmarkingData",
+          "service": {
+            "shortName": "GkeInferenceQuickstart",
+            "fullName": "google.cloud.gkerecommender.v1.GkeInferenceQuickstart"
+          }
+        }
+      }
+    }
+  ]
+}
