@@ -228,35 +228,6 @@ export class SqlFeatureEligibilityServiceClient {
           (this._protos as any).google.cloud.sql.v1.SqlFeatureEligibilityService,
         this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
-    // Iterate over each of the methods that the service provides
-    // and create an API call method for each.
-    const sqlFeatureEligibilityServiceStubMethods =
-        [];
-    for (const methodName of sqlFeatureEligibilityServiceStubMethods) {
-      const callPromise = this.sqlFeatureEligibilityServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
-          throw err;
-        });
-
-      const descriptor =
-        undefined;
-      const apiCall = this._gaxModule.createApiCall(
-        callPromise,
-        this._defaults[methodName],
-        descriptor,
-        this._opts.fallback
-      );
-
-      this.innerApiCalls[methodName] = apiCall;
-    }
-
     return this.sqlFeatureEligibilityServiceStub;
   }
 
