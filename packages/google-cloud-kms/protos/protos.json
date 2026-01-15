@@ -1425,6 +1425,14 @@
                       }
                     },
                     "AccessReason": {
+                      "valuesOptions": {
+                        "MODIFIED_CUSTOMER_INITIATED_ACCESS": {
+                          "deprecated": true
+                        },
+                        "MODIFIED_GOOGLE_INITIATED_SYSTEM_OPERATION": {
+                          "deprecated": true
+                        }
+                      },
                       "values": {
                         "REASON_UNSPECIFIED": 0,
                         "CUSTOMER_INITIATED_SUPPORT": 1,

@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -380,6 +380,334 @@ describe('v1beta.DataAgentServiceClient', () => {
             const expectedError = new Error('The client has already been closed.');
             client.close().catch(err => {throw err});
             await assert.rejects(client.getDataAgent(request), expectedError);
+        });
+    });
+
+    describe('createDataAgentSync', () => {
+        it('invokes createDataAgentSync without error', async () => {
+            const client = new dataagentserviceModule.v1beta.DataAgentServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.geminidataanalytics.v1beta.CreateDataAgentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.geminidataanalytics.v1beta.CreateDataAgentRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.geminidataanalytics.v1beta.DataAgent()
+            );
+            client.innerApiCalls.createDataAgentSync = stubSimpleCall(expectedResponse);
+            const [response] = await client.createDataAgentSync(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createDataAgentSync as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createDataAgentSync as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createDataAgentSync without error using callback', async () => {
+            const client = new dataagentserviceModule.v1beta.DataAgentServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.geminidataanalytics.v1beta.CreateDataAgentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.geminidataanalytics.v1beta.CreateDataAgentRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.geminidataanalytics.v1beta.DataAgent()
+            );
+            client.innerApiCalls.createDataAgentSync = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createDataAgentSync(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.geminidataanalytics.v1beta.IDataAgent|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createDataAgentSync as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createDataAgentSync as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createDataAgentSync with error', async () => {
+            const client = new dataagentserviceModule.v1beta.DataAgentServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.geminidataanalytics.v1beta.CreateDataAgentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.geminidataanalytics.v1beta.CreateDataAgentRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createDataAgentSync = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createDataAgentSync(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createDataAgentSync as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createDataAgentSync as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createDataAgentSync with closed client', async () => {
+            const client = new dataagentserviceModule.v1beta.DataAgentServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.geminidataanalytics.v1beta.CreateDataAgentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.geminidataanalytics.v1beta.CreateDataAgentRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createDataAgentSync(request), expectedError);
+        });
+    });
+
+    describe('updateDataAgentSync', () => {
+        it('invokes updateDataAgentSync without error', async () => {
+            const client = new dataagentserviceModule.v1beta.DataAgentServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.geminidataanalytics.v1beta.UpdateDataAgentRequest()
+            );
+            request.dataAgent ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.geminidataanalytics.v1beta.UpdateDataAgentRequest', ['dataAgent', 'name']);
+            request.dataAgent.name = defaultValue1;
+            const expectedHeaderRequestParams = `data_agent.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.geminidataanalytics.v1beta.DataAgent()
+            );
+            client.innerApiCalls.updateDataAgentSync = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateDataAgentSync(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateDataAgentSync as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateDataAgentSync as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateDataAgentSync without error using callback', async () => {
+            const client = new dataagentserviceModule.v1beta.DataAgentServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.geminidataanalytics.v1beta.UpdateDataAgentRequest()
+            );
+            request.dataAgent ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.geminidataanalytics.v1beta.UpdateDataAgentRequest', ['dataAgent', 'name']);
+            request.dataAgent.name = defaultValue1;
+            const expectedHeaderRequestParams = `data_agent.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.geminidataanalytics.v1beta.DataAgent()
+            );
+            client.innerApiCalls.updateDataAgentSync = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateDataAgentSync(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.geminidataanalytics.v1beta.IDataAgent|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateDataAgentSync as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateDataAgentSync as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateDataAgentSync with error', async () => {
+            const client = new dataagentserviceModule.v1beta.DataAgentServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.geminidataanalytics.v1beta.UpdateDataAgentRequest()
+            );
+            request.dataAgent ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.geminidataanalytics.v1beta.UpdateDataAgentRequest', ['dataAgent', 'name']);
+            request.dataAgent.name = defaultValue1;
+            const expectedHeaderRequestParams = `data_agent.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateDataAgentSync = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateDataAgentSync(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateDataAgentSync as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateDataAgentSync as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateDataAgentSync with closed client', async () => {
+            const client = new dataagentserviceModule.v1beta.DataAgentServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.geminidataanalytics.v1beta.UpdateDataAgentRequest()
+            );
+            request.dataAgent ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.geminidataanalytics.v1beta.UpdateDataAgentRequest', ['dataAgent', 'name']);
+            request.dataAgent.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateDataAgentSync(request), expectedError);
+        });
+    });
+
+    describe('deleteDataAgentSync', () => {
+        it('invokes deleteDataAgentSync without error', async () => {
+            const client = new dataagentserviceModule.v1beta.DataAgentServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.geminidataanalytics.v1beta.DeleteDataAgentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.geminidataanalytics.v1beta.DeleteDataAgentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteDataAgentSync = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteDataAgentSync(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteDataAgentSync as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteDataAgentSync as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteDataAgentSync without error using callback', async () => {
+            const client = new dataagentserviceModule.v1beta.DataAgentServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.geminidataanalytics.v1beta.DeleteDataAgentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.geminidataanalytics.v1beta.DeleteDataAgentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteDataAgentSync = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteDataAgentSync(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteDataAgentSync as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteDataAgentSync as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteDataAgentSync with error', async () => {
+            const client = new dataagentserviceModule.v1beta.DataAgentServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.geminidataanalytics.v1beta.DeleteDataAgentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.geminidataanalytics.v1beta.DeleteDataAgentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteDataAgentSync = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteDataAgentSync(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteDataAgentSync as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteDataAgentSync as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteDataAgentSync with closed client', async () => {
+            const client = new dataagentserviceModule.v1beta.DataAgentServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.geminidataanalytics.v1beta.DeleteDataAgentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.geminidataanalytics.v1beta.DeleteDataAgentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteDataAgentSync(request), expectedError);
         });
     });
 

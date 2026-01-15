@@ -1502,6 +1502,11 @@
                 "vulnerabilityAttestation": {
                   "type": "VulnerabilityAttestation",
                   "id": 10
+                },
+                "files": {
+                  "rule": "repeated",
+                  "type": "File",
+                  "id": 11
                 }
               },
               "nested": {
@@ -1578,6 +1583,19 @@
                         "SUCCESS": 1,
                         "FAILURE": 2
                       }
+                    }
+                  }
+                },
+                "File": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "digest": {
+                      "keyType": "string",
+                      "type": "string",
+                      "id": 2
                     }
                   }
                 }
@@ -2215,6 +2233,10 @@
                 "pageToken": {
                   "type": "string",
                   "id": 4
+                },
+                "returnPartialSuccess": {
+                  "type": "bool",
+                  "id": 5
                 }
               }
             },
@@ -2228,6 +2250,14 @@
                 "nextPageToken": {
                   "type": "string",
                   "id": 2
+                },
+                "unreachable": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 3,
+                  "options": {
+                    "(google.api.field_behavior)": "UNORDERED_LIST"
+                  }
                 }
               }
             },
@@ -2330,6 +2360,10 @@
                 "pageToken": {
                   "type": "string",
                   "id": 4
+                },
+                "returnPartialSuccess": {
+                  "type": "bool",
+                  "id": 5
                 }
               }
             },
@@ -2343,6 +2377,14 @@
                 "nextPageToken": {
                   "type": "string",
                   "id": 2
+                },
+                "unreachable": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 3,
+                  "options": {
+                    "(google.api.field_behavior)": "UNORDERED_LIST"
+                  }
                 }
               }
             },
@@ -2858,6 +2900,14 @@
                   "options": {
                     "(google.api.field_behavior)": "OPTIONAL"
                   }
+                },
+                "data": {
+                  "type": "google.protobuf.Any",
+                  "id": 4
+                },
+                "digest": {
+                  "type": "Digest",
+                  "id": 5
                 }
               }
             },
@@ -2915,7 +2965,27 @@
               "values": {
                 "SECRET_KIND_UNSPECIFIED": 0,
                 "SECRET_KIND_UNKNOWN": 1,
-                "SECRET_KIND_GCP_SERVICE_ACCOUNT_KEY": 2
+                "SECRET_KIND_GCP_SERVICE_ACCOUNT_KEY": 2,
+                "SECRET_KIND_GCP_API_KEY": 3,
+                "SECRET_KIND_GCP_OAUTH2_CLIENT_CREDENTIALS": 4,
+                "SECRET_KIND_GCP_OAUTH2_ACCESS_TOKEN": 5,
+                "SECRET_KIND_ANTHROPIC_ADMIN_API_KEY": 6,
+                "SECRET_KIND_ANTHROPIC_API_KEY": 7,
+                "SECRET_KIND_AZURE_ACCESS_TOKEN": 8,
+                "SECRET_KIND_AZURE_IDENTITY_TOKEN": 9,
+                "SECRET_KIND_DOCKER_HUB_PERSONAL_ACCESS_TOKEN": 10,
+                "SECRET_KIND_GITHUB_APP_REFRESH_TOKEN": 11,
+                "SECRET_KIND_GITHUB_APP_SERVER_TO_SERVER_TOKEN": 12,
+                "SECRET_KIND_GITHUB_APP_USER_TO_SERVER_TOKEN": 13,
+                "SECRET_KIND_GITHUB_CLASSIC_PERSONAL_ACCESS_TOKEN": 14,
+                "SECRET_KIND_GITHUB_FINE_GRAINED_PERSONAL_ACCESS_TOKEN": 15,
+                "SECRET_KIND_GITHUB_OAUTH_TOKEN": 16,
+                "SECRET_KIND_HUGGINGFACE_API_KEY": 17,
+                "SECRET_KIND_OPENAI_API_KEY": 18,
+                "SECRET_KIND_PERPLEXITY_API_KEY": 19,
+                "SECRET_KIND_STRIPE_SECRET_KEY": 20,
+                "SECRET_KIND_STRIPE_RESTRICTED_KEY": 21,
+                "SECRET_KIND_STRIPE_WEBHOOK_SECRET": 22
               }
             },
             "UpgradeNote": {
@@ -3416,6 +3486,10 @@
                 "extraDetails": {
                   "type": "string",
                   "id": 14
+                },
+                "risk": {
+                  "type": "Risk",
+                  "id": 15
                 }
               },
               "nested": {
@@ -3508,6 +3582,38 @@
                       "id": 7
                     }
                   }
+                }
+              }
+            },
+            "Risk": {
+              "fields": {
+                "cisaKev": {
+                  "type": "CISAKnownExploitedVulnerabilities",
+                  "id": 1
+                },
+                "epss": {
+                  "type": "ExploitPredictionScoringSystem",
+                  "id": 2
+                }
+              }
+            },
+            "CISAKnownExploitedVulnerabilities": {
+              "fields": {
+                "knownRansomwareCampaignUse": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "ExploitPredictionScoringSystem": {
+              "fields": {
+                "percentile": {
+                  "type": "double",
+                  "id": 1
+                },
+                "score": {
+                  "type": "double",
+                  "id": 2
                 }
               }
             }

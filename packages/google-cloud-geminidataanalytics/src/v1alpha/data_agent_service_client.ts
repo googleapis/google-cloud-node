@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -292,7 +292,7 @@ export class DataAgentServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const dataAgentServiceStubMethods =
-        ['listDataAgents', 'listAccessibleDataAgents', 'getDataAgent', 'createDataAgent', 'updateDataAgent', 'deleteDataAgent', 'getIamPolicy', 'setIamPolicy'];
+        ['listDataAgents', 'listAccessibleDataAgents', 'getDataAgent', 'createDataAgent', 'createDataAgentSync', 'updateDataAgent', 'updateDataAgentSync', 'deleteDataAgent', 'deleteDataAgentSync', 'getIamPolicy', 'setIamPolicy'];
     for (const methodName of dataAgentServiceStubMethods) {
       const callPromise = this.dataAgentServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -481,6 +481,344 @@ export class DataAgentServiceClient {
         {}|undefined
       ]) => {
         this._log.info('getDataAgent response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Creates a new DataAgent in a given project and location synchronously.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Value for parent.
+ * @param {string} [request.dataAgentId]
+ *   Optional. Id of the requesting object. Must be unique within the parent.
+ *   The allowed format is: `^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$`.
+ *   If not provided, the server will auto-generate a value for the id.
+ * @param {google.cloud.geminidataanalytics.v1alpha.DataAgent} request.dataAgent
+ *   Required. The resource being created.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.geminidataanalytics.v1alpha.DataAgent|DataAgent}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/data_agent_service.create_data_agent_sync.js</caption>
+ * region_tag:geminidataanalytics_v1alpha_generated_DataAgentService_CreateDataAgentSync_async
+ */
+  createDataAgentSync(
+      request?: protos.google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+        protos.google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest|undefined, {}|undefined
+      ]>;
+  createDataAgentSync(
+      request: protos.google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+          protos.google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest|null|undefined,
+          {}|null|undefined>): void;
+  createDataAgentSync(
+      request: protos.google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest,
+      callback: Callback<
+          protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+          protos.google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest|null|undefined,
+          {}|null|undefined>): void;
+  createDataAgentSync(
+      request?: protos.google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+          protos.google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+          protos.google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+        protos.google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('createDataAgentSync request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+        protos.google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createDataAgentSync response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.createDataAgentSync(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+        protos.google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createDataAgentSync response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Updates the parameters of a single DataAgent synchronously.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. Field mask is used to specify the fields to be overwritten in the
+ *   DataAgent resource by the update.
+ *   The fields specified in the update_mask are relative to the resource, not
+ *   the full request. A field will be overwritten if it is in the mask. If the
+ *   user does not provide a mask then all fields with non-default values
+ *   present in the request will be overwritten. If a wildcard mask is provided,
+ *   all fields will be overwritten.
+ * @param {google.cloud.geminidataanalytics.v1alpha.DataAgent} request.dataAgent
+ *   Required. The resource being updated.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.geminidataanalytics.v1alpha.DataAgent|DataAgent}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/data_agent_service.update_data_agent_sync.js</caption>
+ * region_tag:geminidataanalytics_v1alpha_generated_DataAgentService_UpdateDataAgentSync_async
+ */
+  updateDataAgentSync(
+      request?: protos.google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+        protos.google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest|undefined, {}|undefined
+      ]>;
+  updateDataAgentSync(
+      request: protos.google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+          protos.google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateDataAgentSync(
+      request: protos.google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest,
+      callback: Callback<
+          protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+          protos.google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateDataAgentSync(
+      request?: protos.google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+          protos.google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+          protos.google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+        protos.google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'data_agent.name': request.dataAgent!.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('updateDataAgentSync request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+        protos.google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateDataAgentSync response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.updateDataAgentSync(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+        protos.google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateDataAgentSync response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Deletes a single DataAgent synchronously.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/data_agent_service.delete_data_agent_sync.js</caption>
+ * region_tag:geminidataanalytics_v1alpha_generated_DataAgentService_DeleteDataAgentSync_async
+ */
+  deleteDataAgentSync(
+      request?: protos.google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest|undefined, {}|undefined
+      ]>;
+  deleteDataAgentSync(
+      request: protos.google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteDataAgentSync(
+      request: protos.google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteDataAgentSync(
+      request?: protos.google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('deleteDataAgentSync request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteDataAgentSync response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.deleteDataAgentSync(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteDataAgentSync response %j', response);
         return [response, options, rawResponse];
       }).catch((error: any) => {
         if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {

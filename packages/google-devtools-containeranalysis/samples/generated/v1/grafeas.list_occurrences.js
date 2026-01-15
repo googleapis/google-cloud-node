@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -46,6 +46,13 @@ function main(parent) {
    *  Token to provide to skip to a particular spot in the list.
    */
   // const pageToken = 'abc123'
+  /**
+   *  If set, the request will return all reachable Occurrences
+   *  and report all unreachable regions in the `unreachable` field in
+   *  the response.
+   *  Only applicable for requests in the global region.
+   */
+  // const returnPartialSuccess = true
 
   // Imports the Containeranalysis library
   const {GrafeasClient} = require('@google-cloud/containeranalysis').v1;

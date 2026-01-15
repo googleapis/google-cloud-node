@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19712,6 +19712,7 @@
                  * @property {google.protobuf.ITimestamp|null} [archiveTime] DiscoveryOccurrence archiveTime
                  * @property {grafeas.v1.DiscoveryOccurrence.ISBOMStatus|null} [sbomStatus] DiscoveryOccurrence sbomStatus
                  * @property {grafeas.v1.DiscoveryOccurrence.IVulnerabilityAttestation|null} [vulnerabilityAttestation] DiscoveryOccurrence vulnerabilityAttestation
+                 * @property {Array.<grafeas.v1.DiscoveryOccurrence.IFile>|null} [files] DiscoveryOccurrence files
                  */
     
                 /**
@@ -19724,6 +19725,7 @@
                  */
                 function DiscoveryOccurrence(properties) {
                     this.analysisError = [];
+                    this.files = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -19811,6 +19813,14 @@
                 DiscoveryOccurrence.prototype.vulnerabilityAttestation = null;
     
                 /**
+                 * DiscoveryOccurrence files.
+                 * @member {Array.<grafeas.v1.DiscoveryOccurrence.IFile>} files
+                 * @memberof grafeas.v1.DiscoveryOccurrence
+                 * @instance
+                 */
+                DiscoveryOccurrence.prototype.files = $util.emptyArray;
+    
+                /**
                  * Creates a new DiscoveryOccurrence instance using the specified properties.
                  * @function create
                  * @memberof grafeas.v1.DiscoveryOccurrence
@@ -19855,6 +19865,9 @@
                         $root.grafeas.v1.DiscoveryOccurrence.SBOMStatus.encode(message.sbomStatus, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                     if (message.vulnerabilityAttestation != null && Object.hasOwnProperty.call(message, "vulnerabilityAttestation"))
                         $root.grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation.encode(message.vulnerabilityAttestation, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                    if (message.files != null && message.files.length)
+                        for (var i = 0; i < message.files.length; ++i)
+                            $root.grafeas.v1.DiscoveryOccurrence.File.encode(message.files[i], writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                     return writer;
                 };
     
@@ -19931,6 +19944,12 @@
                             }
                         case 10: {
                                 message.vulnerabilityAttestation = $root.grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 11: {
+                                if (!(message.files && message.files.length))
+                                    message.files = [];
+                                message.files.push($root.grafeas.v1.DiscoveryOccurrence.File.decode(reader, reader.uint32()));
                                 break;
                             }
                         default:
@@ -20031,6 +20050,15 @@
                         var error = $root.grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation.verify(message.vulnerabilityAttestation);
                         if (error)
                             return "vulnerabilityAttestation." + error;
+                    }
+                    if (message.files != null && message.hasOwnProperty("files")) {
+                        if (!Array.isArray(message.files))
+                            return "files: array expected";
+                        for (var i = 0; i < message.files.length; ++i) {
+                            var error = $root.grafeas.v1.DiscoveryOccurrence.File.verify(message.files[i]);
+                            if (error)
+                                return "files." + error;
+                        }
                     }
                     return null;
                 };
@@ -20145,6 +20173,16 @@
                             throw TypeError(".grafeas.v1.DiscoveryOccurrence.vulnerabilityAttestation: object expected");
                         message.vulnerabilityAttestation = $root.grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation.fromObject(object.vulnerabilityAttestation);
                     }
+                    if (object.files) {
+                        if (!Array.isArray(object.files))
+                            throw TypeError(".grafeas.v1.DiscoveryOccurrence.files: array expected");
+                        message.files = [];
+                        for (var i = 0; i < object.files.length; ++i) {
+                            if (typeof object.files[i] !== "object")
+                                throw TypeError(".grafeas.v1.DiscoveryOccurrence.files: object expected");
+                            message.files[i] = $root.grafeas.v1.DiscoveryOccurrence.File.fromObject(object.files[i]);
+                        }
+                    }
                     return message;
                 };
     
@@ -20161,8 +20199,10 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.arrays || options.defaults)
+                    if (options.arrays || options.defaults) {
                         object.analysisError = [];
+                        object.files = [];
+                    }
                     if (options.defaults) {
                         object.continuousAnalysis = options.enums === String ? "CONTINUOUS_ANALYSIS_UNSPECIFIED" : 0;
                         object.analysisStatus = options.enums === String ? "ANALYSIS_STATUS_UNSPECIFIED" : 0;
@@ -20197,6 +20237,11 @@
                         object.sbomStatus = $root.grafeas.v1.DiscoveryOccurrence.SBOMStatus.toObject(message.sbomStatus, options);
                     if (message.vulnerabilityAttestation != null && message.hasOwnProperty("vulnerabilityAttestation"))
                         object.vulnerabilityAttestation = $root.grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation.toObject(message.vulnerabilityAttestation, options);
+                    if (message.files && message.files.length) {
+                        object.files = [];
+                        for (var j = 0; j < message.files.length; ++j)
+                            object.files[j] = $root.grafeas.v1.DiscoveryOccurrence.File.toObject(message.files[j], options);
+                    }
                     return object;
                 };
     
@@ -21051,6 +21096,270 @@
                     })();
     
                     return VulnerabilityAttestation;
+                })();
+    
+                DiscoveryOccurrence.File = (function() {
+    
+                    /**
+                     * Properties of a File.
+                     * @memberof grafeas.v1.DiscoveryOccurrence
+                     * @interface IFile
+                     * @property {string|null} [name] File name
+                     * @property {Object.<string,string>|null} [digest] File digest
+                     */
+    
+                    /**
+                     * Constructs a new File.
+                     * @memberof grafeas.v1.DiscoveryOccurrence
+                     * @classdesc Represents a File.
+                     * @implements IFile
+                     * @constructor
+                     * @param {grafeas.v1.DiscoveryOccurrence.IFile=} [properties] Properties to set
+                     */
+                    function File(properties) {
+                        this.digest = {};
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * File name.
+                     * @member {string} name
+                     * @memberof grafeas.v1.DiscoveryOccurrence.File
+                     * @instance
+                     */
+                    File.prototype.name = "";
+    
+                    /**
+                     * File digest.
+                     * @member {Object.<string,string>} digest
+                     * @memberof grafeas.v1.DiscoveryOccurrence.File
+                     * @instance
+                     */
+                    File.prototype.digest = $util.emptyObject;
+    
+                    /**
+                     * Creates a new File instance using the specified properties.
+                     * @function create
+                     * @memberof grafeas.v1.DiscoveryOccurrence.File
+                     * @static
+                     * @param {grafeas.v1.DiscoveryOccurrence.IFile=} [properties] Properties to set
+                     * @returns {grafeas.v1.DiscoveryOccurrence.File} File instance
+                     */
+                    File.create = function create(properties) {
+                        return new File(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified File message. Does not implicitly {@link grafeas.v1.DiscoveryOccurrence.File.verify|verify} messages.
+                     * @function encode
+                     * @memberof grafeas.v1.DiscoveryOccurrence.File
+                     * @static
+                     * @param {grafeas.v1.DiscoveryOccurrence.IFile} message File message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    File.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        if (message.digest != null && Object.hasOwnProperty.call(message, "digest"))
+                            for (var keys = Object.keys(message.digest), i = 0; i < keys.length; ++i)
+                                writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.digest[keys[i]]).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified File message, length delimited. Does not implicitly {@link grafeas.v1.DiscoveryOccurrence.File.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof grafeas.v1.DiscoveryOccurrence.File
+                     * @static
+                     * @param {grafeas.v1.DiscoveryOccurrence.IFile} message File message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    File.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a File message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof grafeas.v1.DiscoveryOccurrence.File
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {grafeas.v1.DiscoveryOccurrence.File} File
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    File.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.DiscoveryOccurrence.File(), key, value;
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    if (message.digest === $util.emptyObject)
+                                        message.digest = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.digest[key] = value;
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a File message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof grafeas.v1.DiscoveryOccurrence.File
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {grafeas.v1.DiscoveryOccurrence.File} File
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    File.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a File message.
+                     * @function verify
+                     * @memberof grafeas.v1.DiscoveryOccurrence.File
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    File.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        if (message.digest != null && message.hasOwnProperty("digest")) {
+                            if (!$util.isObject(message.digest))
+                                return "digest: object expected";
+                            var key = Object.keys(message.digest);
+                            for (var i = 0; i < key.length; ++i)
+                                if (!$util.isString(message.digest[key[i]]))
+                                    return "digest: string{k:string} expected";
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a File message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof grafeas.v1.DiscoveryOccurrence.File
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {grafeas.v1.DiscoveryOccurrence.File} File
+                     */
+                    File.fromObject = function fromObject(object) {
+                        if (object instanceof $root.grafeas.v1.DiscoveryOccurrence.File)
+                            return object;
+                        var message = new $root.grafeas.v1.DiscoveryOccurrence.File();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        if (object.digest) {
+                            if (typeof object.digest !== "object")
+                                throw TypeError(".grafeas.v1.DiscoveryOccurrence.File.digest: object expected");
+                            message.digest = {};
+                            for (var keys = Object.keys(object.digest), i = 0; i < keys.length; ++i)
+                                message.digest[keys[i]] = String(object.digest[keys[i]]);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a File message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof grafeas.v1.DiscoveryOccurrence.File
+                     * @static
+                     * @param {grafeas.v1.DiscoveryOccurrence.File} message File
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    File.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.objects || options.defaults)
+                            object.digest = {};
+                        if (options.defaults)
+                            object.name = "";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        var keys2;
+                        if (message.digest && (keys2 = Object.keys(message.digest)).length) {
+                            object.digest = {};
+                            for (var j = 0; j < keys2.length; ++j)
+                                object.digest[keys2[j]] = message.digest[keys2[j]];
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this File to JSON.
+                     * @function toJSON
+                     * @memberof grafeas.v1.DiscoveryOccurrence.File
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    File.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for File
+                     * @function getTypeUrl
+                     * @memberof grafeas.v1.DiscoveryOccurrence.File
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    File.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/grafeas.v1.DiscoveryOccurrence.File";
+                    };
+    
+                    return File;
                 })();
     
                 return DiscoveryOccurrence;
@@ -24326,6 +24635,7 @@
                  * @property {string|null} [filter] ListOccurrencesRequest filter
                  * @property {number|null} [pageSize] ListOccurrencesRequest pageSize
                  * @property {string|null} [pageToken] ListOccurrencesRequest pageToken
+                 * @property {boolean|null} [returnPartialSuccess] ListOccurrencesRequest returnPartialSuccess
                  */
     
                 /**
@@ -24376,6 +24686,14 @@
                 ListOccurrencesRequest.prototype.pageToken = "";
     
                 /**
+                 * ListOccurrencesRequest returnPartialSuccess.
+                 * @member {boolean} returnPartialSuccess
+                 * @memberof grafeas.v1.ListOccurrencesRequest
+                 * @instance
+                 */
+                ListOccurrencesRequest.prototype.returnPartialSuccess = false;
+    
+                /**
                  * Creates a new ListOccurrencesRequest instance using the specified properties.
                  * @function create
                  * @memberof grafeas.v1.ListOccurrencesRequest
@@ -24407,6 +24725,8 @@
                         writer.uint32(/* id 3, wireType 0 =*/24).int32(message.pageSize);
                     if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                         writer.uint32(/* id 4, wireType 2 =*/34).string(message.pageToken);
+                    if (message.returnPartialSuccess != null && Object.hasOwnProperty.call(message, "returnPartialSuccess"))
+                        writer.uint32(/* id 5, wireType 0 =*/40).bool(message.returnPartialSuccess);
                     return writer;
                 };
     
@@ -24459,6 +24779,10 @@
                                 message.pageToken = reader.string();
                                 break;
                             }
+                        case 5: {
+                                message.returnPartialSuccess = reader.bool();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -24506,6 +24830,9 @@
                     if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                         if (!$util.isString(message.pageToken))
                             return "pageToken: string expected";
+                    if (message.returnPartialSuccess != null && message.hasOwnProperty("returnPartialSuccess"))
+                        if (typeof message.returnPartialSuccess !== "boolean")
+                            return "returnPartialSuccess: boolean expected";
                     return null;
                 };
     
@@ -24529,6 +24856,8 @@
                         message.pageSize = object.pageSize | 0;
                     if (object.pageToken != null)
                         message.pageToken = String(object.pageToken);
+                    if (object.returnPartialSuccess != null)
+                        message.returnPartialSuccess = Boolean(object.returnPartialSuccess);
                     return message;
                 };
     
@@ -24550,6 +24879,7 @@
                         object.filter = "";
                         object.pageSize = 0;
                         object.pageToken = "";
+                        object.returnPartialSuccess = false;
                     }
                     if (message.parent != null && message.hasOwnProperty("parent"))
                         object.parent = message.parent;
@@ -24559,6 +24889,8 @@
                         object.pageSize = message.pageSize;
                     if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                         object.pageToken = message.pageToken;
+                    if (message.returnPartialSuccess != null && message.hasOwnProperty("returnPartialSuccess"))
+                        object.returnPartialSuccess = message.returnPartialSuccess;
                     return object;
                 };
     
@@ -24599,6 +24931,7 @@
                  * @interface IListOccurrencesResponse
                  * @property {Array.<grafeas.v1.IOccurrence>|null} [occurrences] ListOccurrencesResponse occurrences
                  * @property {string|null} [nextPageToken] ListOccurrencesResponse nextPageToken
+                 * @property {Array.<string>|null} [unreachable] ListOccurrencesResponse unreachable
                  */
     
                 /**
@@ -24611,6 +24944,7 @@
                  */
                 function ListOccurrencesResponse(properties) {
                     this.occurrences = [];
+                    this.unreachable = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -24632,6 +24966,14 @@
                  * @instance
                  */
                 ListOccurrencesResponse.prototype.nextPageToken = "";
+    
+                /**
+                 * ListOccurrencesResponse unreachable.
+                 * @member {Array.<string>} unreachable
+                 * @memberof grafeas.v1.ListOccurrencesResponse
+                 * @instance
+                 */
+                ListOccurrencesResponse.prototype.unreachable = $util.emptyArray;
     
                 /**
                  * Creates a new ListOccurrencesResponse instance using the specified properties.
@@ -24662,6 +25004,9 @@
                             $root.grafeas.v1.Occurrence.encode(message.occurrences[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                     if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                         writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                    if (message.unreachable != null && message.unreachable.length)
+                        for (var i = 0; i < message.unreachable.length; ++i)
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
                     return writer;
                 };
     
@@ -24706,6 +25051,12 @@
                             }
                         case 2: {
                                 message.nextPageToken = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                if (!(message.unreachable && message.unreachable.length))
+                                    message.unreachable = [];
+                                message.unreachable.push(reader.string());
                                 break;
                             }
                         default:
@@ -24755,6 +25106,13 @@
                     if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
                         if (!$util.isString(message.nextPageToken))
                             return "nextPageToken: string expected";
+                    if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                        if (!Array.isArray(message.unreachable))
+                            return "unreachable: array expected";
+                        for (var i = 0; i < message.unreachable.length; ++i)
+                            if (!$util.isString(message.unreachable[i]))
+                                return "unreachable: string[] expected";
+                    }
                     return null;
                 };
     
@@ -24782,6 +25140,13 @@
                     }
                     if (object.nextPageToken != null)
                         message.nextPageToken = String(object.nextPageToken);
+                    if (object.unreachable) {
+                        if (!Array.isArray(object.unreachable))
+                            throw TypeError(".grafeas.v1.ListOccurrencesResponse.unreachable: array expected");
+                        message.unreachable = [];
+                        for (var i = 0; i < object.unreachable.length; ++i)
+                            message.unreachable[i] = String(object.unreachable[i]);
+                    }
                     return message;
                 };
     
@@ -24798,8 +25163,10 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.arrays || options.defaults)
+                    if (options.arrays || options.defaults) {
                         object.occurrences = [];
+                        object.unreachable = [];
+                    }
                     if (options.defaults)
                         object.nextPageToken = "";
                     if (message.occurrences && message.occurrences.length) {
@@ -24809,6 +25176,11 @@
                     }
                     if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
                         object.nextPageToken = message.nextPageToken;
+                    if (message.unreachable && message.unreachable.length) {
+                        object.unreachable = [];
+                        for (var j = 0; j < message.unreachable.length; ++j)
+                            object.unreachable[j] = message.unreachable[j];
+                    }
                     return object;
                 };
     
@@ -25962,6 +26334,7 @@
                  * @property {string|null} [filter] ListNotesRequest filter
                  * @property {number|null} [pageSize] ListNotesRequest pageSize
                  * @property {string|null} [pageToken] ListNotesRequest pageToken
+                 * @property {boolean|null} [returnPartialSuccess] ListNotesRequest returnPartialSuccess
                  */
     
                 /**
@@ -26012,6 +26385,14 @@
                 ListNotesRequest.prototype.pageToken = "";
     
                 /**
+                 * ListNotesRequest returnPartialSuccess.
+                 * @member {boolean} returnPartialSuccess
+                 * @memberof grafeas.v1.ListNotesRequest
+                 * @instance
+                 */
+                ListNotesRequest.prototype.returnPartialSuccess = false;
+    
+                /**
                  * Creates a new ListNotesRequest instance using the specified properties.
                  * @function create
                  * @memberof grafeas.v1.ListNotesRequest
@@ -26043,6 +26424,8 @@
                         writer.uint32(/* id 3, wireType 0 =*/24).int32(message.pageSize);
                     if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                         writer.uint32(/* id 4, wireType 2 =*/34).string(message.pageToken);
+                    if (message.returnPartialSuccess != null && Object.hasOwnProperty.call(message, "returnPartialSuccess"))
+                        writer.uint32(/* id 5, wireType 0 =*/40).bool(message.returnPartialSuccess);
                     return writer;
                 };
     
@@ -26095,6 +26478,10 @@
                                 message.pageToken = reader.string();
                                 break;
                             }
+                        case 5: {
+                                message.returnPartialSuccess = reader.bool();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -26142,6 +26529,9 @@
                     if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                         if (!$util.isString(message.pageToken))
                             return "pageToken: string expected";
+                    if (message.returnPartialSuccess != null && message.hasOwnProperty("returnPartialSuccess"))
+                        if (typeof message.returnPartialSuccess !== "boolean")
+                            return "returnPartialSuccess: boolean expected";
                     return null;
                 };
     
@@ -26165,6 +26555,8 @@
                         message.pageSize = object.pageSize | 0;
                     if (object.pageToken != null)
                         message.pageToken = String(object.pageToken);
+                    if (object.returnPartialSuccess != null)
+                        message.returnPartialSuccess = Boolean(object.returnPartialSuccess);
                     return message;
                 };
     
@@ -26186,6 +26578,7 @@
                         object.filter = "";
                         object.pageSize = 0;
                         object.pageToken = "";
+                        object.returnPartialSuccess = false;
                     }
                     if (message.parent != null && message.hasOwnProperty("parent"))
                         object.parent = message.parent;
@@ -26195,6 +26588,8 @@
                         object.pageSize = message.pageSize;
                     if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                         object.pageToken = message.pageToken;
+                    if (message.returnPartialSuccess != null && message.hasOwnProperty("returnPartialSuccess"))
+                        object.returnPartialSuccess = message.returnPartialSuccess;
                     return object;
                 };
     
@@ -26235,6 +26630,7 @@
                  * @interface IListNotesResponse
                  * @property {Array.<grafeas.v1.INote>|null} [notes] ListNotesResponse notes
                  * @property {string|null} [nextPageToken] ListNotesResponse nextPageToken
+                 * @property {Array.<string>|null} [unreachable] ListNotesResponse unreachable
                  */
     
                 /**
@@ -26247,6 +26643,7 @@
                  */
                 function ListNotesResponse(properties) {
                     this.notes = [];
+                    this.unreachable = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -26268,6 +26665,14 @@
                  * @instance
                  */
                 ListNotesResponse.prototype.nextPageToken = "";
+    
+                /**
+                 * ListNotesResponse unreachable.
+                 * @member {Array.<string>} unreachable
+                 * @memberof grafeas.v1.ListNotesResponse
+                 * @instance
+                 */
+                ListNotesResponse.prototype.unreachable = $util.emptyArray;
     
                 /**
                  * Creates a new ListNotesResponse instance using the specified properties.
@@ -26298,6 +26703,9 @@
                             $root.grafeas.v1.Note.encode(message.notes[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                     if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                         writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                    if (message.unreachable != null && message.unreachable.length)
+                        for (var i = 0; i < message.unreachable.length; ++i)
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
                     return writer;
                 };
     
@@ -26342,6 +26750,12 @@
                             }
                         case 2: {
                                 message.nextPageToken = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                if (!(message.unreachable && message.unreachable.length))
+                                    message.unreachable = [];
+                                message.unreachable.push(reader.string());
                                 break;
                             }
                         default:
@@ -26391,6 +26805,13 @@
                     if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
                         if (!$util.isString(message.nextPageToken))
                             return "nextPageToken: string expected";
+                    if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                        if (!Array.isArray(message.unreachable))
+                            return "unreachable: array expected";
+                        for (var i = 0; i < message.unreachable.length; ++i)
+                            if (!$util.isString(message.unreachable[i]))
+                                return "unreachable: string[] expected";
+                    }
                     return null;
                 };
     
@@ -26418,6 +26839,13 @@
                     }
                     if (object.nextPageToken != null)
                         message.nextPageToken = String(object.nextPageToken);
+                    if (object.unreachable) {
+                        if (!Array.isArray(object.unreachable))
+                            throw TypeError(".grafeas.v1.ListNotesResponse.unreachable: array expected");
+                        message.unreachable = [];
+                        for (var i = 0; i < object.unreachable.length; ++i)
+                            message.unreachable[i] = String(object.unreachable[i]);
+                    }
                     return message;
                 };
     
@@ -26434,8 +26862,10 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.arrays || options.defaults)
+                    if (options.arrays || options.defaults) {
                         object.notes = [];
+                        object.unreachable = [];
+                    }
                     if (options.defaults)
                         object.nextPageToken = "";
                     if (message.notes && message.notes.length) {
@@ -26445,6 +26875,11 @@
                     }
                     if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
                         object.nextPageToken = message.nextPageToken;
+                    if (message.unreachable && message.unreachable.length) {
+                        object.unreachable = [];
+                        for (var j = 0; j < message.unreachable.length; ++j)
+                            object.unreachable[j] = message.unreachable[j];
+                    }
                     return object;
                 };
     
@@ -32945,6 +33380,8 @@
                  * @property {grafeas.v1.SecretKind|null} [kind] SecretOccurrence kind
                  * @property {Array.<grafeas.v1.ISecretLocation>|null} [locations] SecretOccurrence locations
                  * @property {Array.<grafeas.v1.ISecretStatus>|null} [statuses] SecretOccurrence statuses
+                 * @property {google.protobuf.IAny|null} [data] SecretOccurrence data
+                 * @property {grafeas.v1.IDigest|null} [digest] SecretOccurrence digest
                  */
     
                 /**
@@ -32989,6 +33426,22 @@
                 SecretOccurrence.prototype.statuses = $util.emptyArray;
     
                 /**
+                 * SecretOccurrence data.
+                 * @member {google.protobuf.IAny|null|undefined} data
+                 * @memberof grafeas.v1.SecretOccurrence
+                 * @instance
+                 */
+                SecretOccurrence.prototype.data = null;
+    
+                /**
+                 * SecretOccurrence digest.
+                 * @member {grafeas.v1.IDigest|null|undefined} digest
+                 * @memberof grafeas.v1.SecretOccurrence
+                 * @instance
+                 */
+                SecretOccurrence.prototype.digest = null;
+    
+                /**
                  * Creates a new SecretOccurrence instance using the specified properties.
                  * @function create
                  * @memberof grafeas.v1.SecretOccurrence
@@ -33020,6 +33473,10 @@
                     if (message.statuses != null && message.statuses.length)
                         for (var i = 0; i < message.statuses.length; ++i)
                             $root.grafeas.v1.SecretStatus.encode(message.statuses[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                    if (message.data != null && Object.hasOwnProperty.call(message, "data"))
+                        $root.google.protobuf.Any.encode(message.data, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                    if (message.digest != null && Object.hasOwnProperty.call(message, "digest"))
+                        $root.grafeas.v1.Digest.encode(message.digest, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                     return writer;
                 };
     
@@ -33072,6 +33529,14 @@
                                 message.statuses.push($root.grafeas.v1.SecretStatus.decode(reader, reader.uint32()));
                                 break;
                             }
+                        case 4: {
+                                message.data = $root.google.protobuf.Any.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 5: {
+                                message.digest = $root.grafeas.v1.Digest.decode(reader, reader.uint32());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -33114,6 +33579,26 @@
                         case 0:
                         case 1:
                         case 2:
+                        case 3:
+                        case 4:
+                        case 5:
+                        case 6:
+                        case 7:
+                        case 8:
+                        case 9:
+                        case 10:
+                        case 11:
+                        case 12:
+                        case 13:
+                        case 14:
+                        case 15:
+                        case 16:
+                        case 17:
+                        case 18:
+                        case 19:
+                        case 20:
+                        case 21:
+                        case 22:
                             break;
                         }
                     if (message.locations != null && message.hasOwnProperty("locations")) {
@@ -33133,6 +33618,16 @@
                             if (error)
                                 return "statuses." + error;
                         }
+                    }
+                    if (message.data != null && message.hasOwnProperty("data")) {
+                        var error = $root.google.protobuf.Any.verify(message.data);
+                        if (error)
+                            return "data." + error;
+                    }
+                    if (message.digest != null && message.hasOwnProperty("digest")) {
+                        var error = $root.grafeas.v1.Digest.verify(message.digest);
+                        if (error)
+                            return "digest." + error;
                     }
                     return null;
                 };
@@ -33168,6 +33663,86 @@
                     case 2:
                         message.kind = 2;
                         break;
+                    case "SECRET_KIND_GCP_API_KEY":
+                    case 3:
+                        message.kind = 3;
+                        break;
+                    case "SECRET_KIND_GCP_OAUTH2_CLIENT_CREDENTIALS":
+                    case 4:
+                        message.kind = 4;
+                        break;
+                    case "SECRET_KIND_GCP_OAUTH2_ACCESS_TOKEN":
+                    case 5:
+                        message.kind = 5;
+                        break;
+                    case "SECRET_KIND_ANTHROPIC_ADMIN_API_KEY":
+                    case 6:
+                        message.kind = 6;
+                        break;
+                    case "SECRET_KIND_ANTHROPIC_API_KEY":
+                    case 7:
+                        message.kind = 7;
+                        break;
+                    case "SECRET_KIND_AZURE_ACCESS_TOKEN":
+                    case 8:
+                        message.kind = 8;
+                        break;
+                    case "SECRET_KIND_AZURE_IDENTITY_TOKEN":
+                    case 9:
+                        message.kind = 9;
+                        break;
+                    case "SECRET_KIND_DOCKER_HUB_PERSONAL_ACCESS_TOKEN":
+                    case 10:
+                        message.kind = 10;
+                        break;
+                    case "SECRET_KIND_GITHUB_APP_REFRESH_TOKEN":
+                    case 11:
+                        message.kind = 11;
+                        break;
+                    case "SECRET_KIND_GITHUB_APP_SERVER_TO_SERVER_TOKEN":
+                    case 12:
+                        message.kind = 12;
+                        break;
+                    case "SECRET_KIND_GITHUB_APP_USER_TO_SERVER_TOKEN":
+                    case 13:
+                        message.kind = 13;
+                        break;
+                    case "SECRET_KIND_GITHUB_CLASSIC_PERSONAL_ACCESS_TOKEN":
+                    case 14:
+                        message.kind = 14;
+                        break;
+                    case "SECRET_KIND_GITHUB_FINE_GRAINED_PERSONAL_ACCESS_TOKEN":
+                    case 15:
+                        message.kind = 15;
+                        break;
+                    case "SECRET_KIND_GITHUB_OAUTH_TOKEN":
+                    case 16:
+                        message.kind = 16;
+                        break;
+                    case "SECRET_KIND_HUGGINGFACE_API_KEY":
+                    case 17:
+                        message.kind = 17;
+                        break;
+                    case "SECRET_KIND_OPENAI_API_KEY":
+                    case 18:
+                        message.kind = 18;
+                        break;
+                    case "SECRET_KIND_PERPLEXITY_API_KEY":
+                    case 19:
+                        message.kind = 19;
+                        break;
+                    case "SECRET_KIND_STRIPE_SECRET_KEY":
+                    case 20:
+                        message.kind = 20;
+                        break;
+                    case "SECRET_KIND_STRIPE_RESTRICTED_KEY":
+                    case 21:
+                        message.kind = 21;
+                        break;
+                    case "SECRET_KIND_STRIPE_WEBHOOK_SECRET":
+                    case 22:
+                        message.kind = 22;
+                        break;
                     }
                     if (object.locations) {
                         if (!Array.isArray(object.locations))
@@ -33189,6 +33764,16 @@
                             message.statuses[i] = $root.grafeas.v1.SecretStatus.fromObject(object.statuses[i]);
                         }
                     }
+                    if (object.data != null) {
+                        if (typeof object.data !== "object")
+                            throw TypeError(".grafeas.v1.SecretOccurrence.data: object expected");
+                        message.data = $root.google.protobuf.Any.fromObject(object.data);
+                    }
+                    if (object.digest != null) {
+                        if (typeof object.digest !== "object")
+                            throw TypeError(".grafeas.v1.SecretOccurrence.digest: object expected");
+                        message.digest = $root.grafeas.v1.Digest.fromObject(object.digest);
+                    }
                     return message;
                 };
     
@@ -33209,8 +33794,11 @@
                         object.locations = [];
                         object.statuses = [];
                     }
-                    if (options.defaults)
+                    if (options.defaults) {
                         object.kind = options.enums === String ? "SECRET_KIND_UNSPECIFIED" : 0;
+                        object.data = null;
+                        object.digest = null;
+                    }
                     if (message.kind != null && message.hasOwnProperty("kind"))
                         object.kind = options.enums === String ? $root.grafeas.v1.SecretKind[message.kind] === undefined ? message.kind : $root.grafeas.v1.SecretKind[message.kind] : message.kind;
                     if (message.locations && message.locations.length) {
@@ -33223,6 +33811,10 @@
                         for (var j = 0; j < message.statuses.length; ++j)
                             object.statuses[j] = $root.grafeas.v1.SecretStatus.toObject(message.statuses[j], options);
                     }
+                    if (message.data != null && message.hasOwnProperty("data"))
+                        object.data = $root.google.protobuf.Any.toObject(message.data, options);
+                    if (message.digest != null && message.hasOwnProperty("digest"))
+                        object.digest = $root.grafeas.v1.Digest.toObject(message.digest, options);
                     return object;
                 };
     
@@ -33795,12 +34387,52 @@
              * @property {number} SECRET_KIND_UNSPECIFIED=0 SECRET_KIND_UNSPECIFIED value
              * @property {number} SECRET_KIND_UNKNOWN=1 SECRET_KIND_UNKNOWN value
              * @property {number} SECRET_KIND_GCP_SERVICE_ACCOUNT_KEY=2 SECRET_KIND_GCP_SERVICE_ACCOUNT_KEY value
+             * @property {number} SECRET_KIND_GCP_API_KEY=3 SECRET_KIND_GCP_API_KEY value
+             * @property {number} SECRET_KIND_GCP_OAUTH2_CLIENT_CREDENTIALS=4 SECRET_KIND_GCP_OAUTH2_CLIENT_CREDENTIALS value
+             * @property {number} SECRET_KIND_GCP_OAUTH2_ACCESS_TOKEN=5 SECRET_KIND_GCP_OAUTH2_ACCESS_TOKEN value
+             * @property {number} SECRET_KIND_ANTHROPIC_ADMIN_API_KEY=6 SECRET_KIND_ANTHROPIC_ADMIN_API_KEY value
+             * @property {number} SECRET_KIND_ANTHROPIC_API_KEY=7 SECRET_KIND_ANTHROPIC_API_KEY value
+             * @property {number} SECRET_KIND_AZURE_ACCESS_TOKEN=8 SECRET_KIND_AZURE_ACCESS_TOKEN value
+             * @property {number} SECRET_KIND_AZURE_IDENTITY_TOKEN=9 SECRET_KIND_AZURE_IDENTITY_TOKEN value
+             * @property {number} SECRET_KIND_DOCKER_HUB_PERSONAL_ACCESS_TOKEN=10 SECRET_KIND_DOCKER_HUB_PERSONAL_ACCESS_TOKEN value
+             * @property {number} SECRET_KIND_GITHUB_APP_REFRESH_TOKEN=11 SECRET_KIND_GITHUB_APP_REFRESH_TOKEN value
+             * @property {number} SECRET_KIND_GITHUB_APP_SERVER_TO_SERVER_TOKEN=12 SECRET_KIND_GITHUB_APP_SERVER_TO_SERVER_TOKEN value
+             * @property {number} SECRET_KIND_GITHUB_APP_USER_TO_SERVER_TOKEN=13 SECRET_KIND_GITHUB_APP_USER_TO_SERVER_TOKEN value
+             * @property {number} SECRET_KIND_GITHUB_CLASSIC_PERSONAL_ACCESS_TOKEN=14 SECRET_KIND_GITHUB_CLASSIC_PERSONAL_ACCESS_TOKEN value
+             * @property {number} SECRET_KIND_GITHUB_FINE_GRAINED_PERSONAL_ACCESS_TOKEN=15 SECRET_KIND_GITHUB_FINE_GRAINED_PERSONAL_ACCESS_TOKEN value
+             * @property {number} SECRET_KIND_GITHUB_OAUTH_TOKEN=16 SECRET_KIND_GITHUB_OAUTH_TOKEN value
+             * @property {number} SECRET_KIND_HUGGINGFACE_API_KEY=17 SECRET_KIND_HUGGINGFACE_API_KEY value
+             * @property {number} SECRET_KIND_OPENAI_API_KEY=18 SECRET_KIND_OPENAI_API_KEY value
+             * @property {number} SECRET_KIND_PERPLEXITY_API_KEY=19 SECRET_KIND_PERPLEXITY_API_KEY value
+             * @property {number} SECRET_KIND_STRIPE_SECRET_KEY=20 SECRET_KIND_STRIPE_SECRET_KEY value
+             * @property {number} SECRET_KIND_STRIPE_RESTRICTED_KEY=21 SECRET_KIND_STRIPE_RESTRICTED_KEY value
+             * @property {number} SECRET_KIND_STRIPE_WEBHOOK_SECRET=22 SECRET_KIND_STRIPE_WEBHOOK_SECRET value
              */
             v1.SecretKind = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
                 values[valuesById[0] = "SECRET_KIND_UNSPECIFIED"] = 0;
                 values[valuesById[1] = "SECRET_KIND_UNKNOWN"] = 1;
                 values[valuesById[2] = "SECRET_KIND_GCP_SERVICE_ACCOUNT_KEY"] = 2;
+                values[valuesById[3] = "SECRET_KIND_GCP_API_KEY"] = 3;
+                values[valuesById[4] = "SECRET_KIND_GCP_OAUTH2_CLIENT_CREDENTIALS"] = 4;
+                values[valuesById[5] = "SECRET_KIND_GCP_OAUTH2_ACCESS_TOKEN"] = 5;
+                values[valuesById[6] = "SECRET_KIND_ANTHROPIC_ADMIN_API_KEY"] = 6;
+                values[valuesById[7] = "SECRET_KIND_ANTHROPIC_API_KEY"] = 7;
+                values[valuesById[8] = "SECRET_KIND_AZURE_ACCESS_TOKEN"] = 8;
+                values[valuesById[9] = "SECRET_KIND_AZURE_IDENTITY_TOKEN"] = 9;
+                values[valuesById[10] = "SECRET_KIND_DOCKER_HUB_PERSONAL_ACCESS_TOKEN"] = 10;
+                values[valuesById[11] = "SECRET_KIND_GITHUB_APP_REFRESH_TOKEN"] = 11;
+                values[valuesById[12] = "SECRET_KIND_GITHUB_APP_SERVER_TO_SERVER_TOKEN"] = 12;
+                values[valuesById[13] = "SECRET_KIND_GITHUB_APP_USER_TO_SERVER_TOKEN"] = 13;
+                values[valuesById[14] = "SECRET_KIND_GITHUB_CLASSIC_PERSONAL_ACCESS_TOKEN"] = 14;
+                values[valuesById[15] = "SECRET_KIND_GITHUB_FINE_GRAINED_PERSONAL_ACCESS_TOKEN"] = 15;
+                values[valuesById[16] = "SECRET_KIND_GITHUB_OAUTH_TOKEN"] = 16;
+                values[valuesById[17] = "SECRET_KIND_HUGGINGFACE_API_KEY"] = 17;
+                values[valuesById[18] = "SECRET_KIND_OPENAI_API_KEY"] = 18;
+                values[valuesById[19] = "SECRET_KIND_PERPLEXITY_API_KEY"] = 19;
+                values[valuesById[20] = "SECRET_KIND_STRIPE_SECRET_KEY"] = 20;
+                values[valuesById[21] = "SECRET_KIND_STRIPE_RESTRICTED_KEY"] = 21;
+                values[valuesById[22] = "SECRET_KIND_STRIPE_WEBHOOK_SECRET"] = 22;
                 return values;
             })();
     
@@ -39103,6 +39735,7 @@
                  * @property {grafeas.v1.ICVSS|null} [cvssV2] VulnerabilityOccurrence cvssV2
                  * @property {grafeas.v1.VulnerabilityOccurrence.IVexAssessment|null} [vexAssessment] VulnerabilityOccurrence vexAssessment
                  * @property {string|null} [extraDetails] VulnerabilityOccurrence extraDetails
+                 * @property {grafeas.v1.IRisk|null} [risk] VulnerabilityOccurrence risk
                  */
     
                 /**
@@ -39235,6 +39868,14 @@
                 VulnerabilityOccurrence.prototype.extraDetails = "";
     
                 /**
+                 * VulnerabilityOccurrence risk.
+                 * @member {grafeas.v1.IRisk|null|undefined} risk
+                 * @memberof grafeas.v1.VulnerabilityOccurrence
+                 * @instance
+                 */
+                VulnerabilityOccurrence.prototype.risk = null;
+    
+                /**
                  * Creates a new VulnerabilityOccurrence instance using the specified properties.
                  * @function create
                  * @memberof grafeas.v1.VulnerabilityOccurrence
@@ -39288,6 +39929,8 @@
                         $root.grafeas.v1.VulnerabilityOccurrence.VexAssessment.encode(message.vexAssessment, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                     if (message.extraDetails != null && Object.hasOwnProperty.call(message, "extraDetails"))
                         writer.uint32(/* id 14, wireType 2 =*/114).string(message.extraDetails);
+                    if (message.risk != null && Object.hasOwnProperty.call(message, "risk"))
+                        $root.grafeas.v1.Risk.encode(message.risk, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
                     return writer;
                 };
     
@@ -39382,6 +40025,10 @@
                             }
                         case 14: {
                                 message.extraDetails = reader.string();
+                                break;
+                            }
+                        case 15: {
+                                message.risk = $root.grafeas.v1.Risk.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -39503,6 +40150,11 @@
                     if (message.extraDetails != null && message.hasOwnProperty("extraDetails"))
                         if (!$util.isString(message.extraDetails))
                             return "extraDetails: string expected";
+                    if (message.risk != null && message.hasOwnProperty("risk")) {
+                        var error = $root.grafeas.v1.Risk.verify(message.risk);
+                        if (error)
+                            return "risk." + error;
+                    }
                     return null;
                 };
     
@@ -39649,6 +40301,11 @@
                     }
                     if (object.extraDetails != null)
                         message.extraDetails = String(object.extraDetails);
+                    if (object.risk != null) {
+                        if (typeof object.risk !== "object")
+                            throw TypeError(".grafeas.v1.VulnerabilityOccurrence.risk: object expected");
+                        message.risk = $root.grafeas.v1.Risk.fromObject(object.risk);
+                    }
                     return message;
                 };
     
@@ -39682,6 +40339,7 @@
                         object.cvssV2 = null;
                         object.vexAssessment = null;
                         object.extraDetails = "";
+                        object.risk = null;
                     }
                     if (message.type != null && message.hasOwnProperty("type"))
                         object.type = message.type;
@@ -39717,6 +40375,8 @@
                         object.vexAssessment = $root.grafeas.v1.VulnerabilityOccurrence.VexAssessment.toObject(message.vexAssessment, options);
                     if (message.extraDetails != null && message.hasOwnProperty("extraDetails"))
                         object.extraDetails = message.extraDetails;
+                    if (message.risk != null && message.hasOwnProperty("risk"))
+                        object.risk = $root.grafeas.v1.Risk.toObject(message.risk, options);
                     return object;
                 };
     
@@ -40697,6 +41357,679 @@
                 })();
     
                 return VulnerabilityOccurrence;
+            })();
+    
+            v1.Risk = (function() {
+    
+                /**
+                 * Properties of a Risk.
+                 * @memberof grafeas.v1
+                 * @interface IRisk
+                 * @property {grafeas.v1.ICISAKnownExploitedVulnerabilities|null} [cisaKev] Risk cisaKev
+                 * @property {grafeas.v1.IExploitPredictionScoringSystem|null} [epss] Risk epss
+                 */
+    
+                /**
+                 * Constructs a new Risk.
+                 * @memberof grafeas.v1
+                 * @classdesc Represents a Risk.
+                 * @implements IRisk
+                 * @constructor
+                 * @param {grafeas.v1.IRisk=} [properties] Properties to set
+                 */
+                function Risk(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Risk cisaKev.
+                 * @member {grafeas.v1.ICISAKnownExploitedVulnerabilities|null|undefined} cisaKev
+                 * @memberof grafeas.v1.Risk
+                 * @instance
+                 */
+                Risk.prototype.cisaKev = null;
+    
+                /**
+                 * Risk epss.
+                 * @member {grafeas.v1.IExploitPredictionScoringSystem|null|undefined} epss
+                 * @memberof grafeas.v1.Risk
+                 * @instance
+                 */
+                Risk.prototype.epss = null;
+    
+                /**
+                 * Creates a new Risk instance using the specified properties.
+                 * @function create
+                 * @memberof grafeas.v1.Risk
+                 * @static
+                 * @param {grafeas.v1.IRisk=} [properties] Properties to set
+                 * @returns {grafeas.v1.Risk} Risk instance
+                 */
+                Risk.create = function create(properties) {
+                    return new Risk(properties);
+                };
+    
+                /**
+                 * Encodes the specified Risk message. Does not implicitly {@link grafeas.v1.Risk.verify|verify} messages.
+                 * @function encode
+                 * @memberof grafeas.v1.Risk
+                 * @static
+                 * @param {grafeas.v1.IRisk} message Risk message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Risk.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.cisaKev != null && Object.hasOwnProperty.call(message, "cisaKev"))
+                        $root.grafeas.v1.CISAKnownExploitedVulnerabilities.encode(message.cisaKev, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.epss != null && Object.hasOwnProperty.call(message, "epss"))
+                        $root.grafeas.v1.ExploitPredictionScoringSystem.encode(message.epss, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Risk message, length delimited. Does not implicitly {@link grafeas.v1.Risk.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof grafeas.v1.Risk
+                 * @static
+                 * @param {grafeas.v1.IRisk} message Risk message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Risk.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Risk message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof grafeas.v1.Risk
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {grafeas.v1.Risk} Risk
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Risk.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.Risk();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.cisaKev = $root.grafeas.v1.CISAKnownExploitedVulnerabilities.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 2: {
+                                message.epss = $root.grafeas.v1.ExploitPredictionScoringSystem.decode(reader, reader.uint32());
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Risk message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof grafeas.v1.Risk
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {grafeas.v1.Risk} Risk
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Risk.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Risk message.
+                 * @function verify
+                 * @memberof grafeas.v1.Risk
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Risk.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.cisaKev != null && message.hasOwnProperty("cisaKev")) {
+                        var error = $root.grafeas.v1.CISAKnownExploitedVulnerabilities.verify(message.cisaKev);
+                        if (error)
+                            return "cisaKev." + error;
+                    }
+                    if (message.epss != null && message.hasOwnProperty("epss")) {
+                        var error = $root.grafeas.v1.ExploitPredictionScoringSystem.verify(message.epss);
+                        if (error)
+                            return "epss." + error;
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a Risk message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof grafeas.v1.Risk
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {grafeas.v1.Risk} Risk
+                 */
+                Risk.fromObject = function fromObject(object) {
+                    if (object instanceof $root.grafeas.v1.Risk)
+                        return object;
+                    var message = new $root.grafeas.v1.Risk();
+                    if (object.cisaKev != null) {
+                        if (typeof object.cisaKev !== "object")
+                            throw TypeError(".grafeas.v1.Risk.cisaKev: object expected");
+                        message.cisaKev = $root.grafeas.v1.CISAKnownExploitedVulnerabilities.fromObject(object.cisaKev);
+                    }
+                    if (object.epss != null) {
+                        if (typeof object.epss !== "object")
+                            throw TypeError(".grafeas.v1.Risk.epss: object expected");
+                        message.epss = $root.grafeas.v1.ExploitPredictionScoringSystem.fromObject(object.epss);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Risk message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof grafeas.v1.Risk
+                 * @static
+                 * @param {grafeas.v1.Risk} message Risk
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Risk.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.cisaKev = null;
+                        object.epss = null;
+                    }
+                    if (message.cisaKev != null && message.hasOwnProperty("cisaKev"))
+                        object.cisaKev = $root.grafeas.v1.CISAKnownExploitedVulnerabilities.toObject(message.cisaKev, options);
+                    if (message.epss != null && message.hasOwnProperty("epss"))
+                        object.epss = $root.grafeas.v1.ExploitPredictionScoringSystem.toObject(message.epss, options);
+                    return object;
+                };
+    
+                /**
+                 * Converts this Risk to JSON.
+                 * @function toJSON
+                 * @memberof grafeas.v1.Risk
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Risk.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Risk
+                 * @function getTypeUrl
+                 * @memberof grafeas.v1.Risk
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Risk.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/grafeas.v1.Risk";
+                };
+    
+                return Risk;
+            })();
+    
+            v1.CISAKnownExploitedVulnerabilities = (function() {
+    
+                /**
+                 * Properties of a CISAKnownExploitedVulnerabilities.
+                 * @memberof grafeas.v1
+                 * @interface ICISAKnownExploitedVulnerabilities
+                 * @property {string|null} [knownRansomwareCampaignUse] CISAKnownExploitedVulnerabilities knownRansomwareCampaignUse
+                 */
+    
+                /**
+                 * Constructs a new CISAKnownExploitedVulnerabilities.
+                 * @memberof grafeas.v1
+                 * @classdesc Represents a CISAKnownExploitedVulnerabilities.
+                 * @implements ICISAKnownExploitedVulnerabilities
+                 * @constructor
+                 * @param {grafeas.v1.ICISAKnownExploitedVulnerabilities=} [properties] Properties to set
+                 */
+                function CISAKnownExploitedVulnerabilities(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * CISAKnownExploitedVulnerabilities knownRansomwareCampaignUse.
+                 * @member {string} knownRansomwareCampaignUse
+                 * @memberof grafeas.v1.CISAKnownExploitedVulnerabilities
+                 * @instance
+                 */
+                CISAKnownExploitedVulnerabilities.prototype.knownRansomwareCampaignUse = "";
+    
+                /**
+                 * Creates a new CISAKnownExploitedVulnerabilities instance using the specified properties.
+                 * @function create
+                 * @memberof grafeas.v1.CISAKnownExploitedVulnerabilities
+                 * @static
+                 * @param {grafeas.v1.ICISAKnownExploitedVulnerabilities=} [properties] Properties to set
+                 * @returns {grafeas.v1.CISAKnownExploitedVulnerabilities} CISAKnownExploitedVulnerabilities instance
+                 */
+                CISAKnownExploitedVulnerabilities.create = function create(properties) {
+                    return new CISAKnownExploitedVulnerabilities(properties);
+                };
+    
+                /**
+                 * Encodes the specified CISAKnownExploitedVulnerabilities message. Does not implicitly {@link grafeas.v1.CISAKnownExploitedVulnerabilities.verify|verify} messages.
+                 * @function encode
+                 * @memberof grafeas.v1.CISAKnownExploitedVulnerabilities
+                 * @static
+                 * @param {grafeas.v1.ICISAKnownExploitedVulnerabilities} message CISAKnownExploitedVulnerabilities message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                CISAKnownExploitedVulnerabilities.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.knownRansomwareCampaignUse != null && Object.hasOwnProperty.call(message, "knownRansomwareCampaignUse"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.knownRansomwareCampaignUse);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified CISAKnownExploitedVulnerabilities message, length delimited. Does not implicitly {@link grafeas.v1.CISAKnownExploitedVulnerabilities.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof grafeas.v1.CISAKnownExploitedVulnerabilities
+                 * @static
+                 * @param {grafeas.v1.ICISAKnownExploitedVulnerabilities} message CISAKnownExploitedVulnerabilities message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                CISAKnownExploitedVulnerabilities.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a CISAKnownExploitedVulnerabilities message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof grafeas.v1.CISAKnownExploitedVulnerabilities
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {grafeas.v1.CISAKnownExploitedVulnerabilities} CISAKnownExploitedVulnerabilities
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                CISAKnownExploitedVulnerabilities.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.CISAKnownExploitedVulnerabilities();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.knownRansomwareCampaignUse = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a CISAKnownExploitedVulnerabilities message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof grafeas.v1.CISAKnownExploitedVulnerabilities
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {grafeas.v1.CISAKnownExploitedVulnerabilities} CISAKnownExploitedVulnerabilities
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                CISAKnownExploitedVulnerabilities.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a CISAKnownExploitedVulnerabilities message.
+                 * @function verify
+                 * @memberof grafeas.v1.CISAKnownExploitedVulnerabilities
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                CISAKnownExploitedVulnerabilities.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.knownRansomwareCampaignUse != null && message.hasOwnProperty("knownRansomwareCampaignUse"))
+                        if (!$util.isString(message.knownRansomwareCampaignUse))
+                            return "knownRansomwareCampaignUse: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a CISAKnownExploitedVulnerabilities message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof grafeas.v1.CISAKnownExploitedVulnerabilities
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {grafeas.v1.CISAKnownExploitedVulnerabilities} CISAKnownExploitedVulnerabilities
+                 */
+                CISAKnownExploitedVulnerabilities.fromObject = function fromObject(object) {
+                    if (object instanceof $root.grafeas.v1.CISAKnownExploitedVulnerabilities)
+                        return object;
+                    var message = new $root.grafeas.v1.CISAKnownExploitedVulnerabilities();
+                    if (object.knownRansomwareCampaignUse != null)
+                        message.knownRansomwareCampaignUse = String(object.knownRansomwareCampaignUse);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a CISAKnownExploitedVulnerabilities message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof grafeas.v1.CISAKnownExploitedVulnerabilities
+                 * @static
+                 * @param {grafeas.v1.CISAKnownExploitedVulnerabilities} message CISAKnownExploitedVulnerabilities
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                CISAKnownExploitedVulnerabilities.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.knownRansomwareCampaignUse = "";
+                    if (message.knownRansomwareCampaignUse != null && message.hasOwnProperty("knownRansomwareCampaignUse"))
+                        object.knownRansomwareCampaignUse = message.knownRansomwareCampaignUse;
+                    return object;
+                };
+    
+                /**
+                 * Converts this CISAKnownExploitedVulnerabilities to JSON.
+                 * @function toJSON
+                 * @memberof grafeas.v1.CISAKnownExploitedVulnerabilities
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                CISAKnownExploitedVulnerabilities.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for CISAKnownExploitedVulnerabilities
+                 * @function getTypeUrl
+                 * @memberof grafeas.v1.CISAKnownExploitedVulnerabilities
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                CISAKnownExploitedVulnerabilities.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/grafeas.v1.CISAKnownExploitedVulnerabilities";
+                };
+    
+                return CISAKnownExploitedVulnerabilities;
+            })();
+    
+            v1.ExploitPredictionScoringSystem = (function() {
+    
+                /**
+                 * Properties of an ExploitPredictionScoringSystem.
+                 * @memberof grafeas.v1
+                 * @interface IExploitPredictionScoringSystem
+                 * @property {number|null} [percentile] ExploitPredictionScoringSystem percentile
+                 * @property {number|null} [score] ExploitPredictionScoringSystem score
+                 */
+    
+                /**
+                 * Constructs a new ExploitPredictionScoringSystem.
+                 * @memberof grafeas.v1
+                 * @classdesc Represents an ExploitPredictionScoringSystem.
+                 * @implements IExploitPredictionScoringSystem
+                 * @constructor
+                 * @param {grafeas.v1.IExploitPredictionScoringSystem=} [properties] Properties to set
+                 */
+                function ExploitPredictionScoringSystem(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ExploitPredictionScoringSystem percentile.
+                 * @member {number} percentile
+                 * @memberof grafeas.v1.ExploitPredictionScoringSystem
+                 * @instance
+                 */
+                ExploitPredictionScoringSystem.prototype.percentile = 0;
+    
+                /**
+                 * ExploitPredictionScoringSystem score.
+                 * @member {number} score
+                 * @memberof grafeas.v1.ExploitPredictionScoringSystem
+                 * @instance
+                 */
+                ExploitPredictionScoringSystem.prototype.score = 0;
+    
+                /**
+                 * Creates a new ExploitPredictionScoringSystem instance using the specified properties.
+                 * @function create
+                 * @memberof grafeas.v1.ExploitPredictionScoringSystem
+                 * @static
+                 * @param {grafeas.v1.IExploitPredictionScoringSystem=} [properties] Properties to set
+                 * @returns {grafeas.v1.ExploitPredictionScoringSystem} ExploitPredictionScoringSystem instance
+                 */
+                ExploitPredictionScoringSystem.create = function create(properties) {
+                    return new ExploitPredictionScoringSystem(properties);
+                };
+    
+                /**
+                 * Encodes the specified ExploitPredictionScoringSystem message. Does not implicitly {@link grafeas.v1.ExploitPredictionScoringSystem.verify|verify} messages.
+                 * @function encode
+                 * @memberof grafeas.v1.ExploitPredictionScoringSystem
+                 * @static
+                 * @param {grafeas.v1.IExploitPredictionScoringSystem} message ExploitPredictionScoringSystem message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ExploitPredictionScoringSystem.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.percentile != null && Object.hasOwnProperty.call(message, "percentile"))
+                        writer.uint32(/* id 1, wireType 1 =*/9).double(message.percentile);
+                    if (message.score != null && Object.hasOwnProperty.call(message, "score"))
+                        writer.uint32(/* id 2, wireType 1 =*/17).double(message.score);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ExploitPredictionScoringSystem message, length delimited. Does not implicitly {@link grafeas.v1.ExploitPredictionScoringSystem.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof grafeas.v1.ExploitPredictionScoringSystem
+                 * @static
+                 * @param {grafeas.v1.IExploitPredictionScoringSystem} message ExploitPredictionScoringSystem message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ExploitPredictionScoringSystem.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an ExploitPredictionScoringSystem message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof grafeas.v1.ExploitPredictionScoringSystem
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {grafeas.v1.ExploitPredictionScoringSystem} ExploitPredictionScoringSystem
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ExploitPredictionScoringSystem.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.ExploitPredictionScoringSystem();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.percentile = reader.double();
+                                break;
+                            }
+                        case 2: {
+                                message.score = reader.double();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an ExploitPredictionScoringSystem message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof grafeas.v1.ExploitPredictionScoringSystem
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {grafeas.v1.ExploitPredictionScoringSystem} ExploitPredictionScoringSystem
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ExploitPredictionScoringSystem.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an ExploitPredictionScoringSystem message.
+                 * @function verify
+                 * @memberof grafeas.v1.ExploitPredictionScoringSystem
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ExploitPredictionScoringSystem.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.percentile != null && message.hasOwnProperty("percentile"))
+                        if (typeof message.percentile !== "number")
+                            return "percentile: number expected";
+                    if (message.score != null && message.hasOwnProperty("score"))
+                        if (typeof message.score !== "number")
+                            return "score: number expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an ExploitPredictionScoringSystem message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof grafeas.v1.ExploitPredictionScoringSystem
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {grafeas.v1.ExploitPredictionScoringSystem} ExploitPredictionScoringSystem
+                 */
+                ExploitPredictionScoringSystem.fromObject = function fromObject(object) {
+                    if (object instanceof $root.grafeas.v1.ExploitPredictionScoringSystem)
+                        return object;
+                    var message = new $root.grafeas.v1.ExploitPredictionScoringSystem();
+                    if (object.percentile != null)
+                        message.percentile = Number(object.percentile);
+                    if (object.score != null)
+                        message.score = Number(object.score);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an ExploitPredictionScoringSystem message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof grafeas.v1.ExploitPredictionScoringSystem
+                 * @static
+                 * @param {grafeas.v1.ExploitPredictionScoringSystem} message ExploitPredictionScoringSystem
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ExploitPredictionScoringSystem.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.percentile = 0;
+                        object.score = 0;
+                    }
+                    if (message.percentile != null && message.hasOwnProperty("percentile"))
+                        object.percentile = options.json && !isFinite(message.percentile) ? String(message.percentile) : message.percentile;
+                    if (message.score != null && message.hasOwnProperty("score"))
+                        object.score = options.json && !isFinite(message.score) ? String(message.score) : message.score;
+                    return object;
+                };
+    
+                /**
+                 * Converts this ExploitPredictionScoringSystem to JSON.
+                 * @function toJSON
+                 * @memberof grafeas.v1.ExploitPredictionScoringSystem
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ExploitPredictionScoringSystem.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ExploitPredictionScoringSystem
+                 * @function getTypeUrl
+                 * @memberof grafeas.v1.ExploitPredictionScoringSystem
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ExploitPredictionScoringSystem.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/grafeas.v1.ExploitPredictionScoringSystem";
+                };
+    
+                return ExploitPredictionScoringSystem;
             })();
     
             return v1;

@@ -2,71 +2,61 @@
   "schema": "1.0",
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
-  "protoPackage": "google.cloud.workflows.v1beta",
-  "libraryPackage": "@google-cloud/workflows",
+  "protoPackage": "google.cloud.workflows.executions.v1beta",
+  "libraryPackage": "@google-cloud/workflows-executions",
   "services": {
-    "Workflows": {
+    "Executions": {
       "clients": {
         "grpc": {
-          "libraryClient": "WorkflowsClient",
+          "libraryClient": "ExecutionsClient",
           "rpcs": {
-            "GetWorkflow": {
+            "CreateExecution": {
               "methods": [
-                "getWorkflow"
+                "createExecution"
               ]
             },
-            "CreateWorkflow": {
+            "GetExecution": {
               "methods": [
-                "createWorkflow"
+                "getExecution"
               ]
             },
-            "DeleteWorkflow": {
+            "CancelExecution": {
               "methods": [
-                "deleteWorkflow"
+                "cancelExecution"
               ]
             },
-            "UpdateWorkflow": {
+            "ListExecutions": {
               "methods": [
-                "updateWorkflow"
-              ]
-            },
-            "ListWorkflows": {
-              "methods": [
-                "listWorkflows",
-                "listWorkflowsStream",
-                "listWorkflowsAsync"
+                "listExecutions",
+                "listExecutionsStream",
+                "listExecutionsAsync"
               ]
             }
           }
         },
         "grpc-fallback": {
-          "libraryClient": "WorkflowsClient",
+          "libraryClient": "ExecutionsClient",
           "rpcs": {
-            "GetWorkflow": {
+            "CreateExecution": {
               "methods": [
-                "getWorkflow"
+                "createExecution"
               ]
             },
-            "CreateWorkflow": {
+            "GetExecution": {
               "methods": [
-                "createWorkflow"
+                "getExecution"
               ]
             },
-            "DeleteWorkflow": {
+            "CancelExecution": {
               "methods": [
-                "deleteWorkflow"
+                "cancelExecution"
               ]
             },
-            "UpdateWorkflow": {
+            "ListExecutions": {
               "methods": [
-                "updateWorkflow"
-              ]
-            },
-            "ListWorkflows": {
-              "methods": [
-                "listWorkflows",
-                "listWorkflowsStream",
-                "listWorkflowsAsync"
+                "listExecutions",
+                "listExecutionsStream",
+                "listExecutionsAsync"
               ]
             }
           }

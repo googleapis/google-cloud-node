@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -349,6 +349,246 @@ describe('v1beta4.SqlInstancesServiceClient', () => {
             const expectedError = new Error('The client has already been closed.');
             client.close().catch(err => {throw err});
             await assert.rejects(client.addServerCa(request), expectedError);
+        });
+    });
+
+    describe('addServerCertificate', () => {
+        it('invokes addServerCertificate without error', async () => {
+            const client = new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.SqlInstancesAddServerCertificateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesAddServerCertificateRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesAddServerCertificateRequest', ['instance']);
+            request.instance = defaultValue2;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&instance=${defaultValue2 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.Operation()
+            );
+            client.innerApiCalls.addServerCertificate = stubSimpleCall(expectedResponse);
+            const [response] = await client.addServerCertificate(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.addServerCertificate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.addServerCertificate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes addServerCertificate without error using callback', async () => {
+            const client = new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.SqlInstancesAddServerCertificateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesAddServerCertificateRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesAddServerCertificateRequest', ['instance']);
+            request.instance = defaultValue2;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&instance=${defaultValue2 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.Operation()
+            );
+            client.innerApiCalls.addServerCertificate = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.addServerCertificate(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.sql.v1beta4.IOperation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.addServerCertificate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.addServerCertificate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes addServerCertificate with error', async () => {
+            const client = new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.SqlInstancesAddServerCertificateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesAddServerCertificateRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesAddServerCertificateRequest', ['instance']);
+            request.instance = defaultValue2;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&instance=${defaultValue2 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.addServerCertificate = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.addServerCertificate(request), expectedError);
+            const actualRequest = (client.innerApiCalls.addServerCertificate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.addServerCertificate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes addServerCertificate with closed client', async () => {
+            const client = new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.SqlInstancesAddServerCertificateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesAddServerCertificateRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesAddServerCertificateRequest', ['instance']);
+            request.instance = defaultValue2;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.addServerCertificate(request), expectedError);
+        });
+    });
+
+    describe('addEntraIdCertificate', () => {
+        it('invokes addEntraIdCertificate without error', async () => {
+            const client = new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.SqlInstancesAddEntraIdCertificateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesAddEntraIdCertificateRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesAddEntraIdCertificateRequest', ['instance']);
+            request.instance = defaultValue2;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&instance=${defaultValue2 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.Operation()
+            );
+            client.innerApiCalls.addEntraIdCertificate = stubSimpleCall(expectedResponse);
+            const [response] = await client.addEntraIdCertificate(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.addEntraIdCertificate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.addEntraIdCertificate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes addEntraIdCertificate without error using callback', async () => {
+            const client = new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.SqlInstancesAddEntraIdCertificateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesAddEntraIdCertificateRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesAddEntraIdCertificateRequest', ['instance']);
+            request.instance = defaultValue2;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&instance=${defaultValue2 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.Operation()
+            );
+            client.innerApiCalls.addEntraIdCertificate = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.addEntraIdCertificate(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.sql.v1beta4.IOperation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.addEntraIdCertificate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.addEntraIdCertificate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes addEntraIdCertificate with error', async () => {
+            const client = new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.SqlInstancesAddEntraIdCertificateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesAddEntraIdCertificateRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesAddEntraIdCertificateRequest', ['instance']);
+            request.instance = defaultValue2;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&instance=${defaultValue2 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.addEntraIdCertificate = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.addEntraIdCertificate(request), expectedError);
+            const actualRequest = (client.innerApiCalls.addEntraIdCertificate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.addEntraIdCertificate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes addEntraIdCertificate with closed client', async () => {
+            const client = new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.SqlInstancesAddEntraIdCertificateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesAddEntraIdCertificateRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesAddEntraIdCertificateRequest', ['instance']);
+            request.instance = defaultValue2;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.addEntraIdCertificate(request), expectedError);
         });
     });
 
@@ -1768,6 +2008,246 @@ describe('v1beta4.SqlInstancesServiceClient', () => {
         });
     });
 
+    describe('listServerCertificates', () => {
+        it('invokes listServerCertificates without error', async () => {
+            const client = new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.SqlInstancesListServerCertificatesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesListServerCertificatesRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesListServerCertificatesRequest', ['instance']);
+            request.instance = defaultValue2;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&instance=${defaultValue2 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.InstancesListServerCertificatesResponse()
+            );
+            client.innerApiCalls.listServerCertificates = stubSimpleCall(expectedResponse);
+            const [response] = await client.listServerCertificates(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listServerCertificates as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listServerCertificates as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listServerCertificates without error using callback', async () => {
+            const client = new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.SqlInstancesListServerCertificatesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesListServerCertificatesRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesListServerCertificatesRequest', ['instance']);
+            request.instance = defaultValue2;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&instance=${defaultValue2 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.InstancesListServerCertificatesResponse()
+            );
+            client.innerApiCalls.listServerCertificates = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listServerCertificates(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.sql.v1beta4.IInstancesListServerCertificatesResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listServerCertificates as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listServerCertificates as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listServerCertificates with error', async () => {
+            const client = new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.SqlInstancesListServerCertificatesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesListServerCertificatesRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesListServerCertificatesRequest', ['instance']);
+            request.instance = defaultValue2;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&instance=${defaultValue2 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listServerCertificates = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listServerCertificates(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listServerCertificates as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listServerCertificates as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listServerCertificates with closed client', async () => {
+            const client = new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.SqlInstancesListServerCertificatesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesListServerCertificatesRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesListServerCertificatesRequest', ['instance']);
+            request.instance = defaultValue2;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.listServerCertificates(request), expectedError);
+        });
+    });
+
+    describe('listEntraIdCertificates', () => {
+        it('invokes listEntraIdCertificates without error', async () => {
+            const client = new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.SqlInstancesListEntraIdCertificatesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesListEntraIdCertificatesRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesListEntraIdCertificatesRequest', ['instance']);
+            request.instance = defaultValue2;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&instance=${defaultValue2 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.InstancesListEntraIdCertificatesResponse()
+            );
+            client.innerApiCalls.listEntraIdCertificates = stubSimpleCall(expectedResponse);
+            const [response] = await client.listEntraIdCertificates(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listEntraIdCertificates as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listEntraIdCertificates as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listEntraIdCertificates without error using callback', async () => {
+            const client = new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.SqlInstancesListEntraIdCertificatesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesListEntraIdCertificatesRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesListEntraIdCertificatesRequest', ['instance']);
+            request.instance = defaultValue2;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&instance=${defaultValue2 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.InstancesListEntraIdCertificatesResponse()
+            );
+            client.innerApiCalls.listEntraIdCertificates = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listEntraIdCertificates(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.sql.v1beta4.IInstancesListEntraIdCertificatesResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listEntraIdCertificates as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listEntraIdCertificates as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listEntraIdCertificates with error', async () => {
+            const client = new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.SqlInstancesListEntraIdCertificatesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesListEntraIdCertificatesRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesListEntraIdCertificatesRequest', ['instance']);
+            request.instance = defaultValue2;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&instance=${defaultValue2 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listEntraIdCertificates = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listEntraIdCertificates(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listEntraIdCertificates as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listEntraIdCertificates as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listEntraIdCertificates with closed client', async () => {
+            const client = new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.SqlInstancesListEntraIdCertificatesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesListEntraIdCertificatesRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesListEntraIdCertificatesRequest', ['instance']);
+            request.instance = defaultValue2;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.listEntraIdCertificates(request), expectedError);
+        });
+    });
+
     describe('patch', () => {
         it('invokes patch without error', async () => {
             const client = new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient({
@@ -2605,6 +3085,246 @@ describe('v1beta4.SqlInstancesServiceClient', () => {
             const expectedError = new Error('The client has already been closed.');
             client.close().catch(err => {throw err});
             await assert.rejects(client.rotateServerCa(request), expectedError);
+        });
+    });
+
+    describe('rotateServerCertificate', () => {
+        it('invokes rotateServerCertificate without error', async () => {
+            const client = new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.SqlInstancesRotateServerCertificateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesRotateServerCertificateRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesRotateServerCertificateRequest', ['instance']);
+            request.instance = defaultValue2;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&instance=${defaultValue2 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.Operation()
+            );
+            client.innerApiCalls.rotateServerCertificate = stubSimpleCall(expectedResponse);
+            const [response] = await client.rotateServerCertificate(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.rotateServerCertificate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.rotateServerCertificate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes rotateServerCertificate without error using callback', async () => {
+            const client = new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.SqlInstancesRotateServerCertificateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesRotateServerCertificateRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesRotateServerCertificateRequest', ['instance']);
+            request.instance = defaultValue2;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&instance=${defaultValue2 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.Operation()
+            );
+            client.innerApiCalls.rotateServerCertificate = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.rotateServerCertificate(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.sql.v1beta4.IOperation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.rotateServerCertificate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.rotateServerCertificate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes rotateServerCertificate with error', async () => {
+            const client = new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.SqlInstancesRotateServerCertificateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesRotateServerCertificateRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesRotateServerCertificateRequest', ['instance']);
+            request.instance = defaultValue2;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&instance=${defaultValue2 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.rotateServerCertificate = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.rotateServerCertificate(request), expectedError);
+            const actualRequest = (client.innerApiCalls.rotateServerCertificate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.rotateServerCertificate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes rotateServerCertificate with closed client', async () => {
+            const client = new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.SqlInstancesRotateServerCertificateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesRotateServerCertificateRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesRotateServerCertificateRequest', ['instance']);
+            request.instance = defaultValue2;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.rotateServerCertificate(request), expectedError);
+        });
+    });
+
+    describe('rotateEntraIdCertificate', () => {
+        it('invokes rotateEntraIdCertificate without error', async () => {
+            const client = new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.SqlInstancesRotateEntraIdCertificateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesRotateEntraIdCertificateRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesRotateEntraIdCertificateRequest', ['instance']);
+            request.instance = defaultValue2;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&instance=${defaultValue2 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.Operation()
+            );
+            client.innerApiCalls.rotateEntraIdCertificate = stubSimpleCall(expectedResponse);
+            const [response] = await client.rotateEntraIdCertificate(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.rotateEntraIdCertificate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.rotateEntraIdCertificate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes rotateEntraIdCertificate without error using callback', async () => {
+            const client = new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.SqlInstancesRotateEntraIdCertificateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesRotateEntraIdCertificateRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesRotateEntraIdCertificateRequest', ['instance']);
+            request.instance = defaultValue2;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&instance=${defaultValue2 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.Operation()
+            );
+            client.innerApiCalls.rotateEntraIdCertificate = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.rotateEntraIdCertificate(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.sql.v1beta4.IOperation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.rotateEntraIdCertificate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.rotateEntraIdCertificate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes rotateEntraIdCertificate with error', async () => {
+            const client = new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.SqlInstancesRotateEntraIdCertificateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesRotateEntraIdCertificateRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesRotateEntraIdCertificateRequest', ['instance']);
+            request.instance = defaultValue2;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&instance=${defaultValue2 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.rotateEntraIdCertificate = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.rotateEntraIdCertificate(request), expectedError);
+            const actualRequest = (client.innerApiCalls.rotateEntraIdCertificate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.rotateEntraIdCertificate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes rotateEntraIdCertificate with closed client', async () => {
+            const client = new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.SqlInstancesRotateEntraIdCertificateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesRotateEntraIdCertificateRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesRotateEntraIdCertificateRequest', ['instance']);
+            request.instance = defaultValue2;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.rotateEntraIdCertificate(request), expectedError);
         });
     });
 
@@ -4048,6 +4768,126 @@ describe('v1beta4.SqlInstancesServiceClient', () => {
         });
     });
 
+    describe('executeSql', () => {
+        it('invokes executeSql without error', async () => {
+            const client = new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.SqlInstancesExecuteSqlRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesExecuteSqlRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesExecuteSqlRequest', ['instance']);
+            request.instance = defaultValue2;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&instance=${defaultValue2 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.SqlInstancesExecuteSqlResponse()
+            );
+            client.innerApiCalls.executeSql = stubSimpleCall(expectedResponse);
+            const [response] = await client.executeSql(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.executeSql as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.executeSql as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes executeSql without error using callback', async () => {
+            const client = new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.SqlInstancesExecuteSqlRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesExecuteSqlRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesExecuteSqlRequest', ['instance']);
+            request.instance = defaultValue2;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&instance=${defaultValue2 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.SqlInstancesExecuteSqlResponse()
+            );
+            client.innerApiCalls.executeSql = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.executeSql(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.sql.v1beta4.ISqlInstancesExecuteSqlResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.executeSql as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.executeSql as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes executeSql with error', async () => {
+            const client = new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.SqlInstancesExecuteSqlRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesExecuteSqlRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesExecuteSqlRequest', ['instance']);
+            request.instance = defaultValue2;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&instance=${defaultValue2 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.executeSql = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.executeSql(request), expectedError);
+            const actualRequest = (client.innerApiCalls.executeSql as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.executeSql as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes executeSql with closed client', async () => {
+            const client = new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.SqlInstancesExecuteSqlRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesExecuteSqlRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesExecuteSqlRequest', ['instance']);
+            request.instance = defaultValue2;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.executeSql(request), expectedError);
+        });
+    });
+
     describe('acquireSsrsLease', () => {
         it('invokes acquireSsrsLease without error', async () => {
             const client = new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient({
@@ -4287,6 +5127,234 @@ describe('v1beta4.SqlInstancesServiceClient', () => {
             await assert.rejects(client.releaseSsrsLease(request), expectedError);
         });
     });
+
+    describe('preCheckMajorVersionUpgrade', () => {
+        it('invokes preCheckMajorVersionUpgrade without error', async () => {
+            const client = new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.SqlInstancesPreCheckMajorVersionUpgradeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesPreCheckMajorVersionUpgradeRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesPreCheckMajorVersionUpgradeRequest', ['instance']);
+            request.instance = defaultValue2;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&instance=${defaultValue2 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.Operation()
+            );
+            client.innerApiCalls.preCheckMajorVersionUpgrade = stubSimpleCall(expectedResponse);
+            const [response] = await client.preCheckMajorVersionUpgrade(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.preCheckMajorVersionUpgrade as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.preCheckMajorVersionUpgrade as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes preCheckMajorVersionUpgrade without error using callback', async () => {
+            const client = new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.SqlInstancesPreCheckMajorVersionUpgradeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesPreCheckMajorVersionUpgradeRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesPreCheckMajorVersionUpgradeRequest', ['instance']);
+            request.instance = defaultValue2;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&instance=${defaultValue2 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.Operation()
+            );
+            client.innerApiCalls.preCheckMajorVersionUpgrade = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.preCheckMajorVersionUpgrade(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.sql.v1beta4.IOperation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.preCheckMajorVersionUpgrade as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.preCheckMajorVersionUpgrade as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes preCheckMajorVersionUpgrade with error', async () => {
+            const client = new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.SqlInstancesPreCheckMajorVersionUpgradeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesPreCheckMajorVersionUpgradeRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesPreCheckMajorVersionUpgradeRequest', ['instance']);
+            request.instance = defaultValue2;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&instance=${defaultValue2 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.preCheckMajorVersionUpgrade = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.preCheckMajorVersionUpgrade(request), expectedError);
+            const actualRequest = (client.innerApiCalls.preCheckMajorVersionUpgrade as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.preCheckMajorVersionUpgrade as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes preCheckMajorVersionUpgrade with closed client', async () => {
+            const client = new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.SqlInstancesPreCheckMajorVersionUpgradeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesPreCheckMajorVersionUpgradeRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesPreCheckMajorVersionUpgradeRequest', ['instance']);
+            request.instance = defaultValue2;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.preCheckMajorVersionUpgrade(request), expectedError);
+        });
+    });
+
+    describe('pointInTimeRestore', () => {
+        it('invokes pointInTimeRestore without error', async () => {
+            const client = new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.SqlInstancesPointInTimeRestoreRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesPointInTimeRestoreRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.Operation()
+            );
+            client.innerApiCalls.pointInTimeRestore = stubSimpleCall(expectedResponse);
+            const [response] = await client.pointInTimeRestore(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.pointInTimeRestore as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.pointInTimeRestore as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes pointInTimeRestore without error using callback', async () => {
+            const client = new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.SqlInstancesPointInTimeRestoreRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesPointInTimeRestoreRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.Operation()
+            );
+            client.innerApiCalls.pointInTimeRestore = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.pointInTimeRestore(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.sql.v1beta4.IOperation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.pointInTimeRestore as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.pointInTimeRestore as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes pointInTimeRestore with error', async () => {
+            const client = new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.SqlInstancesPointInTimeRestoreRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesPointInTimeRestoreRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.pointInTimeRestore = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.pointInTimeRestore(request), expectedError);
+            const actualRequest = (client.innerApiCalls.pointInTimeRestore as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.pointInTimeRestore as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes pointInTimeRestore with closed client', async () => {
+            const client = new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.sql.v1beta4.SqlInstancesPointInTimeRestoreRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.sql.v1beta4.SqlInstancesPointInTimeRestoreRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.pointInTimeRestore(request), expectedError);
+        });
+    });
     describe('getLocation', () => {
         it('invokes getLocation without error', async () => {
             const client = new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient({
@@ -4451,6 +5519,77 @@ describe('v1beta4.SqlInstancesServiceClient', () => {
                         expectedHeaderRequestParams
                     )
             );
+        });
+    });
+
+    describe('Path templates', () => {
+
+        describe('backup', async () => {
+            const fakePath = "/rendered/path/backup";
+            const expectedParameters = {
+                project: "projectValue",
+                backup: "backupValue",
+            };
+            const client = new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.backupPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.backupPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('backupPath', () => {
+                const result = client.backupPath("projectValue", "backupValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.backupPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromBackupName', () => {
+                const result = client.matchProjectFromBackupName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.backupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchBackupFromBackupName', () => {
+                const result = client.matchBackupFromBackupName(fakePath);
+                assert.strictEqual(result, "backupValue");
+                assert((client.pathTemplates.backupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('project', async () => {
+            const fakePath = "/rendered/path/project";
+            const expectedParameters = {
+                project: "projectValue",
+            };
+            const client = new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectPath', () => {
+                const result = client.projectPath("projectValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectName', () => {
+                const result = client.matchProjectFromProjectName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
     });
 });

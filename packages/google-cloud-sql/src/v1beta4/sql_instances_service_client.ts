@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -58,6 +58,7 @@ export class SqlInstancesServiceClient {
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
   locationsClient: LocationsClient;
+  pathTemplates: {[name: string]: gax.PathTemplate};
   sqlInstancesServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -177,6 +178,18 @@ export class SqlInstancesServiceClient {
     // Load the applicable protos.
     this._protos = this._gaxGrpc.loadProtoJSON(jsonProtos);
 
+    // This API contains "path templates"; forward-slash-separated
+    // identifiers to uniquely identify resources within the API.
+    // Create useful helper objects for these.
+    this.pathTemplates = {
+      backupPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/backups/{backup}'
+      ),
+      projectPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}'
+      ),
+    };
+
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
         'google.cloud.sql.v1beta4.SqlInstancesService', gapicConfig as gax.ClientConfig,
@@ -220,7 +233,7 @@ export class SqlInstancesServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const sqlInstancesServiceStubMethods =
-        ['addServerCa', 'clone', 'delete', 'demoteMaster', 'demote', 'export', 'failover', 'reencrypt', 'get', 'import', 'insert', 'list', 'listServerCas', 'patch', 'promoteReplica', 'switchover', 'resetSslConfig', 'restart', 'restoreBackup', 'rotateServerCa', 'startReplica', 'stopReplica', 'truncateLog', 'update', 'createEphemeral', 'rescheduleMaintenance', 'verifyExternalSyncSettings', 'startExternalSync', 'performDiskShrink', 'getDiskShrinkConfig', 'resetReplicaSize', 'getLatestRecoveryTime', 'acquireSsrsLease', 'releaseSsrsLease'];
+        ['addServerCa', 'addServerCertificate', 'addEntraIdCertificate', 'clone', 'delete', 'demoteMaster', 'demote', 'export', 'failover', 'reencrypt', 'get', 'import', 'insert', 'list', 'listServerCas', 'listServerCertificates', 'listEntraIdCertificates', 'patch', 'promoteReplica', 'switchover', 'resetSslConfig', 'restart', 'restoreBackup', 'rotateServerCa', 'rotateServerCertificate', 'rotateEntraIdCertificate', 'startReplica', 'stopReplica', 'truncateLog', 'update', 'createEphemeral', 'rescheduleMaintenance', 'verifyExternalSyncSettings', 'startExternalSync', 'performDiskShrink', 'getDiskShrinkConfig', 'resetReplicaSize', 'getLatestRecoveryTime', 'executeSql', 'acquireSsrsLease', 'releaseSsrsLease', 'preCheckMajorVersionUpgrade', 'pointInTimeRestore'];
     for (const methodName of sqlInstancesServiceStubMethods) {
       const callPromise = this.sqlInstancesServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -328,7 +341,9 @@ export class SqlInstancesServiceClient {
  * instance. Required to prepare for a certificate rotation. If a CA version
  * was previously added but never used in a certificate rotation, this
  * operation replaces that version. There cannot be more than one CA version
- * waiting to be rotated in.
+ * waiting to be rotated in. For instances that have enabled Certificate
+ * Authority Service (CAS) based server CA, use AddServerCertificate to add a
+ * new server certificate.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -415,6 +430,208 @@ export class SqlInstancesServiceClient {
         {}|undefined
       ]) => {
         this._log.info('addServerCa response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Add a new trusted server certificate version for the specified instance
+ * using Certificate Authority Service (CAS) server CA. Required to prepare
+ * for a certificate rotation. If a server certificate version was previously
+ * added but never used in a certificate rotation, this operation replaces
+ * that version. There cannot be more than one certificate version waiting to
+ * be rotated in. For instances not using CAS server CA, use AddServerCa
+ * instead.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Required. Cloud SQL instance ID. This does not include the project ID.
+ * @param {string} request.project
+ *   Required. Project ID of the project that contains the instance.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta4/sql_instances_service.add_server_certificate.js</caption>
+ * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_AddServerCertificate_async
+ */
+  addServerCertificate(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesAddServerCertificateRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesAddServerCertificateRequest|undefined, {}|undefined
+      ]>;
+  addServerCertificate(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesAddServerCertificateRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesAddServerCertificateRequest|null|undefined,
+          {}|null|undefined>): void;
+  addServerCertificate(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesAddServerCertificateRequest,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesAddServerCertificateRequest|null|undefined,
+          {}|null|undefined>): void;
+  addServerCertificate(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesAddServerCertificateRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesAddServerCertificateRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesAddServerCertificateRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesAddServerCertificateRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'instance': request.instance ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('addServerCertificate request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesAddServerCertificateRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('addServerCertificate response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.addServerCertificate(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesAddServerCertificateRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('addServerCertificate response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Adds a new Entra ID certificate for the specified instance. If an Entra ID
+ * certificate was previously added but never used in a certificate rotation,
+ * this operation replaces that version.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Required. Cloud SQL instance ID. This does not include the project ID.
+ * @param {string} request.project
+ *   Required. Project ID of the project that contains the instance.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta4/sql_instances_service.add_entra_id_certificate.js</caption>
+ * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_AddEntraIdCertificate_async
+ */
+  addEntraIdCertificate(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesAddEntraIdCertificateRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesAddEntraIdCertificateRequest|undefined, {}|undefined
+      ]>;
+  addEntraIdCertificate(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesAddEntraIdCertificateRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesAddEntraIdCertificateRequest|null|undefined,
+          {}|null|undefined>): void;
+  addEntraIdCertificate(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesAddEntraIdCertificateRequest,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesAddEntraIdCertificateRequest|null|undefined,
+          {}|null|undefined>): void;
+  addEntraIdCertificate(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesAddEntraIdCertificateRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesAddEntraIdCertificateRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesAddEntraIdCertificateRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesAddEntraIdCertificateRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'instance': request.instance ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('addEntraIdCertificate request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesAddEntraIdCertificateRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('addEntraIdCertificate response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.addEntraIdCertificate(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesAddEntraIdCertificateRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('addEntraIdCertificate response %j', response);
         return [response, options, rawResponse];
       }).catch((error: any) => {
         if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
@@ -533,6 +750,15 @@ export class SqlInstancesServiceClient {
  *   Cloud SQL instance ID. This does not include the project ID.
  * @param {string} request.project
  *   Project ID of the project that contains the instance to be deleted.
+ * @param {boolean} request.enableFinalBackup
+ *   Flag to opt-in for final backup. By default, it is turned off.
+ * @param {number} [request.finalBackupTtlDays]
+ *   Optional. Retention period of the final backup.
+ * @param {google.protobuf.Timestamp} [request.finalBackupExpiryTime]
+ *   Optional. Final Backup expiration time.
+ *   Timestamp in UTC of when this resource is considered expired.
+ * @param {string} [request.finalBackupDescription]
+ *   Optional. The description of the final backup.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -1629,6 +1855,208 @@ export class SqlInstancesServiceClient {
       });
   }
 /**
+ * Lists all versions of server certificates and certificate authorities (CAs)
+ * for the specified instance. There can be up to three sets of certs listed:
+ * the certificate that is currently in use, a future that has been added but
+ * not yet used to sign a certificate, and a certificate that has been rotated
+ * out. For instances not using Certificate Authority Service (CAS) server CA,
+ * use ListServerCas instead.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Required. Cloud SQL instance ID. This does not include the project ID.
+ * @param {string} request.project
+ *   Required. Project ID of the project that contains the instance.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.InstancesListServerCertificatesResponse|InstancesListServerCertificatesResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta4/sql_instances_service.list_server_certificates.js</caption>
+ * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_ListServerCertificates_async
+ */
+  listServerCertificates(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesListServerCertificatesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IInstancesListServerCertificatesResponse,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesListServerCertificatesRequest|undefined, {}|undefined
+      ]>;
+  listServerCertificates(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesListServerCertificatesRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.IInstancesListServerCertificatesResponse,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesListServerCertificatesRequest|null|undefined,
+          {}|null|undefined>): void;
+  listServerCertificates(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesListServerCertificatesRequest,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.IInstancesListServerCertificatesResponse,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesListServerCertificatesRequest|null|undefined,
+          {}|null|undefined>): void;
+  listServerCertificates(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesListServerCertificatesRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.sql.v1beta4.IInstancesListServerCertificatesResponse,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesListServerCertificatesRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.sql.v1beta4.IInstancesListServerCertificatesResponse,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesListServerCertificatesRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IInstancesListServerCertificatesResponse,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesListServerCertificatesRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'instance': request.instance ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('listServerCertificates request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.sql.v1beta4.IInstancesListServerCertificatesResponse,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesListServerCertificatesRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('listServerCertificates response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.listServerCertificates(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.sql.v1beta4.IInstancesListServerCertificatesResponse,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesListServerCertificatesRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('listServerCertificates response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Lists all versions of EntraID certificates for the specified instance.
+ * There can be up to three sets of certificates listed: the certificate that
+ * is currently in use, a future that has been added but not yet used to sign
+ * a certificate, and a certificate that has been rotated out.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Required. Cloud SQL instance ID. This does not include the project ID.
+ * @param {string} request.project
+ *   Required. Project ID of the project that contains the instance.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.InstancesListEntraIdCertificatesResponse|InstancesListEntraIdCertificatesResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta4/sql_instances_service.list_entra_id_certificates.js</caption>
+ * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_ListEntraIdCertificates_async
+ */
+  listEntraIdCertificates(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesListEntraIdCertificatesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IInstancesListEntraIdCertificatesResponse,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesListEntraIdCertificatesRequest|undefined, {}|undefined
+      ]>;
+  listEntraIdCertificates(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesListEntraIdCertificatesRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.IInstancesListEntraIdCertificatesResponse,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesListEntraIdCertificatesRequest|null|undefined,
+          {}|null|undefined>): void;
+  listEntraIdCertificates(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesListEntraIdCertificatesRequest,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.IInstancesListEntraIdCertificatesResponse,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesListEntraIdCertificatesRequest|null|undefined,
+          {}|null|undefined>): void;
+  listEntraIdCertificates(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesListEntraIdCertificatesRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.sql.v1beta4.IInstancesListEntraIdCertificatesResponse,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesListEntraIdCertificatesRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.sql.v1beta4.IInstancesListEntraIdCertificatesResponse,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesListEntraIdCertificatesRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IInstancesListEntraIdCertificatesResponse,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesListEntraIdCertificatesRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'instance': request.instance ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('listEntraIdCertificates request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.sql.v1beta4.IInstancesListEntraIdCertificatesResponse,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesListEntraIdCertificatesRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('listEntraIdCertificates response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.listEntraIdCertificates(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.sql.v1beta4.IInstancesListEntraIdCertificatesResponse,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesListEntraIdCertificatesRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('listEntraIdCertificates response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
  * Partially updates settings of a Cloud SQL instance by merging the request
  * with the current configuration. This method supports patch semantics.
  *
@@ -1739,13 +2167,12 @@ export class SqlInstancesServiceClient {
  * @param {string} request.project
  *   ID of the project that contains the read replica.
  * @param {boolean} request.failover
- *   Set to true to invoke a replica failover to the designated DR replica.
+ *   Set to true to invoke a replica failover to the DR replica.
  *   As part of replica failover, the promote operation attempts
  *   to add the original primary instance as a replica of the promoted
  *   DR replica when the original primary instance comes back online.
  *   If set to false or not specified, then the original primary
  *   instance becomes an independent Cloud SQL primary instance.
- *   Only applicable to MySQL.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -1835,7 +2262,7 @@ export class SqlInstancesServiceClient {
       });
   }
 /**
- * Switches over from the primary instance to the designated DR replica
+ * Switches over from the primary instance to the DR replica
  * instance.
  *
  * @param {Object} request
@@ -1845,9 +2272,9 @@ export class SqlInstancesServiceClient {
  * @param {string} request.project
  *   ID of the project that contains the replica.
  * @param {google.protobuf.Duration} [request.dbTimeout]
- *   Optional. (MySQL only) Cloud SQL instance operations timeout, which is a
- *   sum of all database operations. Default value is 10 minutes and can be
- *   modified to a maximum value of 24 hours.
+ *   Optional. (MySQL and PostgreSQL only) Cloud SQL instance operations
+ *   timeout, which is a sum of all database operations. Default value is 10
+ *   minutes and can be modified to a maximum value of 24 hours.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -1946,6 +2373,8 @@ export class SqlInstancesServiceClient {
  *   Cloud SQL instance ID. This does not include the project ID.
  * @param {string} request.project
  *   Project ID of the project that contains the instance.
+ * @param {google.cloud.sql.v1beta4.SqlInstancesResetSslConfigRequest.ResetSslMode} [request.mode]
+ *   Optional. Reset SSL mode to use.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -2232,7 +2661,9 @@ export class SqlInstancesServiceClient {
   }
 /**
  * Rotates the server certificate to one signed by the Certificate Authority
- * (CA) version previously added with the addServerCA method.
+ * (CA) version previously added with the addServerCA method. For instances
+ * that have enabled Certificate Authority Service (CAS) based server CA,
+ * use RotateServerCertificate to rotate the server certificate.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -2320,6 +2751,207 @@ export class SqlInstancesServiceClient {
         {}|undefined
       ]) => {
         this._log.info('rotateServerCa response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Rotates the server certificate version to one previously added with the
+ * addServerCertificate method. For instances not using Certificate Authority
+ * Service (CAS) server CA, use RotateServerCa instead.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Required. Cloud SQL instance ID. This does not include the project ID.
+ * @param {string} request.project
+ *   Required. Project ID of the project that contains the instance.
+ * @param {google.cloud.sql.v1beta4.InstancesRotateServerCertificateRequest} request.body
+ *   Required. Rotate server certificate request body.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta4/sql_instances_service.rotate_server_certificate.js</caption>
+ * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_RotateServerCertificate_async
+ */
+  rotateServerCertificate(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesRotateServerCertificateRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesRotateServerCertificateRequest|undefined, {}|undefined
+      ]>;
+  rotateServerCertificate(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesRotateServerCertificateRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesRotateServerCertificateRequest|null|undefined,
+          {}|null|undefined>): void;
+  rotateServerCertificate(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesRotateServerCertificateRequest,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesRotateServerCertificateRequest|null|undefined,
+          {}|null|undefined>): void;
+  rotateServerCertificate(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesRotateServerCertificateRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesRotateServerCertificateRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesRotateServerCertificateRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesRotateServerCertificateRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'instance': request.instance ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('rotateServerCertificate request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesRotateServerCertificateRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('rotateServerCertificate response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.rotateServerCertificate(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesRotateServerCertificateRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('rotateServerCertificate response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Rotates the Entra Id certificate version to one previously added with the
+ * addEntraIdCertificate method.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Required. Cloud SQL instance ID. This does not include the project ID.
+ * @param {string} request.project
+ *   Required. Project ID of the project that contains the instance.
+ * @param {google.cloud.sql.v1beta4.InstancesRotateEntraIdCertificateRequest} request.body
+ *   Required. Rotate Entra ID certificate request body.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta4/sql_instances_service.rotate_entra_id_certificate.js</caption>
+ * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_RotateEntraIdCertificate_async
+ */
+  rotateEntraIdCertificate(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesRotateEntraIdCertificateRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesRotateEntraIdCertificateRequest|undefined, {}|undefined
+      ]>;
+  rotateEntraIdCertificate(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesRotateEntraIdCertificateRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesRotateEntraIdCertificateRequest|null|undefined,
+          {}|null|undefined>): void;
+  rotateEntraIdCertificate(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesRotateEntraIdCertificateRequest,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesRotateEntraIdCertificateRequest|null|undefined,
+          {}|null|undefined>): void;
+  rotateEntraIdCertificate(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesRotateEntraIdCertificateRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesRotateEntraIdCertificateRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesRotateEntraIdCertificateRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesRotateEntraIdCertificateRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'instance': request.instance ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('rotateEntraIdCertificate request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesRotateEntraIdCertificateRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('rotateEntraIdCertificate response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.rotateEntraIdCertificate(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesRotateEntraIdCertificateRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('rotateEntraIdCertificate response %j', response);
         return [response, options, rawResponse];
       }).catch((error: any) => {
         if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
@@ -2944,6 +3576,9 @@ export class SqlInstancesServiceClient {
  * @param {google.cloud.sql.v1beta4.ExternalSyncParallelLevel} [request.syncParallelLevel]
  *   Optional. Parallel level for initial data sync. Only applicable for
  *   PostgreSQL.
+ * @param {number[]} [request.selectedObjects]
+ *   Optional. Migrate only the specified objects from the source instance. If
+ *   this field is empty, then migrate all objects.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -3054,6 +3689,11 @@ export class SqlInstancesServiceClient {
  *   Optional. MigrationType configures the migration to use physical files or
  *   logical dump files. If not set, then the logical dump file configuration is
  *   used. Valid values are `LOGICAL` or `PHYSICAL`. Only applicable to MySQL.
+ * @param {boolean} [request.replicaOverwriteEnabled]
+ *   Optional. MySQL only. True if end-user has confirmed that this SES call
+ *   will wipe replica databases overlapping with the proposed selected_objects.
+ *   If this field is not set and there are both overlapping and additional
+ *   databases proposed, an error will be returned.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -3444,6 +4084,9 @@ export class SqlInstancesServiceClient {
  *   Cloud SQL instance ID. This does not include the project ID.
  * @param {string} request.project
  *   Project ID of the project that contains the instance.
+ * @param {google.protobuf.Timestamp} request.sourceInstanceDeletionTime
+ *   The timestamp used to identify the time when the source instance is
+ *   deleted. If this instance is deleted, then you must set the timestamp.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -3523,6 +4166,105 @@ export class SqlInstancesServiceClient {
         {}|undefined
       ]) => {
         this._log.info('getLatestRecoveryTime response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Execute SQL statements.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Required. Database instance ID. This does not include the project ID.
+ * @param {string} request.project
+ *   Required. Project ID of the project that contains the instance.
+ * @param {google.cloud.sql.v1beta4.ExecuteSqlPayload} request.body
+ *   The request body.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.SqlInstancesExecuteSqlResponse|SqlInstancesExecuteSqlResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta4/sql_instances_service.execute_sql.js</caption>
+ * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_ExecuteSql_async
+ */
+  executeSql(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesExecuteSqlRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.ISqlInstancesExecuteSqlResponse,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesExecuteSqlRequest|undefined, {}|undefined
+      ]>;
+  executeSql(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesExecuteSqlRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.ISqlInstancesExecuteSqlResponse,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesExecuteSqlRequest|null|undefined,
+          {}|null|undefined>): void;
+  executeSql(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesExecuteSqlRequest,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.ISqlInstancesExecuteSqlResponse,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesExecuteSqlRequest|null|undefined,
+          {}|null|undefined>): void;
+  executeSql(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesExecuteSqlRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.sql.v1beta4.ISqlInstancesExecuteSqlResponse,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesExecuteSqlRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.sql.v1beta4.ISqlInstancesExecuteSqlResponse,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesExecuteSqlRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.ISqlInstancesExecuteSqlResponse,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesExecuteSqlRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'instance': request.instance ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('executeSql request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.sql.v1beta4.ISqlInstancesExecuteSqlResponse,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesExecuteSqlRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('executeSql response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.executeSql(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.sql.v1beta4.ISqlInstancesExecuteSqlResponse,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesExecuteSqlRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('executeSql response %j', response);
         return [response, options, rawResponse];
       }).catch((error: any) => {
         if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
@@ -3736,6 +4478,205 @@ export class SqlInstancesServiceClient {
         throw error;
       });
   }
+/**
+ * Execute MVU Pre-checks
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Required. Cloud SQL instance ID. This does not include the project ID.
+ * @param {string} request.project
+ *   Required. Project ID of the project that contains the instance.
+ * @param {google.cloud.sql.v1beta4.InstancesPreCheckMajorVersionUpgradeRequest} request.body
+ *   Required. The context for request to perform the pre-check major version
+ *   upgrade operation.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta4/sql_instances_service.pre_check_major_version_upgrade.js</caption>
+ * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_PreCheckMajorVersionUpgrade_async
+ */
+  preCheckMajorVersionUpgrade(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesPreCheckMajorVersionUpgradeRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesPreCheckMajorVersionUpgradeRequest|undefined, {}|undefined
+      ]>;
+  preCheckMajorVersionUpgrade(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesPreCheckMajorVersionUpgradeRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesPreCheckMajorVersionUpgradeRequest|null|undefined,
+          {}|null|undefined>): void;
+  preCheckMajorVersionUpgrade(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesPreCheckMajorVersionUpgradeRequest,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesPreCheckMajorVersionUpgradeRequest|null|undefined,
+          {}|null|undefined>): void;
+  preCheckMajorVersionUpgrade(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesPreCheckMajorVersionUpgradeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesPreCheckMajorVersionUpgradeRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesPreCheckMajorVersionUpgradeRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesPreCheckMajorVersionUpgradeRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'instance': request.instance ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('preCheckMajorVersionUpgrade request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesPreCheckMajorVersionUpgradeRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('preCheckMajorVersionUpgrade response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.preCheckMajorVersionUpgrade(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesPreCheckMajorVersionUpgradeRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('preCheckMajorVersionUpgrade response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Point in time restore for an instance managed by Google Cloud Backup and
+ * Disaster Recovery.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource where you created this instance.
+ *   Format: projects/{project}
+ * @param {google.cloud.sql.v1beta4.PointInTimeRestoreContext} request.context
+ *   Required. The context for request to perform a PITR on a Google Cloud
+ *   Backup and Disaster Recovery managed instance.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta4/sql_instances_service.point_in_time_restore.js</caption>
+ * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_PointInTimeRestore_async
+ */
+  pointInTimeRestore(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesPointInTimeRestoreRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesPointInTimeRestoreRequest|undefined, {}|undefined
+      ]>;
+  pointInTimeRestore(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesPointInTimeRestoreRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesPointInTimeRestoreRequest|null|undefined,
+          {}|null|undefined>): void;
+  pointInTimeRestore(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesPointInTimeRestoreRequest,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesPointInTimeRestoreRequest|null|undefined,
+          {}|null|undefined>): void;
+  pointInTimeRestore(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesPointInTimeRestoreRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesPointInTimeRestoreRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesPointInTimeRestoreRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesPointInTimeRestoreRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('pointInTimeRestore request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesPointInTimeRestoreRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('pointInTimeRestore response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.pointInTimeRestore(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesPointInTimeRestoreRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('pointInTimeRestore response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
 
 /**
    * Gets information about a location.
@@ -3815,6 +4756,68 @@ export class SqlInstancesServiceClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
+  // --------------------
+  // -- Path templates --
+  // --------------------
+
+  /**
+   * Return a fully-qualified backup resource name string.
+   *
+   * @param {string} project
+   * @param {string} backup
+   * @returns {string} Resource name string.
+   */
+  backupPath(project:string,backup:string) {
+    return this.pathTemplates.backupPathTemplate.render({
+      project: project,
+      backup: backup,
+    });
+  }
+
+  /**
+   * Parse the project from Backup resource.
+   *
+   * @param {string} backupName
+   *   A fully-qualified path representing Backup resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromBackupName(backupName: string) {
+    return this.pathTemplates.backupPathTemplate.match(backupName).project;
+  }
+
+  /**
+   * Parse the backup from Backup resource.
+   *
+   * @param {string} backupName
+   *   A fully-qualified path representing Backup resource.
+   * @returns {string} A string representing the backup.
+   */
+  matchBackupFromBackupName(backupName: string) {
+    return this.pathTemplates.backupPathTemplate.match(backupName).backup;
+  }
+
+  /**
+   * Return a fully-qualified project resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  projectPath(project:string) {
+    return this.pathTemplates.projectPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
+   * Parse the project from Project resource.
+   *
+   * @param {string} projectName
+   *   A fully-qualified path representing Project resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectName(projectName: string) {
+    return this.pathTemplates.projectPathTemplate.match(projectName).project;
+  }
 
   /**
    * Terminate the gRPC channel and close the client.
