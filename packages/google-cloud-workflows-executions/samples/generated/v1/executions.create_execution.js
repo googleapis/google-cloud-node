@@ -40,7 +40,7 @@ function main(parent, execution) {
   // const execution = {}
 
   // Imports the Executions library
-  const {ExecutionsClient} = require('@google-cloud/workflow-executions').v1;
+  const {ExecutionsClient} = require('@google-cloud/workflows').v1;
 
   // Instantiates a client
   const executionsClient = new ExecutionsClient();
