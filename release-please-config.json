@@ -219,7 +219,8 @@
     "packages/google-cloud-geminidataanalytics": {},
     "packages/google-cloud-vectorsearch": {},
     "packages/google-cloud-hypercomputecluster": {},
-    "packages/google-cloud-apiregistry": {}
+    "packages/google-cloud-apiregistry": {},
+    "packages/google-cloud-gkerecommender": {}
   },
   "plugins": [
     {
