@@ -34,7 +34,7 @@ function main(requestId) {
   // const requestId = 'abc123'
 
   // Imports the Datamanager library
-  const {IngestionServiceClient} = require('@google-cloud/datamanager').v1;
+  const {IngestionServiceClient} = require('@google-ads/datamanager').v1;
 
   // Instantiates a client
   const datamanagerClient = new IngestionServiceClient();
