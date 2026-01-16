@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.24.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.23.0...sql-v0.24.0) (2026-01-16)
+
+
+### Features
+
+* [sql] introduces auto_upgrade_enabled option for MySQL in DatabaseInstance.Settings ([#6969](https://github.com/googleapis/google-cloud-node/issues/6969)) ([4880248](https://github.com/googleapis/google-cloud-node/commit/48802487892bf059142b4b4064a4c2dec31d3838))
+
 ## [0.23.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.22.0...sql-v0.23.0) (2025-11-21)
 
 
