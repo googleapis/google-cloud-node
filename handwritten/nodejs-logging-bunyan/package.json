@@ -41,7 +41,7 @@
     "presamples-test": "npm run compile",
     "presystem-test": "npm run compile",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
-    "system-test": "mocha build/system-test --timeout 600000",
+    "system-test": "mocha build/system-test --timeout 200000",
     "test": "c8 mocha --recursive build/test",
     "clean": "gts clean",
     "compile": "tsc -p .",
