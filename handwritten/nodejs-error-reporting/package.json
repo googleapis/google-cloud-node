@@ -3,7 +3,7 @@
   "description": "Error Reporting Client Library for Node.js",
   "version": "3.0.5",
   "license": "Apache-2.0",
-  "author": "Google Inc.",
+  "author": "Google LLC",
   "engines": {
     "node": ">=18"
   },
@@ -71,7 +71,9 @@
     "uuid": "^8.3.2"
   },
   "overrides": {
-    "undici": "5.28.4"
+    "undici": "5.28.4",
+    "cheerio": "1.0.0-rc.12",
+    "tablesort": "5.3.0"
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/nodejs-error-reporting"
 }
