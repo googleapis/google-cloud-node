@@ -39,7 +39,7 @@
     "console-log-level": "^1.4.1"
   },
   "devDependencies": {
-    "@compodoc/compodoc": "1.1.25",
+    "@compodoc/compodoc": "1.1.23",
     "@hapi/hapi": "^21.4.4",
     "@types/boom": "^7.3.5",
     "@types/console-log-level": "^1.4.0",
@@ -74,7 +74,8 @@
     "overrides": {
       "undici": "5.28.4",
       "cheerio": "1.0.0-rc.12",
-      "tablesort": "5.3.0"
+      "tablesort": "5.3.0",
+      "bootstrap.native": "4.1.1"
     }
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/nodejs-error-reporting"
