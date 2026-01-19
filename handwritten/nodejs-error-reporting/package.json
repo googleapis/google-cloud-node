@@ -70,10 +70,12 @@
     "typescript": "^5.9.3",
     "uuid": "^8.3.2"
   },
-  "overrides": {
-    "undici": "5.28.4",
-    "cheerio": "1.0.0-rc.12",
-    "tablesort": "5.3.0"
+  "pnpm": {
+    "overrides": {
+      "undici": "5.28.4",
+      "cheerio": "1.0.0-rc.12",
+      "tablesort": "5.3.0"
+    }
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/nodejs-error-reporting"
 }
