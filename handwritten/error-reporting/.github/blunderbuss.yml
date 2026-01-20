@@ -1,4 +1,4 @@
 assign_issues:
-  - googleapis/api-logging-reviewers
+  - googleapis/yoshi-nodejs
 assign_prs:
-  - googleapis/api-logging-reviewers
+  - googleapis/yoshi-nodejs
