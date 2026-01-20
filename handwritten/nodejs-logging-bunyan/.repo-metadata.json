@@ -9,6 +9,6 @@
   "repo": "googleapis/nodejs-logging-bunyan",
   "distribution_name": "@google-cloud/logging-bunyan",
   "api_id": "logging.googleapis.com",
-  "codeowner_team": "@googleapis/api-logging",
+  "codeowner_team": "@googleapis/yoshi-nodejs",
   "library_type": "OTHER"
 }
