@@ -74,8 +74,14 @@
     "overrides": {
       "undici": "5.28.4",
       "cheerio": "1.0.0-rc.12",
-      "tablesort": "5.3.0",
-      "bootstrap.native": "5.0.10"
+      "tablesort": "5.3.0"
+    },
+    "packageExtensions": {
+      "bootstrap.native": {
+        "engines": {
+          "pnpm": ">=7.0.0"
+        }
+      }
     }
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/nodejs-error-reporting"
