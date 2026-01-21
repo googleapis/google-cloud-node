@@ -24,6 +24,7 @@ function main() {
   const autokeyClient = new kms.AutokeyClient();
   const autokeyAdminClient = new kms.AutokeyAdminClient();
   const ekmServiceClient = new kms.EkmServiceClient();
+  const hsmManagementClient = new kms.HsmManagementClient();
   const keyManagementServiceClient = new kms.KeyManagementServiceClient();
 }
 

@@ -2079,5 +2079,105 @@ describe('v1.EkmServiceClient', () => {
                     .getCall(-1).calledWith(fakePath));
             });
         });
+
+        describe('singleTenantHsmInstance', async () => {
+            const fakePath = "/rendered/path/singleTenantHsmInstance";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                single_tenant_hsm_instance: "singleTenantHsmInstanceValue",
+            };
+            const client = new ekmserviceModule.v1.EkmServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.singleTenantHsmInstancePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.singleTenantHsmInstancePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('singleTenantHsmInstancePath', () => {
+                const result = client.singleTenantHsmInstancePath("projectValue", "locationValue", "singleTenantHsmInstanceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.singleTenantHsmInstancePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromSingleTenantHsmInstanceName', () => {
+                const result = client.matchProjectFromSingleTenantHsmInstanceName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.singleTenantHsmInstancePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromSingleTenantHsmInstanceName', () => {
+                const result = client.matchLocationFromSingleTenantHsmInstanceName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.singleTenantHsmInstancePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSingleTenantHsmInstanceFromSingleTenantHsmInstanceName', () => {
+                const result = client.matchSingleTenantHsmInstanceFromSingleTenantHsmInstanceName(fakePath);
+                assert.strictEqual(result, "singleTenantHsmInstanceValue");
+                assert((client.pathTemplates.singleTenantHsmInstancePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('singleTenantHsmInstanceProposal', async () => {
+            const fakePath = "/rendered/path/singleTenantHsmInstanceProposal";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                single_tenant_hsm_instance: "singleTenantHsmInstanceValue",
+                proposal: "proposalValue",
+            };
+            const client = new ekmserviceModule.v1.EkmServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.singleTenantHsmInstanceProposalPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.singleTenantHsmInstanceProposalPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('singleTenantHsmInstanceProposalPath', () => {
+                const result = client.singleTenantHsmInstanceProposalPath("projectValue", "locationValue", "singleTenantHsmInstanceValue", "proposalValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.singleTenantHsmInstanceProposalPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromSingleTenantHsmInstanceProposalName', () => {
+                const result = client.matchProjectFromSingleTenantHsmInstanceProposalName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.singleTenantHsmInstanceProposalPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromSingleTenantHsmInstanceProposalName', () => {
+                const result = client.matchLocationFromSingleTenantHsmInstanceProposalName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.singleTenantHsmInstanceProposalPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSingleTenantHsmInstanceFromSingleTenantHsmInstanceProposalName', () => {
+                const result = client.matchSingleTenantHsmInstanceFromSingleTenantHsmInstanceProposalName(fakePath);
+                assert.strictEqual(result, "singleTenantHsmInstanceValue");
+                assert((client.pathTemplates.singleTenantHsmInstanceProposalPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchProposalFromSingleTenantHsmInstanceProposalName', () => {
+                const result = client.matchProposalFromSingleTenantHsmInstanceProposalName(fakePath);
+                assert.strictEqual(result, "proposalValue");
+                assert((client.pathTemplates.singleTenantHsmInstanceProposalPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
     });
 });
