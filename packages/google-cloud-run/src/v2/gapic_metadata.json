@@ -87,6 +87,84 @@
         }
       }
     },
+    "Instances": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "InstancesClient",
+          "rpcs": {
+            "GetInstance": {
+              "methods": [
+                "getInstance"
+              ]
+            },
+            "CreateInstance": {
+              "methods": [
+                "createInstance"
+              ]
+            },
+            "DeleteInstance": {
+              "methods": [
+                "deleteInstance"
+              ]
+            },
+            "StopInstance": {
+              "methods": [
+                "stopInstance"
+              ]
+            },
+            "StartInstance": {
+              "methods": [
+                "startInstance"
+              ]
+            },
+            "ListInstances": {
+              "methods": [
+                "listInstances",
+                "listInstancesStream",
+                "listInstancesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "InstancesClient",
+          "rpcs": {
+            "GetInstance": {
+              "methods": [
+                "getInstance"
+              ]
+            },
+            "CreateInstance": {
+              "methods": [
+                "createInstance"
+              ]
+            },
+            "DeleteInstance": {
+              "methods": [
+                "deleteInstance"
+              ]
+            },
+            "StopInstance": {
+              "methods": [
+                "stopInstance"
+              ]
+            },
+            "StartInstance": {
+              "methods": [
+                "startInstance"
+              ]
+            },
+            "ListInstances": {
+              "methods": [
+                "listInstances",
+                "listInstancesStream",
+                "listInstancesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "Jobs": {
       "clients": {
         "grpc": {

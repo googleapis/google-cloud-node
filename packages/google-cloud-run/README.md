@@ -63,6 +63,12 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | delete execution | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-run/samples/generated/v2/executions.delete_execution.js) |
 | get execution | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-run/samples/generated/v2/executions.get_execution.js) |
 | list executions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-run/samples/generated/v2/executions.list_executions.js) |
+| create instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-run/samples/generated/v2/instances.create_instance.js) |
+| delete instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-run/samples/generated/v2/instances.delete_instance.js) |
+| get instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-run/samples/generated/v2/instances.get_instance.js) |
+| list instances | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-run/samples/generated/v2/instances.list_instances.js) |
+| start instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-run/samples/generated/v2/instances.start_instance.js) |
+| stop instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-run/samples/generated/v2/instances.stop_instance.js) |
 | create job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-run/samples/generated/v2/jobs.create_job.js) |
 | delete job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-run/samples/generated/v2/jobs.delete_job.js) |
 | get iam policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-run/samples/generated/v2/jobs.get_iam_policy.js) |
