@@ -221,7 +221,11 @@ function ast(file: string, client: string): [string, string][] {
     if (!isExcludedFunction) {
       const docString = methodDocstrings.get(functionName);
       output = output.concat(`\n\n${docString}`);
-      output = output.concat(getOverloadedMethod(node));
+      const overloadedMethods = getOverloadedMethod(node);
+      output = output.concat(overloadedMethods);
+      if (overloadedMethods) {
+        output = output.concat(`\n${docString}`);
+      }
       if (isStatic) {
         output = output.concat('\tstatic ');
       }

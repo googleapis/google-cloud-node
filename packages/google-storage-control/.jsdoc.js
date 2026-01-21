@@ -37,6 +37,10 @@ module.exports = {
       'build/src',
       'protos'
     ],
+    exclude: [
+      'build/src/v2/storage_client.js',
+      'build/src/v2/storage_control_client.js'
+    ],
     includePattern: '\\.js$'
   },
   templates: {

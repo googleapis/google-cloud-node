@@ -254,6 +254,44 @@ export class StorageControlClient {
       {} | null | undefined
     >,
   ): void;
+  // -------------------
+  // -- Service calls --
+  // -------------------
+  /**
+   * Creates a new folder. This operation is only applicable to a hierarchical
+   * namespace enabled bucket.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the bucket in which the folder will reside. The bucket
+   *   must be a hierarchical namespace enabled bucket.
+   * @param {google.storage.control.v2.Folder} request.folder
+   *   Required. Properties of the new folder being created.
+   *   The bucket and name of the folder are specified in the parent and folder_id
+   *   fields, respectively. Populating those fields in `folder` will result in an
+   *   error.
+   * @param {string} request.folderId
+   *   Required. The full name of a folder, including all its parent folders.
+   *   Folders use single '/' characters as a delimiter.
+   *   The folder_id must end with a slash.
+   *   For example, the folder_id of "books/biographies/" would create a new
+   *   "biographies/" folder under the "books/" folder.
+   * @param {boolean} [request.recursive]
+   *   Optional. If true, parent folder doesn't have to be present and all missing
+   *   ancestor folders will be created atomically.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. UUID is the recommended
+   *   format, but other formats are still accepted.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.storage.control.v2.Folder|Folder}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.create_folder.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_CreateFolder_async
+   */
   createFolder(
     request?: protos.google.storage.control.v2.ICreateFolderRequest,
     optionsOrCallback?:
@@ -346,6 +384,33 @@ export class StorageControlClient {
       {} | null | undefined
     >,
   ): void;
+  /**
+   * Permanently deletes an empty folder. This operation is only applicable to a
+   * hierarchical namespace enabled bucket.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the folder.
+   *   Format: `projects/{project}/buckets/{bucket}/folders/{folder}`
+   * @param {number} request.ifMetagenerationMatch
+   *   Makes the operation only succeed conditional on whether the folder's
+   *   current metageneration matches the given value.
+   * @param {number} request.ifMetagenerationNotMatch
+   *   Makes the operation only succeed conditional on whether the folder's
+   *   current metageneration does not match the given value.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. UUID is the recommended
+   *   format, but other formats are still accepted.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.delete_folder.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_DeleteFolder_async
+   */
   deleteFolder(
     request?: protos.google.storage.control.v2.IDeleteFolderRequest,
     optionsOrCallback?:
@@ -438,6 +503,33 @@ export class StorageControlClient {
       {} | null | undefined
     >,
   ): void;
+  /**
+   * Returns metadata for the specified folder. This operation is only
+   * applicable to a hierarchical namespace enabled bucket.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the folder.
+   *   Format: `projects/{project}/buckets/{bucket}/folders/{folder}`
+   * @param {number} request.ifMetagenerationMatch
+   *   Makes the operation only succeed conditional on whether the folder's
+   *   current metageneration matches the given value.
+   * @param {number} request.ifMetagenerationNotMatch
+   *   Makes the operation only succeed conditional on whether the folder's
+   *   current metageneration does not match the given value.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. UUID is the recommended
+   *   format, but other formats are still accepted.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.storage.control.v2.Folder|Folder}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.get_folder.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_GetFolder_async
+   */
   getFolder(
     request?: protos.google.storage.control.v2.IGetFolderRequest,
     optionsOrCallback?:
@@ -528,6 +620,29 @@ export class StorageControlClient {
       {} | null | undefined
     >,
   ): void;
+  /**
+   * Returns the storage layout configuration for a given bucket.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the StorageLayout resource.
+   *   Format: `projects/{project}/buckets/{bucket}/storageLayout`
+   * @param {string} request.prefix
+   *   An optional prefix used for permission check. It is useful when the caller
+   *   only has limited permissions under a specific prefix.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. UUID is the recommended
+   *   format, but other formats are still accepted.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.storage.control.v2.StorageLayout|StorageLayout}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.get_storage_layout.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_GetStorageLayout_async
+   */
   getStorageLayout(
     request?: protos.google.storage.control.v2.IGetStorageLayoutRequest,
     optionsOrCallback?:
@@ -630,6 +745,33 @@ export class StorageControlClient {
       {} | null | undefined
     >,
   ): void;
+  /**
+   * Creates a new managed folder.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the bucket this managed folder belongs to.
+   * @param {google.storage.control.v2.ManagedFolder} request.managedFolder
+   *   Required. Properties of the managed folder being created.
+   *   The bucket and managed folder names are specified in the `parent` and
+   *   `managed_folder_id` fields. Populating these fields in `managed_folder`
+   *   will result in an error.
+   * @param {string} request.managedFolderId
+   *   Required. The name of the managed folder. It uses a single `/` as delimiter
+   *   and leading and trailing `/` are allowed.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. UUID is the recommended
+   *   format, but other formats are still accepted.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.storage.control.v2.ManagedFolder|ManagedFolder}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.create_managed_folder.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_CreateManagedFolder_async
+   */
   createManagedFolder(
     request?: protos.google.storage.control.v2.ICreateManagedFolderRequest,
     optionsOrCallback?:
@@ -737,6 +879,38 @@ export class StorageControlClient {
       {} | null | undefined
     >,
   ): void;
+  /**
+   * Permanently deletes an empty managed folder.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the managed folder.
+   *   Format:
+   *   `projects/{project}/buckets/{bucket}/managedFolders/{managedFolder}`
+   * @param {number} request.ifMetagenerationMatch
+   *   The operation succeeds conditional on the managed folder's current
+   *   metageneration matching the value here specified.
+   * @param {number} request.ifMetagenerationNotMatch
+   *   The operation succeeds conditional on the managed folder's current
+   *   metageneration NOT matching the value here specified.
+   * @param {boolean} request.allowNonEmpty
+   *   Allows deletion of a managed folder even if it is not empty.
+   *   A managed folder is empty if it manages no child managed folders or
+   *   objects. Caller must have permission for
+   *   storage.managedFolders.setIamPolicy.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. UUID is the recommended
+   *   format, but other formats are still accepted.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.delete_managed_folder.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_DeleteManagedFolder_async
+   */
   deleteManagedFolder(
     request?: protos.google.storage.control.v2.IDeleteManagedFolderRequest,
     optionsOrCallback?:
@@ -839,6 +1013,33 @@ export class StorageControlClient {
       {} | null | undefined
     >,
   ): void;
+  /**
+   * Returns metadata for the specified managed folder.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the managed folder.
+   *   Format:
+   *   `projects/{project}/buckets/{bucket}/managedFolders/{managedFolder}`
+   * @param {number} request.ifMetagenerationMatch
+   *   The operation succeeds conditional on the managed folder's current
+   *   metageneration matching the value here specified.
+   * @param {number} request.ifMetagenerationNotMatch
+   *   The operation succeeds conditional on the managed folder's current
+   *   metageneration NOT matching the value here specified.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. UUID is the recommended
+   *   format, but other formats are still accepted.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.storage.control.v2.ManagedFolder|ManagedFolder}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.get_managed_folder.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_GetManagedFolder_async
+   */
   getManagedFolder(
     request?: protos.google.storage.control.v2.IGetManagedFolderRequest,
     optionsOrCallback?:
@@ -938,6 +1139,30 @@ export class StorageControlClient {
       {} | null | undefined
     >,
   ): void;
+  /**
+   * Disables an Anywhere Cache instance. A disabled instance is read-only. The
+   * disablement could be revoked by calling ResumeAnywhereCache. The cache
+   * instance will be deleted automatically if it remains in the disabled state
+   * for at least one hour.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name field in the request should be:
+   *   `projects/{project}/buckets/{bucket}/anywhereCaches/{anywhere_cache}`
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. UUID is the recommended
+   *   format, but other formats are still accepted. This request is only
+   *   idempotent if a `request_id` is provided.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.storage.control.v2.AnywhereCache|AnywhereCache}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.disable_anywhere_cache.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_DisableAnywhereCache_async
+   */
   disableAnywhereCache(
     request?: protos.google.storage.control.v2.IDisableAnywhereCacheRequest,
     optionsOrCallback?:
@@ -1034,6 +1259,27 @@ export class StorageControlClient {
       {} | null | undefined
     >,
   ): void;
+  /**
+   * Pauses an Anywhere Cache instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name field in the request should be:
+   *   `projects/{project}/buckets/{bucket}/anywhereCaches/{anywhere_cache}`
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. UUID is the recommended
+   *   format, but other formats are still accepted. This request is only
+   *   idempotent if a `request_id` is provided.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.storage.control.v2.AnywhereCache|AnywhereCache}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.pause_anywhere_cache.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_PauseAnywhereCache_async
+   */
   pauseAnywhereCache(
     request?: protos.google.storage.control.v2.IPauseAnywhereCacheRequest,
     optionsOrCallback?:
@@ -1130,6 +1376,27 @@ export class StorageControlClient {
       {} | null | undefined
     >,
   ): void;
+  /**
+   * Resumes a disabled or paused Anywhere Cache instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name field in the request should be:
+   *   `projects/{project}/buckets/{bucket}/anywhereCaches/{anywhere_cache}`
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. UUID is the recommended
+   *   format, but other formats are still accepted. This request is only
+   *   idempotent if a `request_id` is provided.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.storage.control.v2.AnywhereCache|AnywhereCache}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.resume_anywhere_cache.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_ResumeAnywhereCache_async
+   */
   resumeAnywhereCache(
     request?: protos.google.storage.control.v2.IResumeAnywhereCacheRequest,
     optionsOrCallback?:
@@ -1225,6 +1492,26 @@ export class StorageControlClient {
       {} | null | undefined
     >,
   ): void;
+  /**
+   * Gets an Anywhere Cache instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name field in the request should be:
+   *   `projects/{project}/buckets/{bucket}/anywhereCaches/{anywhere_cache}`
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. UUID is the recommended
+   *   format, but other formats are still accepted.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.storage.control.v2.AnywhereCache|AnywhereCache}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.get_anywhere_cache.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_GetAnywhereCache_async
+   */
   getAnywhereCache(
     request?: protos.google.storage.control.v2.IGetAnywhereCacheRequest,
     optionsOrCallback?:
@@ -1322,6 +1609,25 @@ export class StorageControlClient {
       {} | null | undefined
     >,
   ): void;
+  /**
+   * Returns the Project scoped singleton IntelligenceConfig resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the `IntelligenceConfig` resource associated with
+   *   your project.
+   *
+   *   Format: `projects/{id}/locations/global/intelligenceConfig`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.storage.control.v2.IntelligenceConfig|IntelligenceConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.get_project_intelligence_config.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_GetProjectIntelligenceConfig_async
+   */
   getProjectIntelligenceConfig(
     request?: protos.google.storage.control.v2.IGetProjectIntelligenceConfigRequest,
     optionsOrCallback?:
@@ -1429,6 +1735,29 @@ export class StorageControlClient {
       {} | null | undefined
     >,
   ): void;
+  /**
+   * Updates the Project scoped singleton IntelligenceConfig resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.storage.control.v2.IntelligenceConfig} request.intelligenceConfig
+   *   Required. The `IntelligenceConfig` resource to be updated.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The `update_mask` that specifies the fields within the
+   *   `IntelligenceConfig` resource that should be modified by this update. Only
+   *   the listed fields are updated.
+   * @param {string} [request.requestId]
+   *   Optional. The ID that uniquely identifies the request, preventing duplicate
+   *   processing.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.storage.control.v2.IntelligenceConfig|IntelligenceConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.update_project_intelligence_config.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_UpdateProjectIntelligenceConfig_async
+   */
   updateProjectIntelligenceConfig(
     request?: protos.google.storage.control.v2.IUpdateProjectIntelligenceConfigRequest,
     optionsOrCallback?:
@@ -1532,6 +1861,25 @@ export class StorageControlClient {
       {} | null | undefined
     >,
   ): void;
+  /**
+   * Returns the Folder scoped singleton IntelligenceConfig resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the `IntelligenceConfig` resource associated with
+   *   your folder.
+   *
+   *   Format: `folders/{id}/locations/global/intelligenceConfig`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.storage.control.v2.IntelligenceConfig|IntelligenceConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.get_folder_intelligence_config.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_GetFolderIntelligenceConfig_async
+   */
   getFolderIntelligenceConfig(
     request?: protos.google.storage.control.v2.IGetFolderIntelligenceConfigRequest,
     optionsOrCallback?:
@@ -1639,6 +1987,29 @@ export class StorageControlClient {
       {} | null | undefined
     >,
   ): void;
+  /**
+   * Updates the Folder scoped singleton IntelligenceConfig resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.storage.control.v2.IntelligenceConfig} request.intelligenceConfig
+   *   Required. The `IntelligenceConfig` resource to be updated.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The `update_mask` that specifies the fields within the
+   *   `IntelligenceConfig` resource that should be modified by this update. Only
+   *   the listed fields are updated.
+   * @param {string} [request.requestId]
+   *   Optional. The ID that uniquely identifies the request, preventing duplicate
+   *   processing.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.storage.control.v2.IntelligenceConfig|IntelligenceConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.update_folder_intelligence_config.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_UpdateFolderIntelligenceConfig_async
+   */
   updateFolderIntelligenceConfig(
     request?: protos.google.storage.control.v2.IUpdateFolderIntelligenceConfigRequest,
     optionsOrCallback?:
@@ -1742,6 +2113,25 @@ export class StorageControlClient {
       {} | null | undefined
     >,
   ): void;
+  /**
+   * Returns the Organization scoped singleton IntelligenceConfig resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the `IntelligenceConfig` resource associated with
+   *   your organization.
+   *
+   *   Format: `organizations/{org_id}/locations/global/intelligenceConfig`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.storage.control.v2.IntelligenceConfig|IntelligenceConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.get_organization_intelligence_config.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_GetOrganizationIntelligenceConfig_async
+   */
   getOrganizationIntelligenceConfig(
     request?: protos.google.storage.control.v2.IGetOrganizationIntelligenceConfigRequest,
     optionsOrCallback?:
@@ -1849,6 +2239,29 @@ export class StorageControlClient {
       {} | null | undefined
     >,
   ): void;
+  /**
+   * Updates the Organization scoped singleton IntelligenceConfig resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.storage.control.v2.IntelligenceConfig} request.intelligenceConfig
+   *   Required. The `IntelligenceConfig` resource to be updated.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The `update_mask` that specifies the fields within the
+   *   `IntelligenceConfig` resource that should be modified by this update. Only
+   *   the listed fields are updated.
+   * @param {string} [request.requestId]
+   *   Optional. The ID that uniquely identifies the request, preventing duplicate
+   *   processing.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.storage.control.v2.IntelligenceConfig|IntelligenceConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.update_organization_intelligence_config.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_UpdateOrganizationIntelligenceConfig_async
+   */
   updateOrganizationIntelligenceConfig(
     request?: protos.google.storage.control.v2.IUpdateOrganizationIntelligenceConfigRequest,
     optionsOrCallback?:
@@ -1950,6 +2363,30 @@ export class StorageControlClient {
       {} | null | undefined
     >,
   ): void;
+  /**
+   * Gets the IAM policy for a specified bucket.
+   * The `resource` field in the request should be
+   * `projects/_/buckets/{bucket}` for a bucket, or
+   * `projects/_/buckets/{bucket}/managedFolders/{managedFolder}`
+   * for a managed folder.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {google.iam.v1.GetPolicyOptions} request.options
+   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+   *   `GetIamPolicy`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.get_iam_policy.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_GetIamPolicy_async
+   */
   getIamPolicy(
     request?: protos.google.iam.v1.IGetIamPolicyRequest,
     optionsOrCallback?:
@@ -2045,6 +2482,38 @@ export class StorageControlClient {
       {} | null | undefined
     >,
   ): void;
+  /**
+   * Updates an IAM policy for the specified bucket.
+   * The `resource` field in the request should be
+   * `projects/_/buckets/{bucket}` for a bucket, or
+   * `projects/_/buckets/{bucket}/managedFolders/{managedFolder}`
+   * for a managed folder.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being specified.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {google.iam.v1.Policy} request.policy
+   *   REQUIRED: The complete policy to be applied to the `resource`. The size of
+   *   the policy is limited to a few 10s of KB. An empty policy is a
+   *   valid policy but certain Cloud Platform services (such as Projects)
+   *   might reject them.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
+   *   the fields in the mask will be modified. If no mask is provided, the
+   *   following default mask is used:
+   *
+   *   `paths: "bindings, etag"`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.set_iam_policy.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_SetIamPolicy_async
+   */
   setIamPolicy(
     request?: protos.google.iam.v1.ISetIamPolicyRequest,
     optionsOrCallback?:
@@ -2136,6 +2605,34 @@ export class StorageControlClient {
       {} | null | undefined
     >,
   ): void;
+  /**
+   * Tests a set of permissions on the given bucket, object, or managed folder
+   * to see which, if any, are held by the caller.
+   * The `resource` field in the request should be
+   * `projects/_/buckets/{bucket}` for a bucket,
+   * `projects/_/buckets/{bucket}/objects/{object}` for an object, or
+   * `projects/_/buckets/{bucket}/managedFolders/{managedFolder}`
+   * for a managed folder.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see
+   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.iam.v1.TestIamPermissionsResponse|TestIamPermissionsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.test_iam_permissions.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_TestIamPermissions_async
+   */
   testIamPermissions(
     request?: protos.google.iam.v1.ITestIamPermissionsRequest,
     optionsOrCallback?:
@@ -2246,6 +2743,40 @@ export class StorageControlClient {
       {} | null | undefined
     >,
   ): void;
+  /**
+   * Renames a source folder to a destination folder. This operation is only
+   * applicable to a hierarchical namespace enabled bucket. During a rename, the
+   * source and destination folders are locked until the long running operation
+   * completes.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the source folder being renamed.
+   *   Format: `projects/{project}/buckets/{bucket}/folders/{folder}`
+   * @param {string} request.destinationFolderId
+   *   Required. The destination folder ID, e.g. `foo/bar/`.
+   * @param {number} request.ifMetagenerationMatch
+   *   Makes the operation only succeed conditional on whether the source
+   *   folder's current metageneration matches the given value.
+   * @param {number} request.ifMetagenerationNotMatch
+   *   Makes the operation only succeed conditional on whether the source
+   *   folder's current metageneration does not match the given value.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. UUID is the recommended
+   *   format, but other formats are still accepted. This request is only
+   *   idempotent if a `request_id` is provided.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.rename_folder.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_RenameFolder_async
+   */
   renameFolder(
     request?: protos.google.storage.control.v2.IRenameFolderRequest,
     optionsOrCallback?:
@@ -2377,6 +2908,34 @@ export class StorageControlClient {
       {} | null | undefined
     >,
   ): void;
+  /**
+   * Creates an Anywhere Cache instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The bucket to which this cache belongs.
+   *   Format: `projects/{project}/buckets/{bucket}`
+   * @param {google.storage.control.v2.AnywhereCache} request.anywhereCache
+   *   Required. Properties of the Anywhere Cache instance being created.
+   *   The parent bucket name is specified in the `parent` field. Server uses the
+   *   default value of `ttl` or `admission_policy` if not specified in
+   *   request.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. UUID is the recommended
+   *   format, but other formats are still accepted. This request is only
+   *   idempotent if a `request_id` is provided.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.create_anywhere_cache.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_CreateAnywhereCache_async
+   */
   createAnywhereCache(
     request?: protos.google.storage.control.v2.ICreateAnywhereCacheRequest,
     optionsOrCallback?:
@@ -2517,6 +3076,39 @@ export class StorageControlClient {
       {} | null | undefined
     >,
   ): void;
+  /**
+   * Updates an Anywhere Cache instance. Mutable fields include `ttl` and
+   * `admission_policy`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.storage.control.v2.AnywhereCache} request.anywhereCache
+   *   Required. The Anywhere Cache instance to be updated.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. List of fields to be updated. Mutable fields of AnywhereCache
+   *   include `ttl` and `admission_policy`.
+   *
+   *   To specify ALL fields, specify a single field with the value `*`. Note: We
+   *   recommend against doing this. If a new field is introduced at a later time,
+   *   an older client updating with the `*` may accidentally reset the new
+   *   field's value.
+   *
+   *   Not specifying any fields is an error.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. UUID is the recommended
+   *   format, but other formats are still accepted. This request is only
+   *   idempotent if a `request_id` is provided.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.update_anywhere_cache.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_UpdateAnywhereCache_async
+   */
   updateAnywhereCache(
     request?: protos.google.storage.control.v2.IUpdateAnywhereCacheRequest,
     optionsOrCallback?:
@@ -2662,6 +3254,53 @@ export class StorageControlClient {
       protos.google.storage.control.v2.IFolder
     >,
   ): void;
+  /**
+   * Retrieves a list of folders. This operation is only applicable to a
+   * hierarchical namespace enabled bucket.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the bucket in which to look for folders. The bucket must
+   *   be a hierarchical namespace enabled bucket.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of folders to return in a single response. The
+   *   service will use this parameter or 1,000 items, whichever is smaller.
+   * @param {string} [request.pageToken]
+   *   Optional. A previously-returned page token representing part of the larger
+   *   set of results to view.
+   * @param {string} [request.prefix]
+   *   Optional. Filter results to folders whose names begin with this prefix.
+   *   If set, the value must either be an empty string or end with a '/'.
+   * @param {string} [request.delimiter]
+   *   Optional. If set, returns results in a directory-like mode. The results
+   *   will only include folders that either exactly match the above prefix, or
+   *   are one level below the prefix. The only supported value is '/'.
+   * @param {string} [request.lexicographicStart]
+   *   Optional. Filter results to folders whose names are lexicographically equal
+   *   to or after lexicographic_start. If lexicographic_end is also set, the
+   *   folders listed have names between lexicographic_start (inclusive) and
+   *   lexicographic_end (exclusive).
+   * @param {string} [request.lexicographicEnd]
+   *   Optional. Filter results to folders whose names are lexicographically
+   *   before lexicographic_end. If lexicographic_start is also set, the folders
+   *   listed have names between lexicographic_start (inclusive) and
+   *   lexicographic_end (exclusive).
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. UUID is the recommended
+   *   format, but other formats are still accepted.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.storage.control.v2.Folder|Folder}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listFoldersAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listFolders(
     request?: protos.google.storage.control.v2.IListFoldersRequest,
     optionsOrCallback?:
@@ -2867,6 +3506,37 @@ export class StorageControlClient {
       protos.google.storage.control.v2.IManagedFolder
     >,
   ): void;
+  /**
+   * Retrieves a list of managed folders for a given bucket.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the bucket this managed folder belongs to.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of managed folders to return in a single response.
+   *   The service will use this parameter or 1,000 items, whichever is smaller.
+   * @param {string} [request.pageToken]
+   *   Optional. A previously-returned page token representing part of the larger
+   *   set of results to view.
+   * @param {string} [request.prefix]
+   *   Optional. Filter results to match managed folders with name starting with
+   *   this prefix.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. UUID is the recommended
+   *   format, but other formats are still accepted.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.storage.control.v2.ManagedFolder|ManagedFolder}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listManagedFoldersAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listManagedFolders(
     request?: protos.google.storage.control.v2.IListManagedFoldersRequest,
     optionsOrCallback?:
@@ -3051,6 +3721,34 @@ export class StorageControlClient {
       protos.google.storage.control.v2.IAnywhereCache
     >,
   ): void;
+  /**
+   * Lists Anywhere Cache instances for a given bucket.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The bucket to which this cache belongs.
+   * @param {number} request.pageSize
+   *   Maximum number of caches to return in a single response.
+   *   The service will use this parameter or 1,000 items, whichever is smaller.
+   * @param {string} request.pageToken
+   *   A previously-returned page token representing part of the larger set of
+   *   results to view.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. UUID is the recommended
+   *   format, but other formats are still accepted.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.storage.control.v2.AnywhereCache|AnywhereCache}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listAnywhereCachesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listAnywhereCaches(
     request?: protos.google.storage.control.v2.IListAnywhereCachesRequest,
     optionsOrCallback?:
@@ -3221,6 +3919,36 @@ export class StorageControlClient {
       {} | null | undefined
     >,
   ): void;
+  /**
+   * Gets the latest state of a long-running operation.  Clients can use this
+   * method to poll the operation result at intervals as recommended by the API
+   * service.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   *   for the details.
+   * @param {function(?Error, ?Object)=} callback
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing
+   *   {@link google.longrunning.Operation | google.longrunning.Operation}.
+   * @return {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   * {@link google.longrunning.Operation | google.longrunning.Operation}.
+   * The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * const name = '';
+   * const [response] = await client.getOperation({name});
+   * // doThingsWith(response)
+   * ```
+   */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
     optionsOrCallback?:
@@ -3340,6 +4068,37 @@ export class StorageControlClient {
       {} | undefined | null
     >,
   ): void;
+  /**
+   * Starts asynchronous cancellation on a long-running operation.  The server
+   * makes a best effort to cancel the operation, but success is not
+   * guaranteed.  If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
+   * {@link Operations.GetOperation} or
+   * other methods to check whether the cancellation succeeded or whether the
+   * operation completed despite cancellation. On successful cancellation,
+   * the operation is not deleted; instead, it becomes an operation with
+   * an {@link Operation.error} value with a {@link google.rpc.Status.code} of
+   * 1, corresponding to `Code.CANCELLED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be cancelled.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
+   * details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.cancelOperation({name: ''});
+   * ```
+   */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
@@ -3420,6 +4179,31 @@ export class StorageControlClient {
       {} | null | undefined
     >,
   ): void;
+  /**
+   * Deletes a long-running operation. This method indicates that the client is
+   * no longer interested in the operation result. It does not cancel the
+   * operation. If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be deleted.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   * for the details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.deleteOperation({name: ''});
+   * ```
+   */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
     optionsOrCallback?:
@@ -3922,6 +4706,53 @@ export class StorageControlClient {
       {} | null | undefined
     >,
   ): void;
+  // -------------------
+  // -- Service calls --
+  // -------------------
+  /**
+   * Permanently deletes an empty bucket.
+   * The request fails if there are any live or
+   * noncurrent objects in the bucket, but the request succeeds if the
+   * bucket only contains soft-deleted objects or incomplete uploads, such
+   * as ongoing XML API multipart uploads. Does not permanently delete
+   * soft-deleted objects.
+   *
+   * When this API is used to delete a bucket containing an object that has a
+   * soft delete policy
+   * enabled, the object becomes soft deleted, and the
+   * `softDeleteTime` and `hardDeleteTime` properties are set on the
+   * object.
+   *
+   * Objects and multipart uploads that were in the bucket at the time of
+   * deletion are also retained for the specified retention duration. When
+   * a soft-deleted bucket reaches the end of its retention duration, it
+   * is permanently deleted. The `hardDeleteTime` of the bucket always
+   * equals
+   * or exceeds the expiration time of the last soft-deleted object in the
+   * bucket.
+   *
+   * **IAM Permissions**:
+   *
+   * Requires `storage.buckets.delete` IAM permission on the bucket.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of a bucket to delete.
+   * @param {number} request.ifMetagenerationMatch
+   *   If set, only deletes the bucket if its metageneration matches this value.
+   * @param {number} request.ifMetagenerationNotMatch
+   *   If set, only deletes the bucket if its metageneration does not match this
+   *   value.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage.delete_bucket.js</caption>
+   * region_tag:storage_v2_generated_Storage_DeleteBucket_async
+   */
   deleteBucket(
     request?: protos.google.storage.v2.IDeleteBucketRequest,
     optionsOrCallback?:
@@ -4021,6 +4852,42 @@ export class StorageControlClient {
       {} | null | undefined
     >,
   ): void;
+  /**
+   * Returns metadata for the specified bucket.
+   *
+   * **IAM Permissions**:
+   *
+   * Requires `storage.buckets.get`
+   * IAM permission on
+   * the bucket. Additionally, to return specific bucket metadata, the
+   * authenticated user must have the following permissions:
+   *
+   * - To return the IAM policies: `storage.buckets.getIamPolicy`
+   * - To return the bucket IP filtering rules: `storage.buckets.getIpFilter`
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of a bucket.
+   * @param {number} request.ifMetagenerationMatch
+   *   If set, only gets the bucket metadata if its metageneration matches this
+   *   value.
+   * @param {number} request.ifMetagenerationNotMatch
+   *   If set, and if the bucket's current metageneration matches the specified
+   *   value, the request returns an error.
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read.
+   *   A `*` field might be used to indicate all fields.
+   *   If no mask is specified, it defaults to all fields.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.storage.v2.Bucket|Bucket}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage.get_bucket.js</caption>
+   * region_tag:storage_v2_generated_Storage_GetBucket_async
+   */
   getBucket(
     request?: protos.google.storage.v2.IGetBucketRequest,
     optionsOrCallback?:
@@ -4134,6 +5001,56 @@ export class StorageControlClient {
       {} | null | undefined
     >,
   ): void;
+  /**
+   * Creates a new bucket.
+   *
+   * **IAM Permissions**:
+   *
+   * Requires `storage.buckets.create` IAM permission on the bucket.
+   * Additionally, to enable specific bucket features, the authenticated user
+   * must have the following permissions:
+   *
+   * - To enable object retention using the `enableObjectRetention` query
+   * parameter: `storage.buckets.enableObjectRetention`
+   * - To set the bucket IP filtering rules: `storage.buckets.setIpFilter`
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project to which this bucket belongs. This field must either
+   *   be empty or `projects/_`. The project ID that owns this bucket should be
+   *   specified in the `bucket.project` field.
+   * @param {google.storage.v2.Bucket} [request.bucket]
+   *   Optional. Properties of the new bucket being inserted.
+   *   The name of the bucket is specified in the `bucket_id` field. Populating
+   *   `bucket.name` field results in an error.
+   *   The project of the bucket must be specified in the `bucket.project` field.
+   *   This field must be in `projects/{projectIdentifier}` format,
+   *   {projectIdentifier} can be the project ID or project number. The `parent`
+   *   field must be either empty or `projects/_`.
+   * @param {string} request.bucketId
+   *   Required. The ID to use for this bucket, which becomes the final component
+   *   of the bucket's resource name. For example, the value `foo` might result in
+   *   a bucket with the name `projects/123456/buckets/foo`.
+   * @param {string} [request.predefinedAcl]
+   *   Optional. Apply a predefined set of access controls to this bucket.
+   *   Valid values are `authenticatedRead`, `private`, `projectPrivate`,
+   *   `publicRead`, or `publicReadWrite`.
+   * @param {string} [request.predefinedDefaultObjectAcl]
+   *   Optional. Apply a predefined set of default object access controls to this
+   *   bucket. Valid values are `authenticatedRead`, `bucketOwnerFullControl`,
+   *   `bucketOwnerRead`, `private`, `projectPrivate`, or `publicRead`.
+   * @param {boolean} [request.enableObjectRetention]
+   *   Optional. If true, enable object retention on the bucket.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.storage.v2.Bucket|Bucket}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage.create_bucket.js</caption>
+   * region_tag:storage_v2_generated_Storage_CreateBucket_async
+   */
   createBucket(
     request?: protos.google.storage.v2.ICreateBucketRequest,
     optionsOrCallback?:
@@ -4238,6 +5155,43 @@ export class StorageControlClient {
       {} | null | undefined
     >,
   ): void;
+  /**
+   * Permanently locks the retention
+   * policy that is
+   * currently applied to the specified bucket.
+   *
+   * Caution: Locking a bucket is an
+   * irreversible action. Once you lock a bucket:
+   *
+   * - You cannot remove the retention policy from the bucket.
+   * - You cannot decrease the retention period for the policy.
+   *
+   * Once locked, you must delete the entire bucket in order to remove the
+   * bucket's retention policy. However, before you can delete the bucket, you
+   * must delete all the objects in the bucket, which is only
+   * possible if all the objects have reached the retention period set by the
+   * retention policy.
+   *
+   * **IAM Permissions**:
+   *
+   * Requires `storage.buckets.update` IAM permission on the bucket.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.bucket
+   *   Required. Name of a bucket.
+   * @param {number} request.ifMetagenerationMatch
+   *   Required. Makes the operation conditional on whether bucket's current
+   *   metageneration matches the given value. Must be positive.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.storage.v2.Bucket|Bucket}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage.lock_bucket_retention_policy.js</caption>
+   * region_tag:storage_v2_generated_Storage_LockBucketRetentionPolicy_async
+   */
   lockBucketRetentionPolicy(
     request?: protos.google.storage.v2.ILockBucketRetentionPolicyRequest,
     optionsOrCallback?:
@@ -4361,6 +5315,58 @@ export class StorageControlClient {
       {} | null | undefined
     >,
   ): void;
+  /**
+   * Updates a bucket. Changes to the bucket are readable immediately after
+   * writing, but configuration changes might take time to propagate. This
+   * method supports `patch` semantics.
+   *
+   * **IAM Permissions**:
+   *
+   * Requires `storage.buckets.update` IAM permission on the bucket.
+   * Additionally, to enable specific bucket features, the authenticated user
+   * must have the following permissions:
+   *
+   * - To set bucket IP filtering rules: `storage.buckets.setIpFilter`
+   * - To update public access prevention policies or access control lists
+   * (ACLs): `storage.buckets.setIamPolicy`
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.storage.v2.Bucket} request.bucket
+   *   Required. The bucket to update.
+   *   The bucket's `name` field is used to identify the bucket.
+   * @param {number} request.ifMetagenerationMatch
+   *   If set, the request modifies the bucket if its metageneration matches this
+   *   value.
+   * @param {number} request.ifMetagenerationNotMatch
+   *   If set, the request modifies the bucket if its metageneration doesn't
+   *   match this value.
+   * @param {string} [request.predefinedAcl]
+   *   Optional. Apply a predefined set of access controls to this bucket.
+   *   Valid values are `authenticatedRead`, `private`, `projectPrivate`,
+   *   `publicRead`, or `publicReadWrite`.
+   * @param {string} [request.predefinedDefaultObjectAcl]
+   *   Optional. Apply a predefined set of default object access controls to this
+   *   bucket. Valid values are `authenticatedRead`, `bucketOwnerFullControl`,
+   *   `bucketOwnerRead`, `private`, `projectPrivate`, or `publicRead`.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. List of fields to be updated.
+   *
+   *   To specify ALL fields, equivalent to the JSON API's "update" function,
+   *   specify a single field with the value `*`. Note: not recommended. If a new
+   *   field is introduced at a later time, an older client updating with the `*`
+   *   might accidentally reset the new field's value.
+   *
+   *   Not specifying any fields is an error.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.storage.v2.Bucket|Bucket}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage.update_bucket.js</caption>
+   * region_tag:storage_v2_generated_Storage_UpdateBucket_async
+   */
   updateBucket(
     request?: protos.google.storage.v2.IUpdateBucketRequest,
     optionsOrCallback?:
@@ -4471,6 +5477,53 @@ export class StorageControlClient {
       protos.google.storage.v2.IBucket
     >,
   ): void;
+  /**
+   * Retrieves a list of buckets for a given project, ordered
+   * lexicographically by name.
+   *
+   * **IAM Permissions**:
+   *
+   * Requires `storage.buckets.list` IAM permission on the bucket.
+   * Additionally, to enable specific bucket features, the authenticated
+   * user must have the following permissions:
+   *
+   * - To list the IAM policies: `storage.buckets.getIamPolicy`
+   * - To list the bucket IP filtering rules: `storage.buckets.getIpFilter`
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project whose buckets we are listing.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of buckets to return in a single response. The
+   *   service uses this parameter or `1,000` items, whichever is smaller. If
+   *   `acl` is present in the `read_mask`, the service uses this parameter of
+   *   `200` items, whichever is smaller.
+   * @param {string} [request.pageToken]
+   *   Optional. A previously-returned page token representing part of the larger
+   *   set of results to view.
+   * @param {string} [request.prefix]
+   *   Optional. Filter results to buckets whose names begin with this prefix.
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read from each result.
+   *   If no mask is specified, it defaults to all fields except `items.
+   *   owner`, `items.acl`, and `items.default_object_acl`.
+   *   `*` might be used to mean "all fields".
+   * @param {boolean} [request.returnPartialSuccess]
+   *   Optional. Allows listing of buckets, even if there are buckets that are
+   *   unreachable.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.storage.v2.Bucket|Bucket}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listBucketsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listBuckets(
     request?: protos.google.storage.v2.IListBucketsRequest,
     optionsOrCallback?:
