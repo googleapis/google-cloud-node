@@ -18,6 +18,7 @@
 
 export {BuildsClient} from './builds_client';
 export {ExecutionsClient} from './executions_client';
+export {InstancesClient} from './instances_client';
 export {JobsClient} from './jobs_client';
 export {RevisionsClient} from './revisions_client';
 export {ServicesClient} from './services_client';
