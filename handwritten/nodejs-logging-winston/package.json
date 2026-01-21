@@ -7,7 +7,11 @@
   "engines": {
     "node": ">=18"
   },
-  "repository": "googleapis/nodejs-logging-winston",
+  "repository": {
+    "type": "git",
+    "directory": "handwritten/nodejs-logging-winston",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
+  },
   "main": "./build/src/index.js",
   "types": "./build/src/index.d.ts",
   "files": [
@@ -78,5 +82,6 @@
   },
   "peerDependencies": {
     "winston": ">=3.2.1"
-  }
+  },
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/nodejs-logging-winston"
 }
