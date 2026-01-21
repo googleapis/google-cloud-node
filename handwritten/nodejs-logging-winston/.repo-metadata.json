@@ -9,7 +9,7 @@
   "repo": "googleapis/nodejs-logging-winston",
   "distribution_name": "@google-cloud/logging-winston",
   "api_id": "logging.googleapis.com",
-  "codeowner_team": "@googleapis/api-logging",
+  "codeowner_team": "@googleapis/yoshi-nodejs",
   "api_shortname": "logging-winston",
   "library_type": "OTHER"
 }
