@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.16.0](https://github.com/googleapis/google-cloud-node/compare/netapp-v0.15.0...netapp-v0.16.0) (2026-01-16)
+
+
+### Features
+
+* [netapp] Update NetApp v1 API with Host Groups, Block Volumes, Cache Volumes, and Backup Restore ([#6994](https://github.com/googleapis/google-cloud-node/issues/6994)) ([4c3178e](https://github.com/googleapis/google-cloud-node/commit/4c3178eed4f65968383838f0394406dea6d7077f))
+
 ## [0.15.0](https://github.com/googleapis/google-cloud-node/compare/netapp-v0.14.1...netapp-v0.15.0) (2025-11-21)
 
 
