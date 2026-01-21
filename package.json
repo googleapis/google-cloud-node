@@ -42,6 +42,10 @@
   "devDependencies": {
     "semistandard": "^17.0.0"
   },
+  "overrides": {
+    "cheerio": "1.0.0",
+    "tablesort": "5.2.1"
+  },
   "engines": {
     "node": ">=18"
   }
