@@ -19,6 +19,13 @@ body:
 
         Please note that documentation requests and questions for specific APIs
         will be closed.
+  - type: input
+    attributes:
+      label: Library Name
+      description: |
+        Which library is this documentation request for? (e.g. @google-cloud/storage, @google-cloud/datastore, etc.)
+    validations:
+      required: true
   - type: checkboxes
     attributes:
       label: Please make sure you have searched for information in the following
