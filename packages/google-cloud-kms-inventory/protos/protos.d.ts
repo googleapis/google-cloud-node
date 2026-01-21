@@ -2106,6 +2106,9 @@ export namespace google {
 
                     /** ImportJob attestation */
                     attestation?: (google.cloud.kms.v1.IKeyOperationAttestation|null);
+
+                    /** ImportJob cryptoKeyBackend */
+                    cryptoKeyBackend?: (string|null);
                 }
 
                 /** Represents an ImportJob. */
@@ -2146,6 +2149,9 @@ export namespace google {
 
                     /** ImportJob attestation. */
                     public attestation?: (google.cloud.kms.v1.IKeyOperationAttestation|null);
+
+                    /** ImportJob cryptoKeyBackend. */
+                    public cryptoKeyBackend: string;
 
                     /**
                      * Creates a new ImportJob instance using the specified properties.
@@ -2550,7 +2556,8 @@ export namespace google {
                     SOFTWARE = 1,
                     HSM = 2,
                     EXTERNAL = 3,
-                    EXTERNAL_VPC = 4
+                    EXTERNAL_VPC = 4,
+                    HSM_SINGLE_TENANT = 5
                 }
 
                 /** AccessReason enum. */
