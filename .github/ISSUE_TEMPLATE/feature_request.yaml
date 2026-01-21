@@ -16,6 +16,7 @@ body:
       label: Library Name
       description: |
         Which library is this feature request for? (e.g. @google-cloud/storage, @google-cloud/datastore, etc.)
+        The library name can be found in its `package.json` or by using the directory name (e.g., `google-cloud-storage`).
     validations:
       required: true
   - type: textarea
