@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/recaptcha-enterprise?activeTab=versions
 
+## [6.4.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v6.3.1...recaptcha-enterprise-v6.4.0) (2026-01-16)
+
+
+### Features
+
+* [recaptchaenterprise] Update NetApp v1 API with Host Groups, Block Volumes, Cache Volumes, and Backup Restore ([#6993](https://github.com/googleapis/google-cloud-node/issues/6993)) ([bc588be](https://github.com/googleapis/google-cloud-node/commit/bc588be78d9b27c0d2d1c3c992720ad332290a1a))
+
 ## [6.3.1](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v6.3.0...recaptcha-enterprise-v6.3.1) (2025-10-13)
 
 

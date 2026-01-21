@@ -1,8 +1,10 @@
 [
   "../../protos/google/cloud/run/v2/build.proto",
   "../../protos/google/cloud/run/v2/condition.proto",
+  "../../protos/google/cloud/run/v2/container_status.proto",
   "../../protos/google/cloud/run/v2/execution.proto",
   "../../protos/google/cloud/run/v2/execution_template.proto",
+  "../../protos/google/cloud/run/v2/instance.proto",
   "../../protos/google/cloud/run/v2/instance_split.proto",
   "../../protos/google/cloud/run/v2/job.proto",
   "../../protos/google/cloud/run/v2/k8s.min.proto",
