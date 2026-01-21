@@ -5,6 +5,175 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "04130369a1e730a90e456ea2d33b1320de67f03b",
+          "message": "[containeranalysis] A new message `File` is added",
+          "issues": [
+            "6987"
+          ]
+        }
+      ],
+      "version": "6.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/containeranalysis",
+      "id": "6415a95a-161d-4893-a33f-e29ae5dc41f0",
+      "createTime": "2026-01-16T00:08:39.016Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "48802487892bf059142b4b4064a4c2dec31d3838",
+          "message": "[sql] introduces auto_upgrade_enabled option for MySQL in DatabaseInstance.Settings",
+          "issues": [
+            "6969"
+          ]
+        }
+      ],
+      "version": "0.24.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/sql",
+      "id": "4408fe3c-41e3-4f84-be48-ed611112061b",
+      "createTime": "2026-01-16T00:08:38.998Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "bc588be78d9b27c0d2d1c3c992720ad332290a1a",
+          "message": "[recaptchaenterprise] Update NetApp v1 API with Host Groups, Block Volumes, Cache Volumes, and Backup Restore",
+          "issues": [
+            "6993"
+          ]
+        }
+      ],
+      "version": "6.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/recaptcha-enterprise",
+      "id": "0eaece13-82ce-4ee0-ac65-b9188fe97e15",
+      "createTime": "2026-01-16T00:08:38.980Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "4c3178eed4f65968383838f0394406dea6d7077f",
+          "message": "[netapp] Update NetApp v1 API with Host Groups, Block Volumes, Cache Volumes, and Backup Restore",
+          "issues": [
+            "6994"
+          ]
+        }
+      ],
+      "version": "0.16.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/netapp",
+      "id": "52003306-2e42-42bb-88d5-ab88c45e9413",
+      "createTime": "2026-01-16T00:08:38.963Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "80a9eaffd72f8d0e549084fb453c98420940e45c",
+          "message": "[memorystore] Adding Method AggregateIssueStats of Database Center API v1beta",
+          "issues": [
+            "7001"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/memorystore",
+      "id": "f4aa5497-07ee-4f6c-a0f2-fe2ce135f779",
+      "createTime": "2026-01-16T00:08:38.943Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "253a242ed75d96ba41f13c260d1373d5ee61b9af",
+          "message": "Add initial files for google.cloud.gkerecommender.v1",
+          "issues": [
+            "6997"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gkerecommender",
+      "id": "e566116d-ee84-465f-b7a4-ecc95f852518",
+      "createTime": "2026-01-16T00:08:38.923Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "90a22f7e0377b7d5166ad183cb5b4547b5bd779a",
+          "message": "[geminidataanalytics] added sync APIs for the CRUD operations of Data Agent",
+          "issues": [
+            "6989"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/geminidataanalytics",
+      "id": "27959087-c728-46d8-8794-7c39943f0fb6",
+      "createTime": "2026-01-16T00:08:38.903Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "8cfd124c5323240e4a3b95608395dc1ce7034b93",
+          "message": "[compute] Update Compute Engine v1 API to revision 20251230 (#1144)",
+          "issues": [
+            "6998"
+          ]
+        }
+      ],
+      "version": "6.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "c1af3142-34b3-4a2e-93f4-44f40bbc3abd",
+      "createTime": "2026-01-16T00:08:38.887Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "fa82814e61c92313c3abed102b1dd60dcca50c6d",
+          "message": "Add initial files for google.cloud.apiregistry.v1beta",
+          "issues": [
+            "6961"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apiregistry",
+      "id": "709a1954-2b48-4c53-b1c2-600c9d83c62e",
+      "createTime": "2026-01-16T00:08:38.858Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "7af18d7e779daec20446b8307412c6b1b7ea0166",
           "message": "[geminidataanalytics] add LookerGoldenQuery to Context",
           "issues": [
@@ -67517,5 +67686,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-01-12T17:04:01.294Z"
+  "updateTime": "2026-01-16T00:08:39.016Z"
 }
