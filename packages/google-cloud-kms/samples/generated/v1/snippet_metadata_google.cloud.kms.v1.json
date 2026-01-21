@@ -588,6 +588,430 @@
       }
     },
     {
+      "regionTag": "cloudkms_v1_generated_HsmManagement_ListSingleTenantHsmInstances_async",
+      "title": "Autokey listSingleTenantHsmInstances Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists [SingleTenantHsmInstances][google.cloud.kms.v1.SingleTenantHsmInstance].",
+      "canonical": true,
+      "file": "hsm_management.list_single_tenant_hsm_instances.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 96,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListSingleTenantHsmInstances",
+        "fullName": "google.cloud.kms.v1.HsmManagement.ListSingleTenantHsmInstances",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "show_deleted",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.kms.v1.ListSingleTenantHsmInstancesResponse",
+        "client": {
+          "shortName": "HsmManagementClient",
+          "fullName": "google.cloud.kms.v1.HsmManagementClient"
+        },
+        "method": {
+          "shortName": "ListSingleTenantHsmInstances",
+          "fullName": "google.cloud.kms.v1.HsmManagement.ListSingleTenantHsmInstances",
+          "service": {
+            "shortName": "HsmManagement",
+            "fullName": "google.cloud.kms.v1.HsmManagement"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_HsmManagement_GetSingleTenantHsmInstance_async",
+      "title": "Autokey getSingleTenantHsmInstance Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns metadata for a given [SingleTenantHsmInstance][google.cloud.kms.v1.SingleTenantHsmInstance].",
+      "canonical": true,
+      "file": "hsm_management.get_single_tenant_hsm_instance.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetSingleTenantHsmInstance",
+        "fullName": "google.cloud.kms.v1.HsmManagement.GetSingleTenantHsmInstance",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.kms.v1.SingleTenantHsmInstance",
+        "client": {
+          "shortName": "HsmManagementClient",
+          "fullName": "google.cloud.kms.v1.HsmManagementClient"
+        },
+        "method": {
+          "shortName": "GetSingleTenantHsmInstance",
+          "fullName": "google.cloud.kms.v1.HsmManagement.GetSingleTenantHsmInstance",
+          "service": {
+            "shortName": "HsmManagement",
+            "fullName": "google.cloud.kms.v1.HsmManagement"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_HsmManagement_CreateSingleTenantHsmInstance_async",
+      "title": "Autokey createSingleTenantHsmInstance Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new [SingleTenantHsmInstance][google.cloud.kms.v1.SingleTenantHsmInstance] in a given Project and Location. User must create a RegisterTwoFactorAuthKeys proposal with this single-tenant HSM instance to finish setup of the instance.",
+      "canonical": true,
+      "file": "hsm_management.create_single_tenant_hsm_instance.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateSingleTenantHsmInstance",
+        "fullName": "google.cloud.kms.v1.HsmManagement.CreateSingleTenantHsmInstance",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "single_tenant_hsm_instance_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "single_tenant_hsm_instance",
+            "type": ".google.cloud.kms.v1.SingleTenantHsmInstance"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "HsmManagementClient",
+          "fullName": "google.cloud.kms.v1.HsmManagementClient"
+        },
+        "method": {
+          "shortName": "CreateSingleTenantHsmInstance",
+          "fullName": "google.cloud.kms.v1.HsmManagement.CreateSingleTenantHsmInstance",
+          "service": {
+            "shortName": "HsmManagement",
+            "fullName": "google.cloud.kms.v1.HsmManagement"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_HsmManagement_CreateSingleTenantHsmInstanceProposal_async",
+      "title": "Autokey createSingleTenantHsmInstanceProposal Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new [SingleTenantHsmInstanceProposal][google.cloud.kms.v1.SingleTenantHsmInstanceProposal] for a given [SingleTenantHsmInstance][google.cloud.kms.v1.SingleTenantHsmInstance].",
+      "canonical": true,
+      "file": "hsm_management.create_single_tenant_hsm_instance_proposal.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateSingleTenantHsmInstanceProposal",
+        "fullName": "google.cloud.kms.v1.HsmManagement.CreateSingleTenantHsmInstanceProposal",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "single_tenant_hsm_instance_proposal_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "single_tenant_hsm_instance_proposal",
+            "type": ".google.cloud.kms.v1.SingleTenantHsmInstanceProposal"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "HsmManagementClient",
+          "fullName": "google.cloud.kms.v1.HsmManagementClient"
+        },
+        "method": {
+          "shortName": "CreateSingleTenantHsmInstanceProposal",
+          "fullName": "google.cloud.kms.v1.HsmManagement.CreateSingleTenantHsmInstanceProposal",
+          "service": {
+            "shortName": "HsmManagement",
+            "fullName": "google.cloud.kms.v1.HsmManagement"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_HsmManagement_ApproveSingleTenantHsmInstanceProposal_async",
+      "title": "Autokey approveSingleTenantHsmInstanceProposal Sample",
+      "origin": "API_DEFINITION",
+      "description": " Approves a [SingleTenantHsmInstanceProposal][google.cloud.kms.v1.SingleTenantHsmInstanceProposal] for a given [SingleTenantHsmInstance][google.cloud.kms.v1.SingleTenantHsmInstance]. The proposal must be in the [PENDING][google.cloud.kms.v1.SingleTenantHsmInstanceProposal.State.PENDING] state.",
+      "canonical": true,
+      "file": "hsm_management.approve_single_tenant_hsm_instance_proposal.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ApproveSingleTenantHsmInstanceProposal",
+        "fullName": "google.cloud.kms.v1.HsmManagement.ApproveSingleTenantHsmInstanceProposal",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "quorum_reply",
+            "type": ".google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.QuorumReply"
+          },
+          {
+            "name": "required_action_quorum_reply",
+            "type": ".google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.RequiredActionQuorumReply"
+          }
+        ],
+        "resultType": ".google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalResponse",
+        "client": {
+          "shortName": "HsmManagementClient",
+          "fullName": "google.cloud.kms.v1.HsmManagementClient"
+        },
+        "method": {
+          "shortName": "ApproveSingleTenantHsmInstanceProposal",
+          "fullName": "google.cloud.kms.v1.HsmManagement.ApproveSingleTenantHsmInstanceProposal",
+          "service": {
+            "shortName": "HsmManagement",
+            "fullName": "google.cloud.kms.v1.HsmManagement"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_HsmManagement_ExecuteSingleTenantHsmInstanceProposal_async",
+      "title": "Autokey executeSingleTenantHsmInstanceProposal Sample",
+      "origin": "API_DEFINITION",
+      "description": " Executes a [SingleTenantHsmInstanceProposal][google.cloud.kms.v1.SingleTenantHsmInstanceProposal] for a given [SingleTenantHsmInstance][google.cloud.kms.v1.SingleTenantHsmInstance]. The proposal must be in the [APPROVED][google.cloud.kms.v1.SingleTenantHsmInstanceProposal.State.APPROVED] state.",
+      "canonical": true,
+      "file": "hsm_management.execute_single_tenant_hsm_instance_proposal.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 57,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ExecuteSingleTenantHsmInstanceProposal",
+        "fullName": "google.cloud.kms.v1.HsmManagement.ExecuteSingleTenantHsmInstanceProposal",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "HsmManagementClient",
+          "fullName": "google.cloud.kms.v1.HsmManagementClient"
+        },
+        "method": {
+          "shortName": "ExecuteSingleTenantHsmInstanceProposal",
+          "fullName": "google.cloud.kms.v1.HsmManagement.ExecuteSingleTenantHsmInstanceProposal",
+          "service": {
+            "shortName": "HsmManagement",
+            "fullName": "google.cloud.kms.v1.HsmManagement"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_HsmManagement_GetSingleTenantHsmInstanceProposal_async",
+      "title": "Autokey getSingleTenantHsmInstanceProposal Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns metadata for a given [SingleTenantHsmInstanceProposal][google.cloud.kms.v1.SingleTenantHsmInstanceProposal].",
+      "canonical": true,
+      "file": "hsm_management.get_single_tenant_hsm_instance_proposal.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 56,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetSingleTenantHsmInstanceProposal",
+        "fullName": "google.cloud.kms.v1.HsmManagement.GetSingleTenantHsmInstanceProposal",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.kms.v1.SingleTenantHsmInstanceProposal",
+        "client": {
+          "shortName": "HsmManagementClient",
+          "fullName": "google.cloud.kms.v1.HsmManagementClient"
+        },
+        "method": {
+          "shortName": "GetSingleTenantHsmInstanceProposal",
+          "fullName": "google.cloud.kms.v1.HsmManagement.GetSingleTenantHsmInstanceProposal",
+          "service": {
+            "shortName": "HsmManagement",
+            "fullName": "google.cloud.kms.v1.HsmManagement"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_HsmManagement_ListSingleTenantHsmInstanceProposals_async",
+      "title": "Autokey listSingleTenantHsmInstanceProposals Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists [SingleTenantHsmInstanceProposals][google.cloud.kms.v1.SingleTenantHsmInstanceProposal].",
+      "canonical": true,
+      "file": "hsm_management.list_single_tenant_hsm_instance_proposals.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 96,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListSingleTenantHsmInstanceProposals",
+        "fullName": "google.cloud.kms.v1.HsmManagement.ListSingleTenantHsmInstanceProposals",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "show_deleted",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsResponse",
+        "client": {
+          "shortName": "HsmManagementClient",
+          "fullName": "google.cloud.kms.v1.HsmManagementClient"
+        },
+        "method": {
+          "shortName": "ListSingleTenantHsmInstanceProposals",
+          "fullName": "google.cloud.kms.v1.HsmManagement.ListSingleTenantHsmInstanceProposals",
+          "service": {
+            "shortName": "HsmManagement",
+            "fullName": "google.cloud.kms.v1.HsmManagement"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_HsmManagement_DeleteSingleTenantHsmInstanceProposal_async",
+      "title": "Autokey deleteSingleTenantHsmInstanceProposal Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a [SingleTenantHsmInstanceProposal][google.cloud.kms.v1.SingleTenantHsmInstanceProposal].",
+      "canonical": true,
+      "file": "hsm_management.delete_single_tenant_hsm_instance_proposal.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 56,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteSingleTenantHsmInstanceProposal",
+        "fullName": "google.cloud.kms.v1.HsmManagement.DeleteSingleTenantHsmInstanceProposal",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "HsmManagementClient",
+          "fullName": "google.cloud.kms.v1.HsmManagementClient"
+        },
+        "method": {
+          "shortName": "DeleteSingleTenantHsmInstanceProposal",
+          "fullName": "google.cloud.kms.v1.HsmManagement.DeleteSingleTenantHsmInstanceProposal",
+          "service": {
+            "shortName": "HsmManagement",
+            "fullName": "google.cloud.kms.v1.HsmManagement"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "cloudkms_v1_generated_KeyManagementService_ListKeyRings_async",
       "title": "Autokey listKeyRings Sample",
       "origin": "API_DEFINITION",
