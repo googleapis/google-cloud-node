@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+## [6.4.0](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v6.3.1...containeranalysis-v6.4.0) (2026-01-16)
+
+
+### Features
+
+* [containeranalysis] A new message `File` is added ([#6987](https://github.com/googleapis/google-cloud-node/issues/6987)) ([0413036](https://github.com/googleapis/google-cloud-node/commit/04130369a1e730a90e456ea2d33b1320de67f03b))
+
 ## [6.3.1](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v6.3.0...containeranalysis-v6.3.1) (2025-10-13)
 
 

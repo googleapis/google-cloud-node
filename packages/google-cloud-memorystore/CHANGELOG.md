@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/memorystore-v0.4.0...memorystore-v0.5.0) (2026-01-16)
+
+
+### Features
+
+* [memorystore] Adding Method AggregateIssueStats of Database Center API v1beta ([#7001](https://github.com/googleapis/google-cloud-node/issues/7001)) ([80a9eaf](https://github.com/googleapis/google-cloud-node/commit/80a9eaffd72f8d0e549084fb453c98420940e45c))
+
 ## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/memorystore-v0.3.1...memorystore-v0.4.0) (2026-01-12)
 
 
