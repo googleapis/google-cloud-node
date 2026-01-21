@@ -1,4 +1,5 @@
 {
+  "handwritten/nodejs-logging-bunyan": "5.1.0",
   "packages/gapic-node-processing": "0.1.6",
   "packages/google-ads-admanager": "0.5.0",
   "packages/google-ads-datamanager": "0.1.0",
@@ -145,11 +146,11 @@
   "packages/google-cloud-saasplatform-saasservicemgmt": "0.1.1",
   "packages/google-cloud-scheduler": "5.3.1",
   "packages/google-cloud-secretmanager": "6.1.1",
+  "packages/google-cloud-securesourcemanager": "0.8.1",
   "packages/google-cloud-security-privateca": "7.0.1",
   "packages/google-cloud-security-publicca": "2.2.1",
   "packages/google-cloud-securitycenter": "9.2.1",
   "packages/google-cloud-securitycentermanagement": "0.7.1",
-  "packages/google-cloud-securesourcemanager": "0.8.1",
   "packages/google-cloud-servicedirectory": "6.1.1",
   "packages/google-cloud-servicehealth": "0.7.1",
   "packages/google-cloud-shell": "4.1.1",

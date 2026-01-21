@@ -15,7 +15,7 @@
 import os
 import synthtool as s
 import synthtool.gcp as gcp
-import synthtool.languages.node as node
+import synthtool.languages.node_mono_repo as node
 import logging
 
 logging.basicConfig(level=logging.DEBUG)
