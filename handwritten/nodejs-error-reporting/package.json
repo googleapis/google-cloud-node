@@ -39,7 +39,7 @@
     "console-log-level": "^1.4.1"
   },
   "devDependencies": {
-    "@compodoc/compodoc": "1.1.25",
+    "@compodoc/compodoc": "1.1.19",
     "@hapi/hapi": "^21.4.4",
     "@types/boom": "^7.3.5",
     "@types/console-log-level": "^1.4.0",
