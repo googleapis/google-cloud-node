@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/geminidataanalytics-v0.4.0...geminidataanalytics-v0.5.0) (2026-01-16)
+
+
+### Features
+
+* [geminidataanalytics] added sync APIs for the CRUD operations of Data Agent ([#6989](https://github.com/googleapis/google-cloud-node/issues/6989)) ([90a22f7](https://github.com/googleapis/google-cloud-node/commit/90a22f7e0377b7d5166ad183cb5b4547b5bd779a))
+
 ## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/geminidataanalytics-v0.3.0...geminidataanalytics-v0.4.0) (2026-01-12)
 
 
